@@ -20,12 +20,12 @@ export const CATEGORY_META: CategoryMeta[] = [
   {
     id: "linear-algebra",
     title: "Linear Algebra",
-    description: "Linear Algebra is the foundation for many machine learning algorithms. It provides the tools to represent and manipulate datasets, features and transformations.",
+    description: "Linear Algebra serves as the core mathematical framework for representing and processing data in machine learning, handling high-dimensional spaces and transformations.",
     keyConcepts: [
-      { title: "Vectors", description: "Building blocks of datasets and features" },
-      { title: "Matrices", description: "Essential for solving equations and optimizing ML models" },
-      { title: "Eigenvalues", description: "For understanding variance and principal components" },
-      { title: "SVD", description: "Widely used in dimensionality reduction and data compression" }
+      { title: "Vectors", description: "Fundamental units for representing data points and features." },
+      { title: "Matrices", description: "Structures for encoding linear operations and data collections." },
+      { title: "Eigen-decomposition", description: "Internal structures of matrices that reveal data variance." },
+      { title: "Matrix Factorization", description: "Advanced techniques like SVD for data compression and latent feature extraction." }
     ]
   },
   {

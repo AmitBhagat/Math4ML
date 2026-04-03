@@ -1,4 +1,4 @@
-﻿import { CategoryData } from '../types';
+import { CategoryData } from '../types';
 
 // =============================================================================
 // LINEAR ALGEBRA
@@ -6,33 +6,33 @@
 export const LINEAR_ALGEBRA_DATA: CategoryData = {
   id: "linear-algebra",
   title: "Linear Algebra",
-  description: "Linear Algebra is the foundation for many machine learning algorithms. It provides the tools to represent and manipulate datasets, features and transformations.",
+  description: "Linear Algebra serves as the core mathematical framework for representing and processing data in machine learning. It provides the essential language for handling high-dimensional feature spaces, optimizing algorithms, and performing complex data transformations.",
   keyConcepts: [
-    { title: "Vectors", description: "Building blocks of datasets and features" },
-    { title: "Matrices", description: "Essential for solving equations and optimizing ML models" },
-    { title: "Eigenvalues", description: "For understanding variance and principal components" },
-    { title: "SVD", description: "Widely used in dimensionality reduction and data compression" }
+    { title: "Vectors", description: "Fundamental units for representing data points and features." },
+    { title: "Matrices", description: "Structures for encoding linear operations and data collections." },
+    { title: "Eigen-decomposition", description: "Internal structures of matrices that reveal data variance." },
+    { title: "Matrix Factorization", description: "Advanced techniques like SVD for data compression and latent feature extraction." }
   ],
   sections: [
     {
       id: "Vectors",
-      title: "Vectors for Machine Learning",
-      description: "Vectors are a fundamental concept in machine learning and play an important role in data representation. They are widely used in algorithms for classification, regression, clustering and deep learning.",
-      formula: "v = (x_1, x_2, \\dots, x_n)",
+      title: "Data Representation via Vectors",
+      description: "Vectors are the primary format for encoding information in modern AI. Whether representing image pixels, word embeddings, or physical measurements, vectors allow us to treat data as coordinates in a multi-dimensional space.",
+      formula: "v = [x_1, x_2, \dots, x_n]",
       details: [
-        "A vector is a mathematical object with magnitude and direction and in machine learning, it represents data in numerical form so that computers can process and analyze it efficiently.",
-        "A vector is an ordered list of numbers, called components or elements, where each number represents a feature of a data point."
+        "A vector is an ordered collection of numerical values, where each element corresponds to a specific characteristic or 'feature' of a data sample.",
+        "In geometric terms, a vector represents a point or a directed line segment within a feature space, enabling mathematical analysis of data relationships."
       ],
       contentSections: [
         {
-          heading: "What are Vectors?",
+          heading: "Understanding Vectors as Data Points",
           paragraphs: [
-            "Vectors are a fundamental concept in machine learning and play an important role in data representation. They are widely used in algorithms for classification, regression, clustering and deep learning. A vector is a mathematical object with magnitude and direction and in machine learning, it represents data in numerical form so that computers can process and analyze it efficiently.",
-            "A vector is an ordered list of numbers, called components or elements, where each number represents a feature of a data point. A vector in a two-dimensional plane can be defined as: $v = (x_1, x_2)$",
-            "For example: a vector for someone's height (in cm) and weight (in kg) might be: $v = (170, 65)$. In higher dimensions, vectors will have more components, such as: $v = (x_1, x_2, x_3, \\dots, x_n)$ where $n$ is the number of features of a specific data point."
+            "In the context of machine learning, vectors act as the bridge between raw data and mathematical models. They enable computers to interpret diverse information—from sensor readings to financial indicators—as purely numerical coordinates. A vector can be viewed as an arrow starting from the origin $(0,0,\dots,0)$ and pointing to a specific location in space.",
+            "Each number within a vector is called a component. For instance, a simple two-dimensional vector representing a house might look like: $v = (x_1, x_2)$ where $x_1$ is the square footage and $x_2$ is the age of the property.",
+            "Example: If a house has $1500$ sq. ft. and is $10$ years old, its feature vector is $v = (1500, 10)$. As we add more features, such as the number of rooms or proximity to transit, the vector expands to higher dimensions: $v = (x_1, x_2, x_3, \dots, x_n)$."
           ],
-          code: "import numpy as np\nvector = np.array([170, 65])\nprint(\"Vector:\", vector)",
-          output: "Vector: [170 65]"
+          code: "import numpy as np\n# Representing a data point (e.g., SqFt, Age, Rooms)\nhouse_vector = np.array([1500, 10, 3])\nprint(\"Feature Vector:\", house_vector)",
+          output: "Feature Vector: [1500   10    3]"
         },
         {
           heading: "Scalars, Vectors and Matrices",
@@ -46,34 +46,29 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
           output: "Matrix:\n [[1 2 3]\n [4 5 6]\n [7 8 9]]"
         },
         {
-          heading: "Vectors in Machine Learning Models",
+          heading: "Role of Vectors in the ML Pipeline",
           paragraphs: [
-            "Vectors are used at various points in machine learning models:",
-            "1. Input: All data such as images, text or sensor readings must be converted into numerical form. These numbers are organized as vectors so models can process them efficiently.",
-            "2. Model: Machine learning models, especially neural networks, rely on vector and matrix operations. Linear algebra operations like multiplication help update model parameters and improve accuracy.",
-            "3. Outputs: Model outputs can be numbers, categories or vectors. In tasks like NLP or recommendations, output vectors are used for similarity, clustering or further predictions."
+            "Vectors are utilized at multiple stages of a machine learning workflow:",
+            "1. Feature Extraction: Raw inputs—like images (pixel intensities), audio (frequency spectra), or text (word counts)—are transformed into numerical vectors. This process is essential for model consumption.",
+            "2. Optimization: During training, models adjust internal parameters (weights) represented as vectors. Multiplications and additions on these vectors allow the model to 'learn' and improve its predictive performance.",
+            "3. Embeddings: In advanced tasks like natural language processing, vectors represent semantic meaning. Similar concepts are mapped to vectors that are geometrically close in space."
+          ]
+        }, {
+          heading: "Classification of Vectors",
+          paragraphs: [
+            "1. Dimensionality: A vector can be represented in any $n$-dimensional space. Row vectors $(x_1, \dots, x_n)$ and column vectors (vertical arrays) are just different notations for the same data.",
+            "2. Special Vector Types:",
+            "- Zero Vector: A vector where all elements are null (e.g., $(0,0,0)$). It serves as the identity element in vector addition.",
+            "- Unit Vector: A vector with a magnitude (length) of $1$. These are primarily used to define directions in feature space: $\mathbf{u} = \frac{\mathbf{v}}{\|\mathbf{v}\|}$.",
+            "- Sparse vs. Dense: Sparse vectors contain mostly zeros (common in text-based 'Bag of Words' models to save memory), while dense vectors are mostly filled with non-zero values (like pixel data or word embeddings)."
           ]
         },
         {
-          heading: "Types of Vectors",
+          heading: "Significance of Vectors in Modern AI",
           paragraphs: [
-            "1. Row and Column Vectors:",
-            "- A row vector is a one-dimensional array represented in a row format: $(x_1, x_2, x_3)$",
-            "- A column vector is a one-dimensional array represented in a column notation:",
-            "$$ \\begin{bmatrix}x_1 \\\\x_2 \\\\x_3 \\\\\\vdots \\\\x_n\\end{bmatrix} $$",
-            "2. Zero Vector: A vector with all elements as zero. Example: $v = (0, 0, 0)$. Zero vectors are useful when solving optimization problems and are the origin in vector space.",
-            "3. Unit Vector: A vector of magnitude 1. It is frequently used to denote direction: $\\mathbf{u} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$ where $\\|\\mathbf{v}\\|$ is the magnitude of vector $v$.",
-            "4. Sparse and Dense Vectors:",
-            "- Sparse Vectors consist primarily of zeros and are employed in text analysis and recommendation systems.",
-            "- Dense Vectors consist primarily of non-zero values and are employed in image processing and deep learning."
-          ]
-        },
-        {
-          heading: "Importance of Vectors in Machine Learning",
-          paragraphs: [
-            "1. Feature Representation: Vectors are used to represent data points in numerical form. For example, in natural language processing (NLP), words are translated into word vectors by techniques such as Word2Vec or TF-IDF.",
-            "2. Distance and Similarity Measures: Similarity between data points is typically calculated in machine learning by vector distance measures like Euclidean Distance (Quantitative measure of straight-line distance between two points) and Cosine Similarity (Quantifies the cosine of the angle between two vectors to ascertain similarity).",
-            "3. Transformations and Projections: Vectors enable mathematical transformations such as rotation, scaling and translation. These are employed in methods such as Principal Component Analysis (PCA) to project datasets into lower dimensions."
+            "1. Feature Geometry: Vectors allow us to compute distances (Euclidean, Manhattan, etc.) between data points to evaluate similarity. For example, in anomaly detection, a vector far from the cluster center indicates unusual patterns.",
+            "2. Semantic Mappings: In tasks like sentiment analysis, words are transformed into vectors (Word2Vec) so that 'Happy' and 'Joyful' occupy similar coordinates, allowing models to understand context without manual rules.",
+            "3. Geometric Projection: Techniques like Principal Component Analysis (PCA) use vector projection to reduce complex data into smaller, more manageable sub-spaces while preserving core information."
           ]
         },
         {
@@ -85,61 +80,56 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
           output: "Addition a+b: [3 2]\nSubtraction a-b: [1 4]\nScalar Multiplication 2*a: [4 6]\nDot Product a.b: -1\nCross Product a x b (extended to 3D): [ 0  0 -5]"
         },
         {
-          heading: "Applications in ML Algorithms",
+          heading: "Algorithmic Implementations",
           paragraphs: [
-            "Vectors play an important role in various machine learning algorithms and natural language processing (NLP) techniques:",
-            "- Linear Regression: Employs vectors to denote the independent and dependent variable relationship: $Y = Xw + b$ where $X$ is a feature vector, $w$ is a weights vector and $b$ is the bias term.",
-            "- Support Vector Machines (SVMs): SVMs utilize vector mathematics to identify the best hyperplane separating various classes in classification problems.",
-            "- Neural Networks: store weights, activations and gradients as vectors, making them crucial for deep learning models.",
-            "- Clustering (K-Means Algorithm): allocates points to clusters based on vector distances.",
-            "- Word Embeddings in NLP: Methods such as Word2Vec and GloVe map words to vectors, capturing their semantic meaning.",
-            "- Sentence and Document Embeddings: Sentences and documents can also be encoded as vectors using techniques like BERT and Doc2Vec."
+            "Vectors are the workhorses of several key algorithms:",
+            "- Linear Regression: Represents a linear relationship as $Y = Xw + b$, where $w$ is a vector of trainable weights and $X$ is the input vector.",
+            "- Support Vector Machines (SVM): Mathematically defines a boundary (hyperplane) that maximizes the margin between different classes in vector space.",
+            "- Deep Learning: Millions of parameters are stored in weight vectors and biases, which are iteratively adjusted using vector-based optimization (Gradient Descent).",
+            "- Clustering: K-means uses vectors to represent the centers of clusters, assigning data points based on the shortest vector distance."
           ]
         }
       ],
-      tags: ["Components", "Magnitude", "Direction", "Sparse", "Dense"],
+      tags: ["Feature Space", "Embeddings", "Dimensionality", "Optimization"],
       level: "Beginner"
     },
     {
       id: "LinearCombinations",
-      title: "Linear Combinations",
-      description: "Linear combination involves combining a set of vectors by multiplying each vector by a scalar (a real number) and then adding the results together.",
-      formula: "w = c_1v_1 + c_2v_2 + \\dots + c_nv_n",
+      title: "Weighted Accumulations (Linear Combinations)",
+      description: "A linear combination is the fundamental way we construct new vectors from existing ones by scaling each vector and summing them up. This 'weighted sum' logic is the basis of almost all predictive modeling.",
+      formula: "w = \alpha v_1 + \beta v_2 + \dots",
       details: [
-        "A linear combination expresses a new vector as a weighted sum of existing vectors.",
-        "Key in regression models, Principal Component Analysis (PCA), and feature engineering."
+        "A linear combination represents a new data point as a weighted contribution from multiple sources.",
+        "Essential for understanding Linear Regression, Neural Networks, and dimensionality reduction techniques like PCA."
       ],
       contentSections: [
         {
-          heading: "What is a Linear Combination?",
+          heading: "What are Linear Combinations?",
           paragraphs: [
-            "Linear combination involves combining a set of vectors by multiplying each vector by a scalar (a real number) and then adding the results together. For example, if you have vectors $v_1$ and $v_2$ and scalars $a$ and $b$, the expression $a \\times v_1 + b \\times v_2$ is a linear combination of those vectors.",
-            "This concept is not limited to just vectors. Linear combinations can also be applied to functions, polynomials and other mathematical entities.",
-            "Linear combinations are used in data science and data analysis in the following ways:",
-            "- In prediction models, results are calculated by multiplying features with weights and adding them.",
-            "- In techniques like Principal Component Analysis (PCA), new variables are created by combining old variables.",
-            "- In feature engineering, existing data columns are combined to make better inputs for models."
+            "A linear combination occurs when you take a set of vectors, multiply each by a specific scaling factor (scalar), and then add the results together. Geometrically, this means you are stretching or shrinking vectors and then placing them head-to-tail to reach a new point in space.",
+            "For example, if you have two base vectors $v_1$ and $v_2$, any vector $w = a v_1 + b v_2$ is a linear combination. This simple operation allows us to navigate entire spaces of data.",
+            "Why this matters in ML:",
+            "- Model Predictions: A regression model predicts a value by forming a linear combination of its input features and learned weights.",
+            "- Data Components: PCA finds the 'principal' directions of data as linear combinations of the original feature set.",
+            "- Transfer Learning: New models can be built as combinations of pre-trained feature extractors."
           ]
         },
         {
-          heading: "Mathematical Definition",
+          heading: "Formal Definition",
           paragraphs: [
-            "Given a set of vectors $v_1, v_2, \\dots, v_n$ in a vector space, a linear combination of these vectors is an expression of the form:",
-            "$$ w = c_1 v_1 + c_2 v_2 + \\dots + c_n v_n $$",
-            "Where $c_1, c_2, \\dots, c_n$ are scalars (real numbers, complex numbers, etc.).",
-            "**Example in $\\mathbb{R}^2$:**",
-            "Consider two vectors:",
-            "$$ \\mathbf{v}_1 = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}, \\mathbf{v}_2 = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} $$",
-            "A linear combination of $v_1$ and $v_2$ would be:",
-            "$$ \\mathbf{w} = c_1 \\mathbf{v}_1 + c_2 \\mathbf{v}_2 = c_1 \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix} + c_2 \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix} = \\begin{bmatrix} c_1 + 3c_2 \\\\ 2c_1 + 4c_2 \\end{bmatrix} $$"
+            "Given a collection of vectors $V = \{v_1, v_2, \dots, v_n\}$ in a vector space, a linear combination is any vector $w$ that can be expressed as:",
+            "$$ w = c_1 v_1 + c_2 v_2 + \dots + c_n v_n $$",
+            "wherein $c_i$ are scalars (weights). If we can reach a target vector $b$ using some combination of $v_i$, we say $b$ is in the 'span' of those vectors.",
+            "**Geometric Example:**",
+            "Imagine two vectors in a 2D plane: $\mathbf{v}_1$ points right, and $\mathbf{v}_2$ points up. By combining them ($w = 2\mathbf{v}_1 + 3\mathbf{v}_2$), you can reach the point $(2, 3)$. Every point in the plane can be reached by some combination of these two basis vectors."
           ]
         },
         {
-          heading: "Properties of Linear Combinations",
+          heading: "Core Algebraic Properties",
           paragraphs: [
-            "1. Linearity Property: Scalar multiplication distributes over addition: $a(u+v) = au + av$ and $(a+b)u = au + bu$. This ensures scaling and addition behave consistently.",
-            "2. Commutative Property: Order of addition does not matter: $v_1 + v_2 = v_2 + v_1$. In linear combinations: $c_1v_1 + c_2v_2 = c_2v_2 + c_1v_1$.",
-            "3. Associative Property: Grouping does not matter: $(v_1 + v_2) + v_3 = v_1 + (v_2 + v_3)$. In linear combinations: $(c_1v_1 + c_2v_2) + c_3v_3 = c_1v_1 + (c_2v_2 + c_3v_3)$."
+            "1. Superposition: The scaling and addition of vectors are distributive. $a(u+v) = au + av$.",
+            "2. Rescaling: A linear combination of scaled vectors is itself a linear combination of the original vectors.",
+            "3. Homogeneity: If you scale the inputs, the output combination scales by the same factor."
           ]
         },
         {
@@ -165,23 +155,22 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "DotProduct",
-      title: "Dot Product (Scalar Product)",
-      description: "In physics and mathematics, the scalar product (dot product) of two vectors gives a scalar quantity. It is fundamental to measuring alignment, work, projections, and similarity in machine learning.",
-      formula: "A \\cdot B = |A| |B| \\cos(\\theta)",
+      title: "Dot Product (Projection & Alignment)",
+      description: "The dot product is a scalar value that measures the degree of alignment between two vectors. It is the engine behind similarity scores, gradient updates, and error measurements in ML.",
+      formula: "A \cdot B = \|A\| \|B\| \cos(\theta)",
       details: [
-        "The dot product results in a scalar quantity.",
-        "In unit vector form: $A \\cdot B = A_x B_x + A_y B_y + A_z B_z$.",
-        "Geometrically, it represents the product of the magnitude of one vector and the component of the other along its direction."
+        "A positive dot product means vectors point in generally the same direction ($< 90^\circ$).",
+        "A zero dot product means vectors are perfectly perpendicular (Orthogonal).",
+        "A negative dot product means they point in opposite directions ($> 90^\circ$)."
       ],
       contentSections: [
         {
-          heading: "Introduction to Scalar Product",
+          heading: "Quantifying Vector Relationships",
           paragraphs: [
-            "In physics and mathematics, vectors can be multiplied either by a scalar or by another vector. One important type of vector multiplication is the scalar product, also known as the dot product. The result of a scalar product is a scalar quantity.",
-            "The scalar product is widely used in physics to define quantities such as work, energy, and power. For example, the work done by a force is defined as the scalar product of the force vector and the displacement vector.",
-            "The scalar product of two vectors $A$ and $B$ is defined as:",
-            "$$ \\boxed{\\overrightarrow{\\text{A}} \\cdot \\overrightarrow{\\text{B}} = |\\overrightarrow{\\text{A}}| \\,| \\overrightarrow{\\text{B}} | \\cos\\theta} $$",
-            "where $|\\mathbf{A}|$ and $|\\mathbf{B}|$ are the magnitudes of the vectors, and $\\theta$ is the angle between them. Since the product is represented by a dot (Â·), it is called the dot product."
+            "In data science, we often need to know how similar two data points are. The dot product (or scalar product) provides a way to multiply two vectors to yield a single number. This number tells us about the angle between the vectors: the more they align, the higher the dot product.",
+            "Mathematically, the dot product of $A$ and $B$ is:",
+            "$$ \mathbf{A} \cdot \mathbf{B} = \sum_{i=1}^n A_i B_i = |A| |B| \cos(\theta) $$",
+            "This operation is essential for algorithms like **Cosine Similarity** (used in text search) and **Gradient Descent** (where we find the direction of steepest descent by taking the dot product of the gradient with our update step)."
           ]
         },
         {
@@ -229,24 +218,24 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "Matrices",
-      title: "Matrices & Matrix Arithmetic",
-      description: "In machine learning data often comes in multi-dimensional arrays making matrices an ideal way to handle such inputs. Mastery of matrix arithmetic is essential for linear regression, neural networks, and dimensionality reduction.",
-      formula: "$$ C_{ij} = \\sum_{k} A_{ik} B_{kj} $$",
+      title: "Structured Data Collections (Matrices)",
+      description: "Matrices are rectangular arrays of numbers that allow us to process entire datasets simultaneously. They are the primary structure for linear models and neural network layers.",
+      formula: "C = A \cdot B",
       details: [
-        "A matrix is a two-dimensional array of numbers arranged in rows and columns: element $a[i][j]$.",
-        "The order of a matrix is expressed as $m \\times n$ where $m$ is number of rows and $n$ is number of columns.",
-        "Understanding matrix arithmetic is essential because many ML algorithms rely heavily on matrix operations."
+        "A matrix is a grid of values where rows usually represent samples and columns represent features.",
+        "The size of a matrix is denoted as $m \times n$ (Rows $\times$ Columns).",
+        "Most machine learning operations, like feeding data through a model, are expressed as matrix-vector multiplications."
       ],
       contentSections: [
         {
-          heading: "What is a Matrix?",
+          heading: "What are Matrices in Data Science?",
           paragraphs: [
-            "In machine learning data often comes in multi-dimensional arrays making matrices an ideal way to handle such inputs. Understanding matrix arithmetic is essential because many machine learning algorithms including linear regression, neural networks and dimensionality reduction techniques, rely heavily on matrix operations.",
-            "A matrix is a two-dimensional array of numbers arranged in rows and columns. Each element in a matrix is represented as $a[i][j]$ where: $i$ is row number and $j$ is column number. The order of a matrix is expressed as $m \\times n$ where $m$ is number of rows and $n$ is number of columns.",
-            "In Python the NumPy library is commonly used to work with matrices. Matrices can be created using the `numpy.array()` function."
+            "A matrix is a two-dimensional arrangement of numbers. In a typical dataset, each row might represent a different observation (like a specific transaction or patient), while each column represents a different attribute (like price or age). This structure allows us to apply a single mathematical operation to thousands of data points at once, which is why GPUs (designed for matrix math) are so vital for AI.",
+            "In a matrix $A$, the element at the $i$-th row and $j$-th column is denoted as $A_{ij}$. If a matrix has the same number of rows and columns, it is called a **square matrix**.",
+            "Using libraries like NumPy, we can define and manipulate these structures with ease."
           ],
-          code: "import numpy as np\nmatrix = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])\nprint(\"Matrix:\\n\", matrix)\nprint(\"Order:\", matrix.shape)",
-          output: "Matrix:\n [[1 2 3]\n [4 5 6]\n [7 8 9]]\nOrder: (3, 3)"
+          code: "import numpy as np\n# A 2x3 matrix representing 2 samples with 3 features each\ndata_matrix = np.array([[1.2, 0.5, 3.1], [0.8, 1.1, 2.9]])\nprint(\"Dataset Matrix:\\n\", data_matrix)\nprint(\"Shape (Samples, Features):\", data_matrix.shape)",
+          output: "Dataset Matrix:\n [[1.2 0.5 3.1]\n [0.8 1.1 2.9]]\nShape (Samples, Features): (2, 3)"
         },
         {
           heading: "Matrix Arithmetic Operations",
@@ -267,25 +256,22 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "LinearTransformation",
-      title: "Linear Mapping (Linear Transformation)",
-      description: "Linear mapping is a mathematical operation that transforms input values into output values using a linear function. It is used for preprocessing, in PCA, and as the core operation in neural networks.",
-      formula: "y = Wx + b",
+      title: "Feature Transformations (Linear Maps)",
+      description: "A linear transformation is a rule that moves vectors from one space to another while preserving the 'grid lines' of the original space. It is the core operation of every layer in a neural network.",
+      formula: "f(u+v) = f(u) + f(v)",
       details: [
-        "A linear transformation preserves vector addition: $f(u+v) = f(u)+f(v)$.",
-        "It preserves homogeneity (scalar multiplication): $f(cu) = cf(u)$.",
-        "Every linear transformation can be represented as matrix multiplication $T(v) = Av$."
+        "Linear maps preserve vector addition and scalar multiplication.",
+        "Any linear transformation from $n$-dimensions to $m$-dimensions can be represented by an $m \times n$ matrix.",
+        "Common examples include scaling, rotation, and data projection."
       ],
       contentSections: [
         {
-          heading: "What is Linear Mapping?",
+          heading: "Information Mapping",
           paragraphs: [
-            "Linear mapping is a mathematical operation that transforms a set of input values into a set of output values using a linear function. It is often used as a preprocessing step to transform the input data into a more suitable format for analysis. It can also be used as a model in itself, such as in linear regression or linear classifiers.",
-            "The linear mapping function can be represented as follows:",
-            "$$ y = Wx + b $$",
-            "where $x$ is the input vector, $W$ is the weight matrix, $b$ is the bias vector and $y$ is the output vector. The weight matrix and bias vector are learned during the training process.",
-            "Let $V$ and $W$ be vector spaces over a field $K$. A function $f: V \\rightarrow W$ is called a linear map if, for any vectors $u, v \\in V$ and a scalar $c \\in K$, the following conditions hold:",
-            "- If the transformation is additive in nature: $f(u + v) = f(u) + f(v)$",
-            "- If transformation is homogeneity: $f(c \\cdot u) = c \\cdot f(u)$"
+            "In machine learning, we often need to project data into a new 'viewing' space. For example, projecting 3D data onto a 2D screen is a transformation. A map $T: V \rightarrow W$ is linear if it follows two rules:",
+            "1. Additivity: $T(u+v) = T(u) + T(v)$ (The transform of a sum is the sum of transforms).",
+            "2. Homogeneity: $T(cu) = cT(u)$ (Scaling the input scales the output by the same amount).",
+            "In the context of Neural Networks, a 'Linear layer' (or Dense layer) performs exactly this operation: $y = Wx + b$. Here, $W$ is the transformation matrix that maps the input features $x$ to a new hidden representation $y$."
           ]
         },
         {
@@ -354,24 +340,22 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "LinearEquations",
-      title: "Solving Linear Equations",
-      description: "Linear Algebra is important in Data Science as it helps represent and process data efficiently, especially for high-dimensional datasets. Solving $Ax = b$ systems is fundamental for optimization, predictions, and identifying relationships.",
-      formula: "$$ A \\mathbf{x} = \\mathbf{b} $$",
+      title: "System Resolution (Ax = b)",
+      description: "Solving systems of linear equations is the process of finding the values that satisfy multiple constraints simultaneously. This is the mathematical engine for weight optimization in linear regression.",
+      formula: "A \mathbf{x} = \mathbf{b}",
       details: [
-        "Detects linear relationships using **null space and nullity**.",
-        "Case 1 ($m=n$): Unique, Infinite, or No Solution based on rank and determinant.",
-        "Case 2 ($m>n$): Overdetermined systems solved via the **Optimization Perspective (Least Squares)**.",
-        "Case 3 ($m<n$): Underdetermined systems with infinite solutions; we select one via pseudoinverse."
+        "In ML, $A$ represents the input data (features), $b$ is the target output, and $x$ is the set of model weights we need to find.",
+        "Overdetermined ($m > n$): More data points than features, solved using 'Least Squares'.",
+        "Underdetermined ($m < n$): More features than data points, leading to infinite solutions (requires regularization)."
       ],
       contentSections: [
         {
-          heading: "Linear Relationships in Data Science",
+          heading: "Satisfying Multiple Constraints",
           paragraphs: [
-            "Linear Algebra is important in Data Science as it helps represent and process data efficiently, especially for high-dimensional datasets. It also helps in understanding relationships between variables. This is useful for:",
-            "- Efficient Data Representation: Organizes data in matrix form.",
-            "- Find Relationships: Identifies important variables and patterns.",
-            "- Supports ML Algorithms: Forms the basis of many machine learning methods.",
-            "Linear relationships among attributes are identified using the concepts of null space and nullity. These help determine whether variables are linearly dependent and whether some attributes can be expressed as combinations of others."
+            "At its heart, machine learning is often about solving $Ax = b$. We have a matrix of features ($A$) and a known result ($b$), and we want to find the relationship ($x$) between them. Depending on the size and shape of our data matrix, we encounter different scenarios:",
+            "1. Exact Solution: rare in real-world data; only happens if we have exactly as many independent equations as variables.",
+            "2. Least Squares: The most common scenario in ML. We have too much data for a perfect fit, so we find the $x$ that minimizes the total error (residuals).",
+            "3. Regularized Solution: When we have too many dimensions and not enough samples, we 'regularize' the system to pick the simplest possible solution (e.g., Lasso or Ridge)."
           ]
         },
         {
@@ -431,22 +415,20 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "EigenValues",
-      title: "Eigenvalues & Eigenvectors",
-      description: "Fundamental concepts in linear algebra used for matrix diagonalization, stability analysis, and PCA. They provide deep insights into how matrices transform space.",
-      formula: "$$ A \\mathbf{v} = \\lambda \\mathbf{v} $$",
+      title: "Eigen-decomposition: Invariant Directions",
+      description: "Eigen-decomposition reveals the 'dna' of a square matrix by identifying directions that only get scaled, not rotated, during a transformation. This is the foundation of PCA.",
+      formula: "A \mathbf{v} = \lambda \mathbf{v}",
       details: [
-        "Eigenvalues (Î») are scalars that stretch/compress eigenvectors.",
-        "Eigenvectors ($v$) are non-zero vectors whose direction remains unchanged under transformation.",
-        "Calculation: Solve $\\det(A - \\lambda I) = 0$ for $\\lambda$, then $(A - \\lambda I)v = 0$ for $v$."
+        "Eigenvalues ($\lambda$) represent the 'stretch' factor of the transformation.",
+        "Eigenvectors ($v$) are the stable directions that don't change orientation.",
+        "Crucial for identifying the directions of maximum variance in a dataset."
       ],
       contentSections: [
         {
-          heading: "Introduction",
+          heading: "The Internal Geometry of Matrices",
           paragraphs: [
-            "Eigenvalues and eigenvectors are fundamental concepts in linear algebra, used in various applications such as matrix diagonalization, stability analysis, and data analysis (e.g., Principal Component Analysis). They are associated with a square matrix and provide insights into its properties.",
-            "**Eigenvalues:** are unique scalar values linked to a matrix or linear transformation. They indicate how much an eigenvector gets stretched or compressed during the transformation. The eigenvector's direction remains unchanged unless the eigenvalue is negative, in which case the direction is simply reversed.",
-            "**Eigenvectors:** are non-zero vectors that, when multiplied by a matrix, only stretch or shrink without changing direction. The eigenvalue must be found first before the eigenvector. For any square matrix A of order $n \\times n$, the eigenvector is a column matrix of size $n \\times 1$. This is known as the **right eigenvector**.",
-            "Alternatively, the **left eigenvector** can be found using the equation $vA = \\lambda v$, where $v$ is a row matrix of size $1 \\times n$."
+            "When we apply a matrix transformation to a space, most vectors get knocked off their original path. However, certain special vectors—Eigenvectors—remain on their original line, only changing in length. The factor by which they grow or shrink is the Eigenvalue.",
+            "Why is this useful? In data science, the eigenvectors pointing in the directions of the most 'stretch' correspond to the features with the most information. By keeping only these directions (PCA), we can compress data without losing its essential characteristics."
           ]
         },
         {
@@ -501,30 +483,24 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "SVD",
-      title: "Singular Value Decomposition (SVD)",
-      description: "Singular Value Decomposition (SVD) is a factorization method in linear algebra that decomposes a matrix into three other matrices, providing a way to represent data in terms of its singular values.",
-      formula: "A = U \\Sigma V^T",
+      title: "SVD: Latent Feature Discovery",
+      description: "Singular Value Decomposition (SVD) is a technique that factorizes any matrix into three components, exposing its latent patterns. It is the powerhouse behind recommendation engines and image compression.",
+      formula: "A = U \Sigma V^T",
       details: [
-        "U: This part tells you about the people (like their general preferences).",
-        "$\\Sigma$: This part shows how important each factor is (how much each rating matters).",
-        "$V^T$: This part tells you about the products (how similar they are to each other)"
+        "U: Captures relationships between rows (e.g., users).",
+        "$\Sigma$: Represents the strength or importance of each latent feature.",
+        "$V^T$: Captures relationships between columns (e.g., items)."
       ],
       contentSections: [
         {
-          heading: "What is SVD?",
+          heading: "Unlocking Hidden Patterns",
           paragraphs: [
-            "Singular Value Decomposition (SVD) is a factorization method in linear algebra that decomposes a matrix into three other matrices, providing a way to represent data in terms of its singular values. SVD helps you split that table into three parts:",
-            "- U: This part tells you about the people (like their general preferences).",
-            "- $\\Sigma$: This part shows how important each factor is (how much each rating matters).",
-            "- $V^T$: This part tells you about the products (how similar they are to each other)",
-            "Let's understand this with the help of an example: Suppose you have a small table of people's ratings for two movies:",
-            "<table class=\"w-full text-left border-collapse bg-white\">\n  <thead>\n    <tr class=\"bg-gray-50 border-b\">\n      <th class=\"px-6 py-3 font-bold text-sm text-gray-900\">Name</th>\n      <th class=\"px-6 py-3 font-bold text-sm text-gray-900\">Movie 1 Rating</th>\n      <th class=\"px-6 py-3 font-bold text-sm text-gray-900\">Movie 2 Rating</th>\n    </tr>\n  </thead>\n  <tbody class=\"divide-y divide-gray-100\">\n    <tr class=\"hover:bg-gray-50\">\n      <td class=\"px-6 py-3 text-sm text-gray-700\">Amit</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">5</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">3</td>\n    </tr>\n    <tr class=\"hover:bg-gray-50\">\n      <td class=\"px-6 py-3 text-sm text-gray-700\">Sanket</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">4</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">2</td>\n    </tr>\n    <tr class=\"hover:bg-gray-50\">\n      <td class=\"px-6 py-3 text-sm text-gray-700\">Harsh</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">2</td>\n      <td class=\"px-6 py-3 text-sm text-gray-700\">5</td>\n    </tr>\n  </tbody>\n</table>",
-            "- SVD breaks this table into three smaller parts: one that shows people's preferences, one that shows the importance of each movie, and one that shows how similar the movies are to each other",
-            "- Mathematically, the SVD of a matrix A (of size $m \\times n$) is represented as: $$A = U \\Sigma V^T$$",
-            "Here:",
-            "- U: An $m \\times m$ orthogonal matrix whose columns are the left singular vectors of A.",
-            "- $\\Sigma$: A diagonal $m \\times n$ matrix containing the singular values of A in descending order.",
-            "- $V^T$: The transpose of an $n \\times n$ orthogonal matrix, where the columns are the right singular vectors of A."
+            "SVD is like 'distilling' a matrix down to its most important ingredients. While Eigen-decomposition only works for square matrices, SVD works for matrices of any shape. It breaks a dataset into three parts:",
+            "1. User/Row Profiles ($U$): How each entry relates to hidden concepts.",
+            "2. Singular Values ($\Sigma$): How much information each hidden concept carries.",
+            "3. Item/Column Profiles ($V^T$): How each feature relates back to those hidden concepts.",
+            "**Conceptual Example: News Articles**",
+            "Imagine a matrix where rows are articles and columns are words. SVD might find a 'latent concept' for 'Sports' that isn't explicitly labeled. The $U$ matrix would tell you which articles are about sports, $\Sigma$ would tell you how prominent 'Sports' is as a theme in the whole library, and $V^T$ would tell you which words (like 'goal', 'score', 'team') participate in that theme."
           ]
         },
         {
@@ -607,26 +583,25 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "VectorNorms",
-      title: "Vector Norms",
-      description: "A vector norm, sometimes represented with a double bar as âˆ¥xâˆ¥, is a function that assigns a non-negative length or size to a vector x in n-dimensional space. Norms are essential in mathematics and machine learning for measuring vector magnitudes and calculating distances.",
-      formula: "| \\mathbf{x} |_p = \\left( \\sum_{i=1}^{n} | x_i |^p \\right)^{\\frac{1}{p}}",
+      title: "Magnitude Metrics (Vector Norms)",
+      description: "A norm is a function that assigns a strictly positive 'length' or size to a vector. In machine learning, norms are used to penalize large weights (regularization) and calculate error distances.",
+      formula: "| \mathbf{x} |_p = (\sum | x_i |^p)^{1/p}",
       details: [
-        "A vector norm satisfies three properties:",
-        "- Non-negativity: âˆ£xâˆ£ > 0 if x â‰  0, and âˆ£xâˆ£=0 if and only if x = 0.",
-        "- Scalar Multiplication: âˆ£kxâˆ£ = âˆ£kâˆ£ â‹… âˆ£xâˆ£ for any scalar k.",
-        "- Triangle Inequality: âˆ£x + yâˆ£ â‰¤ âˆ£xâˆ£ + âˆ£yâˆ£."
+        "A vector norm satisfies three essential properties:",
+        "Non-negativity: $\|\mathbf{x}\| > 0$ if $\mathbf{x} \neq 0$, and $\|\mathbf{x}\|=0$ if and only if $\mathbf{x} = 0$.",
+        "Scalar Multiplication: $\|k\mathbf{x}\| = |k| \cdot \|\mathbf{x}\|$ for any scalar $k$.",
+        "Triangle Inequality: $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$.",
+        "L-infinity (Max Norm): Measures the absolute value of the largest component."
       ],
       contentSections: [
         {
-          heading: "What is a Vector Norm?",
+          heading: "Defining a Valid Norm",
           paragraphs: [
-            "A vector norm, sometimes represented with a double bar as âˆ¥xâˆ¥, is a function that assigns a non-negative length or size to a vector x in n-dimensional space. Norms are essential in mathematics and machine learning for measuring vector magnitudes and calculating distances.",
-            "A vector norm satisfies three properties:",
-            "1. Non-negativity: âˆ£xâˆ£ > 0 if x â‰  0, and âˆ£xâˆ£=0 if and only if x = 0.",
-            "2. Scalar Multiplication: âˆ£kxâˆ£ = âˆ£kâˆ£ â‹… âˆ£xâˆ£ for any scalar k.",
-            "3. Triangle Inequality: âˆ£x + yâˆ£ â‰¤ âˆ£xâˆ£ + âˆ£yâˆ£.",
-            "The vector norm $|x|_p$, also known as the p-norm, for $p = 1, 2,\\dots$ is defined as: $$| \\mathbf{x} |_p = \\left( \\sum_{i=1}^{n} | x_i |^p \\right)^{\\frac{1}{p}}$$",
-            "This general formula encompasses several specific norms that are commonly used:"
+            "A mathematical function is only considered a valid 'norm' if it satisfies these three foundational properties:",
+            "- **Non-negativity**: $\|\mathbf{x}\| > 0$ if $\mathbf{x} \neq 0$, and $\|\mathbf{x}\|=0$ if and only if $\mathbf{x} = 0$.",
+            "- **Scalar Multiplication**: $\|k\mathbf{x}\| = |k| \cdot \|\mathbf{x}\|$ for any scalar $k$.",
+            "- **Triangle Inequality**: $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$.",
+            "In machine learning, we use these norms to quantify error or to penalize model complexity (Regularization)."
           ]
         },
         {
@@ -640,10 +615,10 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
             "The L2 norm, also known as the Euclidean norm, is a measure of the \"length\" or \"magnitude\" of a vector, calculated as the square root of the sum of the squares of its components.",
             "For a vector $x = [x_1, x_2, \\dots, x_n]$, the L2 norm $|x|_2$ is defined as: $$| \\mathbf{x} |_2 = \\sqrt{x_1^2 + x_2^2 + \\dots + x_n^2}$$",
             "Example: If $x = [3, -4, 2]$, then the L2 norm is: $| \\mathbf{x} |_2 = \\sqrt{3^2 + (-4)^2 + 2^2} = \\sqrt{9 + 16 + 4} = \\sqrt{29} \\approx 5.39$",
-            "3. Lâˆž norm",
-            "The Lâˆž norm, also known as the Infinity norm or Max norm, measures the \"size\" of a vector by taking the largest absolute value among its components. Unlike the L1 and L2 norms, which consider the combined contribution of all components, the Lâˆž norm focuses solely on the component with the maximum magnitude.",
-            "For a vector $x = [x_1, x_2, \\dots, x_n]$, the Lâˆž norm $|x|_\\infty$ is defined as: $$|x|_\\infty = \\max|x_i| \\text{ where } 1 \\le i \\le n$$",
-            "Example: If $x = [3, -4, 2]$, then the Lâˆž norm is: $|x|_\\infty = \\max(|3|, |-4|, |2|) = 4$"
+            "3. L\\infty norm",
+            "The L\\infty norm (Infinity norm or Max norm) measures the 'size' of a vector by taking the largest absolute value among its components. It focuses solely on the component with the maximum magnitude, making it sensitive to individual coordinate outliers.",
+            "For a vector $x = [x_1, x_2, \\dots, x_n]$, the L\\infty norm $|x|_\\infty$ is defined as: $$|x|_\\infty = \\max(|x_i|) \\text{ where } 1 \\le i \\le n$$",
+            "Example: If $x = [3, -4, 2]$, then the L\\infty norm is: $|x|_\\infty = \\max(|3|, |-4|, |2|) = 4$"
           ]
         },
         {
@@ -651,12 +626,12 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
           paragraphs: [
             "Question 1. Given the vector x = [4, -3, 7, 1], calculate the L1 norm (Manhattan norm) of the vector.",
             "Question 2. Given the vector x = [1, -2, 2], calculate the L2 norm (Euclidean norm) of the vector.",
-            "Question 3. For the vector x = [7, âˆ’1, âˆ’4, 6], calculate the Lâˆž norm (Infinity norm) of the vector.",
+            "Question 3. For the vector x = [7, -1, -4, 6], calculate the L-infinity norm (Max norm) of the vector.",
             "Question 4. If the L2 norm (Euclidean norm) of a vector x = [x1, x2, x3] is 10, and the components of the vector are x1 = 6 and x2 = 8, find the value of x3.",
             "Answers: 1. 15, 2. 3, 3. 7, 4. 0"
           ],
-          code: "import numpy as np\n\nx1 = np.array([4, -3, 7, 1])\nprint('L1 norm of [4, -3, 7, 1]:', np.linalg.norm(x1, 1))\n\nx2 = np.array([1, -2, 2])\nprint('L2 norm of [1, -2, 2]:', np.linalg.norm(x2, 2))\n\nx3 = np.array([7, -1, -4, 6])\nprint('L-inf norm of [7, -1, -4, 6]:', np.linalg.norm(x3, np.inf))",
-          output: "L1 norm of [4, -3, 7, 1]: 15.0\nL2 norm of [1, -2, 2]: 3.0\nL-inf norm of [7, -1, -4, 6]: 7.0"
+          code: "import numpy as np\n\nx1 = np.array([4, -3, 7, 1])\nprint('L1 norm:', np.linalg.norm(x1, 1))\n\nx2 = np.array([1, -2, 2])\nprint('L2 norm:', np.linalg.norm(x2, 2))\n\nx3 = np.array([7, -1, -4, 6])\nprint('L-infinity norm:', np.linalg.norm(x3, np.inf))",
+          output: "L1 norm: 15.0\nL2 norm: 3.0\nL-infinity norm: 7.0"
         }
       ],
       tags: ["L1", "L2", "Regularization", "Lasso", "Ridge", "Sparsity"],
@@ -664,23 +639,22 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "DistanceMetrics",
-      title: "Measures of Distance",
-      description: "Measures of distance are mathematical functions used to quantify how similar or dissimilar two objects are based on their features. Smaller distance = higher similarity, larger distance = higher dissimilarity.",
-      formula: "d(x,y) = \\sqrt{\\sum_{i=1}^n (x_i - y_i)^2}",
+      title: "Similarity and Dissimilarity (Distance Metrics)",
+      description: "Distance metrics quantify how far apart two data points are in feature space. They are the analytical foundation for clustering, classification (KNN), and recommendation systems.",
+      formula: "d(x,y) = \sqrt{\sum (x_i - y_i)^2}",
       details: [
-        "Important for clustering algorithms (e.g., K-means, hierarchical clustering).",
-        "Choice of distance is context-dependent (numerical, categorical or text data).",
-        "Used to quantify similarity/dissimilarity between objects."
+        "Euclidean Distance: Standard 'as-the-crow-flies' distance.",
+        "Manhattan Distance: 'Grid-based' distance, useful for high-dimensional data.",
+        "Cosine Distance: Measures the angle between vectors, ignoring their size/magnitude."
       ],
       contentSections: [
         {
-          heading: "Why Measures of Distance Matter",
+          heading: "Quantifying Relationships",
           paragraphs: [
-            "Measures of distance are mathematical functions used to quantify how similar or dissimilar two objects are based on their features. These measures are critical for clustering, classification and information retrieval because they help determine relationships among data points. The choice of distance depends on the nature of the data and the application domain.",
-            "- Used to quantify similarity/dissimilarity between objects.",
-            "- Smaller distance = higher similarity, larger distance = higher dissimilarity.",
-            "- Important for clustering algorithms (e.g., K-means, hierarchical clustering).",
-            "- Choice of distance is context-dependent (numerical, categorical or text data)."
+            "In many AI tasks, we need a mathematical way to say 'Example A is similar to Example B'. We do this by measuring the distance between their feature vectors. A small distance implies high similarity. Selecting the right metric is crucial because different datasets respond better to different types of geometry.",
+            "- **Clustering**: K-means uses Euclidean distance to group similar items together.",
+            "- **Classification**: K-Nearest Neighbors (KNN) identifies the label of a new point based on the labels of its closest neighbors in space.",
+            "- **Search Engines**: Use Cosine Similarity to find documents that 'point' in the same semantic direction as the user's query."
           ]
         },
         {
