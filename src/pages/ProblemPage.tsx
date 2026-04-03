@@ -1,49 +1,170 @@
 import { useParams, Link } from "react-router-dom";
-import { ChevronRight, ArrowLeft } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import { CATEGORIES, ContentBlock } from "@/src/data/topics";
 import { CodeSnippet } from "@/src/components/MathComponents";
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
 
-const ContentSection = ({ section }: { section: ContentBlock; key?: number }) => (
-  <div className="mb-10">
-    {section.heading && (
-      <h3 className="text-xl font-bold text-gray-900 mb-4">{section.heading}</h3>
-    )}
-    {section.paragraphs.length > 0 && (
-      <div className="space-y-3 text-gray-700 text-[17px] leading-relaxed">
-        {section.paragraphs.map((p, idx) => {
-          // Detect numbered sub-headings like "1. Row and Column Vectors"
-          if (/^\d+\.\s/.test(p) && p.length < 80) {
-            return <h4 key={idx} className="font-semibold text-gray-900 mt-4 text-lg">{p}</h4>;
-          }
-          // Detect formula-like short lines (e.g., "v = (x₁, x₂)")
-          if (p.startsWith("v =") || p.startsWith("û =") || p.startsWith("Y =")) {
-            return (
-              <div key={idx} className="font-mono text-blue-700 bg-blue-50/50 px-5 py-3 rounded-lg text-lg border border-blue-100 inline-block">
-                {p}
-              </div>
-            );
-          }
-          // Detect bullet-like entries (starts with a capitalized word followed by colon)
-          if (/^[A-Z][a-zA-Z\s()]+:/.test(p)) {
-            const colonIdx = p.indexOf(":");
-            return (
-              <p key={idx} className="pl-4 border-l-2 border-gray-200">
-                <strong className="text-gray-900">{p.slice(0, colonIdx + 1)}</strong>
-                {p.slice(colonIdx + 1)}
-              </p>
-            );
-          }
-          return <p key={idx}>{p}</p>;
-        })}
-      </div>
-    )}
-    {section.code && (
-      <div className="mt-4">
-        <CodeSnippet code={section.code} staticOutput={section.output} />
-      </div>
-    )}
-  </div>
-);
+const RichText = ({ text }: { text: string }) => {
+  if (!text.includes("$")) return <>{text}</>;
+  // Regex to match both $$...$$ and $...$ delimiters
+  const parts = text.split(/(\$\$.*?\$\$|\$.*?\$)/g);
+  return (
+    <>
+      {parts.map((part, i) => {
+        if (part.startsWith("$$") && part.endsWith("$$")) {
+          return <div key={i} className="my-4 flex justify-center"><BlockMath math={part.slice(2, -2).trim()} /></div>;
+        }
+        if (part.startsWith("$") && part.endsWith("$")) {
+          return <InlineMath key={i} math={part.slice(1, -1)} />;
+        }
+        return <span key={i}>{part}</span>;
+      })}
+    </>
+  );
+};
+
+const MarkdownTable = ({ rows }: { rows: string[], key?: any }) => {
+  const data = rows.filter(r => !r.includes("---|--")).map(r => 
+    r.split('|').map(cell => cell.trim()).filter(cell => cell !== "")
+  );
+
+  if (data.length < 1) return null;
+
+  const [headers, ...content] = data;
+
+  return (
+    <div className="my-8 overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
+      <table className="w-full text-left border-collapse bg-white">
+        <thead>
+          <tr className="bg-gray-50 border-b border-gray-200">
+            {headers.map((h, i) => (
+              <th key={i} className="px-6 py-4 font-bold text-gray-900 text-sm"><RichText text={h} /></th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-100">
+          {content.map((row, i) => (
+            <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+              {row.map((cell, j) => (
+                <td key={j} className="px-6 py-4 text-gray-700 text-sm whitespace-nowrap"><RichText text={cell} /></td>
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  );
+};
+
+const ContentSection = ({ section }: { section: ContentBlock; key?: number }) => {
+  // Pre-process paragraphs to group consecutive table rows
+  const processedParagraphs: (string | { type: 'table', rows: string[] })[] = [];
+  let currentTable: string[] = [];
+
+  section.paragraphs.forEach((p) => {
+    if (p.includes('|') && (p.includes('---') || currentTable.length > 0)) {
+      currentTable.push(p);
+    } else {
+      if (currentTable.length > 0) {
+        processedParagraphs.push({ type: 'table', rows: currentTable });
+        currentTable = [];
+      }
+      processedParagraphs.push(p);
+    }
+  });
+  
+  if (currentTable.length > 0) {
+    // If heading also looks like a table header, prepend it
+    if (section.heading?.includes('|')) {
+      currentTable.unshift(section.heading);
+    }
+    processedParagraphs.push({ type: 'table', rows: currentTable });
+  }
+
+  const showHeading = section.heading && !section.heading.includes('|');
+
+  return (
+    <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both">
+      {showHeading && (
+        <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
+          <span className="w-1.5 h-8 bg-blue-600 rounded-full"></span>
+          {section.heading}
+        </h3>
+      )}
+      {processedParagraphs.length > 0 && (
+        <div className="space-y-4 text-gray-700 text-[17px] leading-relaxed">
+          {processedParagraphs.map((p, idx) => {
+            if (typeof p !== 'string') {
+              return <MarkdownTable key={idx} rows={p.rows} />;
+            }
+
+            // Detect numbered sub-headings like "1. Row and Column Vectors"
+            if (/^\d+\.\s/.test(p) && p.length < 80) {
+              return <h4 key={idx} className="font-bold text-gray-900 mt-8 mb-4 text-xl">{p}</h4>;
+            }
+
+            // Detect formula-like short lines
+            if (p.startsWith("v =") || p.startsWith("û =") || p.startsWith("Y =")) {
+              return (
+                <div key={idx} className="font-mono text-blue-700 bg-blue-50/50 px-5 py-3 rounded-xl text-lg border border-blue-100 inline-block my-2">
+                  {p}
+                </div>
+              );
+            }
+
+            // Detect bullet-like entries or bold-prefix points (e.g. "**Google PageRank:**")
+            const starMatch = p.match(/^[-]?\s?\*\*(.*?)\*\*(.*)/);
+            const normalBulletMatch = p.match(/^([A-Z][a-zA-Z\s()]+):(.*)/);
+            
+            if (starMatch) {
+              return (
+                <div key={idx} className="pl-6 py-2 relative group">
+                  <div className="absolute left-0 top-5 w-2 h-2 rounded-full bg-blue-400 group-hover:scale-125 transition-transform"></div>
+                  <strong className="text-gray-900 text-lg"><RichText text={starMatch[1]} />:</strong>
+                  <span className="ml-2"><RichText text={starMatch[2]} /></span>
+                </div>
+              );
+            }
+
+            if (normalBulletMatch) {
+              return (
+                <div key={idx} className="pl-6 py-2 relative group">
+                  <div className="absolute left-0 top-5 w-2 h-2 rounded-full bg-gray-300 group-hover:bg-blue-400 transition-colors"></div>
+                  <strong className="text-gray-900"><RichText text={normalBulletMatch[1]} />:</strong>
+                  <span className="ml-2"><RichText text={normalBulletMatch[2]} /></span>
+                </div>
+              );
+            }
+
+            // Detect LaTeX math blocks
+            if ((p.startsWith("$$") && p.endsWith("$$")) || (p.startsWith("det") && p.includes("\\lambda"))) {
+              const math = p.startsWith("$$") ? p.slice(2, -2).trim() : p;
+              return <div key={idx} className="my-8 py-6 bg-gray-50/50 rounded-2xl border border-gray-100 flex justify-center overflow-x-auto"><BlockMath math={math} /></div>;
+            }
+
+            // Detect dashed points
+            if (p.trim().startsWith("- ")) {
+              return (
+                <div key={idx} className="flex gap-3 pl-2">
+                  <span className="text-blue-500 font-bold mt-0.5">•</span>
+                  <span><RichText text={p.trim().slice(2)} /></span>
+                </div>
+              );
+            }
+
+            return <p key={idx} className="mb-2"><RichText text={p} /></p>;
+          })}
+        </div>
+      )}
+      {section.code && (
+        <div className="mt-8">
+          <CodeSnippet code={section.code} staticOutput={section.output} />
+        </div>
+      )}
+    </div>
+  );
+};
 
 export const ProblemPage = () => {
   const { categoryId, problemId } = useParams<{ categoryId: string; problemId: string }>();
@@ -102,8 +223,8 @@ export const ProblemPage = () => {
                 ))}
               </div>
               {problem.formula && (
-                <div className="mt-6 font-mono text-blue-700 bg-blue-50/50 px-6 py-4 rounded-xl inline-block text-xl border border-blue-100 shadow-sm">
-                  {problem.formula}
+                <div className="mt-6 text-blue-700 bg-blue-50/50 px-6 py-4 rounded-xl inline-block text-xl border border-blue-100 shadow-sm overflow-x-auto max-w-full">
+                  <BlockMath math={problem.formula} />
                 </div>
               )}
             </div>

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ChevronRight, ArrowLeft } from "lucide-react";
-import { CategoryData } from "@/src/data/topics";
+import { CategoryData } from "@/src/data/types";
 
 interface CategoryPageProps {
   category: CategoryData;

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { Layers, FunctionSquare, BarChart3, Dice5, ArrowRight } from "lucide-react";
+import { preloadCategory } from "@/src/data/topics";
 
 const TOPICS = [
   {
@@ -7,6 +8,7 @@ const TOPICS = [
     description: "Vectors, matrices, eigenvalues, SVD — the foundation for ML algorithms",
     icon: Layers,
     link: "/linear-algebra",
+    categoryId: "linear-algebra",
     tags: ["Vectors", "Matrices", "Eigenvalues", "SVD", "Norms"]
   },
   {
@@ -14,6 +16,7 @@ const TOPICS = [
     description: "Sample spaces, Bayes' theorem, distributions — measuring uncertainty",
     icon: Dice5,
     link: "/probability",
+    categoryId: "probability",
     tags: ["Bayes", "Distributions", "Conditional", "Events"]
   },
   {
@@ -21,6 +24,7 @@ const TOPICS = [
     description: "Descriptive & inferential stats, hypothesis testing, correlation",
     icon: BarChart3,
     link: "/statistics",
+    categoryId: "statistics",
     tags: ["Hypothesis", "ANOVA", "Correlation", "Sampling"]
   },
   {
@@ -28,6 +32,7 @@ const TOPICS = [
     description: "Derivatives, gradients, chain rule — optimizing ML models",
     icon: FunctionSquare,
     link: "/calculus",
+    categoryId: "calculus",
     tags: ["Gradient Descent", "Chain Rule", "Jacobian", "AUC"]
   }
 ];
@@ -46,6 +51,7 @@ export const HomePage = () => {
         <Link 
           to="/linear-algebra" 
           className="inline-flex items-center gap-2 bg-black text-white px-8 py-3 rounded-lg font-medium hover:bg-gray-800 transition-colors group"
+          onMouseEnter={() => preloadCategory("linear-algebra")}
         >
           Start Learning 
           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -62,6 +68,7 @@ export const HomePage = () => {
             <Link 
               key={topic.title} 
               to={topic.link}
+              onMouseEnter={() => preloadCategory(topic.categoryId)}
               className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg transition-all group flex flex-col h-full"
             >
               <div className="flex items-center justify-between mb-4">

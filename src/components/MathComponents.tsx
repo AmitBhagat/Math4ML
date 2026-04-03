@@ -173,10 +173,34 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <span className="text-xs text-emerald-600 font-medium">● live</span>
             )}
           </div>
-          <pre className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap
+          <div className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap
             ${runState === "error" ? "text-red-800 bg-red-50/40" : "text-emerald-900 bg-emerald-50/50"}`}>
-            {shownOutput}
-          </pre>
+            {(() => {
+              const lines = shownOutput.split("\n");
+              const textLines: string[] = [];
+              const images: string[] = [];
+              
+              lines.forEach(line => {
+                if (line.includes("IMAGE_DATA:")) {
+                  const b64 = line.split("IMAGE_DATA:")[1].trim();
+                  if (b64) images.push(b64);
+                } else {
+                  textLines.push(line);
+                }
+              });
+
+              return (
+                <>
+                  {textLines.length > 0 && <pre className="whitespace-pre-wrap font-mono m-0">{textLines.join("\n")}</pre>}
+                  {images.map((b64, i) => (
+                    <div key={i} className="mt-4 border rounded shadow-inner bg-white overflow-hidden max-w-full">
+                      <img src={`data:image/png;base64,${b64}`} alt="Python Plot" className="block max-w-full h-auto mx-auto" />
+                    </div>
+                  ))}
+                </>
+              );
+            })()}
+          </div>
         </div>
       )}
 

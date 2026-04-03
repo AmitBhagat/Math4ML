@@ -27,6 +27,7 @@ const DETECTABLE_PACKAGES: Record<string, string> = {
   pandas: "pandas",
   matplotlib: "matplotlib",
   sklearn: "scikit-learn",
+  skimage: "scikit-image",
   sympy: "sympy",
 };
 
@@ -99,6 +100,20 @@ sys.stderr = _capture_buf
 `;
 
   const captureRead = `
+try:
+    import matplotlib.pyplot as plt
+    import io
+    import base64
+    if plt.get_fignums():
+        buf = io.BytesIO()
+        plt.savefig(buf, format='png')
+        buf.seek(0)
+        img_str = base64.b64encode(buf.read()).decode('utf-8')
+        print(f"IMAGE_DATA:{img_str}")
+        plt.close('all')
+except Exception:
+    pass
+
 sys.stdout = sys.__stdout__
 sys.stderr = sys.__stderr__
 _capture_buf.getvalue()
