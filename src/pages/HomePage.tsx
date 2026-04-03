@@ -1,41 +1,15 @@
 import { Link } from "react-router-dom";
 import { Layers, FunctionSquare, BarChart3, Dice5, ArrowRight } from "lucide-react";
-import { preloadCategory } from "@/src/data/topics";
+import { preloadCategory, CATEGORY_META, ICON_MAP } from "@/src/data/topics";
 
-const TOPICS = [
-  {
-    title: "Linear Algebra",
-    description: "Vectors, matrices, eigenvalues, SVD — the foundation for ML algorithms",
-    icon: Layers,
-    link: "/linear-algebra",
-    categoryId: "linear-algebra",
-    tags: ["Vectors", "Matrices", "Eigenvalues", "SVD", "Norms"]
-  },
-  {
-    title: "Probability",
-    description: "Sample spaces, Bayes' theorem, distributions — measuring uncertainty",
-    icon: Dice5,
-    link: "/probability",
-    categoryId: "probability",
-    tags: ["Bayes", "Distributions", "Conditional", "Events"]
-  },
-  {
-    title: "Statistics",
-    description: "Descriptive & inferential stats, hypothesis testing, correlation",
-    icon: BarChart3,
-    link: "/statistics",
-    categoryId: "statistics",
-    tags: ["Hypothesis", "ANOVA", "Correlation", "Sampling"]
-  },
-  {
-    title: "Calculus",
-    description: "Derivatives, gradients, chain rule — optimizing ML models",
-    icon: FunctionSquare,
-    link: "/calculus",
-    categoryId: "calculus",
-    tags: ["Gradient Descent", "Chain Rule", "Jacobian", "AUC"]
-  }
-];
+const TOPICS = CATEGORY_META.map((meta) => ({
+  title: meta.title,
+  description: meta.description,
+  icon: ICON_MAP[meta.id] ?? Layers,
+  link: `/${meta.id}`,
+  categoryId: meta.id,
+  tags: (meta.keyConcepts || []).map(k => k.title).slice(0, 5),
+}));
 
 export const HomePage = () => {
   return (

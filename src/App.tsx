@@ -1,24 +1,29 @@
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route, useParams } from "react-router-dom";
 import { MainLayout } from "./components/MainLayout";
-import { HomePage } from "./pages/HomePage";
-import { AsyncCategoryPage } from "./pages/AsyncCategoryPage";
-import { ProblemPage } from "./pages/ProblemPage";
+import React, { Suspense } from "react";
+import LoadingSkeleton from "./components/LoadingSkeleton";
 
+const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ default: m.HomePage })));
+const AsyncCategoryPage = React.lazy(() => import("./pages/AsyncCategoryPage").then(m => ({ default: m.AsyncCategoryPage })));
+const ProblemPage = React.lazy(() => import("./pages/ProblemPage").then(m => ({ default: m.ProblemPage })));
+
+function CategoryRoute() {
+  const { categoryId } = useParams();
+  if (!categoryId) return null;
+  return <AsyncCategoryPage categoryId={categoryId} />;
+}
 export default function App() {
   return (
     <HashRouter>
       <Routes>
         <Route element={<MainLayout />}>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
           
-          {/* Category Pages — data loaded dynamically */}
-          <Route path="/linear-algebra" element={<AsyncCategoryPage categoryId="linear-algebra" />} />
-          <Route path="/calculus"       element={<AsyncCategoryPage categoryId="calculus" />} />
-          <Route path="/probability"    element={<AsyncCategoryPage categoryId="probability" />} />
-          <Route path="/statistics"     element={<AsyncCategoryPage categoryId="statistics" />} />
-          
-          {/* Problem Pages */}
-          <Route path="/problems/:categoryId/:problemId" element={<ProblemPage />} />
+          {/* Problem Pages (placed before the category route to avoid conflicts) */}
+          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
+
+          {/* Category Pages — data loaded dynamically via param */}
+          <Route path="/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
         </Route>
       </Routes>
     </HashRouter>

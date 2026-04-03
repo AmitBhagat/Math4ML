@@ -1,11 +1,20 @@
 import { useParams, Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { ChevronRight } from "lucide-react";
-import { CATEGORIES, ContentBlock } from "@/src/data/topics";
+import { getCategoryData } from "@/src/data/topics";
+import { CategoryData, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
+import { tableRowsToHtml } from '@/src/lib/tableUtils';
 
 const RichText = ({ text }: { text: string }) => {
+  const trimmed = text.trim();
+  // If the paragraph is a raw HTML table (we store one in data files), render it as HTML
+  if (trimmed.startsWith('<table')) {
+    return <div className="my-8 overflow-x-auto rounded-xl border border-gray-200 shadow-sm" dangerouslySetInnerHTML={{ __html: text }} />;
+  }
+
   if (!text.includes("$")) return <>{text}</>;
   // Regex to match both $$...$$ and $...$ delimiters
   const parts = text.split(/(\$\$.*?\$\$|\$.*?\$)/g);
@@ -67,7 +76,14 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
       currentTable.push(p);
     } else {
       if (currentTable.length > 0) {
-        processedParagraphs.push({ type: 'table', rows: currentTable });
+        // Convert the collected markdown-style pipe rows into an HTML table string
+        try {
+          const html = tableRowsToHtml(currentTable);
+          processedParagraphs.push(html);
+        } catch (e) {
+          // Fallback to the previous object shape if helper call fails for any reason
+          processedParagraphs.push({ type: 'table', rows: currentTable });
+        }
         currentTable = [];
       }
       processedParagraphs.push(p);
@@ -168,9 +184,44 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
 
 export const ProblemPage = () => {
   const { categoryId, problemId } = useParams<{ categoryId: string; problemId: string }>();
-  
-  const category = categoryId ? CATEGORIES[categoryId] : null;
-  const problem = category?.sections.find(s => s.id === problemId);
+  const [category, setCategory] = useState<CategoryData | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    let mounted = true;
+    setLoading(true);
+    if (!categoryId) {
+      setCategory(null);
+      setLoading(false);
+      return;
+    }
+    getCategoryData(categoryId).then((data) => {
+      if (!mounted) return;
+      setCategory(data);
+      setLoading(false);
+    }).catch(() => {
+      if (!mounted) return;
+      setCategory(null);
+      setLoading(false);
+    });
+    return () => { mounted = false; };
+  }, [categoryId]);
+
+  const problem = category?.sections.find((s) => s.id === problemId) ?? null;
+
+  if (loading) {
+    return (
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+        <div className="animate-pulse space-y-6">
+          <div className="h-4 w-48 bg-gray-200 rounded" />
+          <div className="h-12 w-96 bg-gray-200 rounded" />
+          <div className="h-6 w-2/3 bg-gray-100 rounded" />
+          <div className="h-8 w-5/6 bg-gray-200 rounded mt-6" />
+          <div className="h-4 w-full bg-gray-100 rounded" />
+        </div>
+      </div>
+    );
+  }
 
   if (!category || !problem) {
     return (

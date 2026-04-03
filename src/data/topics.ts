@@ -64,6 +64,18 @@ export const CATEGORY_META: CategoryMeta[] = [
 ];
 
 // ---------------------------------------------------------------------------
+// UI helpers — small icon map for categories (kept with metadata)
+// ---------------------------------------------------------------------------
+import { Layers, FunctionSquare, BarChart3, Dice5 } from "lucide-react";
+
+export const ICON_MAP: Record<string, any> = {
+  "linear-algebra": Layers,
+  "probability": Dice5,
+  "statistics": BarChart3,
+  "calculus": FunctionSquare,
+};
+
+// ---------------------------------------------------------------------------
 // Dynamic loader — fetches category data only when needed
 // ---------------------------------------------------------------------------
 const categoryCache = new Map<string, CategoryData>();

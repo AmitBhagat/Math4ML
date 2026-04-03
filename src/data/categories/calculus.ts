@@ -318,12 +318,3 @@ export const CALCULUS_DATA: CategoryData = {
   ]
 };
 
-// =============================================================================
-// CATEGORIES EXPORT â€” now 4 categories
-// =============================================================================
-export const CATEGORIES: Record<string, CategoryData> = {
-  "linear-algebra": LINEAR_ALGEBRA_DATA,
-  "probability": PROBABILITY_DATA,
-  "statistics": STATISTICS_DATA,
-  "calculus": CALCULUS_DATA
-};
