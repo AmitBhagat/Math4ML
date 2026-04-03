@@ -142,12 +142,6 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
             </>
           )}
 
-          {/* Decorative dots */}
-          <div className="flex gap-1.5 ml-1">
-            <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-            <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-            <div className="w-2.5 h-2.5 rounded-full bg-gray-300" />
-          </div>
         </div>
       </div>
 
@@ -160,7 +154,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
           autoResize();
         }}
         spellCheck={false}
-        className="w-full px-6 py-5 text-sm font-mono text-gray-800 leading-relaxed bg-gray-50/50
+        className="w-full px-4 md:px-6 py-4 md:py-5 text-sm font-mono text-gray-800 leading-relaxed bg-gray-50/50
                    resize-none outline-none border-none focus:bg-white/80 transition-colors"
         style={{ minHeight: "80px", overflowY: "hidden" }}
         aria-label="Editable Python code"
@@ -169,7 +163,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
       {/* ── Single output panel (static → replaced by live on Run) ── */}
       {shownOutput !== null && (
         <div className={`border-t ${runState === "error" ? "border-red-200" : "border-emerald-200"}`}>
-          <div className={`px-4 py-2 border-b flex items-center justify-between
+          <div className={`px-4 py-2 border-b flex flex-wrap items-center justify-between
             ${runState === "error" ? "border-red-200 bg-red-50" : "border-emerald-200 bg-emerald-50"}`}>
             <span className={`text-xs font-mono uppercase tracking-widest font-semibold
               ${runState === "error" ? "text-red-600" : "text-emerald-700"}`}>
@@ -179,7 +173,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <span className="text-xs text-emerald-600 font-medium">● live</span>
             )}
           </div>
-          <pre className={`px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap
+          <pre className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap
             ${runState === "error" ? "text-red-800 bg-red-50/40" : "text-emerald-900 bg-emerald-50/50"}`}>
             {shownOutput}
           </pre>

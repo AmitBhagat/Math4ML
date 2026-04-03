@@ -34,10 +34,10 @@ const TOPICS = [
 
 export const HomePage = () => {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-24">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-24">
       {/* Hero Section */}
       <div className="text-center mb-24">
-        <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 tracking-tight">
           Mathematics Visualizer
         </h1>
         <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed">

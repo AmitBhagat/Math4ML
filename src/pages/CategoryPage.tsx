@@ -8,11 +8,11 @@ interface CategoryPageProps {
 
 export const CategoryPage = ({ category }: CategoryPageProps) => {
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
 
 
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
         <Link to="/" className="hover:text-gray-900 hover:underline transition-colors">Home</Link>
         <ChevronRight className="w-4 h-4" />
         <span className="text-gray-900">{category.title}</span>
@@ -20,7 +20,7 @@ export const CategoryPage = ({ category }: CategoryPageProps) => {
 
       {/* Header */}
       <div className="mb-12">
-        <h1 className="text-5xl font-bold text-gray-900 tracking-tight mb-4">
+        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
           {category.title}
         </h1>
         <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">

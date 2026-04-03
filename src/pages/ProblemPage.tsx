@@ -63,11 +63,11 @@ export const ProblemPage = () => {
   const hasRichContent = problem.contentSections && problem.contentSections.length > 0;
 
   return (
-    <div className="max-w-6xl mx-auto px-6 py-12">
+    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
 
 
       {/* Breadcrumb */}
-      <div className="flex items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
         <Link to="/" className="hover:text-gray-900 hover:underline transition-colors">Home</Link>
         <ChevronRight className="w-4 h-4" />
         <Link to={`/${categoryId}`} className="hover:text-gray-900 hover:underline transition-colors">{category.title}</Link>
@@ -77,7 +77,7 @@ export const ProblemPage = () => {
 
       <div className="max-w-4xl">
         {/* Title */}
-        <h1 className="text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
           {problem.title}
         </h1>
         <p className="text-xl text-gray-600 mb-12 leading-relaxed">
