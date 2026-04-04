@@ -67,10 +67,10 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
 
       {/* Header */}
       <div className="mb-20">
-        <h1 className="text-5xl md:text-7xl font-headline font-black text-on-surface tracking-tighter mb-8 leading-none">
+        <h1 className="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tighter mb-8 leading-none">
           {category.title}
         </h1>
-        <p className="text-xl md:text-2xl text-on-surface-variant max-w-4xl leading-relaxed font-light text-editorial-justify">
+        <p className="text-lg md:text-xl text-on-surface-variant max-w-4xl leading-relaxed font-light text-editorial-justify">
           {category.description}
         </p>
       </div>
@@ -90,11 +90,11 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
               className="group bg-surface-container p-10 rounded border-none hover:bg-surface-container-high shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
             >
               <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-headline font-black text-2xl text-on-surface group-hover:text-accent-teal transition-colors">
+                <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
                   {section.title}
                 </h3>
               </div>
-              <p className="text-on-surface-variant text-base mb-10 leading-relaxed flex-grow font-light text-editorial-justify">
+              <p className="text-on-surface-variant text-sm mb-10 leading-relaxed flex-grow font-light text-editorial-justify">
                 {section.description}
               </p>
               <div className="flex flex-wrap gap-3">

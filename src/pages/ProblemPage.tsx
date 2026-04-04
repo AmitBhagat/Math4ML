@@ -104,13 +104,13 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
   return (
     <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both transition-colors">
       {showHeading && (
-        <h3 className="text-3xl font-headline font-black text-on-surface mb-6 flex items-center gap-4">
-          <span className="w-1.5 h-10 bg-accent-teal rounded-full shadow-[0_0_15px_rgba(45,212,191,0.3)]"></span>
+        <h3 className="text-xl font-headline font-black text-on-surface mb-4 flex items-center gap-4">
+          <span className="w-1.5 h-8 bg-accent-teal rounded-full shadow-[0_0_15px_rgba(45,212,191,0.3)]"></span>
           {section.heading}
         </h3>
       )}
       {processedParagraphs.length > 0 && (
-        <div className="space-y-4 text-on-surface-variant text-[17px] leading-relaxed text-editorial-justify">
+        <div className="space-y-4 text-on-surface-variant text-base leading-relaxed text-editorial-justify">
           {processedParagraphs.map((p, idx) => {
             if (typeof p !== 'string') {
               return <MarkdownTable key={idx} rows={p.rows} />;
@@ -259,10 +259,10 @@ export const ProblemPage = () => {
 
       <div className="max-w-4xl">
         {/* Title */}
-        <h1 className="text-5xl md:text-7xl font-headline font-black text-on-surface mb-6 tracking-tighter leading-none">
+        <h1 className="text-4xl md:text-6xl font-headline font-black text-on-surface mb-6 tracking-tighter leading-none">
           {problem.title}
         </h1>
-        <p className="text-xl md:text-2xl text-on-surface-variant mb-16 leading-relaxed font-light text-editorial-justify">
+        <p className="text-lg md:text-xl text-on-surface-variant mb-16 leading-relaxed font-light text-editorial-justify">
           {problem.description}
         </p>
 
@@ -277,8 +277,8 @@ export const ProblemPage = () => {
           /* Fallback: Legacy flat content for topics without contentSections */
           <>
             <div className="mb-12 text-editorial-justify">
-              <h2 className="text-2xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">What is {problem.title}?</h2>
-              <div className="space-y-4 text-on-surface-variant text-lg leading-relaxed">
+              <h2 className="text-xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">What is {problem.title}?</h2>
+              <div className="space-y-4 text-on-surface-variant text-base leading-relaxed">
                 {problem.details.map((detail, idx) => (
                   <p key={idx}>{detail}</p>
                 ))}
@@ -291,7 +291,7 @@ export const ProblemPage = () => {
             {/* Code Snippet */}
             {problem.code && (
               <div className="mb-12">
-                <h2 className="text-2xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">Code Example</h2>
+                <h2 className="text-xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">Code Example</h2>
                 <div className="mt-4">
                   <CodeSnippet code={problem.code} />
                 </div>

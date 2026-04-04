@@ -110,9 +110,9 @@ th {
   hyphens: auto;
 }
 
-/* Responsive KaTeX scaling */
+/* Responsive KaTeX scaling - harmonized with smaller body font */
 .katex {
-  font-size: clamp(0.9rem, 4vw, 1.2rem) !important;
+  font-size: clamp(0.85rem, 3.8vw, 1.1rem) !important;
   transition: font-size 0.3s ease;
 }
 

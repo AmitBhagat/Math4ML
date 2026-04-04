@@ -26,8 +26,8 @@ const TopicCard = ({ topic, ...props }: { topic: any, key?: string }) => {
       <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-8 border ${accentStyles.split(' ').slice(1).join(' ')}`}>
         <Icon className={`w-6 h-6 ${accentStyles.split(' ')[0]}`} />
       </div>
-      <h3 className="text-2xl font-headline font-black mb-3 text-on-surface">{topic.title}</h3>
-      <p className="text-on-surface-variant text-sm mb-10 leading-relaxed flex-grow">{topic.description}</p>
+      <h3 className="text-xl font-headline font-black mb-2 text-on-surface">{topic.title}</h3>
+      <p className="text-on-surface-variant text-xs mb-8 leading-relaxed flex-grow">{topic.description}</p>
       
 
     </Link>
@@ -54,11 +54,11 @@ export const HomePage = () => {
           <div className="inline-block py-1 px-4 mb-8 bg-surface-container-high rounded text-accent-teal font-black text-[10px] uppercase tracking-[0.25em] shadow-sm">
             The Intellectual Curator Series
           </div>
-          <h1 className="text-6xl md:text-8xl font-headline font-black tracking-tighter text-on-surface leading-[0.95] mb-8">
+          <h1 className="text-5xl md:text-7xl font-headline font-black tracking-tighter text-on-surface leading-[0.95] mb-8">
             Mathematics for <br/>
             <span className="text-accent-teal italic">Machine Intelligence.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12 text-editorial-justify">
+          <p className="text-lg md:text-xl text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12 text-editorial-justify">
             An editorial deep-dive into the foundational structures that power modern intelligence. Rigorous, visual, and meticulously organized.
           </p>
           
@@ -93,8 +93,8 @@ export const HomePage = () => {
       <section className="py-32 px-8 md:px-16 bg-surface-container-low/30">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
           <div className="max-w-2xl">
-            <h2 className="text-5xl md:text-6xl font-headline font-black tracking-tight mb-6 text-on-surface">Browse Topics</h2>
-            <p className="text-on-surface-variant text-xl leading-relaxed">Curated paths through the landscape of linear algebra, calculus, and probability theory.</p>
+            <h2 className="text-4xl md:text-5xl font-headline font-black tracking-tight mb-6 text-on-surface">Browse Topics</h2>
+            <p className="text-on-surface-variant text-lg leading-relaxed">Curated paths through the landscape of linear algebra, calculus, and probability theory.</p>
           </div>
           <div className="text-[10px] font-black tracking-[0.3em] uppercase text-accent-teal pb-4 border-b-2 border-accent-teal/20 self-start md:self-auto">
             {topics.length} Core Domains
@@ -127,8 +127,8 @@ export const HomePage = () => {
         </div>
         
         <div className="lg:col-span-5 space-y-10">
-          <h2 className="text-6xl font-headline font-black tracking-tighter leading-none text-on-surface">Learn through <br/><span className="text-on-surface-variant italic opacity-50 underline decoration-accent-teal/30">interaction.</span></h2>
-          <p className="text-xl text-on-surface-variant leading-relaxed font-light text-editorial-justify">
+          <h2 className="text-5xl font-headline font-black tracking-tighter leading-none text-on-surface">Learn through <br/><span className="text-on-surface-variant italic opacity-50 underline decoration-accent-teal/30">interaction.</span></h2>
+          <p className="text-lg text-on-surface-variant leading-relaxed font-light text-editorial-justify">
             Mathematics shouldn't be static. Our platform provides live, browser-based visualizations that allow you to manipulate parameters and see the results in real-time.
           </p>
           
@@ -138,8 +138,8 @@ export const HomePage = () => {
                 <div className="w-2 h-2 rounded-full bg-accent-teal"></div>
               </span>
               <div>
-                <span className="font-headline font-black text-2xl block text-on-surface">Live Equations</span>
-                <p className="text-on-surface-variant leading-relaxed">Alter coefficients and watch the function shape change across multi-dimensional manifolds.</p>
+                <span className="font-headline font-black text-xl block text-on-surface">Live Equations</span>
+                <p className="text-on-surface-variant text-sm leading-relaxed">Alter coefficients and watch the function shape change across multi-dimensional manifolds.</p>
               </div>
             </li>
             <li className="flex items-start gap-6">
@@ -147,8 +147,8 @@ export const HomePage = () => {
                 <div className="w-2 h-2 rounded-full bg-accent-purple"></div>
               </span>
               <div>
-                <span className="font-headline font-black text-2xl block text-on-surface">Vector Field Sandbox</span>
-                <p className="text-on-surface-variant leading-relaxed">Simulate flow and gradients in a 3D environment with real-time computational feedback.</p>
+                <span className="font-headline font-black text-xl block text-on-surface">Vector Field Sandbox</span>
+                <p className="text-on-surface-variant text-sm leading-relaxed">Simulate flow and gradients in a 3D environment with real-time computational feedback.</p>
               </div>
             </li>
           </ul>
