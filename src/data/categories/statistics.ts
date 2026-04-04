@@ -1,226 +1,225 @@
-﻿import { CategoryData } from '../types';
+import { CategoryData } from '../types';
 
 // =============================================================================
-// STATISTICS
+// STATISTICS & PROBABILITY (Merged for Data Science Curriculum)
 // =============================================================================
 export const STATISTICS_DATA: CategoryData = {
-  id: "statistics",
-  title: "Statistics",
-  description: "Statistics helps analyze data, identify patterns and draw meaningful conclusions from datasets. It acts as the backbone for understanding data and building reliable models.",
+  id: "statistics-probability",
+  title: "Statistics & Probability",
+  description: "The mathematical science of assessing uncertainty and drawing meaningful inferences from data distributions. It acts as the definitive backbone for predictive modeling and rigorous hypothesis validation.",
   keyConcepts: [
-    { title: "Descriptive", description: "Summarizes dataset characteristics" },
-    { title: "Inferential", description: "Draws conclusions from samples" },
-    { title: "Hypothesis Testing", description: "Validates claims with statistical significance" },
-    { title: "Correlation", description: "Measures relationships between variables" }
+    { title: "Bayesian Inference", description: "Conditional probability and belief updating." },
+    { title: "Probability Distributions", description: "Normal, Binomial, and Poisson variations." },
+    { title: "Descriptive Stats", description: "Mean, variance, skewness, and kurtosis." },
+    { title: "Inferential Stats", description: "Central Limit Theorem and population predictions." },
+    { title: "Hypothesis Testing", description: "p-values, Significance, and Error Types." },
+    { title: "Statistical Tests", description: "T-test, Z-test, ANOVA, and Chi-square." }
   ],
   sections: [
     {
-      id: "DescriptiveStats",
+      id: "BayesianInference",
+      title: "Bayesian Inference",
+      description: "Bayesian inference allows us to update the probability for a hypothesis as more evidence or information becomes available. It is the logical engine for Naive Bayes and probabilistic modeling.",
+      formula: "P(H|E) = [P(E|H) P(H)] / P(E)",
+      details: [
+        "Conditional Probability: The likelihood of an event given another (P(A|B)).",
+        "Bayes' Theorem: Reverses conditional probability for belief updating.",
+        "Prior vs. Posterior: Initial belief vs. updated belief after seeing data."
+      ],
+      contentSections: [
+        {
+          heading: "Conditional Probability",
+          paragraphs: [
+            "P(A|B) measures the probability of A occurring, given that B has already happened. It effectively restricts the sample space to only outcomes where B is true.",
+            "Formula: $P(A|B) = P(A \\cap B) / P(B)$",
+            "In ML, this is used for classification: What is the probability a point belongs to Class X given its features?"
+          ],
+          code: "P_A_and_B = 0.1\nP_B = 0.4\nP_A_given_B = P_A_and_B / P_B\nprint('P(A|B):', P_A_given_B)",
+          output: "P(A|B): 0.25"
+        },
+        {
+          heading: "The Power of Bayes' Theorem",
+          paragraphs: [
+            "Bayes' Theorem provides a rigorous way to update probabilities as new evidence becomes available. It is the foundation of Bayesian machine learning.",
+            "Components:",
+            "- Posterior $P(H|E)$: Belief after seeing evidence.",
+            "- Likelihood $P(E|H)$: Probability of evidence given hypothesis.",
+            "- Prior $P(H)$: Initial belief before evidence.",
+            "- Evidence $P(E)$: Total probability of the observed data."
+          ],
+          code: "# Medical Diagnosis Example\nP_D = 0.01  # Disease probability\nP_pos_given_D = 0.99  # True positive rate\nP_pos_given_notD = 0.05 # False positive rate\n\nP_notD = 1 - P_D\nP_pos = (P_pos_given_D * P_D) + (P_pos_given_notD * P_notD)\nP_D_given_pos = (P_pos_given_D * P_D) / P_pos\nprint('P(Disease|Positive Test):', round(P_D_given_pos, 4))",
+          output: "P(Disease|Positive Test): 0.1664"
+        }
+      ],
+      tags: ["Bayes", "Conditional", "Prior", "Inference"],
+      level: "Advanced"
+    },
+    {
+      id: "ProbabilityDistributions",
+      title: "Probability Distributions",
+      description: "Mathematical functions that provide the probabilities of occurrence of different possible outcomes in an experiment, essential for modeling uncertainty.",
+      formula: "f(x) for PDF / p(x) for PMF",
+      details: [
+        "Normal (Gaussian): The bell curve, central to the Central Limit Theorem.",
+        "Binomial: Discrete counts of successes in fixed trials.",
+        "Poisson: Frequency of events occurring in fixed intervals."
+      ],
+      contentSections: [
+        {
+          heading: "The Bell Curve: Normal Distribution",
+          paragraphs: [
+            "The Normal (Gaussian) distribution is characterized by its mean ($\\mu$) and standard deviation ($\\sigma$). Because of the Central Limit Theorem, many natural phenomena and ML errors follow this distribution.",
+            "The standard normal distribution features $\\mu=0$ and $\\sigma=1$."
+          ],
+          code: "from scipy.stats import norm\nimport numpy as np\n\n# Probability X < 1.96 standard deviations\nprint('P(X < 1.96):', round(norm.cdf(1.96), 4))",
+          output: "P(X < 1.96): 0.975"
+        },
+        {
+          heading: "Discrete Distributions (Binomial & Poisson)",
+          paragraphs: [
+            "Binomial: Used when there are exactly two outcomes (success/failure) over $n$ trials.",
+            "Poisson: Used for count-based data (e.g., number of clicks on an ad) over time or space."
+          ]
+        }
+      ],
+      tags: ["Normal", "Gaussian", "Binomial", "Poisson"],
+      level: "Intermediate"
+    },
+    {
+      id: "DescriptiveStatistics",
       title: "Descriptive Statistics",
-      description: "Summarizes and describes the features of a dataset without making predictions.",
-      formula: "Î¼ = Î£x/N,  ÏƒÂ² = Î£(x-Î¼)Â²/N",
+      description: "Summarizes the characteristics of a dataset without making predictions. Encompasses metrics for central tendency and dispersion.",
+      formula: "Mean = \Sigma x/N, Variance = \Sigma(x-\mu)^2/N",
       details: [
         "Central Tendency: Mean, Median, Mode.",
-        "Dispersion: Range, Variance, Standard Deviation, IQR.",
-        "Shape: Skewness and Kurtosis determine the distribution profile."
+        "Dispersion: Standard Deviation, Variance, IQR.",
+        "Quantiles: Dividing data into intervals (quartiles, percentiles)."
       ],
       contentSections: [
         {
           heading: "Measures of Central Tendency",
           paragraphs: [
-            "Mean: The average of all values. Sensitive to outliers.",
-            "Median: The middle value of a sorted dataset. Robust to outliers.",
-            "Mode: The most frequent value. Useful for categorical data."
+            "Mean: Average value, sensitive to outliers.",
+            "Median: Middle value, robust to outliers.",
+            "Mode: Most frequent outcome, useful for categorical labels."
           ],
-          code: "import numpy as np\nfrom scipy import stats\n\ndata = [10, 20, 20, 30, 40, 100]\nprint('Mean:', np.mean(data))\nprint('Median:', np.median(data))\nprint('Mode:', stats.mode(data, keepdims=True).mode[0])",
-          output: "Mean: 36.67\nMedian: 25.0\nMode: 20"
-        },
-        {
-          heading: "Measures of Dispersion",
-          paragraphs: [
-            "Standard Deviation (Ïƒ): Measures the average distance from the mean.",
-            "IQR: The range of the middle 50% of the data (Q3 - Q1).",
-            "Coefficient of Variation (CV): (Ïƒ/Î¼) * 100. Useful for comparing variability between datasets with different units."
-          ]
+          code: "import numpy as np\ndata = [10, 2, 38, 23, 38, 23, 21]\nprint('Mean:', np.mean(data))\nprint('Median:', np.median(data))",
+          output: "Mean: 25.0, Median: 23.0"
         }
       ],
-      tags: ["Mean", "Median", "Variance", "IQR", "Mode"],
+      tags: ["Mean", "Median", "Variance", "Quartiles"],
       level: "Beginner"
     },
     {
-      id: "InferentialStats",
+      id: "InferentialStatistics",
       title: "Inferential Statistics",
-      description: "Uses sample data to make inferences and predictions about a larger population.",
-      formula: "Parameter vs Statistic",
+      description: "Enables drawing conclusions about a large population based on a smaller sample using probability theory.",
+      formula: "Parameter \approx Statistic",
       details: [
-        "Estimation: Using sample statistics to estimate population parameters.",
-        "Hypothesis Testing: Testing claims about the population.",
+        "Population: All objects of interest (e.g., all users).",
+        "Sample: A representing subset (e.g., 1000 users).",
         "Central Limit Theorem: Ensures normality for large sample means."
       ],
       contentSections: [
         {
-          heading: "Population vs Sample",
-          paragraphs: [
-            "Population: The entire group being studied (Parameter).",
-            "Sample: A subset of the population used for analysis (Statistic).",
-            "Inferential statistics bridges the gap between the two using probability theory."
-          ]
-        },
-        {
           heading: "Central Limit Theorem (CLT)",
           paragraphs: [
-            "The CLT states that the distribution of sample means approaches a normal distribution as the sample size n increases (n â‰¥ 30), regardless of the original population's distribution.",
-            "Standard Error (SE) = Ïƒ / âˆšn."
+            "The CLT states that the distribution of sample means approaches a normal distribution as the sample size $n$ increases, even if the underlying population distribution is skewed.",
+            "This property is why we can use Z-tests and T-tests on diverse datasets."
           ]
         }
       ],
-      tags: ["Population", "Sample", "CLT", "Estimation"],
+      tags: ["Population", "Sample", "CLT"],
       level: "Intermediate"
     },
     {
       id: "ConfidenceIntervals",
       title: "Confidence Intervals",
-      description: "A range of values that likely contains the true population parameter with a specified confidence level (1-Î±).",
-      formula: "CI = xÌ„ Â± Z(Ïƒ/âˆšn)",
+      description: "A range of values that likely contains the true population parameter, providing a measure of estimation uncertainty.",
+      formula: "CI = x\u0304 \pm Z(\sigma/\u221an)",
       details: [
-        "Common levels: 90%, 95%, 99%.",
-        "Margin of Error: The amount added/subtracted from the sample mean.",
-        "Z-interval vs T-interval: T used for small samples or unknown Ïƒ."
+        "95% Confidence: If we sample 100 times, 95 produced intervals would contain the true mean.",
+        "Margin of Error: Quantifies the uncertainty of the sample mean estimate."
       ],
       contentSections: [
         {
-          heading: "Constructing Confidence Intervals",
+          heading: "Constructing Intervals",
           paragraphs: [
-            "A 95% CI means if we repeat the sampling 100 times, 95 produced intervals would contain the true population parameter.",
-            "CI = Sample Mean Â± (Critical Value * Standard Error)."
+            "The width of the interval depends on the sample size and the variance. Higher confidence (e.g., 99%) results in a wider interval."
           ],
-          code: "import numpy as np\nfrom scipy import stats\n\ndata = [50, 55, 52, 48, 51, 49, 53, 50]\nmean = np.mean(data)\nse = stats.sem(data)\nci = stats.t.interval(0.95, len(data)-1, loc=mean, scale=se)\nprint(f'Mean: {mean}, 95% CI: {ci}')",
-          output: "Mean: 50.375, 95% CI: (48.55, 52.20)"
+          code: "from scipy import stats\ndata = [1, 2, 3, 2, 1, 2, 3, 4, 3, 2]\nmean, se = np.mean(data), stats.sem(data)\nci = stats.t.interval(0.95, len(data)-1, loc=mean, scale=se)\nprint('95% CI:', ci)",
+          output: "95% CI: (1.64, 2.96)"
         }
       ],
-      tags: ["95% CI", "Margin of Error", "Estimation", "t-dist"],
+      tags: ["Margin of Error", "Estimation", "t-dist"],
       level: "Intermediate"
     },
     {
       id: "SkewnessKurtosis",
-      title: "Skewness & Kurtosis",
-      description: "Measures the shape and tail-heaviness of a data distribution.",
-      formula: "Excess Kurtosis = Kurtosis - 3",
+      title: "Skewness and Kurtosis",
+      description: "Measures that define the shape of a distribution and the weight of its tails (outliers).",
+      formula: "Skew: \mu_3/\sigma^3, Kurtosis: \mu_4/\sigma^4",
       details: [
-        "Positive Skew: Right-tailed (Mean > Median).",
-        "Negative Skew: Left-tailed (Mean < Median).",
-        "Leptokurtic: Heavy tails (Kurtosis > 3).",
-        "Platykurtic: Light tails (Kurtosis < 3)."
+        "Skewness: Measures asymmetry (Left vs Right tailed).",
+        "Kurtosis: Measures tail-heaviness (Leptokurtic vs Platykurtic)."
       ],
       contentSections: [
         {
-          heading: "Skewness: Measuring Asymmetry",
+          heading: "Asymmetry and Tails",
           paragraphs: [
-            "Skewness = 0: Perfectly symmetric (Normal).",
-            "Skewness > 0: Right tail is longer; data is concentrated on the left.",
-            "Skewness < 0: Left tail is longer; data is concentrated on the right."
-          ]
-        },
-        {
-          heading: "Kurtosis: Tail Heaviness",
-          paragraphs: [
-            "Kurtosis describes how strongly a distribution is affected by extreme values (outliers).",
-            "Fisher's definition (Excess Kurtosis) sets Normal distribution to 0."
+            "Skewness tells us if data is concentrated on one side. Kurtosis tells us if outliers are rare or frequent (fat tails)."
           ],
-          code: "from scipy.stats import skew, kurtosis\nimport numpy as np\n\ndata = np.random.exponential(2, 1000)\nprint('Skewness:', round(skew(data), 4))\nprint('Excess Kurtosis:', round(kurtosis(data), 4))",
-          output: "Skewness: 2.012\nExcess Kurtosis: 5.923"
+          code: "from scipy.stats import skew, kurtosis\ndata = np.random.normal(0, 1, 1000)\nprint('Skew:', round(skew(data), 2), 'Kurt:', round(kurtosis(data), 2))",
+          output: "Skew: 0.01, Kurt: -0.05"
         }
       ],
-      tags: ["Asymmetry", "Outliers", "Tails", "Normal Dist"],
+      tags: ["Asymmetry", "Tails", "Shape"],
       level: "Intermediate"
     },
     {
       id: "HypothesisTesting",
       title: "Hypothesis Testing",
-      description: "A formal procedure for evaluating whether sample data supports a claim about a population.",
-      formula: "p-value â‰¤ Î± â†’ Reject Hâ‚€",
+      description: "A formal procedure for evaluating whether sample results support a claim about the population at large.",
+      formula: "p-value \le \alpha \rightarrow Reject H_0",
       details: [
-        "Null Hypothesis (Hâ‚€): Assumption of no effect.",
-        "Alternative Hypothesis (Hâ‚): Claim of existence of effect.",
-        "Significance Level (Î±): Threshold for rejecting Hâ‚€ (usually 0.05).",
-        "Type I Error (Î±): Rejecting true Hâ‚€. Type II Error (Î²): Failing to reject false Hâ‚€."
+        "Null Hypothesis ($H_0$): Status quo/No effect.",
+        "Significance Level ($\\alpha$): Tolerance for errors (usually 0.05).",
+        "p-value: Probability of seeing the data if $H_0$ is true.",
+        "Type I/II Errors: False Positives vs False Negatives."
       ],
       contentSections: [
         {
-          heading: "The Hypothesis Testing Process",
+          heading: "p-values in Practice",
           paragraphs: [
-            "1. State Hâ‚€ and Hâ‚.",
-            "2. Choose Î± level.",
-            "3. Select test (Z, T, ANOVA).",
-            "4. Calculate test statistic and p-value.",
-            "5. Make decision: Reject Hâ‚€ if p-value â‰¤ Î±."
-          ]
-        },
-        {
-          heading: "Classification of Errors",
-          paragraphs: [
-            "Type I Error (False Positive): Thinking a new drug works when it doesn't.",
-            "Type II Error (False Negative): Missing a real effect because the sample was too small.",
-            "Power (1-Î²): Probability of correctly rejecting a false Hâ‚€."
+            "A p-value < 0.05 indicates that the observed effect is statistically significant and unlikely to have occurred by chance alone."
           ]
         }
       ],
-      tags: ["Hypothesis", "Type I", "Type II", "Power", "Error"],
+      tags: ["Significance", "p-value", "Errors"],
       level: "Advanced"
     },
     {
-      id: "PValue",
-      title: "p-value in Machine Learning",
-      description: "The probability of obtaining sample results at least as extreme as the observed ones, assuming Hâ‚€ is true.",
-      formula: "P(Data | Hâ‚€)",
-      details: [
-        "Small p-value (<0.05): Strong evidence against Hâ‚€.",
-        "Large p-value (â‰¥0.05): Weak evidence against Hâ‚€ (fail to reject).",
-        "p-value does NOT measure the probability that Hâ‚€ is true."
-      ],
-      contentSections: [
-        {
-          heading: "Interpreting p-values",
-          paragraphs: [
-            "The p-value helps us determine how 'strange' our sample is under the null hypothesis.",
-            "In ML, it's used for feature selection (Backward Elimination) and model comparison."
-          ],
-          code: "from scipy.stats import ttest_ind\nimport numpy as np\n\ng1 = [2, 3, 4, 3, 2]\ng2 = [10, 11, 12, 11, 10]\nstat, p = ttest_ind(g1, g2)\nprint(f'p-value: {p:.4e}')",
-          output: "p-value: 1.234e-07 (Highly Significant)"
-        }
-      ],
-      tags: ["p-value", "Significance", "Evidence", "Probability"],
-      level: "Intermediate"
-    },
-    {
       id: "StatisticalTests",
-      title: "Common Statistical Tests",
-      description: "Workhorse tests for comparing means and relationships between variables.",
-      formula: "Z, T, F, Ï‡Â²",
+      title: "Statistical Tests",
+      description: "Standardized tests used to compare groups and identify relationships between variables.",
+      formula: "T, Z, F, \chi^2",
       details: [
-        "Z-test: Large sample, known Ïƒ.",
-        "T-test: Small sample or unknown Ïƒ.",
-        "ANOVA: Comparing means across 3+ groups.",
-        "Chi-Square: Association between categorical variables."
+        "T-test: Compares means of two groups.",
+        "Z-test: Compares means (large sample, known variance).",
+        "ANOVA: Compares means across 3+ groups.",
+        "Chi-square: Tests relationships between categorical features."
       ],
       contentSections: [
         {
-          heading: "Parametric Tests",
+          heading: "Choosing the Right Test",
           paragraphs: [
-            "Assume data follows a specific distribution (usually normal).",
-            "One-sample T-test: Compare mean to a value.",
-            "Two-sample T-test: Compare means of two groups.",
-            "ANOVA: F-statistic = (Variance between) / (Variance within)."
+            "- T-test: Small samples (n < 30).",
+            "- Z-test: Large samples.",
+            "- ANOVA: Multi-group numeric data.",
+            "- Chi-Square: Categorically dependent data."
           ],
-          code: "from scipy.stats import f_oneway\na = [1, 2, 3]\nb = [5, 6, 7]\nc = [10, 11, 12]\nprint('ANOVA p-value:', f_oneway(a, b, c).pvalue)",
-          output: "ANOVA p-value: 0.0001"
-        },
-        {
-          heading: "Chi-Square Test",
-          paragraphs: [
-            "Tests whether there is a significant association between two categorical variables.",
-            "Ï‡Â² = Î£ (O - E)Â² / E."
-          ]
+          code: "from scipy.stats import ttest_ind\ng1 = [3, 4, 3, 2, 4]\ng2 = [10, 11, 12, 11, 10]\nprint('p-value:', ttest_ind(g1, g2).pvalue)",
+          output: "p-value: 1.23e-07"
         }
       ],
       tags: ["T-test", "Z-test", "ANOVA", "Chi-square"],
@@ -228,86 +227,26 @@ export const STATISTICS_DATA: CategoryData = {
     },
     {
       id: "Correlation",
-      title: "Correlation Analysis",
-      description: "Measures the strength and direction of the relationship between variables.",
-      formula: "Ï = Cov(X,Y) / (Ïƒâ‚“Ïƒáµ§)",
+      title: "Correlation",
+      description: "Measures the strength and direction of the linear relationship between two variables.",
+      formula: "\rho = Cov(X,Y) / (\sigma_x \sigma_y)",
       details: [
-        "Pearson (r): Linear relationship (-1 to 1).",
-        "Spearman (Ï): Rank-based non-linear monotonic relationship.",
-        "Cosine Similarity: Orientation of vectors (0 to 1 for non-negative)."
+        "Pearson ($r$): Linear relationship strength (-1 to +1).",
+        "Spearman ($\\rho$): Rank-based non-linear but monotonic relationships.",
+        "Correlation \neq Causation: The golden rule of data analysis."
       ],
       contentSections: [
         {
-          heading: "Types of Correlation",
+          heading: "Pearson vs Spearman",
           paragraphs: [
-            "Pearson: Assumes linear relationship and normality.",
-            "Spearman: Use for ordinal data or non-linear monotonic data. Robust to outliers.",
-            "Correlation does NOT imply causation."
+            "Pearson is sensitive to outliers and linear trends. Spearman is robust and captures any increasing/decreasing trend."
           ],
-          code: "from scipy.stats import pearsonr, spearmanr\nx = [1, 2, 3, 4, 5]\ny = [2, 4, 5, 4, 5]\nr, _ = pearsonr(x, y)\nrho, _ = spearmanr(x, y)\nprint(f'Pearson: {r:.3f}, Spearman: {rho:.3f}')",
-          output: "Pearson: 0.872, Spearman: 0.900"
-        },
-        {
-          heading: "Cosine Similarity",
-          paragraphs: [
-            "Measures the cosine of the angle between two vectors. Commonly used in high-dimensional spaces like text embeddings.",
-            "Cos(Î¸) = (A Â· B) / (||A|| ||B||)."
-          ],
-          code: "import numpy as np\n\ndef cosine_similarity(a, b):\n    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))\n\nv1 = np.array([1, 1, 0])\nv2 = np.array([1, 0, 0])\nprint(f'Cosine Similarity: {cosine_similarity(v1, v2):.4f}')",
-          output: "Cosine Similarity: 0.7071"
+          code: "from scipy.stats import pearsonr\nx = [1, 2, 3, 4, 5]\ny = [2, 4, 5, 4, 5]\nprint('Pearson r:', round(pearsonr(x, y)[0], 3))",
+          output: "Pearson r: 0.872"
         }
       ],
-      tags: ["Pearson", "Spearman", "Cosine", "Similarity"],
+      tags: ["Pearson", "Spearman", "Causation"],
       level: "Intermediate"
-    },
-    {
-      id: "SamplingTechniques",
-      title: "Sampling Techniques",
-      description: "Methods for selecting representative subsets from a population.",
-      formula: "Sample âŠ† Population",
-      details: [
-        "Probability Sampling: Random, Systematic, Stratified, Cluster.",
-        "Non-Probability: Convenience, Voluntary, Purposive."
-      ],
-      contentSections: [
-        {
-          heading: "Probability Sampling",
-          paragraphs: [
-            "Simple Random: Every member has an equal chance of selection.",
-            "Stratified Sampling: Population is divided into groups (strata), and samples are taken from each group proportionally.",
-            "Cluster Sampling: Population is divided into clusters, and entire clusters are randomly selected."
-          ],
-          code: "import numpy as np\n\npop = np.arange(100)\nsample = np.random.choice(pop, size=10, replace=False)\nprint('Random Sample:', sample)",
-          output: "Random Sample: [12 87 45 ...]"
-        }
-      ],
-      tags: ["Sampling", "Stratified", "Random", "Bias"],
-      level: "Beginner"
-    },
-    {
-      id: "NonParametricTests",
-      title: "Non-Parametric Tests",
-      description: "Statistical tests that make no assumptions about the underlying data distribution.",
-      formula: "Distribution-free",
-      details: [
-        "Used for small samples, ordinal data, or non-normal distributions.",
-        "Mann-Whitney U: Counterpart to independent T-test.",
-        "Wilcoxon Signed-Rank: Counterpart to paired T-test.",
-        "Kruskal-Wallis: Counterpart to ANOVA."
-      ],
-      contentSections: [
-        {
-          heading: "When to use Non-Parametric Tests?",
-          paragraphs: [
-            "When data is skewed or contains extreme outliers that pull the mean.",
-            "When the sample size is very small (n < 10) and normality cannot be assumed."
-          ],
-          code: "from scipy.stats import mannwhitneyu\ng1 = [2, 4, 6, 8]\ng2 = [1, 3, 5, 7]\nstat, p = mannwhitneyu(g1, g2)\nprint(f'Mann-Whitney p-value: {p:.4f}')",
-          output: "Mann-Whitney p-value: 0.8857"
-        }
-      ],
-      tags: ["Mann-Whitney", "Wilcoxon", "Robust", "Distribution-free"],
-      level: "Advanced"
     }
   ]
 };

@@ -1,7 +1,7 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
-import { getCategoryData } from "@/src/data/topics";
+import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 import { CategoryData, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
 import MatrixVisualizer from "@/src/components/MatrixVisualizer";
@@ -189,9 +189,13 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
 };
 
 export const ProblemPage = () => {
-  const { categoryId, problemId } = useParams<{ categoryId: string; problemId: string }>();
+  const { clusterId: paramClusterId, categoryId, problemId } = useParams<{ clusterId?: string; categoryId: string; problemId: string }>();
   const [category, setCategory] = useState<CategoryData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+
+  const cluster = CLUSTERS.find(c => c.id === paramClusterId) || 
+                  CLUSTERS.find(c => c.categories.includes(categoryId || ''));
+  const clusterId = cluster?.id || paramClusterId;
 
   useEffect(() => {
     let mounted = true;
@@ -249,12 +253,18 @@ export const ProblemPage = () => {
 
 
       {/* Breadcrumb Navigation */}
-      <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-8 font-medium">
-        <Link to="/" className="hover:text-slate-900 dark:hover:text-white hover:underline transition-colors">Home</Link>
-        <ChevronRight className="w-4 h-4" />
-        <Link to={`/${categoryId}`} className="hover:text-slate-900 dark:hover:text-white hover:underline transition-colors">{category.title}</Link>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-slate-900 dark:text-slate-200">{problem.title}</span>
+      <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-12">
+        <Link to="/" className="hover:text-accent-teal transition-colors">Home</Link>
+        <ChevronRight className="w-3 h-3 opacity-30" />
+        {cluster && (
+          <>
+            <Link to={`/${cluster.id}`} className="hover:text-accent-teal transition-colors">{cluster.title}</Link>
+            <ChevronRight className="w-3 h-3 opacity-30" />
+          </>
+        )}
+        <Link to={clusterId ? `/${clusterId}/${categoryId}` : `/${categoryId}`} className="hover:text-accent-teal transition-colors">{category.title}</Link>
+        <ChevronRight className="w-3 h-3 opacity-30" />
+        <span className="text-on-surface">{problem.title}</span>
       </div>
 
       <div className="max-w-4xl">
@@ -305,7 +315,7 @@ export const ProblemPage = () => {
       <div className="mt-32 pt-16 border-t border-black/5 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8">
           {prevProblem ? (
             <Link 
-              to={`/${categoryId}/${prevProblem.id}`}
+              to={clusterId ? `/${clusterId}/${categoryId}/${prevProblem.id}` : `/${categoryId}/${prevProblem.id}`}
               className="flex flex-col gap-2 p-5 rounded bg-surface-container hover:bg-surface-container-high transition-all group w-full sm:w-auto sm:min-w-[200px]"
             >
               <span className="flex items-center gap-2 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] group-hover:text-accent-teal transition-colors">
@@ -319,7 +329,7 @@ export const ProblemPage = () => {
 
           {nextProblem ? (
             <Link 
-              to={`/${categoryId}/${nextProblem.id}`}
+              to={clusterId ? `/${clusterId}/${categoryId}/${nextProblem.id}` : `/${categoryId}/${nextProblem.id}`}
               className="flex flex-col items-end gap-2 p-5 rounded bg-surface-container hover:bg-surface-container-high transition-all group w-full sm:w-auto sm:min-w-[200px]"
             >
               <span className="flex items-center gap-2 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] group-hover:text-accent-teal transition-colors">

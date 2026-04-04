@@ -1,4 +1,4 @@
-﻿import { CategoryData } from '../types';
+import { CategoryData } from '../types';
 
 // =============================================================================
 // CALCULUS
@@ -272,7 +272,7 @@ export const CALCULUS_DATA: CategoryData = {
     },
     {
       id: "AreaUnderCurve",
-      title: "Area Under the Curve (Integration)",
+      title: "Area Under the Curve",
       description: "Integration accumulates quantities over continuous ranges. In ML, the AUC-ROC is a key integration-based metric for classifier evaluation.",
       formula: "âˆ«â‚áµ‡ f(x) dx",
       details: ["The definite integral gives the signed area between f(x) and the x-axis from a to b.", "AUC-ROC: area under the ROC curve â€” higher AUC means better classifier performance."],

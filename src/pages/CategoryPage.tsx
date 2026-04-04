@@ -65,7 +65,7 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
     <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
 
 
-      {/* Breadcrumb */}
+      {/* Breadcrumb Navigation */}
       <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-12">
         <Link to="/" className="hover:text-accent-teal transition-colors">Home</Link>
         <ChevronRight className="w-3 h-3 opacity-30" />

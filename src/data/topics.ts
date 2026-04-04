@@ -20,45 +20,45 @@ export const CATEGORY_META: CategoryMeta[] = [
   {
     id: "linear-algebra",
     title: "Linear Algebra",
-    description: "Linear Algebra serves as the core mathematical framework for representing and processing data in machine learning, handling high-dimensional spaces and transformations.",
+    description: "The core mathematical framework for representing data in high-dimensional spaces, encompassing transformations, decompositions, and metric spaces.",
     keyConcepts: [
-      { title: "Vectors", description: "Fundamental units for representing data points and features." },
-      { title: "Matrices", description: "Structures for encoding linear operations and data collections." },
-      { title: "Eigen-decomposition", description: "Internal structures of matrices that reveal data variance." },
-      { title: "Matrix Factorization", description: "Advanced techniques like SVD for data compression and latent feature extraction." }
+      { title: "Vectors & Tensors", description: "Fundamental units for representing feature spaces." },
+      { title: "Linear Combinations", description: "The building blocks of vector spaces and spans." },
+      { title: "Dot Product", description: "Calculating projections and vector similarity." },
+      { title: "Matrix Operations", description: "Transformations: Addition, Multiplication, Inversion." },
+      { title: "Systems of Equations", description: "Solving linear dependencies via Gaussian elimination." },
+      { title: "Eigen-decomposition", description: "Revealing internal variance via eigenvalues/vectors." },
+      { title: "SVD", description: "Singular Value Decomposition for dimensionality reduction." },
+      { title: "Vector Norms", description: "Measuring magnitude (L1, L2) and regularization." },
+      { title: "Distance Measures", description: "Euclidean, Manhattan, and Cosine similarity metrics." }
     ]
   },
   {
-    id: "probability",
-    title: "Probability",
-    description: "Probability helps assess uncertainty and make predictions under limited information — the backbone of Bayesian inference, classification, and generative models.",
+    id: "statistics-probability",
+    title: "Statistics & Probability",
+    description: "The science of assessing uncertainty and drawing meaningful inferences from data distributions — the backbone of predictive modeling and hypothesis validation.",
     keyConcepts: [
-      { title: "Sample Space", description: "Foundation of outcome analysis" },
-      { title: "Bayes' Theorem", description: "Updating beliefs with evidence" },
-      { title: "Distributions", description: "Models for random variables" },
-      { title: "Conditional", description: "Event dependencies" }
-    ]
-  },
-  {
-    id: "statistics",
-    title: "Statistics",
-    description: "Statistics helps analyze data, identify patterns and draw meaningful conclusions from datasets. It acts as the backbone for understanding data and building reliable models.",
-    keyConcepts: [
-      { title: "Descriptive", description: "Summarizes dataset characteristics" },
-      { title: "Inferential", description: "Draws conclusions from samples" },
-      { title: "Hypothesis Testing", description: "Validates claims with statistical significance" },
-      { title: "Correlation", description: "Measures relationships between variables" }
+      { title: "Bayesian Inference", description: "Conditional probability and Bayes' Theorem." },
+      { title: "Probability Distributions", description: "Normal, Binomial, and Poisson models." },
+      { title: "Descriptive Stats", description: "Mean, variance, skewness, and kurtosis." },
+      { title: "Inferential Stats", description: "Population predictions and confidence intervals." },
+      { title: "Hypothesis Testing", description: "p-values, Null hypotheses, and Type I/II errors." },
+      { title: "Statistical Tests", description: "T-test, Z-test, F-test, and Chi-square validation." },
+      { title: "Correlation", description: "Pearson and Spearman relationship coefficients." }
     ]
   },
   {
     id: "calculus",
     title: "Calculus",
-    description: "Calculus helps optimize machine learning models by adjusting parameters to minimize prediction error. It enables gradient-based learning.",
+    description: "The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",
     keyConcepts: [
-      { title: "Derivatives", description: "Measuring changes in parameters" },
-      { title: "Gradient Descent", description: "Core optimization algorithm for ML" },
-      { title: "Chain Rule", description: "Powers backpropagation in neural networks" },
-      { title: "Jacobian & Hessian", description: "Second-order optimization" }
+      { title: "Differentiation", description: "Calculating instantaneous rates of change." },
+      { title: "Partial Derivatives", description: "Handling variables in multi-dimensional space." },
+      { title: "Gradients", description: "Vectors of change used in optimization." },
+      { title: "Gradient Descent", description: "Iterative minimization of loss functions." },
+      { title: "Chain Rule", description: "The foundation of neural network backpropagation." },
+      { title: "Jacobian & Hessian", description: "Coordinate transforms and second-order optimization." },
+      { title: "Area Under Curve", description: "Integration and model evaluation (AUC-ROC)." }
     ]
   },
   // --- Machine Learning Cluster ---
@@ -136,7 +136,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "The Mathematical Foundations",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "calculus", "probability", "statistics"]
+    categories: ["linear-algebra", "statistics-probability", "calculus"]
   },
   {
     id: "machine-learning",
@@ -156,8 +156,7 @@ import {
 
 export const ICON_MAP: Record<string, any> = {
   "linear-algebra": Layers,
-  "probability": Dice5,
-  "statistics": BarChart3,
+  "statistics-probability": BarChart3,
   "calculus": FunctionSquare,
   // ML Category Icons
   "supervised-learning": Brain,
@@ -176,16 +175,14 @@ const categoryCache = new Map<string, CategoryData>();
 // Maps for dynamic import — Vite will code-split these into separate chunks
 const importMap: Record<string, () => Promise<any>> = {
   'linear-algebra': () => import('./categories/linear-algebra'),
-  'probability':    () => import('./categories/probability'),
-  'statistics':     () => import('./categories/statistics'),
+  'statistics-probability': () => import('./categories/statistics'),
   'calculus':       () => import('./categories/calculus'),
 };
 
 // Export name map (the const name inside each file)
 const exportNameMap: Record<string, string> = {
   'linear-algebra': 'LINEAR_ALGEBRA_DATA',
-  'probability':    'PROBABILITY_DATA',
-  'statistics':     'STATISTICS_DATA',
+  'statistics-probability': 'STATISTICS_DATA',
   'calculus':       'CALCULUS_DATA',
 };
 

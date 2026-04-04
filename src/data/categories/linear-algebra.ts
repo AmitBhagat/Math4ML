@@ -16,7 +16,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
   sections: [
     {
       id: "Vectors",
-      title: "Data Representation via Vectors",
+      title: "Vectors",
       description: "Vectors are the primary format for encoding information in modern AI. Whether representing image pixels, word embeddings, or physical measurements, vectors allow us to treat data as coordinates in a multi-dimensional space.",
       formula: "v = [x_1, x_2, \\dots, x_n]",
       details: [
@@ -95,7 +95,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "LinearCombinations",
-      title: "Weighted Accumulations (Linear Combinations)",
+      title: "Linear Combinations",
       description: "A linear combination is the fundamental way we construct new vectors from existing ones by scaling each vector and summing them up. This 'weighted sum' logic is the basis of almost all predictive modeling.",
       formula: "w = \\alpha v_1 + \\beta v_2 + \\dots",
       details: [
@@ -155,7 +155,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "DotProduct",
-      title: "Dot Product (Projection & Alignment)",
+      title: "Dot Product",
       description: "The dot product is a scalar value that measures the degree of alignment between two vectors. It is the engine behind similarity scores, gradient updates, and error measurements in ML.",
       formula: "A \\cdot B = \\|A\\| \\|B\\| \\cos(\\theta)",
       details: [
@@ -218,7 +218,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "Matrices",
-      title: "Structured Data Collections (Matrices)",
+      title: "Matrices and Matrix Operations",
       description: "Matrices are rectangular arrays of numbers that allow us to process entire datasets simultaneously. They are the primary structure for linear models and neural network layers.",
       formula: "C = A \\cdot B",
       details: [
@@ -257,7 +257,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "LinearTransformation",
-      title: "Feature Transformations (Linear Maps)",
+      title: "Linear Transformation",
       description: "A linear transformation is a rule that moves vectors from one space to another while preserving the 'grid lines' of the original space. It is the core operation of every layer in a neural network.",
       formula: "f(u+v) = f(u) + f(v)",
       details: [
@@ -341,7 +341,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "LinearEquations",
-      title: "System Resolution (Ax = b)",
+      title: "Solving Systems of Linear Equations",
       description: "Solving systems of linear equations is the process of finding the values that satisfy multiple constraints simultaneously. This is the mathematical engine for weight optimization in linear regression.",
       formula: "A \\mathbf{x} = \\mathbf{b}",
       details: [
@@ -479,7 +479,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "EigenValues",
-      title: "Eigen-decomposition: Invariant Directions",
+      title: "Eigenvalues and Eigenvectors",
       description: "Eigen-decomposition reveals the 'dna' of a square matrix by identifying directions that only get scaled, not rotated, during a transformation. This is the foundation of PCA.",
       formula: "A \mathbf{v} = \lambda \mathbf{v}",
       details: [
@@ -547,7 +547,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "SVD",
-      title: "SVD: Latent Feature Discovery",
+      title: "Singular Value Decomposition (SVD)",
       description: "Singular Value Decomposition (SVD) is a technique that factorizes any matrix into three components, exposing its latent patterns. It is the powerhouse behind recommendation engines and image compression.",
       formula: "A = U \Sigma V^T",
       details: [
@@ -647,7 +647,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "VectorNorms",
-      title: "Magnitude Metrics (Vector Norms)",
+      title: "Vector Norms",
       description: "A norm is a function that assigns a strictly positive 'length' or size to a vector. In machine learning, norms are used to penalize large weights (regularization) and calculate error distances.",
       formula: "\\| \\mathbf{x} \\|_p = (\\sum | x_i |^p)^{1/p}",
       details: [
@@ -703,7 +703,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     },
     {
       id: "DistanceMetrics",
-      title: "Similarity and Dissimilarity (Distance Metrics)",
+      title: "Measures of Distance",
       description: "Distance metrics quantify how far apart two data points are in feature space. They are the analytical foundation for clustering, classification (KNN), and recommendation systems.",
       formula: "d(x,y) = \\sqrt{\\sum (x_i - y_i)^2}",
       details: [
