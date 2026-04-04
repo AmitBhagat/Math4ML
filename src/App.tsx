@@ -4,6 +4,7 @@ import React, { Suspense } from "react";
 import LoadingSkeleton from "./components/LoadingSkeleton";
 
 const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ default: m.HomePage })));
+const ClusterPage = React.lazy(() => import("./pages/ClusterPage").then(m => ({ default: m.ClusterPage })));
 const AsyncCategoryPage = React.lazy(() => import("./pages/AsyncCategoryPage").then(m => ({ default: m.AsyncCategoryPage })));
 const ProblemPage = React.lazy(() => import("./pages/ProblemPage").then(m => ({ default: m.ProblemPage })));
 
@@ -19,11 +20,16 @@ export default function App() {
         <Route element={<MainLayout />}>
           <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
           
-          {/* Problem Pages (placed before the category route to avoid conflicts) */}
-          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
+          {/* Cluster Pages (Mathematics / Machine Learning) */}
+          <Route path="/:clusterId" element={<Suspense fallback={<LoadingSkeleton /> }><ClusterPage /></Suspense>} />
 
-          {/* Category Pages — data loaded dynamically via param */}
+          {/* Category Pages (Hierarchical and direct for compatibility) */}
+          <Route path="/:clusterId/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
           <Route path="/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
+
+          {/* Problem Pages within Categories and Clusters */}
+          <Route path="/:clusterId/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
+          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
         </Route>
       </Routes>
     </HashRouter>

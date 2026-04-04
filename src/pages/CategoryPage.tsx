@@ -1,17 +1,24 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
+import { useParams, Link } from "react-router-dom";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 import { CategoryData } from "@/src/data/types";
-import { getCategoryData } from "@/src/data/topics";
+import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 
 interface CategoryPageProps {
   category?: CategoryData;
   categoryId?: string;
 }
 
-export const CategoryPage = ({ category: initialCategory, categoryId }: CategoryPageProps) => {
+export const CategoryPage = ({ category: initialCategory, categoryId: propCategoryId }: CategoryPageProps) => {
+  const params = useParams();
+  const clusterId = params.clusterId;
+  const categoryId = propCategoryId || params.categoryId;
+  
   const [category, setCategory] = useState<CategoryData | null>(initialCategory ?? null);
   const [loading, setLoading] = useState<boolean>(!initialCategory);
+
+  const cluster = CLUSTERS.find(c => c.id === clusterId) || 
+                  CLUSTERS.find(c => c.categories.includes(categoryId || ''));
 
   useEffect(() => {
     if (initialCategory) return; // already provided
@@ -62,6 +69,12 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
       <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-12">
         <Link to="/" className="hover:text-accent-teal transition-colors">Home</Link>
         <ChevronRight className="w-3 h-3 opacity-30" />
+        {cluster && (
+          <>
+            <Link to={`/${cluster.id}`} className="hover:text-accent-teal transition-colors">{cluster.title}</Link>
+            <ChevronRight className="w-3 h-3 opacity-30" />
+          </>
+        )}
         <span className="text-on-surface">{category.title}</span>
       </div>
 
@@ -86,7 +99,7 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
       {category.sections.map((section) => (
               <Link
               key={section.id}
-              to={`/${category.id}/${section.id}`}
+              to={cluster ? `/${cluster.id}/${category.id}/${section.id}` : `/${category.id}/${section.id}`}
               className="group bg-surface-container p-10 rounded border-none hover:bg-surface-container-high shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
             >
               <div className="mb-4 flex items-center justify-between">

@@ -60,19 +60,112 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Chain Rule", description: "Powers backpropagation in neural networks" },
       { title: "Jacobian & Hessian", description: "Second-order optimization" }
     ]
+  },
+  // --- Machine Learning Cluster ---
+  {
+    id: "supervised-learning",
+    title: "Supervised Learning",
+    description: "Learning from labeled datasets to map inputs to discrete or continuous outputs. The foundation of predictive modeling.",
+    keyConcepts: [
+      { title: "Regression", description: "Predicting continuous numerical values." },
+      { title: "Classification", description: "Categorizing data into predefined classes." },
+      { title: "SVM & Trees", description: "Core algorithms for complex decision boundaries." }
+    ]
+  },
+  {
+    id: "unsupervised-learning",
+    title: "Unsupervised Learning",
+    description: "Extracting patterns and structures from unlabeled data. Essential for discovery and dimensionality reduction.",
+    keyConcepts: [
+      { title: "Clustering", description: "Grouping similar data points together." },
+      { title: "PCA", description: "Reducing feature space while preserving variance." },
+      { title: "Association", description: "Finding rules that describe your data." }
+    ]
+  },
+  {
+    id: "deep-learning",
+    title: "Neural Networks",
+    description: "Biologically inspired architectures (ANN, CNN, RNN) that power modern computer vision and natural language processing.",
+    keyConcepts: [
+      { title: "Backpropagation", description: "Efficient weight adjustment via chain rule." },
+      { title: "Architectures", description: "Diverse layers for diverse data types." },
+      { title: "Activation", description: "Introducing non-linearity into neurons." }
+    ]
+  },
+  {
+    id: "reinforcement-learning",
+    title: "Reinforcement Learning",
+    description: "Training agents to make sequences of decisions by rewarding desired behaviors and punishing undesired ones.",
+    keyConcepts: [
+      { title: "Agents & Env", description: "Fundamental RL interaction loop." },
+      { title: "Q-Learning", description: "Learning value-based policies for action." },
+      { title: "Markov Processes", description: "Mathematical framework for decision making." }
+    ]
+  },
+  {
+    id: "data-preprocessing",
+    title: "Data Preprocessing",
+    description: "Meticulous cleaning and transformation techniques (Scaling, Encoding, Imputation) required for high-quality model training.",
+    keyConcepts: [
+      { title: "Feature Scaling", description: "Normalizing data for gradient stability." },
+      { title: "Cleaning", description: "Handling missing values and outliers." },
+      { title: "Engineering", description: "Creating new features from raw data attributes." }
+    ]
+  },
+  {
+    id: "model-evaluation",
+    title: "Model Evaluation",
+    description: "Rigorous metrics and validation strategies to assess model performance and ensure generalization to new data.",
+    keyConcepts: [
+      { title: "Performance Metrics", description: "Accuracy, Precision, Recall, and AUC-ROC." },
+      { title: "Cross-Validation", description: "Ensuring robustness across data splits." },
+      { title: "Overfitting", description: "Detecting and preventing model memorization." }
+    ]
+  }
+];
+
+export interface ClusterMeta {
+  id: string;
+  title: string;
+  description: string;
+  categories: string[];
+}
+
+export const CLUSTERS: ClusterMeta[] = [
+  {
+    id: "mathematics",
+    title: "The Mathematical Foundations",
+    description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
+    categories: ["linear-algebra", "calculus", "probability", "statistics"]
+  },
+  {
+    id: "machine-learning",
+    title: "The Applied Intelligence",
+    description: "Architectural paradigms and learning strategies that transform raw data into predictive, autonomous systems.",
+    categories: ["supervised-learning", "unsupervised-learning", "deep-learning", "reinforcement-learning", "data-preprocessing", "model-evaluation"]
   }
 ];
 
 // ---------------------------------------------------------------------------
 // UI helpers — small icon map for categories (kept with metadata)
 // ---------------------------------------------------------------------------
-import { Layers, FunctionSquare, BarChart3, Dice5 } from "lucide-react";
+import { 
+  Layers, FunctionSquare, BarChart3, Dice5, 
+  Brain, Cpu, Network, Database, Activity, ShieldCheck 
+} from "lucide-react";
 
 export const ICON_MAP: Record<string, any> = {
   "linear-algebra": Layers,
   "probability": Dice5,
   "statistics": BarChart3,
   "calculus": FunctionSquare,
+  // ML Category Icons
+  "supervised-learning": Brain,
+  "unsupervised-learning": Cpu,
+  "deep-learning": Network,
+  "reinforcement-learning": Activity,
+  "data-preprocessing": Database,
+  "model-evaluation": ShieldCheck,
 };
 
 // ---------------------------------------------------------------------------

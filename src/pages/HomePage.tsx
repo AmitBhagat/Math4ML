@@ -2,47 +2,56 @@ import { Link } from "react-router-dom";
 import { ArrowRight, PlayCircle, Layers, FunctionSquare, BarChart3, Dice5 } from "lucide-react";
 import { preloadCategory, CATEGORY_META, ICON_MAP } from "@/src/data/topics";
 
-const TopicCard = ({ topic, ...props }: { topic: any, key?: string }) => {
-  const Icon = topic.icon;
+import { CLUSTERS } from "@/src/data/topics";
+
+const DomainCard = ({ cluster, ...props }: { cluster: any, key?: string }) => {
+  const isML = cluster.id === 'machine-learning';
   
-  // Custom colors for topic badges to match the provided design
-  const getAccentColor = (id: string) => {
-    switch (id) {
-      case 'linear-algebra': return 'text-purple-500 bg-purple-500/10 border-purple-500/20';
-      case 'calculus': return 'text-blue-500 bg-blue-500/10 border-blue-500/20';
-      case 'probability': return 'text-teal-500 bg-teal-500/10 border-teal-500/20';
-      default: return 'text-orange-500 bg-orange-500/10 border-orange-500/20';
-    }
-  };
-
-  const accentStyles = getAccentColor(topic.categoryId);
-
   return (
     <Link 
-      to={topic.link}
-      onMouseEnter={() => preloadCategory(topic.categoryId)}
-      className="group relative bg-surface-container border-none p-8 rounded transition-all duration-300 hover:-translate-y-2 hover:bg-surface-container-high hover:shadow-2xl flex flex-col h-full"
+      to={`/${cluster.id}`}
+      className="group relative bg-surface-container border-none p-12 md:p-16 rounded transition-all duration-500 hover:-translate-y-3 hover:bg-surface-container-high hover:shadow-[0_40px_80px_-15px_rgba(0,0,0,0.3)] flex flex-col h-full overflow-hidden"
     >
-      <div className={`w-12 h-12 rounded-full flex items-center justify-center mb-8 border ${accentStyles.split(' ').slice(1).join(' ')}`}>
-        <Icon className={`w-6 h-6 ${accentStyles.split(' ')[0]}`} />
-      </div>
-      <h3 className="text-xl font-headline font-black mb-2 text-on-surface">{topic.title}</h3>
-      <p className="text-on-surface-variant text-xs mb-8 leading-relaxed flex-grow">{topic.description}</p>
-      
+      {/* Decorative Gradient Background */}
+      <div className={`absolute top-0 right-0 w-64 h-64 -mr-20 -mt-20 rounded-full blur-[100px] opacity-20 transition-opacity group-hover:opacity-40 ${
+        isML ? 'bg-accent-teal' : 'bg-accent-purple'
+      }`}></div>
 
+      <div className="relative z-10">
+        <div className="flex items-center gap-4 mb-10">
+           <div className={`w-2 h-10 rounded-full ${isML ? 'bg-accent-teal shadow-[0_0_15px_rgba(45,212,191,0.5)]' : 'bg-accent-purple shadow-[0_0_15px_rgba(168,85,247,0.5)]'}`}></div>
+           <span className="text-[10px] font-black uppercase tracking-[0.4em] text-on-surface-variant/60">Curriculum Domain</span>
+        </div>
+        
+        <h2 className={`text-4xl md:text-5xl font-black mb-6 text-on-surface tracking-tighter leading-none ${!isML ? 'font-headline' : ''}`}>
+          {cluster.title.split(' ').slice(0, -1).join(' ')} <br/>
+          <span className={`${isML ? 'text-accent-teal' : 'text-accent-purple'} italic`}>{cluster.title.split(' ').pop()}</span>
+        </h2>
+        
+        <p className="text-on-surface-variant text-lg leading-relaxed mb-12 max-w-md font-light">
+          {cluster.description}
+        </p>
+
+        <div className="flex flex-wrap gap-4 mt-auto">
+          {cluster.categories.map((catId: string) => {
+            const Icon = ICON_MAP[catId] ?? Layers;
+            return (
+              <div key={catId} className="flex items-center gap-2 px-4 py-2 bg-background/40 backdrop-blur-sm rounded border border-white/5 text-[10px] font-black uppercase tracking-widest text-on-surface-variant">
+                 <Icon className="w-3 h-3" />
+                 {catId.split('-').join(' ')}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+      
+      <div className="mt-16 flex items-center gap-3 text-xs font-black uppercase tracking-widest text-on-surface group-hover:text-accent-teal transition-colors">
+        Enter Domain <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
+      </div>
     </Link>
   );
 };
-
 export const HomePage = () => {
-  const topics = CATEGORY_META.map((meta) => ({
-    title: meta.title,
-    description: meta.description,
-    icon: ICON_MAP[meta.id] ?? Layers,
-    link: `/${meta.id}`,
-    categoryId: meta.id,
-  }));
-
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
@@ -63,16 +72,19 @@ export const HomePage = () => {
           </p>
           
           <div className="flex flex-col md:flex-row gap-6">
-            <Link 
-              to="/linear-algebra"
+            <a 
+              href="#domains"
               className="bg-on-surface text-background px-10 py-5 rounded font-black uppercase text-xs tracking-widest flex items-center justify-center gap-3 hover:scale-[1.03] transition-transform shadow-xl"
             >
               Explore Curriculum
               <ArrowRight className="w-4 h-4" />
-            </Link>
-            <button className="bg-surface-container text-on-surface px-10 py-5 rounded font-black uppercase text-xs tracking-widest hover:bg-surface-container-high transition-colors">
+            </a>
+            <Link 
+              to="/mathematics/linear-algebra/Matrices"
+              className="bg-surface-container text-on-surface px-10 py-5 rounded font-black uppercase text-xs tracking-widest hover:bg-surface-container-high transition-colors flex items-center justify-center"
+            >
               View Visualizations
-            </button>
+            </Link>
           </div>
         </div>
 
@@ -89,21 +101,21 @@ export const HomePage = () => {
         </div>
       </section>
 
-      {/* Topics Grid Section */}
-      <section className="py-32 px-8 md:px-16 bg-surface-container-low/30">
+      {/* Domain Portal Grid */}
+      <section id="domains" className="py-32 px-8 md:px-16 bg-surface-container-low/30">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-headline font-black tracking-tight mb-6 text-on-surface">Browse Topics</h2>
-            <p className="text-on-surface-variant text-lg leading-relaxed">Curated paths through the landscape of linear algebra, calculus, and probability theory.</p>
+            <h2 className="text-4xl md:text-5xl font-headline font-black tracking-tight mb-6 text-on-surface">Curriculum Domains</h2>
+            <p className="text-on-surface-variant text-lg leading-relaxed">Choose your path of inquiry. From the rigorous proofs of shared theory to the adaptive models of applied intelligence.</p>
           </div>
           <div className="text-[10px] font-black tracking-[0.3em] uppercase text-accent-teal pb-4 border-b-2 border-accent-teal/20 self-start md:self-auto">
-            {topics.length} Core Domains
+            {CLUSTERS.length} Primary Domains
           </div>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-          {topics.map((topic) => (
-            <TopicCard key={topic.title} topic={topic} />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {CLUSTERS.map((cluster) => (
+            <DomainCard key={cluster.id} cluster={cluster} />
           ))}
         </div>
       </section>
