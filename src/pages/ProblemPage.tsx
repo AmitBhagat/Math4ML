@@ -1,9 +1,10 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryData } from "@/src/data/topics";
 import { CategoryData, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
+import MatrixVisualizer from "@/src/components/MatrixVisualizer";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { tableRowsToHtml } from '@/src/lib/tableUtils';
@@ -12,7 +13,7 @@ const RichText = ({ text }: { text: string }) => {
   const trimmed = text.trim();
   // If the paragraph is a raw HTML table (we store one in data files), render it as HTML
   if (trimmed.startsWith('<table')) {
-    return <div className="my-8 overflow-x-auto rounded-xl border border-gray-200 shadow-sm" dangerouslySetInnerHTML={{ __html: text }} />;
+    return <div className="my-8 overflow-x-auto rounded border-none bg-surface-container-low shadow-sm transition-colors" dangerouslySetInnerHTML={{ __html: text }} />;
   }
 
   if (!text.includes("$")) return <>{text}</>;
@@ -22,7 +23,7 @@ const RichText = ({ text }: { text: string }) => {
     <>
       {parts.map((part, i) => {
         if (part.startsWith("$$") && part.endsWith("$$")) {
-          return <div key={i} className="my-4 flex justify-center"><BlockMath math={part.slice(2, -2).trim()} /></div>;
+          return <BlockMath key={i} math={part.slice(2, -2).trim()} />;
         }
         if (part.startsWith("$") && part.endsWith("$")) {
           return <InlineMath key={i} math={part.slice(1, -1)} />;
@@ -43,20 +44,20 @@ const MarkdownTable = ({ rows }: { rows: string[], key?: any }) => {
   const [headers, ...content] = data;
 
   return (
-    <div className="my-8 overflow-x-auto rounded-xl border border-gray-200 shadow-sm">
-      <table className="w-full text-left border-collapse bg-white">
+    <div className="my-8 overflow-x-auto rounded border-none bg-surface-container-low shadow-sm transition-colors">
+      <table className="w-full text-left border-collapse">
         <thead>
-          <tr className="bg-gray-50 border-b border-gray-200">
+          <tr className="bg-surface-container/50 border-none">
             {headers.map((h, i) => (
-              <th key={i} className="px-6 py-4 font-bold text-gray-900 text-sm"><RichText text={h} /></th>
+              <th key={i} className="px-6 py-4 font-black text-on-surface text-sm uppercase tracking-widest"><RichText text={h} /></th>
             ))}
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="divide-y divide-black/5 dark:divide-white/5">
           {content.map((row, i) => (
-            <tr key={i} className="hover:bg-gray-50/50 transition-colors">
+            <tr key={i} className="hover:bg-surface-container/30 transition-colors">
               {row.map((cell, j) => (
-                <td key={j} className="px-6 py-4 text-gray-700 text-sm whitespace-nowrap"><RichText text={cell} /></td>
+                <td key={j} className="px-6 py-4 text-on-surface-variant text-sm whitespace-nowrap"><RichText text={cell} /></td>
               ))}
             </tr>
           ))}
@@ -101,15 +102,15 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
   const showHeading = section.heading && !section.heading.includes('|');
 
   return (
-    <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both">
+    <div className="mb-10 animate-in fade-in slide-in-from-bottom-4 duration-700 fill-mode-both transition-colors">
       {showHeading && (
-        <h3 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-3">
-          <span className="w-1.5 h-8 bg-blue-600 rounded-full"></span>
+        <h3 className="text-3xl font-headline font-black text-on-surface mb-6 flex items-center gap-4">
+          <span className="w-1.5 h-10 bg-accent-teal rounded-full shadow-[0_0_15px_rgba(45,212,191,0.3)]"></span>
           {section.heading}
         </h3>
       )}
       {processedParagraphs.length > 0 && (
-        <div className="space-y-4 text-gray-700 text-[17px] leading-relaxed">
+        <div className="space-y-4 text-on-surface-variant text-[17px] leading-relaxed text-editorial-justify">
           {processedParagraphs.map((p, idx) => {
             if (typeof p !== 'string') {
               return <MarkdownTable key={idx} rows={p.rows} />;
@@ -117,13 +118,13 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
 
             // Detect numbered sub-headings like "1. Row and Column Vectors"
             if (/^\d+\.\s/.test(p) && p.length < 80) {
-              return <h4 key={idx} className="font-bold text-gray-900 mt-8 mb-4 text-xl">{p}</h4>;
+              return <h4 key={idx} className="font-headline font-bold text-on-surface mt-10 mb-5 text-2xl border-b border-black/5 dark:border-white/5 pb-2">{p}</h4>;
             }
 
             // Detect formula-like short lines
             if (p.startsWith("v =") || p.startsWith("û =") || p.startsWith("Y =")) {
               return (
-                <div key={idx} className="font-mono text-blue-700 bg-blue-50/50 px-5 py-3 rounded-xl text-lg border border-blue-100 inline-block my-2">
+                <div key={idx} className="font-mono text-accent-teal bg-surface-container-low px-6 py-4 rounded text-lg inline-block my-4 transition-colors">
                   {p}
                 </div>
               );
@@ -135,20 +136,20 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
             
             if (starMatch) {
               return (
-                <div key={idx} className="pl-6 py-2 relative group">
-                  <div className="absolute left-0 top-5 w-2 h-2 rounded-full bg-blue-400 group-hover:scale-125 transition-transform"></div>
-                  <strong className="text-gray-900 text-lg"><RichText text={starMatch[1]} />:</strong>
-                  <span className="ml-2"><RichText text={starMatch[2]} /></span>
+                <div key={idx} className="pl-6 py-3 relative group transition-colors">
+                  <div className="absolute left-0 top-6 w-2 h-2 rounded-full bg-accent-purple group-hover:scale-125 transition-transform"></div>
+                  <strong className="text-on-surface font-headline text-xl"><RichText text={starMatch[1]} />:</strong>
+                  <span className="ml-2 text-on-surface-variant"><RichText text={starMatch[2]} /></span>
                 </div>
               );
             }
 
             if (normalBulletMatch) {
               return (
-                <div key={idx} className="pl-6 py-2 relative group">
-                  <div className="absolute left-0 top-5 w-2 h-2 rounded-full bg-gray-300 group-hover:bg-blue-400 transition-colors"></div>
-                  <strong className="text-gray-900"><RichText text={normalBulletMatch[1]} />:</strong>
-                  <span className="ml-2"><RichText text={normalBulletMatch[2]} /></span>
+                <div key={idx} className="pl-6 py-3 relative group transition-colors">
+                  <div className="absolute left-0 top-6 w-2 h-2 rounded-full bg-accent-teal group-hover:bg-accent-purple transition-colors"></div>
+                  <strong className="text-on-surface font-headline font-bold text-lg"><RichText text={normalBulletMatch[1]} />:</strong>
+                  <span className="ml-2 text-on-surface-variant"><RichText text={normalBulletMatch[2]} /></span>
                 </div>
               );
             }
@@ -156,7 +157,7 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
             // Detect LaTeX math blocks
             if ((p.startsWith("$$") && p.endsWith("$$")) || (p.startsWith("det") && p.includes("\\lambda"))) {
               const math = p.startsWith("$$") ? p.slice(2, -2).trim() : p;
-              return <div key={idx} className="my-8 py-6 bg-gray-50/50 rounded-2xl border border-gray-100 flex justify-center overflow-x-auto"><BlockMath math={math} /></div>;
+              return <BlockMath key={idx} math={math} />;
             }
 
             // Detect dashed points
@@ -171,6 +172,11 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
 
             return <p key={idx} className="mb-2"><RichText text={p} /></p>;
           })}
+        </div>
+      )}
+      {section.visualizer === "matrix" && (
+        <div className="mt-4">
+          <MatrixVisualizer />
         </div>
       )}
       {section.code && (
@@ -207,7 +213,10 @@ export const ProblemPage = () => {
     return () => { mounted = false; };
   }, [categoryId]);
 
-  const problem = category?.sections.find((s) => s.id === problemId) ?? null;
+  const currentIndex = category?.sections.findIndex((s) => s.id === problemId) ?? -1;
+  const problem = currentIndex !== -1 ? category?.sections[currentIndex] : null;
+  const prevProblem = currentIndex > 0 ? category?.sections[currentIndex - 1] : null;
+  const nextProblem = currentIndex < (category?.sections.length ?? 0) - 1 ? category?.sections[currentIndex + 1] : null;
 
   if (loading) {
     return (
@@ -235,24 +244,25 @@ export const ProblemPage = () => {
   const hasRichContent = problem.contentSections && problem.contentSections.length > 0;
 
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 font-sans transition-colors duration-300">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
 
 
-      {/* Breadcrumb */}
-      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
-        <Link to="/" className="hover:text-gray-900 hover:underline transition-colors">Home</Link>
+      {/* Breadcrumb Navigation */}
+      <div className="flex flex-wrap items-center gap-2 text-sm text-slate-500 dark:text-slate-400 mb-8 font-medium">
+        <Link to="/" className="hover:text-slate-900 dark:hover:text-white hover:underline transition-colors">Home</Link>
         <ChevronRight className="w-4 h-4" />
-        <Link to={`/${categoryId}`} className="hover:text-gray-900 hover:underline transition-colors">{category.title}</Link>
+        <Link to={`/${categoryId}`} className="hover:text-slate-900 dark:hover:text-white hover:underline transition-colors">{category.title}</Link>
         <ChevronRight className="w-4 h-4" />
-        <span className="text-gray-900">{problem.title}</span>
+        <span className="text-slate-900 dark:text-slate-200">{problem.title}</span>
       </div>
 
       <div className="max-w-4xl">
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+        <h1 className="text-5xl md:text-7xl font-headline font-black text-on-surface mb-6 tracking-tighter leading-none">
           {problem.title}
         </h1>
-        <p className="text-xl text-gray-600 mb-12 leading-relaxed">
+        <p className="text-xl md:text-2xl text-on-surface-variant mb-16 leading-relaxed font-light text-editorial-justify">
           {problem.description}
         </p>
 
@@ -266,24 +276,22 @@ export const ProblemPage = () => {
         ) : (
           /* Fallback: Legacy flat content for topics without contentSections */
           <>
-            <div className="mb-12">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">What is {problem.title}?</h2>
-              <div className="space-y-4 text-gray-700 text-lg leading-relaxed">
+            <div className="mb-12 text-editorial-justify">
+              <h2 className="text-2xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">What is {problem.title}?</h2>
+              <div className="space-y-4 text-on-surface-variant text-lg leading-relaxed">
                 {problem.details.map((detail, idx) => (
                   <p key={idx}>{detail}</p>
                 ))}
               </div>
               {problem.formula && (
-                <div className="mt-6 text-blue-700 bg-blue-50/50 px-6 py-4 rounded-xl inline-block text-xl border border-blue-100 shadow-sm overflow-x-auto max-w-full">
-                  <BlockMath math={problem.formula} />
-                </div>
+                <BlockMath math={problem.formula} />
               )}
             </div>
 
             {/* Code Snippet */}
             {problem.code && (
               <div className="mb-12">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 border-b pb-2">Code Example</h2>
+                <h2 className="text-2xl font-headline font-black text-on-surface mb-4 border-b border-black/5 dark:border-white/5 pb-2">Code Example</h2>
                 <div className="mt-4">
                   <CodeSnippet code={problem.code} />
                 </div>
@@ -291,6 +299,38 @@ export const ProblemPage = () => {
             )}
           </>
         )}
+      </div>
+
+      {/* Previous / Next Navigation Footer */}
+      <div className="mt-32 pt-16 border-t border-black/5 dark:border-white/5 flex flex-col sm:flex-row items-center justify-between gap-8">
+          {prevProblem ? (
+            <Link 
+              to={`/${categoryId}/${prevProblem.id}`}
+              className="flex flex-col gap-2 p-5 rounded bg-surface-container hover:bg-surface-container-high transition-all group w-full sm:w-auto sm:min-w-[200px]"
+            >
+              <span className="flex items-center gap-2 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] group-hover:text-accent-teal transition-colors">
+                <ArrowLeft className="w-3 h-3" /> Previous
+              </span>
+              <span className="text-lg font-headline font-black text-on-surface group-hover:translate-x-1 transition-transform">{prevProblem.title}</span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block w-full sm:w-auto sm:min-w-[200px]"></div>
+          )}
+
+          {nextProblem ? (
+            <Link 
+              to={`/${categoryId}/${nextProblem.id}`}
+              className="flex flex-col items-end gap-2 p-5 rounded bg-surface-container hover:bg-surface-container-high transition-all group w-full sm:w-auto sm:min-w-[200px]"
+            >
+              <span className="flex items-center gap-2 text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em] group-hover:text-accent-teal transition-colors">
+                Next <ArrowRight className="w-3 h-3" />
+              </span>
+              <span className="text-lg font-headline font-black text-on-surface group-hover:-translate-x-1 transition-transform text-right">{nextProblem.title}</span>
+            </Link>
+          ) : (
+            <div className="hidden sm:block w-full sm:w-auto sm:min-w-[200px]"></div>
+          )}
+        </div>
       </div>
     </div>
   );

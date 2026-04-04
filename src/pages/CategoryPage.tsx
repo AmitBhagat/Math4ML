@@ -32,20 +32,20 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
 
   if (loading || !category) {
     return (
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
-        <div className="animate-pulse space-y-6">
-          <div className="h-4 w-48 bg-gray-200 rounded" />
-          <div className="h-12 w-96 bg-gray-200 rounded" />
-          <div className="h-6 w-2/3 bg-gray-100 rounded" />
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-24">
+        <div className="animate-pulse space-y-10">
+          <div className="h-6 w-48 bg-surface-container rounded" />
+          <div className="h-16 w-3/4 bg-surface-container rounded" />
+          <div className="h-24 w-full bg-surface-container-low rounded" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-16">
             {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="bg-white rounded-xl p-6 border border-gray-200 space-y-3">
-                <div className="h-5 w-3/4 bg-gray-200 rounded" />
-                <div className="h-4 w-full bg-gray-100 rounded" />
-                <div className="h-4 w-5/6 bg-gray-100 rounded" />
-                <div className="flex gap-2 mt-4">
-                  <div className="h-6 w-16 bg-gray-100 rounded" />
-                  <div className="h-6 w-20 bg-gray-100 rounded" />
+              <div key={i} className="bg-surface-container rounded p-8 space-y-6">
+                <div className="h-6 w-3/4 bg-surface-container-high rounded" />
+                <div className="h-4 w-full bg-surface-container-low rounded" />
+                <div className="h-4 w-5/6 bg-surface-container-low rounded" />
+                <div className="flex gap-4 mt-8">
+                  <div className="h-8 w-20 bg-surface-container-low rounded" />
+                  <div className="h-8 w-24 bg-surface-container-low rounded" />
                 </div>
               </div>
             ))}
@@ -59,51 +59,55 @@ export const CategoryPage = ({ category: initialCategory, categoryId }: Category
 
 
       {/* Breadcrumb */}
-      <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-8 font-medium">
-        <Link to="/" className="hover:text-gray-900 hover:underline transition-colors">Home</Link>
-        <ChevronRight className="w-4 h-4" />
-        <span className="text-gray-900">{category.title}</span>
+      <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-12">
+        <Link to="/" className="hover:text-accent-teal transition-colors">Home</Link>
+        <ChevronRight className="w-3 h-3 opacity-30" />
+        <span className="text-on-surface">{category.title}</span>
       </div>
 
       {/* Header */}
-      <div className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight mb-4">
+      <div className="mb-20">
+        <h1 className="text-5xl md:text-7xl font-headline font-black text-on-surface tracking-tighter mb-8 leading-none">
           {category.title}
         </h1>
-        <p className="text-xl text-gray-600 max-w-3xl leading-relaxed">
+        <p className="text-xl md:text-2xl text-on-surface-variant max-w-4xl leading-relaxed font-light text-editorial-justify">
           {category.description}
         </p>
       </div>
 
-      {/* Practice Problems Grid -> Renamed to Key Concepts */}
-      <div className="mb-16">
-        <h2 className="text-2xl font-bold text-gray-900 mb-6 border-b pb-2">Key Concepts</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Key Concepts Grid */}
+      <div className="mb-24">
+        <div className="flex items-center gap-6 mb-12 border-b border-black/5 dark:border-white/5 pb-6">
+          <h2 className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.3em]">Key Concepts Breakdown</h2>
+          <div className="h-[2px] flex-grow bg-gradient-to-r from-accent-teal/30 to-transparent"></div>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {category.sections.map((section) => (
               <Link
               key={section.id}
               to={`/${category.id}/${section.id}`}
-              className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-lg hover:border-gray-300 transition-all flex flex-col h-full group"
+              className="group bg-surface-container p-10 rounded border-none hover:bg-surface-container-high shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
             >
-              <div className="mb-2 flex items-center justify-between">
-                <h3 className="font-bold text-lg text-gray-900 group-hover:text-blue-600 transition-colors">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="font-headline font-black text-2xl text-on-surface group-hover:text-accent-teal transition-colors">
                   {section.title}
                 </h3>
               </div>
-              <p className="text-gray-600 text-sm mb-6 flex-grow">
+              <p className="text-on-surface-variant text-base mb-10 leading-relaxed flex-grow font-light text-editorial-justify">
                 {section.description}
               </p>
-              <div className="flex flex-wrap gap-2">
+              <div className="flex flex-wrap gap-3">
                 {section.tags?.map((tag) => (
-                  <span key={tag} className="text-xs bg-slate-100 text-gray-600 px-2 py-1 rounded-md">
+                  <span key={tag} className="text-[9px] font-black uppercase tracking-widest bg-background/50 text-on-surface-variant px-3 py-1.5 rounded">
                     {tag}
                   </span>
                 ))}
                 {section.level && (
-                  <span className={`text-xs px-2 py-1 rounded-md font-medium ${
-                    section.level === 'Beginner' ? 'bg-green-50 text-green-700' :
-                    section.level === 'Intermediate' ? 'bg-orange-50 text-orange-700' :
-                    'bg-red-50 text-red-700'
+                  <span className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded ${
+                    section.level === 'Beginner' ? 'bg-accent-teal/10 text-accent-teal' :
+                    section.level === 'Intermediate' ? 'bg-accent-purple/10 text-accent-purple' :
+                    'bg-rose-500/10 text-rose-500'
                   }`}>
                     {section.level}
                   </span>

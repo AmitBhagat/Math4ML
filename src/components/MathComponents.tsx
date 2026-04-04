@@ -4,16 +4,10 @@ import { runPython } from "@/src/hooks/usePyodide";
 
 export const VisualizerContainer = ({ title }: { title: string }) => {
   return (
-    <div className="relative w-full h-full bg-[#1a1a1a] text-gray-100 flex items-center justify-center overflow-hidden font-serif">
+    <div className="relative w-full h-full bg-surface-container flex items-center justify-center overflow-hidden">
       <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-30"
-        style={{ backgroundImage: `radial-gradient(circle at center, #2c2c2c 0%, #1a1a1a 100%)` }}
-      />
-      <div
-        className="absolute inset-0 z-0 pointer-events-none mix-blend-screen opacity-[0.04]"
-        style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`
-        }}
+        className="absolute inset-0 z-0 pointer-events-none opacity-10"
+        style={{ backgroundImage: `radial-gradient(circle at center, var(--accent-teal) 0%, transparent 100%)` }}
       />
       <div className="relative z-10 w-full h-full">
         <TopicVisualizer topicId={title} />
@@ -85,27 +79,27 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   };
 
   return (
-    <div className="my-6 rounded-xl overflow-hidden border border-gray-200 bg-white shadow-sm">
+    <div className="my-10 rounded border-none bg-surface-container shadow-2xl overflow-hidden transition-colors">
 
       {/* ── Header bar ── */}
-      <div className="px-4 py-2 bg-gray-50 border-b border-gray-200 flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <span className="text-xs font-mono text-gray-500 uppercase tracking-widest">{language}</span>
+      <div className="px-6 py-4 bg-surface-container-high border-none flex items-center justify-between">
+        <div className="flex items-center gap-4">
+          <span className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">{language}</span>
           {statusText[runState] && (
-            <span className="text-xs text-amber-600 font-medium animate-pulse">
+            <span className="text-[10px] text-accent-teal font-black uppercase tracking-widest animate-pulse">
               {statusText[runState]}
             </span>
           )}
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3">
           {isPython && (
             <>
-              {/* ↺ Reset — shown only when code was edited or live output exists */}
+              {/* ↺ Reset */}
               {(editedCode !== code || liveOutput !== null) && (
                 <button
                   onClick={handleReset}
-                  className="text-xs text-gray-400 hover:text-gray-600 px-2 py-1 rounded transition-colors"
+                  className="text-[10px] font-black text-on-surface-variant hover:text-on-surface px-2 py-1 transition-colors uppercase tracking-widest"
                   title="Restore original code and clear output"
                 >
                   ↺ Reset
@@ -116,10 +110,10 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <button
                 onClick={handleRun}
                 disabled={isRunning}
-                className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-semibold transition-all
+                className={`inline-flex items-center gap-2 px-6 py-2 rounded text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
                   ${isRunning
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-emerald-500 hover:bg-emerald-600 text-white cursor-pointer shadow-sm"
+                    ? "bg-surface-container text-on-surface-variant cursor-not-allowed"
+                    : "bg-accent-teal hover:scale-105 text-on-primary cursor-pointer"
                   }`}
               >
                 {isRunning ? (
@@ -128,14 +122,14 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                       <circle cx="6" cy="6" r="4" strokeOpacity="0.3" />
                       <path d="M6 2a4 4 0 0 1 4 4" strokeLinecap="round" />
                     </svg>
-                    Running…
+                    Running
                   </>
                 ) : (
                   <>
                     <svg className="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
                       <path d="M2 2l8 4-8 4V2z" />
                     </svg>
-                    Run
+                    Run Code
                   </>
                 )}
               </button>
@@ -154,27 +148,27 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
           autoResize();
         }}
         spellCheck={false}
-        className="w-full px-4 md:px-6 py-4 md:py-5 text-sm font-mono text-gray-800 leading-relaxed bg-gray-50/50
-                   resize-none outline-none border-none focus:bg-white/80 transition-colors"
-        style={{ minHeight: "80px", overflowY: "hidden" }}
+        className="w-full px-8 py-6 text-sm font-mono text-on-surface leading-relaxed bg-surface-container-low/50
+                   resize-none outline-none border-none focus:bg-surface-container transition-colors"
+        style={{ minHeight: "120px", overflowY: "hidden" }}
         aria-label="Editable Python code"
       />
 
       {/* ── Single output panel (static → replaced by live on Run) ── */}
       {shownOutput !== null && (
-        <div className={`border-t ${runState === "error" ? "border-red-200" : "border-emerald-200"}`}>
-          <div className={`px-4 py-2 border-b flex flex-wrap items-center justify-between
-            ${runState === "error" ? "border-red-200 bg-red-50" : "border-emerald-200 bg-emerald-50"}`}>
-            <span className={`text-xs font-mono uppercase tracking-widest font-semibold
-              ${runState === "error" ? "text-red-600" : "text-emerald-700"}`}>
-              {runState === "error" ? "⚠ Error" : "▸ Output"}
+        <div className={`border-none transition-colors ${runState === "error" ? "bg-rose-500/10" : "bg-accent-teal/5"}`}>
+          <div className={`px-8 py-3 border-none flex flex-wrap items-center justify-between transition-colors
+            ${runState === "error" ? "bg-rose-500/20" : "bg-accent-teal/10"}`}>
+            <span className={`text-[10px] font-black uppercase tracking-[0.2em]
+              ${runState === "error" ? "text-rose-500" : "text-accent-teal"}`}>
+              {runState === "error" ? "⚠ System Error" : "▸ Analytical Output"}
             </span>
             {isLive && (
-              <span className="text-xs text-emerald-600 font-medium">● live</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-accent-teal">● Live Runtime</span>
             )}
           </div>
-          <div className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap
-            ${runState === "error" ? "text-red-800 bg-red-50/40" : "text-emerald-900 bg-emerald-50/50"}`}>
+          <div className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap transition-colors
+            ${runState === "error" ? "text-rose-800 dark:text-rose-200 bg-rose-50/40 dark:bg-rose-900/20" : "text-emerald-900 dark:text-emerald-200 bg-emerald-50/50 dark:bg-emerald-900/10"}`}>
             {(() => {
               const lines = shownOutput.split("\n");
               const textLines: string[] = [];
@@ -193,7 +187,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                 <>
                   {textLines.length > 0 && <pre className="whitespace-pre-wrap font-mono m-0">{textLines.join("\n")}</pre>}
                   {images.map((b64, i) => (
-                    <div key={i} className="mt-4 border rounded shadow-inner bg-white overflow-hidden max-w-full">
+                    <div key={i} className="mt-4 border rounded shadow-inner bg-white dark:bg-slate-800 overflow-hidden max-w-full transition-colors">
                       <img src={`data:image/png;base64,${b64}`} alt="Python Plot" className="block max-w-full h-auto mx-auto" />
                     </div>
                   ))}
@@ -206,8 +200,8 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
 
       {/* ── Hint when there is no output at all yet ── */}
       {isPython && shownOutput === null && (
-        <div className="px-4 py-2 border-t border-gray-100 bg-gray-50/30">
-          <p className="text-xs text-gray-400">
+        <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 transition-colors">
+          <p className="text-xs text-slate-400 dark:text-slate-500">
             ▸ Edit the code above, then click <strong>Run</strong> · First run loads Python (~3–5s)
           </p>
         </div>

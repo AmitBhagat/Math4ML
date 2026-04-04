@@ -18,7 +18,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "Vectors",
       title: "Data Representation via Vectors",
       description: "Vectors are the primary format for encoding information in modern AI. Whether representing image pixels, word embeddings, or physical measurements, vectors allow us to treat data as coordinates in a multi-dimensional space.",
-      formula: "v = [x_1, x_2, \dots, x_n]",
+      formula: "v = [x_1, x_2, \\dots, x_n]",
       details: [
         "A vector is an ordered collection of numerical values, where each element corresponds to a specific characteristic or 'feature' of a data sample.",
         "In geometric terms, a vector represents a point or a directed line segment within a feature space, enabling mathematical analysis of data relationships."
@@ -27,7 +27,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Understanding Vectors as Data Points",
           paragraphs: [
-            "In the context of machine learning, vectors act as the bridge between raw data and mathematical models. They enable computers to interpret diverse information—from sensor readings to financial indicators—as purely numerical coordinates. A vector can be viewed as an arrow starting from the origin $(0,0,\dots,0)$ and pointing to a specific location in space.",
+            "In the context of machine learning, vectors act as the bridge between raw data and mathematical models. They enable computers to interpret diverse information—from sensor readings to financial indicators—as purely numerical coordinates. A vector can be viewed as an arrow starting from the origin $(0,0,\\dots,0)$ and pointing to a specific location in space.",
             "Each number within a vector is called a component. For instance, a simple two-dimensional vector representing a house might look like: $v = (x_1, x_2)$ where $x_1$ is the square footage and $x_2$ is the age of the property.",
             "Example: If a house has $1500$ sq. ft. and is $10$ years old, its feature vector is $v = (1500, 10)$. As we add more features, such as the number of rooms or proximity to transit, the vector expands to higher dimensions: $v = (x_1, x_2, x_3, \dots, x_n)$."
           ],
@@ -59,7 +59,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
             "1. Dimensionality: A vector can be represented in any $n$-dimensional space. Row vectors $(x_1, \dots, x_n)$ and column vectors (vertical arrays) are just different notations for the same data.",
             "2. Special Vector Types:",
             "- Zero Vector: A vector where all elements are null (e.g., $(0,0,0)$). It serves as the identity element in vector addition.",
-            "- Unit Vector: A vector with a magnitude (length) of $1$. These are primarily used to define directions in feature space: $\mathbf{u} = \frac{\mathbf{v}}{\|\mathbf{v}\|}$.",
+            "- Unit Vector: A vector with a magnitude (length) of $1$. These are primarily used to define directions in feature space: $\\mathbf{u} = \\frac{\\mathbf{v}}{\\|\\mathbf{v}\\|}$.",
             "- Sparse vs. Dense: Sparse vectors contain mostly zeros (common in text-based 'Bag of Words' models to save memory), while dense vectors are mostly filled with non-zero values (like pixel data or word embeddings)."
           ]
         },
@@ -97,7 +97,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "LinearCombinations",
       title: "Weighted Accumulations (Linear Combinations)",
       description: "A linear combination is the fundamental way we construct new vectors from existing ones by scaling each vector and summing them up. This 'weighted sum' logic is the basis of almost all predictive modeling.",
-      formula: "w = \alpha v_1 + \beta v_2 + \dots",
+      formula: "w = \\alpha v_1 + \\beta v_2 + \\dots",
       details: [
         "A linear combination represents a new data point as a weighted contribution from multiple sources.",
         "Essential for understanding Linear Regression, Neural Networks, and dimensionality reduction techniques like PCA."
@@ -117,11 +117,11 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Formal Definition",
           paragraphs: [
-            "Given a collection of vectors $V = \{v_1, v_2, \dots, v_n\}$ in a vector space, a linear combination is any vector $w$ that can be expressed as:",
-            "$$ w = c_1 v_1 + c_2 v_2 + \dots + c_n v_n $$",
+            "Given a collection of vectors $V = \{v_1, v_2, \\dots, v_n\}$ in a vector space, a linear combination is any vector $w$ that can be expressed as:",
+            "$$ w = c_1 v_1 + c_2 v_2 + \\dots + c_n v_n $$",
             "wherein $c_i$ are scalars (weights). If we can reach a target vector $b$ using some combination of $v_i$, we say $b$ is in the 'span' of those vectors.",
             "**Geometric Example:**",
-            "Imagine two vectors in a 2D plane: $\mathbf{v}_1$ points right, and $\mathbf{v}_2$ points up. By combining them ($w = 2\mathbf{v}_1 + 3\mathbf{v}_2$), you can reach the point $(2, 3)$. Every point in the plane can be reached by some combination of these two basis vectors."
+            "Imagine two vectors in a 2D plane: $\\mathbf{v}_1$ points right, and $\\mathbf{v}_2$ points up. By combining them ($w = 2\\mathbf{v}_1 + 3\\mathbf{v}_2$), you can reach the point $(2, 3)$. Every point in the plane can be reached by some combination of these two basis vectors."
           ]
         },
         {
@@ -157,7 +157,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "DotProduct",
       title: "Dot Product (Projection & Alignment)",
       description: "The dot product is a scalar value that measures the degree of alignment between two vectors. It is the engine behind similarity scores, gradient updates, and error measurements in ML.",
-      formula: "A \cdot B = \|A\| \|B\| \cos(\theta)",
+      formula: "A \\cdot B = \\|A\\| \\|B\\| \\cos(\\theta)",
       details: [
         "A positive dot product means vectors point in generally the same direction ($< 90^\circ$).",
         "A zero dot product means vectors are perfectly perpendicular (Orthogonal).",
@@ -169,7 +169,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
           paragraphs: [
             "In data science, we often need to know how similar two data points are. The dot product (or scalar product) provides a way to multiply two vectors to yield a single number. This number tells us about the angle between the vectors: the more they align, the higher the dot product.",
             "Mathematically, the dot product of $A$ and $B$ is:",
-            "$$ \mathbf{A} \cdot \mathbf{B} = \sum_{i=1}^n A_i B_i = |A| |B| \cos(\theta) $$",
+            "$$ \\mathbf{A} \\cdot \\mathbf{B} = \\sum_{i=1}^n A_i B_i = \\|A\\| \\|B\\| \\cos(\\theta) $$",
             "This operation is essential for algorithms like **Cosine Similarity** (used in text search) and **Gradient Descent** (where we find the direction of steepest descent by taking the dot product of the gradient with our update step)."
           ]
         },
@@ -205,7 +205,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Solved Problems",
           paragraphs: [
-            "**Problem 1:** Find scalar product of $A = 2i + 5j + 3k$ and $B = 3i + j + 2k$. Result: $(2 \\times 3) + (5 \\times 1) + (3 \\times 2) = 17$.",
+            "**Problem 1:** Find scalar product of $A = 2\\mathbf{i} + 5\\mathbf{j} + 3\\mathbf{k}$ and $B = 3\\mathbf{i} + \\mathbf{j} + 2\\mathbf{k}$. Result: $(2 \\times 3) + (5 \\times 1) + (3 \\times 2) = 17$.",
             "**Problem 2:** Work done by Force $F = (7i + 5j + 2k)N$ on displacement $D = i + j + 3k$. Work = $F \\cdot D = (7 \\times 1) + (5 \\times 1) + (2 \\times 3) = 18 J$.",
             "**Problem 3:** Find $m$ such that $A = 2i + 3j + k$ and $B = 3i + 2j + mk$ are perpendicular. $A \\cdot B = 0 \\implies 6 + 6 + m = 0 \\implies m = -12$.",
             "**Problem 4:** Prove $U = 2i + 3j + k$ and $V = 4i - 2j - 2k$ are perpendicular. $U \\cdot V = 8 - 6 - 2 = 0$. Hence proved.",
@@ -220,7 +220,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "Matrices",
       title: "Structured Data Collections (Matrices)",
       description: "Matrices are rectangular arrays of numbers that allow us to process entire datasets simultaneously. They are the primary structure for linear models and neural network layers.",
-      formula: "C = A \cdot B",
+      formula: "C = A \\cdot B",
       details: [
         "A matrix is a grid of values where rows usually represent samples and columns represent features.",
         "The size of a matrix is denoted as $m \times n$ (Rows $\times$ Columns).",
@@ -248,7 +248,8 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
             "6. **Scalar Multiplication:** When we multiply a matrix with a scalar then it is multiplied with each and every element in the matrix. The order remains same."
           ],
           code: "import matplotlib.pyplot as plt\nimport numpy as np\n\nA = np.array([[1, 2], [3, 4]])\nB = np.array([[5, 6], [7, 8]])\n\n# Multiplication C = A.dot(B)\nC = A.dot(B)\n\nfig, (ax1, ax2, ax3) = plt.subplots(1, 3, figsize=(15, 5))\n\nfor ax, mat, title in zip([ax1, ax2, ax3], [A, B, C], ['Matrix A', 'Matrix B', 'Result C = A.B']):\n    im = ax.imshow(mat, cmap='YlGn')\n    ax.set_title(title)\n    for (j, i), val in np.ndenumerate(mat):\n        ax.text(i, j, f'{val}', ha='center', va='center', color='black', fontsize=14)\n    plt.colorbar(im, ax=ax)\n\nplt.tight_layout()\nplt.show()\n\nprint(\"Addition A+B:\\n\", A + B)\nprint(\"Dot Product A.dot(B):\\n\", C)\nprint(\"Scalar Mult A * 2:\\n\", A * 2)",
-          output: "Addition A+B:\n [[ 6  8]\n [10 12]]\nDot Product A.dot(B):\n [[19 22]\n [43 50]]\nScalar Mult A * 2:\n [[2 4]\n [6 8]]"
+          output: "Addition A+B:\n [[ 6  8]\n [10 12]]\nDot Product A.dot(B):\n [[19 22]\n [43 50]]\nScalar Mult A * 2:\n [[2 4]\n [6 8]]",
+          visualizer: "matrix"
         }
       ],
       tags: ["Addition", "Multiplication", "Inverse", "Transpose"],
@@ -342,7 +343,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "LinearEquations",
       title: "System Resolution (Ax = b)",
       description: "Solving systems of linear equations is the process of finding the values that satisfy multiple constraints simultaneously. This is the mathematical engine for weight optimization in linear regression.",
-      formula: "A \mathbf{x} = \mathbf{b}",
+      formula: "A \\mathbf{x} = \\mathbf{b}",
       details: [
         "In ML, $A$ represents the input data (features), $b$ is the target output, and $x$ is the set of model weights we need to find.",
         "Overdetermined ($m > n$): More data points than features, solved using 'Least Squares'.",
@@ -384,19 +385,82 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Case 2: m > n (Overdetermined Systems)",
           paragraphs: [
-            "In this case the number of variables or attributes is less than the number of equations. Usually, not all equations can be satisfied. We use the **Optimization Perspective (Least Squares)** to minimize the error $e = Ax - b$.",
-            "We minimize the sum of squared errors: $f(x) = \\min [(Ax - b)^T(Ax - b)]$.",
-            "Differentiating and setting to zero gives the solution: $$ x = (A^T A)^{-1} A^T b $$",
-            "This solution ensures the errors are collectively minimized even if not all equations are satisfies exactly. This requires that $(A^T A)^{-1}$ exists (linearly independent columns)."
+            "In this scenario, you have more constraints (equations) than variables to solve for, typically represented as a tall, skinny matrix $A$.",
+            "Since a perfect solution $Ax = b$ rarely exists in these cases, we shift our goal from finding an \"exact\" solution to finding the \"best possible\" one."
+          ]
+        },
+        {
+          heading: "The Optimization Perspective",
+          paragraphs: [
+            "When we can't hit the target exactly, we try to get as close as possible. The difference between the actual observed values $b$ and our prediction $Ax$ is the residual vector (or error):",
+            "$$ e = Ax - b $$",
+            "To ensure we don't have positive and negative errors canceling each other out, and to penalize larger outliers more heavily, we minimize the Sum of Squared Errors (SSE). Mathematically, this is the squared Euclidean norm:",
+            "$$ f(x) = \\|Ax - b\\|^2 = (Ax - b)^T (Ax - b) $$"
+          ]
+        },
+        {
+          heading: "Deriving the Normal Equations",
+          paragraphs: [
+            "To find the minimum, we take the derivative with respect to $x$ and set it to zero. Expanding the function gives:",
+            "$$ f(x) = x^T A^T Ax - 2x^T A^T b + b^T b $$",
+            "Differentiating with respect to $x$:",
+            "$$ \\frac{\\partial f}{\\partial x} = 2A^T Ax - 2A^T b = 0 $$",
+            "This leads us to the Normal Equations:",
+            "$$ A^T Ax = A^T b $$"
+          ]
+        },
+        {
+          heading: "The Geometric Intuition",
+          paragraphs: [
+            "There is a beautiful geometric interpretation here. The vector $Ax$ must lie within the Column Space of $A$ (the span of its columns). If $b$ is not in that space, the closest point to $b$ in that subspace is its orthogonal projection.",
+            "The least squares solution $x = (A^T A)^{-1} A^{T}b$ effectively projects $b$ onto the column space of $A$. The error vector $e$ is perpendicular (orthogonal) to the columns of $A$, which is why $A^T e = 0$."
+          ]
+        },
+        {
+          heading: "Requirements for a Solution",
+          paragraphs: [
+            "For the solution $x = (A^T A)^{-1} A^T b$ to be unique:",
+            "- The matrix $A$ must have linearly independent columns (it must be full column rank).",
+            "- If the columns are linearly dependent, $A^T A$ will be singular (non-invertible), and we would instead use the Moore-Penrose Pseudoinverse ($A^+$) to find one of the infinite possible solutions.",
+            "This approach is the mathematical engine behind Linear Regression, allowing us to fit a trend line through a cloud of data points where a single line cannot possibly pass through every individual point."
           ]
         },
         {
           heading: "Case 3: m < n (Underdetermined Systems)",
           paragraphs: [
-            "More attributes or variables than equations leads to infinite solutions. We can choose the specific solution that minimizes the norm of $x$ ($min [\\frac{1}{2}x^T x]$ subject to $Ax = b$).",
-            "Using Lagrangian multipliers, we obtain: $$ x = A^T(A A^T)^{-1} b $$",
-            "Requires $(A A^T)^{-1}$ to exist (linearly independent rows).",
-            "**Generalization:** The concept used to generalize solutions for all cases is the **Moore-Penrose Pseudoinverse ($A^+$)**. Singular Value Decomposition (SVD) is used to calculate it."
+            "In this case, the matrix $A$ is \"fat and short.\" Since we have infinite choices for $x$, we need a criterion to pick the \"best\" one. Usually, we want the most efficient or \"simplest\" solution, which mathematically translates to the one with the minimum norm (the one closest to the origin)."
+          ]
+        },
+        {
+          heading: "The Optimization Perspective (Minimum Norm)",
+          paragraphs: [
+            "We want to solve the following constrained optimization problem:",
+            "Minimize: $f(x) = \\frac{1}{2}\\|x\\|^2$ subject to $Ax = b$",
+            "By using a Lagrangian $\\mathcal{L}(x, \\lambda) = \\frac{1}{2}x^T x + \\lambda^T (Ax - b)$, and taking the partial derivatives:",
+            "$$ \\frac{\\partial \\mathcal{L}}{\\partial x} = x + A^T \\lambda = 0 \\implies x = -A^T \\lambda $$",
+            "$$ \\frac{\\partial \\mathcal{L}}{\\partial \\lambda} = Ax - b = 0 \\implies Ax = b $$",
+            "Substituting the first into the second:",
+            "$$ A(-A^T \\lambda) = b \\implies -(AA^T) \\lambda = b \\implies \\lambda = -(AA^T)^{-1} b $$",
+            "Plugging $\\lambda$ back into the equation for $x$:",
+            "$$ x = A^T(AA^T)^{-1}b $$"
+          ]
+        },
+        {
+          heading: "The Moore-Penrose Pseudoinverse ($A^+$)",
+          paragraphs: [
+            "To avoid memorizing different formulas for \"tall\" vs \"fat\" matrices, we use the Pseudoinverse. It provides a unified way to solve $Ax = b$ regardless of the shape or rank of $A$.",
+            "- **Case 1** (Square & Invertible): $A^+ = A^{-1}$",
+            "- **Case 2** (Overdetermined, Full Column Rank): $A^+ = (A^T A)^{-1} A^T$ (Left Inverse)",
+            "- **Case 3** (Underdetermined, Full Row Rank): $A^+ = A^T (A A^T)^{-1}$ (Right Inverse)"
+          ]
+        },
+        {
+          heading: "Calculation via SVD",
+          paragraphs: [
+            "The most robust way to find $A^+$ is through Singular Value Decomposition (SVD), which decomposes any matrix into $A = U\\Sigma V^T$.",
+            "The pseudoinverse is then:",
+            "$$ A^+ = V\\Sigma^+ U^T $$",
+            "Where $\\Sigma^+$ is formed by taking the reciprocal of every non-zero singular value on the diagonal of $\\Sigma$ and transposing it. This method is incredibly powerful because it works even when the matrix is rank-deficient (i.e., when $A^T A$ or $AA^T$ are not invertible)."
           ]
         },
         {
@@ -585,12 +649,12 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "VectorNorms",
       title: "Magnitude Metrics (Vector Norms)",
       description: "A norm is a function that assigns a strictly positive 'length' or size to a vector. In machine learning, norms are used to penalize large weights (regularization) and calculate error distances.",
-      formula: "| \mathbf{x} |_p = (\sum | x_i |^p)^{1/p}",
+      formula: "\\| \\mathbf{x} \\|_p = (\\sum | x_i |^p)^{1/p}",
       details: [
         "A vector norm satisfies three essential properties:",
-        "Non-negativity: $\|\mathbf{x}\| > 0$ if $\mathbf{x} \neq 0$, and $\|\mathbf{x}\|=0$ if and only if $\mathbf{x} = 0$.",
-        "Scalar Multiplication: $\|k\mathbf{x}\| = |k| \cdot \|\mathbf{x}\|$ for any scalar $k$.",
-        "Triangle Inequality: $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$.",
+        "Non-negativity: $\\|\\mathbf{x}\\| > 0$ if $\\mathbf{x} \\neq 0$, and $\\|\\mathbf{x}\\|=0$ if and only if $\\mathbf{x} = 0$.",
+        "Scalar Multiplication: $\\|k\\mathbf{x}\\| = |k| \\cdot \\|\\mathbf{x}\\|$ for any scalar $k$.",
+        "Triangle Inequality: $\\|\\mathbf{x} + \\mathbf{y}\\| \\le \\|\\mathbf{x}\\| + \\|\\mathbf{y}\\|$. ",
         "L-infinity (Max Norm): Measures the absolute value of the largest component."
       ],
       contentSections: [
@@ -598,9 +662,9 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
           heading: "Defining a Valid Norm",
           paragraphs: [
             "A mathematical function is only considered a valid 'norm' if it satisfies these three foundational properties:",
-            "- **Non-negativity**: $\|\mathbf{x}\| > 0$ if $\mathbf{x} \neq 0$, and $\|\mathbf{x}\|=0$ if and only if $\mathbf{x} = 0$.",
-            "- **Scalar Multiplication**: $\|k\mathbf{x}\| = |k| \cdot \|\mathbf{x}\|$ for any scalar $k$.",
-            "- **Triangle Inequality**: $\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|$.",
+            "- **Non-negativity**: $\\|\\mathbf{x}\\| > 0$ if $\\mathbf{x} \\neq 0$, and $\\|\\mathbf{x}\\|=0$ if and only if $\\mathbf{x} = 0$.",
+            "- **Scalar Multiplication**: $\\|k\\mathbf{x}\\| = |k| \\cdot \\|\\mathbf{x}\\|$ for any scalar $k$.",
+            "- **Triangle Inequality**: $\\|\\mathbf{x} + \\mathbf{y}\\| \\le \\|\\mathbf{x}\\| + \\|\\mathbf{y}\\|$. ",
             "In machine learning, we use these norms to quantify error or to penalize model complexity (Regularization)."
           ]
         },
@@ -641,7 +705,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       id: "DistanceMetrics",
       title: "Similarity and Dissimilarity (Distance Metrics)",
       description: "Distance metrics quantify how far apart two data points are in feature space. They are the analytical foundation for clustering, classification (KNN), and recommendation systems.",
-      formula: "d(x,y) = \sqrt{\sum (x_i - y_i)^2}",
+      formula: "d(x,y) = \\sqrt{\\sum (x_i - y_i)^2}",
       details: [
         "Euclidean Distance: Standard 'as-the-crow-flies' distance.",
         "Manhattan Distance: 'Grid-based' distance, useful for high-dimensional data.",
@@ -666,7 +730,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
             "- Best for: Continuous numerical data (when features are normalized).",
             "- Example: Distance between two cities on a 2D map.",
             "2. Manhattan Distance",
-            "Manhattan Distance determines the absolute difference among the pair of the coordinates. Suppose we have two points P and Q to determine the distance between these points we simply have to calculate the perpendicular distance of the points from X-Axis and Y-Axis. In a plane with P at coordinate (x1, y1) and Q at (x2, y2). Manhattan distance between P and Q = |x1 â€“ x2| + |y1 â€“ y2|",
+            "Manhattan Distance determines the absolute difference among the pair of the coordinates. Suppose we have two points P and Q to determine the distance between these points we simply have to calculate the perpendicular distance of the points from X-Axis and Y-Axis. In a plane with P at coordinate ($x_1, y_1$) and Q at ($x_2, y_2$). Manhattan distance between P and Q is $|x_1 - x_2| + |y_1 - y_2|$",
             "Formula: $$d(x,y) = \\sum_{i=1}^n |x_i - y_i|$$",
             "- Best for: High-dimensional data or when diagonal movement has no meaning.",
             "- Example: Distance between blocks in a city (taxicab geometry).",
@@ -681,7 +745,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
             "- Best for: Flexible distance calculations where p is tuned.",
             "- Example: For p=1, it becomes Manhattan; for p=2, it becomes Euclidean.",
             "5. Cosine Similarity / Cosine Distance",
-            "Measures the cosine distance of the angle between two vectors, focusing on orientation rather than magnitude. Commonly converted to distance as 1âˆ’similarity.",
+            "Measures the cosine distance of the angle between two vectors, focusing on orientation rather than magnitude. Commonly converted to distance as $1 - \\text{similarity}$.",
             "Formula(Similarity): $$\\text{Cosine}(x,y) = \\frac{x \\cdot y}{||x|| \\, ||y||}$$",
             "Formula(Distance): $$d(x,y) = 1 - \\frac{x \\cdot y}{||x|| \\, ||y||}$$",
             "- Best for: Text mining, NLP, recommendation systems.",

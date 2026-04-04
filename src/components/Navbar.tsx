@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
-import { Cpu } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
   return (
-    <nav className="fixed top-0 w-full h-16 bg-white border-b border-gray-200 z-50 flex items-center justify-between px-4 md:px-6">
-      <Link to="/" className="flex items-center gap-3">
-        <div className="w-8 h-8 bg-black rounded flex items-center justify-center">
-          <span className="text-white font-bold font-mono text-sm">M</span>
+    <nav className="fixed top-0 w-full h-16 bg-white/80 dark:bg-slate-950/80 backdrop-blur-xl border-b border-black/5 dark:border-white/5 z-50 flex items-center justify-between px-4 md:px-8 transition-all">
+      <Link to="/" className="flex items-center gap-2 group">
+        <div className="w-9 h-9 bg-black dark:bg-white rounded flex items-center justify-center group-hover:scale-105 transition-transform duration-200">
+          <span className="text-white dark:text-black font-black font-mono text-base">M</span>
         </div>
-        <span className="font-bold text-gray-900 tracking-tight text-xl">Mathematics for ML</span>
+        <span className="font-black text-black dark:text-white tracking-tighter text-xl hidden sm:block uppercase">Mathematics for ML</span>
       </Link>
       
-      <div className="hidden md:flex gap-6 text-sm font-medium text-gray-600">
-        <Link to="/" className="hover:text-gray-900 transition-colors">Home</Link>
+      <div className="flex items-center gap-4 md:gap-8">
+        <Link to="/" className="text-sm font-bold text-on-surface-variant hover:text-black dark:hover:text-white transition-colors uppercase tracking-widest">Home</Link>
+        <ThemeToggle />
       </div>
     </nav>
   );

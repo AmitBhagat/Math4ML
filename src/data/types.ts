@@ -3,6 +3,7 @@ export interface ContentBlock {
   paragraphs: string[];
   code?: string;
   output?: string;
+  visualizer?: 'matrix';
 }
 
 export interface TopicSection {
