@@ -1,0 +1,52 @@
+import { CategoryData } from '../src/data/types';
+
+// =============================================================================
+// CALCULUS (Standardized & Refactored for Clean Prose)
+// =============================================================================
+export const CALCULUS_DATA: CategoryData = {
+  id: "calculus",
+  title: "Calculus",
+  description: "Calculus is the mathematical engine of optimization. By calculating gradients and derivatives, we navigate the loss surface to find the weight configuration that minimizes error—the heart of the 'Learning' process.",
+  keyConcepts: [
+    { title: "Differentiation", description: "Measuring instantaneous change and local slopes." },
+    { title: "Partial Derivatives", description: "Managing change across high-dimensional feature spaces." },
+    { title: "Gradients", description: "The vector of steepest ascent used in optimization." },
+    { title: "Chain Rule", description: "The mathematical backbone of backpropagation." }
+  ],
+  sections: [
+    {
+      id: "differentiation",
+      title: "Differentiation: The Rate of Change",
+      description: "Differentiation computes the rate of change of a function with respect to its input. It is the mathematical foundation of all gradient-based ML optimization.",
+      formula: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
+      details: ["The derivative measures instantaneous rate of change.", "In ML, it tells how the loss changes when parameters shift."],
+      contentSections: [
+        {
+          heading: "The Local Slope and The Calculus Handbook",
+          paragraphs: [
+            "Differentiation is the process of finding the derivative of a function. The derivative $f'(x)$ measures how the function's output changes in response to a small change in its input. Geometrically, $f'(x)$ is the slope of the tangent line to the curve $y = f(x)$ at point $x$. If the slope is positive, the function is increasing; if negative, it's decreasing.  ",
+            "$$\\mathbf{f}'(x) = \\lim_{h \\to 0} \\frac{\\mathbf{f}(x+h) - \\mathbf{f}(x)}{h}$$",
+            "To manually differentiate, we follow core rules like the power rule, which is used for polynomial loss functions, and the exponential rule where the function $e^x$ is unique because its rate of change always equals its current value. When functions are nested like layers in a neural network, we use the chain rule to multiply the derivatives together—forming the foundation of backpropagation."
+          ]
+        },
+        {
+          heading: "Partial Signal and Multi-Variable Calculus",
+          paragraphs: [
+            "When a function has multiple inputs, such as weights in a neural network, partial derivatives measure the effect of changing one specific variable while holding everything else constant. This selective measuring allows backpropagation to update every weight in the network by exactly the right amount.  ",
+            "For example, in a function with respect to x and y, we freeze y to find the partial derivative of x. This is the mathematical signal that tells the model which direction to nudge each weight to reduce the overall error."
+          ]
+        },
+        {
+          heading: "The Gradient: The Compass of Optimization",
+          paragraphs: [
+            "The gradient $\\nabla f$ is a vector that collects all the partial derivatives of a function. It is the compass of optimization—it points in the direction where the function increases most rapidly. To reach the minimum loss, we calculate the gradient and step in the opposite direction.  ",
+            "$$\\nabla f(\\mathbf{x}) = \\left[ \\frac{\\partial f}{\\partial x_1}, \\frac{\\partial f}{\\partial x_2}, \\dots, \\frac{\\partial f}{\\partial x_n} \\right]$$",
+            "As an ML lead, you'll monitor the gradient norm to ensure your model's weights don't explode or vanish during training. The gradient is the primary lever you have for guiding your model through the high-dimensional feature landscape toward converged intelligence."
+          ]
+        }
+      ],
+      tags: ["Derivatives", "Slopes", "Rate of Change", "Power Rule"],
+      level: "Beginner"
+    }
+  ]
+};

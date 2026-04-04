@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route, useParams } from "react-router-dom";
 import { MainLayout } from "./components/MainLayout";
 import React, { Suspense } from "react";
 import LoadingSkeleton from "./components/LoadingSkeleton";
+import ScrollToTop from "./components/ScrollToTop";
 
 const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ default: m.HomePage })));
 const ClusterPage = React.lazy(() => import("./pages/ClusterPage").then(m => ({ default: m.ClusterPage })));
@@ -17,6 +18,7 @@ function CategoryRoute() {
 export default function App() {
   return (
     <HashRouter>
+      <ScrollToTop />
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />

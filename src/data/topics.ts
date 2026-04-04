@@ -149,9 +149,9 @@ export const CLUSTERS: ClusterMeta[] = [
 // ---------------------------------------------------------------------------
 // UI helpers — small icon map for categories (kept with metadata)
 // ---------------------------------------------------------------------------
-import { 
-  Layers, FunctionSquare, BarChart3, Dice5, 
-  Brain, Cpu, Network, Database, Activity, ShieldCheck 
+import {
+  Layers, FunctionSquare, BarChart3, Dice5,
+  Brain, Cpu, Network, Database, Activity, ShieldCheck
 } from "lucide-react";
 
 export const ICON_MAP: Record<string, any> = {
@@ -174,16 +174,16 @@ const categoryCache = new Map<string, CategoryData>();
 
 // Maps for dynamic import — Vite will code-split these into separate chunks
 const importMap: Record<string, () => Promise<any>> = {
-  'linear-algebra': () => import('./categories/linear-algebra'),
-  'statistics-probability': () => import('./categories/statistics'),
-  'calculus':       () => import('./categories/calculus'),
+  'linear-algebra': () => import('../../categories/linear-algebra-index'),
+  'statistics-probability': () => import('../../categories/statistics-index'),
+  'calculus': () => import('../../categories/calculus'),
 };
 
 // Export name map (the const name inside each file)
 const exportNameMap: Record<string, string> = {
   'linear-algebra': 'LINEAR_ALGEBRA_DATA',
   'statistics-probability': 'STATISTICS_DATA',
-  'calculus':       'CALCULUS_DATA',
+  'calculus': 'CALCULUS_DATA',
 };
 
 /**
