@@ -8,244 +8,180 @@ export const STATISTICS_DATA: CategoryData = {
   title: "Statistics & Probability",
   description: "The mathematical science of assessing uncertainty and drawing meaningful inferences from data distributions. It acts as the definitive backbone for predictive modeling and rigorous hypothesis validation.",
   keyConcepts: [
-    { title: "Bayesian Inference", description: "Conditional probability and belief updating." },
-    { title: "Probability Distributions", description: "Normal, Binomial, and Poisson variations." },
-    { title: "Descriptive Stats", description: "Mean, variance, skewness, and kurtosis." },
-    { title: "Inferential Stats", description: "Central Limit Theorem and population predictions." },
-    { title: "Hypothesis Testing", description: "p-values, Significance, and Error Types." },
-    { title: "Statistical Tests", description: "T-test, Z-test, ANOVA, and Chi-square." }
+    { title: "Sample Spaces", description: "The set of all possible outcomes of an experiment." },
+    { title: "Probability Rules", description: "Addition, Multiplication, and Complement rules." },
+    { title: "Conditional Probability", description: "Shrinking the sample space based on prior knowledge." },
+    { title: "Bayes Theorem", description: "Updating beliefs ($P(A|B)$) based on new evidence." },
+    { title: "Discrete Distributions", description: "Bernoulli, Binomial, and Poisson variations." },
+    { title: "Continuous Distributions", description: "Normal, Uniform, and Exponential models." }
   ],
   sections: [
     {
-      id: "BayesianInference",
-      title: "Bayesian Inference",
-      description: "Bayesian inference allows us to update the probability for a hypothesis as more evidence or information becomes available. It is the logical engine for Naive Bayes and probabilistic modeling.",
-      formula: "P(H|E) = [P(E|H) P(H)] / P(E)",
+      id: "SampleSpaces",
+      title: "Sample Spaces",
+      description: "In Probability Theory, the sample space is the set of all possible outcomes of a random experiment.",
+      formula: "S = \\{O_1, O_2, \\dots, O_n\\}",
       details: [
-        "Conditional Probability: The likelihood of an event given another (P(A|B)).",
-        "Bayes' Theorem: Reverses conditional probability for belief updating.",
-        "Prior vs. Posterior: Initial belief vs. updated belief after seeing data."
+        "Experiment: Any process that gives a result.",
+        "Outcome: A single possible result.",
+        "Event: A subset of the sample space."
       ],
       contentSections: [
         {
-          heading: "Conditional Probability",
+          heading: "Finding Sample Space",
           paragraphs: [
-            "P(A|B) measures the probability of A occurring, given that B has already happened. It effectively restricts the sample space to only outcomes where B is true.",
-            "Formula: $P(A|B) = P(A \\cap B) / P(B)$",
-            "In ML, this is used for classification: What is the probability a point belongs to Class X given its features?"
-          ],
-          code: "P_A_and_B = 0.1\nP_B = 0.4\nP_A_given_B = P_A_and_B / P_B\nprint('P(A|B):', P_A_given_B)",
-          output: "P(A|B): 0.25"
+            "To find the sample space in probability, follow these fundamental steps:",
+            "1. Identify all possible outcomes of the experiment.",
+            "2. List outcomes in a set, ensuring each one is unique.",
+            "Combining sample spaces when multiple events occur helps in calculating complex probabilities across multidimensional manifolds."
+          ]
         },
         {
-          heading: "The Power of Bayes' Theorem",
+          heading: "Types of Sample Spaces",
           paragraphs: [
-            "Bayes' Theorem provides a rigorous way to update probabilities as new evidence becomes available. It is the foundation of Bayesian machine learning.",
-            "Components:",
-            "- Posterior $P(H|E)$: Belief after seeing evidence.",
-            "- Likelihood $P(E|H)$: Probability of evidence given hypothesis.",
-            "- Prior $P(H)$: Initial belief before evidence.",
-            "- Evidence $P(E)$: Total probability of the observed data."
-          ],
-          code: "# Medical Diagnosis Example\nP_D = 0.01  # Disease probability\nP_pos_given_D = 0.99  # True positive rate\nP_pos_given_notD = 0.05 # False positive rate\n\nP_notD = 1 - P_D\nP_pos = (P_pos_given_D * P_D) + (P_pos_given_notD * P_notD)\nP_D_given_pos = (P_pos_given_D * P_D) / P_pos\nprint('P(Disease|Positive Test):', round(P_D_given_pos, 4))",
-          output: "P(Disease|Positive Test): 0.1664"
+            `**Finite:** The number of outcomes is countable and limited.
+Example: Rolling a die. $S = \\{1, 2, 3, 4, 5, 6\\}$.`,
+            `**Infinite:** The outcomes go on forever.
+Example: Number of coin tosses until the first head. $S = \\{1, 2, 3, 4, \\dots\\}$.`,
+            `**Continuous:** The outcomes can take any real value within a range.
+Example: A number between 0 and 1. $S = \\{x \\in \\mathbb{R} \\mid 0 \\le x \\le 1\\}$.`
+          ]
         }
       ],
-      tags: ["Bayes", "Conditional", "Prior", "Inference"],
+      tags: ["Probability", "Outcome", "Die", "Coin"],
+      level: "Beginner"
+    },
+    {
+      id: "ProbabilityRules",
+      title: "Probability Rules",
+      description: "Fundamental laws for combining probabilities.",
+      formula: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
+      details: ["Addition Rule: A or B.", "Multiplication Rule: A and B.", "Complement Rule: Not A."],
+      contentSections: [
+        {
+          heading: "Core Probability Rules",
+          paragraphs: [
+            `**Addition Rule:** Deals with the probability of the union of two events ($A \\cup B$).
+**Formula:** $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.
+**Note:** We subtract the intersection to avoid double-counting the overlap.`,
+            `**Multiplication Rule:** Applies to the intersection of two events ($A \\cap B$).
+**For Independent Events:** $P(A \\cap B) = P(A) \\times P(B)$.
+**Example:** Rolling an even number AND a number less than 4.`,
+            `**Complement Rule:** The probability of an event NOT occurring.
+**Formula:** $P(A') = 1 - P(A)$.
+**Example:** Not drawing a heart from a deck. $1 - 13/52 = 3/4$.`
+          ]
+        },
+        {
+          heading: "Solved Questions",
+          paragraphs: [
+            `**Q1 (Two coins):** What is the probability of exactly one head?
+**Solution:** $1/2$.
+**Logic:** $1 - P(HH) - P(TT) = 1 - 1/4 - 1/4 = 1/2$.`,
+            `**Q2 (No replacement):** 5 red, 3 blue balls. Probability of 1 red then 1 blue?
+**Solution:** $15/56$.
+**Logic:** $P(\\text{red}) \\times P(\\text{blue after red}) = 5/8 \\times 3/7 = 15/56$.`,
+            `**Q3 (Die):** Probability of a number divisible by 2 OR 3?
+**Solution:** $5/6$.
+**Logic:** $P(/2) + P(/3) - P(/6) = 1/2 + 1/3 - 1/6 = 5/6$.`,
+            `**Q4 (Two dice):** Probability of a sum > 9?
+**Solution:** $1/6$.
+**Logic:** Positive outcomes are (4,6), (5,5), (5,6), (6,4), (6,5), (6,6). Total = $6/36 = 1/6$.`
+          ]
+        }
+      ],
+      tags: ["Addition", "Multiplication", "Complement"],
+      level: "Beginner"
+    },
+    {
+      id: "ConditionalProbability",
+      title: "Conditional Probability",
+      description: "Focus on outcomes given prior knowledge.",
+      formula: "P(A \\mid B) = P(A \\cap B) / P(B)",
+      details: ["Shrinks the sample space.", "Fundamental to Naive Bayes.", "Non-commutative."],
+      contentSections: [
+        {
+          heading: "Logic of Conditional Probability",
+          paragraphs: [
+            "Conditional probability $P(A \\mid B)$ is the likelihood of A given B has happened.",
+            "**The Trick:** You are shrinking the sample space to only the world where B is true. The denominator becomes $P(B)$ instead of the full $S$."
+          ]
+        },
+        {
+          heading: "Comparison Table",
+          paragraphs: [
+            `**Conditional Probability:** $P(A \\mid B)$ - Probability of A given B.
+**Joint Probability:** $P(A \\cap B)$ - Probability of A and B both.
+**Marginal Probability:** $P(A)$ - Probability of A alone.`
+          ]
+        },
+        {
+          heading: "Solved Examples",
+          paragraphs: [
+            `**Example (Rain/Umbrella):** Rain ($R$) = 30%, Umbrella ($U$) = 50%. $P(U|R)$ = 80%. What is $P(R|U)$?
+**Logic:** $P(R \\cap U) = P(R) \\times P(U|R) = 0.3 \\times 0.8 = 0.24$.
+**Result:** $P(R|U) = 0.24 / 0.50 = 0.48$ (48%).`
+          ]
+        }
+      ],
+      tags: ["Conditional", "Dependency"],
+      level: "Intermediate"
+    },
+    {
+      id: "BayesTheorem",
+      title: "Bayes Theorem",
+      description: "Updating beliefs based on evidence.",
+      formula: "P(A \\mid B) = [P(B \\mid A) P(A)] / P(B)",
+      details: ["Prior (Hunch) + Likelihood (Data) = Posterior (Truth).", "Acts as a normalization system."],
+      contentSections: [
+        {
+          heading: "The Bayesian Filter",
+          paragraphs: [
+            `**Prior:** Initial belief before evidence ($P(A)$).
+**Likelihood:** Probability of seeing evidence assuming hypothesis is true ($P(B|A)$).
+**Posterior:** Updated belief after evidence ($P(A|B)$).
+**Evidence:** The total probability of the observation ($P(B)$).`
+          ]
+        },
+        {
+          heading: "Naive Bayes in ML",
+          paragraphs: [
+            "Naive Bayes assumes every feature is independent. Even though words in a sentence aren't independent, the 'Naive' assumption works surprisingly well for Spam Filters.",
+            "**Bayesian Optimization:** Often used for hyperparameter tuning in deep learning."
+          ]
+        }
+      ],
+      tags: ["Bayes", "Posterior", "Prior", "Optimization"],
       level: "Advanced"
     },
     {
       id: "ProbabilityDistributions",
       title: "Probability Distributions",
-      description: "Mathematical functions that provide the probabilities of occurrence of different possible outcomes in an experiment, essential for modeling uncertainty.",
-      formula: "f(x) for PDF / p(x) for PMF",
-      details: [
-        "Normal (Gaussian): The bell curve, central to the Central Limit Theorem.",
-        "Binomial: Discrete counts of successes in fixed trials.",
-        "Poisson: Frequency of events occurring in fixed intervals."
-      ],
+      description: "The taxonomy of data spreads.",
+      formula: "F_X(x) = P(X \\le x)",
+      details: ["PMF for Discrete.", "PDF for Continuous.", "CDF for Accumulation."],
       contentSections: [
         {
-          heading: "The Bell Curve: Normal Distribution",
+          heading: "The DNA (PMF, PDF, CDF)",
           paragraphs: [
-            "The Normal (Gaussian) distribution is characterized by its mean ($\\mu$) and standard deviation ($\\sigma$). Because of the Central Limit Theorem, many natural phenomena and ML errors follow this distribution.",
-            "The standard normal distribution features $\\mu=0$ and $\\sigma=1$."
-          ],
-          code: "from scipy.stats import norm\nimport numpy as np\n\n# Probability X < 1.96 standard deviations\nprint('P(X < 1.96):', round(norm.cdf(1.96), 4))",
-          output: "P(X < 1.96): 0.975"
+            `**PMF:** Probability of exactly $x$ (Discrete). $P(X=x)$.
+**PDF:** Probability over a range (Continuous). The area under the curve.
+**CDF:** Cumulative probability up to $x$. $F_X(x) = \\int_{-\\infty}^x f(t)dt$.`
+          ]
         },
         {
-          heading: "Discrete Distributions (Binomial & Poisson)",
+          heading: "The Distribution Taxonomy",
           paragraphs: [
-            "Binomial: Used when there are exactly two outcomes (success/failure) over $n$ trials.",
-            "Poisson: Used for count-based data (e.g., number of clicks on an ad) over time or space."
+            `**Bernoulli:** Single trial (Success/Failure).
+**Binomial:** $k$ successes in $n$ trials.
+**Poisson:** Frequency of events over time.
+**Normal:** The symmetric Bell Curve.
+**Log-Normal:** Multiplicative growth (Stock prices).
+**Uniform:** Equal probability for all outcomes.`
           ]
         }
       ],
-      tags: ["Normal", "Gaussian", "Binomial", "Poisson"],
-      level: "Intermediate"
-    },
-    {
-      id: "DescriptiveStatistics",
-      title: "Descriptive Statistics",
-      description: "Summarizes the characteristics of a dataset without making predictions. Encompasses metrics for central tendency and dispersion.",
-      formula: "Mean = \Sigma x/N, Variance = \Sigma(x-\mu)^2/N",
-      details: [
-        "Central Tendency: Mean, Median, Mode.",
-        "Dispersion: Standard Deviation, Variance, IQR.",
-        "Quantiles: Dividing data into intervals (quartiles, percentiles)."
-      ],
-      contentSections: [
-        {
-          heading: "Measures of Central Tendency",
-          paragraphs: [
-            "Mean: Average value, sensitive to outliers.",
-            "Median: Middle value, robust to outliers.",
-            "Mode: Most frequent outcome, useful for categorical labels."
-          ],
-          code: "import numpy as np\ndata = [10, 2, 38, 23, 38, 23, 21]\nprint('Mean:', np.mean(data))\nprint('Median:', np.median(data))",
-          output: "Mean: 25.0, Median: 23.0"
-        }
-      ],
-      tags: ["Mean", "Median", "Variance", "Quartiles"],
-      level: "Beginner"
-    },
-    {
-      id: "InferentialStatistics",
-      title: "Inferential Statistics",
-      description: "Enables drawing conclusions about a large population based on a smaller sample using probability theory.",
-      formula: "Parameter \approx Statistic",
-      details: [
-        "Population: All objects of interest (e.g., all users).",
-        "Sample: A representing subset (e.g., 1000 users).",
-        "Central Limit Theorem: Ensures normality for large sample means."
-      ],
-      contentSections: [
-        {
-          heading: "Central Limit Theorem (CLT)",
-          paragraphs: [
-            "The CLT states that the distribution of sample means approaches a normal distribution as the sample size $n$ increases, even if the underlying population distribution is skewed.",
-            "This property is why we can use Z-tests and T-tests on diverse datasets."
-          ]
-        }
-      ],
-      tags: ["Population", "Sample", "CLT"],
-      level: "Intermediate"
-    },
-    {
-      id: "ConfidenceIntervals",
-      title: "Confidence Intervals",
-      description: "A range of values that likely contains the true population parameter, providing a measure of estimation uncertainty.",
-      formula: "CI = x\u0304 \pm Z(\sigma/\u221an)",
-      details: [
-        "95% Confidence: If we sample 100 times, 95 produced intervals would contain the true mean.",
-        "Margin of Error: Quantifies the uncertainty of the sample mean estimate."
-      ],
-      contentSections: [
-        {
-          heading: "Constructing Intervals",
-          paragraphs: [
-            "The width of the interval depends on the sample size and the variance. Higher confidence (e.g., 99%) results in a wider interval."
-          ],
-          code: "from scipy import stats\ndata = [1, 2, 3, 2, 1, 2, 3, 4, 3, 2]\nmean, se = np.mean(data), stats.sem(data)\nci = stats.t.interval(0.95, len(data)-1, loc=mean, scale=se)\nprint('95% CI:', ci)",
-          output: "95% CI: (1.64, 2.96)"
-        }
-      ],
-      tags: ["Margin of Error", "Estimation", "t-dist"],
-      level: "Intermediate"
-    },
-    {
-      id: "SkewnessKurtosis",
-      title: "Skewness and Kurtosis",
-      description: "Measures that define the shape of a distribution and the weight of its tails (outliers).",
-      formula: "Skew: \mu_3/\sigma^3, Kurtosis: \mu_4/\sigma^4",
-      details: [
-        "Skewness: Measures asymmetry (Left vs Right tailed).",
-        "Kurtosis: Measures tail-heaviness (Leptokurtic vs Platykurtic)."
-      ],
-      contentSections: [
-        {
-          heading: "Asymmetry and Tails",
-          paragraphs: [
-            "Skewness tells us if data is concentrated on one side. Kurtosis tells us if outliers are rare or frequent (fat tails)."
-          ],
-          code: "from scipy.stats import skew, kurtosis\ndata = np.random.normal(0, 1, 1000)\nprint('Skew:', round(skew(data), 2), 'Kurt:', round(kurtosis(data), 2))",
-          output: "Skew: 0.01, Kurt: -0.05"
-        }
-      ],
-      tags: ["Asymmetry", "Tails", "Shape"],
-      level: "Intermediate"
-    },
-    {
-      id: "HypothesisTesting",
-      title: "Hypothesis Testing",
-      description: "A formal procedure for evaluating whether sample results support a claim about the population at large.",
-      formula: "p-value \le \alpha \rightarrow Reject H_0",
-      details: [
-        "Null Hypothesis ($H_0$): Status quo/No effect.",
-        "Significance Level ($\\alpha$): Tolerance for errors (usually 0.05).",
-        "p-value: Probability of seeing the data if $H_0$ is true.",
-        "Type I/II Errors: False Positives vs False Negatives."
-      ],
-      contentSections: [
-        {
-          heading: "p-values in Practice",
-          paragraphs: [
-            "A p-value < 0.05 indicates that the observed effect is statistically significant and unlikely to have occurred by chance alone."
-          ]
-        }
-      ],
-      tags: ["Significance", "p-value", "Errors"],
-      level: "Advanced"
-    },
-    {
-      id: "StatisticalTests",
-      title: "Statistical Tests",
-      description: "Standardized tests used to compare groups and identify relationships between variables.",
-      formula: "T, Z, F, \chi^2",
-      details: [
-        "T-test: Compares means of two groups.",
-        "Z-test: Compares means (large sample, known variance).",
-        "ANOVA: Compares means across 3+ groups.",
-        "Chi-square: Tests relationships between categorical features."
-      ],
-      contentSections: [
-        {
-          heading: "Choosing the Right Test",
-          paragraphs: [
-            "- T-test: Small samples (n < 30).",
-            "- Z-test: Large samples.",
-            "- ANOVA: Multi-group numeric data.",
-            "- Chi-Square: Categorically dependent data."
-          ],
-          code: "from scipy.stats import ttest_ind\ng1 = [3, 4, 3, 2, 4]\ng2 = [10, 11, 12, 11, 10]\nprint('p-value:', ttest_ind(g1, g2).pvalue)",
-          output: "p-value: 1.23e-07"
-        }
-      ],
-      tags: ["T-test", "Z-test", "ANOVA", "Chi-square"],
-      level: "Advanced"
-    },
-    {
-      id: "Correlation",
-      title: "Correlation",
-      description: "Measures the strength and direction of the linear relationship between two variables.",
-      formula: "\rho = Cov(X,Y) / (\sigma_x \sigma_y)",
-      details: [
-        "Pearson ($r$): Linear relationship strength (-1 to +1).",
-        "Spearman ($\\rho$): Rank-based non-linear but monotonic relationships.",
-        "Correlation \neq Causation: The golden rule of data analysis."
-      ],
-      contentSections: [
-        {
-          heading: "Pearson vs Spearman",
-          paragraphs: [
-            "Pearson is sensitive to outliers and linear trends. Spearman is robust and captures any increasing/decreasing trend."
-          ],
-          code: "from scipy.stats import pearsonr\nx = [1, 2, 3, 4, 5]\ny = [2, 4, 5, 4, 5]\nprint('Pearson r:', round(pearsonr(x, y)[0], 3))",
-          output: "Pearson r: 0.872"
-        }
-      ],
-      tags: ["Pearson", "Spearman", "Causation"],
+      tags: ["Normal", "Poisson", "Binomial", "Log-Normal"],
       level: "Intermediate"
     }
   ]

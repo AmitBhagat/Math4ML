@@ -7,6 +7,7 @@ const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ defaul
 const ClusterPage = React.lazy(() => import("./pages/ClusterPage").then(m => ({ default: m.ClusterPage })));
 const AsyncCategoryPage = React.lazy(() => import("./pages/AsyncCategoryPage").then(m => ({ default: m.AsyncCategoryPage })));
 const ProblemPage = React.lazy(() => import("./pages/ProblemPage").then(m => ({ default: m.ProblemPage })));
+const VisualizationsPage = React.lazy(() => import("./pages/VisualizationsPage").then(m => ({ default: m.VisualizationsPage })));
 
 function CategoryRoute() {
   const { categoryId } = useParams();
@@ -19,6 +20,8 @@ export default function App() {
       <Routes>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
+          
+          <Route path="/visualizations" element={<Suspense fallback={<LoadingSkeleton /> }><VisualizationsPage /></Suspense>} />
           
           {/* Cluster Pages (Mathematics / Machine Learning) */}
           <Route path="/:clusterId" element={<Suspense fallback={<LoadingSkeleton /> }><ClusterPage /></Suspense>} />

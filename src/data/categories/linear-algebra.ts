@@ -205,11 +205,11 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Solved Problems",
           paragraphs: [
-            "**Problem 1:** Find scalar product of $A = 2\\mathbf{i} + 5\\mathbf{j} + 3\\mathbf{k}$ and $B = 3\\mathbf{i} + \\mathbf{j} + 2\\mathbf{k}$. Result: $(2 \\times 3) + (5 \\times 1) + (3 \\times 2) = 17$.",
-            "**Problem 2:** Work done by Force $F = (7i + 5j + 2k)N$ on displacement $D = i + j + 3k$. Work = $F \\cdot D = (7 \\times 1) + (5 \\times 1) + (2 \\times 3) = 18 J$.",
-            "**Problem 3:** Find $m$ such that $A = 2i + 3j + k$ and $B = 3i + 2j + mk$ are perpendicular. $A \\cdot B = 0 \\implies 6 + 6 + m = 0 \\implies m = -12$.",
-            "**Problem 4:** Prove $U = 2i + 3j + k$ and $V = 4i - 2j - 2k$ are perpendicular. $U \\cdot V = 8 - 6 - 2 = 0$. Hence proved.",
-            "**Problem 5:** Prove $A = 4a_x - 2a_y - a_z$ and $B = a_x + 4a_y - a_z$ are perpendicular. $A \\cdot B = 4(1) + (-2)(4) + (-1)(-1) = 4 - 8 + 1 = -3 \\neq 0$. Not perpendicular."
+            "**Problem 1:** Find the scalar product of $A = 2\\mathbf{i} + 5\\mathbf{j} + 3\\mathbf{k}$ and $B = 3\\mathbf{i} + \\mathbf{j} + 2\\mathbf{k}$.  \n**Solution:** 17.  \n**Explanation:** Using the component-wise formula $A \\cdot B = (A_x B_x) + (A_y B_y) + (A_z B_z)$, we calculate $(2 \\times 3) + (5 \\times 1) + (3 \\times 2) = 6 + 5 + 6 = 17$.",
+            "**Problem 2:** A force $F = (7i + 5j + 2k)N$ acts on a particle, causing a displacement $D = i + j + 3k$. Find the work done.  \n**Solution:** 18 J.  \n**Explanation:** Work is the dot product of Force and Displacement ($W = F \\cdot D$). Thus, $(7 \\times 1) + (5 \\times 1) + (2 \\times 3) = 7 + 5 + 6 = 18$ Joules.",
+            "**Problem 3:** Find $m$ such that $A = 2i + 3j + k$ and $B = 3i + 2j + mk$ are perpendicular.  \n**Solution:** $m = -12$.  \n**Explanation:** For vectors to be perpendicular, their dot product must be zero. $A \\cdot B = (2 \\times 3) + (3 \\times 2) + (1 \\times m) = 12 + m = 0$. Solving for $m$ gives $-12$.",
+            "**Problem 4:** Prove that $U = 2i + 3j + k$ and $V = 4i - 2j - 2k$ are perpendicular.  \n**Solution:** $U \\cdot V = 0$.  \n**Explanation:** Calculating the inner product: $(2 \\times 4) + (3 \\times -2) + (1 \\times -2) = 8 - 6 - 2 = 0$. Since the result is zero, the vectors are orthogonal (perpendicular).",
+            "**Problem 5:** Are $A = 4a_x - 2a_y - a_z$ and $B = a_x + 4a_y - a_z$ perpendicular?  \n**Solution:** No.  \n**Explanation:** $A \\cdot B = 4(1) + (-2)(4) + (-1)(-1) = 4 - 8 + 1 = -3$. Since $-3 \\neq 0$, the vectors are not perpendicular."
           ]
         }
       ],
@@ -688,11 +688,18 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
         {
           heading: "Solved Problems",
           paragraphs: [
-            "Question 1. Given the vector x = [4, -3, 7, 1], calculate the L1 norm (Manhattan norm) of the vector.",
-            "Question 2. Given the vector x = [1, -2, 2], calculate the L2 norm (Euclidean norm) of the vector.",
-            "Question 3. For the vector x = [7, -1, -4, 6], calculate the L-infinity norm (Max norm) of the vector.",
-            "Question 4. If the L2 norm (Euclidean norm) of a vector x = [x1, x2, x3] is 10, and the components of the vector are x1 = 6 and x2 = 8, find the value of x3.",
-            "Answers: 1. 15, 2. 3, 3. 7, 4. 0"
+            `**Question 1:** Given the vector $x = [4, -3, 7, 1]$, calculate the L1 norm (Manhattan norm).
+**Solution:** 15.
+**Explanation:** The L1 norm is the sum of absolute values: $|4| + |-3| + |7| + |1| = 4 + 3 + 7 + 1 = 15$.`,
+            `**Question 2:** Given the vector $x = [1, -2, 2]$, calculate the L2 norm (Euclidean norm).
+**Solution:** 3.
+**Explanation:** The L2 norm is the square root of the sum of squares: $\\sqrt{1^2 + (-2)^2 + 2^2} = \\sqrt{1 + 4 + 4} = \\sqrt{9} = 3$.`,
+            `**Question 3:** For the vector $x = [7, -1, -4, 6]$, calculate the L-infinity norm (Max norm).
+**Solution:** 7.
+**Explanation:** The $L_{\\infty}$ norm is the maximum absolute value among all components: $\\max(|7|, |-1|, |-4|, |6|) = 7$.`,
+            `**Question 4:** If the L2 norm of $x = [6, 8, x_3]$ is 10, find the value of $x_3$.
+**Solution:** 0.
+**Explanation:** From the L2 definition $\\sqrt{6^2 + 8^2 + x_3^2} = 10$. Squaring both sides: $36 + 64 + x_3^2 = 100$. This gives $100 + x_3^2 = 100$, so $x_3 = 0$.`
           ],
           code: "import numpy as np\n\nx1 = np.array([4, -3, 7, 1])\nprint('L1 norm:', np.linalg.norm(x1, 1))\n\nx2 = np.array([1, -2, 2])\nprint('L2 norm:', np.linalg.norm(x2, 2))\n\nx3 = np.array([7, -1, -4, 6])\nprint('L-infinity norm:', np.linalg.norm(x3, np.inf))",
           output: "L1 norm: 15.0\nL2 norm: 3.0\nL-infinity norm: 7.0"

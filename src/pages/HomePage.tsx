@@ -80,7 +80,7 @@ export const HomePage = () => {
               <ArrowRight className="w-4 h-4" />
             </a>
             <Link 
-              to="/mathematics/linear-algebra/Matrices"
+              to="/visualizations"
               className="bg-surface-container text-on-surface px-10 py-5 rounded font-black uppercase text-xs tracking-widest hover:bg-surface-container-high transition-colors flex items-center justify-center"
             >
               View Visualizations

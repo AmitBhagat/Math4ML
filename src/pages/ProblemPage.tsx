@@ -117,7 +117,8 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
             }
 
             // Detect numbered sub-headings like "1. Row and Column Vectors"
-            if (/^\d+\.\s/.test(p) && p.length < 80) {
+            // We only treat it as a heading if it's likely a title, not a simple step (i.e. if it doesn't end with a period)
+            if (/^\d+\.\s/.test(p) && p.length < 80 && !p.endsWith(".")) {
               return <h4 key={idx} className="font-headline font-bold text-on-surface mt-10 mb-5 text-2xl border-b border-black/5 dark:border-white/5 pb-2">{p}</h4>;
             }
 
@@ -132,24 +133,34 @@ const ContentSection = ({ section }: { section: ContentBlock; key?: number }) =>
 
             // Detect bullet-like entries or bold-prefix points (e.g. "**Google PageRank:**")
             const starMatch = p.match(/^[-]?\s?\*\*(.*?)\*\*(.*)/);
-            const normalBulletMatch = p.match(/^([A-Z][a-zA-Z\s()]+):(.*)/);
+            const normalBulletMatch = p.match(/^([A-Z][a-zA-Z\s()]+[\:]?)(.*)/);
             
             if (starMatch) {
+              const label = starMatch[1].trim().endsWith(':') ? starMatch[1].trim().slice(0, -1) : starMatch[1].trim();
+              const content = starMatch[2].trim().startsWith(':') ? starMatch[2].trim().slice(1).trim() : starMatch[2].trim();
+              
               return (
                 <div key={idx} className="pl-6 py-3 relative group transition-colors">
                   <div className="absolute left-0 top-6 w-2 h-2 rounded-full bg-accent-purple group-hover:scale-125 transition-transform"></div>
-                  <strong className="text-on-surface font-headline text-xl"><RichText text={starMatch[1]} />:</strong>
-                  <span className="ml-2 text-on-surface-variant"><RichText text={starMatch[2]} /></span>
+                  <strong className="text-on-surface font-headline text-xl">
+                    <RichText text={label} />:
+                  </strong>
+                  <span className="ml-2 text-on-surface-variant whitespace-pre-wrap"><RichText text={content} /></span>
                 </div>
               );
             }
 
             if (normalBulletMatch) {
+              const label = normalBulletMatch[1].trim().endsWith(':') ? normalBulletMatch[1].trim().slice(0, -1) : normalBulletMatch[1].trim();
+              const content = normalBulletMatch[2].trim().startsWith(':') ? normalBulletMatch[2].trim().slice(1).trim() : normalBulletMatch[2].trim();
+
               return (
                 <div key={idx} className="pl-6 py-3 relative group transition-colors">
                   <div className="absolute left-0 top-6 w-2 h-2 rounded-full bg-accent-teal group-hover:bg-accent-purple transition-colors"></div>
-                  <strong className="text-on-surface font-headline font-bold text-lg"><RichText text={normalBulletMatch[1]} />:</strong>
-                  <span className="ml-2 text-on-surface-variant"><RichText text={normalBulletMatch[2]} /></span>
+                  <strong className="text-on-surface font-headline font-bold text-lg">
+                    <RichText text={label} />:
+                  </strong>
+                  <span className="ml-2 text-on-surface-variant whitespace-pre-wrap"><RichText text={content} /></span>
                 </div>
               );
             }
