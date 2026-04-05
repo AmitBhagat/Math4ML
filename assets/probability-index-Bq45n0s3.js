@@ -44,8 +44,7 @@ const i={id:"probability-basics",title:"Probability Basics: The Mathematical Lan
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Computational Implementation: Discrete Sim</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 def simulate_die_roll(event_condition, trials=10000):
@@ -67,8 +66,7 @@ prob_even = simulate_die_roll(lambda x: x % 2 == 0)
 print(f"Sample Space S: {set(range(1, 7))}")
 print(f"Theoretical P(Even): 0.50")
 print(f"Simulated P(Even): {prob_even:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `},t={id:"probability-events",title:"Events: The Taxonomy and Classification of Luck",description:"A theoretical investigation into the structural properties of events—from simple outcomes to mutually exclusive and independent phenomena.",formula:"E \\subseteq S",details:["Definition of an Event as a Subset of Sample Space","Elementary vs. Compound Events","Set Operations in Probability: Union, Intersection, and Complement","Mutual Exclusivity: The Sum Rule Prerequisite","Statistical Independence vs. Causal Correlation","Impossible vs. Certain Events ($P=0$ vs. $P=1$)"],html:String.raw`
     <div class="premium-toc">
       <div class="premium-toc-title">Event Roadmap</div>
@@ -229,8 +227,7 @@ print(f"Simulated P(Even): {prob_even:.4f}")
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Empirical Matrix Analysis</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 # 1. Define Joint Distribution Table (Rows: Observed, Cols: Predicted)
@@ -250,8 +247,7 @@ print(f"Joint Matrix:\n{joint}")
 print(f"Marginal Observed: {marginal_obs}")
 print(f"Marginal Predicted: {marginal_prd}")
 print(f"P(Observed=0 | Predicted=1): {cond_prob:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `},o={id:"bayes-theorem",title:"Bayes' Theorem: The Mathematical Engine of Belief Updating",description:"A deep dive into Bayesian inference, transforming initial priors into refined posteriors through the integration of empirical likelihoods.",formula:"P(A|B) = \\frac{P(B|A)P(A)}{P(B)}",details:["The 4 Pillars: Prior, Likelihood, Evidence, and Posterior","Evidence Marginalization: The Law of Total Probability","Bayesian Updating: Sequential Refinement of Hypotheses","Naive Bayes: Assumption of Conditional Independence","Point Estimates: MAP vs. MLE in Bayesian Settings","Case Study: Recursive Diagnosis in Diagnostic Spaces"],html:String.raw`
     <div class="premium-toc">
       <div class="premium-toc-title">Inference Roadmap</div>
@@ -387,8 +383,7 @@ print(f"P(Bag 1 | Red): {posteriors[0]:.4f}")
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Numerical Scipy Implementation</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 from scipy.stats import norm, binom, poisson
 
@@ -407,6 +402,5 @@ emails_2 = poisson.pmf(2, 3)
 print(f"Normal Peak (z=0): {z_peak:.4f}")
 print(f"Binomial P(H=5): {heads_5:.4f}")
 print(f"Poisson P(E=2): {emails_2:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `},s={id:"probability",title:"Probability",description:"Probability is the mathematical framework for quantifying uncertainty. In ML, it allows us to move beyond binary 'Yes/No' logic and embrace the nuanced reality of 'How likely is this?'.",keyConcepts:[{title:"Probability Basics",description:"Sample spaces, experiments, and simple outcomes (Coins & Dice)."},{title:"Types of Events",description:"Impossible, Sure, Independent, and Dependent events."},{title:"Probability Rules",description:"Addition, Multiplication, and Complement rules for outcome calculation."},{title:"Joint & Marginal",description:"Simultaneous vs. isolated variable probabilities and conditional logic."},{title:"Bayes Theorem",description:"Updating beliefs based on evidence, the core of Naive Bayes classifiers."},{title:"Distributions",description:"11 distinct distributions (Normal, Binomial, Poisson, etc.) for data modeling."}],sections:[i,t,e,a,o,n]};export{s as PROBABILITY_DATA};

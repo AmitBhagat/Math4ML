@@ -65,8 +65,7 @@ const e={id:"vectors-full",title:"Vectors: Foundations of the Feature Space Mani
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Numerical Implementation: NumPy</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 # 1. Define vectors in R^3
@@ -78,11 +77,11 @@ dot_product = np.dot(x, y)
 l2_norm = np.linalg.norm(x)
 cosine_similarity = dot_product / (np.linalg.norm(x) * np.linalg.norm(y))
 
+# 3. Validation Insights
 print(f"Dot Product: {dot_product}")
 print(f"L2 Norm of x: {l2_norm:.4f}")
 print(f"Cosine Similarity: {cosine_similarity:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `},t={id:"matrices-full",title:"Matrix Essentials: The Computational Engine of Data Science",description:"A comprehensive analysis of matrices as linear operators—covering multiplication mechanics, transposition, and the numerical stability of inverses in high-dimensional optimization.",formula:"\\mathbf{A} \\in \\mathbb{R}^{m \\times n}, \\quad (AB)_{ij} = \\sum A_{ik}B_{kj}, \\quad A A^{-1} = I",details:["Matrix Multiplication: Non-Commutativity and Transformation Composition","Transposition and the Adjoint: Aligning Weight Matrices","Identity Matrices: The Unit Operator in Linear Algebra","Matrix Inversion: Existence, Singularity, and Determinants","ML Intuition: Solving Normal Equations in Regression","Computational Complexity: $O(n^3)$ vs. Optimized Parallel Solves"],html:String.raw`
     <div class="premium-toc">
       <div class="premium-toc-title">Module Contents</div>
