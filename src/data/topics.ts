@@ -34,17 +34,27 @@ export const CATEGORY_META: CategoryMeta[] = [
     ]
   },
   {
-    id: "statistics-probability",
-    title: "Statistics & Probability",
-    description: "The science of assessing uncertainty and drawing meaningful inferences from data distributions — the backbone of predictive modeling and hypothesis validation.",
+    id: "probability",
+    title: "Probability",
+    description: "The mathematical framework for quantifying uncertainty — the bedrock of Bayesian inference and probabilistic modeling.",
     keyConcepts: [
-      { title: "Bayesian Inference", description: "Conditional probability and Bayes' Theorem." },
-      { title: "Probability Distributions", description: "Normal, Binomial, and Poisson models." },
-      { title: "Descriptive Stats", description: "Mean, variance, skewness, and kurtosis." },
-      { title: "Inferential Stats", description: "Population predictions and confidence intervals." },
-      { title: "Hypothesis Testing", description: "p-values, Null hypotheses, and Type I/II errors." },
-      { title: "Statistical Tests", description: "T-test, Z-test, F-test, and Chi-square validation." },
-      { title: "Correlation", description: "Pearson and Spearman relationship coefficients." }
+      { title: "Basics & Events", description: "Sample spaces, experiments, and types of events." },
+      { title: "Probability Rules", description: "Addition, Multiplication, and Complement rules." },
+      { title: "Joint & Marginal", description: "Conditional logic and multi-variable probabilities." },
+      { title: "Bayes Theorem", description: "Updating beliefs based on evidence." },
+      { title: "Distributions", description: "Gaussian, Binomial, Poisson, and more." }
+    ]
+  },
+  {
+    id: "statistics",
+    title: "Statistics",
+    description: "The science of drawing meaningful inferences from data — from hypothesis testing to regression analysis and evaluation metrics.",
+    keyConcepts: [
+      { title: "Sampling Theory", description: "Population parameters and Central Limit Theorem." },
+      { title: "Hypothesis Testing", description: "p-values, T-tests, and Chi-square validation." },
+      { title: "Estimation", description: "Maximum Likelihood (MLE) and MAP estimation." },
+      { title: "Regression", description: "Linear relationships, residuals, and R-squared." },
+      { title: "Evaluation Metrics", description: "Accuracy, Precision, Recall, F1, and ROC-AUC." }
     ]
   },
   {
@@ -136,7 +146,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "The Mathematical Foundations",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "statistics-probability", "calculus"]
+    categories: ["linear-algebra", "probability", "statistics", "calculus"]
   },
   {
     id: "machine-learning",
@@ -156,7 +166,8 @@ import {
 
 export const ICON_MAP: Record<string, any> = {
   "linear-algebra": Layers,
-  "statistics-probability": BarChart3,
+  "probability": Dice5,
+  "statistics": BarChart3,
   "calculus": FunctionSquare,
   // ML Category Icons
   "supervised-learning": Brain,
@@ -175,14 +186,16 @@ const categoryCache = new Map<string, CategoryData>();
 // Maps for dynamic import — Vite will code-split these into separate chunks
 const importMap: Record<string, () => Promise<any>> = {
   'linear-algebra': () => import('../../categories/linear-algebra-index'),
-  'statistics-probability': () => import('../../categories/statistics-index'),
+  'probability': () => import('../../categories/probability-index'),
+  'statistics': () => import('../../categories/statistics-index'),
   'calculus': () => import('../../categories/calculus'),
 };
 
 // Export name map (the const name inside each file)
 const exportNameMap: Record<string, string> = {
   'linear-algebra': 'LINEAR_ALGEBRA_DATA',
-  'statistics-probability': 'STATISTICS_DATA',
+  'probability': 'PROBABILITY_DATA',
+  'statistics': 'STATISTICS_DATA',
   'calculus': 'CALCULUS_DATA',
 };
 

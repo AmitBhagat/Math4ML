@@ -1,6 +1,8 @@
 export interface ContentBlock {
   heading?: string;
-  paragraphs: string[];
+  paragraphs?: string[];
+  content?: string;
+  html?: string;
   code?: string;
   output?: string;
   visualizer?: 'matrix';
@@ -12,6 +14,8 @@ export interface TopicSection {
   description: string;
   formula?: string;
   details: string[];
+  content?: string;
+  html?: string;
   code?: string;
   contentSections?: ContentBlock[];
   tags?: string[];

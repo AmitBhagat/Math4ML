@@ -43,6 +43,13 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
     autoResize();
   }, [editedCode, autoResize]);
 
+  // Update original code when props change (navigating between topics)
+  useEffect(() => {
+    setEditedCode(code);
+    setLiveOutput(null);
+    setRunState("idle");
+  }, [code]);
+
   // Run the currently edited code through Pyodide
   const handleRun = useCallback(async () => {
     setRunState("loading-pyodide");
@@ -65,10 +72,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
     setLiveOutput(null);
   }, [code]);
 
-  // What to display in the output panel:
-  // - live output (after Run), or
-  // - static expected output (from topics data), or
-  // - nothing (show hint instead)
+  // What to display in the output panel
   const shownOutput = liveOutput ?? staticOutput ?? null;
   const isLive = liveOutput !== null;
   const isRunning = runState === "loading-pyodide" || runState === "running";
@@ -79,14 +83,14 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   };
 
   return (
-    <div className="my-10 rounded border-none bg-surface-container shadow-2xl overflow-hidden transition-colors">
+    <div className="my-10 rounded-xl border border-border-premium bg-bg-secondary shadow-xl overflow-hidden transition-all">
 
       {/* ── Header bar ── */}
-      <div className="px-6 py-4 bg-surface-container-high border-none flex items-center justify-between">
+      <div className="px-6 py-4 bg-bg-tertiary border-b border-border-premium flex items-center justify-between">
         <div className="flex items-center gap-4">
-          <span className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.2em]">{language}</span>
+          <span className="text-[10px] font-black text-accent-premium uppercase tracking-[0.2em]">{language}</span>
           {statusText[runState] && (
-            <span className="text-[10px] text-accent-teal font-black uppercase tracking-widest animate-pulse">
+            <span className="text-[10px] text-purple-premium font-black uppercase tracking-widest animate-pulse">
               {statusText[runState]}
             </span>
           )}
@@ -99,7 +103,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               {(editedCode !== code || liveOutput !== null) && (
                 <button
                   onClick={handleReset}
-                  className="text-[10px] font-black text-on-surface-variant hover:text-on-surface px-2 py-1 transition-colors uppercase tracking-widest"
+                  className="text-[10px] font-black text-muted-premium hover:text-text-premium px-2 py-1 transition-colors uppercase tracking-widest"
                   title="Restore original code and clear output"
                 >
                   ↺ Reset
@@ -110,10 +114,10 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <button
                 onClick={handleRun}
                 disabled={isRunning}
-                className={`inline-flex items-center gap-2 px-6 py-2 rounded text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
+                className={`inline-flex items-center gap-2 px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
                   ${isRunning
-                    ? "bg-surface-container text-on-surface-variant cursor-not-allowed"
-                    : "bg-accent-teal hover:scale-105 text-on-primary cursor-pointer"
+                    ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
+                    : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white dark:text-bg cursor-pointer"
                   }`}
               >
                 {isRunning ? (
@@ -148,27 +152,26 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
           autoResize();
         }}
         spellCheck={false}
-        className="w-full px-8 py-6 text-sm font-mono text-on-surface leading-relaxed bg-surface-container-low/50
-                   resize-none outline-none border-none focus:bg-surface-container transition-colors"
+        className="w-full px-8 py-6 text-[13.5px] font-mono text-text-premium leading-relaxed bg-bg/40
+                   resize-none outline-none border-none focus:bg-bg/60 transition-colors"
         style={{ minHeight: "120px", overflowY: "hidden" }}
         aria-label="Editable Python code"
       />
 
       {/* ── Single output panel (static → replaced by live on Run) ── */}
       {shownOutput !== null && (
-        <div className={`border-none transition-colors ${runState === "error" ? "bg-rose-500/10" : "bg-accent-teal/5"}`}>
-          <div className={`px-8 py-3 border-none flex flex-wrap items-center justify-between transition-colors
-            ${runState === "error" ? "bg-rose-500/20" : "bg-accent-teal/10"}`}>
+        <div className={`border-t border-border-premium transition-colors ${runState === "error" ? "bg-red-500/5" : "bg-accent-premium/5"}`}>
+          <div className={`px-8 py-3 border-b border-border-premium/50 flex flex-wrap items-center justify-between transition-colors
+            ${runState === "error" ? "bg-red-500/10" : "bg-accent-premium/10"}`}>
             <span className={`text-[10px] font-black uppercase tracking-[0.2em]
-              ${runState === "error" ? "text-rose-500" : "text-accent-teal"}`}>
+              ${runState === "error" ? "text-red-500" : "text-accent-premium"}`}>
               {runState === "error" ? "⚠ System Error" : "▸ Analytical Output"}
             </span>
             {isLive && (
-              <span className="text-[10px] font-black uppercase tracking-widest text-accent-teal">● Live Runtime</span>
+              <span className="text-[10px] font-black uppercase tracking-widest text-accent-premium/60">● Live Runtime</span>
             )}
           </div>
-          <div className={`px-4 md:px-6 py-4 text-sm font-mono leading-relaxed whitespace-pre-wrap transition-colors
-            ${runState === "error" ? "text-rose-800 dark:text-rose-200 bg-rose-50/40 dark:bg-rose-900/20" : "text-emerald-900 dark:text-emerald-200 bg-emerald-50/50 dark:bg-emerald-900/10"}`}>
+          <div className="px-8 py-6 text-[13px] font-mono leading-relaxed whitespace-pre-wrap text-text-premium opacity-90">
             {(() => {
               const lines = shownOutput.split("\n");
               const textLines: string[] = [];
@@ -187,7 +190,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                 <>
                   {textLines.length > 0 && <pre className="whitespace-pre-wrap font-mono m-0">{textLines.join("\n")}</pre>}
                   {images.map((b64, i) => (
-                    <div key={i} className="mt-4 border rounded shadow-inner bg-white dark:bg-slate-800 overflow-hidden max-w-full transition-colors">
+                    <div key={i} className="mt-6 border border-border-premium rounded-xl bg-white overflow-hidden max-w-full shadow-inner">
                       <img src={`data:image/png;base64,${b64}`} alt="Python Plot" className="block max-w-full h-auto mx-auto" />
                     </div>
                   ))}
@@ -200,9 +203,9 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
 
       {/* ── Hint when there is no output at all yet ── */}
       {isPython && shownOutput === null && (
-        <div className="px-4 py-2 border-t border-slate-100 dark:border-slate-800 bg-slate-50/30 dark:bg-slate-900/10 transition-colors">
-          <p className="text-xs text-slate-400 dark:text-slate-500">
-            ▸ Edit the code above, then click <strong>Run</strong> · First run loads Python (~3–5s)
+        <div className="px-8 py-3 border-t border-border-premium bg-bg-tertiary/40">
+          <p className="text-[11px] text-muted-premium font-light tracking-wide italic">
+            ▸ Edit the code above, then click <strong className="text-accent-premium">Run Code</strong> to see live computations.
           </p>
         </div>
       )}

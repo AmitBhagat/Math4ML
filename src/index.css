@@ -1,123 +1,179 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-headline: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-body: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --font-headline: "Crimson Pro", serif;
+  --font-body: "Outfit", sans-serif;
+  --font-sans: "Outfit", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
 
-  /* Semantic Colors */
-  --color-background: var(--background);
-  --color-surface: var(--surface);
-  --color-surface-container: var(--surface-container);
-  --color-surface-container-low: var(--surface-container-low);
-  --color-surface-container-high: var(--surface-container-high);
-  
-  --color-accent-teal: var(--accent-teal);
-  --color-accent-purple: var(--accent-purple);
-  
-  --color-on-surface: var(--on-surface);
-  --color-on-surface-variant: var(--on-surface-variant);
-  
-  --radius-DEFAULT: 0.125rem;
-  --radius-lg: 0.25rem;
-  --radius-xl: 0.5rem;
-  --radius-full: 9999px;
-}
-
-@variant dark (&:where(.dark, .dark *));
-
-:root {
-  --background: #f7f9fb;
-  --surface: #ffffff;
-  --surface-container: #eceef0;
-  --surface-container-low: #f2f4f6;
-  --surface-container-high: #e6e8ea;
-  --accent-teal: #14b8a6;
-  --accent-purple: #7c3aed;
-  
-  --on-surface: #191c1e;
-  --on-surface-variant: #545f73;
-}
-
-.dark {
-  --background: #020617;
-  --surface: #0a0c0e;
-  --surface-container: #1e2124;
-  --surface-container-low: #191c1e;
-  --surface-container-high: #282a2d;
-  --accent-teal: #2dd4bf;
-  --accent-purple: #ddb7ff;
-  
-  --on-surface: #f1f5f9;
-  --on-surface-variant: #94a3b8;
+  /* Dynamically mapped to CSS variables for Theme support */
+  --color-bg: var(--bg);
+  --color-bg-secondary: var(--bg2);
+  --color-bg-tertiary: var(--bg3);
+  --color-border-premium: var(--border);
+  --color-accent-premium: var(--accent);
+  --color-accent-premium-light: var(--accent2);
+  --color-gold-premium: var(--gold);
+  --color-green-premium: var(--green);
+  --color-purple-premium: var(--purple);
+  --color-text-premium: var(--text);
+  --color-muted-premium: var(--muted);
 }
 
 @layer base {
+  :root {
+    /* ─── PREMIUM LIGHT THEME (Default) ─── */
+    --bg: #fcfcfc;
+    --bg2: #f6f8fa;
+    --bg3: #ffffff;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #54aeff;
+    --gold: #9a6700;
+    --green: #1a7f37;
+    --purple: #8250df;
+    --text: #24292f;
+    --muted: #57606a;
+    
+    --sidebar-w: 280px;
+  }
+
+  .dark {
+    /* ─── PREMIUM DARK THEME ─── */
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #1c2128;
+    --border: #30363d;
+    --accent: #58a6ff;
+    --accent2: #79c0ff;
+    --gold: #e3b341;
+    --green: #3fb950;
+    --purple: #bc8cff;
+    --text: #e6edf3;
+    --muted: #8b949e;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-background text-on-surface antialiased font-body selection:bg-accent-teal/30 transition-colors duration-300 overflow-x-hidden;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Outfit', sans-serif;
+    font-size: 16px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 }
 
-/* Custom Vector Field Background Pattern */
-.vector-field-bg {
-    background: linear-gradient(45deg, var(--background) 25%, var(--surface-container-low) 25%, var(--surface-container-low) 50%, var(--background) 50%, var(--background) 75%, var(--surface-container-low) 75%, var(--surface-container-low) 100%);
-    background-size: 80px 80px;
+@layer components {
+  /* ─── PREMIUM HERO ─── */
+  .premium-hero {
+    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent) 0%, color-mix(in srgb, var(--purple) 5%, transparent) 100%);
+    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    @apply rounded-2xl p-10 mb-12 relative overflow-hidden;
+  }
+  .premium-hero::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .premium-hero-badge {
+    @apply inline-flex items-center gap-1.5 bg-accent-premium/15 border border-accent-premium/30 rounded-full px-3 py-1 text-xs text-accent-premium font-medium mb-4;
+  }
+  .premium-hero h1 {
+    font-family: 'Crimson Pro', serif;
+    @apply text-4xl lg:text-[38px] font-semibold leading-tight mb-4 text-text-premium;
+  }
+  .premium-hero p {
+    @apply text-[15.5px] leading-relaxed font-light text-muted-premium max-w-3xl;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .premium-h2 {
+    font-family: 'Crimson Pro', serif;
+    @apply text-[28px] font-semibold text-text-premium mt-12 mb-4 pb-3 border-b-2 border-border-premium relative;
+  }
+  .premium-h2::after {
+    content: '';
+    position: absolute;
+    bottom: -2px; left: 0;
+    width: 48px; height: 2px;
+    @apply bg-accent-premium;
+  }
+  .premium-h3 {
+    @apply text-lg font-semibold text-accent-premium mt-8 mb-3;
+  }
+  .premium-h4 {
+    @apply text-base font-semibold text-gold-premium mt-6 mb-2;
+  }
+
+  /* ─── CALLOUTS ─── */
+  .premium-callout {
+    @apply rounded-xl p-4 mb-6 flex gap-3;
+  }
+  .premium-callout.info { @apply bg-accent-premium/10 border border-accent-premium/25; }
+  .premium-callout.warn { @apply bg-gold-premium/10 border border-gold-premium/25; }
+  .premium-callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
+  
+  .premium-callout-icon { @apply text-base mt-0.5 shrink-0; }
+  .premium-callout-body { @apply text-sm font-light text-text-premium; }
+  .premium-callout-body strong { @apply font-semibold text-accent-premium; }
+
+  /* ─── DEFINITIONS & CASE STUDIES ─── */
+  .premium-def-box {
+    @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
+  }
+  .premium-def-title {
+    @apply font-mono text-[11px] text-purple-premium uppercase tracking-widest mb-2.5;
+  }
+
+  .premium-case-study {
+    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-6 mb-8;
+  }
+  .premium-case-study h4 { @apply text-green-premium mt-0; }
+
+  /* ─── MATH & TABLES ─── */
+  .premium-math-block {
+    @apply bg-bg-tertiary border border-border-premium border-l-4 border-l-purple-premium rounded-lg p-6 mb-6 overflow-x-auto text-[15px];
+  }
+  
+  .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
+  .premium-table { @apply w-full border-collapse text-sm; }
+  .premium-table thead { @apply bg-bg-secondary; }
+  .premium-table th { @apply px-4 py-3 text-left font-semibold text-accent-premium border border-border-premium text-[13px] uppercase tracking-wider; }
+  .premium-table td { @apply px-4 py-3 border border-border-premium text-text-premium font-light align-top; }
+  .premium-table tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 2%, transparent); }
+
+  /* ─── TOC ─── */
+  .premium-toc {
+    @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
+  }
+  .premium-toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
+  .premium-toc a { @apply block text-muted-premium no-underline text-[13.5px] py-1 transition-colors hover:text-accent-premium; }
+  .premium-toc a.sub { @apply pl-4 text-[13px]; }
+
+  /* ─── CODE ─── */
+  code:not(pre code) {
+    @apply font-mono text-[13px] bg-bg-tertiary px-1.5 py-0.5 rounded text-gold-premium border border-border-premium/50;
+  }
 }
 
-.dark .vector-field-bg {
-    opacity: 0.15;
-}
+/* ─── GLOBAL UTILITIES ─── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
-.light .vector-field-bg {
-    opacity: 0.4;
-}
-
-/* Custom scrollbar matching the curator aesthetic */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  @apply bg-background;
-}
-
-::-webkit-scrollbar-thumb {
-  @apply bg-surface-container hover:bg-surface-container-high transition-colors;
-}
-
-/* Global KaTeX visibility fix */
 .katex {
-  color: currentColor !important;
+  font-size: 1.1em !important;
+  color: var(--text) !important;
 }
-
-
-
-/* Fix for legacy HTML tables stored in data */
-table {
-  @apply text-on-surface-variant;
-}
-
-th {
-  @apply text-on-surface font-headline font-black;
-}
-
-/* Editorial Justification Utility */
-.text-editorial-justify {
-  text-align: justify;
-  text-justify: inter-word;
-  hyphens: auto;
-}
-
-/* Responsive KaTeX scaling - harmonized with smaller body font */
-.katex {
-  font-size: clamp(0.85rem, 3.8vw, 1.1rem) !important;
-  transition: font-size 0.3s ease;
-}
-
-/* Ensure math blocks are situated and centered within a single tonal container */
 .katex-display {
-  @apply my-12 py-12 px-8 bg-surface-container-low/50 rounded flex justify-center text-on-surface items-center transition-all overflow-x-auto;
+  @apply my-6 overflow-x-auto overflow-y-hidden;
 }
-

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ML Evaluation Metrics | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>
+MathJax = {
+  tex: { inlineMath: [['\\(','\\)'],['$','$']], displayMath: [['\\[','\\]'],['$$','$$']] },
+  options: { skipHtmlTags: ['script','noscript','style','textarea'] }
+};
+</script>
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --bg3: #1c2128;
+  --border: #30363d;
+  --accent: #3fb950;
+  --accent2: #56d364;
+  --gold: #e3b341;
+  --blue: #79c0ff;
+  --purple: #bc8cff;
+  --red: #ff7b72;
+  --text: #e6edf3;
+  --muted: #8b949e;
+  --sidebar-w: 280px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--bg); color: var(--text); font-family: 'Outfit', sans-serif; font-size: 16px; line-height: 1.7; display: flex; min-height: 100vh; }
+
+.sidebar { width: var(--sidebar-w); background: var(--bg2); border-right: 1px solid var(--border); position: fixed; top: 0; left: 0; bottom: 0; overflow-y: auto; padding: 24px 0; z-index: 100; }
+.sidebar-logo { padding: 0 20px 24px; border-bottom: 1px solid var(--border); margin-bottom: 16px; }
+.sidebar-logo a { font-weight: 600; font-size: 18px; color: var(--accent); text-decoration: none; }
+.sidebar-logo .sub { color: var(--muted); font-size: 12px; font-weight: 300; display: block; margin-top: 2px; }
+.nav-pages { padding: 0 20px; }
+.nav-section-title { font-size: 11px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px; margin-top: 16px; }
+.page-link { display: flex; align-items: center; gap: 8px; padding: 8px 12px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 13px; margin-bottom: 4px; transition: all 0.15s; border: 1px solid transparent; }
+.page-link:hover { background: var(--bg3); color: var(--text); border-color: var(--border); }
+.page-link.current { background: rgba(63,185,80,0.1); color: var(--accent); border-color: rgba(63,185,80,0.3); }
+.page-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); flex-shrink: 0; }
+.page-link.current .page-dot { background: var(--accent); }
+
+.main { margin-left: var(--sidebar-w); flex: 1; }
+.topbar { background: var(--bg2); border-bottom: 1px solid var(--border); padding: 16px 48px; position: sticky; top: 0; z-index: 50; }
+.breadcrumb { font-size: 13px; color: var(--muted); }
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb span { margin: 0 6px; }
+.content { max-width: 860px; margin: 0 auto; padding: 48px 48px 80px; }
+
+.hero { background: linear-gradient(135deg, rgba(63,185,80,0.08) 0%, rgba(121,192,255,0.05) 100%); border: 1px solid rgba(63,185,80,0.25); border-radius: 16px; padding: 40px 44px; margin-bottom: 48px; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; top: -40px; right: -40px; width: 180px; height: 180px; background: radial-gradient(circle, rgba(63,185,80,0.12) 0%, transparent 70%); pointer-events: none; }
+.hero-badge { display: inline-flex; align-items: center; gap: 6px; background: rgba(63,185,80,0.15); border: 1px solid rgba(63,185,80,0.3); border-radius: 20px; padding: 4px 12px; font-size: 12px; color: var(--accent); font-weight: 500; margin-bottom: 16px; }
+.hero h1 { font-family: 'Crimson Pro', serif; font-size: 36px; font-weight: 600; line-height: 1.2; margin-bottom: 16px; }
+.hero p { color: var(--muted); font-size: 15.5px; line-height: 1.75; font-weight: 300; }
+
+h2 { font-family: 'Crimson Pro', serif; font-size: 28px; font-weight: 600; color: var(--text); margin: 48px 0 16px; padding-bottom: 12px; border-bottom: 2px solid var(--border); position: relative; }
+h2::after { content: ''; position: absolute; bottom: -2px; left: 0; width: 48px; height: 2px; background: var(--accent); }
+h3 { font-size: 18px; font-weight: 600; color: var(--blue); margin: 32px 0 12px; }
+h4 { font-size: 15px; font-weight: 600; color: var(--gold); margin: 24px 0 8px; }
+p { margin-bottom: 14px; font-weight: 300; }
+ul, ol { padding-left: 24px; margin-bottom: 14px; }
+li { margin-bottom: 6px; font-weight: 300; }
+strong { font-weight: 600; color: var(--accent2); }
+
+.math-block { background: var(--bg3); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 20px 24px; margin: 20px 0; overflow-x: auto; }
+.callout { border-radius: 10px; padding: 16px 20px; margin: 20px 0; display: flex; gap: 12px; }
+.callout.info { background: rgba(121,192,255,0.08); border: 1px solid rgba(121,192,255,0.25); }
+.callout.warn { background: rgba(227,179,65,0.08); border: 1px solid rgba(227,179,65,0.25); }
+.callout.success { background: rgba(63,185,80,0.08); border: 1px solid rgba(63,185,80,0.25); }
+.callout.red { background: rgba(255,123,114,0.08); border: 1px solid rgba(255,123,114,0.25); }
+.callout-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+.callout-body { font-size: 14px; font-weight: 300; }
+.callout-body strong { font-weight: 600; }
+
+.table-wrap { overflow-x: auto; margin: 24px 0; }
+table { width: 100%; border-collapse: collapse; font-size: 14px; }
+thead { background: var(--bg3); }
+th { padding: 12px 16px; text-align: left; font-weight: 600; color: var(--accent); border: 1px solid var(--border); font-size: 13px; }
+td { padding: 10px 16px; border: 1px solid var(--border); font-weight: 300; vertical-align: top; }
+tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+
+.def-box { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin: 20px 0; }
+.def-box .def-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+
+.case-study { background: rgba(121,192,255,0.05); border: 1px solid rgba(121,192,255,0.2); border-radius: 12px; padding: 24px; margin: 24px 0; }
+.case-study h4 { color: var(--blue); margin-top: 0; }
+
+.toc { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 20px 24px; margin-bottom: 36px; }
+.toc-title { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-bottom: 12px; font-weight: 600; }
+.toc a { display: block; color: var(--muted); text-decoration: none; font-size: 13.5px; padding: 3px 0; transition: color 0.15s; }
+.toc a:hover { color: var(--accent); }
+.toc a.sub { padding-left: 16px; font-size: 13px; }
+
+.metric-card { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+.m-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 10px; padding: 18px; }
+.m-card h4 { margin: 0 0 8px; font-size: 14px; }
+.m-card p { margin: 0; font-size: 13px; }
+
+.refs { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 24px; margin-top: 48px; }
+.refs h3 { margin-top: 0; color: var(--muted); font-size: 14px; text-transform: uppercase; letter-spacing: 1px; }
+.refs ol { font-size: 12px; color: var(--muted); padding-left: 20px; }
+.refs li { margin-bottom: 4px; }
+.refs a { color: var(--accent); text-decoration: none; }
+code { font-family: 'JetBrains Mono', monospace; font-size: 13px; background: var(--bg3); padding: 2px 6px; border-radius: 4px; color: var(--gold); }
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <a href="#">Math4ML <span class="sub">Mathematics for Machine Learning</span></a>
+  </div>
+  <div class="nav-pages">
+    <div class="nav-section-title">Course Pages</div>
+    <a href="inferential_statistics.html" class="page-link"><span class="page-dot"></span>Inferential Statistics</a>
+    <a href="ml_estimation_bias_variance.html" class="page-link"><span class="page-dot"></span>MLE & Bias-Variance</a>
+    <a href="ml_metrics.html" class="page-link current"><span class="page-dot"></span>ML Evaluation Metrics</a>
+    <a href="regression_analysis.html" class="page-link"><span class="page-dot"></span>Regression Analysis</a>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Machine Learning<span>›</span>Evaluation Metrics</span>
+  </div>
+
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📈 Model Evaluation</div>
+      <h1>Theoretical Foundations and Mathematical Frameworks for Machine Learning Evaluation Metrics</h1>
+      <p>The evaluation of machine learning models constitutes a rigorous statistical discipline that transcends simple binary comparisons. This resource provides exhaustive analysis of classification and regression metrics, detailing their probabilistic underpinnings, formal derivations, and practical applications within complex data topologies.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#confusion">The Binary Confusion Matrix and Error Typology</a>
+      <a href="#accuracy">Global Accuracy and the Imbalance Paradox</a>
+      <a href="#precision-recall">Precision, Recall, and Positive Predictions</a>
+      <a href="#f1">The F1-Score: Mathematical Derivation and Harmonic Justification</a>
+      <a href="#roc">Discriminative Power and ROC-AUC</a>
+      <a href="#roc" class="sub">↳ Probabilistic Interpretation of AUC</a>
+      <a href="#roc" class="sub">↳ Equivalence to Wilcoxon-Mann-Whitney</a>
+      <a href="#regression-metrics">Regression Metrics: MSE and MAE</a>
+      <a href="#regression-metrics" class="sub">↳ MSE Minimizes to the Mean (Proof)</a>
+      <a href="#regression-metrics" class="sub">↳ MAE Minimizes to the Median (Proof)</a>
+      <a href="#cross-entropy">Information Theory and Cross-Entropy</a>
+      <a href="#gradients">Computational Implementation and Gradient Dynamics</a>
+      <a href="#synthesis">Integrated Performance Assessment</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="confusion">The Taxonomy of Classification Performance</h2>
+    <p>In the supervised learning paradigm, classification involves the assignment of an input vector to a discrete category. While the ultimate objective is to minimize error, the nature of that error often dictates the choice of metric. The fundamental building block for all classification evaluation is the <strong>confusion matrix</strong>, a structured representation that disaggregates the model's predictive outcomes against the ground-truth observations.</p>
+
+    <h3>The Binary Confusion Matrix and Error Typology</h3>
+    <p>A confusion matrix for a binary task—where the outcomes are typically labeled as "Positive" (1) and "Negative" (0)—categorizes results into four distinct quadrants. These counts serve as the primary variables for subsequent mathematical derivations.</p>
+
+    <ol>
+      <li><strong>True Positives (TP):</strong> The instances where the model correctly identifies the positive class. In clinical diagnostics, this represents a patient with a disease correctly flagged as infected.</li>
+      <li><strong>True Negatives (TN):</strong> The instances where the model correctly identifies the negative class, such as a healthy patient correctly identified as non-infected.</li>
+      <li><strong>False Positives (FP):</strong> Occurring when the model incorrectly assigns a positive label to a negative instance. Statistically, this is a <strong>Type I error</strong> or a "false alarm."</li>
+      <li><strong>False Negatives (FN):</strong> Occurring when the model incorrectly assigns a negative label to a positive instance. This is a <strong>Type II error</strong>, often considered more dangerous in safety-critical applications.</li>
+    </ol>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Actual \ Predicted</th><th>Predicted Positive</th><th>Predicted Negative</th><th>Total Actual</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Actual Positive</strong></td><td>True Positive (TP)</td><td>False Negative (FN)</td><td>TP + FN</td></tr>
+          <tr><td><strong>Actual Negative</strong></td><td>False Positive (FP)</td><td>True Negative (TN)</td><td>FP + TN</td></tr>
+          <tr><td><strong>Total Predicted</strong></td><td>TP + FP</td><td>FN + TN</td><td>Total Samples</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The distribution of these values provides the first layer of insight into a model's bias and discriminative capability. For instance, a model with a high FP count is considered "over-zealous," while one with a high FN count is "under-sensitive."</p>
+
+    <!-- SECTION 2 -->
+    <h2 id="accuracy">Global Accuracy and the Imbalance Paradox</h2>
+    <p>Accuracy is the most basic metric used to measure overall performance. It represents the ratio of correct predictions to the total number of observations.</p>
+
+    <div class="math-block">
+      \[ \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \]
+    </div>
+
+    <div class="callout warn">
+      <div class="callout-icon">⚠️</div>
+      <div class="callout-body"><strong>Accuracy Paradox:</strong> In a dataset where 99% of the samples belong to the negative class, a non-discriminative model that predicts "Negative" for every input will achieve 99% accuracy. This renders the metric useless for identifying minority class instances, which are frequently the focus of the investigation.</div>
+    </div>
+
+    <div class="case-study">
+      <h4>Numerical Example: 100 People</h4>
+      <p>Consider a scenario with 100 people: 40 are pregnant (Positive) and 60 are not (Negative). If the model predicts: TP = 30, FN = 10, TN = 55, FP = 5.</p>
+      <div class="math-block">
+        \[ \text{Accuracy} = \frac{30 + 55}{100} = \frac{85}{100} = 0.85 \]
+      </div>
+      <p>However, if the dataset were imbalanced (e.g., only 10% positive), the high TN count would mask the model's inability to detect the positive class. This necessitates the use of more granular metrics like Precision and Recall.</p>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="precision-recall">Precision, Recall, and the Validity of Positive Predictions</h2>
+    <p>To move beyond the limitations of accuracy, practitioners isolate the performance on the positive class using two complementary measures: Precision and Recall.</p>
+
+    <h3>Precision: The Measure of Exactness</h3>
+    <p>Precision, or Positive Predictive Value (PPV), quantifies the reliability of the model's positive predictions. It answers the question: "Of all instances identified as positive, how many are truly positive?"</p>
+
+    <div class="math-block">
+      \[ \text{Precision} = \frac{TP}{TP + FP} \]
+    </div>
+
+    <p>Precision is optimized to 1.0 when the False Positive count is zero. This metric is critical in scenarios where a False Positive carries a significant penalty, such as in <strong>email spam filtering</strong> or <strong>legal evidence analysis</strong>, where falsely flagging a legitimate message or person has high costs.</p>
+
+    <h3>Recall: The Measure of Completeness</h3>
+    <p>Recall, also known as Sensitivity or the True Positive Rate (TPR), measures the ability of the model to find all positive instances within the dataset. It answers the question: "Of all actual positive cases, how many did the model find?"</p>
+
+    <div class="math-block">
+      \[ \text{Recall} = \frac{TP}{TP + FN} \]
+    </div>
+
+    <p>Recall is optimized to 1.0 when the False Negative count is zero. High recall is paramount in <strong>medical testing for life-threatening conditions</strong>, where missing a single positive case (False Negative) is unacceptable, even at the cost of more False Positives.</p>
+
+    <h3>The Precision-Recall Trade-off and Boundary Decisions</h3>
+    <p>In practice, increasing precision often leads to a decrease in recall, and vice versa. This occurs because classification models typically output a probability score; the final class assignment depends on a chosen threshold (usually 0.5).</p>
+
+    <ul>
+      <li>A <strong>stringent threshold</strong> (e.g., 0.9) increases precision but decreases recall, as fewer instances meet the high bar for a positive prediction.</li>
+      <li>A <strong>lenient threshold</strong> (e.g., 0.1) increases recall but decreases precision, as more "marginal" instances are labeled positive, including more actual negatives.</li>
+    </ul>
+
+    <div class="case-study">
+      <h4>Breast Cancer Wisconsin Dataset Example</h4>
+      <p>Given: TP = 60, FN = 4, FP = 1, TN = 106.</p>
+      <div class="math-block">
+        \[ \text{Precision} = \frac{60}{60+1} \approx 0.983 \qquad \text{Recall} = \frac{60}{60+4} \approx 0.938 \]
+      </div>
+      <p>If the threshold is lowered to ensure all malignant tumors are caught (Recall → 1.0), the precision might drop as benign tumors are misclassified as malignant.</p>
+    </div>
+
+    <!-- SECTION 4 -->
+    <h2 id="f1">The F1-Score: Mathematical Derivation and Harmonic Justification</h2>
+    <p>The F1-score provides a single numeric measure that balances Precision \((P)\) and Recall \((R)\). It is defined as the <strong>harmonic mean</strong> of the two.</p>
+
+    <div class="math-block">
+      \[ F_1 = \frac{2 \cdot P \cdot R}{P + R} = \frac{2}{\frac{1}{P} + \frac{1}{R}} \]
+    </div>
+
+    <p>Expanding using the raw counts from the confusion matrix:</p>
+    <div class="math-block">
+      \[ F_1 = \frac{TP}{TP + \frac{1}{2}(FP + FN)} \]
+    </div>
+
+    <h3>Why the Harmonic Mean?</h3>
+    <p>A critical theoretical question is why the harmonic mean is used instead of the arithmetic mean \(\left(\frac{P+R}{2}\right)\). The arithmetic mean allows for an "unbalanced" performance to be masked. For instance, if a model has \(P=1.0\) and \(R=0.1\), the arithmetic mean is \(0.55\), which suggests moderate performance despite the model failing to identify almost all positive cases. The harmonic mean for this case would be \(0.18\), correctly reflecting the model's failure.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Metric</th><th>Model A (P=0.9, R=0.9)</th><th>Model B (P=1.0, R=0.1)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Arithmetic Mean</strong></td><td>0.90</td><td>0.55</td></tr>
+          <tr><td><strong>Geometric Mean</strong></td><td>0.90</td><td>0.31</td></tr>
+          <tr><td><strong>Harmonic Mean (F1)</strong></td><td>0.90</td><td>0.18</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The harmonic mean is the reciprocal of the arithmetic mean of the reciprocals. In the context of F1, it gives equal weight to each value's reciprocal, ensuring that the lower of the two metrics (P or R) has a more significant impact on the final score. This "punishes" extreme values, incentivizing the development of models that achieve a high balance between precision and recall.</p>
+
+    <h3>3D Visualization of the F1-Score Surface</h3>
+    <p>Visualizing the F1-score as a function of Precision and Recall reveals a curved plane that drops sharply toward the origin. While the arithmetic mean creates a flat, linear plane, the F1-score surface is concave. This geometric property explains why F1 is a better indicator for imbalanced datasets: it captures the "bottleneck" effect where low performance in either dimension limits the total utility of the classifier.</p>
+
+    <!-- SECTION 5 -->
+    <h2 id="roc">Discriminative Power and the Area Under the ROC Curve (ROC-AUC)</h2>
+    <p>While the metrics discussed thus far depend on a single, fixed classification threshold, the Receiver Operating Characteristic (ROC) curve evaluates a model across <em>all possible</em> thresholds.</p>
+
+    <h3>The Geometric Construction of the ROC Curve</h3>
+    <p>The ROC curve is created by plotting the True Positive Rate (Recall) on the y-axis against the False Positive Rate (FPR) on the x-axis for various thresholds.</p>
+
+    <div class="math-block">
+      \[ \text{FPR} = \frac{FP}{FP + TN} \qquad \text{(1 - Specificity)} \]
+    </div>
+
+    <p>The curve typically begins at \((0, 0)\), representing a threshold so high that no positives are identified, and ends at \((1, 1)\), representing a threshold so low that everything is identified as positive.</p>
+
+    <h3>Probabilistic Interpretation of the AUC</h3>
+    <p>The Area Under the Curve (AUC) is a scalar value representing the overall performance of the classifier. It has a specific probabilistic meaning: given a randomly chosen positive instance \(x^+\) and a randomly chosen negative instance \(x^-\), the AUC is the probability that the model will assign a higher score to \(x^+\) than to \(x^-\).</p>
+
+    <div class="math-block">
+      \[ \text{AUC} = P(\hat{f}(x^+) > \hat{f}(x^-)) \]
+    </div>
+
+    <h4>Formal Derivation of the Probabilistic Interpretation</h4>
+    <p>Let \(\text{TPR}(t)\) be the True Positive Rate and \(\text{FPR}(t)\) be the False Positive Rate at threshold \(t\).</p>
+
+    <div class="math-block">
+      \[ \text{AUC} = \int_0^1 \text{TPR}(t)\; d\text{FPR}(t) \]
+    </div>
+
+    <p>Let \(g^-(s)\) be the probability density function (PDF) of scores for the negative class. Since \(\text{FPR}(t)\) is the complementary cumulative distribution function (CCDF) for the negative class, its derivative is \(-g^-(t)\). Performing a change of variables where \(s = \hat{f}(x^-)\), we obtain:</p>
+
+    <div class="math-block">
+      \[ \text{AUC} = \int_{-\infty}^{\infty} \text{TPR}(s) \cdot g^-(s)\; ds = E_{x^- \sim \text{neg}}\!\left[P(\hat{f}(x^+) > s)\right] = P(\hat{f}(x^+) > \hat{f}(x^-)) \]
+    </div>
+
+    <div class="callout info">
+      <div class="callout-icon">ℹ️</div>
+      <div class="callout-body">This explains why an AUC of <strong>0.5</strong> represents a random classifier (equivalent to a coin toss) and an AUC of <strong>1.0</strong> represents a perfect discriminator.</div>
+    </div>
+
+    <h3>Equivalence to the Wilcoxon-Mann-Whitney Test</h3>
+    <p>The AUC is mathematically equivalent to the Wilcoxon–Mann–Whitney (WMW) U-statistic, divided by the product of the number of positive and negative samples. The WMW test is a non-parametric test of the null hypothesis that it is equally likely that a randomly selected value from one population will be less than or greater than a randomly selected value from a second population.</p>
+
+    <div class="math-block">
+      \[ \text{AUC} = \frac{U}{n_+ \cdot n_-} \]
+    </div>
+
+    <p>Where \(U\) is the number of pairs \((x^+, x^-)\) where the positive instance is ranked higher than the negative instance. This allows AUC to be calculated without plotting the ROC curve by simply iterating through all possible positive-negative pairs and counting "wins."</p>
+
+    <div class="case-study">
+      <h4>Numerical Example: The Tortoise and the Hare Ranking</h4>
+      <p>Consider a dataset with 6 tortoises (Group 1) and 6 hares (Group 2), ranked by their race completion times.</p>
+      <p>Direct Method: For each tortoise, count how many hares it beats.</p>
+      <ul>
+        <li>Tortoise 1 beats 6 hares.</li>
+        <li>Tortoise 2 beats 1 hare.</li>
+        <li>Tortoises 3, 4, 5, 6 beat 1 hare each. Total \(U = 6 + 1 + 1 + 1 + 1 + 1 = 11\).</li>
+      </ul>
+      <p>The maximum possible \(U\) is \(n_+ \cdot n_- = 6 \times 6 = 36\).</p>
+      <div class="math-block">
+        \[ \text{AUC} = \frac{11}{36} \approx 0.306 \]
+      </div>
+      <p>This ranking-based approach is used by many software packages to calculate AUC efficiently on large datasets.</p>
+    </div>
+
+    <h3>Trapezoidal Rule for AUC Integration</h3>
+    <p>When the ROC curve is constructed from a finite set of points \(\{(\text{FPR}_k, \text{TPR}_k)\}\), the area is typically estimated using the trapezoidal rule. The area of each segment between two points on the FPR axis is:</p>
+
+    <div class="math-block">
+      \[ A_k = \frac{(\text{FPR}_{k+1} - \text{FPR}_k) \cdot (\text{TPR}_k + \text{TPR}_{k+1})}{2} \]
+    </div>
+
+    <p>Summing these individual trapezoids across the entire range \([0, 1]\) yields the total AUROC. This method is preferred in packages like Prism and ROCR because it correctly handles ties by averaging the effect between points.</p>
+
+    <!-- SECTION 6 -->
+    <h2 id="regression-metrics">Regression Metrics: Statistical Properties of Errors</h2>
+    <p>In regression analysis, metrics evaluate the distance between the predicted scalar \(\hat{y}\) and the ground-truth \(y\). The residuals, defined as \(e_i = y_i - \hat{y}_i\), form the basis for Mean Squared Error (MSE) and Mean Absolute Error (MAE).</p>
+
+    <h3>Mean Squared Error (MSE) and the L2 Norm</h3>
+    <p>MSE is the average of the squared residuals.</p>
+    <div class="math-block">
+      \[ \text{MSE} = \frac{1}{n}\sum_{i=1}^n (y_i - \hat{y}_i)^2 \]
+    </div>
+
+    <p>MSE corresponds to the squared Euclidean (\(L_2\)) norm. Because it squares the errors, it disproportionately penalizes large residuals. This makes MSE sensitive to outliers; a single data point with a massive error can dominate the entire loss function.</p>
+
+    <h4>Mathematical Proof: MSE Minimizes to the Mean</h4>
+    <p>To find the constant predictor \(c\) that minimizes the MSE for a set of values \(\{y_i\}\), we define the objective function:</p>
+    <div class="math-block">
+      \[ L(c) = \frac{1}{n}\sum_{i=1}^n (y_i - c)^2 \]
+    </div>
+    <p>Taking the derivative with respect to \(c\) and setting it to zero:</p>
+    <div class="math-block">
+      \[ \frac{dL}{dc} = -\frac{2}{n}\sum_{i=1}^n (y_i - c) = 0 \implies c = \frac{1}{n}\sum_{i=1}^n y_i = \bar{y} \]
+    </div>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">Thus, the optimal value for \(c\) is the sample mean. <strong>Minimizing MSE is equivalent to modeling the conditional mean</strong> of the target distribution.</div>
+    </div>
+
+    <h3>Mean Absolute Error (MAE) and the L1 Norm</h3>
+    <p>MAE is the average of the absolute residuals.</p>
+    <div class="math-block">
+      \[ \text{MAE} = \frac{1}{n}\sum_{i=1}^n |y_i - \hat{y}_i| \]
+    </div>
+
+    <p>MAE corresponds to the Manhattan (\(L_1\)) norm. Because the penalty scales linearly with error, MAE is <strong>robust to outliers</strong>.</p>
+
+    <h4>Mathematical Proof: MAE Minimizes to the Median</h4>
+    <p>To find the constant predictor \(c\) that minimizes the MAE:</p>
+    <div class="math-block">
+      \[ L(c) = \frac{1}{n}\sum_{i=1}^n |y_i - c| \]
+    </div>
+    <p>Using the Leibniz integral rule to differentiate (split into two parts where \(y_i > c\) and \(y_i < c\)):</p>
+    <div class="math-block">
+      \[ \frac{dL}{dc} = \frac{1}{n}\left[\sum_{y_i > c}(-1) + \sum_{y_i < c}(+1)\right] = 0 \implies \text{count}(y_i > c) = \text{count}(y_i < c) \]
+    </div>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">This condition is satisfied when \(c\) is the <strong>median</strong>. Thus, a model trained with MAE loss will converge toward the conditional median, making it a "robust estimator" in the presence of noise or heavy-tailed distributions.</div>
+    </div>
+
+    <h3>Comparison of Sensitivity: A Numerical Example</h3>
+    <p>Consider a dataset of errors: \(\{2, -1, 3, -2, 20\}\), where \(20\) is an outlier.</p>
+    <div class="math-block">
+      \[ \text{MAE} = \frac{|2|+|-1|+|3|+|-2|+|20|}{5} = \frac{28}{5} = 5.6 \]
+      \[ \text{MSE} = \frac{4+1+9+4+400}{5} = \frac{418}{5} = 83.6 \]
+      \[ \text{RMSE} = \sqrt{83.6} \approx 9.14 \]
+    </div>
+    <p>The MSE/RMSE values are drastically pulled by the outlier, whereas MAE remains relatively stable. If the model is used for financial forecasting where a large error is catastrophic, MSE is appropriate. If the model is for a recommender system where we want a "typical" user experience regardless of extreme cases, MAE is better.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Feature</th><th>MSE (Mean Squared Error)</th><th>MAE (Mean Absolute Error)</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Statistical Target</strong></td><td>Conditional Mean</td><td>Conditional Median</td></tr>
+          <tr><td><strong>Outlier Handling</strong></td><td>Highly sensitive; squares large errors</td><td>Robust; treats errors linearly</td></tr>
+          <tr><td><strong>Optimization</strong></td><td>Smooth, differentiable everywhere</td><td>Non-differentiable at zero; constant gradient</td></tr>
+          <tr><td><strong>Units</strong></td><td>Squared units (e.g., m²)</td><td>Same as original data (e.g., m)</td></tr>
+          <tr><td><strong>Best Use Case</strong></td><td>When large errors must be discouraged</td><td>When data is noisy or robust estimates are needed</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 7 -->
+    <h2 id="cross-entropy">Information Theory and Cross-Entropy</h2>
+    <p>In probabilistic classification, the model does not just predict a class; it predicts a probability distribution \(Q\) over the classes. Cross-entropy measures how much the predicted distribution \(Q\) differs from the true distribution \(P\).</p>
+
+    <h3>Shannon Entropy: The Foundation of Uncertainty</h3>
+    <p>Information theory, pioneered by Claude Shannon, defines "information content" as the surprise of an event. If an event \(x\) has probability \(P(x)\), its information content is:</p>
+
+    <div class="math-block">
+      \[ I(x) = -\log_2 P(x) \]
+    </div>
+
+    <p>The Shannon Entropy \(H(P)\) is the expected value of the information content:</p>
+    <div class="math-block">
+      \[ H(P) = -\sum_{x \in \mathcal{X}} P(x) \log P(x) \]
+    </div>
+
+    <p>Entropy is maximized when all outcomes are equally likely (maximum uncertainty) and minimized (at zero) when one outcome is certain.</p>
+
+    <h3>KL Divergence: Relative Entropy</h3>
+    <p>The Kullback–Leibler (KL) Divergence measures the distance from \(P\) to \(Q\):</p>
+    <div class="math-block">
+      \[ D_{KL}(P \| Q) = \sum_{x \in \mathcal{X}} P(x) \log \frac{P(x)}{Q(x)} \]
+    </div>
+
+    <p>KL divergence is always non-negative and is zero if and only if \(P = Q\). It is <strong>asymmetric</strong>, meaning \(D_{KL}(P \| Q) \neq D_{KL}(Q \| P)\), and thus is not a true distance metric in the geometric sense.</p>
+
+    <h3>The Decomposition of Cross-Entropy</h3>
+    <p>Cross-entropy \(H(P, Q)\) measures the average number of bits needed to identify an event from \(P\) when using a coding scheme optimized for \(Q\):</p>
+    <div class="math-block">
+      \[ H(P, Q) = -\sum_{x \in \mathcal{X}} P(x) \log Q(x) \]
+    </div>
+
+    <p>The relationship between these terms is:</p>
+    <div class="math-block">
+      \[ H(P, Q) = H(P) + D_{KL}(P \| Q) \]
+    </div>
+
+    <div class="callout info">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">In a supervised learning context, the true labels \(P\) are fixed, so \(H(P)\) is a constant. <strong>Minimizing the cross-entropy \(H(P,Q)\) is therefore mathematically equivalent to minimizing the KL divergence</strong> between the model's predictions and the actual labels.</div>
+    </div>
+
+    <h3>Derivation from Maximum Likelihood Estimation (MLE)</h3>
+    <p>Cross-entropy arises naturally from the Principle of Maximum Likelihood. In a binary classification problem (Logistic Regression), for each sample \(i\), we have a label \(y_i \in \{0,1\}\) and a predicted probability \(\hat{p}_i\). The likelihood of the entire dataset is the product of the probabilities of each observation:</p>
+
+    <div class="math-block">
+      \[ L = \prod_{i=1}^n \hat{p}_i^{y_i}(1-\hat{p}_i)^{1-y_i} \]
+    </div>
+
+    <p>To find the optimal parameters, we maximize the log-likelihood (LL):</p>
+    <div class="math-block">
+      \[ \ell = \sum_{i=1}^n \left[y_i \log \hat{p}_i + (1-y_i)\log(1-\hat{p}_i)\right] \]
+    </div>
+
+    <p>The standard Binary Cross-Entropy (BCE) loss is the negative average log-likelihood:</p>
+    <div class="math-block">
+      \[ \mathcal{L}_{BCE} = -\frac{1}{n}\sum_{i=1}^n \left[y_i \log \hat{p}_i + (1-y_i)\log(1-\hat{p}_i)\right] \]
+    </div>
+
+    <p>For multi-class classification, this is extended using the <strong>Softmax function</strong> to generate a probability vector for \(C\) classes:</p>
+    <div class="math-block">
+      \[ \mathcal{L}_{CE} = -\frac{1}{n}\sum_{i=1}^n \sum_{c=1}^C y_{ic} \log \hat{p}_{ic} \]
+    </div>
+
+    <p>Where \(y_{ic}\) is 1 if the true class for sample \(i\) is \(c\), and 0 otherwise. For each sample, the loss is simply \(-\log \hat{p}_{i,\text{true}}\), which penalizes overconfident incorrect predictions logarithmically.</p>
+
+    <!-- SECTION 8 -->
+    <h2 id="gradients">Computational Implementation and Gradient Dynamics</h2>
+    <p>The choice of metric impacts not only how we judge a model but also how it learns. Gradient-based optimization relies on the derivatives of these loss functions.</p>
+
+    <h3>Gradient Behavior of MSE vs. MAE</h3>
+    <ul>
+      <li><strong>MSE Gradients:</strong> The derivative of \(\frac{1}{2}(y - \hat{y})^2\) with respect to \(\hat{y}\) is \(-( y - \hat{y})\). The gradient magnitude is proportional to the error. When the prediction is far from the target, the gradient is large, forcing rapid correction. As it approaches the target, the gradient shrinks, allowing for fine-tuning without oscillation.</li>
+      <li><strong>MAE Gradients:</strong> The derivative of \(|y - \hat{y}|\) is \(\pm 1\). The gradient magnitude is <strong>constant</strong> regardless of error size. This can cause the model to overshoot the optimum and oscillate unless the learning rate is carefully decayed.</li>
+    </ul>
+
+    <h3>Cross-Entropy and the Sigmoid/Softmax Gradient</h3>
+    <p>In logistic regression and neural networks, cross-entropy is almost always paired with Sigmoid (binary) or Softmax (multiclass) activation functions.</p>
+
+    <ul>
+      <li>The <strong>vanishing gradient</strong> problem occurs when the Sigmoid output is near 0 or 1, as the derivative \(\sigma(z)(1-\sigma(z))\) approaches zero.</li>
+      <li>The cross-entropy loss mitigates this. When calculating the derivative of the BCE loss with respect to the pre-activation weight \(z\), the Sigmoid derivative terms cancel out to yield \(\hat{p} - y\).</li>
+      <li>This result is mathematically elegant: the gradient is simply the error \((\hat{p} - y)\). This is identical to the gradient of MSE for linear regression, ensuring efficient and stable learning.</li>
+    </ul>
+
+    <!-- SECTION 9 -->
+    <h2 id="synthesis">Integrated Performance Assessment: A Synthetic Perspective</h2>
+    <p>Selecting the appropriate metric requires a holistic understanding of the problem's constraints. A comprehensive evaluation strategy often employs multiple metrics to capture different facets of performance.</p>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Domain</th><th>Prioritized Metrics</th><th>Rationale</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Medical Screening</strong></td><td>Recall, ROC-AUC</td><td>Identifying all positive cases is vital; threshold-invariance allows for tuning sensitivity later.</td></tr>
+          <tr><td><strong>Financial Fraud</strong></td><td>Precision, F1-Score</td><td>False Positives lead to customer friction and operational costs; balancing P and R is essential.</td></tr>
+          <tr><td><strong>Recommender Systems</strong></td><td>MAE, Rank Metrics</td><td>User ratings are often noisy; robust estimates are preferred over minimizing rare large deviations.</td></tr>
+          <tr><td><strong>Physics/Engineering</strong></td><td>MSE, RMSE</td><td>Precise accuracy and penalizing large structural errors are critical for safety.</td></tr>
+          <tr><td><strong>Generative Models</strong></td><td>Cross-Entropy, Perplexity</td><td>Measures how well the model approximates the true data-generating distribution.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Summary of Explained Solutions</h3>
+
+    <div class="case-study">
+      <h4>Classification Example: COVID-19 X-Ray Detection</h4>
+      <p>Given: TP=261, TN=193, FP=107, FN=39 (Total=600).</p>
+      <div class="math-block">
+        \[ \text{Accuracy} = \frac{261+193}{600} = \frac{454}{600} \approx 0.757 \]
+        \[ \text{Precision} = \frac{261}{261+107} \approx 0.709 \]
+        \[ \text{Recall} = \frac{261}{261+39} = \frac{261}{300} = 0.870 \]
+        \[ F_1 = \frac{2 \times 0.709 \times 0.870}{0.709+0.870} \approx 0.781 \]
+      </div>
+    </div>
+
+    <div class="case-study">
+      <h4>Regression Example: Housing Price Residuals</h4>
+      <p>Given a residual error of \(e = 20\) (outlier), \(e = 1\) (normal).</p>
+      <div class="math-block">
+        \[ \text{MSE Penalty for } e=20: \quad 20^2 = 400 \]
+        \[ \text{MAE Penalty for } e=20: \quad |20| = 20 \]
+      </div>
+      <p>MSE focuses the model on reducing the \(20\) error significantly more than MAE, which treats it as just another error segment.</p>
+    </div>
+
+    <div class="case-study">
+      <h4>Cross-Entropy Example: Sentiment Analysis</h4>
+      <p>True Label: Positive \((y=[1,0,0])\). Model Logits: \([3.0, 1.0, 0.2]\). Softmax: \(\hat{p} \approx [0.79, 0.11, 0.10]\).</p>
+      <div class="math-block">
+        \[ \mathcal{L} = -\log(0.79) \approx 0.236 \]
+      </div>
+      <p>If model predicted \(\hat{p} = [0.01, 0.97, 0.02]\): \(\mathcal{L} = -\log(0.01) \approx 4.605\) (Higher penalty for wrong confidence).</p>
+    </div>
+
+    <p>Through the integration of confusion matrix dynamics, rank-sum statistics, L-norm variance, and information-theoretic divergence, the evaluation of machine learning models is revealed as a multi-dimensional optimization problem. Professional competence in this field requires moving beyond the calculation of Accuracy toward a nuanced application of metrics that align with the specific statistical and operational requirements of the deployment environment.</p>
+
+    <div class="refs">
+      <h3>Works Cited</h3>
+      <ol>
+        <li>Evaluation metrics and statistical tests for machine learning — <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10937649/" target="_blank">PMC</a></li>
+        <li>Understanding the Confusion Matrix — <a href="https://www.geeksforgeeks.org/machine-learning/confusion-matrix-machine-learning/" target="_blank">GeeksforGeeks</a></li>
+        <li>Confusion Matrix, Accuracy, Precision, Recall, F1 Score — <a href="https://medium.com/analytics-vidhya/confusion-matrix-accuracy-precision-recall-f1-score-ade299cf63cd" target="_blank">Medium</a></li>
+        <li>The ROC-AUC and the Mann-Whitney U-test — <a href="https://johaupt.github.io/blog/Area_under_ROC_curve.html" target="_blank">Johannes Haupt</a></li>
+        <li>Mann–Whitney U test — <a href="https://en.wikipedia.org/wiki/Mann%E2%80%93Whitney_U_test" target="_blank">Wikipedia</a></li>
+        <li>Cross-entropy — <a href="https://en.wikipedia.org/wiki/Cross-entropy" target="_blank">Wikipedia</a></li>
+        <li>MSE vs. MAE — <a href="https://medium.com/@elmahfoudradwane/choosing-the-right-loss-function-mse-vs-mae-in-regression-problems-199e37d25e7b" target="_blank">Medium</a></li>
+        <li>Shannon Entropy and KL Divergence — <a href="https://www.stat.cmu.edu/~cshalizi/754/2006/notes/lecture-28.pdf" target="_blank">CMU Statistics</a></li>
+        <li>The median minimizes MAE — <a href="https://statproofbook.github.io/P/med-mae.html" target="_blank">StatProofBook</a></li>
+        <li>Deriving cross-entropy losses from first principles — <a href="https://drazenzaric.com/blog/cross-entropy-loss/" target="_blank">drazenzaric.com</a></li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

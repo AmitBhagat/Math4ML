@@ -1,52 +1,96 @@
-import { CategoryData } from '../src/data/types';
+import { TopicSection } from '../src/data/types';
 
-// =============================================================================
-// CALCULUS (Standardized & Refactored for Clean Prose)
-// =============================================================================
-export const CALCULUS_DATA: CategoryData = {
-  id: "calculus",
-  title: "Calculus",
-  description: "Calculus is the mathematical engine of optimization. By calculating gradients and derivatives, we navigate the loss surface to find the weight configuration that minimizes error—the heart of the 'Learning' process.",
-  keyConcepts: [
-    { title: "Differentiation", description: "Measuring instantaneous change and local slopes." },
-    { title: "Partial Derivatives", description: "Managing change across high-dimensional feature spaces." },
-    { title: "Gradients", description: "The vector of steepest ascent used in optimization." },
-    { title: "Chain Rule", description: "The mathematical backbone of backpropagation." }
+export const calculusSection: TopicSection = {
+  id: "differentiation",
+  title: "Calculus: The Optimization Engine of Gradient Descent",
+  description: "A formal investigation into the mathematics of continuous change—from univariate derivatives and the Chain Rule to multidimensional gradients and the Jacobian matrices of deep learning.",
+  formula: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
+  details: [
+    "The Derivative: Instantaneous Rate of Change",
+    "Chain Rule: The Backbone of Backpropagation",
+    "Partial Derivatives: Understanding Multidimensional Impact",
+    "The Gradient Vector: Direction of Steepest Ascent",
+    "Jacobian Matrices: Derivatives of Vector-Valued Functions",
+    "Numerical Implementation: Symbolic Differentiation with SymPy"
   ],
-  sections: [
-    {
-      id: "differentiation",
-      title: "Differentiation: The Rate of Change",
-      description: "Differentiation computes the rate of change of a function with respect to its input. It is the mathematical foundation of all gradient-based ML optimization.",
-      formula: "f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}",
-      details: ["The derivative measures instantaneous rate of change.", "In ML, it tells how the loss changes when parameters shift."],
-      contentSections: [
-        {
-          heading: "The Local Slope and The Calculus Handbook",
-          paragraphs: [
-            "Differentiation is the process of finding the derivative of a function. The derivative $f'(x)$ measures how the function's output changes in response to a small change in its input. Geometrically, $f'(x)$ is the slope of the tangent line to the curve $y = f(x)$ at point $x$. If the slope is positive, the function is increasing; if negative, it's decreasing.  ",
-            "$$\\mathbf{f}'(x) = \\lim_{h \\to 0} \\frac{\\mathbf{f}(x+h) - \\mathbf{f}(x)}{h}$$",
-            "To manually differentiate, we follow core rules like the power rule, which is used for polynomial loss functions, and the exponential rule where the function $e^x$ is unique because its rate of change always equals its current value. When functions are nested like layers in a neural network, we use the chain rule to multiply the derivatives together—forming the foundation of backpropagation."
-          ]
-        },
-        {
-          heading: "Partial Signal and Multi-Variable Calculus",
-          paragraphs: [
-            "When a function has multiple inputs, such as weights in a neural network, partial derivatives measure the effect of changing one specific variable while holding everything else constant. This selective measuring allows backpropagation to update every weight in the network by exactly the right amount.  ",
-            "For example, in a function with respect to x and y, we freeze y to find the partial derivative of x. This is the mathematical signal that tells the model which direction to nudge each weight to reduce the overall error."
-          ]
-        },
-        {
-          heading: "The Gradient: The Compass of Optimization",
-          paragraphs: [
-            "The gradient $\\nabla f$ is a vector that collects all the partial derivatives of a function. It is the compass of optimization—it points in the direction where the function increases most rapidly. To reach the minimum loss, we calculate the gradient and step in the opposite direction.  ",
-            "$$\\nabla f(\\mathbf{x}) = \\left[ \\frac{\\partial f}{\\partial x_1}, \\frac{\\partial f}{\\partial x_2}, \\dots, \\frac{\\partial f}{\\partial x_n} \\right]$$",
-            "As an ML lead, you'll monitor the gradient norm to ensure your model's weights don't explode or vanish during training. The gradient is the primary lever you have for guiding your model through the high-dimensional feature landscape toward converged intelligence."
-          ]
-        }
-      ],
-      tags: ["Derivatives", "Slopes", "Rate of Change", "Power Rule"],
-      level: "Beginner"
-    }
-  ]
+  html: String.raw`
+    <div class="premium-toc">
+      <div class="premium-toc-title">Mathematical Roadmap</div>
+      <a href="#derivative">I. The Fundamental Derivative</a>
+      <a href="#chainrule">II. Backpropagation and the Chain Rule</a>
+      <a href="#gradients">III. Gradients and Optimization</a>
+      <a href="#lab">Numerical Laboratory: SymPy</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="derivative" class="premium-h2">I. The Fundamental Derivative</h2>
+    <p>The derivative $f'(x)$ represents the instantaneous rate of change of a function. In the domain of machine learning, this derivative tells us exactly how much the loss (error) will change if we tweak a specific weight by an infinitesimal amount.</p>
+
+    <div class="premium-math-block">
+      f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}
+    </div>
+
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">📉</div>
+      <div class="premium-callout-body">
+        <strong>Optimization Insight:</strong> If $f'(x) > 0$, the function is increasing; to minimize it, we must decrease $x$. If $f'(x) < 0$, the function is decreasing; we should increase $x$.
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2 id="chainrule" class="premium-h2">II. Backpropagation and the Chain Rule</h2>
+    <p>Neural networks are essentially deeply nested composite functions. To calculate how a weight in the first layer affects the final loss, we use the <strong>Chain Rule</strong> to propagate error signals backwards through the computational graph.</p>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Differential Composition</div>
+      <p style="margin:0">If $y = f(u)$ and $u = g(x)$, then the derivative of $y$ with respect to $x$ is the product of the local derivatives:</p>
+      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
+        \frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="gradients" class="premium-h2">III. Gradients and Optimization</h2>
+    <p>In multi-dimensional spaces, we deal with vectors of partial derivatives. These vectors, known as <strong>Gradients</strong>, point in the direction of the steepest ascent on the loss surface.</p>
+
+    <div class="premium-math-block">
+      \nabla f = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^T
+    </div>
+
+    <div class="premium-table-wrap">
+      <table class="premium-table">
+        <thead>
+          <tr><th>Operator</th><th>Notation</th><th>Description</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Partial Derivative</strong></td><td>$\partial f / \partial x_i$</td><td>Rate of change along a single axis.</td></tr>
+          <tr><td><strong>Gradient</strong></td><td>$\nabla f$</td><td>Vector pointing to steepest ascent.</td></tr>
+          <tr><td><strong>Jacobian</strong></td><td>$\mathbf{J}$</td><td>Matrix of first-order partial derivatives.</td></tr>
+          <tr><td><strong>Hessian</strong></td><td>$\mathbf{H}$</td><td>Matrix of second-order partial derivatives (Curvature).</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LAB -->
+    <h2 id="lab" class="premium-h2">Numerical Laboratory: SymPy</h2>
+    <div class="premium-math-block">
+      <python-code>
+import sympy as sp
+
+# 1. Define symbolic variable and function
+x = sp.Symbol('x')
+f = x**2 + 5*x + 6
+
+# 2. Compute symbolic derivative (The Gradient)
+gradient_expr = sp.diff(f, x)
+
+# 3. Evaluate gradient at a specific weight point
+slope_at_2 = gradient_expr.subs(x, 2)
+
+print(f"Target Loss Function: {f}")
+print(f"Gradient Formula: {gradient_expr}")
+print(f"Calculated Gradient at x=2: {slope_at_2}")
+      </python-code>
+    </div>
+  `
 };

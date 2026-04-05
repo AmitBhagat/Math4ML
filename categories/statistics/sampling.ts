@@ -2,39 +2,83 @@ import { TopicSection } from '../../src/data/types';
 
 export const samplingDistributionsSection: TopicSection = {
   id: "sampling-distributions",
-  title: "Sampling Distributions: Estimating the Unknown",
-  description: "In the real world, we can't see the entire population. Sampling distributions allow us to estimate population parameters (like the true mean) from small, manageable subsets of data.",
-  formula: "\\mu_{\\bar{x}} = \\mu, \\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}",
+  title: "Sampling Distributions: The Statistical Bridge to Population Inference",
+  description: "A rigorous exploration of how samples represent populations, the mechanics of estimators, and the foundational role of the Central Limit Theorem in machine learning data pipelines.",
+  formula: "\\mu_{\\bar{x}} = \\mu, \\quad \\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}",
   details: [
-    "Central Limit Theorem (CLT): The magic that makes all large sample means normally distributed.",
-    "Standard Error (SE): Measuring the uncertainty in our estimation of the mean.",
-    "Population vs Sample: Understanding the gap between the ground truth and our observed data."
+    "Population vs. Sample Parameterization",
+    "Mechanics of Simple Random and Stratified Sampling",
+    "The Sampling Distribution of the Mean",
+    "Standard Error and the Law of Large Numbers",
+    "Central Limit Theorem: Convergence to Normality",
+    "Sampling Bias and Selection Effects in ML Datasets"
   ],
-  contentSections: [
-    {
-      heading: "Sampling Methods and Population Estimators",
-      paragraphs: [
-        "Sampling is the process of selecting a subset of individuals from a population to estimate its characteristics. From a lead perspective, your choice of sampling determines the bias and variance of your model:  ",
-        "1. **Simple Random Sampling (SRS)**: Every member has an equal chance of selection.  ",
-        "2. **Stratified Sampling**: The population is divided into groups (strata), and samples are taken from each.  ",
-        "3. **Cluster Sampling**: The population is divided into clusters, and entire clusters are chosen at random.  ",
-        "4. **Systematic Sampling**: Every nth member is selected (e.g., every 10th customer).  ",
-        "**The Law of Large Numbers (LLN)** states that as the sample size $n$ increases, the sample mean $\\bar{x}$ converges to the true population mean $\\mu$."
-      ]
-    },
-    {
-      heading: "The Central Limit Theorem (CLT)",
-      paragraphs: [
-        "The CLT is the foundation of inferential statistics. It states that if $n$ is large (typically $n \\geq 30$), the sampling distribution of the mean will be approximately normal, regardless of the population's shape.  ",
-        "**CLT Properties**:  ",
-        "- **Mean**: The mean of the sample means equals the population mean: $\\mu_{\\bar{x}} = \\mu$.  ",
-        "- **Standard Error (SE)**: The standard deviation of the sample means is $\\sigma_{\\bar{x}} = \\frac{\\sigma}{\\sqrt{n}}$.  ",
-        "As $n$ grows, the Standard Error shrinks, meaning our estimate of the mean becomes more precise. In ML, this explains why adding more data points (rows) consistently improves model stability."
-      ],
-      code: "import numpy as np\n# 1. Non-normal Population (Exponential)\npop = np.random.exponential(scale=10, size=100000)\n\n# 2. Sampling Distribution\nmeans = [np.mean(np.random.choice(pop, size=50)) for _ in range(1000)]\n\n# 3. Verification of CLT\nprint(f\"Population Mean: {np.mean(pop):.4f}\")\nprint(f\"Mean of Sample Means: {np.mean(means):.4f}\")\nprint(f\"Theoretical SE: {np.std(pop)/np.sqrt(50):.4f}\")\nprint(f\"Observed SE: {np.std(means):.4f}\")",
-      output: "Population Mean: 10.0000\nMean of Sample Means: 10.0042\nTheoretical SE: 1.4142\nObserved SE: 1.4089"
-    }
-  ],
-  tags: ["Central Limit Theorem", "Standard Error", "Confidence Intervals", "Sampling Bias", "Z-Score"],
-  level: "Intermediate"
+  html: String.raw`
+    <div class="premium-toc">
+      <div class="premium-toc-title">Sampling Roadmap</div>
+      <a href="#fundamentals">I. Population vs. Sample Fundamentals</a>
+      <a href="#standard-error">II. The Standard Error Formula</a>
+      <a href="#clt">III. The Central Limit Theorem (CLT)</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="fundamentals" class="premium-h2">I. Population vs. Sample Fundamentals</h2>
+    <p>A <strong>Population</strong> is the theoretical set of all possible observations, while a <strong>Sample</strong> is a finite subset used for analysis. The core goal of statistical inference is to use sample statistics to estimate population parameters.</p>
+
+    <div class="premium-table-wrap">
+      <table class="premium-table">
+        <thead>
+          <tr><th>Concept</th><th>Notation</th><th>Intuition</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Population Parameter</strong></td><td>$\mu, \sigma$</td><td>The true, universal "ground truth."</td></tr>
+          <tr><td><strong>Sample Statistic</strong></td><td>$\bar{x}, s$</td><td>An estimate derived from observed data.</td></tr>
+          <tr><td><strong>Sampling Bias</strong></td><td>-</td><td>Error when the sample doesn't represent the population.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">🌉</div>
+      <div class="premium-callout-body">
+        <strong>The Estimator:</strong> A sample statistic (like the mean $\bar{x}$) serves as a <strong>Point Estimator</strong> for the population parameter. Our goal is to minimize the bias and variance of this estimator.
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2 id="standard-error" class="premium-h2">II. The Standard Error Formula</h2>
+    <p>A <strong>Sampling Distribution</strong> is the distribution of a statistic calculated from all possible samples of a fixed size $n$. Its spread is governed by the <strong>Standard Error</strong>.</p>
+
+    <div class="premium-math-block">
+      \sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}}
+    </div>
+
+    <div class="premium-callout success">
+      <div class="premium-callout-icon">📈</div>
+      <div class="premium-callout-body">
+        <strong>The Square Root Law:</strong> To cut the standard error in half, you must quadruple the sample size ($n$). High-volume data naturally produces more stable estimates.
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="clt" class="premium-h2">III. The Central Limit Theorem (CLT)</h2>
+    <p>The CLT is perhaps the most important theorem in statistics. It provides a universal bridge between arbitrary data and the Normal distribution.</p>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Convergence to Normality</div>
+      <p style="margin:0">Regardless of the population's underlying distribution (skewed, uniform, etc.), the sampling distribution of the mean will converge toward a <strong>Normal Distribution</strong> as $n$ increases.</p>
+      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
+        \bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)
+      </div>
+    </div>
+
+    <div class="premium-case-study">
+      <h4>Applied Inference Example</h4>
+      <p>If you take 1,000 samples of size $n=100$ from a highly skewed dataset of user heights:</p>
+      <ul>
+        <li>The distribution of individual heights is skewed.</li>
+        <li>The distribution of the <strong>1,000 sample means</strong> will be a perfect Bell Curve.</li>
+      </ul>
+    </div>
+  `
 };

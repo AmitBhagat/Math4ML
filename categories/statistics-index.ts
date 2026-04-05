@@ -1,38 +1,31 @@
 import { CategoryData } from '../src/data/types';
-import { probabilityBasicsSection } from './statistics/basics';
-import { probabilityEventsSection } from './statistics/events';
-import { probabilityRulesSection } from './statistics/rules';
-import { jointMarginalConditionalSection } from './statistics/joint-marginal-conditional';
-import { bayesTheoremSection } from './statistics/bayes';
-import { distributionsSection } from './statistics/distributions';
 import { samplingDistributionsSection } from './statistics/sampling';
 import { studentsTDistributionSection } from './statistics/student-t';
+import { inferentialStatisticsSection } from './statistics/inferential-statistics';
+import { parameterEstimationSection } from './statistics/estimation';
+import { regressionAnalysisSection } from './statistics/regression-analysis';
+import { metricsSection } from './statistics/metrics';
 
 // =============================================================================
-// STATISTICS & PROBABILITY (Modularized Content)
+// STATISTICS (Inference, Estimation, and Regression)
 // =============================================================================
 export const STATISTICS_DATA: CategoryData = {
-  id: "statistics-probability",
-  title: "Probability & Statistics",
-  description: "Probability and Statistics are the foundation of machine learning, enabling models to handle uncertainty and make data-driven predictions.",
+  id: "statistics",
+  title: "Statistics",
+  description: "Statistics is the science of learning from data. In Machine Learning, it provides the tools for hypothesis testing, parameter estimation, and rigorous model evaluation.",
   keyConcepts: [
-    { title: "Probability Basics", description: "Sample spaces, experiments, and simple outcomes (Coins & Dice)." },
-    { title: "Types of Events", description: "Impossible, Sure, Independent, and Dependent events." },
-    { title: "Probability Rules", description: "Addition, Multiplication, and Complement rules for outcome calculation." },
-    { title: "Joint & Marginal", description: "Simultaneous vs. isolated variable probabilities and conditional logic." },
-    { title: "Bayes Theorem", description: "Updating beliefs based on evidence, the core of Naive Bayes classifiers." },
-    { title: "Data Distributions", description: "11 distinct distributions (Normal, Binomial, Poisson, etc.) for data modeling." },
-    { title: "Sampling Theory", description: "Estimation of population parameters and the Central Limit Theorem." },
-    { title: "Student's t-test", description: "Statistical inference for small samples with unknown variance." }
+    { title: "Sampling Theory", description: "Inferring population properties from subset data and the CLT." },
+    { title: "Hypothesis Testing", description: "Rigorous framework for decision making using p-values and t-tests." },
+    { title: "Estimation", description: "Finding the best-fitting parameters via MLE and MAP." },
+    { title: "Regression", description: "Modeling relationships between variables and quantifying fit." },
+    { title: "Evaluation Metrics", description: "Probabilistic and statistical measures of model performance." }
   ],
   sections: [
-    probabilityBasicsSection,
-    probabilityEventsSection,
-    probabilityRulesSection,
-    jointMarginalConditionalSection,
-    bayesTheoremSection,
-    distributionsSection,
     samplingDistributionsSection,
-    studentsTDistributionSection
+    studentsTDistributionSection,
+    inferentialStatisticsSection,
+    parameterEstimationSection,
+    regressionAnalysisSection,
+    metricsSection
   ]
 };

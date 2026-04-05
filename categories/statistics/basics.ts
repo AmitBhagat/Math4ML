@@ -2,55 +2,87 @@ import { TopicSection } from '../../src/data/types';
 
 export const probabilityBasicsSection: TopicSection = {
   id: "probability-basics",
-  title: "Probability Basics: Foundations",
-  description: "Probability is the mathematical framework for quantifying uncertainty. In ML, every prediction is a probability—from the chance an image is a 'Cat' to the likelihood a user will click 'Buy'.",
-  formula: "P(E) = \\frac{\\text{Successful Outcomes}}{\\text{Total Outcomes}}",
+  title: "Probability Basics: The Mathematical Language of Uncertainty",
+  description: "An essential primer on sample spaces, events, and the classical definition of chance—the bedrock of probabilistic machine learning algorithms.",
+  formula: "P(E) = \\frac{|E|}{|S|}",
   details: [
-    "Uncertainty Logic: Measuring how likely an event is to happen on a scale from 0 to 1.",
-    "Sample Space (S): The set of all possible outcomes for any random experiment.",
-    "Axioms: The rigid laws that ensure probabilities are consistent and mathematically sound."
+    "Sample Space ($S$): The Universal Set of Outcomes",
+    "Events as Subsets of Sample Space",
+    "Axiomatic Probability: The Kolmogorov Framework",
+    "Range of Chance: $0 \\le P(E) \\le 1$",
+    "Complementary Events: $P(E^c) = 1 - P(E)$",
+    "Frequentist vs. Bayesian Interpretations"
   ],
-  contentSections: [
-    {
-      heading: "Uncertainty and Sample Spaces",
-      paragraphs: [
-        "Probability is the branch of mathematics that deals with the chance of an event occurring. In Machine Learning, every prediction—from a 'Cat' label to a 'Click' forecast—lives in this framework.  ",
-        "A **Random Experiment** is any process with an uncertain outcome (e.g., tossing a coin). The **Sample Space ($S$)** is the set of all possible results:  ",
-        "- **Tossing 1 Coin**: $S = \\{H, T\\}$.  ",
-        "- **Tossing 3 Coins**: Total outcomes $= 2^3 = 8$. $S = \\{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT\\}$.  ",
-        "- **Rolling 2 Dice**: Total outcomes $= 6^2 = 36$.  ",
-        "- **Roulette Wheel**: Total outcomes $= 38$ (numbers 1-36, 0, 00).",
-        "**Types of Sample Spaces**:  ",
-        "1. **Finite**: Outcomes can be counted (e.g., $\{H, T\}$).  ",
-        "2. **Infinite**: Outcomes are countable but unending (e.g., $\{1, 2, 3, \\dots\}$).  ",
-        "3. **Continuous**: Outcomes are uncountably many in an interval (e.g., $\{x \\in \\mathbb{R} : 0 \\leq x \\leq 1\}$)."
-      ]
-    },
-    {
-      heading: "Theoretical Probability: Solved Examples",
-      paragraphs: [
-        "The probability of an event $E$ is $P(E) = n(E) / n(S)$, assuming all outcomes are equally likely.  ",
-        "**Ex 1: PIN Codes**. How many 4-digit PINs are possible if repetition is allowed? $n(S) = 10 \\times 10 \\times 10 \\times 10 = 10,000$.  ",
-        "**Ex 2: PIN Codes (No Repetition)**. $n(S) = 10 \\times 9 \\times 8 \\times 7 = 5,040$.  ",
-        "**Ex 3: Deck of Cards**. Probability of picking a card that is NOT a face card? Total 52, Face 12. $P = 40/52 = 10/13$.  ",
-        "**Ex 4: Marbles in a Jar**. A jar contains 3 red and 2 blue marbles. Probability of picking red? $P = 3/5$.  ",
-        "**Ex 5: Rolling 2 Dice**. Probability of the sum being exactly 7? Successful outcomes: (1,6), (2,5), (3,4), (4,3), (5,2), (6,1). $P = 6/36 = 1/6$."
-      ],
-      code: "import numpy as np\n# Logic for Ex 5: Sum of 7 with 2 dice\ndice1 = np.arange(1, 7)\ndice2 = np.arange(1, 7)\nsums = np.add.outer(dice1, dice2)\nsuccessful = np.sum(sums == 7)\ntotal = sums.size\n\nprint(f\"Sum of 7 Outcomes: {successful}\")\nprint(f\"Total Outcomes: {total}\")\nprint(f\"Probability: {successful/total:.4f}\")",
-      output: "Sum of 7 Outcomes: 6\nTotal Outcomes: 36\nProbability: 0.1667"
-    },
-    {
-      heading: "Practice Problems: Test Your Understanding",
-      paragraphs: [
-        "**Question 1.** A bag has 5 red, 3 blue, and 2 green balls. Probability of picking a red or blue ball?  ",
-        "**Question 2.** Rolling two dice, what is the probability that the sum is exactly 10?  ",
-        "**Question 3.** Tossing a coin 4 times, what is the probability of getting exactly 2 heads?  ",
-        "**Question 4.** From a standard deck of cards, what is the probability of drawing a King or a Queen?  ",
-        "**Question 5.** A spinner has numbers 1 to 8. What is the probability of the arrow landing on an even number?  ",
-        "**Answers**: 1. 0.8 | 2. 1/12 | 3. 3/8 | 4. 2/13 | 5. 1/2"
-      ]
-    }
-  ],
-  tags: ["Sample Space", "Uncertainty", "Softmax", "Axioms", "Probability Distributions"],
-  level: "Beginner"
+  html: String.raw`
+    <div class="premium-toc">
+      <div class="premium-toc-title">Foundational Roadmap</div>
+      <a href="#sample-spaces">I. Sample Spaces and Experiments</a>
+      <a href="#axioms">II. Axiomatic Probability</a>
+      <a href="#lab">Computational Implementation: Discrete Sim</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="sample-spaces" class="premium-h2">I. Sample Spaces and Experimental Design</h2>
+    <p>Every probabilistic query begins with an <strong>Experiment</strong> and its <strong>Sample Space ($S$)</strong>—the set containing every possible atomic outcome. An <strong>Event ($E$)</strong> is simply a subset of this space.</p>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">The Classical Definition</div>
+      <p style="margin:0">If all outcomes in a finite sample space $S$ are equally likely, the probability of an event $E$ is the ratio of favorable outcomes to the total size of the sample space:</p>
+      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
+        P(E) = \frac{|E|}{|S|}
+      </div>
+    </div>
+
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">🎲</div>
+      <div class="premium-callout-body">
+        <strong>The Range of Chance:</strong> Probability is always bounded: $0 \le P(E) \le 1$. An event with $P(E)=0$ is "impossible," while $P(E)=1$ is "certain."
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2 id="axioms" class="premium-h2">II. Axiomatic Probability</h2>
+    <p>Beyond simple counting, modern probability rests on the <strong>Kolmogorov Axioms</strong>, which provide the rigorous foundation for processing uncertainty in high-dimensional datasets.</p>
+
+    <div class="premium-table-wrap">
+      <table class="premium-table">
+        <thead>
+          <tr><th>Axiom</th><th>Mathematical Statement</th><th>Intuition</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Non-negativity</strong></td><td>$P(E) \ge 0$</td><td>Chance cannot be negative.</td></tr>
+          <tr><td><strong>Normalization</strong></td><td>$P(S) = 1$</td><td>Something must always happen.</td></tr>
+          <tr><td><strong>Additivity</strong></td><td>$P(E_1 \cup E_2) = P(E_1) + P(E_2)$</td><td>Sum of disjoint event chances.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- LAB -->
+    <h2 id="lab" class="premium-h2">Computational Implementation: Discrete Sim</h2>
+    <div class="premium-math-block">
+      <python-code>
+import numpy as np
+
+def simulate_die_roll(event_condition, trials=10000):
+    """
+    Empirical probability via Monte Carlo simulation.
+    """
+    # 1. Generate random trials
+    rolls = np.random.randint(1, 7, trials)
+    
+    # 2. Count favorable outcomes
+    favorable = np.sum([event_condition(r) for r in rolls])
+    
+    # 3. Calculate empirical ratio
+    return favorable / trials
+
+# Define event: Roll is even
+prob_even = simulate_die_roll(lambda x: x % 2 == 0)
+
+print(f"Sample Space S: {set(range(1, 7))}")
+print(f"Theoretical P(Even): 0.50")
+print(f"Simulated P(Even): {prob_even:.4f}")
+      </python-code>
+    </div>
+  `
 };

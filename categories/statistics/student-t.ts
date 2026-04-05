@@ -1,43 +1,76 @@
 import { TopicSection } from '../../src/data/types';
 
 export const studentsTDistributionSection: TopicSection = {
-  id: "students-t-distribution",
-  title: "Student's t-Distribution: Small Samples",
-  description: "When the population variance is unknown and your sample size is small (n < 30), the Normal distribution isn't accurate enough. The Student's t-distribution fills this gap with 'fatter tails' to handle more uncertainty.",
+  id: "student-t",
+  title: "Student's t-Distribution: The Small-Sample Gaussian Alternative",
+  description: "A comprehensive analysis of the t-distribution framework, essential for robust inference when population variance is unknown and sample sizes are restrictive ($n < 30$).",
   formula: "t = \\frac{\\bar{x} - \\mu}{s / \\sqrt{n}}",
   details: [
-    "Degrees of Freedom (df): The key parameter (n-1) that describes the 'shape' of the t-distribution.",
-    "Fatter Tails: This distribution accounts for higher uncertainty in small samples.",
-    "Small-Sample Inference: Essential for hardware testing or clinical trials where data is expensive."
+    "Origin: The 'Student' Pseudonym and Guinness Breweries",
+    "Tail Density: Accounting for Higher Sampling Uncertainty",
+    "Degrees of Freedom ($df = n-1$) and Distribution Shape",
+    "The Transition from t-Distribution to Standard Normal ($Z$)",
+    "Small-Sample Confidence Intervals and Hypothesis Testing",
+    "Application: t-Tests in Experimental Machine Learning"
   ],
-  contentSections: [
-    {
-      heading: "Student's t-Distribution and Confidence Intervals",
-      paragraphs: [
-        "The **Student's t-Distribution** is used for estimating population parameters when the sample size is small ($n < 30$) or the population standard deviation $\\sigma$ is unknown.  ",
-        "**Properties**:  ",
-        "- **Degrees of Freedom (df)**: $n - 1$.  ",
-        "- **Shape**: Symmetric and bell-shaped, but with **fatter tails** than the normal distribution to account for greater uncertainty.  ",
-        "**Confidence Interval (CI)** is a range of values likely to contain the population parameter:  ",
-        "$$CI = \\bar{x} \\pm t^* \\left( \\frac{s}{\\sqrt{n}} \\right)$$  ",
-        "Where $t^*$ is the critical value for a given confidence level and $df$."
-      ]
-    },
-    {
-      heading: "Worked Example: Testing Student Scores",
-      paragraphs: [
-        "**Problem**: A sample of 10 students has a mean score of $\\bar{x} = 85$ with a sample standard deviation $s = 5$. Find the **95% Confidence Interval** for the true population mean.  ",
-        "**Step 1: Degrees of Freedom.** $df = 10 - 1 = 9$.  ",
-        "**Step 2: Critical Value.** For 95% confidence and $df=9$, $t^* = 2.262$ (from t-table).  ",
-        "**Step 3: Standard Error (SE).** $SE = s / \\sqrt{n} = 5 / \\sqrt{10} = 1.58$.  ",
-        "**Step 4: Margin of Error (ME).** $ME = t^* \\times SE = 2.262 \\times 1.58 = 3.57$.  ",
-        "**Step 5: Confidence Interval.** $CI = 85 \\pm 3.57 = [81.43, 88.57]$.  ",
-        "**Interpretation**: We are 95% confident that the true population mean score is between 81.43 and 88.57."
-      ],
-      code: "import numpy as np\nfrom scipy import stats\n\n# Data from example\nn = 10\nx_bar = 85\ns = 5\nconfidence = 0.95\n\n# Calculation\ndf = n - 1\nt_star = stats.t.ppf((1 + confidence) / 2, df)\nse = s / np.sqrt(n)\nme = t_star * se\nci = (x_bar - me, x_bar + me)\n\nprint(f\"Critical t*: {t_star:.3f}\")\nprint(f\"Margin of Error: {me:.2f}\")\nprint(f\"95% CI: [{ci[0]:.2f}, {ci[1]:.2f}]\")",
-      output: "Critical t*: 2.262\nMargin of Error: 3.58\n95% CI: [81.42, 88.58]"
-    }
-  ],
-  tags: ["T-Test", "Small Sample", "Inference", "Hypothesis", "Fat Tails"],
-  level: "Intermediate"
+  html: String.raw`
+    <div class="premium-toc">
+      <div class="premium-toc-title">t-Distribution Roadmap</div>
+      <a href="#geometry">I. The Geometry of Uncertainty</a>
+      <a href="#derivation">II. Formal t-Statistic Derivation</a>
+      <a href="#convergence">III. Convergence to Standard Normal</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="geometry" class="premium-h2">I. The Geometry of Uncertainty</h2>
+    <p>When sample sizes are small ($n < 30$) and population variance ($\sigma^2$) is unknown, the standard normal assumption fails. The <strong>t-distribution</strong> provides a more conservative model that accounts for the added uncertainty of estimating variance from data.</p>
+
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">📉</div>
+      <div class="premium-callout-body">
+        <strong>Heavy Tails:</strong> The t-distribution has "fatter" tails than the Normal distribution. This reflects a higher probability of extreme values (outliers) in small samples, leading to wider, more robust confidence intervals.
+      </div>
+    </div>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Degrees of Freedom ($df$)</div>
+      <p style="margin:0">The shape of the t-distribution is governed solely by the <strong>Degrees of Freedom</strong>, typically $df = n - 1$.</p>
+      <ul style="margin-top:10px">
+        <li><strong>Low $df$:</strong> Extremely fat tails, maximal uncertainty.</li>
+        <li><strong>High $df$:</strong> Tails thin out; distribution looks like a Bell Curve.</li>
+      </ul>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2 id="derivation" class="premium-h2">II. Formal t-Statistic Derivation</h2>
+    <p>The t-statistic is used in place of the Z-score when we must estimate the standard error using the sample standard deviation $s$ instead of the population $\sigma$.</p>
+
+    <div class="premium-math-block">
+      t = \frac{\bar{x} - \mu}{s / \sqrt{n}}
+    </div>
+
+    <div class="premium-table-wrap">
+      <table class="premium-table">
+        <thead>
+          <tr><th>Component</th><th>Notation</th><th>Intuition</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Sample Mean</strong></td><td>$\bar{x}$</td><td>The point estimate from data.</td></tr>
+          <tr><td><strong>Sample Std Dev</strong></td><td>$s$</td><td>Estimated variation within the sample.</td></tr>
+          <tr><td><strong>Estimated Error</strong></td><td>$s / \sqrt{n}$</td><td>The uncertainty of the mean estimate.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="convergence" class="premium-h2">III. Convergence to Standard Normal</h2>
+    <p>As the sample size $n$ increases, our estimate of the variance ($s^2$) become increasingly accurate. Mathematically, the t-distribution converges to the Standard Normal distribution ($Z$).</p>
+
+    <div class="premium-callout success">
+      <div class="premium-callout-icon">🎯</div>
+      <div class="premium-callout-body">
+        <strong>The Rule of 30:</strong> Typically, for $n \ge 30$, the difference between $t$ and $Z$ becomes negligible. In large-scale ML (billions of samples), we almost always use the Normal assumption.
+      </div>
+    </div>
+  `
 };

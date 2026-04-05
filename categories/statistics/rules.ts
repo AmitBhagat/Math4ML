@@ -2,48 +2,64 @@ import { TopicSection } from '../../src/data/types';
 
 export const probabilityRulesSection: TopicSection = {
   id: "probability-rules",
-  title: "Probability Rules: The Calculus of Risk",
-  description: "Probability rules are the rigid laws that govern any system of chance. These are the fundamental principles—including addition, multiplication, and conditional rules—that allow us to predict the 'unpredictable'.",
+  title: "Probability Rules: The Axiomatic Logic of Chance",
+  description: "A formalization of the Sum and Product rules—the dual engines that drive marginalization and conditioning in probabilistic graphical models.",
   formula: "P(A \\cup B) = P(A) + P(B) - P(A \\cap B)",
   details: [
-    "Addition Rule: Quantifying the probability of either event occurring.",
-    "Multiplication Rule: Calculating the chance of sequential independent events.",
-    "Conditional Mapping: How knowledge of one event updates the probability of another."
+    "The General Addition Rule (Inclusion-Exclusion)",
+    "The Multiplication Rule for Dependent Outcomes",
+    "Marginalization: The Sum Rule in High-Dimensional Spaces",
+    "Conditioning: The Product Rule as a Dependency Chain",
+    "Law of Total Probability: Partitioning the Sample Space",
+    "Application: Propagating Uncertainty in Bayesian Networks"
   ],
-  contentSections: [
-    {
-      heading: "The Calculus of Risk: 4 Fundamental Rules",
-      paragraphs: [
-        "Probability rules are basic laws that help us calculate the chances of complex events. In Machine Learning, we use these to combine and update our confidence in model predictions:  ",
-        "1. **Rule 1: Multiplication Rule** (Independent Events): $P(A \\cap B) = P(A) \\times P(B)$.  ",
-        "2. **Rule 2: Complementary Rule**: $P(A') = 1 - P(A)$.  ",
-        "3. **Rule 3: Addition Rule** (Not Mutually Exclusive): $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.  ",
-        "4. **Rule 4: Conditional Probability Rule**: $P(A|B) = \\frac{P(A \\cap B)}{P(B)}$."
-      ]
-    },
-    {
-      heading: "Theoretical Probability: Solved Examples",
-      paragraphs: [
-        "**Ex 1: Multiplication (With Replacement)**. Draw 2 cards from a 52-card deck with replacement. Probability of Red then Black? $P = \\frac{26}{52} \\times \\frac{26}{52} = 1/4$.  ",
-        "**Ex 2: Multiplication (Without Replacement)**. Draw 2 cards from a 52-card deck without replacement. Probability of Red then Black? $P = \\frac{26}{52} \\times \\frac{26}{51} = 13/51$.  ",
-        "**Ex 3: Addition Rule**. If $P(A)=0.4, P(B)=0.5, P(A \\cap B)=0.2$, then $P(A \\cup B) = 0.4 + 0.5 - 0.2 = 0.7$.  ",
-        "**Ex 4: Conditional Probability**. If $P(A \\cap B)=0.3$ and $P(B)=0.6$, then $P(A|B) = 0.3 / 0.6 = 0.5$."
-      ],
-      code: "import numpy as np\n# Logic for Ex 2: Multiplication without replacement\ntotal = 52\nred = 26\nblack = 26\n\nprob_red1 = red / total\nprob_black2 = black / (total - 1)\n\nprint(f\"Red then Black (No Replacement): {prob_red1 * prob_black2:.4f}\")\nprint(f\"Fraction result: 13/51 ≈ {13/51:.4f}\")",
-      output: "Red then Black (No Replacement): 0.2549\nFraction result: 13/51 ≈ 0.2549"
-    },
-    {
-      heading: "Practice Problems: Test Your Understanding",
-      paragraphs: [
-        "**Question 1.** Given $P(A)=0.6, P(B)=0.3$, and $P(A \\cap B)=0.2$, calculate $P(A \\cup B)$.  ",
-        "**Question 2.** Rolling two dice, what is the probability that the sum is exactly 7 OR exactly 11?  ",
-        "**Question 3.** A bag contains 4 red and 6 blue balls. If you draw two balls WITH replacement, what is the probability of both being red?  ",
-        "**Question 4.** Given $P(A \\cap B)=0.15$ and $P(B)=0.5$, calculate $P(A|B)$.  ",
-        "**Question 5.** Draw one card from a standard deck. What is the probability of drawing a King OR a Diamond? (Total Kings=4, Total Diamonds=13).  ",
-        "**Answers**: 1. 0.7 | 2. 2/9 | 3. 0.16 | 4. 0.3 | 5. 16/52 = 4/13"
-      ]
-    }
-  ],
-  tags: ["Addition Rule", "Multiplication Rule", "Conditional Probability", "Complement"],
-  level: "Beginner"
+  html: String.raw`
+    <div class="premium-toc">
+      <div class="premium-toc-title">Axiomatic Roadmap</div>
+      <a href="#addition">I. The General Addition Rule</a>
+      <a href="#multiplication">II. The Multiplication Rule</a>
+      <a href="#total-prob">III. Law of Total Probability</a>
+    </div>
+
+    <!-- SECTION 1 -->
+    <h2 id="addition" class="premium-h2">I. The General Addition Rule</h2>
+    <p>The <strong>Addition Rule</strong> (or Sum Rule) dictates how we combine probabilities of individual events to find the chance of a union ($A$ or $B$).</p>
+
+    <div class="premium-math-block">
+      P(A \cup B) = P(A) + P(B) - P(A \cap B)
+    </div>
+
+    <div class="premium-callout warn">
+      <div class="premium-callout-icon">⚠️</div>
+      <div class="premium-callout-body">
+        <strong>Inclusion-Exclusion:</strong> We must subtract the intersection $P(A \cap B)$ because those outcomes are counted twice—once in $A$ and once in $B$. If the events are <strong>Mutually Exclusive</strong>, the subtraction term is simply zero.
+      </div>
+    </div>
+
+    <!-- SECTION 2 -->
+    <h2 id="multiplication" class="premium-h2">II. The Multiplication Rule</h2>
+    <p>The <strong>Multiplication Rule</strong> (or Product Rule) is the foundational engine for calculating the joint probability ($A$ and $B$) by decomposing it into marginal and conditional parts.</p>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Joint Probability Decomposition</div>
+      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
+        P(A \cap B) = P(A|B)P(B)
+      </div>
+    </div>
+
+    <!-- SECTION 3 -->
+    <h2 id="total-prob" class="premium-h2">III. The Law of Total Probability</h2>
+    <p>When we want to find the probability of an event $B$ but we only have its conditional probabilities relative to a set of exhaustive and mutually exclusive events $A_i$ (a "partition"), we use the Law of Total Probability.</p>
+
+    <div class="premium-math-block">
+      P(B) = \sum_{i} P(B | A_i) P(A_i)
+    </div>
+
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">🌉</div>
+      <div class="premium-callout-body">
+        <strong>Bayesian Logic:</strong> This rule acts as the <strong>Evidence</strong> $P(D)$ in Bayes' Theorem. It ensures the posterior probabilities are properly normalized so they sum to 1.
+      </div>
+    </div>
+  `
 };
