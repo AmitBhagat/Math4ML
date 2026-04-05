@@ -13,7 +13,15 @@ const VisualizationsPage = React.lazy(() => import("./pages/VisualizationsPage")
 function CategoryRoute() {
   const { categoryId } = useParams();
   if (!categoryId) return null;
-  return <AsyncCategoryPage categoryId={categoryId} />;
+  // Key forces re-mount on category change to prevent stale state
+  return <AsyncCategoryPage key={categoryId} categoryId={categoryId} />;
+}
+
+function ProblemRoute() {
+  const { categoryId, problemId } = useParams();
+  if (!categoryId || !problemId) return null;
+  // Key forces re-mount on problem change — cleanest state reset
+  return <ProblemPage key={`${categoryId}-${problemId}`} />;
 }
 export default function App() {
   return (
@@ -33,8 +41,8 @@ export default function App() {
           <Route path="/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
 
           {/* Problem Pages within Categories and Clusters */}
-          <Route path="/:clusterId/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
-          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemPage /></Suspense>} />
+          <Route path="/:clusterId/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
+          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
         </Route>
       </Routes>
     </HashRouter>
