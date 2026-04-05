@@ -1,5 +1,5 @@
+import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link } from "react-router-dom";
-import { useEffect, useState, useRef } from "react";
 // @ts-expect-error - Contribution types missing
 import renderMathInElement from 'katex/dist/contrib/auto-render';
 import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
@@ -9,6 +9,7 @@ import { CodeSnippet } from "@/src/components/MathComponents";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { cleanMathContent } from '@/src/lib/mathUtils';
+import { getCategoryTheme } from "@/src/lib/themeUtils";
 
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
@@ -25,7 +26,7 @@ const ParsedContent = ({ html }: { html: string }) => {
             .trim();
           
           return (
-            <div key={idx} className="my-8 rounded-xl overflow-hidden border border-border-premium shadow-2xl">
+            <div key={idx}>
               <CodeSnippet code={code} />
             </div>
           );
@@ -75,6 +76,9 @@ export const ProblemPage = () => {
   useEffect(() => {
     let mounted = true;
     setLoading(true);
+    // Ensure we start at the top on every problem change
+    window.scrollTo(0, 0);
+    
     if (!categoryId) {
       setCategory(null);
       setLoading(false);
@@ -99,7 +103,13 @@ export const ProblemPage = () => {
 
   if (loading) {
     return (
-      <div className="animate-pulse space-y-8">
+    <div 
+      className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12"
+      style={{
+        '--category-primary': getCategoryTheme(categoryId || '').primary,
+        '--category-secondary': getCategoryTheme(categoryId || '').secondary,
+      } as React.CSSProperties}
+    >
         <div className="h-48 bg-bg-secondary rounded-2xl w-full" />
         <div className="h-8 bg-bg-secondary rounded w-2/3" />
         <div className="h-4 bg-bg-secondary rounded w-full" />
@@ -118,7 +128,13 @@ export const ProblemPage = () => {
   }
 
   return (
-    <div className="animate-in fade-in slide-in-from-bottom-6 duration-1000">
+    <div 
+      className="w-full"
+      style={{
+        '--category-primary': getCategoryTheme(categoryId || '').primary,
+        '--category-secondary': getCategoryTheme(categoryId || '').secondary,
+      } as React.CSSProperties}
+    >
       
       {/* ─── Hero Section ─── */}
       <div className="premium-hero">
@@ -126,7 +142,6 @@ export const ProblemPage = () => {
           📊 {category.title} / {problem.title}
         </div>
         <h1>{problem.title}</h1>
-        <p>{problem.description}</p>
       </div>
 
       {/* ─── Content Area ─── */}
@@ -136,7 +151,7 @@ export const ProblemPage = () => {
         ) : (
           <div className="space-y-4 text-text-premium font-light leading-relaxed">
              {problem.details && problem.details.map((detail, idx) => (
-               <div key={idx} className="flex gap-3 mb-2">
+               <div key={idx} className="flex gap-3 mb-4">
                  <span className="text-accent-premium mt-1.5 shrink-0">•</span>
                  <span>{detail}</span>
                </div>
@@ -160,7 +175,9 @@ export const ProblemPage = () => {
               <span className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] group-hover:text-accent-premium transition-colors">
                 <ArrowLeft className="w-3.5 h-3.5" /> Previous Section
               </span>
-              <span className="text-lg font-headline font-semibold text-text-premium group-hover:translate-x-1 transition-transform truncate">{prevProblem.title}</span>
+              <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
+                {prevProblem.title}
+              </h3>
             </Link>
           ) : (
             <div className="hidden sm:block min-w-[280px]"></div>
@@ -174,7 +191,9 @@ export const ProblemPage = () => {
               <span className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] group-hover:text-accent-premium transition-colors">
                 Next Section <ArrowRight className="w-3.5 h-3.5" />
               </span>
-              <span className="text-lg font-headline font-semibold text-text-premium group-hover:-translate-x-1 transition-transform truncate">{nextProblem.title}</span>
+              <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
+                {nextProblem.title}
+              </h3>
             </Link>
           ) : (
             <div className="hidden sm:block min-w-[280px]"></div>

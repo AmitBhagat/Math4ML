@@ -31,7 +31,6 @@ const TopicCard = ({ topic, ...props }: { topic: any, key?: string }) => {
         <Icon className={`w-6 h-6 ${accentStyles.split(' ')[0]}`} />
       </div>
       <h3 className="text-xl font-headline font-black mb-2 text-on-surface">{topic.title}</h3>
-      <p className="text-on-surface-variant text-xs mb-8 leading-relaxed flex-grow">{topic.description}</p>
     </Link>
   );
 };
@@ -67,13 +66,10 @@ export const ClusterPage = () => {
       </div>
 
       {/* Header */}
-      <div className="mb-20">
-        <h1 className="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tighter mb-8 leading-none">
+      <div className="mb-12">
+        <h1 className="text-3xl md:text-5xl font-headline font-black text-on-surface tracking-tighter leading-none mb-0">
           {cluster.title}
         </h1>
-        <p className="text-lg md:text-xl text-on-surface-variant max-w-4xl leading-relaxed font-light text-editorial-justify">
-          {cluster.description}
-        </p>
       </div>
 
       {/* Topics Grid Section */}

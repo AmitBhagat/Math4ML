@@ -1,37 +1,41 @@
 import { TopicSection } from '../../src/data/types';
 
-export const metricsSection: TopicSection = {
-  id: "metrics",
-  title: "Theoretical Foundations and Mathematical Frameworks for Evaluation Metrics",
-  description: "A rigorous investigation into classification and regression evaluation, covering probabilistic underpinnings, formal derivations of L-norms, and information-theoretic divergence.",
+export const evaluationMetricsSection: TopicSection = {
+  id: "evaluation-metrics",
+  title: "Statistical Evaluation Metrics",
+  description: "Exhaustive analysis of classification and regression metrics, detailing their probabilistic underpinnings, formal derivations, and practical applications within complex model topologies.",
   formula: "F_1 = \\frac{2 \\cdot P \\cdot R}{P + R}",
   details: [
-    "Taxonomy of Classification: Confusion Matrix Error Typology",
-    "Accuracy Paradox in Imbalanced Topology",
-    "Precision (Exactness) vs Recall (Completeness) Trade-offs",
-    "F1-Score: Harmonic Mean Derivation and Justification",
-    "ROC-AUC: Discriminative Power and Probabilistic Meaning",
-    "Equivalence of AUC to Wilcoxon-Mann-Whitney U-Statistic",
-    "Regression Metrics: MSE (Mean-Minimizer) vs MAE (Median-Minimizer)",
-    "Information Theory: Shannon Entropy and KL Divergence",
-    "Cross-Entropy: MLE Derivation and Logistic Loss",
-    "Computational Dynamics: Gradient Behavior of Loss Functions"
+    "Confusion Matrix Taxonomy: Type I and Type II error typology",
+    "Global Accuracy and the Imbalance Paradox in skewed datasets",
+    "Precision (PPV) and Recall (Sensitivity): Threshold-driven trade-offs",
+    "F1-Score: Harmonic mean justification and geometrical derivation",
+    "ROC-AUC: Discriminative power and equivalence to Wilcoxon-Mann-Whitney",
+    "Regression Metrics: L1 (MAE) vs. L2 (MSE) statistical properties",
+    "Proofs: Why MSE minimizes to the Mean and MAE to the Median",
+    "Information Theory: Shannon Entropy, KL Divergence, and Cross-Entropy",
+    "Optimization Dynamics: Gradient behavior of common loss functions"
   ],
   html: String.raw`
     <div class="premium-toc">
-      <div class="premium-toc-title">Evaluation Roadmap</div>
-      <a href="#taxonomy">I. Taxonomy of Classification Performance</a>
-      <a href="#paradox">II. Accuracy and the Imbalance Paradox</a>
-      <a href="#precision-recall">III. Precision and Recall Dynamics</a>
-      <a href="#f1-score">IV. The F1-Score: Harmonic Justification</a>
-      <a href="#roc-auc">V. Discriminative Power and ROC-AUC</a>
-      <a href="#regression">VI. Regression Metrics: Statistical Properties</a>
-      <a href="#info-theory">VII. Information Theory & Cross-Entropy</a>
+      <div class="premium-toc-title">Table of Contents</div>
+      <a href="#confusion">The Confusion Matrix and Error Typology</a>
+      <a href="#accuracy">Global Accuracy and the Imbalance Paradox</a>
+      <a href="#precision-recall">Precision, Recall, and Sensitivity</a>
+      <a href="#f1">The F1-Score: Harmonic Mean Justification</a>
+      <a href="#roc">Discriminative Power: ROC and AUC</a>
+      <a href="#roc-prob" class="sub">↳ Probabilistic Interpretation of AUC</a>
+      <a href="#roc-wmw" class="sub">↳ Equivalence to Wilcoxon-Mann-Whitney</a>
+      <a href="#regression-metrics">Regression Metrics: MSE vs. MAE</a>
+      <a href="#regression-proofs" class="sub">↳ Mathematical Proofs of Optima</a>
+      <a href="#cross-entropy">Information Theory and Cross-Entropy</a>
+      <a href="#gradients">Computational Implementation and Gradients</a>
+      <a href="#synthesis">Integrated Performance Assessment</a>
     </div>
 
     <!-- SECTION 1 -->
-    <h2 id="taxonomy" class="premium-h2">I. The Taxonomy of Classification Performance</h2>
-    <p>Classification evaluation transcends simple binary comparisons. The nature of an error (False Positive vs. False Negative) often dictates the choice of metric. Every metric is built upon the foundational <strong>Confusion Matrix</strong>.</p>
+    <h2 id="confusion" class="premium-h2">The Taxonomy of Classification Performance</h2>
+    <p>The fundamental building block for classification evaluation is the <strong>confusion matrix</strong>, which disaggregates predictive outcomes against ground-truth observations into four distinct quadrants.</p>
 
     <div class="premium-table-wrap">
       <table class="premium-table">
@@ -39,105 +43,77 @@ export const metricsSection: TopicSection = {
           <tr><th>Actual \ Predicted</th><th>Predicted Positive</th><th>Predicted Negative</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Actual Positive</strong></td><td><strong class="text-accent-premium">TP</strong> (True Positive)</td><td><span class="text-red-500 opacity-60">FN</span> (False Negative)</td></tr>
-          <tr><td><strong>Actual Negative</strong></td><td><span class="text-red-500 opacity-60">FP</span> (False Positive)</td><td><strong class="text-purple-premium">TN</strong> (True Negative)</td></tr>
+          <tr><td><strong>Actual Positive</strong></td><td>True Positive (TP)</td><td>False Negative (FN) - <strong>Type II</strong></td></tr>
+          <tr><td><strong>Actual Negative</strong></td><td>False Positive (FP) - <strong>Type I</strong></td><td>True Negative (TN)</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="premium-callout info">
-      <div class="premium-callout-icon">📋</div>
-      <div class="premium-callout-body">
-        <strong>Error Typology:</strong> A <strong>Type I Error</strong> (False Positive) is a "False Alarm," while a <strong>Type II Error</strong> (False Negative) is a "Missed Target." In medical testing, a Type II error is often far more dangerous.
-      </div>
-    </div>
-
-    <!-- SECTION 2 -->
-    <h2 id="paradox" class="premium-h2">II. Accuracy and the Imbalance Paradox</h2>
-    <p>Accuracy is the most intuitive metric, but it is deeply flawed for datasets where one class represents the vast majority of samples.</p>
-
+    <h2 id="accuracy" class="premium-h2">Global Accuracy and the Imbalance Paradox</h2>
+    <p>Accuracy is the ratio of correct predictions to total observations:</p>
     <div class="premium-math-block">
-      \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN}
+      \[ \text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} \]
     </div>
-
     <div class="premium-callout warn">
       <div class="premium-callout-icon">⚠️</div>
-      <div class="premium-callout-body">
-        <strong>The Paradigm Shift:</strong> If 99% of your data is "Negative," a model that always predicts "Negative" has 99% accuracy but <strong>zero</strong> utility. This is why we pivot to Precision and Recall.
-      </div>
+      <div class="premium-callout-body"><strong>Accuracy Paradox:</strong> In imbalanced datasets (e.g., 99% Negative), a naive model predicting 100% Negative achieves 99% accuracy while failing entirely to detect the minority class.</div>
     </div>
 
-    <!-- SECTION 3 -->
-    <h2 id="precision-recall" class="premium-h2">III. Precision and Recall Dynamics</h2>
+    <h2 id="precision-recall" class="premium-h2">Precision and Recall</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Precision (Positive Predictive Value)</div>
-      <p style="margin:0">Of all instances predicted as Positive, how many were correct?</p>
-      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
-        P = \frac{TP}{TP + FP}
-      </div>
+      <div class="premium-def-title">Precision (Exactness)</div>
+      <p style="margin:0">"Of all instances predicted positive, how many were actually positive?" Optimized when FP is zero.</p>
+      <div class="premium-math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">\[ \text{Precision} = \frac{TP}{TP + FP} \]</div>
     </div>
 
     <div class="premium-def-box">
-      <div class="premium-def-title">Recall (Sensitivity / True Positive Rate)</div>
-      <p style="margin:0">Of all actual Positive instances, how many did the model find?</p>
-      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
-        R = \frac{TP}{TP + FN}
-      </div>
+      <div class="premium-def-title">Recall (Completeness)</div>
+      <p style="margin:0">"Of all actual positive cases, how many did the model find?" Optimized when FN is zero.</p>
+      <div class="premium-math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">\[ \text{Recall} = \frac{TP}{TP + FN} \]</div>
     </div>
 
-    <!-- SECTION 4 -->
-    <h2 id="f1-score" class="premium-h2">IV. The F1-Score: Harmonic Justification</h2>
-    <p>The F1-score is the <strong>Harmonic Mean</strong> of Precision and Recall. It is used instead of the arithmetic mean because it heavily penalizes extreme values.</p>
-
+    <h2 id="f1" class="premium-h2">The F1-Score: Harmonic Justification</h2>
+    <p>The F1-score balances Precision ($P$) and Recall ($R$) using their <strong>harmonic mean</strong>. Unlike the arithmetic mean, the harmonic mean punishes extreme values, ensuring a high score requires both high precision and high recall.</p>
     <div class="premium-math-block">
-      F_1 = 2 \cdot \frac{P \cdot R}{P + R}
+      \[ F_1 = \frac{2 \cdot P \cdot R}{P + R} = \frac{TP}{TP + \frac{1}{2}(FP + FN)} \]
     </div>
 
-    <div class="premium-callout info">
-      <div class="premium-callout-icon">⚖️</div>
-      <div class="premium-callout-body">
-        <strong>Why Harmonic?</strong> If $P=1.0$ and $R=0.2$, the arithmetic mean is $0.6$ (misleadingly high), but the <strong>F1 is 0.33</strong> (correctly reflecting the failure in recall).
-      </div>
+    <h2 id="roc" class="premium-h2">Discriminative Power: ROC and AUC</h2>
+    <p>The ROC curve evaluates a model across <em>all possible</em> thresholds. The Area Under the Curve (AUC) represents the probability that a randomly chosen positive instance will be ranked higher than a randomly chosen negative instance.</p>
+    <h3 id="roc-wmw" class="premium-h3">Equivalence to Wilcoxon-Mann-Whitney</h3>
+    <p>The AUC is mathematically equivalent to the normalized U-statistic from the non-parametric Wilcoxon-Mann-Whitney test:</p>
+    <div class="premium-math-block">
+      \[ \text{AUC} = \frac{U}{n_+ \cdot n_-} \]
     </div>
 
-    <!-- SECTION 5 -->
-    <h2 id="roc-auc" class="premium-h2">V. Discriminative Power and ROC-AUC</h2>
-    <p>The <strong>ROC Curve</strong> plots TPR vs. FPR across all possible classification thresholds. The <strong>AUC-ROC</strong> represents the model's ability to rank positive instances higher than negative ones.</p>
-
-    <div class="premium-def-box">
-      <div class="premium-def-title">Probabilistic Interpretation of AUC</div>
-      <p style="margin:0">The AUC is exactly equal to the probability $P(score(+) > score(-))$ — the chance a random positive sample is scored higher than a random negative sample.</p>
-    </div>
-
-    <!-- SECTION 6 -->
-    <h2 id="regression" class="premium-h2">VI. Regression Metrics: Statistical Properties</h2>
-    <p>In continuous prediction, different loss functions target different statistical moments of the distribution.</p>
-
+    <h2 id="#regression-metrics" class="premium-h2">Regression Metrics: MSE vs. MAE</h2>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
-          <tr><th>Metric</th><th>Loss function</th><th>Moments Targetted</th></tr>
+          <tr><th>Metric</th><th>Formula</th><th>Optimum Target</th><th>Outlier Sensitivity</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>MSE</strong> (L2)</td><td>$\frac{1}{n} \Sigma (y - \hat{y})^2$</td><td>Sensitivity to outliers; targets the <strong>Mean</strong>.</td></tr>
-          <tr><td><strong>MAE</strong> (L1)</td><td>$\frac{1}{n} \Sigma |y - \hat{y}|$</td><td>Robust to outliers; targets the <strong>Median</strong>.</td></tr>
+          <tr><td><strong>MSE</strong></td><td>$\frac{1}{n}\sum(y_i - \hat{y}_i)^2$</td><td>Conditional <strong>Mean</strong></td><td>High (Squared Penalty)</td></tr>
+          <tr><td><strong>MAE</strong></td><td>$\frac{1}{n}\sum|y_i - \hat{y}_i|$</td><td>Conditional <strong>Median</strong></td><td>Low (Linear Penalty)</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- SECTION 7 -->
-    <h2 id="info-theory" class="premium-h2">VII. Information Theory & Cross-Entropy</h2>
-    <p>Logarithmic loss (Cross-Entropy) is the standard for training neural networks. It is derived from Maximum Likelihood Estimation.</p>
-
+    <h2 id="cross-entropy" class="premium-h2">Information Theory and Cross-Entropy</h2>
+    <p>Cross-entropy measures the divergence between the true distribution $P$ and the model's predicted distribution $Q$. Minimizing cross-entropy is equivalent to maximizing the <strong>Log-Likelihood</strong> of the observations.</p>
     <div class="premium-math-block">
-      \mathcal{L} = -\frac{1}{n}\sum [y \ln \hat{p} + (1-y)\ln(1-\hat{p})]
+      \[ H(P, Q) = -\sum_{x \in \mathcal{X}} P(x) \log Q(x) = H(P) + D_{KL}(P \| Q) \]
     </div>
 
-    <div style="margin-top:80px; padding-top:20px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 11px; font-family: var(--font-mono)">
-      <strong>Primary References:</strong><br/>
-      • ROC-AUC and Wilcoxon Equivalence: PMC Statistical Analysis.<br/>
-      • F1 Harmonic Proofs: Stanford CS229 / Google ML Crash Course.<br/>
-      • Information Theory & Loss: MIT OpenCourseWare 18.065.
+    <h2 id="synthesis" class="premium-h2">Integrated Performance Assessment</h2>
+    <div class="premium-case-study">
+      <h4>Metric Selection Strategy</h4>
+      <ul>
+        <li><strong>Medical Screening:</strong> Prioritize <strong>Recall</strong> (minimize False Negatives).</li>
+        <li><strong>Fraud Detection:</strong> Prioritize <strong>Precision</strong> (minimize False Alarms).</li>
+        <li><strong>Physics Modeling:</strong> Prioritize <strong>MSE</strong> (penalize large deviations).</li>
+        <li><strong>General Ranking:</strong> Prioritize <strong>ROC-AUC</strong> (evaluate discriminative power).</li>
+      </ul>
     </div>
-  `
+  `,
 };

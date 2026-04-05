@@ -55,7 +55,8 @@
   }
 
   html {
-    scroll-behavior: smooth;
+    overflow-y: scroll;
+    scrollbar-gutter: stable both-edges;
   }
 
   body {
@@ -65,15 +66,38 @@
     font-size: 16px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
-    transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
+    min-height: 100vh;
+    /* transition removed to prevent diagonal jitter during navigation resets */
+  }
+
+  .no-transition, .no-transition * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  /* ─── TYPOGRAPHY & LIST SPACING ─── */
+  p {
+    @apply mb-5 font-light text-text-premium leading-relaxed;
+  }
+
+  ul, ol {
+    @apply mb-6 pl-6 space-y-3;
+  }
+
+  li {
+    @apply font-light text-text-premium;
   }
 }
 
 @layer components {
   /* ─── PREMIUM HERO ─── */
   .premium-hero {
-    background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent) 0%, color-mix(in srgb, var(--purple) 5%, transparent) 100%);
-    border: 1px solid color-mix(in srgb, var(--accent) 20%, transparent);
+    --theme-primary: var(--category-primary, var(--accent));
+    --theme-secondary: var(--category-secondary, var(--purple));
+    
+    background: linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 8%, transparent) 0%, color-mix(in srgb, var(--theme-secondary) 5%, transparent) 100%);
+    border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
     @apply rounded-2xl p-10 mb-12 relative overflow-hidden;
   }
   .premium-hero::before {
@@ -81,31 +105,34 @@
     position: absolute;
     top: -40px; right: -40px;
     width: 180px; height: 180px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent) 0%, transparent 70%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary) 12%, transparent) 0%, transparent 70%);
     pointer-events: none;
   }
   .premium-hero-badge {
-    @apply inline-flex items-center gap-1.5 bg-accent-premium/15 border border-accent-premium/30 rounded-full px-3 py-1 text-xs text-accent-premium font-medium mb-4;
+    @apply inline-flex items-center gap-1.5 bg-accent-premium/15 border border-accent-premium/30 rounded-full px-3 py-1 text-xs font-medium mb-4;
+    color: var(--theme-primary, var(--accent));
+    background-color: color-mix(in srgb, var(--theme-primary, var(--accent)) 15%, transparent);
+    border-color: color-mix(in srgb, var(--theme-primary, var(--accent)) 30%, transparent);
   }
   .premium-hero h1 {
     font-family: 'Crimson Pro', serif;
-    @apply text-4xl lg:text-[38px] font-semibold leading-tight mb-4 text-text-premium;
+    @apply text-3xl lg:text-[32px] font-semibold leading-tight mb-2 text-text-premium;
   }
   .premium-hero p {
-    @apply text-[15.5px] leading-relaxed font-light text-muted-premium max-w-3xl;
+    @apply text-[15px] leading-relaxed font-light text-muted-premium max-w-3xl;
   }
 
   /* ─── SECTION HEADERS ─── */
   .premium-h2 {
     font-family: 'Crimson Pro', serif;
-    @apply text-[28px] font-semibold text-text-premium mt-12 mb-4 pb-3 border-b-2 border-border-premium relative;
+    @apply text-[24px] font-semibold text-text-premium mt-10 mb-3 pb-3 border-b-2 border-border-premium relative;
   }
   .premium-h2::after {
     content: '';
     position: absolute;
     bottom: -2px; left: 0;
     width: 48px; height: 2px;
-    @apply bg-accent-premium;
+    background-color: var(--category-primary, var(--accent));
   }
   .premium-h3 {
     @apply text-lg font-semibold text-accent-premium mt-8 mb-3;
@@ -141,7 +168,7 @@
 
   /* ─── MATH & TABLES ─── */
   .premium-math-block {
-    @apply bg-bg-tertiary border border-border-premium border-l-4 border-l-purple-premium rounded-lg p-6 mb-6 overflow-x-auto text-[15px];
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-6 mb-6 overflow-x-auto text-[15px];
   }
   
   .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
@@ -175,5 +202,5 @@
   color: var(--text) !important;
 }
 .katex-display {
-  @apply my-6 overflow-x-auto overflow-y-hidden;
+  @apply mt-4 mb-6 overflow-x-auto overflow-y-hidden;
 }

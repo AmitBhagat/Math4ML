@@ -59,8 +59,7 @@ export const probabilityBasicsSection: TopicSection = {
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Computational Implementation: Discrete Sim</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 def simulate_die_roll(event_condition, trials=10000):
@@ -82,7 +81,6 @@ prob_even = simulate_die_roll(lambda x: x % 2 == 0)
 print(f"Sample Space S: {set(range(1, 7))}")
 print(f"Theoretical P(Even): 0.50")
 print(f"Simulated P(Even): {prob_even:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `
 };

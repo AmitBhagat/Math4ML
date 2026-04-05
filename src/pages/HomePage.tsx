@@ -28,9 +28,6 @@ const DomainCard = ({ cluster, ...props }: { cluster: any, key?: string }) => {
           <span className={`${isML ? 'text-accent-teal' : 'text-accent-purple'} italic`}>{cluster.title.split(' ').pop()}</span>
         </h2>
         
-        <p className="text-on-surface-variant text-lg leading-relaxed mb-12 max-w-md font-light">
-          {cluster.description}
-        </p>
 
         <div className="flex flex-wrap gap-4 mt-auto">
           {cluster.categories.map((catId: string) => {
@@ -63,13 +60,10 @@ export const HomePage = () => {
           <div className="inline-block py-1 px-4 mb-8 bg-surface-container-high rounded text-accent-teal font-black text-[10px] uppercase tracking-[0.25em] shadow-sm">
             The Intellectual Curator Series
           </div>
-          <h1 className="text-5xl md:text-7xl font-headline font-black tracking-tighter text-on-surface leading-[0.95] mb-8">
+          <h1 className="text-4xl md:text-6xl font-headline font-black tracking-tighter text-on-surface leading-[0.95] mb-8">
             Mathematics for <br/>
             <span className="text-accent-teal italic">Machine Intelligence.</span>
           </h1>
-          <p className="text-lg md:text-xl text-on-surface-variant font-light leading-relaxed max-w-2xl mb-12 text-editorial-justify">
-            An editorial deep-dive into the foundational structures that power modern intelligence. Rigorous, visual, and meticulously organized.
-          </p>
           
           <div className="flex flex-col md:flex-row gap-6">
             <a 
@@ -105,8 +99,7 @@ export const HomePage = () => {
       <section id="domains" className="py-32 px-8 md:px-16 bg-surface-container-low/30">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-24 gap-12">
           <div className="max-w-2xl">
-            <h2 className="text-4xl md:text-5xl font-headline font-black tracking-tight mb-6 text-on-surface">Curriculum Domains</h2>
-            <p className="text-on-surface-variant text-lg leading-relaxed">Choose your path of inquiry. From the rigorous proofs of shared theory to the adaptive models of applied intelligence.</p>
+            <h2 className="text-3xl md:text-4xl font-headline font-black tracking-tight mb-6 text-on-surface">Curriculum Domains</h2>
           </div>
           <div className="text-[10px] font-black tracking-[0.3em] uppercase text-accent-teal pb-4 border-b-2 border-accent-teal/20 self-start md:self-auto">
             {CLUSTERS.length} Primary Domains

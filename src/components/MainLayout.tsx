@@ -43,7 +43,7 @@ export const MainLayout = () => {
       <div className="flex-1 flex flex-col lg:ml-[var(--sidebar-w)] min-w-0">
         <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
         
-        <main className="flex-1 overflow-x-hidden relative">
+        <main id="main-content" className="flex-1 overflow-y-auto overflow-x-hidden relative no-transition">
           <div className="max-w-[1400px] mx-auto p-6 md:p-12 lg:p-16 pb-32">
             <Outlet />
           </div>

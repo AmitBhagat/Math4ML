@@ -1,138 +1,174 @@
 import { TopicSection } from '../../src/data/types';
 
 export const parameterEstimationSection: TopicSection = {
-  id: "estimation",
-  title: "Comprehensive Analytical Framework for Parameter Estimation and Generalization",
-  description: "An exhaustive investigation into Maximum Likelihood Estimation (MLE), Maximum A Posteriori (MAP) estimation, and the Bias-Variance Tradeoff—the three pillars of machine learning model development.",
-  formula: "P(\\theta|X) = \\frac{P(X|\\theta)P(\\theta)}{P(X)}",
+  id: "parameter-estimation",
+  title: "MLE, MAP, & Bias-Variance",
+  description: "A comprehensive investigation into Maximum Likelihood Estimation (MLE), Maximum A Posteriori (MAP) estimation, and the Bias-Variance Tradeoff—the three pillars of statistical learning and generalization.",
+  formula: "L(\\theta) = \\prod_{i=1}^{n} f(x_i; \\theta)",
   details: [
-    "Frequentist vs. Bayesian Dichotomy in Parametric Inference",
+    "Frequentist vs. Bayesian Paradigms in Parametric Inference",
     "Maximum Likelihood Estimation (MLE): Mechanics and I.I.D. Assumptions",
-    "Log-Likelihood Transformation: Computational Stability and Underflow",
-    "Mathematical Derivations: Bernoulli and Gaussian Parameters",
-    "Fisher Information and Asymptotic Efficiency of MLE",
-    "Maximum A Posteriori (MAP) Estimation: Mode of the Posterior",
-    "Conjugate Priors: The Beta-Bernoulli Update Mechanism",
-    "MAP-Regularization Duality: Bridge to Ridge and Lasso Regression",
-    "Formal Bias-Variance Decomposition: Error Component Analysis",
-    "Generalization Error: Irreducible Noise, Bias² and Variance Components"
+    "Log-Likelihood Transformations for Gaussian and Bernoulli models",
+    "Maximum A Posteriori (MAP): Conjugate Priors and Beta-Bernoulli models",
+    "Bayesian Regularization: Connecting MAP to Ridge (L2) and Lasso (L1)",
+    "Formal Derivation of Bias-Variance Decomposition",
+    "Complexity Tradeoff Curves: Underfitting vs. Overfitting dynamics",
+    "Empirical Risk Minimization (ERM) and Learning Theory"
   ],
   html: String.raw`
     <div class="premium-toc">
-      <div class="premium-toc-title">Estimation Roadmap</div>
-      <a href="#foundations">I. Frequentist vs. Bayesian Foundations</a>
-      <a href="#mle">II. Maximum Likelihood Estimation (MLE)</a>
-      <a href="#map">III. Maximum A Posteriori (MAP)</a>
-      <a href="#bias-variance">IV. The Bias-Variance Tradeoff</a>
-      <a href="#case-study">V. Case Study: Complexity Analysis</a>
+      <div class="premium-toc-title">Table of Contents</div>
+      <a href="#foundations">Theoretical Foundations of Parametric Inference</a>
+      <a href="#mle">Maximum Likelihood Estimation (MLE)</a>
+      <a href="#mle-gaussian" class="sub">↳ Gaussian & Bernoulli Derivations</a>
+      <a href="#map">Maximum A Posteriori (MAP) Estimation</a>
+      <a href="#map-regularization" class="sub">↳ MAP as Regularization (Ridge & Lasso)</a>
+      <a href="#bv">The Bias-Variance Decomposition</a>
+      <a href="#bv-derivation" class="sub">↳ Formal Mathematical Derivation</a>
+      <a href="#complexity">The Complexity Tradeoff Curve</a>
+      <a href="#casestudy">Case Study: Diabetes Dataset Analysis</a>
+      <a href="#advanced">Advanced Insights: Information Geometry</a>
     </div>
 
     <!-- SECTION 1 -->
-    <h2 id="foundations" class="premium-h2">I. Theoretical Foundations of Parametric Inference</h2>
-    <p>In the statistical paradigm, we model the world as a probabilistic system governed by unknown parameters $\theta$. The process of "learning" is constructing an estimator $\hat{\theta}$ from data that approximates the ground truth.</p>
+    <h2 id="foundations" class="premium-h2">Theoretical Foundations of Parametric Inference</h2>
+    <p>In the classical statistical paradigm, the world is modeled as a probabilistic system governed by unknown but fixed parameters. We assume the existence of a true data-generating distribution $P(x, y; \theta^*)$, where $\theta^*$ represents the "ground truth" parameters we wish to recover. The process of learning, therefore, is the process of constructing an estimator $\hat{\theta}$ from a finite dataset $S = \{(x_i, y_i)\}_{i=1}^n$ that approximates $\theta^*$ with high precision and reliability.</p>
+    <p>The construction of such an estimator requires an objective function that quantifies the "goodness" of any candidate parameter $\theta$. Depending on the philosophical stance adopted—Frequentist or Bayesian—this objective function takes different forms.</p>
+
+    <h3 class="premium-h3">The Frequentist and Bayesian Dichotomy</h3>
+    <p>The distinction between MLE and MAP is not merely a choice of algorithm but a fundamental divergence in how uncertainty and information are handled. In a Frequentist framework, the randomness resides in the data sampling process. In the Bayesian framework, the randomness resides in our knowledge of the parameter—we begin with a prior belief and use the data as evidence to update that belief into a posterior distribution.</p>
 
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
-          <tr><th>Approach</th><th>Philosophy</th><th>Objective</th></tr>
+          <tr><th>Feature</th><th>Maximum Likelihood Estimation (MLE)</th><th>Maximum A Posteriori (MAP)</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Frequentist</strong></td><td>Parameters are <strong>fixed constants</strong>. Randomness is in the sampling.</td><td>Maximize Likelihood $P(D|\theta)$.</td></tr>
-          <tr><td><strong>Bayesian</strong></td><td>Parameters are <strong>random variables</strong>. Randomness is in our knowledge.</td><td>Maximize Posterior $P(\theta|D)$.</td></tr>
+          <tr><td><strong>Philosophical Paradigm</strong></td><td>Frequentist: Parameters are fixed constants.</td><td>Bayesian: Parameters are random variables.</td></tr>
+          <tr><td><strong>Objective Function</strong></td><td>Maximize the likelihood $P(D|\theta)$.</td><td>Maximize the posterior $P(\theta|D) \propto P(D|\theta)P(\theta)$.</td></tr>
+          <tr><td><strong>Prior Knowledge</strong></td><td>Ignored; relies solely on empirical data.</td><td>Integrated via a prior distribution $P(\theta)$.</td></tr>
+          <tr><td><strong>Regularization</strong></td><td>None; susceptible to overfitting in small samples.</td><td>Implicitly regularized by the prior.</td></tr>
+          <tr><td><strong>Statistical Consistency</strong></td><td>Converges to the true $\theta^*$ as $n \to \infty$.</td><td>Converges to the MLE estimate as $n \to \infty$.</td></tr>
         </tbody>
       </table>
     </div>
 
     <!-- SECTION 2 -->
-    <h2 id="mle" class="premium-h2">II. Maximum Likelihood Estimation (MLE)</h2>
-    <p>MLE seeks the parameters that assign the highest probability to the observed data. For computational stability, we almost always maximize the <strong>Log-Likelihood</strong>.</p>
+    <h2 id="mle" class="premium-h2">Maximum Likelihood Estimation: Theory and Mechanics</h2>
+    <p>Maximum Likelihood Estimation (MLE) is predicated on the idea that the "most likely" parameters are those that assign the highest probability to the actual data observed. It is a purely data-driven approach that makes no assumptions about the likelihood of the parameters themselves before the data is seen.</p>
+
+    <h3 class="premium-h3">The Likelihood Function and I.I.D. Assumptions</h3>
+    <p>Consider a set of observations $X = \{x_1, x_2, \dots, x_n\}$. We assume these observations are independent and identically distributed (i.i.d.), meaning each $x_i$ is drawn from the same distribution $f(x; \theta)$ and the occurrence of one does not affect the others. The joint probability (the likelihood) of the entire dataset is the product of the individual probabilities:</p>
 
     <div class="premium-math-block">
-      \ell(\theta) = \sum_{i=1}^{n} \ln f(x_i; \theta)
+      \[ L(\theta) = \prod_{i=1}^{n} f(x_i; \theta) \]
     </div>
 
-    <div class="premium-callout info">
-      <div class="premium-callout-icon">⚡</div>
-      <div class="premium-callout-body">
-        <strong>The Log Transformation:</strong> Logs turn products (prone to underflow) into sums. Since $\ln$ is a monotonic function, the $\theta$ that maximizes the log-likelihood is the same as the one that maximizes the raw likelihood.
-      </div>
+    <p>The task of MLE is to find the $\hat{\theta}$ that maximizes this product:</p>
+    <div class="premium-math-block">
+      \[ \hat{\theta}_{MLE} = \arg\max_{\theta} L(\theta) \]
     </div>
 
-    <div class="premium-def-box">
-      <div class="premium-def-title">Gaussian Parameter MLE</div>
-      <p>For $n$ observations $x_i \sim N(\mu, \sigma^2)$, the MLE estimators are:</p>
-      <ul style="margin-top:10px">
-        <li><strong>Mean:</strong> $\hat{\mu}_{MLE} = \frac{1}{n} \sum x_i = \bar{x}$</li>
-        <li><strong>Variance:</strong> $\hat{\sigma}^2_{MLE} = \frac{1}{n} \sum (x_i - \bar{x})^2$</li>
-      </ul>
+    <h3 class="premium-h3">The Log-Likelihood Transformation</h3>
+    <p>Maximizing a product of many small probabilities is computationally unstable due to numerical underflow. Because the natural logarithm is a strictly increasing function, the value of $\theta$ that maximizes $L(\theta)$ also maximizes $\ln L(\theta)$. This transforms the product into a sum, which is far more tractable for optimization:</p>
+
+    <div class="premium-math-block">
+      \[ \ell(\theta) = \ln L(\theta) = \sum_{i=1}^{n} \ln f(x_i; \theta) \]
+    </div>
+
+    <h3 id="mle-gaussian" class="premium-h3">Mathematical Derivations: Bernoulli and Gaussian</h3>
+    <p>For a <strong>Bernoulli distribution</strong> (binary outcomes $x \in \{0, 1\}$), the MLE for the success probability $p$ is the observed sample mean:</p>
+    <div class="premium-math-block">
+      \[ \hat{p}_{MLE} = \frac{k}{n} \quad \text{(where } k \text{ is the number of successes)} \]
+    </div>
+
+    <p>For a <strong>Gaussian distribution</strong> $N(\mu, \sigma^2)$, optimizing the log-likelihood reveals:</p>
+    <div class="premium-math-block">
+        \[ \hat{\mu}_{MLE} = \frac{1}{n}\sum_{i=1}^n x_i \]
+        \[ \hat{\sigma}^2_{MLE} = \frac{1}{n}\sum_{i=1}^n (x_i - \bar{x})^2 \]
     </div>
 
     <div class="premium-callout warn">
       <div class="premium-callout-icon">⚠️</div>
-      <div class="premium-callout-body">
-        <strong>The Bias Pitfall:</strong> The MLE variance estimator is <strong>biased</strong> for small $n$ (it underestimates the true variance). We use <strong>Bessel's Correction</strong> ($n-1$) to create an unbiased estimator.
-      </div>
+      <div class="premium-callout-body">The MLE for variance is <strong>biased</strong> for small $n$; its expectation is $\frac{n-1}{n}\sigma^2$. The standard unbiased estimator uses $n-1$ in the denominator (Bessel's correction).</div>
     </div>
 
     <!-- SECTION 3 -->
-    <h2 id="map" class="premium-h2">III. Maximum A Posteriori (MAP) Estimation</h2>
-    <p>MAP refines raw likelihood by incorporating <strong>Prior Knowledge</strong> $P(\theta)$. This acts as a regularizer, preventing the model from overreacting to noise in small datasets.</p>
+    <h2 id="map" class="premium-h2">Maximum A Posteriori Estimation: The Bayesian Extension</h2>
+    <p>While MLE is powerful, it is prone to extreme sensitivity in small datasets. Maximum A Posteriori (MAP) estimation corrects this by treating the parameter as a random variable with an associated <strong>prior distribution</strong> $P(\theta)$.</p>
 
-    <div class="premium-def-box">
-      <div class="premium-def-title">The MAP-Regularization Duality</div>
-      <p style="margin:0">Mathematically, MAP estimation with a Gaussian prior on parameters is exactly equivalent to <strong>Ridge Regression (L2)</strong>.</p>
-      <div class="premium-math-block" style="margin-top:15px; margin-bottom:0; background:transparent; border:none; padding:0;">
-        \hat{\theta}_{MAP} = \arg\max_{\theta} P(X|\theta) P(\theta)
+    <h3 class="premium-h3">The Mechanics of Bayes' Theorem</h3>
+    <p>MAP estimation identifies the mode of the posterior distribution $P(\theta|X)$. Using Bayes' Theorem:</p>
+    <div class="premium-math-block">
+      \[ \hat{\theta}_{MAP} = \arg\max_{\theta}\; P(X|\theta) \cdot P(\theta) \]
+    </div>
+
+    <div class="premium-case-study">
+      <h4>Numerical Example: The "Fair Coin" Prior</h4>
+      <p>If we have a prior belief that a coin is fair (mode $= 0.5$) and observe 25 heads in 30 trials:</p>
+      <div class="premium-math-block">
+        \[ \hat{p}_{MAP} \approx 0.70 \quad \text{vs.} \quad \hat{p}_{MLE} \approx 0.83 \]
+      </div>
+      <p>The prior "pulls" the estimate toward our initial belief, acting as a buffer against noisy, extreme results in small samples.</p>
+    </div>
+
+    <h3 id="map-regularization" class="premium-h3">MAP as Regularization: Ridge and Lasso</h3>
+    <p>One of the most profound links in machine learning is that between Bayesian priors and regularization penalties.</p>
+    <div class="premium-callout info">
+      <div class="premium-callout-icon">💡</div>
+      <div class="premium-callout-body">
+        Assuming a <strong>Gaussian prior</strong> on the weights of a linear model ($\beta \sim N(0, \tau^2 I)$) results in <strong>Ridge Regression (L2)</strong>. <br/>
+        Assuming a <strong>Laplacian prior</strong> results in <strong>Lasso Regression (L1)</strong>, which promotes sparsity.
       </div>
     </div>
 
     <!-- SECTION 4 -->
-    <h2 id="bias-variance" class="premium-h2">IV. The Bias-Variance Decomposition</h2>
-    <p>The total error of any learner can be decomposed into three fundamental components. Understanding this tradeoff is the key to tuning model complexity.</p>
+    <h2 id="bv" class="premium-h2">The Bias-Variance Decomposition</h2>
+    <p>The goal of learning is to achieve low error on unseen data. This generalization error can be decomposed into three fundamental, non-negative components.</p>
 
+    <h3 id="bv-derivation" class="premium-h3">Formal Mathematical Derivation</h3>
+    <p>The total Mean Squared Error (MSE) at a test point $x$ can be expanded into:</p>
     <div class="premium-math-block">
-      \text{Total Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Noise}
+      \[ \underbrace{E[(y - \hat{f})^2]}_{\text{Total MSE}} = \underbrace{(E[\hat{f}] - f)^2}_{\text{Bias}^2} + \underbrace{\text{Var}(\hat{f})}_{\text{Variance}} + \underbrace{\sigma^2}_{\text{Irreducible Error}} \]
     </div>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Bias (Underfitting Error)</div>
+      <p style="margin:0">Measures the error introduced by approximating a complex real-world relationship with a simpler model. High bias leads to <strong>underfitting</strong>.</p>
+    </div>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Variance (Overfitting Error)</div>
+      <p style="margin:0">Measures the model's sensitivity to specific fluctuations in the training set. High variance leads to <strong>overfitting</strong>.</p>
+    </div>
+
+    <div class="premium-def-box">
+      <div class="premium-def-title">Irreducible Error</div>
+      <p style="margin:0">The statistical "floor" of the error caused by noise inherent in the data-generating process itself.</p>
+    </div>
+
+    <!-- SECTION 5 -->
+    <h2 id="complexity" class="premium-h2">The Complexity Tradeoff Curve</h2>
+    <p>As model complexity increases (e.g., higher degree polynomials), bias typically decreases while variance increases. The optimal model sits at the "elbow" of the U-shaped test error curve.</p>
 
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
-          <tr><th>Component</th><th>Source</th><th>Effect</th></tr>
+          <tr><th>Model Complexity</th><th>Bias Trend</th><th>Variance Trend</th><th>Training Error</th><th>Test Error</th></tr>
         </thead>
         <tbody>
-          <tr><td><strong>Bias</strong></td><td>Simplifying assumptions.</td><td>Underfitting (High Bias).</td></tr>
-          <tr><td><strong>Variance</strong></td><td>Sensitivity to training noise.</td><td>Overfitting (High Variance).</td></tr>
-          <tr><td><strong>Noise</strong></td><td>Inherent randomness.</td><td>The absolute floor of error.</td></tr>
+          <tr><td><strong>Low (Linear)</strong></td><td>High (Underfit)</td><td>Low</td><td>High</td><td>High</td></tr>
+          <tr><td><strong>Optimal</strong></td><td>Moderate</td><td>Moderate</td><td>Moderate</td><td><strong>Minimum</strong></td></tr>
+          <tr><td><strong>High (Poly-25)</strong></td><td>Low</td><td>High (Overfit)</td><td>Extremely Low</td><td>Extremely High</td></tr>
         </tbody>
       </table>
     </div>
 
-    <!-- SECTION 5 -->
-    <h2 id="case-study" class="premium-h2">V. Case Study: Dataset Complexity Analysis</h2>
-    <div class="premium-case-study">
-      <h4>The Generalization Gap</h4>
-      <p>Consider a model predicting diabetes progression. As we add features, we observe the following metrics:</p>
-      <div class="premium-table-wrap" style="margin-top:20px">
-        <table class="premium-table">
-          <thead>
-            <tr><th>Features</th><th>Training MSE</th><th>Test MSE</th><th>Status</th></tr>
-          </thead>
-          <tbody>
-            <tr><td>Baseline</td><td>5524</td><td>6352</td><td>Underfitting</td></tr>
-            <tr><td>S4 Only</td><td>4278</td><td>5409</td><td>High Bias</td></tr>
-            <tr style="background: color-mix(in srgb, var(--accent) 5%, transparent)"><td><strong>S5 & BMI</strong></td><td>3004</td><td>3453</td><td><strong>OPTIMAL</strong></td></tr>
-            <tr><td>All Features</td><td>2640</td><td>3224</td><td>Overfitting</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p style="margin-top:15px">While "All Features" minimizes training error, it increases the generalization gap. The "S5 & BMI" subset provides the most reliable balance between bias and variance.</p>
-    </div>
+    <!-- SECTION 6 -->
+    <h2 id="casestudy" class="premium-h2">Case Study: Diabetes Dataset Analysis</h2>
+    <p>In standard datasets like the Diabetes study (442 patients, 10 variables), we observe that while adding more features always reduces training MSE (reducing bias), the test MSE eventually begins to rise as the model begins to fit the noise (increasing variance).</p>
 
-    <div style="margin-top:80px; padding-top:20px; border-top: 1px solid var(--border); opacity: 0.6; font-size: 11px; font-family: var(--font-mono)">
-      <strong>Primary References:</strong><br/>
-      • MLE and MAP Theory: Stanford CS229 / CS109.<br/>
-      • Bias-Variance Decomposition: Cornell CS4780 / MIT 15.097.<br/>
-      • Regularization & Priors: CMU Statistical Machine Learning.
-    </div>
-  `
+    <h2 id="advanced" class="premium-h2">Advanced Insights: Information Geometry</h2>
+    <p>Beyond simple error decomposition, modern research investigates the deeper geometric properties of these estimators. One such insight is the <strong>Fisher Information</strong> $I(\theta)$, which defines the curvature of the log-likelihood and establishes the theoretical lower bound for the variance of an unbiased estimator (Cramér–Rao Lower Bound).</p>
+  `,
 };

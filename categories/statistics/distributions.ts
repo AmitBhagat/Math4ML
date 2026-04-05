@@ -67,8 +67,7 @@ export const distributionsSection: TopicSection = {
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Numerical Scipy Implementation</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 from scipy.stats import norm, binom, poisson
 
@@ -87,7 +86,6 @@ emails_2 = poisson.pmf(2, 3)
 print(f"Normal Peak (z=0): {z_peak:.4f}")
 print(f"Binomial P(H=5): {heads_5:.4f}")
 print(f"Poisson P(E=2): {emails_2:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `
 };

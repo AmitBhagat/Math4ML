@@ -80,8 +80,7 @@ export const vectorsFullSection: TopicSection = {
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Numerical Implementation: NumPy</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 # 1. Define vectors in R^3
@@ -93,10 +92,10 @@ dot_product = np.dot(x, y)
 l2_norm = np.linalg.norm(x)
 cosine_similarity = dot_product / (np.linalg.norm(x) * np.linalg.norm(y))
 
+# 3. Validation Insights
 print(f"Dot Product: {dot_product}")
 print(f"L2 Norm of x: {l2_norm:.4f}")
 print(f"Cosine Similarity: {cosine_similarity:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `
 };

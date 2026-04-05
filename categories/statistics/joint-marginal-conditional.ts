@@ -68,8 +68,7 @@ export const jointMarginalConditionalSection: TopicSection = {
 
     <!-- LAB -->
     <h2 id="lab" class="premium-h2">Empirical Matrix Analysis</h2>
-    <div class="premium-math-block">
-      <python-code>
+    <python-code>
 import numpy as np
 
 # 1. Define Joint Distribution Table (Rows: Observed, Cols: Predicted)
@@ -89,7 +88,6 @@ print(f"Joint Matrix:\n{joint}")
 print(f"Marginal Observed: {marginal_obs}")
 print(f"Marginal Predicted: {marginal_prd}")
 print(f"P(Observed=0 | Predicted=1): {cond_prob:.4f}")
-      </python-code>
-    </div>
+    </python-code>
   `
 };

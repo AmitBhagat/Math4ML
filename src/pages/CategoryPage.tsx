@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { ChevronRight, ArrowLeft } from "lucide-react";
 import { CategoryData } from "@/src/data/types";
 import { getCategoryData, CLUSTERS } from "@/src/data/topics";
+import { getCategoryTheme } from "@/src/lib/themeUtils";
 
 interface CategoryPageProps {
   category?: CategoryData;
@@ -62,7 +63,13 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
     );
   }
   return (
-    <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
+    <div 
+      className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12"
+      style={{
+        '--category-primary': getCategoryTheme(categoryId || '').primary,
+        '--category-secondary': getCategoryTheme(categoryId || '').secondary,
+      } as React.CSSProperties}
+    >
 
 
       {/* Breadcrumb Navigation */}
@@ -79,13 +86,17 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
       </div>
 
       {/* Header */}
-      <div className="mb-20">
-        <h1 className="text-4xl md:text-6xl font-headline font-black text-on-surface tracking-tighter mb-8 leading-none">
+      <div 
+        className="premium-hero"
+        style={{
+          '--category-primary': getCategoryTheme(categoryId || '').primary,
+          '--category-secondary': getCategoryTheme(categoryId || '').secondary,
+          padding: '40px'
+        } as React.CSSProperties}
+      >
+        <h1 className="text-3xl md:text-5xl font-headline font-black text-on-surface tracking-tighter leading-none mb-0">
           {category.title}
         </h1>
-        <p className="text-lg md:text-xl text-on-surface-variant max-w-4xl leading-relaxed font-light text-editorial-justify">
-          {category.description}
-        </p>
       </div>
 
       {/* Key Concepts Grid */}
@@ -107,9 +118,6 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
                   {section.title}
                 </h3>
               </div>
-              <p className="text-on-surface-variant text-sm mb-10 leading-relaxed flex-grow font-light text-editorial-justify">
-                {section.description}
-              </p>
               <div className="flex flex-wrap gap-3">
                 {section.tags?.map((tag) => (
                   <span key={tag} className="text-[9px] font-black uppercase tracking-widest bg-background/50 text-on-surface-variant px-3 py-1.5 rounded">
