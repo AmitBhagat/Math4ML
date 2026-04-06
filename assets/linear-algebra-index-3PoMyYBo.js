@@ -1,4 +1,10 @@
-const t={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",html:String.raw`
+const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
+      <h1>Introduction to Vectors</h1>
+      <p>In Machine Learning, <strong>Vectors</strong> are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#definition">Vector Definition</a>
@@ -128,9 +134,15 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we understand basic Vector operations, we can move to <strong>Matrices</strong>, which allow us to perform these operations on entire datasets simultaneously.
+      <strong>Next Step:</strong> Having mastered core vector foundations, let's explore how we grid these vectors into <strong><a href="#/mathematics/linear-algebra/matrices">Matrix Essentials</a></strong>.
     </div>
-  `},e={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",html:String.raw`
+  `},t={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
+      <h1>Introduction to Matrices</h1>
+      <p>In Machine Learning, a <strong>Matrix</strong> is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire <strong>Dataset</strong>, where rows correspond to individual samples and columns correspond to features.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#definition">Matrix Definition</a>
@@ -270,9 +282,15 @@ print(f"Inverse:\n{A_inv}")
     </div>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Understanding how matrices transform space leads us to <strong>Eigenvalues and Eigenvectors</strong>, which help us find the most important directions (axes) in our data.
+      <strong>Next Step:</strong> Matrix properties define a model's stability. Next, we explore the geometry of where data "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
   `},i={id:"matrix-properties",title:"Introduction to Matrix Properties",description:'Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.',html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🧬 Linear Algebra · Matrix Properties</div>
+      <h1>Introduction to Matrix Properties</h1>
+      <p>Matrix properties like <strong>Rank</strong>, <strong>Determinant</strong>, <strong>Trace</strong>, and <strong>Positive Definiteness</strong> act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#rank">1. Rank of a Matrix</a>
@@ -419,9 +437,15 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> These properties allow us to analyze the stability of our models. Next, we will explore <strong>Eigenvalues and Eigenvectors</strong>, which use these properties to decompose matrices into their simplest, most informative components.
+      <strong>Next Step:</strong> Matrix properties define a model's stability. Explore where data truly "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
   `},a={id:"vector-spaces",title:"Introduction to Vector Spaces",description:"A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
+      <h1>Introduction to Vector Spaces</h1>
+      <p>A <strong>Vector Space</strong> is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in \(\mathbb{R}^n\) (an \(n\)-dimensional real space), where each dimension represents a specific feature of our data.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#subspaces">1. Subspaces</a>
@@ -538,9 +562,15 @@ print(f"Projection of y onto u: {projection}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we understand how vectors occupy and project within spaces, we can tackle <strong>Calculus</strong>, specifically <strong>Partial Derivatives</strong>, to see how moving along these axes changes our model's error.
+      <strong>Next Step:</strong> Having mastered decompositions like SVD, we reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
   `},n={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
+      <h1>Introduction to Matrix Decompositions</h1>
+      <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#lu">1. LU Decomposition</a>
@@ -681,6 +711,12 @@ print(f"SVD Singular Values: {s}")
       <strong>Linking Rule:</strong> Having mastered how to decompose data structures, we now have the foundation for <strong>Optimization</strong>. Specifically, we can use these tools to solve for the weights of a model where the "change" in error is minimized using <strong>Calculus</strong>.
     </div>
   `},o={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">λ Linear Algebra · Eigenvalues & Eigenvectors</div>
+      <h1>Introduction to Eigenvalues and Eigenvectors</h1>
+      <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#core">1. Core Theory &amp; Mathematical Derivation</a>
@@ -793,6 +829,12 @@ print("lambda1 * v1:", lambda1 * v1)
       <strong>Linking Rule:</strong> Now that we have covered the static properties of data via Linear Algebra, we can transition to <strong>Calculus</strong>, which allows us to understand how these values <em>change</em>, leading us to the heart of ML training: <strong>Gradient Descent</strong>.
     </div>
   `},s={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">📝 Solved Examples · Eigenvalues, Eigenvectors & PCA</div>
+      <h1>Solved Examples: Eigenvalues, Eigenvectors, and PCA</h1>
+      <p>Following the GeeksforGeeks pattern, here are practical, step-by-step examples to solidify your understanding of the concepts discussed. Each example walks through the complete solution with all intermediate steps shown.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Examples in This Page</div>
       <a href="#ex1">Example 1 — Finding Eigenvalues and Eigenvectors</a>
@@ -933,4 +975,4 @@ $$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pma
     <div class="linking-rule">
       <strong>Linking Rule:</strong> Now that we have covered the static properties of data via Linear Algebra, we can transition to <strong>Calculus</strong>, which allows us to understand how these values <em>change</em>, leading us to the heart of ML training: <strong>Gradient Descent</strong>.
     </div>
-  `},r={id:"linear-algebra",title:"Linear Algebra",description:"Linear Algebra is the language of Machine Learning. It provides the mathematical framework for representing and processing high-dimensional data, from simple vectors to complex matrix decompositions.",keyConcepts:[{title:"Vectors & Foundations",description:"Dot Product, Norms (L1/L2), Linear Combinations, Span, and Basis."},{title:"Matrix Essentials",description:"Multiplication, Transpose, Inverse, and Identity mappings."},{title:"Matrix Properties",description:"Information metrics: Rank, Determinant, Trace, and Definiteness."},{title:"Vector Spaces",description:"Subspaces, independence, and orthogonal projections."},{title:"Matrix Decompositions",description:"Structural factorization via SVD, LU, Cholesky, and QR."},{title:"Eigen-analysis",description:"Spectral theory behind PCA, Clustering, and Matrix Factorization."},{title:"PCA Solved Examples",description:"Step-by-step walkthroughs of Eigen-decomposition and PCA."}],sections:[t,e,i,a,n,o,s]};export{r as LINEAR_ALGEBRA_DATA};
+  `},r={id:"linear-algebra",title:"Linear Algebra",description:"Linear Algebra is the language of Machine Learning. It provides the mathematical framework for representing and processing high-dimensional data, from simple vectors to complex matrix decompositions.",keyConcepts:[{title:"Vectors & Foundations",description:"Dot Product, Norms (L1/L2), Linear Combinations, Span, and Basis."},{title:"Matrix Essentials",description:"Multiplication, Transpose, Inverse, and Identity mappings."},{title:"Matrix Properties",description:"Information metrics: Rank, Determinant, Trace, and Definiteness."},{title:"Vector Spaces",description:"Subspaces, independence, and orthogonal projections."},{title:"Matrix Decompositions",description:"Structural factorization via SVD, LU, Cholesky, and QR."},{title:"Eigen-analysis",description:"Spectral theory behind PCA, Clustering, and Matrix Factorization."},{title:"PCA Solved Examples",description:"Step-by-step walkthroughs of Eigen-decomposition and PCA."}],sections:[e,t,i,a,n,o,s]};export{r as LINEAR_ALGEBRA_DATA};
