@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vectors | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#58a6ff;--accent2:#79c0ff;--gold:#e3b341;--green:#3fb950;--purple:#bc8cff;--red:#ff7b72;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;letter-spacing:-0.5px;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(88,166,255,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(88,166,255,0.08) 0%,rgba(188,140,255,0.04) 100%);border:1px solid rgba(88,166,255,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(88,166,255,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(88,166,255,0.12);border:1px solid rgba(88,166,255,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--accent2);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}
+ul,ol{padding-left:22px;margin-bottom:13px;}
+li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(88,166,255,0.07);border:1px solid rgba(88,166,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.warn{background:rgba(227,179,65,0.07);border:1px solid rgba(227,179,65,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.table-wrap{overflow-x:auto;margin:22px 0;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+thead{background:var(--bg3);}
+th{padding:11px 14px;text-align:left;font-weight:600;color:var(--accent);border:1px solid var(--border);font-size:12.5px;text-transform:uppercase;letter-spacing:0.4px;}
+td{padding:9px 14px;border:1px solid var(--border);font-weight:300;vertical-align:top;}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--purple);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.code-block .kw{color:#ff7b72;}
+.code-block .fn{color:#d2a8ff;}
+.code-block .st{color:#a5d6ff;}
+.code-block .cm{color:#8b949e;font-style:italic;}
+.code-block .num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;transition:color 0.15s;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(88,166,255,0.06);border:1px solid rgba(88,166,255,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+.refs{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:20px;margin-top:40px;}
+.refs h3{margin-top:0;color:var(--muted);font-size:13px;text-transform:uppercase;letter-spacing:1px;}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Linear Algebra</span></a></div>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link current"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+  <div class="nav-section-title">Statistics</div>
+  <a href="inferential_statistics.html" class="page-link"><span class="page-dot"></span>Inferential Statistics</a>
+  <a href="ml_estimation_bias_variance.html" class="page-link"><span class="page-dot"></span>MLE &amp; Bias-Variance</a>
+  <a href="ml_metrics.html" class="page-link"><span class="page-dot"></span>ML Evaluation Metrics</a>
+  <a href="regression_analysis.html" class="page-link"><span class="page-dot"></span>Regression Analysis</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Linear Algebra<span>›</span>Vectors</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">🔢 Linear Algebra · Vectors</div>
+      <h1>Introduction to Vectors</h1>
+      <p>In Machine Learning, <strong>Vectors</strong> are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#definition">Vector Definition</a>
+      <a href="#dot">1. Dot Product</a>
+      <a href="#norms">2. Vector Norms (L₁ and L₂)</a>
+      <a href="#span">3. Linear Combinations, Span, and Basis</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <h2 id="definition">Vector Definition</h2>
+    <p>A vector is an ordered list of numbers, typically denoted in column form:</p>
+    <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
+    <p>where \(n\) represents the dimensionality of the vector space.</p>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li>Basic understanding of Coordinate Geometry.</li>
+        <li>Familiarity with scalar operations (addition, multiplication).</li>
+      </ul>
+    </div>
+
+    <h2 id="dot">1. Dot Product</h2>
+    <p>The <strong>Dot Product</strong> (or inner product) is an algebraic operation that takes two equal-length sequences of numbers and returns a single scalar. It measures how much one vector "aligns" with another.</p>
+
+    <h3>Core Theory</h3>
+    <p>Geometrically, the dot product is the projection of one vector onto another. In ML, it is used to calculate the similarity between two vectors (e.g., in Cosine Similarity) and is the core operation in Neural Network layer computations \((z = w \cdot x + b)\).</p>
+
+    <h3>Mathematical Derivation</h3>
+    <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\) in \(\mathbb{R}^n\):</p>
+    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
+    <p>Alternatively, using the angle \(\theta\) between them:</p>
+    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta)$$</div>
+
+    <h3>Illustrative Example</h3>
+    <div class="example-box">
+      <h4>Example: Dot Product Calculation</h4>
+      <p>Calculate the dot product of \(\mathbf{a} = [2, 3]\) and \(\mathbf{b} = [4, -1]\).</p>
+      <ol>
+        <li>Multiply corresponding components: \((2 \times 4) + (3 \times -1)\)</li>
+        <li>Sum them: \(8 - 3 = 5\)</li>
+      </ol>
+      <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = (2)(4) + (3)(-1) = 8 - 3 = 5$$</div>
+      <p><strong>Result:</strong> 5. Since the value is positive, the vectors point in a similar general direction.</p>
+    </div>
+
+    <h2 id="norms">2. Vector Norms (L₁ and L₂)</h2>
+    <p>A <strong>Norm</strong> is a function that assigns a strictly positive length or size to a vector.</p>
+
+    <h3>Core Theory</h3>
+    <ul>
+      <li><strong>L₁ Norm (Manhattan Distance):</strong> The sum of the absolute values of the components. It is often used in <strong>Lasso Regularization</strong> to encourage sparsity in models.</li>
+      <li><strong>L₂ Norm (Euclidean Distance):</strong> The square root of the sum of squared components. It is the most common distance metric and is used in <strong>Ridge Regularization</strong>.</li>
+    </ul>
+
+    <h3>Mathematical Derivation</h3>
+    <p>The general \(p\)-norm is given by:</p>
+    <div class="math-block">$$\|\mathbf{x}\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}$$</div>
+    <ul>
+      <li><strong>L₁ Norm (\(p=1\)):</strong> \(\|\mathbf{x}\|_1 = \sum_{i=1}^{n} |x_i|\)</li>
+      <li><strong>L₂ Norm (\(p=2\)):</strong> \(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}\)</li>
+    </ul>
+
+    <h3>Illustrative Example</h3>
+    <div class="example-box">
+      <h4>Example: Computing Norms</h4>
+      <p>For \(\mathbf{v} = [3, -4]\):</p>
+      <div class="math-block">$$\|\mathbf{v}\|_1 = |3| + |-4| = 3 + 4 = 7$$</div>
+      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$</div>
+    </div>
+
+    <h2 id="span">3. Linear Combinations, Span, and Basis</h2>
+    <p>These concepts define how we navigate and construct vector spaces.</p>
+
+    <h3>Core Theory</h3>
+    <ul>
+      <li><strong>Linear Combination:</strong> A new vector created by multiplying vectors by scalars and adding them together: \(\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2\).</li>
+      <li><strong>Span:</strong> The set of all possible linear combinations of a group of vectors. If the span covers the entire space, those vectors can reach any point in that space.</li>
+      <li><strong>Basis:</strong> A set of vectors that are <strong>linearly independent</strong> and whose span covers the entire space. It is the "minimalist" set of directions needed to define a space.</li>
+    </ul>
+
+    <h3>Mathematical Derivation</h3>
+    <p>If a vector \(\mathbf{b}\) can be written as:</p>
+    <div class="math-block">$$\mathbf{b} = x_1\mathbf{a}_1 + x_2\mathbf{a}_2 + \dots + x_n\mathbf{a}_n$$</div>
+    <p>then \(\mathbf{b}\) is a linear combination of \(\{\mathbf{a}_1, \dots, \mathbf{a}_n\}\). If this set of \(\mathbf{a}\) vectors is linearly independent and can represent any vector in \(\mathbb{R}^n\), they form a <strong>Basis</strong>.</p>
+
+    <h3>Illustrative Example</h3>
+    <div class="example-box">
+      <h4>Example: Basis for ℝ²</h4>
+      <p>Check if \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) span \(\mathbb{R}^2\).</p>
+      <p>Any vector \([x, y]\) can be written as \(x[1, 0] + y[0, 1]\). Since these two vectors are independent and can reach any point, they form the standard basis for 2D space.</p>
+    </div>
+
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Define vectors</span>
+a = np.<span class="fn">array</span>([<span class="num">2</span>, <span class="num">3</span>])
+b = np.<span class="fn">array</span>([<span class="num">4</span>, <span class="num">-1</span>])
+
+<span class="cm"># Dot Product</span>
+dot_prod = np.<span class="fn">dot</span>(a, b)
+
+<span class="cm"># Norms</span>
+l1_norm = np.linalg.<span class="fn">norm</span>(a, ord=<span class="num">1</span>)
+l2_norm = np.linalg.<span class="fn">norm</span>(a, ord=<span class="num">2</span>)
+
+<span class="fn">print</span>(<span class="st">f"Dot Product: {dot_prod}"</span>)
+<span class="fn">print</span>(<span class="st">f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}"</span>)</pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>Dot Product:</strong> Used in <strong>Support Vector Machines (SVM)</strong> and <strong>Attention Mechanisms</strong> in Transformers to calculate weights.</li>
+      <li><strong>Norms:</strong> Essential for <strong>Loss Functions</strong> (Mean Absolute Error vs Mean Squared Error) and preventing overfitting via <strong>Regularization</strong>.</li>
+      <li><strong>Span/Basis:</strong> Fundamental to <strong>Principal Component Analysis (PCA)</strong>, where we find a new basis that captures the maximum variance of the data.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li>The <strong>Dot Product</strong> measures direction and alignment.</li>
+      <li><strong>L₁</strong> is for sparsity; <strong>L₂</strong> is for magnitude and distance.</li>
+      <li>A <strong>Basis</strong> provides the coordinate system for your data features.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>Linking Rule:</strong> Now that we understand basic Vector operations, we can move to <strong>Matrices</strong>, which allow us to perform these operations on entire datasets simultaneously.
+    </div>
+  </div>
+</div>
+</body>
+</html>

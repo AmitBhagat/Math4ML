@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 // @ts-expect-error - Contribution types missing
 import renderMathInElement from 'katex/dist/contrib/auto-render';
 import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
@@ -10,6 +10,7 @@ import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { cleanMathContent } from '@/src/lib/mathUtils';
 import { getCategoryTheme } from "@/src/lib/themeUtils";
+import { Hammer, Clock, Star } from "lucide-react";
 
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
@@ -65,6 +66,7 @@ const HtmlWithMath = ({ html, className }: { html: string; className?: string; k
 };
 
 export const ProblemPage = () => {
+  const navigate = useNavigate();
   const { clusterId: paramClusterId, categoryId, problemId } = useParams<{ clusterId?: string; categoryId: string; problemId: string }>();
   const [category, setCategory] = useState<CategoryData | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
@@ -120,9 +122,46 @@ export const ProblemPage = () => {
 
   if (!category || !problem) {
     return (
-      <div className="py-24 text-center">
-        <h1 className="text-3xl font-bold text-text-premium mb-4 font-headline">Problem not found</h1>
-        <Link to="/" className="text-accent-premium hover:underline">Return Home</Link>
+      <div className="py-32 flex flex-col items-center text-center animate-in fade-in slide-in-from-bottom-8 duration-700">
+        <div className="w-20 h-20 rounded-3xl bg-accent-premium/5 flex items-center justify-between p-5 mb-8 border border-accent-premium/10 shadow-premium-glow">
+          <Hammer className="w-full h-full text-accent-premium animate-pulse" />
+        </div>
+        
+        <h1 className="text-3xl md:text-4xl font-black uppercase tracking-[0.25em] text-on-surface mb-6">
+          Future Intelligence
+        </h1>
+        
+        <div className="max-w-xl mx-auto space-y-6">
+          <p className="text-muted-premium text-lg font-light leading-relaxed">
+            This module is currently being synthesized for the <span className="text-accent-premium font-medium">Applied Intelligence</span> cluster. 
+            Detailed derivations, interactive proofs, and neural architecture deep-dives are coming soon.
+          </p>
+          
+          <div className="flex flex-wrap justify-center gap-4 pt-8">
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-bg-secondary border border-border-premium text-[10px] font-black uppercase tracking-widest text-muted-premium">
+              <Clock className="w-3 h-3" /> Synthesis in Progress
+            </div>
+            <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent-premium/5 border border-accent-premium/20 text-[10px] font-black uppercase tracking-widest text-accent-premium">
+              <Star className="w-3 h-3" /> High Fidelity Content
+            </div>
+          </div>
+
+          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700 delay-300">
+            <button 
+              onClick={() => navigate(-1)}
+              className="flex items-center justify-center gap-2 px-8 py-3 rounded-xl bg-bg-secondary border border-border-premium text-sm font-semibold text-text-premium hover:border-accent-premium/40 hover:bg-bg-tertiary transition-all active:scale-95 no-underline cursor-pointer group"
+            >
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" /> 
+              Back to Curriculum
+            </button>
+            <Link 
+              to="/" 
+              className="flex items-center justify-center px-8 py-3 rounded-xl bg-accent-premium text-white text-sm font-semibold hover:bg-accent-premium-light transition-all active:scale-95 no-underline"
+            >
+              Explore Math Modules
+            </Link>
+          </div>
+        </div>
       </div>
     );
   }
@@ -136,12 +175,11 @@ export const ProblemPage = () => {
       } as React.CSSProperties}
     >
       
-      {/* ─── Hero Section ─── */}
-      <div className="premium-hero">
-        <div className="premium-hero-badge">
-          📊 {category.title} / {problem.title}
-        </div>
-        <h1>{problem.title}</h1>
+      {/* ─── Minimal Header ─── */}
+      <div className="mb-12">
+        <h1 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-on-surface">
+          {problem.title}
+        </h1>
       </div>
 
       {/* ─── Content Area ─── */}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eigenvalues, Eigenvectors &amp; PCA — Solved Examples | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#bc8cff;--accent2:#d2a8ff;--blue:#79c0ff;--green:#3fb950;--gold:#e3b341;--red:#ff7b72;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(188,140,255,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(188,140,255,0.09) 0%,rgba(88,166,255,0.04) 100%);border:1px solid rgba(188,140,255,0.22);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(188,140,255,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(188,140,255,0.12);border:1px solid rgba(188,140,255,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:36px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:24px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:18px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}
+ul,ol{padding-left:22px;margin-bottom:13px;}
+li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:16px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:16px 0;display:flex;gap:10px;}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.purple{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.table-wrap{overflow-x:auto;margin:22px 0;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+thead{background:var(--bg3);}
+th{padding:11px 14px;text-align:left;font-weight:600;color:var(--accent);border:1px solid var(--border);font-size:12.5px;}
+td{padding:9px 14px;border:1px solid var(--border);font-weight:300;vertical-align:top;}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+/* Solved example card */
+.solved-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin:28px 0;overflow:hidden;}
+.solved-header{background:rgba(188,140,255,0.08);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:12px;}
+.solved-num{background:var(--accent);color:var(--bg);font-size:12px;font-weight:700;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.solved-title{font-size:15px;font-weight:600;color:var(--accent2);}
+.solved-body{padding:20px 24px;}
+.problem-box{background:rgba(88,166,255,0.05);border:1px solid rgba(88,166,255,0.15);border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:14px;}
+.problem-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.step-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
+.conclusion{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:14px;font-weight:300;}
+.conclusion strong{color:var(--green);}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Linear Algebra</span></a></div>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link current"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+  <div class="nav-section-title">Statistics</div>
+  <a href="inferential_statistics.html" class="page-link"><span class="page-dot"></span>Inferential Statistics</a>
+  <a href="ml_estimation_bias_variance.html" class="page-link"><span class="page-dot"></span>MLE &amp; Bias-Variance</a>
+  <a href="ml_metrics.html" class="page-link"><span class="page-dot"></span>ML Evaluation Metrics</a>
+  <a href="regression_analysis.html" class="page-link"><span class="page-dot"></span>Regression Analysis</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Linear Algebra<span>›</span>Eigenvalues, Eigenvectors &amp; PCA — Solved Examples</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📝 Solved Examples · Eigenvalues, Eigenvectors &amp; PCA</div>
+      <h1>Solved Examples: Eigenvalues, Eigenvectors, and PCA</h1>
+      <p>Following the GeeksforGeeks pattern, here are practical, step-by-step examples to solidify your understanding of the concepts discussed. Each example walks through the complete solution with all intermediate steps shown.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Examples in This Page</div>
+      <a href="#ex1">Example 1 — Finding Eigenvalues and Eigenvectors</a>
+      <a href="#ex2">Example 2 — PCA Selection (Variance Explained)</a>
+      <a href="#ex3">Example 3 — PCA Interpretation</a>
+      <a href="#summary-table">Summary Table for Quick Revision</a>
+    </div>
+
+    <!-- EXAMPLE 1 -->
+    <div class="solved-card" id="ex1">
+      <div class="solved-header">
+        <div class="solved-num">1</div>
+        <div class="solved-title">Finding Eigenvalues and Eigenvectors</div>
+      </div>
+      <div class="solved-body">
+        <div class="problem-box">
+          <div class="problem-label">Problem</div>
+          Find the eigenvalues and eigenvectors for the matrix \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).
+        </div>
+
+        <div class="step-label">Step 1: Set up the Characteristic Equation</div>
+        <div class="math-block">$$\det(A - \lambda I) = 0$$
+$$\begin{vmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{vmatrix} = 0$$</div>
+
+        <div class="step-label">Step 2: Solve the Quadratic Equation</div>
+        <div class="math-block">$$(4-\lambda)(3-\lambda) - (2)(1) = 0$$
+$$\lambda^2 - 7\lambda + 12 - 2 = 0 \implies \lambda^2 - 7\lambda + 10 = 0$$</div>
+        <p>Factoring the quadratic: \((\lambda - 5)(\lambda - 2) = 0\).</p>
+        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\).</div></div>
+
+        <div class="step-label">Step 3: Find Eigenvectors for λ₁ = 5</div>
+        <div class="math-block">$$(A - 5I)v = 0 \implies \begin{pmatrix} 4-5 & 1 \\ 2 & 3-5 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$
+$$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
+        <p>From the first row: \(-x + y = 0 \implies x = y\).</p>
+        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">One possible <strong>Eigenvector</strong> is \(v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\).</div></div>
+
+        <div class="step-label">Step 4: Find Eigenvectors for λ₂ = 2</div>
+        <div class="math-block">$$(A - 2I)v = 0 \implies \begin{pmatrix} 2 & 1 \\ 2 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
+        <p>From the first row: \(2x + y = 0 \implies y = -2x\).</p>
+        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">One possible <strong>Eigenvector</strong> is \(v_2 = \begin{pmatrix} 1 \\ -2 \end{pmatrix}\).</div></div>
+      </div>
+    </div>
+
+    <!-- EXAMPLE 2 -->
+    <div class="solved-card" id="ex2">
+      <div class="solved-header">
+        <div class="solved-num">2</div>
+        <div class="solved-title">PCA Selection (Variance Explained)</div>
+      </div>
+      <div class="solved-body">
+        <div class="problem-box">
+          <div class="problem-label">Problem</div>
+          Suppose you perform PCA on a dataset with 3 features. You calculate the eigenvalues of the covariance matrix as \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\). How much variance is retained if you reduce the data to 2 dimensions?
+        </div>
+
+        <div class="step-label">Step 1: Calculate Total Variance</div>
+        <p>Total Variance = Sum of all eigenvalues:</p>
+        <div class="math-block">$$\text{Total} = 15 + 4 + 1 = 20$$</div>
+
+        <div class="step-label">Step 2: Calculate Variance of Top 2 Components</div>
+        <p>Sum of \(\lambda_1\) and \(\lambda_2\) (the highest values):</p>
+        <div class="math-block">$$\text{Sum} = 15 + 4 = 19$$</div>
+
+        <div class="step-label">Step 3: Calculate Percentage</div>
+        <div class="math-block">$$\frac{19}{20} \times 100 = 95\%$$</div>
+
+        <div class="conclusion">
+          <strong>Conclusion:</strong> By keeping the first two principal components, you retain <strong>95%</strong> of the original information while reducing the dimensionality by 33%.
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMPLE 3 -->
+    <div class="solved-card" id="ex3">
+      <div class="solved-header">
+        <div class="solved-num">3</div>
+        <div class="solved-title">PCA Interpretation</div>
+      </div>
+      <div class="solved-body">
+        <div class="problem-box">
+          <div class="problem-label">Problem</div>
+          In a dataset measuring "Height" and "Weight," the first Eigenvector (Principal Component 1) is found to be \(v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix}\) with \(\lambda_1 = 50\). What does this tell you?
+        </div>
+
+        <div class="step-label">Interpretation of Eigenvector (v₁)</div>
+        <p>Since both components are positive and equal, this eigenvector represents an axis where Height and Weight increase together. This is the "Size" component. It shows the direction of maximum correlation.</p>
+        <div class="math-block">$$v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix} \approx \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{pmatrix}$$</div>
+        <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body">The equal weighting (\(0.707 \approx 1/\sqrt{2}\)) means both Height and Weight contribute equally to this principal component — a diagonal axis at 45° in the Height-Weight plane.</div></div>
+
+        <div class="step-label">Interpretation of Eigenvalue (λ₁ = 50)</div>
+        <p>A value of 50 indicates that a significant portion of the total spread (variance) in the population is captured along this "Size" axis rather than by looking at height or weight individually.</p>
+        <div class="math-block">$$\lambda_1 = 50 \implies \text{Variance along PC1} = 50 \text{ units}^2$$</div>
+
+        <div class="conclusion">
+          <strong>Conclusion:</strong> The first principal component captures a "Size" effect where Height and Weight move together. The eigenvalue of 50 quantifies how much of the total dataset variance is explained by this single axis.
+        </div>
+      </div>
+    </div>
+
+    <!-- SUMMARY TABLE -->
+    <h2 id="summary-table">Summary Table for Quick Revision</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Eigenvalue (\(\lambda\))</th>
+            <th>Eigenvector (\(v\))</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Physical Meaning</strong></td>
+            <td>Magnitude / Scaling factor</td>
+            <td>Direction / Axis</td>
+          </tr>
+          <tr>
+            <td><strong>In PCA</strong></td>
+            <td>Amount of Variance captured</td>
+            <td>The Principal Component itself</td>
+          </tr>
+          <tr>
+            <td><strong>Selection Criteria</strong></td>
+            <td>Keep the largest values</td>
+            <td>Keep corresponding vectors</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout purple">
+      <div class="callout-icon">🎯</div>
+      <div class="callout-body">
+        <strong>Key Insight:</strong> In PCA, you always sort eigenvalues in descending order. The eigenvector corresponding to the largest eigenvalue is the <strong>First Principal Component</strong> — the direction of greatest variance in your data.
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

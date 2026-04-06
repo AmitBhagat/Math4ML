@@ -1,7 +1,8 @@
-import { Outlet, useLocation } from "react-router-dom";
+import { Outlet, useLocation, useParams } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
-import { Topbar } from "./Topbar";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -10,52 +11,97 @@ function cn(...inputs: ClassValue[]) {
 }
 
 export const MainLayout = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [showScrollTitle, setShowScrollTitle] = useState(false);
   const location = useLocation();
+  const { problemId } = useParams();
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
-  // Close sidebar on route change (mobile)
+
+  // Scroll listener for Topbar Title
   useEffect(() => {
-    setIsSidebarOpen(false);
-  }, [location.pathname]);
+    const handleScroll = () => {
+      if (scrollContainerRef.current) {
+        setShowScrollTitle(scrollContainerRef.current.scrollTop > 150);
+      }
+    };
+    
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
+    }
+    return () => container?.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const formattedTitle = problemId?.split('-').map(word => 
+    word.charAt(0).toUpperCase() + word.slice(1)
+  ).join(' ');
 
   return (
-    <div className="min-h-screen bg-bg text-text-premium flex font-sans selection:bg-accent/20">
-      {/* Sidebar - Fixed on desktop, Overlay on mobile */}
-      <Sidebar />
+    <div className="h-screen flex bg-bg text-text-premium font-sans selection:bg-accent/20 overflow-hidden">
       
-      {/* Mobile Sidebar Overlay */}
-      {isSidebarOpen && (
-        <div 
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-[90] lg:hidden"
-          onClick={() => setIsSidebarOpen(false)}
+      {/* ─── Sidebar Layer (Universal Push) ─── */}
+      <div 
+        className={cn(
+          "h-full bg-bg-secondary transition-all duration-500 ease-in-out border-r border-border-premium z-[100] shrink-0 overflow-hidden",
+          isSidebarOpen ? "w-[var(--sidebar-w)] opacity-100" : "w-0 opacity-0 border-none"
+        )}
+      >
+        <Sidebar 
+          onClose={() => setIsSidebarOpen(false)} 
+          className="w-[var(--sidebar-w)]"
         />
-      )}
-      
-      {/* Mobile Drawer Sidebar */}
-      <div className={cn(
-        "fixed top-0 left-0 bottom-0 w-[var(--sidebar-w)] bg-bg-secondary z-[100] transform transition-transform duration-300 lg:hidden",
-        isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-      )}>
-        <Sidebar />
       </div>
 
-      {/* Main Content Area */}
-      <div className="flex-1 flex flex-col lg:ml-[var(--sidebar-w)] min-w-0">
-        <Topbar onMenuClick={() => setIsSidebarOpen(true)} />
+      {/* ─── Main View Layer ─── */}
+      <div className="flex-1 flex flex-col min-w-0 relative h-full">
         
-        <main id="main-content" className="flex-1 overflow-y-auto overflow-x-hidden relative no-transition">
-          <div className="max-w-[1400px] mx-auto p-6 md:p-12 lg:p-16 pb-32">
+        {/* ─── Top Control Bar (Sticky) ─── */}
+        <header className="sticky top-0 z-[60] w-full bg-bg/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between h-14 px-6 shrink-0">
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-secondary border border-border-premium text-muted-premium hover:text-accent-premium hover:border-accent-premium/40 transition-all active:scale-95 group"
+            >
+              <Menu className="w-4 h-4 group-hover:scale-110 transition-transform" />
+              <span className="text-[10px] font-black uppercase tracking-widest hidden sm:block">Menu</span>
+            </button>
+          </div>
+
+          {/* Centered Scroll Title */}
+          <div 
+            className={cn(
+              "absolute left-1/2 -translate-x-1/2 transition-all duration-500",
+              showScrollTitle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+            )}
+          >
+            <span className="text-[11px] font-black uppercase tracking-[0.25em] text-on-surface truncate max-w-[200px] sm:max-w-md">
+              {formattedTitle}
+            </span>
+          </div>
+
+          <div className="flex items-center gap-4">
+            <ThemeToggle />
+          </div>
+        </header>
+        
+        <main 
+          id="main-content" 
+          ref={scrollContainerRef}
+          className="flex-1 overflow-y-auto overflow-x-hidden relative scroll-smooth no-transition"
+        >
+          <div className="max-w-[1400px] mx-auto p-4 md:p-10 lg:p-12 pb-32">
             <Outlet />
           </div>
-        </main>
 
-        <footer className="py-12 border-t border-border-premium bg-bg-secondary/30 mt-auto">
-          <div className="max-w-[1400px] mx-auto px-6 text-center">
-            <p className="text-xs text-muted-premium font-light tracking-widest uppercase">
-              Math4ML Curriculum © 2026 • Optimized for Deep Insight
-            </p>
-          </div>
-        </footer>
+          <footer className="py-12 border-t border-border-premium bg-bg-secondary/30 mt-auto">
+            <div className="max-w-[1400px] mx-auto px-6 text-center">
+              <p className="text-xs text-muted-premium font-light tracking-widest uppercase">
+                Math4ML Curriculum © 2026 • Optimized for Deep Insight
+              </p>
+            </div>
+          </footer>
+        </main>
       </div>
     </div>
   );

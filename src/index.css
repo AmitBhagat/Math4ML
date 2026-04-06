@@ -190,6 +190,89 @@
   code:not(pre code) {
     @apply font-mono text-[13px] bg-bg-tertiary px-1.5 py-0.5 rounded text-gold-premium border border-border-premium/50;
   }
+
+  /* ─── DOCUMENTATION SPECIFIC (G-STYLE) ─── */
+  /* These support the new Linear Algebra HTML content */
+  .toc {
+    @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
+  }
+  .toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
+  .toc a { @apply block text-muted-premium no-underline text-[13.5px] py-1 transition-colors hover:text-accent-premium; }
+  .toc a.sub { @apply pl-4 text-[13px]; }
+
+  .def-box {
+    @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
+  }
+  .def-title {
+    @apply font-mono text-[11px] text-purple-premium uppercase tracking-widest mb-2.5;
+  }
+
+  .example-box {
+    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-6 mb-8;
+  }
+  .example-box h4 { @apply text-green-premium mt-0 mb-3 font-semibold; }
+
+  .callout { @apply rounded-xl p-4 mb-6 flex gap-3; }
+  .callout.info { @apply bg-accent-premium/10 border border-accent-premium/25; }
+  .callout.warn { @apply bg-gold-premium/10 border border-gold-premium/25; }
+  .callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
+  .callout.tip { @apply bg-purple-premium/10 border border-purple-premium/25; }
+  .callout-icon { @apply text-lg mt-0.5 shrink-0; }
+  .callout-body { @apply text-sm font-light text-text-premium; }
+  .callout-body strong { @apply font-semibold text-accent-premium; }
+
+  .math-block {
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-6 mb-6 overflow-x-auto text-[15px];
+    border-left: 3px solid var(--accent);
+  }
+
+  /* Linking Rules */
+  .linking-rule {
+    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-sm font-light text-muted-premium;
+  }
+  .linking-rule strong { @apply text-accent-premium font-semibold; }
+
+  .note-box {
+    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-sm font-light text-text-premium;
+  }
+  .note-box strong { @apply text-gold-premium font-semibold; }
+
+  .step-box {
+    @apply bg-bg-tertiary border border-border-premium rounded-xl p-5 my-4 flex items-start gap-4;
+  }
+  .step-num {
+    @apply shrink-0 bg-accent-premium text-bg font-bold p-1 rounded-full w-6 h-6 flex items-center justify-center text-[10px];
+  }
+
+  /* Solved Examples Patterns */
+  .solved-card {
+    @apply bg-bg-secondary border border-border-premium rounded-2xl my-8 overflow-hidden;
+  }
+  .solved-header {
+    @apply bg-accent-premium/5 border-b border-border-premium p-5 flex items-center gap-4;
+  }
+  .solved-num {
+    @apply w-8 h-8 rounded-full bg-accent-premium text-bg flex items-center justify-center font-bold text-sm;
+  }
+  .solved-title {
+    @apply font-headline text-lg font-semibold text-accent-premium;
+  }
+  .solved-body {
+    @apply p-6;
+  }
+  .problem-box {
+    @apply bg-accent-premium/5 border border-accent-premium/15 rounded-xl p-5 mb-6 text-sm leading-relaxed;
+  }
+  .problem-label {
+    @apply font-mono text-[10px] text-accent-premium uppercase tracking-widest mb-2 block;
+  }
+  .step-label {
+    @apply font-mono text-[10px] text-muted-premium uppercase tracking-widest mt-6 mb-2 block;
+  }
+  .conclusion {
+    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-sm font-light text-text-premium;
+  }
+  .conclusion strong { @apply text-green-premium font-semibold; }
 }
 
 /* ─── GLOBAL UTILITIES ─── */

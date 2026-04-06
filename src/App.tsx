@@ -11,17 +11,19 @@ const ProblemPage = React.lazy(() => import("./pages/ProblemPage").then(m => ({ 
 const VisualizationsPage = React.lazy(() => import("./pages/VisualizationsPage").then(m => ({ default: m.VisualizationsPage })));
 
 function CategoryRoute() {
-  const { categoryId } = useParams();
+  const { clusterId, categoryId } = useParams();
   if (!categoryId) return null;
-  // Key forces re-mount on category change to prevent stale state
-  return <AsyncCategoryPage key={categoryId} categoryId={categoryId} />;
+  // Key forces re-mount on category or cluster change to prevent stale state
+  const routeKey = clusterId ? `${clusterId}-${categoryId}` : categoryId;
+  return <AsyncCategoryPage key={routeKey} categoryId={categoryId} />;
 }
 
 function ProblemRoute() {
-  const { categoryId, problemId } = useParams();
+  const { clusterId, categoryId, problemId } = useParams();
   if (!categoryId || !problemId) return null;
   // Key forces re-mount on problem change — cleanest state reset
-  return <ProblemPage key={`${categoryId}-${problemId}`} />;
+  const routeKey = clusterId ? `${clusterId}-${categoryId}-${problemId}` : `${categoryId}-${problemId}`;
+  return <ProblemPage key={routeKey} />;
 }
 export default function App() {
   return (

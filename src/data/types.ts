@@ -13,7 +13,7 @@ export interface TopicSection {
   title: string;
   description: string;
   formula?: string;
-  details: string[];
+  details?: string[];
   content?: string;
   html?: string;
   code?: string;

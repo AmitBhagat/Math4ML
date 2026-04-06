@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eigenvalues &amp; Eigenvectors | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#58a6ff;--accent2:#79c0ff;--gold:#e3b341;--green:#3fb950;--purple:#bc8cff;--red:#ff7b72;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(88,166,255,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(88,166,255,0.08) 0%,rgba(188,140,255,0.05) 100%);border:1px solid rgba(88,166,255,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(88,166,255,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(88,166,255,0.12);border:1px solid rgba(88,166,255,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--purple);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}
+ul,ol{padding-left:22px;margin-bottom:13px;}
+li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(88,166,255,0.07);border:1px solid rgba(88,166,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.purple{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.step-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:16px 20px;margin:12px 0;}
+.step-num{display:inline-block;background:var(--accent);color:var(--bg);font-size:11px;font-weight:700;border-radius:50%;width:20px;height:20px;text-align:center;line-height:20px;margin-right:8px;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.code-block .kw{color:#ff7b72;}.code-block .fn{color:#d2a8ff;}.code-block .st{color:#a5d6ff;}.code-block .cm{color:#8b949e;font-style:italic;}.code-block .num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(88,166,255,0.05);border:1px solid rgba(88,166,255,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Linear Algebra</span></a></div>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link current"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+  <div class="nav-section-title">Statistics</div>
+  <a href="inferential_statistics.html" class="page-link"><span class="page-dot"></span>Inferential Statistics</a>
+  <a href="ml_estimation_bias_variance.html" class="page-link"><span class="page-dot"></span>MLE &amp; Bias-Variance</a>
+  <a href="ml_metrics.html" class="page-link"><span class="page-dot"></span>ML Evaluation Metrics</a>
+  <a href="regression_analysis.html" class="page-link"><span class="page-dot"></span>Regression Analysis</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Linear Algebra<span>›</span>Eigenvalues &amp; Eigenvectors</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">λ Linear Algebra · Eigenvalues &amp; Eigenvectors</div>
+      <h1>Introduction to Eigenvalues and Eigenvectors</h1>
+      <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#core">1. Core Theory &amp; Mathematical Derivation</a>
+      <a href="#core" class="sub">↳ How to Find Eigenvalues &amp; Eigenvectors</a>
+      <a href="#core" class="sub">↳ Illustrative Example</a>
+      <a href="#pca">2. Principal Component Analysis (PCA)</a>
+      <a href="#spectral">3. Spectral Clustering</a>
+      <a href="#factorization">4. Matrix Factorization</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Matrix Multiplication:</strong> \(A\mathbf{v}\).</li>
+        <li><strong>Determinants:</strong> To solve the characteristic equation.</li>
+        <li><strong>Identity Matrix:</strong> \(I\).</li>
+      </ul>
+    </div>
+
+    <h2 id="core">1. Core Theory &amp; Mathematical Derivation</h2>
+    <p>For a square matrix \(A\), a non-zero vector \(\mathbf{v}\) is an <strong>Eigenvector</strong> if:</p>
+    <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
+    <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector.</p>
+
+    <h3>How to Find Them (Step-by-Step)</h3>
+    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\).</div>
+    <div class="step-box"><span class="step-num">2</span><strong>Solve for \(\lambda\):</strong> For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular. Therefore, we solve: \(\det(A - \lambda I) = 0\)</div>
+    <div class="step-box"><span class="step-num">3</span><strong>Solve for \(\mathbf{v}\):</strong> Once you have the eigenvalues, plug each \(\lambda\) back into \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</div>
+
+    <h3>Illustrative Example</h3>
+    <div class="example-box">
+      <h4>Example: Finding Eigenvalues</h4>
+      <p>Find eigenvalues for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\).</p>
+      <ol>
+        <li>\(\det\left(\begin{bmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{bmatrix}\right) = (4-\lambda)(3-\lambda) - 2 = 0\).</li>
+        <li>\(\lambda^2 - 7\lambda + 12 - 2 = \lambda^2 - 7\lambda + 10 = 0\).</li>
+        <li>Factoring: \((\lambda - 5)(\lambda - 2) = 0\).</li>
+      </ol>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Eigenvalues are \(\lambda_1 = 5,\; \lambda_2 = 2\).</div></div>
+    </div>
+
+    <h2 id="pca">2. Principal Component Analysis (PCA)</h2>
+    <p>PCA is a dimensionality reduction technique that uses Eigen-decomposition to transform high-dimensional data into a lower-dimensional form while retaining as much variance as possible.</p>
+
+    <h3>The Logic</h3>
+    <ol>
+      <li>Calculate the <strong>Covariance Matrix</strong> of the data.</li>
+      <li>Find the <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> of this covariance matrix.</li>
+      <li>The eigenvector with the <strong>highest eigenvalue</strong> is the <strong>First Principal Component</strong> (the direction of maximum variance).</li>
+      <li>Project the data onto these top eigenvectors to reduce dimensions.</li>
+    </ol>
+    <div class="callout info"><div class="callout-icon">📐</div><div class="callout-body"><strong>ML Context:</strong> PCA reduces 100 features to the 10 most important ones to speed up training and reduce noise without losing critical information.</div></div>
+
+    <h2 id="spectral">3. Spectral Clustering</h2>
+    <p>Unlike K-Means, which assumes spherical clusters, <strong>Spectral Clustering</strong> uses the eigenvalues of a similarity matrix to perform dimensionality reduction before clustering in fewer dimensions.</p>
+
+    <h3>The Logic</h3>
+    <ol>
+      <li>Construct an <strong>Adjacency Matrix</strong> (how close points are).</li>
+      <li>Compute the <strong>Graph Laplacian</strong> matrix \(L = D - A\).</li>
+      <li>Find the eigenvalues of \(L\). The "spectral" part refers to using the bottom eigenvectors (the ones with the smallest non-zero eigenvalues) to map data into a space where clusters are easily separable.</li>
+    </ol>
+
+    <h2 id="factorization">4. Matrix Factorization</h2>
+    <p>Matrix Factorization (like <strong>SVD — Singular Value Decomposition</strong>) decomposes a matrix into a product of matrices.</p>
+
+    <h3>The Logic</h3>
+    <p>If \(A\) is a symmetric matrix, it can be factored as:</p>
+    <div class="math-block">$$A = Q \Lambda Q^T$$</div>
+    <p>where \(Q\) is a matrix of eigenvectors and \(\Lambda\) (Capital Lambda) is a diagonal matrix of eigenvalues. In Recommendation Systems (like Netflix), this is used to discover "latent features" (e.g., a user's preference for 'Sci-Fi' or 'Action') by decomposing the User-Movie rating matrix.</p>
+
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Define a symmetric matrix (e.g., a covariance matrix)</span>
+A = np.<span class="fn">array</span>([[<span class="num">4</span>, <span class="num">2</span>], [<span class="num">2</span>, <span class="num">3</span>]])
+
+<span class="cm"># Calculate Eigenvalues and Eigenvectors</span>
+eigenvalues, eigenvectors = np.linalg.<span class="fn">eig</span>(A)
+
+<span class="fn">print</span>(<span class="st">"Eigenvalues:"</span>, eigenvalues)
+<span class="fn">print</span>(<span class="st">"Eigenvectors (Columns):\n"</span>, eigenvectors)
+
+<span class="cm"># Verification: Av = lambda * v</span>
+v1 = eigenvectors[:, <span class="num">0</span>]
+lambda1 = eigenvalues[<span class="num">0</span>]
+<span class="fn">print</span>(<span class="st">"\nA @ v1:"</span>, np.<span class="fn">dot</span>(A, v1))
+<span class="fn">print</span>(<span class="st">"lambda1 * v1:"</span>, lambda1 * v1)</pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>PCA:</strong> Reducing 100 features to the 10 most important ones to speed up training.</li>
+      <li><strong>Computer Vision:</strong> <strong>Eigenfaces</strong> uses eigenvectors of face images for recognition.</li>
+      <li><strong>Google PageRank:</strong> The "importance" of a webpage is essentially an eigenvalue problem of the web-link matrix.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>Eigenvectors</strong> define the "axes" or directions of a transformation.</li>
+      <li><strong>Eigenvalues</strong> define the "strength" or importance of those directions.</li>
+      <li>Large eigenvalues in a covariance matrix signify the most important patterns in data.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>Linking Rule:</strong> Now that we have covered the static properties of data via Linear Algebra, we can transition to <strong>Calculus</strong>, which allows us to understand how these values <em>change</em>, leading us to the heart of ML training: <strong>Gradient Descent</strong>.
+    </div>
+  </div>
+</div>
+</body>
+</html>

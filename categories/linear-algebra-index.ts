@@ -1,14 +1,14 @@
 import { CategoryData } from '../src/data/types';
-import { vectorsFullSection } from './linear-algebra/vectors-full';
-import { matricesFullSection } from './linear-algebra/matrices-full';
+import { vectorsSection } from './linear-algebra/vectors';
+import { matricesSection } from './linear-algebra/matrices';
 import { matrixPropertiesSection } from './linear-algebra/matrix-properties';
-import { eigenAdvancedSection } from './linear-algebra/eigen-advanced';
-import { decompositionsFullSection } from './linear-algebra/decompositions-full';
-import { vectorSpacesFullSection } from './linear-algebra/vector-spaces-full';
-import { transformationsFullSection } from './linear-algebra/transformations-full';
+import { vectorSpacesSection } from './linear-algebra/vector-spaces';
+import { matrixDecompositionsSection } from './linear-algebra/matrix-decompositions';
+import { eigenvaluesEigenvectorsSection } from './linear-algebra/eigenvalues-eigenvectors';
+import { eigenvaluesEigenvectorsPcaSection } from './linear-algebra/eigenvalues-eigenvectors-pca';
 
 // =============================================================================
-// LINEAR ALGEBRA (Consolidated Ultimate Edition)
+// LINEAR ALGEBRA (High-Fidelity HTML Edition)
 // =============================================================================
 export const LINEAR_ALGEBRA_DATA: CategoryData = {
   id: "linear-algebra",
@@ -18,18 +18,18 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     { title: "Vectors & Foundations", description: "Dot Product, Norms (L1/L2), Linear Combinations, Span, and Basis." },
     { title: "Matrix Essentials", description: "Multiplication, Transpose, Inverse, and Identity mappings." },
     { title: "Matrix Properties", description: "Information metrics: Rank, Determinant, Trace, and Definiteness." },
+    { title: "Vector Spaces", description: "Subspaces, independence, and orthogonal projections." },
+    { title: "Matrix Decompositions", description: "Structural factorization via SVD, LU, Cholesky, and QR." },
     { title: "Eigen-analysis", description: "Spectral theory behind PCA, Clustering, and Matrix Factorization." },
-    { title: "Advanced Decompositions", description: "Structural factorization via SVD, LU, Cholesky, and QR." },
-    { title: "Vector Spaces & Geometry", description: "Subspaces, Independence, Linear Equations, and Orthogonal Projections." },
-    { title: "Linear Transformations", description: "Coordinate mappings: Change of Basis, Kernel (Null Space), and Range." }
+    { title: "PCA Solved Examples", description: "Step-by-step walkthroughs of Eigen-decomposition and PCA." }
   ],
   sections: [
-    vectorsFullSection,
-    matricesFullSection,
+    vectorsSection,
+    matricesSection,
     matrixPropertiesSection,
-    eigenAdvancedSection,
-    decompositionsFullSection,
-    vectorSpacesFullSection,
-    transformationsFullSection
+    vectorSpacesSection,
+    matrixDecompositionsSection,
+    eigenvaluesEigenvectorsSection,
+    eigenvaluesEigenvectorsPcaSection
   ]
 };

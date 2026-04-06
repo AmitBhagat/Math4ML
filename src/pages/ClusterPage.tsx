@@ -58,16 +58,9 @@ export const ClusterPage = () => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12">
-      {/* Breadcrumb */}
-      <div className="flex flex-wrap items-center gap-3 text-[10px] font-black uppercase tracking-[0.2em] text-on-surface-variant mb-12">
-        <Link to="/" className="hover:text-accent-teal transition-colors">Home</Link>
-        <ChevronRight className="w-3 h-3 opacity-30" />
-        <span className="text-on-surface">{cluster.title}</span>
-      </div>
-
-      {/* Header */}
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-5xl font-headline font-black text-on-surface tracking-tighter leading-none mb-0">
+      {/* ─── Minimal Header ─── */}
+      <div className="mb-12 pt-6">
+        <h1 className="text-3xl md:text-5xl font-black uppercase tracking-[0.2em] text-on-surface leading-none">
           {cluster.title}
         </h1>
       </div>

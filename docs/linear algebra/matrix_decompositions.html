@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matrix Decompositions | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#ff7b72;--accent2:#ffa198;--blue:#79c0ff;--green:#3fb950;--gold:#e3b341;--purple:#bc8cff;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(255,123,114,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(255,123,114,0.08) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(255,123,114,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,123,114,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,123,114,0.12);border:1px solid rgba(255,123,114,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}
+ul,ol{padding-left:22px;margin-bottom:13px;}
+li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.purple{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.table-wrap{overflow-x:auto;margin:22px 0;}
+table{width:100%;border-collapse:collapse;font-size:14px;}
+thead{background:var(--bg3);}
+th{padding:11px 14px;text-align:left;font-weight:600;color:var(--accent);border:1px solid var(--border);font-size:12.5px;}
+td{padding:9px 14px;border:1px solid var(--border);font-weight:300;vertical-align:top;}
+tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.code-block .kw{color:#ff7b72;}.code-block .fn{color:#d2a8ff;}.code-block .st{color:#a5d6ff;}.code-block .cm{color:#8b949e;font-style:italic;}.code-block .num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(255,123,114,0.05);border:1px solid rgba(255,123,114,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Linear Algebra</span></a></div>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link current"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+  <div class="nav-section-title">Statistics</div>
+  <a href="inferential_statistics.html" class="page-link"><span class="page-dot"></span>Inferential Statistics</a>
+  <a href="ml_estimation_bias_variance.html" class="page-link"><span class="page-dot"></span>MLE &amp; Bias-Variance</a>
+  <a href="ml_metrics.html" class="page-link"><span class="page-dot"></span>ML Evaluation Metrics</a>
+  <a href="regression_analysis.html" class="page-link"><span class="page-dot"></span>Regression Analysis</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Linear Algebra<span>›</span>Matrix Decompositions</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
+      <h1>Introduction to Matrix Decompositions</h1>
+      <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#lu">1. LU Decomposition</a>
+      <a href="#cholesky">2. Cholesky Decomposition</a>
+      <a href="#qr">3. QR Decomposition</a>
+      <a href="#svd">4. Singular Value Decomposition (SVD)</a>
+      <a href="#implementation">Implementation (Python/NumPy/SciPy)</a>
+      <a href="#summary">Summary Table</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Matrix Multiplication:</strong> \(AB = C\).</li>
+        <li><strong>Orthonormal Matrices:</strong> \(Q^T Q = I\) (columns are unit vectors and orthogonal).</li>
+        <li><strong>Triangular Matrices:</strong> Upper (\(U\)) or Lower (\(L\)) where all elements above/below the diagonal are zero.</li>
+      </ul>
+    </div>
+
+    <h2 id="lu">1. LU Decomposition</h2>
+    <p>LU Decomposition factors a square matrix \(A\) into a <strong>Lower Triangular</strong> matrix (\(L\)) and an <strong>Upper Triangular</strong> matrix (\(U\)).</p>
+
+    <h3>Core Theory</h3>
+    <p>It is primarily used to solve systems of linear equations (\(Ax = b\)). Instead of calculating a costly inverse, we solve two simpler triangular systems: \(Ly = b\) and then \(Ux = y\).</p>
+
+    <h3>Mathematical Derivation</h3>
+    <p>For \(A \in \mathbb{R}^{n \times n}\):</p>
+    <div class="math-block">$$A = LU$$</div>
+    <p>Where:</p>
+    <div class="math-block">$$L = \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \quad \text{and} \quad U = \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
+
+    <h3>Illustrative Example</h3>
+    <div class="example-box">
+      <h4>Example: LU Factorization</h4>
+      <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\).</p>
+      <ol>
+        <li>Set \(u_{11} = 2, u_{12} = 3\).</li>
+        <li>Find \(l_{21}\) such that \(l_{21} \times 2 = 8 \implies l_{21} = 4\).</li>
+        <li>Find \(u_{22}\) such that \((4 \times 3) + u_{22} = 15 \implies u_{22} = 3\).</li>
+      </ol>
+      <div class="math-block">$$L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}$$</div>
+    </div>
+
+    <h2 id="cholesky">2. Cholesky Decomposition</h2>
+    <p>Cholesky Decomposition is a special case of LU for <strong>Symmetric, Positive Definite</strong> matrices.</p>
+
+    <h3>Core Theory</h3>
+    <p>It factors \(A\) into \(LL^T\). Because it exploits symmetry, it is roughly twice as fast as LU decomposition and much more numerically stable.</p>
+
+    <h3>Mathematical Derivation</h3>
+    <div class="math-block">$$A = LL^T$$</div>
+    <p>Where \(L\) is a lower triangular matrix with positive diagonal entries.</p>
+
+    <h3>Applications in ML</h3>
+    <ul>
+      <li><strong>Gaussian Processes:</strong> Used to sample from multivariate normal distributions.</li>
+      <li><strong>Kalman Filters:</strong> For state estimation in robotics.</li>
+    </ul>
+
+    <h2 id="qr">3. QR Decomposition</h2>
+    <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)).</p>
+
+    <h3>Core Theory</h3>
+    <p>\(Q\) contains orthonormal columns (\(Q^T Q = I\)), meaning it preserves lengths and angles. \(R\) contains the "coefficients" of the transformation. This is widely used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
+
+    <h3>Mathematical Derivation</h3>
+    <div class="math-block">$$A = QR$$</div>
+    <p>Usually computed using the <strong>Gram-Schmidt process</strong> or <strong>Householder reflections</strong>.</p>
+
+    <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
+    <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
+
+    <h3>Core Theory</h3>
+    <p>SVD decomposes a matrix into three parts:</p>
+    <ol>
+      <li><strong>\(U\):</strong> Left singular vectors (Orthogonal — represents rotations in the output space).</li>
+      <li><strong>\(\Sigma\) (Sigma):</strong> Singular values (Diagonal — represents scaling factors).</li>
+      <li><strong>\(V^T\):</strong> Right singular vectors (Orthogonal — represents rotations in the input space).</li>
+    </ol>
+
+    <h3>Mathematical Derivation</h3>
+    <div class="math-block">$$A = U \Sigma V^T$$</div>
+    <p>The singular values in \(\Sigma\) are the square roots of the eigenvalues of \(A^T A\).</p>
+
+    <h3>Applications in ML</h3>
+    <ul>
+      <li><strong>Image Compression:</strong> Keeping only the largest \(k\) singular values to reconstruct a lower-quality but smaller image.</li>
+      <li><strong>Latent Semantic Analysis (LSA):</strong> Finding hidden relationships between documents and terms.</li>
+      <li><strong>PCA:</strong> Modern PCA implementations typically use SVD for better numerical stability.</li>
+    </ul>
+
+    <div class="callout purple"><div class="callout-icon">💡</div><div class="callout-body"><strong>Key Insight:</strong> The singular values in \(\Sigma\) are the square roots of the eigenvalues of \(A^T A\), linking SVD directly to eigenvalue theory.</div></div>
+
+    <h2 id="implementation">Implementation (Python/NumPy/SciPy)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.linalg <span class="kw">import</span> lu, cholesky, qr, svd
+
+A = np.<span class="fn">array</span>([[<span class="num">4</span>, <span class="num">12</span>, <span class="num">-16</span>], [<span class="num">12</span>, <span class="num">37</span>, <span class="num">-43</span>], [<span class="num">-16</span>, <span class="num">-43</span>, <span class="num">98</span>]])
+
+<span class="cm"># LU Decomposition</span>
+P, L, U = <span class="fn">lu</span>(A)
+
+<span class="cm"># Cholesky (Requires Symmetric Positive Definite)</span>
+L_chol = <span class="fn">cholesky</span>(A, lower=<span class="kw">True</span>)
+
+<span class="cm"># QR Decomposition</span>
+Q, R = <span class="fn">qr</span>(A)
+
+<span class="cm"># SVD</span>
+U_svd, s, Vh = <span class="fn">svd</span>(A)
+
+<span class="fn">print</span>(<span class="st">f"SVD Singular Values: {s}"</span>)</pre></div>
+
+    <h2 id="summary">Summary Table</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Decomposition</th><th>Requirements</th><th>Main Use Case</th></tr></thead>
+        <tbody>
+          <tr><td><strong>LU</strong></td><td>Square Matrix</td><td>Solving linear systems (\(Ax=b\))</td></tr>
+          <tr><td><strong>Cholesky</strong></td><td>Symmetric + PD</td><td>Fast optimization, Gaussian sampling</td></tr>
+          <tr><td><strong>QR</strong></td><td>Any Matrix</td><td>Linear Regression (Least Squares)</td></tr>
+          <tr><td><strong>SVD</strong></td><td>Any Matrix</td><td>Data Compression, PCA, NLP</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>LU/Cholesky</strong> are for efficiency in solving equations.</li>
+      <li><strong>QR</strong> is for numerical stability in regression.</li>
+      <li><strong>SVD</strong> is for discovering the underlying structure (latent features) of data.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>Linking Rule:</strong> Having mastered how to decompose data structures, we now have the foundation for <strong>Optimization</strong>. Specifically, we can use these tools to solve for the weights of a model where the "change" in error is minimized using <strong>Calculus</strong>.
+    </div>
+  </div>
+</div>
+</body>
+</html>
