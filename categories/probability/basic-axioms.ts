@@ -133,7 +133,7 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Now that we understand these <strong>Basic Axioms</strong>, we can move toward <strong>Bayes' Theorem</strong>, which flips conditional probabilities to allow us to calculate the probability of a cause given its effects (the foundation of inference).
+      <strong>Next Step:</strong> Having mastered the basic axioms, move toward <strong><a href="#/mathematics/probability/bayes-theorem">Bayes' Theorem</a></strong> to calculate the probability of causes given their effects.
     </div>
   `
 };

@@ -132,7 +132,7 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Now that we have mastered <strong>Bayes' Theorem</strong>, we can move on to <strong>Random Variables and Probability Distributions</strong> (like Gaussian or Bernoulli), which allow us to apply these Bayesian principles to continuous data rather than just discrete events.
+      <strong>Next Step:</strong> Once we know the "mapping" of random variables, we can summarize them by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
     </div>
   `
 };

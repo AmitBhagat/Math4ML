@@ -137,7 +137,7 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Now that we can summarize data using mean and variance, we can dive into <strong>Common Distributions</strong> (like the Gaussian Distribution), which are entirely defined by these two parameters.
+      <strong>Next Step:</strong> Now that we can summarize data using mean and variance, we can dive into <strong><a href="#/mathematics/probability/probability-distributions">Common Distributions</a></strong> to see the mathematical "shapes" of different stochastic processes.
     </div>
   `
 };

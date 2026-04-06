@@ -54,11 +54,34 @@ export const CATEGORY_META: CategoryMeta[] = [
     title: "Statistics",
     description: "The science of drawing meaningful inferences from data — from hypothesis testing to regression analysis and evaluation metrics.",
     keyConcepts: [
-      { title: "Sampling Theory", description: "Population parameters and Central Limit Theorem." },
-      { title: "Hypothesis Testing", description: "p-values, T-tests, and Chi-square validation." },
-      { title: "Estimation", description: "Maximum Likelihood (MLE) and MAP estimation." },
-      { title: "Regression", description: "Linear relationships, residuals, and R-squared." },
-      { title: "Evaluation Metrics", description: "Accuracy, Precision, Recall, F1, and ROC-AUC." }
+      { title: "Descriptive Statistics", description: "Measures of central tendency, spread, and information-theoretic uncertainty." },
+      { title: "Sampling & Resampling", description: "Bootstrapping, Cross-Validation, and population inference." },
+      { title: "Inferential Statistics", description: "The mathematical theory of hypothesis testing, p-values, and confidence intervals." },
+      { title: "Estimation Theory", description: "Maximum Likelihood (MLE) vs. Maximum A Posteriori (MAP) and the Bias-Variance tradeoff." },
+      { title: "Regression Analysis", description: "The Ordinary Least Squares (OLS) framework, residuals, and R-squared." },
+      { title: "Evaluation Metrics", description: "Probabilistic and information-theoretic measures of classification and regression performance." }
+    ]
+  },
+  {
+    id: "information-theory",
+    title: "Information Theory",
+    description: "Quantifying uncertainty and information flow, providing the bedrock for loss functions like Cross-Entropy and KL Divergence.",
+    keyConcepts: [
+      { title: "Shannon Entropy", description: "Measuring the average uncertainty in a probability distribution." },
+      { title: "KL Divergence", description: "Quantifying the information loss between two distributions." },
+      { title: "Cross-Entropy", description: "The standard objective function for classification and NLP." },
+      { title: "Mutual Information", description: "Measuring the statistical dependency between random variables." }
+    ]
+  },
+  {
+    id: "discrete-math",
+    title: "Discrete Mathematics",
+    description: "The logic and structures governing finite systems, essential for computer science, algorithms, and symbolic AI.",
+    keyConcepts: [
+      { title: "Set Theory", description: "Foundations of data manipulation, filtering, and joins." },
+      { title: "Mathematical Logic", description: "Propositional and First-Order logic for reasoning systems." },
+      { title: "Combinatorics", description: "Counting arrangements, permutations, and search space analysis." },
+      { title: "Graph Theory", description: "Modeling relationships between entities in Knowledge Graphs." }
     ]
   },
   {
@@ -150,7 +173,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "The Mathematical Foundations",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "probability", "statistics", "calculus"]
+    categories: ["linear-algebra", "probability", "statistics", "calculus", "information-theory", "discrete-math"]
   },
   {
     id: "machine-learning",
@@ -165,7 +188,8 @@ export const CLUSTERS: ClusterMeta[] = [
 // ---------------------------------------------------------------------------
 import {
   Layers, FunctionSquare, BarChart3, Dice5,
-  Brain, Cpu, Network, Database, Activity, ShieldCheck
+  Brain, Cpu, Network, Database, Activity, ShieldCheck,
+  Binary, GitBranch
 } from "lucide-react";
 
 export const ICON_MAP: Record<string, any> = {
@@ -180,6 +204,8 @@ export const ICON_MAP: Record<string, any> = {
   "reinforcement-learning": Activity,
   "data-preprocessing": Database,
   "model-evaluation": ShieldCheck,
+  "information-theory": Binary,
+  "discrete-math": GitBranch,
 };
 
 // ---------------------------------------------------------------------------
@@ -192,7 +218,9 @@ const importMap: Record<string, () => Promise<any>> = {
   'linear-algebra': () => import('../../categories/linear-algebra-index'),
   'probability': () => import('../../categories/probability-index'),
   'statistics': () => import('../../categories/statistics-index'),
-  'calculus': () => import('../../categories/calculus'),
+  'calculus': () => import('../../categories/calculus-index'),
+  'information-theory': () => import('../../categories/information-theory-index'),
+  'discrete-math': () => import('../../categories/discrete-math-index'),
 };
 
 // Export name map (the const name inside each file)
@@ -201,6 +229,8 @@ const exportNameMap: Record<string, string> = {
   'probability': 'PROBABILITY_DATA',
   'statistics': 'STATISTICS_DATA',
   'calculus': 'CALCULUS_DATA',
+  'information-theory': 'INFORMATION_THEORY_DATA',
+  'discrete-math': 'DISCRETE_MATH_DATA',
 };
 
 /**

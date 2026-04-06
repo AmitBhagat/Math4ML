@@ -138,7 +138,7 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Understanding multivariate distributions is the final step before entering <strong>Estimation Theory</strong>. Once you can model multiple variables, you can use <strong>Maximum Likelihood Estimation (MLE)</strong> to find the parameters that best fit your observed multi-dimensional data.
+      <strong>Next Step:</strong> Once we can model multiple variables, we need to understand the theoretical safety net of <strong><a href="#/mathematics/probability/laws">Probability Laws (LLN & CLT)</a></strong>.
     </div>
   `
 };

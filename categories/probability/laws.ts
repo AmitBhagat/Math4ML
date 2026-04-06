@@ -111,7 +111,7 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> These laws provide the theoretical "safety net" for everything that follows. Now that we know samples represent populations, we can move to <strong>Estimation Theory</strong>, specifically <strong>Maximum Likelihood Estimation (MLE)</strong>, to find the parameters that best describe our data.
+      <strong>Next Step:</strong> These laws provide the theoretical safety net. Now that we know samples represent populations, move to <strong><a href="#/mathematics/probability/bayes-mle">Maximum Likelihood Estimation (MLE)</a></strong> to find the parameters that best describe your data.
     </div>
   `
 };

@@ -101,7 +101,7 @@ export const bayesMleSection: TopicSection = {
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Now work through <strong>Practical Examples</strong> (Spam filtering and Coin tossing) to see exactly how the Log-Likelihood trick and Bayes' inversion work in code.
+      <strong>Congratulations!</strong> You have mastered the foundations of Probability. Now, put these tools to work in <strong><a href="#/mathematics/statistics/descriptive-statistics">Statistics</a></strong> to analyze real-world datasets.
     </div>
   `
 };

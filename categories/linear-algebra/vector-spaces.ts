@@ -127,7 +127,7 @@ print(f"Projection of y onto u: {projection}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we understand how vectors occupy and project within spaces, we can tackle <strong>Calculus</strong>, specifically <strong>Partial Derivatives</strong>, to see how moving along these axes changes our model's error.
+      <strong>Next Step:</strong> Having mastered decompositions like SVD, we reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
   `
 };

@@ -140,7 +140,7 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we understand basic Vector operations, we can move to <strong>Matrices</strong>, which allow us to perform these operations on entire datasets simultaneously.
+      <strong>Next Step:</strong> Having mastered core vector foundations, let's explore how we grid these vectors into <strong><a href="#/mathematics/linear-algebra/matrices">Matrix Essentials</a></strong>.
     </div>
   `
 };

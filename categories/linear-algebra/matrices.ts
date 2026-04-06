@@ -150,7 +150,7 @@ print(f"Inverse:\n{A_inv}")
     </div>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Understanding how matrices transform space leads us to <strong>Eigenvalues and Eigenvectors</strong>, which help us find the most important directions (axes) in our data.
+      <strong>Next Step:</strong> Matrix properties define a model's stability. Next, we explore the geometry of where data "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
   `
 };

@@ -149,7 +149,7 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Understanding these distributions leads directly to <strong>Maximum Likelihood Estimation (MLE)</strong> and <strong>Maximum A Posteriori (MAP)</strong>, which are the core techniques used to actually "train" models by finding the best parameters for these distributions.
+      <strong>Next Step:</strong> Understanding single-variable distributions leads directly to <strong><a href="#/mathematics/probability/multivariate-probability">Multivariate Probability</a></strong>, where we model complex feature vectors.
     </div>
   `
 };

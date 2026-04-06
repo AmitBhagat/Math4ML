@@ -157,7 +157,7 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> These properties allow us to analyze the stability of our models. Next, we will explore <strong>Eigenvalues and Eigenvectors</strong>, which use these properties to decompose matrices into their simplest, most informative components.
+      <strong>Next Step:</strong> Matrix properties define a model's stability. Explore where data truly "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
   `
 };
