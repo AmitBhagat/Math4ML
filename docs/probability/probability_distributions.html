@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Probability Distributions | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#ff7b72;--accent2:#ffa198;--blue:#79c0ff;--green:#3fb950;--gold:#e3b341;--purple:#bc8cff;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(255,123,114,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(255,123,114,0.08) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(255,123,114,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(255,123,114,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,123,114,0.12);border:1px solid rgba(255,123,114,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout.warn{background:rgba(227,179,65,0.07);border:1px solid rgba(227,179,65,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.dist-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.dist-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.dist-card .d-type{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.dist-card h4{margin:0 0 8px;color:var(--gold);}
+.dist-card p{margin:0 0 5px;font-size:13.5px;}
+.dist-card .ml-use{font-size:12.5px;color:var(--muted);margin-top:8px;}
+.dist-card .ml-use strong{color:var(--blue);}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.kw{color:#ff7b72;}.fn{color:#d2a8ff;}.st{color:#a5d6ff;}.cm{color:#8b949e;font-style:italic;}.num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(255,123,114,0.05);border:1px solid rgba(255,123,114,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link current"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Probability Distributions</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📉 Probability · Distributions</div>
+      <h1>Probability Distributions</h1>
+      <p>In Machine Learning, we don't just look at individual data points; we look at the <strong>distribution</strong> they follow. A probability distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes. Choosing the right distribution is the first step in building any probabilistic model, from <strong>Logistic Regression</strong> to <strong>Variational Autoencoders</strong>.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#discrete">Discrete Distributions</a>
+      <a href="#discrete" class="sub">↳ 1. Bernoulli · 2. Binomial · 3. Poisson</a>
+      <a href="#continuous">Continuous Distributions</a>
+      <a href="#continuous" class="sub">↳ 4. Gaussian · 5. Uniform · 6. Exponential · 7. Laplace</a>
+      <a href="#derivation">Mathematical Derivation: Gaussian to Standard Normal</a>
+      <a href="#comparison">Illustrative Example: Choosing the Right Distribution</a>
+      <a href="#implementation">Implementation in Python (SciPy)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Random Variables:</strong> Knowing the difference between Discrete and Continuous.</li>
+        <li><strong>PMF/PDF:</strong> Understanding how we measure probability for different types of variables.</li>
+        <li><strong>Expectation &amp; Variance:</strong> These are the "parameters" that define the shape of the distributions below.</li>
+      </ul>
+    </div>
+
+    <h2 id="discrete">Discrete Distributions</h2>
+    <p>These are used when outcomes are countable (e.g., Yes/No, number of clicks).</p>
+
+    <div class="dist-grid">
+      <div class="dist-card">
+        <div class="d-type">Discrete · #1</div>
+        <h4>Bernoulli Distribution</h4>
+        <p>The simplest distribution. Models a single trial with two outcomes: Success \((x=1)\) or Failure \((x=0)\).</p>
+        <p><strong>Parameter:</strong> \(p\) (Probability of success).</p>
+        <p><strong>PMF:</strong> \(P(x) = p^x(1-p)^{1-x}\)</p>
+        <div class="ml-use"><strong>ML Use:</strong> The output of a binary classifier (before thresholding) is a Bernoulli parameter.</div>
+      </div>
+      <div class="dist-card">
+        <div class="d-type">Discrete · #2</div>
+        <h4>Binomial Distribution</h4>
+        <p>Models the number of successes in \(n\) independent Bernoulli trials.</p>
+        <p><strong>Parameters:</strong> \(n\) (trials), \(p\) (success probability).</p>
+        <p><strong>PMF:</strong> \(P(x) = \binom{n}{x} p^x (1-p)^{n-x}\)</p>
+        <div class="ml-use"><strong>ML Use:</strong> Modeling the number of users who will click an ad out of a batch of 100.</div>
+      </div>
+      <div class="dist-card" style="grid-column:span 2">
+        <div class="d-type">Discrete · #3</div>
+        <h4>Poisson Distribution</h4>
+        <p>Models the number of events occurring in a fixed interval of time or space.</p>
+        <p><strong>Parameter:</strong> \(\lambda\) (Average rate of occurrence).</p>
+        <p><strong>PMF:</strong> \(P(x) = \dfrac{e^{-\lambda} \lambda^x}{x!}\)</p>
+        <div class="ml-use"><strong>ML Use:</strong> Predicting the number of support tickets received per day or web traffic spikes.</div>
+      </div>
+    </div>
+
+    <h2 id="continuous">Continuous Distributions</h2>
+    <p>These model data that can take any real value (e.g., height, time, pixel intensity).</p>
+
+    <div class="dist-grid">
+      <div class="dist-card" style="grid-column:span 2">
+        <div class="d-type">Continuous · #4 — The "King"</div>
+        <h4>Gaussian (Normal) Distribution</h4>
+        <p>The "King" of distributions due to the <strong>Central Limit Theorem</strong>. It is symmetric and bell-shaped.</p>
+        <p><strong>Parameters:</strong> \(\mu\) (mean), \(\sigma^2\) (variance).</p>
+        <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
+        <div class="ml-use"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
+      </div>
+      <div class="dist-card">
+        <div class="d-type">Continuous · #5</div>
+        <h4>Uniform Distribution</h4>
+        <p>All outcomes in the interval \([a, b]\) are equally likely.</p>
+        <p><strong>Parameters:</strong> \(a\) (start), \(b\) (end).</p>
+        <div class="ml-use"><strong>ML Use:</strong> Weight initialization in Neural Networks (e.g., Xavier/Glorot initialization).</div>
+      </div>
+      <div class="dist-card">
+        <div class="d-type">Continuous · #6</div>
+        <h4>Exponential Distribution</h4>
+        <p>Models the time between events in a Poisson process (time until the next event).</p>
+        <p><strong>Parameter:</strong> \(\lambda\) (rate).</p>
+        <div class="ml-use"><strong>ML Use:</strong> Survival analysis, modeling the "Time-to-Click" in marketing.</div>
+      </div>
+      <div class="dist-card" style="grid-column:span 2">
+        <div class="d-type">Continuous · #7</div>
+        <h4>Laplace Distribution</h4>
+        <p>Similar to Gaussian but with a sharper peak and "heavier tails."</p>
+        <p><strong>Parameters:</strong> \(\mu\) (location), \(b\) (scale).</p>
+        <div class="ml-use"><strong>ML Use:</strong> Linked to <strong>L1 Regularization (Lasso)</strong>. While Gaussian noise leads to L2, Laplace noise leads to L1, encouraging sparsity in models.</div>
+      </div>
+    </div>
+
+    <h2 id="derivation">Mathematical Derivation: Gaussian to Standard Normal</h2>
+    <p>To compare different Gaussian distributions, we transform them into the <strong>Standard Normal Distribution</strong> \((\mu=0, \sigma=1)\) using the <strong>Z-score</strong>:</p>
+    <div class="math-block">$$Z = \frac{x - \mu}{\sigma}$$</div>
+    <p>If \(X \sim \mathcal{N}(\mu, \sigma^2)\), then \(Z \sim \mathcal{N}(0, 1)\). This is the math behind <code>StandardScaler</code> in Scikit-Learn.</p>
+
+    <h2 id="comparison">Illustrative Example: Choosing the Right Distribution</h2>
+    <div class="example-box">
+      <h4>Model Error Comparison</h4>
+      <p>Imagine you are modeling the errors of a model:</p>
+      <ol>
+        <li>If errors are symmetric and cluster around zero, use <strong>Gaussian</strong>.</li>
+        <li>If you want to allow for "outliers" (heavy tails), use <strong>Laplace</strong>.</li>
+        <li>If errors are only positive and represent "wait time," use <strong>Exponential</strong>.</li>
+      </ol>
+    </div>
+
+    <h2 id="implementation">Implementation in Python (SciPy)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy <span class="kw">import</span> stats
+
+<span class="cm"># 1. Binomial: 10 tosses, p=0.5. Prob of getting exactly 5 heads?</span>
+prob_5_heads = stats.binom.<span class="fn">pmf</span>(<span class="num">5</span>, n=<span class="num">10</span>, p=<span class="num">0.5</span>)
+
+<span class="cm"># 2. Poisson: Avg 3 emails/hour. Prob of getting 5 emails?</span>
+prob_5_emails = stats.poisson.<span class="fn">pmf</span>(<span class="num">5</span>, mu=<span class="num">3</span>)
+
+<span class="cm"># 3. Gaussian: Mean 100, Std 15 (IQ score). Prob of IQ &lt; 85?</span>
+prob_lower_iq = stats.norm.<span class="fn">cdf</span>(<span class="num">85</span>, loc=<span class="num">100</span>, scale=<span class="num">15</span>)
+
+<span class="fn">print</span>(<span class="st">f"Binomial (5 Heads): {prob_5_heads:.4f}"</span>)
+<span class="fn">print</span>(<span class="st">f"Poisson (5 Emails): {prob_5_emails:.4f}"</span>)
+<span class="fn">print</span>(<span class="st">f"Gaussian (IQ &lt; 85): {prob_lower_iq:.4f}"</span>)</pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>L1 vs L2 Regularization:</strong> L2 assumes weights follow a Gaussian prior; L1 assumes they follow a Laplace prior.</li>
+      <li><strong>Maximum Likelihood Estimation (MLE):</strong> We pick distribution parameters that make the observed data most likely.</li>
+      <li><strong>Initialization:</strong> Uniform and Gaussian distributions are the defaults for starting weight values in Deep Learning.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>Normal (Gaussian)</strong> is the default for most natural phenomena.</li>
+      <li><strong>Bernoulli</strong> is for binary choices \((0/1)\).</li>
+      <li><strong>Laplace</strong> is "pointier" than Gaussian and handles outliers differently.</li>
+      <li><strong>Poisson</strong> is for counts; <strong>Exponential</strong> is for time between counts.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>The "Linking" Rule:</strong> Understanding these distributions leads directly to <strong>Maximum Likelihood Estimation (MLE)</strong> and <strong>Maximum A Posteriori (MAP)</strong>, which are the core techniques used to actually "train" models by finding the best parameters for these distributions.
+    </div>
+  </div>
+</div>
+</body>
+</html>

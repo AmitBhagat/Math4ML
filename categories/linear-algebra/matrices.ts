@@ -5,6 +5,12 @@ export const matricesSection: TopicSection = {
   title: "Introduction to Matrices",
   description: "In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",
   html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
+      <h1>Introduction to Matrices</h1>
+      <p>In Machine Learning, a <strong>Matrix</strong> is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire <strong>Dataset</strong>, where rows correspond to individual samples and columns correspond to features.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#definition">Matrix Definition</a>

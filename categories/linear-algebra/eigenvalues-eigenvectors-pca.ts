@@ -5,6 +5,12 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
   title: "Solved Examples: Eigenvalues, Eigenvectors, and PCA",
   description: "Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",
   html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">📝 Solved Examples · Eigenvalues, Eigenvectors & PCA</div>
+      <h1>Solved Examples: Eigenvalues, Eigenvectors, and PCA</h1>
+      <p>Following the GeeksforGeeks pattern, here are practical, step-by-step examples to solidify your understanding of the concepts discussed. Each example walks through the complete solution with all intermediate steps shown.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Examples in This Page</div>
       <a href="#ex1">Example 1 — Finding Eigenvalues and Eigenvectors</a>

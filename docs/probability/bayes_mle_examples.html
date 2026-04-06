@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayes' &amp; MLE Examples | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#e3b341;--accent2:#f0d060;--blue:#79c0ff;--green:#3fb950;--purple:#bc8cff;--red:#ff7b72;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(227,179,65,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(227,179,65,0.09) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(227,179,65,0.22);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(227,179,65,0.12) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(227,179,65,0.12);border:1px solid rgba(227,179,65,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:36px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:24px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:18px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:16px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:16px 0;display:flex;gap:10px;}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout.warn{background:rgba(227,179,65,0.07);border:1px solid rgba(227,179,65,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.solved-card{background:var(--bg2);border:1px solid var(--border);border-radius:14px;margin:28px 0;overflow:hidden;}
+.solved-header{background:rgba(227,179,65,0.07);border-bottom:1px solid var(--border);padding:16px 24px;display:flex;align-items:center;gap:12px;}
+.solved-num{background:var(--accent);color:var(--bg);font-size:12px;font-weight:700;border-radius:50%;width:26px;height:26px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.solved-title{font-size:15px;font-weight:600;color:var(--accent2);}
+.solved-body{padding:20px 24px;}
+.problem-box{background:rgba(121,192,255,0.05);border:1px solid rgba(121,192,255,0.15);border-radius:8px;padding:14px 18px;margin-bottom:16px;font-size:14px;}
+.problem-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--blue);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.step-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin:14px 0 6px;}
+.conclusion{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);border-radius:8px;padding:14px 18px;margin-top:14px;font-size:14px;font-weight:300;}
+.conclusion strong{color:var(--green);}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.kv-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.kv-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.kv-card .kv-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.kv-card p{margin:0;font-size:13.5px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link current"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Bayes' &amp; MLE Examples</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📝 Solved Examples · Bayes' Theorem &amp; MLE</div>
+      <h1>Bayes' Theorem &amp; MLE: Practical Examples</h1>
+      <p>To solidify your understanding as an ML engineer, here are two classic problems: one focused on <strong>updating beliefs</strong> (Bayes) and one on <strong>finding optimal parameters</strong> (MLE).</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Examples in This Page</div>
+      <a href="#ex1">Example 1 — Bayes' Theorem in Spam Filtering</a>
+      <a href="#ex2">Example 2 — MLE for a Bernoulli Distribution (Coin Toss)</a>
+      <a href="#takeaway">Key Takeaway for ML Engineers</a>
+    </div>
+
+    <!-- EXAMPLE 1 -->
+    <div class="solved-card" id="ex1">
+      <div class="solved-header">
+        <div class="solved-num">1</div>
+        <div class="solved-title">Bayes' Theorem in Spam Filtering</div>
+      </div>
+      <div class="solved-body">
+        <div class="problem-box">
+          <div class="problem-label">Problem</div>
+          <p style="margin:0">A certain email filter is tested.</p>
+          <ul style="margin-top:8px">
+            <li><strong>10%</strong> of all emails are <strong>Spam</strong> \((P(S) = 0.10)\).</li>
+            <li>If an email is Spam, the word "Offer" appears <strong>80%</strong> of the time \((P(O|S) = 0.80)\).</li>
+            <li>If an email is <strong>Not Spam (Ham)</strong>, the word "Offer" appears only <strong>5%</strong> of the time \((P(O|H) = 0.05)\).</li>
+          </ul>
+          <p style="margin-top:8px"><strong>Question:</strong> If you receive an email containing the word "Offer," what is the probability that it is actually Spam?</p>
+        </div>
+
+        <p>We need to find \(P(S|O)\). Using Bayes' Theorem:</p>
+        <div class="math-block">$$P(S|O) = \frac{P(O|S) \cdot P(S)}{P(O)}$$</div>
+
+        <div class="step-label">Step 1: Calculate the Evidence P(O)</div>
+        <p>The word "Offer" can appear in both Spam and Ham emails:</p>
+        <div class="math-block">$$P(O) = [P(O|S) \cdot P(S)] + [P(O|H) \cdot P(H)]$$
+$$P(O) = (0.80 \cdot 0.10) + (0.05 \cdot 0.90) = 0.08 + 0.045 = 0.125$$</div>
+
+        <div class="step-label">Step 2: Plug into the Formula</div>
+        <div class="math-block">$$P(S|O) = \frac{0.80 \cdot 0.10}{0.125} = \frac{0.08}{0.125} = 0.64$$</div>
+
+        <div class="conclusion">
+          <strong>Conclusion:</strong> Even though the word "Offer" is very common in spam, there is a <strong>64%</strong> chance the email is spam. The "Prior" \((10\%)\) was low, which pulls the final probability down from the \(80\%\) likelihood.
+        </div>
+      </div>
+    </div>
+
+    <!-- EXAMPLE 2 -->
+    <div class="solved-card" id="ex2">
+      <div class="solved-header">
+        <div class="solved-num">2</div>
+        <div class="solved-title">MLE for a Bernoulli Distribution (Coin Toss)</div>
+      </div>
+      <div class="solved-body">
+        <div class="problem-box">
+          <div class="problem-label">Problem</div>
+          <p style="margin:0">You are given a coin, but you don't know if it's fair. You flip it <strong>10 times</strong> and observe <strong>7 Heads (H)</strong> and <strong>3 Tails (T)</strong>.</p>
+          <p style="margin-top:8px"><strong>Question:</strong> Find the Maximum Likelihood Estimate for the probability of getting a Head \((\theta)\).</p>
+        </div>
+
+        <p>For a single flip, the probability is \(P(x) = \theta^x (1-\theta)^{1-x}\) (where \(x=1\) for Heads and \(x=0\) for Tails).</p>
+
+        <div class="step-label">Step 1: Likelihood Function L(θ)</div>
+        <p>Since the flips are independent:</p>
+        <div class="math-block">$$L(\theta) = \theta^7 \cdot (1-\theta)^3$$</div>
+
+        <div class="step-label">Step 2: Log-Likelihood ℓ(θ)</div>
+        <div class="math-block">$$\ell(\theta) = \ln(\theta^7 \cdot (1-\theta)^3) = 7\ln(\theta) + 3\ln(1-\theta)$$</div>
+
+        <div class="step-label">Step 3: Find the Maximum</div>
+        <p>Differentiate with respect to \(\theta\) and set to \(0\):</p>
+        <div class="math-block">$$\frac{d}{d\theta} [7\ln(\theta) + 3\ln(1-\theta)] = \frac{7}{\theta} - \frac{3}{1-\theta} = 0$$</div>
+
+        <div class="step-label">Step 4: Solve for θ</div>
+        <div class="math-block">$$\frac{7}{\theta} = \frac{3}{1-\theta}$$
+$$7(1-\theta) = 3\theta \implies 7 - 7\theta = 3\theta \implies 7 = 10\theta \implies \theta = 0.7$$</div>
+
+        <div class="conclusion">
+          <strong>Conclusion:</strong> The MLE for the parameter \(\theta\) is <strong>0.7</strong>. This makes intuitive sense: if you see \(70\%\) heads in your sample, the "most likely" version of the world is one where the coin has a \(70\%\) chance of landing on heads.
+        </div>
+      </div>
+    </div>
+
+    <!-- KEY TAKEAWAY -->
+    <h2 id="takeaway">Key Takeaway for ML Engineers</h2>
+    <div class="kv-grid">
+      <div class="kv-card">
+        <div class="kv-label">When to use Bayes</div>
+        <p><strong>Bayes</strong> is used when you have a <strong>Prior</strong> (e.g., in Naive Bayes classifiers or Bayesian Neural Networks).</p>
+      </div>
+      <div class="kv-card">
+        <div class="kv-label">When to use MLE</div>
+        <p><strong>MLE</strong> is used when you want the <strong>best-fit parameters</strong> for your data without assuming any prior belief (e.g., training a Logistic Regression or finding the weights in a standard Neural Network).</p>
+      </div>
+    </div>
+
+    <div class="callout tip"><div class="callout-icon">🧠</div><div class="callout-body">Would you like to see how these concepts are specifically applied to the <strong>Loss Functions</strong> of Neural Networks? Explore the MLE &amp; Bias-Variance section in the Statistics module for deeper connections.</div></div>
+  </div>
+</div>
+</body>
+</html>

@@ -176,11 +176,13 @@ export const ProblemPage = () => {
     >
       
       {/* ─── Minimal Header ─── */}
-      <div className="mb-12">
-        <h1 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-on-surface">
-          {problem.title}
-        </h1>
-      </div>
+      {!problem.html?.trim().startsWith('<div class="premium-hero">') && (
+        <div className="mb-12">
+          <h1 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-on-surface">
+            {problem.title}
+          </h1>
+        </div>
+      )}
 
       {/* ─── Content Area ─── */}
       <div className="content-area">

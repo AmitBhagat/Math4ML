@@ -5,6 +5,12 @@ export const matrixPropertiesSection: TopicSection = {
   title: "Introduction to Matrix Properties",
   description: "Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the \"DNA\" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.",
   html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🧬 Linear Algebra · Matrix Properties</div>
+      <h1>Introduction to Matrix Properties</h1>
+      <p>Matrix properties like <strong>Rank</strong>, <strong>Determinant</strong>, <strong>Trace</strong>, and <strong>Positive Definiteness</strong> act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#rank">1. Rank of a Matrix</a>

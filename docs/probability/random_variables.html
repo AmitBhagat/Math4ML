@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Random Variables &amp; Functions | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#3fb950;--accent2:#56d364;--gold:#e3b341;--blue:#79c0ff;--purple:#bc8cff;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(63,185,80,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(63,185,80,0.08) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(63,185,80,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(63,185,80,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(63,185,80,0.12);border:1px solid rgba(63,185,80,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0;}
+.type-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 20px;}
+.type-card .type-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.type-card h4{margin-top:0;color:var(--gold);}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--accent);margin-top:0;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.kw{color:#ff7b72;}.fn{color:#d2a8ff;}.st{color:#a5d6ff;}.cm{color:#8b949e;font-style:italic;}.num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(63,185,80,0.05);border:1px solid rgba(63,185,80,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link current"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Random Variables &amp; Functions</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📊 Probability · Random Variables &amp; Functions</div>
+      <h1>Random Variables &amp; Functions</h1>
+      <p>In the previous sections, we looked at fixed events (like rolling a die). However, in Machine Learning, we deal with data that can take a wide range of values. A <strong>Random Variable (RV)</strong> is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe "stochastic" (random) processes.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#core">Core Theory: Discrete vs. Continuous</a>
+      <a href="#core" class="sub">↳ 1. Discrete Random Variables (PMF)</a>
+      <a href="#core" class="sub">↳ 2. Continuous Random Variables (PDF)</a>
+      <a href="#cdf">Cumulative Distribution Function (CDF)</a>
+      <a href="#derivation">Mathematical Derivation: PDF to Probability</a>
+      <a href="#examples">Illustrative Examples</a>
+      <a href="#implementation">Implementation in Python (SciPy)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Basic Axioms:</strong> Understanding sample spaces and total probability.</li>
+        <li><strong>Calculus (for Continuous):</strong> Basic integration is required to find probabilities for continuous ranges.</li>
+      </ul>
+    </div>
+
+    <h2 id="core">Core Theory: Discrete vs. Continuous</h2>
+
+    <div class="two-col">
+      <div class="type-card">
+        <div class="type-label">Type 1</div>
+        <h4>Discrete Random Variables</h4>
+        <p>Takes on a <strong>countable</strong> number of distinct values (e.g., \(0, 1, 2, \dots\)).</p>
+        <p><strong>Examples:</strong> Number of emails received in an hour, number of heads in 10 coin tosses.</p>
+        <p><strong>PMF:</strong> \(P(X = x)\) gives the probability that the RV exactly equals a specific value.</p>
+        <p><strong>Constraint:</strong> \(\sum P(x) = 1\).</p>
+      </div>
+      <div class="type-card">
+        <div class="type-label">Type 2</div>
+        <h4>Continuous Random Variables</h4>
+        <p>Can take any value within an interval (e.g., any real number between 0 and 1).</p>
+        <p><strong>Examples:</strong> The exact height of a person, the time until a server fails, the weights in a Neural Network.</p>
+        <p><strong>PDF:</strong> \(f(x)\) does <strong>not</strong> give the probability of a single point (always 0). The <strong>area under the curve</strong> represents probability.</p>
+        <p><strong>Constraint:</strong> \(\int_{-\infty}^{\infty} f(x) dx = 1\).</p>
+      </div>
+    </div>
+
+    <h2 id="cdf">Cumulative Distribution Function (CDF)</h2>
+    <p>The <strong>CDF</strong>, denoted as \(F(x)\), is the probability that the random variable \(X\) will take a value less than or equal to \(x\). It is the "running total" of probability.</p>
+    <ul>
+      <li><strong>Definition:</strong> \(F(x) = P(X \le x)\)</li>
+      <li><strong>For Discrete:</strong> \(F(x) = \sum_{t \le x} P(t)\)</li>
+      <li><strong>For Continuous:</strong> \(F(x) = \int_{-\infty}^{x} f(t) dt\)</li>
+    </ul>
+
+    <h2 id="derivation">Mathematical Derivation: PDF to Probability</h2>
+    <p>Since the probability of a continuous RV at a single point \(P(X = c) = 0\), we calculate the probability over an interval \([a, b]\) using the PDF:</p>
+    <div class="math-block">$$P(a \le X \le b) = \int_{a}^{b} f(x) dx$$</div>
+    <p>From the fundamental theorem of calculus, if \(F(x)\) is the CDF:</p>
+    <div class="math-block">$$P(a \le X \le b) = F(b) - F(a)$$</div>
+
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Discrete Case: Bernoulli Trial</h4>
+      <p>Imagine a single coin flip where Heads \((H) = 1\) and Tails \((T) = 0\).</p>
+      <p><strong>PMF:</strong> \(P(X=1) = p\), \(P(X=0) = 1-p\).</p>
+      <p><strong>CDF:</strong></p>
+      <ul>
+        <li>If \(x < 0,\; F(x) = 0\)</li>
+        <li>If \(0 \le x < 1,\; F(x) = 1-p\)</li>
+        <li>If \(x \ge 1,\; F(x) = 1\)</li>
+      </ul>
+    </div>
+
+    <div class="example-box">
+      <h4>Continuous Case: Uniform Distribution</h4>
+      <p>Suppose a random number generator picks any value between 0 and 10. The PDF is constant: \(f(x) = \frac{1}{10}\).</p>
+      <p><strong>What is \(P(2 \le X \le 5)\)?</strong></p>
+      <div class="math-block">$$P = \int_{2}^{5} \frac{1}{10} dx = \left[\frac{x}{10}\right]_{2}^{5} = \frac{5}{10} - \frac{2}{10} = 0.3$$</div>
+    </div>
+
+    <h2 id="implementation">Implementation in Python (SciPy)</h2>
+    <p>Machine Learning practitioners use <code>scipy.stats</code> to handle these distributions efficiently.</p>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">from</span> scipy.stats <span class="kw">import</span> norm  <span class="cm"># Gaussian/Normal distribution</span>
+
+<span class="cm"># Create a continuous distribution (Normal: mean=0, std=1)</span>
+mu, sigma = <span class="num">0</span>, <span class="num">1</span>
+dist = <span class="fn">norm</span>(mu, sigma)
+
+<span class="cm"># 1. PDF at a point (Density)</span>
+<span class="fn">print</span>(<span class="st">f"PDF at x=0: {dist.pdf(0):.4f}"</span>)
+
+<span class="cm"># 2. CDF (P(X &lt;= 0)) -&gt; Should be 0.5 for a symmetric normal distribution</span>
+<span class="fn">print</span>(<span class="st">f"CDF at x=0: {dist.cdf(0):.4f}"</span>)
+
+<span class="cm"># 3. Probability between -1 and 1: P(-1 &lt;= X &lt;= 1)</span>
+prob_interval = dist.<span class="fn">cdf</span>(<span class="num">1</span>) - dist.<span class="fn">cdf</span>(-<span class="num">1</span>)
+<span class="fn">print</span>(<span class="st">f"Probability between -1 and 1: {prob_interval:.4f}"</span>)</pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>Classification:</strong> Softmax output is essentially a <strong>PMF</strong> over the possible classes.</li>
+      <li><strong>Anomaly Detection:</strong> We model "normal" data using a <strong>PDF</strong>. If a new data point falls in a region where the PDF value is extremely low (the "tails"), we flag it as an anomaly.</li>
+      <li><strong>Generative Models:</strong> GANs and VAEs try to learn the underlying <strong>PDF</strong> of the training data to sample (generate) new images.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>PMF</strong> is for specific outcomes; <strong>PDF</strong> is for intervals.</li>
+      <li><strong>CDF</strong> always starts at 0 and ends at 1; it is always non-decreasing.</li>
+      <li>In ML, we often assume our error follows a <strong>Continuous Normal Distribution</strong>.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>The "Linking" Rule:</strong> Understanding these variables allows us to explore <strong>Common Distributions</strong> (Bernoulli, Binomial, Gaussian, Poisson). Once we know the "shape" of these distributions, we can perform <strong>Expectation and Variance</strong> calculations to summarize data.
+    </div>
+  </div>
+</div>
+</body>
+</html>

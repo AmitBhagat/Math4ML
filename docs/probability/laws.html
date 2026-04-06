@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Laws: LLN &amp; CLT | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#bc8cff;--accent2:#d2a8ff;--blue:#79c0ff;--green:#3fb950;--gold:#e3b341;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(188,140,255,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(188,140,255,0.08) 0%,rgba(88,166,255,0.04) 100%);border:1px solid rgba(188,140,255,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(188,140,255,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(188,140,255,0.12);border:1px solid rgba(188,140,255,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.law-box{border-radius:12px;padding:24px;margin:20px 0;}
+.law-box.lln{background:rgba(63,185,80,0.06);border:2px solid rgba(63,185,80,0.25);}
+.law-box.clt{background:rgba(188,140,255,0.06);border:2px solid rgba(188,140,255,0.25);}
+.law-box .law-label{font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px;font-weight:600;}
+.law-box.lln .law-label{color:var(--green);}
+.law-box.clt .law-label{color:var(--accent);}
+.law-box h3{margin-top:0;}
+.step-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;font-weight:300;display:flex;gap:10px;align-items:flex-start;}
+.step-num{background:var(--accent);color:var(--bg);font-size:11px;font-weight:700;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.kw{color:#ff7b72;}.fn{color:#d2a8ff;}.st{color:#a5d6ff;}.cm{color:#8b949e;font-style:italic;}.num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(188,140,255,0.05);border:1px solid rgba(188,140,255,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link current"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Laws: LLN &amp; CLT</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">⚖️ Probability · Laws</div>
+      <h1>Law of Large Numbers &amp; Central Limit Theorem</h1>
+      <p>The <strong>Law of Large Numbers (LLN)</strong> and the <strong>Central Limit Theorem (CLT)</strong> are the two most important pillars of statistics. They explain why we can trust data samples to represent a whole population. In Machine Learning, these laws justify why training a model on a finite dataset (a sample) allows it to generalize to the real world (the population).</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#lln">1. Law of Large Numbers (LLN)</a>
+      <a href="#clt">2. Central Limit Theorem (CLT)</a>
+      <a href="#clt" class="sub">↳ Core Properties</a>
+      <a href="#se">Mathematical Derivation: Standard Error</a>
+      <a href="#example">Illustrative Example: Die Rolls</a>
+      <a href="#implementation">Implementation in Python (Visualizing CLT)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Expectation &amp; Variance:</strong> Mean \((\mu)\) and spread \((\sigma^2)\) of a distribution.</li>
+        <li><strong>Random Variables:</strong> Understanding that data points are outcomes of a process.</li>
+        <li><strong>Sampling:</strong> The act of selecting a subset of data from a larger set.</li>
+      </ul>
+    </div>
+
+    <h2 id="lln">1. Law of Large Numbers (LLN)</h2>
+    <div class="law-box lln">
+      <div class="law-label">LLN — Law of Large Numbers</div>
+      <p>The LLN states that as the number of independent and identically distributed (<strong>i.i.d.</strong>) random trials increases, their observed average (sample mean) will get closer and closer to the theoretical average (population mean).</p>
+    </div>
+
+    <h3>The "Why"</h3>
+    <p>If you flip a fair coin 10 times, you might get 7 heads (70%). But if you flip it 10,000 times, the percentage of heads will almost certainly be very close to 50%. The "noise" of individual randomness cancels out as the sample size grows.</p>
+
+    <p><strong>Mathematical Definition:</strong></p>
+    <p>For a sequence of i.i.d. variables \(X_1, X_2, \dots, X_n\) with mean \(\mu\):</p>
+    <div class="math-block">$$\bar{X}_n \to \mu \text{ as } n \to \infty$$</div>
+
+    <h2 id="clt">2. Central Limit Theorem (CLT)</h2>
+    <div class="law-box clt">
+      <div class="law-label">CLT — Central Limit Theorem</div>
+      <p>The CLT is arguably the most powerful tool in an ML Engineer's toolkit. It states that if you take sufficiently large random samples from <strong>any</strong> population (regardless of the original distribution's shape), the distribution of the <strong>sample means</strong> will be approximately <strong>Gaussian (Normal)</strong>.</p>
+    </div>
+
+    <h3>Core Properties</h3>
+    <ol>
+      <li>The mean of the sample means will be equal to the population mean \((\mu)\).</li>
+      <li>The variance of the sample means will be \(\frac{\sigma^2}{n}\) (Standard Error).</li>
+      <li>The "shape" becomes a bell curve as \(n\) increases (usually \(n \ge 30\) is sufficient).</li>
+    </ol>
+
+    <p><strong>Mathematical Definition:</strong></p>
+    <div class="math-block">$$\bar{X}_n \approx \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
+
+    <h2 id="se">Mathematical Derivation: Standard Error</h2>
+    <p>Why does the spread of our sample mean decrease as we collect more data?</p>
+
+    <div class="step-box"><div class="step-num">1</div><div>Let \(S_n = X_1 + X_2 + \dots + X_n\).</div></div>
+    <div class="step-box"><div class="step-num">2</div><div>The variance of the sum of independent variables is the sum of their variances: \(Var(S_n) = n\sigma^2\)</div></div>
+    <div class="step-box"><div class="step-num">3</div><div>We are interested in the mean \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
+    <div class="step-box"><div class="step-num">4</div><div>Using the property \(Var(aX) = a^2 Var(X)\):</div></div>
+    <div class="math-block">$$Var\!\left(\frac{S_n}{n}\right) = \frac{1}{n^2} Var(S_n) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
+    <div class="step-box"><div class="step-num">5</div><div><strong>Conclusion:</strong> As \(n\) grows, the variance \(\frac{\sigma^2}{n}\) shrinks toward zero, concentrating our estimate around the true mean.</div></div>
+
+    <h2 id="example">Illustrative Example: Die Rolls</h2>
+    <div class="example-box">
+      <h4>LLN and CLT in Action</h4>
+      <ul>
+        <li><strong>Original Distribution:</strong> A single die roll is <strong>Uniform</strong> (flat), with \(\mu = 3.5\).</li>
+        <li><strong>LLN Application:</strong> If you roll a die 1,000 times and average them, you will get a value very close to 3.5.</li>
+        <li><strong>CLT Application:</strong> If you ask 500 people to each roll a die 30 times and report their average, and then you plot those 500 averages, you will see a perfect <strong>Bell Curve</strong> centered at 3.5, even though the die itself isn't "bell-shaped."</li>
+      </ul>
+    </div>
+
+    <h2 id="implementation">Implementation in Python (Visualizing CLT)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+<span class="kw">import</span> matplotlib.pyplot <span class="kw">as</span> plt
+
+<span class="cm"># 1. Create a highly non-normal population (Exponential)</span>
+population = np.random.<span class="fn">exponential</span>(scale=<span class="num">2</span>, size=<span class="num">100000</span>)
+
+<span class="cm"># 2. Take 1000 samples of size 50 and calculate their means</span>
+sample_means = [np.<span class="fn">mean</span>(np.random.<span class="fn">choice</span>(population, <span class="num">50</span>)) <span class="kw">for</span> _ <span class="kw">in</span> <span class="fn">range</span>(<span class="num">1000</span>)]
+
+<span class="cm"># 3. Plot the distribution of sample means</span>
+plt.<span class="fn">hist</span>(sample_means, bins=<span class="num">30</span>, density=<span class="kw">True</span>, color=<span class="st">'skyblue'</span>, edgecolor=<span class="st">'black'</span>)
+plt.<span class="fn">title</span>(<span class="st">"Distribution of Sample Means (CLT in Action)"</span>)
+plt.<span class="fn">xlabel</span>(<span class="st">"Sample Mean Value"</span>)
+plt.<span class="fn">ylabel</span>(<span class="st">"Frequency"</span>)
+plt.<span class="fn">show</span>()</pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>Confidence Intervals:</strong> Since we know the distribution of sample means is Gaussian (thanks to CLT), we can say with 95% confidence where the true population parameter lies.</li>
+      <li><strong>Hypothesis Testing:</strong> A/B testing relies on the CLT to determine if a change in a website's UI actually improved the click-through rate or if the result was just random noise.</li>
+      <li><strong>Stochastic Gradient Descent (SGD):</strong> We update model weights using a small "batch" (sample) of data because the LLN guarantees that the average gradient of the batch is a good estimate of the gradient for the entire dataset.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>LLN</strong> guarantees that our estimate is <strong>accurate</strong> (converges to truth).</li>
+      <li><strong>CLT</strong> gives us the <strong>distribution of the error</strong> (it will be Gaussian).</li>
+      <li><strong>\(n=30\):</strong> The magic number where most distributions start looking Normal.</li>
+      <li><strong>Independence:</strong> Both laws require samples to be independent.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>The "Linking" Rule:</strong> These laws provide the theoretical "safety net" for everything that follows. Now that we know samples represent populations, we can move to <strong>Estimation Theory</strong>, specifically <strong>Maximum Likelihood Estimation (MLE)</strong>, to find the parameters that best describe our data.
+    </div>
+  </div>
+</div>
+</body>
+</html>

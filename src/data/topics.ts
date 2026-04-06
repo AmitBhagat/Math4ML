@@ -38,11 +38,15 @@ export const CATEGORY_META: CategoryMeta[] = [
     title: "Probability",
     description: "The mathematical framework for quantifying uncertainty — the bedrock of Bayesian inference and probabilistic modeling.",
     keyConcepts: [
-      { title: "Basics & Events", description: "Sample spaces, experiments, and types of events." },
-      { title: "Probability Rules", description: "Addition, Multiplication, and Complement rules." },
-      { title: "Joint & Marginal", description: "Conditional logic and multi-variable probabilities." },
-      { title: "Bayes Theorem", description: "Updating beliefs based on evidence." },
-      { title: "Distributions", description: "Gaussian, Binomial, Poisson, and more." }
+      { title: "Basic Axioms", description: "Sample spaces, Kolmogorov axioms, and the building blocks of uncertainty." },
+      { title: "Bayes' Theorem", description: "Updating beliefs based on evidence: Posterior, Likelihood, and Priors." },
+      { title: "Random Variables", description: "Discrete (PMF) vs. Continuous (PDF) mappings of stochastic processes." },
+      { title: "Expectation & Variance", description: "Summarizing distributions: Center (Mean) and Spread (Variance/Covariance)." },
+      { title: "Common Distributions", description: "Bernoulli, Gaussian, Poisson, and Laplace — the shapes of data." },
+      { title: "Multivariate Probability", description: "Joint, Marginal, and Conditional distributions for feature vectors." },
+      { title: "LLN & CLT", description: "The Law of Large Numbers and Central Limit Theorem: WHY samples work." },
+      { title: "Estimation (MLE/MAP)", description: "Finding the 'best' parameters for a distribution using Likelihood." },
+      { title: "Practical Inference", description: "Solved examples: Spam filtering and Bernoulli MLE coin tosses." }
     ]
   },
   {

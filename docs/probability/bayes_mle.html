@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bayes' Theorem &amp; MLE | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#3fb950;--accent2:#56d364;--blue:#79c0ff;--gold:#e3b341;--purple:#bc8cff;--red:#ff7b72;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(63,185,80,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(63,185,80,0.08) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(63,185,80,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(63,185,80,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(63,185,80,0.12);border:1px solid rgba(63,185,80,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--gold);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout.tip{background:rgba(188,140,255,0.07);border:1px solid rgba(188,140,255,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.comparison-table{width:100%;border-collapse:collapse;font-size:14px;margin:20px 0;}
+.comparison-table thead{background:var(--bg3);}
+.comparison-table th{padding:11px 14px;text-align:left;font-weight:600;color:var(--accent);border:1px solid var(--border);font-size:12.5px;}
+.comparison-table td{padding:9px 14px;border:1px solid var(--border);font-weight:300;}
+.comparison-table tr:nth-child(even) td{background:rgba(255,255,255,0.02);}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.step-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;font-weight:300;display:flex;gap:10px;align-items:flex-start;}
+.step-num{background:var(--accent);color:var(--bg);font-size:11px;font-weight:700;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link current"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Bayes' Theorem &amp; MLE</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">🎯 Probability · Bayes' Theorem &amp; MLE</div>
+      <h1>Bayes' Theorem and Maximum Likelihood Estimation (MLE) for ML Engineers</h1>
+      <p>In the realm of Machine Learning, understanding how we update our beliefs with data and how we find the "best" parameters for our models is crucial. Bayes' Theorem and MLE provide the mathematical foundation for these tasks.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#conditional">1. Conditional Probability: The Foundation</a>
+      <a href="#bayes">2. Bayes' Theorem</a>
+      <a href="#likelihood">3. Likelihood vs. Probability</a>
+      <a href="#mle">4. Maximum Likelihood Estimation (MLE)</a>
+      <a href="#mle" class="sub">↳ Likelihood Function</a>
+      <a href="#mle" class="sub">↳ Log-Likelihood</a>
+      <a href="#mle" class="sub">↳ Maximization</a>
+      <a href="#mle" class="sub">↳ ML Application</a>
+    </div>
+
+    <h2 id="conditional">1. Conditional Probability: The Foundation</h2>
+    <p>Conditional Probability is the likelihood of an event occurring, given that another event has already occurred.</p>
+
+    <h3>The Formula</h3>
+    <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}$$</div>
+
+    <h3>Intuition</h3>
+    <p>Imagine you are looking at a dataset of emails. \(P(\text{Spam})\) is the probability any email is spam. However, if you know the email contains the word "Winner," you are no longer looking at the entire pool of emails; you have restricted your "universe" to only those containing that word. \(P(\text{Spam}|\text{Winner})\) is the proportion of that new, smaller universe that is actually spam.</p>
+
+    <h2 id="bayes">2. Bayes' Theorem</h2>
+    <p>Bayes' Theorem allows us to reverse conditional probabilities. It is the engine behind Bayesian Inference, used to update the probability of a hypothesis as more evidence becomes available.</p>
+
+    <h3>The Formula</h3>
+    <div class="math-block">$$P(H|D) = \frac{P(D|H) \cdot P(H)}{P(D)}$$</div>
+
+    <h3>Key Components</h3>
+    <ul>
+      <li><strong>Posterior \(P(H|D)\):</strong> What we want to know (e.g., Probability the model parameters are correct given the data).</li>
+      <li><strong>Likelihood \(P(D|H)\):</strong> How well the parameters explain the observed data.</li>
+      <li><strong>Prior \(P(H)\):</strong> Our belief before seeing the data.</li>
+      <li><strong>Evidence \(P(D)\):</strong> The total probability of the data under all possible hypotheses.</li>
+    </ul>
+
+    <h2 id="likelihood">3. Likelihood vs. Probability</h2>
+    <p>While the terms are often used interchangeably in casual conversation, they have distinct mathematical meanings in statistics.</p>
+
+    <div class="toc" style="margin-bottom:0">
+      <table class="comparison-table">
+        <thead><tr><th>Feature</th><th>Probability</th><th>Likelihood</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Focus</strong></td><td>Predicting outcomes.</td><td>Estimating parameters.</td></tr>
+          <tr><td><strong>Fixed Element</strong></td><td>Parameters \((\theta)\) are fixed.</td><td>Observed Data \((x)\) is fixed.</td></tr>
+          <tr><td><strong>Variable Element</strong></td><td>Data \((x)\) is the variable.</td><td>Parameters \((\theta)\) are the variable.</td></tr>
+          <tr><td><strong>Goal</strong></td><td>Given the model, how likely is this data?</td><td>Given this data, how likely is this model?</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="callout info" style="margin-top:18px"><div class="callout-icon">💡</div><div class="callout-body"><strong>Example:</strong> If you flip a coin 10 times and get 7 heads, the <strong>Probability</strong> describes the chance of getting that result if the coin is fair. The <strong>Likelihood</strong> function helps us determine if the coin is "fair" or "biased" based on those 7 heads.</div></div>
+
+    <h2 id="mle">4. Maximum Likelihood Estimation (MLE)</h2>
+    <p>MLE is a method used to estimate the parameters of a probability distribution by maximizing a likelihood function.</p>
+
+    <h3>How it works</h3>
+
+    <div class="step-box"><div class="step-num">1</div><div><strong>Define the Likelihood Function:</strong> For a set of i.i.d. data points \(X = \{x_1, x_2, ..., x_n\}\), the likelihood is the product of individual probabilities: \[L(\theta) = \prod_{i=1}^{n} P(x_i | \theta)\]</div></div>
+
+    <div class="step-box"><div class="step-num">2</div><div><strong>Log-Likelihood:</strong> Because products are hard to differentiate, we take the natural log \((\ln)\). This turns the product into a sum, which is mathematically easier and doesn't change the location of the maximum: \[\ell(\theta) = \sum_{i=1}^{n} \ln P(x_i | \theta)\]</div></div>
+
+    <div class="step-box"><div class="step-num">3</div><div><strong>Maximize:</strong> We find the derivative with respect to \(\theta\), set it to zero, and solve: \[\frac{d}{d\theta} \ell(\theta) = 0\]</div></div>
+
+    <h3>ML Application</h3>
+    <div class="callout success"><div class="callout-icon">🔗</div><div class="callout-body"><strong>Key Insight:</strong> In Linear Regression, when we assume the residuals (errors) follow a Normal Distribution, minimizing the Mean Squared Error (MSE) is mathematically equivalent to finding the MLE for the model weights.</div></div>
+  </div>
+</div>
+</body>
+</html>

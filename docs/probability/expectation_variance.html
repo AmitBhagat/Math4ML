@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Expectation &amp; Variance | Math4ML</title>
+<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.min.js"></script>
+<script>MathJax={tex:{inlineMath:[['\\(','\\)'],['$','$']],displayMath:[['\\[','\\]'],['$$','$$']]},options:{skipHtmlTags:['script','noscript','style','textarea']}};</script>
+<style>
+:root{--bg:#0d1117;--bg2:#161b22;--bg3:#1c2128;--border:#30363d;--accent:#e3b341;--accent2:#f0d060;--blue:#79c0ff;--green:#3fb950;--purple:#bc8cff;--text:#e6edf3;--muted:#8b949e;--sidebar-w:280px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-size:16px;line-height:1.7;display:flex;min-height:100vh;}
+.sidebar{width:var(--sidebar-w);background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;bottom:0;overflow-y:auto;padding:24px 0;z-index:100;}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid var(--border);margin-bottom:16px;}
+.sidebar-logo a{font-weight:600;font-size:18px;color:var(--accent);text-decoration:none;}
+.sidebar-logo .sub{color:var(--muted);font-size:12px;font-weight:300;display:block;margin-top:2px;}
+.nav-section-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin:16px 20px 8px;}
+.page-link{display:flex;align-items:center;gap:8px;padding:7px 20px;color:var(--muted);text-decoration:none;font-size:13px;transition:all 0.15s;border-left:2px solid transparent;}
+.page-link:hover{background:var(--bg3);color:var(--text);}
+.page-link.current{background:rgba(227,179,65,0.08);color:var(--accent);border-left-color:var(--accent);font-weight:500;}
+.page-dot{width:5px;height:5px;border-radius:50%;background:var(--muted);flex-shrink:0;}
+.page-link.current .page-dot{background:var(--accent);}
+.main{margin-left:var(--sidebar-w);flex:1;}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:14px 48px;position:sticky;top:0;z-index:50;}
+.breadcrumb{font-size:13px;color:var(--muted);}
+.breadcrumb a{color:var(--accent);text-decoration:none;}
+.breadcrumb span{margin:0 6px;}
+.content{max-width:860px;margin:0 auto;padding:48px 48px 80px;}
+.hero{background:linear-gradient(135deg,rgba(227,179,65,0.08) 0%,rgba(121,192,255,0.04) 100%);border:1px solid rgba(227,179,65,0.2);border-radius:16px;padding:40px 44px;margin-bottom:48px;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-40px;right:-40px;width:180px;height:180px;background:radial-gradient(circle,rgba(227,179,65,0.1) 0%,transparent 70%);pointer-events:none;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(227,179,65,0.12);border:1px solid rgba(227,179,65,0.3);border-radius:20px;padding:4px 12px;font-size:12px;color:var(--accent);font-weight:500;margin-bottom:16px;}
+.hero h1{font-family:'Crimson Pro',serif;font-size:38px;font-weight:600;line-height:1.2;margin-bottom:14px;}
+.hero p{color:var(--muted);font-size:15px;line-height:1.75;font-weight:300;}
+h2{font-family:'Crimson Pro',serif;font-size:27px;font-weight:600;margin:48px 0 16px;padding-bottom:10px;border-bottom:2px solid var(--border);position:relative;}
+h2::after{content:'';position:absolute;bottom:-2px;left:0;width:44px;height:2px;background:var(--accent);}
+h3{font-size:17px;font-weight:600;color:var(--blue);margin:28px 0 10px;}
+h4{font-size:14.5px;font-weight:600;color:var(--purple);margin:20px 0 8px;}
+p{margin-bottom:13px;font-weight:300;}ul,ol{padding-left:22px;margin-bottom:13px;}li{margin-bottom:5px;font-weight:300;}
+strong{font-weight:600;color:var(--accent2);}
+.math-block{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.callout{border-radius:10px;padding:14px 18px;margin:18px 0;display:flex;gap:10px;}
+.callout.info{background:rgba(121,192,255,0.07);border:1px solid rgba(121,192,255,0.22);}
+.callout.success{background:rgba(63,185,80,0.07);border:1px solid rgba(63,185,80,0.22);}
+.callout-icon{font-size:15px;flex-shrink:0;margin-top:2px;}
+.callout-body{font-size:14px;font-weight:300;}
+.callout-body strong{font-weight:600;}
+.concepts-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+.concept-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:16px 18px;}
+.concept-card .c-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;}
+.concept-card h4{margin:0 0 6px;color:var(--accent2);}
+.concept-card p{margin:0;font-size:13.5px;}
+.def-box{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin:18px 0;}
+.def-title{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;}
+.example-box{background:rgba(63,185,80,0.04);border:1px solid rgba(63,185,80,0.18);border-radius:10px;padding:20px 24px;margin:18px 0;}
+.example-box h4{color:var(--green);margin-top:0;}
+.step-box{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:12px 16px;margin:8px 0;font-size:14px;font-weight:300;display:flex;gap:10px;align-items:flex-start;}
+.step-num{background:var(--accent);color:var(--bg);font-size:11px;font-weight:700;border-radius:50%;width:20px;height:20px;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.code-block{background:var(--bg3);border:1px solid var(--border);border-radius:8px;padding:18px 22px;margin:18px 0;overflow-x:auto;}
+.code-block pre{font-family:'JetBrains Mono',monospace;font-size:13px;color:#e6edf3;line-height:1.6;margin:0;}
+.kw{color:#ff7b72;}.fn{color:#d2a8ff;}.st{color:#a5d6ff;}.cm{color:#8b949e;font-style:italic;}.num{color:#79c0ff;}
+.toc{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:18px 22px;margin-bottom:32px;}
+.toc-title{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:10px;font-weight:600;}
+.toc a{display:block;color:var(--muted);text-decoration:none;font-size:13px;padding:2px 0;}
+.toc a:hover{color:var(--accent);}
+.toc a.sub{padding-left:14px;font-size:12.5px;}
+.linking-rule{background:rgba(227,179,65,0.05);border:1px solid rgba(227,179,65,0.18);border-radius:8px;padding:14px 18px;margin-top:36px;font-size:13.5px;font-weight:300;color:var(--muted);}
+.linking-rule strong{color:var(--accent);}
+::-webkit-scrollbar{width:5px;height:5px;}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px;}
+</style>
+</head>
+<body>
+<aside class="sidebar">
+  <div class="sidebar-logo"><a href="#">Math4ML<span class="sub">Probability</span></a></div>
+  <div class="nav-section-title">Probability</div>
+  <a href="basic_axioms.html" class="page-link"><span class="page-dot"></span>Basic Axioms</a>
+  <a href="bayes_theorem.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem</a>
+  <a href="random_variables.html" class="page-link"><span class="page-dot"></span>Random Variables &amp; Functions</a>
+  <a href="expectation_variance.html" class="page-link current"><span class="page-dot"></span>Expectation &amp; Variance</a>
+  <a href="probability_distributions.html" class="page-link"><span class="page-dot"></span>Probability Distributions</a>
+  <a href="multivariate_probability.html" class="page-link"><span class="page-dot"></span>Multivariate Probability</a>
+  <a href="laws.html" class="page-link"><span class="page-dot"></span>Laws (LLN &amp; CLT)</a>
+  <a href="bayes_mle.html" class="page-link"><span class="page-dot"></span>Bayes' Theorem &amp; MLE</a>
+  <a href="bayes_mle_examples.html" class="page-link"><span class="page-dot"></span>Bayes' &amp; MLE Examples</a>
+  <div class="nav-section-title">Linear Algebra</div>
+  <a href="vectors.html" class="page-link"><span class="page-dot"></span>Vectors</a>
+  <a href="matrices.html" class="page-link"><span class="page-dot"></span>Matrices</a>
+  <a href="matrix_properties.html" class="page-link"><span class="page-dot"></span>Matrix Properties</a>
+  <a href="vector_spaces.html" class="page-link"><span class="page-dot"></span>Vector Spaces</a>
+  <a href="matrix_decompositions.html" class="page-link"><span class="page-dot"></span>Matrix Decompositions</a>
+  <a href="eigenvalues_eigenvectors.html" class="page-link"><span class="page-dot"></span>Eigenvalues &amp; Eigenvectors</a>
+  <a href="eigenvalues_eigenvectors_pca.html" class="page-link"><span class="page-dot"></span>Eigenvalues, Eigenvectors &amp; PCA</a>
+</aside>
+<div class="main">
+  <div class="topbar"><span class="breadcrumb"><a href="#">Math4ML</a><span>›</span>Probability<span>›</span>Expectation &amp; Variance</span></div>
+  <div class="content">
+    <div class="hero">
+      <div class="hero-badge">📐 Probability · Expectation &amp; Variance</div>
+      <h1>Expectation &amp; Variance</h1>
+      <p>While Probability Distributions give us the "shape" of data, <strong>Expectation and Variance</strong> provide the summary statistics that describe that shape. In Machine Learning, we use these to understand the "center" of our predictions and how much they "spread" or vary. These concepts are foundational for understanding <strong>Loss Functions</strong>, <strong>Regularization</strong>, and <strong>PCA</strong>.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#core">Core Theory: Summarizing Distributions</a>
+      <a href="#core" class="sub">↳ 1. Expectation E[X]</a>
+      <a href="#core" class="sub">↳ 2. Variance Var(X)</a>
+      <a href="#core" class="sub">↳ 3. Covariance Cov(X, Y)</a>
+      <a href="#core" class="sub">↳ 4. Correlation ρ</a>
+      <a href="#derivation">Mathematical Derivation: Variance Shortcut</a>
+      <a href="#example">Illustrative Example: Portfolio Risk</a>
+      <a href="#implementation">Implementation in Python (NumPy)</a>
+      <a href="#applications">Applications in ML</a>
+      <a href="#takeaways">Key Takeaways</a>
+    </div>
+
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <ul style="margin:0">
+        <li><strong>Random Variables:</strong> Understanding Discrete (PMF) and Continuous (PDF) variables.</li>
+        <li><strong>Basic Calculus:</strong> Summation \((\sum)\) and Integration \((\int)\).</li>
+      </ul>
+    </div>
+
+    <h2 id="core">Core Theory: Summarizing Distributions</h2>
+
+    <div class="concepts-grid">
+      <div class="concept-card">
+        <div class="c-label">Concept 1</div>
+        <h4>Expectation E[X] or μ</h4>
+        <p>The weighted average of all possible values. The "center of mass" of the distribution.</p>
+        <p style="margin-top:8px"><strong>Discrete:</strong> \(E[X] = \sum x \cdot P(X=x)\)</p>
+        <p><strong>Continuous:</strong> \(E[X] = \int_{-\infty}^{\infty} x \cdot f(x) dx\)</p>
+      </div>
+      <div class="concept-card">
+        <div class="c-label">Concept 2</div>
+        <h4>Variance Var(X) or σ²</h4>
+        <p>Measures the spread of the RV around its mean. High variance = far from mean.</p>
+        <p style="margin-top:8px"><strong>Formula:</strong> \(Var(X) = E[(X - E[X])^2]\)</p>
+        <p><strong>Shortcut:</strong> \(Var(X) = E[X^2] - (E[X])^2\)</p>
+      </div>
+      <div class="concept-card">
+        <div class="c-label">Concept 3</div>
+        <h4>Covariance Cov(X, Y)</h4>
+        <p>Indicates the <em>direction</em> of the linear relationship between two RVs.</p>
+        <ul style="margin-top:8px;font-size:13.5px">
+          <li><strong>Positive:</strong> Both increase together.</li>
+          <li><strong>Negative:</strong> One up, other down.</li>
+          <li><strong>Zero:</strong> No linear relationship.</li>
+        </ul>
+      </div>
+      <div class="concept-card">
+        <div class="c-label">Concept 4</div>
+        <h4>Correlation ρ<sub>X,Y</sub></h4>
+        <p>The <em>normalized</em> version of covariance. Always between <strong>−1 and 1</strong>, making it easier to interpret.</p>
+        <p style="margin-top:8px"><strong>Formula:</strong> \(\rho_{X,Y} = \dfrac{Cov(X, Y)}{\sigma_X \sigma_Y}\)</p>
+      </div>
+    </div>
+
+    <h2 id="derivation">Mathematical Derivation: Variance Shortcut</h2>
+    <p>It is often easier to calculate variance using the shortcut formula. Here is the step-by-step derivation:</p>
+
+    <div class="step-box"><div class="step-num">1</div><div>Start with the definition: \(Var(X) = E[(X - \mu)^2]\) where \(\mu = E[X]\).</div></div>
+    <div class="step-box"><div class="step-num">2</div><div>Expand the square: \(E[X^2 - 2X\mu + \mu^2]\).</div></div>
+    <div class="step-box"><div class="step-num">3</div><div>Use the <strong>Linearity of Expectation</strong> \((E[A+B] = E[A] + E[B])\): \[Var(X) = E[X^2] - E[2X\mu] + E[\mu^2]\]</div></div>
+    <div class="step-box"><div class="step-num">4</div><div>Since \(\mu\) is a constant, \(E[2X\mu] = 2\mu E[X] = 2\mu^2\): \[Var(X) = E[X^2] - 2\mu^2 + \mu^2\]</div></div>
+    <div class="step-box"><div class="step-num">5</div><div>Simplify:</div></div>
+    <div class="math-block">$$Var(X) = E[X^2] - \mu^2 = E[X^2] - (E[X])^2$$</div>
+
+    <h2 id="example">Illustrative Example: Portfolio Risk</h2>
+    <div class="example-box">
+      <h4>Problem: Two-Stock Portfolio</h4>
+      <p>You have two stocks, \(X\) and \(Y\).</p>
+      <ul>
+        <li>\(E[X] = 10\%\), \(Var(X) = 4\)</li>
+        <li>\(E[Y] = 12\%\), \(Var(Y) = 9\)</li>
+        <li>\(Cov(X, Y) = 2\)</li>
+      </ul>
+      <p><strong>Calculate the Expected Return and Variance of a portfolio \(P = 0.5X + 0.5Y\):</strong></p>
+      <ol>
+        <li><strong>Expected Return:</strong> \(E[P] = 0.5(10) + 0.5(12) = 11\%\).</li>
+        <li><strong>Portfolio Variance:</strong></li>
+      </ol>
+      <div class="math-block">$$Var(0.5X + 0.5Y) = 0.5^2 Var(X) + 0.5^2 Var(Y) + 2(0.5)(0.5) Cov(X, Y)$$
+$$Var(P) = 0.25(4) + 0.25(9) + 0.5(2) = 1 + 2.25 + 1 = 4.25$$</div>
+    </div>
+
+    <h2 id="implementation">Implementation in Python (NumPy)</h2>
+    <div class="code-block"><pre><span class="kw">import</span> numpy <span class="kw">as</span> np
+
+<span class="cm"># Sample data: Years of Experience vs Salary (scaled)</span>
+experience = np.<span class="fn">array</span>([<span class="num">1</span>, <span class="num">2</span>, <span class="num">3</span>, <span class="num">4</span>, <span class="num">5</span>, <span class="num">6</span>])
+salary = np.<span class="fn">array</span>([<span class="num">45</span>, <span class="num">50</span>, <span class="num">60</span>, <span class="num">58</span>, <span class="num">70</span>, <span class="num">85</span>])
+
+<span class="cm"># Mean</span>
+mean_exp = np.<span class="fn">mean</span>(experience)
+
+<span class="cm"># Variance</span>
+var_exp = np.<span class="fn">var</span>(experience)
+
+<span class="cm"># Covariance Matrix</span>
+<span class="cm"># Returns [[Var(X), Cov(X,Y)], [Cov(Y,X), Var(Y)]]</span>
+cov_matrix = np.<span class="fn">cov</span>(experience, salary)
+covariance = cov_matrix[<span class="num">0</span>, <span class="num">1</span>]
+
+<span class="cm"># Correlation</span>
+correlation = np.<span class="fn">corrcoef</span>(experience, salary)[<span class="num">0</span>, <span class="num">1</span>]
+
+<span class="fn">print</span>(<span class="st">f"Correlation: {correlation:.4f}"</span>)  <span class="cm"># Close to 1 (Strong positive)</span></pre></div>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>Bias-Variance Tradeoff:</strong> High variance in a model leads to <strong>Overfitting</strong>, where the model captures noise instead of the underlying pattern.</li>
+      <li><strong>PCA (Principal Component Analysis):</strong> This technique works by finding the directions (eigenvectors) that maximize the <strong>Variance</strong> of the data.</li>
+      <li><strong>Standardization:</strong> We transform features to have <strong>Mean = 0</strong> and <strong>Variance = 1</strong> so that gradient descent converges faster.</li>
+    </ul>
+
+    <h2 id="takeaways">Key Takeaways</h2>
+    <ul>
+      <li><strong>Expectation</strong> is the "average" outcome.</li>
+      <li><strong>Variance</strong> is the "risk" or uncertainty.</li>
+      <li><strong>Covariance/Correlation</strong> tell us how features move together.</li>
+      <li><strong>Linearity of Expectation:</strong> \(E[aX + b] = aE[X] + b\). This is extremely useful in simplifying complex ML equations.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>The "Linking" Rule:</strong> Now that we can summarize data using mean and variance, we can dive into <strong>Common Distributions</strong> (like the Gaussian Distribution), which are entirely defined by these two parameters.
+    </div>
+  </div>
+</div>
+</body>
+</html>

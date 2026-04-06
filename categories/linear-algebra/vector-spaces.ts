@@ -5,6 +5,12 @@ export const vectorSpacesSection: TopicSection = {
   title: "Introduction to Vector Spaces",
   description: "A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",
   html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
+      <h1>Introduction to Vector Spaces</h1>
+      <p>A <strong>Vector Space</strong> is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in \(\mathbb{R}^n\) (an \(n\)-dimensional real space), where each dimension represents a specific feature of our data.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#subspaces">1. Subspaces</a>

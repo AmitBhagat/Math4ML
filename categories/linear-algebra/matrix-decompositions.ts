@@ -5,6 +5,12 @@ export const matrixDecompositionsSection: TopicSection = {
   title: "Introduction to Matrix Decompositions",
   description: "In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",
   html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
+      <h1>Introduction to Matrix Decompositions</h1>
+      <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
+    </div>
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#lu">1. LU Decomposition</a>
