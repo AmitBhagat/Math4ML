@@ -10,7 +10,8 @@ const e={id:"basics",title:"Introduction to Calculus",description:"Differential 
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-tangent">Example 1: Tangent Slopes</a>
+      <a href="#example-error">Example 2: Error Derivatives</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -51,26 +52,38 @@ const e={id:"basics",title:"Introduction to Calculus",description:"Differential 
     <p>This is the "secret sauce" of <strong>Backpropagation</strong>. If a variable $z$ depends on $y$, and $y$ depends on $x$, then $z$ depends on $x$ via the chain:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-tangent">Example 1: Tangent Slopes & Instantaneous Change</h2>
     <div class="example-box">
-      <h4>Problem: Finding Error Gradients</h4>
-      <p>Find the partial derivatives of $f(x, w) = (xw - y)^2$ with respect to $w$. (This is a simple squared error loss).</p>
+      <h4>Problem: Finding the Slope of $f(x) = x^2$</h4>
+      <p>Calculate the derivative (slope) of the function $f(x) = x^2$ at the point $x = 3$.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li>Let $u = (xw - y)$. Then $f = u^2$.</li>
-        <li>By Chain Rule: $\frac{\partial f}{\partial w} = \frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial w}$.</li>
-        <li>$\frac{\partial f}{\partial u} = 2u = 2(xw - y)$.</li>
-        <li>$\frac{\partial u}{\partial w} = x$ (since $x$ and $y$ are treated as constants).</li>
-        <li><strong>Result:</strong> $\frac{\partial f}{\partial w} = 2(xw - y) \cdot x$.</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Power Rule:</strong> For $f(x) = x^n$, the derivative $f'(x) = n \cdot x^{n-1}$. Here, $n=2$, so $f'(x) = 2x$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Substitute $x = 3$:</strong> Evaluate $f'(3) = 2(3) = 6$.</div></div>
 
-      <p>If $x=2, w=3, y=5$:</p>
-      <ul>
-        <li>$f(2, 3) = (2 \cdot 3 - 5)^2 = 1^2 = 1$.</li>
-        <li>$\frac{\partial f}{\partial w} = 2(6-5) \cdot 2 = 4$.</li>
-      </ul>
-      <p><strong>Interpretation:</strong> Increasing $w$ by a tiny bit will increase the error by approximately 4 times that bit.</p>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> At the point where $x=3$, the function is increasing at a rate of 6 units for every 1 unit of change in $x$. The tangent line at this point has a slope of 6.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-error">Example 2: The Slope of Error (Loss Gradient)</h2>
+    <div class="example-box">
+      <h4>Problem: Univariate Squared Error</h4>
+      <p>In a simple model, let Loss $L = (mx - y)^2$. Find how the loss changes with respect to the slope $m$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Outer/Inner Functions:</strong> Let $u = (mx - y)$, then $L = u^2$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Chain Rule:</strong> $\frac{dL}{dm} = \frac{dL}{du} \cdot \frac{du}{dm}$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Differentiate:</strong> $\frac{dL}{du} = 2u$ and $\frac{du}{dm} = x$ (since $x, y$ are constants).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Result:</strong> $\frac{dL}{dm} = 2(mx - y) \cdot x$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> This "slope of error" tells us how to adjust $m$ to reduce the loss. If $\frac{dL}{dm}$ is positive, we must decrease $m$ to move toward the minimum.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -131,7 +144,8 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. Multivariate Calculus Concepts</a>
       <a href="#backprop">2. Backpropagation & The Chain Rule</a>
-      <a href="#walkthrough">3. Mathematical Walkthrough</a>
+      <a href="#example-nested">Example 1: Nested Functions</a>
+      <a href="#example-backprop">Example 2: Backprop Step</a>
       <a href="#conclusion">Conclusion</a>
     </div>
 
@@ -158,33 +172,39 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     
     <p>In a Neural Network, this allows us to calculate the local gradient at each node and multiply it by the gradient flowing from above. This efficiency prevents us from having to re-calculate the entire derivative for every single parameter from scratch.</p>
 
-    <h2 id="walkthrough">3. Mathematical Walkthrough: Updating Weights</h2>
-    <p>Let’s look at a single neuron with one input $x$, a weight $w$, a bias $b$, and a sigmoid activation function $\sigma$.</p>
-
+    <h2 id="example-nested">Example 1: The Chain of Influence (Nested Functions)</h2>
     <div class="example-box">
-      <h4>The Forward Pass:</h4>
-      <ol>
-        <li><strong>Linear Combination:</strong> $z = wx + b$</li>
-        <li><strong>Activation:</strong> $a = \sigma(z) = \frac{1}{1 + e^{-z}}$</li>
-        <li><strong>Loss (MSE):</strong> $L = \frac{1}{2}(y - a)^2$</li>
-      </ol>
-
-      <h4>The Backward Pass (Calculating $\frac{\partial L}{\partial w}$):</h4>
-      <p>Using the Chain Rule, we decompose the derivative:</p>
-      <div class="math-block">$$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w}$$</div>
+      <h4>Problem: Differentiating $\sin(x^2)$</h4>
+      <p>Find the derivative of $f(x) = \sin(x^2)$ with respect to $x$.</p>
       
-      <ol style="list-style-type: decimal;">
-        <li>Derivative of Loss w.r.t Activation: $\frac{\partial L}{\partial a} = -(y - a)$</li>
-        <li>Derivative of Activation w.r.t Linear Sum: $\frac{\partial a}{\partial z} = a(1 - a)$</li>
-        <li>Derivative of Linear Sum w.r.t Weight: $\frac{\partial z}{\partial w} = x$</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Layers:</strong> Outer function $g(u) = \sin(u)$, inner function $h(x) = x^2$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Differentiate Layers:</strong> $g'(u) = \cos(u)$ and $h'(x) = 2x$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Chain Rule:</strong> $f'(x) = g'(h(x)) \cdot h'(x) = \cos(x^2) \cdot 2x$.</div></div>
 
-      <p>Combining them:</p>
-      <div class="math-block">$$\frac{\partial L}{\partial w} = -(y - a) \cdot a(1 - a) \cdot x$$</div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Logic:</strong> The change in $f$ is the change in the 'sine' layer <strong>multiplied</strong> by the change inside the 'squared' layer. This is how gradients flow through network layers.
+        </div>
+      </div>
+    </div>
 
-      <h4>The Weight Update:</h4>
-      <p>Once we have the gradient, we update the weight using a learning rate ($\eta$):</p>
-      <div class="math-block">$$w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}$$</div>
+    <h2 id="example-backprop">Example 2: Backpropagation Step (Single Neuron)</h2>
+    <div class="example-box">
+      <h4>Problem: Calculating Weight Gradients</h4>
+      <p>Given a hidden neuron output $a = \sigma(wx + b)$ and a loss $L = \frac{1}{2}(y - a)^2$. Find $\frac{\partial L}{\partial w}$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Local Gradient (Loss):</strong> $\frac{\partial L}{\partial a} = -(y - a)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Local Gradient (Activation):</strong> $\frac{\partial a}{\partial z} = a(1 - a)$, where $z = wx+b$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Local Gradient (Weight):</strong> $\frac{\partial z}{\partial w} = x$.</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Chain Rule Result:</strong> $\frac{\partial L}{\partial w} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w} = -(y-a) \cdot a(1-a) \cdot x$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> This formula tells the optimizer exactly how to tweak $w$ to reduce the error. Each term is a "local" derivative that we multiply together.
+        </div>
+      </div>
     </div>
 
     <h2 id="conclusion">Conclusion</h2>
@@ -289,7 +309,8 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-gradient">Example 1: Computing Gradients</a>
+      <a href="#example-hessian">Example 2: Analyzing Curvature</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -331,32 +352,43 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     <p>The Hessian is a square matrix of <strong>second-order</strong> partial derivatives of a scalar-valued function. It describes the local curvature:</p>
     <div class="math-block">$$H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-gradient">Example 1: Navigating a 2D Gradient</h2>
     <div class="example-box">
-      <h4>Problem: Gradient and Hessian Analysis</h4>
-      <p>Find the Gradient and Hessian of $f(x, y) = 3x^2 + 2xy + y^2$.</p>
+      <h4>Problem: Computing the Direction of Steepest Ascent</h4>
+      <p>Find the gradient of $f(x, y) = x^2 + 3xy + 2y^2$ at the point $(1, 2)$.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>First Partial Derivatives</strong>:
-          <ul>
-            <li>$\frac{\partial f}{\partial x} = 6x + 2y$</li>
-            <li>$\frac{\partial f}{\partial y} = 2x + 2y$</li>
-          </ul>
-        </li>
-        <li><strong>Gradient Vector</strong>: $\nabla f = [6x + 2y, 2x + 2y]^T$.</li>
-        <li><strong>Second Partial Derivatives</strong>:
-          <ul>
-            <li>$\frac{\partial^2 f}{\partial x^2} = 6$, $\frac{\partial^2 f}{\partial y^2} = 2$</li>
-            <li>$\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x} = 2$</li>
-          </ul>
-        </li>
-        <li><strong>Hessian Matrix</strong>: 
-          <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
-            $$H = \begin{bmatrix} 6 & 2 \\ 2 & 2 \end{bmatrix}$$
-          </div>
-        </li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Partial w.r.t $x$:</strong> $\frac{\partial f}{\partial x} = 2x + 3y$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Partial w.r.t $y$:</strong> $\frac{\partial f}{\partial y} = 3x + 4y$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Evaluate at $(1, 2)$:</strong> $\frac{\partial f}{\partial x} = 2(1) + 3(2) = 8$ and $\frac{\partial f}{\partial y} = 3(1) + 4(2) = 11$.</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Resulting Gradient:</strong> $\nabla f(1, 2) = [8, 11]^T$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> To increase the function value as quickly as possible from $(1, 2)$, you should move in the direction of the vector $[8, 11]$. In ML, we move in the <strong>opposite</strong> direction $(-[8, 11])$ to minimize loss.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-hessian">Example 2: Detecting Surface Curvature (Hessian)</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing the Local Shape of $f(x, y) = x^2 + y^2$</h4>
+      <p>Calculate the Hessian matrix and use its eigenvalues to describe the curvature.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>First Derivatives:</strong> $f_x = 2x$, $f_y = 2y$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Second Derivatives:</strong> $f_{xx} = 2$, $f_{yy} = 2$, $f_{xy} = f_{yx} = 0$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Construct Hessian:</strong> 
+        <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
+          $$H = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}$$
+        </div>
+      </div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Both eigenvalues are positive ($\lambda = 2$). This indicates the surface is <strong>locally bowl-shaped (convex)</strong>, and any critical point found here will be a local minimum.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -498,7 +530,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Integration measures accumulation. Now, find the 'best' possible values by exploring <strong><a href="#/mathematics/calculus/optimization">Optimization Theory</a></strong>.
     </div>
-  `},r={id:"optimization",title:"Optimization Theory",description:"Optimization Theory is the study of finding the 'best' solution. In ML, this means finding weights that minimize the Loss Function.",color:"#A5D6A7",html:String.raw`
+  `},s={id:"optimization",title:"Optimization Theory",description:"Optimization Theory is the study of finding the 'best' solution. In ML, this means finding weights that minimize the Loss Function.",color:"#A5D6A7",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Calculus · Optimization</div>
       <h1>Optimization Theory: Finding the Best Parameters</h1>
@@ -510,7 +542,8 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-critical">Example 1: Finding Critical Points</a>
+      <a href="#example-classify">Example 2: Minima vs. Saddle Points</a>
       <a href="#implementation">Implementation (Python/SciPy)</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -553,23 +586,41 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       </table>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-critical">Example 1: Finding Critical Points</h2>
     <div class="example-box">
-      <h4>Scenario: Analyzing Critical Points</h4>
-      <p>Analyze $f(x, y) = x^2 - y^2$.</p>
+      <h4>Problem: Identifying Candidates for Minima</h4>
+      <p>Find the critical points of $f(x, y) = x^2 + y^2 - 4x - 6y + 14$.</p>
       
-      <p><strong>Step-by-Step Analysis:</strong></p>
-      <ol>
-        <li><strong>Find Gradient</strong>: $\nabla f = [2x, -2y]^T$.</li>
-        <li><strong>Find Critical Point</strong>: Set $2x=0, -2y=0$. The only critical point is $(0, 0)$.</li>
-        <li><strong>Find Hessian</strong>:
-          <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
-            $$H = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$$
-          </div>
-        </li>
-        <li><strong>Evaluate Eigenvalues</strong>: The eigenvalues are $\lambda_1 = 2$ and $\lambda_2 = -2$.</li>
-      </ol>
-      <p><strong>Result:</strong> Because one is positive and one is negative, $(0,0)$ is a <strong>Saddle Point</strong>.</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Compute Gradient:</strong> $\nabla f = [2x - 4, 2y - 6]^T$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set to Zero:</strong> $2x - 4 = 0 \implies x = 2$ and $2y - 6 = 0 \implies y = 3$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Identify Point:</strong> The only critical point is $(2, 3)$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Optimization Goal:</strong> In ML, this "Zero Gradient" condition is the target of our training. We want to find the parameter values where the error surface is flat, ideally at the bottom of a valley.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-classify">Example 2: Classifying Minima vs. Saddle Points</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing $f(x, y) = x^2 - y^2$</h4>
+      <p>Analyze the critical point $(0, 0)$ using the Hessian matrix.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Find Hessian:</strong> $f_{xx} = 2, f_{yy} = -2, f_{xy} = 0$.
+        <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
+          $$H = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$$
+        </div>
+      </div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Check Eigenvalues:</strong> $\lambda_1 = 2$ (positive) and $\lambda_2 = -2$ (negative).</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Because the eigenvalues have <strong>opposite signs</strong>, the point $(0, 0)$ is a <strong>Saddle Point</strong>. In Deep Learning, saddle points are more common than local minima and can significantly slow down training.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/SciPy)</h2>
@@ -701,7 +752,7 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
     <div class="linking-rule">
       <strong>Final Step:</strong> Having mastered vector fields and flow, you've completed the <strong>Calculus</strong> foundations. You are now equipped to step into <strong><a href="#/mathematics/information-theory/entropy">Information Theory</a></strong>, where we measure "Surprise" and "Entropy".
     </div>
-  `},s={id:"calculus",title:"Calculus",description:"The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",keyConcepts:[{title:"Differentiation",description:"Calculating instantaneous rates of change."},{title:"Partial Derivatives",description:"Handling variables in multi-dimensional space."},{title:"Gradients",description:"Vectors of change used in optimization."},{title:"Gradient Descent",description:"Iterative minimization of loss functions."},{title:"Chain Rule",description:"The foundation of neural network backpropagation."},{title:"Jacobian & Hessian",description:"Coordinate transforms and second-order optimization."},{title:"Area Under Curve",description:"Integration and model evaluation (AUC-ROC)."}],introHtml:String.raw`
+  `},r={id:"calculus",title:"Calculus",description:"The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",keyConcepts:[{title:"Differentiation",description:"Calculating instantaneous rates of change."},{title:"Partial Derivatives",description:"Handling variables in multi-dimensional space."},{title:"Gradients",description:"Vectors of change used in optimization."},{title:"Gradient Descent",description:"Iterative minimization of loss functions."},{title:"Chain Rule",description:"The foundation of neural network backpropagation."},{title:"Jacobian & Hessian",description:"Coordinate transforms and second-order optimization."},{title:"Area Under Curve",description:"Integration and model evaluation (AUC-ROC)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -835,4 +886,4 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
       </div>
 
     </div>
-  `,sections:[e,t,a,i,n,r,o]};export{s as CALCULUS_DATA};
+  `,sections:[e,t,a,i,n,s,o]};export{r as CALCULUS_DATA};

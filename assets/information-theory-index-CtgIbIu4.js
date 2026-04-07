@@ -83,7 +83,9 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-balls">Example 1: Picking Balls</a>
+      <a href="#example-coins">Example 2: Fair vs. Biased Coins</a>
+      <a href="#example-passwords">Example 3: Password Entropy</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -127,20 +129,54 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
       </ol>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-balls">Example 1: Picking Balls from a Bag</h2>
     <div class="example-box">
-      <h4>Scenario: Picking Balls from a Bag</h4>
-      <p>A bag with <strong>4 balls</strong>: 3 are <strong>Red</strong> and 1 is <strong>Blue</strong>.</p>
+      <h4>Problem: Non-Uniform Outcome Probability</h4>
+      <p>A bag with <strong>4 balls</strong>: 3 are <strong>Red</strong> and 1 is <strong>Blue</strong>. Calculate the entropy of the picking process.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>Probabilities:</strong> $P(\text{Red}) = 0.75$, $P(\text{Blue}) = 0.25$.</li>
-        <li><strong>Formulation:</strong> $H(X) = -[P(\text{Red}) \log_2 P(\text{Red}) + P(\text{Blue}) \log_2 P(\text{Blue})]$</li>
-        <li><strong>Solve:</strong> $H(X) = -[0.75 \log_2(0.75) + 0.25 \log_2(0.25)]$
-          <div class="math-block">$$H(X) = -[-0.311 - 0.5] = 0.811 \text{ bits}$$</div>
-        </li>
-      </ol>
-      <p><strong>Interpretation:</strong> Low entropy because the distribution is biased toward Red. If there were 2 Red and 2 Blue, entropy would be exactly **1.0 bit**.</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Probabilities:</strong> $P(\text{Red}) = 0.75$, $P(\text{Blue}) = 0.25$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $H(X) = -[0.75 \log_2(0.75) + 0.25 \log_2(0.25)]$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $H(X) \approx -[-0.311 - 0.5] = 0.811 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Low entropy because the distribution is biased toward Red. If there were 2 Red and 2 Blue, entropy would be exactly **1.0 bit** (maximum uncertainty).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-coins">Example 2: Fair vs. Biased Coins</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing Degrees of Uncertainty</h4>
+      <p><strong>Coin A (Fair):</strong> $P(H) = 0.5, P(T) = 0.5$.</p>
+      <p><strong>Coin B (Double-Headed):</strong> $P(H) = 1.0, P(T) = 0.0$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Entropy A:</strong> $H(A) = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = 1.0 \text{ bit}$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Entropy B:</strong> $H(B) = -(1.0 \log_2 1.0 + 0 \log_2 0) = 0 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Geometric Insight:</strong> A fair coin flip provides exactly 1 bit of information. A double-headed coin provides <strong>zero</strong> information because the outcome is certain (zero surprise).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-passwords">Example 3: Password Entropy</h2>
+    <div class="example-box">
+      <h4>Problem: Measuring Information Security</h4>
+      <p>Compare the entropy of a 4-digit PIN ($0-9$) vs. a 4-character password (A-Z).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>PIN (Digits):</strong> Total $N = 10^4 = 10,000$. $H = \log_2(10,000) \approx 13.3 \text{ bits}$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Password (Letters):</strong> Total $N = 26^4 = 456,976$. $H = \log_2(456,976) \approx 18.8 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Security Tip:</strong> Increasing the complexity of the character set (adding symbols) increases the <strong>Entropy per character</strong>, making the password statistically harder to brute-force.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>
@@ -182,7 +218,9 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-weather">Example 1: Weather Prediction</a>
+      <a href="#example-asymmetry">Example 2: Asymmetry (P vs Q)</a>
+      <a href="#example-uniform">Example 3: Approximation Penalty</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -225,17 +263,54 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
       <p style="margin:0">It represents the "extra" bits required because our model $Q$ isn't perfect.</p>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-weather">Example 1: Weather Prediction Accuracy</h2>
     <div class="example-box">
-      <h4>Scenario: Weather Prediction</h4>
+      <h4>Problem: Quantifying Prediction Error</h4>
       <p>True probability $P$: Sunny (0.8), Rainy (0.2). Model $Q$: Sunny (0.5), Rainy (0.5).</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>Sunny:</strong> $0.8 \cdot \log_2(0.8 / 0.5) \approx 0.542$</li>
-        <li><strong>Rainy:</strong> $0.2 \cdot \log_2(0.2 / 0.5) \approx -0.264$</li>
-        <li><strong>Total:</strong> $D_{KL}(P \parallel Q) = 0.542 - 0.264 = 0.278 \text{ bits}$</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sunny Component:</strong> $0.8 \cdot \log_2(0.8 / 0.5) \approx 0.542 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Rainy Component:</strong> $0.2 \cdot \log_2(0.2 / 0.5) \approx -0.264 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Summation:</strong> $D_{KL}(P \parallel Q) = 0.542 - 0.264 = 0.278 \text{ bits}$</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Using Model $Q$ to represent the weather results in an "information penalty" of <strong>0.278 bits</strong> per day compared to the optimal distribution $P$.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-asymmetry">Example 2: The Asymmetry of Divergence</h2>
+    <div class="example-box">
+      <h4>Problem: Proving KL is not a Distance Metric</h4>
+      <p>Calculate $D_{KL}(Q \parallel P)$ for the same distributions and compare with Example 1.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sunny:</strong> $0.5 \cdot \log_2(0.5 / 0.8) \approx -0.339 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Rainy:</strong> $0.5 \cdot \log_2(0.5 / 0.2) \approx 0.661 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Total:</strong> $D_{KL}(Q \parallel P) = -0.339 + 0.661 = 0.322 \text{ bits}$</div></div>
+
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Key Insight:</strong> $0.322 \neq 0.278$. KL Divergence is <strong>not a distance</strong> because it doesn't satisfy the symmetry property. This is why it's called a 'divergence'.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-uniform">Example 3: Approximation Penalty</h2>
+    <div class="example-box">
+      <h4>Problem: Assuming Uniformity in Unbalanced Data</h4>
+      <p>Suppose we use a **Uniform Distribution** $U$ to approximate an **unbalanced** True distribution $P = \{0.9, 0.1\}$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculation:</strong> $D_{KL}(P \parallel U) = 0.9 \log_2(0.9/0.5) + 0.1 \log_2(0.1/0.5)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluation:</strong> $0.9(0.84) + 0.1(-2.32) = 0.75 - 0.23 = 0.52 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> The "cost" of assuming everything is equally likely is roughly **half a bit** of extra surprise per sample.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation (NumPy)</h2>
@@ -279,6 +354,8 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
+      <a href="#example-binary">Example 1: Binary Classification</a>
+      <a href="#example-multiclass">Example 2: Multi-class Digit Recognition</a>
       <a href="#relationship">Relationship to KL Divergence</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -304,8 +381,38 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
 
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>For discrete probability distributions $P$ and $Q$ defined on the same probability space, the Cross-Entropy $H(P, Q)$ is defined as:</p>
-    <div class="math-block">
-      $$H(P, Q) = -\sum_{i} P(x_i) \log_2 Q(x_i)$$
+    <h2 id="example-binary">Example 1: Binary Classification (Cat vs. Dog)</h2>
+    <div class="example-box">
+      <h4>Problem: Penalizing Uncertainty in Predictions</h4>
+      <p>True label $P$: $[1, 0]$ (It is 100% a Cat). Model prediction $Q$: $[0.9, 0.1]$ (High confidence Cat).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Components:</strong> $P(Cat)=1, P(Dog)=0$ and $Q(Cat)=0.9, Q(Dog)=0.1$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> $H(P, Q) = -(1 \cdot \log_2 0.9 + 0 \cdot \log_2 0.1)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $H(P, Q) = -(-0.152) = 0.152 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> If the model predicted $[0.6, 0.4]$ (Lower confidence), the cross-entropy would be higher ($\approx 0.737 \text{ bits}$), penalizing the model more for its uncertainty.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-multiclass">Example 2: Multi-class (Handwritten Digits)</h2>
+    <div class="example-box">
+      <h4>Problem: Efficiency in One-Hot Encoded Labels</h4>
+      <p>True label for Digit '7': $P = [0, 0, \dots, 1, 0, 0]$ (1 at index 7). Model prediction $Q$ outputs a probability of $0.8$ for '7'.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Observation:</strong> In one-hot encoding, all $P_i = 0$ except for the true label index.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> Cross-entropy simplifies to just the negative log of the true class's predicted probability: $-\log_2(0.8)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> $H(P, Q) \approx 0.322 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> This shows why Cross-Entropy is so efficient for backpropagation—it only cares about the probability assigned to the **correct** answer.
+        </div>
+      </div>
     </div>
 
     <h2 id="relationship">Relationship from Entropy</h2>
@@ -325,7 +432,7 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having learned how to measure uncertainty and loss, let's look at <strong><a href="#/mathematics/information-theory/mutual-information">Mutual Information</a></strong> to see how variables share information.
     </div>
-  `},n={id:"mutual-information",title:"Mutual Information",description:"Mutual Information (MI) quantifies the amount of information obtained about one random variable through another, capturing any kind of statistical dependency.",html:String.raw`
+  `},s={id:"mutual-information",title:"Mutual Information",description:"Mutual Information (MI) quantifies the amount of information obtained about one random variable through another, capturing any kind of statistical dependency.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📏 Info Theory · MI</div>
       <h1>Mutual Information (MI)</h1>
@@ -337,7 +444,9 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-fruit">Example 1: Classification Signal</a>
+      <a href="#example-noise">Example 2: Noisy Features</a>
+      <a href="#example-nonlinear">Example 3: Non-Linear dependency</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -376,16 +485,52 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       </ul>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-fruit">Example 1: Identifying a Fruit by Color</h2>
     <div class="example-box">
-      <h4>Scenario: Predict if a Fruit is an Orange based on its Color</h4>
-      <p>Data: 2 samples [Orange, Orange], 1 [Apple, Red], 1 [Apple, Green].</p>
-      <ul>
-        <li><strong>Entropy of Fruit $H(X)$:</strong> $P(\text{Orange})=0.5, P(\text{Apple})=0.5 \implies H(X) = 1$ bit.</li>
-        <li><strong>Conditional Entropy $H(X|Y)$:</strong> If Color is Orange, we are 100% sure it's Orange. If Red or Green, 100% sure it's Apple. $H(X|Y) = 0$.</li>
-        <li><strong>MI Calculation:</strong> $I(X; Y) = 1 - 0 = 1$ bit.</li>
-      </ul>
-      <p><strong>Conclusion:</strong> Knowing the color completely removes the uncertainty about the fruit.</p>
+      <h4>Problem: Does Color provide a Categorical Signal?</h4>
+      <p>Suppose 50% of our basket contains <strong>Oranges</strong> (all are orange) and 50% are <strong>Apples</strong> (mix of red and green).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Initial Uncertainty:</strong> $H(Fruit) = 1.0 \text{ bit}$ (perfect 50/50 uncertainty).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> We learn the color is "Orange." Only the Orange fruit category possesses this color.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> Uncertainty $H(Fruit|Color)$ drops to 0 bits.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> $I(Fruit; Color) = 1.0 - 0 = 1.0 \text{ bit}$. Color provides <strong>maximum information</strong> about the fruit type.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-noise">Example 2: Noisy / Independent Features</h2>
+    <div class="example-box">
+      <h4>Problem: Detecting Lack of Relationship</h4>
+      <p>Variable $X$: Exam Score. Variable $Y$: Student's Shoe Size.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Independence:</strong> Usually, $X$ and $Y$ are independent. Learning $Y$ doesn't change the distribution of $X$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> $H(X|Y) = H(X)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> $I(X; Y) = H(X) - H(X) = 0 \text{ bits}$.</div></div>
+
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> In automated feature selection, features with <strong>Zero Mutual Information</strong> are typically discarded because they contain no signal for the target.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-nonlinear">Example 3: Capturing Non-Linear Shapes</h2>
+    <div class="example-box">
+      <h4>Problem: Identifying Dependencies where Correlation Fails ($Y = X^2$)</h4>
+      <p>Standard <strong>Pearson Correlation</strong> might be zero if $X$ is centered at zero (as positive and negative slopes cancel out). However, Mutual Information is <strong>not</strong> fooled.</p>
+      
+      <p>Because $Y$ is a deterministic function of $X$, $H(Y|X) = 0$. The Mutual Information $I(X; Y)$ will be positive and significant, correctly identifying that a strong relationship exists.</p>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Key Benefit:</strong> MI is superior to Correlation for detecting complex, non-linear patterns in datasets.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation (Scikit-Learn)</h2>
@@ -416,7 +561,7 @@ for name, score in zip(data.columns, mi_scores):
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered joint information, see these concepts in action with <strong><a href="#/mathematics/information-theory/examples">Practical Examples: Information Theory</a></strong>.
     </div>
-  `},r={id:"information-theory-examples",title:"Practical Examples",description:"Master the calculations and logic behind Entropy, Cross-Entropy, KL Divergence, and Perplexity with solved examples.",html:String.raw`
+  `},n={id:"information-theory-examples",title:"Practical Examples",description:"Master the calculations and logic behind Entropy, Cross-Entropy, KL Divergence, and Perplexity with solved examples.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📝 Solved Examples · Info Theory</div>
       <h1>Information Theory: Practical Examples</h1>
@@ -495,7 +640,7 @@ for name, score in zip(data.columns, mi_scores):
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the information-theoretic foundations, you've completed the <strong>Information Theory</strong> module. Ready to dive into the building blocks of mathematics with <strong><a href="#/mathematics/discrete-math/set-theory">Discrete Mathematics: Set Theory</a></strong>?
     </div>
-  `},s={id:"information-theory",title:"Information Theory",description:"Information Theory provides the mathematical foundation for quantifying uncertainty, measuring information flow, and designing optimal loss functions for Machine Learning models.",keyConcepts:[{title:"Self-Information",description:"Quantifying the 'surprise' or information in a single event."},{title:"Shannon Entropy",description:"The average uncertainty or randomness in a probability distribution."},{title:"KL Divergence",description:"Relative Entropy: measuring how much one distribution diverges from another."},{title:"Cross-Entropy",description:"The standard loss function for classification and language modeling."},{title:"Mutual Information",description:"Quantifying the dependency between different random variables."},{title:"Perplexity",description:"A measure of how well a probability model predicts a sample (common in NLP)."}],introHtml:String.raw`
+  `},a={id:"information-theory",title:"Information Theory",description:"Information Theory provides the mathematical foundation for quantifying uncertainty, measuring information flow, and designing optimal loss functions for Machine Learning models.",keyConcepts:[{title:"Self-Information",description:"Quantifying the 'surprise' or information in a single event."},{title:"Shannon Entropy",description:"The average uncertainty or randomness in a probability distribution."},{title:"KL Divergence",description:"Relative Entropy: measuring how much one distribution diverges from another."},{title:"Cross-Entropy",description:"The standard loss function for classification and language modeling."},{title:"Mutual Information",description:"Quantifying the dependency between different random variables."},{title:"Perplexity",description:"A measure of how well a probability model predicts a sample (common in NLP)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -629,4 +774,4 @@ for name, score in zip(data.columns, mi_scores):
       </div>
 
     </div>
-  `,sections:[e,t,i,o,n,r]};export{s as INFORMATION_THEORY_DATA};
+  `,sections:[e,t,i,o,s,n]};export{a as INFORMATION_THEORY_DATA};

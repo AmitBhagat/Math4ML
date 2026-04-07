@@ -1,7 +1,7 @@
-const t={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",color:"#0D47A1",html:String.raw`
+const t={id:"vectors",title:"Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",color:"#0D47A1",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
-      <h1>Introduction to Vectors</h1>
+      <h1>Vectors</h1>
       <p>In Machine Learning, <strong>Vectors</strong> are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.</p>
     </div>
 
@@ -150,10 +150,10 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered core vector foundations, let's explore how we grid these vectors into <strong><a href="#/mathematics/linear-algebra/matrices">Matrix Essentials</a></strong>.
     </div>
-  `},e={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",color:"#1976D2",html:String.raw`
+  `},e={id:"matrices",title:"Matrices",description:"Matrices are rectangular arrays of numbers that represent linear transformations between vector spaces. They are the workhorses of almost all machine learning operations.",color:"#2E7D32",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
-      <h1>Introduction to Matrices</h1>
+      <div class="premium-hero-badge">🔢 Linear Algebra · Matrices</div>
+      <h1>Matrices</h1>
       <p>In Machine Learning, a <strong>Matrix</strong> is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire <strong>Dataset</strong>, where rows correspond to individual samples and columns correspond to features.</p>
     </div>
 
@@ -324,10 +324,10 @@ print(f"Inverse:\n{A_inv}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Understanding the "DNA" of a matrix is crucial for model stability. Next, we explore <strong><a href="#/mathematics/linear-algebra/matrix-properties">Matrix Properties</a></strong> like Rank, Determinants, and Trace.
     </div>
-  `},i={id:"matrix-properties",title:"Introduction to Matrix Properties",description:'Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.',color:"#1976D2",html:String.raw`
+  `},i={id:"matrix-properties",title:"Matrix Properties",description:'Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.',color:"#1976D2",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Matrix Properties</div>
-      <h1>Introduction to Matrix Properties</h1>
+      <h1>Matrix Properties</h1>
       <p>Matrix properties like <strong>Rank</strong>, <strong>Determinant</strong>, <strong>Trace</strong>, and <strong>Positive Definiteness</strong> act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.</p>
     </div>
 
@@ -491,10 +491,10 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Matrix properties define a model's stability. Explore where data truly "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
-  `},a={id:"vector-spaces",title:"Introduction to Vector Spaces",description:"A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",color:"#0D47A1",html:String.raw`
+  `},a={id:"vector-spaces",title:"Vector Spaces",description:"Beyond individual vectors, we explore the structured environments where they exist — Subspaces, Spans, Bases, and the Dimension of data repositories.",color:"#673AB7",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
-      <h1>Introduction to Vector Spaces</h1>
+      <div class="premium-hero-badge">🌌 Linear Algebra · Vector Spaces</div>
+      <h1>Vector Spaces</h1>
       <p>A <strong>Vector Space</strong> is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in \(\mathbb{R}^n\) (an \(n\)-dimensional real space), where each dimension represents a specific feature of our data.</p>
     </div>
 
@@ -624,10 +624,10 @@ print(f"Projection of y onto u: {projection}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the basis and projections of where data lives, we can now factorize these structures into simpler components with <strong><a href="#/mathematics/linear-algebra/matrix-decompositions">Matrix Decompositions</a></strong>.
     </div>
-  `},s={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",color:"#90CAF9",html:String.raw`
+  `},s={id:"matrix-decompositions",title:"Matrix Decompositions",description:"High-dimensional data can be dense and difficult to manage. Decompositions — SVD, LU, Cholesky, and QR — allow us to break complex matrices into simpler, more manageable factors.",color:"#D32F2F",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
-      <h1>Introduction to Matrix Decompositions</h1>
+      <div class="premium-hero-badge">🧬 Linear Algebra · Decompositions</div>
+      <h1>Matrix Decompositions</h1>
       <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
     </div>
 
@@ -770,10 +770,10 @@ print(f"SVD Singular Values: {s}")
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD directly uses eigenvalues. Now, reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
-  `},n={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",color:"#42A5F5",html:String.raw`
+  `},n={id:"eigenvalues-eigenvectors",title:"Eigenvalues and Eigenvectors",description:"Eigen-analysis reveals the internal structure of a matrix — its eigenvalues and eigenvectors — which are the foundations of PCA, Singular Value Decomposition, and spectral analysis.",color:"#FFD600",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">λ Linear Algebra · Eigenvalues & Eigenvectors</div>
-      <h1>Introduction to Eigenvalues and Eigenvectors</h1>
+      <div class="premium-hero-badge">🏹 Linear Algebra · Spectral Theory</div>
+      <h1>Eigenvalues and Eigenvectors</h1>
       <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
     </div>
 

@@ -2,7 +2,7 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
-      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points (like a column of User IDs or a list of features).</p>
+      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
     </div>
 
     <div class="toc">
@@ -10,6 +10,7 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       <a href="#subsets">1. Subsets ($\subseteq$)</a>
       <a href="#union">2. Union ($\cup$)</a>
       <a href="#intersection">3. Intersection ($\cap$)</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#comparison">Comparison Table for Data Operations</a>
       <a href="#ml-journey">Why this matters for ML</a>
     </div>
@@ -24,27 +25,68 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
     </div>
     <p><strong>Notation:</strong> $A \subseteq B$</p>
 
+    <hr class="premium-hr">
+
     <h2 id="union">2. Union ($\cup$)</h2>
     <p>The <strong>union</strong> of two sets includes all unique elements from both sets.</p>
     <div class="callout tip">
       <div class="callout-icon">🤝</div>
       <div class="callout-body">
-        <strong>Data Context:</strong> This is used when you are <strong>merging</strong> two datasets with the same structure (e.g., combining sales data from January and February). In SQL, this is the <code>UNION</code> command.
+        <strong>Data Context:</strong> This is used when you are <strong>merging</strong> two datasets with the same structure. In SQL, this is the <code>UNION</code> command.
       </div>
     </div>
     <p><strong>Logic:</strong> "Give me everything from Set A OR Set B."<br>
     <strong>Notation:</strong> $A \cup B$</p>
+
+    <hr class="premium-hr">
 
     <h2 id="intersection">3. Intersection ($\cap$)</h2>
     <p>The <strong>intersection</strong> includes only the elements that appear in <em>both</em> sets.</p>
     <div class="callout info">
       <div class="callout-icon">📍</div>
       <div class="callout-body">
-        <strong>Data Context:</strong> This is used for <strong>Inner Joins</strong>. If you have a list of "Email Subscribers" and a list of "Recent Buyers," the intersection tells you which subscribers actually bought something.
+        <strong>Data Context:</strong> This is used for <strong>Inner Joins</strong>. If you have "Email Subscribers" and "Buyers," the intersection tells you who did both.
       </div>
     </div>
     <p><strong>Logic:</strong> "Give me only what is in Set A AND Set B."<br>
     <strong>Notation:</strong> $A \cap B$</p>
+
+    <hr class="premium-hr">
+
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Reconciling Customer Lists</h4>
+      <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Data Insight:</strong> Intersection is the foundation of <strong>Inner Joins</strong>, while Union represents a <strong>Full Outer Join</strong> without duplicates.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
+      <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> This is a powerful technique for <strong>Data Auditing</strong>—quickly finding rows that exist in your local slice but are missing from the production database.
+        </div>
+      </div>
+    </div>
+
+    <hr class="premium-hr">
 
     <h2 id="comparison">Comparison Table for Data Operations</h2>
     <div class="premium-table-wrap">
@@ -80,7 +122,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Set theory defines the collections of data. Now, explore <strong><a href="#/mathematics/discrete-math/logic">Mathematical Logic</a></strong> to see how we build complex rules to filter and transform these sets.
+      <strong>Next Step:</strong> Set theory defines the collections of data. Now, explore <strong><a href="#/mathematics/discrete-math/logic">Mathematical Logic</a></strong> to see how we build complex rules.
     </div>
   `},e={id:"logic",title:"Mathematical Logic",description:"The framework that allows machines to reason. Explore Propositional and First-Order Logic in the context of Symbolic AI and expert systems.",color:"#7986CB",html:String.raw`
     <div class="premium-hero">
@@ -94,6 +136,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       <a href="#propositional">1. Propositional Logic</a>
       <a href="#fol">2. First-Order Logic (FOL)</a>
       <a href="#applications">3. Applications in AI & Software</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#comparison">Comparison Summary</a>
       <a href="#ml-context">Logic in Data Science</a>
     </div>
@@ -145,7 +188,38 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     <h3>C. Knowledge Representation</h3>
     <p>In <strong>Knowledge Graphs</strong>, logic helps infer new facts through transitivity and other logical properties.</p>
 
-    <h2 id="comparison">Comparison Summary</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Evaluating a Medical Expert System Rule</h4>
+      <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Logic Insight:</strong> In expert systems, finding "False" cases helps debug the knowledge base; it indicates the rule is either too broad or missing a condition.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
+      <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Why it matters:</strong> Simplified logic reduces cognitive load for other developers and can prevent "nesting hell" in complex control flows.
+        </div>
+      </div>
+    </div>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
@@ -174,7 +248,7 @@ not_nyc = df[~(df['city'] == 'New York')]
     <div class="linking-rule">
       <strong>Next Step:</strong> Logic helps us reason. Now let's explore <strong><a href="#/mathematics/discrete-math/combinatorics">Combinatorics</a></strong> to see how we can count and arrange data points in large-scale systems.
     </div>
-  `},o={id:"combinatorics",title:"Combinatorics",description:"The art of counting in algorithm analysis and search space determination for AI and Machine Learning.",color:"#9FA8DA",html:String.raw`
+  `},s={id:"combinatorics",title:"Combinatorics",description:"The art of counting in algorithm analysis and search space determination for AI and Machine Learning.",color:"#9FA8DA",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Discrete Math · Counting</div>
       <h1>Combinatorics: The Art of Counting</h1>
@@ -186,7 +260,8 @@ not_nyc = df[~(df['city'] == 'New York')]
       <a href="#counting-principle">1. Fundamental Counting Principle</a>
       <a href="#permutations">2. Permutations (Order Matters)</a>
       <a href="#combinations">3. Combinations (Order Doesn't Matter)</a>
-      <a href="#comparison">Comparison for Algorithm Analysis</a>
+      <a href="#examples">Illustrative Examples</a>
+      <a href="#comparison">Comparison Summary</a>
       <a href="#ml-career">Why this matters for your AI/ML Career</a>
     </div>
 
@@ -223,7 +298,39 @@ not_nyc = df[~(df['city'] == 'New York')]
       </div>
     </div>
 
-    <h2 id="comparison">Comparison for Algorithm Analysis</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
+      <p>A deep learning researcher wants to test 3 distinct layers: **Conv2D (C)**, **MaxPooling (M)**, and **Dropout (D)**. How many ways can they be ordered in a block?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>ML Tip:</strong> While permutations give you the search space, <strong>Neural Architecture Search (NAS)</strong> uses algorithms to find the <em>best</em> permutation without testing all $n!$ combinations.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Feature Subset Selection (Combinations)</h4>
+      <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Complexity Note:</strong> As $n$ grows, the number of combinations explodes (this is the <strong>Combinatorial Explosion</strong>). This is why we use <strong>Recursive Feature Elimination (RFE)</strong> instead of exhaustive search.
+        </div>
+      </div>
+    </div>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
@@ -280,6 +387,7 @@ combs = list(itertools.combinations(items, 2))
       <a href="#components">1. The Core Components</a>
       <a href="#types">2. Types of Graphs</a>
       <a href="#matrices">3. Adjacency Matrices</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#ai-ml">4. Why this matters for AI/ML</a>
       <a href="#implementation">Python Implementation</a>
     </div>
@@ -316,7 +424,47 @@ combs = list(itertools.combinations(items, 2))
       </div>
     </div>
 
-    <h2 id="ai-ml">4. Why this matters for AI/ML</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Building an Adjacency Matrix</h4>
+      <p>Represent a simple **Social Network** of 4 users ($A, B, C, D$) where:
+      <ul>
+        <li>$A$ is friends with $B$ and $C$</li>
+        <li>$B$ is friends with $A$ and $D$</li>
+        <li>$C$ is friends with $A$</li>
+        <li>$D$ is friends with $B$</li>
+      </ul>
+      </p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Resulting Matrix:</strong>
+        <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
+      </div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Graph Insight:</strong> Notice the <strong>Symmetry</strong> along the diagonal. For friend $A$ (Row 1), we see connections at Column 2 ($B$) and Column 3 ($C$).
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Calculating Degree Centrality</h4>
+      <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> In GNNs, these degree counts are used for <strong>Normalization</strong> within Message Passing layers to prevent highly connected nodes from overwhelming the feature signals.
+        </div>
+      </div>
+    </div>
     <ul>
       <li><strong>Knowledge Graphs:</strong> Powering search engines and LLMs by linking facts with semantic meanings.</li>
       <li><strong>Graph Neural Networks (GNNs):</strong> Predicting things like "Will these users become friends?" or "Is this molecule toxic?" using adjacency matrices and node features.</li>
@@ -347,7 +495,7 @@ if adj_matrix[1, 2] == 1:
     <div class="linking-rule">
       <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
     </div>
-  `},s={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
+  `},o={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -481,4 +629,4 @@ if adj_matrix[1, 2] == 1:
       </div>
 
     </div>
-  `,sections:[t,e,o,i]};export{s as DISCRETE_MATH_DATA};
+  `,sections:[t,e,s,i]};export{o as DISCRETE_MATH_DATA};
