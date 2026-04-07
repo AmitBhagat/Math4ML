@@ -1,0 +1,29 @@
+import { CategoryData } from "../src/data/types";
+
+export const DEEP_LEARNING_DATA: CategoryData = {
+  id: "deep-learning",
+  title: "Neural Networks & Deep Learning",
+  description: "Biologically inspired architectures (ANN, CNN, RNN) that power modern computer vision and natural language processing.",
+  keyConcepts: [
+    { title: "Backpropagation", description: "Efficient weight updates via Chain Rule." },
+    { title: "Layers", description: "Hierarchical feature extraction in deep models." }
+  ],
+  sections: [
+    {
+      id: "architectures",
+      title: "Foundational Architectures",
+      description: "Overview of MLP, CNN, and RNN structural patterns.",
+      content: "",
+      tags: ["MLP", "CNN", "RNN"],
+      color: "#e3b341"
+    },
+    {
+      id: "optimization",
+      title: "Deep Optimization",
+      description: "Loss minimization techniques for high-dimensional parameter spaces.",
+      content: "",
+      tags: ["Backprop", "Adam", "SGD"],
+      color: "#e3b341"
+    }
+  ]
+};

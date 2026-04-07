@@ -1,14 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
 @import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
   --font-headline: "Crimson Pro", serif;
   --font-body: "Outfit", sans-serif;
   --font-sans: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
-
-  /* Support for .dark class in Tailwind 4 */
-  @custom-variant dark (&:where(.dark, .dark *));
 
   /* Dynamically mapped to CSS variables for Theme support */
   --color-bg: var(--bg);
@@ -22,6 +20,15 @@
   --color-purple-premium: var(--purple);
   --color-text-premium: var(--text);
   --color-muted-premium: var(--muted);
+
+  /* Material Design 3 surface tokens for skeletons and cards */
+  --color-surface-container: var(--s-container);
+  --color-surface-container-low: var(--s-container-low);
+  --color-surface-container-high: var(--s-container-high);
+  --color-on-surface: var(--text);
+  --color-on-surface-variant: var(--muted);
+
+  --shadow-premium-glow: 0 0 20px -5px var(--accent);
 }
 
 @layer base {
@@ -39,14 +46,18 @@
     --text: #24292f;
     --muted: #57606a;
     
+    --s-container: #f0f2f5;
+    --s-container-low: #f6f8fa;
+    --s-container-high: #e1e4e8;
+    
     --sidebar-w: 280px;
   }
 
   .dark {
     /* ─── PREMIUM DARK THEME ─── */
     --bg: #0d1117;
-    --bg2: #161b22;
-    --bg3: #1c2128;
+    --bg2: #010409;
+    --bg3: #161b22;
     --border: #30363d;
     --accent: #58a6ff;
     --accent2: #79c0ff;
@@ -55,6 +66,10 @@
     --purple: #bc8cff;
     --text: #e6edf3;
     --muted: #8b949e;
+
+    --s-container: #161b22;
+    --s-container-low: #0d1117;
+    --s-container-high: #21262d;
   }
 
   html {
@@ -276,6 +291,17 @@
     @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-sm font-normal text-text-premium;
   }
   .conclusion strong { @apply text-green-premium font-semibold; }
+
+  /* Elevation Utilities */
+  .surface-elevated {
+    @apply bg-surface-container border border-border-premium shadow-lg rounded-2xl p-6;
+  }
+  .surface-elevated-low {
+    @apply bg-surface-container-low border border-border-premium/50 shadow-sm rounded-xl p-4;
+  }
+  .surface-elevated-high {
+    @apply bg-surface-container-high border border-border-premium shadow-xl rounded-3xl p-8;
+  }
 }
 
 /* ─── GLOBAL UTILITIES ─── */

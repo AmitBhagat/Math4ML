@@ -6,45 +6,50 @@ import { useTheme } from "@/src/hooks/useTheme";
 
 // ── MONOKAI SYNTAX HIGHLIGHTER (Lightweight Regex) ──
 const highlightPython = (code: string) => {
-  // Escape HTML tags to prevent XSS/broken layout
+  // Common Colors (Synchronized with dark palette)
+  const colors = {
+    keyword: "#ff57a0", // Pink
+    type: "#50E3C2",    // Mint
+    function: "#ff9ac1", // Salmon
+    string: "#f8e71c",  // Yellow
+    number: "#ae81ff",  // Purple
+    comment: "#75715e", // Grey
+    special: "#ae81ff", // Purple
+  };
+
+  // 1. Define placeholders and storage for strings and comments
+  const protectedMap: Record<string, string> = {};
+  let protectedCounter = 0;
+
+  // Single-pass regex to identify strings and comments to preserve them
+  const protectedRegex = /(#.*)|(['"])(?:(?!\2|\\).|\\.)*\2/g;
+  
   let html = code
     .replace(/&/g, "&amp;")
     .replace(/</g, "&lt;")
     .replace(/>/g, "&gt;");
 
-  // High-fidelity Neon-on-Dark Palette (Synchronized with ray-so-export.png)
-  const colors = {
-    keyword: "#ff57a0", // Neon Pink
-    type: "#50E3C2",    // Radiant Mint/Teal
-    function: "#ff9ac1", // Salmon Pink
-    string: "#f8e71c",  // Canary Yellow
-    number: "#ae81ff",  // Purple
-    comment: "#75715e", // Muted Grey
-    special: "#ae81ff", // Purple
-    punctuation: "#ffffff", // Pure White
-  };
+  // Protect potentially volatile tokens
+  html = html.replace(protectedRegex, (match, p1, p2) => {
+    const id = `__PROT_${protectedCounter++}__`;
+    const color = p1 ? colors.comment : colors.string;
+    protectedMap[id] = `<span style="color: ${color}">${match}</span>`;
+    return id;
+  });
 
-  // Comments (#)
-  html = html.replace(/(#.*)/g, `<span style="color: ${colors.comment}">$1</span>`);
-
-  // Strings (Single/Double quotes)
-  html = html.replace(/(['"])(?:(?!\1|\\).|\\.)*\1/g, `<span style="color: ${colors.string}">$&</span>`);
-
-  // Keywords (Control Flow)
+  // 2. Highlighting keywords and other patterns on "clean" code
   const keywords = /\b(def|class|if|else|elif|for|while|return|import|from|as|try|except|with|in|is|not|and|or|yield|pass|break|continue)\b/g;
   html = html.replace(keywords, `<span style="color: ${colors.keyword}">$1</span>`);
 
-  // Type-like words (Capitalized or specific imports)
   html = html.replace(/\b([A-Z][a-zA-Z0-9_]*)\b/g, `<span style="color: ${colors.type}">$1</span>`);
-
-  // Special Constants
   html = html.replace(/\b(self|cls|True|False|None)\b/g, `<span style="color: ${colors.special}">$1</span>`);
-
-  // Numbers (Integers and Floats)
   html = html.replace(/\b(\d+(\.\d+)?)\b/g, `<span style="color: ${colors.number}">$1</span>`);
-
-  // Function calls (Word before parenthesis)
   html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\()/g, `<span style="color: ${colors.function}">$1</span>`);
+
+  // 3. Restore protected tokens
+  Object.keys(protectedMap).forEach(id => {
+    html = html.replace(id, protectedMap[id]);
+  });
 
   return html;
 };
@@ -112,7 +117,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   // Run the currently edited code through Pyodide
   const handleRun = useCallback(async () => {
     setRunState("loading-pyodide");
-    setLiveOutput(null);
+    // Removed setLiveOutput(null) to prevent output area flickering during re-runs.
     try {
       const result = await runPython(editedCode);
       setLiveOutput(result);

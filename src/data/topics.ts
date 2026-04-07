@@ -221,6 +221,14 @@ const importMap: Record<string, () => Promise<any>> = {
   'calculus': () => import('../../categories/calculus-index'),
   'information-theory': () => import('../../categories/information-theory-index'),
   'discrete-math': () => import('../../categories/discrete-math-index'),
+  
+  // Machine Learning Cluster
+  'supervised-learning': () => import('../../categories/supervised-learning-index'),
+  'unsupervised-learning': () => import('../../categories/unsupervised-learning-index'),
+  'deep-learning': () => import('../../categories/deep-learning-index'),
+  'reinforcement-learning': () => import('../../categories/reinforcement-learning-index'),
+  'data-preprocessing': () => import('../../categories/data-preprocessing-index'),
+  'model-evaluation': () => import('../../categories/model-evaluation-index'),
 };
 
 // Export name map (the const name inside each file)
@@ -231,6 +239,14 @@ const exportNameMap: Record<string, string> = {
   'calculus': 'CALCULUS_DATA',
   'information-theory': 'INFORMATION_THEORY_DATA',
   'discrete-math': 'DISCRETE_MATH_DATA',
+  
+  // Machine Learning Cluster
+  'supervised-learning': 'SUPERVISED_LEARNING_DATA',
+  'unsupervised-learning': 'UNSUPERVISED_LEARNING_DATA',
+  'deep-learning': 'DEEP_LEARNING_DATA',
+  'reinforcement-learning': 'REINFORCEMENT_LEARNING_DATA',
+  'data-preprocessing': 'DATA_PREPROCESSING_DATA',
+  'model-evaluation': 'MODEL_EVALUATION_DATA',
 };
 
 /**
