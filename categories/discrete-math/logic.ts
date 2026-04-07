@@ -4,6 +4,7 @@ export const logicSection: TopicSection = {
   id: "logic",
   title: "Mathematical Logic",
   description: "The framework that allows machines to reason. Explore Propositional and First-Order Logic in the context of Symbolic AI and expert systems.",
+  color: "#7986CB",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Discrete Math · Logic</div>
@@ -94,7 +95,7 @@ not_nyc = df[~(df['city'] == 'New York')]
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Logic helps us reason. Now let's explore <strong>Combinatorics</strong> to see how we can count and arrange data points in large-scale systems.
+      <strong>Next Step:</strong> Logic helps us reason. Now let's explore <strong><a href="#/mathematics/discrete-math/combinatorics">Combinatorics</a></strong> to see how we can count and arrange data points in large-scale systems.
     </div>
   `
 };

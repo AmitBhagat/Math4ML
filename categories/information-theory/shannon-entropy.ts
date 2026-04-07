@@ -101,7 +101,7 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Minimizing KL Divergence is mathematically equivalent to minimizing <strong><a href="#/mathematics/information-theory/cross-entropy">Cross-Entropy Loss</a></strong>, our next topic.
+      <strong>Next Step:</strong> Shannon Entropy measures uncertainty in one variable. Now, explore how we compare distributions using <strong><a href="#/mathematics/information-theory/kl-divergence">KL Divergence</a></strong>.
     </div>
   `
 };

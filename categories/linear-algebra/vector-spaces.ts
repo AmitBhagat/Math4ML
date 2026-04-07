@@ -4,6 +4,7 @@ export const vectorSpacesSection: TopicSection = {
   id: "vector-spaces",
   title: "Introduction to Vector Spaces",
   description: "A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",
+  color: "#0D47A1",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
@@ -127,7 +128,7 @@ print(f"Projection of y onto u: {projection}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Having mastered decompositions like SVD, we reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
+      <strong>Next Step:</strong> Having mastered the basis and projections of where data lives, we can now factorize these structures into simpler components with <strong><a href="#/mathematics/linear-algebra/matrix-decompositions">Matrix Decompositions</a></strong>.
     </div>
   `
 };

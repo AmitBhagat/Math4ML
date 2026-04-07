@@ -4,6 +4,7 @@ export const samplingResamplingSection: TopicSection = {
   id: "sampling-resampling",
   title: "Sampling & Resampling",
   description: "Learn methods to estimate uncertainty and ensure generalization through Bootstrapping, K-Fold Cross-Validation, and Stratified sampling.",
+  color: "#FFE082",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔄 Statistics · Resampling</div>

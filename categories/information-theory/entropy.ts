@@ -4,6 +4,7 @@ export const entropySection: TopicSection = {
   id: "entropy",
   title: "Information Theory Basics",
   description: "Introduction to Information Theory, Entropy, Cross-Entropy Loss, and KL Divergence in Machine Learning.",
+  color: "#26C6DA",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Info Theory · Introduction</div>
@@ -75,7 +76,7 @@ export const entropySection: TopicSection = {
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Understanding entropy within a distribution allows us to explore <strong><a href="#/mathematics/information-theory/kl-divergence">KL Divergence</a></strong> and measure differences between distributions.
+      <strong>Next Step:</strong> Entropy measures uncertainty in one variable. Now, explore the mathematical depth in <strong><a href="#/mathematics/information-theory/shannon-entropy">Shannon Entropy</a></strong>.
     </div>
   `
 };

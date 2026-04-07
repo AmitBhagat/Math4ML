@@ -133,7 +133,7 @@ export const ProblemPage = () => {
         
         <div className="max-w-xl mx-auto space-y-6">
           <p className="text-muted-premium text-lg font-light leading-relaxed">
-            This module is currently being synthesized for the <span className="text-accent-premium font-medium">Applied Intelligence</span> cluster. 
+            This module is currently being synthesized for the <span className="text-accent-premium font-medium">Machine Learning</span> cluster. 
             Detailed derivations, interactive proofs, and neural architecture deep-dives are coming soon.
           </p>
           
@@ -210,12 +210,18 @@ export const ProblemPage = () => {
           {prevProblem ? (
             <Link 
               to={clusterId ? `/${clusterId}/${categoryId}/${prevProblem.id}` : `/${categoryId}/${prevProblem.id}`}
-              className="flex flex-col gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:border-accent-premium/40 hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline"
+              className="flex flex-col gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline"
+              style={{
+                borderColor: prevProblem.color ? `${prevProblem.color}40` : undefined,
+              }}
             >
-              <span className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] group-hover:text-accent-premium transition-colors">
+              <span 
+                className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] transition-colors"
+                style={{ color: prevProblem.color || undefined }}
+              >
                 <ArrowLeft className="w-3.5 h-3.5" /> Previous Section
               </span>
-              <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
+              <h3 className="font-headline font-black text-xl text-on-surface group-hover:opacity-80 transition-opacity">
                 {prevProblem.title}
               </h3>
             </Link>
@@ -226,12 +232,18 @@ export const ProblemPage = () => {
           {nextProblem ? (
             <Link 
               to={clusterId ? `/${clusterId}/${categoryId}/${nextProblem.id}` : `/${categoryId}/${nextProblem.id}`}
-              className="flex flex-col items-end gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:border-accent-premium/40 hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline text-right"
+              className="flex flex-col items-end gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline text-right"
+              style={{
+                borderColor: nextProblem.color ? `${nextProblem.color}40` : undefined,
+              }}
             >
-              <span className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] group-hover:text-accent-premium transition-colors">
+              <span 
+                className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] transition-colors"
+                style={{ color: nextProblem.color || undefined }}
+              >
                 Next Section <ArrowRight className="w-3.5 h-3.5" />
               </span>
-              <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
+              <h3 className="font-headline font-black text-xl text-on-surface group-hover:opacity-80 transition-opacity">
                 {nextProblem.title}
               </h3>
             </Link>

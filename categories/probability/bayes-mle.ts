@@ -4,6 +4,7 @@ export const bayesMleSection: TopicSection = {
   id: "bayes-mle",
   title: "Bayes' Theorem & MLE",
   description: "Maximum Likelihood Estimation (MLE) and Bayesian Inference are two different philosophies for 'training' a model by finding the best parameters for a probability distribution.",
+  color: "#FFC107",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎯 Probability · Bayes' Theorem & MLE</div>
@@ -101,7 +102,7 @@ export const bayesMleSection: TopicSection = {
     </ul>
 
     <div class="linking-rule">
-      <strong>Congratulations!</strong> You have mastered the foundations of Probability. Now, put these tools to work in <strong><a href="#/mathematics/statistics/descriptive-statistics">Statistics</a></strong> to analyze real-world datasets.
+      <strong>Next Step:</strong> Theory is best solidified through practice. Let's look at <strong><a href="#/mathematics/probability/bayes-mle-examples">Practical Examples</a></strong> of Spam Filtering and Coin Tosses.
     </div>
   `
 };

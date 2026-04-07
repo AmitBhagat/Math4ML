@@ -4,6 +4,7 @@ export const combinatoricsSection: TopicSection = {
   id: "combinatorics",
   title: "Combinatorics",
   description: "The art of counting in algorithm analysis and search space determination for AI and Machine Learning.",
+  color: "#9FA8DA",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Discrete Math · Counting</div>
@@ -96,7 +97,7 @@ combs = list(itertools.combinations(items, 2))
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Counting arrangements is key. Now let's explore <strong>Graph Theory</strong> to see how entities and their relationships (like neurons in a network) are modeled.
+      <strong>Next Step:</strong> Counting arrangements is key. Now let's explore <strong><a href="#/mathematics/discrete-math/graph-theory">Graph Theory</a></strong> to see how entities and their relationships (like neurons in a network) are modeled.
     </div>
   `
 };

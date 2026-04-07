@@ -4,6 +4,7 @@ export const optimizationSection: TopicSection = {
   id: "optimization",
   title: "Optimization Theory",
   description: "Optimization Theory is the study of finding the 'best' solution. In ML, this means finding weights that minimize the Loss Function.",
+  color: "#A5D6A7",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Calculus · Optimization</div>

@@ -8,7 +8,7 @@ export const informationTheoryExamplesSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">📝 Solved Examples · Info Theory</div>
       <h1>Information Theory: Practical Examples</h1>
-      <p>Continuing with our GeeksforGeeks-style guide, here are practical examples to help you master the calculations and logic behind these concepts.</p>
+      <p>Continuing with our comprehensive guide, here are practical examples to help you master the calculations and logic behind these concepts.</p>
     </div>
 
     <div class="toc">
@@ -81,7 +81,7 @@ export const informationTheoryExamplesSection: TopicSection = {
     </div>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Having mastered the information-theoretic foundations, you've completed the <strong>Information Theory</strong> module. Ready to dive into <strong>Discrete Mathematics</strong>?
+      <strong>Next Step:</strong> Having mastered the information-theoretic foundations, you've completed the <strong>Information Theory</strong> module. Ready to dive into the building blocks of mathematics with <strong><a href="#/mathematics/discrete-math/set-theory">Discrete Mathematics: Set Theory</a></strong>?
     </div>
   `
 };

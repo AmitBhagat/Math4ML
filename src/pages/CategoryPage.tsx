@@ -105,52 +105,66 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
     >
 
 
-      {/* ─── Minimal Header ─── */}
-      <div className="mb-12">
-        <h1 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-on-surface">
-          {category.title}
-        </h1>
-      </div>
+      {/* ─── Minimal Header (Hidden if custom intro is present) ─── */}
+      {!category.introHtml && (
+        <div className="mb-12">
+          <h1 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-on-surface">
+            {category.title}
+          </h1>
+        </div>
+      )}
 
-      {/* Key Concepts Grid */}
-      <div className="mb-24">
-        <div className="flex items-center gap-6 mb-12 border-b border-black/5 dark:border-white/5 pb-6">
-          <h2 className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.3em]">Key Concepts Breakdown</h2>
-          <div className="h-[2px] flex-grow bg-gradient-to-r from-accent-teal/30 to-transparent"></div>
+      {category.introHtml ? (
+        /* Custom Narrative Intro */
+        <div 
+          className="premium-intro-content" 
+          dangerouslySetInnerHTML={{ __html: category.introHtml }} 
+        />
+      ) : (
+        /* Default Key Concepts Grid */
+        <div className="mb-24">
+          <div className="flex items-center gap-6 mb-12 border-b border-black/5 dark:border-white/5 pb-6">
+            <h2 className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.3em]">Key Concepts Breakdown</h2>
+            <div className="h-[2px] flex-grow bg-gradient-to-r from-accent-teal/30 to-transparent"></div>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {category.sections.map((section) => {
+              const sectionColor = section.color || 'var(--category-primary)';
+              return (
+                <Link
+                  key={section.id}
+                  to={cluster ? `/${cluster.id}/${category.id}/${section.id}` : `/${category.id}/${section.id}`}
+                  className="group bg-surface-container p-10 rounded border border-transparent hover:border-border-premium hover:bg-surface-container-high transition-all duration-300 flex flex-col h-full relative overflow-hidden"
+                  style={{
+                    '--hover-glow': `${sectionColor}15`,
+                  } as React.CSSProperties}
+                >
+                  <div 
+                    className="absolute top-0 left-0 w-1.5 h-full transition-transform duration-300 group-hover:scale-y-110" 
+                    style={{ backgroundColor: sectionColor }}
+                  />
+                  <div className="mb-4 flex items-center justify-between">
+                    <h3 
+                      className="font-headline font-black text-xl text-on-surface transition-colors"
+                      style={{ color: 'inherit' }}
+                    >
+                      {section.title}
+                    </h3>
+                  </div>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {section.tags?.slice(0, 3).map((tag) => (
+                      <span key={tag} className="text-[8px] font-black uppercase tracking-[0.15em] bg-bg-secondary/50 text-muted-premium px-2 py-1 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </Link>
+              );
+            })}
+          </div>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {category.sections.map((section) => (
-              <Link
-              key={section.id}
-              to={cluster ? `/${cluster.id}/${category.id}/${section.id}` : `/${category.id}/${section.id}`}
-              className="group bg-surface-container p-10 rounded border-none hover:bg-surface-container-high shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col h-full"
-            >
-              <div className="mb-4 flex items-center justify-between">
-                <h3 className="font-headline font-black text-xl text-on-surface group-hover:text-accent-teal transition-colors">
-                  {section.title}
-                </h3>
-              </div>
-              <div className="flex flex-wrap gap-3">
-                {section.tags?.map((tag) => (
-                  <span key={tag} className="text-[9px] font-black uppercase tracking-widest bg-background/50 text-on-surface-variant px-3 py-1.5 rounded">
-                    {tag}
-                  </span>
-                ))}
-                {section.level && (
-                  <span className={`text-[9px] font-black uppercase tracking-widest px-3 py-1.5 rounded ${
-                    section.level === 'Beginner' ? 'bg-accent-teal/10 text-accent-teal' :
-                    section.level === 'Intermediate' ? 'bg-accent-purple/10 text-accent-purple' :
-                    'bg-rose-500/10 text-rose-500'
-                  }`}>
-                    {section.level}
-                  </span>
-                )}
-              </div>
-            </Link>
-          ))}
-        </div>
-      </div>
+      )}
     </div>
   );
 };

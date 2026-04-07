@@ -99,7 +99,7 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Minimizing <strong>KL Divergence</strong> is mathematically equivalent to minimizing <strong>Cross-Entropy Loss</strong>, our next topic.
+      <strong>Next Step:</strong> Minimizing KL Divergence is mathematically equivalent to minimizing <strong><a href="#/mathematics/information-theory/cross-entropy">Cross-Entropy Loss</a></strong>, our next topic.
     </div>
   `
 };

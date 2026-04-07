@@ -4,6 +4,7 @@ export const descriptiveStatisticsSection: TopicSection = {
   id: "descriptive-statistics",
   title: "Descriptive Statistics",
   description: "Understand the core measures of central tendency and spread, and how Information Theory provides the mathematical foundation for measuring uncertainty.",
+  color: "#B2EBF2",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Statistics · Basics</div>

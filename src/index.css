@@ -78,7 +78,7 @@
 
   /* ─── TYPOGRAPHY & LIST SPACING ─── */
   p {
-    @apply mb-5 font-light text-text-premium leading-relaxed;
+    @apply mb-5 font-normal text-text-premium leading-relaxed;
   }
 
   ul, ol {
@@ -86,7 +86,7 @@
   }
 
   li {
-    @apply font-light text-text-premium;
+    @apply font-normal text-text-premium;
   }
 }
 
@@ -119,7 +119,7 @@
     @apply text-3xl lg:text-[32px] font-semibold leading-tight mb-2 text-text-premium;
   }
   .premium-hero p {
-    @apply text-[15px] leading-relaxed font-light text-muted-premium max-w-3xl;
+    @apply text-[15px] leading-relaxed font-normal text-muted-premium max-w-3xl;
   }
 
   /* ─── SECTION HEADERS ─── */
@@ -150,7 +150,7 @@
   .premium-callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
   
   .premium-callout-icon { @apply text-base mt-0.5 shrink-0; }
-  .premium-callout-body { @apply text-sm font-light text-text-premium; }
+  .premium-callout-body { @apply text-sm font-normal text-text-premium; }
   .premium-callout-body strong { @apply font-semibold text-accent-premium; }
 
   /* ─── DEFINITIONS & CASE STUDIES ─── */
@@ -168,14 +168,14 @@
 
   /* ─── MATH & TABLES ─── */
   .premium-math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-6 mb-6 overflow-x-auto text-[15px];
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[15px] max-w-full;
   }
   
   .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
   .premium-table { @apply w-full border-collapse text-sm; }
   .premium-table thead { @apply bg-bg-secondary; }
   .premium-table th { @apply px-4 py-3 text-left font-semibold text-accent-premium border border-border-premium text-[13px] uppercase tracking-wider; }
-  .premium-table td { @apply px-4 py-3 border border-border-premium text-text-premium font-light align-top; }
+  .premium-table td { @apply px-4 py-3 border border-border-premium text-text-premium font-normal align-top; }
   .premium-table tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 2%, transparent); }
 
   /* ─── TOC ─── */
@@ -218,22 +218,22 @@
   .callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
   .callout.tip { @apply bg-purple-premium/10 border border-purple-premium/25; }
   .callout-icon { @apply text-lg mt-0.5 shrink-0; }
-  .callout-body { @apply text-sm font-light text-text-premium; }
+  .callout-body { @apply text-sm font-normal text-text-premium; }
   .callout-body strong { @apply font-semibold text-accent-premium; }
 
   .math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-6 mb-6 overflow-x-auto text-[15px];
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[15px] max-w-full;
     border-left: 3px solid var(--accent);
   }
 
   /* Linking Rules */
   .linking-rule {
-    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-sm font-light text-muted-premium;
+    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-sm font-normal text-muted-premium;
   }
   .linking-rule strong { @apply text-accent-premium font-semibold; }
 
   .note-box {
-    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-sm font-light text-text-premium;
+    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-sm font-normal text-text-premium;
   }
   .note-box strong { @apply text-gold-premium font-semibold; }
 
@@ -270,7 +270,7 @@
     @apply font-mono text-[10px] text-muted-premium uppercase tracking-widest mt-6 mb-2 block;
   }
   .conclusion {
-    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-sm font-light text-text-premium;
+    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-sm font-normal text-text-premium;
   }
   .conclusion strong { @apply text-green-premium font-semibold; }
 }

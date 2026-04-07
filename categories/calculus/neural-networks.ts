@@ -4,6 +4,7 @@ export const neuralNetworksSection: TopicSection = {
   id: "neural-networks",
   title: "Calculus in Neural Networks",
   description: "In Deep Learning, multivariate calculus is the engine that powers optimization. Learn how the Chain Rule enables efficient training.",
+  color: "#4A148C",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Calculus · Neural Networks</div>
@@ -75,7 +76,7 @@ export const neuralNetworksSection: TopicSection = {
     <p>By calculating these partial derivatives layer-by-layer moving backwards, the network "learns" exactly how much each weight contributed to the total error. This mathematical foundation is what allows complex models to converge toward an optimal solution.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Single-variable chains are simple, but ML involves thousands of simultaneous weights. Explore the geometry of high-dimensional loss surfaces in <strong><a href="#/mathematics/calculus/multivariable">Multivariable Calculus</a></strong>.
+      <strong>Next Step:</strong> Single-variable chains are simple, but ML involves thousands of simultaneous weights. Let's see <strong><a href="#/mathematics/calculus/neural-networks-examples">Practical Examples</a></strong> of the Chain Rule in action.
     </div>
   `
 };

@@ -4,6 +4,7 @@ export const basicAxiomsSection: TopicSection = {
   id: "basic-axioms",
   title: "Basic Axioms of Probability",
   description: "Probability is the mathematical framework used to quantify uncertainty. In Machine Learning, it is the backbone of algorithms like Naive Bayes, Hidden Markov Models, and even the Softmax function in Deep Learning.",
+  color: "#FF6F00",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎲 Probability · Basic Axioms</div>

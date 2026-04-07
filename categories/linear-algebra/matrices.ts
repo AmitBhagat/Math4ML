@@ -4,6 +4,7 @@ export const matricesSection: TopicSection = {
   id: "matrices",
   title: "Introduction to Matrices",
   description: "In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",
+  color: "#1976D2",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
@@ -150,7 +151,7 @@ print(f"Inverse:\n{A_inv}")
     </div>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Matrix properties define a model's stability. Next, we explore the geometry of where data "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
+      <strong>Next Step:</strong> Understanding the "DNA" of a matrix is crucial for model stability. Next, we explore <strong><a href="#/mathematics/linear-algebra/matrix-properties">Matrix Properties</a></strong> like Rank, Determinants, and Trace.
     </div>
   `
 };

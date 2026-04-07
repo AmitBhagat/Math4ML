@@ -93,7 +93,7 @@ for name, score in zip(data.columns, mi_scores):
     </ul>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> Having mastered the bridge of <strong>Mutual Information</strong> between variables, let's look at <strong>Entropy Examples</strong> to solidify our understanding of these core calculations.
+      <strong>Next Step:</strong> Having mastered joint information, see these concepts in action with <strong><a href="#/mathematics/information-theory/examples">Practical Examples: Information Theory</a></strong>.
     </div>
   `
 };

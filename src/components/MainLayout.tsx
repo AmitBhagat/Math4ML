@@ -90,7 +90,12 @@ export const MainLayout = () => {
           ref={scrollContainerRef}
           className="flex-1 overflow-y-auto overflow-x-hidden relative scroll-smooth no-transition"
         >
-          <div className="max-w-[1400px] mx-auto p-4 md:p-10 lg:p-12 pb-32">
+          <div 
+            className={cn(
+              "max-w-[1400px] mx-auto pb-32 px-4 md:px-10 lg:px-12",
+              location.pathname === "/" ? "pt-0" : "pt-4 md:pt-10 lg:pt-12"
+            )}
+          >
             <Outlet />
           </div>
 

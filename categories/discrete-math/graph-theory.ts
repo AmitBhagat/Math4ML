@@ -4,6 +4,7 @@ export const graphTheorySection: TopicSection = {
   id: "graph-theory",
   title: "Graph Theory",
   description: "The study of relationships and connections. Explore Nodes, Edges, Adjacency Matrices, and their applications in GNNs and Knowledge Graphs.",
+  color: "#C5CAE9",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
@@ -81,7 +82,7 @@ if adj_matrix[1, 2] == 1:
     </python-code>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> You've explored the foundations of <strong>Discrete Mathematics</strong>. These discrete structures are the building blocks of <strong>Logic</strong> and <strong>Algorithms</strong> that drive intelligence in modern software.
+      <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
     </div>
   `
 };

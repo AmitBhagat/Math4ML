@@ -1,6 +1,53 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { TopicVisualizer } from "./MathematicalVisualizations";
 import { runPython } from "@/src/hooks/usePyodide";
+import { Copy, Check, Play, RotateCcw } from "lucide-react";
+import { useTheme } from "@/src/hooks/useTheme";
+
+// ── MONOKAI SYNTAX HIGHLIGHTER (Lightweight Regex) ──
+const highlightPython = (code: string) => {
+  // Escape HTML tags to prevent XSS/broken layout
+  let html = code
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+
+  // High-fidelity Neon-on-Dark Palette (Synchronized with ray-so-export.png)
+  const colors = {
+    keyword: "#ff57a0", // Neon Pink
+    type: "#50E3C2",    // Radiant Mint/Teal
+    function: "#ff9ac1", // Salmon Pink
+    string: "#f8e71c",  // Canary Yellow
+    number: "#ae81ff",  // Purple
+    comment: "#75715e", // Muted Grey
+    special: "#ae81ff", // Purple
+    punctuation: "#ffffff", // Pure White
+  };
+
+  // Comments (#)
+  html = html.replace(/(#.*)/g, `<span style="color: ${colors.comment}">$1</span>`);
+
+  // Strings (Single/Double quotes)
+  html = html.replace(/(['"])(?:(?!\1|\\).|\\.)*\1/g, `<span style="color: ${colors.string}">$&</span>`);
+
+  // Keywords (Control Flow)
+  const keywords = /\b(def|class|if|else|elif|for|while|return|import|from|as|try|except|with|in|is|not|and|or|yield|pass|break|continue)\b/g;
+  html = html.replace(keywords, `<span style="color: ${colors.keyword}">$1</span>`);
+
+  // Type-like words (Capitalized or specific imports)
+  html = html.replace(/\b([A-Z][a-zA-Z0-9_]*)\b/g, `<span style="color: ${colors.type}">$1</span>`);
+
+  // Special Constants
+  html = html.replace(/\b(self|cls|True|False|None)\b/g, `<span style="color: ${colors.special}">$1</span>`);
+
+  // Numbers (Integers and Floats)
+  html = html.replace(/\b(\d+(\.\d+)?)\b/g, `<span style="color: ${colors.number}">$1</span>`);
+
+  // Function calls (Word before parenthesis)
+  html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\()/g, `<span style="color: ${colors.function}">$1</span>`);
+
+  return html;
+};
 
 export const VisualizerContainer = ({ title }: { title: string }) => {
   return (
@@ -28,8 +75,12 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   const [editedCode, setEditedCode] = useState(code);
   const [runState, setRunState] = useState<RunState>("idle");
   const [liveOutput, setLiveOutput] = useState<string | null>(null);
+  const [copied, setCopied] = useState(false);
+  const { theme } = useTheme();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const preRef = useRef<HTMLPreElement>(null);
   const isPython = language === "python";
+  const isDark = theme === "dark";
 
   // Auto-resize textarea to fit its content height
   const autoResize = useCallback(() => {
@@ -42,6 +93,14 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   useEffect(() => {
     autoResize();
   }, [editedCode, autoResize]);
+
+  // Synchronize scroll position between textarea and highlighted display
+  const handleScroll = useCallback(() => {
+    if (textareaRef.current && preRef.current) {
+      preRef.current.scrollTop = textareaRef.current.scrollTop;
+      preRef.current.scrollLeft = textareaRef.current.scrollLeft;
+    }
+  }, []);
 
   // Update original code when props change (navigating between topics)
   useEffect(() => {
@@ -72,6 +131,12 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
     setLiveOutput(null);
   }, [code]);
 
+  const handleCopy = useCallback(() => {
+    navigator.clipboard.writeText(editedCode);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  }, [editedCode]);
+
   // What to display in the output panel
   const shownOutput = liveOutput ?? staticOutput ?? null;
   const isLive = liveOutput !== null;
@@ -82,31 +147,64 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
     running: "Running…",
   };
 
-  return (
-    <div className="my-10 rounded-xl border border-border-premium bg-bg-secondary shadow-xl overflow-hidden transition-all">
+  // Shared font & typography metrics for perfect alignment
+  const editorMetrics = "text-[13.5px] font-mono leading-relaxed px-6 md:px-10 py-6 md:py-8";
 
-      {/* ── Header bar ── */}
-      <div className="px-6 py-4 bg-bg-tertiary border-b border-border-premium flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <span className="text-[10px] font-black text-accent-premium uppercase tracking-[0.2em]">{language}</span>
+  return (
+    <div className="my-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
+      {/* ── Main Code Window (Adaptive Container) ── */}
+      <div className={`rounded-[24px] shadow-2xl border overflow-hidden transition-colors duration-500
+        ${isDark ? "bg-[#2b213a] border-white/5" : "bg-bg-secondary border-border-premium/60 shadow-lg"}`}>
+
+      {/* ── Header bar (Adaptive UI) ── */}
+      <div className={`px-6 py-4 flex items-center justify-between border-b transition-colors duration-500
+        ${isDark ? "bg-[#21192d]/80 border-white/5" : "bg-bg-tertiary border-border-premium/40"}`}>
+        <div className="flex items-center gap-6">
+          {/* Traffic Lights (macOS Colors) */}
+          <div className="flex gap-2 mr-2">
+            <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56] shadow-sm border border-black/5" />
+            <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e] shadow-sm border border-black/5" />
+            <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f] shadow-sm border border-black/5" />
+          </div>
+          
+          <span className={`text-[10px] font-black uppercase tracking-[0.25em] transition-colors
+            ${isDark ? "text-white/30" : "text-muted-premium/60"}`}>
+            {language}
+          </span>
           {statusText[runState] && (
-            <span className="text-[10px] text-purple-premium font-black uppercase tracking-widest animate-pulse">
+            <span className="text-[10px] text-[#ae81ff] font-black uppercase tracking-widest animate-pulse">
               {statusText[runState]}
             </span>
           )}
         </div>
 
         <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           {isPython && (
             <>
+              {/* Copy Button */}
+              <button
+                onClick={handleCopy}
+                className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
+                  ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
+                title="Copy to clipboard"
+              >
+                {copied ? <Check className="w-3.5 h-3.5 text-green-premium" /> : <Copy className="w-3.5 h-3.5" />}
+                <span className="text-[10px] font-black uppercase tracking-widest hidden sm:inline">
+                  {copied ? "Copied" : "Copy"}
+                </span>
+              </button>
+
               {/* ↺ Reset */}
               {(editedCode !== code || liveOutput !== null) && (
                 <button
                   onClick={handleReset}
-                  className="text-[10px] font-black text-muted-premium hover:text-text-premium px-2 py-1 transition-colors uppercase tracking-widest"
-                  title="Restore original code and clear output"
+                  className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
+                    ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
+                  title="Restore original code"
                 >
-                  ↺ Reset
+                  <RotateCcw className="w-3.5 h-3.5" />
+                  <span className="text-[10px] font-black uppercase tracking-widest hidden lg:inline">Reset</span>
                 </button>
               )}
 
@@ -114,10 +212,10 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <button
                 onClick={handleRun}
                 disabled={isRunning}
-                className={`inline-flex items-center gap-2 px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
+                className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
                   ${isRunning
                     ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
-                    : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white dark:text-bg cursor-pointer"
+                    : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white cursor-pointer"
                   }`}
               >
                 {isRunning ? (
@@ -126,14 +224,12 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                       <circle cx="6" cy="6" r="4" strokeOpacity="0.3" />
                       <path d="M6 2a4 4 0 0 1 4 4" strokeLinecap="round" />
                     </svg>
-                    Running
+                    <span className="hidden sm:inline">Running</span>
                   </>
                 ) : (
                   <>
-                    <svg className="w-3 h-3" viewBox="0 0 12 12" fill="currentColor">
-                      <path d="M2 2l8 4-8 4V2z" />
-                    </svg>
-                    Run Code
+                    <Play className="w-3 h-3 fill-current" />
+                    <span>Run</span>
                   </>
                 )}
               </button>
@@ -141,37 +237,53 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
           )}
 
         </div>
+
+        </div>
       </div>
 
-      {/* ── Editable code textarea (auto-height) ── */}
-      <textarea
-        ref={textareaRef}
-        value={editedCode}
-        onChange={(e) => {
-          setEditedCode(e.target.value);
-          autoResize();
-        }}
-        spellCheck={false}
-        className="w-full px-8 py-6 text-[13.5px] font-mono text-text-premium leading-relaxed bg-bg/40
-                   resize-none outline-none border-none focus:bg-bg/60 transition-colors"
-        style={{ minHeight: "120px", overflowY: "hidden" }}
-        aria-label="Editable Python code"
-      />
+      {/* ── Code Editor Layer (Ray.so Minimalist Theme) ── */}
+      <div className="relative bg-[#2b213a] overflow-hidden group">
+        {/* Layer 1: Highlighted Display */}
+        <pre
+          ref={preRef}
+          aria-hidden="true"
+          className={`absolute inset-0 m-0 pointer-events-none whitespace-pre overflow-hidden ${editorMetrics}`}
+          style={{ color: "#ffffff" }}
+          dangerouslySetInnerHTML={{ __html: highlightPython(editedCode) + "\n" }}
+        />
 
-      {/* ── Single output panel (static → replaced by live on Run) ── */}
+        {/* Layer 2: Interactive Textarea */}
+        <textarea
+          ref={textareaRef}
+          value={editedCode}
+          onChange={(e) => {
+            setEditedCode(e.target.value);
+            autoResize();
+          }}
+          onScroll={handleScroll}
+          spellCheck={false}
+          wrap="off"
+          className={`relative w-full bg-transparent text-transparent caret-white 
+                     resize-none outline-none border-none focus:outline-none transition-colors 
+                     overflow-x-auto min-h-[120px] ${editorMetrics}`}
+          style={{ overflowY: "hidden" }}
+          aria-label="Editable Python code"
+        />
+      </div>
+
+      {/* ── Single output panel (Adaptive UI) ── */}
       {shownOutput !== null && (
-        <div className={`border-t border-border-premium transition-colors ${runState === "error" ? "bg-red-500/5" : "bg-accent-premium/5"}`}>
+        <div className={`border-t border-border-premium animate-in fade-in slide-in-from-top-2 duration-300 transition-colors
+          ${isDark ? "bg-[#2b213a]" : "bg-bg-secondary"}`}>
           <div className={`px-8 py-3 border-b border-border-premium/50 flex flex-wrap items-center justify-between transition-colors
-            ${runState === "error" ? "bg-red-500/10" : "bg-accent-premium/10"}`}>
+            ${runState === "error" ? "bg-red-500/10" : isDark ? "bg-accent-premium/10" : "bg-bg-tertiary"}`}>
             <span className={`text-[10px] font-black uppercase tracking-[0.2em]
-              ${runState === "error" ? "text-red-500" : "text-accent-premium"}`}>
-              {runState === "error" ? "⚠ System Error" : "▸ Analytical Output"}
+              ${runState === "error" ? "text-red-500" : isDark ? "text-white/40" : "text-muted-premium"}`}>
+              {runState === "error" ? "⚠ System Error" : "▸ Output"}
             </span>
-            {isLive && (
-              <span className="text-[10px] font-black uppercase tracking-widest text-accent-premium/60">● Live Runtime</span>
-            )}
           </div>
-          <div className="px-8 py-6 text-[13px] font-mono leading-relaxed whitespace-pre-wrap text-text-premium opacity-90">
+          <div className={`px-4 md:px-8 py-4 md:py-6 text-[13px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
+            ${isDark ? "text-white/90" : "text-text-premium"}`}>
             {(() => {
               const lines = shownOutput.split("\n");
               const textLines: string[] = [];
@@ -202,13 +314,8 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
       )}
 
       {/* ── Hint when there is no output at all yet ── */}
-      {isPython && shownOutput === null && (
-        <div className="px-8 py-3 border-t border-border-premium bg-bg-tertiary/40">
-          <p className="text-[11px] text-muted-premium font-light tracking-wide italic">
-            ▸ Edit the code above, then click <strong className="text-accent-premium">Run Code</strong> to see live computations.
-          </p>
+
         </div>
-      )}
-    </div>
+      </div>
   );
 };

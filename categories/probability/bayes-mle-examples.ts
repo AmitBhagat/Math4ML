@@ -77,7 +77,7 @@ export const bayesMleExamplesSection: TopicSection = {
     </ul>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> Now that you've mastered <strong>Probability</strong>, you can transition into <strong>Information Theory</strong>, where we use these probabilities to measure "Surprise" and "Entropy" — the core of Loss Functions like Cross-Entropy.
+      <strong>Final Step:</strong> Now that you've mastered <strong>Probability</strong>, you can transition into <strong><a href="#/mathematics/statistics/descriptive-statistics">Statistics</a></strong>, where we use these tools to analyze real-world datasets and infer population properties.
     </div>
   `
 };

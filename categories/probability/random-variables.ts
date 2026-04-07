@@ -124,7 +124,7 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Understanding these variables allows us to explore <strong>Common Distributions</strong> (Bernoulli, Binomial, Gaussian, Poisson). Once we know the "shape" of these distributions, we can perform <strong>Expectation and Variance</strong> calculations to summarize data.
+      <strong>Next Step:</strong> Understanding these variables allows us to summarize data by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
     </div>
   `
 };

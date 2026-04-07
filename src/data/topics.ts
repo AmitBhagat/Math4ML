@@ -171,13 +171,13 @@ export interface ClusterMeta {
 export const CLUSTERS: ClusterMeta[] = [
   {
     id: "mathematics",
-    title: "The Mathematical Foundations",
+    title: "Mathematics",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
     categories: ["linear-algebra", "probability", "statistics", "calculus", "information-theory", "discrete-math"]
   },
   {
     id: "machine-learning",
-    title: "The Applied Intelligence",
+    title: "Machine Learning",
     description: "Architectural paradigms and learning strategies that transform raw data into predictive, autonomous systems.",
     categories: ["supervised-learning", "unsupervised-learning", "deep-learning", "reinforcement-learning", "data-preprocessing", "model-evaluation"]
   }

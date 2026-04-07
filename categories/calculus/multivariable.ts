@@ -4,6 +4,7 @@ export const multivariableSection: TopicSection = {
   id: "multivariable",
   title: "Multivariable Calculus",
   description: "Multivariable Calculus extends the concepts of single-variable differentiation to functions of several variables. In ML, we optimize millions of parameters simultaneously.",
+  color: "#388E3C",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Calculus · Multivariable</div>

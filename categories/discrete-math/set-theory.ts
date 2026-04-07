@@ -4,6 +4,7 @@ export const setTheorySection: TopicSection = {
   id: "set-theory",
   title: "Set Theory",
   description: "The foundation for data manipulation, joins, and filtering in data science and AI.",
+  color: "#5C6BC0",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>

@@ -1,30 +1,73 @@
 export const getCategoryTheme = (categoryId: string) => {
   const themes: Record<string, { primary: string; secondary: string; border: string }> = {
+    // Mathematics Cluster
     'linear-algebra': {
-      primary: '#8250df', // Purple
-      secondary: '#bc8cff',
-      border: 'rgba(130, 80, 223, 0.2)'
+      primary: '#bc8cff', // Purple
+      secondary: '#d2b3ff',
+      border: 'rgba(188, 140, 255, 0.2)'
     },
     'calculus': {
-      primary: '#0969da', // Blue
-      secondary: '#54aeff',
-      border: 'rgba(9, 105, 218, 0.2)'
+      primary: '#58a6ff', // Blue
+      secondary: '#a5d6ff',
+      border: 'rgba(88, 166, 255, 0.2)'
     },
     'probability': {
-      primary: '#2dd4bf', // Teal
-      secondary: '#99f6e4',
-      border: 'rgba(45, 212, 191, 0.2)'
+      primary: '#e3b341', // Gold
+      secondary: '#f2cc60',
+      border: 'rgba(227, 179, 65, 0.2)'
     },
     'statistics': {
-      primary: '#f97316', // Orange
-      secondary: '#fbbf24',
-      border: 'rgba(249, 115, 22, 0.2)'
+      primary: '#3fb950', // Green
+      secondary: '#7ee787',
+      border: 'rgba(63, 185, 80, 0.2)'
+    },
+    'information-theory': {
+      primary: '#ff7b72', // Red
+      secondary: '#ffa198',
+      border: 'rgba(255, 123, 114, 0.2)'
+    },
+    'discrete-math': {
+      primary: '#bc8cff', // Cycle: Purple
+      secondary: '#d2b3ff',
+      border: 'rgba(188, 140, 255, 0.2)'
+    },
+
+    // Machine Learning Cluster
+    'supervised-learning': {
+      primary: '#58a6ff', // Blue
+      secondary: '#a5d6ff',
+      border: 'rgba(88, 166, 255, 0.2)'
+    },
+    'unsupervised-learning': {
+      primary: '#bc8cff', // Purple
+      secondary: '#d2b3ff',
+      border: 'rgba(188, 140, 255, 0.2)'
+    },
+    'deep-learning': {
+      primary: '#e3b341', // Gold
+      secondary: '#f2cc60',
+      border: 'rgba(227, 179, 65, 0.2)'
+    },
+    'reinforcement-learning': {
+      primary: '#3fb950', // Green
+      secondary: '#7ee787',
+      border: 'rgba(63, 185, 80, 0.2)'
+    },
+    'data-preprocessing': {
+      primary: '#ff7b72', // Red
+      secondary: '#ffa198',
+      border: 'rgba(255, 123, 114, 0.2)'
+    },
+    'model-evaluation': {
+      primary: '#58a6ff', // Blue
+      secondary: '#a5d6ff',
+      border: 'rgba(88, 166, 255, 0.2)'
     }
   };
 
   return themes[categoryId] || {
-    primary: 'var(--accent)',
-    secondary: 'var(--purple)',
-    border: 'var(--border)'
+    primary: '#bc8cff',
+    secondary: '#d2b3ff',
+    border: 'rgba(188, 140, 255, 0.2)'
   };
 };

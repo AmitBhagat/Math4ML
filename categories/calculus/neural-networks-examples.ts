@@ -4,6 +4,7 @@ export const neuralNetworksExamplesSection: TopicSection = {
   id: "neural-networks-examples",
   title: "Practical Examples",
   description: "Solidify your understanding of how the Chain Rule and Partial Derivatives operate in a computational graph with two distinct examples.",
+  color: "#AB47BC",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📝 Solved Examples · Calculus</div>

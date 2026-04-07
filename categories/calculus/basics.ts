@@ -4,6 +4,7 @@ export const basicsSection: TopicSection = {
   id: "basics",
   title: "Introduction to Calculus",
   description: "Differential Calculus is the study of how functions change when their inputs change by infinitesimal amounts. In Machine Learning, it's the primary engine for optimization.",
+  color: "#1B5E20",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Introduction</div>

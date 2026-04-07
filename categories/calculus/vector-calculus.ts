@@ -4,6 +4,7 @@ export const vectorCalculusSection: TopicSection = {
   id: "vector-calculus",
   title: "Vector Calculus",
   description: "Vector Calculus deals with the differentiation and integration of vector fields. Learn how divergence and curl are used to constrain AI simulations.",
+  color: "#66BB6A",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌀 Calculus · Vector Fields</div>
@@ -102,7 +103,7 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> Having mastered vector fields and flow, you've completed the <strong>Calculus</strong> foundations. You are now equipped to step into <strong>Machine Learning</strong> paradigms like Supervised Learning, where these optimization landscapes come alive.
+      <strong>Final Step:</strong> Having mastered vector fields and flow, you've completed the <strong>Calculus</strong> foundations. You are now equipped to step into <strong><a href="#/mathematics/information-theory/entropy">Information Theory</a></strong>, where we measure "Surprise" and "Entropy".
     </div>
   `
 };

@@ -132,7 +132,7 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Once we know the "mapping" of random variables, we can summarize them by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
+      <strong>Next Step:</strong> Bayes' Theorem works on events. To handle data, we must map these events to numbers using <strong><a href="#/mathematics/probability/random-variables">Random Variables & Functions</a></strong>.
     </div>
   `
 };

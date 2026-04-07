@@ -4,6 +4,7 @@ export const multivariateProbabilitySection: TopicSection = {
   id: "multivariate-probability",
   title: "Multivariate Probability",
   description: "Multivariate Probability provides the tools to model multiple related variables simultaneously and understand how they interact, moving beyond single-feature analysis.",
+  color: "#FFA000",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Probability · Multivariate</div>

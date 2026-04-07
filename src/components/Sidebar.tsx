@@ -159,22 +159,31 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                         ) : sections.length > 0 ? (
                           sections.map((section) => {
                             const isTopicActive = currentProblemId === section.id;
+                            const sectionColor = section.color || theme.primary;
+                            
                             return (
                               <Link
                                 key={section.id}
                                 to={`/${cluster.id}/${catId}/${section.id}`}
                                 className={cn(
-                                  "py-1.5 px-3 rounded-md text-[13px] leading-tight transition-all no-underline",
+                                  "group/item py-1.5 px-3 rounded-md text-[13px] leading-tight transition-all no-underline flex items-center gap-2",
                                   isTopicActive 
-                                    ? "bg-accent-premium/10 text-accent-premium font-medium"
+                                    ? "bg-accent-premium/10 font-medium"
                                     : "text-muted-premium hover:text-text-premium hover:bg-bg-tertiary"
                                 )}
                                 style={{
-                                  color: isTopicActive ? theme.primary : undefined,
-                                  backgroundColor: isTopicActive ? `${theme.primary}10` : undefined
+                                  color: isTopicActive ? sectionColor : undefined,
+                                  backgroundColor: isTopicActive ? `${sectionColor}15` : undefined
                                 }}
                               >
-                                {section.title}
+                                <span 
+                                  className={cn(
+                                    "w-1 h-1 rounded-full shrink-0 transition-transform duration-300",
+                                    isTopicActive ? "scale-125" : "opacity-40 group-hover/item:opacity-100"
+                                  )}
+                                  style={{ backgroundColor: sectionColor }}
+                                />
+                                <span className="truncate">{section.title}</span>
                               </Link>
                             );
                           })

@@ -20,12 +20,14 @@ export interface TopicSection {
   contentSections?: ContentBlock[];
   tags?: string[];
   level?: string;
+  color?: string;
 }
 
 export interface CategoryData {
   id: string;
   title: string;
   description: string;
+  introHtml?: string;
   keyConcepts: { title: string; description: string }[];
   sections: TopicSection[];
 }

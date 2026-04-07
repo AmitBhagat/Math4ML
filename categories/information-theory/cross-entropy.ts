@@ -60,7 +60,7 @@ export const crossEntropySection: TopicSection = {
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Having learned how to measure uncertainty and loss, let's look at <strong>Mutual Information</strong> to see how variables share information.
+      <strong>Next Step:</strong> Having learned how to measure uncertainty and loss, let's look at <strong><a href="#/mathematics/information-theory/mutual-information">Mutual Information</a></strong> to see how variables share information.
     </div>
   `
 };
