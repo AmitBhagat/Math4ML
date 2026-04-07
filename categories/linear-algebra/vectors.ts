@@ -23,29 +23,37 @@ export const vectorsSection: TopicSection = {
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <p style="margin-bottom: 0.5rem">To master vectors, you need at least a baseline grasp of:</p>
+      <ul style="margin:0">
+        <li><strong>Coordinate Geometry:</strong> Cartesian planes and axes.</li>
+        <li><strong>Scalar Math:</strong> Basic arithmetic (addition, multiplication).</li>
+      </ul>
+    </div>
+
     <h2 id="definition">Vector Definition</h2>
-    <p>A vector is an ordered list of numbers, typically denoted in column form:</p>
+    <p>A vector is an ordered list of numbers, typically denoted in column form. In Machine Learning, we don't just see them as "points"—we see them as <strong>Features</strong> in a high-dimensional space.</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
 
     <visualizer topic="Vectors" />
 
     <p>where \(n\) represents the dimensionality of the vector space.</p>
 
-    <div class="def-box">
-      <div class="def-title">Prerequisites</div>
-      <ul style="margin:0">
-        <li>Basic understanding of Coordinate Geometry.</li>
-        <li>Familiarity with scalar operations (addition, multiplication).</li>
-      </ul>
-    </div>
-
-    <h2 id="dot">1. Dot Product</h2>
-    <p>The <strong>Dot Product</strong> (or inner product) is an algebraic operation that takes two equal-length sequences of numbers and returns a single scalar. It measures how much one vector "aligns" with another.</p>
+    <h2 id="dot">1. Dot Product (The Similarity Engine)</h2>
+    <p>The <strong>Dot Product</strong> (or inner product) is the mathematical heart of almost every modern ML model, from Linear Regression to Large Language Models (LLMs).</p>
 
     <h3>Core Theory</h3>
-    <p>Geometrically, the dot product is the projection of one vector onto another. In ML, it is used to calculate the similarity between two vectors (e.g., in Cosine Similarity) and is the core operation in Neural Network layer computations \((z = w \cdot x + b)\).</p>
+    <p>Geometrically, the dot product is the projection of one vector onto another. It answers the critical question: <em>"How much of vector A is pointing in the direction of vector B?"</em></p>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> It’s how much of one vector "lives" in the direction of another. <strong>The 'Gotcha':</strong> Remember that the dot product is heavily influenced by the <strong>length</strong> of the vectors. If you want pure direction, you use Cosine Similarity.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of the Dot Product as a "Compatibility Score." If two vectors are perfectly aligned, the score is maxed out. If they are perpendicular (orthogonal), they have <em>zero</em> in common. 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> The result is heavily biased by the <strong>magnitude</strong> (length) of the vectors. If you want to compare "concepts" without letting loud data drown out quiet data, you must normalize the vectors first (this leads us to <strong>Cosine Similarity</strong>).
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\) in \(\mathbb{R}^n\):</p>
@@ -77,14 +85,21 @@ export const vectorsSection: TopicSection = {
       <li><strong>L₂ Norm (Euclidean Distance):</strong> The square root of the sum of squared components. It is the most common distance metric and is used in <strong>Ridge Regularization</strong>.</li>
     </ul>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A Norm must satisfy the <strong>Triangle Inequality</strong>: shortcuts shouldn't be longer than the long way around. L₁ is "sharp" (forces zeros), while L₂ is "smooth" (spreads the weight).</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of the **L₁ Norm** as a taxi in Manhattan—you have to follow the grid of streets. The **L₂ Norm** is how a crow flies—the shortest straight-line distance. 
+        <br/><br/>
+        <strong>ML Connection:</strong> L₁ creates "sharp" constraints that force model weights to exactly zero (Sparsity), while L₂ creates "smooth" constraints that just keep weights small.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>The general \(p\)-norm is given by:</p>
     <div class="math-block">$$\|\mathbf{x}\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}$$</div>
     <ul>
-      <li><strong>L₁ Norm (\(p=1\)):</strong> \(\|\mathbf{x}\|_1 = \sum_{i=1}^{n} |x_i|\)</li>
-      <li><strong>L₂ Norm (\(p=2\)):</strong> \(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}\)</li>
+      <li><strong>L₁ Norm (\(p=1\)):</strong> \(\|\mathbf{x}\|_1 = \sum_{i=1}^{n} |x_i|\) (Sum of absolute values)</li>
+      <li><strong>L₂ Norm (\(p=2\)):</strong> \(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}\) (Euclidean length)</li>
     </ul>
 
     <h3>Illustrative Example</h3>
@@ -92,26 +107,35 @@ export const vectorsSection: TopicSection = {
       <h4>Problem: Computing L₁ and L₂ Norms</h4>
       <p>For a vector \(\mathbf{v} = [3, -4]\), calculate its length using different metrics.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> Sum of absolute values.</div></div>
-      <div class="math-block">$$\|\mathbf{v}\|_1 = |3| + |-4| = 3 + 4 = 7$$</div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> \(|3| + |-4| = 7\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> \(\sqrt{3^2 + (-4)^2} = \sqrt{25} = 5\).</div></div>
 
-      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> Square root of sum of squares.</div></div>
-      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$$</div>
-
-      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The L₁ norm is larger than the L₂ norm. In regularization, L₁ (Lasso) creates "sharp" constraints that force weights to zero, while L₂ (Ridge) creates "smooth" constraints.</div></div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> The Manhattan distance (7) is always greater than or equal to the Euclidean distance (5). In ML, using L₁ (Lasso) results in features being "turned off," while L₂ (Ridge) just turns down the volume.
+        </div>
+      </div>
     </div>
 
     <h2 id="span">3. Linear Combinations, Span, and Basis</h2>
-    <p>These concepts define how we navigate and construct vector spaces.</p>
+    <p>If vectors are the building blocks, then <strong>Span</strong> and <strong>Basis</strong> are the rules for how high we can build.</p>
 
     <h3>Core Theory</h3>
     <ul>
-      <li><strong>Linear Combination:</strong> A new vector created by multiplying vectors by scalars and adding them together: \(\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2\).</li>
-      <li><strong>Span:</strong> The set of all possible linear combinations of a group of vectors. If the span covers the entire space, those vectors can reach any point in that space.</li>
-      <li><strong>Basis:</strong> A set of vectors that are <strong>linearly independent</strong> and whose span covers the entire space. It is the "minimalist" set of directions needed to define a space.</li>
+      <li><strong>Linear Combination:</strong> Scaling and adding vectors together: \(\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2\).</li>
+      <li><strong>Span:</strong> The entire region of space you can reach using linear combinations of your set.</li>
+      <li><strong>Basis:</strong> The "Minimalist Set" of independent vectors needed to span a space.</li>
     </ul>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A Basis is the minimal toolkit required to reach every point in space without redundant tools. If your features have <strong>Multicollinearity</strong>, you have redundant tools, and your model might get confused.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> A **Basis** is like the primary colors (Red, Green, Blue). You can make any color with them, and you can’t make Blue using just Red and Green. If your basis vectors are dependent, it's like having two shades of Red—one is redundant.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> In ML, redundant features (Multicollinearity) are just dependent vectors in your basis. They don't add new info; they just add noise and make your model unstable.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>If a vector \(\mathbf{b}\) can be written as:</p>

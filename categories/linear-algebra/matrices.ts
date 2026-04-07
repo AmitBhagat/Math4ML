@@ -42,74 +42,92 @@ export const matricesSection: TopicSection = {
     
     <visualizer topic="MatrixOperations" />
 
-    <h2 id="mult">1. Matrix Multiplication</h2>
-    <p>Matrix multiplication is not a simple element-wise operation. It is a way of composing linear transformations.</p>
+    <h2 id="mult">1. Matrix Multiplication (Composition)</h2>
+    <p>Matrix multiplication is not a simple element-wise operation. It is a way of <strong>composing linear transformations</strong>.</p>
 
     <h3>Core Theory</h3>
-    <p>For the product \(C = AB\) to exist, the number of columns in \(A\) must equal the number of rows in \(B\). If \(A\) is \((m \times n)\) and \(B\) is \((n \times p)\), then \(C\) will be \((m \times p)\). Each element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of \(A\) and the \(j\)-th column of \(B\).</p>
+    <p>For the product \(C = AB\) to exist, the dimensions must align: \((m \times n) \cdot (n \times p) \to (m \times p)\). The number of columns in the first must equal the number of rows in the second.</p>
     
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Matrix multiplication is <strong>composition</strong>. If $A$ rotates and $B$ scales, $AB$ is the single machine that does both. <strong>The 'Gotcha':</strong> $AB \neq BA$. Reversing the order in ML (e.g., Weights $\times$ Data vs. Data $\times$ Weights) is the #1 cause of shape errors.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Matrix multiplication is <strong>composition</strong>. If \(A\) is a machine that rotates and \(B\) is a machine that scales, \(AB\) is the combined machine that does both. 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> Order matters. \(AB \neq BA\). In ML, getting the order wrong between your Weights (\(W\)) and your Data (\(X\)) is the #1 cause of "Shape Mismatch" crashes during training.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
-    <p>The element in the \(i\)-th row and \(j\)-th column is defined as:</p>
+    <p>The element in the \(i\)-th row and \(j\)-th column of the product is the dot product of the \(i\)-th row of \(A\) and the \(j\)-th column of \(B\):</p>
     <div class="math-block">$$c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$$</div>
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
       <h4>Problem: 2×2 Matrix Multiplication</h4>
-      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate the product \(C = AB\).</p>
+      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate \(AB\).</p>
       
       <div class="step-box"><span class="step-num">1</span><div><strong>Row 1 × Column 1:</strong> \((1 \times 5) + (2 \times 7) = 19\).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Row 1 × Column 2:</strong> \((1 \times 6) + (2 \times 8) = 22\).</div></div>
       <div class="step-box"><span class="step-num">3</span><div><strong>Row 2 × Column 1:</strong> \((3 \times 5) + (4 \times 7) = 43\).</div></div>
       <div class="step-box"><span class="step-num">4</span><div><strong>Row 2 × Column 2:</strong> \((3 \times 6) + (4 \times 8) = 50\).</div></div>
 
-      <div class="math-block">$$C = \begin{bmatrix} 1(5)+2(7) & 1(6)+2(8) \\ 3(5)+4(7) & 3(6)+4(8) \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      <div class="math-block">$$AB = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
       
-      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> Each entry in \(C\) captures how much the \(i\)-th row of the first matrix "aligns" with the \(j\)-th column of the second.</div></div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> Each entry captures how much the rows of the first matrix "align" with the columns of the second.
+        </div>
+      </div>
     </div>
 
     <visualizer topic="Matrices" />
 
     <h2 id="transpose">2. Matrix Transpose</h2>
-    <p>The transpose of a matrix is an operator which flips a matrix over its diagonal.</p>
+    <p>The <strong>Transpose</strong> of a matrix flips its rows and columns.</p>
 
     <h3>Core Theory</h3>
-    <p>Transposing switches the row and column indices. It is frequently used in ML to align dimensions for matrix multiplication, especially when calculating the gradient or handling weights.</p>
+    <p>It is essentially reflecting the matrix over its main diagonal. In ML, we use Transpose to align dimensions for dot products and to calculate gradients during backpropagation.</p>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Transpose</strong> $A^\top$ flips the matrix over its diagonal. Memory trick: $(AB)^\top = B^\top A^\top$. The order reverses when you flip!</div></div>
-
-    <h3>Mathematical Derivation</h3>
-    <p>If \(A\) has elements \(a_{ij}\), then \(A^T\) has elements \(a_{ji}\):</p>
-    <div class="math-block">$$(A^T)_{ij} = A_{ji}$$</div>
-
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Example: Transpose of a 2×3 Matrix</h4>
-      <p>If \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\), then \(A^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}\).</p>
-      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Note:</strong> The shape changes from \((2 \times 3)\) to \((3 \times 2)\).</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> The Transpose \(A^\top\) flips the perspective. 
+        <br/><br/>
+        <strong>Memory Trick:</strong> \((AB)^\top = B^\top A^\top\). When you flip the whole system, the order of the machines reverses too!
+      </div>
     </div>
 
+    <h3>Mathematical Derivation</h3>
+    <p>If \(A\) has dimensions \(m \times n\), then \(A^\top\) has dimensions \(n \times m\):</p>
+    <div class="math-block">$$(A^\top)_{ij} = a_{ji}$$</div>
+
     <h2 id="identity">3. Identity Matrix (I)</h2>
-    <p>The <strong>Identity Matrix</strong> is a square matrix with ones on the main diagonal and zeros elsewhere.</p>
+    <p>The <strong>Identity Matrix</strong> is the "1" of the matrix world.</p>
 
-    <h3>Core Theory</h3>
-    <p>It acts as the number "1" in matrix algebra. Multiplying any matrix \(A\) by the identity matrix \(I\) results in the original matrix \(A\):</p>
-    <div class="math-block">$$AI = IA = A$$</div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> It’s the "Do Nothing" transformation. If you multiply any vector by \(I\), nothing changes. It’s the starting point for identity mappings in ResNets (Residual Networks).
+      </div>
+    </div>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> It’s a "do-nothing" transformation. If you multiply a vector by $I$, it stays exactly where it is. It's the starting point for stability.</div></div>
-
-    <h3>Mathematical Representation</h3>
-    <p>For a \(3 \times 3\) space:</p>
-    <div class="math-block">$$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</div>
+    <div class="math-block">$$I = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</div>
 
     <h2 id="inverse">4. Matrix Inverse</h2>
-    <p>The inverse of a square matrix \(A\) is a matrix \(A^{-1}\) such that their product is the identity matrix.</p>
+    <p>The <strong>Inverse</strong> is the "Undo" button for linear transformations.</p>
 
     <h3>Core Theory</h3>
-    <p>Not all matrices have an inverse. A matrix must be <strong>square</strong> and <strong>non-singular</strong> (its determinant \(\neq 0\)). In ML, inverses are used to solve systems of linear equations, such as in the <strong>Normal Equation</strong> for Linear Regression.</p>
+    <p>The inverse \(A^{-1}\) is a matrix such that \(AA^{-1} = I\). Not every matrix has an inverse—singular matrices (where space was squashed) cannot be "unsquashed."</p>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Inverse</strong> $A^{-1}$ is the "undo" button. If a matrix "squashes" space into a line, that info is lost and you can't undo it—that's a singular matrix (non-invertible).</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> If a matrix "flattens" your 2D data into a 1D line, information is lost forever. You can't undo that. That’s why **Singular Matrices** (determinant = 0) have no inverse.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> Computing inverses for large matrices is computationally expensive and unstable. In modern ML, we almost always use <strong>Matrix Decomposition</strong> or iterative solvers instead.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation (for 2×2)</h3>
     <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the inverse is:</p>

@@ -190,14 +190,16 @@ export const PremiumMatrixVisualizer = ({ a = 1, b = 0.5, c = -0.5, d = 1, playi
 
     const range = 7;
     for (let i = -range; i <= range; i++) {
+       // y-basis family (moving parallel to x-basis)
        ctx.lineWidth = i === 0 ? 1.5 : 0.5;
-       ctx.strokeStyle = i === 0 ? C.teal + "80" : C.grid;
+       ctx.strokeStyle = i === 0 ? C.blue + "80" : C.grid;
        ctx.beginPath();
        ctx.moveTo(ox + (-range * ta + i * tc) * scale, oy - (-range * tb + i * td) * scale);
        ctx.lineTo(ox + (range * ta + i * tc) * scale, oy - (range * tb + i * td) * scale);
        ctx.stroke();
 
-       ctx.strokeStyle = i === 0 ? C.blue + "80" : C.grid;
+       // x-basis family (moving parallel to y-basis)
+       ctx.strokeStyle = i === 0 ? C.teal + "80" : C.grid;
        ctx.beginPath();
        ctx.moveTo(ox + (i * ta - range * tc) * scale, oy - (i * tb - range * td) * scale);
        ctx.lineTo(ox + (i * ta + range * tc) * scale, oy - (i * tb + range * td) * scale);

@@ -58,27 +58,45 @@ export function drawInfoBox(
 ) {
   const colors = C(theme);
   
-  // Aggressive breakpoints to clear central geometry (Origin-Clearance strategy)
-  const needsShift = W < 1100; // Shift to right for all but large desktops
   const needsStack = W < 700 || lines.some(l => (l.label.length + l.value.length) > 18);
   const isVerySmall = W < 450;
   
-  // Responsive sizing: (C-Busting v4: Ultra-Narrow Mode)
   const boxW = isVerySmall ? 160 : (needsStack ? Math.min(W - 32, 190) : 240);
-  const lineH = needsStack ? 28 : 18;
+  const lineH = needsStack ? 24 : 18;
   const boxH = (needsStack ? 32 : 40) + lines.length * lineH + 12;
   
-  // Position Logic: Force Top-Right early to avoid origin overlap
-  const x = needsShift ? (W - boxW - 12) : 20;
-  const y = needsShift ? 95 : 20; 
+  // Explicitly avoid the center cross (origin) by checking all corners
+  // Origin is at W/2, H/2. Check distance from each candidate (x,y)
+  const candidates = [
+    { x: 20, y: 20 },                     // Top-Left
+    { x: W - boxW - 20, y: 20 },          // Top-Right
+    { x: 20, y: H - boxH - 65 },          // Bottom-Left (elevated to clear controls)
+    { x: W - boxW - 20, y: H - boxH - 65 } // Bottom-Right
+  ];
+
+  const ox = W / 2, oy = H / 2;
+  const safePadding = 40;
+
+  // Find a candidate that doesn't significantly overlap the central origin area
+  let best = candidates[0];
+  for (const c of candidates) {
+    const overlapsX = (ox > c.x - safePadding) && (ox < c.x + boxW + safePadding);
+    const overlapsY = (oy > c.y - safePadding) && (oy < c.y + boxH + safePadding);
+    if (!overlapsX || !overlapsY) {
+      best = c;
+      break;
+    }
+  }
+
+  const { x, y } = best;
 
   ctx.save();
   // Glassmorphism effect
   ctx.fillStyle = colors.infoBg;
   ctx.strokeStyle = colors.infoBorder;
   ctx.lineWidth = 1;
-  ctx.shadowColor = "rgba(0,0,0,0.15)";
-  ctx.shadowBlur = 12;
+  ctx.shadowColor = "rgba(0,0,0,0.3)";
+  ctx.shadowBlur = 20;
   roundRect(ctx, x, y, boxW, boxH, 12);
   ctx.fill();
   ctx.stroke();
@@ -86,22 +104,20 @@ export function drawInfoBox(
 
   ctx.font = `bold ${needsStack ? '10px' : '13px'} 'Space Grotesk'`;
   ctx.fillStyle = colors.blue2;
-  ctx.fillText(title, x + 12, y + (needsStack ? 22 : 26));
+  ctx.fillText(title, x + 12, y + (needsStack ? 20 : 26));
 
   ctx.font = `${isVerySmall ? '9px' : '10px'} 'JetBrains Mono'`;
   lines.forEach((line, i) => {
-    const rowY = y + (needsStack ? 40 : 48) + i * lineH;
+    const rowY = y + (needsStack ? 36 : 48) + i * lineH;
     
     if (needsStack) {
-      // Content-Aware Vertical Stacking
       ctx.fillStyle = line.color;
-      ctx.globalAlpha = 0.7;
+      ctx.globalAlpha = 0.8;
       ctx.fillText(line.label, x + 12, rowY - 4);
       ctx.globalAlpha = 1.0;
       ctx.fillStyle = colors.white;
       ctx.fillText(line.value, x + 12, rowY + 8);
     } else {
-      // Desktop Side-by-Side
       ctx.fillStyle = line.color;
       ctx.fillText(`${line.label}:`, x + 12, rowY);
       ctx.fillStyle = colors.white;
@@ -187,39 +203,40 @@ interface CanvasBaseProps {
   theme?: VisualizerTheme;
 }
 
-export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoResize = true, theme = 'light' }) => {
+export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, theme = 'light' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const startTime = useRef<number | null>(null);
   const [isPlaying, setIsPlaying] = React.useState(false);
-  const [key, setKey] = React.useState(0); // For resetting animation
 
-  const resize = useCallback(() => {
+  useEffect(() => {
     const canvas = canvasRef.current;
     const container = containerRef.current;
     if (!canvas || !container) return;
-    
-    const dpr = window.devicePixelRatio || 1;
-    const { width, height } = container.getBoundingClientRect();
-    const w = width || 600;
-    const h = height || 400;
 
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
-    
-    const ctx = canvas.getContext("2d");
-    if (ctx) ctx.scale(dpr, dpr);
-  }, []);
+    const observer = new ResizeObserver((entries) => {
+      const entry = entries[0];
+      if (!entry) return;
 
-  useEffect(() => {
-    if (autoResize) {
-      resize();
-      window.addEventListener("resize", resize);
-      return () => window.removeEventListener("resize", resize);
-    }
-  }, [resize, autoResize]);
+      const { width, height } = entry.contentRect;
+      const dpr = window.devicePixelRatio || 1;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        ctx.scale(dpr, dpr);
+        // Force a synchronous draw on resize to avoid flicker
+        onDraw(ctx, width, height, 0, theme);
+      }
+    });
+
+    observer.observe(container);
+    return () => observer.disconnect();
+  }, [onDraw, theme]);
 
   const loop = useCallback((ts: number) => {
     if (!isPlaying) {
@@ -238,9 +255,8 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoR
       }
     }
     requestAnimationFrame(loop);
-  }, [onDraw, isPlaying]);
+  }, [onDraw, isPlaying, theme]);
 
-  // ─── Animation Trigger Effect ───
   useEffect(() => {
     if (isPlaying) {
       const raf = requestAnimationFrame(loop);
@@ -248,28 +264,18 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoR
     }
   }, [loop, isPlaying]);
 
-  // ─── Initial State Snapshot Effect ───
-  useEffect(() => {
-    const drawSnapshot = () => {
-      const canvas = canvasRef.current;
-      if (canvas && !isPlaying) {
-        const ctx = canvas.getContext("2d");
-        if (ctx) {
-          const { width, height } = canvas.getBoundingClientRect();
-          if (width > 0 && height > 0) {
-            onDraw(ctx, width, height, 0, theme);
-          }
-        }
-      }
-    };
-
-    drawSnapshot();
-  }, [onDraw, isPlaying]);
-
   const handleReset = (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsPlaying(false);
     startTime.current = null;
+    const canvas = canvasRef.current;
+    if (canvas) {
+      const ctx = canvas.getContext("2d");
+      if (ctx) {
+        const { width, height } = canvas.getBoundingClientRect();
+        onDraw(ctx, width, height, 0, theme);
+      }
+    }
   };
 
   return (

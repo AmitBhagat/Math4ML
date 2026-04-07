@@ -31,95 +31,63 @@ export const matrixPropertiesSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="rank">1. Rank of a Matrix</h2>
-    <p>The <strong>Rank</strong> of a matrix represents the number of linearly independent rows or columns in the matrix.</p>
+    <h2 id="rank">1. Rank (Information Density)</h2>
+    <p>The <strong>Rank</strong> of a matrix represents the number of linearly independent rows or columns.</p>
 
     <h3>Core Theory</h3>
-    <p>Rank tells us the "true dimensionality" of the information contained in a matrix. If a \(3 \times 3\) matrix has a rank of 2, it means one row is a redundant combination of the others, and the matrix effectively operates in 2D space.</p>
-    <ul>
-      <li><strong>Full Rank:</strong> When \(\text{rank}(A) = \min(m, n)\).</li>
-      <li><strong>Rank Deficient:</strong> When \(\text{rank}(A) < \min(m, n)\).</li>
-    </ul>
+    <p>Rank tells us the "true dimensionality" of the information. If a \(100 \times 100\) matrix has a rank of 2, it means 98 of your features are redundant junk. The matrix operates in a tiny 2D slice of that 100D space.</p>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Rank is the measure of <em>unique</em> information. If your features have <strong>Multicollinearity</strong> (one is just the other times 2), your rank drops, and your model might fail to invert the data.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Rank is the measure of <em>unique</em> information. It’s like hearing 100 people talk, but only 2 of them are saying anything original.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> In the real world, computers struggle with rank. Because of **Floating-Point Noise**, a matrix that is mathematically rank-deficient might look like it has "Full Rank" because of tiny non-zero values (like \(10^{-16}\)). We use **Singular Value Decomposition (SVD)** to find the "Effective Rank."
+      </div>
+    </div>
 
     <visualizer topic="Rank" />
 
-    <h3>Mathematical Derivation</h3>
-    <p>The rank is often found by converting a matrix to <strong>Row Echelon Form (REF)</strong> using Gaussian elimination. The number of non-zero rows in REF is the rank.</p>
+    <h2 id="det">2. Determinant (Scaling Factor)</h2>
+    <p>The <strong>Determinant</strong> \(\det(A)\) is a scalar that summarizes how a matrix changes space.</p>
 
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Problem: Computing the Rank via Row Reduction</h4>
-      <p>Find the rank of \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\).</p>
-      
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Row Dependencies:</strong> Notice that \(R_2 = 2R_1\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Perform Row Operation:</strong> \(R_2 \to R_2 - 2R_1\).</div></div>
-      
-      <div class="math-block">$$A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}$$</div>
-      
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. Since only one row is non-zero after elimination, the matrix "squashes" 2D space into 1D line.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Take a unit square; the Determinant is the <strong>Area</strong> of the new shape after transformation. If the determinant is negative, the space has been "flipped" inside out.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> If \(\det(A) = 0\), you have "squashed" your data into a flatter dimension. You can't go back. This is why singular matrices are non-invertible—you can't "un-squash" a pancake back into a sphere.
+      </div>
     </div>
 
-    <h2 id="det">2. Determinant (det(A) or |A|)</h2>
-    <p>The <strong>Determinant</strong> is a scalar value that can be calculated from a square matrix.</p>
+    <h2 id="trace">3. Trace (The Signature)</h2>
+    <p>The <strong>Trace</strong> \(tr(A)\) is the sum of the elements on the main diagonal.</p>
 
-    <h3>Core Theory</h3>
-    <p>Geometrically, the determinant represents the <strong>scaling factor</strong> of the linear transformation described by the matrix.</p>
-    <ul>
-      <li>If \(\det(A) = 0\), the matrix is <strong>singular</strong> (non-invertible) and "squashes" space into a lower dimension.</li>
-      <li>If \(\det(A) = 1\), the transformation preserves volume.</li>
-    </ul>
-
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Take a unit square; the <strong>Determinant</strong> is the area of the new shape after transformation. In <strong>Gaussian Distributions</strong>, the determinant of the Covariance Matrix tells us how "spread out" or "squashed" the data is.</div></div>
-
-    <h3>Mathematical Derivation (for 2×2)</h3>
-    <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\):</p>
-    <div class="math-block">$$\det(A) = ad - bc$$</div>
-    <p>For a \(3 \times 3\) matrix, use cofactor expansion.</p>
-
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Problem: Computing the Determinant (Scaling Factor)</h4>
-      <p>Calculate \(\det(A)\) for \(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
-      
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(ad - bc\).</div></div>
-      <div class="math-block">$$\det(A) = (3 \times 2) - (1 \times 2) = 6 - 2 = 4$$</div>
-
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4. If \(\det(A)\) were 0, the area would collapse to zero.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> The Trace is a "signature." No matter how you rotate or change the coordinates (basis change), the trace stays the same. 
+        <br/><br/>
+        <strong>Technical Fact:</strong> The sum of the **Eigenvalues** always equals the Trace. It’s a quick way to sanity-check your calculations.
+      </div>
     </div>
 
-    <visualizer topic="Determinants" />
-
-    <h2 id="trace">3. Trace (tr(A))</h2>
-    <p>The <strong>Trace</strong> of a square matrix is the sum of its diagonal elements.</p>
-
-    <h3>Core Theory</h3>
-    <p>The trace is invariant under a change of basis. In ML, it is often used in the context of <strong>Matrix Derivatives</strong> and is related to the sum of the matrix's eigenvalues.</p>
-
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Trace</strong> is simply the sum of diagonal elements, but it's a "signature"—no matter how you rotate the coordinate system, the trace stays the same. Sum of eigenvalues = Trace.</div></div>
-
-    <h3>Mathematical Derivation</h3>
-    <p>For \(A \in \mathbb{R}^{n \times n}\):</p>
     <div class="math-block">$$tr(A) = \sum_{i=1}^{n} a_{ii}$$</div>
 
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Example: Computing the Trace</h4>
-      <p>\(A = \begin{bmatrix} 5 & 2 & 1 \\ 0 & -1 & 4 \\ 3 & 1 & 10 \end{bmatrix}\).</p>
-      <div class="math-block">$$tr(A) = 5 + (-1) + 10 = 14$$</div>
-    </div>
-
-    <h2 id="pd">4. Positive Definiteness</h2>
-    <p>A symmetric matrix \(A\) is <strong>Positive Definite (PD)</strong> if for every non-zero vector \(\mathbf{x}\), the scalar \(\mathbf{x}^T A \mathbf{x}\) is strictly positive.</p>
+    <h2 id="pd">4. Positive Definiteness (The Bowl)</h2>
+    <p>A symmetric matrix \(A\) is <strong>Positive Definite (PD)</strong> if \(\mathbf{x}^\top A \mathbf{x} > 0\) for all non-zero vectors \(\mathbf{x}\).</p>
 
     <h3>Core Theory</h3>
-    <p>This property is critical in <strong>Optimization</strong>. If the Hessian matrix (matrix of second derivatives) of a loss function is Positive Definite, the function is locally convex, meaning any local minimum is a global minimum.</p>
-    <ul>
-      <li><strong>Positive Semi-Definite (PSD):</strong> \(\mathbf{x}^T A \mathbf{x} \geq 0\).</li>
-    </ul>
+    <p>This property is the "Gold Standard" for optimization. If the Hessian matrix of a loss function is Positive Definite, the surface is guaranteed to be convex (bowl-shaped).</p>
 
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A <strong>Positive Definite</strong> matrix describes a "bowl-shaped" (convex) surface. If your loss function is a bowl, your optimizer will always find the bottom.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of a **Positive Definite** matrix as a perfect "bowl." No matter where you drop a ball, it will roll to the stable bottom (Global Minimum). 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> If your matrix is only **Positive Semi-Definite**, your bowl has a "flat bottom" (like a trough). Your optimizer might get lost moving along that flat line instead of finding a single point.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>A matrix \(A\) is PD if:</p>
