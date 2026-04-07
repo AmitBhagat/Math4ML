@@ -1,4 +1,4 @@
-const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",html:String.raw`
+const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",color:"#0D47A1",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
       <h1>Introduction to Vectors</h1>
@@ -136,7 +136,7 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered core vector foundations, let's explore how we grid these vectors into <strong><a href="#/mathematics/linear-algebra/matrices">Matrix Essentials</a></strong>.
     </div>
-  `},t={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",html:String.raw`
+  `},t={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",color:"#1976D2",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
       <h1>Introduction to Matrices</h1>
@@ -282,9 +282,9 @@ print(f"Inverse:\n{A_inv}")
     </div>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Matrix properties define a model's stability. Next, we explore the geometry of where data "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
+      <strong>Next Step:</strong> Understanding the "DNA" of a matrix is crucial for model stability. Next, we explore <strong><a href="#/mathematics/linear-algebra/matrix-properties">Matrix Properties</a></strong> like Rank, Determinants, and Trace.
     </div>
-  `},i={id:"matrix-properties",title:"Introduction to Matrix Properties",description:'Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.',html:String.raw`
+  `},i={id:"matrix-properties",title:"Introduction to Matrix Properties",description:'Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.',color:"#1976D2",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Matrix Properties</div>
       <h1>Introduction to Matrix Properties</h1>
@@ -439,7 +439,7 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Matrix properties define a model's stability. Explore where data truly "lives" in <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
-  `},a={id:"vector-spaces",title:"Introduction to Vector Spaces",description:"A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",html:String.raw`
+  `},a={id:"vector-spaces",title:"Introduction to Vector Spaces",description:"A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",color:"#0D47A1",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
       <h1>Introduction to Vector Spaces</h1>
@@ -562,9 +562,9 @@ print(f"Projection of y onto u: {projection}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Having mastered decompositions like SVD, we reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
+      <strong>Next Step:</strong> Having mastered the basis and projections of where data lives, we can now factorize these structures into simpler components with <strong><a href="#/mathematics/linear-algebra/matrix-decompositions">Matrix Decompositions</a></strong>.
     </div>
-  `},n={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",html:String.raw`
+  `},n={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",color:"#90CAF9",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
       <h1>Introduction to Matrix Decompositions</h1>
@@ -577,8 +577,8 @@ print(f"Projection of y onto u: {projection}")
       <a href="#cholesky">2. Cholesky Decomposition</a>
       <a href="#qr">3. QR Decomposition</a>
       <a href="#svd">4. Singular Value Decomposition (SVD)</a>
-      <a href="#implementation">Implementation (Python/NumPy/SciPy)</a>
-      <a href="#summary">Summary Table</a>
+      <a href="#implementation">Implementation (Python/SciPy)</a>
+      <a href="#comparison">Algorithm Complexity & Selection</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
@@ -592,39 +592,22 @@ print(f"Projection of y onto u: {projection}")
     </div>
 
     <h2 id="lu">1. LU Decomposition</h2>
-    <p>LU Decomposition factors a square matrix \(A\) into a <strong>Lower Triangular</strong> matrix (\(L\)) and an <strong>Upper Triangular</strong> matrix (\(U\)).</p>
+    <p>LU Decomposition factors a square matrix \(A\) into a <strong>Lower Triangular</strong> matrix (\(L\)) and an <strong>Upper Triangular</strong> matrix (\(U\)). It is primarily used to solve systems of linear equations (\(Ax = b\)) efficiently.</p>
+    <div class="math-block">$$A = LU \implies \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
 
-    <h3>Core Theory</h3>
-    <p>It is primarily used to solve systems of linear equations (\(Ax = b\)). Instead of calculating a costly inverse, we solve two simpler triangular systems: \(Ly = b\) and then \(Ux = y\).</p>
-
-    <h3>Mathematical Derivation</h3>
-    <p>For \(A \in \mathbb{R}^{n \times n}\):</p>
-    <div class="math-block">$$A = LU$$</div>
-    <p>Where:</p>
-    <div class="math-block">$$L = \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \quad \text{and} \quad U = \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
-
-    <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: LU Factorization</h4>
+      <h4>Solved Example: LU Factorization</h4>
       <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\).</p>
       <ol>
         <li>Set \(u_{11} = 2, u_{12} = 3\).</li>
         <li>Find \(l_{21}\) such that \(l_{21} \times 2 = 8 \implies l_{21} = 4\).</li>
         <li>Find \(u_{22}\) such that \((4 \times 3) + u_{22} = 15 \implies u_{22} = 3\).</li>
       </ol>
-      <div class="math-block">$$L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}$$</div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}\).</div></div>
     </div>
 
     <h2 id="cholesky">2. Cholesky Decomposition</h2>
-    <p>Cholesky Decomposition is a special case of LU for <strong>Symmetric, Positive Definite</strong> matrices.</p>
-
-    <h3>Core Theory</h3>
-    <p>It factors \(A\) into \(LL^T\). Because it exploits symmetry, it is roughly twice as fast as LU decomposition and much more numerically stable.</p>
-
-    <h3>Mathematical Derivation</h3>
-    <div class="math-block">$$A = LL^T$$</div>
-    <p>Where \(L\) is a lower triangular matrix with positive diagonal entries.</p>
-
+    <p>Cholesky Decomposition is a special case of LU for <strong>Symmetric, Positive Definite</strong> matrices. It factors \(A\) into \(LL^T\). Because it exploits symmetry, it is roughly twice as fast as LU decomposition and much more numerically stable.</p>
     <h3>Applications in ML</h3>
     <ul>
       <li><strong>Gaussian Processes:</strong> Used to sample from multivariate normal distributions.</li>
@@ -632,43 +615,33 @@ print(f"Projection of y onto u: {projection}")
     </ul>
 
     <h2 id="qr">3. QR Decomposition</h2>
-    <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)).</p>
-
-    <h3>Core Theory</h3>
-    <p>\(Q\) contains orthonormal columns (\(Q^T Q = I\)), meaning it preserves lengths and angles. \(R\) contains the "coefficients" of the transformation. This is widely used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
-
-    <h3>Mathematical Derivation</h3>
-    <div class="math-block">$$A = QR$$</div>
-    <p>Usually computed using the <strong>Gram-Schmidt process</strong> or <strong>Householder reflections</strong>.</p>
+    <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)). Since \(Q\) preserves lengths and angles (\(Q^T Q = I\)), this is used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
 
     <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
     <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
-
-    <h3>Core Theory</h3>
-    <p>SVD decomposes a matrix into three parts:</p>
-    <ol>
-      <li><strong>\(U\):</strong> Left singular vectors (Orthogonal — represents rotations in the output space).</li>
-      <li><strong>\(\Sigma\) (Sigma):</strong> Singular values (Diagonal — represents scaling factors).</li>
-      <li><strong>\(V^T\):</strong> Right singular vectors (Orthogonal — represents rotations in the input space).</li>
-    </ol>
-
-    <h3>Mathematical Derivation</h3>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
-    <p>The singular values in \(\Sigma\) are the square roots of the eigenvalues of \(A^T A\).</p>
+    <div class="def-box">
+        <div class="def-title">What the components represent</div>
+        <ul style="margin:0">
+          <li><strong>\(U\):</strong> Left singular vectors (Rotations in output space).</li>
+          <li><strong>\(\Sigma\):</strong> Singular values (Scaling factor for each axis).</li>
+          <li><strong>\(V^T\):</strong> Right singular vectors (Rotations in input space).</li>
+        </ul>
+      </div>
 
     <h3>Applications in ML</h3>
     <ul>
-      <li><strong>Image Compression:</strong> Keeping only the largest \(k\) singular values to reconstruct a lower-quality but smaller image.</li>
-      <li><strong>Latent Semantic Analysis (LSA):</strong> Finding hidden relationships between documents and terms.</li>
-      <li><strong>PCA:</strong> Modern PCA implementations typically use SVD for better numerical stability.</li>
+      <li><strong>Image Compression:</strong> Keeping only the largest \(k\) singular values to reconstruct a smaller image.</li>
+      <li><strong>Latent Semantic Analysis (LSA):</strong> Finding hidden relationships in NLP.</li>
+      <li><strong>PCA:</strong> Robust implementations typically use SVD for stability.</li>
     </ul>
 
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Key Insight:</strong> The singular values in \(\Sigma\) are the square roots of the eigenvalues of \(A^T A\), linking SVD directly to eigenvalue theory.</div></div>
 
-    <h2 id="implementation">Implementation (Python/NumPy/SciPy)</h2>
+    <h2 id="implementation">Implementation (Python/SciPy)</h2>
     <python-code>
 import numpy as np
-from scipy.linalg import lu, cholesky, qr, svd
+from scipy.linalg import lu, qr, cholesky, svd
 
 A = np.array([[4, 12, -16], [12, 37, -43], [-16, -43, 98]])
 
@@ -678,24 +651,23 @@ P, L, U = lu(A)
 # Cholesky (Requires Symmetric Positive Definite)
 L_chol = cholesky(A, lower=True)
 
-# QR Decomposition
-Q, R = qr(A)
-
 # SVD
 U_svd, s, Vh = svd(A)
 
 print(f"SVD Singular Values: {s}")
     </python-code>
 
-    <h2 id="summary">Summary Table</h2>
+    <h2 id="comparison">Algorithm Complexity & Selection</h2>
     <div class="premium-table-wrap">
       <table class="premium-table">
-        <thead><tr><th>Decomposition</th><th>Requirements</th><th>Main Use Case</th></tr></thead>
+        <thead>
+          <tr><th>Method</th><th>Complexity</th><th>Requirement</th><th>Best For</th></tr>
+        </thead>
         <tbody>
-          <tr><td><strong>LU</strong></td><td>Square Matrix</td><td>Solving linear systems (\(Ax=b\))</td></tr>
-          <tr><td><strong>Cholesky</strong></td><td>Symmetric + PD</td><td>Fast optimization, Gaussian sampling</td></tr>
-          <tr><td><strong>QR</strong></td><td>Any Matrix</td><td>Linear Regression (Least Squares)</td></tr>
-          <tr><td><strong>SVD</strong></td><td>Any Matrix</td><td>Data Compression, PCA, NLP</td></tr>
+          <tr><td>LU</td><td>\(O(2/3 n^3)\)</td><td>Square</td><td>Systems of Equations</td></tr>
+          <tr><td>QR</td><td>\(O(2 n^3)\)</td><td>Any</td><td>Linear Regression</td></tr>
+          <tr><td>Cholesky</td><td>\(O(1/3 n^3)\)</td><td>Symm + PD</td><td>Efficient Sampling</td></tr>
+          <tr><td>SVD</td><td>\(O(mn^2)\)</td><td>Any</td><td>PCA / NLP / Compression</td></tr>
         </tbody>
       </table>
     </div>
@@ -704,13 +676,13 @@ print(f"SVD Singular Values: {s}")
     <ul>
       <li><strong>LU/Cholesky</strong> are for efficiency in solving equations.</li>
       <li><strong>QR</strong> is for numerical stability in regression.</li>
-      <li><strong>SVD</strong> is for discovering the underlying structure (latent features) of data.</li>
+      <li><strong>SVD</strong> is for discovering latent structure (latent features) in data.</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Having mastered how to decompose data structures, we now have the foundation for <strong>Optimization</strong>. Specifically, we can use these tools to solve for the weights of a model where the "change" in error is minimized using <strong>Calculus</strong>.
+      <strong>Next Step:</strong> SVD directly uses eigenvalues. Now, reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
-  `},o={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",html:String.raw`
+  `},o={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",color:"#42A5F5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">λ Linear Algebra · Eigenvalues & Eigenvectors</div>
       <h1>Introduction to Eigenvalues and Eigenvectors</h1>
@@ -719,14 +691,14 @@ print(f"SVD Singular Values: {s}")
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#core">1. Core Theory &amp; Mathematical Derivation</a>
-      <a href="#core" class="sub">↳ How to Find Eigenvalues &amp; Eigenvectors</a>
-      <a href="#core" class="sub">↳ Illustrative Example</a>
-      <a href="#pca">2. Principal Component Analysis (PCA)</a>
-      <a href="#spectral">3. Spectral Clustering</a>
-      <a href="#factorization">4. Matrix Factorization</a>
+      <a href="#theory">1. Core Theory: Scaling & Span</a>
+      <a href="#derivation">2. Mathematical Derivation (λ and v)</a>
+      <a href="#example">3. Illustrative Example Walkthrough</a>
+      <a href="#stability">4. Stability of Neural Networks (Spectral Radius)</a>
+      <a href="#pca">5. Application: PCA & Spectral Clustering</a>
+      <a href="#factorization">6. Application: Matrix Factorization</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
+      <a href="#applications">Real-world AI Applications</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
@@ -739,63 +711,49 @@ print(f"SVD Singular Values: {s}")
       </ul>
     </div>
 
-    <h2 id="core">1. Core Theory &amp; Mathematical Derivation</h2>
+    <h2 id="theory">1. Core Theory: Scaling & Span</h2>
     <p>For a square matrix \(A\), a non-zero vector \(\mathbf{v}\) is an <strong>Eigenvector</strong> if:</p>
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
-    <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector.</p>
+    <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector. This means the vector \(\mathbf{v}\) essentially points in a direction that \(A\) does not rotate; it only stretches or shrinks it by \(\lambda\).</p>
 
-    <h3>How to Find Them (Step-by-Step)</h3>
-    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\).</div>
-    <div class="step-box"><span class="step-num">2</span><strong>Solve for \(\lambda\):</strong> For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular. Therefore, we solve: \(\det(A - \lambda I) = 0\)</div>
-    <div class="step-box"><span class="step-num">3</span><strong>Solve for \(\mathbf{v}\):</strong> Once you have the eigenvalues, plug each \(\lambda\) back into \((A - \lambda I)\mathbf{v} = 0\).</div>
+    <h2 id="derivation">2. Mathematical Derivation (λ and v)</h2>
+    <p>To find \(\lambda\), we rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\). For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular:</p>
+    
+    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</p></div>
+    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</p></div>
 
-    <h3>Illustrative Example</h3>
+    <h2 id="example">3. Illustrative Example Walkthrough</h2>
     <div class="example-box">
-      <h4>Example: Finding Eigenvalues</h4>
-      <p>Find eigenvalues for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\).</p>
+      <h4>Problem: Find eigenvalues for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\)</h4>
       <ol>
         <li>\(\det\left(\begin{bmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{bmatrix}\right) = (4-\lambda)(3-\lambda) - 2 = 0\).</li>
         <li>\(\lambda^2 - 7\lambda + 12 - 2 = \lambda^2 - 7\lambda + 10 = 0\).</li>
-        <li>Factoring: \((\lambda - 5)(\lambda - 2) = 0\).</li>
+        <li>Factoring: \((\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5, \lambda_2 = 2\).</li>
       </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Eigenvalues are \(\lambda_1 = 5,\; \lambda_2 = 2\).</div></div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">For \(\lambda_1 = 5\), we solve \((A - 5I)\mathbf{v} = 0 \implies v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\).</div></div>
     </div>
 
-    <h2 id="pca">2. Principal Component Analysis (PCA)</h2>
-    <p>PCA is a dimensionality reduction technique that uses Eigen-decomposition to transform high-dimensional data into a lower-dimensional form while retaining as much variance as possible.</p>
+    <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>
+    <p>In Deep Learning, the <strong>Spectral Radius</strong> (the largest absolute eigenvalue) of your weight matrices determines if signals will explode or vanish. This is the cornerstone of <strong>Weight Initialization</strong> strategies.</p>
+    <div class="callout info">
+      <div class="callout-icon">🚀</div>
+      <div class="callout-body">
+        <strong>The Rule:</strong> If \(\lambda_{max} > 1\), weights grow exponentially (Exploding Gradients). If \(\lambda_{max} << 1\), signals can vanish (Vanishing Gradients).
+      </div>
+    </div>
 
-    <h3>The Logic</h3>
-    <ol>
-      <li>Calculate the <strong>Covariance Matrix</strong> of the data.</li>
-      <li>Find the <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> of this covariance matrix.</li>
-      <li>The eigenvector with the <strong>highest eigenvalue</strong> is the <strong>First Principal Component</strong> (the direction of maximum variance).</li>
-      <li>Project the data onto these top eigenvectors to reduce dimensions.</li>
-    </ol>
-    <div class="callout info"><div class="callout-icon">📐</div><div class="callout-body"><strong>ML Context:</strong> PCA reduces 100 features to the 10 most important ones to speed up training and reduce noise without losing critical information.</div></div>
+    <h2 id="pca">5. Application: PCA & Spectral Clustering</h2>
+    <p><strong>PCA</strong> finds the eigenvectors of the data's covariance matrix. This reduces 100 features to the 10 most important ones without losing critical patterns.</p>
+    <p><strong>Spectral Clustering</strong> uses the eigenvalues of a Graph Laplacian matrix \(L = D - A\) to map data into a space where clusters are easily separable, outperforming K-Means on non-spherical data.</p>
 
-    <h2 id="spectral">3. Spectral Clustering</h2>
-    <p>Unlike K-Means, which assumes spherical clusters, <strong>Spectral Clustering</strong> uses the eigenvalues of a similarity matrix to perform dimensionality reduction before clustering in fewer dimensions.</p>
-
-    <h3>The Logic</h3>
-    <ol>
-      <li>Construct an <strong>Adjacency Matrix</strong> (how close points are).</li>
-      <li>Compute the <strong>Graph Laplacian</strong> matrix \(L = D - A\).</li>
-      <li>Find the eigenvalues of \(L\). The "spectral" part refers to using the bottom eigenvectors (the ones with the smallest non-zero eigenvalues) to map data into a space where clusters are easily separable.</li>
-    </ol>
-
-    <h2 id="factorization">4. Matrix Factorization</h2>
-    <p>Matrix Factorization (like <strong>SVD — Singular Value Decomposition</strong>) decomposes a matrix into a product of matrices.</p>
-
-    <h3>The Logic</h3>
-    <p>If \(A\) is a symmetric matrix, it can be factored as:</p>
-    <div class="math-block">$$A = Q \Lambda Q^T$$</div>
-    <p>where \(Q\) is a matrix of eigenvectors and \(\Lambda\) (Capital Lambda) is a diagonal matrix of eigenvalues. In Recommendation Systems (like Netflix), this is used to discover "latent features" (e.g., a user's preference for 'Sci-Fi' or 'Action') by decomposing the User-Movie rating matrix.</p>
+    <h2 id="factorization">6. Application: Matrix Factorization</h2>
+    <p>If \(A\) is a symmetric matrix, it can be factored as \(A = Q \Lambda Q^T\), where \(Q\) is a matrix of eigenvectors and \(\Lambda\) is a diagonal matrix of eigenvalues. This is used in Recommendation Systems (like Netflix) to discover "latent features"—detecting a user's preference for 'Action' vs. 'Sci-Fi' from raw ratings.</p>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>
 import numpy as np
 
-# Define a symmetric matrix (e.g., a covariance matrix)
+# A symmetric matrix (e.g., a covariance matrix)
 A = np.array([[4, 2], [2, 3]])
 
 # Calculate Eigenvalues and Eigenvectors
@@ -807,41 +765,61 @@ print("Eigenvectors (Columns):\n", eigenvectors)
 # Verification: Av = lambda * v
 v1 = eigenvectors[:, 0]
 lambda1 = eigenvalues[0]
-print("\nA @ v1:", np.dot(A, v1))
-print("lambda1 * v1:", lambda1 * v1)
+print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
     </python-code>
 
-    <h2 id="applications">Applications in ML</h2>
+    <h2 id="applications">Real-world AI Applications</h2>
     <ul>
-      <li><strong>PCA:</strong> Reducing 100 features to the 10 most important ones to speed up training.</li>
-      <li><strong>Computer Vision:</strong> <strong>Eigenfaces</strong> uses eigenvectors of face images for recognition.</li>
-      <li><strong>Google PageRank:</strong> The "importance" of a webpage is essentially an eigenvalue problem of the web-link matrix.</li>
+      <li><strong>Principal Component Analysis (PCA):</strong> Dimensionality reduction for data visualization and feature engineering.</li>
+      <li><strong>Computer Vision:</strong> <strong>Eigenfaces</strong> uses eigenvectors of face images for facial recognition.</li>
+      <li><strong>Google PageRank:</strong> The importance of a webpage is calculated as the dominant eigenvalue of the web-link matrix.</li>
     </ul>
 
     <h2 id="takeaways">Key Takeaways</h2>
     <ul>
       <li><strong>Eigenvectors</strong> define the "axes" or directions of a transformation.</li>
-      <li><strong>Eigenvalues</strong> define the "strength" or importance of those directions.</li>
+      <li><strong>Eigenvalues</strong> define the "strength" or magnitude of scaling along those axes.</li>
       <li>Large eigenvalues in a covariance matrix signify the most important patterns in data.</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we have covered the static properties of data via Linear Algebra, we can transition to <strong>Calculus</strong>, which allows us to understand how these values <em>change</em>, leading us to the heart of ML training: <strong>Gradient Descent</strong>.
+      <strong>Next Step:</strong> With the theory mastered, let's explore practical <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors-pca">Solved SVD & PCA Examples</a></strong>.
+    </div>
     </div>
   `},s={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">📝 Solved Examples · Eigenvalues, Eigenvectors & PCA</div>
-      <h1>Solved Examples: Eigenvalues, Eigenvectors, and PCA</h1>
-      <p>Following the GeeksforGeeks pattern, here are practical, step-by-step examples to solidify your understanding of the concepts discussed. Each example walks through the complete solution with all intermediate steps shown.</p>
+      <div class="premium-hero-badge">📉 Linear Algebra · Principal Component Analysis</div>
+      <h1>Principal Component Analysis (PCA) Walkthrough</h1>
+      <p>PCA is the crown jewel of dimensionality reduction. It bridges the gap between <strong>Linear Algebra</strong> (SVD/Eigenvectors) and <strong>Statistics</strong> (Variance/Covariance) to simplify high-dimensional data without losing its soul.</p>
     </div>
 
     <div class="toc">
-      <div class="toc-title">Examples in This Page</div>
-      <a href="#ex1">Example 1 — Finding Eigenvalues and Eigenvectors</a>
-      <a href="#ex2">Example 2 — PCA Selection (Variance Explained)</a>
-      <a href="#ex3">Example 3 — PCA Interpretation</a>
-      <a href="#summary-table">Summary Table for Quick Revision</a>
+      <div class="toc-title">Table of Contents</div>
+      <a href="#theory">1. The Intuition: Variance as Information</a>
+      <a href="#derivation">2. Mathematical Derivation (The 5 Steps)</a>
+      <a href="#ex1">3. Solved Practice Case: Finding Eigen-pairs</a>
+      <a href="#ex2">4. Solved Practice Case: Variance Selection</a>
+      <a href="#ex3">5. Solved Practice Case: Interpreting PC1</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
+      <a href="#summary-table">Summary Table</a>
     </div>
+
+    <h2 id="theory">1. The Intuition: Variance as Information</h2>
+    <p>In Machine Learning, we assume that the directions in which data varies the most are the directions that contain the most <strong>information</strong>. PCA finds these directions (Principal Components) and ignores the noise.</p>
+    <div class="example-box">
+      <h4>Age vs. Income (2D to 1D)</h4>
+      <p>Imagine Age and Income are highly correlated. Instead of using two features, PCA finds the "trend line" (PC1) that explains most of the spread. By projecting data onto this 1D line, we capture the "Age-Income" effect while reducing dimensionality by 50%.</p>
+    </div>
+
+    <h2 id="derivation">2. Mathematical Derivation (The 5 Steps)</h2>
+    <p>This is the formal process for transforming a high-dimensional dataset \(X\) into a lower-dimensional subspace:</p>
+    <div class="step-box"><span class="step-num">1</span><strong>Standardize:</strong> Mean-center the data (\(X_{centered} = X - \mu\)) so the data cloud is centered at the origin.</div>
+    <div class="step-box"><span class="step-num">2</span><strong>Covariance Matrix:</strong> Compute \(C = \frac{1}{m-1} X^T X\) to measure how features vary together.</div>
+    <div class="step-box"><span class="step-num">3</span><strong>Eigen-decomposition:</strong> Solve the characteristic equation \(Cv = \lambda v\). Eigenvectors define the new axes; eigenvalues define their "strength."</div>
+    <div class="step-box"><span class="step-num">4</span><strong>Sort & Select:</strong> Rank eigenvalues in descending order. Pick the top \(k\) (where \(k < n\)) to form a projection matrix \(W\).</div>
+    <div class="step-box"><span class="step-num">5</span><strong>Project:</strong> Transform the original data into the new subspace via \(X_{new} = X_{centered} \cdot W\).</div>
+
+    <h2 id="examples">3. Solved Practice Examples</h2>
 
     <!-- EXAMPLE 1 -->
     <div class="solved-card" id="ex1">
@@ -856,25 +834,15 @@ print("lambda1 * v1:", lambda1 * v1)
         </div>
 
         <div class="step-label">Step 1: Set up the Characteristic Equation</div>
-        <div class="math-block">$$\det(A - \lambda I) = 0$$
-$$\begin{vmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{vmatrix} = 0$$</div>
+        <div class="math-block">$$\det(A - \lambda I) = 0 \implies \begin{vmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{vmatrix} = 0$$</div>
 
         <div class="step-label">Step 2: Solve the Quadratic Equation</div>
-        <div class="math-block">$$(4-\lambda)(3-\lambda) - (2)(1) = 0$$
-$$\lambda^2 - 7\lambda + 12 - 2 = 0 \implies \lambda^2 - 7\lambda + 10 = 0$$</div>
-        <p>Factoring the quadratic: \((\lambda - 5)(\lambda - 2) = 0\).</p>
+        <div class="math-block">$$\lambda^2 - 7\lambda + 10 = 0 \implies (\lambda - 5)(\lambda - 2) = 0$$</div>
         <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\).</div></div>
 
         <div class="step-label">Step 3: Find Eigenvectors for λ₁ = 5</div>
-        <div class="math-block">$$(A - 5I)v = 0 \implies \begin{pmatrix} 4-5 & 1 \\ 2 & 3-5 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$
-$$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
-        <p>From the first row: \(-x + y = 0 \implies x = y\).</p>
-        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">One possible <strong>Eigenvector</strong> is \(v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\).</div></div>
-
-        <div class="step-label">Step 4: Find Eigenvectors for λ₂ = 2</div>
-        <div class="math-block">$$(A - 2I)v = 0 \implies \begin{pmatrix} 2 & 1 \\ 2 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
-        <p>From the first row: \(2x + y = 0 \implies y = -2x\).</p>
-        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">One possible <strong>Eigenvector</strong> is \(v_2 = \begin{pmatrix} 1 \\ -2 \end{pmatrix}\).</div></div>
+        <div class="math-block">$$(A - 5I)v = 0 \implies \begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
+        <p>From the first row: \(-x + y = 0 \implies x = y\). One possible <strong>Eigenvector</strong> is \(v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\).</p>
       </div>
     </div>
 
@@ -887,22 +855,14 @@ $$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pma
       <div class="solved-body">
         <div class="problem-box">
           <div class="problem-label">Problem</div>
-          Suppose you perform PCA on a dataset with 3 features. You calculate the eigenvalues of the covariance matrix as \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\). How much variance is retained if you reduce the data to 2 dimensions?
+          If \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\), how much variance is retained in 2D?
         </div>
 
-        <div class="step-label">Step 1: Calculate Total Variance</div>
-        <p>Total Variance = Sum of all eigenvalues:</p>
-        <div class="math-block">$$\text{Total} = 15 + 4 + 1 = 20$$</div>
-
-        <div class="step-label">Step 2: Calculate Variance of Top 2 Components</div>
-        <p>Sum of \(\lambda_1\) and \(\lambda_2\) (the highest values):</p>
-        <div class="math-block">$$\text{Sum} = 15 + 4 = 19$$</div>
-
-        <div class="step-label">Step 3: Calculate Percentage</div>
+        <p>Total Variance = \(15 + 4 + 1 = 20\). Sum of top 2 = \(15 + 4 = 19\).</p>
         <div class="math-block">$$\frac{19}{20} \times 100 = 95\%$$</div>
 
         <div class="conclusion">
-          <strong>Conclusion:</strong> By keeping the first two principal components, you retain <strong>95%</strong> of the original information while reducing the dimensionality by 33%.
+          <strong>Conclusion:</strong> By keeping the first two principal components, you retain <strong>95%</strong> of the original information while reducing the dimensionality.
         </div>
       </div>
     </div>
@@ -911,68 +871,196 @@ $$\begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pma
     <div class="solved-card" id="ex3">
       <div class="solved-header">
         <div class="solved-num">3</div>
-        <div class="solved-title">PCA Interpretation</div>
+        <div class="solved-title">PCA Interpretation: The "Size" Axis</div>
       </div>
       <div class="solved-body">
         <div class="problem-box">
           <div class="problem-label">Problem</div>
-          In a dataset measuring "Height" and "Weight," the first Eigenvector (Principal Component 1) is found to be \(v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix}\) with \(\lambda_1 = 50\). What does this tell you?
+          In a dataset measuring "Height" and "Weight," \(v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix}\) with \(\lambda_1 = 50\). What does this tell you?
         </div>
 
         <div class="step-label">Interpretation of Eigenvector (v₁)</div>
-        <p>Since both components are positive and equal, this eigenvector represents an axis where Height and Weight increase together. This is the "Size" component. It shows the direction of maximum correlation.</p>
-        <div class="math-block">$$v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix} \approx \begin{pmatrix} \frac{1}{\sqrt{2}} \\ \frac{1}{\sqrt{2}} \end{pmatrix}$$</div>
-        <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body">The equal weighting (\(0.707 \approx 1/\sqrt{2}\)) means both Height and Weight contribute equally to this principal component — a diagonal axis at 45° in the Height-Weight plane.</div></div>
+        <p>Since both components are positive and equal, this eigenvector represents an axis where Height and Weight increase together. This is the <strong>"Size"</strong> component. It shows the direction of maximum correlation.</p>
+        <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body">The equal weighting (\(0.707 \approx 1/\sqrt{2}\)) means both Height and Weight contribute equally — a diagonal axis at 45° in the Height-Weight plane.</div></div>
 
         <div class="step-label">Interpretation of Eigenvalue (λ₁ = 50)</div>
-        <p>A value of 50 indicates that a significant portion of the total spread (variance) in the population is captured along this "Size" axis rather than by looking at height or weight individually.</p>
-        <div class="math-block">$$\lambda_1 = 50 \implies \text{Variance along PC1} = 50 \text{ units}^2$$</div>
-
-        <div class="conclusion">
-          <strong>Conclusion:</strong> The first principal component captures a "Size" effect where Height and Weight move together. The eigenvalue of 50 quantifies how much of the total dataset variance is explained by this single axis.
-        </div>
+        <p>A value of 50 indicates that a significant portion of the total spread (variance) is captured along this "Size" axis rather than by looking at height or weight individually.</p>
       </div>
     </div>
+
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <python-code>
+import numpy as np
+
+# 1. Create Synthetic 2D Data
+X = np.array([[2.5, 2.4], [0.5, 0.7], [2.2, 2.9], [1.9, 2.2], [3.1, 3.0]])
+
+# 2. Standardization & Covariance
+X_centered = X - np.mean(X, axis=0)
+cov_mat = np.cov(X_centered, rowvar=False)
+
+# 3. Eigen-decomposition
+eigen_values, eigen_vectors = np.linalg.eigh(cov_mat)
+
+# 4. Sort and Project (Top 1 PC)
+idx = np.argsort(eigen_values)[::-1]
+v1 = eigen_vectors[:, idx[0]]
+X_pca = X_centered @ v1
+
+print("PCA 1D Projection:", X_pca)
+    </python-code>
 
     <!-- SUMMARY TABLE -->
     <h2 id="summary-table">Summary Table for Quick Revision</h2>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Eigenvalue (\(\lambda\))</th>
-            <th>Eigenvector (\(v\))</th>
-          </tr>
+          <tr><th>Concept</th><th>Math Tool</th><th>Purpose</th></tr>
         </thead>
         <tbody>
-          <tr>
-            <td><strong>Physical Meaning</strong></td>
-            <td>Magnitude / Scaling factor</td>
-            <td>Direction / Axis</td>
-          </tr>
-          <tr>
-            <td><strong>In PCA</strong></td>
-            <td>Amount of Variance captured</td>
-            <td>The Principal Component itself</td>
-          </tr>
-          <tr>
-            <td><strong>Selection Criteria</strong></td>
-            <td>Keep the largest values</td>
-            <td>Keep corresponding vectors</td>
-          </tr>
+          <tr><td><strong>Centering</strong></td><td>Arithmetic Mean</td><td>Removes bias; shifts data to origin.</td></tr>
+          <tr><td><strong>Relationship</strong></td><td>Covariance Matrix</td><td>Measures how features change together.</td></tr>
+          <tr><td><strong>Directions</strong></td><td>Eigenvectors</td><td>Defines the "Principal Components".</td></tr>
+          <tr><td><strong>Importance</strong></td><td>Eigenvalues</td><td>Tells us how much variance each PC captures.</td></tr>
         </tbody>
       </table>
     </div>
 
-    <div class="callout tip">
-      <div class="callout-icon">🎯</div>
-      <div class="callout-body">
-        <strong>Key Insight:</strong> In PCA, you always sort eigenvalues in descending order. The eigenvector corresponding to the largest eigenvalue is the <strong>First Principal Component</strong> — the direction of greatest variance in your data.
-      </div>
-    </div>
-
     <div class="linking-rule">
-      <strong>Linking Rule:</strong> Now that we have covered the static properties of data via Linear Algebra, we can transition to <strong>Calculus</strong>, which allows us to understand how these values <em>change</em>, leading us to the heart of ML training: <strong>Gradient Descent</strong>.
+      <strong>Next Step:</strong> With Linear Algebra mastered, we can move into the world of uncertainty: <strong><a href="#/mathematics/probability/basic-axioms">Basic Axioms of Probability</a></strong>.
     </div>
-  `},r={id:"linear-algebra",title:"Linear Algebra",description:"Linear Algebra is the language of Machine Learning. It provides the mathematical framework for representing and processing high-dimensional data, from simple vectors to complex matrix decompositions.",keyConcepts:[{title:"Vectors & Foundations",description:"Dot Product, Norms (L1/L2), Linear Combinations, Span, and Basis."},{title:"Matrix Essentials",description:"Multiplication, Transpose, Inverse, and Identity mappings."},{title:"Matrix Properties",description:"Information metrics: Rank, Determinant, Trace, and Definiteness."},{title:"Vector Spaces",description:"Subspaces, independence, and orthogonal projections."},{title:"Matrix Decompositions",description:"Structural factorization via SVD, LU, Cholesky, and QR."},{title:"Eigen-analysis",description:"Spectral theory behind PCA, Clustering, and Matrix Factorization."},{title:"PCA Solved Examples",description:"Step-by-step walkthroughs of Eigen-decomposition and PCA."}],sections:[e,t,i,a,n,o,s]};export{r as LINEAR_ALGEBRA_DATA};
+  `},r={id:"linear-algebra",title:"Linear Algebra",description:"Linear Algebra is the language of Machine Learning. It provides the mathematical framework for representing and processing high-dimensional data, from simple vectors to complex matrix decompositions.",keyConcepts:[{title:"Vectors & Foundations",description:"Dot Product, Norms (L1/L2), Linear Combinations, Span, and Basis."},{title:"Matrix Essentials",description:"Multiplication, Transpose, Inverse, and Identity mappings."},{title:"Matrix Properties",description:"Information metrics: Rank, Determinant, Trace, and Definiteness."},{title:"Vector Spaces",description:"Subspaces, independence, and orthogonal projections."},{title:"Matrix Decompositions",description:"Structural factorization via SVD, LU, Cholesky, and QR."},{title:"Eigen-analysis",description:"Spectral theory behind PCA, Clustering, and Matrix Factorization."},{title:"PCA Solved Examples",description:"Step-by-step walkthroughs of Eigen-decomposition and PCA."}],introHtml:String.raw`
+    <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
+      
+      <!-- Intro Section -->
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-headline font-semibold text-text-premium leading-tight">
+          Linear Algebra: <span class="text-accent italic">The Language of Machine Learning</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-text-premium font-normal leading-relaxed opacity-90">
+          In the world of Machine Learning, <strong>Linear Algebra</strong> is not just a branch of mathematics; it is the fundamental language we use to communicate with data. If Machine Learning is the engine, Linear Algebra is the fuel and the chassis that holds everything together.
+        </p>
+        
+        <p class="text-lg text-muted-premium font-normal leading-relaxed">
+          Everything from a single pixel in an image to the complex weights of a Large Language Model is represented using the concepts of Linear Algebra. By mastering this domain, you transition from someone who simply "uses" ML libraries to someone who understands the geometry of data.
+        </p>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- Why It Matters -->
+      <div class="space-y-10">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent">Why It Matters</h3>
+        </div>
+        
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          When you train a model, you aren't just crunching numbers—you are performing <span class="italic text-accent-premium">high-dimensional transformations</span>. 
+        </p>
+
+        <ul class="space-y-8 list-none pl-0">
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Data Representation</strong>
+              <p class="text-muted-premium font-normal">Almost all data—be it text, images, or audio—is converted into <strong>Vectors</strong> and <strong>Matrices</strong> before a computer can process it.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Dimensionality Reduction</strong>
+              <p class="text-muted-premium font-normal">Techniques like <strong>Principal Component Analysis (PCA)</strong> use eigenvalues and eigenvectors to compress massive datasets while keeping the most important information.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Deep Learning</strong>
+              <p class="text-muted-premium font-normal">Every "layer" in a neural network is essentially a massive matrix multiplication followed by a transformation.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- Core Concepts -->
+      <div class="space-y-10">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent">Core Concepts to Master</h3>
+        </div>
+
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          To build a strong intuition for ML, we will focus on these key areas:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Vectors & Spaces</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Understanding data points as coordinates in multi-dimensional space.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Matrix Operations</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Learning how to manipulate data through multiplication, transposition, and inversion.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Linear Transformations</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Visualizing how matrices can stretch, rotate, and compress space.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Eigenvalues & Eigenvectors</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Finding the 'hidden axes' along which data varies the most.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Matrix Decomposition</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Breaking complex matrices into simpler parts (like SVD) for efficient computation.</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- What to Expect -->
+      <div class="space-y-10 pb-12">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent">What to Expect</h3>
+        </div>
+
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          On this page, we move beyond rote memorization of formulas. We focus on <strong>geometric intuition</strong>. You will learn to see a matrix not just as a grid of numbers, but as a function that moves space. 
+        </p>
+
+        <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-4xl font-serif">"</div>
+          <p class="text-xl md:text-2xl text-text-premium italic leading-relaxed font-light">
+            "Mathematics is the art of giving the same name to different things."
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="w-8 h-[1px] bg-accent/30"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent/60">— Henri Poincaré</span>
+          </div>
+        </div>
+
+        <p class="text-lg text-muted-premium font-normal leading-relaxed">
+          By the end of this module, you'll see that a recommendation system, a face recognizer, and a language translator all share the same mathematical DNA.
+        </p>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="pt-12 text-center border-t border-border-premium/50">
+        <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Ready to start?</p>
+        <a 
+          href="/#/mathematics/linear-algebra/vectors" 
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
+        >
+          Begin with The Vector
+        </a>
+      </div>
+
+    </div>
+  `,sections:[e,t,i,a,n,o,s]};export{r as LINEAR_ALGEBRA_DATA};

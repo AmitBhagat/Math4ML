@@ -1,4 +1,4 @@
-const i={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Probability is the mathematical framework used to quantify uncertainty. In Machine Learning, it is the backbone of algorithms like Naive Bayes, Hidden Markov Models, and even the Softmax function in Deep Learning.",html:String.raw`
+const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Probability is the mathematical framework used to quantify uncertainty. In Machine Learning, it is the backbone of algorithms like Naive Bayes, Hidden Markov Models, and even the Softmax function in Deep Learning.",color:"#FF6F00",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎲 Probability · Basic Axioms</div>
       <h1>Basic Axioms of Probability</h1>
@@ -129,7 +129,7 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the basic axioms, move toward <strong><a href="#/mathematics/probability/bayes-theorem">Bayes' Theorem</a></strong> to calculate the probability of causes given their effects.
     </div>
-  `},e={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
+  `},t={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔄 Probability · Bayes' Theorem</div>
       <h1>Bayes' Theorem</h1>
@@ -257,9 +257,9 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Once we know the "mapping" of random variables, we can summarize them by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
+      <strong>Next Step:</strong> Bayes' Theorem works on events. To handle data, we must map these events to numbers using <strong><a href="#/mathematics/probability/random-variables">Random Variables & Functions</a></strong>.
     </div>
-  `},t={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
+  `},i={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Probability · Random Variables &amp; Functions</div>
       <h1>Random Variables &amp; Functions</h1>
@@ -379,7 +379,7 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>The "Linking" Rule:</strong> Understanding these variables allows us to explore <strong>Common Distributions</strong> (Bernoulli, Binomial, Gaussian, Poisson). Once we know the "shape" of these distributions, we can perform <strong>Expectation and Variance</strong> calculations to summarize data.
+      <strong>Next Step:</strong> Understanding these variables allows us to summarize data by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
     </div>
   `},a={id:"expectation-variance",title:"Expectation & Variance",description:"While Probability Distributions give us the 'shape' of data, Expectation and Variance provide the summary statistics that describe that shape.",html:String.raw`
     <div class="premium-hero">
@@ -663,7 +663,7 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Understanding single-variable distributions leads directly to <strong><a href="#/mathematics/probability/multivariate-probability">Multivariate Probability</a></strong>, where we model complex feature vectors.
     </div>
-  `},o={id:"multivariate-probability",title:"Multivariate Probability",description:"Multivariate Probability provides the tools to model multiple related variables simultaneously and understand how they interact, moving beyond single-feature analysis.",html:String.raw`
+  `},o={id:"multivariate-probability",title:"Multivariate Probability",description:"Multivariate Probability provides the tools to model multiple related variables simultaneously and understand how they interact, moving beyond single-feature analysis.",color:"#FFA000",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Probability · Multivariate</div>
       <h1>Multivariate Probability</h1>
@@ -799,7 +799,7 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Once we can model multiple variables, we need to understand the theoretical safety net of <strong><a href="#/mathematics/probability/laws">Probability Laws (LLN & CLT)</a></strong>.
     </div>
-  `},n={id:"laws",title:"Law of Large Numbers & Central Limit Theorem",description:"The Law of Large Numbers (LLN) and the Central Limit Theorem (CLT) explain why we can trust data samples to represent a whole population, justifying model generalization.",html:String.raw`
+  `},r={id:"laws",title:"Law of Large Numbers & Central Limit Theorem",description:"The Law of Large Numbers (LLN) and the Central Limit Theorem (CLT) explain why we can trust data samples to represent a whole population, justifying model generalization.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚖️ Probability · Laws</div>
       <h1>Law of Large Numbers &amp; Central Limit Theorem</h1>
@@ -908,7 +908,7 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> These laws provide the theoretical safety net. Now that we know samples represent populations, move to <strong><a href="#/mathematics/probability/bayes-mle">Maximum Likelihood Estimation (MLE)</a></strong> to find the parameters that best describe your data.
     </div>
-  `},r={id:"bayes-mle",title:"Bayes' Theorem & MLE",description:"Maximum Likelihood Estimation (MLE) and Bayesian Inference are two different philosophies for 'training' a model by finding the best parameters for a probability distribution.",html:String.raw`
+  `},n={id:"bayes-mle",title:"Bayes' Theorem & MLE",description:"Maximum Likelihood Estimation (MLE) and Bayesian Inference are two different philosophies for 'training' a model by finding the best parameters for a probability distribution.",color:"#FFC107",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎯 Probability · Bayes' Theorem & MLE</div>
       <h1>Bayes' Theorem &amp; MLE</h1>
@@ -1005,7 +1005,7 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Congratulations!</strong> You have mastered the foundations of Probability. Now, put these tools to work in <strong><a href="#/mathematics/statistics/descriptive-statistics">Statistics</a></strong> to analyze real-world datasets.
+      <strong>Next Step:</strong> Theory is best solidified through practice. Let's look at <strong><a href="#/mathematics/probability/bayes-mle-examples">Practical Examples</a></strong> of Spam Filtering and Coin Tosses.
     </div>
   `},l={id:"bayes-mle-examples",title:"Practical Examples",description:"Solidify your understanding of Bayes' Theorem and Maximum Likelihood Estimation with practical examples: Spam Filtering and a Bernoulli Coin Toss.",html:String.raw`
     <div class="premium-hero">
@@ -1080,6 +1080,140 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> Now that you've mastered <strong>Probability</strong>, you can transition into <strong>Information Theory</strong>, where we use these probabilities to measure "Surprise" and "Entropy" — the core of Loss Functions like Cross-Entropy.
+      <strong>Final Step:</strong> Now that you've mastered <strong>Probability</strong>, you can transition into <strong><a href="#/mathematics/statistics/descriptive-statistics">Statistics</a></strong>, where we use these tools to analyze real-world datasets and infer population properties.
     </div>
-  `},d={id:"probability",title:"Probability",description:"Probability is the mathematical framework for quantifying uncertainty. In ML, it allows us to move beyond binary 'Yes/No' logic and embrace the nuanced reality of 'How likely is this?'.",keyConcepts:[{title:"Basic Axioms",description:"Sample spaces, Kolmogorov axioms, and the building blocks of uncertainty."},{title:"Bayes' Theorem",description:"Updating beliefs based on evidence: Posterior, Likelihood, and Priors."},{title:"Random Variables",description:"Discrete (PMF) vs. Continuous (PDF) mappings of stochastic processes."},{title:"Expectation & Variance",description:"Summarizing distributions: Center (Mean) and Spread (Variance/Covariance)."},{title:"Common Distributions",description:"Bernoulli, Gaussian, Poisson, and Laplace — the shapes of data."},{title:"Multivariate Probability",description:"Joint, Marginal, and Conditional distributions for feature vectors."},{title:"LLN & CLT",description:"The Law of Large Numbers and Central Limit Theorem: WHY samples work."},{title:"Estimation (MLE/MAP)",description:"Finding the 'best' parameters for a distribution using Likelihood."},{title:"Practical Inference",description:"Solved examples: Spam filtering and Bernoulli MLE coin tosses."}],sections:[i,e,t,a,s,o,n,r,l]};export{d as PROBABILITY_DATA};
+  `},d={id:"probability",title:"Probability",description:"Probability is the mathematical framework for quantifying uncertainty. In ML, it allows us to move beyond binary 'Yes/No' logic and embrace the nuanced reality of 'How likely is this?'.",keyConcepts:[{title:"Basic Axioms",description:"Sample spaces, Kolmogorov axioms, and the building blocks of uncertainty."},{title:"Bayes' Theorem",description:"Updating beliefs based on evidence: Posterior, Likelihood, and Priors."},{title:"Random Variables",description:"Discrete (PMF) vs. Continuous (PDF) mappings of stochastic processes."},{title:"Expectation & Variance",description:"Summarizing distributions: Center (Mean) and Spread (Variance/Covariance)."},{title:"Common Distributions",description:"Bernoulli, Gaussian, Poisson, and Laplace — the shapes of data."},{title:"Multivariate Probability",description:"Joint, Marginal, and Conditional distributions for feature vectors."},{title:"LLN & CLT",description:"The Law of Large Numbers and Central Limit Theorem: WHY samples work."},{title:"Estimation (MLE/MAP)",description:"Finding the 'best' parameters for a distribution using Likelihood."},{title:"Practical Inference",description:"Solved examples: Spam filtering and Bernoulli MLE coin tosses."}],introHtml:String.raw`
+    <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
+      
+      <!-- Intro Section -->
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-headline font-semibold text-text-premium leading-tight">
+          Probability: <span class="text-accent italic">Mastering Uncertainty</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-text-premium font-normal leading-relaxed opacity-90">
+          Data is messy, noisy, and incomplete. <strong>Probability</strong> is the mathematical bridge that allows us to move from binary "Yes/No" thinking to the nuanced reality of modern AI. It’s what allows a model to say "I am 87% sure this is a face."
+        </p>
+        
+        <p class="text-lg text-muted-premium font-normal leading-relaxed">
+          Machine Learning is fundamentally about inference—using past evidence to make predictions about the unknown. Probability provides the formal framework to quantify exactly how much we know, how much we don't, and how our beliefs should change as new data arrives.
+        </p>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- Why It Matters -->
+      <div class="space-y-10">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent font-semibold">Why It Matters</h3>
+        </div>
+        
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          Models don't just calculate values; they estimate likelihoods. Uncertainty is the only constant.
+        </p>
+
+        <ul class="space-y-8 list-none pl-0">
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Bayesian Reasoning</strong>
+              <p class="text-muted-premium font-normal">We use <strong>Prior</strong> knowledge and new <strong>Evidence</strong> to calculate a <strong>Posterior</strong> belief. This is how models "update" their understanding of the world.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Stochastic Processes</strong>
+              <p class="text-muted-premium font-normal">Many real-world systems are random. Understand <strong>Random Variables</strong> and <strong>Distributions</strong> to model the "inner life" of these physical and digital systems.</p>
+            </div>
+          </li>
+          <li class="flex items-start gap-6 group">
+            <div class="mt-1 w-6 h-6 rounded-full bg-accent/10 border border-accent/20 flex items-center justify-center text-accent text-[10px] font-bold group-hover:scale-110 transition-transform">•</div>
+            <div>
+              <strong class="text-text-premium block text-lg mb-1 font-semibold">Expectation & Risk</strong>
+              <p class="text-muted-premium font-normal">By calculating <strong>Expected Values</strong> and <strong>Variance</strong>, we can measure the potential "risk" or error in our model's predictions.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- Core Concepts -->
+      <div class="space-y-10">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent font-semibold">Core Concepts to Master</h3>
+        </div>
+
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          To build a strong probabilistic intuition, we will focus on these key pillars:
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Bayes' Theorem</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">The cornerstone of probabilistic updating and belief propagation.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Probability Distributions</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">The "shapes" that data can take, from Normal/Gaussian to Bernoulli.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Joint & Marginal Probability</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">Understanding how different features depend on or exclude one another.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Independence</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">The critical assumption that simplifies massive multi-feature models.</p>
+          </div>
+          <div class="space-y-2 border-l-2 border-accent/10 pl-6 hover:border-accent transition-colors">
+            <h4 class="font-semibold text-text-premium tracking-tight">Likelihood vs. Probability</h4>
+            <p class="text-sm text-muted-premium font-normal leading-relaxed">The distinction that powers Maximum Likelihood Estimation (MLE).</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- What to Expect -->
+      <div class="space-y-10 pb-12">
+        <div class="flex items-center gap-4">
+          <div class="h-[1px] w-12 bg-accent/30"></div>
+          <h3 class="text-[11px] font-black uppercase tracking-[0.3em] text-accent font-semibold">What to Expect</h3>
+        </div>
+
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          We move beyond rolling dice and flipping coins. You will learn how to update your beliefs—and your model's weights—when new data arrives, transforming from a deterministic coder to a probabilistic master.
+        </p>
+
+        <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-4xl font-serif">"</div>
+          <p class="text-xl md:text-2xl text-text-premium italic leading-relaxed font-light">
+            "Probability is the very guide of life."
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="w-8 h-[1px] bg-accent/30"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent/60">— Marcus Cicero</span>
+          </div>
+        </div>
+
+        <p class="text-lg text-muted-premium font-normal leading-relaxed">
+          By the end of this module, you'll see why a spam filter, a face recognizer, and a self-driving car all deal with the same fundamental currency: **Likelihood.**
+        </p>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="pt-12 text-center border-t border-border-premium/50">
+        <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Ready to measure uncertainty?</p>
+        <a 
+          href="/#/mathematics/probability/basic-axioms" 
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
+        >
+          Begin with Basic Axioms
+        </a>
+      </div>
+
+    </div>
+  `,sections:[e,t,i,a,s,o,r,n,l]};export{d as PROBABILITY_DATA};
