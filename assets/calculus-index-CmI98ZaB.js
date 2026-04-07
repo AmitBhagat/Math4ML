@@ -29,6 +29,13 @@ const e={id:"basics",title:"Introduction to Calculus",description:"Differential 
 
     <h2 id="theory">Core Theory: The "Why"</h2>
     <p>In ML, we define a <strong>Loss Function</strong> that measures how "wrong" our model is. To improve the model, we need to know: <em>"If I increase this weight slightly, will the error go up or down?"</em></p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Calculus is the "language of sensitivity." It answers the question: <em>"How much does my output care about my input?"</em> In a neural network with 10 million weights, calculus tells us exactly how 'sensitive' the error is to each individual weight.
+      </div>
+    </div>
     
     <div class="callout info">
       <div class="callout-icon">💡</div>
@@ -43,14 +50,35 @@ const e={id:"basics",title:"Introduction to Calculus",description:"Differential 
     <p>The derivative of a function $f(x)$ at point $x$ is defined as:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This limit formula is just a formal way of saying: <em>"Give $x$ an infinitesimal nudge ($h$), and see how much $f(x)$ moves."</em> The derivative is the <strong>best linear approximation</strong> of the function at that specific point.
+      </div>
+    </div>
+
     <h3>2. Partial Derivatives</h3>
     <p>In ML, functions usually have thousands of inputs (weights). A <strong>Partial Derivative</strong> measures how the function changes with respect to <em>one</em> variable while holding all others constant.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of a mountain (the loss surface). A partial derivative $\frac{\partial f}{\partial x}$ tells you the slope if you walk strictly North-South, ignoring East-West. To find the overall "direction of steepest descent," we combine all these partial derivatives into a single vector called the <strong>Gradient</strong>.
+      </div>
+    </div>
     <p>For a function $f(x, y)$:</p>
     <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>
 
     <h3>3. The Chain Rule</h3>
     <p>This is the "secret sauce" of <strong>Backpropagation</strong>. If a variable $z$ depends on $y$, and $y$ depends on $x$, then $z$ depends on $x$ via the chain:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Chain Rule is the DNA of <strong>Backpropagation</strong>. It allows us to calculate how a weight in the <em>first</em> layer of a deep network affects the error at the <em>last</em> layer, by multiplying the local gradients of every intermediate layer.
+      </div>
+    </div>
 
     <h2 id="example-tangent">Example 1: Tangent Slopes & Instantaneous Change</h2>
     <div class="example-box">
@@ -156,6 +184,13 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
       <li><strong>The Gradient ($\nabla$):</strong> This is a vector of all partial derivatives. It points in the direction of the steepest ascent. In training, we move in the opposite direction (Gradient Descent).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of the Loss Function as a "Landscape of Error." Your goal is to reach the bottom of the deepest valley. The <strong>Gradient</strong> is your GPS—it tells you the exact slope of the ground beneath your feet for every single weight. By nudging the weights against the gradient, you take a step toward the minimum.
+      </div>
+    </div>
+
     <h2 id="backprop">2. How the Chain Rule enables Backpropagation</h2>
     <p>Backpropagation is essentially a recursive application of the <strong>Chain Rule</strong>. In a multi-layered network, the input flows through several nested functions:</p>
     <div class="math-block">$$L(y, \hat{y}) = L(f_n(f_{n-1}(\dots f_1(x)\dots)))$$</div>
@@ -171,6 +206,13 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     </div>
     
     <p>In a Neural Network, this allows us to calculate the local gradient at each node and multiply it by the gradient flowing from above. This efficiency prevents us from having to re-calculate the entire derivative for every single parameter from scratch.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Backpropagation is <strong>"Blame Assignment."</strong> When the network makes a mistake, the Chain Rule identifies exactly how much each weight contributed to that error. It works backwards from the final result, "passing the blame" layer by layer until every weight knows how it needs to change.
+      </div>
+    </div>
 
     <h2 id="example-nested">Example 1: The Chain of Influence (Nested Functions)</h2>
     <div class="example-box">
@@ -213,7 +255,7 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Single-variable chains are simple, but ML involves thousands of simultaneous weights. Let's see <strong><a href="#/mathematics/calculus/neural-networks-examples">Practical Examples</a></strong> of the Chain Rule in action.
     </div>
-  `},a={id:"neural-networks-examples",title:"Practical Examples",description:"Solidify your understanding of how the Chain Rule and Partial Derivatives operate in a computational graph with two distinct examples.",color:"#AB47BC",html:String.raw`
+  `},i={id:"neural-networks-examples",title:"Practical Examples",description:"Solidify your understanding of how the Chain Rule and Partial Derivatives operate in a computational graph with two distinct examples.",color:"#AB47BC",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📝 Solved Examples · Calculus</div>
       <h1>Neural Network Updates: Practical Examples</h1>
@@ -253,6 +295,14 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
         <li><strong>Gradient:</strong> $\frac{\partial L}{\partial w} = (-2) \cdot (2) = -4$</li>
         <li><strong>Interpretation:</strong> Because the gradient is negative, increasing the weight $w$ will decrease the loss $L$.</li>
       </ul>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is the <strong>"Weight Nudge."</strong> The gradient $\frac{\partial L}{\partial w} = -4$ tells us that for every 1 unit we increase the weight, the loss <em>drops</em> by 4 units. In Gradient Descent, we subtract the gradient to "roll" down the hill toward the minimum.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="sigmoid">Example 2: Logistic Regression (Sigmoid Activation)</h2>
@@ -286,6 +336,14 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
       <p>Using Gradient Descent:</p>
       <div class="math-block">$$w_{new} = w_{old} - (\eta \cdot \text{Gradient})$$</div>
       <div class="math-block">$$w_{new} = 0.8 - (0.1 \cdot -0.0592) = 0.80592$$</div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> Notice that the gradient is much smaller here than in Example 1. This is because the <strong>Sigmoid Derivative</strong> $a(1-a)$ is a decimal (max 0.25). When you chain many sigmoids together, you multiply these small decimals, making the final update almost zero. This is the <strong>Vanishing Gradient</strong> problem—the early layers of the network simply stop learning.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="takeaways">Key Takeaways for Implementation</h2>
@@ -297,7 +355,7 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Single-variable chains are simple, but ML involves thousands of simultaneous weights. Explore the geometry of high-dimensional loss surfaces in <strong><a href="#/mathematics/calculus/multivariable">Multivariable Calculus</a></strong>.
     </div>
-  `},i={id:"multivariable",title:"Multivariable Calculus",description:"Multivariable Calculus extends the concepts of single-variable differentiation to functions of several variables. In ML, we optimize millions of parameters simultaneously.",color:"#388E3C",html:String.raw`
+  `},a={id:"multivariable",title:"Multivariable Calculus",description:"Multivariable Calculus extends the concepts of single-variable differentiation to functions of several variables. In ML, we optimize millions of parameters simultaneously.",color:"#388E3C",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌐 Calculus · Multivariable</div>
       <h1>Multivariable Calculus: Navigating Feature Landscapes</h1>
@@ -342,15 +400,36 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     <h3>1. The Gradient ($\nabla f$)</h3>
     <p>For a scalar function $f(x_1, x_2, ..., x_n)$, the gradient is a vector of all its partial derivatives:</p>
     <div class="math-block">$$\nabla f = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^T$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Gradient</strong> $\nabla f$ is a compass. No matter where you stand on the loss surface, $\nabla f$ points directly toward the steepest "uphill" direction. This is how <strong>Gradient Descent</strong> knows exactly which way to nudge the weights—just take a step in the <em>opposite</em> direction.
+      </div>
+    </div>
     <p><strong>Directional Derivative</strong>: To find the slope in any arbitrary direction vector $\mathbf{v}$, we use: $D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}$.</p>
 
     <h3>2. The Jacobian ($J$)</h3>
     <p>When we have a function $\mathbf{f}$ that maps $\mathbb{R}^n$ to $\mathbb{R}^m$, the Jacobian is a matrix of all first-order partial derivatives:</p>
     <div class="math-block">$$J = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Jacobian</strong> is the multi-input, multi-output version of the derivative. It tells you how a <em>vector output</em> (like an entire layer in a neural network) is sensitive to a <em>vector input</em>. Its determinant measures how the transformation stretches or squashes space locally.
+      </div>
+    </div>
+
     <h3>3. The Hessian ($H$)</h3>
     <p>The Hessian is a square matrix of <strong>second-order</strong> partial derivatives of a scalar-valued function. It describes the local curvature:</p>
     <div class="math-block">$$H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If the Gradient is the "velocity" of your optimization, the <strong>Hessian</strong> is the "acceleration" or curvature. It tells you how fast the gradient itself is changing. In ML, we use this to avoid "zig-zagging" in narrow valleys or to check if a critical point is a true minimum or a treacherous <strong>saddle point</strong>.
+      </div>
+    </div>
 
     <h2 id="example-gradient">Example 1: Navigating a 2D Gradient</h2>
     <div class="example-box">
@@ -424,7 +503,7 @@ print("Jacobian Matrix at (1,2):\n", compute_jacobian(point))
     <div class="linking-rule">
       <strong>Next Step:</strong> Multivariable terrains define where we can move. Now, learn how to calculate "area under the curve" and probability accumulates in <strong><a href="#/mathematics/calculus/integrals">Integral Calculus</a></strong>.
     </div>
-  `},n={id:"integrals",title:"Integral Calculus",description:"Integral Calculus is the inverse of differentiation. While derivatives measure rate of change, integrals measure accumulation and area under a curve.",html:String.raw`
+  `},s={id:"integrals",title:"Integral Calculus",description:"Integral Calculus is the inverse of differentiation. While derivatives measure rate of change, integrals measure accumulation and area under a curve.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Calculus · Integration</div>
       <h1>Integral Calculus: The Math of Accumulation</h1>
@@ -469,15 +548,36 @@ print("Jacobian Matrix at (1,2):\n", compute_jacobian(point))
     <h3>1. The Indefinite Integral</h3>
     <p>If $F'(x) = f(x)$, then:</p>
     <div class="math-block">$$\int f(x) \, dx = F(x) + C$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Indefinite Integral</strong> is like a "Reverse Engineering" process. If you know how fast a car is accelerating at every moment (the derivative), the integral helps you reconstruct its position. In ML, if we have the gradient of a loss function, the integral helps us understand the global "shape" of the loss surface.
+      </div>
+    </div>
     <p>where $C$ is the constant of integration (representing the fact that shifting a graph vertically doesn't change its slope).</p>
 
     <h3>2. The Definite Integral (Fundamental Theorem of Calculus)</h3>
     <p>To find the area under $f(x)$ from $a$ to $b$:</p>
     <div class="math-block">$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This is the <strong>Fundamental Theorem of Calculus</strong>. It bridges the gap between slopes and areas. By simply subtracting the values of the antiderivative at two points, we can find the total area (accumulation) without having to sum up infinite infinitesimal rectangles manually.
+      </div>
+    </div>
+
     <h3>3. Integration in Probability</h3>
     <p>For a continuous random variable $X$ to be a valid probability distribution, the total area under its PDF must be 1:</p>
     <div class="math-block">$$\int_{-\infty}^{\infty} f(x) \, dx = 1$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> In probability, <strong>Integration = Normalization</strong>. We integrate over all possible outcomes to ensure the total probability space captures everything. If the area isn't exactly 1, your model isn't a valid probability distribution.
+      </div>
+    </div>
     <p>The probability that $X$ falls between $a$ and $b$ is:</p>
     <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
 
@@ -530,7 +630,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Integration measures accumulation. Now, find the 'best' possible values by exploring <strong><a href="#/mathematics/calculus/optimization">Optimization Theory</a></strong>.
     </div>
-  `},s={id:"optimization",title:"Optimization Theory",description:"Optimization Theory is the study of finding the 'best' solution. In ML, this means finding weights that minimize the Loss Function.",color:"#A5D6A7",html:String.raw`
+  `},n={id:"optimization",title:"Optimization Theory",description:"Optimization Theory is the study of finding the 'best' solution. In ML, this means finding weights that minimize the Loss Function.",color:"#A5D6A7",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Calculus · Optimization</div>
       <h1>Optimization Theory: Finding the Best Parameters</h1>
@@ -563,6 +663,13 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       <li><strong>Non-Convex Functions</strong>: Like a mountain range. There are many small valleys (local minima) and flat ridges (saddle points) that can trick an optimization algorithm into stopping before it reaches the true lowest point (global minimum).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Optimization is a "Blind Man's Walk." You can only feel the slope directly under your feet (the gradient). In a <strong>Convex</strong> landscape, the slope always points toward the global prize. In <strong>Non-Convex</strong> Deep Learning, you might find a comfortable valley that is still miles above the actual bottom—this is why we use techniques like <strong>Momentum</strong> to "bounce" out of local traps.
+      </div>
+    </div>
+
     <h2 id="derivation">Mathematical Derivation</h2>
 
     <h3>1. Convexity Defined</h3>
@@ -570,8 +677,22 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     <div class="math-block">$$f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$$</div>
     <p><strong>Hessian Test:</strong> A twice-differentiable function is convex if its Hessian matrix $H$ is <strong>Positive Semi-Definite</strong> ($H \succeq 0$) for all $x$. This means all its eigenvalues are $\geq 0$.</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Why do we care about the <strong>Hessian Eigenvalues</strong>? If even one eigenvalue is negative, there's a direction where the surface curves <em>downward</em>. For a perfect minimum, every single direction must curve <em>upward</em>—meaning the Hessian must be <strong>Positive Definite</strong>.
+      </div>
+    </div>
+
     <h3>2. Critical Points</h3>
     <p>We find candidates for the minimum by setting the gradient to zero: $\nabla f(x) = 0$. We then use the <strong>Second Derivative Test</strong> (Hessian) to classify them:</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> $\nabla f = 0$ is the <strong>Stationary Point</strong> condition. It means you're standing on flat ground. But are you at the bottom of a hole (minimum), the top of a peak (maximum), or on a ridge (saddle point)? The Hessian tells you the difference. In high-dimensional ML, <strong>Saddle Points</strong> are a nightmare—you're flat in thousands of directions but still not at the bottom.
+      </div>
+    </div>
 
     <div class="premium-table-wrap">
       <table class="premium-table">
@@ -688,14 +809,34 @@ for start in starts:
     <p>The "Del" operator $\nabla$ is defined as:</p>
     <div class="math-block">$$\nabla = \left[ \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} \right]$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This $\nabla$ (Nabla) is the "Del" operator. It's a symbolic vector of derivatives. When it acts on a scalar, it gives a <strong>Gradient</strong>; when it dots a vector, it gives <strong>Divergence</strong>; when it crosses a vector, it gives <strong>Curl</strong>. It is the master tool of field theory.
+      </div>
+    </div>
+
     <h3>1. Divergence ($\text{div } \mathbf{F}$ or $\nabla \cdot \mathbf{F}$)</h3>
     <p>Divergence is the <strong>dot product</strong> of the Del operator and the vector field $\mathbf{F} = [P, Q, R]$. It results in a <strong>scalar</strong>.</p>
     <div class="math-block">$$\nabla \cdot \mathbf{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Divergence</strong> answers: <em>"is the point breathing in or breathing out?"</em> If div is positive, the point is a <strong>source</strong> (like a garden in bloom). If negative, it's a <strong>sink</strong> (like a drain). In ML, we use this in <strong>Generative Flows</strong> to ensure the "density" of our data is conserved correctly as we transform it.
+      </div>
+    </div>
+
     <h3>2. Curl ($\text{curl } \mathbf{F}$ or $\nabla \times \mathbf{F}$)</h3>
     <p>Curl is the <strong>cross product</strong> of the Del operator and the vector field. It results in a <strong>vector</strong> that represents the axis of rotation.</p>
-    <div class="math-block">
       $$\nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Curl</strong> measures the local rotation. If you drop a stick in a whirlpool, the curl tells you how fast it spins. In <strong>Physics-Informed Neural Networks (PINNs)</strong>, we might penalize the model if it predicts a flow that has curl where none should exist (like a static air field).
+      </div>
     </div>
 
     <h2 id="example">Illustrative Example</h2>
@@ -886,4 +1027,4 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
       </div>
 
     </div>
-  `,sections:[e,t,a,i,n,s,o]};export{r as CALCULUS_DATA};
+  `,sections:[e,t,i,a,s,n,o]};export{r as CALCULUS_DATA};

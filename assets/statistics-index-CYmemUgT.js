@@ -32,8 +32,22 @@ const t={id:"descriptive-statistics",title:"Descriptive Statistics",description:
     <div class="step-box"><span class="step-num">2</span><div><strong>Shannon Entropy \(H(X)\):</strong> The expected value (average surprise) across all outcomes.</div></div>
     <div class="math-block">$$H(X) = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Entropy</strong> is the measure of "Average Surprise." If an event is certain (e.g., the sun rising), it has zero entropy—it tells you nothing new. If an event is a coin flip, it has high entropy. In Decision Trees, we use this to pick the feature that "reduces chaos" the most.
+      </div>
+    </div>
+
     <div class="step-box"><span class="step-num">3</span><div><strong>Cross-Entropy \(H(P, Q)\):</strong> Average bits to identify events from \(P\) using code optimized for \(Q\).</div></div>
     <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> is the most important loss function in classification. It measures the "distance" between the truth ($P$) and your model's guess ($Q$). When your model is perfectly confident and correct, Cross-Entropy hits its minimum.
+      </div>
+    </div>
 
     <h2 id="entropy-example">3. Illustrative Example: Entropy (Binary Trials)</h2>
     <div class="example-box">
@@ -110,6 +124,11 @@ print(f"Cross-Entropy (Loss): {cross_entropy(true_labels, predicted_probs):.4f} 
 # Descriptive Statistics Example
 data = np.array([10, 12, 23, 23, 16, 23, 21, 16])
 print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
+
+# Core Theory: Normalization
+# (x - mean) / std_dev
+z_scores = (data - np.mean(data)) / np.std(data)
+print(f"Standardized Data (Z-scores): {z_scores[:3]}")
     </python-code>
 
     <div class="callout tip">
@@ -133,7 +152,7 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having analyzed the shape of our data, explore the mathematical patterns behind it in <strong><a href="#/mathematics/statistics/probability-distributions">Probability Distributions</a></strong>.
     </div>
-  `},e={id:"sampling-resampling",title:"Sampling & Resampling",description:"Learn methods to estimate uncertainty and ensure generalization through Bootstrapping, K-Fold Cross-Validation, and Stratified sampling.",color:"#FFE082",html:String.raw`
+  `},i={id:"sampling-resampling",title:"Sampling & Resampling",description:"Learn methods to estimate uncertainty and ensure generalization through Bootstrapping, K-Fold Cross-Validation, and Stratified sampling.",color:"#FFE082",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔄 Statistics · Resampling</div>
       <h1>Sampling & Resampling</h1>
@@ -152,12 +171,26 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
 
     <h2 id="bootstrapping">1. Bootstrapping</h2>
     <p>Bootstrapping is a statistical method involving drawing repeated samples from a dataset <strong>with replacement</strong>.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Bootstrapping</strong> is the "Simulated Population" intuition. Since we can't go back and get more real data, we treat our sample as if it <em>is</em> the whole world, and draw many sub-samples from it. This allows us to calculate <strong>Confidence Intervals</strong> and build <strong>Ensemble Models</strong> (like Random Forests).
+      </div>
+    </div>
     
     <div class="premium-def-box">
       <div class="premium-def-title">The "OOB" Ratio</div>
       <p style="margin:0">For a sample of size \(n\), the probability of an item <strong>not</strong> being picked in \(n\) draws is \((1 - \frac{1}{n})^n\).</p>
       <div class="math-block" style="margin-top:10px">\(\lim_{n \to \infty} (1 - \frac{1}{n})^n = \frac{1}{e} \approx 0.368\)</div>
       <p style="margin-top:10px">This leaves ~36.8% of data as <strong>Out-Of-Bag (OOB)</strong>, acting as a "free" validation set.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>OOB (Out-of-Bag)</strong> is the "Natural Testing Ground." Because you sample with replacement, about 1/3 of your data is never seen by any individual tree in a Random Forest. This acts as a <strong>Validation Set</strong> that you get "for free" without needing to set data aside manually.
+      </div>
     </div>
 
     <h2 id="bootstrap-example">1.1 Illustrative Example: Bootstrap Variance</h2>
@@ -181,6 +214,13 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
 
     <h2 id="cv">2. Cross-Validation (CV)</h2>
     <p>Cross-Validation is a resampling procedure used to evaluate machine learning models on a limited data sample.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Validation</strong> is the "Fair Rotation" intuition. Instead of trusting a single train/test split (which might be "lucky" or "unlucky"), you rotate through the entire dataset. Every single data point eventually gets a chance to be used for testing, giving you a much more honest measure of your model's <strong>Generalization</strong>.
+      </div>
+    </div>
     
     <h3>K-Fold Cross-Validation</h3>
     <ol>
@@ -260,7 +300,7 @@ for train_index, test_index in skf.split(X, y):
     <div class="linking-rule">
       <strong>Next Step:</strong> Resampling ensures robustness. Move from samples to conclusions with <strong><a href="#/mathematics/statistics/inferential-statistics">Inferential Statistics</a></strong>.
     </div>
-  `},i={id:"inferential-statistics",title:"Inferential Statistics",description:"Learn how to make predictions or 'inferences' about large populations based on representative samples using hypothesis testing and confidence intervals.",html:String.raw`
+  `},e={id:"inferential-statistics",title:"Inferential Statistics",description:"Learn how to make predictions or 'inferences' about large populations based on representative samples using hypothesis testing and confidence intervals.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Statistics · Inference</div>
       <h1>Inferential Statistics for Machine Learning</h1>
@@ -287,6 +327,13 @@ for train_index, test_index in skf.split(X, y):
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Hypothesis Testing is a <strong>"Criminal Trial."</strong> The Null Hypothesis is <strong>Innocent</strong> (no effect) until the evidence is so overwhelming that "Innocence" becomes impossible. We don't <em>prove</em> the Alternative; we simply provide enough evidence to <em>reject</em> the Null.
+      </div>
+    </div>
+
     <h2 id="hypothesis-example">1.1 Illustrative Example: The p-value Ritual</h2>
     <div class="example-box">
       <h4>Problem: Is Feature X Significant?</h4>
@@ -296,6 +343,13 @@ for train_index, test_index in skf.split(X, y):
       <div class="step-box"><span class="step-num">2</span><div><strong>Comparison:</strong> \(0.002 < 0.05\).</div></div>
 
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Reject \(H_0\). The relationship between square footage and price is <strong>Statistically Significant</strong>. There is only a 0.2% chance this result is due to random noise.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>P-value</strong> is a <strong>"Surprise Score."</strong> If $p$ is tiny, we are very surprised, meaning the Null Hypothesis is likely wrong. If $p$ is large, our result is boring and totally expected under the Null—so we change nothing.
+      </div>
+    </div>
     </div>
 
     <h2 id="error-example">1.2 Illustrative Example: Type I vs. Type II</h2>
@@ -307,6 +361,13 @@ for train_index, test_index in skf.split(X, y):
       <div class="step-box"><span class="step-num">2</span><div><strong>Type II (False Negative):</strong> Alert says "Healthy" but server is "Down". Users are complaining (Beta Error).</div></div>
 
       <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Tradeoff:</strong> Decreasing the threshold to catch every "Down" server (Lower Type II) usually increases "False Alarms" (Higher Type I). This is the <strong>Precision-Recall Tradeoff</strong>.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Type I Error</strong> is the <strong>"False Alarm"</strong> (crying wolf when there is no wolf). <strong>Type II Error</strong> is the <strong>"Sleeping Guard"</strong> (missing the wolf when it's actually there). In ML, you decide which error is more expensive based on your specific use case.
+      </div>
+    </div>
     </div>
 
     <h2 id="statistical-tests">2. Common Statistical Tests</h2>
@@ -394,6 +455,13 @@ print(f"95% Confidence Interval for the mean: {ci}")
 
     <h2 id="mle">1. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE is a method of estimating the parameters of a probability distribution by maximizing a <strong>likelihood function</strong>, so that under the assumed statistical model, the observed data is most probable.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MLE</strong> is the "Data-Only" perspective. It asks: "If I assume a specific model, which parameters make my actual data look the least surprising?" It's the engine behind <strong>Linear Regression</strong> and <strong>Neural Network</strong> training before you add any penalties.
+      </div>
+    </div>
     
     <h2 id="mle-derivation">1.1 Mathematical Derivation: Gaussian Mean</h2>
     <div class="example-box">
@@ -425,6 +493,13 @@ print(f"95% Confidence Interval for the mean: {ci}")
 
     <h2 id="map">2. Maximum A Posteriori (MAP)</h2>
     <p>MAP is a Bayesian approach. Unlike MLE, which only looks at the data, MAP incorporates a <strong>Prior Distribution</strong> $P(\theta)$, which represents our previous belief about the parameters.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MAP</strong> is the <strong>"Common Sense"</strong> filter. It prevents your model from over-reacting to a few weird data points. In ML, this is <strong>Regularization</strong>. Using a <em>Gaussian Prior</em> is mathematically identical to <strong>L2 Regularization (Weight Decay)</strong>.
+      </div>
+    </div>
     
     <div class="premium-def-box">
       <div class="premium-def-title">Bayesian MAP Formula</div>
@@ -457,6 +532,13 @@ print(f"95% Confidence Interval for the mean: {ci}")
       <li><strong>Bias:</strong> Error from erroneous assumptions in the learning algorithm (leads to <strong>Underfitting</strong>).</li>
       <li><strong>Variance:</strong> Error from sensitivity to small fluctuations in the training set (leads to <strong>Overfitting</strong>).</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Tradeoff</strong> is like tuning a radio. <strong>High Bias</strong> is a "lazy" model that ignores the data patterns (Underfitting). <strong>High Variance</strong> is a "hyper-active" model that hallucinates patterns in random noise (Overfitting). Your job is to find the <strong>Sweet Spot</strong>.
+      </div>
+    </div>
     
     <div class="math-block">
       $$\text{Total Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}$$
@@ -534,6 +616,13 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
       <p style="margin-top:10px">Where \(\beta_0\) is the <strong>Intercept</strong> and \(\beta_1\) is the <strong>Slope</strong>.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Linear Regression</strong> is the "Line of Best Fit" intuition. It assumes that nature follows a straight path. While simple, it is incredibly powerful because it is <strong>Interpretable</strong>—you can tell exactly how much $Y$ changes for every unit of $X$.
+      </div>
+    </div>
+
     <h2 id="ols-example">1.1 Illustrative Example: Manual OLS</h2>
     <div class="example-box">
       <h4>Problem: Fitting a Line by Hand</h4>
@@ -552,6 +641,13 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
     <p>To find the best $\beta_0$ and $\beta_1$, we minimize the sum of squared differences between predicted and actual values:</p>
     <div class="math-block">
       $$J(\beta_0, \beta_1) = \frac{1}{n} \sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>OLS (Ordinary Least Squares)</strong> is the "Surface Area of Error" intuition. By squaring the differences, we ensure that being "a little off" is okay, but being "very off" is a disaster. It forces the line to stay as close as possible to the majority of your data points.
+      </div>
     </div>
 
     <h2 id="residuals">2. Residuals & Plotting</h2>
@@ -576,6 +672,13 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
     
     <div class="math-block">
       $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>R-Squared</strong> is the "Explained Variance" intuition. If $R^2 = 0.8$, it means your model is 80% better than just guessing the average value for every prediction. It's a measure of how much "chaos" you've managed to turn into "predictable pattern."
+      </div>
     </div>
     <p>Where:</p>
     <ul>
@@ -666,6 +769,13 @@ print(f"Residuals: {residuals}")
     <div class="step-box"><span class="step-num">3</span><div><strong>Recall (Sensitivity):</strong> "Did we find all positives?" \(\frac{TP}{TP + FN}\). Critical for safety/health.</div></div>
     <div class="step-box"><span class="step-num">4</span><div><strong>F1-Score:</strong> Harmonic mean. \(2 \cdot \frac{\text{Pre} \cdot \text{Rec}}{\text{Pre} + \text{Rec}}\). Balance point.</div></div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Precision</strong> is the "Quality" metric (low false alarms). <strong>Recall</strong> is the "Quantity" metric (finding everyone). In a cancer screening, <strong>Recall</strong> is life-or-death. In a spam filter, <strong>Precision</strong> is king because you don't want to miss a single boss email.
+      </div>
+    </div>
+
     <h2 id="precision-recall-example">2. Illustrative Example: Precision vs. Recall</h2>
     <div class="example-box">
       <h4>Problem: Evaluating a Cancer Model</h4>
@@ -690,6 +800,13 @@ print(f"Residuals: {residuals}")
     <div class="step-box"><span class="step-num">1</span><div><strong>MAE (Robust):</strong> Average absolute difference. \(\frac{1}{n} \sum |y - \hat{y}|\).</div></div>
     <div class="step-box"><span class="step-num">2</span><div><strong>MSE (Square Penalty):</strong> Squaring large errors. \(\frac{1}{n} \sum (y - \hat{y})^2\).</div></div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MSE</strong> is a <strong>Punishment</strong>. Because it squares the error, a single 10-unit mistake costs you 100 points, while 10 one-unit mistakes only cost you 10. If your model <em>must</em> avoid large errors at all costs (like in autonomous driving), MSE is your best friend.
+      </div>
+    </div>
+
     <h2 id="mae-mse-example">4. Illustrative Example: MAE vs. MSE</h2>
     <div class="example-box">
       <h4>Problem: Impact of Outliers</h4>
@@ -704,6 +821,13 @@ print(f"Residuals: {residuals}")
     <h2 id="cross-entropy">5. Probabilistic Metric: Cross-Entropy</h2>
     <p>In Deep Learning, we don't just want a label; we want <strong>Confidence</strong>.</p>
     <div class="math-block">$$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> doesn't just care <em>if</em> you were right; it cares <em>how sure</em> you were. If your model predicts a 99% probability for a wrong class, this metric will penalize it brutally. It forces the model to be honest about its own uncertainty.
+      </div>
+    </div>
 
     <h2 id="implementation">Python Implementation</h2>
     <python-code>
@@ -777,6 +901,13 @@ print(f"Cross-Entropy Loss: {log_loss(y_true_prob, y_pred_prob):.4f}")
       <strong>ML Context:</strong> The output of a **Sigmoid activation function** ($\sigma(z)$) is interpreted as the parameter $p$ of a Bernoulli distribution. This is the bedrock of binary classification.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Bernoulli is the <strong>"Yes/No Bit"</strong> of the universe. It is the simplest possible way to describe uncertainty. In AI, every time your model predicts "Cat" vs "Dog," it is essentially guessing the winning side of a Bernoulli coin flip.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = x) = p^x (1-p)^{1-x}$ for $x \in \{0, 1\}$</li>
@@ -828,6 +959,13 @@ print(f"P(Success): {pmf_success}")
       <strong>ML Context:</strong> Used to model <strong>Batch Accuracy</strong>. If a model has 90% accuracy ($p=0.9$), we can calculate the likelihood of getting exactly $k$ correct predictions in a batch of $n$ images.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If Bernoulli is a single coin flip, Binomial is the <strong>"Stack of Successes."</strong> It tells you the probability of hitting a specific number of goals in $n$ tries. It assumes every trial is independent—an assumption that is the shortcut for most batch processing in ML.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$</li>
@@ -867,6 +1005,13 @@ print(f"P(X=2): {prob_2:.4f}")
       <strong>ML Context:</strong> Used in **Network Traffic modeling** (packets per second) or **Anomaly Detection** (number of failed login attempts).
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Poisson is the <strong>"Raindrops on a Roof"</strong> intuition. It models counts over continuous time. If you know the average rate ($\lambda$), Poisson tells you how likely it is to see a sudden burst or a strange silence.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$</li>
@@ -898,6 +1043,13 @@ print(f"P(X=2): {prob_2:.4f}")
       <div class="step-box"><span class="step-num">1</span><div><strong>Degrees of Freedom (df):</strong> \(\nu = n - 1 = 9\).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Tail Check:</strong> At \(\nu=9\), the tails are much wider than a standard normal.</div></div>
       <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The t-distribution is more <strong>conservative</strong>. It provides wider confidence intervals, acknowledging that our estimate of the variance might be slightly off due to the small sample size.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Student's t is a <strong>"Cautious Gaussian."</strong> When you have very little data (less than 30 points), you can't be 100% sure about the "spread" ($\sigma$). The t-distribution gives you "heavier tails"—it essentially adds a safety margin for your uncertainty.
+      </div>
+    </div>
     </div>
 
     <python-code>
@@ -916,6 +1068,13 @@ print(f"P(X=2) for lambda=4: {prob_2:.4f}")
     
     <div class="def-box">
       <strong>ML Context:</strong> The output of a **Softmax activation function** represents the parameters of a Categorical distribution ($\sum p_i = 1$).
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Categorical is the <strong>"Multi-sided Die"</strong> of probability. It extends the coin flip to any number of categories. In Deep Learning, your <strong>Final Layer</strong> is almost always a Categorical distribution over your classes.
+      </div>
     </div>
 
     <h3>Mathematical Derivation</h3>
@@ -995,6 +1154,13 @@ print(f"Outcome Probability: {prob:.4f}")
       <strong>ML Context:</strong> The **Central Limit Theorem** explains why Gaussian noise is everywhere. Linear Regression assumes errors (residuals) follow a Gaussian distribution.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Gaussian is the <strong>"Universal Average."</strong> Due to the CLT, if you sum up enough random effects, life always forms a bell curve. This is why we assume modern "Normal" noise in almost all ML regression models.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PDF:</strong> $f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$</li>
@@ -1036,6 +1202,13 @@ plt.show()
       <strong>ML Context:</strong> Used in **Bayesian A/B testing**. If $\alpha$ is prior successes and $\beta$ is prior failures, the distribution represents our belief about the success rate.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Beta is the <strong>"Probability of a Probability."</strong> Unlike other distributions that model data, Beta models your <strong>Confidence</strong> in a Bernoulli $p$. If $\alpha$ is high, you're sure it's a success; if $\beta$ is high, you're sure it's a failure.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PDF:</strong> $f(x; \alpha, \beta) = \frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha, \beta)}$</li>
@@ -1071,6 +1244,13 @@ print(f"Expected Probability: {mean}")
     
     <div class="def-box">
       <strong>ML Context:</strong> The backbone of **Latent Dirichlet Allocation (LDA)** for Topic Modeling. It is the conjugate prior for Categorical/Multinomial distributions.
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Dirichlet is the <strong>"Sparsity Prior."</strong> It is the big brother of Beta, modeling mixtures of many categories. In Topic Modeling, we use it to force a document to choose just 1-2 main topics rather than being a messy soup of everything.
+      </div>
     </div>
 
     <h3>Mathematical Derivation</h3>
@@ -1295,4 +1475,4 @@ print(f"Simplex Sample (Prob Mixture): {sample}")
       </div>
 
     </div>
-  `,sections:[t,n,e,i,s,a,o]};export{r as STATISTICS_DATA};
+  `,sections:[t,n,i,e,s,a,o]};export{r as STATISTICS_DATA};

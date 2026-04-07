@@ -3,6 +3,13 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
       <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> A <strong>Set</strong> is a <strong>"Box of Unique Items."</strong> In Python, this is exactly what the <code>set()</code> object does—it forces everything inside to be unique. If you try to add a duplicate, the set just ignores it. This is the bedrock of <strong>Data Deduplication</strong>.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -24,6 +31,13 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       </div>
     </div>
     <p><strong>Notation:</strong> $A \subseteq B$</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cardinality $|A|$</strong> is the "Census" of your set. It's just a fancy way of saying <code>len(data)</code>. In ML, if the cardinality of your feature set is too high (like "Unique User IDs"), it can actually hurt your model's ability to generalize.
+      </div>
+    </div>
 
     <hr class="premium-hr">
 
@@ -50,6 +64,13 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
     </div>
     <p><strong>Logic:</strong> "Give me only what is in Set A AND Set B."<br>
     <strong>Notation:</strong> $A \cap B$</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Complement $A^c$</strong> is the "Everything Else" intuition. If $A$ is the set of "Spam Emails" and the Universal Set $\mathcal{U}$ is your entire Inbox, then $A^c$ is your "Legit Mail." This is the core of <strong>Inverse Filtering</strong> in Data Engineering.
+      </div>
+    </div>
 
     <hr class="premium-hr">
 
@@ -143,6 +164,13 @@ filtered_df = df[df['user_id'].isin(subset_list)]
 
     <h2 id="propositional">1. Propositional Logic</h2>
     <p>This is the simplest form of logic. It deals with <strong>propositions</strong>—statements that are either <strong>True</strong> or <strong>False</strong>.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Propositional Logic</strong> is the "Light Switch" intuition. Everything is either ON ($T$) or OFF ($F$). It is the foundation of <strong>Digital Electronics</strong> and every <code>if/else</code> statement you've ever written in Python.
+      </div>
+    </div>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Variables:</strong> Usually represented as $P, Q, R$.</li>
@@ -157,6 +185,13 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Implication ($P \to Q$)</strong> is the "Contract" intuition. Think of it as a promise: "If you pay me ($P$), I will give you a car ($Q$)." The only way to break the contract is if you pay me ($P=T$), but I don't give you the car ($Q=F$). If you don't pay me ($P=F$), the contract isn't broken regardless of what I do.
+      </div>
+    </div>
+
     <h2 id="fol">2. First-Order Logic (FOL)</h2>
     <p>FOL adds <strong>Quantifiers</strong> and <strong>Predicates</strong> to make logic more powerful, allowing it to describe objects and relationships.</p>
     <div class="def-box">
@@ -169,6 +204,13 @@ filtered_df = df[df['user_id'].isin(subset_list)]
           </ul>
         </li>
       </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>First-Order Logic (FOL)</strong> is the "Object-Oriented" intuition. Propositional logic is too limited; it can't say "Every car is red." FOL lets you define <strong>Objects</strong> (Cars) and <strong>Properties</strong> (Red), making it the language of choice for <strong>Knowledge Graphs</strong> and <strong>Semantic Search</strong>.
+      </div>
     </div>
 
     <h2 id="applications">3. Applications in AI & Software</h2>
@@ -267,6 +309,13 @@ not_nyc = df[~(df['city'] == 'New York')]
 
     <h2 id="counting-principle">1. The Fundamental Counting Principle</h2>
     <p>If there are $n$ ways to do one thing and $m$ ways to do another, there are $n \times m$ ways to do both.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Fundamental Principle</strong> is the "Options per Slot" intuition. If you're building a 3-layer neural network and each layer has 5 possible sizes, you have $5 \times 5 \times 5 = 125$ possible architectures. This is the simple math behind <strong>Grid Search</strong>.
+      </div>
+    </div>
     <div class="callout tip">
       <div class="callout-icon">⚙️</div>
       <div class="callout-body">
@@ -279,6 +328,13 @@ not_nyc = df[~(df['city'] == 'New York')]
     <div class="math-block">
       $$P(n, r) = \frac{n!}{(n-r)!}$$
     </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Permutations</strong> are for when <strong>Sequence is King</strong>. Think of a password: "1-2-3" is completely different from "3-2-1." In ML, we use this to calculate the complexity of <strong>Traveling Salesman</strong> problems or optimal routing for delivery robots.
+      </div>
+    </div>
     <div class="callout info">
       <div class="callout-icon">📋</div>
       <div class="callout-body">
@@ -290,6 +346,13 @@ not_nyc = df[~(df['city'] == 'New York')]
     <p>A <strong>Combination</strong> is a selection of items where the sequence is <strong>irrelevant</strong>.</p>
     <div class="math-block">
       $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Combinations</strong> are the "Handful of Items" intuition. Order doesn't matter. If you pick a handful of 3 features from a pool of 10, it doesn't matter which one you grabbed first. This is why <strong>Feature Selection</strong> is a combination problem, not a permutation one.
+      </div>
     </div>
     <div class="callout info">
       <div class="callout-icon">🧪</div>
@@ -328,6 +391,13 @@ not_nyc = df[~(df['city'] == 'New York')]
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Complexity Note:</strong> As $n$ grows, the number of combinations explodes (this is the <strong>Combinatorial Explosion</strong>). This is why we use <strong>Recursive Feature Elimination (RFE)</strong> instead of exhaustive search.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Combinatorial Explosion</strong> is the "Scaling Nightmare." If you have 100 features, there are more combinations of those features than there are atoms in the universe. This is why <strong>Brute Force</strong> is forbidden in AI; we always need clever shortcuts like <strong>Heuristics</strong> or <strong>Gradients</strong>.
         </div>
       </div>
     </div>
@@ -375,7 +445,7 @@ combs = list(itertools.combinations(items, 2))
     <div class="linking-rule">
       <strong>Next Step:</strong> Counting arrangements is key. Now let's explore <strong><a href="#/mathematics/discrete-math/graph-theory">Graph Theory</a></strong> to see how entities and their relationships (like neurons in a network) are modeled.
     </div>
-  `},i={id:"graph-theory",title:"Graph Theory",description:"The study of relationships and connections. Explore Nodes, Edges, Adjacency Matrices, and their applications in GNNs and Knowledge Graphs.",color:"#C5CAE9",html:String.raw`
+  `},o={id:"graph-theory",title:"Graph Theory",description:"The study of relationships and connections. Explore Nodes, Edges, Adjacency Matrices, and their applications in GNNs and Knowledge Graphs.",color:"#C5CAE9",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
@@ -401,12 +471,26 @@ combs = list(itertools.combinations(items, 2))
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Nodes & Edges</strong> are the "Entities & Relationships" intuition. In a standard database, you have isolated rows. In a <strong>Graph Database</strong>, you focus on the lines <em>between</em> the rows. This is how Google understands that "Paris" is the "Capital Of" "France."
+      </div>
+    </div>
+
     <h2 id="types">2. Types of Graphs</h2>
     <ul>
       <li><strong>Undirected Graphs:</strong> Mutual relationships (e.g., LinkedIn connections).</li>
       <li><strong>Directed Graphs (Digraphs):</strong> Specific directions (e.g., Twitter "Follows").</li>
       <li><strong>Weighted Graphs:</strong> Edges have values (e.g., distances between cities in a map).</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Directed vs. Undirected</strong> is the "One-Way vs. Two-Way" intuition. <strong>Twitter</strong> is Directed (I can follow you without you following me). <strong>LinkedIn</strong> is Undirected (we must both agree to be connections). In ML, <strong>Causal Models</strong> are always Directed because time and logic only flow one way.
+      </div>
+    </div>
 
     <h2 id="matrices">3. Adjacency Matrices</h2>
     <p>To help a computer understand a graph, we represent it as an <strong>Adjacency Matrix</strong> $M$, a square matrix where:</p>
@@ -415,6 +499,13 @@ combs = list(itertools.combinations(items, 2))
         <li>$M_{ij} = 1$ if there is an edge between node $i$ and node $j$.</li>
         <li>$M_{ij} = 0$ if there is no connection.</li>
       </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Adjacency Matrix</strong> is the "Machine Translation" intuition. Computers can't "see" circles and lines. The matrix turns a web of connections into a grid of 0s and 1s that a <strong>GPU</strong> can process. This is the bridge between <strong>Discrete Math</strong> and <strong>Linear Algebra</strong>.
+      </div>
     </div>
 
     <div class="callout tip">
@@ -471,6 +562,13 @@ combs = list(itertools.combinations(items, 2))
       <li><strong>Recommendation Systems:</strong> Identifying "communities" or "clusters" to suggest products based on connectivity.</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Graph Neural Networks (GNNs)</strong> use the "Neighbor Talk" intuition. In a GNN, each node "talks" to its neighbors to learn about its environment. If your neighbors are all "Data Scientists," a GNN will likely predict that you are also a "Data Scientist."
+      </div>
+    </div>
+
     <h2 id="implementation">Python Implementation (NumPy)</h2>
     <python-code>
 import numpy as np
@@ -495,7 +593,7 @@ if adj_matrix[1, 2] == 1:
     <div class="linking-rule">
       <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
     </div>
-  `},o={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
+  `},i={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -629,4 +727,4 @@ if adj_matrix[1, 2] == 1:
       </div>
 
     </div>
-  `,sections:[t,e,s,i]};export{o as DISCRETE_MATH_DATA};
+  `,sections:[t,e,s,o]};export{i as DISCRETE_MATH_DATA};

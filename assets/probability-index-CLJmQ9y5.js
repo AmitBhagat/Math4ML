@@ -37,6 +37,13 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
       <li><strong>Example:</strong> If you toss a coin, \(S = \{H, T\}\). If you roll a six-sided die, \(S = \{1, 2, 3, 4, 5, 6\}\).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Sample Space</strong> $S$ is the "Universe of Possibility" for your experiment. Every single thing that <em>could</em> happen must be in $S$. In ML, if you're classifying images of cats and dogs, but your sample space doesn't include "birds," your model will be forced to make a wrong guess when it sees one.
+      </div>
+    </div>
+
     <h3>2. Events (A, B)</h3>
     <p>An <strong>Event</strong> is a subset of the sample space. It represents one or more outcomes that we are interested in.</p>
     <ul>
@@ -45,11 +52,15 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
 
     <h3>3. The Three Axioms of Probability (Kolmogorov Axioms)</h3>
     <p>For any event \(A\) in the sample space \(S\):</p>
-    <ol>
-      <li><strong>Non-negativity:</strong> The probability of an event is always a non-negative real number: \(P(A) \ge 0\).</li>
-      <li><strong>Certainty:</strong> The probability of the entire sample space is 1: \(P(S) = 1\).</li>
       <li><strong>Additivity:</strong> For any two mutually exclusive events (where \(A \cap B = \emptyset\)), the probability of their union is the sum of their individual probabilities: \(P(A \cup B) = P(A) + P(B)\).</li>
     </ol>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> These are the "Rules of the Game." They ensure that probability behaves like a <strong>measure of volume</strong>. If you have two non-overlapping areas, their total area is just the sum. Without these rules, we couldn't trust our models to be consistent.
+      </div>
+    </div>
 
     <h2 id="conditional">Mathematical Derivation: Conditional Probability &amp; Independence</h2>
 
@@ -57,6 +68,13 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
     <p>This measures the probability of an event \(A\) occurring, <strong>given</strong> that event \(B\) has already occurred. This is critical in ML for updating our "beliefs" as new data arrives.</p>
     <p>The formula is defined as:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Conditional probability is the <strong>"Shrinking Universe"</strong> intuition. When I tell you $B$ has occurred, your entire universe $S$ collapses down to just $B$. Now, the only part of $A$ that matters is the part that survived the collapse ($A \cap B$).
+      </div>
+    </div>
     <visualizer topic="ConditionalProbability" />
 
     <p><strong>Derivation steps:</strong></p>
@@ -69,6 +87,13 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
     <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
     <p>From the conditional probability formula, if \(A\) and \(B\) are independent:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A) \cdot P(B)}{P(B)} = P(A)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Independence</strong> means <strong>Zero Information</strong>. If $A$ and $B$ are independent, knowing $B$ gives you absolutely no hint about $A$. In ML, we often assume features are independent (Naive Bayes) to make the math easier, even if it's not perfectly true.
+      </div>
+    </div>
 
     <h2 id="example">3. Illustrative Example: Die Roll</h2>
     <div class="example-box">
@@ -140,7 +165,7 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the basic axioms, move toward <strong><a href="#/mathematics/probability/bayes-theorem">Bayes' Theorem</a></strong> to calculate the probability of causes given their effects.
     </div>
-  `},i={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
+  `},t={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔄 Probability · Bayes' Theorem</div>
       <h1>Bayes' Theorem</h1>
@@ -181,6 +206,13 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
       $$P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$$
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Bayes' Theorem is a <strong>"Common Sense Correction."</strong> It tells you exactly how much you should update your mind after seeing a piece of data. If the evidence is strong, you move closer to the hypothesis. If your initial belief (Prior) was rock-solid, it takes a lot of evidence to budge you.
+      </div>
+    </div>
+
     <div class="premium-toc" style="background: transparent; border: none; padding: 0;">
       <div class="perspectives-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0;">
         <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
@@ -202,6 +234,13 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
       </div>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Prior</strong> $P(H)$ is where <strong>Expert Knowledge</strong> enters the model. The <strong>Likelihood</strong> $P(E|H)$ is where the <strong>Data</strong> enters. Bayes is the mathematical marriage of these two sources of information.
+      </div>
+    </div>
+
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>The derivation is a direct consequence of the <strong>Definition of Conditional Probability</strong>.</p>
     <div class="step-box"><span class="step-num">1</span><div><strong>Conditional Definition:</strong> \(P(H|E) = \frac{P(H \cap E)}{P(E)}\).</div></div>
@@ -210,6 +249,13 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     <div class="math-block">$$P(H|E) = \frac{P(E|H)P(H)}{P(E)}$$</div>
     <p>To calculate \(P(E)\), we often use the <strong>Law of Total Probability</strong>:</p>
     <div class="math-block">$$P(E) = P(E|H)P(H) + P(E|H^c)P(H^c)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> That denominator $P(E)$ is the <strong>Normalization Factor</strong>. Its only job is to ensure that all possible hypotheses sum up to 100%. Without it, we wouldn't have a valid probability distribution—just a set of relative "scores."
+      </div>
+    </div>
 
     <h2 id="applications">Core Applications in ML</h2>
 
@@ -287,11 +333,18 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     <div class="linking-rule">
       <strong>Next Step:</strong> Bayes' Theorem works on events. To handle data, we must map these events to numbers using <strong><a href="#/mathematics/probability/random-variables">Random Variables & Functions</a></strong>.
     </div>
-  `},t={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
+  `},i={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Probability · Random Variables &amp; Functions</div>
       <h1>Random Variables &amp; Functions</h1>
       <p>In the previous sections, we looked at fixed events (like rolling a die). However, in Machine Learning, we deal with data that can take a wide range of values. A <strong>Random Variable (RV)</strong> is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe "stochastic" (random) processes.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of a <strong>Random Variable</strong> as a "Translator." It takes messy real-world outcomes (like "Cloudy" or "Sunny") and translates them into numbers (like 0 or 1) so we can do math with them. It is <strong>not</strong> a variable in the traditional sense; it's a function that measures the world.
+      </div>
+    </div>
     </div>
 
     <div class="toc">
@@ -337,8 +390,22 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
       </div>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Discrete vs. Continuous</strong> divide is like <strong>Digital vs. Analog</strong>. A discrete RV is like a staircase—you're either on step 1 or step 2. A continuous RV is like a slide—you can be at any height. In ML, binary classification is discrete (0/1), but the confidence score (0.873...) is continuous.
+      </div>
+    </div>
+
     <h2 id="cdf">Cumulative Distribution Function (CDF)</h2>
     <p>The <strong>CDF</strong>, denoted as \(F(x)\), is the probability that the random variable \(X\) will take a value less than or equal to \(x\). It is the "running total" of probability.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>CDF</strong> is the "Running Score" of your distribution. If probability is a pile of sand, the PDF tells you how high the pile is at one spot, but the CDF tells you the <strong>total weight</strong> of the sand to the left of that spot. It always starts at 0 (nothing) and ends at 1 (everything).
+      </div>
+    </div>
     <ul>
       <li><strong>Definition:</strong> \(F(x) = P(X \le x)\)</li>
       <li><strong>For Discrete:</strong> \(F(x) = \sum_{t \le x} P(t)\)</li>
@@ -431,7 +498,7 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Understanding these variables allows us to summarize data by calculating <strong><a href="#/mathematics/probability/expectation-variance">Expectation and Variance</a></strong>.
     </div>
-  `},a={id:"expectation-variance",title:"Expectation & Variance",description:"While Probability Distributions give us the 'shape' of data, Expectation and Variance provide the summary statistics that describe that shape.",html:String.raw`
+  `},s={id:"expectation-variance",title:"Expectation & Variance",description:"While Probability Distributions give us the 'shape' of data, Expectation and Variance provide the summary statistics that describe that shape.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Probability · Expectation &amp; Variance</div>
       <h1>Expectation &amp; Variance</h1>
@@ -470,6 +537,13 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
         <p>The weighted average of all possible values. The "center of mass" of the distribution.</p>
         <p style="margin-top:8px"><strong>Discrete:</strong> \(E[X] = \sum x \cdot P(X=x)\)</p>
         <p><strong>Continuous:</strong> \(E[X] = \int_{-\infty}^{\infty} x \cdot f(x) dx\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Expectation</strong> is the "Long-term Average." If you repeated an experiment a million times, $E[X]$ is where your results would cluster. It is the <strong>First Moment</strong> of a distribution.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Concept 2</div>
@@ -477,6 +551,13 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
         <p>Measures the spread of the RV around its mean. High variance = far from mean.</p>
         <p style="margin-top:8px"><strong>Formula:</strong> \(Var(X) = E[(X - E[X])^2]\)</p>
         <p><strong>Shortcut:</strong> \(Var(X) = E[X^2] - (E[X])^2\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Variance</strong> measures the "Surprise." If variance is low, you know exactly what to expect. If it's high, the data is noisy and unpredictable. It is the <strong>Second Moment</strong> of a distribution and is fundamental to <strong>Risk Analysis</strong> and <strong>Model Regularization</strong>.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Concept 3</div>
@@ -493,6 +574,13 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
         <h4>Correlation ρ<sub>X,Y</sub></h4>
         <p>The <em>normalized</em> version of covariance. Always between <strong>−1 and 1</strong>, making it easier to interpret.</p>
         <p style="margin-top:8px"><strong>Formula:</strong> \(\rho_{X,Y} = \dfrac{Cov(X, Y)}{\sigma_X \sigma_Y}\)</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Covariance</strong> tells you the <em>direction</em> of the dance (do they move together or apart?). <strong>Correlation</strong> tells you the <em>strength</em> of the connection (how synchronized are they?). In ML, high correlation between features ($> 0.9$) is a red flag for <strong>Multicollinearity</strong>—it means your model is getting the same information twice.
       </div>
     </div>
 
@@ -574,7 +662,7 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we can summarize data using mean and variance, we can dive into <strong><a href="#/mathematics/probability/probability-distributions">Common Distributions</a></strong> to see the mathematical "shapes" of different stochastic processes.
     </div>
-  `},s={id:"probability-distributions",title:"Probability Distributions",description:"A probability distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes. Choosing the right distribution is the first step in building any probabilistic model.",html:String.raw`
+  `},a={id:"probability-distributions",title:"Probability Distributions",description:"A probability distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes. Choosing the right distribution is the first step in building any probabilistic model.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📉 Probability · Distributions</div>
       <h1>Probability Distributions</h1>
@@ -615,6 +703,13 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p><strong>Parameter:</strong> \(p\) (Probability of success).</p>
         <p><strong>PMF:</strong> \(P(x) = p^x(1-p)^{1-x}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> The output of a binary classifier (before thresholding) is a Bernoulli parameter.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Bernoulli is the <strong>"Atomic Unit"</strong> of probability. It represents a single bit of information: Yes or No. In ML, every time you use a <strong>Sigmoid</strong> activation, you are predicting the parameter $p$ of a Bernoulli distribution.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Discrete · #2</div>
@@ -623,6 +718,13 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p><strong>Parameters:</strong> \(n\) (trials), \(p\) (success probability).</p>
         <p><strong>PMF:</strong> \(P(x) = \binom{n}{x} p^x (1-p)^{n-x}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Modeling the number of users who will click an ad out of a batch of 100.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> If Bernoulli is a single coin flip, Binomial is the entire <strong>"Stack of Successes."</strong> It tells you the probability of getting $k$ successes in $n$ tries. It assumes every trial is independent—an assumption we often make in ML batches.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box" style="grid-column: span 2;">
         <div class="premium-def-title">Discrete · #3</div>
@@ -631,6 +733,13 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p><strong>Parameter:</strong> \(\lambda\) (Average rate of occurrence).</p>
         <p><strong>PMF:</strong> \(P(x) = \dfrac{e^{-\lambda} \lambda^x}{x!}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Predicting the number of support tickets received per day or web traffic spikes.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Poisson is the <strong>"Event Stream"</strong> intuition. It models <em>counts</em> over time. Use this when events are rare but happen at a constant average rate. In AI, it’s used for modeling request spikes in cloud infrastructure.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -645,6 +754,13 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p><strong>Parameters:</strong> \(\mu\) (mean), \(\sigma^2\) (variance).</p>
         <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> The Gaussian is the <strong>"Universal Attractor."</strong> Thanks to the <strong>Central Limit Theorem</strong>, if you sum up enough random effects, the result will <em>always</em> look like a Bell Curve. This is why we assume modern "Normal" noise in almost all ML regression models.
+          </div>
+        </div>
       </div>
       <div class="my-10" style="grid-column: span 2;">
         <visualizer topic="Distributions" />
@@ -669,6 +785,13 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p>Similar to Gaussian but with a sharper peak and "heavier tails."</p>
         <p><strong>Parameters:</strong> \(\mu\) (location), \(b\) (scale).</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Linked to <strong>L1 Regularization (Lasso)</strong>. While Gaussian noise leads to L2, Laplace noise leads to L1, encouraging sparsity in models.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Laplace is <strong>"Gaussian with Spikes."</strong> It has a much sharper peak at the mean. In ML, assuming a Laplace prior on your weights leads to <strong>Sparsity</strong> (L1 regularization), because the distribution practically begs for common values to be exactly zero.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -780,6 +903,13 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
         <p><strong>Discrete:</strong> \(P(X=x, Y=y)\)</p>
         <p><strong>Continuous:</strong> surface in 3D space.</p>
         <p><strong>Constraint:</strong> \(\sum\sum P(x,y) = 1\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> The <strong>Joint Distribution</strong> is the "Whole Picture." It contains every possible scrap of information about the relationship between $X$ and $Y$. In ML, your entire dataset is essentially a sample from a massive joint distribution of all your features.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Perspective 2</div>
@@ -788,6 +918,13 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
         <p style="margin-top:8px">"Summing out" one variable. Like looking at a 3D object from the side.</p>
         <p><strong>Discrete:</strong> \(P(X=x) = \sum_{y} P(x, y)\)</p>
         <p><strong>Continuous:</strong> \(f_X(x) = \int f(x, y) dy\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Marginalization</strong> is the "Projection" intuition. When you marginalize out $Y$, you are mathematically "flattening" the joint distribution onto the $X$-axis. You are saying: "I don't care what $Y$ is doing; just show me the total probability for $X$."
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Perspective 3</div>
@@ -795,6 +932,13 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
         <p>\(P(X|Y)\)</p>
         <p style="margin-top:8px">Distribution of \(X\) given \(Y\) has a specific value. A "slice" of the joint, re-normalized.</p>
         <p><strong>Formula:</strong> \(P(X|Y) = \dfrac{P(X, Y)}{P(Y)}\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Conditional Distribution</strong> is the "Slice" intuition. You take a sharp knife and cut a slice through the joint distribution at a specific value of $Y$. Then, you re-scale that slice so it sums to 1. This is the heart of <strong>Inference</strong>—predicting $X$ once you've observed $Y$.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -923,6 +1067,14 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     <div class="premium-callout success" style="border-width: 2px;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600;">LLN — Law of Large Numbers</div>
       <p>The LLN states that as the number of independent and identically distributed (<strong>i.i.d.</strong>) random trials increases, their observed average (sample mean) will get closer and closer to the theoretical average (population mean).</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> LLN is the <strong>"Stability from Chaos"</strong> intuition. While a single coin flip is unpredictable, 10,000 flips are perfectly predictable. In ML, this is why training on a large dataset (Big Data) works—the individual "weirdness" of outliers cancels out, leaving only the true signal.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h3>The "Why"</h3>
@@ -936,6 +1088,14 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     <div class="premium-callout info" style="border-width: 2px;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600;">CLT — Central Limit Theorem</div>
       <p>The CLT is arguably the most powerful tool in an ML Engineer's toolkit. It states that if you take sufficiently large random samples from <strong>any</strong> population (regardless of the original distribution's shape), the distribution of the <strong>sample means</strong> will be approximately <strong>Gaussian (Normal)</strong>.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> CLT is the <strong>"Natural Magnetism"</strong> of probability. It doesn't matter how weird your data starts (flat, skewed, or sharp)—once you start taking averages, the result is <em>always</em> a bell curve. This is why we can use Gaussian tools (like Linear Regression) even if the underlying data isn't perfectly normal.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h3>Core Properties</h3>
@@ -959,6 +1119,13 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     <div class="step-box"><span class="step-num">3</span><div><strong>Mean Variable:</strong> We define the sample mean as \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
     <div class="step-box"><span class="step-num">4</span><div><strong>Scaling Variance:</strong> Using \(Var(aX) = a^2 Var(X)\):</div></div>
     <div class="math-block">$$Var\!\left(\frac{1}{n} S_n\right) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This $1/n$ scaling is the <strong>"Precision Guarantee."</strong> It tells you exactly how much your uncertainty shrinks as you collect more data. If you want to be twice as precise, you need four times as much data (because of the square root when you take the standard deviation).
+      </div>
+    </div>
     
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Conclusion:</strong> As \(n \to \infty\), the variance \(\frac{\sigma^2}{n} \to 0\). This proves that the sample mean becomes an increasingly precise estimate of the truth.</div></div>
 
@@ -1052,6 +1219,13 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     <p>In estimation, we rewrite Bayes' Theorem using parameters \((\theta)\) and data \((D)\):</p>
     <div class="math-block">$$P(\theta|D) = \frac{P(D|\theta) \cdot P(\theta)}{P(D)}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This version of Bayes is the <strong>"Learning Formula."</strong> It tells us how to update our internal model ($\theta$) by looking at the world ($D$). This is how a child learns what a "dog" looks like—by starting with a fuzzy prior and sharpening it with every dog they see.
+      </div>
+    </div>
+
     <div class="premium-toc" style="background: transparent; border: none; padding: 0;">
       <div class="perspectives-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0;">
         <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
@@ -1082,11 +1256,26 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
       <div class="step-box"><span class="step-num">2</span><div><strong>Likelihood \(L(\theta=0.5|H)\):</strong> You fix the data (Heads). How well does "fairness" explain this observation?</div></div>
 
       <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Crucially:</strong> Likelihood is <strong>not</strong> a probability distribution. It doesn't sum to 1. It is a "score" of how well parameters fit the facts.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> The <strong>Probability</strong> perspective is <em>Forecasting</em> (given $\theta$, what's the data?). The <strong>Likelihood</strong> perspective is <em>Fitting</em> (given data, what's $\theta$?). ML is almost entirely about <strong>Fitting</strong>.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="mle">4. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE asks: "Which parameter \(\theta\) makes the observed data \(D\) most probable?" It ignores the Prior \(P(\theta)\) entirely.</p>
     <div class="math-block">$$\hat{\theta}_{MLE} = \arg\max_{\theta} P(D|\theta)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MLE</strong> is the <strong>"Blind Expert."</strong> It trusts the data 100%. If you flip a coin once and get Heads, MLE will insist that tails is <em>impossible</em> ($p=1.0$). It has no common sense—only the facts in front of it.
+      </div>
+    </div>
 
     <h2 id="mle-example">5. Illustrative Example: MLE (Estimating Coin Bias)</h2>
     <div class="example-box">
@@ -1117,6 +1306,13 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     <h2 id="comparison">MLE vs. MAP</h2>
     <p><strong>MAP (Maximum A Posteriori)</strong> is like MLE but it includes the Prior belief:</p>
     <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} P(D|\theta) \cdot P(\theta)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MAP</strong> is the <strong>"Skeptical Expert."</strong> It balances the data against its existing knowledge (the Prior). In ML, <strong>L2 Regularization</strong> (Weight Decay) is exactly the same as using a Gaussian Prior. It says: "The data suggests the weights should be huge, but my Prior says they should stay small."
+      </div>
+    </div>
 
     <div class="premium-table-wrap">
       <table class="premium-table">
@@ -1185,6 +1381,14 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
       <div class="step-box"><div class="step-num">4</div><div><strong>Normalize:</strong>
 \[P(S|\text{Data}) = \frac{0.192}{0.192 + 0.003} = \frac{0.192}{0.195} \approx 0.985\]</div></div>
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a <strong>98.5%</strong> chance the email is Spam.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is <strong>Bayesian Inference</strong> in action. We started with a "Weak Prior" (40% spam), but the specific combination of words "Free" and "Winner" provided such strong <strong>Likelihood</strong> that it pulled our confidence almost to 100%. One piece of evidence can change everything.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="coin">Example 2: Bernoulli MLE (Coin Toss)</h2>
@@ -1198,12 +1402,27 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
 \[L(p) = \prod_{i=1}^n p^{x_i}(1-p)^{1-x_i} = p^k(1-p)^{n-k}\] (where \(k = \sum x_i\) is the number of heads).</div></div>
       <div class="step-box"><div class="step-num">2</div><div><strong>Apply Log-Likelihood trick:</strong>
 \[\log(L(p)) = k \log(p) + (n-k) \log(1-p)\]</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> Why the <strong>Log Trick</strong>? In ML, we often multiply thousands of tiny probabilities together, which leads to <strong>Numerical Underflow</strong> (the computer rounds your number to zero). By taking the log, we turn <strong>Products into Sums</strong>, which are much more stable and easier to optimize with Gradient Descent.
+        </div>
+      </div>
       <div class="step-box"><div class="step-num">3</div><div><strong>Take the derivative with respect to \(p\):</strong>
 \[\frac{d}{dp} \log(L(p)) = \frac{k}{p} - \frac{n-k}{1-p}\]</div></div>
       <div class="step-box"><div class="step-num">4</div><div><strong>Set to zero to find the maximum:</strong>
 \[\frac{k}{p} = \frac{n-k}{1-p} \implies k(1-p) = p(n-k)\]
 \[k - kp = np - kp \implies \hat{p} = \frac{k}{n}\]</div></div>
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Intuitive Result:</strong> The Best MLE for the parameter \(p\) is simply the <strong>fraction of heads</strong> we saw in our sample!</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is a beautiful moment where math meets intuition. MLE essentially proves that if you see 8 heads out of 10, the "smartest" guess for the coin's bias is 0.8. This derivation is the root of almost every <strong>Loss Function</strong> in modern AI.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="interpretation">Interpretation for ML</h2>
@@ -1350,4 +1569,4 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
       </div>
 
     </div>
-  `,sections:[e,i,t,a,s,o,n,r,l]};export{d as PROBABILITY_DATA};
+  `,sections:[e,t,i,s,a,o,n,r,l]};export{d as PROBABILITY_DATA};

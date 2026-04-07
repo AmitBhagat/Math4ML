@@ -1,4 +1,4 @@
-const e={id:"entropy",title:"Information Theory Basics",description:"Introduction to Information Theory, Entropy, Cross-Entropy Loss, and KL Divergence in Machine Learning.",color:"#26C6DA",html:String.raw`
+const t={id:"entropy",title:"Information Theory Basics",description:"Introduction to Information Theory, Entropy, Cross-Entropy Loss, and KL Divergence in Machine Learning.",color:"#26C6DA",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Info Theory · Introduction</div>
       <h1>Information Theory in Machine Learning</h1>
@@ -28,6 +28,13 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Entropy</strong> is the "Surprise" intuition. If I tell you "it's going to rain in the rainforest," you aren't surprised (Low Entropy). If I tell you "it's going to rain in the Sahara," you are very surprised (High Entropy). In ML, we use this to measure how much "mess" is in our data labels.
+      </div>
+    </div>
+
     <h2 id="cross-entropy">Cross-Entropy Loss</h2>
     <p>Cross-Entropy measures the difference between two probability distributions: the <strong>true distribution</strong> ($P$) and the <strong>predicted distribution</strong> ($Q$).</p>
     
@@ -47,6 +54,13 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
     <p>KL Divergence, often called "Relative Entropy," measures how much one probability distribution $Q$ (approximation) diverges from a second, reference distribution $P$ (truth).</p>
     <div class="math-block">
       $$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>KL Divergence</strong> is the "Difference in Perspective" intuition. It measures how much information you lose by using your model $Q$ instead of the true distribution $P$. It is <strong>non-symmetric</strong> because "going from $P$ to $Q$" is a different information-loss story than "going from $Q$ to $P$."
+      </div>
     </div>
     <div class="callout info">
       <div class="callout-icon">📊</div>
@@ -71,7 +85,7 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
     <div class="linking-rule">
       <strong>Next Step:</strong> Entropy measures uncertainty in one variable. Now, explore the mathematical depth in <strong><a href="#/mathematics/information-theory/shannon-entropy">Shannon Entropy</a></strong>.
     </div>
-  `},t={id:"shannon-entropy",title:"Shannon Entropy",description:"Shannon Entropy measures the average amount of 'information' or 'surprise' in a process.",html:String.raw`
+  `},e={id:"shannon-entropy",title:"Shannon Entropy",description:"Shannon Entropy measures the average amount of 'information' or 'surprise' in a process.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📏 Info Theory · Shannon</div>
       <h1>Shannon Entropy</h1>
@@ -129,6 +143,13 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
       </ol>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Self-Information</strong> is the "Surprise Score" of a single event. If an event is 100% certain, its surprise is zero ($\log(1)=0$). If an event is extremely rare, its surprise is massive. <strong>Entropy</strong> is just the weighted average of all these separate surprise scores.
+      </div>
+    </div>
+
     <h2 id="example-balls">Example 1: Picking Balls from a Bag</h2>
     <div class="example-box">
       <h4>Problem: Non-Uniform Outcome Probability</h4>
@@ -159,6 +180,13 @@ const e={id:"entropy",title:"Information Theory Basics",description:"Introductio
         <div class="callout-icon">✓</div>
         <div class="callout-body">
           <strong>Geometric Insight:</strong> A fair coin flip provides exactly 1 bit of information. A double-headed coin provides <strong>zero</strong> information because the outcome is certain (zero surprise).
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Maximum Entropy</strong> occurs at the <strong>Uniform Distribution</strong>. When you have no idea what's going to happen (everything is equally likely), you are at peak uncertainty. In ML, we often initialize weights with uniform or normal distributions to start with maximum entropy (minimum bias).
         </div>
       </div>
     </div>
@@ -211,6 +239,13 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
       <div class="premium-hero-badge">📏 Info Theory · KL Divergence</div>
       <h1>Kullback-Leibler (KL) Divergence</h1>
       <p><strong>Kullback-Leibler (KL) Divergence</strong>, often called <strong>Relative Entropy</strong>, is a statistical measure that quantifies how much one probability distribution (often the predicted distribution) differs from a second, reference probability distribution (the true distribution).</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>KL Divergence</strong> is the "Information Loss" intuition. It measures how many <em>extra bits</em> of surprise you'll experience if you believe the world follows distribution $Q$ (the model), but it actually follows $P$ (the truth). It's essentially the cost of being "wrong" about the probability of events.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -263,6 +298,13 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
       <p style="margin:0">It represents the "extra" bits required because our model $Q$ isn't perfect.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The relationship <strong>$D_{KL} = \text{Cross-Entropy} - \text{Entropy}$</strong> is the "Baseline" intuition. Entropy is the minimum possible bits needed to describe $P$. Cross-Entropy is what you actually used. The difference (KL) is your <strong>Systemic Inefficiency</strong>.
+      </div>
+    </div>
+
     <h2 id="example-weather">Example 1: Weather Prediction Accuracy</h2>
     <div class="example-box">
       <h4>Problem: Quantifying Prediction Error</h4>
@@ -293,6 +335,13 @@ print(f"Entropy: {calculate_entropy(probs):.4f} bits")
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
           <strong>Key Insight:</strong> $0.322 \neq 0.278$. KL Divergence is <strong>not a distance</strong> because it doesn't satisfy the symmetry property. This is why it's called a 'divergence'.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Asymmetry</strong> is the "Map vs. Territory" intuition. If $P$ is the actual territory and $Q$ is your map, the "surprise" of finding a mountain not on your map is different from the "surprise" of looking for a mountain that doesn't exist in reality. In ML, we usually minimize $D_{KL}(P \parallel Q)$ because we want our model ($Q$) to cover the truth ($P$).
         </div>
       </div>
     </div>
@@ -347,6 +396,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       <div class="premium-hero-badge">📏 Info Theory · Cross-Entropy</div>
       <h1>Cross-Entropy</h1>
       <p><strong>Cross-Entropy</strong> measures the difference between two probability distributions: the <strong>true distribution</strong> ($P$) and the <strong>predicted distribution</strong> ($Q$). It is the primary objective function used in Neural Networks for classification.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> is the "Penalty for Ignorance." It tells you how many average bits you'll need to send if you use the <em>wrong</em> codebook ($Q$) for the <em>actual</em> events ($P$). In AI, your model is trying to synchronized its codebook with reality.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -396,6 +452,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
           <strong>ML Insight:</strong> If the model predicted $[0.6, 0.4]$ (Lower confidence), the cross-entropy would be higher ($\approx 0.737 \text{ bits}$), penalizing the model more for its uncertainty.
         </div>
       </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Binary Cross-Entropy (BCE)</strong> is the "Sigmoid Match." Since there are only two outcomes, the formula simplifies to measuring how much the model's single $p$ value "misses" the 0 or 1 target. It is the gold standard for binary "Yes/No" classifiers.
+        </div>
+      </div>
     </div>
 
     <h2 id="example-multiclass">Example 2: Multi-class (Handwritten Digits)</h2>
@@ -411,6 +474,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Interpretation:</strong> This shows why Cross-Entropy is so efficient for backpropagation—it only cares about the probability assigned to the **correct** answer.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Categorical Cross-Entropy (CCE)</strong> is the "Softmax Alignment." Because of One-Hot encoding (where all labels except one are zero), the entire sum vanishes except for the one term corresponding to the true class. This makes it incredibly fast for training LLMs or Image classifiers with thousands of categories.
         </div>
       </div>
     </div>
@@ -437,6 +507,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       <div class="premium-hero-badge">📏 Info Theory · MI</div>
       <h1>Mutual Information (MI)</h1>
       <p><strong>Mutual Information</strong> is a statistical measure that quantifies the amount of information obtained about one random variable through another random variable. It measures how much knowing one variable reduces uncertainty about the other.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Mutual Information</strong> is the "Uncertainty Reduction" intuition. It asks: "If I tell you the value of $Y$, how much simpler does predicting $X$ become?" If they have no connection, your uncertainty stays high ($MI = 0$). If they are perfectly linked, your uncertainty vanishes ($MI = \text{Entropy}$).
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -467,6 +544,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Reduction in Entropy:</strong> MI is the intersection of information between two variables. It is the reduction in the entropy of $X$ achieved by learning $Y$: $I(X; Y) = H(X) - H(X|Y)$.
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of it as a <strong>Venn Diagram</strong> of information. $H(X)$ and $H(Y)$ are two circles. The area where they overlap is the <strong>Mutual Information</strong>. The total area covered by both is the <strong>Joint Entropy $H(X, Y)$</strong>.
       </div>
     </div>
 
@@ -531,6 +615,13 @@ print(f"KL Divergence: {kl_divergence(P, Q):.4f} bits")
           <strong>Key Benefit:</strong> MI is superior to Correlation for detecting complex, non-linear patterns in datasets.
         </div>
       </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Correlation</strong> only looks for "Straight Lines." If your relationship is a <strong>Parabola ($Y = X^2$)</strong>, Correlation will often say "0" because the up-slope cancels the down-slope. <strong>Mutual Information</strong> doesn't care about shapes; it only cares if knowing $X$ helps predict $Y$. This makes it the ultimate "Relationship Detector" for Feature Selection.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation (Scikit-Learn)</h2>
@@ -591,6 +682,13 @@ for name, score in zip(data.columns, mi_scores):
       <p><strong>Insight:</strong> If the coin were fair (0.5/0.5), entropy would be 1. Since it's biased, the uncertainty is lower.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Calculation Intuition</strong>. Entropy is the weighted sum of "Surprise." By multiplying the probability ($P$) by the bits of surprise ($\log_2(1/P)$), you are essentially finding the "Average Surprise" you feel when toss the coin over and over.
+      </div>
+    </div>
+
     <h2 id="cross-entropy">2. Example of Cross-Entropy Loss</h2>
     <div class="example-box">
       <p><strong>Scenario:</strong> Image classifier for [Cat, Dog, Bird]. Target is <strong>Dog</strong>. Predictions: [0.1, 0.7, 0.2].</p>
@@ -602,6 +700,13 @@ for name, score in zip(data.columns, mi_scores):
         <li>$L = -\log(0.7) \approx 0.357$</li>
       </ol>
       <p><strong>Insight:</strong> Only the probability of the *correct* class matters here. Higher confidence in the correct class reduces loss.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Accuracy vs. Confidence</strong>. A model could have 100% accuracy but high Cross-Entropy loss if it is "hesitant" (e.g., predicting 0.51 for the correct class). We use this loss to force the model to not just be right, but to be <strong>Confident</strong>.
+      </div>
     </div>
 
     <h2 id="kl-divergence">3. Example of KL Divergence</h2>
@@ -637,10 +742,17 @@ for name, score in zip(data.columns, mi_scores):
       <p><strong>Conclusion:</strong> Model A is better; lower perplexity means the model is "less surprised" by the truth.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Perplexity</strong> is the "Effective Branching Factor." If a model has a perplexity of 10, it means it is as surprised by the next word as if it were trying to guess the outcome of a fair 10-sided die. Lower perplexity means the model has narrowed down the possibilities much more effectively.
+      </div>
+    </div>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the information-theoretic foundations, you've completed the <strong>Information Theory</strong> module. Ready to dive into the building blocks of mathematics with <strong><a href="#/mathematics/discrete-math/set-theory">Discrete Mathematics: Set Theory</a></strong>?
     </div>
-  `},a={id:"information-theory",title:"Information Theory",description:"Information Theory provides the mathematical foundation for quantifying uncertainty, measuring information flow, and designing optimal loss functions for Machine Learning models.",keyConcepts:[{title:"Self-Information",description:"Quantifying the 'surprise' or information in a single event."},{title:"Shannon Entropy",description:"The average uncertainty or randomness in a probability distribution."},{title:"KL Divergence",description:"Relative Entropy: measuring how much one distribution diverges from another."},{title:"Cross-Entropy",description:"The standard loss function for classification and language modeling."},{title:"Mutual Information",description:"Quantifying the dependency between different random variables."},{title:"Perplexity",description:"A measure of how well a probability model predicts a sample (common in NLP)."}],introHtml:String.raw`
+  `},r={id:"information-theory",title:"Information Theory",description:"Information Theory provides the mathematical foundation for quantifying uncertainty, measuring information flow, and designing optimal loss functions for Machine Learning models.",keyConcepts:[{title:"Self-Information",description:"Quantifying the 'surprise' or information in a single event."},{title:"Shannon Entropy",description:"The average uncertainty or randomness in a probability distribution."},{title:"KL Divergence",description:"Relative Entropy: measuring how much one distribution diverges from another."},{title:"Cross-Entropy",description:"The standard loss function for classification and language modeling."},{title:"Mutual Information",description:"Quantifying the dependency between different random variables."},{title:"Perplexity",description:"A measure of how well a probability model predicts a sample (common in NLP)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -774,4 +886,4 @@ for name, score in zip(data.columns, mi_scores):
       </div>
 
     </div>
-  `,sections:[e,t,i,o,s,n]};export{a as INFORMATION_THEORY_DATA};
+  `,sections:[t,e,i,o,s,n]};export{r as INFORMATION_THEORY_DATA};

@@ -16,27 +16,37 @@ const t={id:"vectors",title:"Vectors",description:"In Machine Learning, Vectors 
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
+    <div class="def-box">
+      <div class="def-title">Prerequisites</div>
+      <p style="margin-bottom: 0.5rem">To master vectors, you need at least a baseline grasp of:</p>
+      <ul style="margin:0">
+        <li><strong>Coordinate Geometry:</strong> Cartesian planes and axes.</li>
+        <li><strong>Scalar Math:</strong> Basic arithmetic (addition, multiplication).</li>
+      </ul>
+    </div>
+
     <h2 id="definition">Vector Definition</h2>
-    <p>A vector is an ordered list of numbers, typically denoted in column form:</p>
+    <p>A vector is an ordered list of numbers, typically denoted in column form. In Machine Learning, we don't just see them as "points"—we see them as <strong>Features</strong> in a high-dimensional space.</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
 
     <visualizer topic="Vectors" />
 
     <p>where \(n\) represents the dimensionality of the vector space.</p>
 
-    <div class="def-box">
-      <div class="def-title">Prerequisites</div>
-      <ul style="margin:0">
-        <li>Basic understanding of Coordinate Geometry.</li>
-        <li>Familiarity with scalar operations (addition, multiplication).</li>
-      </ul>
-    </div>
-
-    <h2 id="dot">1. Dot Product</h2>
-    <p>The <strong>Dot Product</strong> (or inner product) is an algebraic operation that takes two equal-length sequences of numbers and returns a single scalar. It measures how much one vector "aligns" with another.</p>
+    <h2 id="dot">1. Dot Product (The Similarity Engine)</h2>
+    <p>The <strong>Dot Product</strong> (or inner product) is the mathematical heart of almost every modern ML model, from Linear Regression to Large Language Models (LLMs).</p>
 
     <h3>Core Theory</h3>
-    <p>Geometrically, the dot product is the projection of one vector onto another. In ML, it is used to calculate the similarity between two vectors (e.g., in Cosine Similarity) and is the core operation in Neural Network layer computations \((z = w \cdot x + b)\).</p>
+    <p>Geometrically, the dot product is the projection of one vector onto another. It answers the critical question: <em>"How much of vector A is pointing in the direction of vector B?"</em></p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of the Dot Product as a "Compatibility Score." If two vectors are perfectly aligned, the score is maxed out. If they are perpendicular (orthogonal), they have <em>zero</em> in common. 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> The result is heavily biased by the <strong>magnitude</strong> (length) of the vectors. If you want to compare "concepts" without letting loud data drown out quiet data, you must normalize the vectors first (this leads us to <strong>Cosine Similarity</strong>).
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\) in \(\mathbb{R}^n\):</p>
@@ -68,12 +78,21 @@ const t={id:"vectors",title:"Vectors",description:"In Machine Learning, Vectors 
       <li><strong>L₂ Norm (Euclidean Distance):</strong> The square root of the sum of squared components. It is the most common distance metric and is used in <strong>Ridge Regularization</strong>.</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of the **L₁ Norm** as a taxi in Manhattan—you have to follow the grid of streets. The **L₂ Norm** is how a crow flies—the shortest straight-line distance. 
+        <br/><br/>
+        <strong>ML Connection:</strong> L₁ creates "sharp" constraints that force model weights to exactly zero (Sparsity), while L₂ creates "smooth" constraints that just keep weights small.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <p>The general \(p\)-norm is given by:</p>
     <div class="math-block">$$\|\mathbf{x}\|_p = \left( \sum_{i=1}^{n} |x_i|^p \right)^{1/p}$$</div>
     <ul>
-      <li><strong>L₁ Norm (\(p=1\)):</strong> \(\|\mathbf{x}\|_1 = \sum_{i=1}^{n} |x_i|\)</li>
-      <li><strong>L₂ Norm (\(p=2\)):</strong> \(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}\)</li>
+      <li><strong>L₁ Norm (\(p=1\)):</strong> \(\|\mathbf{x}\|_1 = \sum_{i=1}^{n} |x_i|\) (Sum of absolute values)</li>
+      <li><strong>L₂ Norm (\(p=2\)):</strong> \(\|\mathbf{x}\|_2 = \sqrt{\sum_{i=1}^{n} x_i^2}\) (Euclidean length)</li>
     </ul>
 
     <h3>Illustrative Example</h3>
@@ -81,24 +100,35 @@ const t={id:"vectors",title:"Vectors",description:"In Machine Learning, Vectors 
       <h4>Problem: Computing L₁ and L₂ Norms</h4>
       <p>For a vector \(\mathbf{v} = [3, -4]\), calculate its length using different metrics.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> Sum of absolute values.</div></div>
-      <div class="math-block">$$\|\mathbf{v}\|_1 = |3| + |-4| = 3 + 4 = 7$$</div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> \(|3| + |-4| = 7\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> \(\sqrt{3^2 + (-4)^2} = \sqrt{25} = 5\).</div></div>
 
-      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> Square root of sum of squares.</div></div>
-      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$$</div>
-
-      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The L₁ norm is larger than the L₂ norm. In regularization, L₁ (Lasso) creates "sharp" constraints that force weights to zero, while L₂ (Ridge) creates "smooth" constraints.</div></div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> The Manhattan distance (7) is always greater than or equal to the Euclidean distance (5). In ML, using L₁ (Lasso) results in features being "turned off," while L₂ (Ridge) just turns down the volume.
+        </div>
+      </div>
     </div>
 
     <h2 id="span">3. Linear Combinations, Span, and Basis</h2>
-    <p>These concepts define how we navigate and construct vector spaces.</p>
+    <p>If vectors are the building blocks, then <strong>Span</strong> and <strong>Basis</strong> are the rules for how high we can build.</p>
 
     <h3>Core Theory</h3>
     <ul>
-      <li><strong>Linear Combination:</strong> A new vector created by multiplying vectors by scalars and adding them together: \(\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2\).</li>
-      <li><strong>Span:</strong> The set of all possible linear combinations of a group of vectors. If the span covers the entire space, those vectors can reach any point in that space.</li>
-      <li><strong>Basis:</strong> A set of vectors that are <strong>linearly independent</strong> and whose span covers the entire space. It is the "minimalist" set of directions needed to define a space.</li>
+      <li><strong>Linear Combination:</strong> Scaling and adding vectors together: \(\mathbf{y} = c_1\mathbf{v}_1 + c_2\mathbf{v}_2\).</li>
+      <li><strong>Span:</strong> The entire region of space you can reach using linear combinations of your set.</li>
+      <li><strong>Basis:</strong> The "Minimalist Set" of independent vectors needed to span a space.</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> A **Basis** is like the primary colors (Red, Green, Blue). You can make any color with them, and you can’t make Blue using just Red and Green. If your basis vectors are dependent, it's like having two shades of Red—one is redundant.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> In ML, redundant features (Multicollinearity) are just dependent vectors in your basis. They don't add new info; they just add noise and make your model unstable.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>If a vector \(\mathbf{b}\) can be written as:</p>
@@ -187,66 +217,92 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     
     <visualizer topic="MatrixOperations" />
 
-    <h2 id="mult">1. Matrix Multiplication</h2>
-    <p>Matrix multiplication is not a simple element-wise operation. It is a way of composing linear transformations.</p>
+    <h2 id="mult">1. Matrix Multiplication (Composition)</h2>
+    <p>Matrix multiplication is not a simple element-wise operation. It is a way of <strong>composing linear transformations</strong>.</p>
 
     <h3>Core Theory</h3>
-    <p>For the product \(C = AB\) to exist, the number of columns in \(A\) must equal the number of rows in \(B\). If \(A\) is \((m \times n)\) and \(B\) is \((n \times p)\), then \(C\) will be \((m \times p)\). Each element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of \(A\) and the \(j\)-th column of \(B\).</p>
+    <p>For the product \(C = AB\) to exist, the dimensions must align: \((m \times n) \cdot (n \times p) \to (m \times p)\). The number of columns in the first must equal the number of rows in the second.</p>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Matrix multiplication is <strong>composition</strong>. If \(A\) is a machine that rotates and \(B\) is a machine that scales, \(AB\) is the combined machine that does both. 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> Order matters. \(AB \neq BA\). In ML, getting the order wrong between your Weights (\(W\)) and your Data (\(X\)) is the #1 cause of "Shape Mismatch" crashes during training.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
-    <p>The element in the \(i\)-th row and \(j\)-th column is defined as:</p>
+    <p>The element in the \(i\)-th row and \(j\)-th column of the product is the dot product of the \(i\)-th row of \(A\) and the \(j\)-th column of \(B\):</p>
     <div class="math-block">$$c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$$</div>
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
       <h4>Problem: 2×2 Matrix Multiplication</h4>
-      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate the product \(C = AB\).</p>
+      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate \(AB\).</p>
       
       <div class="step-box"><span class="step-num">1</span><div><strong>Row 1 × Column 1:</strong> \((1 \times 5) + (2 \times 7) = 19\).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Row 1 × Column 2:</strong> \((1 \times 6) + (2 \times 8) = 22\).</div></div>
       <div class="step-box"><span class="step-num">3</span><div><strong>Row 2 × Column 1:</strong> \((3 \times 5) + (4 \times 7) = 43\).</div></div>
       <div class="step-box"><span class="step-num">4</span><div><strong>Row 2 × Column 2:</strong> \((3 \times 6) + (4 \times 8) = 50\).</div></div>
 
-      <div class="math-block">$$C = \begin{bmatrix} 1(5)+2(7) & 1(6)+2(8) \\ 3(5)+4(7) & 3(6)+4(8) \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      <div class="math-block">$$AB = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
       
-      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> Each entry in \(C\) captures how much the \(i\)-th row of the first matrix "aligns" with the \(j\)-th column of the second.</div></div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> Each entry captures how much the rows of the first matrix "align" with the columns of the second.
+        </div>
+      </div>
     </div>
 
     <visualizer topic="Matrices" />
 
     <h2 id="transpose">2. Matrix Transpose</h2>
-    <p>The transpose of a matrix is an operator which flips a matrix over its diagonal.</p>
+    <p>The <strong>Transpose</strong> of a matrix flips its rows and columns.</p>
 
     <h3>Core Theory</h3>
-    <p>Transposing switches the row and column indices. It is frequently used in ML to align dimensions for matrix multiplication, especially when calculating the gradient or handling weights.</p>
+    <p>It is essentially reflecting the matrix over its main diagonal. In ML, we use Transpose to align dimensions for dot products and to calculate gradients during backpropagation.</p>
 
-    <h3>Mathematical Derivation</h3>
-    <p>If \(A\) has elements \(a_{ij}\), then \(A^T\) has elements \(a_{ji}\):</p>
-    <div class="math-block">$$(A^T)_{ij} = A_{ji}$$</div>
-
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Example: Transpose of a 2×3 Matrix</h4>
-      <p>If \(A = \begin{bmatrix} 1 & 2 & 3 \\ 4 & 5 & 6 \end{bmatrix}\), then \(A^T = \begin{bmatrix} 1 & 4 \\ 2 & 5 \\ 3 & 6 \end{bmatrix}\).</p>
-      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Note:</strong> The shape changes from \((2 \times 3)\) to \((3 \times 2)\).</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> The Transpose \(A^\top\) flips the perspective. 
+        <br/><br/>
+        <strong>Memory Trick:</strong> \((AB)^\top = B^\top A^\top\). When you flip the whole system, the order of the machines reverses too!
+      </div>
     </div>
 
+    <h3>Mathematical Derivation</h3>
+    <p>If \(A\) has dimensions \(m \times n\), then \(A^\top\) has dimensions \(n \times m\):</p>
+    <div class="math-block">$$(A^\top)_{ij} = a_{ji}$$</div>
+
     <h2 id="identity">3. Identity Matrix (I)</h2>
-    <p>The <strong>Identity Matrix</strong> is a square matrix with ones on the main diagonal and zeros elsewhere.</p>
+    <p>The <strong>Identity Matrix</strong> is the "1" of the matrix world.</p>
 
-    <h3>Core Theory</h3>
-    <p>It acts as the number "1" in matrix algebra. Multiplying any matrix \(A\) by the identity matrix \(I\) results in the original matrix \(A\):</p>
-    <div class="math-block">$$AI = IA = A$$</div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> It’s the "Do Nothing" transformation. If you multiply any vector by \(I\), nothing changes. It’s the starting point for identity mappings in ResNets (Residual Networks).
+      </div>
+    </div>
 
-    <h3>Mathematical Representation</h3>
-    <p>For a \(3 \times 3\) space:</p>
-    <div class="math-block">$$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</div>
+    <div class="math-block">$$I = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</div>
 
     <h2 id="inverse">4. Matrix Inverse</h2>
-    <p>The inverse of a square matrix \(A\) is a matrix \(A^{-1}\) such that their product is the identity matrix.</p>
+    <p>The <strong>Inverse</strong> is the "Undo" button for linear transformations.</p>
 
     <h3>Core Theory</h3>
-    <p>Not all matrices have an inverse. A matrix must be <strong>square</strong> and <strong>non-singular</strong> (its determinant \(\neq 0\)). In ML, inverses are used to solve systems of linear equations, such as in the <strong>Normal Equation</strong> for Linear Regression.</p>
+    <p>The inverse \(A^{-1}\) is a matrix such that \(AA^{-1} = I\). Not every matrix has an inverse—singular matrices (where space was squashed) cannot be "unsquashed."</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> If a matrix "flattens" your 2D data into a 1D line, information is lost forever. You can't undo that. That’s why **Singular Matrices** (determinant = 0) have no inverse.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> Computing inverses for large matrices is computationally expensive and unstable. In modern ML, we almost always use <strong>Matrix Decomposition</strong> or iterative solvers instead.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation (for 2×2)</h3>
     <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the inverse is:</p>
@@ -350,87 +406,63 @@ print(f"Inverse:\n{A_inv}")
       </ul>
     </div>
 
-    <h2 id="rank">1. Rank of a Matrix</h2>
-    <p>The <strong>Rank</strong> of a matrix represents the number of linearly independent rows or columns in the matrix.</p>
+    <h2 id="rank">1. Rank (Information Density)</h2>
+    <p>The <strong>Rank</strong> of a matrix represents the number of linearly independent rows or columns.</p>
 
     <h3>Core Theory</h3>
-    <p>Rank tells us the "true dimensionality" of the information contained in a matrix. If a \(3 \times 3\) matrix has a rank of 2, it means one row is a redundant combination of the others, and the matrix effectively operates in 2D space.</p>
-    <ul>
-      <li><strong>Full Rank:</strong> When \(\text{rank}(A) = \min(m, n)\).</li>
-      <li><strong>Rank Deficient:</strong> When \(\text{rank}(A) < \min(m, n)\).</li>
-    </ul>
+    <p>Rank tells us the "true dimensionality" of the information. If a \(100 \times 100\) matrix has a rank of 2, it means 98 of your features are redundant junk. The matrix operates in a tiny 2D slice of that 100D space.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Rank is the measure of <em>unique</em> information. It’s like hearing 100 people talk, but only 2 of them are saying anything original.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> In the real world, computers struggle with rank. Because of **Floating-Point Noise**, a matrix that is mathematically rank-deficient might look like it has "Full Rank" because of tiny non-zero values (like \(10^{-16}\)). We use **Singular Value Decomposition (SVD)** to find the "Effective Rank."
+      </div>
+    </div>
 
     <visualizer topic="Rank" />
 
-    <h3>Mathematical Derivation</h3>
-    <p>The rank is often found by converting a matrix to <strong>Row Echelon Form (REF)</strong> using Gaussian elimination. The number of non-zero rows in REF is the rank.</p>
+    <h2 id="det">2. Determinant (Scaling Factor)</h2>
+    <p>The <strong>Determinant</strong> \(\det(A)\) is a scalar that summarizes how a matrix changes space.</p>
 
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Problem: Computing the Rank via Row Reduction</h4>
-      <p>Find the rank of \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\).</p>
-      
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Row Dependencies:</strong> Notice that \(R_2 = 2R_1\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Perform Row Operation:</strong> \(R_2 \to R_2 - 2R_1\).</div></div>
-      
-      <div class="math-block">$$A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}$$</div>
-      
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. Since only one row is non-zero after elimination, the matrix "squashes" 2D space into 1D line.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Take a unit square; the Determinant is the <strong>Area</strong> of the new shape after transformation. If the determinant is negative, the space has been "flipped" inside out.
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> If \(\det(A) = 0\), you have "squashed" your data into a flatter dimension. You can't go back. This is why singular matrices are non-invertible—you can't "un-squash" a pancake back into a sphere.
+      </div>
     </div>
 
-    <h2 id="det">2. Determinant (det(A) or |A|)</h2>
-    <p>The <strong>Determinant</strong> is a scalar value that can be calculated from a square matrix.</p>
+    <h2 id="trace">3. Trace (The Signature)</h2>
+    <p>The <strong>Trace</strong> \(tr(A)\) is the sum of the elements on the main diagonal.</p>
 
-    <h3>Core Theory</h3>
-    <p>Geometrically, the determinant represents the <strong>scaling factor</strong> of the linear transformation described by the matrix.</p>
-    <ul>
-      <li>If \(\det(A) = 0\), the matrix is <strong>singular</strong> (non-invertible) and "squashes" space into a lower dimension.</li>
-      <li>If \(\det(A) = 1\), the transformation preserves volume.</li>
-    </ul>
-
-    <h3>Mathematical Derivation (for 2×2)</h3>
-    <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\):</p>
-    <div class="math-block">$$\det(A) = ad - bc$$</div>
-    <p>For a \(3 \times 3\) matrix, use cofactor expansion.</p>
-
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Problem: Computing the Determinant (Scaling Factor)</h4>
-      <p>Calculate \(\det(A)\) for \(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
-      
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(ad - bc\).</div></div>
-      <div class="math-block">$$\det(A) = (3 \times 2) - (1 \times 2) = 6 - 2 = 4$$</div>
-
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4. If \(\det(A)\) were 0, the area would collapse to zero.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> The Trace is a "signature." No matter how you rotate or change the coordinates (basis change), the trace stays the same. 
+        <br/><br/>
+        <strong>Technical Fact:</strong> The sum of the **Eigenvalues** always equals the Trace. It’s a quick way to sanity-check your calculations.
+      </div>
     </div>
 
-    <visualizer topic="Determinants" />
-
-    <h2 id="trace">3. Trace (tr(A))</h2>
-    <p>The <strong>Trace</strong> of a square matrix is the sum of its diagonal elements.</p>
-
-    <h3>Core Theory</h3>
-    <p>The trace is invariant under a change of basis. In ML, it is often used in the context of <strong>Matrix Derivatives</strong> and is related to the sum of the matrix's eigenvalues.</p>
-
-    <h3>Mathematical Derivation</h3>
-    <p>For \(A \in \mathbb{R}^{n \times n}\):</p>
     <div class="math-block">$$tr(A) = \sum_{i=1}^{n} a_{ii}$$</div>
 
-    <h3>Illustrative Example</h3>
-    <div class="example-box">
-      <h4>Example: Computing the Trace</h4>
-      <p>\(A = \begin{bmatrix} 5 & 2 & 1 \\ 0 & -1 & 4 \\ 3 & 1 & 10 \end{bmatrix}\).</p>
-      <div class="math-block">$$tr(A) = 5 + (-1) + 10 = 14$$</div>
-    </div>
-
-    <h2 id="pd">4. Positive Definiteness</h2>
-    <p>A symmetric matrix \(A\) is <strong>Positive Definite (PD)</strong> if for every non-zero vector \(\mathbf{x}\), the scalar \(\mathbf{x}^T A \mathbf{x}\) is strictly positive.</p>
+    <h2 id="pd">4. Positive Definiteness (The Bowl)</h2>
+    <p>A symmetric matrix \(A\) is <strong>Positive Definite (PD)</strong> if \(\mathbf{x}^\top A \mathbf{x} > 0\) for all non-zero vectors \(\mathbf{x}\).</p>
 
     <h3>Core Theory</h3>
-    <p>This property is critical in <strong>Optimization</strong>. If the Hessian matrix (matrix of second derivatives) of a loss function is Positive Definite, the function is locally convex, meaning any local minimum is a global minimum.</p>
-    <ul>
-      <li><strong>Positive Semi-Definite (PSD):</strong> \(\mathbf{x}^T A \mathbf{x} \geq 0\).</li>
-    </ul>
+    <p>This property is the "Gold Standard" for optimization. If the Hessian matrix of a loss function is Positive Definite, the surface is guaranteed to be convex (bowl-shaped).</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of a **Positive Definite** matrix as a perfect "bowl." No matter where you drop a ball, it will roll to the stable bottom (Global Minimum). 
+        <br/><br/>
+        <strong>The 'Gotcha':</strong> If your matrix is only **Positive Semi-Definite**, your bowl has a "flat bottom" (like a trough). Your optimizer might get lost moving along that flat line instead of finding a single point.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>A matrix \(A\) is PD if:</p>
@@ -527,7 +559,12 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
       <li><strong>Closure under Addition:</strong> If \(\mathbf{u}, \mathbf{v} \in S\), then \(\mathbf{u} + \mathbf{v} \in S\).</li>
       <li><strong>Closure under Scalar Multiplication:</strong> If \(\mathbf{u} \in S\) and \(c\) is a scalar, then \(c\mathbf{u} \in S\).</li>
     </ol>
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Context:</strong> In PCA, we find a low-dimensional <strong>subspace</strong> that captures the most variance of the original high-dimensional data.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> A <strong>Subspace</strong> is like a "layer" or a "flat slice" of the original space that still goes through the origin. If you add two vectors in that slice, you stay in that slice. PCA works by finding the best 1D or 2D "slice" to represent your 100D data.
+      </div>
+    </div>
 
     <h2 id="independence">2. Linear Independence</h2>
     <p>A set of vectors is <strong>Linearly Independent</strong> if no vector in the set can be defined as a linear combination of the others.</p>
@@ -545,7 +582,12 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
       <div class="step-box"><span class="step-num">1</span><div><strong>Check for Multiples:</strong> Can we find a scalar \(k\) such that \(\mathbf{v}_2 = k\mathbf{v}_1\)?</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Yes, \(2 \times [1, 2] = [2, 4]\). Since \(\mathbf{v}_2\) is a direct multiple of \(\mathbf{v}_1\), they are <strong>Linearly Dependent</strong>.</div></div>
 
-      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>ML Risk:</strong> High dependence between features (Multicollinearity) makes models unstable. In this case, \(\mathbf{v}_2\) adds no new information to the model.</div></div>
+      <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Independent vectors offer <strong>new information</strong>. If a vector is dependent, it's just "saying the same thing" as the others. <strong>The 'Gotcha':</strong> In ML, redundant features (Multicollinearity) make it impossible for your model to know which feature is actually causing the output, leading to unstable weights.
+      </div>
+    </div>
     </div>
 
     <visualizer topic="BasisChange" />
@@ -558,6 +600,13 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = 0$$</div>
     <p>If the vectors are also unit vectors (length = 1), they are called <strong>Orthonormal</strong>.</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> <strong>Orthogonality</strong> is the ultimate independence. If two features are orthogonal, changing one has <em>zero</em> impact on the other. This makes them perfectly "decoupled."
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <p>Recall \(\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)\). If \(\theta = 90^\circ\), then \(\cos(90^\circ) = 0\), making the dot product zero.</p>
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(90^\circ) = \|\mathbf{u}\| \|\mathbf{v}\| \cdot 0 = 0$$</div>
@@ -569,6 +618,13 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
 
     <h3>Core Theory</h3>
     <p>In ML, projections are used to reduce dimensions or to find the closest point in a subspace to a given vector (the basis of <strong>Linear Regression</strong>). The error vector (the difference between the original and the projection) is always orthogonal to the subspace.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of a projection as a <strong>simplification</strong>. You're throwing away the "orthogonal noise" to find the version of your data that fits into a simpler model. This is exactly what happens when you "fit" a line to a cloud of points in Linear Regression.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>The projection of \(\mathbf{y}\) onto \(\mathbf{u}\), denoted \(\text{proj}_{\mathbf{u}}(\mathbf{y})\), is:</p>
@@ -657,6 +713,13 @@ print(f"Projection of y onto u: {projection}")
     <p>LU Decomposition factors a square matrix \(A\) into a <strong>Lower Triangular</strong> matrix (\(L\)) and an <strong>Upper Triangular</strong> matrix (\(U\)). It is primarily used to solve systems of linear equations (\(Ax = b\)) efficiently.</p>
     <div class="math-block">$$A = LU \implies \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> LU is essentially <strong>Gaussian Elimination</strong> in disguise. When you perform row operations to get a matrix into upper triangular form ($U$), the "memory" of those operations is stored in the lower triangular matrix ($L$). In ML, we use LU to solve $Ax = b$ because back-substitution with triangular matrices is incredibly fast ($O(n^2)$) compared to inverting the whole matrix.
+      </div>
+    </div>
+
     <div class="example-box">
       <h4>Problem: LU Factorization</h4>
       <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\) into \(L\) and \(U\).</p>
@@ -675,6 +738,13 @@ print(f"Projection of y onto u: {projection}")
 
     <h2 id="cholesky">2. Cholesky Decomposition</h2>
     <p>Cholesky Decomposition is a special case of LU for <strong>Symmetric, Positive Definite</strong> matrices. It factors \(A\) into \(LL^T\). Because it exploits symmetry, it is roughly twice as fast as LU decomposition and much more numerically stable.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If LU is like factoring $15 = 3 \times 5$, Cholesky is like taking the square root: $16 = 4 \times 4$. In ML, we use this to generate <strong>correlated noise</strong> in simulations or to solve <strong>Gaussian Processes</strong> efficiently.
+      </div>
+    </div>
     <h3>Applications in ML</h3>
     <ul>
       <li><strong>Gaussian Processes:</strong> Used to sample from multivariate normal distributions.</li>
@@ -683,6 +753,13 @@ print(f"Projection of y onto u: {projection}")
 
     <h2 id="qr">3. QR Decomposition</h2>
     <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)). Since \(Q\) preserves lengths and angles (\(Q^T Q = I\)), this is used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> QR is about <strong>Orthonormalization</strong>. We take messy columns and turn them into perpendicular unit vectors ($Q$), and a "recipe" matrix ($R$) that tells us how to rebuild the original. In ML, QR is the backbone of <strong>Linear Regression</strong> because $Q$ doesn't amplify numerical errors like basic inversion does.
+      </div>
+    </div>
 
     <div class="example-box">
       <h4>Problem: QR Factorization Intuition</h4>
@@ -700,6 +777,13 @@ print(f"Projection of y onto u: {projection}")
     <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
     <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> SVD says <strong>any</strong> linear transformation can be broken into three steps: a rotation ($V^\top$), a scaling ($\Sigma$), and another rotation ($U$). It reveals the "true axes" of your data. The values in $\Sigma$ tell you importance—this is how <strong>SVD-based compression</strong> knows which data to keep and which to throw away.
+      </div>
+    </div>
 
     <visualizer topic="SVD" />
 
@@ -770,7 +854,7 @@ print(f"SVD Singular Values: {s}")
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD directly uses eigenvalues. Now, reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
-  `},n={id:"eigenvalues-eigenvectors",title:"Eigenvalues and Eigenvectors",description:"Eigen-analysis reveals the internal structure of a matrix — its eigenvalues and eigenvectors — which are the foundations of PCA, Singular Value Decomposition, and spectral analysis.",color:"#FFD600",html:String.raw`
+  `},o={id:"eigenvalues-eigenvectors",title:"Eigenvalues and Eigenvectors",description:"Eigen-analysis reveals the internal structure of a matrix — its eigenvalues and eigenvectors — which are the foundations of PCA, Singular Value Decomposition, and spectral analysis.",color:"#FFD600",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Linear Algebra · Spectral Theory</div>
       <h1>Eigenvalues and Eigenvectors</h1>
@@ -806,11 +890,25 @@ print(f"SVD Singular Values: {s}")
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
     <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector. This means the vector \(\mathbf{v}\) essentially points in a direction that \(A\) does not rotate; it only stretches or shrinks it by \(\lambda\).</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Most vectors get knocked off their path in a transformation. <strong>Eigenvectors</strong> are the survivors: they stay on their span. In ML, these are the **principal axes** of your data. The eigenvalue $\lambda$ is the "energy" or variance along that axis.
+      </div>
+    </div>
+
     <h2 id="derivation">2. Mathematical Derivation (λ and v)</h2>
     <p>To find \(\lambda\), we rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\). For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular:</p>
     
-    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</p></div>
-    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</p></div>
+    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</div>
+    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> To find the eigenvalues, we look for when $(A - \lambda I)$ squashes space (determinant = 0). This polynomial $\det(A - \lambda I)$ is the "DNA" of the matrix. Once you have the roots, you have the spectral map of the transformation.
+      </div>
+    </div>
 
     <h2 id="example">3. Illustrative Example Walkthrough</h2>
     <div class="example-box">
@@ -831,6 +929,13 @@ print(f"SVD Singular Values: {s}")
 
     <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>
     <p>In Deep Learning, the <strong>Spectral Radius</strong> (the largest absolute eigenvalue) of your weight matrices determines if signals will explode or vanish. This is the cornerstone of <strong>Weight Initialization</strong> strategies.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Spectral Radius $\rho(A)$ is the "gain" of your layer. If $\rho(A) > 1$, gradients explode after many layers. If $\rho(A) < 1$, they vanish. Modern init strategies like <strong>Xavier/He</strong> keep this near 1 for stability.
+      </div>
+    </div>
     <div class="callout info">
       <div class="callout-icon">🚀</div>
       <div class="callout-body">
@@ -844,6 +949,13 @@ print(f"SVD Singular Values: {s}")
 
     <h2 id="factorization">6. Application: Matrix Factorization</h2>
     <p>If \(A\) is a symmetric matrix, it can be factored as \(A = Q \Lambda Q^T\), where \(Q\) is a matrix of eigenvectors and \(\Lambda\) is a diagonal matrix of eigenvalues. This is used in Recommendation Systems (like Netflix) to discover "latent features"—detecting a user's preference for 'Action' vs. 'Sci-Fi' from raw ratings.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If $A$ is symmetric, it can be perfectly "decoupled" into independent axes. ML uses this to find <strong>hidden factors</strong>. In a movie matrix, $Q$ might represent Genres, and $\Lambda$ tells you how much a person likes each genre.
+      </div>
+    </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>
@@ -882,7 +994,7 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
       <strong>Next Step:</strong> With the theory mastered, let's explore practical <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors-pca">Solved SVD & PCA Examples</a></strong>.
     </div>
     </div>
-  `},o={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
+  `},n={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📉 Linear Algebra · Principal Component Analysis</div>
       <h1>Principal Component Analysis (PCA) Walkthrough</h1>
@@ -907,6 +1019,13 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
       <p>Imagine Age and Income are highly correlated. Instead of using two features, PCA finds the "trend line" (PC1) that explains most of the spread. By projecting data onto this 1D line, we capture the "Age-Income" effect while reducing dimensionality by 50%.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> PCA works because it assumes <strong>Variance = Information</strong>. If a feature doesn't change much, it's probably noise. PCA rotates the coordinate system until the first axis (PC1) points toward the greatest spread of data.
+      </div>
+    </div>
+
     <h2 id="derivation">2. Mathematical Derivation (The 5 Steps)</h2>
     <p>This is the formal process for transforming a high-dimensional dataset \(X\) into a lower-dimensional subspace:</p>
     <div class="step-box"><span class="step-num">1</span><strong>Standardize:</strong> Mean-center the data (\(X_{centered} = X - \mu\)) so the data cloud is centered at the origin.</div>
@@ -914,6 +1033,13 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
     <div class="step-box"><span class="step-num">3</span><strong>Eigen-decomposition:</strong> Solve the characteristic equation \(Cv = \lambda v\). Eigenvectors define the new axes; eigenvalues define their "strength."</div>
     <div class="step-box"><span class="step-num">4</span><strong>Sort & Select:</strong> Rank eigenvalues in descending order. Pick the top \(k\) (where \(k < n\)) to form a projection matrix \(W\).</div>
     <div class="step-box"><span class="step-num">5</span><strong>Project:</strong> Transform the original data into the new subspace via \(X_{new} = X_{centered} \cdot W\).</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Covariance Matrix</strong> $C$ is the bridge. It tells us which features move together. By finding the eigenvectors of $C$, we are finding the natural "skeleton" of the data distribution. Rank the eigenvalues, and you've ranked the features by information density.
+      </div>
+    </div>
 
     <h2 id="examples">3. Solved Practice Examples</h2>
 
@@ -1127,4 +1253,4 @@ print("PCA 1D Projection:", X_pca)
       </div>
 
     </div>
-  `,sections:[t,e,i,a,s,n,o]};export{r as LINEAR_ALGEBRA_DATA};
+  `,sections:[t,e,i,a,s,o,n]};export{r as LINEAR_ALGEBRA_DATA};
