@@ -19,6 +19,9 @@ const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Le
     <h2 id="definition">Vector Definition</h2>
     <p>A vector is an ordered list of numbers, typically denoted in column form:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
+
+    <visualizer topic="Vectors" />
+
     <p>where \(n\) represents the dimensionality of the vector space.</p>
 
     <div class="def-box">
@@ -52,6 +55,8 @@ const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Le
       <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = (2)(4) + (3)(-1) = 8 - 3 = 5$$</div>
       <p><strong>Result:</strong> 5. Since the value is positive, the vectors point in a similar general direction.</p>
     </div>
+
+    <visualizer topic="DotProduct" />
 
     <h2 id="norms">2. Vector Norms (L₁ and L₂)</h2>
     <p>A <strong>Norm</strong> is a function that assigns a strictly positive length or size to a vector.</p>
@@ -100,6 +105,8 @@ const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Le
       <p>Any vector \([x, y]\) can be written as \(x[1, 0] + y[0, 1]\). Since these two vectors are independent and can reach any point, they form the standard basis for 2D space.</p>
     </div>
 
+    <visualizer topic="LinearCombinations" />
+
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>
 import numpy as np
@@ -146,6 +153,7 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#definition">Matrix Definition</a>
+      <a href="#playground">Interactive Matrix Playground</a>
       <a href="#mult">1. Matrix Multiplication</a>
       <a href="#transpose">2. Matrix Transpose</a>
       <a href="#identity">3. Identity Matrix</a>
@@ -166,6 +174,11 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
         <li>Familiarity with basic algebraic variables.</li>
       </ul>
     </div>
+
+    <h2 id="playground">Interactive Matrix Playground</h2>
+    <p>Experiment with real-time matrix operations. Switch between <strong>Addition</strong>, <strong>Multiplication</strong>, and <strong>Scalar</strong> modes to see how the arithmetic DNA of each operation compositions the final result.</p>
+    
+    <visualizer topic="MatrixOperations" />
 
     <h2 id="mult">1. Matrix Multiplication</h2>
     <p>Matrix multiplication is not a simple element-wise operation. It is a way of composing linear transformations.</p>
@@ -189,6 +202,8 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
       </ul>
       <div class="math-block">$$C = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
     </div>
+
+    <visualizer topic="Matrices" />
 
     <h2 id="transpose">2. Matrix Transpose</h2>
     <p>The transpose of a matrix is an operator which flips a matrix over its diagonal.</p>
@@ -357,6 +372,8 @@ print(f"Inverse:\n{A_inv}")
       <p><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4.</p>
     </div>
 
+    <visualizer topic="Determinants" />
+
     <h2 id="trace">3. Trace (tr(A))</h2>
     <p>The <strong>Trace</strong> of a square matrix is the sum of its diagonal elements.</p>
 
@@ -494,6 +511,8 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
       </ul>
     </div>
 
+    <visualizer topic="BasisChange" />
+
     <h2 id="orthogonality">3. Orthogonality</h2>
     <p>Two vectors are <strong>Orthogonal</strong> if they are perpendicular to each other.</p>
 
@@ -571,6 +590,8 @@ print(f"Projection of y onto u: {projection}")
       <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
     </div>
 
+    <visualizer topic="Matrices" />
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#lu">1. LU Decomposition</a>
@@ -628,6 +649,8 @@ print(f"Projection of y onto u: {projection}")
           <li><strong>\(V^T\):</strong> Right singular vectors (Rotations in input space).</li>
         </ul>
       </div>
+
+    <visualizer topic="SVD" />
 
     <h3>Applications in ML</h3>
     <ul>
@@ -688,6 +711,8 @@ print(f"SVD Singular Values: {s}")
       <h1>Introduction to Eigenvalues and Eigenvectors</h1>
       <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
     </div>
+
+    <visualizer topic="Eigenvalues" />
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
@@ -792,6 +817,8 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
       <h1>Principal Component Analysis (PCA) Walkthrough</h1>
       <p>PCA is the crown jewel of dimensionality reduction. It bridges the gap between <strong>Linear Algebra</strong> (SVD/Eigenvectors) and <strong>Statistics</strong> (Variance/Covariance) to simplify high-dimensional data without losing its soul.</p>
     </div>
+
+    <visualizer topic="PCA" />
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
