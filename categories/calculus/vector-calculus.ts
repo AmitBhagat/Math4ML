@@ -96,6 +96,7 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="Gradient" />
     <ul>
       <li><strong>PINNs</strong>: Loss functions are designed to penalize the model if the Divergence or Curl violates physical laws (e.g., Maxwell's equations).</li>
       <li><strong>Generative Models</strong>: Divergence is used in Normalizing Flows to track how probability density "spreads" as data is transformed.</li>

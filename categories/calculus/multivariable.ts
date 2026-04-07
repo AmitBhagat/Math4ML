@@ -37,6 +37,12 @@ export const multivariableSection: TopicSection = {
       <li>A <strong>Jacobian</strong> helps us handle vector-valued functions (multiple outputs).</li>
       <li>A <strong>Hessian</strong> describes the "curvature" of the surface, telling us if we are at a minimum, maximum, or a saddle point.</li>
     </ul>
+    <div class="my-8">
+      <visualizer topic="PartialDerivatives" />
+    </div>
+    <div class="my-8">
+      <visualizer topic="JacobianHessian" />
+    </div>
 
     <h2 id="derivation">Mathematical Derivation</h2>
 

@@ -19,7 +19,8 @@ export const expectationVarianceSection: TopicSection = {
       <a href="#core" class="sub">↳ 3. Covariance Cov(X, Y)</a>
       <a href="#core" class="sub">↳ 4. Correlation ρ</a>
       <a href="#derivation">Mathematical Derivation: Variance Shortcut</a>
-      <a href="#example">Illustrative Example: Portfolio Risk</a>
+      <a href="#example">4. Illustrative Example: Portfolio Risk</a>
+      <a href="#scaling-example">5. Illustrative Example: Scaling & Shifts</a>
       <a href="#implementation">Implementation in Python (NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -71,29 +72,36 @@ export const expectationVarianceSection: TopicSection = {
     <h2 id="derivation">Mathematical Derivation: Variance Shortcut</h2>
     <p>It is often easier to calculate variance using the shortcut formula. Here is the step-by-step derivation:</p>
 
-    <div class="step-box"><div class="step-num">1</div><div>Start with the definition: \(Var(X) = E[(X - \mu)^2]\) where \(\mu = E[X]\).</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>Expand the square: \(E[X^2 - 2X\mu + \mu^2]\).</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>Use the <strong>Linearity of Expectation</strong> \((E[A+B] = E[A] + E[B])\): \[Var(X) = E[X^2] - E[2X\mu] + E[\mu^2]\]</div></div>
-    <div class="step-box"><div class="step-num">4</div><div>Since \(\mu\) is a constant, \(E[2X\mu] = 2\mu E[X] = 2\mu^2\): \[Var(X) = E[X^2] - 2\mu^2 + \mu^2\]</div></div>
-    <div class="step-box"><div class="step-num">5</div><div>Simplify:</div></div>
-    <div class="math-block">$$Var(X) = E[X^2] - \mu^2 = E[X^2] - (E[X])^2$$</div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Definition:</strong> \(Var(X) = E[(X - \mu)^2]\) where \(\mu = E[X]\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Expand Square:</strong> \(E[X^2 - 2X\mu + \mu^2]\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Linearity:</strong> \(E[X^2] - E[2X\mu] + E[\mu^2]\).</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>Constants:</strong> \(E[X^2] - 2\mu E[X] + \mu^2 = E[X^2] - 2\mu^2 + \mu^2\).</div></div>
+    <div class="step-box"><span class="step-num">5</span><div><strong>Simplify:</strong></div></div>
+    <div class="math-block">$$Var(X) = E[X^2] - (E[X])^2$$</div>
 
-    <h2 id="example">Illustrative Example: Portfolio Risk</h2>
+    <h2 id="example">4. Illustrative Example: Portfolio Risk</h2>
     <div class="example-box">
-      <h4>Problem: Two-Stock Portfolio</h4>
-      <p>You have two stocks, \(X\) and \(Y\).</p>
-      <ul>
-        <li>\(E[X] = 10\%\), \(Var(X) = 4\)</li>
-        <li>\(E[Y] = 12\%\), \(Var(Y) = 9\)</li>
-        <li>\(Cov(X, Y) = 2\)</li>
-      </ul>
-      <p><strong>Calculate the Expected Return and Variance of a portfolio \(P = 0.5X + 0.5Y\):</strong></p>
-      <ol>
-        <li><strong>Expected Return:</strong> \(E[P] = 0.5(10) + 0.5(12) = 11\%\).</li>
-        <li><strong>Portfolio Variance:</strong></li>
-      </ol>
-      <div class="math-block">$$Var(0.5X + 0.5Y) = 0.5^2 Var(X) + 0.5^2 Var(Y) + 2(0.5)(0.5) Cov(X, Y)$$
-$$Var(P) = 0.25(4) + 0.25(9) + 0.5(2) = 1 + 2.25 + 1 = 4.25$$</div>
+      <h4>Problem: Two-Stock Variance</h4>
+      <p>Consider two stocks \(X\) and \(Y\) with returns \(E[X] = 10, E[Y] = 12\) and variances \(Var(X) = 4, Var(Y) = 9\). If their covariance is \(2\), what is the variance of a 50/50 portfolio \(P = 0.5X + 0.5Y\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Expectation (Linearity):</strong> \(E[P] = 0.5(10) + 0.5(12) = 11\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Variance Rule:</strong> \(Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X, Y)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Substitute:</strong> \(0.25(4) + 0.25(9) + 2(0.5)(0.5)(2)\).</div></div>
+
+      <div class="math-block">$$Var(P) = 1 + 2.25 + 1 = 4.25$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Insight:</strong> The portfolio variance (4.25) is lower than simply averaging the individual variances \((4+9)/2 = 6.5\) because the stocks are not perfectly correlated. This is "Diversification" in action.</div></div>
+    </div>
+
+    <h2 id="scaling-example">5. Illustrative Example: Scaling & Shifts</h2>
+    <div class="example-box">
+      <h4>Problem: Mean & Variance Transformations</h4>
+      <p>Imagine your data \(X\) has mean \(\mu=5\) and variance \(\sigma^2=16\). You transform the data by multiplying by 3 and adding 10: \(Y = 3X + 10\). What are the new mean and variance?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>New Mean:</strong> \(E[3X + 10] = 3E[X] + 10 = 3(5) + 10 = 25\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>New Variance:</strong> \(Var(3X + 10) = 3^2 Var(X) = 9(16) = 144\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Mean shifts linearly \((25)\). Variance scales by the <strong>square</strong> of the multiplier \((144)\). Added constants (10) change the mean but have <strong>zero effect</strong> on variance (spread).</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (NumPy)</h2>

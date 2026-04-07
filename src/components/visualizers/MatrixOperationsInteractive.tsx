@@ -1,30 +1,45 @@
 import React, { useState } from "react";
 import { InlineMath } from "react-katex";
+import { useTheme } from "../../hooks/useTheme";
 
-const MatrixInput = ({ value, onChange }: { value: number; onChange: (v: number) => void; key?: string }) => (
+interface MatrixInputProps {
+  value: number;
+  onChange: (v: number) => void;
+  theme: 'light' | 'dark';
+  key?: React.Key;
+}
+
+const MatrixInput = ({ value, onChange, theme }: MatrixInputProps) => (
   <input
     type="number"
     value={value}
     onChange={(e) => onChange(Number(e.target.value))}
-    className="w-16 h-12 text-center border border-gray-300 rounded focus:ring-2 focus:ring-gray-500 focus:border-transparent transition-all px-2 py-2 font-medium text-gray-800"
+    className="w-16 h-12 text-center border border-border-premium bg-bg-tertiary rounded-lg focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all px-2 py-2 font-mono font-bold text-slate-900 dark:text-white"
   />
 );
 
-const ResultCell = ({ value }: { value: number; key?: string }) => (
-  <div className="w-16 h-12 flex items-center justify-center border border-green-200 bg-white rounded text-green-600 font-bold shadow-sm">
+interface ResultCellProps {
+  value: number;
+  theme: 'light' | 'dark';
+  key?: React.Key;
+}
+
+const ResultCell = ({ value, theme }: ResultCellProps) => (
+  <div className="w-16 h-12 flex items-center justify-center border-2 border-slate-900 dark:border-white bg-white dark:bg-slate-950 text-slate-900 dark:text-white font-mono font-black shadow-lg transform scale-105">
     {value}
   </div>
 );
 
-const Bracket = ({ children }: { children: React.ReactNode }) => (
+const Bracket = ({ children }: { children: React.ReactNode; theme: 'light' | 'dark' }) => (
   <div className="relative flex items-center">
-    <span className="text-4xl text-gray-300 font-light select-none px-1">[</span>
+    <span className="text-5xl text-slate-300 dark:text-slate-700 font-extralight select-none px-2">[</span>
     {children}
-    <span className="text-4xl text-gray-300 font-light select-none px-1">]</span>
+    <span className="text-5xl text-slate-300 dark:text-slate-700 font-extralight select-none px-2">]</span>
   </div>
 );
 
 export const MatrixOperationsInteractive: React.FC = () => {
+  const { theme } = useTheme();
   const [mode, setMode] = useState<"add" | "multiply" | "scalar">("add");
   const [matrixA, setMatrixA] = useState([[2, 1], [0, 3]]);
   const [matrixB, setMatrixB] = useState([[1, 2], [4, 1]]);
@@ -66,20 +81,22 @@ export const MatrixOperationsInteractive: React.FC = () => {
   const result = calculateResult();
 
   return (
-    <div className="bg-white p-6 md:p-8 rounded-xl shadow-sm border border-gray-100 max-w-4xl mx-auto my-8 font-sans text-gray-900">
-      <div className="mb-8">
-        <h3 className="text-xl font-bold text-gray-900 mb-2">Interactive Matrix Operations</h3>
-        <p className="text-sm text-gray-600">Experiment with Addition, Multiplication, and Scalar operations in real-time.</p>
+    <div className="bg-bg-secondary dark:bg-slate-900 p-8 rounded-[2rem] shadow-xl border border-border-premium max-w-5xl mx-auto my-12 transition-colors duration-500 overflow-hidden">
+      <div className="mb-10 text-center">
+        <h3 className="text-xs font-black uppercase tracking-[0.4em] text-slate-400 dark:text-slate-500 mb-2 font-mono">Computational Engine</h3>
+        <h2 className="text-3xl font-headline font-black text-slate-900 dark:text-white tracking-tight">Interactive Matrix Laboratory</h2>
       </div>
 
       {/* Mode Selector */}
-      <div className="flex flex-wrap gap-3 mb-8">
+      <div className="flex flex-wrap justify-center gap-4 mb-12">
         {(["add", "multiply", "scalar"] as const).map((m) => (
           <button
             key={m}
             onClick={() => setMode(m)}
-            className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
-              mode === m ? "bg-black text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"
+            className={`px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest transition-all duration-300 border-2 ${
+              mode === m 
+                ? "bg-white dark:bg-slate-950 text-slate-900 dark:text-white border-slate-900 dark:border-white shadow-lg" 
+                : "bg-transparent text-slate-400 dark:text-slate-500 border-border-premium hover:border-slate-400"
             }`}
           >
             {m === "add" ? "Addition (A + B)" : m === "multiply" ? "Multiplication (A × B)" : "Scalar (k × A)"}
@@ -88,56 +105,70 @@ export const MatrixOperationsInteractive: React.FC = () => {
       </div>
 
       {/* Matrix Row */}
-      <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-12">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-8 mb-16 scale-90 md:scale-100">
         {mode === "scalar" && (
           <div className="flex flex-col items-center">
-             <label className="text-xs font-bold text-gray-400 uppercase mb-2">Scalar k</label>
+             <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Scalar k</label>
              <input
                 type="number"
                 value={scalar}
                 onChange={(e) => setScalar(Number(e.target.value))}
-                className="w-24 h-12 text-center text-lg font-semibold border border-gray-300 rounded focus:ring-2 focus:ring-gray-500 transition-all"
+                className="w-20 h-14 text-center text-xl font-mono font-black bg-bg-tertiary border-2 border-border-premium rounded-xl focus:ring-2 focus:ring-slate-400 transition-all text-slate-900 dark:text-white"
              />
           </div>
         )}
 
         <div className="flex flex-col items-center">
-          <label className="text-xs font-bold text-gray-400 uppercase mb-2">Matrix A</label>
-          <Bracket>
-            <div className="grid grid-cols-2 gap-2">
+          <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Matrix A</label>
+          <Bracket theme={theme}>
+            <div className="grid grid-cols-2 gap-3">
               {matrixA.map((row, r) => row.map((val, c) => (
-                <MatrixInput key={`a-${r}-${c}`} value={val} onChange={(v) => updateA(r, c, v)} />
+                <MatrixInput 
+                  key={`a-${r}-${c}`} 
+                  value={val} 
+                  onChange={(v) => updateA(r, c, v)} 
+                  theme={theme} 
+                />
               )))}
             </div>
           </Bracket>
         </div>
 
-        <span className="text-2xl text-gray-400 font-light mx-2">
+        <span className="text-3xl text-slate-300 dark:text-slate-700 font-light translate-y-2">
           {mode === "add" ? "+" : "×"}
         </span>
 
         {mode !== "scalar" && (
           <div className="flex flex-col items-center">
-            <label className="text-xs font-bold text-gray-400 uppercase mb-2">Matrix B</label>
-            <Bracket>
-              <div className="grid grid-cols-2 gap-2">
+            <label className="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-3">Matrix B</label>
+            <Bracket theme={theme}>
+              <div className="grid grid-cols-2 gap-3">
                 {matrixB.map((row, r) => row.map((val, c) => (
-                  <MatrixInput key={`b-${r}-${c}`} value={val} onChange={(v) => updateB(r, c, v)} />
+                  <MatrixInput 
+                    key={`b-${r}-${c}`} 
+                    value={val} 
+                    onChange={(v) => updateB(r, c, v)} 
+                    theme={theme} 
+                  />
                 )))}
               </div>
             </Bracket>
           </div>
         )}
 
-        <span className="text-2xl text-gray-400 font-light mx-2">=</span>
+        <span className="text-3xl text-slate-300 dark:text-slate-700 font-light translate-y-2">=</span>
 
         <div className="flex flex-col items-center">
-          <label className="text-xs font-bold text-green-600 uppercase mb-2">Result Matrix</label>
-          <div className="bg-green-50 border border-green-100 p-4 rounded-xl">
-             <Bracket>
-                <div className="grid grid-cols-2 gap-2">
+          <label className="text-[9px] font-black text-slate-400 dark:text-slate-500 uppercase tracking-widest mb-3">Result</label>
+          <div className="p-4 rounded-2xl bg-bg-tertiary/50">
+             <Bracket theme={theme}>
+                <div className="grid grid-cols-2 gap-5">
                   {result.map((row, r) => row.map((val, c) => (
-                    <ResultCell key={`c-${r}-${c}`} value={val} />
+                    <ResultCell 
+                      key={`c-${r}-${c}`} 
+                      value={val} 
+                      theme={theme} 
+                    />
                   )))}
                 </div>
              </Bracket>
@@ -146,33 +177,83 @@ export const MatrixOperationsInteractive: React.FC = () => {
       </div>
 
       {/* Calculation Steps Area */}
-      <div className="bg-gray-50 p-6 rounded-lg border border-gray-100">
-        <h4 className="text-lg font-semibold text-gray-800 mb-2">Calculation Steps</h4>
-        <p className="text-sm text-gray-500 mb-4 italic">Individual cell arithmetic based on current inputs.</p>
+      <div className="bg-bg-tertiary/30 p-8 rounded-2xl border border-border-premium">
+        <div className="flex items-center gap-3 mb-6">
+           <div className="w-1 h-4 bg-slate-900 dark:bg-white rounded-full"></div>
+           <h4 className="text-xs font-black uppercase tracking-widest text-slate-900 dark:text-white">Arithmetic Logic</h4>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4 text-sm text-gray-700">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-6 text-[13px] font-mono text-slate-600 dark:text-slate-400">
            {mode === "add" && (
              <>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{11} = A_{11} + B_{11} = ${matrixA[0][0]} + ${matrixB[0][0]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{12} = A_{12} + B_{12} = ${matrixA[0][1]} + ${matrixB[0][1]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][1]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{21} = A_{21} + B_{21} = ${matrixA[1][0]} + ${matrixB[1][0]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{22} = A_{22} + B_{22} = ${matrixA[1][1]} + ${matrixB[1][1]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][1]}</span></div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{11} = A_{11} + B_{11} = ${matrixA[0][0]} + ${matrixB[0][0]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[0][0]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{12} = A_{12} + B_{12} = ${matrixA[0][1]} + ${matrixB[0][1]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[0][1]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{21} = A_{21} + B_{21} = ${matrixA[1][0]} + ${matrixB[1][0]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[1][0]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{22} = A_{22} + B_{22} = ${matrixA[1][1]} + ${matrixB[1][1]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[1][1]}</span>
+               </div>
              </>
            )}
            {mode === "multiply" && (
              <>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{11} = (A_{11} \\times B_{11}) + (A_{12} \\times B_{21}) = (${matrixA[0][0]} \\times ${matrixB[0][0]}) + (${matrixA[0][1]} \\times ${matrixB[1][0]}) =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{12} = (A_{11} \\times B_{12}) + (A_{12} \\times B_{22}) = (${matrixA[0][0]} \\times ${matrixB[0][1]}) + (${matrixA[0][1]} \\times ${matrixB[1][1]}) =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][1]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{21} = (A_{21} \\times B_{11}) + (A_{22} \\times B_{21}) = (${matrixA[1][0]} \\times ${matrixB[0][0]}) + (${matrixA[1][1]} \\times ${matrixB[1][0]}) =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{22} = (A_{21} \\times B_{12}) + (A_{22} \\times B_{22}) = (${matrixA[1][0]} \\times ${matrixB[0][1]}) + (${matrixA[1][1]} \\times ${matrixB[1][1]}) =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][1]}</span></div>
+               <div className="flex flex-col gap-1 border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{11} = (A_{11} \\cdot B_{11}) + (A_{12} \\cdot B_{21})`}</InlineMath>
+                 <div className="flex justify-between items-center text-[11px] opacity-60">
+                   <span>{`(${matrixA[0][0]} \\cdot ${matrixB[0][0]}) + (${matrixA[0][1]} \\cdot ${matrixB[1][0]})`}</span>
+                   <span className="text-slate-900 dark:text-white font-black text-sm">{result[0][0]}</span>
+                 </div>
+               </div>
+               <div className="flex flex-col gap-1 border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{12} = (A_{11} \\cdot B_{12}) + (A_{12} \\cdot B_{22})`}</InlineMath>
+                 <div className="flex justify-between items-center text-[11px] opacity-60">
+                   <span>{`(${matrixA[0][0]} \\cdot ${matrixB[0][1]}) + (${matrixA[0][1]} \\cdot ${matrixB[1][1]})`}</span>
+                   <span className="text-slate-900 dark:text-white font-black text-sm">{result[0][1]}</span>
+                 </div>
+               </div>
+               <div className="flex flex-col gap-1 border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{21} = (A_{21} \\cdot B_{11}) + (A_{22} \\cdot B_{21})`}</InlineMath>
+                 <div className="flex justify-between items-center text-[11px] opacity-60">
+                   <span>{`(${matrixA[1][0]} \\cdot ${matrixB[0][0]}) + (${matrixA[1][1]} \\cdot ${matrixB[1][0]})`}</span>
+                   <span className="text-slate-900 dark:text-white font-black text-sm">{result[1][0]}</span>
+                 </div>
+               </div>
+               <div className="flex flex-col gap-1 border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{22} = (A_{21} \\cdot B_{12}) + (A_{22} \\cdot B_{22})`}</InlineMath>
+                 <div className="flex justify-between items-center text-[11px] opacity-60">
+                   <span>{`(${matrixA[1][0]} \\cdot ${matrixB[0][1]}) + (${matrixA[1][1]} \\cdot ${matrixB[1][1]})`}</span>
+                   <span className="text-slate-900 dark:text-white font-black text-sm">{result[1][1]}</span>
+                 </div>
+               </div>
              </>
            )}
            {mode === "scalar" && (
              <>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{11} = k \\times A_{11} = ${scalar} \\times ${matrixA[0][0]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{12} = k \\times A_{12} = ${scalar} \\times ${matrixA[0][1]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[0][1]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{21} = k \\times A_{21} = ${scalar} \\times ${matrixA[1][0]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][0]}</span></div>
-               <div className="flex items-center gap-2"><InlineMath>{`C_{22} = k \\times A_{22} = ${scalar} \\times ${matrixA[1][1]} =`}</InlineMath> <span className="text-green-600 font-bold">{result[1][1]}</span></div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{11} = k \\cdot A_{11} = ${scalar} \\cdot ${matrixA[0][0]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[0][0]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{12} = k \\cdot A_{12} = ${scalar} \\cdot ${matrixA[0][1]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[0][1]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{21} = k \\cdot A_{21} = ${scalar} \\cdot ${matrixA[1][0]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[1][0]}</span>
+               </div>
+               <div className="flex items-center justify-between border-b border-border-premium pb-2">
+                 <InlineMath>{`C_{22} = k \\cdot A_{22} = ${scalar} \\cdot ${matrixA[1][1]}`}</InlineMath>
+                 <span className="text-slate-900 dark:text-white font-black">{result[1][1]}</span>
+               </div>
              </>
            )}
         </div>

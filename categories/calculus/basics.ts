@@ -107,8 +107,12 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="Differentiation" />
     <ul>
       <li><strong>Backpropagation</strong>: The Chain Rule is used to propagate the error from the output layer back to the hidden layers to update weights.</li>
+    </ul>
+    <visualizer topic="ChainRule" />
+    <ul>
       <li><strong>Gradient Descent</strong>: Uses partial derivatives to find the local minimum of the cost function.</li>
       <li><strong>Activation Functions</strong>: Derivatives of functions like <strong>Sigmoid</strong> or <strong>ReLU</strong> are needed to calculate gradients during training.</li>
     </ul>

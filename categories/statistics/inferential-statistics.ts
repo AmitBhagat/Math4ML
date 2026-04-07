@@ -13,7 +13,8 @@ export const inferentialStatisticsSection: TopicSection = {
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#hypothesis-testing">1. Hypothesis Testing</a>
+      <a href="#hypothesis-example">1.1 Illustrative Example: The p-value Ritual</a>
+      <a href="#error-example">1.2 Illustrative Example: Type I vs. Type II</a>
       <a href="#statistical-tests">2. Common Statistical Tests</a>
       <a href="#confidence-intervals">3. Confidence Intervals (CI)</a>
       <a href="#implementation">Python Implementation</a>
@@ -22,45 +23,47 @@ export const inferentialStatisticsSection: TopicSection = {
 
     <h2 id="hypothesis-testing">1. Hypothesis Testing</h2>
     <p>Hypothesis testing is a formal procedure for investigating our ideas about the world using statistics.</p>
-    <div class="def-box">
+    <div class="premium-def-box">
       <ul style="margin:0">
-        <li><strong>Null Hypothesis ($H_0$):</strong> The status quo; assumes no effect or no difference (e.g., "Feature X does not affect the target").</li>
-        <li><strong>Alternative Hypothesis ($H_1$):</strong> What you want to prove (e.g., "Feature X significantly affects the target").</li>
-        <li><strong>P-value:</strong> The probability of obtaining results at least as extreme as the observed results, assuming $H_0$ is true. 
-          <ul>
-            <li><strong>$p < 0.05$:</strong> Reject $H_0$ (Statistically Significant).</li>
-            <li><strong>$p \ge 0.05$:</strong> Fail to reject $H_0$.</li>
-          </ul>
-        </li>
+        <li><strong>Null Hypothesis (\(H_0\)):</strong> The "No Effect" assumption. (e.g., "This feature is noise").</li>
+        <li><strong>Alternative Hypothesis (\(H_1\)):</strong> The "Effect Exists" claim. (e.g., "This feature predicts price").</li>
+        <li><strong>P-value:</strong> Probability of seeing your result IF the null hypothesis were true.</li>
       </ul>
     </div>
 
-    <h2 id="statistical-tests">2. Common Statistical Tests</h2>
-    
-    <h3>A. T-Test</h3>
-    <p>Used to compare the means of two groups.</p>
-    <ul>
-      <li><strong>One-sample T-test:</strong> Compares the mean of a sample to a known population mean.</li>
-      <li><strong>Independent Two-sample T-test:</strong> Compares the means of two independent groups.</li>
-    </ul>
-    <div class="math-block">
-      $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
-    </div>
-    <p>Where $\bar{x}$ is the sample mean, $s^2$ is the variance, and $n$ is the sample size.</p>
+    <h2 id="hypothesis-example">1.1 Illustrative Example: The p-value Ritual</h2>
+    <div class="example-box">
+      <h4>Problem: Is Feature X Significant?</h4>
+      <p>In a housing model, the coefficient for 'Square Footage' has a \(p = 0.002\). Should we keep it?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Threshold (\(\alpha\)):</strong> Usually set to 0.05.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Comparison:</strong> \(0.002 < 0.05\).</div></div>
 
-    <h3>B. Chi-Square Test ($\chi^2$)</h3>
-    <p>Used for categorical data to determine if there is a significant association between two variables (Test of Independence).</p>
-    <div class="math-block">
-      $$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Reject \(H_0\). The relationship between square footage and price is <strong>Statistically Significant</strong>. There is only a 0.2% chance this result is due to random noise.</div></div>
     </div>
-    <p>Where $O_i$ is the observed frequency and $E_i$ is the expected frequency.</p>
+
+    <h2 id="error-example">1.2 Illustrative Example: Type I vs. Type II</h2>
+    <div class="example-box">
+      <h4>Problem: Diagnosing a Broken Server</h4>
+      <p>A monitoring system alerts if a server is 'Down'. What are the errors?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Type I (False Positive):</strong> Alert says "Down" but server is "Healthy". You woke up for nothing (Alpha Error).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Type II (False Negative):</strong> Alert says "Healthy" but server is "Down". Users are complaining (Beta Error).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Tradeoff:</strong> Decreasing the threshold to catch every "Down" server (Lower Type II) usually increases "False Alarms" (Higher Type I). This is the <strong>Precision-Recall Tradeoff</strong>.</div></div>
+    </div>
+
+    <h2 id="statistical-tests">2. Common Statistical Tests</h2>
+    <div class="step-box"><span class="step-num">1</span><div><strong>The T-Test:</strong> Compares means of small samples (\(n < 30\)).</div></div>
+    <div class="math-block">$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$</div>
+
+    <div class="step-box"><span class="step-num">2</span><div><strong>The Chi-Square (\(\chi^2\)):</strong> Compares categories for independence (e.g., clicks vs. gender).</div></div>
+    <div class="math-block">$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$</div>
 
     <h2 id="confidence-intervals">3. Confidence Intervals (CI)</h2>
     <p>A Confidence Interval provides a range of values within which we are confident the true population parameter lies (usually 95%).</p>
-    <div class="math-block">
-      $$CI = \bar{x} \pm z \left( \frac{\sigma}{\sqrt{n}} \right)$$
-    </div>
-    <p>Where $z$ is the z-score (1.96 for 95% CI) and $\frac{\sigma}{\sqrt{n}}$ is the Standard Error.</p>
+    <div class="math-block">$$CI = \bar{x} \pm z \left( \frac{\sigma}{\sqrt{n}} \right)$$</div>
+    <p>Where \(z\) is the critical value (1.96 for 95% CI) and \(\frac{\sigma}{\sqrt{n}}\) is the <strong>Standard Error</strong>.</p>
 
     <div class="callout info">
       <div class="callout-icon">📊</div>

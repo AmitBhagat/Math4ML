@@ -97,6 +97,7 @@ for start in starts:
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="GradientDescent" />
     <ul>
       <li><strong>Linear/Logistic Regression</strong>: These result in <strong>Convex</strong> loss functions. Gradient Descent is guaranteed to find the global optimum.</li>
       <li><strong>Deep Learning (Neural Networks)</strong>: These are highly <strong>Non-Convex</strong>. They have billions of parameters and countless local minima and saddle points.</li>

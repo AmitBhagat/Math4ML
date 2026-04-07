@@ -13,10 +13,10 @@ export const evaluationMetricsSection: TopicSection = {
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#classification">1. Classification Metrics (Confusion Matrix)</a>
-      <a href="#regression">2. Regression Metrics</a>
-      <a href="#cross-entropy">3. Probabilistic Metric: Cross-Entropy</a>
-      <a href="#example">Mathematical Example: Precision vs. Recall</a>
+      <a href="#classification">1. Classification Metrics</a>
+      <a href="#precision-recall-example">2. Illustrative Example: Precision vs. Recall</a>
+      <a href="#regression">3. Regression Metrics</a>
+      <a href="#mae-mse-example">4. Illustrative Example: MAE vs. MSE</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -24,14 +24,22 @@ export const evaluationMetricsSection: TopicSection = {
     <h2 id="classification">1. Classification Metrics (The Confusion Matrix)</h2>
     <p>Most classification metrics are derived from the <strong>Confusion Matrix</strong>, which compares Predicted vs. Actual labels.</p>
     
-    <div class="def-box">
-      <div class="def-title">Core Formulas</div>
-      <ul style="margin:0">
-        <li><strong>Accuracy:</strong> $\frac{TP + TN}{TP + TN + FP + FN}$</li>
-        <li><strong>Precision:</strong> Of all predicted positives, how many were actually positive? $\frac{TP}{TP + FP}$</li>
-        <li><strong>Recall:</strong> Of all actual positives, how many did we catch? $\frac{TP}{TP + FN}$</li>
-        <li><strong>F1-Score:</strong> The harmonic mean of Precision and Recall. $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$</li>
-      </ul>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Accuracy:</strong> Overall correctness. \((TP + TN) / \text{Total}\). High bias on imbalanced data.</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Precision:</strong> "Is it really positive?" \(\frac{TP}{TP + FP}\). Target when False Alarms are costly.</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Recall (Sensitivity):</strong> "Did we find all positives?" \(\frac{TP}{TP + FN}\). Critical for safety/health.</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>F1-Score:</strong> Harmonic mean. \(2 \cdot \frac{\text{Pre} \cdot \text{Rec}}{\text{Pre} + \text{Rec}}\). Balance point.</div></div>
+
+    <h2 id="precision-recall-example">2. Illustrative Example: Precision vs. Recall</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating a Cancer Model</h4>
+      <p>A dataset has 100 patients. 10 have cancer (\(P=10\)). A model predicts "Cancer" for 15 people. Out of those 15, only 8 actually have cancer (\(TP=8\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>False Positives (FP):</strong> Predicted 15 - Correct 8 = 7.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>False Negatives (FN):</strong> Actual 10 - Found 8 = 2.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Precision:</strong> \(8 / (8 + 7) \approx 0.53\) (53%).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Recall:</strong> \(8 / (8 + 2) = 0.80\) (80%).</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Analysis:</strong> The model is "Safe" (80% recall catches most cancer) but "Noisy" (53% precision means many healthy people get a scare). In ML, we tune the <strong>Decision Threshold</strong> to slide along this tradeoff.</div></div>
     </div>
 
     <h3>ROC-AUC</h3>
@@ -42,40 +50,23 @@ export const evaluationMetricsSection: TopicSection = {
 
     <h2 id="regression">2. Regression Metrics</h2>
     
-    <h3>A. Mean Absolute Error (MAE)</h3>
-    <p>The average of the absolute differences between predictions and actual values. It's robust to outliers.</p>
-    <div class="math-block">
-      $$\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$$
-    </div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>MAE (Robust):</strong> Average absolute difference. \(\frac{1}{n} \sum |y - \hat{y}|\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>MSE (Square Penalty):</strong> Squaring large errors. \(\frac{1}{n} \sum (y - \hat{y})^2\).</div></div>
 
-    <h3>B. Mean Squared Error (MSE)</h3>
-    <p>The average of the squared differences. Penalizes large errors more heavily than MAE due to squaring.</p>
-    <div class="math-block">
-      $$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
-    </div>
-
-    <h2 id="cross-entropy">3. Probabilistic Metric: Cross-Entropy</h2>
-    <p>In Deep Learning, we don't just want a label; we want the probability. <strong>Cross-Entropy</strong> measures the performance of a model whose output is a probability between 0 and 1.</p>
-    <div class="math-block">
-      $$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$
-    </div>
-    <ul>
-      <li>If predicted probability $\hat{y}_i$ for true class $y_i$ is close to 1, loss is low.</li>
-      <li>If it is close to 0, loss approaches infinity.</li>
-    </ul>
-
+    <h2 id="mae-mse-example">4. Illustrative Example: MAE vs. MSE</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example: Precision vs. Recall</h4>
-      <p><strong>Problem:</strong> A cancer detection model predicts 100 patients. Actual Cancer: 10. Model predicts Cancer for 15. Correct predictions (TP): 8.</p>
+      <h4>Problem: Impact of Outliers</h4>
+      <p>A model predicts house prices. For 3 houses, errors are: [\$1k, \$2k, \$10k]. Compare metrics.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Identify counts:</strong> $TP=8$, $FP=7$ (15-8), $FN=2$ (10-8).</li>
-        <li><strong>Precision:</strong> $8 / (8 + 7) = 0.53$ (53%).</li>
-        <li><strong>Recall:</strong> $8 / (8 + 2) = 0.80$ (80%).</li>
-      </ol>
-      <p><strong>Conclusion:</strong> High recall (catches most cancer) but low precision (many false alarms).</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>MAE:</strong> \((1 + 2 + 10) / 3 = 4.33\text{k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>MSE:</strong> \((1^2 + 2^2 + 10^2) / 3 = (1 + 4 + 100) / 3 = 35\text{k}\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Insight:</strong> The outlier (10k error) dominates the <strong>MSE</strong> due to the squaring effect (\(100/35\) vs \(10/4.33\)). Use MSE when large errors are unacceptable (e.g., self-driving safety); use MAE when you want to ignore noise.</div></div>
     </div>
+
+    <h2 id="cross-entropy">5. Probabilistic Metric: Cross-Entropy</h2>
+    <p>In Deep Learning, we don't just want a label; we want <strong>Confidence</strong>.</p>
+    <div class="math-block">$$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$</div>
 
     <h2 id="implementation">Python Implementation</h2>
     <python-code>

@@ -18,7 +18,8 @@ export const probabilityDistributionsSection: TopicSection = {
       <a href="#continuous">Continuous Distributions</a>
       <a href="#continuous" class="sub">↳ 4. Gaussian · 5. Uniform · 6. Exponential · 7. Laplace</a>
       <a href="#derivation">Mathematical Derivation: Gaussian to Standard Normal</a>
-      <a href="#comparison">Illustrative Example: Choosing the Right Distribution</a>
+      <a href="#binomial-example">3. Illustrative Example: Binomial (Successes)</a>
+      <a href="#gaussian-example">4. Illustrative Example: Gaussian (Z-score)</a>
       <a href="#implementation">Implementation in Python (SciPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -75,6 +76,9 @@ export const probabilityDistributionsSection: TopicSection = {
         <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
       </div>
+      <div class="my-10" style="grid-column: span 2;">
+        <visualizer topic="Distributions" />
+      </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Continuous · #5</div>
         <h4>Uniform Distribution</h4>
@@ -103,15 +107,29 @@ export const probabilityDistributionsSection: TopicSection = {
     <div class="math-block">$$Z = \frac{x - \mu}{\sigma}$$</div>
     <p>If \(X \sim \mathcal{N}(\mu, \sigma^2)\), then \(Z \sim \mathcal{N}(0, 1)\). This is the math behind <code>StandardScaler</code> in Scikit-Learn.</p>
 
-    <h2 id="comparison">Illustrative Example: Choosing the Right Distribution</h2>
+    <h2 id="binomial-example">3. Illustrative Example: Binomial (Binary Successes)</h2>
     <div class="example-box">
-      <h4>Model Error Comparison</h4>
-      <p>Imagine you are modeling the errors of a model:</p>
-      <ol>
-        <li>If errors are symmetric and cluster around zero, use <strong>Gaussian</strong>.</li>
-        <li>If you want to allow for "outliers" (heavy tails), use <strong>Laplace</strong>.</li>
-        <li>If errors are only positive and represent "wait time," use <strong>Exponential</strong>.</li>
-      </ol>
+      <h4>Problem: Tracking Clicks on Ad Impressions</h4>
+      <p>An ad has a Click-Through Rate (CTR) of \(p=0.1\). If we show it to \(n=5\) users, what is the probability that <strong>exactly 2</strong> will click?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Plug in Values:</strong> \(\binom{5}{2} = 10\). Calculated as \(\frac{5!}{2!3!} = 10\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> \(10 \times (0.1)^2 \times (0.9)^3\).</div></div>
+
+      <div class="math-block">$$P(X=2) = 10 \times 0.01 \times 0.729 = 0.0729$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a ~7.3% chance of getting exactly 2 clicks. Note how the probability drops off as we move away from the expectation of \(np = 0.5\).</div></div>
+    </div>
+
+    <h2 id="gaussian-example">4. Illustrative Example: Gaussian (Z-score)</h2>
+    <div class="example-box">
+      <h4>Problem: Standardizing "Wait Times"</h4>
+      <p>A server's response time follows \(\mathcal{N}(500ms, 100^2)\). If a request takes \(650ms\), how many standard deviations from the mean is it?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Recall Formula:</strong> \(Z = \frac{x - \mu}{\sigma}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(Z = \frac{650 - 500}{100} = \frac{150}{100} = 1.5\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> A Z-score of 1.5 means the request was significantly slower than average. In ML, we often <strong>clip</strong> values with Z-scores \(|Z| > 3\) as they are likely outliers.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (SciPy)</h2>

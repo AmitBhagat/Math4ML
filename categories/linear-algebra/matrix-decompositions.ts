@@ -39,14 +39,19 @@ export const matrixDecompositionsSection: TopicSection = {
     <div class="math-block">$$A = LU \implies \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
 
     <div class="example-box">
-      <h4>Solved Example: LU Factorization</h4>
-      <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\).</p>
-      <ol>
-        <li>Set \(u_{11} = 2, u_{12} = 3\).</li>
-        <li>Find \(l_{21}\) such that \(l_{21} \times 2 = 8 \implies l_{21} = 4\).</li>
-        <li>Find \(u_{22}\) such that \((4 \times 3) + u_{22} = 15 \implies u_{22} = 3\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}\).</div></div>
+      <h4>Problem: LU Factorization</h4>
+      <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\) into \(L\) and \(U\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Extract Top Row for U:</strong> The first row of \(U\) is simply the first row of \(A\) if \(l_{11}=1\).</div></div>
+      <div class="math-block">$$u_{11} = 2, \quad u_{12} = 3$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Multiplier for L:</strong> Find \(l_{21}\) such that \(l_{21} \times u_{11} = 8\).</div></div>
+      <div class="math-block">$$l_{21} = 8/2 = 4$$</div>
+
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve for Remainder in U:</strong> \((4 \times u_{12}) + u_{22} = 15\).</div></div>
+      <div class="math-block">$$12 + u_{22} = 15 \implies u_{22} = 3$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}\). Multiplying them back recovers \(A\).</div></div>
     </div>
 
     <h2 id="cholesky">2. Cholesky Decomposition</h2>
@@ -60,19 +65,38 @@ export const matrixDecompositionsSection: TopicSection = {
     <h2 id="qr">3. QR Decomposition</h2>
     <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)). Since \(Q\) preserves lengths and angles (\(Q^T Q = I\)), this is used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
 
+    <div class="example-box">
+      <h4>Problem: QR Factorization Intuition</h4>
+      <p>Factor \(A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\) into \(Q\) and \(R\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Orthogonalize columns (Gram-Schmidt):</strong> Column 1 (\(\mathbf{a}_1\)) is already unit length and along the x-axis.</div></div>
+      <div class="math-block">$$\mathbf{q}_1 = [1, 0]^T$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Project and Subtract:</strong> Keep the part of \(\mathbf{a}_2\) that is perpendicular to \(\mathbf{q}_1\).</div></div>
+      <div class="math-block">$$\mathbf{q}_2 = [0, 1]^T$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(Q = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad R = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\). In this case, \(A\) was already "mostly" orthogonal.</div></div>
+    </div>
+
     <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
     <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
-    <div class="def-box">
-        <div class="def-title">What the components represent</div>
-        <ul style="margin:0">
-          <li><strong>\(U\):</strong> Left singular vectors (Rotations in output space).</li>
-          <li><strong>\(\Sigma\):</strong> Singular values (Scaling factor for each axis).</li>
-          <li><strong>\(V^T\):</strong> Right singular vectors (Rotations in input space).</li>
-        </ul>
-      </div>
 
     <visualizer topic="SVD" />
+
+    <h3>Illustrative Example: SVD Manual Breakdown</h3>
+    <div class="example-box">
+      <h4>Problem: Decomposing a Scaling Matrix</h4>
+      <p>Factor \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\) using SVD.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Singular Values (\(\Sigma\)):</strong> Since \(A\) is diagonal, the singular values are simply the diagonal elements in descending order.</div></div>
+      <div class="math-block">$$\sigma_1 = 3, \quad \sigma_2 = 2 \implies \Sigma = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Left Singular Vectors (U):</strong> These represent the output space rotation. Since no rotation occurred, \(U = I\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Right Singular Vectors (Vᵀ):</strong> These represent the input space rotation. Again, \(V^T = I\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(A = [I][\text{diag}(3, 2)][I]\). For more complex matrices, \(U\) and \(V\) would contain eigenvectors of \(AA^T\) and \(A^TA\).</div></div>
+    </div>
 
     <h3>Applications in ML</h3>
     <ul>

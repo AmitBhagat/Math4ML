@@ -14,10 +14,8 @@ export const descriptiveStatisticsSection: TopicSection = {
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#what-is-it">What is Information Theory?</a>
-      <a href="#derivations">Mathematical Derivations</a>
-      <a href="#ml-examples">Examples in Machine Learning</a>
-      <a href="#integration">Descriptive Statistics Integration</a>
+      <a href="#entropy-example">3. Illustrative Example: Entropy (Binary Trials)</a>
+      <a href="#mean-median-example">4. Illustrative Example: Mean vs. Median</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -35,56 +33,62 @@ export const descriptiveStatisticsSection: TopicSection = {
 
     <h2 id="derivations">Mathematical Derivations</h2>
     
-    <h3>1. Self-Information ($I(x)$)</h3>
-    <p>The information in an event is inversely proportional to its probability.</p>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Self-Information \(I(x)\):</strong> Measures surprise. Low probability = high surprise.</div></div>
     <div class="math-block">$$I(x) = -\log_b(P(x))$$</div>
-    <p>Usually, $b=2$ (bits) or $b=e$ (nats).</p>
 
-    <h3>2. Shannon Entropy ($H(X)$)</h3>
-    <p>The expected value (average) of the information of all possible outcomes of a random variable $X$.</p>
-    <div class="math-block">$$H(X) = E[I(X)] = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Shannon Entropy \(H(X)\):</strong> The expected value (average surprise) across all outcomes.</div></div>
+    <div class="math-block">$$H(X) = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
 
-    <h3>3. Cross-Entropy ($H(P, Q)$)</h3>
-    <p>Measures the average number of bits needed to identify an event from $P$ using code optimized for $Q$.</p>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Cross-Entropy \(H(P, Q)\):</strong> Average bits to identify events from \(P\) using code optimized for \(Q\).</div></div>
     <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
 
-    <h2 id="ml-examples">Examples in Machine Learning</h2>
-    
-    <h3>Decision Trees (Information Gain)</h3>
-    <p>Used to decide which feature to split on. Information Gain is the reduction in entropy:</p>
-    <div class="math-block">$$\text{Gain}(S, A) = \text{Entropy}(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \text{Entropy}(S_v)$$</div>
+    <h2 id="entropy-example">3. Illustrative Example: Entropy (Binary Trials)</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing Surprise in Coin Flips</h4>
+      <p>Compare the Entropy of a fair coin \((p=0.5)\) vs. a highly biased coin \((p=0.9)\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Fair Coin:</strong> \(H(X) = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = -(0.5 \times -1 \times 2) = 1.0\text{ bit}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Biased Coin:</strong> \(H(X) = -(0.9 \log_2 0.9 + 0.1 \log_2 0.1) \approx -(0.139 + 0.332) = 0.47\text{ bits}\).</div></div>
 
-    <h3>Logistic Regression / Neural Networks</h3>
-    <p>Cross-entropy is used as the loss function. If $y$ is actual label (0/1) and $\hat{y}$ is predicted probability:</p>
-    <div class="math-block">$$\text{Loss} = -(y \log(\hat{y}) + (1-y) \log(1-\hat{y}))$$</div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Intuition:</strong> A fair coin has the <strong>maximum possible entropy</strong> (1 bit) because it is perfectly unpredictable. The biased coin is more predictable, so it contains less information (lower entropy).</div></div>
+    </div>
 
-    <h2 id="integration">Descriptive Statistics Integration</h2>
-    <p>Before applying information-theoretic measures, we look at descriptive statistics to understand the spread and central tendency.</p>
+    <h2 id="mean-median-example">4. Illustrative Example: Mean vs. Median</h2>
+    <div class="example-box">
+      <h4>Problem: Salary Analysis in a Startup</h4>
+      <p>A startup has 5 employees with salaries: [40k, 45k, 50k, 55k, 1M]. Which metric better represents the "typical" salary?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Mean:</strong> \(\mu = \frac{40+45+50+55+1000}{5} = \frac{1190}{5} = 238\text{k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Median:</strong> Middle value in sorted list = \(50\text{k}\).</div></div>
 
-    <div class="def-box">
-      <table style="width:100%; border-collapse: collapse;">
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Gotcha:</strong> The <strong>Mean</strong> is heavily pulled by the outlier (1M CEO salary), making the company look richer than it is. In ML, we often use the <strong>Median</strong> for robust statistics when data is skewed or contains anomalies.</div></div>
+    </div>
+
+    <h2 id="integration">Descriptive Statistics</h2>
+    <div class="premium-table-wrap">
+      <table class="premium-table">
         <thead>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <th style="padding: 10px; text-align: left;">Metric</th>
-            <th style="padding: 10px; text-align: left;">Formula / Description</th>
-            <th style="padding: 10px; text-align: left;">Use Case in ML</th>
+          <tr>
+            <th>Metric</th>
+            <th>Formula / Description</th>
+            <th>Use Case in ML</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding: 10px;"><strong>Mean</strong></td>
-            <td style="padding: 10px;">$\mu = \frac{1}{n} \sum x_i$</td>
-            <td style="padding: 10px;">Centering data for Gaussian distributions.</td>
+            <td><strong>Mean (\(\mu\))</strong></td>
+            <td>\(\mu = \frac{1}{n} \sum x_i\)</td>
+            <td>Feature scaling & normalization.</td>
           </tr>
           <tr>
-            <td style="padding: 10px;"><strong>Std Dev</strong></td>
-            <td style="padding: 10px;">$\sigma = \sqrt{\frac{\sum(x_i-\mu)^2}{n}}$</td>
-            <td style="padding: 10px;">Measuring spread; high $\sigma$ often implies higher entropy.</td>
+            <td><strong>Std Dev (\(\sigma\))</strong></td>
+            <td>\(\sigma = \sqrt{\frac{\sum(x_i-\mu)^2}{n}}\)</td>
+            <td>Measuring feature spread; high \(\sigma\) implies high entropy.</td>
           </tr>
           <tr>
-            <td style="padding: 10px;"><strong>IQR</strong></td>
-            <td style="padding: 10px;">$Q3 - Q1$</td>
-            <td style="padding: 10px;">Detecting outliers that might skew probability estimates.</td>
+            <td><strong>IQR</strong></td>
+            <td>\(Q3 - Q1\)</td>
+            <td>Robust outlier detection (ignoring tails).</td>
           </tr>
         </tbody>
       </table>

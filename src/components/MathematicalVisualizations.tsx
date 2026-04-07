@@ -1,8 +1,10 @@
 import React from "react";
 import { motion } from "motion/react";
+import { VisualizerTheme } from "./visualizers/CanvasBase";
 
 interface VisualizerProps {
   topicId: string;
+  theme?: VisualizerTheme;
 }
 
 const containerVariants = {
@@ -780,35 +782,58 @@ import {
   PremiumNormsVisualizer,
   PremiumDistanceVisualizer,
   PremiumEquationsVisualizer,
-  PremiumMatrixOpsVisualizer
+  PremiumMatrixOpsVisualizer,
+  PremiumOrthogonalityVisualizer,
+  PremiumProjectionsVisualizer,
+  PremiumRankVisualizer
 } from "./visualizers/LinAlgVisualizers";
 
-export const TopicVisualizer = ({ topicId, params = {} }: VisualizerProps & { params?: any }) => {
+import {
+  PremiumDifferentiationVisualizer,
+  PremiumAreaUnderCurveVisualizer,
+  PremiumGradientDescentVisualizer,
+  PremiumPartialDerivativesVisualizer,
+  PremiumGradientVisualizer,
+  PremiumChainRuleVisualizer,
+  PremiumJacobianHessianVisualizer
+} from "./visualizers/CalculusVisualizers";
+
+import {
+  PremiumSampleSpaceVisualizer,
+  PremiumBayesTheoremVisualizer,
+  PremiumDistributionsVisualizer,
+  PremiumConditionalVisualizer
+} from "./visualizers/ProbabilityVisualizers";
+
+export const TopicVisualizer = ({ topicId, params = {}, theme = 'light' }: VisualizerProps & { params?: any }) => {
   switch (topicId) {
     // Linear Algebra (High-Fidelity Canvas)
-    case "Vectors": return <PremiumVectorsVisualizer {...params} mode="add" />;
-    case "LinearCombinations": return <PremiumVectorsVisualizer {...params} mode="scalar" />;
-    case "DotProduct": return <PremiumDotProductVisualizer {...params} />;
-    case "Matrices": return <PremiumMatrixVisualizer {...params} />;
-    case "LinearTransformation": return <PremiumMatrixVisualizer {...params} b={params.b ?? 0.5} c={params.c ?? -0.2} />;
-    case "LinearEquations": return <PremiumEquationsVisualizer {...params} />; 
+    case "Vectors": return <PremiumVectorsVisualizer {...params} mode="add" theme={theme} />;
+    case "LinearCombinations": return <PremiumVectorsVisualizer {...params} mode="scalar" theme={theme} />;
+    case "DotProduct": return <PremiumDotProductVisualizer {...params} theme={theme} />;
+    case "Matrices": return <PremiumMatrixVisualizer {...params} theme={theme} />;
+    case "LinearTransformation": return <PremiumMatrixVisualizer {...params} b={params.b ?? 0.5} c={params.c ?? -0.2} theme={theme} />;
+    case "LinearEquations": return <PremiumEquationsVisualizer {...params} theme={theme} />; 
     case "Eigenvalues": 
-    case "Eigenvectors": return <PremiumEigenVisualizer {...params} />;
-    case "SVD": return <PremiumSVDVisualizer {...params} />;
-    case "MatrixDecompositions": return <PremiumSVDVisualizer {...params} />;
-    case "BasisChange": return <PremiumBasisVisualizer {...params} />;
-    case "Determinants": return <PremiumDeterminantVisualizer {...params} />;
-    case "PCA": return <PremiumPCAVisualizer {...params} />;
-    case "VectorNorms": return <PremiumNormsVisualizer {...params} />;
-    case "DistanceMetrics": return <PremiumDistanceVisualizer {...params} />;
-    case "MatrixOperations": return <PremiumMatrixOpsVisualizer {...params} />;
+    case "Eigenvectors": return <PremiumEigenVisualizer {...params} theme={theme} />;
+    case "SVD": return <PremiumSVDVisualizer {...params} theme={theme} />;
+    case "MatrixDecompositions": return <PremiumSVDVisualizer {...params} theme={theme} />;
+    case "BasisChange": return <PremiumBasisVisualizer {...params} theme={theme} />;
+    case "Determinants": return <PremiumDeterminantVisualizer {...params} theme={theme} />;
+    case "PCA": return <PremiumPCAVisualizer {...params} theme={theme} />;
+    case "VectorNorms": return <PremiumNormsVisualizer {...params} theme={theme} />;
+    case "DistanceMetrics": return <PremiumDistanceVisualizer {...params} theme={theme} />;
+    case "MatrixOperations": return <PremiumMatrixOpsVisualizer {...params} theme={theme} />;
+    case "Orthogonality": return <PremiumOrthogonalityVisualizer {...params} theme={theme} />;
+    case "Projections": return <PremiumProjectionsVisualizer {...params} theme={theme} />;
+    case "Rank": return <PremiumRankVisualizer {...params} a={params.a ?? 1} b={params.b ?? 2} c={params.c ?? 0.5} d={params.d ?? 1} theme={theme} />;
 
     // Probability
-    case "SampleSpace": return <SampleSpaceVisual />;
-    case "ProbabilityRules": return <ProbabilityRulesVisual />;
-    case "ConditionalProbability": return <ConditionalProbabilityVisual />;
-    case "BayesTheorem": return <BayesTheoremVisual />;
-    case "Distributions": return <DistributionsVisual />;
+    case "SampleSpace": return <PremiumSampleSpaceVisualizer {...params} theme={theme} />;
+    case "ProbabilityRules": return <PremiumSampleSpaceVisualizer {...params} theme={theme} />; // Shared Venn logic
+    case "ConditionalProbability": return <PremiumConditionalVisualizer {...params} theme={theme} />;
+    case "BayesTheorem": return <PremiumBayesTheoremVisualizer {...params} theme={theme} />;
+    case "Distributions": return <PremiumDistributionsVisualizer {...params} theme={theme} />;
 
     // Statistics
     case "DescriptiveStats": return <DescriptiveStatsVisual />;
@@ -822,13 +847,13 @@ export const TopicVisualizer = ({ topicId, params = {} }: VisualizerProps & { pa
     case "NonParametricTests": return <NonParametricTestsVisual />;
 
     // Calculus
-    case "Differentiation": return <DifferentiationVisual />;
-    case "PartialDerivatives": return <PartialDerivativesVisual />;
-    case "Gradient": return <GradientVisual />;
-    case "GradientDescent": return <GradientDescentVisual />;
-    case "ChainRule": return <ChainRuleVisual />;
-    case "JacobianHessian": return <JacobianHessianVisual />;
-    case "AreaUnderCurve": return <AreaUnderCurveVisual />;
+    case "Differentiation": return <PremiumDifferentiationVisualizer {...params} theme={theme} />;
+    case "PartialDerivatives": return <PremiumPartialDerivativesVisualizer {...params} theme={theme} />;
+    case "Gradient": return <PremiumGradientVisualizer {...params} theme={theme} />;
+    case "GradientDescent": return <PremiumGradientDescentVisualizer {...params} theme={theme} />;
+    case "ChainRule": return <PremiumChainRuleVisualizer {...params} theme={theme} />;
+    case "JacobianHessian": return <PremiumJacobianHessianVisualizer {...params} theme={theme} />;
+    case "AreaUnderCurve": return <PremiumAreaUnderCurveVisualizer {...params} theme={theme} />;
 
     default:
       return (

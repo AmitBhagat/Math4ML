@@ -3,6 +3,7 @@ import { MainLayout } from "./components/MainLayout";
 import React, { Suspense } from "react";
 import LoadingSkeleton from "./components/LoadingSkeleton";
 import ScrollToTop from "./components/ScrollToTop";
+import { ThemeProvider } from "./context/ThemeContext";
 
 const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ default: m.HomePage })));
 const ClusterPage = React.lazy(() => import("./pages/ClusterPage").then(m => ({ default: m.ClusterPage })));
@@ -27,26 +28,28 @@ function ProblemRoute() {
 }
 export default function App() {
   return (
-    <HashRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route element={<MainLayout />}>
-          <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
-          
-          <Route path="/visualizations" element={<Suspense fallback={<LoadingSkeleton /> }><VisualizationsPage /></Suspense>} />
-          
-          {/* Cluster Pages (Mathematics / Machine Learning) */}
-          <Route path="/:clusterId" element={<Suspense fallback={<LoadingSkeleton /> }><ClusterPage /></Suspense>} />
+    <ThemeProvider>
+      <HashRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route element={<MainLayout />}>
+            <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
+            
+            <Route path="/visualizations" element={<Suspense fallback={<LoadingSkeleton /> }><VisualizationsPage /></Suspense>} />
+            
+            {/* Cluster Pages (Mathematics / Machine Learning) */}
+            <Route path="/:clusterId" element={<Suspense fallback={<LoadingSkeleton /> }><ClusterPage /></Suspense>} />
 
-          {/* Category Pages (Hierarchical and direct for compatibility) */}
-          <Route path="/:clusterId/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
-          <Route path="/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
+            {/* Category Pages (Hierarchical and direct for compatibility) */}
+            <Route path="/:clusterId/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
+            <Route path="/:categoryId" element={<Suspense fallback={<LoadingSkeleton /> }><CategoryRoute /></Suspense>} />
 
-          {/* Problem Pages within Categories and Clusters */}
-          <Route path="/:clusterId/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
-          <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
-        </Route>
-      </Routes>
-    </HashRouter>
+            {/* Problem Pages within Categories and Clusters */}
+            <Route path="/:clusterId/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
+            <Route path="/:categoryId/:problemId" element={<Suspense fallback={<LoadingSkeleton /> }><ProblemRoute /></Suspense>} />
+          </Route>
+        </Routes>
+      </HashRouter>
+    </ThemeProvider>
   );
 }

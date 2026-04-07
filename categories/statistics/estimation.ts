@@ -23,40 +23,53 @@ export const parameterEstimationSection: TopicSection = {
     <h2 id="mle">1. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE is a method of estimating the parameters of a probability distribution by maximizing a <strong>likelihood function</strong>, so that under the assumed statistical model, the observed data is most probable.</p>
     
-    <h3>Mathematical Derivation</h3>
-    <p>Given a set of i.i.d. observations $X = \{x_1, x_2, ..., x_n\}$, the likelihood function $L(\theta)$ is:</p>
-    <div class="math-block">
-      $$L(\theta) = P(X|\theta) = \prod_{i=1}^{n} P(x_i|\theta)$$
-    </div>
-    <p>To simplify the calculation, we take the <strong>Log-Likelihood</strong>:</p>
-    <div class="math-block">
-      $$\ell(\theta) = \log L(\theta) = \sum_{i=1}^{n} \log P(x_i|\theta)$$
-    </div>
-    <p>The MLE estimate $\hat{\theta}_{MLE}$ is found by setting the derivative to zero: $\frac{\partial}{\partial \theta} \ell(\theta) = 0$.</p>
-
+    <h2 id="mle-derivation">1.1 Mathematical Derivation: Gaussian Mean</h2>
     <div class="example-box">
-      <h4>Mathematical Example: Gaussian Mean</h4>
-      <p><strong>Problem:</strong> Estimate the mean ($\mu$) of a Normal Distribution given data points $\{x_1, ..., x_n\}$ assuming variance $\sigma^2$ is known.</p>
+      <h4>Problem: Finding the "Most Likely" Mean</h4>
+      <p>Estimate the mean (\(\mu\)) of a Normal Distribution given data \(X = \{x_1, ..., x_n\}\). Assume variance \(\sigma^2\) is known.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Log-Likelihood:</strong> $\ell(\mu) = \sum \log \left( \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \right)$</li>
-        <li><strong>Simplify:</strong> $\ell(\mu) = n \log \left(\frac{1}{\sqrt{2\pi\sigma^2}}\right) - \sum \frac{(x_i-\mu)^2}{2\sigma^2}$</li>
-        <li><strong>Differentiate w.r.t $\mu$:</strong> $\frac{d}{d\mu} \ell(\mu) = \sum \frac{(x_i-\mu)}{\sigma^2} = 0$</li>
-        <li><strong>Result:</strong> $\hat{\mu}_{MLE} = \frac{1}{n} \sum_{i=1}^{n} x_i$ (The Sample Mean).</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Log-Likelihood:</strong> Take the log of the Gaussian PDF for all points:</div></div>
+      <div class="math-block">$$\ell(\mu) = \sum \log \left( \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \right)$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Simplify:</strong> Drop constants and focus on the exponent.</div></div>
+      <div class="math-block">$$\ell(\mu) = C - \sum \frac{(x_i-\mu)^2}{2\sigma^2}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Optimize:</strong> Set \(\frac{d}{d\mu} \ell(\mu) = 0\).</div></div>
+      <div class="math-block">$$\sum \frac{(x_i-\mu)}{\sigma^2} = 0 \implies \sum x_i = n\mu$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(\hat{\mu}_{MLE} = \frac{1}{n} \sum x_i\). The sample mean is the Maximum Likelihood Estimator for a Gaussian population.</div></div>
+    </div>
+
+    <h2 id="bias-example">1.2 Illustrative Example: Bessel's Correction</h2>
+    <div class="example-box">
+      <h4>Problem: Why divide by \(n-1\)?</h4>
+      <p>The MLE for variance is \(\hat{\sigma}^2 = \frac{1}{n} \sum (x_i - \mu)^2\). However, we almost always use \(s^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2\). Why?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Bias:</strong> When we use the sample mean \(\bar{x}\) instead of the true population mean \(\mu\), we underestimate the total spread.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Correction:</strong> Dividing by \(n-1\) (degrees of freedom) makes the estimator <strong>Unbiased</strong>.</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> For very large \(n\), the difference between \(1/n\) and \(1/(n-1)\) vanishes. This is why "Big Data" often ignores Bessel's correction, but it's critical for small-sample statistics.</div></div>
     </div>
 
     <h2 id="map">2. Maximum A Posteriori (MAP)</h2>
     <p>MAP is a Bayesian approach. Unlike MLE, which only looks at the data, MAP incorporates a <strong>Prior Distribution</strong> $P(\theta)$, which represents our previous belief about the parameters.</p>
     
-    <div class="def-box">
-      <div class="def-title">Bayesian MAP Formula</div>
-      <p style="margin:0">Using Bayes' Theorem:</p>
-      <div class="math-block" style="margin-top:10px; margin-bottom:10px; background:transparent; border:none; padding:0;">
-        $$P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}$$
-      </div>
-      <p style="margin:0">$\hat{\theta}_{MAP} = \text{argmax}_\theta [ \log P(X|\theta) + \log P(\theta) ]$</p>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Bayesian MAP Formula</div>
+      <div class="math-block">$$P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}$$</div>
+      <p style="margin-top:10px">\(\hat{\theta}_{MAP} = \text{argmax}_\theta [ \log P(X|\theta) + \log P(\theta) ]\)</p>
+    </div>
+
+    <h2 id="ctr-example">2.1 Illustrative Example: Confidence Intervals for CTR</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating Ad Performance</h4>
+      <p>Your ad has 1000 impressions and 20 clicks. What is the 95% Confidence Interval for the Click-Through Rate (CTR)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Point Estimate:</strong> \(\hat{p} = 20 / 1000 = 0.02\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Standard Error:</strong> \(SE = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.02 \times 0.98}{1000}} \approx 0.0044\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Interval:</strong> \(0.02 \pm (1.96 \times 0.0044) = [0.011, 0.029]\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Interpretation:</strong> We are 95% confident that the true population CTR is between 1.1% and 2.9%. In A/B testing, these clusters help determine if a new design is statistically superior.</div></div>
     </div>
     
     <div class="callout tip">

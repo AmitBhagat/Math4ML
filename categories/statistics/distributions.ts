@@ -16,7 +16,8 @@ export const probabilityDistributionsSection: TopicSection = {
       <a href="#bernoulli">1. Bernoulli Distribution</a>
       <a href="#binomial">2. Binomial Distribution</a>
       <a href="#poisson">3. Poisson Distribution</a>
-      <a href="#categorical">4. Categorical Distribution</a>
+      <a href="#t-distribution">4. Student's t-Distribution (New)</a>
+      <a href="#categorical">5. Categorical Distribution</a>
       <a href="#multinomial">5. Multinomial Distribution</a>
       <a href="#gaussian">6. Gaussian (Normal) Distribution</a>
       <a href="#beta">7. Beta Distribution</a>
@@ -46,12 +47,18 @@ export const probabilityDistributionsSection: TopicSection = {
       </div>
     </div>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A Binary Classifier detects fraudulent transactions. For a specific transaction, the model outputs a probability of 0.02 that it is "Fraud" ($p=0.02$). Calculate the variance of this prediction.</p>
-    <p><strong>Solution:</strong>
-      Identify $p = 0.02, q = 0.98$.
-      $$Var(X) = p(1-p) = 0.02 \times 0.98 = 0.0196$$
-    </p>
+    <h2 id="bernoulli-example">1. Illustrative Example: Bernoulli Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Predicting Rare Fraud</h4>
+      <p>A binary classifier detects fraudulent transactions. For a specific transaction, the model outputs \(p = 0.02\) (Fraud) and \(q = 0.98\) (Safe). Calculate the variance of this prediction.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Parameter:</strong> \(p = 0.02\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> \(Var(X) = p(1-p)\).</div></div>
+
+      <div class="math-block">$$Var(X) = 0.02 \times 0.98 = 0.0196$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Insight:</strong> Variance is highest at \(p=0.5\) and lowest at the extremes (0 or 1). This means the model is "surest" when probabilities are near 0 or 1.</div></div>
+    </div>
 
     <python-code>
 import numpy as np
@@ -83,11 +90,19 @@ print(f"P(Success): {pmf_success}")
       <li><strong>Variance:</strong> $np(1-p)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A QA engineer finds that 10% of commits have bugs ($p=0.1$). If 5 commits are made ($n=5$), what is the probability that **exactly 2** have bugs?</p>
-    <p><strong>Solution:</strong>
-      $$P(X=2) = \binom{5}{2} (0.1)^2 (0.9)^3 = 10 \times 0.01 \times 0.729 = 0.0729$$ (7.29%).
-    </p>
+    <h2 id="binomial-example">2. Illustrative Example: Binomial Batch Logic</h2>
+    <div class="example-box">
+      <h4>Problem: QA Bug Detection</h4>
+      <p>A QA engineer finds that 10% of commits have bugs \((p=0.1)\). If 5 commits are made \((n=5)\), what is the probability that <strong>exactly 2</strong> have bugs?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Values:</strong> \(n=5, k=2, p=0.1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Combinations:</strong> \(\binom{5}{2} = 10\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute PMF:</strong> \(10 \times (0.1)^2 \times (0.9)^3\).</div></div>
+
+      <div class="math-block">$$P(X=2) = 10 \times 0.01 \times 0.729 = 0.0729$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a <strong>7.29%</strong> chance of hitting exactly 2 bugs. This is much lower than the 90% chance of hitting 0 or 1 bug.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import binom
@@ -114,11 +129,31 @@ print(f"P(X=2): {prob_2:.4f}")
       <li><strong>Variance:</strong> $\lambda$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A server receives an average of 4 requests/sec ($\lambda=4$). What is the probability it receives **exactly 2** requests in the next second?</p>
-    <p><strong>Solution:</strong>
-      $$P(X=2) = \frac{4^2 e^{-4}}{2!} = \frac{16 \times 0.0183}{2} = 0.1464$$ (14.64%).
-    </p>
+    <h2 id="poisson-example">3. Illustrative Example: Poisson Rate Analysis</h2>
+    <div class="example-box">
+      <h4>Problem: Server Request Spikes</h4>
+      <p>A server receives an average of 4 requests/sec \((\lambda=4)\). What is the probability it receives <strong>exactly 2</strong> requests in the next second?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identity:</strong> \(\lambda=4, k=2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Formula:</strong> \(P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate:</strong> \(\frac{16 \times 0.0183}{2}\).</div></div>
+
+      <div class="math-block">$$P(X=2) \approx 0.1464$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> There is a <strong>14.6%</strong> chance of seeing exactly 2 requests. In SRE/MLOps, we use this to set alerting thresholds for "quiet" periods.</div></div>
+    </div>
+
+    <h2 id="t-distribution" style="background: linear-gradient(to right, #cf222e, #9a6700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">4. Student's t-Distribution</h2>
+    <p>The Student's t-Distribution is similar to the Normal distribution but has <strong>heavier tails</strong>. It is essential when estimating parameters from small sample sizes where the population variance is unknown.</p>
+    <div class="math-block">$$f(t) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})} \left(1 + \frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}}$$</div>
+    
+    <div class="example-box">
+      <h4>Problem: Uncertainty in Small Samples</h4>
+      <p>Why do we use the t-distribution for \(n=10\) instead of a Normal curve?</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Degrees of Freedom (df):</strong> \(\nu = n - 1 = 9\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Tail Check:</strong> At \(\nu=9\), the tails are much wider than a standard normal.</div></div>
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The t-distribution is more <strong>conservative</strong>. It provides wider confidence intervals, acknowledging that our estimate of the variance might be slightly off due to the small sample size.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import poisson
@@ -145,12 +180,18 @@ print(f"P(X=2) for lambda=4: {prob_2:.4f}")
       <li><strong>Variance ($Var(x_i)$):</strong> $p_i(1-p_i)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A Softmax layer outputs $[0.1, 0.7, 0.2]$ for labels [Cloud, Rain, Sun]. Calculate the variance for the "Cloud" category.</p>
-    <p><strong>Solution:</strong>
-      $p_1 = 0.1$.
-      $$Var(x_1) = 0.1(1 - 0.1) = 0.09$$
-    </p>
+    <h2 id="categorical-example">5. Illustrative Example: Softmax Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating Label Confidence</h4>
+      <p>A Softmax layer outputs \([0.1, 0.7, 0.2]\) for the labels [Cloud, Rain, Sun]. Calculate the variance for the "Cloud" category (\(p_1 = 0.1\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Softmax Output:</strong> \(p_1 = 0.1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Variance Formula:</strong> \(Var(x_i) = p_i(1 - p_i)\).</div></div>
+
+      <div class="math-block">$$Var(x_1) = 0.1 \times (1 - 0.1) = 0.09$$</div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Interpretation:</strong> The low variance (0.09) compared to the higher variance of the "Rain" category (\(0.7 \times 0.3 = 0.21\)) indicates the model is more "certain" about the non-existence of clouds than the presence of rain.</div></div>
+    </div>
 
     <python-code>
 import numpy as np
@@ -177,11 +218,19 @@ print(f"One-hot Sample: {sample}")
       <li><strong>Variance ($Var(x_i)$):</strong> $n \cdot p_i(1 - p_i)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A sentiment model with $p = [0.4, 0.4, 0.2]$ (Pos, Neu, Neg). In 10 posts, what is the probability of exactly 5 Pos, 3 Neu, and 2 Neg?</p>
-    <p><strong>Solution:</strong>
-      $$P = \frac{10!}{5!3!2!} (0.4)^5 (0.4)^3 (0.2)^2 \approx 0.066$$ (6.6%).
-    </p>
+    <h2 id="multinomial-example">6. Illustrative Example: document Mixture</h2>
+    <div class="example-box">
+      <h4>Problem: Sentiment Model Outcome</h4>
+      <p>A sentiment model predicts \(p = [0.4, 0.4, 0.2]\) (Positive, Neutral, Negative). In 10 posts, what is the probability of exactly 5 Positive, 3 Neutral, and 2 Negative posts?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Parameters:</strong> \(n=10, \mathbf{x} = [5, 3, 2], \mathbf{p} = [0.4, 0.4, 0.2]\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factorials:</strong> \(10! / (5! \times 3! \times 2!) = 3628800 / (120 \times 6 \times 2) = 2520\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute:</strong> \(2520 \times 0.4^5 \times 0.4^3 \times 0.2^2\).</div></div>
+
+      <div class="math-block">$$P \approx 0.0665$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Significance:</strong> Even though this is the "expected" distribution, the probability of hitting it <strong>exactly</strong> is only about 6.6%. This highlights the high dimensionality and "spread" of Multinomial outcomes.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import multinomial
@@ -208,12 +257,19 @@ print(f"Outcome Probability: {prob:.4f}")
       <li><strong>Z-Score:</strong> $Z = \frac{X - \mu}{\sigma}$ (Standardization)</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> CPUs have speed $\mu=3.5, \sigma=0.2$ GHz. What is the probability of a CPU > 3.9 GHz?</p>
-    <p><strong>Solution:</strong>
-      $$Z = \frac{3.9 - 3.5}{0.2} = 2.0$$
-      $P(Z > 2.0)$ is half of the remaining 4.6% outside the $2\sigma$ range = 2.3%.
-    </p>
+    <h2 id="gaussian-example">7. Illustrative Example: Standardizing ML Features</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing CPUs via Z-scores</h4>
+      <p>CPUs have clock speeds with \(\mu=3.5, \sigma=0.2\) GHz. What is the probability of a CPU having a speed \(> 3.9\) GHz?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Standardize (Z-score):</strong> \(Z = \frac{X - \mu}{\sigma} = \frac{3.9 - 3.5}{0.2} = 2.0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Empirical Rule:</strong> 95% of data is within \(\pm 2\sigma\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Tail Calculation:</strong> 5% remains in the tails. Since we want "greater than", we take the upper tail: \(5\% / 2 = 2.5\%\).</div></div>
+
+      <div class="math-block">$$P(X > 3.9) \approx 0.0228$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Why?</strong> This standardization is the exact math behind <strong>StandardScaler</strong> in Scikit-Learn. It ensures features have a mean of 0 and variance of 1, helping gradient descent converge faster.</div></div>
+    </div>
 
     <python-code>
 import matplotlib.pyplot as plt
@@ -242,11 +298,18 @@ plt.show()
       <li><strong>Mean:</strong> $\frac{\alpha}{\alpha + \beta}$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> You observe 8 clicks ($\alpha$) and 2 non-clicks ($\beta$). What is the expected Click-Through Rate (CTR)?</p>
-    <p><strong>Solution:</strong>
-      $$E[X] = \frac{8}{8 + 2} = 0.8 \text{ (80\% CTR)}$$
-    </p>
+    <h2 id="beta-example">8. Illustrative Example: Bayesian A/B Testing</h2>
+    <div class="example-box">
+      <h4>Problem: Predicting Click-Through Rate (CTR)</h4>
+      <p>You observe 8 clicks (\(\alpha=8\)) and 2 non-clicks (\(\beta=2\)) on a webpage. What is our expected belief about the true CTR?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Parameters:</strong> \(\alpha = 8, \beta = 2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Expected Value:</strong> \(E[X] = \frac{\alpha}{\alpha + \beta}\).</div></div>
+
+      <div class="math-block">$$E[X] = \frac{8}{8 + 2} = 0.8 \text{ (80\% CTR)}$$</div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Insight:</strong> As we observe more data (e.g., 800 clicks, 200 non-clicks), the Beta distribution becomes "tighter" around 0.8, representing increased confidence in our model's estimate.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import beta
@@ -266,10 +329,17 @@ print(f"Expected Probability: {mean}")
     </div>
 
     <h3>Mathematical Derivation</h3>
-    <ul>
-      <li><strong>PDF:</strong> $f(\mathbf{x}; \mathbf{\alpha}) = \frac{1}{B(\mathbf{\alpha})} \prod_{i=1}^{K} x_i^{\alpha_i - 1}$</li>
-      <li><strong>Mean ($E[x_i]$):</strong> $\frac{\alpha_i}{\sum \alpha_j}$</li>
-    </ul>
+    <div class="math-block">$$f(\mathbf{x}; \mathbf{\alpha}) = \frac{1}{B(\mathbf{\alpha})} \prod_{i=1}^{K} x_i^{\alpha_i - 1}$$</div>
+    
+    <div class="example-box">
+      <h4>Problem: Topic Modeling Prior</h4>
+      <p>A document has 3 possible topics. We set a Dirichlet prior with \(\mathbf{\alpha} = [10, 10, 10]\). What is the expected distribution of topics?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Mean Formula:</strong> \(E[x_i] = \alpha_i / \sum \alpha_j\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(10 / (10+10+10) = 1/3\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Insight:</strong> If we set \(\alpha < 1\) (e.g., [0.1, 0.1, 0.1]), the distribution pushes the document to be "sparse"—favoring only one topic. This <strong>Sparsity Prior</strong> is what makes LDA topic modeling effective.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import dirichlet
@@ -320,6 +390,12 @@ print(f"Simplex Sample (Prob Mixture): {sample}")
             <td>Continuous</td>
             <td>Weight Init / Regression</td>
             <td>Central Limit Theorem basis</td>
+          </tr>
+          <tr>
+            <td><strong>Student's t</strong></td>
+            <td>Continuous</td>
+            <td>Small-sample Inference</td>
+            <td>Heavier tails for uncertainty</td>
           </tr>
           <tr>
             <td><strong>Beta</strong></td>

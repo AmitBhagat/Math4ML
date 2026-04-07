@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { TopicVisualizer } from "../MathematicalVisualizations";
 import { VisualizerControls } from "./VisualizerControls";
+import { useTheme } from "../../hooks/useTheme";
+import { VisualizerTheme } from "./CanvasBase";
 
 interface InteractiveVisualizerProps {
   topicId: string;
@@ -24,31 +26,34 @@ const DEFAULT_PARAMS: Record<string, any> = {
 
 export const InteractiveVisualizer: React.FC<InteractiveVisualizerProps> = ({ topicId }) => {
   const [params, setParams] = useState(DEFAULT_PARAMS[topicId] || {});
+  const { theme } = useTheme();
+  const vTheme = theme as VisualizerTheme;
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start mb-20 animate-in fade-in slide-in-from-bottom-8 duration-700">
-      {/* ─── Card 1: 1:1 Reference Style Controls ─── */}
-      <div className="h-auto bg-white rounded-[2rem] border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] p-6 outline outline-1 outline-white">
+      {/* ─── Card 1: Controls ─── */}
+      <div className="h-auto bg-bg-secondary dark:bg-bg-tertiary rounded-[2rem] border border-border-premium shadow-xl p-6 outline outline-1 outline-border-premium/50 transition-colors duration-500">
           <VisualizerControls 
             topicId={topicId} 
             params={params} 
             setParams={setParams} 
+            theme={vTheme}
           />
       </div>
 
-      {/* ─── Card 2: 1:1 Integrated Canvas/Visual ─── */}
+      {/* ─── Card 2: Visual ─── */}
       <div className="h-fit sticky top-24">
-        <div className="h-[450px] bg-white rounded-[2rem] border border-slate-100 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.08)] overflow-hidden relative outline outline-1 outline-white">
-          <div className="absolute inset-x-0 h-10 bg-slate-50/50 backdrop-blur-sm border-b border-slate-100/50 flex items-center px-6 z-10">
-             <div className="flex gap-1.5">
-                <div className="w-2 h-2 rounded-full bg-slate-200" />
-                <div className="w-2 h-2 rounded-full bg-slate-200" />
-                <div className="w-2 h-2 rounded-full bg-slate-200" />
+        <div className={`h-[450px] ${vTheme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'} rounded-[2rem] border border-border-premium shadow-2xl overflow-hidden relative outline outline-1 outline-border-premium/30 transition-all duration-700`}>
+          <div className={`absolute inset-x-0 h-10 ${vTheme === 'dark' ? 'bg-slate-900/80' : 'bg-slate-50/80'} backdrop-blur-md border-b border-border-premium/30 flex items-center px-6 z-10 transition-colors duration-500`}>
+             <div className="flex gap-1.5 min-w-[60px]">
+                <div className="w-2.5 h-2.5 rounded-full bg-red-400/40" />
+                <div className="w-2.5 h-2.5 rounded-full bg-amber-400/40" />
+                <div className="w-2.5 h-2.5 rounded-full bg-emerald-400/40" />
              </div>
-             <span className="mx-auto text-[10px] uppercase tracking-widest font-black text-slate-300">Mathematical Projection</span>
+             <span className={`mx-auto text-[10px] uppercase tracking-[0.2em] font-black ${vTheme === 'dark' ? 'text-slate-500' : 'text-slate-400'}`}>Mathematical Projection</span>
           </div>
           <div className="h-full pt-10">
-            <TopicVisualizer topicId={topicId} params={params} />
+            <TopicVisualizer topicId={topicId} params={params} theme={vTheme} />
           </div>
         </div>
         <div className="mt-6 px-4">

@@ -7,6 +7,9 @@
   --font-sans: "Outfit", sans-serif;
   --font-mono: "JetBrains Mono", monospace;
 
+  /* Support for .dark class in Tailwind 4 */
+  @custom-variant dark (&:where(.dark, .dark *));
+
   /* Dynamically mapped to CSS variables for Theme support */
   --color-bg: var(--bg);
   --color-bg-secondary: var(--bg2);

@@ -18,8 +18,8 @@ export const multivariateProbabilitySection: TopicSection = {
       <a href="#perspectives" class="sub">↳ 1. Joint Distribution P(X, Y)</a>
       <a href="#perspectives" class="sub">↳ 2. Marginal Distribution P(X)</a>
       <a href="#perspectives" class="sub">↳ 3. Conditional Distribution P(X|Y)</a>
-      <a href="#rules">Mathematical Derivation: Sum &amp; Product Rules</a>
-      <a href="#example">Illustrative Example: The Weather Table</a>
+      <a href="#marginal-example">4. Illustrative Example: Marginalization</a>
+      <a href="#covariance-example">5. Illustrative Example: Covariance</a>
       <a href="#implementation">Implementation in Python (Multivariate Gaussian)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -64,40 +64,56 @@ export const multivariateProbabilitySection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="rules">Mathematical Derivation: Sum &amp; Product Rules</h2>
-    <p>These two rules are the "Laws of Physics" for Machine Learning inference.</p>
-
-    <h3>1. The Sum Rule (Marginalization)</h3>
-    <div class="math-block">$$P(X) = \sum_{Y} P(X, Y)$$</div>
-    <p><em>This allows us to ignore "nuisance variables" we don't care about.</em></p>
-
-    <h3>2. The Product Rule</h3>
-    <div class="math-block">$$P(X, Y) = P(Y|X)P(X)$$</div>
-    <p><em>This allows us to break a complex joint distribution into simpler conditional components.</em></p>
-
-    <p>Combining these two gives us <strong>Bayes' Theorem</strong> in a multivariate context:</p>
-    <div class="math-block">$$P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{Y} P(X|Y)P(Y)}$$</div>
-
-    <h2 id="example">Illustrative Example: The Weather Table</h2>
+    <h2 id="rules">3. Core Rules of Probability</h2>
     <div class="example-box">
-      <h4>Joint Distribution of Weather and Cavity</h4>
-      <p>Imagine a joint distribution of Weather \((X)\) and Cavity \((Y)\) at a dentist's office:</p>
+      <h4>The "Laws of Physics" for ML Inference</h4>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Sum Rule (Marginalization):</strong> To find \(P(X)\), we "sum out" all \(Y\)'s.</div></div>
+      <div class="math-block">$$P(X) = \sum_{Y} P(X, Y)$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Product Rule:</strong> Relates Joint and Conditional.</div></div>
+      <div class="math-block">$$P(X, Y) = P(Y|X)P(X)$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Combined Form (Bayes):</strong></div></div>
+      <div class="math-block">$$P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{Y} P(X|Y)P(Y)}$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Why?</strong> The denominator is the <strong>Evidence</strong>. It ensures the posterior probabilities sum to 1. In complex ML models, this sum is often impossible to compute directly, leading to <strong>Variational Inference</strong>.</div></div>
+    </div>
+
+    <h2 id="marginal-example">4. Illustrative Example: The Weather Dataset</h2>
+    <div class="example-box">
+      <h4>Problem: Extracting Marginals from Joint Data</h4>
+      <p>Consider a simplified joint distribution of Weather (\(X\)) and mood (\(Y\)):</p>
+      
       <div class="premium-table-wrap">
         <table class="premium-table">
-          <thead><tr><th></th><th>Cavity (Y=1)</th><th>No Cavity (Y=0)</th><th>Marginal P(X)</th></tr></thead>
+          <thead><tr><th></th><th>Happy (Y=1)</th><th>Neutral (Y=0)</th></tr></thead>
           <tbody>
-            <tr><td><strong>Sunny (X=1)</strong></td><td>0.06</td><td>0.54</td><td><strong>0.60</strong></td></tr>
-            <tr><td><strong>Rainy (X=0)</strong></td><td>0.04</td><td>0.36</td><td><strong>0.40</strong></td></tr>
-            <tr><td><strong>Marginal P(Y)</strong></td><td><strong>0.10</strong></td><td><strong>0.90</strong></td><td><strong>1.00</strong></td></tr>
+            <tr><td><strong>Sunny (X=1)</strong></td><td>0.60</td><td>0.10</td></tr>
+            <tr><td><strong>Rainy (X=0)</strong></td><td>0.05</td><td>0.25</td></tr>
           </tbody>
         </table>
       </div>
-      <ul>
-        <li><strong>Joint Probability:</strong> \(P(\text{Sunny, Cavity}) = 0.06\).</li>
-        <li><strong>Marginal Probability:</strong> What is the probability it is Sunny? \(0.06 + 0.54 = 0.60\).</li>
-        <li><strong>Conditional Probability:</strong> If it is Sunny, what is the chance of a Cavity?</li>
-      </ul>
-      <div class="math-block">$$P(\text{Cavity}|\text{Sunny}) = \frac{P(\text{Sunny, Cavity})}{P(\text{Sunny})} = \frac{0.06}{0.60} = 0.10$$</div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Find Marginal P(Sunny):</strong> Sum across the first row: \(0.60 + 0.10 = 0.70\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Marginal P(Happy):</strong> Sum down the first column: \(0.60 + 0.05 = 0.65\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Conditional P(Happy | Rainy):</strong> Focus only on \(X=0\) row and normalize.</div></div>
+
+      <div class="math-block">$$P(Y=1|X=0) = \frac{0.05}{0.05 + 0.30} = \frac{0.05}{0.35} \approx 0.143$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> While the overall probability of happiness is 65%, seeing "Rainy" weather drops it drastically to ~14%.</div></div>
+    </div>
+
+    <h2 id="covariance-example">5. Illustrative Example: Covariance</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing Multi-Sensor Data</h4>
+      <p>Two sensors \(X\) and \(Y\) measure temperature at different locations. We observe 3 pairs: \((10, 12), (15, 17), (20, 22)\). The means are \(\mu_x = 15, \mu_y = 17\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Covariance:</strong> \(Cov(X, Y) = \frac{1}{n} \sum (x_i - \mu_x)(y_i - \mu_y)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \((-5 \times -5) + (0 \times 0) + (5 \times 5) = 25 + 0 + 25 = 50\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(50 / 3 \approx 16.67\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Insight:</strong> The positive covariance tells us the sensors move together (syncronized). In ML, this redundancy is the core principle behind PCA dimension reduction.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (Multivariate Gaussian)</h2>

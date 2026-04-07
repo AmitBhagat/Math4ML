@@ -1,22 +1,28 @@
 import React, { useRef, useEffect, useCallback } from "react";
 
-// ─── HIGH-FIDELITY COLOR PALETTE (Math4ML Premium) ──────────────────────────
-export const C = {
-  blue: "#3b8beb",
-  blue2: "#5ba3f5",
-  teal: "#00d4aa",
-  purple: "#a78bfa",
-  pink: "#f472b6",
-  yellow: "#fbbf24",
-  red: "#f87171",
-  green: "#4ade80",
-  orange: "#fb923c",
-  grid: "rgba(26, 40, 64, 0.5)",
-  gridBright: "rgba(36, 54, 86, 0.8)",
-  axis: "rgba(42, 64, 112, 1)",
-  white: "#e2e8f0",
-  muted: "#64748b",
+// ─── HIGH-FIDELITY THEME PALETTES ──────────────────────────────────────────
+export type VisualizerTheme = 'light' | 'dark';
+
+const PALETTES = {
+  light: {
+    blue: "#3b8beb", blue2: "#5ba3f5", teal: "#00d4aa", purple: "#a78bfa",
+    pink: "#f472b6", yellow: "#fbbf24", red: "#f87171", green: "#4ade80",
+    orange: "#fb923c",
+    grid: "rgba(0, 0, 0, 0.45)", gridBright: "rgba(0, 0, 0, 0.65)",
+    axis: "rgba(0, 0, 0, 0.85)", white: "#24292f", muted: "#64748b",
+    bg: "#ffffff", infoBg: "rgba(255, 255, 255, 0.95)", infoBorder: "rgba(0, 0, 0, 0.1)"
+  },
+  dark: {
+    blue: "#60a5fa", blue2: "#93c5fd", teal: "#2dd4bf", purple: "#c084fc",
+    pink: "#f472b6", yellow: "#fbbf24", red: "#f87171", green: "#4ade80",
+    orange: "#fb923c",
+    grid: "rgba(255, 255, 255, 0.25)", gridBright: "rgba(255, 255, 255, 0.45)",
+    axis: "rgba(255, 255, 255, 0.75)", white: "#f8fafc", muted: "#94a3b8",
+    bg: "#0f172a", infoBg: "rgba(15, 23, 42, 0.95)", infoBorder: "rgba(255, 255, 255, 0.15)"
+  }
 };
+
+export const C = (theme: VisualizerTheme = 'light') => PALETTES[theme];
 
 // ─── CANVAS HELPERS ───────────────────────────────────────────────────────────
 export function useAnimationFrame(cb: (elapsed: number, ts: number) => void, deps: any[] = []) {
@@ -39,10 +45,11 @@ export function useAnimationFrame(cb: (elapsed: number, ts: number) => void, dep
   }, deps);
 }
 
-export function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number, scale: number, ox: number, oy: number) {
+export function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number, scale: number, ox: number, oy: number, theme: VisualizerTheme = 'light') {
+  const colors = C(theme);
   ctx.lineWidth = 0.5;
   const step = scale;
-  ctx.strokeStyle = C.grid;
+  ctx.strokeStyle = colors.grid;
   for (let x = ox % step; x < w; x += step) {
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
   }
@@ -50,7 +57,7 @@ export function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number, sc
     ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(w, y); ctx.stroke();
   }
   // Axes
-  ctx.lineWidth = 1.5; ctx.strokeStyle = C.axis;
+  ctx.lineWidth = 2.5; ctx.strokeStyle = colors.axis;
   ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(w, oy); ctx.stroke();
   ctx.beginPath(); ctx.moveTo(ox, 0); ctx.lineTo(ox, h); ctx.stroke();
 }
@@ -85,12 +92,13 @@ export function easeInOut(t: number) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 import { Play, RotateCcw } from "lucide-react";
 
 interface CanvasBaseProps {
-  onDraw: (ctx: CanvasRenderingContext2D, width: number, height: number, elapsed: number) => void;
+  onDraw: (ctx: CanvasRenderingContext2D, width: number, height: number, elapsed: number, theme: VisualizerTheme) => void;
   className?: string;
   autoResize?: boolean;
+  theme?: VisualizerTheme;
 }
 
-export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoResize = true }) => {
+export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoResize = true, theme = 'light' }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const startTime = useRef<number | null>(null);
@@ -137,7 +145,7 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoR
       const ctx = canvas.getContext("2d");
       if (ctx) {
         const { width, height } = canvas.getBoundingClientRect();
-        onDraw(ctx, width, height, elapsed);
+        onDraw(ctx, width, height, elapsed, theme);
       }
     }
     requestAnimationFrame(loop);
@@ -160,7 +168,7 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoR
         if (ctx) {
           const { width, height } = canvas.getBoundingClientRect();
           if (width > 0 && height > 0) {
-            onDraw(ctx, width, height, 0);
+            onDraw(ctx, width, height, 0, theme);
           }
         }
       }
@@ -184,14 +192,16 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({ onDraw, className, autoR
         <button
           onClick={() => setIsPlaying(!isPlaying)}
           className={`flex items-center gap-2 px-6 py-2.5 rounded-full text-[10px] font-black uppercase tracking-widest shadow-2xl transition-all active:scale-95
-            ${isPlaying ? "bg-red-500/10 border border-red-500/20 text-red-500" : "bg-accent-premium text-white"}`}
+            ${isPlaying 
+              ? "bg-slate-900 dark:bg-white text-white dark:text-black border border-slate-900 dark:border-white" 
+              : "bg-white dark:bg-slate-900 text-slate-900 dark:text-white border border-slate-900 dark:border-white"}`}
         >
           {isPlaying ? "Pause" : <><Play className="w-3 h-3 fill-current" /> Solve / Play</>}
         </button>
         
         <button
           onClick={handleReset}
-          className="p-2.5 rounded-full bg-bg-secondary border border-border-premium text-muted-premium hover:text-accent-premium transition-colors shadow-xl"
+          className="p-2.5 rounded-full bg-bg-secondary dark:bg-slate-800 border border-border-premium text-muted-premium hover:text-accent-premium transition-colors shadow-xl"
           title="Reset"
         >
           <RotateCcw className="w-3.5 h-3.5" />

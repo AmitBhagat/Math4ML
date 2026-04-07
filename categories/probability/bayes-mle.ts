@@ -18,8 +18,8 @@ export const bayesMleSection: TopicSection = {
       <a href="#bayes">2. Bayes' Theorem Revisited</a>
       <a href="#likelihood">3. Likelihood vs. Probability</a>
       <a href="#mle">4. Maximum Likelihood Estimation (MLE)</a>
-      <a href="#mle" class="sub">↳ The Log-Likelihood Trick</a>
-      <a href="#comparison">MLE vs. MAP (Maximum A Posteriori)</a>
+      <a href="#mle-example">5. Illustrative Example: MLE (Coin Bias)</a>
+      <a href="#map-example">6. Illustrative Example: MAP (Beta Prior)</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
@@ -61,21 +61,45 @@ export const bayesMleSection: TopicSection = {
     </div>
 
     <h2 id="likelihood">3. Likelihood vs. Probability</h2>
-    <p>This is a subtle but vital distinction:</p>
-    <ul>
-      <li><strong>Probability \(P(D|\theta)\):</strong> We fix \(\theta\) and vary \(D\). "Given this fair coin, what's the chance of 3 heads?"</li>
-      <li><strong>Likelihood \(L(\theta|D)\):</strong> We fix \(D\) and vary \(\theta\). "Given we saw 3 heads, how likely is it that the coin's fairness parameter is \(0.8\)?</li>
-    </ul>
+    <div class="example-box">
+      <h4>The "Inversion" of Perspective</h4>
+      <p>Imagine a coin with success probability \(\theta\). You flip it and get Heads (H).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Probability \(P(H|\theta=0.5)\):</strong> You fix the coin as fair. The chance of H is \(0.5\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Likelihood \(L(\theta=0.5|H)\):</strong> You fix the data (Heads). How well does "fairness" explain this observation?</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Crucially:</strong> Likelihood is <strong>not</strong> a probability distribution. It doesn't sum to 1. It is a "score" of how well parameters fit the facts.</div></div>
+    </div>
 
     <h2 id="mle">4. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE asks: "Which parameter \(\theta\) makes the observed data \(D\) most probable?" It ignores the Prior \(P(\theta)\) entirely.</p>
     <div class="math-block">$$\hat{\theta}_{MLE} = \arg\max_{\theta} P(D|\theta)$$</div>
 
-    <h3>The Log-Likelihood Trick</h3>
-    <p>Data points are usually independent, so \(P(D|\theta) = P(d_1|\theta) \cdot P(d_2|\theta) \cdot \dots \cdot P(d_n|\theta)\). Multiplying many small probabilities leads to numbers so small that computers can't handle them (underflow).</p>
-    <p>To fix this, we maximize the <strong>Log-Likelihood</strong>. Since \(\log(x)\) is a monotonically increasing function, the \(\theta\) that maximizes \(\log(P)\) also maximizes \(P\).</p>
-    <div class="math-block">$$\log \left( \prod P(d_i|\theta) \right) = \sum \log(P(d_i|\theta))$$</div>
-    <div class="callout tip"><div class="callout-icon">🚀</div><div class="callout-body"><strong>Why?</strong> It turns difficult multiplication into easy addition and makes the derivatives much simpler to compute!</div></div>
+    <h2 id="mle-example">5. Illustrative Example: MLE (Estimating Coin Bias)</h2>
+    <div class="example-box">
+      <h4>Problem: Finding the "Most Likely" \(\theta\)</h4>
+      <p>In 10 flips of a mysterious coin, you see 8 Heads and 2 Tails. What is the MLE estimate of \(\theta\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Likelihood Function:</strong> \(L(\theta) = \theta^8 (1-\theta)^2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Log-Likelihood:</strong> \(\ln L(\theta) = 8 \ln \theta + 2 \ln(1-\theta)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Optimize:</strong> Set derivative to zero: \(\frac{8}{\theta} - \frac{2}{1-\theta} = 0\).</div></div>
+
+      <div class="math-block">$$8(1-\theta) = 2\theta \implies 8 = 10\theta \implies \hat{\theta}_{MLE} = 0.8$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> MLE perfectly matches the observed frequency (8/10). It assumes the data is all that matters.</div></div>
+    </div>
+
+    <h2 id="map-example">6. Illustrative Example: MAP (Beta Prior)</h2>
+    <div class="example-box">
+      <h4>Problem: When Priors Pull Back</h4>
+      <p>Using the same 8/10 data, but now we have a <strong>Prior</strong> that the coin is fair (\(\mu=0.5\)). This prior behaves like having seen 2 virtual Heads and 2 virtual Tails previously.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Posterior Logic:</strong> Combine observed (8H, 2T) with prior (2H, 2T).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>New Totals:</strong> 10 Heads, 4 Tails. Total flips = 14.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>MAP Estimate:</strong> \(\hat{\theta}_{MAP} = \frac{10}{14} \approx 0.71\).</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> See how the Prior "pulled" the estimate from 0.8 back towards 0.5? This is <strong>Regularization</strong>. It prevents the model from overreacting to a small sample of 10 flips.</div></div>
+    </div>
 
     <h2 id="comparison">MLE vs. MAP</h2>
     <p><strong>MAP (Maximum A Posteriori)</strong> is like MLE but it includes the Prior belief:</p>

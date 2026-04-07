@@ -41,18 +41,22 @@ export const matrixPropertiesSection: TopicSection = {
       <li><strong>Rank Deficient:</strong> When \(\text{rank}(A) < \min(m, n)\).</li>
     </ul>
 
+    <visualizer topic="Rank" />
+
     <h3>Mathematical Derivation</h3>
     <p>The rank is often found by converting a matrix to <strong>Row Echelon Form (REF)</strong> using Gaussian elimination. The number of non-zero rows in REF is the rank.</p>
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing the Rank</h4>
+      <h4>Problem: Computing the Rank via Row Reduction</h4>
       <p>Find the rank of \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\).</p>
-      <ol>
-        <li>Perform row operation: \(R_2 \to R_2 - 2R_1\).</li>
-        <li>\(A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. (The rows are linearly dependent).</div></div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Row Dependencies:</strong> Notice that \(R_2 = 2R_1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Perform Row Operation:</strong> \(R_2 \to R_2 - 2R_1\).</div></div>
+      
+      <div class="math-block">$$A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. Since only one row is non-zero after elimination, the matrix "squashes" 2D space into 1D line.</div></div>
     </div>
 
     <h2 id="det">2. Determinant (det(A) or |A|)</h2>
@@ -72,10 +76,13 @@ export const matrixPropertiesSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing the Determinant</h4>
-      <p>\(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
+      <h4>Problem: Computing the Determinant (Scaling Factor)</h4>
+      <p>Calculate \(\det(A)\) for \(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(ad - bc\).</div></div>
       <div class="math-block">$$\det(A) = (3 \times 2) - (1 \times 2) = 6 - 2 = 4$$</div>
-      <p><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4.</p>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4. If \(\det(A)\) were 0, the area would collapse to zero.</div></div>
     </div>
 
     <visualizer topic="Determinants" />
@@ -115,12 +122,15 @@ export const matrixPropertiesSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Testing Positive Definiteness</h4>
+      <h4>Problem: Testing Positive Definiteness</h4>
       <p>Is \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\) Positive Definite?</p>
-      <p>Let \(\mathbf{x} = [x_1, x_2]^T\):</p>
-      <div class="math-block">$$\mathbf{x}^T A \mathbf{x} = [x_1, x_2] \begin{bmatrix} 2x_1 \\ 3x_2 \end{bmatrix} = 2x_1^2 + 3x_2^2$$</div>
-      <p>Since squares are always non-negative and \(\mathbf{x}\) is non-zero, the result is always \(> 0\).</p>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Yes, it is Positive Definite.</div></div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Expand Quadratic Form \(\mathbf{x}^T A \mathbf{x}\):</strong></div></div>
+      <div class="math-block">$$\mathbf{x}^T A \mathbf{x} = [x_1, x_2] \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = 2x_1^2 + 3x_2^2$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Since \(x_1^2, x_2^2 > 0\) for any non-zero \(\mathbf{x}\), the sum \(2x_1^2 + 3x_2^2\) is always strictly positive.</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Yes, it is Positive Definite. In optimization, this means the loss surface is a local "bowl" (convex).</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

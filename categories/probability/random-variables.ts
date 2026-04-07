@@ -18,7 +18,8 @@ export const randomVariablesSection: TopicSection = {
       <a href="#core" class="sub">↳ 2. Continuous Random Variables (PDF)</a>
       <a href="#cdf">Cumulative Distribution Function (CDF)</a>
       <a href="#derivation">Mathematical Derivation: PDF to Probability</a>
-      <a href="#examples">Illustrative Examples</a>
+      <a href="#examples">3. Illustrative Example: Bernoulli & Uniform</a>
+      <a href="#expectation-example">4. Illustrative Example: Expectation</a>
       <a href="#implementation">Implementation in Python (SciPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -67,25 +68,46 @@ export const randomVariablesSection: TopicSection = {
     <p>From the fundamental theorem of calculus, if \(F(x)\) is the CDF:</p>
     <div class="math-block">$$P(a \le X \le b) = F(b) - F(a)$$</div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples">3. Illustrative Example: Bernoulli & Uniform</h2>
 
     <div class="example-box">
-      <h4>Discrete Case: Bernoulli Trial</h4>
-      <p>Imagine a single coin flip where Heads \((H) = 1\) and Tails \((T) = 0\).</p>
-      <p><strong>PMF:</strong> \(P(X=1) = p\), \(P(X=0) = 1-p\).</p>
-      <p><strong>CDF:</strong></p>
-      <ul>
-        <li>If \(x < 0,\; F(x) = 0\)</li>
-        <li>If \(0 \le x < 1,\; F(x) = 1-p\)</li>
-        <li>If \(x \ge 1,\; F(x) = 1\)</li>
-      </ul>
+      <h4>Discrete Case: Bernoulli Trial (Coin Flip)</h4>
+      <p>Let \(X = 1\) for Heads and \(X = 0\) for Tails, with \(P(H) = p\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define PMF:</strong> \(P(X=x) = p^x (1-p)^{1-x}\) for \(x \in \{0, 1\}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Construct CDF:</strong> The probability "accumulates" at 0 and 1.</div></div>
+
+      <div class="math-block">$$F(x) = \begin{cases} 0 & x < 0 \\ 1-p & 0 \le x < 1 \\ 1 & x \ge 1 \end{cases}$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> If \(p=0.7\), the CDF "jumps" from 0 to 0.3 at \(x=0\), and from 0.3 to 1.0 at \(x=1\).</div></div>
     </div>
 
     <div class="example-box">
-      <h4>Continuous Case: Uniform Distribution</h4>
-      <p>Suppose a random number generator picks any value between 0 and 10. The PDF is constant: \(f(x) = \frac{1}{10}\).</p>
-      <p><strong>What is \(P(2 \le X \le 5)\)?</strong></p>
-      <div class="math-block">$$P = \int_{2}^{5} \frac{1}{10} dx = \left[\frac{x}{10}\right]_{2}^{5} = \frac{5}{10} - \frac{2}{10} = 0.3$$</div>
+      <h4>Continuous Case: Uniform Interval</h4>
+      <p>A sensor measures temperature between 20°C and 30°C with equal density. What is \(P(22 < X < 25)\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define PDF:</strong> Height must be \(1/(30-20) = 0.1\) to ensure total area = 1.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set up Integral:</strong> Probability is the area from 22 to 25.</div></div>
+
+      <div class="math-block">$$P(22 < X < 25) = \int_{22}^{25} 0.1 \, dx = [0.1x]_{22}^{25}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> \(0.1(25) - 0.1(22) = 2.5 - 2.2 = 0.3\).</div></div>
+      
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> For a uniform distribution, the probability is simply the <strong>width of the interval</strong> times the <strong>density height</strong>. \(3 \times 0.1 = 0.3\).</div></div>
+    </div>
+
+    <h2 id="expectation-example">4. Illustrative Example: Expectation</h2>
+    <div class="example-box">
+      <h4>Problem: Expected Value of a Weighted Die</h4>
+      <p>A "loaded" die has the following probabilities: \(P(6) = 0.5\), and \(P(1) = P(2) = P(3) = P(4) = P(5) = 0.1\). What is the expected roll \(E[X]\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Formula:</strong> \(E[X] = \sum x \cdot P(X=x)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sum standard faces:</strong> \((1+2+3+4+5) \times 0.1 = 15 \times 0.1 = 1.5\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Add the loaded face:</strong> \(6 \times 0.5 = 3.0\).</div></div>
+
+      <div class="math-block">$$E[X] = 1.5 + 3.0 = 4.5$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Even though the die only shows integers, the "average" outcome over many trials is 4.5. This is the "center of mass" of the distribution.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (SciPy)</h2>

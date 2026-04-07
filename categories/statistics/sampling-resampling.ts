@@ -15,8 +15,9 @@ export const samplingResamplingSection: TopicSection = {
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#bootstrapping">1. Bootstrapping</a>
+      <a href="#bootstrap-example">1.1 Illustrative Example: Mean Variance</a>
       <a href="#cv">2. Cross-Validation (CV)</a>
-      <a href="#example">Mathematical Example: Bootstrap Mean Estimation</a>
+      <a href="#stratified-example">2.1 Illustrative Example: Stratified Splits</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#conclusions">Key Takeaways</a>
     </div>
@@ -24,15 +25,23 @@ export const samplingResamplingSection: TopicSection = {
     <h2 id="bootstrapping">1. Bootstrapping</h2>
     <p>Bootstrapping is a statistical method involving drawing repeated samples from a dataset <strong>with replacement</strong>.</p>
     
-    <div class="def-box">
-      <div class="def-title">Core Concept</div>
-      <p style="margin:0">If we have a dataset $D$ of size $n$, a bootstrap sample is created by picking $n$ elements from $D$, where each element can be picked more than once.</p>
+    <div class="premium-def-box">
+      <div class="premium-def-title">The "OOB" Ratio</div>
+      <p style="margin:0">For a sample of size \(n\), the probability of an item <strong>not</strong> being picked in \(n\) draws is \((1 - \frac{1}{n})^n\).</p>
+      <div class="math-block" style="margin-top:10px">\(\lim_{n \to \infty} (1 - \frac{1}{n})^n = \frac{1}{e} \approx 0.368\)</div>
+      <p style="margin-top:10px">This leaves ~36.8% of data as <strong>Out-Of-Bag (OOB)</strong>, acting as a "free" validation set.</p>
+    </div>
+
+    <h2 id="bootstrap-example">1.1 Illustrative Example: Bootstrap Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Estimating Mean Uncertainty</h4>
+      <p>A dataset has 3 points: \(X = [10, 20, 30]\). Find the probability that the value '10' is excluded from a single bootstrap sample of size 3.</p>
       
-      <p style="margin-top:15px; margin-bottom:0">Probability of an item *not* being picked in a sample of size $n$: $P(\text{not picked}) = \left(1 - \frac{1}{n}\right)^n$</p>
-      <ul style="margin-top:10px; margin-bottom:0">
-        <li><strong>In-bag samples:</strong> $\approx 63.2\%$ of unique data.</li>
-        <li><strong>Out-of-bag (OOB) samples:</strong> $\approx 36.8\%$ of data (used for testing).</li>
-      </ul>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Individual Draw:</strong> Probability of <strong>not</strong> picking 10 is \(2/3\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Independent Draws:</strong> Since we sample with replacement, the probability is \((2/3) \times (2/3) \times (2/3)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculation:</strong> \(8/27 \approx 29.6\%\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Analysis:</strong> Even with a tiny dataset, ~30% of it is "hidden" in each bootstrap. In ML, this "hiding" of data across different models (like in Random Forests) is exactly what prevents overfitting.</div></div>
     </div>
 
     <div class="callout tip">
@@ -63,17 +72,15 @@ export const samplingResamplingSection: TopicSection = {
       <li><strong>Stratified K-Fold:</strong> Ensures each fold has the same percentage of samples of each target class as the complete set. (Crucial for imbalanced data).</li>
     </ul>
 
+    <h2 id="stratified-example">2.1 Illustrative Example: Stratified Splits</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example: Bootstrap Mean Estimation</h4>
-      <p><strong>Problem:</strong> Given a dataset $X = [10, 20, 30]$, calculate the probability that the value '10' is excluded from a sample of size $n=3$.</p>
+      <h4>Problem: Sampling from Imbalanced Fraud Data</h4>
+      <p>A dataset has 1,000 samples: 990 "Normal" and 10 "Fraud". We want a 50/50 Train/Test split.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li>For $n=3$, the probability of not picking '10' in one draw is $2/3$.</li>
-        <li>For 3 draws:
-          <div class="math-block">$$P(\text{Exclusion}) = \left(\frac{2}{3}\right)^3 = \frac{8}{27} \approx 0.296 \text{ (29.6%)}$$</div>
-        </li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Risk:</strong> Random split might put 0 Fraud samples in your Test set. You'd have 100% accuracy but 0 value.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Fix:</strong> Stratified Sampling ensures each split has exactly 1% Fraud. Train gets 5 Fraud; Test gets 5 Fraud.</div></div>
+
+      <div class="callout focus"><div class="callout-icon">⚖️</div><div class="callout-body"><strong>Judgment:</strong> Always use <strong>StratifiedKFold</strong> in scikit-learn for classification. It's the cheapest insurance policy against "Lucky Folds" that make your model look better than it is.</div></div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>

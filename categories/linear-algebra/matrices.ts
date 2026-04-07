@@ -54,15 +54,17 @@ export const matricesSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: 2×2 Matrix Multiplication</h4>
-      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\).</p>
-      <ul>
-        <li>\(c_{11} = (1 \times 5) + (2 \times 7) = 5 + 14 = 19\)</li>
-        <li>\(c_{12} = (1 \times 6) + (2 \times 8) = 6 + 16 = 22\)</li>
-        <li>\(c_{21} = (3 \times 5) + (4 \times 7) = 15 + 28 = 43\)</li>
-        <li>\(c_{22} = (3 \times 6) + (4 \times 8) = 18 + 32 = 50\)</li>
-      </ul>
-      <div class="math-block">$$C = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      <h4>Problem: 2×2 Matrix Multiplication</h4>
+      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate the product \(C = AB\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Row 1 × Column 1:</strong> \((1 \times 5) + (2 \times 7) = 19\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Row 1 × Column 2:</strong> \((1 \times 6) + (2 \times 8) = 22\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Row 2 × Column 1:</strong> \((3 \times 5) + (4 \times 7) = 43\).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Row 2 × Column 2:</strong> \((3 \times 6) + (4 \times 8) = 50\).</div></div>
+
+      <div class="math-block">$$C = \begin{bmatrix} 1(5)+2(7) & 1(6)+2(8) \\ 3(5)+4(7) & 3(6)+4(8) \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> Each entry in \(C\) captures how much the \(i\)-th row of the first matrix "aligns" with the \(j\)-th column of the second.</div></div>
     </div>
 
     <visualizer topic="Matrices" />
@@ -108,14 +110,30 @@ export const matricesSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Finding the Inverse of a 2×2 Matrix</h4>
+      <h4>Problem: Finding the Inverse of a 2×2 Matrix</h4>
       <p>Find the inverse of \(A = \begin{bmatrix} 4 & 7 \\ 2 & 6 \end{bmatrix}\).</p>
-      <ol>
-        <li><strong>Determinant:</strong> \((4 \times 6) - (7 \times 2) = 24 - 14 = 10\)</li>
-        <li><strong>Swap and Negate:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\)</li>
-        <li><strong>Multiply by \(1/10\):</strong></li>
-      </ol>
-      <div class="math-block">$$A^{-1} = \frac{1}{10}\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix} = \begin{bmatrix} 0.6 & -0.7 \\ -0.2 & 0.4 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Determinant:</strong> \((4 \times 6) - (7 \times 2) = 10\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Swap diagonal, negate off-diagonal:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Scale by \(1/\det\):</strong> \(\frac{1}{10}\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div></div>
+
+      <div class="math-block">$$A^{-1} = \begin{bmatrix} 0.6 & -0.7 \\ -0.2 & 0.4 \end{bmatrix}$$</div>
+
+      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Check:</strong> Does \(AA^{-1} = I\)? \([4(0.6) + 7(-0.2)] = 2.4 - 1.4 = 1\). It works!</div></div>
+    </div>
+
+    <h2 id="composition">Illustrative Example: Composition of Transformations</h2>
+    <div class="example-box">
+      <h4>Problem: Consecutive Linear Mappings</h4>
+      <p>Transform a vector \(\mathbf{x} = [1, 0]\) using a <strong>90° Rotation</strong> (\(R\)) followed by a <strong>Scaling factor of 2</strong> (\(S\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define Matrices:</strong> \(R = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\) and \(S = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Compose:</strong> \(C = SR\) (Apply \(R\) first, then \(S\)).</div></div>
+
+      <div class="math-block">$$C = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 0 & -2 \\ 2 & 0 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply to x:</strong> \(C\mathbf{x} = [0, 2]\)</div></div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Final State:</strong> The vector was rotated to \([0, 1]\), then scaled to \([0, 2]\). Matrix multiplication allowed us to collapse these two steps into one single operation.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

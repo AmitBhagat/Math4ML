@@ -99,6 +99,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="AreaUnderCurve" />
     <ul>
       <li><strong>Expectation and Variance</strong>: Computing the average value of a continuous distribution: $E[X] = \int x f(x) \, dx$.</li>
       <li><strong>Bayesian Inference</strong>: Calculating the "Evidence" (the denominator in Bayes' Rule) often requires integrating over all possible parameter values.</li>

@@ -53,11 +53,13 @@ export const vectorSpacesSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Independence vs Dependence</h4>
-      <ul>
-        <li>\(\mathbf{v}_1 = [1, 0]\), \(\mathbf{v}_2 = [0, 1]\) → <strong>Independent</strong> (You can't make \([0, 1]\) using only \([1, 0]\)).</li>
-        <li>\(\mathbf{v}_1 = [1, 2]\), \(\mathbf{v}_2 = [2, 4]\) → <strong>Dependent</strong> (\(\mathbf{v}_2 = 2\mathbf{v}_1\)).</li>
-      </ul>
+      <h4>Problem: Testing Linear Independence</h4>
+      <p>Decide if \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) are independent.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Check for Multiples:</strong> Can we find a scalar \(k\) such that \(\mathbf{v}_2 = k\mathbf{v}_1\)?</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Yes, \(2 \times [1, 2] = [2, 4]\). Since \(\mathbf{v}_2\) is a direct multiple of \(\mathbf{v}_1\), they are <strong>Linearly Dependent</strong>.</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>ML Risk:</strong> High dependence between features (Multicollinearity) makes models unstable. In this case, \(\mathbf{v}_2\) adds no new information to the model.</div></div>
     </div>
 
     <visualizer topic="BasisChange" />
@@ -74,6 +76,8 @@ export const vectorSpacesSection: TopicSection = {
     <p>Recall \(\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)\). If \(\theta = 90^\circ\), then \(\cos(90^\circ) = 0\), making the dot product zero.</p>
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(90^\circ) = \|\mathbf{u}\| \|\mathbf{v}\| \cdot 0 = 0$$</div>
 
+    <visualizer topic="Orthogonality" />
+
     <h2 id="projections">4. Orthogonal Projections</h2>
     <p>An <strong>Orthogonal Projection</strong> of a vector \(\mathbf{y}\) onto a vector \(\mathbf{u}\) is the "shadow" that \(\mathbf{y}\) casts on the line spanned by \(\mathbf{u}\).</p>
 
@@ -84,18 +88,20 @@ export const vectorSpacesSection: TopicSection = {
     <p>The projection of \(\mathbf{y}\) onto \(\mathbf{u}\), denoted \(\text{proj}_{\mathbf{u}}(\mathbf{y})\), is:</p>
     <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$</div>
 
+    <visualizer topic="Projections" />
+
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Projecting y onto u</h4>
+      <h4>Problem: Computing an Orthogonal Projection</h4>
       <p>Project \(\mathbf{y} = [2, 3]\) onto \(\mathbf{u} = [4, 0]\).</p>
-      <ol>
-        <li>\(\mathbf{y} \cdot \mathbf{u} = (2 \times 4) + (3 \times 0) = 8\).</li>
-        <li>\(\mathbf{u} \cdot \mathbf{u} = (4 \times 4) + (0 \times 0) = 16\).</li>
-        <li>\(\text{Scalar} = 8/16 = 0.5\).</li>
-        <li>\(\text{Proj} = 0.5 \times [4, 0] = [2, 0]\).</li>
-      </ol>
-      <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \frac{8}{16}[4, 0] = 0.5 \times [4, 0] = [2, 0]$$</div>
-      <p><strong>Result:</strong> \([2, 0]\). The "height" component \([0, 3]\) was discarded.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Dot Products:</strong> \(\mathbf{y} \cdot \mathbf{u} = 8\) and \(\mathbf{u} \cdot \mathbf{u} = 16\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Scalar Projection:</strong> \(\frac{8}{16} = 0.5\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Scalar to u:</strong> \(0.5 \times [4, 0] = [2, 0]\).</div></div>
+
+      <div class="math-block">$$\hat{\mathbf{y}} = \text{proj}_{\mathbf{u}}(\mathbf{y}) = [2, 0]$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> The "shadow" of \(\mathbf{y}\) on the x-axis is \([2, 0]\). The vertical component \([0, 3]\) was orthogonal to \(\mathbf{u}\) and thus removed.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

@@ -19,7 +19,8 @@ export const basicAxiomsSection: TopicSection = {
       <a href="#blocks" class="sub">↳ 2. Events</a>
       <a href="#blocks" class="sub">↳ 3. The Three Axioms (Kolmogorov)</a>
       <a href="#conditional">Mathematical Derivation: Conditional Probability &amp; Independence</a>
-      <a href="#example">Illustrative Example: Die Roll</a>
+      <a href="#example">3. Illustrative Example: Die Roll</a>
+      <a href="#union-example">4. Illustrative Example: Union of Events</a>
       <a href="#implementation">Implementation in Python (NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -37,6 +38,7 @@ export const basicAxiomsSection: TopicSection = {
     <p>Probability begins with a few fundamental definitions that define the "world" we are operating in.</p>
 
     <h3>1. Sample Space (S)</h3>
+    <visualizer topic="SampleSpace" />
     <p>The <strong>Sample Space</strong> is the set of all possible outcomes of a random experiment.</p>
     <ul>
       <li><strong>Example:</strong> If you toss a coin, \(S = \{H, T\}\). If you roll a six-sided die, \(S = \{1, 2, 3, 4, 5, 6\}\).</li>
@@ -62,6 +64,7 @@ export const basicAxiomsSection: TopicSection = {
     <p>This measures the probability of an event \(A\) occurring, <strong>given</strong> that event \(B\) has already occurred. This is critical in ML for updating our "beliefs" as new data arrives.</p>
     <p>The formula is defined as:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
+    <visualizer topic="ConditionalProbability" />
 
     <p><strong>Derivation steps:</strong></p>
     <div class="step-box"><span class="step-num">1</span><div>Since \(B\) has occurred, our "new" sample space is restricted to \(B\).</div></div>
@@ -74,24 +77,32 @@ export const basicAxiomsSection: TopicSection = {
     <p>From the conditional probability formula, if \(A\) and \(B\) are independent:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A) \cdot P(B)}{P(B)} = P(A)$$</div>
 
-    <h2 id="example">Illustrative Example: Die Roll</h2>
+    <h2 id="example">3. Illustrative Example: Die Roll</h2>
     <div class="example-box">
       <h4>Problem: Conditional Probability on a Die</h4>
-      <p>You roll a fair six-sided die.</p>
-      <ul>
-        <li>Event \(A\): Rolling an even number \(\{2, 4, 6\}\).</li>
-        <li>Event \(B\): Rolling a number greater than 3 \(\{4, 5, 6\}\).</li>
-      </ul>
-      <p><strong>Step-by-step Solution:</strong></p>
-      <ol>
-        <li><strong>Total Outcomes \((S)\):</strong> \(\{1, 2, 3, 4, 5, 6\} \implies n(S) = 6\).</li>
-        <li><strong>Probability of \(A\):</strong> \(P(A) = \frac{3}{6} = 0.5\).</li>
-        <li><strong>Probability of \(B\):</strong> \(P(B) = \frac{3}{6} = 0.5\).</li>
-        <li><strong>Find \(A \cap B\):</strong> Outcomes that are both even AND \(> 3\) are \(\{4, 6\}\). So, \(P(A \cap B) = \frac{2}{6} = \frac{1}{3}\).</li>
-        <li><strong>Calculate \(P(A|B)\):</strong></li>
-      </ol>
-      <div class="math-block">$$P(A|B) = \frac{1/3}{1/2} = \frac{2}{3} \approx 0.67$$</div>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> If I tell you the roll was greater than 3, the chance it is even increases from 50% to 67%.</div></div>
+      <p>You roll a fair six-sided die. If I tell you the result is greater than 3, what is the probability that it is an even number?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Events:</strong> \(A = \{2, 4, 6\}\) (Even), \(B = \{4, 5, 6\}\) (Greater than 3).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Intersection:</strong> \(A \cap B = \{4, 6\}\). Thus, \(P(A \cap B) = 2/6 = 1/3\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Formula:</strong> \(P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{1/3}{1/2}\).</div></div>
+
+      <div class="math-block">$$P(A|B) = \frac{2}{3} \approx 0.67$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Knowing that the roll was \(> 3\) increases our confidence that it was even from 50% to 67%.</div></div>
+    </div>
+
+    <h2 id="union-example">4. Illustrative Example: Union of Events</h2>
+    <div class="example-box">
+      <h4>Problem: Non-Mutually Exclusive Events</h4>
+      <p>In a standard deck of 52 cards, what is the probability of drawing a <strong>Red Card</strong> (Event R) OR an <strong>Ace</strong> (Event A)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Individual Probabilities:</strong> \(P(R) = 26/52 = 0.5\), \(P(A) = 4/52 \approx 0.077\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Overlap:</strong> There are 2 Red Aces (Heart and Diamond). \(P(R \cap A) = 2/52 \approx 0.038\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply General Addition Rule:</strong> \(P(R \cup A) = P(R) + P(A) - P(R \cap A)\).</div></div>
+
+      <div class="math-block">$$P(R \cup A) = \frac{26}{52} + \frac{4}{52} - \frac{2}{52} = \frac{28}{52} \approx 0.538$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> We subtract the intersection because the Red Aces were counted twice — once as Red cards and once as Aces. In ML, ignoring dependencies like this leads to overconfident (and wrong) models.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (NumPy)</h2>

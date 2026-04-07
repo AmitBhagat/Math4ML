@@ -16,8 +16,8 @@ export const lawsSection: TopicSection = {
       <a href="#lln">1. Law of Large Numbers (LLN)</a>
       <a href="#clt">2. Central Limit Theorem (CLT)</a>
       <a href="#clt" class="sub">↳ Core Properties</a>
-      <a href="#se">Mathematical Derivation: Standard Error</a>
-      <a href="#example">Illustrative Example: Die Rolls</a>
+      <a href="#lln-example">4. Illustrative Example: LLN (Coin Flips)</a>
+      <a href="#clt-example">5. Illustrative Example: CLT (Dice Sums)</a>
       <a href="#implementation">Implementation in Python (Visualizing CLT)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -60,25 +60,43 @@ export const lawsSection: TopicSection = {
 
     <p><strong>Mathematical Definition:</strong></p>
     <div class="math-block">$$\bar{X}_n \approx \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
+    <div class="my-10">
+      <visualizer topic="Distributions" />
+    </div>
 
     <h2 id="se">Mathematical Derivation: Standard Error</h2>
     <p>Why does the spread of our sample mean decrease as we collect more data?</p>
 
-    <div class="step-box"><div class="step-num">1</div><div>Let \(S_n = X_1 + X_2 + \dots + X_n\).</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>The variance of the sum of independent variables is the sum of their variances: \(Var(S_n) = n\sigma^2\)</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>We are interested in the mean \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
-    <div class="step-box"><div class="step-num">4</div><div>Using the property \(Var(aX) = a^2 Var(X)\):</div></div>
-    <div class="math-block">$$Var\!\left(\frac{S_n}{n}\right) = \frac{1}{n^2} Var(S_n) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
-    <div class="step-box"><div class="step-num">5</div><div><strong>Conclusion:</strong> As \(n\) grows, the variance \(\frac{\sigma^2}{n}\) shrinks toward zero, concentrating our estimate around the true mean.</div></div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Sum of Variables:</strong> Let \(S_n = X_1 + X_2 + \dots + X_n\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Summed Variance:</strong> For independent variables, \(Var(S_n) = n\sigma^2\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Mean Variable:</strong> We define the sample mean as \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>Scaling Variance:</strong> Using \(Var(aX) = a^2 Var(X)\):</div></div>
+    <div class="math-block">$$Var\!\left(\frac{1}{n} S_n\right) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
+    
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Conclusion:</strong> As \(n \to \infty\), the variance \(\frac{\sigma^2}{n} \to 0\). This proves that the sample mean becomes an increasingly precise estimate of the truth.</div></div>
 
-    <h2 id="example">Illustrative Example: Die Rolls</h2>
+    <h2 id="lln-example">4. Illustrative Example: LLN (Trial Convergence)</h2>
     <div class="example-box">
-      <h4>LLN and CLT in Action</h4>
-      <ul>
-        <li><strong>Original Distribution:</strong> A single die roll is <strong>Uniform</strong> (flat), with \(\mu = 3.5\).</li>
-        <li><strong>LLN Application:</strong> If you roll a die 1,000 times and average them, you will get a value very close to 3.5.</li>
-        <li><strong>CLT Application:</strong> If you ask 500 people to each roll a die 30 times and report their average, and then you plot those 500 averages, you will see a perfect <strong>Bell Curve</strong> centered at 3.5, even though the die itself isn't "bell-shaped."</li>
-      </ul>
+      <h4>Problem: Tracking the Mean of a Fair Coin</h4>
+      <p>If you flip a coin and record the cumulative fraction of Heads, how does it behave over time?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>At \(n=10\):</strong> You might see 7 Heads (70%). The noise is high.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>At \(n=100\):</strong> You might see 53 Heads (53%). The noise is shrinking.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>At \(n=10,000\):</strong> You might see 5002 Heads (50.02%).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Observed mean stabilizes at the theoretical mean (0.5). In ML, this ensures that training on 1M images gives a representative model of the real world.</div></div>
+    </div>
+
+    <h2 id="clt-example">5. Illustrative Example: CLT (Emergence of Normality)</h2>
+    <div class="example-box">
+      <h4>Problem: Summing Uniform Die Rolls</h4>
+      <p>A single die roll is flat (Uniform). What is the distribution of the <strong>average</strong> of 30 rolls?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Single Roll:</strong> Probability of 1, 2, 3, 4, 5, 6 is exactly \(1/6\). (Square/Flat shape).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sample Mean:</strong> Roll 30 dice and take the average. Repeat this process 1,000 times.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Observation:</strong> Plotting these 1,000 averages creates a <strong>Gaussian Bell Curve</strong>.</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> This is why Gaussian noise / Residuals are so common in ML. Most errors are the "sum" of many tiny, independent random effects, which naturally form a Normal distribution.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (Visualizing CLT)</h2>

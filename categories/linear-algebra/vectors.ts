@@ -53,14 +53,15 @@ export const vectorsSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Dot Product Calculation</h4>
+      <h4>Problem: Dot Product Calculation</h4>
       <p>Calculate the dot product of \(\mathbf{a} = [2, 3]\) and \(\mathbf{b} = [4, -1]\).</p>
-      <ol>
-        <li>Multiply corresponding components: \((2 \times 4) + (3 \times -1)\)</li>
-        <li>Sum them: \(8 - 3 = 5\)</li>
-      </ol>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Multiply corresponding components:</strong> \((2 \times 4)\) and \((3 \times -1)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sum the results:</strong> \(8 + (-3) = 5\).</div></div>
+
       <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = (2)(4) + (3)(-1) = 8 - 3 = 5$$</div>
-      <p><strong>Result:</strong> 5. Since the value is positive, the vectors point in a similar general direction.</p>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> The result is positive, meaning the vectors point in a similar general direction (the angle \(\theta\) is acute).</div></div>
     </div>
 
     <visualizer topic="DotProduct" />
@@ -84,10 +85,16 @@ export const vectorsSection: TopicSection = {
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing Norms</h4>
-      <p>For \(\mathbf{v} = [3, -4]\):</p>
+      <h4>Problem: Computing L₁ and L₂ Norms</h4>
+      <p>For a vector \(\mathbf{v} = [3, -4]\), calculate its length using different metrics.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> Sum of absolute values.</div></div>
       <div class="math-block">$$\|\mathbf{v}\|_1 = |3| + |-4| = 3 + 4 = 7$$</div>
-      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$</div>
+
+      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> Square root of sum of squares.</div></div>
+      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The L₁ norm is larger than the L₂ norm. In regularization, L₁ (Lasso) creates "sharp" constraints that force weights to zero, while L₂ (Ridge) creates "smooth" constraints.</div></div>
     </div>
 
     <h2 id="span">3. Linear Combinations, Span, and Basis</h2>

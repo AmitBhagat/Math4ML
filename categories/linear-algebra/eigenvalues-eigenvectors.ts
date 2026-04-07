@@ -49,13 +49,19 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
 
     <h2 id="example">3. Illustrative Example Walkthrough</h2>
     <div class="example-box">
-      <h4>Problem: Find eigenvalues for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\)</h4>
-      <ol>
-        <li>\(\det\left(\begin{bmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{bmatrix}\right) = (4-\lambda)(3-\lambda) - 2 = 0\).</li>
-        <li>\(\lambda^2 - 7\lambda + 12 - 2 = \lambda^2 - 7\lambda + 10 = 0\).</li>
-        <li>Factoring: \((\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5, \lambda_2 = 2\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">For \(\lambda_1 = 5\), we solve \((A - 5I)\mathbf{v} = 0 \implies v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\).</div></div>
+      <h4>Problem: Finding Eigenvalues & Eigenvectors</h4>
+      <p>Find the eigenpairs for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Solve the Characteristic Equation:</strong> \(\det(A - \lambda I) = 0\).</div></div>
+      <div class="math-block">$$(4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10 = 0$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factor the Quadratic:</strong> \((\lambda - 5)(\lambda - 2) = 0\).</div></div>
+      <div class="math-block">$$\lambda_1 = 5, \quad \lambda_2 = 2$$</div>
+
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute Eigenvector for \(\lambda_1 = 5\):</strong> Solve \((A - 5I)\mathbf{v} = 0\).</div></div>
+      <div class="math-block">$$\begin{bmatrix} -1 & 1 \\ 2 & -2 \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> We found two eigenpairs. The most "dominant" eigenvalue is 5, representing the primary direction of scaling.</div></div>
     </div>
 
     <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>

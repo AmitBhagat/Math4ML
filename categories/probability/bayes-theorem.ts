@@ -20,7 +20,8 @@ export const bayesTheoremSection: TopicSection = {
       <a href="#applications" class="sub">↳ 1. Naive Bayes</a>
       <a href="#applications" class="sub">↳ 2. Bayesian Inference</a>
       <a href="#applications" class="sub">↳ 3. Bayesian Neural Networks (BNNs)</a>
-      <a href="#example">Illustrative Example: Medical Testing</a>
+      <a href="#example">4. Illustrative Example: Medical Testing</a>
+      <a href="#spam-example">5. Illustrative Example: Spam Filters</a>
       <a href="#implementation">Implementation: Naive Bayes Logic in Python</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -67,10 +68,10 @@ export const bayesTheoremSection: TopicSection = {
 
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>The derivation is a direct consequence of the <strong>Definition of Conditional Probability</strong>.</p>
-    <div class="step-box"><div class="step-num">1</div><div>Start with the definition of \(P(H|E)\): \(\displaystyle P(H|E) = \frac{P(H \cap E)}{P(E)}\)</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>From the Product Rule, we know: \(P(H \cap E) = P(E|H) \cdot P(H)\)</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>Substitute step 2 into step 1:</div></div>
-    <div class="math-block">$$P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$$</div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Conditional Definition:</strong> \(P(H|E) = \frac{P(H \cap E)}{P(E)}\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Product Rule:</strong> \(P(H \cap E) = P(E|H) \cdot P(H)\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Substitution:</strong> Combine the two to get the inverted relationship.</div></div>
+    <div class="math-block">$$P(H|E) = \frac{P(E|H)P(H)}{P(E)}$$</div>
     <p>To calculate \(P(E)\), we often use the <strong>Law of Total Probability</strong>:</p>
     <div class="math-block">$$P(E) = P(E|H)P(H) + P(E|H^c)P(H^c)$$</div>
 
@@ -87,20 +88,36 @@ export const bayesTheoremSection: TopicSection = {
     <p>In standard Neural Networks, weights are fixed numbers. In <strong>BNNs</strong>, weights are <strong>probability distributions</strong>.</p>
     <div class="callout info"><div class="callout-icon">🧠</div><div class="callout-body"><strong>Benefit:</strong> The model can tell you "I don't know." If it sees data far from its training set, the variance in the weight distributions leads to high uncertainty in the output.</div></div>
 
-    <h2 id="example">Illustrative Example: Medical Testing</h2>
+    <h2 id="example">4. Illustrative Example: Medical Testing</h2>
     <div class="example-box">
-      <h4>Problem: Disease Testing Paradox</h4>
-      <p>A disease affects <strong>1%</strong> of the population. A test is <strong>99% accurate</strong> (if you have it, it's positive 99% of the time) but has a <strong>2% false-positive rate</strong>. If you test positive, what is the probability you actually have the disease?</p>
-      <ol>
-        <li><strong>Prior \(P(D)\):</strong> \(0.01\)</li>
-        <li><strong>Likelihood \(P(+|D)\):</strong> \(0.99\)</li>
-        <li><strong>False Positive \(P(+|\text{no }D)\):</strong> \(0.02\)</li>
-        <li><strong>Calculate Evidence \(P(+)\):</strong></li>
-      </ol>
-      <div class="math-block">$$P(+) = (0.99 \times 0.01) + (0.02 \times 0.99) = 0.0099 + 0.0198 = 0.0297$$</div>
-      <p><strong>Calculate Posterior \(P(D|+)\):</strong></p>
-      <div class="math-block">$$P(D|+) = \frac{0.99 \times 0.01}{0.0297} = \frac{0.0099}{0.0297} \approx 0.333$$</div>
-      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> Even with a "99% accurate" test, you only have a <strong>33.3%</strong> chance of having the disease because the disease is so rare! This is the power of the prior.</div></div>
+      <h4>Problem: The Disease Testing Paradox</h4>
+      <p>A disease affects <strong>1%</strong> of the population (\(P(H) = 0.01\)). A test is <strong>99% accurate</strong> (\(P(E|H) = 0.99\)) but has a <strong>2% false positive rate</strong> (\(P(E|H^c) = 0.02\)). If you test positive, what is the probability you have the disease?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Evidence \(P(E)\):</strong> Total probability of a positive test.</div></div>
+      <div class="math-block">$$P(E) = (0.99 \times 0.01) + (0.02 \times 0.99) = 0.0297$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Bayes:</strong> \(P(H|E) = \frac{0.99 \times 0.01}{0.0297}\).</div></div>
+
+      <div class="math-block">$$P(H|E) \approx 0.333$$</div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> Despite the "99% accuracy," the posterior is only <strong>33.3%</strong>. This happens because the disease is so rare that the small false positive rate still produces more "false" positives than "true" ones.</div></div>
+    </div>
+
+    <h2 id="spam-example">5. Illustrative Example: Spam Filters</h2>
+    <div class="example-box">
+      <h4>Problem: Classifying "Urgent" Emails</h4>
+      <p>40% of your emails are Spam. The word <strong>"Urgent"</strong> appears in 80% of Spam but only 10% of Ham (Normal). You receive an email with "Urgent". Is it Spam?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define Priors:</strong> \(P(\text{Spam}) = 0.4\), \(P(\text{Ham}) = 0.6\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Likelihoods:</strong> \(P(\text{Urgent}|\text{Spam}) = 0.8\), \(P(\text{Urgent}|\text{Ham}) = 0.1\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Posterior:</strong> \(P(\text{Spam}|\text{Urgent}) = \frac{0.8 \times 0.4}{(0.8 \times 0.4) + (0.1 \times 0.6)}\).</div></div>
+
+      <div class="math-block">$$P(\text{Spam}|\text{Urgent}) = \frac{0.32}{0.32 + 0.06} = \frac{0.32}{0.38} \approx 0.84$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Since the probability (84%) is high, the model correctly flags this as Spam. Knowledge of the word "Urgent" shifted our belief from 40% to 84%.</div></div>
+    </div>
+    <div class="my-10">
+       <visualizer topic="BayesTheorem" />
     </div>
 
     <h2 id="implementation">Implementation: Naive Bayes Logic in Python</h2>

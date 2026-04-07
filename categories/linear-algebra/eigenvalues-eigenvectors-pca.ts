@@ -17,9 +17,7 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. The Intuition: Variance as Information</a>
       <a href="#derivation">2. Mathematical Derivation (The 5 Steps)</a>
-      <a href="#ex1">3. Solved Practice Case: Finding Eigen-pairs</a>
-      <a href="#ex2">4. Solved Practice Case: Variance Selection</a>
-      <a href="#ex3">5. Solved Practice Case: Interpreting PC1</a>
+      <a href="#examples">3. Solved Practice Examples</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#summary-table">Summary Table</a>
     </div>
@@ -41,71 +39,39 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
 
     <h2 id="examples">3. Solved Practice Examples</h2>
 
-    <!-- EXAMPLE 1 -->
-    <div class="solved-card" id="ex1">
-      <div class="solved-header">
-        <div class="solved-num">1</div>
-        <div class="solved-title">Finding Eigenvalues and Eigenvectors</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          Find the eigenvalues and eigenvectors for the matrix \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).
-        </div>
+    <h3>Illustrative Example: Finding Eigenvalues & Eigenvectors</h3>
+    <div class="example-box">
+      <h4>Problem: Manual Eigen-decomposition</h4>
+      <p>Find the eigenvalues and eigenvectors for the matrix \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Solve the Characteristic Equation:</strong> \(\det(A - \lambda I) = 0 \implies \lambda^2 - 7\lambda + 10 = 0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factor the Quadratic:</strong> \((\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5, \lambda_2 = 2\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute Eigenvector for \(\lambda_1=5\):</strong> Solve \((A-5I)\mathbf{v}=0 \implies \mathbf{v}_1 = [1, 1]^T\).</div></div>
 
-        <div class="step-label">Step 1: Set up the Characteristic Equation</div>
-        <div class="math-block">$$\det(A - \lambda I) = 0 \implies \begin{vmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{vmatrix} = 0$$</div>
-
-        <div class="step-label">Step 2: Solve the Quadratic Equation</div>
-        <div class="math-block">$$\lambda^2 - 7\lambda + 10 = 0 \implies (\lambda - 5)(\lambda - 2) = 0$$</div>
-        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\).</div></div>
-
-        <div class="step-label">Step 3: Find Eigenvectors for λ₁ = 5</div>
-        <div class="math-block">$$(A - 5I)v = 0 \implies \begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
-        <p>From the first row: \(-x + y = 0 \implies x = y\). One possible <strong>Eigenvector</strong> is \(v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\).</p>
-      </div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\). The primary axis of variance is the vector \([1, 1]\).</div></div>
     </div>
 
-    <!-- EXAMPLE 2 -->
-    <div class="solved-card" id="ex2">
-      <div class="solved-header">
-        <div class="solved-num">2</div>
-        <div class="solved-title">PCA Selection (Variance Explained)</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          If \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\), how much variance is retained in 2D?
-        </div>
+    <h3>Illustrative Example: Variance Selection</h3>
+    <div class="example-box">
+      <h4>Problem: Dimensionality Reduction Decision</h4>
+      <p>If \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\), how much variance is retained if we reduce to 2D?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sum All Eigenvalues:</strong> \(\sum \lambda = 15 + 4 + 1 = 20\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Reconstructed Sum:</strong> \(15 + 4 = 19\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Ratio:</strong> \(\frac{19}{20} = 95\%\).</div></div>
 
-        <p>Total Variance = \(15 + 4 + 1 = 20\). Sum of top 2 = \(15 + 4 = 19\).</p>
-        <div class="math-block">$$\frac{19}{20} \times 100 = 95\%$$</div>
-
-        <div class="conclusion">
-          <strong>Conclusion:</strong> By keeping the first two principal components, you retain <strong>95%</strong> of the original information while reducing the dimensionality.
-        </div>
-      </div>
+      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Conclusion:</strong> Keeping the first two components retains <strong>95%</strong> of original info.</div></div>
     </div>
 
-    <!-- EXAMPLE 3 -->
-    <div class="solved-card" id="ex3">
-      <div class="solved-header">
-        <div class="solved-num">3</div>
-        <div class="solved-title">PCA Interpretation: The "Size" Axis</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          In a dataset measuring "Height" and "Weight," \(v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix}\) with \(\lambda_1 = 50\). What does this tell you?
-        </div>
+    <h3>Illustrative Example: Interpreting PC Axes</h3>
+    <div class="example-box">
+      <h4>Problem: The "Size" Component in Height-Weight Data</h4>
+      <p>In a dataset measuring Height and Weight, the first PC is \(\mathbf{v}_1 = [0.707, 0.707]\). What is its physical meaning?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Analyze Contributions:</strong> Both components are positive and equal.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Deduce Meaning:</strong> This axis represents a simultaneous increase in both features.</div></div>
 
-        <div class="step-label">Interpretation of Eigenvector (v₁)</div>
-        <p>Since both components are positive and equal, this eigenvector represents an axis where Height and Weight increase together. This is the <strong>"Size"</strong> component. It shows the direction of maximum correlation.</p>
-        <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body">The equal weighting (\(0.707 \approx 1/\sqrt{2}\)) means both Height and Weight contribute equally — a diagonal axis at 45° in the Height-Weight plane.</div></div>
-
-        <div class="step-label">Interpretation of Eigenvalue (λ₁ = 50)</div>
-        <p>A value of 50 indicates that a significant portion of the total spread (variance) is captured along this "Size" axis rather than by looking at height or weight individually.</p>
-      </div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> PC1 represents the <strong>"Overall Size"</strong> of the person. It captures the shared variance where taller people tend to be heavier.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

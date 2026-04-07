@@ -14,9 +14,10 @@ export const regressionAnalysisSection: TopicSection = {
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#linear">1. Linear Regression</a>
+      <a href="#ols-example">1.1 Illustrative Example: Manual OLS</a>
       <a href="#residuals">2. Residuals & Plotting</a>
-      <a href="#r2">3. R-Squared ($R^2$)</a>
-      <a href="#example">Mathematical Example & Solution</a>
+      <a href="#r2">3. R-Squared (\(R^2\))</a>
+      <a href="#r2-example">3.1 Illustrative Example: Explaining Variance</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways for ML</a>
     </div>
@@ -24,19 +25,24 @@ export const regressionAnalysisSection: TopicSection = {
     <h2 id="linear">1. Linear Regression</h2>
     <p>Linear Regression assumes a linear relationship between the input variables and the single output variable.</p>
     
-    <div class="def-box">
-      <div class="def-title">Mathematical Representation</div>
-      <p style="margin:0">The model represented by the following equation:</p>
-      <div class="math-block" style="margin-top:10px; margin-bottom:10px; background:transparent; border:none; padding:0;">
-        $$Y = \beta_0 + \beta_1 X + \epsilon$$
-      </div>
-      <ul style="margin-bottom:0">
-        <li><strong>$Y$:</strong> Dependent Variable (Target)</li>
-        <li><strong>$X$:</strong> Independent Variable (Predictor)</li>
-        <li><strong>$\beta_0$:</strong> Intercept (Value of $Y$ when $X=0$)</li>
-        <li><strong>$\beta_1$:</strong> Slope (Change in $Y$ for a unit change in $X$)</li>
-        <li><strong>$\epsilon$:</strong> Random Error (Noise)</li>
-      </ul>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Model Equation</div>
+      <div class="math-block">$$Y = \beta_0 + \beta_1 X + \epsilon$$</div>
+      <p style="margin-top:10px">Where \(\beta_0\) is the <strong>Intercept</strong> and \(\beta_1\) is the <strong>Slope</strong>.</p>
+    </div>
+
+    <h2 id="ols-example">1.1 Illustrative Example: Manual OLS</h2>
+    <div class="example-box">
+      <h4>Problem: Fitting a Line by Hand</h4>
+      <p>Given \(X = [1, 2, 3]\) and \(Y = [2, 4, 5]\). Find the regression line \(Y = \beta_0 + \beta_1 X\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Means:</strong> \(\bar{X} = 2, \bar{Y} = 3.67\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Numerator:</strong> \(\sum (x_i - \bar{X})(y_i - \bar{Y}) = (-1)(-1.67) + (0)(0.33) + (1)(1.33) = 3.0\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Denominator:</strong> \(\sum (x_i - \bar{X})^2 = (-1)^2 + 0^2 + 1^2 = 2\).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Slope (\(\beta_1\)):</strong> \(3.0 / 2 = 1.5\).</div></div>
+      <div class="step-box"><span class="step-num">5</span><div><strong>Intercept (\(\beta_0\)):</strong> \(3.67 - (1.5 \times 2) = 0.67\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Equation:</strong> \(\hat{Y} = 0.67 + 1.5X\). This line minimizes the <strong>Sum of Squared Errors</strong> across all three points.</div></div>
     </div>
 
     <h3>Cost Function: Mean Squared Error (MSE)</h3>
@@ -74,19 +80,15 @@ export const regressionAnalysisSection: TopicSection = {
       <li><strong>$SS_{tot}$ (Total Sum of Squares):</strong> $\sum (y_i - \bar{y})^2$ — The total variance in the data.</li>
     </ul>
 
+    <h2 id="r2-example">3.1 Illustrative Example: Explaining Variance</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example with Solution</h4>
-      <p><strong>Problem:</strong> Given $X = [1, 2, 3]$ and $Y = [2, 4, 5]$. Find the regression line $Y = \beta_0 + \beta_1 X$ and calculate the Residual for $X=2$.</p>
+      <h4>Problem: Interpreting \(R^2 = 0.85\)</h4>
+      <p>A marketing model predicts sales based on ad spend with an \(R^2\) of 0.85. What does this mean?</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Calculate Means:</strong> $\bar{X} = 2$, $\bar{Y} = 3.67$.</li>
-        <li><strong>Calculate Slope ($\beta_1$):</strong> 
-          $$\beta_1 = \frac{\sum (x_i - \bar{X})(y_i - \bar{Y})}{\sum (x_i - \bar{X})^2} = \frac{1.67 + 0 + 1.33}{1 + 1} = 1.5$$
-        </li>
-        <li><strong>Calculate Intercept ($\beta_0$):</strong> $\beta_0 = \bar{Y} - \beta_1 \bar{X} = 3.67 - (1.5 \times 2) = 0.67$.</li>
-        <li><strong>Residual for $X=2$:</strong> $\hat{y} = 0.67 + 1.5(2) = 3.67 \implies e = 4 - 3.67 = 0.33$.</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Meaning:</strong> 85% of the variation in sales can be explained by the variation in ad spend.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Leftovers:</strong> The remaining 15% is due to factors not in the model (noise, seasonality, competitor moves).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Reality Check:</strong> High \(R^2\) doesn't always mean a good model (it could be overfitting). Always check <strong>Residual Plots</strong> for patterns that indicate your linear assumption is failing.</div></div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>
