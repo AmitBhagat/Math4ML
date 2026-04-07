@@ -9,6 +9,13 @@ export const mutualInformationSection: TopicSection = {
       <div class="premium-hero-badge">📏 Info Theory · MI</div>
       <h1>Mutual Information (MI)</h1>
       <p><strong>Mutual Information</strong> is a statistical measure that quantifies the amount of information obtained about one random variable through another random variable. It measures how much knowing one variable reduces uncertainty about the other.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Mutual Information</strong> is the "Uncertainty Reduction" intuition. It asks: "If I tell you the value of $Y$, how much simpler does predicting $X$ become?" If they have no connection, your uncertainty stays high ($MI = 0$). If they are perfectly linked, your uncertainty vanishes ($MI = \text{Entropy}$).
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -39,6 +46,13 @@ export const mutualInformationSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Reduction in Entropy:</strong> MI is the intersection of information between two variables. It is the reduction in the entropy of $X$ achieved by learning $Y$: $I(X; Y) = H(X) - H(X|Y)$.
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of it as a <strong>Venn Diagram</strong> of information. $H(X)$ and $H(Y)$ are two circles. The area where they overlap is the <strong>Mutual Information</strong>. The total area covered by both is the <strong>Joint Entropy $H(X, Y)$</strong>.
       </div>
     </div>
 
@@ -101,6 +115,13 @@ export const mutualInformationSection: TopicSection = {
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Key Benefit:</strong> MI is superior to Correlation for detecting complex, non-linear patterns in datasets.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Correlation</strong> only looks for "Straight Lines." If your relationship is a <strong>Parabola ($Y = X^2$)</strong>, Correlation will often say "0" because the up-slope cancels the down-slope. <strong>Mutual Information</strong> doesn't care about shapes; it only cares if knowing $X$ helps predict $Y$. This makes it the ultimate "Relationship Detector" for Feature Selection.
         </div>
       </div>
     </div>

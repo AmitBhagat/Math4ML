@@ -50,15 +50,36 @@ export const multivariableSection: TopicSection = {
     <h3>1. The Gradient ($\nabla f$)</h3>
     <p>For a scalar function $f(x_1, x_2, ..., x_n)$, the gradient is a vector of all its partial derivatives:</p>
     <div class="math-block">$$\nabla f = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^T$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Gradient</strong> $\nabla f$ is a compass. No matter where you stand on the loss surface, $\nabla f$ points directly toward the steepest "uphill" direction. This is how <strong>Gradient Descent</strong> knows exactly which way to nudge the weights—just take a step in the <em>opposite</em> direction.
+      </div>
+    </div>
     <p><strong>Directional Derivative</strong>: To find the slope in any arbitrary direction vector $\mathbf{v}$, we use: $D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}$.</p>
 
     <h3>2. The Jacobian ($J$)</h3>
     <p>When we have a function $\mathbf{f}$ that maps $\mathbb{R}^n$ to $\mathbb{R}^m$, the Jacobian is a matrix of all first-order partial derivatives:</p>
     <div class="math-block">$$J = \begin{bmatrix} \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\ \vdots & \ddots & \vdots \\ \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Jacobian</strong> is the multi-input, multi-output version of the derivative. It tells you how a <em>vector output</em> (like an entire layer in a neural network) is sensitive to a <em>vector input</em>. Its determinant measures how the transformation stretches or squashes space locally.
+      </div>
+    </div>
+
     <h3>3. The Hessian ($H$)</h3>
     <p>The Hessian is a square matrix of <strong>second-order</strong> partial derivatives of a scalar-valued function. It describes the local curvature:</p>
     <div class="math-block">$$H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If the Gradient is the "velocity" of your optimization, the <strong>Hessian</strong> is the "acceleration" or curvature. It tells you how fast the gradient itself is changing. In ML, we use this to avoid "zig-zagging" in narrow valleys or to check if a critical point is a true minimum or a treacherous <strong>saddle point</strong>.
+      </div>
+    </div>
 
     <h2 id="example-gradient">Example 1: Navigating a 2D Gradient</h2>
     <div class="example-box">

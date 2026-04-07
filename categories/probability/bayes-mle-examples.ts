@@ -48,6 +48,14 @@ export const bayesMleExamplesSection: TopicSection = {
       <div class="step-box"><div class="step-num">4</div><div><strong>Normalize:</strong>
 \[P(S|\text{Data}) = \frac{0.192}{0.192 + 0.003} = \frac{0.192}{0.195} \approx 0.985\]</div></div>
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a <strong>98.5%</strong> chance the email is Spam.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is <strong>Bayesian Inference</strong> in action. We started with a "Weak Prior" (40% spam), but the specific combination of words "Free" and "Winner" provided such strong <strong>Likelihood</strong> that it pulled our confidence almost to 100%. One piece of evidence can change everything.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="coin">Example 2: Bernoulli MLE (Coin Toss)</h2>
@@ -61,12 +69,27 @@ export const bayesMleExamplesSection: TopicSection = {
 \[L(p) = \prod_{i=1}^n p^{x_i}(1-p)^{1-x_i} = p^k(1-p)^{n-k}\] (where \(k = \sum x_i\) is the number of heads).</div></div>
       <div class="step-box"><div class="step-num">2</div><div><strong>Apply Log-Likelihood trick:</strong>
 \[\log(L(p)) = k \log(p) + (n-k) \log(1-p)\]</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> Why the <strong>Log Trick</strong>? In ML, we often multiply thousands of tiny probabilities together, which leads to <strong>Numerical Underflow</strong> (the computer rounds your number to zero). By taking the log, we turn <strong>Products into Sums</strong>, which are much more stable and easier to optimize with Gradient Descent.
+        </div>
+      </div>
       <div class="step-box"><div class="step-num">3</div><div><strong>Take the derivative with respect to \(p\):</strong>
 \[\frac{d}{dp} \log(L(p)) = \frac{k}{p} - \frac{n-k}{1-p}\]</div></div>
       <div class="step-box"><div class="step-num">4</div><div><strong>Set to zero to find the maximum:</strong>
 \[\frac{k}{p} = \frac{n-k}{1-p} \implies k(1-p) = p(n-k)\]
 \[k - kp = np - kp \implies \hat{p} = \frac{k}{n}\]</div></div>
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Intuitive Result:</strong> The Best MLE for the parameter \(p\) is simply the <strong>fraction of heads</strong> we saw in our sample!</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is a beautiful moment where math meets intuition. MLE essentially proves that if you see 8 heads out of 10, the "smartest" guess for the coin's bias is 0.8. This derivation is the root of almost every <strong>Loss Function</strong> in modern AI.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="interpretation">Interpretation for ML</h2>

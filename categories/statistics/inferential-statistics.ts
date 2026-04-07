@@ -31,6 +31,13 @@ export const inferentialStatisticsSection: TopicSection = {
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Hypothesis Testing is a <strong>"Criminal Trial."</strong> The Null Hypothesis is <strong>Innocent</strong> (no effect) until the evidence is so overwhelming that "Innocence" becomes impossible. We don't <em>prove</em> the Alternative; we simply provide enough evidence to <em>reject</em> the Null.
+      </div>
+    </div>
+
     <h2 id="hypothesis-example">1.1 Illustrative Example: The p-value Ritual</h2>
     <div class="example-box">
       <h4>Problem: Is Feature X Significant?</h4>
@@ -40,6 +47,13 @@ export const inferentialStatisticsSection: TopicSection = {
       <div class="step-box"><span class="step-num">2</span><div><strong>Comparison:</strong> \(0.002 < 0.05\).</div></div>
 
       <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Reject \(H_0\). The relationship between square footage and price is <strong>Statistically Significant</strong>. There is only a 0.2% chance this result is due to random noise.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>P-value</strong> is a <strong>"Surprise Score."</strong> If $p$ is tiny, we are very surprised, meaning the Null Hypothesis is likely wrong. If $p$ is large, our result is boring and totally expected under the Null—so we change nothing.
+      </div>
+    </div>
     </div>
 
     <h2 id="error-example">1.2 Illustrative Example: Type I vs. Type II</h2>
@@ -51,6 +65,13 @@ export const inferentialStatisticsSection: TopicSection = {
       <div class="step-box"><span class="step-num">2</span><div><strong>Type II (False Negative):</strong> Alert says "Healthy" but server is "Down". Users are complaining (Beta Error).</div></div>
 
       <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Tradeoff:</strong> Decreasing the threshold to catch every "Down" server (Lower Type II) usually increases "False Alarms" (Higher Type I). This is the <strong>Precision-Recall Tradeoff</strong>.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Type I Error</strong> is the <strong>"False Alarm"</strong> (crying wolf when there is no wolf). <strong>Type II Error</strong> is the <strong>"Sleeping Guard"</strong> (missing the wolf when it's actually there). In ML, you decide which error is more expensive based on your specific use case.
+      </div>
+    </div>
     </div>
 
     <h2 id="statistical-tests">2. Common Statistical Tests</h2>

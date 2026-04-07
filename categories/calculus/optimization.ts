@@ -38,6 +38,13 @@ export const optimizationSection: TopicSection = {
       <li><strong>Non-Convex Functions</strong>: Like a mountain range. There are many small valleys (local minima) and flat ridges (saddle points) that can trick an optimization algorithm into stopping before it reaches the true lowest point (global minimum).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Optimization is a "Blind Man's Walk." You can only feel the slope directly under your feet (the gradient). In a <strong>Convex</strong> landscape, the slope always points toward the global prize. In <strong>Non-Convex</strong> Deep Learning, you might find a comfortable valley that is still miles above the actual bottom—this is why we use techniques like <strong>Momentum</strong> to "bounce" out of local traps.
+      </div>
+    </div>
+
     <h2 id="derivation">Mathematical Derivation</h2>
 
     <h3>1. Convexity Defined</h3>
@@ -45,8 +52,22 @@ export const optimizationSection: TopicSection = {
     <div class="math-block">$$f(\lambda x_1 + (1-\lambda)x_2) \leq \lambda f(x_1) + (1-\lambda)f(x_2)$$</div>
     <p><strong>Hessian Test:</strong> A twice-differentiable function is convex if its Hessian matrix $H$ is <strong>Positive Semi-Definite</strong> ($H \succeq 0$) for all $x$. This means all its eigenvalues are $\geq 0$.</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Why do we care about the <strong>Hessian Eigenvalues</strong>? If even one eigenvalue is negative, there's a direction where the surface curves <em>downward</em>. For a perfect minimum, every single direction must curve <em>upward</em>—meaning the Hessian must be <strong>Positive Definite</strong>.
+      </div>
+    </div>
+
     <h3>2. Critical Points</h3>
     <p>We find candidates for the minimum by setting the gradient to zero: $\nabla f(x) = 0$. We then use the <strong>Second Derivative Test</strong> (Hessian) to classify them:</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> $\nabla f = 0$ is the <strong>Stationary Point</strong> condition. It means you're standing on flat ground. But are you at the bottom of a hole (minimum), the top of a peak (maximum), or on a ridge (saddle point)? The Hessian tells you the difference. In high-dimensional ML, <strong>Saddle Points</strong> are a nightmare—you're flat in thousands of directions but still not at the bottom.
+      </div>
+    </div>
 
     <div class="premium-table-wrap">
       <table class="premium-table">

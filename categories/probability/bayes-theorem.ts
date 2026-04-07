@@ -45,6 +45,13 @@ export const bayesTheoremSection: TopicSection = {
       $$P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$$
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Bayes' Theorem is a <strong>"Common Sense Correction."</strong> It tells you exactly how much you should update your mind after seeing a piece of data. If the evidence is strong, you move closer to the hypothesis. If your initial belief (Prior) was rock-solid, it takes a lot of evidence to budge you.
+      </div>
+    </div>
+
     <div class="premium-toc" style="background: transparent; border: none; padding: 0;">
       <div class="perspectives-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0;">
         <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
@@ -66,6 +73,13 @@ export const bayesTheoremSection: TopicSection = {
       </div>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Prior</strong> $P(H)$ is where <strong>Expert Knowledge</strong> enters the model. The <strong>Likelihood</strong> $P(E|H)$ is where the <strong>Data</strong> enters. Bayes is the mathematical marriage of these two sources of information.
+      </div>
+    </div>
+
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>The derivation is a direct consequence of the <strong>Definition of Conditional Probability</strong>.</p>
     <div class="step-box"><span class="step-num">1</span><div><strong>Conditional Definition:</strong> \(P(H|E) = \frac{P(H \cap E)}{P(E)}\).</div></div>
@@ -74,6 +88,13 @@ export const bayesTheoremSection: TopicSection = {
     <div class="math-block">$$P(H|E) = \frac{P(E|H)P(H)}{P(E)}$$</div>
     <p>To calculate \(P(E)\), we often use the <strong>Law of Total Probability</strong>:</p>
     <div class="math-block">$$P(E) = P(E|H)P(H) + P(E|H^c)P(H^c)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> That denominator $P(E)$ is the <strong>Normalization Factor</strong>. Its only job is to ensure that all possible hypotheses sum up to 100%. Without it, we wouldn't have a valid probability distribution—just a set of relative "scores."
+      </div>
+    </div>
 
     <h2 id="applications">Core Applications in ML</h2>
 

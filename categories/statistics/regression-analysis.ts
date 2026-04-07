@@ -31,6 +31,13 @@ export const regressionAnalysisSection: TopicSection = {
       <p style="margin-top:10px">Where \(\beta_0\) is the <strong>Intercept</strong> and \(\beta_1\) is the <strong>Slope</strong>.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Linear Regression</strong> is the "Line of Best Fit" intuition. It assumes that nature follows a straight path. While simple, it is incredibly powerful because it is <strong>Interpretable</strong>—you can tell exactly how much $Y$ changes for every unit of $X$.
+      </div>
+    </div>
+
     <h2 id="ols-example">1.1 Illustrative Example: Manual OLS</h2>
     <div class="example-box">
       <h4>Problem: Fitting a Line by Hand</h4>
@@ -49,6 +56,13 @@ export const regressionAnalysisSection: TopicSection = {
     <p>To find the best $\beta_0$ and $\beta_1$, we minimize the sum of squared differences between predicted and actual values:</p>
     <div class="math-block">
       $$J(\beta_0, \beta_1) = \frac{1}{n} \sum_{i=1}^{n} (y_i - (\beta_0 + \beta_1 x_i))^2$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>OLS (Ordinary Least Squares)</strong> is the "Surface Area of Error" intuition. By squaring the differences, we ensure that being "a little off" is okay, but being "very off" is a disaster. It forces the line to stay as close as possible to the majority of your data points.
+      </div>
     </div>
 
     <h2 id="residuals">2. Residuals & Plotting</h2>
@@ -73,6 +87,13 @@ export const regressionAnalysisSection: TopicSection = {
     
     <div class="math-block">
       $$R^2 = 1 - \frac{SS_{res}}{SS_{tot}}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>R-Squared</strong> is the "Explained Variance" intuition. If $R^2 = 0.8$, it means your model is 80% better than just guessing the average value for every prediction. It's a measure of how much "chaos" you've managed to turn into "predictable pattern."
+      </div>
     </div>
     <p>Where:</p>
     <ul>

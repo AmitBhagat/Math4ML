@@ -41,6 +41,8 @@ export const matrixPropertiesSection: TopicSection = {
       <li><strong>Rank Deficient:</strong> When \(\text{rank}(A) < \min(m, n)\).</li>
     </ul>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Rank is the measure of <em>unique</em> information. If your features have <strong>Multicollinearity</strong> (one is just the other times 2), your rank drops, and your model might fail to invert the data.</div></div>
+
     <visualizer topic="Rank" />
 
     <h3>Mathematical Derivation</h3>
@@ -69,6 +71,8 @@ export const matrixPropertiesSection: TopicSection = {
       <li>If \(\det(A) = 1\), the transformation preserves volume.</li>
     </ul>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Take a unit square; the <strong>Determinant</strong> is the area of the new shape after transformation. In <strong>Gaussian Distributions</strong>, the determinant of the Covariance Matrix tells us how "spread out" or "squashed" the data is.</div></div>
+
     <h3>Mathematical Derivation (for 2×2)</h3>
     <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\):</p>
     <div class="math-block">$$\det(A) = ad - bc$$</div>
@@ -93,6 +97,8 @@ export const matrixPropertiesSection: TopicSection = {
     <h3>Core Theory</h3>
     <p>The trace is invariant under a change of basis. In ML, it is often used in the context of <strong>Matrix Derivatives</strong> and is related to the sum of the matrix's eigenvalues.</p>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Trace</strong> is simply the sum of diagonal elements, but it's a "signature"—no matter how you rotate the coordinate system, the trace stays the same. Sum of eigenvalues = Trace.</div></div>
+
     <h3>Mathematical Derivation</h3>
     <p>For \(A \in \mathbb{R}^{n \times n}\):</p>
     <div class="math-block">$$tr(A) = \sum_{i=1}^{n} a_{ii}$$</div>
@@ -112,6 +118,8 @@ export const matrixPropertiesSection: TopicSection = {
     <ul>
       <li><strong>Positive Semi-Definite (PSD):</strong> \(\mathbf{x}^T A \mathbf{x} \geq 0\).</li>
     </ul>
+
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A <strong>Positive Definite</strong> matrix describes a "bowl-shaped" (convex) surface. If your loss function is a bowl, your optimizer will always find the bottom.</div></div>
 
     <h3>Mathematical Derivation</h3>
     <p>A matrix \(A\) is PD if:</p>

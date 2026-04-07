@@ -36,7 +36,17 @@ export function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w
 }
 
 /**
- * Draws an info box that is aware of the viewport (W, H)
+ * Shared utility to get a responsive scale factor across visualizers
+ */
+export function getResponsiveScale(W: number, H: number, baseScale: number = 60): number {
+  const isSmall = W < 600;
+  if (!isSmall) return baseScale;
+  const ratio = Math.max(0.5, Math.min(W, 640) / 640);
+  return baseScale * ratio;
+}
+
+/**
+ * Draws a premium info box that adaptively positions itself
  */
 export function drawInfoBox(
   ctx: CanvasRenderingContext2D, 
@@ -47,32 +57,60 @@ export function drawInfoBox(
   theme: VisualizerTheme = 'light'
 ) {
   const colors = C(theme);
-  const isSmall = W < 520;
   
-  // Responsive sizing & positioning
-  const boxW = isSmall ? Math.min(W - 40, 260) : 240;
-  const boxH = 40 + lines.length * 18 + 10;
+  // Aggressive breakpoints to clear central geometry (Origin-Clearance strategy)
+  const needsShift = W < 1100; // Shift to right for all but large desktops
+  const needsStack = W < 700 || lines.some(l => (l.label.length + l.value.length) > 18);
+  const isVerySmall = W < 450;
   
-  // On mobile, we move it slightly lower or higher to avoid centered content
-  const x = isSmall ? (W - boxW) / 2 : 20;
-  const y = isSmall ? 50 : 20; // 50px from top on mobile to clear the "Mathematical Projection" title
+  // Responsive sizing: (C-Busting v4: Ultra-Narrow Mode)
+  const boxW = isVerySmall ? 160 : (needsStack ? Math.min(W - 32, 190) : 240);
+  const lineH = needsStack ? 28 : 18;
+  const boxH = (needsStack ? 32 : 40) + lines.length * lineH + 12;
+  
+  // Position Logic: Force Top-Right early to avoid origin overlap
+  const x = needsShift ? (W - boxW - 12) : 20;
+  const y = needsShift ? 95 : 20; 
 
+  ctx.save();
+  // Glassmorphism effect
   ctx.fillStyle = colors.infoBg;
   ctx.strokeStyle = colors.infoBorder;
   ctx.lineWidth = 1;
+  ctx.shadowColor = "rgba(0,0,0,0.15)";
+  ctx.shadowBlur = 12;
   roundRect(ctx, x, y, boxW, boxH, 12);
   ctx.fill();
   ctx.stroke();
+  ctx.shadowBlur = 0;
 
-  ctx.font = "bold 13px 'Space Grotesk'";
+  ctx.font = `bold ${needsStack ? '10px' : '13px'} 'Space Grotesk'`;
   ctx.fillStyle = colors.blue2;
-  ctx.fillText(title, x + 16, y + 26);
+  ctx.fillText(title, x + 12, y + (needsStack ? 22 : 26));
 
-  ctx.font = "11px 'JetBrains Mono'";
+  ctx.font = `${isVerySmall ? '9px' : '10px'} 'JetBrains Mono'`;
   lines.forEach((line, i) => {
-    ctx.fillStyle = line.color;
-    ctx.fillText(`${line.label}: ${line.value}`, x + 16, y + 48 + i * 18);
+    const rowY = y + (needsStack ? 40 : 48) + i * lineH;
+    
+    if (needsStack) {
+      // Content-Aware Vertical Stacking
+      ctx.fillStyle = line.color;
+      ctx.globalAlpha = 0.7;
+      ctx.fillText(line.label, x + 12, rowY - 4);
+      ctx.globalAlpha = 1.0;
+      ctx.fillStyle = colors.white;
+      ctx.fillText(line.value, x + 12, rowY + 8);
+    } else {
+      // Desktop Side-by-Side
+      ctx.fillStyle = line.color;
+      ctx.fillText(`${line.label}:`, x + 12, rowY);
+      ctx.fillStyle = colors.white;
+      ctx.textAlign = "right";
+      ctx.fillText(line.value, x + boxW - 12, rowY);
+      ctx.textAlign = "left";
+    }
   });
+  ctx.restore();
 }
 
 

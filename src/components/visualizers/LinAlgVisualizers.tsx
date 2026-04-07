@@ -9,7 +9,8 @@ import {
   useAnimationFrame,
   VisualizerTheme,
   drawInfoBox,
-  roundRect
+  roundRect,
+  getResponsiveScale
 } from "./CanvasBase";
 
 // â”€â”€â”€ UTILS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
@@ -51,7 +52,7 @@ export const PremiumVectorsVisualizer = ({
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 60, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 60), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
 
     ctx.clearRect(0, 0, W, H);
@@ -122,7 +123,7 @@ export const PremiumDotProductVisualizer = ({
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 60, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 60), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
 
     ctx.clearRect(0, 0, W, H);
@@ -175,7 +176,7 @@ export const PremiumDotProductVisualizer = ({
 export const PremiumMatrixVisualizer = ({ a = 1, b = 0.5, c = -0.5, d = 1, playing = true, theme = 'light' }: { a?: number, b?: number, c?: number, d?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
     ctx.clearRect(0, 0, W, H);
 
@@ -226,7 +227,7 @@ export const PremiumMatrixVisualizer = ({ a = 1, b = 0.5, c = -0.5, d = 1, playi
 export const PremiumDeterminantVisualizer = ({ a = 2, b = 1, c = 0.5, d = 2, playing = true, theme = 'light' }: { a?: number, b?: number, c?: number, d?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 60, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 60), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
     const ta = lerp(1, a, p), tb = lerp(0, b, p);
     const tc = lerp(0, c, p), td = lerp(1, d, p);
@@ -266,7 +267,7 @@ export const PremiumEigenVisualizer = ({ a = 2, b = 1, c = 1, d = 2, playing = t
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 55, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 55), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
     ctx.clearRect(0, 0, W, H);
     drawGrid(ctx, W, H, scale, ox, oy, theme);
@@ -337,7 +338,7 @@ export const PremiumEigenVisualizer = ({ a = 2, b = 1, c = 1, d = 2, playing = t
 export const PremiumBasisVisualizer = ({ e1x=1, e1y=1, e2x=-1, e2y=1, vx=1, vy=1, theme = 'light' }: { e1x?: number, e1y?: number, e2x?: number, e2y?: number, vx?: number, vy?: number, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 55, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 55), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
 
     ctx.clearRect(0, 0, W, H);
@@ -387,7 +388,7 @@ export const PremiumBasisVisualizer = ({ e1x=1, e1y=1, e2x=-1, e2y=1, vx=1, vy=1
 export const PremiumSVDVisualizer = ({ sigma1 = 2.5, sigma2 = 0.8, theta1 = 30, theta2 = 20, playing = true, theme = 'light' }: { sigma1?: number, sigma2?: number, theta1?: number, theta2?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 55, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 55), ox = W / 2, oy = H / 2;
     const duration = 4000;
     const p = easeInOut(Math.min(elapsed / duration, 1));
     
@@ -453,7 +454,7 @@ export const PremiumPCAVisualizer = ({ angle = 30, spread = 1.8, playing = true,
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 55, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 55), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
     const ang = angle * Math.PI / 180;
 
@@ -497,7 +498,7 @@ export const PremiumPCAVisualizer = ({ angle = 30, spread = 1.8, playing = true,
 export const PremiumNormsVisualizer = ({ p = 2, playing = true, theme = 'light' }: { p?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 80, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 80), ox = W / 2, oy = H / 2;
     const dur = 3000;
     const animP = easeInOut(Math.min(elapsed / dur, 1));
     const currentP = lerp(2, p, animP);
@@ -539,7 +540,7 @@ export const PremiumNormsVisualizer = ({ p = 2, playing = true, theme = 'light' 
 export const PremiumDistanceVisualizer = ({ ax = -2, ay = -1, bx = 2, by = 2, playing = true, theme = 'light' }: { ax?: number, ay?: number, bx?: number, by?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 55, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 55), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
 
     ctx.clearRect(0, 0, W, H);
@@ -585,7 +586,7 @@ export const PremiumDistanceVisualizer = ({ ax = -2, ay = -1, bx = 2, by = 2, pl
 export const PremiumEquationsVisualizer = ({ a1=1, b1=1, c1=2, a2=1, b2=-1, c2=0, playing=true, theme = 'light' }: { a1?: number, b1?: number, c1?: number, a2?: number, b2?: number, c2?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
     ctx.clearRect(0, 0, W, H);
     drawGrid(ctx, W, H, scale, ox, oy, theme);
@@ -707,16 +708,22 @@ export const PremiumMatrixOpsVisualizer = ({
     // Draw Operations
     if (mode === "scalar") {
         ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "bold 24px 'Space Grotesk'";
+        const centerCol = W < 500 ? col2 : col1; 
         ctx.fillText(`k=${k}`, col1 - 100, oy + 8);
         drawMatrix(col1, oy, A, "Matrix A");
         ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "24px Inter"; ctx.fillText("=", col1 + 80, oy + 8);
         drawMatrix(col1 + 180, oy, C_res, "Result (k * A)", true);
     } else {
-        drawMatrix(col1, oy, A, "Matrix A");
-        ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "24px Inter"; ctx.fillText(symbol, col2 - 80, oy + 8);
-        drawMatrix(col2, oy, B, "Matrix B");
-        ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "24px Inter"; ctx.fillText("=", col3 - 80, oy + 8);
-        drawMatrix(col3, oy, C_res, "Result Matrix", true);
+        const isSmall = W < 500;
+        const spacing = isSmall ? 100 : 160;
+        drawMatrix(ox - spacing, isSmall ? oy - 60 : oy, A, "Matrix A");
+        ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "24px Inter"; 
+        ctx.fillText(symbol, ox, isSmall ? oy : oy + 8);
+        drawMatrix(isSmall ? ox : ox + spacing, isSmall ? oy + 60 : oy, B, "Matrix B");
+        
+        ctx.fillStyle = theme === 'dark' ? "#ffffff" : "#000000"; ctx.font = "24px Inter"; 
+        ctx.fillText("=", isSmall ? ox + 100 : col3 - 80, isSmall ? oy + 120 : oy + 8);
+        drawMatrix(isSmall ? ox : col3, isSmall ? oy + 180 : oy, C_res, "Result Matrix", true);
     }
 
     ctx.textAlign = "left";
@@ -731,7 +738,7 @@ export const PremiumMatrixOpsVisualizer = ({
 export const PremiumOrthogonalityVisualizer = ({ vx = 3, vy = 0, wx = 0, wy = 3, theme = 'light' }: { vx?: number, vy?: number, wx?: number, wy?: number, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 60, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 60), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
     ctx.clearRect(0, 0, W, H);
     drawGrid(ctx, W, H, scale, ox, oy, theme);
@@ -774,7 +781,7 @@ export const PremiumOrthogonalityVisualizer = ({ vx = 3, vy = 0, wx = 0, wy = 3,
 export const PremiumProjectionsVisualizer = ({ vx = 3, vy = 2, wx = 4, wy = 0, theme = 'light' }: { vx?: number, vy?: number, wx?: number, wy?: number, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 60, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 60), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 3000, 1));
     ctx.clearRect(0, 0, W, H);
     drawGrid(ctx, W, H, scale, ox, oy, theme);
@@ -833,7 +840,7 @@ export const PremiumRankVisualizer = ({ rank = 1, a = 1, b = 1, c = 1, d = 1, th
   // For rank 1, we ensure c = k*a, d = k*b.
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 4000, 1));
     ctx.clearRect(0, 0, W, H);
 
@@ -875,7 +882,8 @@ export const PremiumRankVisualizer = ({ rank = 1, a = 1, b = 1, c = 1, d = 1, th
 
     if (Math.abs(det) < 0.05 && p > 0.8) {
       ctx.fillStyle = C.red; ctx.font = "bold 14px 'Space Grotesk'"; ctx.textAlign = "center";
-      ctx.fillText("SPACE COLLAPSED!", ox, oy + 180);
+      const isSmall = W < 500;
+      ctx.fillText("SPACE COLLAPSED!", ox, isSmall ? oy + scale * 1.5 : oy + 180);
       ctx.textAlign = "left";
     }
   };

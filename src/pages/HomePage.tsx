@@ -27,8 +27,8 @@ const FadeIn = ({ children, delay = 0, y = 20 }: { children: ReactNode, delay?: 
 const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string }) => (
   <FadeIn>
     <div className="mb-8">
-      <h2 className="text-3xl md:text-3xl font-headline font-semibold text-text-premium mb-3">{title}</h2>
-      {subtitle && <p className="text-muted-premium max-w-2xl text-[14px] font-normal leading-relaxed">{subtitle}</p>}
+      <h2 className="text-4xl md:text-4xl font-headline font-semibold text-text-premium mb-3">{title}</h2>
+      {subtitle && <p className="text-muted-premium max-w-2xl text-base font-normal leading-relaxed">{subtitle}</p>}
       <div className="w-12 h-1 bg-accent/20 rounded-full mt-3"></div>
     </div>
   </FadeIn>
@@ -62,13 +62,13 @@ const PillarCard = ({ title, description, icon: Icon, link, delay, categoryId }:
             <Icon className="w-6 h-6" />
           </div>
 
-          <h3 className="text-xl font-headline font-semibold text-text-premium mb-3 transition-colors group-hover:text-text-premium">
+          <h3 className="text-2xl font-headline font-semibold text-text-premium mb-3 transition-colors group-hover:text-text-premium">
             {title}
           </h3>
-          <p className="text-sm text-muted-premium leading-relaxed mb-6 font-normal">{description}</p>
+          <p className="text-base text-muted-premium leading-relaxed mb-6 font-normal">{description}</p>
           
           <div 
-            className="mt-auto flex items-center gap-2 text-xs font-semibold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-500"
+            className="mt-auto flex items-center gap-2 text-sm font-semibold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-500"
             style={{ color: theme.primary }}
           >
             Explore Module <ArrowRight className="w-3 h-3" />
@@ -98,20 +98,20 @@ export const HomePage = () => {
       <section className="relative pt-0 pb-0 px-8 md:px-16 max-w-7xl mx-auto overflow-hidden">
         <div className="max-w-4xl relative z-10">
           <FadeIn>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[10px] uppercase font-bold tracking-widest mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent/10 border border-accent/20 text-accent text-[12px] uppercase font-bold tracking-widest mb-6">
               <Sparkles className="w-3 h-3" />
               Machine Learning Logic
             </div>
           </FadeIn>
           
           <FadeIn delay={0.1}>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-headline font-semibold text-text-premium leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-headline font-semibold text-text-premium leading-[1.1] mb-6 tracking-tight">
               Welcome to <span className="text-accent italic">Math 4 ML</span>
             </h1>
           </FadeIn>
           
           <FadeIn delay={0.2}>
-            <p className="text-xl md:text-2xl text-muted-premium font-normal leading-relaxed max-w-3xl mb-0">
+            <p className="text-2xl md:text-3xl text-muted-premium font-normal leading-relaxed max-w-3xl mb-0">
               Your dedicated gateway to mastering the <span className="text-text-premium font-medium">mathematical foundations</span> that power modern Artificial Intelligence.
             </p>
           </FadeIn>

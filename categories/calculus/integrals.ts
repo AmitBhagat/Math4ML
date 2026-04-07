@@ -49,15 +49,36 @@ export const integralsSection: TopicSection = {
     <h3>1. The Indefinite Integral</h3>
     <p>If $F'(x) = f(x)$, then:</p>
     <div class="math-block">$$\int f(x) \, dx = F(x) + C$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Indefinite Integral</strong> is like a "Reverse Engineering" process. If you know how fast a car is accelerating at every moment (the derivative), the integral helps you reconstruct its position. In ML, if we have the gradient of a loss function, the integral helps us understand the global "shape" of the loss surface.
+      </div>
+    </div>
     <p>where $C$ is the constant of integration (representing the fact that shifting a graph vertically doesn't change its slope).</p>
 
     <h3>2. The Definite Integral (Fundamental Theorem of Calculus)</h3>
     <p>To find the area under $f(x)$ from $a$ to $b$:</p>
     <div class="math-block">$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This is the <strong>Fundamental Theorem of Calculus</strong>. It bridges the gap between slopes and areas. By simply subtracting the values of the antiderivative at two points, we can find the total area (accumulation) without having to sum up infinite infinitesimal rectangles manually.
+      </div>
+    </div>
+
     <h3>3. Integration in Probability</h3>
     <p>For a continuous random variable $X$ to be a valid probability distribution, the total area under its PDF must be 1:</p>
     <div class="math-block">$$\int_{-\infty}^{\infty} f(x) \, dx = 1$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> In probability, <strong>Integration = Normalization</strong>. We integrate over all possible outcomes to ensure the total probability space captures everything. If the area isn't exactly 1, your model isn't a valid probability distribution.
+      </div>
+    </div>
     <p>The probability that $X$ falls between $a$ and $b$ is:</p>
     <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
 

@@ -41,7 +41,12 @@ export const vectorSpacesSection: TopicSection = {
       <li><strong>Closure under Addition:</strong> If \(\mathbf{u}, \mathbf{v} \in S\), then \(\mathbf{u} + \mathbf{v} \in S\).</li>
       <li><strong>Closure under Scalar Multiplication:</strong> If \(\mathbf{u} \in S\) and \(c\) is a scalar, then \(c\mathbf{u} \in S\).</li>
     </ol>
-    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Context:</strong> In PCA, we find a low-dimensional <strong>subspace</strong> that captures the most variance of the original high-dimensional data.</div></div>
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> A <strong>Subspace</strong> is like a "layer" or a "flat slice" of the original space that still goes through the origin. If you add two vectors in that slice, you stay in that slice. PCA works by finding the best 1D or 2D "slice" to represent your 100D data.
+      </div>
+    </div>
 
     <h2 id="independence">2. Linear Independence</h2>
     <p>A set of vectors is <strong>Linearly Independent</strong> if no vector in the set can be defined as a linear combination of the others.</p>
@@ -59,7 +64,12 @@ export const vectorSpacesSection: TopicSection = {
       <div class="step-box"><span class="step-num">1</span><div><strong>Check for Multiples:</strong> Can we find a scalar \(k\) such that \(\mathbf{v}_2 = k\mathbf{v}_1\)?</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Yes, \(2 \times [1, 2] = [2, 4]\). Since \(\mathbf{v}_2\) is a direct multiple of \(\mathbf{v}_1\), they are <strong>Linearly Dependent</strong>.</div></div>
 
-      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>ML Risk:</strong> High dependence between features (Multicollinearity) makes models unstable. In this case, \(\mathbf{v}_2\) adds no new information to the model.</div></div>
+      <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Independent vectors offer <strong>new information</strong>. If a vector is dependent, it's just "saying the same thing" as the others. <strong>The 'Gotcha':</strong> In ML, redundant features (Multicollinearity) make it impossible for your model to know which feature is actually causing the output, leading to unstable weights.
+      </div>
+    </div>
     </div>
 
     <visualizer topic="BasisChange" />
@@ -72,6 +82,13 @@ export const vectorSpacesSection: TopicSection = {
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = 0$$</div>
     <p>If the vectors are also unit vectors (length = 1), they are called <strong>Orthonormal</strong>.</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> <strong>Orthogonality</strong> is the ultimate independence. If two features are orthogonal, changing one has <em>zero</em> impact on the other. This makes them perfectly "decoupled."
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <p>Recall \(\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)\). If \(\theta = 90^\circ\), then \(\cos(90^\circ) = 0\), making the dot product zero.</p>
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(90^\circ) = \|\mathbf{u}\| \|\mathbf{v}\| \cdot 0 = 0$$</div>
@@ -83,6 +100,13 @@ export const vectorSpacesSection: TopicSection = {
 
     <h3>Core Theory</h3>
     <p>In ML, projections are used to reduce dimensions or to find the closest point in a subspace to a given vector (the basis of <strong>Linear Regression</strong>). The error vector (the difference between the original and the projection) is always orthogonal to the subspace.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of a projection as a <strong>simplification</strong>. You're throwing away the "orthogonal noise" to find the version of your data that fits into a simpler model. This is exactly what happens when you "fit" a line to a cloud of points in Linear Regression.
+      </div>
+    </div>
 
     <h3>Mathematical Derivation</h3>
     <p>The projection of \(\mathbf{y}\) onto \(\mathbf{u}\), denoted \(\text{proj}_{\mathbf{u}}(\mathbf{y})\), is:</p>

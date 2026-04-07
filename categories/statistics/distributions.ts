@@ -32,6 +32,13 @@ export const probabilityDistributionsSection: TopicSection = {
       <strong>ML Context:</strong> The output of a **Sigmoid activation function** ($\sigma(z)$) is interpreted as the parameter $p$ of a Bernoulli distribution. This is the bedrock of binary classification.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Bernoulli is the <strong>"Yes/No Bit"</strong> of the universe. It is the simplest possible way to describe uncertainty. In AI, every time your model predicts "Cat" vs "Dog," it is essentially guessing the winning side of a Bernoulli coin flip.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = x) = p^x (1-p)^{1-x}$ for $x \in \{0, 1\}$</li>
@@ -83,6 +90,13 @@ print(f"P(Success): {pmf_success}")
       <strong>ML Context:</strong> Used to model <strong>Batch Accuracy</strong>. If a model has 90% accuracy ($p=0.9$), we can calculate the likelihood of getting exactly $k$ correct predictions in a batch of $n$ images.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If Bernoulli is a single coin flip, Binomial is the <strong>"Stack of Successes."</strong> It tells you the probability of hitting a specific number of goals in $n$ tries. It assumes every trial is independent—an assumption that is the shortcut for most batch processing in ML.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = k) = \binom{n}{k} p^k (1-p)^{n-k}$</li>
@@ -122,6 +136,13 @@ print(f"P(X=2): {prob_2:.4f}")
       <strong>ML Context:</strong> Used in **Network Traffic modeling** (packets per second) or **Anomaly Detection** (number of failed login attempts).
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Poisson is the <strong>"Raindrops on a Roof"</strong> intuition. It models counts over continuous time. If you know the average rate ($\lambda$), Poisson tells you how likely it is to see a sudden burst or a strange silence.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PMF:</strong> $P(X = k) = \frac{\lambda^k e^{-\lambda}}{k!}$</li>
@@ -153,6 +174,13 @@ print(f"P(X=2): {prob_2:.4f}")
       <div class="step-box"><span class="step-num">1</span><div><strong>Degrees of Freedom (df):</strong> \(\nu = n - 1 = 9\).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Tail Check:</strong> At \(\nu=9\), the tails are much wider than a standard normal.</div></div>
       <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The t-distribution is more <strong>conservative</strong>. It provides wider confidence intervals, acknowledging that our estimate of the variance might be slightly off due to the small sample size.</div></div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Student's t is a <strong>"Cautious Gaussian."</strong> When you have very little data (less than 30 points), you can't be 100% sure about the "spread" ($\sigma$). The t-distribution gives you "heavier tails"—it essentially adds a safety margin for your uncertainty.
+      </div>
+    </div>
     </div>
 
     <python-code>
@@ -171,6 +199,13 @@ print(f"P(X=2) for lambda=4: {prob_2:.4f}")
     
     <div class="def-box">
       <strong>ML Context:</strong> The output of a **Softmax activation function** represents the parameters of a Categorical distribution ($\sum p_i = 1$).
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Categorical is the <strong>"Multi-sided Die"</strong> of probability. It extends the coin flip to any number of categories. In Deep Learning, your <strong>Final Layer</strong> is almost always a Categorical distribution over your classes.
+      </div>
     </div>
 
     <h3>Mathematical Derivation</h3>
@@ -250,6 +285,13 @@ print(f"Outcome Probability: {prob:.4f}")
       <strong>ML Context:</strong> The **Central Limit Theorem** explains why Gaussian noise is everywhere. Linear Regression assumes errors (residuals) follow a Gaussian distribution.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Gaussian is the <strong>"Universal Average."</strong> Due to the CLT, if you sum up enough random effects, life always forms a bell curve. This is why we assume modern "Normal" noise in almost all ML regression models.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PDF:</strong> $f(x) = \frac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}$</li>
@@ -291,6 +333,13 @@ plt.show()
       <strong>ML Context:</strong> Used in **Bayesian A/B testing**. If $\alpha$ is prior successes and $\beta$ is prior failures, the distribution represents our belief about the success rate.
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Beta is the <strong>"Probability of a Probability."</strong> Unlike other distributions that model data, Beta models your <strong>Confidence</strong> in a Bernoulli $p$. If $\alpha$ is high, you're sure it's a success; if $\beta$ is high, you're sure it's a failure.
+      </div>
+    </div>
+
     <h3>Mathematical Derivation</h3>
     <ul>
       <li><strong>PDF:</strong> $f(x; \alpha, \beta) = \frac{x^{\alpha-1}(1-x)^{\beta-1}}{B(\alpha, \beta)}$</li>
@@ -326,6 +375,13 @@ print(f"Expected Probability: {mean}")
     
     <div class="def-box">
       <strong>ML Context:</strong> The backbone of **Latent Dirichlet Allocation (LDA)** for Topic Modeling. It is the conjugate prior for Categorical/Multinomial distributions.
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Dirichlet is the <strong>"Sparsity Prior."</strong> It is the big brother of Beta, modeling mixtures of many categories. In Topic Modeling, we use it to force a document to choose just 1-2 main topics rather than being a messy soup of everything.
+      </div>
     </div>
 
     <h3>Mathematical Derivation</h3>

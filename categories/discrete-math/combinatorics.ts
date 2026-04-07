@@ -24,6 +24,13 @@ export const combinatoricsSection: TopicSection = {
 
     <h2 id="counting-principle">1. The Fundamental Counting Principle</h2>
     <p>If there are $n$ ways to do one thing and $m$ ways to do another, there are $n \times m$ ways to do both.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Fundamental Principle</strong> is the "Options per Slot" intuition. If you're building a 3-layer neural network and each layer has 5 possible sizes, you have $5 \times 5 \times 5 = 125$ possible architectures. This is the simple math behind <strong>Grid Search</strong>.
+      </div>
+    </div>
     <div class="callout tip">
       <div class="callout-icon">⚙️</div>
       <div class="callout-body">
@@ -36,6 +43,13 @@ export const combinatoricsSection: TopicSection = {
     <div class="math-block">
       $$P(n, r) = \frac{n!}{(n-r)!}$$
     </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Permutations</strong> are for when <strong>Sequence is King</strong>. Think of a password: "1-2-3" is completely different from "3-2-1." In ML, we use this to calculate the complexity of <strong>Traveling Salesman</strong> problems or optimal routing for delivery robots.
+      </div>
+    </div>
     <div class="callout info">
       <div class="callout-icon">📋</div>
       <div class="callout-body">
@@ -47,6 +61,13 @@ export const combinatoricsSection: TopicSection = {
     <p>A <strong>Combination</strong> is a selection of items where the sequence is <strong>irrelevant</strong>.</p>
     <div class="math-block">
       $$C(n, r) = \binom{n}{r} = \frac{n!}{r!(n-r)!}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Combinations</strong> are the "Handful of Items" intuition. Order doesn't matter. If you pick a handful of 3 features from a pool of 10, it doesn't matter which one you grabbed first. This is why <strong>Feature Selection</strong> is a combination problem, not a permutation one.
+      </div>
     </div>
     <div class="callout info">
       <div class="callout-icon">🧪</div>
@@ -85,6 +106,13 @@ export const combinatoricsSection: TopicSection = {
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Complexity Note:</strong> As $n$ grows, the number of combinations explodes (this is the <strong>Combinatorial Explosion</strong>). This is why we use <strong>Recursive Feature Elimination (RFE)</strong> instead of exhaustive search.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Combinatorial Explosion</strong> is the "Scaling Nightmare." If you have 100 features, there are more combinations of those features than there are atoms in the universe. This is why <strong>Brute Force</strong> is forbidden in AI; we always need clever shortcuts like <strong>Heuristics</strong> or <strong>Gradients</strong>.
         </div>
       </div>
     </div>

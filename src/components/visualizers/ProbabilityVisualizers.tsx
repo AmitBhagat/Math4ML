@@ -6,7 +6,8 @@ import {
   lerp, 
   easeInOut,
   VisualizerTheme,
-  drawInfoBox
+  drawInfoBox,
+  getResponsiveScale
 } from "./CanvasBase";
 
 // Utils removed, now using shared CanvasBase functions
@@ -21,13 +22,14 @@ export const PremiumSampleSpaceVisualizer = ({ overlap = 0.3, aSize = 0.5, bSize
     ctx.clearRect(0, 0, W, H);
     
     // Universe S
+    const boxW = Math.min(360, W * 0.85), boxH = Math.min(240, H * 0.5);
     ctx.strokeStyle = C.muted;
     ctx.setLineDash([5, 5]);
-    ctx.strokeRect(ox - 180, oy - 120, 360, 240);
+    ctx.strokeRect(ox - boxW / 2, oy - boxH / 2, boxW, boxH);
     ctx.setLineDash([]);
     ctx.fillStyle = C.muted;
     ctx.font = "bold 14px font-mono";
-    ctx.fillText("S", ox + 160, oy - 100);
+    ctx.fillText("S", ox + boxW / 2 - 20, oy - boxH / 2 + 20);
 
     const rA = Math.sqrt(aSize) * 120;
     const rB = Math.sqrt(bSize) * 120;
@@ -138,7 +140,7 @@ export const PremiumDistributionsVisualizer = ({ mu = 0, sigma = 1, theme = 'lig
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H - 100;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H - 100;
     const p = easeInOut(Math.min(elapsed / 1500, 1));
     
     ctx.clearRect(0, 0, W, H);
@@ -197,17 +199,18 @@ export const PremiumConditionalVisualizer = ({ conditioning = 0.5, theme = 'ligh
     ctx.clearRect(0, 0, W, H);
     
     // Sample Space Container
+    const boxW = Math.min(300, W * 0.8), boxH = Math.min(200, H * 0.4);
     ctx.strokeStyle = C.muted;
     ctx.lineWidth = 1;
-    ctx.strokeRect(ox - 150, oy - 100, 300, 200);
+    ctx.strokeRect(ox - boxW / 2, oy - boxH / 2, boxW, boxH);
 
     // Event B (Condition)
-    const bWidth = 300 * conditioning * p;
+    const bWidth = boxW * conditioning * p;
     ctx.fillStyle = C.teal + "20";
-    ctx.fillRect(ox - 150, oy - 100, bWidth, 200);
+    ctx.fillRect(ox - boxW / 2, oy - boxH / 2, bWidth, boxH);
     ctx.strokeStyle = C.teal;
     ctx.lineWidth = 2;
-    ctx.strokeRect(ox - 150, oy - 100, bWidth, 200);
+    ctx.strokeRect(ox - boxW / 2, oy - boxH / 2, bWidth, boxH);
 
     // Event A (Intersects B)
     ctx.beginPath();
@@ -220,7 +223,7 @@ export const PremiumConditionalVisualizer = ({ conditioning = 0.5, theme = 'ligh
     // The Restricted Space Highlight
     ctx.save();
     ctx.beginPath();
-    ctx.rect(ox - 150, oy - 100, bWidth, 200);
+    ctx.rect(ox - boxW / 2, oy - boxH / 2, bWidth, boxH);
     ctx.clip();
     
     ctx.beginPath();
@@ -231,7 +234,7 @@ export const PremiumConditionalVisualizer = ({ conditioning = 0.5, theme = 'ligh
 
     ctx.fillStyle = C.white;
     ctx.font = "bold 12px font-mono";
-    ctx.fillText("Event B", ox - 140, oy - 110);
+    ctx.fillText("Event B", ox - boxW / 2 + 10, oy - boxH / 2 - 10);
     ctx.fillText("A ∩ B", ox - 70, oy);
 
     drawInfoBox(ctx, W, H, "Conditioning S → B", [

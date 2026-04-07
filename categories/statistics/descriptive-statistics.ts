@@ -39,8 +39,22 @@ export const descriptiveStatisticsSection: TopicSection = {
     <div class="step-box"><span class="step-num">2</span><div><strong>Shannon Entropy \(H(X)\):</strong> The expected value (average surprise) across all outcomes.</div></div>
     <div class="math-block">$$H(X) = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Entropy</strong> is the measure of "Average Surprise." If an event is certain (e.g., the sun rising), it has zero entropy—it tells you nothing new. If an event is a coin flip, it has high entropy. In Decision Trees, we use this to pick the feature that "reduces chaos" the most.
+      </div>
+    </div>
+
     <div class="step-box"><span class="step-num">3</span><div><strong>Cross-Entropy \(H(P, Q)\):</strong> Average bits to identify events from \(P\) using code optimized for \(Q\).</div></div>
     <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> is the most important loss function in classification. It measures the "distance" between the truth ($P$) and your model's guess ($Q$). When your model is perfectly confident and correct, Cross-Entropy hits its minimum.
+      </div>
+    </div>
 
     <h2 id="entropy-example">3. Illustrative Example: Entropy (Binary Trials)</h2>
     <div class="example-box">
@@ -117,6 +131,11 @@ print(f"Cross-Entropy (Loss): {cross_entropy(true_labels, predicted_probs):.4f} 
 # Descriptive Statistics Example
 data = np.array([10, 12, 23, 23, 16, 23, 21, 16])
 print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
+
+# Core Theory: Normalization
+# (x - mean) / std_dev
+z_scores = (data - np.mean(data)) / np.std(data)
+print(f"Standardized Data (Z-scores): {z_scores[:3]}")
     </python-code>
 
     <div class="callout tip">

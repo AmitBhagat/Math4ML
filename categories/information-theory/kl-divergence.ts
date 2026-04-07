@@ -9,6 +9,13 @@ export const klDivergenceSection: TopicSection = {
       <div class="premium-hero-badge">📏 Info Theory · KL Divergence</div>
       <h1>Kullback-Leibler (KL) Divergence</h1>
       <p><strong>Kullback-Leibler (KL) Divergence</strong>, often called <strong>Relative Entropy</strong>, is a statistical measure that quantifies how much one probability distribution (often the predicted distribution) differs from a second, reference probability distribution (the true distribution).</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>KL Divergence</strong> is the "Information Loss" intuition. It measures how many <em>extra bits</em> of surprise you'll experience if you believe the world follows distribution $Q$ (the model), but it actually follows $P$ (the truth). It's essentially the cost of being "wrong" about the probability of events.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -61,6 +68,13 @@ export const klDivergenceSection: TopicSection = {
       <p style="margin:0">It represents the "extra" bits required because our model $Q$ isn't perfect.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The relationship <strong>$D_{KL} = \text{Cross-Entropy} - \text{Entropy}$</strong> is the "Baseline" intuition. Entropy is the minimum possible bits needed to describe $P$. Cross-Entropy is what you actually used. The difference (KL) is your <strong>Systemic Inefficiency</strong>.
+      </div>
+    </div>
+
     <h2 id="example-weather">Example 1: Weather Prediction Accuracy</h2>
     <div class="example-box">
       <h4>Problem: Quantifying Prediction Error</h4>
@@ -91,6 +105,13 @@ export const klDivergenceSection: TopicSection = {
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
           <strong>Key Insight:</strong> $0.322 \neq 0.278$. KL Divergence is <strong>not a distance</strong> because it doesn't satisfy the symmetry property. This is why it's called a 'divergence'.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Asymmetry</strong> is the "Map vs. Territory" intuition. If $P$ is the actual territory and $Q$ is your map, the "surprise" of finding a mountain not on your map is different from the "surprise" of looking for a mountain that doesn't exist in reality. In ML, we usually minimize $D_{KL}(P \parallel Q)$ because we want our model ($Q$) to cover the truth ($P$).
         </div>
       </div>
     </div>

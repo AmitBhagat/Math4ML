@@ -22,6 +22,13 @@ export const parameterEstimationSection: TopicSection = {
 
     <h2 id="mle">1. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE is a method of estimating the parameters of a probability distribution by maximizing a <strong>likelihood function</strong>, so that under the assumed statistical model, the observed data is most probable.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MLE</strong> is the "Data-Only" perspective. It asks: "If I assume a specific model, which parameters make my actual data look the least surprising?" It's the engine behind <strong>Linear Regression</strong> and <strong>Neural Network</strong> training before you add any penalties.
+      </div>
+    </div>
     
     <h2 id="mle-derivation">1.1 Mathematical Derivation: Gaussian Mean</h2>
     <div class="example-box">
@@ -53,6 +60,13 @@ export const parameterEstimationSection: TopicSection = {
 
     <h2 id="map">2. Maximum A Posteriori (MAP)</h2>
     <p>MAP is a Bayesian approach. Unlike MLE, which only looks at the data, MAP incorporates a <strong>Prior Distribution</strong> $P(\theta)$, which represents our previous belief about the parameters.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MAP</strong> is the <strong>"Common Sense"</strong> filter. It prevents your model from over-reacting to a few weird data points. In ML, this is <strong>Regularization</strong>. Using a <em>Gaussian Prior</em> is mathematically identical to <strong>L2 Regularization (Weight Decay)</strong>.
+      </div>
+    </div>
     
     <div class="premium-def-box">
       <div class="premium-def-title">Bayesian MAP Formula</div>
@@ -85,6 +99,13 @@ export const parameterEstimationSection: TopicSection = {
       <li><strong>Bias:</strong> Error from erroneous assumptions in the learning algorithm (leads to <strong>Underfitting</strong>).</li>
       <li><strong>Variance:</strong> Error from sensitivity to small fluctuations in the training set (leads to <strong>Overfitting</strong>).</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Tradeoff</strong> is like tuning a radio. <strong>High Bias</strong> is a "lazy" model that ignores the data patterns (Underfitting). <strong>High Variance</strong> is a "hyper-active" model that hallucinates patterns in random noise (Overfitting). Your job is to find the <strong>Sweet Spot</strong>.
+      </div>
+    </div>
     
     <div class="math-block">
       $$\text{Total Error} = \text{Bias}^2 + \text{Variance} + \text{Irreducible Error}$$

@@ -41,11 +41,25 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
     <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector. This means the vector \(\mathbf{v}\) essentially points in a direction that \(A\) does not rotate; it only stretches or shrinks it by \(\lambda\).</p>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Most vectors get knocked off their path in a transformation. <strong>Eigenvectors</strong> are the survivors: they stay on their span. In ML, these are the **principal axes** of your data. The eigenvalue $\lambda$ is the "energy" or variance along that axis.
+      </div>
+    </div>
+
     <h2 id="derivation">2. Mathematical Derivation (λ and v)</h2>
     <p>To find \(\lambda\), we rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\). For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular:</p>
     
-    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</p></div>
-    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</p></div>
+    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</div>
+    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> To find the eigenvalues, we look for when $(A - \lambda I)$ squashes space (determinant = 0). This polynomial $\det(A - \lambda I)$ is the "DNA" of the matrix. Once you have the roots, you have the spectral map of the transformation.
+      </div>
+    </div>
 
     <h2 id="example">3. Illustrative Example Walkthrough</h2>
     <div class="example-box">
@@ -66,6 +80,13 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
 
     <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>
     <p>In Deep Learning, the <strong>Spectral Radius</strong> (the largest absolute eigenvalue) of your weight matrices determines if signals will explode or vanish. This is the cornerstone of <strong>Weight Initialization</strong> strategies.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Spectral Radius $\rho(A)$ is the "gain" of your layer. If $\rho(A) > 1$, gradients explode after many layers. If $\rho(A) < 1$, they vanish. Modern init strategies like <strong>Xavier/He</strong> keep this near 1 for stability.
+      </div>
+    </div>
     <div class="callout info">
       <div class="callout-icon">🚀</div>
       <div class="callout-body">
@@ -79,6 +100,13 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
 
     <h2 id="factorization">6. Application: Matrix Factorization</h2>
     <p>If \(A\) is a symmetric matrix, it can be factored as \(A = Q \Lambda Q^T\), where \(Q\) is a matrix of eigenvectors and \(\Lambda\) is a diagonal matrix of eigenvalues. This is used in Recommendation Systems (like Netflix) to discover "latent features"—detecting a user's preference for 'Action' vs. 'Sci-Fi' from raw ratings.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If $A$ is symmetric, it can be perfectly "decoupled" into independent axes. ML uses this to find <strong>hidden factors</strong>. In a movie matrix, $Q$ might represent Genres, and $\Lambda$ tells you how much a person likes each genre.
+      </div>
+    </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>

@@ -31,12 +31,26 @@ export const graphTheorySection: TopicSection = {
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Nodes & Edges</strong> are the "Entities & Relationships" intuition. In a standard database, you have isolated rows. In a <strong>Graph Database</strong>, you focus on the lines <em>between</em> the rows. This is how Google understands that "Paris" is the "Capital Of" "France."
+      </div>
+    </div>
+
     <h2 id="types">2. Types of Graphs</h2>
     <ul>
       <li><strong>Undirected Graphs:</strong> Mutual relationships (e.g., LinkedIn connections).</li>
       <li><strong>Directed Graphs (Digraphs):</strong> Specific directions (e.g., Twitter "Follows").</li>
       <li><strong>Weighted Graphs:</strong> Edges have values (e.g., distances between cities in a map).</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Directed vs. Undirected</strong> is the "One-Way vs. Two-Way" intuition. <strong>Twitter</strong> is Directed (I can follow you without you following me). <strong>LinkedIn</strong> is Undirected (we must both agree to be connections). In ML, <strong>Causal Models</strong> are always Directed because time and logic only flow one way.
+      </div>
+    </div>
 
     <h2 id="matrices">3. Adjacency Matrices</h2>
     <p>To help a computer understand a graph, we represent it as an <strong>Adjacency Matrix</strong> $M$, a square matrix where:</p>
@@ -45,6 +59,13 @@ export const graphTheorySection: TopicSection = {
         <li>$M_{ij} = 1$ if there is an edge between node $i$ and node $j$.</li>
         <li>$M_{ij} = 0$ if there is no connection.</li>
       </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Adjacency Matrix</strong> is the "Machine Translation" intuition. Computers can't "see" circles and lines. The matrix turns a web of connections into a grid of 0s and 1s that a <strong>GPU</strong> can process. This is the bridge between <strong>Discrete Math</strong> and <strong>Linear Algebra</strong>.
+      </div>
     </div>
 
     <div class="callout tip">
@@ -100,6 +121,13 @@ export const graphTheorySection: TopicSection = {
       <li><strong>Graph Neural Networks (GNNs):</strong> Predicting things like "Will these users become friends?" or "Is this molecule toxic?" using adjacency matrices and node features.</li>
       <li><strong>Recommendation Systems:</strong> Identifying "communities" or "clusters" to suggest products based on connectivity.</li>
     </ul>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Graph Neural Networks (GNNs)</strong> use the "Neighbor Talk" intuition. In a GNN, each node "talks" to its neighbors to learn about its environment. If your neighbors are all "Data Scientists," a GNN will likely predict that you are also a "Data Scientist."
+      </div>
+    </div>
 
     <h2 id="implementation">Python Implementation (NumPy)</h2>
     <python-code>

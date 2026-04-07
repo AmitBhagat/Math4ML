@@ -35,6 +35,13 @@ export const entropySection: TopicSection = {
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Entropy</strong> is the "Surprise" intuition. If I tell you "it's going to rain in the rainforest," you aren't surprised (Low Entropy). If I tell you "it's going to rain in the Sahara," you are very surprised (High Entropy). In ML, we use this to measure how much "mess" is in our data labels.
+      </div>
+    </div>
+
     <h2 id="cross-entropy">Cross-Entropy Loss</h2>
     <p>Cross-Entropy measures the difference between two probability distributions: the <strong>true distribution</strong> ($P$) and the <strong>predicted distribution</strong> ($Q$).</p>
     
@@ -54,6 +61,13 @@ export const entropySection: TopicSection = {
     <p>KL Divergence, often called "Relative Entropy," measures how much one probability distribution $Q$ (approximation) diverges from a second, reference distribution $P$ (truth).</p>
     <div class="math-block">
       $$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>KL Divergence</strong> is the "Difference in Perspective" intuition. It measures how much information you lose by using your model $Q$ instead of the true distribution $P$. It is <strong>non-symmetric</strong> because "going from $P$ to $Q$" is a different information-loss story than "going from $Q$ to $P$."
+      </div>
     </div>
     <div class="callout info">
       <div class="callout-icon">📊</div>

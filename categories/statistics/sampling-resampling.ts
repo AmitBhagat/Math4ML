@@ -24,12 +24,26 @@ export const samplingResamplingSection: TopicSection = {
 
     <h2 id="bootstrapping">1. Bootstrapping</h2>
     <p>Bootstrapping is a statistical method involving drawing repeated samples from a dataset <strong>with replacement</strong>.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Bootstrapping</strong> is the "Simulated Population" intuition. Since we can't go back and get more real data, we treat our sample as if it <em>is</em> the whole world, and draw many sub-samples from it. This allows us to calculate <strong>Confidence Intervals</strong> and build <strong>Ensemble Models</strong> (like Random Forests).
+      </div>
+    </div>
     
     <div class="premium-def-box">
       <div class="premium-def-title">The "OOB" Ratio</div>
       <p style="margin:0">For a sample of size \(n\), the probability of an item <strong>not</strong> being picked in \(n\) draws is \((1 - \frac{1}{n})^n\).</p>
       <div class="math-block" style="margin-top:10px">\(\lim_{n \to \infty} (1 - \frac{1}{n})^n = \frac{1}{e} \approx 0.368\)</div>
       <p style="margin-top:10px">This leaves ~36.8% of data as <strong>Out-Of-Bag (OOB)</strong>, acting as a "free" validation set.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>OOB (Out-of-Bag)</strong> is the "Natural Testing Ground." Because you sample with replacement, about 1/3 of your data is never seen by any individual tree in a Random Forest. This acts as a <strong>Validation Set</strong> that you get "for free" without needing to set data aside manually.
+      </div>
     </div>
 
     <h2 id="bootstrap-example">1.1 Illustrative Example: Bootstrap Variance</h2>
@@ -53,6 +67,13 @@ export const samplingResamplingSection: TopicSection = {
 
     <h2 id="cv">2. Cross-Validation (CV)</h2>
     <p>Cross-Validation is a resampling procedure used to evaluate machine learning models on a limited data sample.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Validation</strong> is the "Fair Rotation" intuition. Instead of trusting a single train/test split (which might be "lucky" or "unlucky"), you rotate through the entire dataset. Every single data point eventually gets a chance to be used for testing, giving you a much more honest measure of your model's <strong>Generalization</strong>.
+      </div>
+    </div>
     
     <h3>K-Fold Cross-Validation</h3>
     <ol>

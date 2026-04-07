@@ -36,6 +36,14 @@ export const lawsSection: TopicSection = {
     <div class="premium-callout success" style="border-width: 2px;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600;">LLN — Law of Large Numbers</div>
       <p>The LLN states that as the number of independent and identically distributed (<strong>i.i.d.</strong>) random trials increases, their observed average (sample mean) will get closer and closer to the theoretical average (population mean).</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> LLN is the <strong>"Stability from Chaos"</strong> intuition. While a single coin flip is unpredictable, 10,000 flips are perfectly predictable. In ML, this is why training on a large dataset (Big Data) works—the individual "weirdness" of outliers cancels out, leaving only the true signal.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h3>The "Why"</h3>
@@ -49,6 +57,14 @@ export const lawsSection: TopicSection = {
     <div class="premium-callout info" style="border-width: 2px;">
       <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; font-weight: 600;">CLT — Central Limit Theorem</div>
       <p>The CLT is arguably the most powerful tool in an ML Engineer's toolkit. It states that if you take sufficiently large random samples from <strong>any</strong> population (regardless of the original distribution's shape), the distribution of the <strong>sample means</strong> will be approximately <strong>Gaussian (Normal)</strong>.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> CLT is the <strong>"Natural Magnetism"</strong> of probability. It doesn't matter how weird your data starts (flat, skewed, or sharp)—once you start taking averages, the result is <em>always</em> a bell curve. This is why we can use Gaussian tools (like Linear Regression) even if the underlying data isn't perfectly normal.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h3>Core Properties</h3>
@@ -72,6 +88,13 @@ export const lawsSection: TopicSection = {
     <div class="step-box"><span class="step-num">3</span><div><strong>Mean Variable:</strong> We define the sample mean as \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
     <div class="step-box"><span class="step-num">4</span><div><strong>Scaling Variance:</strong> Using \(Var(aX) = a^2 Var(X)\):</div></div>
     <div class="math-block">$$Var\!\left(\frac{1}{n} S_n\right) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This $1/n$ scaling is the <strong>"Precision Guarantee."</strong> It tells you exactly how much your uncertainty shrinks as you collect more data. If you want to be twice as precise, you need four times as much data (because of the square root when you take the standard deviation).
+      </div>
+    </div>
     
     <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Conclusion:</strong> As \(n \to \infty\), the variance \(\frac{\sigma^2}{n} \to 0\). This proves that the sample mean becomes an increasingly precise estimate of the truth.</div></div>
 

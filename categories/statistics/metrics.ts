@@ -29,6 +29,13 @@ export const evaluationMetricsSection: TopicSection = {
     <div class="step-box"><span class="step-num">3</span><div><strong>Recall (Sensitivity):</strong> "Did we find all positives?" \(\frac{TP}{TP + FN}\). Critical for safety/health.</div></div>
     <div class="step-box"><span class="step-num">4</span><div><strong>F1-Score:</strong> Harmonic mean. \(2 \cdot \frac{\text{Pre} \cdot \text{Rec}}{\text{Pre} + \text{Rec}}\). Balance point.</div></div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Precision</strong> is the "Quality" metric (low false alarms). <strong>Recall</strong> is the "Quantity" metric (finding everyone). In a cancer screening, <strong>Recall</strong> is life-or-death. In a spam filter, <strong>Precision</strong> is king because you don't want to miss a single boss email.
+      </div>
+    </div>
+
     <h2 id="precision-recall-example">2. Illustrative Example: Precision vs. Recall</h2>
     <div class="example-box">
       <h4>Problem: Evaluating a Cancer Model</h4>
@@ -53,6 +60,13 @@ export const evaluationMetricsSection: TopicSection = {
     <div class="step-box"><span class="step-num">1</span><div><strong>MAE (Robust):</strong> Average absolute difference. \(\frac{1}{n} \sum |y - \hat{y}|\).</div></div>
     <div class="step-box"><span class="step-num">2</span><div><strong>MSE (Square Penalty):</strong> Squaring large errors. \(\frac{1}{n} \sum (y - \hat{y})^2\).</div></div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MSE</strong> is a <strong>Punishment</strong>. Because it squares the error, a single 10-unit mistake costs you 100 points, while 10 one-unit mistakes only cost you 10. If your model <em>must</em> avoid large errors at all costs (like in autonomous driving), MSE is your best friend.
+      </div>
+    </div>
+
     <h2 id="mae-mse-example">4. Illustrative Example: MAE vs. MSE</h2>
     <div class="example-box">
       <h4>Problem: Impact of Outliers</h4>
@@ -67,6 +81,13 @@ export const evaluationMetricsSection: TopicSection = {
     <h2 id="cross-entropy">5. Probabilistic Metric: Cross-Entropy</h2>
     <p>In Deep Learning, we don't just want a label; we want <strong>Confidence</strong>.</p>
     <div class="math-block">$$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> doesn't just care <em>if</em> you were right; it cares <em>how sure</em> you were. If your model predicts a 99% probability for a wrong class, this metric will penalize it brutally. It forces the model to be honest about its own uncertainty.
+      </div>
+    </div>
 
     <h2 id="implementation">Python Implementation</h2>
     <python-code>

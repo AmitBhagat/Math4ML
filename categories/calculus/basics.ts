@@ -36,6 +36,13 @@ export const basicsSection: TopicSection = {
 
     <h2 id="theory">Core Theory: The "Why"</h2>
     <p>In ML, we define a <strong>Loss Function</strong> that measures how "wrong" our model is. To improve the model, we need to know: <em>"If I increase this weight slightly, will the error go up or down?"</em></p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Calculus is the "language of sensitivity." It answers the question: <em>"How much does my output care about my input?"</em> In a neural network with 10 million weights, calculus tells us exactly how 'sensitive' the error is to each individual weight.
+      </div>
+    </div>
     
     <div class="callout info">
       <div class="callout-icon">💡</div>
@@ -50,14 +57,35 @@ export const basicsSection: TopicSection = {
     <p>The derivative of a function $f(x)$ at point $x$ is defined as:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This limit formula is just a formal way of saying: <em>"Give $x$ an infinitesimal nudge ($h$), and see how much $f(x)$ moves."</em> The derivative is the <strong>best linear approximation</strong> of the function at that specific point.
+      </div>
+    </div>
+
     <h3>2. Partial Derivatives</h3>
     <p>In ML, functions usually have thousands of inputs (weights). A <strong>Partial Derivative</strong> measures how the function changes with respect to <em>one</em> variable while holding all others constant.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of a mountain (the loss surface). A partial derivative $\frac{\partial f}{\partial x}$ tells you the slope if you walk strictly North-South, ignoring East-West. To find the overall "direction of steepest descent," we combine all these partial derivatives into a single vector called the <strong>Gradient</strong>.
+      </div>
+    </div>
     <p>For a function $f(x, y)$:</p>
     <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>
 
     <h3>3. The Chain Rule</h3>
     <p>This is the "secret sauce" of <strong>Backpropagation</strong>. If a variable $z$ depends on $y$, and $y$ depends on $x$, then $z$ depends on $x$ via the chain:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The Chain Rule is the DNA of <strong>Backpropagation</strong>. It allows us to calculate how a weight in the <em>first</em> layer of a deep network affects the error at the <em>last</em> layer, by multiplying the local gradients of every intermediate layer.
+      </div>
+    </div>
 
     <h2 id="example-tangent">Example 1: Tangent Slopes & Instantaneous Change</h2>
     <div class="example-box">

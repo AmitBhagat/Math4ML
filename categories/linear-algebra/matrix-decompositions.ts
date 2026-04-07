@@ -38,6 +38,13 @@ export const matrixDecompositionsSection: TopicSection = {
     <p>LU Decomposition factors a square matrix \(A\) into a <strong>Lower Triangular</strong> matrix (\(L\)) and an <strong>Upper Triangular</strong> matrix (\(U\)). It is primarily used to solve systems of linear equations (\(Ax = b\)) efficiently.</p>
     <div class="math-block">$$A = LU \implies \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> LU is essentially <strong>Gaussian Elimination</strong> in disguise. When you perform row operations to get a matrix into upper triangular form ($U$), the "memory" of those operations is stored in the lower triangular matrix ($L$). In ML, we use LU to solve $Ax = b$ because back-substitution with triangular matrices is incredibly fast ($O(n^2)$) compared to inverting the whole matrix.
+      </div>
+    </div>
+
     <div class="example-box">
       <h4>Problem: LU Factorization</h4>
       <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\) into \(L\) and \(U\).</p>
@@ -56,6 +63,13 @@ export const matrixDecompositionsSection: TopicSection = {
 
     <h2 id="cholesky">2. Cholesky Decomposition</h2>
     <p>Cholesky Decomposition is a special case of LU for <strong>Symmetric, Positive Definite</strong> matrices. It factors \(A\) into \(LL^T\). Because it exploits symmetry, it is roughly twice as fast as LU decomposition and much more numerically stable.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> If LU is like factoring $15 = 3 \times 5$, Cholesky is like taking the square root: $16 = 4 \times 4$. In ML, we use this to generate <strong>correlated noise</strong> in simulations or to solve <strong>Gaussian Processes</strong> efficiently.
+      </div>
+    </div>
     <h3>Applications in ML</h3>
     <ul>
       <li><strong>Gaussian Processes:</strong> Used to sample from multivariate normal distributions.</li>
@@ -64,6 +78,13 @@ export const matrixDecompositionsSection: TopicSection = {
 
     <h2 id="qr">3. QR Decomposition</h2>
     <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)). Since \(Q\) preserves lengths and angles (\(Q^T Q = I\)), this is used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> QR is about <strong>Orthonormalization</strong>. We take messy columns and turn them into perpendicular unit vectors ($Q$), and a "recipe" matrix ($R$) that tells us how to rebuild the original. In ML, QR is the backbone of <strong>Linear Regression</strong> because $Q$ doesn't amplify numerical errors like basic inversion does.
+      </div>
+    </div>
 
     <div class="example-box">
       <h4>Problem: QR Factorization Intuition</h4>
@@ -81,6 +102,13 @@ export const matrixDecompositionsSection: TopicSection = {
     <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
     <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> SVD says <strong>any</strong> linear transformation can be broken into three steps: a rotation ($V^\top$), a scaling ($\Sigma$), and another rotation ($U$). It reveals the "true axes" of your data. The values in $\Sigma$ tell you importance—this is how <strong>SVD-based compression</strong> knows which data to keep and which to throw away.
+      </div>
+    </div>
 
     <visualizer topic="SVD" />
 

@@ -9,6 +9,13 @@ export const randomVariablesSection: TopicSection = {
       <div class="premium-hero-badge">📊 Probability · Random Variables &amp; Functions</div>
       <h1>Random Variables &amp; Functions</h1>
       <p>In the previous sections, we looked at fixed events (like rolling a die). However, in Machine Learning, we deal with data that can take a wide range of values. A <strong>Random Variable (RV)</strong> is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe "stochastic" (random) processes.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of a <strong>Random Variable</strong> as a "Translator." It takes messy real-world outcomes (like "Cloudy" or "Sunny") and translates them into numbers (like 0 or 1) so we can do math with them. It is <strong>not</strong> a variable in the traditional sense; it's a function that measures the world.
+      </div>
+    </div>
     </div>
 
     <div class="toc">
@@ -54,8 +61,22 @@ export const randomVariablesSection: TopicSection = {
       </div>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Discrete vs. Continuous</strong> divide is like <strong>Digital vs. Analog</strong>. A discrete RV is like a staircase—you're either on step 1 or step 2. A continuous RV is like a slide—you can be at any height. In ML, binary classification is discrete (0/1), but the confidence score (0.873...) is continuous.
+      </div>
+    </div>
+
     <h2 id="cdf">Cumulative Distribution Function (CDF)</h2>
     <p>The <strong>CDF</strong>, denoted as \(F(x)\), is the probability that the random variable \(X\) will take a value less than or equal to \(x\). It is the "running total" of probability.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>CDF</strong> is the "Running Score" of your distribution. If probability is a pile of sand, the PDF tells you how high the pile is at one spot, but the CDF tells you the <strong>total weight</strong> of the sand to the left of that spot. It always starts at 0 (nothing) and ends at 1 (everything).
+      </div>
+    </div>
     <ul>
       <li><strong>Definition:</strong> \(F(x) = P(X \le x)\)</li>
       <li><strong>For Discrete:</strong> \(F(x) = \sum_{t \le x} P(t)\)</li>

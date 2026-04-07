@@ -71,10 +71,10 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
     )}>
       <div className="p-5 pb-6 mb-4 border-b border-border-premium flex items-center justify-between">
         <Link to="/" className="group flex flex-col gap-0.5 no-underline">
-          <span className="font-sans font-semibold text-lg text-accent-premium tracking-tight group-hover:text-accent-premium-light transition-colors">
+          <span className="font-sans font-semibold text-xl text-accent-premium tracking-tight group-hover:text-accent-premium-light transition-colors">
             Math4ML
           </span>
-          <span className="text-[10px] uppercase tracking-wider text-muted-premium font-light group-hover:text-text-premium transition-colors">
+          <span className="text-[12px] uppercase tracking-wider text-muted-premium font-light group-hover:text-text-premium transition-colors">
             Mathematics for Machine Learning
           </span>
         </Link>
@@ -93,7 +93,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
           <div key={cluster.id} className="mb-6">
             <Link 
               to={`/${cluster.id}`}
-              className="px-3 text-[10px] font-black uppercase tracking-[0.25em] text-muted-premium/40 mb-4 flex items-center gap-2 hover:text-accent-premium transition-colors no-underline"
+              className="px-3 text-[12px] font-black uppercase tracking-[0.25em] text-muted-premium/40 mb-4 flex items-center gap-2 hover:text-accent-premium transition-colors no-underline"
             >
               <LayoutPanelLeft className="w-3 h-3" />
               {cluster.title}
@@ -125,7 +125,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                         onMouseEnter={() => setHoveredId(catId)}
                         onMouseLeave={() => setHoveredId(null)}
                         className={cn(
-                          "flex-1 flex items-center gap-2.5 px-2 py-2 text-sm transition-all no-underline min-w-0",
+                          "flex-1 flex items-center gap-2.5 px-2 py-2 text-base transition-all no-underline min-w-0",
                           isActive ? "font-semibold" : "text-muted-premium hover:text-text-premium"
                         )}
                         style={{ 
@@ -162,7 +162,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                     )}>
                       <div className="pl-7 pr-2 flex flex-col gap-0.5 border-l border-border-premium ml-3.5 py-1">
                         {isLoading ? (
-                          <div className="py-2 flex items-center gap-2 text-[10px] text-muted-premium italic">
+                          <div className="py-2 flex items-center gap-2 text-[12px] text-muted-premium italic">
                             <Loader2 className="w-3 h-3 animate-spin" />
                             Loading curriculum...
                           </div>
@@ -176,7 +176,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                                 key={section.id}
                                 to={`/${cluster.id}/${catId}/${section.id}`}
                                 className={cn(
-                                  "group/item py-1.5 px-3 rounded-md text-[13px] leading-tight transition-all no-underline flex items-center gap-2",
+                                  "group/item py-1.5 px-3 rounded-md text-[15px] leading-tight transition-all no-underline flex items-center gap-2",
                                   isTopicActive 
                                     ? "bg-accent-premium/10 font-medium"
                                     : "text-muted-premium hover:text-text-premium hover:bg-bg-tertiary"
@@ -198,7 +198,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                             );
                           })
                         ) : (
-                          <div className="py-2 px-3 text-[11px] text-muted-premium/60 italic flex items-center gap-2">
+                          <div className="py-2 px-3 text-[13px] text-muted-premium/60 italic flex items-center gap-2">
                              <Clock className="w-3 h-3" />
                              Available Soon
                           </div>
@@ -216,8 +216,8 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
       {/* Sidebar Footer */}
       <div className="mt-auto p-6 border-t border-border-premium bg-bg-secondary/50 backdrop-blur-sm sticky bottom-0">
         <div className="flex flex-col gap-1">
-          <span className="text-[10px] font-black uppercase tracking-widest text-muted-premium">System</span>
-          <span className="text-[11px] text-text-premium/50 font-mono">v1.2.0 • Immersive Edition</span>
+          <span className="text-[12px] font-black uppercase tracking-widest text-muted-premium">System</span>
+          <span className="text-[12px] text-text-premium/50 font-mono">v1.2.0 • Immersive Edition</span>
         </div>
       </div>
     </aside>

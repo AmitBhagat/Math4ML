@@ -10,6 +10,13 @@ export const setTheorySection: TopicSection = {
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
       <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> A <strong>Set</strong> is a <strong>"Box of Unique Items."</strong> In Python, this is exactly what the <code>set()</code> object does—it forces everything inside to be unique. If you try to add a duplicate, the set just ignores it. This is the bedrock of <strong>Data Deduplication</strong>.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -31,6 +38,13 @@ export const setTheorySection: TopicSection = {
       </div>
     </div>
     <p><strong>Notation:</strong> $A \subseteq B$</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Cardinality $|A|$</strong> is the "Census" of your set. It's just a fancy way of saying <code>len(data)</code>. In ML, if the cardinality of your feature set is too high (like "Unique User IDs"), it can actually hurt your model's ability to generalize.
+      </div>
+    </div>
 
     <hr class="premium-hr">
 
@@ -57,6 +71,13 @@ export const setTheorySection: TopicSection = {
     </div>
     <p><strong>Logic:</strong> "Give me only what is in Set A AND Set B."<br>
     <strong>Notation:</strong> $A \cap B$</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Complement $A^c$</strong> is the "Everything Else" intuition. If $A$ is the set of "Spam Emails" and the Universal Set $\mathcal{U}$ is your entire Inbox, then $A^c$ is your "Legit Mail." This is the core of <strong>Inverse Filtering</strong> in Data Engineering.
+      </div>
+    </div>
 
     <hr class="premium-hr">
 

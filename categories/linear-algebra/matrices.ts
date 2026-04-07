@@ -47,6 +47,8 @@ export const matricesSection: TopicSection = {
 
     <h3>Core Theory</h3>
     <p>For the product \(C = AB\) to exist, the number of columns in \(A\) must equal the number of rows in \(B\). If \(A\) is \((m \times n)\) and \(B\) is \((n \times p)\), then \(C\) will be \((m \times p)\). Each element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of \(A\) and the \(j\)-th column of \(B\).</p>
+    
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> Matrix multiplication is <strong>composition</strong>. If $A$ rotates and $B$ scales, $AB$ is the single machine that does both. <strong>The 'Gotcha':</strong> $AB \neq BA$. Reversing the order in ML (e.g., Weights $\times$ Data vs. Data $\times$ Weights) is the #1 cause of shape errors.</div></div>
 
     <h3>Mathematical Derivation</h3>
     <p>The element in the \(i\)-th row and \(j\)-th column is defined as:</p>
@@ -75,6 +77,8 @@ export const matricesSection: TopicSection = {
     <h3>Core Theory</h3>
     <p>Transposing switches the row and column indices. It is frequently used in ML to align dimensions for matrix multiplication, especially when calculating the gradient or handling weights.</p>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Transpose</strong> $A^\top$ flips the matrix over its diagonal. Memory trick: $(AB)^\top = B^\top A^\top$. The order reverses when you flip!</div></div>
+
     <h3>Mathematical Derivation</h3>
     <p>If \(A\) has elements \(a_{ij}\), then \(A^T\) has elements \(a_{ji}\):</p>
     <div class="math-block">$$(A^T)_{ij} = A_{ji}$$</div>
@@ -93,6 +97,8 @@ export const matricesSection: TopicSection = {
     <p>It acts as the number "1" in matrix algebra. Multiplying any matrix \(A\) by the identity matrix \(I\) results in the original matrix \(A\):</p>
     <div class="math-block">$$AI = IA = A$$</div>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> It’s a "do-nothing" transformation. If you multiply a vector by $I$, it stays exactly where it is. It's the starting point for stability.</div></div>
+
     <h3>Mathematical Representation</h3>
     <p>For a \(3 \times 3\) space:</p>
     <div class="math-block">$$I_3 = \begin{bmatrix} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}$$</div>
@@ -102,6 +108,8 @@ export const matricesSection: TopicSection = {
 
     <h3>Core Theory</h3>
     <p>Not all matrices have an inverse. A matrix must be <strong>square</strong> and <strong>non-singular</strong> (its determinant \(\neq 0\)). In ML, inverses are used to solve systems of linear equations, such as in the <strong>Normal Equation</strong> for Linear Regression.</p>
+
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> The <strong>Inverse</strong> $A^{-1}$ is the "undo" button. If a matrix "squashes" space into a line, that info is lost and you can't undo it—that's a singular matrix (non-invertible).</div></div>
 
     <h3>Mathematical Derivation (for 2×2)</h3>
     <p>For \(A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), the inverse is:</p>

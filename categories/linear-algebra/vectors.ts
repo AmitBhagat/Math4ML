@@ -45,6 +45,8 @@ export const vectorsSection: TopicSection = {
     <h3>Core Theory</h3>
     <p>Geometrically, the dot product is the projection of one vector onto another. In ML, it is used to calculate the similarity between two vectors (e.g., in Cosine Similarity) and is the core operation in Neural Network layer computations \((z = w \cdot x + b)\).</p>
 
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> It’s how much of one vector "lives" in the direction of another. <strong>The 'Gotcha':</strong> Remember that the dot product is heavily influenced by the <strong>length</strong> of the vectors. If you want pure direction, you use Cosine Similarity.</div></div>
+
     <h3>Mathematical Derivation</h3>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\) in \(\mathbb{R}^n\):</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
@@ -74,6 +76,8 @@ export const vectorsSection: TopicSection = {
       <li><strong>L₁ Norm (Manhattan Distance):</strong> The sum of the absolute values of the components. It is often used in <strong>Lasso Regularization</strong> to encourage sparsity in models.</li>
       <li><strong>L₂ Norm (Euclidean Distance):</strong> The square root of the sum of squared components. It is the most common distance metric and is used in <strong>Ridge Regularization</strong>.</li>
     </ul>
+
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A Norm must satisfy the <strong>Triangle Inequality</strong>: shortcuts shouldn't be longer than the long way around. L₁ is "sharp" (forces zeros), while L₂ is "smooth" (spreads the weight).</div></div>
 
     <h3>Mathematical Derivation</h3>
     <p>The general \(p\)-norm is given by:</p>
@@ -106,6 +110,8 @@ export const vectorsSection: TopicSection = {
       <li><strong>Span:</strong> The set of all possible linear combinations of a group of vectors. If the span covers the entire space, those vectors can reach any point in that space.</li>
       <li><strong>Basis:</strong> A set of vectors that are <strong>linearly independent</strong> and whose span covers the entire space. It is the "minimalist" set of directions needed to define a space.</li>
     </ul>
+
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Teacher's Intuition:</strong> A Basis is the minimal toolkit required to reach every point in space without redundant tools. If your features have <strong>Multicollinearity</strong>, you have redundant tools, and your model might get confused.</div></div>
 
     <h3>Mathematical Derivation</h3>
     <p>If a vector \(\mathbf{b}\) can be written as:</p>

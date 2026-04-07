@@ -46,6 +46,13 @@ export const multivariateProbabilitySection: TopicSection = {
         <p><strong>Discrete:</strong> \(P(X=x, Y=y)\)</p>
         <p><strong>Continuous:</strong> surface in 3D space.</p>
         <p><strong>Constraint:</strong> \(\sum\sum P(x,y) = 1\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> The <strong>Joint Distribution</strong> is the "Whole Picture." It contains every possible scrap of information about the relationship between $X$ and $Y$. In ML, your entire dataset is essentially a sample from a massive joint distribution of all your features.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Perspective 2</div>
@@ -54,6 +61,13 @@ export const multivariateProbabilitySection: TopicSection = {
         <p style="margin-top:8px">"Summing out" one variable. Like looking at a 3D object from the side.</p>
         <p><strong>Discrete:</strong> \(P(X=x) = \sum_{y} P(x, y)\)</p>
         <p><strong>Continuous:</strong> \(f_X(x) = \int f(x, y) dy\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Marginalization</strong> is the "Projection" intuition. When you marginalize out $Y$, you are mathematically "flattening" the joint distribution onto the $X$-axis. You are saying: "I don't care what $Y$ is doing; just show me the total probability for $X$."
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Perspective 3</div>
@@ -61,6 +75,13 @@ export const multivariateProbabilitySection: TopicSection = {
         <p>\(P(X|Y)\)</p>
         <p style="margin-top:8px">Distribution of \(X\) given \(Y\) has a specific value. A "slice" of the joint, re-normalized.</p>
         <p><strong>Formula:</strong> \(P(X|Y) = \dfrac{P(X, Y)}{P(Y)}\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Conditional Distribution</strong> is the "Slice" intuition. You take a sharp knife and cut a slice through the joint distribution at a specific value of $Y$. Then, you re-scale that slice so it sums to 1. This is the heart of <strong>Inference</strong>—predicting $X$ once you've observed $Y$.
+          </div>
+        </div>
       </div>
     </div>
 

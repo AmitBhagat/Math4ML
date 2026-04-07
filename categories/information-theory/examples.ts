@@ -34,6 +34,13 @@ export const informationTheoryExamplesSection: TopicSection = {
       <p><strong>Insight:</strong> If the coin were fair (0.5/0.5), entropy would be 1. Since it's biased, the uncertainty is lower.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Calculation Intuition</strong>. Entropy is the weighted sum of "Surprise." By multiplying the probability ($P$) by the bits of surprise ($\log_2(1/P)$), you are essentially finding the "Average Surprise" you feel when toss the coin over and over.
+      </div>
+    </div>
+
     <h2 id="cross-entropy">2. Example of Cross-Entropy Loss</h2>
     <div class="example-box">
       <p><strong>Scenario:</strong> Image classifier for [Cat, Dog, Bird]. Target is <strong>Dog</strong>. Predictions: [0.1, 0.7, 0.2].</p>
@@ -45,6 +52,13 @@ export const informationTheoryExamplesSection: TopicSection = {
         <li>$L = -\log(0.7) \approx 0.357$</li>
       </ol>
       <p><strong>Insight:</strong> Only the probability of the *correct* class matters here. Higher confidence in the correct class reduces loss.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Accuracy vs. Confidence</strong>. A model could have 100% accuracy but high Cross-Entropy loss if it is "hesitant" (e.g., predicting 0.51 for the correct class). We use this loss to force the model to not just be right, but to be <strong>Confident</strong>.
+      </div>
     </div>
 
     <h2 id="kl-divergence">3. Example of KL Divergence</h2>
@@ -78,6 +92,13 @@ export const informationTheoryExamplesSection: TopicSection = {
         <li><strong>Model B:</strong> $PP = 1 / 0.4 = 2.5$</li>
       </ol>
       <p><strong>Conclusion:</strong> Model A is better; lower perplexity means the model is "less surprised" by the truth.</p>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Perplexity</strong> is the "Effective Branching Factor." If a model has a perplexity of 10, it means it is as surprised by the next word as if it were trying to guess the outcome of a fair 10-sided die. Lower perplexity means the model has narrowed down the possibilities much more effectively.
+      </div>
     </div>
 
     <div class="linking-rule">

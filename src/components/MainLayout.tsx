@@ -64,7 +64,7 @@ export const MainLayout = () => {
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-secondary border border-border-premium text-muted-premium hover:text-accent-premium hover:border-accent-premium/40 transition-all active:scale-95 group"
             >
               <Menu className="w-4 h-4 group-hover:scale-110 transition-transform" />
-              <span className="text-[10px] font-black uppercase tracking-widest hidden sm:block">Menu</span>
+              <span className="text-[12px] font-black uppercase tracking-widest hidden sm:block">Menu</span>
             </button>
           </div>
 
@@ -75,7 +75,7 @@ export const MainLayout = () => {
               showScrollTitle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
             )}
           >
-            <span className="text-[11px] font-black uppercase tracking-[0.25em] text-on-surface truncate max-w-[200px] sm:max-w-md">
+            <span className="text-[13px] font-black uppercase tracking-[0.25em] text-on-surface truncate max-w-[200px] sm:max-w-md">
               {formattedTitle}
             </span>
           </div>
@@ -101,7 +101,7 @@ export const MainLayout = () => {
 
           <footer className="py-12 border-t border-border-premium bg-bg-secondary/30 mt-auto">
             <div className="max-w-[1400px] mx-auto px-6 text-center">
-              <p className="text-xs text-muted-premium font-light tracking-widest uppercase">
+              <p className="text-sm text-muted-premium font-light tracking-widest uppercase">
                 Math4ML Curriculum © 2026 • Optimized for Deep Insight
               </p>
             </div>

@@ -28,6 +28,13 @@ export const neuralNetworksSection: TopicSection = {
       <li><strong>The Gradient ($\nabla$):</strong> This is a vector of all partial derivatives. It points in the direction of the steepest ascent. In training, we move in the opposite direction (Gradient Descent).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Think of the Loss Function as a "Landscape of Error." Your goal is to reach the bottom of the deepest valley. The <strong>Gradient</strong> is your GPS—it tells you the exact slope of the ground beneath your feet for every single weight. By nudging the weights against the gradient, you take a step toward the minimum.
+      </div>
+    </div>
+
     <h2 id="backprop">2. How the Chain Rule enables Backpropagation</h2>
     <p>Backpropagation is essentially a recursive application of the <strong>Chain Rule</strong>. In a multi-layered network, the input flows through several nested functions:</p>
     <div class="math-block">$$L(y, \hat{y}) = L(f_n(f_{n-1}(\dots f_1(x)\dots)))$$</div>
@@ -43,6 +50,13 @@ export const neuralNetworksSection: TopicSection = {
     </div>
     
     <p>In a Neural Network, this allows us to calculate the local gradient at each node and multiply it by the gradient flowing from above. This efficiency prevents us from having to re-calculate the entire derivative for every single parameter from scratch.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Backpropagation is <strong>"Blame Assignment."</strong> When the network makes a mistake, the Chain Rule identifies exactly how much each weight contributed to that error. It works backwards from the final result, "passing the blame" layer by layer until every weight knows how it needs to change.
+      </div>
+    </div>
 
     <h2 id="example-nested">Example 1: The Chain of Influence (Nested Functions)</h2>
     <div class="example-box">

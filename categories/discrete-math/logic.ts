@@ -24,6 +24,13 @@ export const logicSection: TopicSection = {
 
     <h2 id="propositional">1. Propositional Logic</h2>
     <p>This is the simplest form of logic. It deals with <strong>propositions</strong>—statements that are either <strong>True</strong> or <strong>False</strong>.</p>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Propositional Logic</strong> is the "Light Switch" intuition. Everything is either ON ($T$) or OFF ($F$). It is the foundation of <strong>Digital Electronics</strong> and every <code>if/else</code> statement you've ever written in Python.
+      </div>
+    </div>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Variables:</strong> Usually represented as $P, Q, R$.</li>
@@ -38,6 +45,13 @@ export const logicSection: TopicSection = {
       </ul>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Implication ($P \to Q$)</strong> is the "Contract" intuition. Think of it as a promise: "If you pay me ($P$), I will give you a car ($Q$)." The only way to break the contract is if you pay me ($P=T$), but I don't give you the car ($Q=F$). If you don't pay me ($P=F$), the contract isn't broken regardless of what I do.
+      </div>
+    </div>
+
     <h2 id="fol">2. First-Order Logic (FOL)</h2>
     <p>FOL adds <strong>Quantifiers</strong> and <strong>Predicates</strong> to make logic more powerful, allowing it to describe objects and relationships.</p>
     <div class="def-box">
@@ -50,6 +64,13 @@ export const logicSection: TopicSection = {
           </ul>
         </li>
       </ul>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>First-Order Logic (FOL)</strong> is the "Object-Oriented" intuition. Propositional logic is too limited; it can't say "Every car is red." FOL lets you define <strong>Objects</strong> (Cars) and <strong>Properties</strong> (Red), making it the language of choice for <strong>Knowledge Graphs</strong> and <strong>Semantic Search</strong>.
+      </div>
     </div>
 
     <h2 id="applications">3. Applications in AI & Software</h2>

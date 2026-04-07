@@ -43,6 +43,13 @@ export const expectationVarianceSection: TopicSection = {
         <p>The weighted average of all possible values. The "center of mass" of the distribution.</p>
         <p style="margin-top:8px"><strong>Discrete:</strong> \(E[X] = \sum x \cdot P(X=x)\)</p>
         <p><strong>Continuous:</strong> \(E[X] = \int_{-\infty}^{\infty} x \cdot f(x) dx\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Expectation</strong> is the "Long-term Average." If you repeated an experiment a million times, $E[X]$ is where your results would cluster. It is the <strong>First Moment</strong> of a distribution.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Concept 2</div>
@@ -50,6 +57,13 @@ export const expectationVarianceSection: TopicSection = {
         <p>Measures the spread of the RV around its mean. High variance = far from mean.</p>
         <p style="margin-top:8px"><strong>Formula:</strong> \(Var(X) = E[(X - E[X])^2]\)</p>
         <p><strong>Shortcut:</strong> \(Var(X) = E[X^2] - (E[X])^2\)</p>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> <strong>Variance</strong> measures the "Surprise." If variance is low, you know exactly what to expect. If it's high, the data is noisy and unpredictable. It is the <strong>Second Moment</strong> of a distribution and is fundamental to <strong>Risk Analysis</strong> and <strong>Model Regularization</strong>.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Concept 3</div>
@@ -66,6 +80,13 @@ export const expectationVarianceSection: TopicSection = {
         <h4>Correlation ρ<sub>X,Y</sub></h4>
         <p>The <em>normalized</em> version of covariance. Always between <strong>−1 and 1</strong>, making it easier to interpret.</p>
         <p style="margin-top:8px"><strong>Formula:</strong> \(\rho_{X,Y} = \dfrac{Cov(X, Y)}{\sigma_X \sigma_Y}\)</p>
+      </div>
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Covariance</strong> tells you the <em>direction</em> of the dance (do they move together or apart?). <strong>Correlation</strong> tells you the <em>strength</em> of the connection (how synchronized are they?). In ML, high correlation between features ($> 0.9$) is a red flag for <strong>Multicollinearity</strong>—it means your model is getting the same information twice.
       </div>
     </div>
 

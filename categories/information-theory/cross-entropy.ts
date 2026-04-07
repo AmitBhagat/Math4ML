@@ -9,6 +9,13 @@ export const crossEntropySection: TopicSection = {
       <div class="premium-hero-badge">📏 Info Theory · Cross-Entropy</div>
       <h1>Cross-Entropy</h1>
       <p><strong>Cross-Entropy</strong> measures the difference between two probability distributions: the <strong>true distribution</strong> ($P$) and the <strong>predicted distribution</strong> ($Q$). It is the primary objective function used in Neural Networks for classification.</p>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Cross-Entropy</strong> is the "Penalty for Ignorance." It tells you how many average bits you'll need to send if you use the <em>wrong</em> codebook ($Q$) for the <em>actual</em> events ($P$). In AI, your model is trying to synchronized its codebook with reality.
+        </div>
+      </div>
     </div>
 
     <div class="toc">
@@ -58,6 +65,13 @@ export const crossEntropySection: TopicSection = {
           <strong>ML Insight:</strong> If the model predicted $[0.6, 0.4]$ (Lower confidence), the cross-entropy would be higher ($\approx 0.737 \text{ bits}$), penalizing the model more for its uncertainty.
         </div>
       </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Binary Cross-Entropy (BCE)</strong> is the "Sigmoid Match." Since there are only two outcomes, the formula simplifies to measuring how much the model's single $p$ value "misses" the 0 or 1 target. It is the gold standard for binary "Yes/No" classifiers.
+        </div>
+      </div>
     </div>
 
     <h2 id="example-multiclass">Example 2: Multi-class (Handwritten Digits)</h2>
@@ -73,6 +87,13 @@ export const crossEntropySection: TopicSection = {
         <div class="callout-icon">💡</div>
         <div class="callout-body">
           <strong>Interpretation:</strong> This shows why Cross-Entropy is so efficient for backpropagation—it only cares about the probability assigned to the **correct** answer.
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Categorical Cross-Entropy (CCE)</strong> is the "Softmax Alignment." Because of One-Hot encoding (where all labels except one are zero), the entire sum vanishes except for the one term corresponding to the true class. This makes it incredibly fast for training LLMs or Image classifiers with thousands of categories.
         </div>
       </div>
     </div>

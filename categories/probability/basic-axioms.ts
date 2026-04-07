@@ -44,6 +44,13 @@ export const basicAxiomsSection: TopicSection = {
       <li><strong>Example:</strong> If you toss a coin, \(S = \{H, T\}\). If you roll a six-sided die, \(S = \{1, 2, 3, 4, 5, 6\}\).</li>
     </ul>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Sample Space</strong> $S$ is the "Universe of Possibility" for your experiment. Every single thing that <em>could</em> happen must be in $S$. In ML, if you're classifying images of cats and dogs, but your sample space doesn't include "birds," your model will be forced to make a wrong guess when it sees one.
+      </div>
+    </div>
+
     <h3>2. Events (A, B)</h3>
     <p>An <strong>Event</strong> is a subset of the sample space. It represents one or more outcomes that we are interested in.</p>
     <ul>
@@ -52,11 +59,15 @@ export const basicAxiomsSection: TopicSection = {
 
     <h3>3. The Three Axioms of Probability (Kolmogorov Axioms)</h3>
     <p>For any event \(A\) in the sample space \(S\):</p>
-    <ol>
-      <li><strong>Non-negativity:</strong> The probability of an event is always a non-negative real number: \(P(A) \ge 0\).</li>
-      <li><strong>Certainty:</strong> The probability of the entire sample space is 1: \(P(S) = 1\).</li>
       <li><strong>Additivity:</strong> For any two mutually exclusive events (where \(A \cap B = \emptyset\)), the probability of their union is the sum of their individual probabilities: \(P(A \cup B) = P(A) + P(B)\).</li>
     </ol>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> These are the "Rules of the Game." They ensure that probability behaves like a <strong>measure of volume</strong>. If you have two non-overlapping areas, their total area is just the sum. Without these rules, we couldn't trust our models to be consistent.
+      </div>
+    </div>
 
     <h2 id="conditional">Mathematical Derivation: Conditional Probability &amp; Independence</h2>
 
@@ -64,6 +75,13 @@ export const basicAxiomsSection: TopicSection = {
     <p>This measures the probability of an event \(A\) occurring, <strong>given</strong> that event \(B\) has already occurred. This is critical in ML for updating our "beliefs" as new data arrives.</p>
     <p>The formula is defined as:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> Conditional probability is the <strong>"Shrinking Universe"</strong> intuition. When I tell you $B$ has occurred, your entire universe $S$ collapses down to just $B$. Now, the only part of $A$ that matters is the part that survived the collapse ($A \cap B$).
+      </div>
+    </div>
     <visualizer topic="ConditionalProbability" />
 
     <p><strong>Derivation steps:</strong></p>
@@ -76,6 +94,13 @@ export const basicAxiomsSection: TopicSection = {
     <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
     <p>From the conditional probability formula, if \(A\) and \(B\) are independent:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A) \cdot P(B)}{P(B)} = P(A)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Independence</strong> means <strong>Zero Information</strong>. If $A$ and $B$ are independent, knowing $B$ gives you absolutely no hint about $A$. In ML, we often assume features are independent (Naive Bayes) to make the math easier, even if it's not perfectly true.
+      </div>
+    </div>
 
     <h2 id="example">3. Illustrative Example: Die Roll</h2>
     <div class="example-box">

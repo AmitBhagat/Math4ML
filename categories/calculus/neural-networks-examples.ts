@@ -45,6 +45,14 @@ export const neuralNetworksExamplesSection: TopicSection = {
         <li><strong>Gradient:</strong> $\frac{\partial L}{\partial w} = (-2) \cdot (2) = -4$</li>
         <li><strong>Interpretation:</strong> Because the gradient is negative, increasing the weight $w$ will decrease the loss $L$.</li>
       </ul>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> This is the <strong>"Weight Nudge."</strong> The gradient $\frac{\partial L}{\partial w} = -4$ tells us that for every 1 unit we increase the weight, the loss <em>drops</em> by 4 units. In Gradient Descent, we subtract the gradient to "roll" down the hill toward the minimum.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="sigmoid">Example 2: Logistic Regression (Sigmoid Activation)</h2>
@@ -78,6 +86,14 @@ export const neuralNetworksExamplesSection: TopicSection = {
       <p>Using Gradient Descent:</p>
       <div class="math-block">$$w_{new} = w_{old} - (\eta \cdot \text{Gradient})$$</div>
       <div class="math-block">$$w_{new} = 0.8 - (0.1 \cdot -0.0592) = 0.80592$$</div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> Notice that the gradient is much smaller here than in Example 1. This is because the <strong>Sigmoid Derivative</strong> $a(1-a)$ is a decimal (max 0.25). When you chain many sigmoids together, you multiply these small decimals, making the final update almost zero. This is the <strong>Vanishing Gradient</strong> problem—the early layers of the network simply stop learning.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="takeaways">Key Takeaways for Implementation</h2>

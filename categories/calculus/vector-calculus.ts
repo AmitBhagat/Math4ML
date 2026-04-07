@@ -42,14 +42,34 @@ export const vectorCalculusSection: TopicSection = {
     <p>The "Del" operator $\nabla$ is defined as:</p>
     <div class="math-block">$$\nabla = \left[ \frac{\partial}{\partial x}, \frac{\partial}{\partial y}, \frac{\partial}{\partial z} \right]$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This $\nabla$ (Nabla) is the "Del" operator. It's a symbolic vector of derivatives. When it acts on a scalar, it gives a <strong>Gradient</strong>; when it dots a vector, it gives <strong>Divergence</strong>; when it crosses a vector, it gives <strong>Curl</strong>. It is the master tool of field theory.
+      </div>
+    </div>
+
     <h3>1. Divergence ($\text{div } \mathbf{F}$ or $\nabla \cdot \mathbf{F}$)</h3>
     <p>Divergence is the <strong>dot product</strong> of the Del operator and the vector field $\mathbf{F} = [P, Q, R]$. It results in a <strong>scalar</strong>.</p>
     <div class="math-block">$$\nabla \cdot \mathbf{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Divergence</strong> answers: <em>"is the point breathing in or breathing out?"</em> If div is positive, the point is a <strong>source</strong> (like a garden in bloom). If negative, it's a <strong>sink</strong> (like a drain). In ML, we use this in <strong>Generative Flows</strong> to ensure the "density" of our data is conserved correctly as we transform it.
+      </div>
+    </div>
+
     <h3>2. Curl ($\text{curl } \mathbf{F}$ or $\nabla \times \mathbf{F}$)</h3>
     <p>Curl is the <strong>cross product</strong> of the Del operator and the vector field. It results in a <strong>vector</strong> that represents the axis of rotation.</p>
-    <div class="math-block">
       $$\nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}$$
+    </div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Curl</strong> measures the local rotation. If you drop a stick in a whirlpool, the curl tells you how fast it spins. In <strong>Physics-Informed Neural Networks (PINNs)</strong>, we might penalize the model if it predicts a flow that has curl where none should exist (like a static air field).
+      </div>
     </div>
 
     <h2 id="example">Illustrative Example</h2>

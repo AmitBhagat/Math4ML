@@ -8,7 +8,8 @@ import {
   easeInOut,
   VisualizerTheme,
   drawInfoBox,
-  roundRect
+  roundRect,
+  getResponsiveScale
 } from "./CanvasBase";
 
 // Utils removed, now using shared functions from CanvasBase
@@ -36,7 +37,7 @@ export const PremiumDifferentiationVisualizer = ({ a = 1, theme = 'light' }: { a
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2000, 1));
     
     ctx.clearRect(0, 0, W, H);
@@ -95,7 +96,7 @@ export const PremiumAreaUnderCurveVisualizer = ({ a = -2, b = 2, n = 10, theme =
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 2500, 1));
     
     ctx.clearRect(0, 0, W, H);
@@ -150,7 +151,7 @@ export const PremiumGradientDescentVisualizer = ({ eta = 0.1, theme = 'light' }:
 
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const toScreen = (x: number, y: number): [number, number] => [ox + x * scale, oy - y * scale];
 
     ctx.clearRect(0, 0, W, H);
@@ -212,7 +213,7 @@ export const PremiumPartialDerivativesVisualizer = ({ focus = 'x', theme = 'ligh
   // f(x,y) = sin(x) * cos(y)
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 40, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 40), ox = W / 2, oy = H / 2;
     const t = elapsed / 1000;
 
     ctx.clearRect(0, 0, W, H);
@@ -270,19 +271,33 @@ export const PremiumChainRuleVisualizer = ({ theme = 'light' }: { theme?: Visual
        ctx.fillText(label, x, y + 6);
     };
 
-    drawBox(ox - 150, oy, "g(x)", C.teal);
-    drawBox(ox + 50, oy, "f(u)", C.blue);
+    const isSmall = W < 500;
+    const spacing = isSmall ? 80 : 150;
+
+    drawBox(ox - (isSmall ? 0 : spacing ), isSmall ? oy - 60 : oy, "g(x)", C.teal);
+    drawBox(ox + (isSmall ? 0 : spacing ), isSmall ? oy + 60 : oy, "f(u)", C.blue);
 
     // Connecting Arrows
-    drawArrow(ctx, ox - 230, oy, ox - 200, oy, C.white, 2);
-    drawArrow(ctx, ox - 100, oy, ox, oy, C.yellow, 3);
-    drawArrow(ctx, ox + 100, oy, ox + 130, oy, C.yellow, 3);
+    if (!isSmall) {
+        drawArrow(ctx, ox - 230, oy, ox - 200, oy, C.white, 2);
+        drawArrow(ctx, ox - 100, oy, ox, oy, C.yellow, 3);
+        drawArrow(ctx, ox + 100, oy, ox + 130, oy, C.yellow, 3);
+    } else {
+        drawArrow(ctx, ox, oy - 120, ox, oy - 90, C.white, 2);
+        drawArrow(ctx, ox, oy - 30, ox, oy + 30, C.yellow, 3);
+        drawArrow(ctx, ox, oy + 90, ox, oy + 120, C.yellow, 3);
+    }
 
     // Rate indicators
     ctx.fillStyle = C.yellow;
     ctx.font = "bold 10px font-mono";
-    ctx.fillText("dg/dx", ox - 100, oy - 15);
-    ctx.fillText("df/du", ox + 100, oy - 15);
+    if (!isSmall) {
+        ctx.fillText("dg/dx", ox - 100, oy - 15);
+        ctx.fillText("df/du", ox + 100, oy - 15);
+    } else {
+        ctx.fillText("dg/dx", ox + 40, oy - 15);
+        ctx.fillText("df/du", ox + 40, oy + 15);
+    }
 
     if (p > 0.5) {
        ctx.beginPath();
@@ -304,7 +319,7 @@ export const PremiumChainRuleVisualizer = ({ theme = 'light' }: { theme?: Visual
 export const PremiumGradientVisualizer = ({ x = 1, y = 1, theme = 'light' }: { x?: number, y?: number, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut(Math.min(elapsed / 1500, 1));
     
     ctx.clearRect(0, 0, W, H);
@@ -351,7 +366,7 @@ export const PremiumGradientVisualizer = ({ x = 1, y = 1, theme = 'light' }: { x
 export const PremiumJacobianHessianVisualizer = ({ mode = 'jacobian', theme = 'light' }: { mode?: 'jacobian' | 'hessian', theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
-    const scale = 50, ox = W / 2, oy = H / 2;
+    const scale = getResponsiveScale(W, H, 50), ox = W / 2, oy = H / 2;
     const p = easeInOut((Math.sin(elapsed / 1000) + 1) / 2);
 
     ctx.clearRect(0, 0, W, H);

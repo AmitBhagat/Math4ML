@@ -43,8 +43,8 @@
     --gold: #9a6700;
     --green: #1a7f37;
     --purple: #8250df;
-    --text: #24292f;
-    --muted: #57606a;
+    --text: #111827;
+    --muted: #374151;
     
     --s-container: #f0f2f5;
     --s-container-low: #f6f8fa;
@@ -54,22 +54,22 @@
   }
 
   .dark {
-    /* ─── PREMIUM DARK THEME ─── */
-    --bg: #0d1117;
-    --bg2: #010409;
-    --bg3: #161b22;
-    --border: #30363d;
-    --accent: #58a6ff;
-    --accent2: #79c0ff;
-    --gold: #e3b341;
-    --green: #3fb950;
-    --purple: #bc8cff;
-    --text: #e6edf3;
-    --muted: #8b949e;
+    /* ─── PREMIUM DARK THEME (Refined) ─── */
+    --bg: #0f172a;        /* Deep charcoal instead of dead-black */
+    --bg2: #020617;       /* Softer secondary background */
+    --bg3: #1e293b;       /* Distinct elevated surface */
+    --border: #334155;    /* Subtle border contrast */
+    --accent: #60a5fa;    /* Slightly desaturated accent for comfort */
+    --accent2: #93c5fd;
+    --gold: #fbbf24;      /* Warmer gold */
+    --green: #4ade80;     /* Fresh green */
+    --purple: #c084fc;    /* Muted purple */
+    --text: #e2e8f0;      /* Muted off-white reduces "glow" */
+    --muted: #94a3b8;     /* Balanced muted text */
 
-    --s-container: #161b22;
-    --s-container-low: #0d1117;
-    --s-container-high: #21262d;
+    --s-container: #1e293b;
+    --s-container-low: #0f172a;
+    --s-container-high: #334155;
   }
 
   html {
@@ -81,7 +81,7 @@
     background: var(--bg);
     color: var(--text);
     font-family: 'Outfit', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
@@ -134,16 +134,16 @@
   }
   .premium-hero h1 {
     font-family: 'Crimson Pro', serif;
-    @apply text-3xl lg:text-[32px] font-semibold leading-tight mb-2 text-text-premium;
+    @apply text-4xl lg:text-[36px] font-semibold leading-tight mb-2 text-text-premium;
   }
   .premium-hero p {
-    @apply text-[15px] leading-relaxed font-normal text-muted-premium max-w-3xl;
+    @apply text-[17px] leading-relaxed font-normal text-muted-premium max-w-3xl;
   }
 
   /* ─── SECTION HEADERS ─── */
   .premium-h2 {
     font-family: 'Crimson Pro', serif;
-    @apply text-[24px] font-semibold text-text-premium mt-10 mb-3 pb-3 border-b-2 border-border-premium relative;
+    @apply text-[28px] font-semibold text-text-premium mt-10 mb-3 pb-3 border-b-2 border-border-premium relative;
   }
   .premium-h2::after {
     content: '';
@@ -153,10 +153,10 @@
     background-color: var(--category-primary, var(--accent));
   }
   .premium-h3 {
-    @apply text-lg font-semibold text-accent-premium mt-8 mb-3;
+    @apply text-xl font-semibold text-accent-premium mt-8 mb-3;
   }
   .premium-h4 {
-    @apply text-base font-semibold text-gold-premium mt-6 mb-2;
+    @apply text-lg font-semibold text-gold-premium mt-6 mb-2;
   }
 
   /* ─── CALLOUTS ─── */
@@ -168,7 +168,7 @@
   .premium-callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
   
   .premium-callout-icon { @apply text-base mt-0.5 shrink-0; }
-  .premium-callout-body { @apply text-sm font-normal text-text-premium; }
+  .premium-callout-body { @apply text-base font-normal text-text-premium; }
   .premium-callout-body strong { @apply font-semibold text-accent-premium; }
 
   /* ─── DEFINITIONS & CASE STUDIES ─── */
@@ -176,7 +176,7 @@
     @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
   }
   .premium-def-title {
-    @apply font-mono text-[11px] text-purple-premium uppercase tracking-widest mb-2.5;
+    @apply font-mono text-[13px] text-purple-premium uppercase tracking-widest mb-2.5;
   }
 
   .premium-case-study {
@@ -186,13 +186,13 @@
 
   /* ─── MATH & TABLES ─── */
   .premium-math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[15px] max-w-full;
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[17px] max-w-full;
   }
   
   .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
-  .premium-table { @apply w-full border-collapse text-sm; }
+  .premium-table { @apply w-full border-collapse text-base; }
   .premium-table thead { @apply bg-bg-secondary; }
-  .premium-table th { @apply px-4 py-3 text-left font-semibold text-accent-premium border border-border-premium text-[13px] uppercase tracking-wider; }
+  .premium-table th { @apply px-4 py-3 text-left font-semibold text-accent-premium border border-border-premium text-[15px] uppercase tracking-wider; }
   .premium-table td { @apply px-4 py-3 border border-border-premium text-text-premium font-normal align-top; }
   .premium-table tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 2%, transparent); }
 
@@ -201,12 +201,12 @@
     @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
   }
   .premium-toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
-  .premium-toc a { @apply block text-muted-premium no-underline text-[13.5px] py-1 transition-colors hover:text-accent-premium; }
-  .premium-toc a.sub { @apply pl-4 text-[13px]; }
+  .premium-toc a { @apply block text-muted-premium no-underline text-[15.5px] py-1 transition-colors hover:text-accent-premium; }
+  .premium-toc a.sub { @apply pl-4 text-[15px]; }
 
   /* ─── CODE ─── */
   code:not(pre code) {
-    @apply font-mono text-[13px] bg-bg-tertiary px-1.5 py-0.5 rounded text-gold-premium border border-border-premium/50;
+    @apply font-mono text-[14px] bg-bg-tertiary px-1.5 py-0.5 rounded text-gold-premium border border-border-premium/50;
   }
 
   /* ─── DOCUMENTATION SPECIFIC (G-STYLE) ─── */
@@ -215,14 +215,14 @@
     @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
   }
   .toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
-  .toc a { @apply block text-muted-premium no-underline text-[13.5px] py-1 transition-colors hover:text-accent-premium; }
-  .toc a.sub { @apply pl-4 text-[13px]; }
+  .toc a { @apply block text-muted-premium no-underline text-[15.5px] py-1 transition-colors hover:text-accent-premium; }
+  .toc a.sub { @apply pl-4 text-[15px]; }
 
   .def-box {
     @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
   }
   .def-title {
-    @apply font-mono text-[11px] text-purple-premium uppercase tracking-widest mb-2.5;
+    @apply font-mono text-[13px] text-purple-premium uppercase tracking-widest mb-2.5;
   }
 
   .example-box {
@@ -236,22 +236,22 @@
   .callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
   .callout.tip { @apply bg-purple-premium/10 border border-purple-premium/25; }
   .callout-icon { @apply text-lg mt-0.5 shrink-0; }
-  .callout-body { @apply text-sm font-normal text-text-premium; }
+  .callout-body { @apply text-base font-normal text-text-premium; }
   .callout-body strong { @apply font-semibold text-accent-premium; }
 
   .math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[15px] max-w-full;
+    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[17px] max-w-full;
     border-left: 3px solid var(--accent);
   }
 
   /* Linking Rules */
   .linking-rule {
-    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-sm font-normal text-muted-premium;
+    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-muted-premium;
   }
   .linking-rule strong { @apply text-accent-premium font-semibold; }
 
   .note-box {
-    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-sm font-normal text-text-premium;
+    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-base font-normal text-text-premium;
   }
   .note-box strong { @apply text-gold-premium font-semibold; }
 
@@ -259,7 +259,7 @@
     @apply bg-bg-tertiary border border-border-premium rounded-xl p-5 my-4 flex items-start gap-4;
   }
   .step-num {
-    @apply shrink-0 bg-accent-premium text-bg font-bold p-1 rounded-full w-6 h-6 flex items-center justify-center text-[10px];
+    @apply shrink-0 bg-accent-premium text-bg font-bold p-1 rounded-full w-6 h-6 flex items-center justify-center text-[12px];
   }
 
   /* Solved Examples Patterns */
@@ -270,25 +270,25 @@
     @apply bg-accent-premium/5 border-b border-border-premium p-5 flex items-center gap-4;
   }
   .solved-num {
-    @apply w-8 h-8 rounded-full bg-accent-premium text-bg flex items-center justify-center font-bold text-sm;
+    @apply w-8 h-8 rounded-full bg-accent-premium text-bg flex items-center justify-center font-bold text-base;
   }
   .solved-title {
-    @apply font-headline text-lg font-semibold text-accent-premium;
+    @apply font-headline text-xl font-semibold text-accent-premium;
   }
   .solved-body {
     @apply p-6;
   }
   .problem-box {
-    @apply bg-accent-premium/5 border border-accent-premium/15 rounded-xl p-5 mb-6 text-sm leading-relaxed;
+    @apply bg-accent-premium/5 border border-accent-premium/15 rounded-xl p-5 mb-6 text-base leading-relaxed;
   }
   .problem-label {
-    @apply font-mono text-[10px] text-accent-premium uppercase tracking-widest mb-2 block;
+    @apply font-mono text-[12px] text-accent-premium uppercase tracking-widest mb-2 block;
   }
   .step-label {
-    @apply font-mono text-[10px] text-muted-premium uppercase tracking-widest mt-6 mb-2 block;
+    @apply font-mono text-[12px] text-muted-premium uppercase tracking-widest mt-6 mb-2 block;
   }
   .conclusion {
-    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-sm font-normal text-text-premium;
+    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-base font-normal text-text-premium;
   }
   .conclusion strong { @apply text-green-premium font-semibold; }
 
@@ -310,7 +310,7 @@
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
 .katex {
-  font-size: 1.1em !important;
+  font-size: 1.15em !important;
   color: var(--text) !important;
 }
 .katex-display {

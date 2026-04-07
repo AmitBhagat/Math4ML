@@ -62,6 +62,13 @@ export const shannonEntropySection: TopicSection = {
       </ol>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>Self-Information</strong> is the "Surprise Score" of a single event. If an event is 100% certain, its surprise is zero ($\log(1)=0$). If an event is extremely rare, its surprise is massive. <strong>Entropy</strong> is just the weighted average of all these separate surprise scores.
+      </div>
+    </div>
+
     <h2 id="example-balls">Example 1: Picking Balls from a Bag</h2>
     <div class="example-box">
       <h4>Problem: Non-Uniform Outcome Probability</h4>
@@ -92,6 +99,13 @@ export const shannonEntropySection: TopicSection = {
         <div class="callout-icon">✓</div>
         <div class="callout-body">
           <strong>Geometric Insight:</strong> A fair coin flip provides exactly 1 bit of information. A double-headed coin provides <strong>zero</strong> information because the outcome is certain (zero surprise).
+        </div>
+      </div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> <strong>Maximum Entropy</strong> occurs at the <strong>Uniform Distribution</strong>. When you have no idea what's going to happen (everything is equally likely), you are at peak uncertainty. In ML, we often initialize weights with uniform or normal distributions to start with maximum entropy (minimum bias).
         </div>
       </div>
     </div>

@@ -39,6 +39,13 @@ export const bayesMleSection: TopicSection = {
     <p>In estimation, we rewrite Bayes' Theorem using parameters \((\theta)\) and data \((D)\):</p>
     <div class="math-block">$$P(\theta|D) = \frac{P(D|\theta) \cdot P(\theta)}{P(D)}$$</div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> This version of Bayes is the <strong>"Learning Formula."</strong> It tells us how to update our internal model ($\theta$) by looking at the world ($D$). This is how a child learns what a "dog" looks like—by starting with a fuzzy prior and sharpening it with every dog they see.
+      </div>
+    </div>
+
     <div class="premium-toc" style="background: transparent; border: none; padding: 0;">
       <div class="perspectives-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0;">
         <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
@@ -69,11 +76,26 @@ export const bayesMleSection: TopicSection = {
       <div class="step-box"><span class="step-num">2</span><div><strong>Likelihood \(L(\theta=0.5|H)\):</strong> You fix the data (Heads). How well does "fairness" explain this observation?</div></div>
 
       <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Crucially:</strong> Likelihood is <strong>not</strong> a probability distribution. It doesn't sum to 1. It is a "score" of how well parameters fit the facts.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Core Theory:</strong> The <strong>Probability</strong> perspective is <em>Forecasting</em> (given $\theta$, what's the data?). The <strong>Likelihood</strong> perspective is <em>Fitting</em> (given data, what's $\theta$?). ML is almost entirely about <strong>Fitting</strong>.
+        </div>
+      </div>
+    </div>
     </div>
 
     <h2 id="mle">4. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE asks: "Which parameter \(\theta\) makes the observed data \(D\) most probable?" It ignores the Prior \(P(\theta)\) entirely.</p>
     <div class="math-block">$$\hat{\theta}_{MLE} = \arg\max_{\theta} P(D|\theta)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MLE</strong> is the <strong>"Blind Expert."</strong> It trusts the data 100%. If you flip a coin once and get Heads, MLE will insist that tails is <em>impossible</em> ($p=1.0$). It has no common sense—only the facts in front of it.
+      </div>
+    </div>
 
     <h2 id="mle-example">5. Illustrative Example: MLE (Estimating Coin Bias)</h2>
     <div class="example-box">
@@ -104,6 +126,13 @@ export const bayesMleSection: TopicSection = {
     <h2 id="comparison">MLE vs. MAP</h2>
     <p><strong>MAP (Maximum A Posteriori)</strong> is like MLE but it includes the Prior belief:</p>
     <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} P(D|\theta) \cdot P(\theta)$$</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> <strong>MAP</strong> is the <strong>"Skeptical Expert."</strong> It balances the data against its existing knowledge (the Prior). In ML, <strong>L2 Regularization</strong> (Weight Decay) is exactly the same as using a Gaussian Prior. It says: "The data suggests the weights should be huge, but my Prior says they should stay small."
+      </div>
+    </div>
 
     <div class="premium-table-wrap">
       <table class="premium-table">

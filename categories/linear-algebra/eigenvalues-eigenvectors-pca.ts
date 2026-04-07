@@ -29,6 +29,13 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
       <p>Imagine Age and Income are highly correlated. Instead of using two features, PCA finds the "trend line" (PC1) that explains most of the spread. By projecting data onto this 1D line, we capture the "Age-Income" effect while reducing dimensionality by 50%.</p>
     </div>
 
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> PCA works because it assumes <strong>Variance = Information</strong>. If a feature doesn't change much, it's probably noise. PCA rotates the coordinate system until the first axis (PC1) points toward the greatest spread of data.
+      </div>
+    </div>
+
     <h2 id="derivation">2. Mathematical Derivation (The 5 Steps)</h2>
     <p>This is the formal process for transforming a high-dimensional dataset \(X\) into a lower-dimensional subspace:</p>
     <div class="step-box"><span class="step-num">1</span><strong>Standardize:</strong> Mean-center the data (\(X_{centered} = X - \mu\)) so the data cloud is centered at the origin.</div>
@@ -36,6 +43,13 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
     <div class="step-box"><span class="step-num">3</span><strong>Eigen-decomposition:</strong> Solve the characteristic equation \(Cv = \lambda v\). Eigenvectors define the new axes; eigenvalues define their "strength."</div>
     <div class="step-box"><span class="step-num">4</span><strong>Sort & Select:</strong> Rank eigenvalues in descending order. Pick the top \(k\) (where \(k < n\)) to form a projection matrix \(W\).</div>
     <div class="step-box"><span class="step-num">5</span><strong>Project:</strong> Transform the original data into the new subspace via \(X_{new} = X_{centered} \cdot W\).</div>
+
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Core Theory:</strong> The <strong>Covariance Matrix</strong> $C$ is the bridge. It tells us which features move together. By finding the eigenvectors of $C$, we are finding the natural "skeleton" of the data distribution. Rank the eigenvalues, and you've ranked the features by information density.
+      </div>
+    </div>
 
     <h2 id="examples">3. Solved Practice Examples</h2>
 

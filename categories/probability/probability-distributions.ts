@@ -45,6 +45,13 @@ export const probabilityDistributionsSection: TopicSection = {
         <p><strong>Parameter:</strong> \(p\) (Probability of success).</p>
         <p><strong>PMF:</strong> \(P(x) = p^x(1-p)^{1-x}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> The output of a binary classifier (before thresholding) is a Bernoulli parameter.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Bernoulli is the <strong>"Atomic Unit"</strong> of probability. It represents a single bit of information: Yes or No. In ML, every time you use a <strong>Sigmoid</strong> activation, you are predicting the parameter $p$ of a Bernoulli distribution.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Discrete · #2</div>
@@ -53,6 +60,13 @@ export const probabilityDistributionsSection: TopicSection = {
         <p><strong>Parameters:</strong> \(n\) (trials), \(p\) (success probability).</p>
         <p><strong>PMF:</strong> \(P(x) = \binom{n}{x} p^x (1-p)^{n-x}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Modeling the number of users who will click an ad out of a batch of 100.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> If Bernoulli is a single coin flip, Binomial is the entire <strong>"Stack of Successes."</strong> It tells you the probability of getting $k$ successes in $n$ tries. It assumes every trial is independent—an assumption we often make in ML batches.
+          </div>
+        </div>
       </div>
       <div class="premium-def-box" style="grid-column: span 2;">
         <div class="premium-def-title">Discrete · #3</div>
@@ -61,6 +75,13 @@ export const probabilityDistributionsSection: TopicSection = {
         <p><strong>Parameter:</strong> \(\lambda\) (Average rate of occurrence).</p>
         <p><strong>PMF:</strong> \(P(x) = \dfrac{e^{-\lambda} \lambda^x}{x!}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Predicting the number of support tickets received per day or web traffic spikes.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Poisson is the <strong>"Event Stream"</strong> intuition. It models <em>counts</em> over time. Use this when events are rare but happen at a constant average rate. In AI, it’s used for modeling request spikes in cloud infrastructure.
+          </div>
+        </div>
       </div>
     </div>
 
@@ -75,6 +96,13 @@ export const probabilityDistributionsSection: TopicSection = {
         <p><strong>Parameters:</strong> \(\mu\) (mean), \(\sigma^2\) (variance).</p>
         <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> The Gaussian is the <strong>"Universal Attractor."</strong> Thanks to the <strong>Central Limit Theorem</strong>, if you sum up enough random effects, the result will <em>always</em> look like a Bell Curve. This is why we assume modern "Normal" noise in almost all ML regression models.
+          </div>
+        </div>
       </div>
       <div class="my-10" style="grid-column: span 2;">
         <visualizer topic="Distributions" />
@@ -99,6 +127,13 @@ export const probabilityDistributionsSection: TopicSection = {
         <p>Similar to Gaussian but with a sharper peak and "heavier tails."</p>
         <p><strong>Parameters:</strong> \(\mu\) (location), \(b\) (scale).</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Linked to <strong>L1 Regularization (Lasso)</strong>. While Gaussian noise leads to L2, Laplace noise leads to L1, encouraging sparsity in models.</div>
+
+        <div class="callout tip">
+          <div class="callout-icon">💡</div>
+          <div class="callout-body">
+            <strong>Core Theory:</strong> Laplace is <strong>"Gaussian with Spikes."</strong> It has a much sharper peak at the mean. In ML, assuming a Laplace prior on your weights leads to <strong>Sparsity</strong> (L1 regularization), because the distribution practically begs for common values to be exactly zero.
+          </div>
+        </div>
       </div>
     </div>
 

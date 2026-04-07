@@ -153,7 +153,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   };
 
   // Shared font & typography metrics for perfect alignment
-  const editorMetrics = "text-[13.5px] font-mono leading-relaxed px-6 md:px-10 py-6 md:py-8";
+  const editorMetrics = "text-[15.5px] font-mono leading-relaxed px-6 md:px-10 py-6 md:py-8";
 
   return (
     <div className="my-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
@@ -172,12 +172,12 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
             <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f] shadow-sm border border-black/5" />
           </div>
           
-          <span className={`text-[10px] font-black uppercase tracking-[0.25em] transition-colors
+          <span className={`text-[12px] font-black uppercase tracking-[0.25em] transition-colors
             ${isDark ? "text-white/30" : "text-muted-premium/60"}`}>
             {language}
           </span>
           {statusText[runState] && (
-            <span className="text-[10px] text-[#ae81ff] font-black uppercase tracking-widest animate-pulse">
+            <span className="text-[12px] text-[#ae81ff] font-black uppercase tracking-widest animate-pulse">
               {statusText[runState]}
             </span>
           )}
@@ -195,7 +195,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                 title="Copy to clipboard"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-green-premium" /> : <Copy className="w-3.5 h-3.5" />}
-                <span className="text-[10px] font-black uppercase tracking-widest hidden sm:inline">
+                <span className="text-[12px] font-black uppercase tracking-widest hidden sm:inline">
                   {copied ? "Copied" : "Copy"}
                 </span>
               </button>
@@ -209,7 +209,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                   title="Restore original code"
                 >
                   <RotateCcw className="w-3.5 h-3.5" />
-                  <span className="text-[10px] font-black uppercase tracking-widest hidden lg:inline">Reset</span>
+                  <span className="text-[12px] font-black uppercase tracking-widest hidden lg:inline">Reset</span>
                 </button>
               )}
 
@@ -217,7 +217,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
               <button
                 onClick={handleRun}
                 disabled={isRunning}
-                className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[10px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
+                className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
                   ${isRunning
                     ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
                     : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white cursor-pointer"
@@ -282,12 +282,12 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
           ${isDark ? "bg-[#2b213a]" : "bg-bg-secondary"}`}>
           <div className={`px-8 py-3 border-b border-border-premium/50 flex flex-wrap items-center justify-between transition-colors
             ${runState === "error" ? "bg-red-500/10" : isDark ? "bg-accent-premium/10" : "bg-bg-tertiary"}`}>
-            <span className={`text-[10px] font-black uppercase tracking-[0.2em]
+            <span className={`text-[12px] font-black uppercase tracking-[0.2em]
               ${runState === "error" ? "text-red-500" : isDark ? "text-white/40" : "text-muted-premium"}`}>
               {runState === "error" ? "⚠ System Error" : "▸ Output"}
             </span>
           </div>
-          <div className={`px-4 md:px-8 py-4 md:py-6 text-[13px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
+          <div className={`px-4 md:px-8 py-4 md:py-6 text-[15px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
             ${isDark ? "text-white/90" : "text-text-premium"}`}>
             {(() => {
               const lines = shownOutput.split("\n");
