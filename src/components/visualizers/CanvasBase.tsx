@@ -25,6 +25,57 @@ const PALETTES = {
 export const C = (theme: VisualizerTheme = 'light') => PALETTES[theme];
 
 // ─── CANVAS HELPERS ───────────────────────────────────────────────────────────
+export function roundRect(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+/**
+ * Draws an info box that is aware of the viewport (W, H)
+ */
+export function drawInfoBox(
+  ctx: CanvasRenderingContext2D, 
+  W: number, 
+  H: number, 
+  title: string, 
+  lines: {label: string, value: string, color: string}[], 
+  theme: VisualizerTheme = 'light'
+) {
+  const colors = C(theme);
+  const isSmall = W < 520;
+  
+  // Responsive sizing & positioning
+  const boxW = isSmall ? Math.min(W - 40, 260) : 240;
+  const boxH = 40 + lines.length * 18 + 10;
+  
+  // On mobile, we move it slightly lower or higher to avoid centered content
+  const x = isSmall ? (W - boxW) / 2 : 20;
+  const y = isSmall ? 50 : 20; // 50px from top on mobile to clear the "Mathematical Projection" title
+
+  ctx.fillStyle = colors.infoBg;
+  ctx.strokeStyle = colors.infoBorder;
+  ctx.lineWidth = 1;
+  roundRect(ctx, x, y, boxW, boxH, 12);
+  ctx.fill();
+  ctx.stroke();
+
+  ctx.font = "bold 13px 'Space Grotesk'";
+  ctx.fillStyle = colors.blue2;
+  ctx.fillText(title, x + 16, y + 26);
+
+  ctx.font = "11px 'JetBrains Mono'";
+  lines.forEach((line, i) => {
+    ctx.fillStyle = line.color;
+    ctx.fillText(`${line.label}: ${line.value}`, x + 16, y + 48 + i * 18);
+  });
+}
+
+
 export function useAnimationFrame(cb: (elapsed: number, ts: number) => void, deps: any[] = []) {
   const rafRef = useRef<number | null>(null);
   const cbRef = useRef(cb);

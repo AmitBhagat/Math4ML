@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const vectorsSection: TopicSection = {
   id: "vectors",
-  title: "Introduction to Vectors",
+  title: "Vectors",
   description: "In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",
   color: "#0D47A1",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
-      <h1>Introduction to Vectors</h1>
+      <h1>Vectors</h1>
       <p>In Machine Learning, <strong>Vectors</strong> are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.</p>
     </div>
 

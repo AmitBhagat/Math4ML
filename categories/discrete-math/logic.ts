@@ -17,6 +17,7 @@ export const logicSection: TopicSection = {
       <a href="#propositional">1. Propositional Logic</a>
       <a href="#fol">2. First-Order Logic (FOL)</a>
       <a href="#applications">3. Applications in AI & Software</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#comparison">Comparison Summary</a>
       <a href="#ml-context">Logic in Data Science</a>
     </div>
@@ -68,7 +69,38 @@ export const logicSection: TopicSection = {
     <h3>C. Knowledge Representation</h3>
     <p>In <strong>Knowledge Graphs</strong>, logic helps infer new facts through transitivity and other logical properties.</p>
 
-    <h2 id="comparison">Comparison Summary</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Evaluating a Medical Expert System Rule</h4>
+      <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Logic Insight:</strong> In expert systems, finding "False" cases helps debug the knowledge base; it indicates the rule is either too broad or missing a condition.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
+      <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Why it matters:</strong> Simplified logic reduces cognitive load for other developers and can prevent "nesting hell" in complex control flows.
+        </div>
+      </div>
+    </div>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>

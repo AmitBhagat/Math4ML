@@ -6,39 +6,12 @@ import {
   drawArrow, 
   lerp, 
   easeInOut,
-  VisualizerTheme
+  VisualizerTheme,
+  drawInfoBox,
+  roundRect
 } from "./CanvasBase";
 
-// ─── UTILS ───
-const roundRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-};
-
-const drawInfoBox = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, title: string, lines: {label: string, value: string, color: string}[], theme: VisualizerTheme = 'light') => {
-  const colors = BaseC(theme);
-  ctx.fillStyle = colors.infoBg;
-  ctx.strokeStyle = colors.infoBorder;
-  ctx.lineWidth = 1;
-  roundRect(ctx, x, y, w, h, 10);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.font = "bold 13px 'Space Grotesk'";
-  ctx.fillStyle = colors.blue2;
-  ctx.fillText(title, x + 16, y + 26);
-
-  ctx.font = "11px 'JetBrains Mono'";
-  lines.forEach((line, i) => {
-    ctx.fillStyle = line.color;
-    ctx.fillText(`${line.label}: ${line.value}`, x + 16, y + 48 + i * 18);
-  });
-};
+// Utils removed, now using shared functions from CanvasBase
 
 const drawTicks = (ctx: CanvasRenderingContext2D, ox: number, oy: number, scale: number, theme: VisualizerTheme = 'light', range = 6) => {
   const colors = BaseC(theme);
@@ -106,7 +79,7 @@ export const PremiumDifferentiationVisualizer = ({ a = 1, theme = 'light' }: { a
     ctx.beginPath(); ctx.arc(psx, psy, 6, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = C.teal; ctx.lineWidth = 2; ctx.stroke();
 
-    drawInfoBox(ctx, 20, 20, 200, 90, "Differentiation", [
+    drawInfoBox(ctx, W, H, "Differentiation", [
       { label: "Point x", value: fa.toFixed(2), color: C.white },
       { label: "f(x)", value: fa_y.toFixed(3), color: C.blue2 },
       { label: "Slope f'(x)", value: slope.toFixed(3), color: C.teal }
@@ -160,7 +133,7 @@ export const PremiumAreaUnderCurveVisualizer = ({ a = -2, b = 2, n = 10, theme =
         totalArea += fy * dx;
     }
 
-    drawInfoBox(ctx, 20, 20, 200, 90, "Definite Integral", [
+    drawInfoBox(ctx, W, H, "Definite Integral", [
       { label: "Interval", value: `[${a}, ${b}]`, color: C.white },
       { label: "Rects (n)", value: Math.floor(n).toString(), color: C.teal },
       { label: "Riemann Area", value: (totalArea * p).toFixed(3), color: C.yellow }
@@ -223,7 +196,7 @@ export const PremiumGradientDescentVisualizer = ({ eta = 0.1, theme = 'light' }:
     ctx.beginPath(); ctx.arc(lastX, lastY, 8, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = C.yellow; ctx.lineWidth = 3; ctx.stroke();
 
-    drawInfoBox(ctx, 20, 20, 220, 100, "Stochastic Optimization", [
+    drawInfoBox(ctx, W, H, "Stochastic Optimization", [
       { label: "Learning Rate", value: eta.toFixed(3), color: C.teal },
       { label: "Iteration", value: totalStepsToShow.toString(), color: C.yellow },
       { label: "Local Minimum", value: curX.toFixed(3), color: C.white },
@@ -266,7 +239,7 @@ export const PremiumPartialDerivativesVisualizer = ({ focus = 'x', theme = 'ligh
     }
     ctx.stroke();
 
-    drawInfoBox(ctx, 20, 20, 200, 80, "Partial Differentiation", [
+    drawInfoBox(ctx, W, H, "Partial Differentiation", [
       { label: "Wrt Variable", value: focus.toUpperCase(), color: focus === 'x' ? C.teal : C.pink },
       { label: "Logic", value: `Keep ${focus==='x'?'Y':'X'} Constant`, color: C.muted }
     ], theme);
@@ -319,7 +292,7 @@ export const PremiumChainRuleVisualizer = ({ theme = 'light' }: { theme?: Visual
        ctx.stroke();
     }
 
-    drawInfoBox(ctx, 20, 20, 200, 80, "The Chain Rule", [
+    drawInfoBox(ctx, W, H, "The Chain Rule", [
       { label: "Logic", value: "Rate Propagation", color: C.yellow },
       { label: "Formula", value: "dy/dx = dy/du * du/dx", color: C.white }
     ], theme);
@@ -365,7 +338,7 @@ export const PremiumGradientVisualizer = ({ x = 1, y = 1, theme = 'light' }: { x
     ctx.beginPath(); ctx.arc(sx, sy, 5, 0, Math.PI * 2); ctx.fill();
     ctx.strokeStyle = C.yellow; ctx.stroke();
 
-    drawInfoBox(ctx, 20, 20, 220, 90, "Gradient Field", [
+    drawInfoBox(ctx, W, H, "Gradient Field", [
       { label: "Point", value: `[${x.toFixed(1)}, ${y.toFixed(1)}]`, color: C.white },
       { label: "Gradient ∇f", value: `[${gx.toFixed(1)}, ${gy.toFixed(1)}]`, color: C.yellow },
       { label: "Property", value: "Steepest Ascent", color: C.muted }
@@ -416,7 +389,7 @@ export const PremiumJacobianHessianVisualizer = ({ mode = 'jacobian', theme = 'l
        ctx.stroke();
     }
 
-    drawInfoBox(ctx, 20, 20, 210, 80, mode === 'jacobian' ? "Jacobian Matrix" : "Hessian Matrix", [
+    drawInfoBox(ctx, W, H, mode === 'jacobian' ? "Jacobian Matrix" : "Hessian Matrix", [
       { label: "Concept", value: mode === 'jacobian' ? "Local Linearity" : "Local Curvature", color: C.yellow },
       { label: "ML Use", value: "Optimizer Dynamics", color: C.muted }
     ], theme);

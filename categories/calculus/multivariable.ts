@@ -17,7 +17,8 @@ export const multivariableSection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-gradient">Example 1: Computing Gradients</a>
+      <a href="#example-hessian">Example 2: Analyzing Curvature</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -59,32 +60,43 @@ export const multivariableSection: TopicSection = {
     <p>The Hessian is a square matrix of <strong>second-order</strong> partial derivatives of a scalar-valued function. It describes the local curvature:</p>
     <div class="math-block">$$H_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-gradient">Example 1: Navigating a 2D Gradient</h2>
     <div class="example-box">
-      <h4>Problem: Gradient and Hessian Analysis</h4>
-      <p>Find the Gradient and Hessian of $f(x, y) = 3x^2 + 2xy + y^2$.</p>
+      <h4>Problem: Computing the Direction of Steepest Ascent</h4>
+      <p>Find the gradient of $f(x, y) = x^2 + 3xy + 2y^2$ at the point $(1, 2)$.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>First Partial Derivatives</strong>:
-          <ul>
-            <li>$\frac{\partial f}{\partial x} = 6x + 2y$</li>
-            <li>$\frac{\partial f}{\partial y} = 2x + 2y$</li>
-          </ul>
-        </li>
-        <li><strong>Gradient Vector</strong>: $\nabla f = [6x + 2y, 2x + 2y]^T$.</li>
-        <li><strong>Second Partial Derivatives</strong>:
-          <ul>
-            <li>$\frac{\partial^2 f}{\partial x^2} = 6$, $\frac{\partial^2 f}{\partial y^2} = 2$</li>
-            <li>$\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x} = 2$</li>
-          </ul>
-        </li>
-        <li><strong>Hessian Matrix</strong>: 
-          <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
-            $$H = \begin{bmatrix} 6 & 2 \\ 2 & 2 \end{bmatrix}$$
-          </div>
-        </li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Partial w.r.t $x$:</strong> $\frac{\partial f}{\partial x} = 2x + 3y$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Partial w.r.t $y$:</strong> $\frac{\partial f}{\partial y} = 3x + 4y$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Evaluate at $(1, 2)$:</strong> $\frac{\partial f}{\partial x} = 2(1) + 3(2) = 8$ and $\frac{\partial f}{\partial y} = 3(1) + 4(2) = 11$.</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Resulting Gradient:</strong> $\nabla f(1, 2) = [8, 11]^T$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> To increase the function value as quickly as possible from $(1, 2)$, you should move in the direction of the vector $[8, 11]$. In ML, we move in the <strong>opposite</strong> direction $(-[8, 11])$ to minimize loss.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-hessian">Example 2: Detecting Surface Curvature (Hessian)</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing the Local Shape of $f(x, y) = x^2 + y^2$</h4>
+      <p>Calculate the Hessian matrix and use its eigenvalues to describe the curvature.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>First Derivatives:</strong> $f_x = 2x$, $f_y = 2y$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Second Derivatives:</strong> $f_{xx} = 2$, $f_{yy} = 2$, $f_{xy} = f_{yx} = 0$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Construct Hessian:</strong> 
+        <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
+          $$H = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}$$
+        </div>
+      </div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Both eigenvalues are positive ($\lambda = 2$). This indicates the surface is <strong>locally bowl-shaped (convex)</strong>, and any critical point found here will be a local minimum.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

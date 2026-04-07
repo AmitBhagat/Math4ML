@@ -55,6 +55,15 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
     setExpandedId(expandedId === catId ? null : catId);
   };
 
+  const handleCategoryClick = (e: React.MouseEvent, catId: string) => {
+    // If it's already active, we toggle expansion instead of just navigating
+    if (currentCategoryId === catId) {
+      e.preventDefault();
+      setExpandedId(expandedId === catId ? null : catId);
+    }
+    // If not active, let the Link handle navigation (useEffect will handle expansion)
+  };
+
   return (
     <aside className={cn(
       "h-full bg-bg-secondary border-r border-border-premium overflow-y-auto z-[100] desktop-drawer scroll-smooth custom-scrollbar flex flex-col shrink-0",
@@ -112,6 +121,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                     )}>
                       <Link
                         to={`/${cluster.id}/${catId}`}
+                        onClick={(e) => handleCategoryClick(e, catId)}
                         onMouseEnter={() => setHoveredId(catId)}
                         onMouseLeave={() => setHoveredId(null)}
                         className={cn(

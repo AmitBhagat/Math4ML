@@ -17,7 +17,8 @@ export const optimizationSection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-critical">Example 1: Finding Critical Points</a>
+      <a href="#example-classify">Example 2: Minima vs. Saddle Points</a>
       <a href="#implementation">Implementation (Python/SciPy)</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -60,23 +61,41 @@ export const optimizationSection: TopicSection = {
       </table>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-critical">Example 1: Finding Critical Points</h2>
     <div class="example-box">
-      <h4>Scenario: Analyzing Critical Points</h4>
-      <p>Analyze $f(x, y) = x^2 - y^2$.</p>
+      <h4>Problem: Identifying Candidates for Minima</h4>
+      <p>Find the critical points of $f(x, y) = x^2 + y^2 - 4x - 6y + 14$.</p>
       
-      <p><strong>Step-by-Step Analysis:</strong></p>
-      <ol>
-        <li><strong>Find Gradient</strong>: $\nabla f = [2x, -2y]^T$.</li>
-        <li><strong>Find Critical Point</strong>: Set $2x=0, -2y=0$. The only critical point is $(0, 0)$.</li>
-        <li><strong>Find Hessian</strong>:
-          <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
-            $$H = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$$
-          </div>
-        </li>
-        <li><strong>Evaluate Eigenvalues</strong>: The eigenvalues are $\lambda_1 = 2$ and $\lambda_2 = -2$.</li>
-      </ol>
-      <p><strong>Result:</strong> Because one is positive and one is negative, $(0,0)$ is a <strong>Saddle Point</strong>.</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Compute Gradient:</strong> $\nabla f = [2x - 4, 2y - 6]^T$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set to Zero:</strong> $2x - 4 = 0 \implies x = 2$ and $2y - 6 = 0 \implies y = 3$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Identify Point:</strong> The only critical point is $(2, 3)$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Optimization Goal:</strong> In ML, this "Zero Gradient" condition is the target of our training. We want to find the parameter values where the error surface is flat, ideally at the bottom of a valley.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-classify">Example 2: Classifying Minima vs. Saddle Points</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing $f(x, y) = x^2 - y^2$</h4>
+      <p>Analyze the critical point $(0, 0)$ using the Hessian matrix.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Find Hessian:</strong> $f_{xx} = 2, f_{yy} = -2, f_{xy} = 0$.
+        <div class="math-block" style="background:transparent; border:none; padding:0; margin-top:10px;">
+          $$H = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}$$
+        </div>
+      </div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Check Eigenvalues:</strong> $\lambda_1 = 2$ (positive) and $\lambda_2 = -2$ (negative).</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Because the eigenvalues have <strong>opposite signs</strong>, the point $(0, 0)$ is a <strong>Saddle Point</strong>. In Deep Learning, saddle points are more common than local minima and can significantly slow down training.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/SciPy)</h2>

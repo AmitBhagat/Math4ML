@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const matrixDecompositionsSection: TopicSection = {
   id: "matrix-decompositions",
-  title: "Introduction to Matrix Decompositions",
-  description: "In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",
-  color: "#90CAF9",
+  title: "Matrix Decompositions",
+  description: "High-dimensional data can be dense and difficult to manage. Decompositions — SVD, LU, Cholesky, and QR — allow us to break complex matrices into simpler, more manageable factors.",
+  color: "#D32F2F",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
-      <h1>Introduction to Matrix Decompositions</h1>
+      <div class="premium-hero-badge">🧬 Linear Algebra · Decompositions</div>
+      <h1>Matrix Decompositions</h1>
       <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
     </div>
 

@@ -42,8 +42,9 @@ export const InteractiveVisualizer: React.FC<InteractiveVisualizerProps> = ({ to
       </div>
 
       {/* ─── Card 2: Visual ─── */}
-      <div className="h-fit sticky top-24">
-        <div className={`h-[450px] ${vTheme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'} rounded-[2rem] border border-border-premium shadow-2xl overflow-hidden relative outline outline-1 outline-border-premium/30 transition-all duration-700`}>
+      <div className="h-fit lg:sticky lg:top-24">
+        <div className={`h-[350px] sm:h-[450px] ${vTheme === 'dark' ? 'bg-slate-950 text-slate-100' : 'bg-white text-slate-900'} rounded-[2rem] border border-border-premium shadow-2xl overflow-hidden relative outline outline-1 outline-border-premium/30 transition-all duration-700`}>
+
           <div className={`absolute inset-x-0 h-10 ${vTheme === 'dark' ? 'bg-slate-900/80' : 'bg-slate-50/80'} backdrop-blur-md border-b border-border-premium/30 flex items-center px-6 z-10 transition-colors duration-500`}>
              <div className="flex gap-1.5 min-w-[60px]">
                 <div className="w-2.5 h-2.5 rounded-full bg-red-400/40" />

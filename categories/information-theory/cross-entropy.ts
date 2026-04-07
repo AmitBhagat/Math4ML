@@ -16,6 +16,8 @@ export const crossEntropySection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
+      <a href="#example-binary">Example 1: Binary Classification</a>
+      <a href="#example-multiclass">Example 2: Multi-class Digit Recognition</a>
       <a href="#relationship">Relationship to KL Divergence</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -41,8 +43,38 @@ export const crossEntropySection: TopicSection = {
 
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>For discrete probability distributions $P$ and $Q$ defined on the same probability space, the Cross-Entropy $H(P, Q)$ is defined as:</p>
-    <div class="math-block">
-      $$H(P, Q) = -\sum_{i} P(x_i) \log_2 Q(x_i)$$
+    <h2 id="example-binary">Example 1: Binary Classification (Cat vs. Dog)</h2>
+    <div class="example-box">
+      <h4>Problem: Penalizing Uncertainty in Predictions</h4>
+      <p>True label $P$: $[1, 0]$ (It is 100% a Cat). Model prediction $Q$: $[0.9, 0.1]$ (High confidence Cat).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Components:</strong> $P(Cat)=1, P(Dog)=0$ and $Q(Cat)=0.9, Q(Dog)=0.1$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> $H(P, Q) = -(1 \cdot \log_2 0.9 + 0 \cdot \log_2 0.1)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $H(P, Q) = -(-0.152) = 0.152 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> If the model predicted $[0.6, 0.4]$ (Lower confidence), the cross-entropy would be higher ($\approx 0.737 \text{ bits}$), penalizing the model more for its uncertainty.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-multiclass">Example 2: Multi-class (Handwritten Digits)</h2>
+    <div class="example-box">
+      <h4>Problem: Efficiency in One-Hot Encoded Labels</h4>
+      <p>True label for Digit '7': $P = [0, 0, \dots, 1, 0, 0]$ (1 at index 7). Model prediction $Q$ outputs a probability of $0.8$ for '7'.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Observation:</strong> In one-hot encoding, all $P_i = 0$ except for the true label index.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> Cross-entropy simplifies to just the negative log of the true class's predicted probability: $-\log_2(0.8)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> $H(P, Q) \approx 0.322 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> This shows why Cross-Entropy is so efficient for backpropagation—it only cares about the probability assigned to the **correct** answer.
+        </div>
+      </div>
     </div>
 
     <h2 id="relationship">Relationship from Entropy</h2>

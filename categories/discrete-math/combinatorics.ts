@@ -17,7 +17,8 @@ export const combinatoricsSection: TopicSection = {
       <a href="#counting-principle">1. Fundamental Counting Principle</a>
       <a href="#permutations">2. Permutations (Order Matters)</a>
       <a href="#combinations">3. Combinations (Order Doesn't Matter)</a>
-      <a href="#comparison">Comparison for Algorithm Analysis</a>
+      <a href="#examples">Illustrative Examples</a>
+      <a href="#comparison">Comparison Summary</a>
       <a href="#ml-career">Why this matters for your AI/ML Career</a>
     </div>
 
@@ -54,7 +55,39 @@ export const combinatoricsSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="comparison">Comparison for Algorithm Analysis</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
+      <p>A deep learning researcher wants to test 3 distinct layers: **Conv2D (C)**, **MaxPooling (M)**, and **Dropout (D)**. How many ways can they be ordered in a block?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>ML Tip:</strong> While permutations give you the search space, <strong>Neural Architecture Search (NAS)</strong> uses algorithms to find the <em>best</em> permutation without testing all $n!$ combinations.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Feature Subset Selection (Combinations)</h4>
+      <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Complexity Note:</strong> As $n$ grows, the number of combinations explodes (this is the <strong>Combinatorial Explosion</strong>). This is why we use <strong>Recursive Feature Elimination (RFE)</strong> instead of exhaustive search.
+        </div>
+      </div>
+    </div>
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>

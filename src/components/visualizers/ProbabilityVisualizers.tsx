@@ -5,39 +5,11 @@ import {
   drawGrid, 
   lerp, 
   easeInOut,
-  VisualizerTheme
+  VisualizerTheme,
+  drawInfoBox
 } from "./CanvasBase";
 
-// ─── UTILS ───
-const roundRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-};
-
-const drawInfoBox = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, title: string, lines: {label: string, value: string, color: string}[], theme: VisualizerTheme = 'light') => {
-  const colors = BaseC(theme);
-  ctx.fillStyle = colors.infoBg;
-  ctx.strokeStyle = colors.infoBorder;
-  ctx.lineWidth = 1;
-  roundRect(ctx, x, y, w, h, 10);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.font = "bold 13px 'Space Grotesk'";
-  ctx.fillStyle = colors.blue2;
-  ctx.fillText(title, x + 16, y + 26);
-
-  ctx.font = "11px 'JetBrains Mono'";
-  lines.forEach((line, i) => {
-    ctx.fillStyle = line.color;
-    ctx.fillText(`${line.label}: ${line.value}`, x + 16, y + 48 + i * 18);
-  });
-};
+// Utils removed, now using shared CanvasBase functions
 
 // ─── SAMPLE SPACE (VENN DIAGRAM) ───
 export const PremiumSampleSpaceVisualizer = ({ overlap = 0.3, aSize = 0.5, bSize = 0.5, theme = 'light' }: { overlap?: number, aSize?: number, bSize?: number, theme?: VisualizerTheme }) => {
@@ -87,7 +59,7 @@ export const PremiumSampleSpaceVisualizer = ({ overlap = 0.3, aSize = 0.5, bSize
     ctx.fillText("A", ax - 20, oy - rA - 10);
     ctx.fillText("B", bx + 20, oy - rB - 10);
 
-    drawInfoBox(ctx, 20, 20, 220, 90, "Sample Space Logic", [
+    drawInfoBox(ctx, W, H, "Sample Space Logic", [
       { label: "P(A)", value: aSize.toFixed(2), color: C.blue2 },
       { label: "P(B)", value: bSize.toFixed(2), color: C.teal },
       { label: "Overlap", value: (overlap * 100).toFixed(0) + "%", color: C.yellow }
@@ -105,7 +77,7 @@ export const PremiumBayesTheoremVisualizer = ({ prior = 0.3, likelihood = 0.8, f
     
     ctx.clearRect(0, 0, W, H);
     
-    const boxW = 300, boxH = 200;
+    const boxW = Math.min(300, W * 0.8), boxH = Math.min(200, H * 0.45);
     const startX = ox - boxW / 2, startY = oy - boxH / 2;
 
     // 1. Draw "Prior" split
@@ -148,7 +120,7 @@ export const PremiumBayesTheoremVisualizer = ({ prior = 0.3, likelihood = 0.8, f
 
     const posterior = (prior * likelihood) / (prior * likelihood + (1 - prior) * falseAlarm);
 
-    drawInfoBox(ctx, 20, 20, 240, 110, "Bayesian Inference", [
+    drawInfoBox(ctx, W, H, "Bayesian Inference", [
       { label: "Prior P(H)", value: prior.toFixed(2), color: C.blue2 },
       { label: "Evidence P(E|H)", value: likelihood.toFixed(2), color: C.teal },
       { label: "False Pos P(E|¬H)", value: falseAlarm.toFixed(2), color: C.pink },
@@ -206,7 +178,7 @@ export const PremiumDistributionsVisualizer = ({ mu = 0, sigma = 1, theme = 'lig
     ctx.closePath();
     ctx.fill();
 
-    drawInfoBox(ctx, 20, 20, 220, 90, "Normal Distribution", [
+    drawInfoBox(ctx, W, H, "Normal Distribution", [
       { label: "Mean (μ)", value: mu.toFixed(2), color: C.white },
       { label: "Variance (σ²)", value: (sigma * sigma).toFixed(2), color: C.teal },
       { label: "Area (±1σ)", value: "68.2%", color: C.muted }
@@ -262,7 +234,7 @@ export const PremiumConditionalVisualizer = ({ conditioning = 0.5, theme = 'ligh
     ctx.fillText("Event B", ox - 140, oy - 110);
     ctx.fillText("A ∩ B", ox - 70, oy);
 
-    drawInfoBox(ctx, 20, 20, 240, 90, "Conditioning S → B", [
+    drawInfoBox(ctx, W, H, "Conditioning S → B", [
       { label: "P(B) Evidence", value: conditioning.toFixed(2), color: C.teal },
       { label: "P(A|B)", value: "Ratio (A∩B)/B", color: C.yellow },
       { label: "Logic", value: "Space Restriction", color: C.muted }

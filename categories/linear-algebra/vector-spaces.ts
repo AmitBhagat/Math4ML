@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const vectorSpacesSection: TopicSection = {
   id: "vector-spaces",
-  title: "Introduction to Vector Spaces",
-  description: "A Vector Space is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in ℝⁿ (an n-dimensional real space), where each dimension represents a specific feature of our data.",
-  color: "#0D47A1",
+  title: "Vector Spaces",
+  description: "Beyond individual vectors, we explore the structured environments where they exist — Subspaces, Spans, Bases, and the Dimension of data repositories.",
+  color: "#673AB7",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🌐 Linear Algebra · Vector Spaces</div>
-      <h1>Introduction to Vector Spaces</h1>
+      <div class="premium-hero-badge">🌌 Linear Algebra · Vector Spaces</div>
+      <h1>Vector Spaces</h1>
       <p>A <strong>Vector Space</strong> is a collection of vectors that can be added together and multiplied by scalars while remaining within the same space. In Machine Learning, we often work in \(\mathbb{R}^n\) (an \(n\)-dimensional real space), where each dimension represents a specific feature of our data.</p>
     </div>
 

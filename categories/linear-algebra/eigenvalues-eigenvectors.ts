@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const eigenvaluesEigenvectorsSection: TopicSection = {
   id: "eigenvalues-eigenvectors",
-  title: "Introduction to Eigenvalues and Eigenvectors",
-  description: "In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",
-  color: "#42A5F5",
+  title: "Eigenvalues and Eigenvectors",
+  description: "Eigen-analysis reveals the internal structure of a matrix — its eigenvalues and eigenvectors — which are the foundations of PCA, Singular Value Decomposition, and spectral analysis.",
+  color: "#FFD600",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">λ Linear Algebra · Eigenvalues & Eigenvectors</div>
-      <h1>Introduction to Eigenvalues and Eigenvectors</h1>
+      <div class="premium-hero-badge">🏹 Linear Algebra · Spectral Theory</div>
+      <h1>Eigenvalues and Eigenvectors</h1>
       <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
     </div>
 

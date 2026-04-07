@@ -16,7 +16,8 @@ export const neuralNetworksSection: TopicSection = {
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. Multivariate Calculus Concepts</a>
       <a href="#backprop">2. Backpropagation & The Chain Rule</a>
-      <a href="#walkthrough">3. Mathematical Walkthrough</a>
+      <a href="#example-nested">Example 1: Nested Functions</a>
+      <a href="#example-backprop">Example 2: Backprop Step</a>
       <a href="#conclusion">Conclusion</a>
     </div>
 
@@ -43,33 +44,39 @@ export const neuralNetworksSection: TopicSection = {
     
     <p>In a Neural Network, this allows us to calculate the local gradient at each node and multiply it by the gradient flowing from above. This efficiency prevents us from having to re-calculate the entire derivative for every single parameter from scratch.</p>
 
-    <h2 id="walkthrough">3. Mathematical Walkthrough: Updating Weights</h2>
-    <p>Let’s look at a single neuron with one input $x$, a weight $w$, a bias $b$, and a sigmoid activation function $\sigma$.</p>
-
+    <h2 id="example-nested">Example 1: The Chain of Influence (Nested Functions)</h2>
     <div class="example-box">
-      <h4>The Forward Pass:</h4>
-      <ol>
-        <li><strong>Linear Combination:</strong> $z = wx + b$</li>
-        <li><strong>Activation:</strong> $a = \sigma(z) = \frac{1}{1 + e^{-z}}$</li>
-        <li><strong>Loss (MSE):</strong> $L = \frac{1}{2}(y - a)^2$</li>
-      </ol>
-
-      <h4>The Backward Pass (Calculating $\frac{\partial L}{\partial w}$):</h4>
-      <p>Using the Chain Rule, we decompose the derivative:</p>
-      <div class="math-block">$$\frac{\partial L}{\partial w} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w}$$</div>
+      <h4>Problem: Differentiating $\sin(x^2)$</h4>
+      <p>Find the derivative of $f(x) = \sin(x^2)$ with respect to $x$.</p>
       
-      <ol style="list-style-type: decimal;">
-        <li>Derivative of Loss w.r.t Activation: $\frac{\partial L}{\partial a} = -(y - a)$</li>
-        <li>Derivative of Activation w.r.t Linear Sum: $\frac{\partial a}{\partial z} = a(1 - a)$</li>
-        <li>Derivative of Linear Sum w.r.t Weight: $\frac{\partial z}{\partial w} = x$</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Layers:</strong> Outer function $g(u) = \sin(u)$, inner function $h(x) = x^2$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Differentiate Layers:</strong> $g'(u) = \cos(u)$ and $h'(x) = 2x$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Chain Rule:</strong> $f'(x) = g'(h(x)) \cdot h'(x) = \cos(x^2) \cdot 2x$.</div></div>
 
-      <p>Combining them:</p>
-      <div class="math-block">$$\frac{\partial L}{\partial w} = -(y - a) \cdot a(1 - a) \cdot x$$</div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Logic:</strong> The change in $f$ is the change in the 'sine' layer <strong>multiplied</strong> by the change inside the 'squared' layer. This is how gradients flow through network layers.
+        </div>
+      </div>
+    </div>
 
-      <h4>The Weight Update:</h4>
-      <p>Once we have the gradient, we update the weight using a learning rate ($\eta$):</p>
-      <div class="math-block">$$w_{new} = w_{old} - \eta \cdot \frac{\partial L}{\partial w}$$</div>
+    <h2 id="example-backprop">Example 2: Backpropagation Step (Single Neuron)</h2>
+    <div class="example-box">
+      <h4>Problem: Calculating Weight Gradients</h4>
+      <p>Given a hidden neuron output $a = \sigma(wx + b)$ and a loss $L = \frac{1}{2}(y - a)^2$. Find $\frac{\partial L}{\partial w}$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Local Gradient (Loss):</strong> $\frac{\partial L}{\partial a} = -(y - a)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Local Gradient (Activation):</strong> $\frac{\partial a}{\partial z} = a(1 - a)$, where $z = wx+b$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Local Gradient (Weight):</strong> $\frac{\partial z}{\partial w} = x$.</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Chain Rule Result:</strong> $\frac{\partial L}{\partial w} = \frac{\partial L}{\partial a} \cdot \frac{\partial a}{\partial z} \cdot \frac{\partial z}{\partial w} = -(y-a) \cdot a(1-a) \cdot x$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> This formula tells the optimizer exactly how to tweak $w$ to reduce the error. Each term is a "local" derivative that we multiply together.
+        </div>
+      </div>
     </div>
 
     <h2 id="conclusion">Conclusion</h2>

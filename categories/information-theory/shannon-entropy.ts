@@ -16,7 +16,9 @@ export const shannonEntropySection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-balls">Example 1: Picking Balls</a>
+      <a href="#example-coins">Example 2: Fair vs. Biased Coins</a>
+      <a href="#example-passwords">Example 3: Password Entropy</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -60,20 +62,54 @@ export const shannonEntropySection: TopicSection = {
       </ol>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-balls">Example 1: Picking Balls from a Bag</h2>
     <div class="example-box">
-      <h4>Scenario: Picking Balls from a Bag</h4>
-      <p>A bag with <strong>4 balls</strong>: 3 are <strong>Red</strong> and 1 is <strong>Blue</strong>.</p>
+      <h4>Problem: Non-Uniform Outcome Probability</h4>
+      <p>A bag with <strong>4 balls</strong>: 3 are <strong>Red</strong> and 1 is <strong>Blue</strong>. Calculate the entropy of the picking process.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>Probabilities:</strong> $P(\text{Red}) = 0.75$, $P(\text{Blue}) = 0.25$.</li>
-        <li><strong>Formulation:</strong> $H(X) = -[P(\text{Red}) \log_2 P(\text{Red}) + P(\text{Blue}) \log_2 P(\text{Blue})]$</li>
-        <li><strong>Solve:</strong> $H(X) = -[0.75 \log_2(0.75) + 0.25 \log_2(0.25)]$
-          <div class="math-block">$$H(X) = -[-0.311 - 0.5] = 0.811 \text{ bits}$$</div>
-        </li>
-      </ol>
-      <p><strong>Interpretation:</strong> Low entropy because the distribution is biased toward Red. If there were 2 Red and 2 Blue, entropy would be exactly **1.0 bit**.</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Probabilities:</strong> $P(\text{Red}) = 0.75$, $P(\text{Blue}) = 0.25$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $H(X) = -[0.75 \log_2(0.75) + 0.25 \log_2(0.25)]$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $H(X) \approx -[-0.311 - 0.5] = 0.811 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Low entropy because the distribution is biased toward Red. If there were 2 Red and 2 Blue, entropy would be exactly **1.0 bit** (maximum uncertainty).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-coins">Example 2: Fair vs. Biased Coins</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing Degrees of Uncertainty</h4>
+      <p><strong>Coin A (Fair):</strong> $P(H) = 0.5, P(T) = 0.5$.</p>
+      <p><strong>Coin B (Double-Headed):</strong> $P(H) = 1.0, P(T) = 0.0$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Entropy A:</strong> $H(A) = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = 1.0 \text{ bit}$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Entropy B:</strong> $H(B) = -(1.0 \log_2 1.0 + 0 \log_2 0) = 0 \text{ bits}$.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Geometric Insight:</strong> A fair coin flip provides exactly 1 bit of information. A double-headed coin provides <strong>zero</strong> information because the outcome is certain (zero surprise).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-passwords">Example 3: Password Entropy</h2>
+    <div class="example-box">
+      <h4>Problem: Measuring Information Security</h4>
+      <p>Compare the entropy of a 4-digit PIN ($0-9$) vs. a 4-character password (A-Z).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>PIN (Digits):</strong> Total $N = 10^4 = 10,000$. $H = \log_2(10,000) \approx 13.3 \text{ bits}$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Password (Letters):</strong> Total $N = 26^4 = 456,976$. $H = \log_2(456,976) \approx 18.8 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Security Tip:</strong> Increasing the complexity of the character set (adding symbols) increases the <strong>Entropy per character</strong>, making the password statistically harder to brute-force.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>

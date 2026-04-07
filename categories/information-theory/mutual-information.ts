@@ -16,7 +16,9 @@ export const mutualInformationSection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-fruit">Example 1: Classification Signal</a>
+      <a href="#example-noise">Example 2: Noisy Features</a>
+      <a href="#example-nonlinear">Example 3: Non-Linear dependency</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -55,16 +57,52 @@ export const mutualInformationSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-fruit">Example 1: Identifying a Fruit by Color</h2>
     <div class="example-box">
-      <h4>Scenario: Predict if a Fruit is an Orange based on its Color</h4>
-      <p>Data: 2 samples [Orange, Orange], 1 [Apple, Red], 1 [Apple, Green].</p>
-      <ul>
-        <li><strong>Entropy of Fruit $H(X)$:</strong> $P(\text{Orange})=0.5, P(\text{Apple})=0.5 \implies H(X) = 1$ bit.</li>
-        <li><strong>Conditional Entropy $H(X|Y)$:</strong> If Color is Orange, we are 100% sure it's Orange. If Red or Green, 100% sure it's Apple. $H(X|Y) = 0$.</li>
-        <li><strong>MI Calculation:</strong> $I(X; Y) = 1 - 0 = 1$ bit.</li>
-      </ul>
-      <p><strong>Conclusion:</strong> Knowing the color completely removes the uncertainty about the fruit.</p>
+      <h4>Problem: Does Color provide a Categorical Signal?</h4>
+      <p>Suppose 50% of our basket contains <strong>Oranges</strong> (all are orange) and 50% are <strong>Apples</strong> (mix of red and green).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Initial Uncertainty:</strong> $H(Fruit) = 1.0 \text{ bit}$ (perfect 50/50 uncertainty).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> We learn the color is "Orange." Only the Orange fruit category possesses this color.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> Uncertainty $H(Fruit|Color)$ drops to 0 bits.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> $I(Fruit; Color) = 1.0 - 0 = 1.0 \text{ bit}$. Color provides <strong>maximum information</strong> about the fruit type.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-noise">Example 2: Noisy / Independent Features</h2>
+    <div class="example-box">
+      <h4>Problem: Detecting Lack of Relationship</h4>
+      <p>Variable $X$: Exam Score. Variable $Y$: Student's Shoe Size.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Independence:</strong> Usually, $X$ and $Y$ are independent. Learning $Y$ doesn't change the distribution of $X$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> $H(X|Y) = H(X)$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> $I(X; Y) = H(X) - H(X) = 0 \text{ bits}$.</div></div>
+
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> In automated feature selection, features with <strong>Zero Mutual Information</strong> are typically discarded because they contain no signal for the target.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-nonlinear">Example 3: Capturing Non-Linear Shapes</h2>
+    <div class="example-box">
+      <h4>Problem: Identifying Dependencies where Correlation Fails ($Y = X^2$)</h4>
+      <p>Standard <strong>Pearson Correlation</strong> might be zero if $X$ is centered at zero (as positive and negative slopes cancel out). However, Mutual Information is <strong>not</strong> fooled.</p>
+      
+      <p>Because $Y$ is a deterministic function of $X$, $H(Y|X) = 0$. The Mutual Information $I(X; Y)$ will be positive and significant, correctly identifying that a strong relationship exists.</p>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Key Benefit:</strong> MI is superior to Correlation for detecting complex, non-linear patterns in datasets.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation (Scikit-Learn)</h2>

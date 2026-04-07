@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const matricesSection: TopicSection = {
   id: "matrices",
-  title: "Introduction to Matrices",
-  description: "In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",
-  color: "#1976D2",
+  title: "Matrices",
+  description: "Matrices are rectangular arrays of numbers that represent linear transformations between vector spaces. They are the workhorses of almost all machine learning operations.",
+  color: "#2E7D32",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
-      <h1>Introduction to Matrices</h1>
+      <div class="premium-hero-badge">🔢 Linear Algebra · Matrices</div>
+      <h1>Matrices</h1>
       <p>In Machine Learning, a <strong>Matrix</strong> is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire <strong>Dataset</strong>, where rows correspond to individual samples and columns correspond to features.</p>
     </div>
 

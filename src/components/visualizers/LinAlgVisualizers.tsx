@@ -7,39 +7,13 @@ import {
   lerp, 
   easeInOut,
   useAnimationFrame,
-  VisualizerTheme
+  VisualizerTheme,
+  drawInfoBox,
+  roundRect
 } from "./CanvasBase";
 
 // â”€â”€â”€ UTILS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-const roundRect = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, r: number) => {
-  ctx.beginPath();
-  ctx.moveTo(x + r, y);
-  ctx.arcTo(x + w, y, x + w, y + h, r);
-  ctx.arcTo(x + w, y + h, x, y + h, r);
-  ctx.arcTo(x, y + h, x, y, r);
-  ctx.arcTo(x, y, x + w, y, r);
-  ctx.closePath();
-};
-
-const drawInfoBox = (ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: number, title: string, lines: {label: string, value: string, color: string}[], theme: VisualizerTheme = 'light') => {
-  const colors = BaseC(theme);
-  ctx.fillStyle = colors.infoBg;
-  ctx.strokeStyle = colors.infoBorder;
-  ctx.lineWidth = 1;
-  roundRect(ctx, x, y, w, h, 10);
-  ctx.fill();
-  ctx.stroke();
-
-  ctx.font = "bold 13px 'Space Grotesk'";
-  ctx.fillStyle = colors.blue2;
-  ctx.fillText(title, x + 16, y + 26);
-
-  ctx.font = "11px 'JetBrains Mono'";
-  lines.forEach((line, i) => {
-    ctx.fillStyle = line.color;
-    ctx.fillText(`${line.label}: ${line.value}`, x + 16, y + 48 + i * 18);
-  });
-};
+// Utils removed, now using shared functions from CanvasBase
 
 const drawTicks = (ctx: CanvasRenderingContext2D, ox: number, oy: number, scale: number, theme: VisualizerTheme = 'light', range = 6) => {
   const colors = BaseC(theme);
@@ -186,18 +160,18 @@ export const PremiumDotProductVisualizer = ({
       ctx.setLineDash([]);
     }
 
-    drawInfoBox(ctx, 20, 20, 180, 100, "Dot Product Detail", [
-      { label: "v Â· w", value: dot.toFixed(2), color: C.blue2 },
-      { label: "Angle Î¸", value: `${(angle * 180 / Math.PI).toFixed(1)}Â°`, color: C.purple },
-      { label: "cos(Î¸)", value: cosA.toFixed(2), color: C.white },
-      { label: "|proj_w(v)|", value: (dot/wlen).toFixed(2), color: C.yellow }
-    ]);
+    drawInfoBox(ctx, W, H, "Dot Product Detail", [
+      { label: "v · w", value: dot.toFixed(2), color: C.blue2 },
+      { label: "Angle θ", value: `${(angle * 180 / Math.PI).toFixed(1)}°`, color: C.purple },
+      { label: "cos(θ)", value: cosA.toFixed(2), color: C.white },
+      { label: " |proj_w(v)|", value: (dot/wlen).toFixed(2), color: C.yellow }
+    ], theme);
   };
 
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 3: MATRIX TRANSFORMS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 3: MATRIX TRANSFORMS —————————————————————————————————————
 export const PremiumMatrixVisualizer = ({ a = 1, b = 0.5, c = -0.5, d = 1, playing = true, theme = 'light' }: { a?: number, b?: number, c?: number, d?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
@@ -232,23 +206,23 @@ export const PremiumMatrixVisualizer = ({ a = 1, b = 0.5, c = -0.5, d = 1, playi
     // Centered labels
     ctx.fillStyle = C.blue; ctx.font = "bold 13px 'Space Grotesk'";
     drawArrow(ctx, ox, oy, ox + ta * scale, oy - tb * scale, C.blue, 3);
-    ctx.fillText("Ãªâ‚", ox + ta * scale + 6, oy - tb * scale - 6);
+    ctx.fillText("ê₁", ox + ta * scale + 6, oy - tb * scale - 6);
     ctx.fillStyle = C.teal;
     drawArrow(ctx, ox, oy, ox + tc * scale, oy - td * scale, C.teal, 3);
-    ctx.fillText("Ãªâ‚‚", ox + tc * scale + 6, oy - td * scale - 6);
+    ctx.fillText("ê₂", ox + tc * scale + 6, oy - td * scale - 6);
 
     const det = ta * td - tb * tc;
-    drawInfoBox(ctx, W - 180, 20, 160, 90, "Transformation", [
+    drawInfoBox(ctx, W, H, "Transformation", [
       { label: "Matrix A", value: `[${a} ${b}; ${c} ${d}]`, color: C.blue2 },
       { label: "det(A)", value: det.toFixed(2), color: Math.abs(det) < 0.01 ? C.red : C.green },
-      { label: "Scale factor", value: `Ã—${Math.abs(det).toFixed(1)}`, color: C.muted }
+      { label: "Scale factor", value: `×${Math.abs(det).toFixed(1)}`, color: C.muted }
     ], theme);
   };
 
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 4: DETERMINANT â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 4: DETERMINANT ———————————————————————————————————————————
 export const PremiumDeterminantVisualizer = ({ a = 2, b = 1, c = 0.5, d = 2, playing = true, theme = 'light' }: { a?: number, b?: number, c?: number, d?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
@@ -277,16 +251,16 @@ export const PremiumDeterminantVisualizer = ({ a = 2, b = 1, c = 0.5, d = 2, pla
     drawArrow(ctx, ox, oy, ox + ta*scale, oy - tb*scale, C.blue, 3);
     drawArrow(ctx, ox, oy, ox + tc*scale, oy - td*scale, C.teal, 3);
 
-    drawInfoBox(ctx, 20, 20, 180, 80, "Determinant Analysis", [
+    drawInfoBox(ctx, W, H, "Determinant Analysis", [
       { label: "det(A)", value: det.toFixed(2), color: C.yellow },
-      { label: "Linear Scale", value: `Ã—${Math.sqrt(Math.abs(det)).toFixed(2)}`, color: C.white }
+      { label: "Linear Scale", value: `×${Math.sqrt(Math.abs(det)).toFixed(2)}`, color: C.white }
     ], theme);
   };
 
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 5: EIGENVECTORS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 5: EIGENVECTORS ———————————————————————————————————————————
 export const PremiumEigenVisualizer = ({ a = 2, b = 1, c = 1, d = 2, playing = true, theme = 'light' }: { a?: number, b?: number, c?: number, d?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const points = useMemo(() => Array.from({ length: 40 }).map(() => [(Math.random()-0.5)*8, (Math.random()-0.5)*8]), []);
 
@@ -338,13 +312,13 @@ export const PremiumEigenVisualizer = ({ a = 2, b = 1, c = 1, d = 2, playing = t
       drawArrow(ctx, ox, oy, ex2, ey2, C.pink, 3.5);
 
       ctx.fillStyle = C.yellow; ctx.font = "bold 13px 'Space Grotesk'";
-      ctx.fillText(`Î»â‚ = ${lam1.toFixed(2)}`, ex1 + 8, ey1 - 8);
+      ctx.fillText(`λ₁ = ${lam1.toFixed(2)}`, ex1 + 8, ey1 - 8);
       ctx.fillStyle = C.pink;
-      ctx.fillText(`Î»â‚‚ = ${lam2.toFixed(2)}`, ex2 + 8, ey2 - 8);
+      ctx.fillText(`λ₂ = ${lam2.toFixed(2)}`, ex2 + 8, ey2 - 8);
 
-      drawInfoBox(ctx, 20, 20, 200, 100, "Eigenvalue Decomposition", [
-        { label: "Î»1 (Yellow)", value: lam1.toFixed(3), color: C.yellow },
-        { label: "Î»2 (Pink)", value: lam2.toFixed(3), color: C.pink },
+      drawInfoBox(ctx, W, H, "Eigenvalue Decomposition", [
+        { label: "λ1 (Yellow)", value: lam1.toFixed(3), color: C.yellow },
+        { label: "λ2 (Pink)", value: lam2.toFixed(3), color: C.pink },
         { label: "Trace", value: trace.toFixed(1), color: C.muted },
         { label: "Determinant", value: det.toFixed(1), color: C.muted }
       ]);
@@ -359,7 +333,7 @@ export const PremiumEigenVisualizer = ({ a = 2, b = 1, c = 1, d = 2, playing = t
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 6: CHANGE OF BASIS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 6: CHANGE OF BASIS ———————————————————————————————————————
 export const PremiumBasisVisualizer = ({ e1x=1, e1y=1, e2x=-1, e2y=1, vx=1, vy=1, theme = 'light' }: { e1x?: number, e1y?: number, e2x?: number, e2y?: number, vx?: number, vy?: number, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
@@ -399,7 +373,7 @@ export const PremiumBasisVisualizer = ({ e1x=1, e1y=1, e2x=-1, e2y=1, vx=1, vy=1
     const [vsx, vsy] = [ox + lerp(vx, vNew[0], p) * scale, oy - lerp(vy, vNew[1], p) * scale];
     drawArrow(ctx, ox, oy, vsx, vsy, C.yellow, 3);
 
-    drawInfoBox(ctx, 20, 20, 200, 90, "Basis Change", [
+    drawInfoBox(ctx, W, H, "Basis Change", [
       { label: "New b1", value: `(${e1x}, ${e1y})`, color: C.blue2 },
       { label: "New b2", value: `(${e2x}, ${e2y})`, color: C.teal },
       { label: "Transition", value: p > 0.9 ? "Basis Active" : "Interpolating...", color: C.muted }
@@ -409,7 +383,7 @@ export const PremiumBasisVisualizer = ({ e1x=1, e1y=1, e2x=-1, e2y=1, vx=1, vy=1
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 7: SVD â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 7: SVD ———————————————————————————————————————————————————
 export const PremiumSVDVisualizer = ({ sigma1 = 2.5, sigma2 = 0.8, theta1 = 30, theta2 = 20, playing = true, theme = 'light' }: { sigma1?: number, sigma2?: number, theta1?: number, theta2?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const onDraw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number, theme: VisualizerTheme) => {
     const C = BaseC(theme);
@@ -417,7 +391,7 @@ export const PremiumSVDVisualizer = ({ sigma1 = 2.5, sigma2 = 0.8, theta1 = 30, 
     const duration = 4000;
     const p = easeInOut(Math.min(elapsed / duration, 1));
     
-    // Triple-Phase Logic from LinAlgViz.jsx: 1. Rotate Váµ€, 2. Scale Î£, 3. Rotate U
+    // Triple-Phase Logic from LinAlgViz.jsx: 1. Rotate Vᵀ, 2. Scale Σ, 3. Rotate U
     const ph1 = Math.min(1, p * 3);
     const ph2 = Math.min(1, Math.max(0, p * 3 - 1));
     const ph3 = Math.min(1, Math.max(0, p * 3 - 2));
@@ -456,11 +430,11 @@ export const PremiumSVDVisualizer = ({ sigma1 = 2.5, sigma2 = 0.8, theta1 = 30, 
     drawArrow(ctx, ox, oy, ox + ua2x*scale, oy - ua2y*scale, C.pink, 3);
 
     const currentStep = ph3 > 0.01 ? 2 : ph2 > 0.01 ? 1 : 0;
-    const steps = ["Váµ€ Rotation", "Î£ Scaling", "U Rotation"];
-    drawInfoBox(ctx, 20, 20, 200, 100, "SVD: U Î£ Váµ€ Decomposition", [
+    const steps = ["Vᵀ Rotation", "Σ Scaling", "U Rotation"];
+    drawInfoBox(ctx, W, H, "SVD: U Σ Vᵀ Decomposition", [
       { label: "State", value: steps[currentStep], color: C.yellow },
-      { label: "Ïƒ1 Principal", value: s1.toFixed(2), color: C.white },
-      { label: "Ïƒ2 Principal", value: s2.toFixed(2), color: C.white },
+      { label: "σ1 Principal", value: s1.toFixed(2), color: C.white },
+      { label: "σ2 Principal", value: s2.toFixed(2), color: C.white },
       { label: "Sequence", value: `${(p*100).toFixed(0)}% Complete`, color: C.muted }
     ], theme);
   };
@@ -468,7 +442,7 @@ export const PremiumSVDVisualizer = ({ sigma1 = 2.5, sigma2 = 0.8, theta1 = 30, 
   return <CanvasBase onDraw={onDraw} theme={theme} />;
 };
 
-// â”€â”€â”€ SCENE 8: PCA â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ————————————————————————————————— SCENE 8: PCA ———————————————————————————————————————————————————
 export const PremiumPCAVisualizer = ({ angle = 30, spread = 1.8, playing = true, theme = 'light' }: { angle?: number, spread?: number, playing?: boolean, theme?: VisualizerTheme }) => {
   const points = useMemo(() => {
     return Array.from({ length: 40 }).map(() => [
@@ -508,8 +482,8 @@ export const PremiumPCAVisualizer = ({ angle = 30, spread = 1.8, playing = true,
     const ex = 5;
     drawArrow(ctx, ox - pc1[0]*ex*scale, oy + pc1[1]*ex*scale, ox + pc1[0]*ex*scale, oy - pc1[1]*ex*scale, C.yellow, 3);
     
-    drawInfoBox(ctx, 20, 20, 180, 80, "PCA Projections", [
-      { label: "Principal axis", value: `${angle}Â°`, color: C.yellow },
+    drawInfoBox(ctx, W, H, "PCA Projections", [
+      { label: "Principal axis", value: `${angle}°`, color: C.yellow },
       { label: "Variance", value: "Maximizing...", color: C.muted }
     ], theme);
   };
@@ -550,7 +524,7 @@ export const PremiumNormsVisualizer = ({ p = 2, playing = true, theme = 'light' 
     ctx.stroke();
     ctx.shadowBlur = 0;
 
-    drawInfoBox(ctx, 20, 20, 180, 80, `L${p.toFixed(1)} Norm Unit Circle`, [
+    drawInfoBox(ctx, W, H, `L${p.toFixed(1)} Norm Unit Circle`, [
       { label: "Norm Order p", value: currentP.toFixed(2), color: C.teal },
       { label: "Shape", value: p === 1 ? "Diamond" : p === 2 ? "Circle" : "Super-ellipse", color: C.muted }
     ], theme);
@@ -595,7 +569,7 @@ export const PremiumDistanceVisualizer = ({ ax = -2, ay = -1, bx = 2, by = 2, pl
     const distE = Math.sqrt((bx - ax) ** 2 + (by - ay) ** 2);
     const distM = Math.abs(bx - ax) + Math.abs(by - ay);
 
-    drawInfoBox(ctx, 20, 20, 190, 90, "Distance Analytics", [
+    drawInfoBox(ctx, W, H, "Distance Analytics", [
       { label: "Euclidean (L2)", value: distE.toFixed(2), color: C.blue2 },
       { label: "Manhattan (L1)", value: distM.toFixed(2), color: C.teal },
       { label: "θ (Alignment)", value: (Math.atan2(by-ay, bx-ax) * 180 / Math.PI).toFixed(0) + "°", color: C.muted }
@@ -639,7 +613,7 @@ export const PremiumEquationsVisualizer = ({ a1=1, b1=1, c1=2, a2=1, b2=-1, c2=0
       }
     }
 
-    drawInfoBox(ctx, 20, 20, 180, 90, "System Analysis", [
+    drawInfoBox(ctx, W, H, "System Analysis", [
       { label: "Eq1", value: `${a1}x + ${b1}y = ${c1}`, color: C.blue2 },
       { label: "Eq2", value: `${a2}x + ${b2}y = ${c2}`, color: C.teal },
       { label: "Solvable", value: Math.abs(det) > 0.01 ? "Yes" : "Parallel", color: C.muted }
@@ -784,7 +758,7 @@ export const PremiumOrthogonalityVisualizer = ({ vx = 3, vy = 0, wx = 0, wy = 3,
     drawArrow(ctx, ox, oy, pxA, pyA, C.blue, 4);
     drawArrow(ctx, ox, oy, pxB, pyB, C.teal, 4);
 
-    drawInfoBox(ctx, 20, 20, 200, 80, "Orthogonality Check", [
+    drawInfoBox(ctx, W, H, "Orthogonality Check", [
       { label: "Vector v", value: `[${vx}, ${vy}]`, color: C.blue2 },
       { label: "Vector w", value: `[${wx}, ${wy}]`, color: C.teal },
       { label: "Dot Product", value: dot.toFixed(2), color: isOrthogonal ? C.green : C.red }
@@ -841,11 +815,11 @@ export const PremiumProjectionsVisualizer = ({ vx = 3, vy = 2, wx = 4, wy = 0, t
       ctx.globalAlpha = 1;
     }
 
-    drawInfoBox(ctx, 20, 20, 220, 100, "Orthogonal Projection", [
+    drawInfoBox(ctx, W, H, "Orthogonal Projection", [
       { label: "Vector v", value: `[${vx}, ${vy}]`, color: C.blue2 },
       { label: "Projected on", value: `[${wx}, ${wy}]`, color: C.teal },
-      { label: "Coeff (Î»)", value: projCoeff.toFixed(2), color: C.yellow },
-      { label: "Orthogonal?", value: "Yes (Error âŠ¥ w)", color: C.green }
+      { label: "Coeff (λ)", value: projCoeff.toFixed(2), color: C.yellow },
+      { label: "Orthogonal?", value: "Yes (Error ⊥ w)", color: C.green }
     ], theme);
   };
 
@@ -893,7 +867,7 @@ export const PremiumRankVisualizer = ({ rank = 1, a = 1, b = 1, c = 1, d = 1, th
     }
 
     const det = fa * fd - fb * fc;
-    drawInfoBox(ctx, 20, 20, 200, 100, `Matrix Rank: ${rank}`, [
+    drawInfoBox(ctx, W, H, `Matrix Rank: ${rank}`, [
       { label: "Determinant", value: det.toFixed(3), color: Math.abs(det) < 0.01 ? C.red : C.green },
       { label: "Dimensionality", value: Math.abs(det) < 0.01 ? "1D (Line)" : "2D (Plane)", color: C.yellow },
       { label: "Status", value: Math.abs(det) < 0.01 ? "Rank Deficient" : "Full Rank", color: C.white }

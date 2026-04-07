@@ -17,6 +17,7 @@ export const graphTheorySection: TopicSection = {
       <a href="#components">1. The Core Components</a>
       <a href="#types">2. Types of Graphs</a>
       <a href="#matrices">3. Adjacency Matrices</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#ai-ml">4. Why this matters for AI/ML</a>
       <a href="#implementation">Python Implementation</a>
     </div>
@@ -53,7 +54,47 @@ export const graphTheorySection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="ai-ml">4. Why this matters for AI/ML</h2>
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Building an Adjacency Matrix</h4>
+      <p>Represent a simple **Social Network** of 4 users ($A, B, C, D$) where:
+      <ul>
+        <li>$A$ is friends with $B$ and $C$</li>
+        <li>$B$ is friends with $A$ and $D$</li>
+        <li>$C$ is friends with $A$</li>
+        <li>$D$ is friends with $B$</li>
+      </ul>
+      </p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Resulting Matrix:</strong>
+        <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
+      </div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Graph Insight:</strong> Notice the <strong>Symmetry</strong> along the diagonal. For friend $A$ (Row 1), we see connections at Column 2 ($B$) and Column 3 ($C$).
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Calculating Degree Centrality</h4>
+      <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> In GNNs, these degree counts are used for <strong>Normalization</strong> within Message Passing layers to prevent highly connected nodes from overwhelming the feature signals.
+        </div>
+      </div>
+    </div>
     <ul>
       <li><strong>Knowledge Graphs:</strong> Powering search engines and LLMs by linking facts with semantic meanings.</li>
       <li><strong>Graph Neural Networks (GNNs):</strong> Predicting things like "Will these users become friends?" or "Is this molecule toxic?" using adjacency matrices and node features.</li>

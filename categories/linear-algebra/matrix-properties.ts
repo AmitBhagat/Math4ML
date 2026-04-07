@@ -2,13 +2,13 @@ import { TopicSection } from '../../src/data/types';
 
 export const matrixPropertiesSection: TopicSection = {
   id: "matrix-properties",
-  title: "Introduction to Matrix Properties",
+  title: "Matrix Properties",
   description: "Matrix properties like Rank, Determinant, Trace, and Positive Definiteness act as the \"DNA\" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.",
   color: "#1976D2",
   html: String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Matrix Properties</div>
-      <h1>Introduction to Matrix Properties</h1>
+      <h1>Matrix Properties</h1>
       <p>Matrix properties like <strong>Rank</strong>, <strong>Determinant</strong>, <strong>Trace</strong>, and <strong>Positive Definiteness</strong> act as the "DNA" of a matrix. They tell us whether a system of equations has a solution, how a transformation scales space, and whether an optimization problem (like training a model) has a stable minimum.</p>
     </div>
 

@@ -17,7 +17,8 @@ export const basicsSection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-tangent">Example 1: Tangent Slopes</a>
+      <a href="#example-error">Example 2: Error Derivatives</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -58,26 +59,38 @@ export const basicsSection: TopicSection = {
     <p>This is the "secret sauce" of <strong>Backpropagation</strong>. If a variable $z$ depends on $y$, and $y$ depends on $x$, then $z$ depends on $x$ via the chain:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-tangent">Example 1: Tangent Slopes & Instantaneous Change</h2>
     <div class="example-box">
-      <h4>Problem: Finding Error Gradients</h4>
-      <p>Find the partial derivatives of $f(x, w) = (xw - y)^2$ with respect to $w$. (This is a simple squared error loss).</p>
+      <h4>Problem: Finding the Slope of $f(x) = x^2$</h4>
+      <p>Calculate the derivative (slope) of the function $f(x) = x^2$ at the point $x = 3$.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li>Let $u = (xw - y)$. Then $f = u^2$.</li>
-        <li>By Chain Rule: $\frac{\partial f}{\partial w} = \frac{\partial f}{\partial u} \cdot \frac{\partial u}{\partial w}$.</li>
-        <li>$\frac{\partial f}{\partial u} = 2u = 2(xw - y)$.</li>
-        <li>$\frac{\partial u}{\partial w} = x$ (since $x$ and $y$ are treated as constants).</li>
-        <li><strong>Result:</strong> $\frac{\partial f}{\partial w} = 2(xw - y) \cdot x$.</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Power Rule:</strong> For $f(x) = x^n$, the derivative $f'(x) = n \cdot x^{n-1}$. Here, $n=2$, so $f'(x) = 2x$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Substitute $x = 3$:</strong> Evaluate $f'(3) = 2(3) = 6$.</div></div>
 
-      <p>If $x=2, w=3, y=5$:</p>
-      <ul>
-        <li>$f(2, 3) = (2 \cdot 3 - 5)^2 = 1^2 = 1$.</li>
-        <li>$\frac{\partial f}{\partial w} = 2(6-5) \cdot 2 = 4$.</li>
-      </ul>
-      <p><strong>Interpretation:</strong> Increasing $w$ by a tiny bit will increase the error by approximately 4 times that bit.</p>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> At the point where $x=3$, the function is increasing at a rate of 6 units for every 1 unit of change in $x$. The tangent line at this point has a slope of 6.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-error">Example 2: The Slope of Error (Loss Gradient)</h2>
+    <div class="example-box">
+      <h4>Problem: Univariate Squared Error</h4>
+      <p>In a simple model, let Loss $L = (mx - y)^2$. Find how the loss changes with respect to the slope $m$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Outer/Inner Functions:</strong> Let $u = (mx - y)$, then $L = u^2$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Chain Rule:</strong> $\frac{dL}{dm} = \frac{dL}{du} \cdot \frac{du}{dm}$.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Differentiate:</strong> $\frac{dL}{du} = 2u$ and $\frac{du}{dm} = x$ (since $x, y$ are constants).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Result:</strong> $\frac{dL}{dm} = 2(mx - y) \cdot x$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Insight:</strong> This "slope of error" tells us how to adjust $m$ to reduce the loss. If $\frac{dL}{dm}$ is positive, we must decrease $m$ to move toward the minimum.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>

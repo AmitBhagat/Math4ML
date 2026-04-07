@@ -16,7 +16,9 @@ export const klDivergenceSection: TopicSection = {
       <a href="#prerequisites">Prerequisites</a>
       <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
+      <a href="#example-weather">Example 1: Weather Prediction</a>
+      <a href="#example-asymmetry">Example 2: Asymmetry (P vs Q)</a>
+      <a href="#example-uniform">Example 3: Approximation Penalty</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#applications">Applications in ML</a>
     </div>
@@ -59,17 +61,54 @@ export const klDivergenceSection: TopicSection = {
       <p style="margin:0">It represents the "extra" bits required because our model $Q$ isn't perfect.</p>
     </div>
 
-    <h2 id="example">Illustrative Example</h2>
+    <h2 id="example-weather">Example 1: Weather Prediction Accuracy</h2>
     <div class="example-box">
-      <h4>Scenario: Weather Prediction</h4>
+      <h4>Problem: Quantifying Prediction Error</h4>
       <p>True probability $P$: Sunny (0.8), Rainy (0.2). Model $Q$: Sunny (0.5), Rainy (0.5).</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>Sunny:</strong> $0.8 \cdot \log_2(0.8 / 0.5) \approx 0.542$</li>
-        <li><strong>Rainy:</strong> $0.2 \cdot \log_2(0.2 / 0.5) \approx -0.264$</li>
-        <li><strong>Total:</strong> $D_{KL}(P \parallel Q) = 0.542 - 0.264 = 0.278 \text{ bits}$</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sunny Component:</strong> $0.8 \cdot \log_2(0.8 / 0.5) \approx 0.542 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Rainy Component:</strong> $0.2 \cdot \log_2(0.2 / 0.5) \approx -0.264 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Summation:</strong> $D_{KL}(P \parallel Q) = 0.542 - 0.264 = 0.278 \text{ bits}$</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> Using Model $Q$ to represent the weather results in an "information penalty" of <strong>0.278 bits</strong> per day compared to the optimal distribution $P$.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-asymmetry">Example 2: The Asymmetry of Divergence</h2>
+    <div class="example-box">
+      <h4>Problem: Proving KL is not a Distance Metric</h4>
+      <p>Calculate $D_{KL}(Q \parallel P)$ for the same distributions and compare with Example 1.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sunny:</strong> $0.5 \cdot \log_2(0.5 / 0.8) \approx -0.339 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Rainy:</strong> $0.5 \cdot \log_2(0.5 / 0.2) \approx 0.661 \text{ bits}$</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Total:</strong> $D_{KL}(Q \parallel P) = -0.339 + 0.661 = 0.322 \text{ bits}$</div></div>
+
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Key Insight:</strong> $0.322 \neq 0.278$. KL Divergence is <strong>not a distance</strong> because it doesn't satisfy the symmetry property. This is why it's called a 'divergence'.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-uniform">Example 3: Approximation Penalty</h2>
+    <div class="example-box">
+      <h4>Problem: Assuming Uniformity in Unbalanced Data</h4>
+      <p>Suppose we use a **Uniform Distribution** $U$ to approximate an **unbalanced** True distribution $P = \{0.9, 0.1\}$.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculation:</strong> $D_{KL}(P \parallel U) = 0.9 \log_2(0.9/0.5) + 0.1 \log_2(0.1/0.5)$.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluation:</strong> $0.9(0.84) + 0.1(-2.32) = 0.75 - 0.23 = 0.52 \text{ bits}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Interpretation:</strong> The "cost" of assuming everything is equally likely is roughly **half a bit** of extra surprise per sample.
+        </div>
+      </div>
     </div>
 
     <h2 id="implementation">Python Implementation (NumPy)</h2>

@@ -9,7 +9,7 @@ export const setTheorySection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
-      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points (like a column of User IDs or a list of features).</p>
+      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
     </div>
 
     <div class="toc">
@@ -17,6 +17,7 @@ export const setTheorySection: TopicSection = {
       <a href="#subsets">1. Subsets ($\subseteq$)</a>
       <a href="#union">2. Union ($\cup$)</a>
       <a href="#intersection">3. Intersection ($\cap$)</a>
+      <a href="#examples">Illustrative Examples</a>
       <a href="#comparison">Comparison Table for Data Operations</a>
       <a href="#ml-journey">Why this matters for ML</a>
     </div>
@@ -31,27 +32,68 @@ export const setTheorySection: TopicSection = {
     </div>
     <p><strong>Notation:</strong> $A \subseteq B$</p>
 
+    <hr class="premium-hr">
+
     <h2 id="union">2. Union ($\cup$)</h2>
     <p>The <strong>union</strong> of two sets includes all unique elements from both sets.</p>
     <div class="callout tip">
       <div class="callout-icon">🤝</div>
       <div class="callout-body">
-        <strong>Data Context:</strong> This is used when you are <strong>merging</strong> two datasets with the same structure (e.g., combining sales data from January and February). In SQL, this is the <code>UNION</code> command.
+        <strong>Data Context:</strong> This is used when you are <strong>merging</strong> two datasets with the same structure. In SQL, this is the <code>UNION</code> command.
       </div>
     </div>
     <p><strong>Logic:</strong> "Give me everything from Set A OR Set B."<br>
     <strong>Notation:</strong> $A \cup B$</p>
+
+    <hr class="premium-hr">
 
     <h2 id="intersection">3. Intersection ($\cap$)</h2>
     <p>The <strong>intersection</strong> includes only the elements that appear in <em>both</em> sets.</p>
     <div class="callout info">
       <div class="callout-icon">📍</div>
       <div class="callout-body">
-        <strong>Data Context:</strong> This is used for <strong>Inner Joins</strong>. If you have a list of "Email Subscribers" and a list of "Recent Buyers," the intersection tells you which subscribers actually bought something.
+        <strong>Data Context:</strong> This is used for <strong>Inner Joins</strong>. If you have "Email Subscribers" and "Buyers," the intersection tells you who did both.
       </div>
     </div>
     <p><strong>Logic:</strong> "Give me only what is in Set A AND Set B."<br>
     <strong>Notation:</strong> $A \cap B$</p>
+
+    <hr class="premium-hr">
+
+    <h2 id="examples">Illustrative Examples</h2>
+
+    <div class="example-box">
+      <h4>Problem: Reconciling Customer Lists</h4>
+      <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Data Insight:</strong> Intersection is the foundation of <strong>Inner Joins</strong>, while Union represents a <strong>Full Outer Join</strong> without duplicates.
+        </div>
+      </div>
+    </div>
+
+    <div class="example-box">
+      <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
+      <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div></div>
+
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>ML Usage:</strong> This is a powerful technique for <strong>Data Auditing</strong>—quickly finding rows that exist in your local slice but are missing from the production database.
+        </div>
+      </div>
+    </div>
+
+    <hr class="premium-hr">
 
     <h2 id="comparison">Comparison Table for Data Operations</h2>
     <div class="premium-table-wrap">
@@ -87,7 +129,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Set theory defines the collections of data. Now, explore <strong><a href="#/mathematics/discrete-math/logic">Mathematical Logic</a></strong> to see how we build complex rules to filter and transform these sets.
+      <strong>Next Step:</strong> Set theory defines the collections of data. Now, explore <strong><a href="#/mathematics/discrete-math/logic">Mathematical Logic</a></strong> to see how we build complex rules.
     </div>
   `
 };
