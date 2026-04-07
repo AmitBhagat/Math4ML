@@ -78,6 +78,8 @@ export const matrixPropertiesSection: TopicSection = {
       <p><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4.</p>
     </div>
 
+    <visualizer topic="Determinants" />
+
     <h2 id="trace">3. Trace (tr(A))</h2>
     <p>The <strong>Trace</strong> of a square matrix is the sum of its diagonal elements.</p>
 

@@ -768,19 +768,40 @@ const NonParametricTestsVisual = () => (
   </div>
 );
 
-export const TopicVisualizer = ({ topicId }: VisualizerProps) => {
+import { 
+  PremiumVectorsVisualizer, 
+  PremiumMatrixVisualizer, 
+  PremiumEigenVisualizer, 
+  PremiumSVDVisualizer, 
+  PremiumPCAVisualizer,
+  PremiumDeterminantVisualizer,
+  PremiumDotProductVisualizer,
+  PremiumBasisVisualizer,
+  PremiumNormsVisualizer,
+  PremiumDistanceVisualizer,
+  PremiumEquationsVisualizer,
+  PremiumMatrixOpsVisualizer
+} from "./visualizers/LinAlgVisualizers";
+
+export const TopicVisualizer = ({ topicId, params = {} }: VisualizerProps & { params?: any }) => {
   switch (topicId) {
-    // Linear Algebra
-    case "Vectors": return <VectorsVisual />;
-    case "LinearCombinations": return <LinearCombinationsVisual />;
-    case "DotProduct": return <DotProductVisual />;
-    case "Matrices": return <MatricesVisual />;
-    case "LinearTransformation": return <LinearTransformationVisual />;
-    case "LinearEquations": return <LinearEquationsVisual />;
-    case "Eigenvalues": return <EigenvaluesVisual />;
-    case "SVD": return <SVDVisual />;
-    case "VectorNorms": return <VectorNormsVisual />;
-    case "DistanceMetrics": return <DistanceMetricsVisual />;
+    // Linear Algebra (High-Fidelity Canvas)
+    case "Vectors": return <PremiumVectorsVisualizer {...params} mode="add" />;
+    case "LinearCombinations": return <PremiumVectorsVisualizer {...params} mode="scalar" />;
+    case "DotProduct": return <PremiumDotProductVisualizer {...params} />;
+    case "Matrices": return <PremiumMatrixVisualizer {...params} />;
+    case "LinearTransformation": return <PremiumMatrixVisualizer {...params} b={params.b ?? 0.5} c={params.c ?? -0.2} />;
+    case "LinearEquations": return <PremiumEquationsVisualizer {...params} />; 
+    case "Eigenvalues": 
+    case "Eigenvectors": return <PremiumEigenVisualizer {...params} />;
+    case "SVD": return <PremiumSVDVisualizer {...params} />;
+    case "MatrixDecompositions": return <PremiumSVDVisualizer {...params} />;
+    case "BasisChange": return <PremiumBasisVisualizer {...params} />;
+    case "Determinants": return <PremiumDeterminantVisualizer {...params} />;
+    case "PCA": return <PremiumPCAVisualizer {...params} />;
+    case "VectorNorms": return <PremiumNormsVisualizer {...params} />;
+    case "DistanceMetrics": return <PremiumDistanceVisualizer {...params} />;
+    case "MatrixOperations": return <PremiumMatrixOpsVisualizer {...params} />;
 
     // Probability
     case "SampleSpace": return <SampleSpaceVisual />;

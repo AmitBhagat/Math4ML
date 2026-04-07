@@ -12,6 +12,8 @@ export const matrixDecompositionsSection: TopicSection = {
       <p>In Machine Learning, <strong>Matrix Decomposition</strong> (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., \(15 = 3 \times 5\)). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.</p>
     </div>
 
+    <visualizer topic="Matrices" />
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#lu">1. LU Decomposition</a>
@@ -69,6 +71,8 @@ export const matrixDecompositionsSection: TopicSection = {
           <li><strong>\(V^T\):</strong> Right singular vectors (Rotations in input space).</li>
         </ul>
       </div>
+
+    <visualizer topic="SVD" />
 
     <h3>Applications in ML</h3>
     <ul>

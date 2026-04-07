@@ -26,6 +26,9 @@ export const vectorsSection: TopicSection = {
     <h2 id="definition">Vector Definition</h2>
     <p>A vector is an ordered list of numbers, typically denoted in column form:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
+
+    <visualizer topic="Vectors" />
+
     <p>where \(n\) represents the dimensionality of the vector space.</p>
 
     <div class="def-box">
@@ -59,6 +62,8 @@ export const vectorsSection: TopicSection = {
       <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = (2)(4) + (3)(-1) = 8 - 3 = 5$$</div>
       <p><strong>Result:</strong> 5. Since the value is positive, the vectors point in a similar general direction.</p>
     </div>
+
+    <visualizer topic="DotProduct" />
 
     <h2 id="norms">2. Vector Norms (L₁ and L₂)</h2>
     <p>A <strong>Norm</strong> is a function that assigns a strictly positive length or size to a vector.</p>
@@ -106,6 +111,8 @@ export const vectorsSection: TopicSection = {
       <p>Check if \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) span \(\mathbb{R}^2\).</p>
       <p>Any vector \([x, y]\) can be written as \(x[1, 0] + y[0, 1]\). Since these two vectors are independent and can reach any point, they form the standard basis for 2D space.</p>
     </div>
+
+    <visualizer topic="LinearCombinations" />
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>

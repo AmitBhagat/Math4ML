@@ -60,6 +60,8 @@ export const vectorSpacesSection: TopicSection = {
       </ul>
     </div>
 
+    <visualizer topic="BasisChange" />
+
     <h2 id="orthogonality">3. Orthogonality</h2>
     <p>Two vectors are <strong>Orthogonal</strong> if they are perpendicular to each other.</p>
 

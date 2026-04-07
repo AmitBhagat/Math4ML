@@ -11,6 +11,8 @@ export const eigenvaluesEigenvectorsPcaSection: TopicSection = {
       <p>PCA is the crown jewel of dimensionality reduction. It bridges the gap between <strong>Linear Algebra</strong> (SVD/Eigenvectors) and <strong>Statistics</strong> (Variance/Covariance) to simplify high-dimensional data without losing its soul.</p>
     </div>
 
+    <visualizer topic="PCA" />
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. The Intuition: Variance as Information</a>

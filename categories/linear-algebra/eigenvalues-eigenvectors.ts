@@ -12,6 +12,8 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
     </div>
 
+    <visualizer topic="Eigenvalues" />
+
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. Core Theory: Scaling & Span</a>

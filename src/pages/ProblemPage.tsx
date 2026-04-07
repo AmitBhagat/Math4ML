@@ -6,16 +6,21 @@ import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
 import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 import { CategoryData, TopicSection, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
+import { TopicVisualizer } from "@/src/components/MathematicalVisualizations";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { cleanMathContent } from '@/src/lib/mathUtils';
 import { getCategoryTheme } from "@/src/lib/themeUtils";
 import { Hammer, Clock, Star } from "lucide-react";
 
+import { InteractiveVisualizer } from "@/src/components/visualizers/InteractiveVisualizer";
+import { MatrixOperationsInteractive } from "@/src/components/visualizers/MatrixOperationsInteractive";
+
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
   if (!html) return null;
-  const segments = html.split(/(<python-code>[\s\S]*?<\/python-code>)/g);
+  // Match both <python-code> and <visualizer topic="..." />
+  const segments = html.split(/(<python-code>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
   
   return (
     <>
@@ -29,6 +34,26 @@ const ParsedContent = ({ html }: { html: string }) => {
           return (
             <div key={idx}>
               <CodeSnippet code={code} />
+            </div>
+          );
+        }
+
+        if (segment.startsWith('<visualizer')) {
+          const match = segment.match(/topic="([^"]*)"/);
+          const topic = match ? match[1] : '';
+
+          // Special Case: Matrix Operations (Exactly same UI bypass)
+          if (topic === "MatrixOperations") {
+            return (
+              <div key={idx} className="my-14 w-full">
+                 <MatrixOperationsInteractive />
+              </div>
+            );
+          }
+
+          return (
+            <div key={idx} className="my-14 max-w-6xl">
+               <InteractiveVisualizer topicId={topic} />
             </div>
           );
         }

@@ -15,6 +15,7 @@ export const matricesSection: TopicSection = {
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#definition">Matrix Definition</a>
+      <a href="#playground">Interactive Matrix Playground</a>
       <a href="#mult">1. Matrix Multiplication</a>
       <a href="#transpose">2. Matrix Transpose</a>
       <a href="#identity">3. Identity Matrix</a>
@@ -35,6 +36,11 @@ export const matricesSection: TopicSection = {
         <li>Familiarity with basic algebraic variables.</li>
       </ul>
     </div>
+
+    <h2 id="playground">Interactive Matrix Playground</h2>
+    <p>Experiment with real-time matrix operations. Switch between <strong>Addition</strong>, <strong>Multiplication</strong>, and <strong>Scalar</strong> modes to see how the arithmetic DNA of each operation compositions the final result.</p>
+    
+    <visualizer topic="MatrixOperations" />
 
     <h2 id="mult">1. Matrix Multiplication</h2>
     <p>Matrix multiplication is not a simple element-wise operation. It is a way of composing linear transformations.</p>
@@ -58,6 +64,8 @@ export const matricesSection: TopicSection = {
       </ul>
       <div class="math-block">$$C = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
     </div>
+
+    <visualizer topic="Matrices" />
 
     <h2 id="transpose">2. Matrix Transpose</h2>
     <p>The transpose of a matrix is an operator which flips a matrix over its diagonal.</p>
