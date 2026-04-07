@@ -12,7 +12,8 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
       <a href="#blocks" class="sub">↳ 2. Events</a>
       <a href="#blocks" class="sub">↳ 3. The Three Axioms (Kolmogorov)</a>
       <a href="#conditional">Mathematical Derivation: Conditional Probability &amp; Independence</a>
-      <a href="#example">Illustrative Example: Die Roll</a>
+      <a href="#example">3. Illustrative Example: Die Roll</a>
+      <a href="#union-example">4. Illustrative Example: Union of Events</a>
       <a href="#implementation">Implementation in Python (NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -30,6 +31,7 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
     <p>Probability begins with a few fundamental definitions that define the "world" we are operating in.</p>
 
     <h3>1. Sample Space (S)</h3>
+    <visualizer topic="SampleSpace" />
     <p>The <strong>Sample Space</strong> is the set of all possible outcomes of a random experiment.</p>
     <ul>
       <li><strong>Example:</strong> If you toss a coin, \(S = \{H, T\}\). If you roll a six-sided die, \(S = \{1, 2, 3, 4, 5, 6\}\).</li>
@@ -55,6 +57,7 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
     <p>This measures the probability of an event \(A\) occurring, <strong>given</strong> that event \(B\) has already occurred. This is critical in ML for updating our "beliefs" as new data arrives.</p>
     <p>The formula is defined as:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
+    <visualizer topic="ConditionalProbability" />
 
     <p><strong>Derivation steps:</strong></p>
     <div class="step-box"><span class="step-num">1</span><div>Since \(B\) has occurred, our "new" sample space is restricted to \(B\).</div></div>
@@ -67,24 +70,32 @@ const e={id:"basic-axioms",title:"Basic Axioms of Probability",description:"Prob
     <p>From the conditional probability formula, if \(A\) and \(B\) are independent:</p>
     <div class="math-block">$$P(A|B) = \frac{P(A) \cdot P(B)}{P(B)} = P(A)$$</div>
 
-    <h2 id="example">Illustrative Example: Die Roll</h2>
+    <h2 id="example">3. Illustrative Example: Die Roll</h2>
     <div class="example-box">
       <h4>Problem: Conditional Probability on a Die</h4>
-      <p>You roll a fair six-sided die.</p>
-      <ul>
-        <li>Event \(A\): Rolling an even number \(\{2, 4, 6\}\).</li>
-        <li>Event \(B\): Rolling a number greater than 3 \(\{4, 5, 6\}\).</li>
-      </ul>
-      <p><strong>Step-by-step Solution:</strong></p>
-      <ol>
-        <li><strong>Total Outcomes \((S)\):</strong> \(\{1, 2, 3, 4, 5, 6\} \implies n(S) = 6\).</li>
-        <li><strong>Probability of \(A\):</strong> \(P(A) = \frac{3}{6} = 0.5\).</li>
-        <li><strong>Probability of \(B\):</strong> \(P(B) = \frac{3}{6} = 0.5\).</li>
-        <li><strong>Find \(A \cap B\):</strong> Outcomes that are both even AND \(> 3\) are \(\{4, 6\}\). So, \(P(A \cap B) = \frac{2}{6} = \frac{1}{3}\).</li>
-        <li><strong>Calculate \(P(A|B)\):</strong></li>
-      </ol>
-      <div class="math-block">$$P(A|B) = \frac{1/3}{1/2} = \frac{2}{3} \approx 0.67$$</div>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> If I tell you the roll was greater than 3, the chance it is even increases from 50% to 67%.</div></div>
+      <p>You roll a fair six-sided die. If I tell you the result is greater than 3, what is the probability that it is an even number?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Events:</strong> \(A = \{2, 4, 6\}\) (Even), \(B = \{4, 5, 6\}\) (Greater than 3).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Intersection:</strong> \(A \cap B = \{4, 6\}\). Thus, \(P(A \cap B) = 2/6 = 1/3\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Formula:</strong> \(P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{1/3}{1/2}\).</div></div>
+
+      <div class="math-block">$$P(A|B) = \frac{2}{3} \approx 0.67$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Knowing that the roll was \(> 3\) increases our confidence that it was even from 50% to 67%.</div></div>
+    </div>
+
+    <h2 id="union-example">4. Illustrative Example: Union of Events</h2>
+    <div class="example-box">
+      <h4>Problem: Non-Mutually Exclusive Events</h4>
+      <p>In a standard deck of 52 cards, what is the probability of drawing a <strong>Red Card</strong> (Event R) OR an <strong>Ace</strong> (Event A)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Individual Probabilities:</strong> \(P(R) = 26/52 = 0.5\), \(P(A) = 4/52 \approx 0.077\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Overlap:</strong> There are 2 Red Aces (Heart and Diamond). \(P(R \cap A) = 2/52 \approx 0.038\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply General Addition Rule:</strong> \(P(R \cup A) = P(R) + P(A) - P(R \cap A)\).</div></div>
+
+      <div class="math-block">$$P(R \cup A) = \frac{26}{52} + \frac{4}{52} - \frac{2}{52} = \frac{28}{52} \approx 0.538$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> We subtract the intersection because the Red Aces were counted twice — once as Red cards and once as Aces. In ML, ignoring dependencies like this leads to overconfident (and wrong) models.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (NumPy)</h2>
@@ -129,7 +140,7 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the basic axioms, move toward <strong><a href="#/mathematics/probability/bayes-theorem">Bayes' Theorem</a></strong> to calculate the probability of causes given their effects.
     </div>
-  `},t={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
+  `},i={id:"bayes-theorem",title:"Bayes' Theorem",description:"Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔄 Probability · Bayes' Theorem</div>
       <h1>Bayes' Theorem</h1>
@@ -145,7 +156,8 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
       <a href="#applications" class="sub">↳ 1. Naive Bayes</a>
       <a href="#applications" class="sub">↳ 2. Bayesian Inference</a>
       <a href="#applications" class="sub">↳ 3. Bayesian Neural Networks (BNNs)</a>
-      <a href="#example">Illustrative Example: Medical Testing</a>
+      <a href="#example">4. Illustrative Example: Medical Testing</a>
+      <a href="#spam-example">5. Illustrative Example: Spam Filters</a>
       <a href="#implementation">Implementation: Naive Bayes Logic in Python</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -192,10 +204,10 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
 
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>The derivation is a direct consequence of the <strong>Definition of Conditional Probability</strong>.</p>
-    <div class="step-box"><div class="step-num">1</div><div>Start with the definition of \(P(H|E)\): \(\displaystyle P(H|E) = \frac{P(H \cap E)}{P(E)}\)</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>From the Product Rule, we know: \(P(H \cap E) = P(E|H) \cdot P(H)\)</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>Substitute step 2 into step 1:</div></div>
-    <div class="math-block">$$P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$$</div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Conditional Definition:</strong> \(P(H|E) = \frac{P(H \cap E)}{P(E)}\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Product Rule:</strong> \(P(H \cap E) = P(E|H) \cdot P(H)\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Substitution:</strong> Combine the two to get the inverted relationship.</div></div>
+    <div class="math-block">$$P(H|E) = \frac{P(E|H)P(H)}{P(E)}$$</div>
     <p>To calculate \(P(E)\), we often use the <strong>Law of Total Probability</strong>:</p>
     <div class="math-block">$$P(E) = P(E|H)P(H) + P(E|H^c)P(H^c)$$</div>
 
@@ -212,20 +224,36 @@ print(f"P(A|B) Simulated: {conditional_prob:.4f}")
     <p>In standard Neural Networks, weights are fixed numbers. In <strong>BNNs</strong>, weights are <strong>probability distributions</strong>.</p>
     <div class="callout info"><div class="callout-icon">🧠</div><div class="callout-body"><strong>Benefit:</strong> The model can tell you "I don't know." If it sees data far from its training set, the variance in the weight distributions leads to high uncertainty in the output.</div></div>
 
-    <h2 id="example">Illustrative Example: Medical Testing</h2>
+    <h2 id="example">4. Illustrative Example: Medical Testing</h2>
     <div class="example-box">
-      <h4>Problem: Disease Testing Paradox</h4>
-      <p>A disease affects <strong>1%</strong> of the population. A test is <strong>99% accurate</strong> (if you have it, it's positive 99% of the time) but has a <strong>2% false-positive rate</strong>. If you test positive, what is the probability you actually have the disease?</p>
-      <ol>
-        <li><strong>Prior \(P(D)\):</strong> \(0.01\)</li>
-        <li><strong>Likelihood \(P(+|D)\):</strong> \(0.99\)</li>
-        <li><strong>False Positive \(P(+|\text{no }D)\):</strong> \(0.02\)</li>
-        <li><strong>Calculate Evidence \(P(+)\):</strong></li>
-      </ol>
-      <div class="math-block">$$P(+) = (0.99 \times 0.01) + (0.02 \times 0.99) = 0.0099 + 0.0198 = 0.0297$$</div>
-      <p><strong>Calculate Posterior \(P(D|+)\):</strong></p>
-      <div class="math-block">$$P(D|+) = \frac{0.99 \times 0.01}{0.0297} = \frac{0.0099}{0.0297} \approx 0.333$$</div>
-      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> Even with a "99% accurate" test, you only have a <strong>33.3%</strong> chance of having the disease because the disease is so rare! This is the power of the prior.</div></div>
+      <h4>Problem: The Disease Testing Paradox</h4>
+      <p>A disease affects <strong>1%</strong> of the population (\(P(H) = 0.01\)). A test is <strong>99% accurate</strong> (\(P(E|H) = 0.99\)) but has a <strong>2% false positive rate</strong> (\(P(E|H^c) = 0.02\)). If you test positive, what is the probability you have the disease?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Evidence \(P(E)\):</strong> Total probability of a positive test.</div></div>
+      <div class="math-block">$$P(E) = (0.99 \times 0.01) + (0.02 \times 0.99) = 0.0297$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Bayes:</strong> \(P(H|E) = \frac{0.99 \times 0.01}{0.0297}\).</div></div>
+
+      <div class="math-block">$$P(H|E) \approx 0.333$$</div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> Despite the "99% accuracy," the posterior is only <strong>33.3%</strong>. This happens because the disease is so rare that the small false positive rate still produces more "false" positives than "true" ones.</div></div>
+    </div>
+
+    <h2 id="spam-example">5. Illustrative Example: Spam Filters</h2>
+    <div class="example-box">
+      <h4>Problem: Classifying "Urgent" Emails</h4>
+      <p>40% of your emails are Spam. The word <strong>"Urgent"</strong> appears in 80% of Spam but only 10% of Ham (Normal). You receive an email with "Urgent". Is it Spam?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define Priors:</strong> \(P(\text{Spam}) = 0.4\), \(P(\text{Ham}) = 0.6\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Likelihoods:</strong> \(P(\text{Urgent}|\text{Spam}) = 0.8\), \(P(\text{Urgent}|\text{Ham}) = 0.1\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Posterior:</strong> \(P(\text{Spam}|\text{Urgent}) = \frac{0.8 \times 0.4}{(0.8 \times 0.4) + (0.1 \times 0.6)}\).</div></div>
+
+      <div class="math-block">$$P(\text{Spam}|\text{Urgent}) = \frac{0.32}{0.32 + 0.06} = \frac{0.32}{0.38} \approx 0.84$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Since the probability (84%) is high, the model correctly flags this as Spam. Knowledge of the word "Urgent" shifted our belief from 40% to 84%.</div></div>
+    </div>
+    <div class="my-10">
+       <visualizer topic="BayesTheorem" />
     </div>
 
     <h2 id="implementation">Implementation: Naive Bayes Logic in Python</h2>
@@ -259,7 +287,7 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     <div class="linking-rule">
       <strong>Next Step:</strong> Bayes' Theorem works on events. To handle data, we must map these events to numbers using <strong><a href="#/mathematics/probability/random-variables">Random Variables & Functions</a></strong>.
     </div>
-  `},i={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
+  `},t={id:"random-variables",title:"Random Variables & Functions",description:"A Random Variable (RV) is a functional mapping that assigns a numerical value to each outcome in a sample space. It allows us to use mathematical tools to describe stochastic processes.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Probability · Random Variables &amp; Functions</div>
       <h1>Random Variables &amp; Functions</h1>
@@ -273,7 +301,8 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
       <a href="#core" class="sub">↳ 2. Continuous Random Variables (PDF)</a>
       <a href="#cdf">Cumulative Distribution Function (CDF)</a>
       <a href="#derivation">Mathematical Derivation: PDF to Probability</a>
-      <a href="#examples">Illustrative Examples</a>
+      <a href="#examples">3. Illustrative Example: Bernoulli & Uniform</a>
+      <a href="#expectation-example">4. Illustrative Example: Expectation</a>
       <a href="#implementation">Implementation in Python (SciPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -322,25 +351,46 @@ print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}"
     <p>From the fundamental theorem of calculus, if \(F(x)\) is the CDF:</p>
     <div class="math-block">$$P(a \le X \le b) = F(b) - F(a)$$</div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples">3. Illustrative Example: Bernoulli & Uniform</h2>
 
     <div class="example-box">
-      <h4>Discrete Case: Bernoulli Trial</h4>
-      <p>Imagine a single coin flip where Heads \((H) = 1\) and Tails \((T) = 0\).</p>
-      <p><strong>PMF:</strong> \(P(X=1) = p\), \(P(X=0) = 1-p\).</p>
-      <p><strong>CDF:</strong></p>
-      <ul>
-        <li>If \(x < 0,\; F(x) = 0\)</li>
-        <li>If \(0 \le x < 1,\; F(x) = 1-p\)</li>
-        <li>If \(x \ge 1,\; F(x) = 1\)</li>
-      </ul>
+      <h4>Discrete Case: Bernoulli Trial (Coin Flip)</h4>
+      <p>Let \(X = 1\) for Heads and \(X = 0\) for Tails, with \(P(H) = p\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define PMF:</strong> \(P(X=x) = p^x (1-p)^{1-x}\) for \(x \in \{0, 1\}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Construct CDF:</strong> The probability "accumulates" at 0 and 1.</div></div>
+
+      <div class="math-block">$$F(x) = \begin{cases} 0 & x < 0 \\ 1-p & 0 \le x < 1 \\ 1 & x \ge 1 \end{cases}$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> If \(p=0.7\), the CDF "jumps" from 0 to 0.3 at \(x=0\), and from 0.3 to 1.0 at \(x=1\).</div></div>
     </div>
 
     <div class="example-box">
-      <h4>Continuous Case: Uniform Distribution</h4>
-      <p>Suppose a random number generator picks any value between 0 and 10. The PDF is constant: \(f(x) = \frac{1}{10}\).</p>
-      <p><strong>What is \(P(2 \le X \le 5)\)?</strong></p>
-      <div class="math-block">$$P = \int_{2}^{5} \frac{1}{10} dx = \left[\frac{x}{10}\right]_{2}^{5} = \frac{5}{10} - \frac{2}{10} = 0.3$$</div>
+      <h4>Continuous Case: Uniform Interval</h4>
+      <p>A sensor measures temperature between 20°C and 30°C with equal density. What is \(P(22 < X < 25)\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define PDF:</strong> Height must be \(1/(30-20) = 0.1\) to ensure total area = 1.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Set up Integral:</strong> Probability is the area from 22 to 25.</div></div>
+
+      <div class="math-block">$$P(22 < X < 25) = \int_{22}^{25} 0.1 \, dx = [0.1x]_{22}^{25}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> \(0.1(25) - 0.1(22) = 2.5 - 2.2 = 0.3\).</div></div>
+      
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> For a uniform distribution, the probability is simply the <strong>width of the interval</strong> times the <strong>density height</strong>. \(3 \times 0.1 = 0.3\).</div></div>
+    </div>
+
+    <h2 id="expectation-example">4. Illustrative Example: Expectation</h2>
+    <div class="example-box">
+      <h4>Problem: Expected Value of a Weighted Die</h4>
+      <p>A "loaded" die has the following probabilities: \(P(6) = 0.5\), and \(P(1) = P(2) = P(3) = P(4) = P(5) = 0.1\). What is the expected roll \(E[X]\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Formula:</strong> \(E[X] = \sum x \cdot P(X=x)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sum standard faces:</strong> \((1+2+3+4+5) \times 0.1 = 15 \times 0.1 = 1.5\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Add the loaded face:</strong> \(6 \times 0.5 = 3.0\).</div></div>
+
+      <div class="math-block">$$E[X] = 1.5 + 3.0 = 4.5$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Even though the die only shows integers, the "average" outcome over many trials is 4.5. This is the "center of mass" of the distribution.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (SciPy)</h2>
@@ -396,7 +446,8 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
       <a href="#core" class="sub">↳ 3. Covariance Cov(X, Y)</a>
       <a href="#core" class="sub">↳ 4. Correlation ρ</a>
       <a href="#derivation">Mathematical Derivation: Variance Shortcut</a>
-      <a href="#example">Illustrative Example: Portfolio Risk</a>
+      <a href="#example">4. Illustrative Example: Portfolio Risk</a>
+      <a href="#scaling-example">5. Illustrative Example: Scaling & Shifts</a>
       <a href="#implementation">Implementation in Python (NumPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -448,29 +499,36 @@ print(f"Probability between -1 and 1: {prob_interval:.4f}")
     <h2 id="derivation">Mathematical Derivation: Variance Shortcut</h2>
     <p>It is often easier to calculate variance using the shortcut formula. Here is the step-by-step derivation:</p>
 
-    <div class="step-box"><div class="step-num">1</div><div>Start with the definition: \(Var(X) = E[(X - \mu)^2]\) where \(\mu = E[X]\).</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>Expand the square: \(E[X^2 - 2X\mu + \mu^2]\).</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>Use the <strong>Linearity of Expectation</strong> \((E[A+B] = E[A] + E[B])\): \[Var(X) = E[X^2] - E[2X\mu] + E[\mu^2]\]</div></div>
-    <div class="step-box"><div class="step-num">4</div><div>Since \(\mu\) is a constant, \(E[2X\mu] = 2\mu E[X] = 2\mu^2\): \[Var(X) = E[X^2] - 2\mu^2 + \mu^2\]</div></div>
-    <div class="step-box"><div class="step-num">5</div><div>Simplify:</div></div>
-    <div class="math-block">$$Var(X) = E[X^2] - \mu^2 = E[X^2] - (E[X])^2$$</div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Definition:</strong> \(Var(X) = E[(X - \mu)^2]\) where \(\mu = E[X]\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Expand Square:</strong> \(E[X^2 - 2X\mu + \mu^2]\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Linearity:</strong> \(E[X^2] - E[2X\mu] + E[\mu^2]\).</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>Constants:</strong> \(E[X^2] - 2\mu E[X] + \mu^2 = E[X^2] - 2\mu^2 + \mu^2\).</div></div>
+    <div class="step-box"><span class="step-num">5</span><div><strong>Simplify:</strong></div></div>
+    <div class="math-block">$$Var(X) = E[X^2] - (E[X])^2$$</div>
 
-    <h2 id="example">Illustrative Example: Portfolio Risk</h2>
+    <h2 id="example">4. Illustrative Example: Portfolio Risk</h2>
     <div class="example-box">
-      <h4>Problem: Two-Stock Portfolio</h4>
-      <p>You have two stocks, \(X\) and \(Y\).</p>
-      <ul>
-        <li>\(E[X] = 10\%\), \(Var(X) = 4\)</li>
-        <li>\(E[Y] = 12\%\), \(Var(Y) = 9\)</li>
-        <li>\(Cov(X, Y) = 2\)</li>
-      </ul>
-      <p><strong>Calculate the Expected Return and Variance of a portfolio \(P = 0.5X + 0.5Y\):</strong></p>
-      <ol>
-        <li><strong>Expected Return:</strong> \(E[P] = 0.5(10) + 0.5(12) = 11\%\).</li>
-        <li><strong>Portfolio Variance:</strong></li>
-      </ol>
-      <div class="math-block">$$Var(0.5X + 0.5Y) = 0.5^2 Var(X) + 0.5^2 Var(Y) + 2(0.5)(0.5) Cov(X, Y)$$
-$$Var(P) = 0.25(4) + 0.25(9) + 0.5(2) = 1 + 2.25 + 1 = 4.25$$</div>
+      <h4>Problem: Two-Stock Variance</h4>
+      <p>Consider two stocks \(X\) and \(Y\) with returns \(E[X] = 10, E[Y] = 12\) and variances \(Var(X) = 4, Var(Y) = 9\). If their covariance is \(2\), what is the variance of a 50/50 portfolio \(P = 0.5X + 0.5Y\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Expectation (Linearity):</strong> \(E[P] = 0.5(10) + 0.5(12) = 11\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Variance Rule:</strong> \(Var(aX + bY) = a^2Var(X) + b^2Var(Y) + 2abCov(X, Y)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Substitute:</strong> \(0.25(4) + 0.25(9) + 2(0.5)(0.5)(2)\).</div></div>
+
+      <div class="math-block">$$Var(P) = 1 + 2.25 + 1 = 4.25$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Insight:</strong> The portfolio variance (4.25) is lower than simply averaging the individual variances \((4+9)/2 = 6.5\) because the stocks are not perfectly correlated. This is "Diversification" in action.</div></div>
+    </div>
+
+    <h2 id="scaling-example">5. Illustrative Example: Scaling & Shifts</h2>
+    <div class="example-box">
+      <h4>Problem: Mean & Variance Transformations</h4>
+      <p>Imagine your data \(X\) has mean \(\mu=5\) and variance \(\sigma^2=16\). You transform the data by multiplying by 3 and adding 10: \(Y = 3X + 10\). What are the new mean and variance?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>New Mean:</strong> \(E[3X + 10] = 3E[X] + 10 = 3(5) + 10 = 25\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>New Variance:</strong> \(Var(3X + 10) = 3^2 Var(X) = 9(16) = 144\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Mean shifts linearly \((25)\). Variance scales by the <strong>square</strong> of the multiplier \((144)\). Added constants (10) change the mean but have <strong>zero effect</strong> on variance (spread).</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (NumPy)</h2>
@@ -530,7 +588,8 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
       <a href="#continuous">Continuous Distributions</a>
       <a href="#continuous" class="sub">↳ 4. Gaussian · 5. Uniform · 6. Exponential · 7. Laplace</a>
       <a href="#derivation">Mathematical Derivation: Gaussian to Standard Normal</a>
-      <a href="#comparison">Illustrative Example: Choosing the Right Distribution</a>
+      <a href="#binomial-example">3. Illustrative Example: Binomial (Successes)</a>
+      <a href="#gaussian-example">4. Illustrative Example: Gaussian (Z-score)</a>
       <a href="#implementation">Implementation in Python (SciPy)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -587,6 +646,9 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
         <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
         <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
       </div>
+      <div class="my-10" style="grid-column: span 2;">
+        <visualizer topic="Distributions" />
+      </div>
       <div class="premium-def-box">
         <div class="premium-def-title">Continuous · #5</div>
         <h4>Uniform Distribution</h4>
@@ -615,15 +677,29 @@ print(f"Correlation: {correlation:.4f}")  # Close to 1 (Strong positive)
     <div class="math-block">$$Z = \frac{x - \mu}{\sigma}$$</div>
     <p>If \(X \sim \mathcal{N}(\mu, \sigma^2)\), then \(Z \sim \mathcal{N}(0, 1)\). This is the math behind <code>StandardScaler</code> in Scikit-Learn.</p>
 
-    <h2 id="comparison">Illustrative Example: Choosing the Right Distribution</h2>
+    <h2 id="binomial-example">3. Illustrative Example: Binomial (Binary Successes)</h2>
     <div class="example-box">
-      <h4>Model Error Comparison</h4>
-      <p>Imagine you are modeling the errors of a model:</p>
-      <ol>
-        <li>If errors are symmetric and cluster around zero, use <strong>Gaussian</strong>.</li>
-        <li>If you want to allow for "outliers" (heavy tails), use <strong>Laplace</strong>.</li>
-        <li>If errors are only positive and represent "wait time," use <strong>Exponential</strong>.</li>
-      </ol>
+      <h4>Problem: Tracking Clicks on Ad Impressions</h4>
+      <p>An ad has a Click-Through Rate (CTR) of \(p=0.1\). If we show it to \(n=5\) users, what is the probability that <strong>exactly 2</strong> will click?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Plug in Values:</strong> \(\binom{5}{2} = 10\). Calculated as \(\frac{5!}{2!3!} = 10\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> \(10 \times (0.1)^2 \times (0.9)^3\).</div></div>
+
+      <div class="math-block">$$P(X=2) = 10 \times 0.01 \times 0.729 = 0.0729$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a ~7.3% chance of getting exactly 2 clicks. Note how the probability drops off as we move away from the expectation of \(np = 0.5\).</div></div>
+    </div>
+
+    <h2 id="gaussian-example">4. Illustrative Example: Gaussian (Z-score)</h2>
+    <div class="example-box">
+      <h4>Problem: Standardizing "Wait Times"</h4>
+      <p>A server's response time follows \(\mathcal{N}(500ms, 100^2)\). If a request takes \(650ms\), how many standard deviations from the mean is it?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Recall Formula:</strong> \(Z = \frac{x - \mu}{\sigma}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(Z = \frac{650 - 500}{100} = \frac{150}{100} = 1.5\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> A Z-score of 1.5 means the request was significantly slower than average. In ML, we often <strong>clip</strong> values with Z-scores \(|Z| > 3\) as they are likely outliers.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (SciPy)</h2>
@@ -676,8 +752,8 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
       <a href="#perspectives" class="sub">↳ 1. Joint Distribution P(X, Y)</a>
       <a href="#perspectives" class="sub">↳ 2. Marginal Distribution P(X)</a>
       <a href="#perspectives" class="sub">↳ 3. Conditional Distribution P(X|Y)</a>
-      <a href="#rules">Mathematical Derivation: Sum &amp; Product Rules</a>
-      <a href="#example">Illustrative Example: The Weather Table</a>
+      <a href="#marginal-example">4. Illustrative Example: Marginalization</a>
+      <a href="#covariance-example">5. Illustrative Example: Covariance</a>
       <a href="#implementation">Implementation in Python (Multivariate Gaussian)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -722,40 +798,56 @@ print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
       </div>
     </div>
 
-    <h2 id="rules">Mathematical Derivation: Sum &amp; Product Rules</h2>
-    <p>These two rules are the "Laws of Physics" for Machine Learning inference.</p>
-
-    <h3>1. The Sum Rule (Marginalization)</h3>
-    <div class="math-block">$$P(X) = \sum_{Y} P(X, Y)$$</div>
-    <p><em>This allows us to ignore "nuisance variables" we don't care about.</em></p>
-
-    <h3>2. The Product Rule</h3>
-    <div class="math-block">$$P(X, Y) = P(Y|X)P(X)$$</div>
-    <p><em>This allows us to break a complex joint distribution into simpler conditional components.</em></p>
-
-    <p>Combining these two gives us <strong>Bayes' Theorem</strong> in a multivariate context:</p>
-    <div class="math-block">$$P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{Y} P(X|Y)P(Y)}$$</div>
-
-    <h2 id="example">Illustrative Example: The Weather Table</h2>
+    <h2 id="rules">3. Core Rules of Probability</h2>
     <div class="example-box">
-      <h4>Joint Distribution of Weather and Cavity</h4>
-      <p>Imagine a joint distribution of Weather \((X)\) and Cavity \((Y)\) at a dentist's office:</p>
+      <h4>The "Laws of Physics" for ML Inference</h4>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Sum Rule (Marginalization):</strong> To find \(P(X)\), we "sum out" all \(Y\)'s.</div></div>
+      <div class="math-block">$$P(X) = \sum_{Y} P(X, Y)$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Product Rule:</strong> Relates Joint and Conditional.</div></div>
+      <div class="math-block">$$P(X, Y) = P(Y|X)P(X)$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Combined Form (Bayes):</strong></div></div>
+      <div class="math-block">$$P(Y|X) = \frac{P(X|Y)P(Y)}{\sum_{Y} P(X|Y)P(Y)}$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Why?</strong> The denominator is the <strong>Evidence</strong>. It ensures the posterior probabilities sum to 1. In complex ML models, this sum is often impossible to compute directly, leading to <strong>Variational Inference</strong>.</div></div>
+    </div>
+
+    <h2 id="marginal-example">4. Illustrative Example: The Weather Dataset</h2>
+    <div class="example-box">
+      <h4>Problem: Extracting Marginals from Joint Data</h4>
+      <p>Consider a simplified joint distribution of Weather (\(X\)) and mood (\(Y\)):</p>
+      
       <div class="premium-table-wrap">
         <table class="premium-table">
-          <thead><tr><th></th><th>Cavity (Y=1)</th><th>No Cavity (Y=0)</th><th>Marginal P(X)</th></tr></thead>
+          <thead><tr><th></th><th>Happy (Y=1)</th><th>Neutral (Y=0)</th></tr></thead>
           <tbody>
-            <tr><td><strong>Sunny (X=1)</strong></td><td>0.06</td><td>0.54</td><td><strong>0.60</strong></td></tr>
-            <tr><td><strong>Rainy (X=0)</strong></td><td>0.04</td><td>0.36</td><td><strong>0.40</strong></td></tr>
-            <tr><td><strong>Marginal P(Y)</strong></td><td><strong>0.10</strong></td><td><strong>0.90</strong></td><td><strong>1.00</strong></td></tr>
+            <tr><td><strong>Sunny (X=1)</strong></td><td>0.60</td><td>0.10</td></tr>
+            <tr><td><strong>Rainy (X=0)</strong></td><td>0.05</td><td>0.25</td></tr>
           </tbody>
         </table>
       </div>
-      <ul>
-        <li><strong>Joint Probability:</strong> \(P(\text{Sunny, Cavity}) = 0.06\).</li>
-        <li><strong>Marginal Probability:</strong> What is the probability it is Sunny? \(0.06 + 0.54 = 0.60\).</li>
-        <li><strong>Conditional Probability:</strong> If it is Sunny, what is the chance of a Cavity?</li>
-      </ul>
-      <div class="math-block">$$P(\text{Cavity}|\text{Sunny}) = \frac{P(\text{Sunny, Cavity})}{P(\text{Sunny})} = \frac{0.06}{0.60} = 0.10$$</div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Find Marginal P(Sunny):</strong> Sum across the first row: \(0.60 + 0.10 = 0.70\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Marginal P(Happy):</strong> Sum down the first column: \(0.60 + 0.05 = 0.65\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Conditional P(Happy | Rainy):</strong> Focus only on \(X=0\) row and normalize.</div></div>
+
+      <div class="math-block">$$P(Y=1|X=0) = \frac{0.05}{0.05 + 0.30} = \frac{0.05}{0.35} \approx 0.143$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> While the overall probability of happiness is 65%, seeing "Rainy" weather drops it drastically to ~14%.</div></div>
+    </div>
+
+    <h2 id="covariance-example">5. Illustrative Example: Covariance</h2>
+    <div class="example-box">
+      <h4>Problem: Analyzing Multi-Sensor Data</h4>
+      <p>Two sensors \(X\) and \(Y\) measure temperature at different locations. We observe 3 pairs: \((10, 12), (15, 17), (20, 22)\). The means are \(\mu_x = 15, \mu_y = 17\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Covariance:</strong> \(Cov(X, Y) = \frac{1}{n} \sum (x_i - \mu_x)(y_i - \mu_y)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \((-5 \times -5) + (0 \times 0) + (5 \times 5) = 25 + 0 + 25 = 50\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(50 / 3 \approx 16.67\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Insight:</strong> The positive covariance tells us the sensors move together (syncronized). In ML, this redundancy is the core principle behind PCA dimension reduction.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (Multivariate Gaussian)</h2>
@@ -799,7 +891,7 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Once we can model multiple variables, we need to understand the theoretical safety net of <strong><a href="#/mathematics/probability/laws">Probability Laws (LLN & CLT)</a></strong>.
     </div>
-  `},r={id:"laws",title:"Law of Large Numbers & Central Limit Theorem",description:"The Law of Large Numbers (LLN) and the Central Limit Theorem (CLT) explain why we can trust data samples to represent a whole population, justifying model generalization.",html:String.raw`
+  `},n={id:"laws",title:"Law of Large Numbers & Central Limit Theorem",description:"The Law of Large Numbers (LLN) and the Central Limit Theorem (CLT) explain why we can trust data samples to represent a whole population, justifying model generalization.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚖️ Probability · Laws</div>
       <h1>Law of Large Numbers &amp; Central Limit Theorem</h1>
@@ -811,8 +903,8 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
       <a href="#lln">1. Law of Large Numbers (LLN)</a>
       <a href="#clt">2. Central Limit Theorem (CLT)</a>
       <a href="#clt" class="sub">↳ Core Properties</a>
-      <a href="#se">Mathematical Derivation: Standard Error</a>
-      <a href="#example">Illustrative Example: Die Rolls</a>
+      <a href="#lln-example">4. Illustrative Example: LLN (Coin Flips)</a>
+      <a href="#clt-example">5. Illustrative Example: CLT (Dice Sums)</a>
       <a href="#implementation">Implementation in Python (Visualizing CLT)</a>
       <a href="#applications">Applications in ML</a>
       <a href="#takeaways">Key Takeaways</a>
@@ -855,25 +947,43 @@ print(f"Joint Density at [175, 75]: {joint_pdf:.4f}")
 
     <p><strong>Mathematical Definition:</strong></p>
     <div class="math-block">$$\bar{X}_n \approx \mathcal{N}\!\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
+    <div class="my-10">
+      <visualizer topic="Distributions" />
+    </div>
 
     <h2 id="se">Mathematical Derivation: Standard Error</h2>
     <p>Why does the spread of our sample mean decrease as we collect more data?</p>
 
-    <div class="step-box"><div class="step-num">1</div><div>Let \(S_n = X_1 + X_2 + \dots + X_n\).</div></div>
-    <div class="step-box"><div class="step-num">2</div><div>The variance of the sum of independent variables is the sum of their variances: \(Var(S_n) = n\sigma^2\)</div></div>
-    <div class="step-box"><div class="step-num">3</div><div>We are interested in the mean \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
-    <div class="step-box"><div class="step-num">4</div><div>Using the property \(Var(aX) = a^2 Var(X)\):</div></div>
-    <div class="math-block">$$Var\!\left(\frac{S_n}{n}\right) = \frac{1}{n^2} Var(S_n) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
-    <div class="step-box"><div class="step-num">5</div><div><strong>Conclusion:</strong> As \(n\) grows, the variance \(\frac{\sigma^2}{n}\) shrinks toward zero, concentrating our estimate around the true mean.</div></div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Sum of Variables:</strong> Let \(S_n = X_1 + X_2 + \dots + X_n\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Summed Variance:</strong> For independent variables, \(Var(S_n) = n\sigma^2\).</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Mean Variable:</strong> We define the sample mean as \(\bar{X}_n = \frac{S_n}{n}\).</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>Scaling Variance:</strong> Using \(Var(aX) = a^2 Var(X)\):</div></div>
+    <div class="math-block">$$Var\!\left(\frac{1}{n} S_n\right) = \frac{1}{n^2} (n\sigma^2) = \frac{\sigma^2}{n}$$</div>
+    
+    <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Conclusion:</strong> As \(n \to \infty\), the variance \(\frac{\sigma^2}{n} \to 0\). This proves that the sample mean becomes an increasingly precise estimate of the truth.</div></div>
 
-    <h2 id="example">Illustrative Example: Die Rolls</h2>
+    <h2 id="lln-example">4. Illustrative Example: LLN (Trial Convergence)</h2>
     <div class="example-box">
-      <h4>LLN and CLT in Action</h4>
-      <ul>
-        <li><strong>Original Distribution:</strong> A single die roll is <strong>Uniform</strong> (flat), with \(\mu = 3.5\).</li>
-        <li><strong>LLN Application:</strong> If you roll a die 1,000 times and average them, you will get a value very close to 3.5.</li>
-        <li><strong>CLT Application:</strong> If you ask 500 people to each roll a die 30 times and report their average, and then you plot those 500 averages, you will see a perfect <strong>Bell Curve</strong> centered at 3.5, even though the die itself isn't "bell-shaped."</li>
-      </ul>
+      <h4>Problem: Tracking the Mean of a Fair Coin</h4>
+      <p>If you flip a coin and record the cumulative fraction of Heads, how does it behave over time?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>At \(n=10\):</strong> You might see 7 Heads (70%). The noise is high.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>At \(n=100\):</strong> You might see 53 Heads (53%). The noise is shrinking.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>At \(n=10,000\):</strong> You might see 5002 Heads (50.02%).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Observed mean stabilizes at the theoretical mean (0.5). In ML, this ensures that training on 1M images gives a representative model of the real world.</div></div>
+    </div>
+
+    <h2 id="clt-example">5. Illustrative Example: CLT (Emergence of Normality)</h2>
+    <div class="example-box">
+      <h4>Problem: Summing Uniform Die Rolls</h4>
+      <p>A single die roll is flat (Uniform). What is the distribution of the <strong>average</strong> of 30 rolls?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Single Roll:</strong> Probability of 1, 2, 3, 4, 5, 6 is exactly \(1/6\). (Square/Flat shape).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sample Mean:</strong> Roll 30 dice and take the average. Repeat this process 1,000 times.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Observation:</strong> Plotting these 1,000 averages creates a <strong>Gaussian Bell Curve</strong>.</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> This is why Gaussian noise / Residuals are so common in ML. Most errors are the "sum" of many tiny, independent random effects, which naturally form a Normal distribution.</div></div>
     </div>
 
     <h2 id="implementation">Implementation in Python (Visualizing CLT)</h2>
@@ -908,7 +1018,7 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> These laws provide the theoretical safety net. Now that we know samples represent populations, move to <strong><a href="#/mathematics/probability/bayes-mle">Maximum Likelihood Estimation (MLE)</a></strong> to find the parameters that best describe your data.
     </div>
-  `},n={id:"bayes-mle",title:"Bayes' Theorem & MLE",description:"Maximum Likelihood Estimation (MLE) and Bayesian Inference are two different philosophies for 'training' a model by finding the best parameters for a probability distribution.",color:"#FFC107",html:String.raw`
+  `},r={id:"bayes-mle",title:"Bayes' Theorem & MLE",description:"Maximum Likelihood Estimation (MLE) and Bayesian Inference are two different philosophies for 'training' a model by finding the best parameters for a probability distribution.",color:"#FFC107",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎯 Probability · Bayes' Theorem & MLE</div>
       <h1>Bayes' Theorem &amp; MLE</h1>
@@ -921,8 +1031,8 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
       <a href="#bayes">2. Bayes' Theorem Revisited</a>
       <a href="#likelihood">3. Likelihood vs. Probability</a>
       <a href="#mle">4. Maximum Likelihood Estimation (MLE)</a>
-      <a href="#mle" class="sub">↳ The Log-Likelihood Trick</a>
-      <a href="#comparison">MLE vs. MAP (Maximum A Posteriori)</a>
+      <a href="#mle-example">5. Illustrative Example: MLE (Coin Bias)</a>
+      <a href="#map-example">6. Illustrative Example: MAP (Beta Prior)</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
 
@@ -964,21 +1074,45 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
     </div>
 
     <h2 id="likelihood">3. Likelihood vs. Probability</h2>
-    <p>This is a subtle but vital distinction:</p>
-    <ul>
-      <li><strong>Probability \(P(D|\theta)\):</strong> We fix \(\theta\) and vary \(D\). "Given this fair coin, what's the chance of 3 heads?"</li>
-      <li><strong>Likelihood \(L(\theta|D)\):</strong> We fix \(D\) and vary \(\theta\). "Given we saw 3 heads, how likely is it that the coin's fairness parameter is \(0.8\)?</li>
-    </ul>
+    <div class="example-box">
+      <h4>The "Inversion" of Perspective</h4>
+      <p>Imagine a coin with success probability \(\theta\). You flip it and get Heads (H).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Probability \(P(H|\theta=0.5)\):</strong> You fix the coin as fair. The chance of H is \(0.5\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Likelihood \(L(\theta=0.5|H)\):</strong> You fix the data (Heads). How well does "fairness" explain this observation?</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Crucially:</strong> Likelihood is <strong>not</strong> a probability distribution. It doesn't sum to 1. It is a "score" of how well parameters fit the facts.</div></div>
+    </div>
 
     <h2 id="mle">4. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE asks: "Which parameter \(\theta\) makes the observed data \(D\) most probable?" It ignores the Prior \(P(\theta)\) entirely.</p>
     <div class="math-block">$$\hat{\theta}_{MLE} = \arg\max_{\theta} P(D|\theta)$$</div>
 
-    <h3>The Log-Likelihood Trick</h3>
-    <p>Data points are usually independent, so \(P(D|\theta) = P(d_1|\theta) \cdot P(d_2|\theta) \cdot \dots \cdot P(d_n|\theta)\). Multiplying many small probabilities leads to numbers so small that computers can't handle them (underflow).</p>
-    <p>To fix this, we maximize the <strong>Log-Likelihood</strong>. Since \(\log(x)\) is a monotonically increasing function, the \(\theta\) that maximizes \(\log(P)\) also maximizes \(P\).</p>
-    <div class="math-block">$$\log \left( \prod P(d_i|\theta) \right) = \sum \log(P(d_i|\theta))$$</div>
-    <div class="callout tip"><div class="callout-icon">🚀</div><div class="callout-body"><strong>Why?</strong> It turns difficult multiplication into easy addition and makes the derivatives much simpler to compute!</div></div>
+    <h2 id="mle-example">5. Illustrative Example: MLE (Estimating Coin Bias)</h2>
+    <div class="example-box">
+      <h4>Problem: Finding the "Most Likely" \(\theta\)</h4>
+      <p>In 10 flips of a mysterious coin, you see 8 Heads and 2 Tails. What is the MLE estimate of \(\theta\)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Likelihood Function:</strong> \(L(\theta) = \theta^8 (1-\theta)^2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Log-Likelihood:</strong> \(\ln L(\theta) = 8 \ln \theta + 2 \ln(1-\theta)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Optimize:</strong> Set derivative to zero: \(\frac{8}{\theta} - \frac{2}{1-\theta} = 0\).</div></div>
+
+      <div class="math-block">$$8(1-\theta) = 2\theta \implies 8 = 10\theta \implies \hat{\theta}_{MLE} = 0.8$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> MLE perfectly matches the observed frequency (8/10). It assumes the data is all that matters.</div></div>
+    </div>
+
+    <h2 id="map-example">6. Illustrative Example: MAP (Beta Prior)</h2>
+    <div class="example-box">
+      <h4>Problem: When Priors Pull Back</h4>
+      <p>Using the same 8/10 data, but now we have a <strong>Prior</strong> that the coin is fair (\(\mu=0.5\)). This prior behaves like having seen 2 virtual Heads and 2 virtual Tails previously.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Posterior Logic:</strong> Combine observed (8H, 2T) with prior (2H, 2T).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>New Totals:</strong> 10 Heads, 4 Tails. Total flips = 14.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>MAP Estimate:</strong> \(\hat{\theta}_{MAP} = \frac{10}{14} \approx 0.71\).</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> See how the Prior "pulled" the estimate from 0.8 back towards 0.5? This is <strong>Regularization</strong>. It prevents the model from overreacting to a small sample of 10 flips.</div></div>
+    </div>
 
     <h2 id="comparison">MLE vs. MAP</h2>
     <p><strong>MAP (Maximum A Posteriori)</strong> is like MLE but it includes the Prior belief:</p>
@@ -1216,4 +1350,4 @@ print(f"Sample Means (first 5): {sample_means[:5]}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,o,r,n,l]};export{d as PROBABILITY_DATA};
+  `,sections:[e,i,t,a,s,o,n,r,l]};export{d as PROBABILITY_DATA};

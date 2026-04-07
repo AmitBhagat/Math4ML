@@ -1,4 +1,4 @@
-const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",color:"#0D47A1",html:String.raw`
+const t={id:"vectors",title:"Introduction to Vectors",description:"In Machine Learning, Vectors are the fundamental building blocks used to represent data. Whether it is a single pixel in an image, a word in a natural language model, or a feature set for a house price prediction, everything is mathematically represented as a vector.",color:"#0D47A1",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
       <h1>Introduction to Vectors</h1>
@@ -46,14 +46,15 @@ const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Le
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Dot Product Calculation</h4>
+      <h4>Problem: Dot Product Calculation</h4>
       <p>Calculate the dot product of \(\mathbf{a} = [2, 3]\) and \(\mathbf{b} = [4, -1]\).</p>
-      <ol>
-        <li>Multiply corresponding components: \((2 \times 4) + (3 \times -1)\)</li>
-        <li>Sum them: \(8 - 3 = 5\)</li>
-      </ol>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Multiply corresponding components:</strong> \((2 \times 4)\) and \((3 \times -1)\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Sum the results:</strong> \(8 + (-3) = 5\).</div></div>
+
       <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = (2)(4) + (3)(-1) = 8 - 3 = 5$$</div>
-      <p><strong>Result:</strong> 5. Since the value is positive, the vectors point in a similar general direction.</p>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> The result is positive, meaning the vectors point in a similar general direction (the angle \(\theta\) is acute).</div></div>
     </div>
 
     <visualizer topic="DotProduct" />
@@ -77,10 +78,16 @@ const e={id:"vectors",title:"Introduction to Vectors",description:"In Machine Le
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing Norms</h4>
-      <p>For \(\mathbf{v} = [3, -4]\):</p>
+      <h4>Problem: Computing L₁ and L₂ Norms</h4>
+      <p>For a vector \(\mathbf{v} = [3, -4]\), calculate its length using different metrics.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>L₁ Norm (Manhattan):</strong> Sum of absolute values.</div></div>
       <div class="math-block">$$\|\mathbf{v}\|_1 = |3| + |-4| = 3 + 4 = 7$$</div>
-      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = \sqrt{25} = 5$$</div>
+
+      <div class="step-box"><span class="step-num">2</span><div><strong>L₂ Norm (Euclidean):</strong> Square root of sum of squares.</div></div>
+      <div class="math-block">$$\|\mathbf{v}\|_2 = \sqrt{3^2 + (-4)^2} = \sqrt{9 + 16} = 5$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The L₁ norm is larger than the L₂ norm. In regularization, L₁ (Lasso) creates "sharp" constraints that force weights to zero, while L₂ (Ridge) creates "smooth" constraints.</div></div>
     </div>
 
     <h2 id="span">3. Linear Combinations, Span, and Basis</h2>
@@ -143,7 +150,7 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered core vector foundations, let's explore how we grid these vectors into <strong><a href="#/mathematics/linear-algebra/matrices">Matrix Essentials</a></strong>.
     </div>
-  `},t={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",color:"#1976D2",html:String.raw`
+  `},e={id:"matrices",title:"Introduction to Matrices",description:"In Machine Learning, a Matrix is a rectangular array of numbers arranged in rows and columns. While a vector represents a single data point, a matrix typically represents an entire Dataset, where rows correspond to individual samples and columns correspond to features.",color:"#1976D2",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🟪 Linear Algebra · Matrices</div>
       <h1>Introduction to Matrices</h1>
@@ -192,15 +199,17 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: 2×2 Matrix Multiplication</h4>
-      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\).</p>
-      <ul>
-        <li>\(c_{11} = (1 \times 5) + (2 \times 7) = 5 + 14 = 19\)</li>
-        <li>\(c_{12} = (1 \times 6) + (2 \times 8) = 6 + 16 = 22\)</li>
-        <li>\(c_{21} = (3 \times 5) + (4 \times 7) = 15 + 28 = 43\)</li>
-        <li>\(c_{22} = (3 \times 6) + (4 \times 8) = 18 + 32 = 50\)</li>
-      </ul>
-      <div class="math-block">$$C = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      <h4>Problem: 2×2 Matrix Multiplication</h4>
+      <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) and \(B = \begin{bmatrix} 5 & 6 \\ 7 & 8 \end{bmatrix}\). Calculate the product \(C = AB\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Row 1 × Column 1:</strong> \((1 \times 5) + (2 \times 7) = 19\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Row 1 × Column 2:</strong> \((1 \times 6) + (2 \times 8) = 22\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Row 2 × Column 1:</strong> \((3 \times 5) + (4 \times 7) = 43\).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Row 2 × Column 2:</strong> \((3 \times 6) + (4 \times 8) = 50\).</div></div>
+
+      <div class="math-block">$$C = \begin{bmatrix} 1(5)+2(7) & 1(6)+2(8) \\ 3(5)+4(7) & 3(6)+4(8) \end{bmatrix} = \begin{bmatrix} 19 & 22 \\ 43 & 50 \end{bmatrix}$$</div>
+      
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> Each entry in \(C\) captures how much the \(i\)-th row of the first matrix "aligns" with the \(j\)-th column of the second.</div></div>
     </div>
 
     <visualizer topic="Matrices" />
@@ -246,14 +255,30 @@ print(f"L1 Norm: {l1_norm}, L2 Norm: {l2_norm}")
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Finding the Inverse of a 2×2 Matrix</h4>
+      <h4>Problem: Finding the Inverse of a 2×2 Matrix</h4>
       <p>Find the inverse of \(A = \begin{bmatrix} 4 & 7 \\ 2 & 6 \end{bmatrix}\).</p>
-      <ol>
-        <li><strong>Determinant:</strong> \((4 \times 6) - (7 \times 2) = 24 - 14 = 10\)</li>
-        <li><strong>Swap and Negate:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\)</li>
-        <li><strong>Multiply by \(1/10\):</strong></li>
-      </ol>
-      <div class="math-block">$$A^{-1} = \frac{1}{10}\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix} = \begin{bmatrix} 0.6 & -0.7 \\ -0.2 & 0.4 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Determinant:</strong> \((4 \times 6) - (7 \times 2) = 10\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Swap diagonal, negate off-diagonal:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Scale by \(1/\det\):</strong> \(\frac{1}{10}\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div></div>
+
+      <div class="math-block">$$A^{-1} = \begin{bmatrix} 0.6 & -0.7 \\ -0.2 & 0.4 \end{bmatrix}$$</div>
+
+      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Check:</strong> Does \(AA^{-1} = I\)? \([4(0.6) + 7(-0.2)] = 2.4 - 1.4 = 1\). It works!</div></div>
+    </div>
+
+    <h2 id="composition">Illustrative Example: Composition of Transformations</h2>
+    <div class="example-box">
+      <h4>Problem: Consecutive Linear Mappings</h4>
+      <p>Transform a vector \(\mathbf{x} = [1, 0]\) using a <strong>90° Rotation</strong> (\(R\)) followed by a <strong>Scaling factor of 2</strong> (\(S\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Define Matrices:</strong> \(R = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}\) and \(S = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Compose:</strong> \(C = SR\) (Apply \(R\) first, then \(S\)).</div></div>
+
+      <div class="math-block">$$C = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix} \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 0 & -2 \\ 2 & 0 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply to x:</strong> \(C\mathbf{x} = [0, 2]\)</div></div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Final State:</strong> The vector was rotated to \([0, 1]\), then scaled to \([0, 2]\). Matrix multiplication allowed us to collapse these two steps into one single operation.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -335,18 +360,22 @@ print(f"Inverse:\n{A_inv}")
       <li><strong>Rank Deficient:</strong> When \(\text{rank}(A) < \min(m, n)\).</li>
     </ul>
 
+    <visualizer topic="Rank" />
+
     <h3>Mathematical Derivation</h3>
     <p>The rank is often found by converting a matrix to <strong>Row Echelon Form (REF)</strong> using Gaussian elimination. The number of non-zero rows in REF is the rank.</p>
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing the Rank</h4>
+      <h4>Problem: Computing the Rank via Row Reduction</h4>
       <p>Find the rank of \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\).</p>
-      <ol>
-        <li>Perform row operation: \(R_2 \to R_2 - 2R_1\).</li>
-        <li>\(A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. (The rows are linearly dependent).</div></div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Row Dependencies:</strong> Notice that \(R_2 = 2R_1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Perform Row Operation:</strong> \(R_2 \to R_2 - 2R_1\).</div></div>
+      
+      <div class="math-block">$$A \to \begin{bmatrix} 1 & 2 \\ 0 & 0 \end{bmatrix}$$</div>
+      
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Rank is 1. Since only one row is non-zero after elimination, the matrix "squashes" 2D space into 1D line.</div></div>
     </div>
 
     <h2 id="det">2. Determinant (det(A) or |A|)</h2>
@@ -366,10 +395,13 @@ print(f"Inverse:\n{A_inv}")
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Computing the Determinant</h4>
-      <p>\(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
+      <h4>Problem: Computing the Determinant (Scaling Factor)</h4>
+      <p>Calculate \(\det(A)\) for \(A = \begin{bmatrix} 3 & 1 \\ 2 & 2 \end{bmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(ad - bc\).</div></div>
       <div class="math-block">$$\det(A) = (3 \times 2) - (1 \times 2) = 6 - 2 = 4$$</div>
-      <p><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4.</p>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> This transformation increases the area of any shape by a factor of 4. If \(\det(A)\) were 0, the area would collapse to zero.</div></div>
     </div>
 
     <visualizer topic="Determinants" />
@@ -409,12 +441,15 @@ print(f"Inverse:\n{A_inv}")
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Testing Positive Definiteness</h4>
+      <h4>Problem: Testing Positive Definiteness</h4>
       <p>Is \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\) Positive Definite?</p>
-      <p>Let \(\mathbf{x} = [x_1, x_2]^T\):</p>
-      <div class="math-block">$$\mathbf{x}^T A \mathbf{x} = [x_1, x_2] \begin{bmatrix} 2x_1 \\ 3x_2 \end{bmatrix} = 2x_1^2 + 3x_2^2$$</div>
-      <p>Since squares are always non-negative and \(\mathbf{x}\) is non-zero, the result is always \(> 0\).</p>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Yes, it is Positive Definite.</div></div>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Expand Quadratic Form \(\mathbf{x}^T A \mathbf{x}\):</strong></div></div>
+      <div class="math-block">$$\mathbf{x}^T A \mathbf{x} = [x_1, x_2] \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix} \begin{bmatrix} x_1 \\ x_2 \end{bmatrix} = 2x_1^2 + 3x_2^2$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Since \(x_1^2, x_2^2 > 0\) for any non-zero \(\mathbf{x}\), the sum \(2x_1^2 + 3x_2^2\) is always strictly positive.</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> Yes, it is Positive Definite. In optimization, this means the loss surface is a local "bowl" (convex).</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -504,11 +539,13 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
 
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Independence vs Dependence</h4>
-      <ul>
-        <li>\(\mathbf{v}_1 = [1, 0]\), \(\mathbf{v}_2 = [0, 1]\) → <strong>Independent</strong> (You can't make \([0, 1]\) using only \([1, 0]\)).</li>
-        <li>\(\mathbf{v}_1 = [1, 2]\), \(\mathbf{v}_2 = [2, 4]\) → <strong>Dependent</strong> (\(\mathbf{v}_2 = 2\mathbf{v}_1\)).</li>
-      </ul>
+      <h4>Problem: Testing Linear Independence</h4>
+      <p>Decide if \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) are independent.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Check for Multiples:</strong> Can we find a scalar \(k\) such that \(\mathbf{v}_2 = k\mathbf{v}_1\)?</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> Yes, \(2 \times [1, 2] = [2, 4]\). Since \(\mathbf{v}_2\) is a direct multiple of \(\mathbf{v}_1\), they are <strong>Linearly Dependent</strong>.</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>ML Risk:</strong> High dependence between features (Multicollinearity) makes models unstable. In this case, \(\mathbf{v}_2\) adds no new information to the model.</div></div>
     </div>
 
     <visualizer topic="BasisChange" />
@@ -525,6 +562,8 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     <p>Recall \(\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)\). If \(\theta = 90^\circ\), then \(\cos(90^\circ) = 0\), making the dot product zero.</p>
     <div class="math-block">$$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(90^\circ) = \|\mathbf{u}\| \|\mathbf{v}\| \cdot 0 = 0$$</div>
 
+    <visualizer topic="Orthogonality" />
+
     <h2 id="projections">4. Orthogonal Projections</h2>
     <p>An <strong>Orthogonal Projection</strong> of a vector \(\mathbf{y}\) onto a vector \(\mathbf{u}\) is the "shadow" that \(\mathbf{y}\) casts on the line spanned by \(\mathbf{u}\).</p>
 
@@ -535,18 +574,20 @@ print(f"Rank: {rank}, Det: {det}, Trace: {trace}, Is PD: {is_pd}")
     <p>The projection of \(\mathbf{y}\) onto \(\mathbf{u}\), denoted \(\text{proj}_{\mathbf{u}}(\mathbf{y})\), is:</p>
     <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$</div>
 
+    <visualizer topic="Projections" />
+
     <h3>Illustrative Example</h3>
     <div class="example-box">
-      <h4>Example: Projecting y onto u</h4>
+      <h4>Problem: Computing an Orthogonal Projection</h4>
       <p>Project \(\mathbf{y} = [2, 3]\) onto \(\mathbf{u} = [4, 0]\).</p>
-      <ol>
-        <li>\(\mathbf{y} \cdot \mathbf{u} = (2 \times 4) + (3 \times 0) = 8\).</li>
-        <li>\(\mathbf{u} \cdot \mathbf{u} = (4 \times 4) + (0 \times 0) = 16\).</li>
-        <li>\(\text{Scalar} = 8/16 = 0.5\).</li>
-        <li>\(\text{Proj} = 0.5 \times [4, 0] = [2, 0]\).</li>
-      </ol>
-      <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \frac{8}{16}[4, 0] = 0.5 \times [4, 0] = [2, 0]$$</div>
-      <p><strong>Result:</strong> \([2, 0]\). The "height" component \([0, 3]\) was discarded.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Dot Products:</strong> \(\mathbf{y} \cdot \mathbf{u} = 8\) and \(\mathbf{u} \cdot \mathbf{u} = 16\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Find Scalar Projection:</strong> \(\frac{8}{16} = 0.5\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Scalar to u:</strong> \(0.5 \times [4, 0] = [2, 0]\).</div></div>
+
+      <div class="math-block">$$\hat{\mathbf{y}} = \text{proj}_{\mathbf{u}}(\mathbf{y}) = [2, 0]$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> The "shadow" of \(\mathbf{y}\) on the x-axis is \([2, 0]\). The vertical component \([0, 3]\) was orthogonal to \(\mathbf{u}\) and thus removed.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -583,7 +624,7 @@ print(f"Projection of y onto u: {projection}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Having mastered the basis and projections of where data lives, we can now factorize these structures into simpler components with <strong><a href="#/mathematics/linear-algebra/matrix-decompositions">Matrix Decompositions</a></strong>.
     </div>
-  `},n={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",color:"#90CAF9",html:String.raw`
+  `},s={id:"matrix-decompositions",title:"Introduction to Matrix Decompositions",description:"In Machine Learning, Matrix Decomposition (or Factorization) is the process of breaking down a matrix into a product of simpler, constituent matrices. This is analogous to factoring a number (e.g., 15 = 3 × 5). Decomposing a matrix makes it easier to solve linear equations, invert matrices, and compress data.",color:"#90CAF9",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔀 Linear Algebra · Matrix Decompositions</div>
       <h1>Introduction to Matrix Decompositions</h1>
@@ -617,14 +658,19 @@ print(f"Projection of y onto u: {projection}")
     <div class="math-block">$$A = LU \implies \begin{bmatrix} 1 & 0 \\ l_{21} & 1 \end{bmatrix} \begin{bmatrix} u_{11} & u_{12} \\ 0 & u_{22} \end{bmatrix}$$</div>
 
     <div class="example-box">
-      <h4>Solved Example: LU Factorization</h4>
-      <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\).</p>
-      <ol>
-        <li>Set \(u_{11} = 2, u_{12} = 3\).</li>
-        <li>Find \(l_{21}\) such that \(l_{21} \times 2 = 8 \implies l_{21} = 4\).</li>
-        <li>Find \(u_{22}\) such that \((4 \times 3) + u_{22} = 15 \implies u_{22} = 3\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}\).</div></div>
+      <h4>Problem: LU Factorization</h4>
+      <p>Factor \(A = \begin{bmatrix} 2 & 3 \\ 8 & 15 \end{bmatrix}\) into \(L\) and \(U\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Extract Top Row for U:</strong> The first row of \(U\) is simply the first row of \(A\) if \(l_{11}=1\).</div></div>
+      <div class="math-block">$$u_{11} = 2, \quad u_{12} = 3$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Multiplier for L:</strong> Find \(l_{21}\) such that \(l_{21} \times u_{11} = 8\).</div></div>
+      <div class="math-block">$$l_{21} = 8/2 = 4$$</div>
+
+      <div class="step-box"><span class="step-num">3</span><div><strong>Solve for Remainder in U:</strong> \((4 \times u_{12}) + u_{22} = 15\).</div></div>
+      <div class="math-block">$$12 + u_{22} = 15 \implies u_{22} = 3$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(L = \begin{bmatrix} 1 & 0 \\ 4 & 1 \end{bmatrix}, \quad U = \begin{bmatrix} 2 & 3 \\ 0 & 3 \end{bmatrix}\). Multiplying them back recovers \(A\).</div></div>
     </div>
 
     <h2 id="cholesky">2. Cholesky Decomposition</h2>
@@ -638,19 +684,38 @@ print(f"Projection of y onto u: {projection}")
     <h2 id="qr">3. QR Decomposition</h2>
     <p>QR Decomposition factors a matrix into an <strong>Orthogonal</strong> matrix (\(Q\)) and an <strong>Upper Triangular</strong> matrix (\(R\)). Since \(Q\) preserves lengths and angles (\(Q^T Q = I\)), this is used to solve the <strong>Least Squares</strong> problem in Linear Regression.</p>
 
+    <div class="example-box">
+      <h4>Problem: QR Factorization Intuition</h4>
+      <p>Factor \(A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\) into \(Q\) and \(R\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Orthogonalize columns (Gram-Schmidt):</strong> Column 1 (\(\mathbf{a}_1\)) is already unit length and along the x-axis.</div></div>
+      <div class="math-block">$$\mathbf{q}_1 = [1, 0]^T$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Project and Subtract:</strong> Keep the part of \(\mathbf{a}_2\) that is perpendicular to \(\mathbf{q}_1\).</div></div>
+      <div class="math-block">$$\mathbf{q}_2 = [0, 1]^T$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(Q = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \quad R = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}\). In this case, \(A\) was already "mostly" orthogonal.</div></div>
+    </div>
+
     <h2 id="svd">4. Singular Value Decomposition (SVD)</h2>
     <p>SVD is the "Swiss Army Knife" of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> \(m \times n\) matrix.</p>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
-    <div class="def-box">
-        <div class="def-title">What the components represent</div>
-        <ul style="margin:0">
-          <li><strong>\(U\):</strong> Left singular vectors (Rotations in output space).</li>
-          <li><strong>\(\Sigma\):</strong> Singular values (Scaling factor for each axis).</li>
-          <li><strong>\(V^T\):</strong> Right singular vectors (Rotations in input space).</li>
-        </ul>
-      </div>
 
     <visualizer topic="SVD" />
+
+    <h3>Illustrative Example: SVD Manual Breakdown</h3>
+    <div class="example-box">
+      <h4>Problem: Decomposing a Scaling Matrix</h4>
+      <p>Factor \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\) using SVD.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Singular Values (\(\Sigma\)):</strong> Since \(A\) is diagonal, the singular values are simply the diagonal elements in descending order.</div></div>
+      <div class="math-block">$$\sigma_1 = 3, \quad \sigma_2 = 2 \implies \Sigma = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Left Singular Vectors (U):</strong> These represent the output space rotation. Since no rotation occurred, \(U = I\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Right Singular Vectors (Vᵀ):</strong> These represent the input space rotation. Again, \(V^T = I\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(A = [I][\text{diag}(3, 2)][I]\). For more complex matrices, \(U\) and \(V\) would contain eigenvectors of \(AA^T\) and \(A^TA\).</div></div>
+    </div>
 
     <h3>Applications in ML</h3>
     <ul>
@@ -705,7 +770,7 @@ print(f"SVD Singular Values: {s}")
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD directly uses eigenvalues. Now, reach the crown jewel of Linear Algebra: <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
     </div>
-  `},o={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",color:"#42A5F5",html:String.raw`
+  `},n={id:"eigenvalues-eigenvectors",title:"Introduction to Eigenvalues and Eigenvectors",description:"In Linear Algebra, Eigenvalues and Eigenvectors provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix A) is applied to most vectors, they change both their magnitude and their direction. However, Eigenvectors are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.",color:"#42A5F5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">λ Linear Algebra · Eigenvalues & Eigenvectors</div>
       <h1>Introduction to Eigenvalues and Eigenvectors</h1>
@@ -749,13 +814,19 @@ print(f"SVD Singular Values: {s}")
 
     <h2 id="example">3. Illustrative Example Walkthrough</h2>
     <div class="example-box">
-      <h4>Problem: Find eigenvalues for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\)</h4>
-      <ol>
-        <li>\(\det\left(\begin{bmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{bmatrix}\right) = (4-\lambda)(3-\lambda) - 2 = 0\).</li>
-        <li>\(\lambda^2 - 7\lambda + 12 - 2 = \lambda^2 - 7\lambda + 10 = 0\).</li>
-        <li>Factoring: \((\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5, \lambda_2 = 2\).</li>
-      </ol>
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">For \(\lambda_1 = 5\), we solve \((A - 5I)\mathbf{v} = 0 \implies v_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}\).</div></div>
+      <h4>Problem: Finding Eigenvalues & Eigenvectors</h4>
+      <p>Find the eigenpairs for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Solve the Characteristic Equation:</strong> \(\det(A - \lambda I) = 0\).</div></div>
+      <div class="math-block">$$(4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10 = 0$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factor the Quadratic:</strong> \((\lambda - 5)(\lambda - 2) = 0\).</div></div>
+      <div class="math-block">$$\lambda_1 = 5, \quad \lambda_2 = 2$$</div>
+
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute Eigenvector for \(\lambda_1 = 5\):</strong> Solve \((A - 5I)\mathbf{v} = 0\).</div></div>
+      <div class="math-block">$$\begin{bmatrix} -1 & 1 \\ 2 & -2 \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> We found two eigenpairs. The most "dominant" eigenvalue is 5, representing the primary direction of scaling.</div></div>
     </div>
 
     <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>
@@ -811,7 +882,7 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
       <strong>Next Step:</strong> With the theory mastered, let's explore practical <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors-pca">Solved SVD & PCA Examples</a></strong>.
     </div>
     </div>
-  `},s={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
+  `},o={id:"eigenvalues-eigenvectors-pca",title:"Solved Examples: Eigenvalues, Eigenvectors, and PCA",description:"Practical, step-by-step examples to solidify your understanding of Eigenvalues, Eigenvectors, and Principal Component Analysis (PCA). Each example walks through the complete solution with all intermediate steps shown.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📉 Linear Algebra · Principal Component Analysis</div>
       <h1>Principal Component Analysis (PCA) Walkthrough</h1>
@@ -824,9 +895,7 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
       <div class="toc-title">Table of Contents</div>
       <a href="#theory">1. The Intuition: Variance as Information</a>
       <a href="#derivation">2. Mathematical Derivation (The 5 Steps)</a>
-      <a href="#ex1">3. Solved Practice Case: Finding Eigen-pairs</a>
-      <a href="#ex2">4. Solved Practice Case: Variance Selection</a>
-      <a href="#ex3">5. Solved Practice Case: Interpreting PC1</a>
+      <a href="#examples">3. Solved Practice Examples</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#summary-table">Summary Table</a>
     </div>
@@ -848,71 +917,39 @@ print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
 
     <h2 id="examples">3. Solved Practice Examples</h2>
 
-    <!-- EXAMPLE 1 -->
-    <div class="solved-card" id="ex1">
-      <div class="solved-header">
-        <div class="solved-num">1</div>
-        <div class="solved-title">Finding Eigenvalues and Eigenvectors</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          Find the eigenvalues and eigenvectors for the matrix \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).
-        </div>
+    <h3>Illustrative Example: Finding Eigenvalues & Eigenvectors</h3>
+    <div class="example-box">
+      <h4>Problem: Manual Eigen-decomposition</h4>
+      <p>Find the eigenvalues and eigenvectors for the matrix \(A = \begin{pmatrix} 4 & 1 \\ 2 & 3 \end{pmatrix}\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Solve the Characteristic Equation:</strong> \(\det(A - \lambda I) = 0 \implies \lambda^2 - 7\lambda + 10 = 0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factor the Quadratic:</strong> \((\lambda - 5)(\lambda - 2) = 0 \implies \lambda_1 = 5, \lambda_2 = 2\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute Eigenvector for \(\lambda_1=5\):</strong> Solve \((A-5I)\mathbf{v}=0 \implies \mathbf{v}_1 = [1, 1]^T\).</div></div>
 
-        <div class="step-label">Step 1: Set up the Characteristic Equation</div>
-        <div class="math-block">$$\det(A - \lambda I) = 0 \implies \begin{vmatrix} 4-\lambda & 1 \\ 2 & 3-\lambda \end{vmatrix} = 0$$</div>
-
-        <div class="step-label">Step 2: Solve the Quadratic Equation</div>
-        <div class="math-block">$$\lambda^2 - 7\lambda + 10 = 0 \implies (\lambda - 5)(\lambda - 2) = 0$$</div>
-        <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\).</div></div>
-
-        <div class="step-label">Step 3: Find Eigenvectors for λ₁ = 5</div>
-        <div class="math-block">$$(A - 5I)v = 0 \implies \begin{pmatrix} -1 & 1 \\ 2 & -2 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$$</div>
-        <p>From the first row: \(-x + y = 0 \implies x = y\). One possible <strong>Eigenvector</strong> is \(v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}\).</p>
-      </div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body">The <strong>Eigenvalues</strong> are \(\lambda_1 = 5\) and \(\lambda_2 = 2\). The primary axis of variance is the vector \([1, 1]\).</div></div>
     </div>
 
-    <!-- EXAMPLE 2 -->
-    <div class="solved-card" id="ex2">
-      <div class="solved-header">
-        <div class="solved-num">2</div>
-        <div class="solved-title">PCA Selection (Variance Explained)</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          If \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\), how much variance is retained in 2D?
-        </div>
+    <h3>Illustrative Example: Variance Selection</h3>
+    <div class="example-box">
+      <h4>Problem: Dimensionality Reduction Decision</h4>
+      <p>If \(\lambda_1 = 15\), \(\lambda_2 = 4\), and \(\lambda_3 = 1\), how much variance is retained if we reduce to 2D?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Sum All Eigenvalues:</strong> \(\sum \lambda = 15 + 4 + 1 = 20\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Reconstructed Sum:</strong> \(15 + 4 = 19\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Ratio:</strong> \(\frac{19}{20} = 95\%\).</div></div>
 
-        <p>Total Variance = \(15 + 4 + 1 = 20\). Sum of top 2 = \(15 + 4 = 19\).</p>
-        <div class="math-block">$$\frac{19}{20} \times 100 = 95\%$$</div>
-
-        <div class="conclusion">
-          <strong>Conclusion:</strong> By keeping the first two principal components, you retain <strong>95%</strong> of the original information while reducing the dimensionality.
-        </div>
-      </div>
+      <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body"><strong>Conclusion:</strong> Keeping the first two components retains <strong>95%</strong> of original info.</div></div>
     </div>
 
-    <!-- EXAMPLE 3 -->
-    <div class="solved-card" id="ex3">
-      <div class="solved-header">
-        <div class="solved-num">3</div>
-        <div class="solved-title">PCA Interpretation: The "Size" Axis</div>
-      </div>
-      <div class="solved-body">
-        <div class="problem-box">
-          <div class="problem-label">Problem</div>
-          In a dataset measuring "Height" and "Weight," \(v_1 = \begin{pmatrix} 0.707 \\ 0.707 \end{pmatrix}\) with \(\lambda_1 = 50\). What does this tell you?
-        </div>
+    <h3>Illustrative Example: Interpreting PC Axes</h3>
+    <div class="example-box">
+      <h4>Problem: The "Size" Component in Height-Weight Data</h4>
+      <p>In a dataset measuring Height and Weight, the first PC is \(\mathbf{v}_1 = [0.707, 0.707]\). What is its physical meaning?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Analyze Contributions:</strong> Both components are positive and equal.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Deduce Meaning:</strong> This axis represents a simultaneous increase in both features.</div></div>
 
-        <div class="step-label">Interpretation of Eigenvector (v₁)</div>
-        <p>Since both components are positive and equal, this eigenvector represents an axis where Height and Weight increase together. This is the <strong>"Size"</strong> component. It shows the direction of maximum correlation.</p>
-        <div class="callout info"><div class="callout-icon">ℹ️</div><div class="callout-body">The equal weighting (\(0.707 \approx 1/\sqrt{2}\)) means both Height and Weight contribute equally — a diagonal axis at 45° in the Height-Weight plane.</div></div>
-
-        <div class="step-label">Interpretation of Eigenvalue (λ₁ = 50)</div>
-        <p>A value of 50 indicates that a significant portion of the total spread (variance) is captured along this "Size" axis rather than by looking at height or weight individually.</p>
-      </div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> PC1 represents the <strong>"Overall Size"</strong> of the person. It captures the shared variance where taller people tend to be heavier.</div></div>
     </div>
 
     <h2 id="implementation">Implementation (Python/NumPy)</h2>
@@ -1090,4 +1127,4 @@ print("PCA 1D Projection:", X_pca)
       </div>
 
     </div>
-  `,sections:[e,t,i,a,n,o,s]};export{r as LINEAR_ALGEBRA_DATA};
+  `,sections:[t,e,i,a,s,n,o]};export{r as LINEAR_ALGEBRA_DATA};

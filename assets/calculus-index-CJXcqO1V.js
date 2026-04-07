@@ -100,8 +100,12 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="Differentiation" />
     <ul>
       <li><strong>Backpropagation</strong>: The Chain Rule is used to propagate the error from the output layer back to the hidden layers to update weights.</li>
+    </ul>
+    <visualizer topic="ChainRule" />
+    <ul>
       <li><strong>Gradient Descent</strong>: Uses partial derivatives to find the local minimum of the cost function.</li>
       <li><strong>Activation Functions</strong>: Derivatives of functions like <strong>Sigmoid</strong> or <strong>ReLU</strong> are needed to calculate gradients during training.</li>
     </ul>
@@ -305,6 +309,12 @@ print(f"Current Loss: {current_loss}, Updated Weight: {new_w}")
       <li>A <strong>Jacobian</strong> helps us handle vector-valued functions (multiple outputs).</li>
       <li>A <strong>Hessian</strong> describes the "curvature" of the surface, telling us if we are at a minimum, maximum, or a saddle point.</li>
     </ul>
+    <div class="my-8">
+      <visualizer topic="PartialDerivatives" />
+    </div>
+    <div class="my-8">
+      <visualizer topic="JacobianHessian" />
+    </div>
 
     <h2 id="derivation">Mathematical Derivation</h2>
 
@@ -477,6 +487,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="AreaUnderCurve" />
     <ul>
       <li><strong>Expectation and Variance</strong>: Computing the average value of a continuous distribution: $E[X] = \int x f(x) \, dx$.</li>
       <li><strong>Bayesian Inference</strong>: Calculating the "Evidence" (the denominator in Bayes' Rule) often requires integrating over all possible parameter values.</li>
@@ -579,6 +590,7 @@ for start in starts:
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="GradientDescent" />
     <ul>
       <li><strong>Linear/Logistic Regression</strong>: These result in <strong>Convex</strong> loss functions. Gradient Descent is guaranteed to find the global optimum.</li>
       <li><strong>Deep Learning (Neural Networks)</strong>: These are highly <strong>Non-Convex</strong>. They have billions of parameters and countless local minima and saddle points.</li>
@@ -679,6 +691,7 @@ print(f"Divergence at center index [5,5]: {div[5, 5]}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <visualizer topic="Gradient" />
     <ul>
       <li><strong>PINNs</strong>: Loss functions are designed to penalize the model if the Divergence or Curl violates physical laws (e.g., Maxwell's equations).</li>
       <li><strong>Generative Models</strong>: Divergence is used in Normalizing Flows to track how probability density "spreads" as data is transformed.</li>

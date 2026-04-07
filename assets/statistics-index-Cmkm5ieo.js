@@ -7,10 +7,8 @@ const t={id:"descriptive-statistics",title:"Descriptive Statistics",description:
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#what-is-it">What is Information Theory?</a>
-      <a href="#derivations">Mathematical Derivations</a>
-      <a href="#ml-examples">Examples in Machine Learning</a>
-      <a href="#integration">Descriptive Statistics Integration</a>
+      <a href="#entropy-example">3. Illustrative Example: Entropy (Binary Trials)</a>
+      <a href="#mean-median-example">4. Illustrative Example: Mean vs. Median</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -28,56 +26,62 @@ const t={id:"descriptive-statistics",title:"Descriptive Statistics",description:
 
     <h2 id="derivations">Mathematical Derivations</h2>
     
-    <h3>1. Self-Information ($I(x)$)</h3>
-    <p>The information in an event is inversely proportional to its probability.</p>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Self-Information \(I(x)\):</strong> Measures surprise. Low probability = high surprise.</div></div>
     <div class="math-block">$$I(x) = -\log_b(P(x))$$</div>
-    <p>Usually, $b=2$ (bits) or $b=e$ (nats).</p>
 
-    <h3>2. Shannon Entropy ($H(X)$)</h3>
-    <p>The expected value (average) of the information of all possible outcomes of a random variable $X$.</p>
-    <div class="math-block">$$H(X) = E[I(X)] = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Shannon Entropy \(H(X)\):</strong> The expected value (average surprise) across all outcomes.</div></div>
+    <div class="math-block">$$H(X) = -\sum_{i=1}^{n} P(x_i) \log_b P(x_i)$$</div>
 
-    <h3>3. Cross-Entropy ($H(P, Q)$)</h3>
-    <p>Measures the average number of bits needed to identify an event from $P$ using code optimized for $Q$.</p>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Cross-Entropy \(H(P, Q)\):</strong> Average bits to identify events from \(P\) using code optimized for \(Q\).</div></div>
     <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
 
-    <h2 id="ml-examples">Examples in Machine Learning</h2>
-    
-    <h3>Decision Trees (Information Gain)</h3>
-    <p>Used to decide which feature to split on. Information Gain is the reduction in entropy:</p>
-    <div class="math-block">$$\text{Gain}(S, A) = \text{Entropy}(S) - \sum_{v \in \text{Values}(A)} \frac{|S_v|}{|S|} \text{Entropy}(S_v)$$</div>
+    <h2 id="entropy-example">3. Illustrative Example: Entropy (Binary Trials)</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing Surprise in Coin Flips</h4>
+      <p>Compare the Entropy of a fair coin \((p=0.5)\) vs. a highly biased coin \((p=0.9)\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Fair Coin:</strong> \(H(X) = -(0.5 \log_2 0.5 + 0.5 \log_2 0.5) = -(0.5 \times -1 \times 2) = 1.0\text{ bit}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Biased Coin:</strong> \(H(X) = -(0.9 \log_2 0.9 + 0.1 \log_2 0.1) \approx -(0.139 + 0.332) = 0.47\text{ bits}\).</div></div>
 
-    <h3>Logistic Regression / Neural Networks</h3>
-    <p>Cross-entropy is used as the loss function. If $y$ is actual label (0/1) and $\hat{y}$ is predicted probability:</p>
-    <div class="math-block">$$\text{Loss} = -(y \log(\hat{y}) + (1-y) \log(1-\hat{y}))$$</div>
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Intuition:</strong> A fair coin has the <strong>maximum possible entropy</strong> (1 bit) because it is perfectly unpredictable. The biased coin is more predictable, so it contains less information (lower entropy).</div></div>
+    </div>
 
-    <h2 id="integration">Descriptive Statistics Integration</h2>
-    <p>Before applying information-theoretic measures, we look at descriptive statistics to understand the spread and central tendency.</p>
+    <h2 id="mean-median-example">4. Illustrative Example: Mean vs. Median</h2>
+    <div class="example-box">
+      <h4>Problem: Salary Analysis in a Startup</h4>
+      <p>A startup has 5 employees with salaries: [40k, 45k, 50k, 55k, 1M]. Which metric better represents the "typical" salary?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Mean:</strong> \(\mu = \frac{40+45+50+55+1000}{5} = \frac{1190}{5} = 238\text{k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Median:</strong> Middle value in sorted list = \(50\text{k}\).</div></div>
 
-    <div class="def-box">
-      <table style="width:100%; border-collapse: collapse;">
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Gotcha:</strong> The <strong>Mean</strong> is heavily pulled by the outlier (1M CEO salary), making the company look richer than it is. In ML, we often use the <strong>Median</strong> for robust statistics when data is skewed or contains anomalies.</div></div>
+    </div>
+
+    <h2 id="integration">Descriptive Statistics</h2>
+    <div class="premium-table-wrap">
+      <table class="premium-table">
         <thead>
-          <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <th style="padding: 10px; text-align: left;">Metric</th>
-            <th style="padding: 10px; text-align: left;">Formula / Description</th>
-            <th style="padding: 10px; text-align: left;">Use Case in ML</th>
+          <tr>
+            <th>Metric</th>
+            <th>Formula / Description</th>
+            <th>Use Case in ML</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td style="padding: 10px;"><strong>Mean</strong></td>
-            <td style="padding: 10px;">$\mu = \frac{1}{n} \sum x_i$</td>
-            <td style="padding: 10px;">Centering data for Gaussian distributions.</td>
+            <td><strong>Mean (\(\mu\))</strong></td>
+            <td>\(\mu = \frac{1}{n} \sum x_i\)</td>
+            <td>Feature scaling & normalization.</td>
           </tr>
           <tr>
-            <td style="padding: 10px;"><strong>Std Dev</strong></td>
-            <td style="padding: 10px;">$\sigma = \sqrt{\frac{\sum(x_i-\mu)^2}{n}}$</td>
-            <td style="padding: 10px;">Measuring spread; high $\sigma$ often implies higher entropy.</td>
+            <td><strong>Std Dev (\(\sigma\))</strong></td>
+            <td>\(\sigma = \sqrt{\frac{\sum(x_i-\mu)^2}{n}}\)</td>
+            <td>Measuring feature spread; high \(\sigma\) implies high entropy.</td>
           </tr>
           <tr>
-            <td style="padding: 10px;"><strong>IQR</strong></td>
-            <td style="padding: 10px;">$Q3 - Q1$</td>
-            <td style="padding: 10px;">Detecting outliers that might skew probability estimates.</td>
+            <td><strong>IQR</strong></td>
+            <td>\(Q3 - Q1\)</td>
+            <td>Robust outlier detection (ignoring tails).</td>
           </tr>
         </tbody>
       </table>
@@ -139,8 +143,9 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#bootstrapping">1. Bootstrapping</a>
+      <a href="#bootstrap-example">1.1 Illustrative Example: Mean Variance</a>
       <a href="#cv">2. Cross-Validation (CV)</a>
-      <a href="#example">Mathematical Example: Bootstrap Mean Estimation</a>
+      <a href="#stratified-example">2.1 Illustrative Example: Stratified Splits</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#conclusions">Key Takeaways</a>
     </div>
@@ -148,15 +153,23 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
     <h2 id="bootstrapping">1. Bootstrapping</h2>
     <p>Bootstrapping is a statistical method involving drawing repeated samples from a dataset <strong>with replacement</strong>.</p>
     
-    <div class="def-box">
-      <div class="def-title">Core Concept</div>
-      <p style="margin:0">If we have a dataset $D$ of size $n$, a bootstrap sample is created by picking $n$ elements from $D$, where each element can be picked more than once.</p>
+    <div class="premium-def-box">
+      <div class="premium-def-title">The "OOB" Ratio</div>
+      <p style="margin:0">For a sample of size \(n\), the probability of an item <strong>not</strong> being picked in \(n\) draws is \((1 - \frac{1}{n})^n\).</p>
+      <div class="math-block" style="margin-top:10px">\(\lim_{n \to \infty} (1 - \frac{1}{n})^n = \frac{1}{e} \approx 0.368\)</div>
+      <p style="margin-top:10px">This leaves ~36.8% of data as <strong>Out-Of-Bag (OOB)</strong>, acting as a "free" validation set.</p>
+    </div>
+
+    <h2 id="bootstrap-example">1.1 Illustrative Example: Bootstrap Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Estimating Mean Uncertainty</h4>
+      <p>A dataset has 3 points: \(X = [10, 20, 30]\). Find the probability that the value '10' is excluded from a single bootstrap sample of size 3.</p>
       
-      <p style="margin-top:15px; margin-bottom:0">Probability of an item *not* being picked in a sample of size $n$: $P(\text{not picked}) = \left(1 - \frac{1}{n}\right)^n$</p>
-      <ul style="margin-top:10px; margin-bottom:0">
-        <li><strong>In-bag samples:</strong> $\approx 63.2\%$ of unique data.</li>
-        <li><strong>Out-of-bag (OOB) samples:</strong> $\approx 36.8\%$ of data (used for testing).</li>
-      </ul>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Individual Draw:</strong> Probability of <strong>not</strong> picking 10 is \(2/3\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Independent Draws:</strong> Since we sample with replacement, the probability is \((2/3) \times (2/3) \times (2/3)\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculation:</strong> \(8/27 \approx 29.6\%\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Analysis:</strong> Even with a tiny dataset, ~30% of it is "hidden" in each bootstrap. In ML, this "hiding" of data across different models (like in Random Forests) is exactly what prevents overfitting.</div></div>
     </div>
 
     <div class="callout tip">
@@ -187,17 +200,15 @@ print(f"Mean: {np.mean(data)}, Std Dev: {np.std(data):.2f}")
       <li><strong>Stratified K-Fold:</strong> Ensures each fold has the same percentage of samples of each target class as the complete set. (Crucial for imbalanced data).</li>
     </ul>
 
+    <h2 id="stratified-example">2.1 Illustrative Example: Stratified Splits</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example: Bootstrap Mean Estimation</h4>
-      <p><strong>Problem:</strong> Given a dataset $X = [10, 20, 30]$, calculate the probability that the value '10' is excluded from a sample of size $n=3$.</p>
+      <h4>Problem: Sampling from Imbalanced Fraud Data</h4>
+      <p>A dataset has 1,000 samples: 990 "Normal" and 10 "Fraud". We want a 50/50 Train/Test split.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li>For $n=3$, the probability of not picking '10' in one draw is $2/3$.</li>
-        <li>For 3 draws:
-          <div class="math-block">$$P(\text{Exclusion}) = \left(\frac{2}{3}\right)^3 = \frac{8}{27} \approx 0.296 \text{ (29.6%)}$$</div>
-        </li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Risk:</strong> Random split might put 0 Fraud samples in your Test set. You'd have 100% accuracy but 0 value.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Fix:</strong> Stratified Sampling ensures each split has exactly 1% Fraud. Train gets 5 Fraud; Test gets 5 Fraud.</div></div>
+
+      <div class="callout focus"><div class="callout-icon">⚖️</div><div class="callout-body"><strong>Judgment:</strong> Always use <strong>StratifiedKFold</strong> in scikit-learn for classification. It's the cheapest insurance policy against "Lucky Folds" that make your model look better than it is.</div></div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>
@@ -258,7 +269,8 @@ for train_index, test_index in skf.split(X, y):
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#hypothesis-testing">1. Hypothesis Testing</a>
+      <a href="#hypothesis-example">1.1 Illustrative Example: The p-value Ritual</a>
+      <a href="#error-example">1.2 Illustrative Example: Type I vs. Type II</a>
       <a href="#statistical-tests">2. Common Statistical Tests</a>
       <a href="#confidence-intervals">3. Confidence Intervals (CI)</a>
       <a href="#implementation">Python Implementation</a>
@@ -267,45 +279,47 @@ for train_index, test_index in skf.split(X, y):
 
     <h2 id="hypothesis-testing">1. Hypothesis Testing</h2>
     <p>Hypothesis testing is a formal procedure for investigating our ideas about the world using statistics.</p>
-    <div class="def-box">
+    <div class="premium-def-box">
       <ul style="margin:0">
-        <li><strong>Null Hypothesis ($H_0$):</strong> The status quo; assumes no effect or no difference (e.g., "Feature X does not affect the target").</li>
-        <li><strong>Alternative Hypothesis ($H_1$):</strong> What you want to prove (e.g., "Feature X significantly affects the target").</li>
-        <li><strong>P-value:</strong> The probability of obtaining results at least as extreme as the observed results, assuming $H_0$ is true. 
-          <ul>
-            <li><strong>$p < 0.05$:</strong> Reject $H_0$ (Statistically Significant).</li>
-            <li><strong>$p \ge 0.05$:</strong> Fail to reject $H_0$.</li>
-          </ul>
-        </li>
+        <li><strong>Null Hypothesis (\(H_0\)):</strong> The "No Effect" assumption. (e.g., "This feature is noise").</li>
+        <li><strong>Alternative Hypothesis (\(H_1\)):</strong> The "Effect Exists" claim. (e.g., "This feature predicts price").</li>
+        <li><strong>P-value:</strong> Probability of seeing your result IF the null hypothesis were true.</li>
       </ul>
     </div>
 
-    <h2 id="statistical-tests">2. Common Statistical Tests</h2>
-    
-    <h3>A. T-Test</h3>
-    <p>Used to compare the means of two groups.</p>
-    <ul>
-      <li><strong>One-sample T-test:</strong> Compares the mean of a sample to a known population mean.</li>
-      <li><strong>Independent Two-sample T-test:</strong> Compares the means of two independent groups.</li>
-    </ul>
-    <div class="math-block">
-      $$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
-    </div>
-    <p>Where $\bar{x}$ is the sample mean, $s^2$ is the variance, and $n$ is the sample size.</p>
+    <h2 id="hypothesis-example">1.1 Illustrative Example: The p-value Ritual</h2>
+    <div class="example-box">
+      <h4>Problem: Is Feature X Significant?</h4>
+      <p>In a housing model, the coefficient for 'Square Footage' has a \(p = 0.002\). Should we keep it?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Threshold (\(\alpha\)):</strong> Usually set to 0.05.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Comparison:</strong> \(0.002 < 0.05\).</div></div>
 
-    <h3>B. Chi-Square Test ($\chi^2$)</h3>
-    <p>Used for categorical data to determine if there is a significant association between two variables (Test of Independence).</p>
-    <div class="math-block">
-      $$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Reject \(H_0\). The relationship between square footage and price is <strong>Statistically Significant</strong>. There is only a 0.2% chance this result is due to random noise.</div></div>
     </div>
-    <p>Where $O_i$ is the observed frequency and $E_i$ is the expected frequency.</p>
+
+    <h2 id="error-example">1.2 Illustrative Example: Type I vs. Type II</h2>
+    <div class="example-box">
+      <h4>Problem: Diagnosing a Broken Server</h4>
+      <p>A monitoring system alerts if a server is 'Down'. What are the errors?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Type I (False Positive):</strong> Alert says "Down" but server is "Healthy". You woke up for nothing (Alpha Error).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Type II (False Negative):</strong> Alert says "Healthy" but server is "Down". Users are complaining (Beta Error).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Tradeoff:</strong> Decreasing the threshold to catch every "Down" server (Lower Type II) usually increases "False Alarms" (Higher Type I). This is the <strong>Precision-Recall Tradeoff</strong>.</div></div>
+    </div>
+
+    <h2 id="statistical-tests">2. Common Statistical Tests</h2>
+    <div class="step-box"><span class="step-num">1</span><div><strong>The T-Test:</strong> Compares means of small samples (\(n < 30\)).</div></div>
+    <div class="math-block">$$t = \frac{\bar{x}_1 - \bar{x}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$</div>
+
+    <div class="step-box"><span class="step-num">2</span><div><strong>The Chi-Square (\(\chi^2\)):</strong> Compares categories for independence (e.g., clicks vs. gender).</div></div>
+    <div class="math-block">$$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$</div>
 
     <h2 id="confidence-intervals">3. Confidence Intervals (CI)</h2>
     <p>A Confidence Interval provides a range of values within which we are confident the true population parameter lies (usually 95%).</p>
-    <div class="math-block">
-      $$CI = \bar{x} \pm z \left( \frac{\sigma}{\sqrt{n}} \right)$$
-    </div>
-    <p>Where $z$ is the z-score (1.96 for 95% CI) and $\frac{\sigma}{\sqrt{n}}$ is the Standard Error.</p>
+    <div class="math-block">$$CI = \bar{x} \pm z \left( \frac{\sigma}{\sqrt{n}} \right)$$</div>
+    <p>Where \(z\) is the critical value (1.96 for 95% CI) and \(\frac{\sigma}{\sqrt{n}}\) is the <strong>Standard Error</strong>.</p>
 
     <div class="callout info">
       <div class="callout-icon">📊</div>
@@ -362,7 +376,7 @@ print(f"95% Confidence Interval for the mean: {ci}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we can infer population properties, find the 'best' parameters for your models in <strong><a href="#/mathematics/statistics/estimation">Estimation Theory</a></strong>.
     </div>
-  `},a={id:"estimation",title:"Estimation Theory",description:"In Machine Learning, Estimation is the process of using data to find the most likely parameters for a model, through MLE, MAP, and the Bias-Variance tradeoff.",html:String.raw`
+  `},s={id:"estimation",title:"Estimation Theory",description:"In Machine Learning, Estimation is the process of using data to find the most likely parameters for a model, through MLE, MAP, and the Bias-Variance tradeoff.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Statistics · Estimation</div>
       <h1>Estimation Theory in Machine Learning</h1>
@@ -381,40 +395,53 @@ print(f"95% Confidence Interval for the mean: {ci}")
     <h2 id="mle">1. Maximum Likelihood Estimation (MLE)</h2>
     <p>MLE is a method of estimating the parameters of a probability distribution by maximizing a <strong>likelihood function</strong>, so that under the assumed statistical model, the observed data is most probable.</p>
     
-    <h3>Mathematical Derivation</h3>
-    <p>Given a set of i.i.d. observations $X = \{x_1, x_2, ..., x_n\}$, the likelihood function $L(\theta)$ is:</p>
-    <div class="math-block">
-      $$L(\theta) = P(X|\theta) = \prod_{i=1}^{n} P(x_i|\theta)$$
-    </div>
-    <p>To simplify the calculation, we take the <strong>Log-Likelihood</strong>:</p>
-    <div class="math-block">
-      $$\ell(\theta) = \log L(\theta) = \sum_{i=1}^{n} \log P(x_i|\theta)$$
-    </div>
-    <p>The MLE estimate $\hat{\theta}_{MLE}$ is found by setting the derivative to zero: $\frac{\partial}{\partial \theta} \ell(\theta) = 0$.</p>
-
+    <h2 id="mle-derivation">1.1 Mathematical Derivation: Gaussian Mean</h2>
     <div class="example-box">
-      <h4>Mathematical Example: Gaussian Mean</h4>
-      <p><strong>Problem:</strong> Estimate the mean ($\mu$) of a Normal Distribution given data points $\{x_1, ..., x_n\}$ assuming variance $\sigma^2$ is known.</p>
+      <h4>Problem: Finding the "Most Likely" Mean</h4>
+      <p>Estimate the mean (\(\mu\)) of a Normal Distribution given data \(X = \{x_1, ..., x_n\}\). Assume variance \(\sigma^2\) is known.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Log-Likelihood:</strong> $\ell(\mu) = \sum \log \left( \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \right)$</li>
-        <li><strong>Simplify:</strong> $\ell(\mu) = n \log \left(\frac{1}{\sqrt{2\pi\sigma^2}}\right) - \sum \frac{(x_i-\mu)^2}{2\sigma^2}$</li>
-        <li><strong>Differentiate w.r.t $\mu$:</strong> $\frac{d}{d\mu} \ell(\mu) = \sum \frac{(x_i-\mu)}{\sigma^2} = 0$</li>
-        <li><strong>Result:</strong> $\hat{\mu}_{MLE} = \frac{1}{n} \sum_{i=1}^{n} x_i$ (The Sample Mean).</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Log-Likelihood:</strong> Take the log of the Gaussian PDF for all points:</div></div>
+      <div class="math-block">$$\ell(\mu) = \sum \log \left( \frac{1}{\sqrt{2\pi\sigma^2}} e^{-\frac{(x_i-\mu)^2}{2\sigma^2}} \right)$$</div>
+      
+      <div class="step-box"><span class="step-num">2</span><div><strong>Simplify:</strong> Drop constants and focus on the exponent.</div></div>
+      <div class="math-block">$$\ell(\mu) = C - \sum \frac{(x_i-\mu)^2}{2\sigma^2}$$</div>
+      
+      <div class="step-box"><span class="step-num">3</span><div><strong>Optimize:</strong> Set \(\frac{d}{d\mu} \ell(\mu) = 0\).</div></div>
+      <div class="math-block">$$\sum \frac{(x_i-\mu)}{\sigma^2} = 0 \implies \sum x_i = n\mu$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> \(\hat{\mu}_{MLE} = \frac{1}{n} \sum x_i\). The sample mean is the Maximum Likelihood Estimator for a Gaussian population.</div></div>
+    </div>
+
+    <h2 id="bias-example">1.2 Illustrative Example: Bessel's Correction</h2>
+    <div class="example-box">
+      <h4>Problem: Why divide by \(n-1\)?</h4>
+      <p>The MLE for variance is \(\hat{\sigma}^2 = \frac{1}{n} \sum (x_i - \mu)^2\). However, we almost always use \(s^2 = \frac{1}{n-1} \sum (x_i - \bar{x})^2\). Why?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Bias:</strong> When we use the sample mean \(\bar{x}\) instead of the true population mean \(\mu\), we underestimate the total spread.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Correction:</strong> Dividing by \(n-1\) (degrees of freedom) makes the estimator <strong>Unbiased</strong>.</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> For very large \(n\), the difference between \(1/n\) and \(1/(n-1)\) vanishes. This is why "Big Data" often ignores Bessel's correction, but it's critical for small-sample statistics.</div></div>
     </div>
 
     <h2 id="map">2. Maximum A Posteriori (MAP)</h2>
     <p>MAP is a Bayesian approach. Unlike MLE, which only looks at the data, MAP incorporates a <strong>Prior Distribution</strong> $P(\theta)$, which represents our previous belief about the parameters.</p>
     
-    <div class="def-box">
-      <div class="def-title">Bayesian MAP Formula</div>
-      <p style="margin:0">Using Bayes' Theorem:</p>
-      <div class="math-block" style="margin-top:10px; margin-bottom:10px; background:transparent; border:none; padding:0;">
-        $$P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}$$
-      </div>
-      <p style="margin:0">$\hat{\theta}_{MAP} = \text{argmax}_\theta [ \log P(X|\theta) + \log P(\theta) ]$</p>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Bayesian MAP Formula</div>
+      <div class="math-block">$$P(\theta|X) = \frac{P(X|\theta)P(\theta)}{P(X)}$$</div>
+      <p style="margin-top:10px">\(\hat{\theta}_{MAP} = \text{argmax}_\theta [ \log P(X|\theta) + \log P(\theta) ]\)</p>
+    </div>
+
+    <h2 id="ctr-example">2.1 Illustrative Example: Confidence Intervals for CTR</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating Ad Performance</h4>
+      <p>Your ad has 1000 impressions and 20 clicks. What is the 95% Confidence Interval for the Click-Through Rate (CTR)?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Point Estimate:</strong> \(\hat{p} = 20 / 1000 = 0.02\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Standard Error:</strong> \(SE = \sqrt{\frac{p(1-p)}{n}} = \sqrt{\frac{0.02 \times 0.98}{1000}} \approx 0.0044\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Interval:</strong> \(0.02 \pm (1.96 \times 0.0044) = [0.011, 0.029]\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Interpretation:</strong> We are 95% confident that the true population CTR is between 1.1% and 2.9%. In A/B testing, these clusters help determine if a new design is statistically superior.</div></div>
     </div>
     
     <div class="callout tip">
@@ -480,7 +507,7 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> After estimating parameters, apply them to model relationships in <strong><a href="#/mathematics/statistics/regression-analysis">Regression Analysis</a></strong>.
     </div>
-  `},s={id:"regression-analysis",title:"Regression Analysis",description:"Explore the relationship between independent and dependent variables through Linear Regression, Residuals, and R-Squared.",html:String.raw`
+  `},a={id:"regression-analysis",title:"Regression Analysis",description:"Explore the relationship between independent and dependent variables through Linear Regression, Residuals, and R-Squared.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📈 Statistics · Regression</div>
       <h1>Regression Analysis</h1>
@@ -490,9 +517,10 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
       <a href="#linear">1. Linear Regression</a>
+      <a href="#ols-example">1.1 Illustrative Example: Manual OLS</a>
       <a href="#residuals">2. Residuals & Plotting</a>
-      <a href="#r2">3. R-Squared ($R^2$)</a>
-      <a href="#example">Mathematical Example & Solution</a>
+      <a href="#r2">3. R-Squared (\(R^2\))</a>
+      <a href="#r2-example">3.1 Illustrative Example: Explaining Variance</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways for ML</a>
     </div>
@@ -500,19 +528,24 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
     <h2 id="linear">1. Linear Regression</h2>
     <p>Linear Regression assumes a linear relationship between the input variables and the single output variable.</p>
     
-    <div class="def-box">
-      <div class="def-title">Mathematical Representation</div>
-      <p style="margin:0">The model represented by the following equation:</p>
-      <div class="math-block" style="margin-top:10px; margin-bottom:10px; background:transparent; border:none; padding:0;">
-        $$Y = \beta_0 + \beta_1 X + \epsilon$$
-      </div>
-      <ul style="margin-bottom:0">
-        <li><strong>$Y$:</strong> Dependent Variable (Target)</li>
-        <li><strong>$X$:</strong> Independent Variable (Predictor)</li>
-        <li><strong>$\beta_0$:</strong> Intercept (Value of $Y$ when $X=0$)</li>
-        <li><strong>$\beta_1$:</strong> Slope (Change in $Y$ for a unit change in $X$)</li>
-        <li><strong>$\epsilon$:</strong> Random Error (Noise)</li>
-      </ul>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Model Equation</div>
+      <div class="math-block">$$Y = \beta_0 + \beta_1 X + \epsilon$$</div>
+      <p style="margin-top:10px">Where \(\beta_0\) is the <strong>Intercept</strong> and \(\beta_1\) is the <strong>Slope</strong>.</p>
+    </div>
+
+    <h2 id="ols-example">1.1 Illustrative Example: Manual OLS</h2>
+    <div class="example-box">
+      <h4>Problem: Fitting a Line by Hand</h4>
+      <p>Given \(X = [1, 2, 3]\) and \(Y = [2, 4, 5]\). Find the regression line \(Y = \beta_0 + \beta_1 X\).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Means:</strong> \(\bar{X} = 2, \bar{Y} = 3.67\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Numerator:</strong> \(\sum (x_i - \bar{X})(y_i - \bar{Y}) = (-1)(-1.67) + (0)(0.33) + (1)(1.33) = 3.0\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Denominator:</strong> \(\sum (x_i - \bar{X})^2 = (-1)^2 + 0^2 + 1^2 = 2\).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Slope (\(\beta_1\)):</strong> \(3.0 / 2 = 1.5\).</div></div>
+      <div class="step-box"><span class="step-num">5</span><div><strong>Intercept (\(\beta_0\)):</strong> \(3.67 - (1.5 \times 2) = 0.67\).</div></div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Equation:</strong> \(\hat{Y} = 0.67 + 1.5X\). This line minimizes the <strong>Sum of Squared Errors</strong> across all three points.</div></div>
     </div>
 
     <h3>Cost Function: Mean Squared Error (MSE)</h3>
@@ -550,19 +583,15 @@ print(f"Complex Model Score (Variance): {model_complex.score(X_poly, y):.4f}")
       <li><strong>$SS_{tot}$ (Total Sum of Squares):</strong> $\sum (y_i - \bar{y})^2$ — The total variance in the data.</li>
     </ul>
 
+    <h2 id="r2-example">3.1 Illustrative Example: Explaining Variance</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example with Solution</h4>
-      <p><strong>Problem:</strong> Given $X = [1, 2, 3]$ and $Y = [2, 4, 5]$. Find the regression line $Y = \beta_0 + \beta_1 X$ and calculate the Residual for $X=2$.</p>
+      <h4>Problem: Interpreting \(R^2 = 0.85\)</h4>
+      <p>A marketing model predicts sales based on ad spend with an \(R^2\) of 0.85. What does this mean?</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Calculate Means:</strong> $\bar{X} = 2$, $\bar{Y} = 3.67$.</li>
-        <li><strong>Calculate Slope ($\beta_1$):</strong> 
-          $$\beta_1 = \frac{\sum (x_i - \bar{X})(y_i - \bar{Y})}{\sum (x_i - \bar{X})^2} = \frac{1.67 + 0 + 1.33}{1 + 1} = 1.5$$
-        </li>
-        <li><strong>Calculate Intercept ($\beta_0$):</strong> $\beta_0 = \bar{Y} - \beta_1 \bar{X} = 3.67 - (1.5 \times 2) = 0.67$.</li>
-        <li><strong>Residual for $X=2$:</strong> $\hat{y} = 0.67 + 1.5(2) = 3.67 \implies e = 4 - 3.67 = 0.33$.</li>
-      </ol>
+      <div class="step-box"><span class="step-num">1</span><div><strong>The Meaning:</strong> 85% of the variation in sales can be explained by the variation in ad spend.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>The Leftovers:</strong> The remaining 15% is due to factors not in the model (noise, seasonality, competitor moves).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Reality Check:</strong> High \(R^2\) doesn't always mean a good model (it could be overfitting). Always check <strong>Residual Plots</strong> for patterns that indicate your linear assumption is failing.</div></div>
     </div>
 
     <h2 id="implementation">Python Implementation</h2>
@@ -621,10 +650,10 @@ print(f"Residuals: {residuals}")
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#classification">1. Classification Metrics (Confusion Matrix)</a>
-      <a href="#regression">2. Regression Metrics</a>
-      <a href="#cross-entropy">3. Probabilistic Metric: Cross-Entropy</a>
-      <a href="#example">Mathematical Example: Precision vs. Recall</a>
+      <a href="#classification">1. Classification Metrics</a>
+      <a href="#precision-recall-example">2. Illustrative Example: Precision vs. Recall</a>
+      <a href="#regression">3. Regression Metrics</a>
+      <a href="#mae-mse-example">4. Illustrative Example: MAE vs. MSE</a>
       <a href="#implementation">Python Implementation</a>
       <a href="#takeaways">Key Takeaways</a>
     </div>
@@ -632,14 +661,22 @@ print(f"Residuals: {residuals}")
     <h2 id="classification">1. Classification Metrics (The Confusion Matrix)</h2>
     <p>Most classification metrics are derived from the <strong>Confusion Matrix</strong>, which compares Predicted vs. Actual labels.</p>
     
-    <div class="def-box">
-      <div class="def-title">Core Formulas</div>
-      <ul style="margin:0">
-        <li><strong>Accuracy:</strong> $\frac{TP + TN}{TP + TN + FP + FN}$</li>
-        <li><strong>Precision:</strong> Of all predicted positives, how many were actually positive? $\frac{TP}{TP + FP}$</li>
-        <li><strong>Recall:</strong> Of all actual positives, how many did we catch? $\frac{TP}{TP + FN}$</li>
-        <li><strong>F1-Score:</strong> The harmonic mean of Precision and Recall. $F1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$</li>
-      </ul>
+    <div class="step-box"><span class="step-num">1</span><div><strong>Accuracy:</strong> Overall correctness. \((TP + TN) / \text{Total}\). High bias on imbalanced data.</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>Precision:</strong> "Is it really positive?" \(\frac{TP}{TP + FP}\). Target when False Alarms are costly.</div></div>
+    <div class="step-box"><span class="step-num">3</span><div><strong>Recall (Sensitivity):</strong> "Did we find all positives?" \(\frac{TP}{TP + FN}\). Critical for safety/health.</div></div>
+    <div class="step-box"><span class="step-num">4</span><div><strong>F1-Score:</strong> Harmonic mean. \(2 \cdot \frac{\text{Pre} \cdot \text{Rec}}{\text{Pre} + \text{Rec}}\). Balance point.</div></div>
+
+    <h2 id="precision-recall-example">2. Illustrative Example: Precision vs. Recall</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating a Cancer Model</h4>
+      <p>A dataset has 100 patients. 10 have cancer (\(P=10\)). A model predicts "Cancer" for 15 people. Out of those 15, only 8 actually have cancer (\(TP=8\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>False Positives (FP):</strong> Predicted 15 - Correct 8 = 7.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>False Negatives (FN):</strong> Actual 10 - Found 8 = 2.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Precision:</strong> \(8 / (8 + 7) \approx 0.53\) (53%).</div></div>
+      <div class="step-box"><span class="step-num">4</span><div><strong>Recall:</strong> \(8 / (8 + 2) = 0.80\) (80%).</div></div>
+
+      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Analysis:</strong> The model is "Safe" (80% recall catches most cancer) but "Noisy" (53% precision means many healthy people get a scare). In ML, we tune the <strong>Decision Threshold</strong> to slide along this tradeoff.</div></div>
     </div>
 
     <h3>ROC-AUC</h3>
@@ -650,40 +687,23 @@ print(f"Residuals: {residuals}")
 
     <h2 id="regression">2. Regression Metrics</h2>
     
-    <h3>A. Mean Absolute Error (MAE)</h3>
-    <p>The average of the absolute differences between predictions and actual values. It's robust to outliers.</p>
-    <div class="math-block">
-      $$\text{MAE} = \frac{1}{n} \sum_{i=1}^{n} |y_i - \hat{y}_i|$$
-    </div>
+    <div class="step-box"><span class="step-num">1</span><div><strong>MAE (Robust):</strong> Average absolute difference. \(\frac{1}{n} \sum |y - \hat{y}|\).</div></div>
+    <div class="step-box"><span class="step-num">2</span><div><strong>MSE (Square Penalty):</strong> Squaring large errors. \(\frac{1}{n} \sum (y - \hat{y})^2\).</div></div>
 
-    <h3>B. Mean Squared Error (MSE)</h3>
-    <p>The average of the squared differences. Penalizes large errors more heavily than MAE due to squaring.</p>
-    <div class="math-block">
-      $$\text{MSE} = \frac{1}{n} \sum_{i=1}^{n} (y_i - \hat{y}_i)^2$$
-    </div>
-
-    <h2 id="cross-entropy">3. Probabilistic Metric: Cross-Entropy</h2>
-    <p>In Deep Learning, we don't just want a label; we want the probability. <strong>Cross-Entropy</strong> measures the performance of a model whose output is a probability between 0 and 1.</p>
-    <div class="math-block">
-      $$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$
-    </div>
-    <ul>
-      <li>If predicted probability $\hat{y}_i$ for true class $y_i$ is close to 1, loss is low.</li>
-      <li>If it is close to 0, loss approaches infinity.</li>
-    </ul>
-
+    <h2 id="mae-mse-example">4. Illustrative Example: MAE vs. MSE</h2>
     <div class="example-box">
-      <h4 id="example">Mathematical Example: Precision vs. Recall</h4>
-      <p><strong>Problem:</strong> A cancer detection model predicts 100 patients. Actual Cancer: 10. Model predicts Cancer for 15. Correct predictions (TP): 8.</p>
+      <h4>Problem: Impact of Outliers</h4>
+      <p>A model predicts house prices. For 3 houses, errors are: [\$1k, \$2k, \$10k]. Compare metrics.</p>
       
-      <p><strong>Solution:</strong></p>
-      <ol>
-        <li><strong>Identify counts:</strong> $TP=8$, $FP=7$ (15-8), $FN=2$ (10-8).</li>
-        <li><strong>Precision:</strong> $8 / (8 + 7) = 0.53$ (53%).</li>
-        <li><strong>Recall:</strong> $8 / (8 + 2) = 0.80$ (80%).</li>
-      </ol>
-      <p><strong>Conclusion:</strong> High recall (catches most cancer) but low precision (many false alarms).</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>MAE:</strong> \((1 + 2 + 10) / 3 = 4.33\text{k}\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>MSE:</strong> \((1^2 + 2^2 + 10^2) / 3 = (1 + 4 + 100) / 3 = 35\text{k}\).</div></div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Insight:</strong> The outlier (10k error) dominates the <strong>MSE</strong> due to the squaring effect (\(100/35\) vs \(10/4.33\)). Use MSE when large errors are unacceptable (e.g., self-driving safety); use MAE when you want to ignore noise.</div></div>
     </div>
+
+    <h2 id="cross-entropy">5. Probabilistic Metric: Cross-Entropy</h2>
+    <p>In Deep Learning, we don't just want a label; we want <strong>Confidence</strong>.</p>
+    <div class="math-block">$$\text{Loss} = -\sum_{i=1}^{M} y_i \log(\hat{y}_i)$$</div>
 
     <h2 id="implementation">Python Implementation</h2>
     <python-code>
@@ -729,7 +749,7 @@ print(f"Cross-Entropy Loss: {log_loss(y_true_prob, y_pred_prob):.4f}")
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have completed the Statistics module. Next, enter the engine of optimization: <strong><a href="#/mathematics/calculus/basics">Calculus</a></strong>.
     </div>
-  `},r={id:"probability-distributions",title:"Probability Distributions",description:"The mathematical blueprints of uncertainty. From binary successes in neural networks to traffic modeling and Bayesian priors, understand the distributions that power Modern ML.",html:String.raw`
+  `},n={id:"probability-distributions",title:"Probability Distributions",description:"The mathematical blueprints of uncertainty. From binary successes in neural networks to traffic modeling and Bayesian priors, understand the distributions that power Modern ML.",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Statistics · Probability</div>
       <h1>Probability Distributions for ML</h1>
@@ -741,7 +761,8 @@ print(f"Cross-Entropy Loss: {log_loss(y_true_prob, y_pred_prob):.4f}")
       <a href="#bernoulli">1. Bernoulli Distribution</a>
       <a href="#binomial">2. Binomial Distribution</a>
       <a href="#poisson">3. Poisson Distribution</a>
-      <a href="#categorical">4. Categorical Distribution</a>
+      <a href="#t-distribution">4. Student's t-Distribution (New)</a>
+      <a href="#categorical">5. Categorical Distribution</a>
       <a href="#multinomial">5. Multinomial Distribution</a>
       <a href="#gaussian">6. Gaussian (Normal) Distribution</a>
       <a href="#beta">7. Beta Distribution</a>
@@ -771,12 +792,18 @@ print(f"Cross-Entropy Loss: {log_loss(y_true_prob, y_pred_prob):.4f}")
       </div>
     </div>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A Binary Classifier detects fraudulent transactions. For a specific transaction, the model outputs a probability of 0.02 that it is "Fraud" ($p=0.02$). Calculate the variance of this prediction.</p>
-    <p><strong>Solution:</strong>
-      Identify $p = 0.02, q = 0.98$.
-      $$Var(X) = p(1-p) = 0.02 \times 0.98 = 0.0196$$
-    </p>
+    <h2 id="bernoulli-example">1. Illustrative Example: Bernoulli Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Predicting Rare Fraud</h4>
+      <p>A binary classifier detects fraudulent transactions. For a specific transaction, the model outputs \(p = 0.02\) (Fraud) and \(q = 0.98\) (Safe). Calculate the variance of this prediction.</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Parameter:</strong> \(p = 0.02\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> \(Var(X) = p(1-p)\).</div></div>
+
+      <div class="math-block">$$Var(X) = 0.02 \times 0.98 = 0.0196$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Insight:</strong> Variance is highest at \(p=0.5\) and lowest at the extremes (0 or 1). This means the model is "surest" when probabilities are near 0 or 1.</div></div>
+    </div>
 
     <python-code>
 import numpy as np
@@ -808,11 +835,19 @@ print(f"P(Success): {pmf_success}")
       <li><strong>Variance:</strong> $np(1-p)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A QA engineer finds that 10% of commits have bugs ($p=0.1$). If 5 commits are made ($n=5$), what is the probability that **exactly 2** have bugs?</p>
-    <p><strong>Solution:</strong>
-      $$P(X=2) = \binom{5}{2} (0.1)^2 (0.9)^3 = 10 \times 0.01 \times 0.729 = 0.0729$$ (7.29%).
-    </p>
+    <h2 id="binomial-example">2. Illustrative Example: Binomial Batch Logic</h2>
+    <div class="example-box">
+      <h4>Problem: QA Bug Detection</h4>
+      <p>A QA engineer finds that 10% of commits have bugs \((p=0.1)\). If 5 commits are made \((n=5)\), what is the probability that <strong>exactly 2</strong> have bugs?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Values:</strong> \(n=5, k=2, p=0.1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate Combinations:</strong> \(\binom{5}{2} = 10\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute PMF:</strong> \(10 \times (0.1)^2 \times (0.9)^3\).</div></div>
+
+      <div class="math-block">$$P(X=2) = 10 \times 0.01 \times 0.729 = 0.0729$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a <strong>7.29%</strong> chance of hitting exactly 2 bugs. This is much lower than the 90% chance of hitting 0 or 1 bug.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import binom
@@ -839,11 +874,31 @@ print(f"P(X=2): {prob_2:.4f}")
       <li><strong>Variance:</strong> $\lambda$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A server receives an average of 4 requests/sec ($\lambda=4$). What is the probability it receives **exactly 2** requests in the next second?</p>
-    <p><strong>Solution:</strong>
-      $$P(X=2) = \frac{4^2 e^{-4}}{2!} = \frac{16 \times 0.0183}{2} = 0.1464$$ (14.64%).
-    </p>
+    <h2 id="poisson-example">3. Illustrative Example: Poisson Rate Analysis</h2>
+    <div class="example-box">
+      <h4>Problem: Server Request Spikes</h4>
+      <p>A server receives an average of 4 requests/sec \((\lambda=4)\). What is the probability it receives <strong>exactly 2</strong> requests in the next second?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identity:</strong> \(\lambda=4, k=2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Formula:</strong> \(P(X=k) = \frac{\lambda^k e^{-\lambda}}{k!}\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate:</strong> \(\frac{16 \times 0.0183}{2}\).</div></div>
+
+      <div class="math-block">$$P(X=2) \approx 0.1464$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Interpretation:</strong> There is a <strong>14.6%</strong> chance of seeing exactly 2 requests. In SRE/MLOps, we use this to set alerting thresholds for "quiet" periods.</div></div>
+    </div>
+
+    <h2 id="t-distribution" style="background: linear-gradient(to right, #cf222e, #9a6700); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">4. Student's t-Distribution</h2>
+    <p>The Student's t-Distribution is similar to the Normal distribution but has <strong>heavier tails</strong>. It is essential when estimating parameters from small sample sizes where the population variance is unknown.</p>
+    <div class="math-block">$$f(t) = \frac{\Gamma(\frac{\nu+1}{2})}{\sqrt{\nu\pi}\Gamma(\frac{\nu}{2})} \left(1 + \frac{t^2}{\nu}\right)^{-\frac{\nu+1}{2}}$$</div>
+    
+    <div class="example-box">
+      <h4>Problem: Uncertainty in Small Samples</h4>
+      <p>Why do we use the t-distribution for \(n=10\) instead of a Normal curve?</p>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Degrees of Freedom (df):</strong> \(\nu = n - 1 = 9\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Tail Check:</strong> At \(\nu=9\), the tails are much wider than a standard normal.</div></div>
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>ML Insight:</strong> The t-distribution is more <strong>conservative</strong>. It provides wider confidence intervals, acknowledging that our estimate of the variance might be slightly off due to the small sample size.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import poisson
@@ -870,12 +925,18 @@ print(f"P(X=2) for lambda=4: {prob_2:.4f}")
       <li><strong>Variance ($Var(x_i)$):</strong> $p_i(1-p_i)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A Softmax layer outputs $[0.1, 0.7, 0.2]$ for labels [Cloud, Rain, Sun]. Calculate the variance for the "Cloud" category.</p>
-    <p><strong>Solution:</strong>
-      $p_1 = 0.1$.
-      $$Var(x_1) = 0.1(1 - 0.1) = 0.09$$
-    </p>
+    <h2 id="categorical-example">5. Illustrative Example: Softmax Variance</h2>
+    <div class="example-box">
+      <h4>Problem: Evaluating Label Confidence</h4>
+      <p>A Softmax layer outputs \([0.1, 0.7, 0.2]\) for the labels [Cloud, Rain, Sun]. Calculate the variance for the "Cloud" category (\(p_1 = 0.1\)).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Softmax Output:</strong> \(p_1 = 0.1\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Variance Formula:</strong> \(Var(x_i) = p_i(1 - p_i)\).</div></div>
+
+      <div class="math-block">$$Var(x_1) = 0.1 \times (1 - 0.1) = 0.09$$</div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>Interpretation:</strong> The low variance (0.09) compared to the higher variance of the "Rain" category (\(0.7 \times 0.3 = 0.21\)) indicates the model is more "certain" about the non-existence of clouds than the presence of rain.</div></div>
+    </div>
 
     <python-code>
 import numpy as np
@@ -902,11 +963,19 @@ print(f"One-hot Sample: {sample}")
       <li><strong>Variance ($Var(x_i)$):</strong> $n \cdot p_i(1 - p_i)$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> A sentiment model with $p = [0.4, 0.4, 0.2]$ (Pos, Neu, Neg). In 10 posts, what is the probability of exactly 5 Pos, 3 Neu, and 2 Neg?</p>
-    <p><strong>Solution:</strong>
-      $$P = \frac{10!}{5!3!2!} (0.4)^5 (0.4)^3 (0.2)^2 \approx 0.066$$ (6.6%).
-    </p>
+    <h2 id="multinomial-example">6. Illustrative Example: document Mixture</h2>
+    <div class="example-box">
+      <h4>Problem: Sentiment Model Outcome</h4>
+      <p>A sentiment model predicts \(p = [0.4, 0.4, 0.2]\) (Positive, Neutral, Negative). In 10 posts, what is the probability of exactly 5 Positive, 3 Neutral, and 2 Negative posts?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Parameters:</strong> \(n=10, \mathbf{x} = [5, 3, 2], \mathbf{p} = [0.4, 0.4, 0.2]\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factorials:</strong> \(10! / (5! \times 3! \times 2!) = 3628800 / (120 \times 6 \times 2) = 2520\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Compute:</strong> \(2520 \times 0.4^5 \times 0.4^3 \times 0.2^2\).</div></div>
+
+      <div class="math-block">$$P \approx 0.0665$$</div>
+
+      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Significance:</strong> Even though this is the "expected" distribution, the probability of hitting it <strong>exactly</strong> is only about 6.6%. This highlights the high dimensionality and "spread" of Multinomial outcomes.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import multinomial
@@ -933,12 +1002,19 @@ print(f"Outcome Probability: {prob:.4f}")
       <li><strong>Z-Score:</strong> $Z = \frac{X - \mu}{\sigma}$ (Standardization)</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> CPUs have speed $\mu=3.5, \sigma=0.2$ GHz. What is the probability of a CPU > 3.9 GHz?</p>
-    <p><strong>Solution:</strong>
-      $$Z = \frac{3.9 - 3.5}{0.2} = 2.0$$
-      $P(Z > 2.0)$ is half of the remaining 4.6% outside the $2\sigma$ range = 2.3%.
-    </p>
+    <h2 id="gaussian-example">7. Illustrative Example: Standardizing ML Features</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing CPUs via Z-scores</h4>
+      <p>CPUs have clock speeds with \(\mu=3.5, \sigma=0.2\) GHz. What is the probability of a CPU having a speed \(> 3.9\) GHz?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Standardize (Z-score):</strong> \(Z = \frac{X - \mu}{\sigma} = \frac{3.9 - 3.5}{0.2} = 2.0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Empirical Rule:</strong> 95% of data is within \(\pm 2\sigma\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Tail Calculation:</strong> 5% remains in the tails. Since we want "greater than", we take the upper tail: \(5\% / 2 = 2.5\%\).</div></div>
+
+      <div class="math-block">$$P(X > 3.9) \approx 0.0228$$</div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Why?</strong> This standardization is the exact math behind <strong>StandardScaler</strong> in Scikit-Learn. It ensures features have a mean of 0 and variance of 1, helping gradient descent converge faster.</div></div>
+    </div>
 
     <python-code>
 import matplotlib.pyplot as plt
@@ -967,11 +1043,18 @@ plt.show()
       <li><strong>Mean:</strong> $\frac{\alpha}{\alpha + \beta}$</li>
     </ul>
 
-    <h3>Example & Solution</h3>
-    <p><strong>Problem:</strong> You observe 8 clicks ($\alpha$) and 2 non-clicks ($\beta$). What is the expected Click-Through Rate (CTR)?</p>
-    <p><strong>Solution:</strong>
-      $$E[X] = \frac{8}{8 + 2} = 0.8 \text{ (80\% CTR)}$$
-    </p>
+    <h2 id="beta-example">8. Illustrative Example: Bayesian A/B Testing</h2>
+    <div class="example-box">
+      <h4>Problem: Predicting Click-Through Rate (CTR)</h4>
+      <p>You observe 8 clicks (\(\alpha=8\)) and 2 non-clicks (\(\beta=2\)) on a webpage. What is our expected belief about the true CTR?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Parameters:</strong> \(\alpha = 8, \beta = 2\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Expected Value:</strong> \(E[X] = \frac{\alpha}{\alpha + \beta}\).</div></div>
+
+      <div class="math-block">$$E[X] = \frac{8}{8 + 2} = 0.8 \text{ (80\% CTR)}$$</div>
+
+      <div class="callout focus"><div class="callout-icon">🎯</div><div class="callout-body"><strong>ML Insight:</strong> As we observe more data (e.g., 800 clicks, 200 non-clicks), the Beta distribution becomes "tighter" around 0.8, representing increased confidence in our model's estimate.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import beta
@@ -991,10 +1074,17 @@ print(f"Expected Probability: {mean}")
     </div>
 
     <h3>Mathematical Derivation</h3>
-    <ul>
-      <li><strong>PDF:</strong> $f(\mathbf{x}; \mathbf{\alpha}) = \frac{1}{B(\mathbf{\alpha})} \prod_{i=1}^{K} x_i^{\alpha_i - 1}$</li>
-      <li><strong>Mean ($E[x_i]$):</strong> $\frac{\alpha_i}{\sum \alpha_j}$</li>
-    </ul>
+    <div class="math-block">$$f(\mathbf{x}; \mathbf{\alpha}) = \frac{1}{B(\mathbf{\alpha})} \prod_{i=1}^{K} x_i^{\alpha_i - 1}$$</div>
+    
+    <div class="example-box">
+      <h4>Problem: Topic Modeling Prior</h4>
+      <p>A document has 3 possible topics. We set a Dirichlet prior with \(\mathbf{\alpha} = [10, 10, 10]\). What is the expected distribution of topics?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Mean Formula:</strong> \(E[x_i] = \alpha_i / \sum \alpha_j\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(10 / (10+10+10) = 1/3\).</div></div>
+
+      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Insight:</strong> If we set \(\alpha < 1\) (e.g., [0.1, 0.1, 0.1]), the distribution pushes the document to be "sparse"—favoring only one topic. This <strong>Sparsity Prior</strong> is what makes LDA topic modeling effective.</div></div>
+    </div>
 
     <python-code>
 from scipy.stats import dirichlet
@@ -1047,6 +1137,12 @@ print(f"Simplex Sample (Prob Mixture): {sample}")
             <td>Central Limit Theorem basis</td>
           </tr>
           <tr>
+            <td><strong>Student's t</strong></td>
+            <td>Continuous</td>
+            <td>Small-sample Inference</td>
+            <td>Heavier tails for uncertainty</td>
+          </tr>
+          <tr>
             <td><strong>Beta</strong></td>
             <td>Continuous</td>
             <td>Bayesian Prob Modeling</td>
@@ -1065,7 +1161,7 @@ print(f"Simplex Sample (Prob Mixture): {sample}")
     <div class="linking-rule">
       <strong>Next Step:</strong> With these distributions as our tools, we can now master <strong><a href="#/mathematics/statistics/sampling-resampling">Sampling & Resampling</a></strong> to draw conclusions from representative data.
     </div>
-  `},n={id:"statistics",title:"Statistics",description:"Statistics is the science of learning from data. In Machine Learning, it provides the tools for descriptive analysis, hypothesis testing, parameter estimation, and rigorous model evaluation.",keyConcepts:[{title:"Descriptive Statistics",description:"Measures of central tendency, spread, and information-theoretic uncertainty."},{title:"Probability Distributions",description:"The mathematical blueprints for Bernoulli, Binomial, Gaussian, and Bayesian priors."},{title:"Sampling & Resampling",description:"Bootstrapping, Cross-Validation, and population inference."},{title:"Inferential Statistics",description:"The mathematical theory of hypothesis testing, p-values, and confidence intervals."},{title:"Estimation Theory",description:"Maximum Likelihood (MLE) vs. Maximum A Posteriori (MAP) and the Bias-Variance tradeoff."},{title:"Regression Analysis",description:"The Ordinary Least Squares (OLS) framework, residuals, and R-squared."},{title:"Evaluation Metrics",description:"Probabilistic and information-theoretic measures of classification and regression performance."}],introHtml:String.raw`
+  `},r={id:"statistics",title:"Statistics",description:"Statistics is the science of learning from data. In Machine Learning, it provides the tools for descriptive analysis, hypothesis testing, parameter estimation, and rigorous model evaluation.",keyConcepts:[{title:"Descriptive Statistics",description:"Measures of central tendency, spread, and information-theoretic uncertainty."},{title:"Probability Distributions",description:"The mathematical blueprints for Bernoulli, Binomial, Gaussian, and Bayesian priors."},{title:"Sampling & Resampling",description:"Bootstrapping, Cross-Validation, and population inference."},{title:"Inferential Statistics",description:"The mathematical theory of hypothesis testing, p-values, and confidence intervals."},{title:"Estimation Theory",description:"Maximum Likelihood (MLE) vs. Maximum A Posteriori (MAP) and the Bias-Variance tradeoff."},{title:"Regression Analysis",description:"The Ordinary Least Squares (OLS) framework, residuals, and R-squared."},{title:"Evaluation Metrics",description:"Probabilistic and information-theoretic measures of classification and regression performance."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -1199,4 +1295,4 @@ print(f"Simplex Sample (Prob Mixture): {sample}")
       </div>
 
     </div>
-  `,sections:[t,r,e,i,a,s,o]};export{n as STATISTICS_DATA};
+  `,sections:[t,n,e,i,s,a,o]};export{r as STATISTICS_DATA};
