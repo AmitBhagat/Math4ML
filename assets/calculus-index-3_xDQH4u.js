@@ -5,18 +5,7 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       <p>A <strong>Derivative</strong> measures how "sensitive" a function is to a tiny change in its input. In Machine Learning, we use derivatives to determine exactly how small adjustments to model weights will affect our error (loss).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-tangent">Example 1: Finding Tangent Slopes</a>
-      <a href="#example-loss">Example 2: Sensitivity of Loss to Bias</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Functions</strong>: Understanding \(f(x)\).</li>
@@ -24,19 +13,19 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculus is the "Language of Sensitivity." It answers the question: <em>"If I nudge this variable by a hair, how much does the result move?"</em> If you are standing on a hill, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. ML models always want to move "downhill" to find the minimum error.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
+        Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
         If you're driving, the speedometer doesn't tell you where you've been; it tells you exactly how fast you're changing your position <em>right now</em>. 
         In ML, the derivative tells the model how fast the error is changing with respect to its weights <em>at this exact moment</em>.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
     <p><strong>Common Rules:</strong></p>
@@ -45,8 +34,8 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       <li><strong>Constant Rule:</strong> \(\frac{d}{dx}C = 0\).</li>
     </ul>
 
-    <h2 id="example-tangent">Example 1: Finding Tangent Slopes</h2>
-    <div class="example-box">
+    <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
+    
       <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
       
       <div class="algorithm-steps">
@@ -66,10 +55,10 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
           <strong>Result:</strong> The slope (rate of change) is 6. For every 0.01 unit you increase \(x\), the output \(y\) will increase by approximately 0.06 units.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-loss">Example 2: Sensitivity of Loss to Bias</h2>
-    <div class="example-box">
+    <h2 id="example-loss" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sensitivity of Loss to Bias</h2>
+    
       <h4>Problem: Nudging a Single Parameter</h4>
       <p>Assume your Loss \(L = (b - 5)^2\) where \(b\) is a bias term. Calculate the sensitivity at \(b = 2\).</p>
       
@@ -90,9 +79,9 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
           <strong>Result:</strong> The derivative is <strong>negative</strong>. This tells the model: "Increasing the bias \(b\) will <strong>decrease</strong> the loss." So the optimization algorithm will nudge \(b\) higher.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 def f(x):
     return x**2
@@ -115,25 +104,14 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Single variables are rare in ML. How do we find slopes on multidimensional planes? Explore <strong><a href="#/mathematics/calculus/partial-derivatives">Partial Derivatives</a></strong>.
     </div>
-  `},e={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
+  `},i={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Multivariable</div>
       <h1>Partial Derivatives: The Specialized Slope</h1>
       <p>A <strong>Partial Derivative</strong> measures how a function changes when we "nudge" only <strong>one</strong> specific input, while freezing all other variables. In Machine Learning, where models have millions of weights, these allow us to isolate the influence of each individual parameter.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-bowl">Example 1: Surface Slope of a Bowl</a>
-      <a href="#example-features">Example 2: Isotropic Sensitivity in a Linear Model</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Simple Derivatives</strong>: How a 1D function changes.</li>
@@ -141,26 +119,26 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine you are standing on a mountain (the Loss Surface). To optimize your model, you need to know: <em>"If I step strictly North (towards Weight A), does it go up? If I step strictly East (towards Weight B), does it go down?"</em> A partial derivative is that <strong>directional "step"</strong> along a single axis.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Partial Derivatives as <strong>Selective Vision</strong>. 
+        Think of Partial Derivatives as <strong>Selective Vision</strong>. 
         If you have a function with 10 variables, the partial derivative w.r.t \(x_1\) "blurs out" everyone else. 
         It treats \(x_2, x_3, \dots\) as if they were fixed constant numbers like 5 or 10. 
         This is how a neural network isolates exactly which of its millions of weights is causing the most error.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y)\), the partial derivative with respect to \(x\) is defined by the limit where <strong>only \(x\)</strong> receives a nudge:</p>
     <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>
     <p>Notice that \(y\) stays exactly the same in both parts of the fraction.</p>
 
-    <h2 id="example-bowl">Example 1: Surface Slope of a Bowl</h2>
-    <div class="example-box">
+    <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
+    
       <h4>Problem: Finding Slopes on \(f(x, y) = x^2 + y^2\)</h4>
       <p>Evaluate the partial derivatives at the point \((1, 2)\).</p>
       
@@ -185,10 +163,10 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
           <strong>Result:</strong> Moving toward x is a slope of 2; moving toward y is a slope of 4. Therefore, the function is <strong>more sensitive</strong> to changes in \(y\) at this specific point.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-features">Example 2: Feature Sensitivity in a Model</h2>
-    <div class="example-box">
+    <h2 id="example-features" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Feature Sensitivity in a Model</h2>
+    
       <h4>Problem: Evaluating the Impact of Features</h4>
       <p>A simple model predicts house prices: \(P = 50x + 20y + 10\), where \(x\) is sq-footage and \(y\) is year-built. Calculate the "Partial Impact" of sq-footage.</p>
       
@@ -209,9 +187,9 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
           <strong>Result:</strong> The partial derivative is 50. This means for every unit \(x\) increases, the price \(P\) increases by 50, regardless of the year built (\(y\)).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -238,25 +216,14 @@ print(f"Exact derivative (2x): {2*x_val}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, partial derivatives tell us slopes along axes. How do we combine them to find the true "upward" direction? Explore <strong><a href="#/mathematics/calculus/gradient">The Gradient</a></strong>.
     </div>
-  `},i={id:"gradient",title:"The Gradient",description:"The Gradient is a vector of all partial derivatives. It points in the direction of the steepest ascent on a high-dimensional surface.",color:"#1B5E20",html:String.raw`
+  `},e={id:"gradient",title:"The Gradient",description:"The Gradient is a vector of all partial derivatives. It points in the direction of the steepest ascent on a high-dimensional surface.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Gradient</div>
       <h1>The Gradient: The Compass of Optimization</h1>
       <p>The <strong>Gradient</strong> (\(\nabla f\)) is a vector containing all the partial derivatives of a function. It is a mathematical "compass" that always points directly in the direction of the <strong>steepest uphill</strong> slope.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-mountain">Example 1: Navigating a Loss Mountain</a>
-      <a href="#example-directional">Example 2: Directional Derivative in 2D</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Partial Derivatives</strong>: How to nudge one variable at a time.</li>
@@ -264,26 +231,26 @@ print(f"Exact derivative (2x): {2*x_val}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East. The <strong>Gradient</strong> combines these into a single arrow that points exactly "Uphill." In Machine Learning, we want to go "Downhill," so we simply take a step in the <strong>opposite direction</strong> of the gradient.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Gradient like a <strong>Treasure Compass</strong>. 
+        Think of the Gradient like a <strong>Treasure Compass</strong>. 
         Except instead of pointing toward North, it points toward where the error is growing fastest. 
         By "negating" the compass (\(-\nabla f\)), we get a direct path to the <strong>Global Minimum</strong> (the treasure). 
         Without this compass, training a neural network would just be blind guessing.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a scalar function \(f(x, y, \dots, z)\), the gradient \(\nabla f\) is a vector of its first-order partial derivatives:</p>
     <div class="math-block">$$\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \dots, \frac{\partial f}{\partial z} \right]^T$$</div>
     <p><strong>Directional Derivative:</strong> To find the slope in any arbitrary direction vector \(\mathbf{v}\), you take the dot product: \(D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}\).</p>
 
-    <h2 id="example-mountain">Example 1: Navigating a Loss Mountain</h2>
-    <div class="example-box">
+    <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
+    
       <h4>Problem: Finding the Steering Direction</h4>
       <p>Let \(f(x, y) = x^2 + 3xy + 2y^2\). Find the gradient at the point \((1, 2)\).</p>
       
@@ -308,10 +275,10 @@ print(f"Exact derivative (2x): {2*x_val}")
           <strong>Result:</strong> To increase the function value as quickly as possible from \((1, 2)\), move in the direction of \([8, 11]\). In ML optimization, we would move toward \([-8, -11]\) to minimize error.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-directional">Example 2: Directional Derivative in 2D</h2>
-    <div class="example-box">
+    <h2 id="example-directional" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Directional Derivative in 2D</h2>
+    
       <h4>Problem: Slope Toward the Horizon</h4>
       <p>Find the slope of \(f(x, y) = x^2 + y^2\) at \((3, 4)\) in the direction of \(\mathbf{v} = [1, 1]\).</p>
       
@@ -336,9 +303,9 @@ print(f"Exact derivative (2x): {2*x_val}")
           <strong>Result:</strong> Moving diagonally at \((3, 4)\) results in a slope of ~9.9. This tells us the <strong>Directional Sensitivity</strong> of our model along a custom feature axis.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -375,18 +342,7 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
       <p>The <strong>Chain Rule</strong> is the mathematical "telephone wire" that connects every layer of a neural network. It allows us to calculate how <strong>sensitive</strong> the final error is to a weight deep inside the model by multiplying the local sensitivities of every intermediate step.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-composite">Example 1: Composite Functions</a>
-      <a href="#example-backprop">Example 2: Backpropagation in a 2-Layer NN</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Simple Derivatives</strong>: How to differentiate individual terms.</li>
@@ -394,26 +350,26 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, we don't just have one function mapping input to output. We have a <strong>Chain</strong> of functions: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\to\) Error. To train the network, we need to know: <em>"How much does that deep weight \(w\) affect the Final Error?"</em> The Chain Rule says we can just multiply the slopes of every connection along the path to find the answer.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Chain Rule as <strong>Passing a Secret</strong>. 
+        Think of the Chain Rule as <strong>Passing a Secret</strong>. 
         If Person A whispers to B, and B whispers to C, and C screams at D—how does A's whisper affect D's scream? 
         The Chain Rule multiplies the "loudness" (slope) of every person in the chain. 
         In ML, this is why we can train 100-layer "Deep" networks: we just keep multiplying the local gradients backwards!
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
     <p>For multivariable functions, you sum the paths: \(\frac{\partial f}{\partial t} = \sum_{i} \frac{\partial f}{\partial x_i} \cdot \frac{\partial x_i}{\partial t}\).</p>
 
-    <h2 id="example-composite">Example 1: Composite Functions</h2>
-    <div class="example-box">
+    <h2 id="example-composite" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Composite Functions</h2>
+    
       <h4>Problem: Derivative of \(f(x) = (3x^2 + 1)^4\)</h4>
       
       <div class="algorithm-steps">
@@ -441,10 +397,10 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
           <strong>Result:</strong> We solved a complex problem by breaking it into two simple "linked" parts.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-backprop">Example 2: Backpropagation in a 2-Layer NN</h2>
-    <div class="example-box">
+    <h2 id="example-backprop" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Backpropagation in a 2-Layer NN</h2>
+    
       <h4>Problem: Error Sensitivity Flow</h4>
       <p>Let Loss \(L = e^a\) and activation \(a = wx\). Find how the loss changes with weight \(w\).</p>
       
@@ -469,9 +425,9 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
           <strong>Result:</strong> This is exactly how <strong>Neural Network Training</strong> works. We calculate the local impact at each step and multiply them to get the "Global" impact of the weight.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -506,18 +462,7 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
       <p>The <strong>Jacobian Matrix</strong> (\(\mathbf{J}\)) is a rectangular grid containing <strong>all possible partial derivatives</strong> between a set of inputs and a set of outputs. In Machine Learning, it tells us exactly how every single neuron in one layer affects every single neuron in the next.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-jacobian">Example 1: Layer-to-Layer Sensitivity</a>
-      <a href="#example-softmax">Example 2: Softmax Sensitivity (Overview)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Matrices</strong>: Understanding rows and columns.</li>
@@ -525,28 +470,28 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A simple derivative (\(df/dx\)) is for one input and one output. A Gradient (\(\nabla f\)) is for many inputs and one output. But in Deep Learning, every layer takes a vector and spits out a <strong>new vector</strong>. To track the sensitivity of this transformation, we need a grid where every row is the gradient of a different output.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Jacobian as a <strong>"Responsibility Matrix."</strong> 
+        Think of the Jacobian as a <strong>"Responsibility Matrix."</strong> 
         The row tells you: <em>"How much does Output #1 care about Input #1, #2, #3?"</em> 
         The column tells you: <em>"How much does Input #1 affect Output #1, #2, #3?"</em> 
         Without this grid, we couldn't pass gradients through complex "Vector Layers" like Softmax or fully connected layers.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(\mathbf{f}(\mathbf{x}) = [f_1, f_2, \dots, f_m]^T\) of input \(\mathbf{x} = [x_1, x_2, \dots, x_n]^T\), the Jacobian is:</p>
     <div class="math-block">$$ \mathbf{J} = \begin{bmatrix} 
     \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
     \vdots & \ddots & \vdots \\
     \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix} $$</div>
 
-    <h2 id="example-jacobian">Example 1: Layer-to-Layer Sensitivity</h2>
-    <div class="example-box">
+    <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
+    
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>
       
       <div class="algorithm-steps">
@@ -570,10 +515,10 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
           <strong>Result:</strong> We now have a complete "Map" of how the entire output vector responds to any change in the input vector.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-softmax">Example 2: Sensitivity of Softmax Outputs</h2>
-    <div class="example-box">
+    <h2 id="example-softmax" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sensitivity of Softmax Outputs</h2>
+    
       <h4>Problem: The Jacobian of a Probability Layer</h4>
       <p>Softmax turns scores into probabilities. If you increase Score #1, Probability #1 goes up, but #2 and #3 <strong>must</strong> go down to keep the sum at 100%.</p>
       
@@ -594,9 +539,9 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
           <strong>Intuition:</strong> The Jacobian of Softmax is <strong>huge</strong> in modern LLMs. It ensures that when the model decides "Cat" is more likely, it also correctly decides "Dog" is less likely.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -629,25 +574,14 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Jacobians tell us about "first-order" velocity. What about the "Acceleration" or the curvature of the loss? Explore <strong><a href="#/mathematics/calculus/hessian">The Hessian Matrix</a></strong>.
     </div>
-  `},o={id:"hessian",title:"Hessian Matrix",description:"The Hessian contains all the second-order partial derivatives. It tells us about the 'Curvature' or 'Acceleration' of the loss function.",color:"#1B5E20",html:String.raw`
+  `},n={id:"hessian",title:"Hessian Matrix",description:"The Hessian contains all the second-order partial derivatives. It tells us about the 'Curvature' or 'Acceleration' of the loss function.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Second Derivatives</div>
       <h1>Hessian Matrix: The Curvature Grid</h1>
       <p>The <strong>Hessian Matrix</strong> (\(\mathbf{H}\)) is a square grid containing <strong>all second-order partial derivatives</strong>. While the Gradient tells us "Direction" (Velocity), the Hessian tells us "Curvature" (Acceleration). In Machine Learning, it's the key to understanding if we are at a local minimum, a local maximum, or a saddle point.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-hessian">Example 1: Finding Curvature at a Point</a>
-      <a href="#example-newton">Example 2: Second-order Optimization (Newton)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Partial Derivatives</strong>: How to nudging one variable.</li>
@@ -655,13 +589,13 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Gradient (\(\nabla f\)) tells you which way to walk to reduce the loss. But it doesn't tell you how <strong>fast</strong> the slope is changing. Are you on a sharp peak? A flat valley? A <strong>Hessian</strong> tells the optimizer: <em>"Slow down, the ground is curving upwards!"</em> or <em>"Speed up, the slope is constant."</em> This is the difference between simple Gradient Descent and advanced "Second-Order" methods.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Hessian as <strong>The Road Condition</strong>. 
+        Think of the Hessian as <strong>The Road Condition</strong>. 
         The Gradient is your <strong>Steering Wheel</strong>. 
         The Hessian is how much you need to <strong>Brake or Accelerate</strong> because the road is curving. 
         If you are at the bottom of a bowl, the Hessian is "Positive Definite" (all curvas are up). 
@@ -670,7 +604,7 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
     <div class="math-block">$$ \mathbf{H} = \begin{bmatrix} 
     \frac{\partial^2 f}{\partial x_1^2} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
@@ -678,8 +612,8 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n^2} \end{bmatrix} $$</div>
     <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
 
-    <h2 id="example-hessian">Example 1: Finding Curvature at a Point</h2>
-    <div class="example-box">
+    <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Curvature at a Point</h2>
+    
       <h4>Problem: Finding the Hessian of \(f(x, y) = x^2 + 5xy + 3y^2\)</h4>
       
       <div class="algorithm-steps">
@@ -711,10 +645,10 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
           <strong>Result:</strong> We now have a complete model of how the entire surface is "bending."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-newton">Example 2: Second-order Optimization (Newton)</h2>
-    <div class="example-box">
+    <h2 id="example-newton" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Second-order Optimization (Newton)</h2>
+    
       <h4>Problem: Taking a "Full Step" toward the Minimum</h4>
       <p>Given the Gradient \(\mathbf{g}\) and Hessian \(\mathbf{H}\), how does a smart optimizer take a step?</p>
       
@@ -735,9 +669,9 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
           <strong>Intuition:</strong> If the ground is very curved (large Hessian), we take a smaller, careful step. If the ground is flat, we take a massive, confident step. This is much faster than simple Gradient Descent.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -778,25 +712,14 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Sometimes a function is too complex to solve exactly. How do we approximate it with a simpler "Flat" or "Parabolic" version? Explore <strong><a href="#/mathematics/calculus/taylor-series">Taylor Series Approximation</a></strong>.
     </div>
-  `},n={id:"taylor-series",title:"Taylor Series Approximation",description:"A Taylor Series is a way to approximate a complex, curvy function with a simple polynomial like a line or a parabola.",color:"#1B5E20",html:String.raw`
+  `},o={id:"taylor-series",title:"Taylor Series Approximation",description:"A Taylor Series is a way to approximate a complex, curvy function with a simple polynomial like a line or a parabola.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Approximation</div>
       <h1>Taylor Series: The Simplifier</h1>
       <p>A <strong>Taylor Series</strong> is a mathematical tool that takes a complex, "bumpy" function and mimics it using simpler pieces (lines, curves, etc.). In Machine Learning, we almost never solve the full loss function exactly—we approximate it with a "Local" Taylor expansion to decide our next step.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-linear">Example 1: Linear Approximation of \(e^x\)</a>
-      <a href="#example-quadratic">Example 2: Quadratic Approximation of Loss</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Derivatives</strong>: How to find slopes.</li>
@@ -804,27 +727,27 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating a 100-layer neural network's exact output at every possible point is impossible. But if we are currently at weights \(\mathbf{w}_0\), we only need to know what the loss surface looks like <strong>nearby</strong>. A "First-order" Taylor expansion is just a <strong>Tangent Line</strong>. A "Second-order" expansion is a <strong>Parabola</strong>. These approximations are the foundation of almost all numerical solvers.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Taylor Series as <strong>"Drawing a Map from Memory."</strong> 
+        Think of the Taylor Series as <strong>"Drawing a Map from Memory."</strong> 
         If you are at point A, you know the height (Value), the slope (1st Derivative), and how the ground is curving (2nd Derivative). 
         By combining these, you can guess what point B looks like without actually going there. 
         The more derivatives you use (\(n\)-th degree), the more <strong>accurate</strong> your map becomes.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>The \(n\)-th order Taylor polynomial of \(f(x)\) around a center point \(a\) is:</p>
     <div class="math-block">$$P_n(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n$$</div>
     <p><strong>First Order (Linear):</strong> \(f(x) \approx f(a) + f'(a)(x-a)\).</p>
     <p><strong>Second Order (Quadratic):</strong> \(f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2\).</p>
 
-    <h2 id="example-linear">Example 1: Linear Approximation of \(e^x\)</h2>
-    <div class="example-box">
+    <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
+    
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>
       <p>Estimate \(e^{0.1}\) using a Taylor expansion centered at \(a = 0\).</p>
       
@@ -849,10 +772,10 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
           <strong>Result:</strong> We got within <strong>0.5%</strong> of the true value with just a single derivative! This is why "First-order" optimizers like SGD are so effective.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-quadratic">Example 2: Quadratic Approximation of Loss</h2>
-    <div class="example-box">
+    <h2 id="example-quadratic" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Quadratic Approximation of Loss</h2>
+    
       <h4>Problem: Finding the "Bowl" near our current weights</h4>
       <p>Given \(L(w) = w^4\) at \(w = 1\), find the quadratic approximation (\(n=2\)).</p>
       
@@ -881,9 +804,9 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
           <strong>Result:</strong> We’ve turned a complex fourth-degree function into a simple parabola. Optimizers can find the exact minimum of this parabola in 1 step.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -919,18 +842,7 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       <p>A <strong>Critical Point</strong> is any point where the gradient of a function is exactly zero (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a struggle to find a specific type of critical point: the <strong>Global Minimum</strong> of our error function.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-minimum">Example 1: Finding Local Minima</a>
-      <a href="#example-saddle">Example 2: Detecting Saddle Points in 2D</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradients</strong>: How to find vectors of slopes.</li>
@@ -938,20 +850,20 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>When you are hiking, you are at a "Critical Point" if the ground at your feet is perfectly flat. This could mean you are at the <strong>Top of a Peak</strong> (Maximize Reward), the <strong>Bottom of a Valley</strong> (Minimize Loss), or on a <strong>Saddle Point</strong> (Flat from one side, steep from another). To build a model that actually works, we need to distinguish between these cases.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Critical Point like <strong>The End of a Path</strong>. 
+        Think of a Critical Point like <strong>The End of a Path</strong>. 
         If you arrive at a flat spot and the ground curves up in all directions, you've found a <strong>Minimum</strong> (Success!). 
         If it curves down everyone, you've found a <strong>Maximum</strong> (Reverse success!). 
         In Deep Learning, we often find <strong>Saddle Points</strong>—frustrating flat areas that trap our models and slow down training.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>We find critical points by solving the equation:</p>
     <div class="math-block">$$\nabla f(\mathbf{x}) = \mathbf{0}$$</div>
     <p>To classify the point, we examine the <strong>Eigenvalues</strong> of the Hessian matrix \(\mathbf{H}\):</p>
@@ -961,8 +873,8 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       <li><strong>Mixed \(\lambda\):</strong> -> <strong>Saddle Point</strong>.</li>
     </ul>
 
-    <h2 id="example-minimum">Example 1: Finding Local Minima</h2>
-    <div class="example-box">
+    <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
+    
       <h4>Problem: Finding the Bottom of \(f(x, y) = x^2 + y^2 - 4x\)</h4>
       
       <div class="algorithm-steps">
@@ -986,10 +898,10 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
           <strong>Result:</strong> \((2, 0)\) is a <strong>Local Minimum</strong>. This is the optimal configuration for this toy model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-saddle">Example 2: Detecting Saddle Points in 2D</h2>
-    <div class="example-box">
+    <h2 id="example-saddle" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Detecting Saddle Points in 2D</h2>
+    
       <h4>Problem: Finding the Trap in \(f(x, y) = x^2 - y^2\)</h4>
       
       <div class="algorithm-steps">
@@ -1013,9 +925,9 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
           <strong>Intuition:</strong> One eigenvalue is positive (Uphill along x), and one is negative (Downhill along y). This is a <strong>Saddle Point</strong>. In ML training, your optimizer might get stuck here forever because the "Net Gradient" is zero, even though lower points exist nearby.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize
@@ -1050,17 +962,7 @@ print(f"Value at Min: {res.fun}")
       <p><strong>Integral Calculus</strong> is the inverse of differential calculus. While derivatives measure the rate of change (the slope), integrals measure the <strong>accumulation</strong> of quantities (the area under a curve). In Machine Learning and Data Science, integration is the fundamental tool used to compute probabilities, expectations, and normalize complex distributions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Differential Calculus</strong>: Understanding that $\frac{d}{dx}(\text{Integral}) = \text{Function}$.</li>
@@ -1069,7 +971,7 @@ print(f"Value at Min: {res.fun}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In ML, we often deal with <strong>Probability Density Functions (PDFs)</strong>. A PDF $f(x)$ tells us the relative likelihood of a continuous random variable. However, the probability of a single exact point (e.g., "What is the probability a person is exactly 175.0000... cm tall?") is zero.</p>
     
     <div class="callout tip">
@@ -1083,7 +985,7 @@ print(f"Value at Min: {res.fun}")
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
 
     <h3>1. The Indefinite Integral</h3>
     <p>If $F'(x) = f(x)$, then:</p>
@@ -1121,8 +1023,8 @@ print(f"Value at Min: {res.fun}")
     <p>The probability that $X$ falls between $a$ and $b$ is:</p>
     <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
+    
       <h4>Problem: Finding Range Probabilities</h4>
       <p>Given a simple PDF $f(x) = \frac{3}{8}x^2$ defined on the interval $[0, 2]$, find the probability that $x$ is between 1 and 2.</p>
       
@@ -1150,9 +1052,9 @@ print(f"Value at Min: {res.fun}")
         </div>
       </div>
       <p><strong>Result:</strong> There is an <strong>87.5%</strong> probability that $x$ falls in the range $[1, 2]$.</p>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <p>While we use integrals theoretically, in AI we often perform <strong>Numerical Integration</strong> when the function is too complex to solve by hand.</p>
     <python-code>
 import numpy as np
@@ -1227,4 +1129,4 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       </div>
 
     </div>
-  `,sections:[t,e,i,a,s,o,n,r,l]};export{d as CALCULUS_DATA};
+  `,sections:[t,i,e,a,s,n,o,r,l]};export{d as CALCULUS_DATA};

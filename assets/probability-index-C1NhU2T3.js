@@ -5,18 +5,7 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
       <p>A <strong>Random Variable</strong> (RV) is the bridge between actual physical events (like flipping a coin) and the world of numbers. In Machine Learning, every data point is a realization of some underlying random variable.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-coin">Example 1: Discrete (Coin Flips)</a>
-      <a href="#example-wait">Example 2: Continuous (Wait Times)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Sample Space</strong>: The set of all possible outcomes.</li>
@@ -24,13 +13,13 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Math doesn't like "Heads" or "Tails." It likes 0s and 1s. A Random Variable is the "Translator" that takes an outcome from the messy real world and turns it into a number we can actually perform math on. Without them, we couldn't calculate averages, variances, or train any model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Random Variable as a <strong>Scorecard</strong>. 
+        Think of a Random Variable as a <strong>Scorecard</strong>. 
         The experiment happens behind a curtain (e.g., a customer buys a product). 
         The Random Variable is the number on the scorecard (e.g., the price they paid). 
         Different customers (outcomes) result in different scores.
@@ -44,8 +33,8 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
       <li><strong>Continuous:</strong> Outcomes you can measure (e.g., height, time, temperature).</li>
     </ul>
 
-    <h2 id="example-coin">Example 1: Discrete (Coin Flips)</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
+    
       <h4>Problem: Mapping Binary Outcomes</h4>
       <p>You flip a coin 3 times. Let \(X\) be the number of Heads. Find the values \(X\) can take.</p>
       
@@ -70,10 +59,10 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
           <strong>Result:</strong> We've successfully converted 8 abstract outcomes into a simple set of numbers. This is the first step toward calculating the "Average" number of heads.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-wait">Example 2: Continuous (Wait Times)</h2>
-    <div class="example-box">
+    <h2 id="example-wait" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Continuous (Wait Times)</h2>
+    
       <h4>Problem: Tracking Continuous Events</h4>
       <p>Let \(Y\) be the time (in minutes) you wait for a bus. What values can \(Y\) take?</p>
       
@@ -94,9 +83,9 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
           <strong>Intuition:</strong> Unlike the coin flip, we can't list every possible wait time. This makes it a <strong>Continuous Random Variable</strong>, which we handle using Probability Density Functions (PDFs) instead of simple lists.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -127,18 +116,7 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
       <p>A <strong>Probability Distribution</strong> is the "Shape" of a Random Variable. It tells us exactly how likely different outcomes are. In Machine Learning, we almost always assume our data follows some distribution (like the "Bell Curve") to make predictions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</a>
-      <a href="#example-normal">Example 2: Normal (The Bell Curve)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -146,13 +124,13 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model <strong>Uncertainty</strong>. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Probability Distribution as a <strong>Heat Map</strong>. 
+        Think of a Probability Distribution as a <strong>Heat Map</strong>. 
         Where the map is "hot" (high probability), outcomes are common. 
         Where the map is "cold," outcomes are rare. 
         In ML, we want to find the parameters of this map that best explain the data we've already seen.
@@ -165,8 +143,8 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
       <li><strong>Probability Density Function (PDF)</strong>: For Continuous RVs, \(f(x)\). The total area under the curve must be 1.</li>
     </ul>
 
-    <h2 id="example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</h2>
-    <div class="example-box">
+    <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
+    
       <h4>Problem: Tracking a 1-Trial Experiment</h4>
       <p>A "Success" happens with probability \(p=0.7\). What is the PMF?</p>
       
@@ -187,10 +165,10 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
           <strong>Result:</strong> This is the simplest possible distribution. It's the building block for <strong>Binary Classification</strong> models (Cat vs. Not Cat).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-normal">Example 2: Normal (The Bell Curve)</h2>
-    <div class="example-box">
+    <h2 id="example-normal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal (The Bell Curve)</h2>
+    
       <h4>Problem: Capturing Collective Data Distributions</h4>
       <p>Heights are Normally distributed with mean \(\mu = 70\) and standard deviation \(\sigma = 3\). Find the probability that someone is exactly 70 inches tall.</p>
       
@@ -211,9 +189,9 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
           <strong>Intuition:</strong> In the Real World, most common errors (noise) result from many tiny independent factors. When added together, they almost always form this Bell Curve. This is why we use <strong>Gaussian Naive Bayes</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt
@@ -243,18 +221,7 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
       <p>A <strong>Joint Distribution</strong> (\(P(X, Y)\)) is a mathematical function that models the probability of two or more random variables occurring at the same time. In Machine Learning, we don't just care about one feature; we care about the <strong>Interaction</strong> between all our features.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-scatter">Example 1: Scatter of Features</a>
-      <a href="#example-marginal">Example 2: Marginalizing Out a Variable</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Scalar PMFs and PDFs.</li>
@@ -262,13 +229,13 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" <strong>and</strong> "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
+        Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
         Instead of just one axis of data, you have two. 
         The "peaks" on this map tell you which combinations of (X, Y) are most common. 
         In ML, we use this to find out if features are correlated or if they are "moving" together in predictable ways.
@@ -281,8 +248,8 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
       <li><strong>Marginal Distribution:</strong> To find the probability of just one variable, you "sum out" (marginalize) the others: \(P(X=x) = \sum_{y} P(x, y)\).</li>
     </ul>
 
-    <h2 id="example-scatter">Example 1: Scatter of Binary Features</h2>
-    <div class="example-box">
+    <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
+    
       <h4>Problem: Tracking Clicks and Purchases</h4>
       <p>Let \(X=1\) be a customer who clicked a link, and \(Y=1\) be a customer who made a purchase. The joint probabilities are:</p>
       <table>
@@ -308,10 +275,10 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
           <strong>Result:</strong> Most customers don't click and don't buy (0.6). But knowing the click (\(X=1\)) significantly shifts our expectation that they might buy.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-marginal">Example 2: Marginalizing Out a Variable</h2>
-    <div class="example-box">
+    <h2 id="example-marginal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Marginalizing Out a Variable</h2>
+    
       <h4>Problem: Finding the Overall Click-Rate</h4>
       <p>Given the table above, what is the probability that a customer clicks, regardless of whether they buy?</p>
       
@@ -332,9 +299,9 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
           <strong>Result:</strong> 30% of our customers click. By "Marginalizing" out the purchase variable, we simplified a 2D problem back down to a 1D problem.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -361,25 +328,14 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we already <em>know</em> one variable? How does that change the probability of the other? Explore <strong><a href="#/mathematics/probability/conditional-probability">Conditional Probability</a></strong>.
     </div>
-  `},a={id:"conditional-probability",title:"Conditional Probability",description:"Conditional Probability measures the likelihood of an event occurring given that another event has already happened. It is the key to 'Updating' our knowledge.",color:"#FF6F00",html:String.raw`
+  `},s={id:"conditional-probability",title:"Conditional Probability",description:"Conditional Probability measures the likelihood of an event occurring given that another event has already happened. It is the key to 'Updating' our knowledge.",color:"#FF6F00",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎲 Probability · Conditional</div>
       <h1>Conditional Probability: Updated Beliefs</h1>
       <p><strong>Conditional Probability</strong> (\(P(A|B)\)) measures the likelihood of Event A occurring, <strong>given</strong> that Event B is already known to have happened. In Machine Learning, this is the "Secret Sauce" that allows us to refine a prediction as we receive new data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-die">Example 1: Die Roll Given > 3</a>
-      <a href="#example-test">Example 2: Diagnostic Test Accuracy</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Joint Probability</strong>: Understanding \(P(A, B)\).</li>
@@ -387,13 +343,13 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Normally, your perspective covers the entire universe. But once I tell you "Condition B is true," your world shrinks. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Conditional Probability as a <strong>"Filter."</strong> 
+        Think of Conditional Probability as a <strong>"Filter."</strong> 
         Imagine a pool of 1,000 customers. You want to know if someone will buy. 
         Once I tell you "They put an item in the cart" (Condition B), you <strong>filter out</strong> everyone who didn't. 
         Your universe is now smaller, and the likelihood of a purchase is much higher. 
@@ -401,12 +357,12 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
     <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>
 
-    <h2 id="example-die">Example 1: Die Roll Given > 3</h2>
-    <div class="example-box">
+    <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
+    
       <h4>Problem: Narrowing Down Outcomes</h4>
       <p>I roll a fair six-sided die. If I tell you the result is \(> 3\), what is the probability that it is an even number?</p>
       
@@ -431,10 +387,10 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
           <strong>Result:</strong> Knowing the roll was \(> 3\) increased our confidence from 50% to <strong>66%</strong>. The world shrunk!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-test">Example 2: Diagnostic Test Accuracy</h2>
-    <div class="example-box">
+    <h2 id="example-test" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Diagnostic Test Accuracy</h2>
+    
       <h4>Problem: The Sensitivity of Models</h4>
       <p>A test for a disease is 90% accurate (if you have it, the test is positive). 1% of the population has it. If you test positive, how likely are you to actually have the disease?</p>
       
@@ -455,9 +411,9 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
           <strong>Intuition:</strong> Even if the test is "accurate," if the disease is extremely rare, most positives will still be <strong>False Positives</strong>. Conditional probability helps us spot these biases in our ML models (like Spam filters).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -484,25 +440,14 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Sometimes, knowing B tells you <em>absolutely nothing</em> new about A. Explore <strong><a href="#/mathematics/probability/independence">Independence</a></strong>.
     </div>
-  `},s={id:"independence",title:"Independence",description:"Two events are Independent if knowing that one occurred does not change the probability of the other. It is the core assumption of Naive Bayes.",color:"#FF6F00",html:String.raw`
+  `},a={id:"independence",title:"Independence",description:"Two events are Independent if knowing that one occurred does not change the probability of the other. It is the core assumption of Naive Bayes.",color:"#FF6F00",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🎲 Probability · Independence</div>
       <h1>Independence: Zero Information</h1>
       <p>Two events \(A\) and \(B\) are <strong>Independent</strong> if the occurrence of one provides <strong>Zero Information</strong> about the probability of the other. In Machine Learning, we often assume features are independent—this is known as the "Naive" assumption in Naive Bayes.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-coin">Example 1: Independent Coin Tosses</a>
-      <a href="#example-exclusive">Example 2: Mutually Exclusive vs. Independent</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
@@ -510,13 +455,13 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If you tell me "It is raining," my probability of "Someone buying an umbrella" increases. These events are <strong>Dependent</strong>. But if you tell me "My coin land on Heads," does that affect the probability of "It raining"? No. Those events are <strong>Independent</strong>. Understanding independence allows us to simplify complex joint probabilities into simple products.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Independence as <strong>"Emotional Distance."</strong> 
+        Think of Independence as <strong>"Emotional Distance."</strong> 
         If two variables are independent, they don't care about each other. 
         They don't share any secrets. 
         In ML, we love independence because it lets us calculate massive joint probabilities by just <strong>multiplying</strong> them (\(P(A) \times P(B) \times P(C)\)).
@@ -527,8 +472,8 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
     <p>...which also implies that the conditional probability doesn't move: \(P(A|B) = P(A)\).</p>
 
-    <h2 id="example-coin">Example 1: Independent Coin Tosses</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
+    
       <h4>Problem: Successive Binary Trials</h4>
       <p>I toss a coin twice. Let \(A\) be 'Heads on 1st' and \(B\) be 'Heads on 2nd'. Are they independent?</p>
       
@@ -553,10 +498,10 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
           <strong>Result:</strong> YES. They are independent. The coin does not have "memory" of the previous toss.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-exclusive">Example 2: Mutually Exclusive vs. Independent</h2>
-    <div class="example-box">
+    <h2 id="example-exclusive" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Mutually Exclusive vs. Independent</h2>
+    
       <h4>Problem: Clearing Up a Common Confusion</h4>
       <p>If two events are Mutually Exclusive (\(A\) and \(B\) can't both happen), can they be Independent?</p>
       
@@ -577,9 +522,9 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
           <strong>Result:</strong> NO. Mutually exclusive events are actually highly <strong>Dependent</strong> because they are perfect opposites! This is a classic exam trap.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -616,18 +561,7 @@ print(f"P(A) * P(B): {check:.4f}")
       <p>The <strong>Expected Value</strong> \(\mathbb{E}[X]\) is the average outcome you would get if you repeated a random experiment infinitely many times. In Machine Learning, we optimize models to minimize the <strong>Expected Loss</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-payoff">Example 1: Long-term Average Payoff</a>
-      <a href="#example-weighted">Example 2: Weighted Sum of Features</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -635,13 +569,13 @@ print(f"P(A) * P(B): {check:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Probability Distribution says: <em>"Anything could happen."</em> Expectation says: <em>"On average, this is what will happen."</em> It is the <strong>Balance Point</strong> of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In ML, every prediction is essentially an "Expected Value" calculated from the data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Expected Value as a <strong>"Fair Bet."</strong> 
+        Think of Expected Value as a <strong>"Fair Bet."</strong> 
         If you play a game 1,000 times, you'll sometimes win big and sometimes lose. 
         Your <strong>Expectation</strong> is the number that tells you if, in the long run, you'll walk away with more money than you started with. 
         In ML, we don't care about a single "lucky" training batch; we care about the <strong>Expected Performance</strong> across all future data.
@@ -653,8 +587,8 @@ print(f"P(A) * P(B): {check:.4f}")
     <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>
     <p><strong>Linearity:</strong> \(\mathbb{E}[aX + b] = a\mathbb{E}[X] + b\). The average of a sum is the sum of the averages!</p>
 
-    <h2 id="example-payoff">Example 1: Long-term Average Payoff</h2>
-    <div class="example-box">
+    <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
+    
       <h4>Problem: Evaluating a Lottery</h4>
       <p>A ticket costs $5. You have a 1% chance to win $400 and a 99% chance to win $0. What is your expectation?</p>
       
@@ -679,10 +613,10 @@ print(f"P(A) * P(B): {check:.4f}")
           <strong>Result:</strong> Since the ticket costs $5 but only yields $4 on average, you will <strong>lose $1</strong> per ticket in the long run. The Expected Value is your reality check.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-weighted">Example 2: Weighted Sum of Features</h2>
-    <div class="example-box">
+    <h2 id="example-weighted" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Weighted Sum of Features</h2>
+    
       <h4>Problem: Finding the Center of Data</h4>
       <p>Data shows scores: [10, 10, 10, 50]. What's the expected score?</p>
       
@@ -703,9 +637,9 @@ print(f"P(A) * P(B): {check:.4f}")
           <strong>Result:</strong> 20 is the "Average" score. In Linear Regression, your prediction is essentially calculating this weighted expectation from the input features.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -739,18 +673,7 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
       <p><strong>Variance</strong> (\(\sigma^2\) or \(\text{Var}[X]\)) is the mathematical measure of <strong>Discrepancy</strong>. It tells us if our model's predictions are tightly clustered around the target or if they are wildly inconsistent.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-risk">Example 1: Risk in Investment</a>
-      <a href="#example-error">Example 2: Variance of Model Errors</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Expectation</strong>: Understanding the center of gravity (\(\mu\)).</li>
@@ -758,13 +681,13 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Expectation (Average) tells you where your data is <strong>centered</strong>. Variance tells you how much your data <strong>mistrusts</strong> that center. A high variance model is "noisy" and unpredictable. A low variance model is consistent. In ML, we often trade off some accuracy (Bias) to get a more consistent model (Low Variance).</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Variance as <strong>"Drunkenness."</strong> 
+        Think of Variance as <strong>"Drunkenness."</strong> 
         If you walk in a straight line, your variance is zero. 
         If you stumble randomly back and forth while moving forward, your <strong>average path</strong> might still be a straight line, but your <strong>Variance</strong> is high. 
         In ML, high variance weights mean your model hasn't "converged" and is still stumbling around the solution.
@@ -776,8 +699,8 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
     <div class="math-block">$$\text{Var}[X] = \mathbb{E}[(X - \mu)^2]$$</div>
     <p><strong>Common Shortcut:</strong> \(\text{Var}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2\). (Mean of squares minus square of means).</p>
 
-    <h2 id="example-risk">Example 1: Risk in Investment</h2>
-    <div class="example-box">
+    <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
+    
       <h4>Problem: Comparing Two Stocks</h4>
       <p>Stock A pays $5 every day. Stock B pays $20 half the time and -$10 the other half.</p>
       
@@ -802,10 +725,10 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
           <strong>Result:</strong> Both stocks have an <strong>Expectation of $5</strong>. But Stock B has high <strong>Variance (225)</strong>. This is why we use variance as a proxy for "Risk."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-error">Example 2: Variance of Model Errors</h2>
-    <div class="example-box">
+    <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Variance of Model Errors</h2>
+    
       <h4>Problem: Measuring Reliability</h4>
       <p>Data: Predictions are off by [-1, 2, 0, -1]. Calculate the variance of the error.</p>
       
@@ -830,9 +753,9 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
           <strong>Result:</strong> 1.5. This tells us our "Expected deviation" from the correct answer is fairly small. This is the foundation of <strong>Least Squares Regression</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -867,18 +790,7 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
       <p>The <strong>Law of Large Numbers (LLN)</strong> is the "Anchor" of probability. It mathematically guarantees that if you take enough samples, the <strong>Sample Mean</strong> will eventually land on the <strong>True Theoretical Mean</strong> of the population.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-casino">Example 1: The Casino's House Edge</a>
-      <a href="#example-sample">Example 2: Sample Mean Convergence</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -886,13 +798,13 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If you flip a coin 5 times, you might get 4 heads (80%). This is just "luck." But if you flip a coin 5,000,000 times, you will almost certainly have extremely close to 50% heads. The <strong>LLN</strong> says that individual "luck" (Variability) gets washed away as the sample size grows. This is why we can trust our model's performance on a large test set.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of LLN as <strong>"The Truth Coming to Light."</strong> 
+        Think of LLN as <strong>"The Truth Coming to Light."</strong> 
         In the short term, anyone can look like a genius (High Accuracy). 
         But in the long term, your <strong>True Average Skill</strong> will be revealed. 
         In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the <strong>True Error</strong> of the model on the data distribution.
@@ -905,8 +817,8 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
     <p>The <strong>Strong LLN</strong> states:</p>
     <div class="math-block">$$\overline{X}_n \xrightarrow{a.s.} \mu \text{ as } n \to \infty$$</div>
 
-    <h2 id="example-casino">Example 1: The Casino's House Edge</h2>
-    <div class="example-box">
+    <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
+    
       <h4>Problem: Tracking Profit over Time</h4>
       <p>A casino game has a 51% chance for the house to win $1 and a 49% chance to lose $1.</p>
       
@@ -927,10 +839,10 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
           <strong>Result:</strong> Individual players can win (Luck), but the <strong>Law of Large Numbers</strong> means the casino <strong>never loses in the long run</strong>. It is mathematically impossible for them to lose over millions of trials.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-sample">Example 2: Sample Mean Convergence</h2>
-    <div class="example-box">
+    <h2 id="example-sample" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sample Mean Convergence</h2>
+    
       <h4>Problem: Measuring Error Stability</h4>
       <p>Data: Errors are drawn from a distribution with \(\mu = 0\) and \(\sigma = 10\).</p>
       
@@ -951,9 +863,9 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
           <strong>Intuition:</strong> This is why we need <strong>Large Datasets</strong> in Deep Learning. If we only have 10 data points, our "Accuracy" is just noise. If we have 1,000,000, the LLN gives us the <strong>Scientific Confidence</strong> that our model is actually working.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt
@@ -985,18 +897,7 @@ print(f"Final Average: {running_avg[-1]:.4f}")
       <p>The <strong>Central Limit Theorem (CLT)</strong> is the "Master Rule" of statistics. It says that if you add together many independent random variables, their <strong>Sum</strong> (and Mean) will always eventually form a <strong>Normal Distribution</strong> (Bell Curve). This is why the Normal distribution is so pervasive in Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-uniform">Example 1: Sum of Uniform Distributions</a>
-      <a href="#example-noise">Example 2: Why Error is usually Normal</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -1004,13 +905,13 @@ print(f"Final Average: {running_avg[-1]:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the <strong>CLT</strong> says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
+        Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
         If you ask one person to guess the price of a jar of jellybeans, they might be wildly wrong. 
         But if you ask 10,000 people and take their <strong>Average</strong>, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
         In ML, this is why we can assume that our model's cumulative error is Gaussian.
@@ -1022,8 +923,8 @@ print(f"Final Average: {running_avg[-1]:.4f}")
     <div class="math-block">$$\overline{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
     <p>The <strong>Z-score</strong> of the sample mean is: \(Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}\).</p>
 
-    <h2 id="example-uniform">Example 1: Sum of Uniform Distributions</h2>
-    <div class="example-box">
+    <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
+    
       <h4>Problem: Turning Flat space into a Bell Curve</h4>
       <p>A single U(0, 1) distribution is a flat rectangle. What if you sum 100 of them?</p>
       
@@ -1048,10 +949,10 @@ print(f"Final Average: {running_avg[-1]:.4f}")
           <strong>Result:</strong> By summing 100 "flat" variables, we birthed a Gaussian one. This is the <strong>CLT</strong> in action.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-noise">Example 2: Why Error is usually Normal</h2>
-    <div class="example-box">
+    <h2 id="example-noise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Why Error is usually Normal</h2>
+    
       <h4>Problem: Tracking Compound Measurement Errors</h4>
       <p>Assume your sensor error is caused by temperature, vibration, and radiation. Each follows a wild distribution.</p>
       
@@ -1072,9 +973,9 @@ print(f"Final Average: {running_avg[-1]:.4f}")
           <strong>Intuition:</strong> This is why we almost always use <strong>MSE (Mean Squared Error)</strong> in ML—it is mathematically the optimal loss function if you assume your data errors follow this CLT-driven Normal distribution.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt
@@ -1106,18 +1007,7 @@ plt.show()
       <p><strong>Bayes' Theorem</strong> (\(P(A|B)\)) is a mathematical formula used to determine the probability of an event based on prior knowledge of conditions that might be related to the event. In Machine Learning, it's the core of everything from <strong>Naive Bayes Classifiers</strong> to <strong>Bayesian Neural Networks</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-spam">Example 1: Spam Filter (Prior/Posterior)</a>
-      <a href="#example-monty">Example 2: The Monty Hall Problem</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
@@ -1125,13 +1015,13 @@ plt.show()
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
+        Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
         You start with a guess (the Prior). 
         You see some evidence (the Data). 
         Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
@@ -1139,7 +1029,7 @@ plt.show()
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
     <ul>
       <li><strong>\(P(A|B)\)</strong>: Posterior (Belief after seeing data).</li>
@@ -1148,8 +1038,8 @@ plt.show()
       <li><strong>\(P(B)\)</strong>: Evidence (Normalization constant).</li>
     </ul>
 
-    <h2 id="example-spam">Example 1: Spam Filter (Prior/Posterior)</h2>
-    <div class="example-box">
+    <h2 id="example-spam" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter (Prior/Posterior)</h2>
+    
       <h4>Problem: Identifying Junk Emails</h4>
       <p>10% of emails are Spam. 80% of Spam contains the word "Free." Only 1% of ham (good emails) contains "Free." If an email has "Free," is it spam?</p>
       
@@ -1174,10 +1064,10 @@ plt.show()
           <strong>Result:</strong> Your belief that the email is spam shot up from <strong>10%</strong> to <strong>89%</strong> just by seeing one word. This is how basic Spam filters function.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-monty">Example 2: The Monty Hall Problem</h2>
-    <div class="example-box">
+    <h2 id="example-monty" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Monty Hall Problem</h2>
+    
       <h4>Problem: Updating Knowledge with Evidence</h4>
       <p>You choose Door #1. The host opens Door #3 (Evidence). Should you switch to Door #2?</p>
       
@@ -1198,9 +1088,9 @@ plt.show()
           <strong>Intuition:</strong> Bayes' Theorem shows that <strong>Door #2</strong> now has a <strong>2/3</strong> chance! Switching doubles your odds because the host's action provided <strong>Information</strong> that updated your Bayesian state.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 def bayes_inference(prior, likelihood_pos, likelihood_neg):
     # P(Cause|Effect) = (P(Effect|Cause) * P(Cause)) / P(Effect)
@@ -1271,4 +1161,4 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,o,n,r,l,d]};export{c as PROBABILITY_DATA};
+  `,sections:[e,t,i,s,a,o,n,r,l,d]};export{c as PROBABILITY_DATA};

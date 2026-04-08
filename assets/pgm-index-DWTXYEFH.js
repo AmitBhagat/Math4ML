@@ -5,22 +5,13 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       <p>Probabilities are rarely isolated. If it's raining, your grass is likely wet. If your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these <strong>Causal Relationships</strong>. By using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows through a complex system of uncertainty.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The DAG Structure</a>
-      <a href="#independence">Local Markov Property</a>
-      <a href="#math">Joint Probability Factorization</a>
-      <a href="#inference">Inference: Predicting the Unseen</a>
-      <a href="#analogy">The "Crime Scene" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The DAG Structure</h2>
     <p>A Bayesian Network consists of <strong>Nodes</strong> (Random Variables) and <strong>Edges</strong> (Direct Influence). The graph must be <strong>Acyclic</strong> (no loops), because a variable cannot be its own cause.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Storyboard."</strong> 
+        Think of it as <strong>"The Storyboard."</strong> 
         Each node is an event. The arrows tell the story of <strong>Who Influences Whom</strong>. 
         If there is no arrow between two nodes, it doesn't mean they aren't related—it just means they only talk to each other through <strong>intermediaries</strong>.
       </div>
@@ -35,7 +26,7 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
     <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
 
     <h2 id="inference">Inference: Predicting the Unseen</h2>
-    <div class="example-box">
+    
       <h4>Scenario: The Alarm System</h4>
       <p>Variables: [Burglary, Earthquake, Alarm, JohnCalls, MaryCalls]</p>
       
@@ -53,10 +44,10 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
           <div><strong>The Method:</strong> We use <strong>Variable Elimination</strong> or <strong>Belief Propagation</strong> to "Flow" the probability from the observation back to the cause.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Detective's Mental Map</h2>
+    
       <h4>Scenario: Explaining Away the Broken Window</h4>
       <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A <strong>Burglar</strong> or a <strong>Baseball</strong> thrown by a neighborhood kid.</p>
       
@@ -82,12 +73,12 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
+          Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Explaining Away</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
 import numpy as np
 
@@ -125,15 +116,6 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
       <p>Imagine you are a <strong>Prisoner in a Basement</strong>. You cannot see the weather (Rain or Sun). But every day, you see your <strong>Guard</strong> come in with or without an <strong>Umbrella</strong>. <strong>Hidden Markov Models</strong> are the math for guessing the "Hidden" weather based on the "Observable" guard. It's the standard tool for Speech Recognition and DNA Sequencing.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Latent vs. Observed</a>
-      <a href="#markov">The Markov Property: No Memory</a>
-      <a href="#math">Transition & Emission Matrices</a>
-      <a href="#viterbi">The Viterbi Search: Finding the Sequence</a>
-      <a href="#analogy">The "Invisible Reporter" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Latent vs. Observed</h2>
     <p>An HMM has two layers:</p>
     <ul>
@@ -144,7 +126,7 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots in Time."</strong> 
+        Think of it as <strong>"Connecting the Dots in Time."</strong> 
         The hidden states (\(Z_t\)) are the <strong>Reality</strong>. The observations (\(X_t\)) are the <strong>Symptoms</strong>. 
         Because the reality changes over time, we use a <strong>Markov Chain</strong> to model the transitions.
       </div>
@@ -162,7 +144,7 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
     </ul>
 
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
-    <div class="example-box">
+    
       <h4>Scenario: What is the most likely sequence?</h4>
       <p>If you see [Umbrella, No Umbrella, Umbrella], what was the weather? [Rain, Sun, Rain] or [Rain, Rain, Rain]?</p>
       
@@ -176,10 +158,10 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
           <div><strong>The Method:</strong> We use the <strong>Viterbi Algorithm</strong> (a Dynamic Programming trick) to find the "Best Path" through the trellis of possibilities.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Prisoner in the Basement</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Prisoner in the Basement</h2>
+    
       <h4>Scenario: Guessing the Weather from the Guard's Gear</h4>
       <p>Imagine you are a prisoner in a windowless room. You want to know if it's Raining or Sunny outside, but you only see your guard once a day.</p>
       
@@ -205,12 +187,12 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> HMMs are the <strong>Sherlock Holmes of Time</strong>. They look at the "Clues" (Observations) to deduce the "Truth" (Hidden States) that caused them. This makes them perfect for Speech (Sound waves -> Typed words) or Bio-informatics (Protein sequence -> Function).
+          HMMs are the <strong>Sherlock Holmes of Time</strong>. They look at the "Clues" (Observations) to deduce the "Truth" (Hidden States) that caused them. This makes them perfect for Speech (Sound waves -> Typed words) or Bio-informatics (Protein sequence -> Function).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Viterbi Decoding</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Sequence: [Umbrella, No Umbrella]\n[Path A] 'Rain' -> 'Sun' Prob: 0.1215\n[Path B] 'Rain' -> 'Rain' Prob: 0.0315\n\n[Viterbi] Winner: 'Rain' followed by 'Sun'\n[Verdict] It was likely raining when the guard had the umbrella, but cleared up by the second visit.">
 import numpy as np
 
@@ -244,22 +226,13 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
       <p>How do you find the <strong>Average Height</strong> of two different species if you don't know <strong>Which Height belongs to Which Species</strong>? You can't find the average without the species, and you can't find the species without the average. This is the "Chicken and Egg" problem of Latent Variables. <strong>Expectation-Maximization (EM)</strong> is the algorithm that guesses its way to the truth.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Latent Variables</a>
-      <a href="#math">Jensen's Inequality & Lower Bound</a>
-      <a href="#steps">The 2 Big Steps: E and M</a>
-      <a href="#convergence">Convergence: Finding the Peak</a>
-      <a href="#analogy">The "Blind School" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Latent Variables</h2>
     <p>In many real-world problems, we have <strong>Latent Variables (Z)</strong>—things that exist but aren't in our dataset. If we knew \(Z\), the problem would be simple. If we don't, we have to <strong>Iterate</strong>. EM is the engine that powers Gaussian Mixture Models (GMM) and Hidden Markov Model (HMM) training.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Soft Guessing."</strong> 
+        Think of it as <strong>"Soft Guessing."</strong> 
         The algorithm doesn't say "Point A *definitely* belongs to Species 1." It says "Point A belongs to Species 1 with <strong>70% probability</strong>." This "Soft" assignment is what allows the algorithm to converge smoothly.
       </div>
     </div>
@@ -269,7 +242,7 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     <div class="math-block">$$\log \sum_z P(x, z \mid \theta) \ge \sum_z Q(z) \log \frac{P(x, z \mid \theta)}{Q(z)}$$</div>
 
     <h2 id="steps">The 2 Big Steps: E and M</h2>
-    <div class="example-box">
+    
       <h4>How to solve the unsolvable:</h4>
       
       <div class="algorithm-steps">
@@ -286,10 +259,10 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
           <div><strong>Convergence:</strong> Keep bouncing between E and M until the parameters stop changing.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Blind Schoolteacher</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Blind Schoolteacher</h2>
+    
       <h4>Scenario: Sorting 100 Students into Two Voice-Pitch Teams</h4>
       <p>Imagine a blind teacher trying to sort 100 students into two teams: <strong>The High-Pitch Sopranos</strong> and <strong>The Low-Pitch Basses</strong>. The teacher doesn't know who is who.</p>
       
@@ -315,12 +288,12 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> EM is for <strong>Incomplete Data</strong>. It handles the problem where you need the parameters to find the labels, and the labels to find the parameters. By iterating between "Filling in the blanks" (E) and "Optimizing the fit" (M), it eventually finds the global truth.
+          EM is for <strong>Incomplete Data</strong>. It handles the problem where you need the parameters to find the labels, and the labels to find the parameters. By iterating between "Filling in the blanks" (E) and "Optimizing the fit" (M), it eventually finds the global truth.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: 1D GMM Step</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Iteration 0: Mu1 = -0.50, Mu2 = 0.50\n[Scan] Iteration 5: Mu1 = -1.82, Mu2 = 1.91\n[Scan] Iteration 10: Mu1 = -1.98, Mu2 = 2.05\n\n[Status] Converged after 10 epochs.\n[Verdict] EM correctly separated the overlapping Normal distributions (Target: -2.0, 2.0).">
 import numpy as np
 

@@ -5,14 +5,6 @@ const e={id:"scaling",title:"Feature Scaling",description:"Standardization vs. N
       <p>Imagine trying to compare a person's <strong>Height in meters</strong> (1.8) with their <strong>Annual Income</strong> (80,000). To a computer, 80,000 is objectively "bigger" and "more important" than 1.8. Without scaling, your model will ignore height and obsess over income. <strong>Feature Scaling</strong> ensures every variable gets a fair vote.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#normalization">Normalization (Min-Max)</a>
-      <a href="#standardization">Standardization (Z-Score)</a>
-      <a href="#importance">Why Scale? The Gradient Speedup</a>
-      <a href="#analogy">The "Compare Apples to Oranges" Analogy</a>
-    </div>
-
     <h2 id="normalization">Normalization (Min-Max Scaling)</h2>
     <p>Normalization squashes all your data into a fixed range, usually <strong>[0, 1]</strong>. It's the best choice when your data has a fixed boundary (like image pixels 0-255) and follow a non-Gaussian distribution.</p>
     
@@ -32,7 +24,7 @@ const e={id:"scaling",title:"Feature Scaling",description:"Standardization vs. N
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Standardization doesn't just "shrink" the numbers; it translates them into <strong>"Standard Deviation Steps."</strong> Instead of saying "You earn $80k," the model sees "You are 2.5 standard deviations above the average earner." This is much more informative for the math.
+        Standardization doesn't just "shrink" the numbers; it translates them into <strong>"Standard Deviation Steps."</strong> Instead of saying "You earn $80k," the model sees "You are 2.5 standard deviations above the average earner." This is much more informative for the math.
       </div>
     </div>
 
@@ -52,8 +44,8 @@ const e={id:"scaling",title:"Feature Scaling",description:"Standardization vs. N
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Fair Athlete</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fair Athlete</h2>
+    
       <h4>Scenario: Comparing a Sprinter and a Weightlifter</h4>
       <p>How do you decide who is the "Best Athlete" when one measures performance in <strong>Seconds</strong> (10.0) and the other in <strong>Grams</strong> (200,000)?</p>
       
@@ -79,12 +71,12 @@ const e={id:"scaling",title:"Feature Scaling",description:"Standardization vs. N
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Scaling is the <strong>Universal Translator</strong> for data. Without it, your model isn't learning logic; it's just following the biggest units. If your model is taking 1,000 epochs to move an inch, check your scales!
+          Scaling is the <strong>Universal Translator</strong> for data. Without it, your model isn't learning logic; it's just following the biggest units. If your model is taking 1,000 epochs to move an inch, check your scales!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Standardization in Action</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Input: Height (m) vs. Income ($)\n[Action] Initializing Scikit-Learn StandardScaler (Z-Score)...\n[Mapping] Row 1: [1.8m, $80k]  -> [ 0.9,  0.8]\n[Mapping] Row 2: [1.6m, $40k]  -> [-1.3, -1.1]\n[Status] Features are now centered at 0 with unit variance.\n[Insight] The model now sees 'Height' and 'Income' as equally influential voters.">
 import numpy as np
 from sklearn.preprocessing import StandardScaler
@@ -118,14 +110,6 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
       <p>Computers don't know what "London," "Berlin," or "Paris" mean. They only know <strong>Numbers</strong>. To teach them about categories, we have to translate words into a mathematical language that doesn't imply a false order or weight. <strong>Categorical Encoding</strong> is that translator.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#label">Label Encoding: The Integer Map</a>
-      <a href="#onehot">One-Hot Encoding: The Binary Vector</a>
-      <a href="#trap">The Dummy Variable Trap</a>
-      <a href="#analogy">The "Traffic Light" Analogy</a>
-    </div>
-
     <h2 id="label">Label Encoding</h2>
     <p>Label Encoding maps each category to a unique integer (e.g., Red=0, Green=1, Blue=2). 
     <strong>The Gotcha:</strong> This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
@@ -137,7 +121,7 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> One-Hot Encoding is like <strong>"Voting Panels."</strong> 
+        One-Hot Encoding is like <strong>"Voting Panels."</strong> 
         Instead of a single dial, you have a row of buttons. If you press the "Berlin" button, all other buttons pop up. It's the safest way to encode nominal data without introducing bias.
       </div>
     </div>
@@ -157,8 +141,8 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Label Translator</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Label Translator</h2>
+    
       <h4>Scenario: Teaching a Model about Fruit</h4>
       <p>How do we represent 'Apple', 'Banana', and 'Cherry' without making the computer think one is "Greater" than the other? A computer sees integers as having magnitude (2 > 1).</p>
       
@@ -184,12 +168,12 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Always use <strong>One-Hot</strong> for nominal data (Categories with no order like Cities or Colors). Save <strong>Label Encoding</strong> for ordinal data where the order actually matters (like "Small", "Medium", "Large").
+          Always use <strong>One-Hot</strong> for nominal data (Categories with no order like Cities or Colors). Save <strong>Label Encoding</strong> for ordinal data where the order actually matters (like "Small", "Medium", "Large").
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: One-Hot vs. Label Encoding</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 4 nominal categories (Cities)\n[Label] Running LabelEncoder: {'Berlin':0, 'London':1, 'Paris':2}\n[OHE] Running get_dummies (One-Hot Encoding)...\n[Mapping] Row 0: 'London' -> [0, 1, 0] (as binary vector)\n[Insight] One-Hot encoding added 2 new features to eliminate false ordering.\n[Efficiency] Using 'drop_first=True' to avoid the Dummy Variable Trap.">
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder
@@ -222,14 +206,6 @@ print(df_ohe)
       <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). <strong>Handling Missing Data</strong> is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#types">The 3 Types of Missingness</a>
-      <a href="#deletion">Deletion Strategies</a>
-      <a href="#imputation">Imputation: Filling the Gaps</a>
-      <a href="#analogy">The "Missing Witness" Analogy</a>
-    </div>
-
     <h2 id="types">The 3 Types of Missingness</h2>
     <p>Not all missing data is created equal. Understanding <strong>Why</strong> it's missing is critical:</p>
     <ul>
@@ -254,7 +230,7 @@ print(df_ohe)
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Data Surgery."</strong> 
+        Think of it as <strong>"Data Surgery."</strong> 
         If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. <strong>Imputation</strong> is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
       </div>
     </div>
@@ -271,8 +247,8 @@ print(df_ohe)
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Hole in the Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hole in the Map</h2>
+    
       <h4>Scenario: Predicting House Prices with Missing Features</h4>
       <p>A house listing is missing its 'Number of Bathrooms' feature. We can't let the model crash, so we have to fill the hole.</p>
       
@@ -298,12 +274,12 @@ print(df_ohe)
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Handling missing data is about <strong>preserving signal</strong> without introducing <strong>hallucinations</strong>. If 50% of a column is missing, don't impute—just delete the column. You can't perform surgery on a ghost.
+          Handling missing data is about <strong>preserving signal</strong> without introducing <strong>hallucinations</strong>. If 50% of a column is missing, don't impute—just delete the column. You can't perform surgery on a ghost.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Imputing Values</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset identified with NaN values in 'Bathrooms' and 'Color'.\n[Median] Filling 'Bathrooms' holes with the middle value...\n[Result] Missing bathroom replaced with: 2.5\n[Mode] Filling 'Color' holes with most frequent value...\n[Result] Missing color replaced with: 'White'\n[Status] Dataset finalized and ready for ML training.">
 import numpy as np
 import pandas as pd

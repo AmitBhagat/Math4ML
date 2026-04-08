@@ -1,22 +1,11 @@
-const e={id:"vectors",title:"Vectors",description:"A vector is a collection of numbers that represents a point or a magnitude in space. In ML, every data point is a vector.",color:"#3F51B5",html:String.raw`
+const t={id:"vectors",title:"Vectors",description:"A vector is a collection of numbers that represents a point or a magnitude in space. In ML, every data point is a vector.",color:"#3F51B5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Vectors</div>
       <h1>Vectors: The Foundations of Data</h1>
       <p>A <strong>Vector</strong> is the most fundamental object in modern mathematics. In Machine Learning, we don't see "objects"—we see vectors. An image is a vector of pixels; a house is a vector of features like size and price.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-data">Example 1: Data Representation</a>
-      <a href="#example-navigation">Example 2: Vector Navigation</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Basic Arithmetic</strong>: Summing and multiplying numbers.</li>
@@ -24,24 +13,24 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Why do we care about vectors? Because they allow us to treat <strong>features</strong> as <strong>directions</strong>. If you are predicting house prices, the number of bedrooms is one axis and the square footage is another. A single house then becomes a "location" in this feature space.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a vector as a <strong>Recipe</strong>. The numbers inside tell you exactly how much of each "ingredient" (direction) to mix to reach your destination. If you change one number, you change the entire flavor (data point).
+        Think of a vector as a <strong>Recipe</strong>. The numbers inside tell you exactly how much of each "ingredient" (direction) to mix to reach your destination. If you change one number, you change the entire flavor (data point).
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) in \(\mathbb{R}^n\) is an ordered list of \(n\) real numbers:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
     <p><strong>Vector Addition:</strong> We add vectors component-wise: \(\mathbf{a} + \mathbf{b} = [a_1+b_1, a_2+b_2]^T\).</p>
     <p><strong>Scalar Multiplication:</strong> Scaling a vector grows or shrinks it: \(c\mathbf{v} = [cv_1, cv_2]^T\).</p>
 
-    <h2 id="example-data">Example 1: Data Representation</h2>
-    <div class="example-box">
+    <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
+    
       <h4>Problem: Real Estate Vectorization</h4>
       <p>A house has 3 bedrooms, 2 bathrooms, and is 1500 sq ft. Represent this as a vector \(\mathbf{h}\) and find the vector for a "double-sized" house.</p>
       
@@ -66,10 +55,10 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
           <strong>Result:</strong> We've mathematically represented a physical object. This is "Feature Engineering" in its purest form.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-navigation">Example 2: Vector Navigation</h2>
-    <div class="example-box">
+    <h2 id="example-navigation" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Vector Navigation</h2>
+    
       <h4>Problem: Chaining Movements</h4>
       <p>You walk 3 units North (\(\mathbf{a} = [0, 3]\)) then 4 units East (\(\mathbf{b} = [4, 0]\)). Find your total displacement.</p>
       
@@ -90,9 +79,9 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
           <strong>Intuition:</strong> Addition is like <strong>Step-by-Step Directions</strong>. The total movement is the result of taking every advice in order.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -119,21 +108,11 @@ print(f"Sum: {add}, Scaled: {scaled}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, vectors are points. Where do these points "live"? Explore <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
-  `},t={id:"vector-spaces",title:"Vector Spaces",description:"A Vector Space is the playground where vectors exist. It's defined by the rules of addition and scaling.",color:"#3F51B5",html:String.raw`
+  `},e={id:"vector-spaces",title:"Vector Spaces",description:"A Vector Space is the playground where vectors exist. It's defined by the rules of addition and scaling.",color:"#3F51B5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🌌 Linear Algebra · Vector Spaces</div>
       <h1>Vector Spaces: The Arena</h1>
       <p>A <strong>Vector Space</strong> is a set of vectors that follows a consistent set of rules. It ensures that when you add or scale vectors, you stay within the "playground" and don't exit the mathematical universe.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#rules">1. Axioms: The Rules</a>
-      <a href="#subspaces">2. Subspaces</a>
-      <a href="#example-subspace">Example 1: A 2D Plane in 3D Space</a>
-      <a href="#example-closure">Example 2: Closure Property Check</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
     </div>
 
     <h2 id="rules">1. Axioms: The Rules</h2>
@@ -146,7 +125,7 @@ print(f"Sum: {add}, Scaled: {scaled}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a <strong>Vector Space</strong> like a <strong>Gaming World</strong>. No matter where you move your character or how high they jump (scale), you should never "fall out of the map." 
+        Think of a <strong>Vector Space</strong> like a <strong>Gaming World</strong>. No matter where you move your character or how high they jump (scale), you should never "fall out of the map." 
         If you can navigate any combination of features without hitting a mathematical "dead end," you're in a vector space.
       </div>
     </div>
@@ -154,8 +133,8 @@ print(f"Sum: {add}, Scaled: {scaled}")
     <h2 id="subspaces">2. Subspaces</h2>
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
-    <h2 id="example-subspace">Example 1: A 2D Plane in 3D Space</h2>
-    <div class="example-box">
+    <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>
+    
       <h4>Problem: Visualizing Subspaces</h4>
       <p>Is the set of vectors \([x, y, 0]\) in \(\mathbb{R}^3\) a subspace?</p>
       
@@ -180,10 +159,10 @@ print(f"Sum: {add}, Scaled: {scaled}")
           <strong>Result:</strong> YES. It's a valid subspace. In ML, when we perform <strong>Dimensionality Reduction</strong>, we're often projecting high-dimensional data onto a lower-dimensional subspace like this.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-closure">Example 2: Closure Property Check</h2>
-    <div class="example-box">
+    <h2 id="example-closure" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Closure Property Check</h2>
+    
       <h4>Problem: Finding the "Exit"</h4>
       <p>Is the set of vectors \([x, 1]\) where \(x \in \mathbb{R}\) a vector space?</p>
       
@@ -208,9 +187,9 @@ print(f"Sum: {add}, Scaled: {scaled}")
           <strong>Result:</strong> NO. Addition/Scaling "pushed us out" of the set. This set doesn't form a vector space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -235,21 +214,11 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.
     </div>
-  `},i={id:"linear-independence",title:"Linear Independence",description:"Linear Independence ensures your vectors aren't redundant. If a vector can be written as a combination of others, it adds no new information.",color:"#FF9800",html:String.raw`
+  `},s={id:"linear-independence",title:"Linear Independence",description:"Linear Independence ensures your vectors aren't redundant. If a vector can be written as a combination of others, it adds no new information.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Linear Algebra · Linear Independence</div>
       <h1>Linear Independence: Zero Redundancy</h1>
       <p>Linear Independence is a way to measure the <strong>uniqueness</strong> of information. In Machine Learning, if two features are linearly dependent, you have redundant info that could slow down your model or cause errors.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#definition">1. The Definition</a>
-      <a href="#intuition">2. The "No Help" Intuition</a>
-      <a href="#example-redundancy">Example 1: Redundant Feature Check</a>
-      <a href="#example-zero">Example 2: The Zero Solution Test</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
     </div>
 
     <h2 id="definition">1. The Definition</h2>
@@ -260,15 +229,15 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of vectors as <strong>Speakers</strong> in a debate. 
+        Think of vectors as <strong>Speakers</strong> in a debate. 
         If Speaker A says something new, they are independent. 
         But if Speaker B just repeats exactly what Speaker A said (or a mix of A and C), then Speaker B is <strong>Linearly Dependent</strong>. 
         They add no "news" to the conversation.
       </div>
     </div>
 
-    <h2 id="example-redundancy">Example 1: Redundant Feature Check</h2>
-    <div class="example-box">
+    <h2 id="example-redundancy" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Redundant Feature Check</h2>
+    
       <h4>Problem: Identifying Noise</h4>
       <p>Are \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) independent?</p>
       
@@ -293,10 +262,10 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
           <strong>Result:</strong> Dependent. They are just the same line. In ML, this could be like having "Temperature in Celsius" and "Temperature in Kelvin" as two separate features—they are mathematically redundant.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-zero">Example 2: The Zero Solution Test</h2>
-    <div class="example-box">
+    <h2 id="example-zero" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Zero Solution Test</h2>
+    
       <h4>Problem: Checking ℝ² Independence</h4>
       <p>Are \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) independent?</p>
       
@@ -321,9 +290,9 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
           <strong>Result:</strong> YES. Independent. They point in completely different directions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -346,21 +315,11 @@ print(f"Is Independent? {is_independent}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.
     </div>
-  `},a={id:"basis-dimension",title:"Basis and Dimension",description:"A Basis is the minimal set of vectors needed to build a space. Dimension is just the count of vectors in that set.",color:"#9C27B0",html:String.raw`
+  `},i={id:"basis-dimension",title:"Basis and Dimension",description:"A Basis is the minimal set of vectors needed to build a space. Dimension is just the count of vectors in that set.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Basis</div>
       <h1>Basis and Dimension</h1>
       <p>A <strong>Basis</strong> is the "Minimalist Skeleton" of a vector space. It’s the smallest set of independent vectors that let you reach <strong>every</strong> point in the space. The <strong>Dimension</strong> is just the total number of vectors in that basis.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#basis">1. The Basis Concept</a>
-      <a href="#dimension">2. Dimension vs. Rank</a>
-      <a href="#example-r2">Example 1: Standard Basis for ℝ²</a>
-      <a href="#example-graphics">Example 2: Custom Basis in Graphics</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
     </div>
 
     <h2 id="basis">1. The Basis Concept</h2>
@@ -373,17 +332,17 @@ print(f"Is Independent? {is_independent}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a <strong>Basis</strong> like the <strong>Primary Colors</strong> in painting. 
+        Think of a <strong>Basis</strong> like the <strong>Primary Colors</strong> in painting. 
         You only need Red, Blue, and Yellow to create every other color in existence. 
         Adding a "Light Red" wouldn't help—it’s not independent! A basis is the <strong>absolute minimum</strong> you need to reach every color (data point).
       </div>
     </div>
 
     <h2 id="dimension">2. Dimension vs. Rank</h2>
-    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
+    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For <span class="text-green-premium font-bold">Case Study:</span> , \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
 
-    <h2 id="example-r2">Example 1: Standard Basis for ℝ²</h2>
-    <div class="example-box">
+    <h2 id="example-r2" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Standard Basis for ℝ²</h2>
+    
       <h4>Problem: Finding the Simplest Basis</h4>
       <p>Prove that \(\mathbf{e}_1 = [1, 0]\) and \(\mathbf{e}_2 = [0, 1]\) form a basis for 2D space.</p>
       
@@ -404,10 +363,10 @@ print(f"Is Independent? {is_independent}")
           <strong>Result:</strong> These vectors span the entire 2D plane. Since there are 2 vectors, the <strong>Dimension</strong> of our workspace is 2.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-graphics">Example 2: Custom Basis in Graphics</h2>
-    <div class="example-box">
+    <h2 id="example-graphics" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Custom Basis in Graphics</h2>
+    
       <h4>Problem: Changing Perspective</h4>
       <p>In computer vision, we sometimes use a coordinate system tilted at 45°. Is \(\mathbf{b}_1 = [1, 1]\) and \(\mathbf{b}_2 = [1, -1]\) a valid basis?</p>
       
@@ -428,9 +387,9 @@ print(f"Is Independent? {is_independent}")
           <strong>Result:</strong> YES. You can reach any point using these two directions. This is the foundation of <strong>Basis Change</strong>, which helps models "see" patterns from different angles.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -457,25 +416,14 @@ print(f"Dimension of the created space: {dim}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is defined. Now how do we measure the "Alignment" and "Overlap" between our vectors? Explore <strong><a href="#/mathematics/linear-algebra/dot-product">Dot Product</a></strong>.
     </div>
-  `},s={id:"dot-product",title:"Dot Product",description:"The Dot Product measures the 'overlap' or 'alignment' between two vectors. It's the engine behind similarity and attention.",color:"#D32F2F",html:String.raw`
+  `},a={id:"dot-product",title:"Dot Product",description:"The Dot Product measures the 'overlap' or 'alignment' between two vectors. It's the engine behind similarity and attention.",color:"#D32F2F",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Dot Product</div>
       <h1>Dot Product: The Similarity Engine</h1>
       <p>The <strong>Dot Product</strong> (or inner product) is the mathematical heart of almost every modern ML model, from Linear Regression to Large Language Models (LLMs).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-nlp">Example 1: Word Similarity in NLP</a>
-      <a href="#example-orthogonality">Example 2: Orthogonality Check</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Vector Basics</strong>: Multiplying and summing components.</li>
@@ -483,24 +431,24 @@ print(f"Dimension of the created space: {dim}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>At its core, the Dot Product answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em></p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
+        Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
     <p>Alternatively, using the angle \(\theta\) between them:</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta)$$</div>
 
-    <h2 id="example-nlp">Example 1: Word Similarity in NLP</h2>
-    <div class="example-box">
+    <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
+    
       <h4>Problem: Comparing Sentiments</h4>
       <p>Compare \(\mathbf{v}_1 = [1, 1]\) (Positive) and \(\mathbf{v}_2 = [1, -1]\) (Negative).</p>
       
@@ -521,10 +469,10 @@ print(f"Dimension of the created space: {dim}")
           <strong>Result:</strong> Zero indicates <strong>Orthogonality</strong>. In NLP, this means these two concepts are completely independent or "on different planets."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-orthogonality">Example 2: Alignment Check</h2>
-    <div class="example-box">
+    <h2 id="example-orthogonality" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Alignment Check</h2>
+    
       <h4>Problem: Similarity of [3, 4] and [4, 3]</h4>
       <p>Are these two vectors pointing in roughly the same direction?</p>
       
@@ -545,9 +493,9 @@ print(f"Dimension of the created space: {dim}")
           <strong>Result:</strong> YES. High dot product means high alignment. They share most of their "energy" in the same directions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -576,17 +524,6 @@ print(f"Dot Product: {dot}")
       <p>A <strong>Norm</strong> is a mathematical function that assigns a strictly positive "length" to a vector. In Machine Learning, we use norms to prevent models from "overfitting" by penalizing large weights.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#definition">1. Definition of a Norm</a>
-      <a href="#l2">2. L₂ Norm (Euclidean)</a>
-      <a href="#l1">3. L₁ Norm (Manhattan)</a>
-      <a href="#example-distance">Example 1: Manhattan vs. Euclidean</a>
-      <a href="#example-reg">Example 2: Lasso vs. Ridge Regularization</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
     <h2 id="definition">1. Definition of a Norm</h2>
     <p>A function \(\|\mathbf{x}\|\) is a norm if it satisfies these properties:</p>
     <ul>
@@ -606,15 +543,14 @@ print(f"Dot Product: {dot}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong>
         Think of <strong>L₂</strong> as a straight line across a field. 
         Think of <strong>L₁</strong> as walking through a city grid—you can't cut corners; you have to follow the streets. 
         In ML, <strong>L₁</strong> is used when you want a model to be "sparse" (selective), while <strong>L₂</strong> is used to keep weights small and stable.
       </div>
     </div>
 
-    <h2 id="example-distance">Example 1: Manhattan vs. Euclidean</h2>
-    <div class="example-box">
+    <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
+    
       <h4>Problem: Comparing Distances for [3, 4]</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -633,10 +569,10 @@ print(f"Dot Product: {dot}")
           <strong>Result:</strong> L₁ distance is always \(\ge\) L₂. L₁ is "harsher" and easier for models to interpret as binary decisions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-reg">Example 2: Lasso vs. Ridge Regularization</h2>
-    <div class="example-box">
+    <h2 id="example-reg" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Lasso vs. Ridge Regularization</h2>
+    
       <h4>Problem: Penalizing Large Weights</h4>
       <p>Assume your model weights are \(\mathbf{w} = [1, 0.01]\). Find the L₁ and L₂ penalties.</p>
       
@@ -657,9 +593,9 @@ print(f"Dot Product: {dot}")
           <strong>Intuition:</strong> L₁ (Lasso) will often force small weights to exactly 0, effectively deleting irrelevant features. L₂ (Ridge) just keeps all weights tiny.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -691,23 +627,13 @@ print(f"L2: {l2}, L1: {l1}")
       <p>A <strong>Matrix</strong> is a rectangular grid of numbers organized into rows and columns. In Machine Learning, matrices are used to represent everything from image pixel values to the weights of a neural network.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#operations">Mathematical Operations</a>
-      <a href="#example-image">Example 1: Grayscale Image Representation</a>
-      <a href="#example-transpose">Example 2: Matrix Transpose in Data Alignment</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If a vector is a single data point, a matrix is an <strong>entire dataset</strong>. Each row might represent a different house, and each column a different feature (price, size, year). Matrices allow us to process thousands of inputs in a single mathematical "swing."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Matrix as a <strong>Batch Processor</strong>. 
+        Think of a Matrix as a <strong>Batch Processor</strong>. 
         Instead of calculating the price of one house at a time, you put all the house data into a matrix and multiply it by your weight vector. It’s the "Industrial Scale" version of vector math.
       </div>
     </div>
@@ -719,8 +645,8 @@ print(f"L2: {l2}, L1: {l1}")
       <li><strong>Transpose (\(A^T\)):</strong> Flips the matrix over its diagonal, switching rows and columns.</li>
     </ul>
 
-    <h2 id="example-image">Example 1: Grayscale Image Representation</h2>
-    <div class="example-box">
+    <h2 id="example-image" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Grayscale Image Representation</h2>
+    
       <h4>Problem: Visualizing Pixels</h4>
       <p>Represent a 2x2 grayscale image where the top-left pixel is white (255), bottom-right is black (0), and others are gray (128).</p>
       
@@ -741,10 +667,10 @@ print(f"L2: {l2}, L1: {l1}")
           <strong>Result:</strong> We've converted a visual concept into a matrix. Computer vision models "see" by reading these matrix values.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-transpose">Example 2: Matrix Transpose in Data Alignment</h2>
-    <div class="example-box">
+    <h2 id="example-transpose" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Matrix Transpose in Data Alignment</h2>
+    
       <h4>Problem: Pivoting Features</h4>
       <p>A dataset \(D = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) has 2 samples (rows) and 2 features (cols). Find \(D^T\).</p>
       
@@ -769,9 +695,9 @@ print(f"L2: {l2}, L1: {l1}")
           <strong>Intuition:</strong> Transposing is like <strong>Rotating a Map</strong>. The info is the same, but the perspective changes—now features are rows and samples are columns. This is essential for calculating Correlation Matrices.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -802,36 +728,26 @@ print(f"Transpose:\n{A_t}")
       <p>Combining two matrices (\(AB\)) is not just multiplication—it's <strong>Composition</strong>. It's the mathematical way of saying, "Do Transformation B, then do Transformation A." This is exactly what happens in every layer of a Neural Network.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-composition">Example 1: Chaining Transformations</a>
-      <a href="#example-shape">Example 2: Shape Mismatch Survival Guide</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. Matrix multiplication (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. This allows us to collapse multiple complex steps into a single matrix.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Matrix Multiplication as a <strong>Relay Race</strong>. 
+        Think of Matrix Multiplication as a <strong>Relay Race</strong>. 
         Matrix B runs the first leg (processes the input), then hands the baton to Matrix A (processes B's output). 
         The product \(AB\) is the <strong>entire race</strong> condensed into one motion. 
         In ML, this is how a model goes from "Raw Image Pixels" to "Cat or Dog."
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For \(C = AB\), the element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of A and the \(j\)-th column of B:</p>
     <div class="math-block">$$c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$$</div>
     <p><strong>Crucial Rule:</strong> The number of <strong>columns</strong> in A must match the number of <strong>rows</strong> in B.</p>
 
-    <h2 id="example-composition">Example 1: Chaining Transformations</h2>
-    <div class="example-box">
+    <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
+    
       <h4>Problem: Finding the Combined Rule</h4>
       <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 1 \end{bmatrix}, B = \begin{bmatrix} 1 & 0 \\ 0 & 2 \end{bmatrix}\). Calculate \(AB\).</p>
       
@@ -856,10 +772,10 @@ print(f"Transpose:\n{A_t}")
           <strong>Result:</strong> Multiplication is <strong>not commutative</strong> (\(AB \neq BA\)). In the relay race, the order of runners matters!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-shape">Example 2: Shape Mismatch Survival Guide</h2>
-    <div class="example-box">
+    <h2 id="example-shape" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Shape Mismatch Survival Guide</h2>
+    
       <h4>Problem: Can they Multiply?</h4>
       <p>Check if \(A (3 \times 2)\) can multiply \(B (2 \times 5)\).</p>
       
@@ -884,9 +800,9 @@ print(f"Transpose:\n{A_t}")
           <strong>Result:</strong> YES. They align. This is the #1 debugging skill in building Neural Networks.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -920,37 +836,27 @@ print(f"Product: {C}")
       <p>The <strong>Inverse</strong> of a Matrix \(A\) is denoted by \(A^{-1}\). If Matrix A transforms Vector \(\mathbf{x}\) into Vector \(\mathbf{y}\), then Matrix \(A^{-1}\) reverses that process, bringing you right back to \(\mathbf{x}\).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-undo">Example 1: The "Undo" Walkthrough</a>
-      <a href="#example-system">Example 2: Solving a 2×2 System</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In algebra, if you multiply by 5, you undo it by dividing by 5. In Linear Algebra, the <strong>Inverse</strong> is that "division." We don't have a division sign for matrices, so we multiply by the Inverse to cancel out a transformation.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Matrix Inverse as <strong>Unraveling a Knot</strong>. 
+        Think of a Matrix Inverse as <strong>Unraveling a Knot</strong>. 
         Matrix A tied the knot (mixed the data). 
         The Inverse \(A^{-1}\) is the precise set of movements needed to untie it. 
         But beware: not every knot can be untied—if the matrix squashed the data into 0, that info is gone forever!
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>The matrix \(A^{-1}\) is defined by the property:</p>
     <div class="math-block">$$AA^{-1} = A^{-1}A = I$$</div>
     <p>where \(I\) is the <strong>Identity Matrix</strong> (the "1" of matrices). For a 2x2 matrix, the formula is:</p>
     <div class="math-block">$$A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$</div>
 
-    <h2 id="example-undo">Example 1: The "Undo" Walkthrough</h2>
-    <div class="example-box">
+    <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
+    
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       
       <div class="algorithm-steps">
@@ -978,10 +884,10 @@ print(f"Product: {C}")
           <strong>Result:</strong> \(A^{-1} = \begin{bmatrix} 0.6 & -0.7 \\ -0.2 & 0.4 \end{bmatrix}\). Multiplying this with original A will give you back the Identity!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-system">Example 2: Solving a 2×2 System</h2>
-    <div class="example-box">
+    <h2 id="example-system" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Solving a 2×2 System</h2>
+    
       <h4>Problem: Finding Inputs x given Outputs y</h4>
       <p>Assume \(A\mathbf{x} = \mathbf{b}\). If \(\mathbf{b} = [1, 2]\) and you have \(A^{-1}\), find \(\mathbf{x}\).</p>
       
@@ -1006,9 +912,9 @@ print(f"Product: {C}")
           <strong>Result:</strong> We solved for the unknown inputs by simply "multiplying back." This is how many statistics algorithms find the best-fit line.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1038,23 +944,13 @@ else:
       <p>The <strong>Determinant</strong> \(\det(A)\) is a scalar value that tells you how a linear transformation changes the <strong>volume</strong> of space. It’s the "Scale Factor" of the matrix.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#rules">2. Properties & Meaning</a>
-      <a href="#example-area">Example 1: Area Scaling of a Unit Square</a>
-      <a href="#example-singularity">Example 2: Singularity Check (Det = 0)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine a unit square on a grid (area = 1). When you multiply it by a matrix, it might stretch into a larger rectangle or rotate into a diamond. The <strong>Determinant</strong> is the area of that new shape. If \(\det = 2\), the space doubled; if \(\det = 0\), the space was squashed into a flat line.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Determinant as a <strong>"Dimension Watchdog."</strong> 
+        Think of the Determinant as a <strong>"Dimension Watchdog."</strong> 
         If the determinant is zero, your matrix has "deleted" a dimension. 
         It’s like turning a 3D sphere into a 2D pancake—you can't go back! 
         That’s why matrices with zero determinant have no inverse (Singular Matrices).
@@ -1068,8 +964,8 @@ else:
       <li>\(\det(A) = 0\): Matrix is non-invertible (Singular).</li>
     </ul>
 
-    <h2 id="example-area">Example 1: Area Scaling of a Unit Square</h2>
-    <div class="example-box">
+    <h2 id="example-area" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Area Scaling of a Unit Square</h2>
+    
       <h4>Problem: Finding the Scale Factor</h4>
       <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the determinant and interpret it.</p>
       
@@ -1090,10 +986,10 @@ else:
           <strong>Result:</strong> Any shape you draw in that space will have exactly <strong>6 times</strong> the area after the transformation.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-singularity">Example 2: Singularity Check (Det = 0)</h2>
-    <div class="example-box">
+    <h2 id="example-singularity" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Singularity Check (Det = 0)</h2>
+    
       <h4>Problem: Is this "Undoable"?</h4>
       <p>Check if \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\) has an inverse.</p>
       
@@ -1114,9 +1010,9 @@ else:
           <strong>Result:</strong> \(\det = 0\). This matrix squashed the 2D plane into a 1D line. No inverse exists. This is why <strong>full rank</strong> data is critical in ML.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1144,23 +1040,13 @@ print(f"Determinant: {det:.2f}")
       <p>The <strong>Rank</strong> of a Matrix is the maximum number of linearly independent rows or columns. It tells you the <strong>true dimension</strong> of the data hidden within the grid.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#rules">2. Properties of Rank</a>
-      <a href="#example-redundant">Example 1: Detecting Rank-Deficient Data</a>
-      <a href="#example-density">Example 2: Rank as Information Density</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>You might have a spreadsheet with 100 columns (features), but if 80 of them are just combinations of others, your <strong>Matrix Rank</strong> is only 20. Rank is the "Reality Check" that tells you how much unique information you actually have before you start training a model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
+        Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
         If 5 people testify but 4 of them are just repeating exactly what the first person said, you only have <strong>Rank 1</strong> evidence. 
         In ML, high rank means diverse, "independent" features. Low rank means "noisy" or redundant data.
       </div>
@@ -1173,8 +1059,8 @@ print(f"Determinant: {det:.2f}")
       <li><strong>Column Rank = Row Rank:</strong> The number of unique columns always equals the number of unique rows!</li>
     </ul>
 
-    <h2 id="example-redundant">Example 1: Detecting Rank-Deficient Data</h2>
-    <div class="example-box">
+    <h2 id="example-redundant" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Detecting Rank-Deficient Data</h2>
+    
       <h4>Problem: Finding the Hidden Dimension</h4>
       <p>For \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \\ 3 & 6 \end{bmatrix}\), find the rank.</p>
       
@@ -1195,10 +1081,10 @@ print(f"Determinant: {det:.2f}")
           <strong>Result:</strong> \(\text{Rank} = 1\). Despite having 3 rows, this matrix only contains information along a single 1D line in 3D space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-density">Example 2: Rank as Information Density</h2>
-    <div class="example-box">
+    <h2 id="example-density" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rank as Information Density</h2>
+    
       <h4>Problem: Checking for Invertibility</h4>
       <p>Is \(A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\) full rank?</p>
       
@@ -1219,9 +1105,9 @@ print(f"Determinant: {det:.2f}")
           <strong>Result:</strong> \(\text{Rank} = 2\). Since it's a 2x2 matrix, it's "Full Rank" and fully invertible. No data is being squashed here.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1249,35 +1135,25 @@ print(f"Matrix Rank: {rank}")
       <p>Two vectors are <strong>Orthogonal</strong> if they have zero in common (angle = 90°). A <strong>Projection</strong> is the "shadow" that one vector casts onto another. In ML, this is how we filter out noise from our features.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-projection">Example 1: 1D Projection (Searching for Shadows)</a>
-      <a href="#example-least-squares">Example 2: Least Squares (Simple Regression)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, we often have high-dimensional data that we want to simplify. <strong>Orthogonal Projections</strong> allow us to "condense" a vector into a smaller subspace while keeping as much of the original information as possible. It’s like looking at a 3D shadow on a 2D wall—you lose depth, but you keep the shape.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Projection as a <strong>"Best Approximation."</strong> 
+        Think of a Projection as a <strong>"Best Approximation."</strong> 
         If you are on a stage and a spotlight shines on you, your <strong>shadow</strong> on the floor is the "closest point" to you that exists on that floor. 
         In ML, we use this to find the "closest" prediction to our real labels.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>The projection of vector \(\mathbf{y}\) onto vector \(\mathbf{u}\) is:</p>
     <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \hat{\mathbf{y}} = \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$</div>
     <p>The <strong>Error Vector</strong> (\(\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}\)) is always <strong>Orthogonal</strong> to \(\mathbf{u}\).</p>
 
-    <h2 id="example-projection">Example 1: 1D Projection (Searching for Shadows)</h2>
-    <div class="example-box">
+    <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
+    
       <h4>Problem: Shadow of [3, 4] on X-axis</h4>
       <p>Project vector \(\mathbf{y} = [3, 4]\) onto the vector \(\mathbf{u} = [1, 0]\).</p>
       
@@ -1302,10 +1178,10 @@ print(f"Matrix Rank: {rank}")
           <strong>Result:</strong> We discarded the "Vertical" information (4) as noise. The result stays in the \(\mathbf{u}\) direction.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-least-squares">Example 2: Least Squares (Simple Regression)</h2>
-    <div class="example-box">
+    <h2 id="example-least-squares" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Least Squares (Simple Regression)</h2>
+    
       <h4>Problem: Fitting a Line</h4>
       <p>Least Squares is just a projection. We project our target vector \(\mathbf{y}\) onto the column space of our features \(X\).</p>
       
@@ -1326,9 +1202,9 @@ print(f"Matrix Rank: {rank}")
           <strong>Intuition:</strong> Your "prediction" is the best approximation allowed by your data. The difference (Residual) is always 100% independent of your features.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1358,37 +1234,27 @@ print(f"Shadow of y on u: {proj_y_u}")
       <p>An <strong>Eigenvector</strong> is a vector that, when multiplied by a matrix, <strong>never changes direction</strong>—it only scales. The <strong>Eigenvalue</strong> \(\lambda\) is the scaling factor. They are the "Fingerprints" of a linear transformation.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-diagonal">Example 1: Finding Hidden Axes</a>
-      <a href="#example-chareq">Example 2: Characteristic Equation Walkthrough</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find <strong>Principal Components</strong> in data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
+        Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
         If you spin a globe, every point moves—except for the North and South Poles. 
         The "Line through the Poles" is the <strong>Eigenvector</strong>. 
         It stays in place while everything else transforms around it.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
     <p>To find \(\lambda\), we solve the <strong>Characteristic Equation</strong>:</p>
     <div class="math-block">$$\det(A - \lambda I) = 0$$</div>
 
-    <h2 id="example-diagonal">Example 1: Finding Hidden Axes</h2>
-    <div class="example-box">
+    <h2 id="example-diagonal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Hidden Axes</h2>
+    
       <h4>Problem: Identifying Eigenvalues for a Diagonal Matrix</h4>
       <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the eigenpairs.</p>
       
@@ -1413,10 +1279,10 @@ print(f"Shadow of y on u: {proj_y_u}")
           <strong>Result:</strong> \(\lambda_1 = 3, \mathbf{v}_1 = [1, 0]\) and \(\lambda_2 = 2, \mathbf{v}_2 = [0, 1]\). Diagonal matrices already show their eigen-secrets!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-chareq">Example 2: Characteristic Equation Walkthrough</h2>
-    <div class="example-box">
+    <h2 id="example-chareq" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Characteristic Equation Walkthrough</h2>
+    
       <h4>Problem: Solxing for λ of A = [[4, 1], [2, 3]]</h4>
       
       <div class="algorithm-steps">
@@ -1440,9 +1306,9 @@ print(f"Shadow of y on u: {proj_y_u}")
           <strong>Intuition:</strong> \(\lambda = 5\) is your "Main Signal." The direction corresponding to this eigenvalue contains the most <strong>Variance</strong> in your data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1465,30 +1331,20 @@ print(f"Eigenvectors:\n{vecs}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Some matrices have "Good Behavior" and always produce positive scaling factors. Explore <strong><a href="#/mathematics/linear-algebra/positive-definite">Positive Definite Matrices</a></strong>.
     </div>
-  `},m={id:"positive-definite",title:"Positive Definite Matrices",description:"Positive Definite matrices are the 'Stability Kings' of optimization. They always point 'Up' or produce positive scales.",color:"#3F51B5",html:String.raw`
+  `},g={id:"positive-definite",title:"Positive Definite Matrices",description:"Positive Definite matrices are the 'Stability Kings' of optimization. They always point 'Up' or produce positive scales.",color:"#3F51B5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Stability</div>
       <h1>Positive Definite Matrices</h1>
       <p>A <strong>Positive Definite (PD)</strong> matrix is a symmetric matrix where all eigenvalues are strictly positive (\(\lambda > 0\)). It is the mathematical guarantee that a "multivariate bowl" always has a unique bottom point.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-minimum">Example 1: Global Minimum Stability Check</a>
-      <a href="#example-hessian">Example 2: Hessian of a Quadratic Form</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Optimization (Gradient Descent), we want to reach the minimum of a "loss surface." If the Hessian matrix (\(H\)) at a point is <strong>Positive Definite</strong>, it means the surface is locally curved like a bowl. No matter which way you move, you'll eventually "roll back down" to the center. This is the definition of <strong>Convexity</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Positive Definite matrix like a <strong>Trampoline</strong>. 
+        Think of a Positive Definite matrix like a <strong>Trampoline</strong>. 
         No matter where you step on it (\(\mathbf{x}\)), the surface pushes back "Up" toward you (\(\mathbf{x}^T A \mathbf{x} > 0\)). 
         If the matrix were <strong>Indefinite</strong>, it would be like a <strong>Saddle</strong>—it pushes up in one direction but collapses under you in another. 
         Stability is everything in ML.
@@ -1500,8 +1356,8 @@ print(f"Eigenvectors:\n{vecs}")
     <div class="math-block">$$\mathbf{x}^T A \mathbf{x} > 0$$</div>
     <p><strong>Shortcut:</strong> All eigenvalues \(\lambda_i\) must be \(> 0\).</p>
 
-    <h2 id="example-minimum">Example 1: Global Minimum Stability Check</h2>
-    <div class="example-box">
+    <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
+    
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>
       
@@ -1522,10 +1378,10 @@ print(f"Eigenvectors:\n{vecs}")
           <strong>Result:</strong> YES. It's a "Bowl." Any optimization starting in this space will naturally find the center.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-hessian">Example 2: Hessian of a Quadratic Form</h2>
-    <div class="example-box">
+    <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Hessian of a Quadratic Form</h2>
+    
       <h4>Problem: Checking Convexity of f(x, y) = x² + 4y²</h4>
       
       <div class="algorithm-steps">
@@ -1545,9 +1401,9 @@ print(f"Eigenvectors:\n{vecs}")
           <strong>Result:</strong> The Hessian is Positive Definite. This means the loss function is <strong>Globally Convex</strong> and we can find the perfect weights using Gradient Descent.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -1570,30 +1426,20 @@ print(f"Is Matrix Positive Definite? {is_pd}")
     <div class="linking-rule">
       <strong>Next Step:</strong> PD matrices are stable. Now, learn the "Swiss Army Knife" that decomposes <em>any</em> matrix into these components. Explore <strong><a href="#/mathematics/linear-algebra/svd">Singular Value Decomposition (SVD)</a></strong>.
     </div>
-  `},g={id:"svd",title:"Singular Value Decomposition (SVD)",description:"The Swiss Army Knife of Linear Algebra. SVD decomposes any matrix into rotation, scaling, and rotation steps.",color:"#D32F2F",html:String.raw`
+  `},m={id:"svd",title:"Singular Value Decomposition (SVD)",description:"The Swiss Army Knife of Linear Algebra. SVD decomposes any matrix into rotation, scaling, and rotation steps.",color:"#D32F2F",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Decompositions</div>
       <h1>Singular Value Decomposition (SVD)</h1>
       <p>SVD is the <strong>Swiss Army Knife</strong> of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> matrix—even the "messy" rectangular ones. It is the core algorithm behind image compression and recommendation systems.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#formula">2. The SVD Formula</a>
-      <a href="#example-reconstruction">Example 1: Rotation-Scaling-Rotation Breakdown</a>
-      <a href="#example-compression">Example 2: Image Compression (Rank-k)</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Every linear transformation can be broken down into three simple steps: Rotate, Stretch, Rotate. SVD allows us to take a "chaos" matrix and find the core directions that contain all the information. In Machine Learning, this helps us find the "structure" in noisy data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a lump of <strong>Pizza Dough</strong>. 
+        Think of a lump of <strong>Pizza Dough</strong>. 
         SVD says you can turn it into any final pizza in 3 steps: 
         1. <strong>Rotate</strong> the dough to find the best axis, 
         2. <strong>Stretch</strong> it into a circle (Scaling), 
@@ -1610,8 +1456,8 @@ print(f"Is Matrix Positive Definite? {is_pd}")
       <li><strong>Vᵀ:</strong> Right Singular Vectors (Rotates the input space).</li>
     </ul>
 
-    <h2 id="example-reconstruction">Example 1: Rotation-Scaling-Rotation Breakdown</h2>
-    <div class="example-box">
+    <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
+    
       <h4>Problem: Reconstructing A = [[1, 0], [0, 2]]</h4>
       
       <div class="algorithm-steps">
@@ -1631,10 +1477,10 @@ print(f"Is Matrix Positive Definite? {is_pd}")
           <strong>Result:</strong> SVD found the "most important" axis is \([0, 1]\) with a strength of 2. It automatically sorts information by power.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-compression">Example 2: Image Compression (Rank-k)</h2>
-    <div class="example-box">
+    <h2 id="example-compression" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Image Compression (Rank-k)</h2>
+    
       <h4>Problem: Reducing 2D Noise</h4>
       <p>Assume your matrix \(A\) has singular values \(\Sigma = [100, 1]\). Reconstruct it with only the top value.</p>
       
@@ -1655,9 +1501,9 @@ print(f"Is Matrix Positive Definite? {is_pd}")
           <strong>Result:</strong> We kept <strong>99%</strong> of the information using only <strong>half</strong> the storage space. This is how high-res photos are transmitted over slow WiFi.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.linalg import svd
@@ -1687,23 +1533,13 @@ print(f"Singular values of A: {s}")
       <p><strong>PCA</strong> is the most popular technique for <strong>Dimensionality Reduction</strong>. It uses the power of Eigenvalues and SVD to find the absolute best "Perspective" for looking at high-dimensional data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#steps">2. The 5 Steps of PCA</a>
-      <a href="#example-3d2d">Example 1: Reducing 3D Data to 2D</a>
-      <a href="#example-variance">Example 2: Covariance Matrix Eigen-analysis</a>
-      <a href="#implementation">Implementation (Python/Scikit-Learn)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, "More Features" is not always better. Features can be redundant (High-Correlation) or noisy. PCA finds the <strong>Principal Components</strong>—the directions in which the data is most spread out. By projecting data onto these components, we can keep the "Signal" while deleting the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of PCA as <strong>Finding the Best Camera Angle</strong>. 
+        Think of PCA as <strong>Finding the Best Camera Angle</strong>. 
         Imagine a clear 3D statue of a horse. If you take a picture from the front, you might just see a circle. But if you take it from the side (the direction of maximum spread), you capture the whole horse in 2D. 
         PCA calculates that perfect "Side View" automatically.
       </div>
@@ -1733,8 +1569,8 @@ print(f"Singular values of A: {s}")
       </div>
     </div>
 
-    <h2 id="example-3d2d">Example 1: Reducing 3D Data to 2D</h2>
-    <div class="example-box">
+    <h2 id="example-3d2d" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Reducing 3D Data to 2D</h2>
+    
       <h4>Problem: Visualizing a High-D Cluster</h4>
       <p>Data has features: [Height, Weight, Age]. If Age and Height are 100% correlated, can we simplify?</p>
       
@@ -1755,10 +1591,10 @@ print(f"Singular values of A: {s}")
           <strong>Result:</strong> We can plot this 3D data on a 2D screen without losing any important trends.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-variance">Example 2: Covariance Matrix Eigen-analysis</h2>
-    <div class="example-box">
+    <h2 id="example-variance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Covariance Matrix Eigen-analysis</h2>
+    
       <h4>Problem: Finding the PC for Cov = [[2, 1], [1, 2]]</h4>
       
       <div class="algorithm-steps">
@@ -1782,9 +1618,9 @@ print(f"Singular values of A: {s}")
           <strong>Result:</strong> By choosing PC1, you capture <strong>75%</strong> of the total variance (\(3 / (3+1)\)) with just one feature!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/Scikit-Learn)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 from sklearn.decomposition import PCA
 import numpy as np
@@ -1858,4 +1694,4 @@ print(f"Reduced Shape: {X_reduced.shape}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,n,o,r,l,d,c,h,p,m,g,v]};export{u as LINEAR_ALGEBRA_DATA};
+  `,sections:[t,e,s,i,a,n,o,r,l,d,c,h,p,g,m,v]};export{u as LINEAR_ALGEBRA_DATA};

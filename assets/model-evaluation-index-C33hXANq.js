@@ -5,15 +5,6 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
       <p>Accuracy is a dangerous metric. If you are testing for a <strong>Rare Disease</strong> that affects 1% of the population, a model that simply says "Healthy" to everyone is <strong>99% Accurate</strong>—but it's a <strong>Total Failure</strong>. The <strong>Confusion Matrix</strong> is the "Truth Table" that exposes exactly where your model is being fooled.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The 4 Quadrants</a>
-      <a href="#math">TP, TN, FP, FN</a>
-      <a href="#errors">Type I vs. Type II Errors</a>
-      <a href="#interpretation">Reading the Grid</a>
-      <a href="#analogy">The "Security Guard" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The 4 Quadrants</h2>
     <p>A Confusion Matrix is a \(2 \times 2\) grid (for binary classification) that compares <strong>Reality</strong> (Rows) vs. <strong>Perception</strong> (Columns).</p>
     <div class="math-block">
@@ -31,7 +22,7 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Story of Your Mistakes."</strong> 
+        Think of it as <strong>"The Story of Your Mistakes."</strong> 
         It's not just that you were <strong>Wrong</strong>; it's <strong>HOW</strong> you were wrong. 
         Did you cry wolf when there was no wolf? (FP). Or did you sleep while the wolf attacked? (FN). Real-world problems often care <strong>Much More</strong> about one type of mistake than the other.
       </div>
@@ -60,7 +51,7 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
     </div>
 
     <h2 id="algorithm">The Confusion Matrix Process</h2>
-    <div class="example-box">
+    
       <h4>The Reality Check Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -84,10 +75,10 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
           <div><strong>Analysis:</strong> Use the counts to derive higher-level metrics like Precision and Recall.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Truth Table</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Truth Table</h2>
+    
       <h4>Scenario: Testing for a Rare Disease</h4>
       <p>Imagine you test 100 people for a disease. 10 actually have it, 90 do not. Your model makes some mistakes.</p>
       
@@ -113,12 +104,12 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
       <div class="callout warning">
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> The Matrix forces you to choose your poison. For a <strong>rare cancer</strong>, you'd rather have a few False Positives (over-testing) than a single False Negative (death). For a <strong>spam filter</strong>, you'd rather let spam in (FN) than delete a job offer (FP).
+          The Matrix forces you to choose your poison. For a <strong>rare cancer</strong>, you'd rather have a few False Positives (over-testing) than a single False Negative (death). For a <strong>spam filter</strong>, you'd rather let spam in (FN) than delete a job offer (FP).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Tallying the Truth</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Comparing 10 Predictions against Ground Truth...\n[Result] Confusion Matrix Grid:\n\n             Predicted: NO | Predicted: YES\nActual: NO  [[    5      ,      1      ],\nActual: YES  [    1      ,      3      ]]\n\n[Insight] Accuracy: 80.0%\n[Insight] 1 innocent email was marked as Spam (False Positive).\n[Insight] 1 Spam email was missed (False Negative).">
 import numpy as np
 from sklearn.metrics import confusion_matrix
@@ -155,22 +146,13 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
       <p>If your model shouts <strong>"SPAM!"</strong> for every email, it's very effective at finding spam—but it also ruins your inbox. <strong>Precision</strong> is the metric that asks: "Of all the times you yelled 'Positive', how many were <strong>Actually</strong> positive?" It's the measure of your <strong>Credibility</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Denominator of Guesses</a>
-      <a href="#math">The Precision Formula</a>
-      <a href="#false-alarms">Avoiding False Alarms</a>
-      <a href="#use-case">When Precision is King</a>
-      <a href="#analogy">The "Detective" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Denominator of Guesses</h2>
     <p>Precision focuses <strong>Only</strong> on your positive predictions. It ignores the things you correctly ignored (TN). It only cares about the times you took <strong>Action</strong> and whether that action was <strong>Right</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Reliability Score."</strong> 
+        Think of it as <strong>"The Reliability Score."</strong> 
         If you say "Buy this Stock!", and it goes up, your precision is high. 
         If you say "Buy this Stock!", and it crashes, your precision is low. 
         Precision is about <strong>Not being a False Prophet</strong>.
@@ -187,8 +169,8 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     <h2 id="use-case">When Precision is King</h2>
     <p>Precision is the most important metric when the <strong>Cost of a False Positive is HIGH</strong>.</p>
     <ul>
-      <li><strong>Example 1:</strong> Sentencing someone to prison. If you are wrong (FP), an innocent person goes to jail. Precision must be <strong>Near 100%</strong>.</li>
-      <li><strong>Example 2:</strong> Content Moderation. If you block a harmless YouTube video (FP), the creator loses income. </li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Sentencing someone to prison. If you are wrong (FP), an innocent person goes to jail. Precision must be <strong>Near 100%</strong>.</li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Content Moderation. If you block a harmless YouTube video (FP), the creator loses income. </li>
     </ul>
 
     <h2 id="analogy">The "Email Spam Filter" Analogy</h2>
@@ -204,7 +186,7 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     </div>
 
     <h2 id="algorithm">The Precision Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Guess Validation Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -228,10 +210,10 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
           <div><strong>Interpret:</strong> A score of 0.95 means every time the model says "Positive", it's right 95% of the time.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Honest Witness</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Honest Witness</h2>
+    
       <h4>Scenario: Declaring "Urgent" Mail in a Mailroom</h4>
       <p>Imagine a clerk sorting 1,000 envelopes. He only wants to mark an envelope as <strong>"Urgent"</strong> if it definitely contains a time-sensitive check. He is a perfectionist.</p>
       
@@ -257,12 +239,12 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> High precision usually means your model is <strong>Conservative</strong>. It's like a witness who only speaks when they are 100% sure. It's the "Quality" metric—perfect for when the cost of a mistake (False Positive) is high.
+          High precision usually means your model is <strong>Conservative</strong>. It's like a witness who only speaks when they are 100% sure. It's the "Quality" metric—perfect for when the cost of a mistake (False Positive) is high.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Calculating Credibility</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Analyzing 10 predictions vs. Reality...\n[Status] Total 'YES' predictions: 4\n[Verification] Correct 'YES' (TP): 3\n[Verification] False Alarms (FP): 1\n[Result] Precision = 3/4 = 75.0%\n[Insight] If this model flags an email as Spam, it's correct 75% of the time.">
 import numpy as np
 from sklearn.metrics import precision_score
@@ -294,22 +276,13 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
       <p>If you are testing for a <strong>Deadly Disease</strong>, you don't care if you annoy a few healthy people (FP). You care about finding <strong>Every Single Sick Person</strong>. <strong>Recall</strong> (also called Sensitivity) is the metric that asks: "Of all the actual positives that exist in reality, how many did you <strong>Manage to Find</strong>?"</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Denominator of Reality</a>
-      <a href="#math">The Recall Formula</a>
-      <a href="#missed">Avoiding Missed Opportunities</a>
-      <a href="#use-case">When Recall is King</a>
-      <a href="#analogy">The "Security Dog" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Denominator of Reality</h2>
     <p>While <strong>Precision</strong> looks at your guesses, <strong>Recall</strong> looks at <strong>Reality</strong>. It doesn't care about your false alarms (FP). It only cares about the positive cases you <strong>Missed (FN)</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Thoroughness Score."</strong> 
+        Think of it as <strong>"The Thoroughness Score."</strong> 
         If there are 100 criminals in the city, and you catch all 100, your recall is 1.0 (even if you accidentally arrested 50 innocent people along with them). 
         Recall is about <strong>Not leaving anyone behind</strong>.
       </div>
@@ -325,8 +298,8 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     <h2 id="use-case">When Recall is King</h2>
     <p>Recall is the most important metric when the <strong>Cost of a False Negative is HIGH</strong>.</p>
     <ul>
-      <li><strong>Example 1:</strong> Cancer Screening. Missing a tumor (FN) is a death sentence. Over-diagnosing (FP) just leads to more tests. </li>
-      <li><strong>Example 2:</strong> Fraud Detection. You'd rather flag a legitimate transaction for review than let a hacker steal \$10,000.</li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Cancer Screening. Missing a tumor (FN) is a death sentence. Over-diagnosing (FP) just leads to more tests. </li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Fraud Detection. You'd rather flag a legitimate transaction for review than let a hacker steal \$10,000.</li>
     </ul>
 
     <h2 id="false-alarms">The Tension between P and R</h2>
@@ -344,7 +317,7 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     </div>
 
     <h2 id="algorithm">The Recall Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Comprehensive Finder Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -368,10 +341,10 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
           <div><strong>Interpret:</strong> A score of 0.99 means the model found 99% of the targets, only missing 1%.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Net of Inclusion</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Net of Inclusion</h2>
+    
       <h4>Scenario: Searching for an Engagement Ring in a Swimming Pool</h4>
       <p>Imagine you dropped your diamond ring in a public pool filled with 1,000 random plastic toys. You <strong>cannot</strong> leave without it.</p>
       
@@ -397,12 +370,12 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> High recall usually means your model is <strong>Aggressive</strong>. It's like a paranoid security guard who checks everyone. It's the "Quantity" metric—perfect for when the cost of a miss (False Negative) is catastrophic, like cancer or fraud.
+          High recall usually means your model is <strong>Aggressive</strong>. It's like a paranoid security guard who checks everyone. It's the "Quantity" metric—perfect for when the cost of a miss (False Negative) is catastrophic, like cancer or fraud.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Measuring Thoroughness</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Reality: 4 Actual Positive cases (Spam/Sick) identified.\n[Action] Running Model Inference...\n[Verify] Correctly Found (TP): 3\n[Verify] Dangerous Misses (FN): 1\n[Result] Recall (Sensitivity) = 3/4 = 75.0%\n[Insight] The model 'Caught' 75% of the truth, but let one target 'Escape'.">
 import numpy as np
 from sklearn.metrics import recall_score
@@ -434,22 +407,13 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
       <p>Precision and Recall are like a <strong>Sports Car</strong> and a <strong>Tank</strong>. You want speed (Precision), but you also want durability (Recall). How do you compare them? You can't just take a simple average! <strong>F1 Score</strong> is the <strong>Harmonic Mean</strong> that forces both values to be high for the score to look good.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Harmonic Mean</a>
-      <a href="#math">The F1 Formula</a>
-      <a href="#avg">Arithmetic vs. Harmonic Mean</a>
-      <a href="#imbalance">Imbalanced Data: Why F1 Matters</a>
-      <a href="#analogy">The "Balanced Diplomat" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Harmonic Mean</h2>
     <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the <strong>Harmonic Mean</strong> because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Weakest Link"</strong> metric. 
+        Think of it as <strong>"The Weakest Link"</strong> metric. 
         It forces your model to be <strong>All-Rounder</strong>. 
         You can't "Cheat" the F1 Score by having infinite recall and terrible precision (catching everyone by arresting the whole city). 
         The F1 Score will only be 1.0 if <strong>Both</strong> metrics are 1.0.
@@ -482,7 +446,7 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     </div>
 
     <h2 id="algorithm">The F1 Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Harmonic Balancing Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -506,10 +470,10 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
           <div><strong>Final Score:</strong> The resulting $F_1$ value will be closer to the <strong>smaller</strong> of the two numbers, forcing a balance.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The All-Rounder Interview</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The All-Rounder Interview</h2>
+    
       <h4>Scenario: Hiring a Developer for a Startup</h4>
       <p>You have two criteria: Coding Skill (Precision) and Communication (Recall). Since you have a small team, you need a "Balanced All-Rounder."</p>
       
@@ -535,12 +499,12 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
+          In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Finding the Harmonic Balance</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Reality: 4 Targets, Model: 5 Predictions\n[Component] Precision (Quality): 60.0% (3/5 were right)\n[Component] Recall (Thoroughness): 75.0% (3/4 found)\n[Action] Calculating Harmonic Mean (P*R)/(P+R) * 2...\n[Result] F1-Score: 66.7%\n[Insight] The F1 centers between P and R, leaning toward the lower value.">
 from sklearn.metrics import precision_score, recall_score, f1_score
 
@@ -571,15 +535,6 @@ print(f"F1 Final Score: {f1:.2f}")
       <p>A classifier doesn't just say "Yes" or "No." It gives a <strong>Probability</strong> (e.g., 0.72). You choose where to draw the line. <strong>ROC (Receiver Operating Characteristic)</strong> curves show us the <strong>Trade-off</strong> between capturing more positives and crying wolf more often as we slide that line from 0 to 1.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: TPR vs. FPR</a>
-      <a href="#math">The Axis: Sensitivity & 1-Specificity</a>
-      <a href="#threshold">The Threshold Slide</a>
-      <a href="#optimal">The "Knee" of the Curve</a>
-      <a href="#analogy">The "Security Door" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: TPR vs. FPR</h2>
     <p>The ROC curve plots two things against each other:</p>
     <ul>
@@ -590,7 +545,7 @@ print(f"F1 Final Score: {f1:.2f}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Trade-off Map."</strong> 
+        Think of it as <strong>"The Trade-off Map."</strong> 
         Every point on the curve represents a different <strong>Threshold</strong> (e.g., "Only flag if probability > 0.3" vs. "Only flag if > 0.9"). 
         If you are <strong>Lenient</strong> (Low Threshold), you get 100% Recall but also 100% False Positives. 
         If you are <strong>Strict</strong> (High Threshold), you get 0% Recall but also 0% False Positives.
@@ -616,7 +571,7 @@ print(f"F1 Final Score: {f1:.2f}")
     </div>
 
     <h2 id="algorithm">The ROC Curve Plotting Process</h2>
-    <div class="example-box">
+    
       <h4>The Threshold Sweep</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -640,10 +595,10 @@ print(f"F1 Final Score: {f1:.2f}")
           <strong>Plotting:</strong> Map every (FPR, TPR) pair to a dot on the grid and connect them to form the curve.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Confidence Slider</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Confidence Slider</h2>
+    
       <h4>Scenario: Tuning an Airport Metal Detector Knob</h4>
       <p>Imagine you are a security guard with a sensitivity knob. You need to find a setting that catches dangerous objects (Positives) but doesn't beep at every belt buckle (Negatives).</p>
       
@@ -669,12 +624,12 @@ print(f"F1 Final Score: {f1:.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> The ROC Curve shows the "Capability" of your model regardless of the classification threshold. If your curve is a straight diagonal line, your model is basically a coin flip. The closer the curve peaks toward the <strong>top-left corner</strong>, the better your "Knob" is at distinguishing signal from noise.
+          The ROC Curve shows the "Capability" of your model regardless of the classification threshold. If your curve is a straight diagonal line, your model is basically a coin flip. The closer the curve peaks toward the <strong>top-left corner</strong>, the better your "Knob" is at distinguishing signal from noise.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Sweeping the Threshold</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating 10 probability scores against ground truth...\n[Action] Sweeping Threshold from 1.0 down to 0.0...\n[Threshold 0.82] TPR: 0.25 | FPR: 0.00 (Safe / Picky)\n[Threshold 0.45] TPR: 0.75 | FPR: 0.20 (Balanced)\n[Threshold 0.12] TPR: 1.00 | FPR: 1.00 (Aggressive / Messy)\n[Result] ROC points calculated for optimization.\n[Insight] The 'Sweet Spot' is where we find the max TPR for the min FPR.">
 import numpy as np
 from sklearn.metrics import roc_curve
@@ -709,22 +664,13 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
       <p>If the ROC curve is a picture of the model's potential, <strong>AUC</strong> is its Final Grade. It is a single number between <strong>0 and 1</strong>. It tells us: <strong>How good is this model at telling two things apart?</strong> A score of 0.8 means the model is "Pretty Good," while 0.5 means it's just flipping a coin.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Probability of Correct Ranking</a>
-      <a href="#interpretation">Interpreting the Score (0.5 to 1.0)</a>
-      <a href="#imbalance">Handling Imbalanced Sets</a>
-      <a href="#limitations">When AUC Lies to You</a>
-      <a href="#analogy">The "Blind Comparison" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Ranking Probability</h2>
     <p>The <strong>AUC (Area Under the ROC Curve)</strong> has a beautiful probabilistic meaning. If you pick one <strong>Random Positive</strong> sample and one <strong>Random Negative</strong> sample, AUC is the probability that your model will give the Positive sample a <strong>Higher Score</strong> than the Negative one.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Separation Power."</strong> 
+        Think of it as <strong>"Separation Power."</strong> 
         It doesn't care about the threshold. It asks: "Are the 'Yes' people actually getting higher numbers than the 'No' people?" 
         If they are perfectly separated, AUC is <strong>1.0</strong>. 
         If they are completely mixed up, AUC is <strong>0.5</strong>.
@@ -757,7 +703,7 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
     </div>
 
     <h2 id="algorithm">The AUC Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Area Integration Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -781,10 +727,10 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
           <div><strong>Validation:</strong> Ensure a score of 1.0 (The perfect square) or 0.5 (The purely random triangle).</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Separation Power</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Separation Power</h2>
+    
       <h4>Scenario: Grading a Chemistry Test for Fairness</h4>
       <p>Imagine you have two groups: <strong>Chemists</strong> and <strong>Artists</strong>. You give them a chemistry test. How "Discriminative" is the test?</p>
       
@@ -810,12 +756,12 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> AUC is the <strong>Universal Grade</strong>. Unlike Accuracy, it doesn't care if your dataset is imbalanced (e.g., 99% Artists). It only cares about the "Ranking." If you want to know if one model is objectively better than another, ignore the accuracy and compare their <strong>AUC</strong>.
+          AUC is the <strong>Universal Grade</strong>. Unlike Accuracy, it doesn't care if your dataset is imbalanced (e.g., 99% Artists). It only cares about the "Ranking." If you want to know if one model is objectively better than another, ignore the accuracy and compare their <strong>AUC</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Separation Quality</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating 10 probability pairs (Target vs. Background)...\n[Action] Computing Area Under ROC Curve (Trapezoidal Integration)...\n[Result] ROC-AUC Score: 0.9250\n[Grade] Excellent Separation Power!\n[Insight] There is a 92.5% chance that a random Positive sample will rank higher than a random Negative.">
 import numpy as np
 from sklearn.metrics import roc_auc_score
@@ -838,7 +784,7 @@ print(f"Status: {auc*100:.1f}% probability of correct ranking.")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the metrics of prediction. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},r={id:"model-evaluation",title:"Model Evaluation",description:"Rigorous metrics and validation strategies to assess model performance and ensure generalization to new data.",keyConcepts:[{title:"The Truth Table",description:"Using Confusion Matrices to expose the exact nature of prediction errors."},{title:"Precision-Recall Balance",description:"Optimizing the trade-off between false alarms and missed detections."},{title:"Separation Power",description:"Quantifying global model performance across all possible thresholds via AUC."}],introHtml:String.raw`
+  `},n={id:"model-evaluation",title:"Model Evaluation",description:"Rigorous metrics and validation strategies to assess model performance and ensure generalization to new data.",keyConcepts:[{title:"The Truth Table",description:"Using Confusion Matrices to expose the exact nature of prediction errors."},{title:"Precision-Recall Balance",description:"Optimizing the trade-off between false alarms and missed detections."},{title:"Separation Power",description:"Quantifying global model performance across all possible thresholds via AUC."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -884,4 +830,4 @@ print(f"Status: {auc*100:.1f}% probability of correct ranking.")
       </div>
 
     </div>
-  `,sections:[e,t,s,o,i,a]};export{r as MODEL_EVALUATION_DATA};
+  `,sections:[e,t,s,o,i,a]};export{n as MODEL_EVALUATION_DATA};

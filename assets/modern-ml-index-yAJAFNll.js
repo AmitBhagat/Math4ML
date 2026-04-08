@@ -5,28 +5,19 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
       <p>Supervised learning is <strong>Expensive</strong>. It requires humans to label millions of images. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. It looks at the world and creates its own puzzles to solve. By solving these "Pretext Tasks," it learns the <strong>Structure of Reality</strong> for free.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Pretext Tasks</a>
-      <a href="#masking">Masked Modeling: The BERT Strategy</a>
-      <a href="#contrastive">Contrastive SSL: Similarity as Label</a>
-      <a href="#downstream">Pre-training vs. Downstream Tasks</a>
-      <a href="#analogy">The "Jigsaw Puzzle" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Pretext Tasks</h2>
     <p>In SSL, we hide a part of the data and ask the model to <strong>Predict the Missing Part</strong>. This "Fake" objective is called a <strong>Pretext Task</strong>. The goal isn't to be good at the puzzle—it's to learn the <strong>Representations</strong> required to solve it.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Read by Context."</strong> 
+        Think of it as <strong>"Learning to Read by Context."</strong> 
         If I give you a sentence with a missing [MASK] word, you use the surrounding words to guess it. 
         To guess correctly, you must understand <strong>Grammar, Logic, and Facts</strong>. You learned English without me giving you a dictionary of "Word Categories." 
       </div>
     </div>
 
-    <h2 id="masking">Examples of Pretext Tasks</h2>
+    <h2 id="masking" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> s of Pretext Tasks</h2>
     <ul>
       <li><strong>NLP (Masked LM):</strong> "The [MASK] sat on the mat." -> Model learns "Cat".</li>
       <li><strong>Computer Vision (Jigsaw):</strong> Scramble an image into 9 tiles. Model learns to <strong>Reassemble</strong> them. To do this, it must recognize arms, legs, and backgrounds.</li>
@@ -49,7 +40,7 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
     </div>
 
     <h2 id="algorithm">The Self-Supervised Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Pretext Optimization Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -73,10 +64,10 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
           <strong>Transfer:</strong> Use the learned weights (which now "understand" the data) for any downstream task.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Master Jigsaw Solver</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Master Jigsaw Solver</h2>
+    
       <h4>Scenario: Training a Child with 1,000 Blank Jigsaws</h4>
       <p>Imagine you have 1,000 jigsaw puzzles, but you don't show the child the "Final Picture" on the box (No Labels).</p>
       
@@ -98,12 +89,12 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
+          SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (SimCLR Concept)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
 import torchvision.transforms as T
 from PIL import Image
@@ -141,22 +132,13 @@ print("Views created. Model will now learn if these came from the SAME image.")
       <p>Why start from scratch? In the old days, every model was born "Stupid" and had to learn the alphabet. <strong>Transfer Learning</strong> allows a model to be born with <strong>10 years of experience</strong> from another field. It's the secret sauce behind modern Large Language Models and medical AI.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Knowledge Extraction</a>
-      <a href="#process">The 3 Pillars: Pre-train, Freeze, Fine-tune</a>
-      <a href="#domain">Domain Adaptation & Shift</a>
-      <a href="#benefits">The 'Sample Efficiency' Advantage</a>
-      <a href="#analogy">The "Kung Fu" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Hierarchical Knowledge</h2>
     <p>Neural networks learn <strong>Hierarchical Features</strong>. The first layers see <strong>Edges</strong>, the middle layers see <strong>Shapes</strong>, and only the final layers see <strong>Specific Objects</strong>. Transfer Learning keeps the "Edges" and "Shapes" knowledge and only replaces the "Specific Object" part.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Academic Credit."</strong> 
+        Think of it as <strong>"Academic Credit."</strong> 
         If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry. You <strong>Transfer</strong> your understanding of math and logic. 
         In ML, a model that saw 100 million generic internet photos already knows what <strong>Shadows</strong> and <strong>Textures</strong> look like. We just teach it to use that knowledge for <strong>MRI Scans</strong>.
       </div>
@@ -185,7 +167,7 @@ print("Views created. Model will now learn if these came from the SAME image.")
     </div>
 
     <h2 id="algorithm">The Transfer Learning Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Knowledge Grafting Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -209,10 +191,10 @@ print("Views created. Model will now learn if these came from the SAME image.")
           <strong>Unfreezing (Optional):</strong> Gradually unfreeze the later base layers and train with a tiny learning rate to "Fine-tune" the results.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Musician's Pivot</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Musician's Pivot</h2>
+    
       <h4>Scenario: A Classical Pianist learning Jazz Improvisation</h4>
       <p>Imagine a pianist who has spent 20 years mastering <strong>Classical Music</strong>. They decide they want to learn <strong>Jazz</strong>. Do they start from scratch?</p>
       
@@ -238,12 +220,12 @@ print("Views created. Model will now learn if these came from the SAME image.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
+          Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (The Head Swap)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
 import torch.nn as nn
 from torchvision import models
@@ -276,22 +258,13 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
       <p>A 4K image has 8 million pixels. That is <strong>Too Much Information</strong>. To understand the image, you don't need the exact color of every pixel; you need the <strong>Identity</strong> of the object. <strong>Representation Learning</strong> (Feature Learning) is the process of compressing raw data into a set of <strong>Meaningful Numbers</strong> (Vectors) that capture the "Soul" of the information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Latent Space</a>
-      <a href="#disentanglement">Disentanglement: Separating Features</a>
-      <a href="#manifold">The Manifold Hypothesis</a>
-      <a href="#vectors">Embeddings: The Currency of AI</a>
-      <a href="#analogy">The "Sketch Artist" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Latent Space</h2>
     <p>A <strong>Representation</strong> is just a point in a "Latent Space." If you take a picture of a <strong>Dog</strong> and a picture of a <strong>Wolf</strong>, their pixel values might be totally different. But in the model's <strong>Latent Space</strong>, they will be very close to each other. Representation learning is about finding the <strong>Mapping</strong> (\(f: X \to Z\)) that honors the semantic truth.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Lossy but Smart Compression."</strong> 
+        Think of it as <strong>"Lossy but Smart Compression."</strong> 
         If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
         Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
       </div>
@@ -323,7 +296,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </div>
 
     <h2 id="algorithm">The Representation Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Feature Extraction Pipeline</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -347,10 +320,10 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
           <strong>Downstream Use:</strong> Use these learned vectors as the "Input" for other models, making them 10x more efficient.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Chef's Taste Profile</h2>
+    
       <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
       <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use <strong>Features</strong>.</p>
       
@@ -376,12 +349,12 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
+          In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (The Bottleneck)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
 import torch.nn as nn
 import torch
@@ -412,20 +385,11 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
     </div>
-  `},a={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
+  `},n={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚀 Modern ML · Similarity</div>
       <h1>Contrastive: Spot the Difference</h1>
       <p>How do you learn what a "Face" is if you don't have labels? You learn by <strong>Comparison</strong>. If I show you two photos of the same person, you know they should look similar in your head. If I show you a person and a car, you know they should look different. <strong>Contrastive Learning</strong> is the art of <strong>Pulling Friends Close</strong> and <strong>Pushing Enemies Away</strong> in latent space.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: InfoNCE Loss</a>
-      <a href="#pairs">Pairs: Positives vs. Negatives</a>
-      <a href="#augmentation">Augmentations: Creating Positives</a>
-      <a href="#triplet">Triplet Loss Mechanics</a>
-      <a href="#analogy">The "Jealous Rival" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: Contrastive Divergence</h2>
@@ -434,7 +398,7 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Social Distancing in Vector Space."</strong> 
+        Think of it as <strong>"Social Distancing in Vector Space."</strong> 
         The "Loss Function" acts like a spring. 
         It <strong>Pulls</strong> similar ideas together until they overlap. 
         It <strong>Pushes</strong> dissimilar ideas apart until they never touch. 
@@ -468,7 +432,7 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </div>
 
     <h2 id="algorithm">The Contrastive Algorithm (SimCLR Style)</h2>
-    <div class="example-box">
+    
       <h4>The Pull-Push Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -492,10 +456,10 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
           <strong>Discrimination:</strong> Simultaneously minimize the similarity between these views and <strong>Every other image</strong> in the batch (The Negatives).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Twin Study</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Twin Study</h2>
+    
       <h4>Scenario: Matching 100 sets of Identical Twins</h4>
       <p>Imagine you have a group of 200 people (100 sets of identical twins) in a dark room. You don't know anyone's name. Your only goal is to organize them.</p>
       
@@ -517,12 +481,12 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Contrastive learning is about <strong>Relative Understanding</strong>. It doesn't care that a point is at exactly (0.5, 0.5). It only cares that (0.5, 0.5) is *closer* to its twin than it is to anything else. This makes it incredibly robust for finding patterns in massive, messy datasets.
+          Contrastive learning is about <strong>Relative Understanding</strong>. It doesn't care that a point is at exactly (0.5, 0.5). It only cares that (0.5, 0.5) is *closer* to its twin than it is to anything else. This makes it incredibly robust for finding patterns in massive, messy datasets.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (Similarity Logic)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Input: Batch of 128 Image Pairs\n[Action] Extracting 512-dim features using ResNet-18...\n[Loss] Similarity(Twins) = 0.98 (High)\n[Loss] Similarity(Strangers) = 0.05 (Low)\n\n[Status] Gradient Step: Pulling twins closer, pushing strangers away.\n[Insight] The latent space is beginning to cluster 'Architecture' vs 'Nature'.">
 import torch
 import torch.nn.functional as F
@@ -549,7 +513,7 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the edge of modern research. You now understand the paradigms powering the world's most advanced AI systems.
     </div>
-  `},n={id:"modern-ml",title:"Modern ML Topics",description:"Beyond traditional architectures—exploring the paradigms of Self-Supervised, Transfer, and Contrastive learning.",keyConcepts:[{title:"Self-Supervision",description:"Learning without human labels by solving innovative 'pretext' puzzles."},{title:"Knowledge Transfer",description:"Repurposing pre-trained global intelligence for specific downstream expertise."},{title:"Latent Embeddings",description:"The art of compressing high-dimensional reality into meaningful semantic vectors."}],introHtml:String.raw`
+  `},a={id:"modern-ml",title:"Modern ML Topics",description:"Beyond traditional architectures—exploring the paradigms of Self-Supervised, Transfer, and Contrastive learning.",keyConcepts:[{title:"Self-Supervision",description:"Learning without human labels by solving innovative 'pretext' puzzles."},{title:"Knowledge Transfer",description:"Repurposing pre-trained global intelligence for specific downstream expertise."},{title:"Latent Embeddings",description:"The art of compressing high-dimensional reality into meaningful semantic vectors."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -595,4 +559,4 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
       </div>
 
     </div>
-  `,sections:[e,t,s,a]};export{n as MODERN_ML_DATA};
+  `,sections:[e,t,s,n]};export{a as MODERN_ML_DATA};

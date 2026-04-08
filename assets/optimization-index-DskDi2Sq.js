@@ -1,22 +1,11 @@
-const e={id:"gradient-descent",title:"Gradient Descent",description:"Gradient Descent is the primary optimization algorithm used to minimize a function by iteratively moving in the direction of steepest descent.",color:"#F44336",html:String.raw`
+const t={id:"gradient-descent",title:"Gradient Descent",description:"Gradient Descent is the primary optimization algorithm used to minimize a function by iteratively moving in the direction of steepest descent.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Optimization · Descent</div>
       <h1>Gradient Descent: The Path Downward</h1>
       <p><strong>Gradient Descent</strong> is the fundamental "Algorithm of Learning." It is how a machine moves from a random guess to a perfectly tuned model. By calculating the <strong>Gradient</strong> (the direction of steepest ascent) and moving the opposite way, we "slide" down the loss surface toward the minimum error.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-parabola">Example 1: The 1D Parabola</a>
-      <a href="#example-surface">Example 2: Sliding Down a 2D Bowl</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>The Gradient</strong>: Understanding \(\nabla f\).</li>
@@ -24,13 +13,13 @@ const e={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, we have a <strong>Loss Function</strong> that measures how wrong our model is. We want to find the parameter weights \(w\) that make this error as small as possible. Since we can't solve for the perfect \(w\) in one step for complex models (like Neural Networks), we take many tiny steps downhill. Each step is guided by the <strong>Gradient</strong>, which tells us exactly which way is "Down."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Imagine you are a <strong>Drunkard on a Foggy Mountain</strong>. 
+        Imagine you are a <strong>Drunkard on a Foggy Mountain</strong>. 
         You want to reach the pub at the bottom, but you can only see the ground directly beneath your feet. 
         You feel the slope with your boots. If the ground slopes up to the North, you take a step South. 
         Repeat this 1,000 times, and eventually, you'll be having a drink at the <strong>Local Minimum</strong>.
@@ -45,8 +34,8 @@ const e={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
       <li><strong>\(\eta\) (Eta)</strong>: The <strong>Learning Rate</strong>. This determines how big of a "step" we take.</li>
     </ul>
 
-    <h2 id="example-parabola">Example 1: The 1D Parabola</h2>
-    <div class="example-box">
+    <h2 id="example-parabola" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The 1D Parabola</h2>
+    
       <h4>Problem: Minimizing \(f(x) = x^2\)</h4>
       <p>Start at \(x = 4\). Use learning rate \(\eta = 0.1\). Find the next two positions.</p>
       
@@ -71,10 +60,10 @@ const e={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
           <strong>Result:</strong> Notice how the steps (\(0.8, 0.64, \dots\)) get smaller as we get closer to the bottom (\(x=0\)). The gradient naturally slows down as the slope flattens.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-surface">Example 2: Sliding Down a 2D Bowl</h2>
-    <div class="example-box">
+    <h2 id="example-surface" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sliding Down a 2D Bowl</h2>
+    
       <h4>Problem: Optimizing Two Weights simultaneously</h4>
       <p>Loss surface: \(J(w_1, w_2) = w_1^2 + 5w_2^2\).</p>
       
@@ -95,9 +84,9 @@ const e={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
           <strong>Intuition:</strong> In 2D, the model will "zig-zag" more aggressively in the direction of the steeper slope. This is why <strong>Feature Scaling</strong> is so important—it makes the bowl "round" instead of an "elongated oval," helping Gradient Descent move straight to the center.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -123,25 +112,14 @@ for i in range(10):
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have 1 billion data points? We can't wait to calculate the gradient for all of them! Explore <strong><a href="#/mathematics/optimization/sgd">Stochastic Gradient Descent (SGD)</a></strong>.
     </div>
-  `},t={id:"sgd",title:"Stochastic Gradient Descent (SGD)",description:"SGD is an iterative method for optimizing an objective function with suitable smoothness properties, using only one (or a few) samples at a time.",color:"#F44336",html:String.raw`
+  `},e={id:"sgd",title:"Stochastic Gradient Descent (SGD)",description:"SGD is an iterative method for optimizing an objective function with suitable smoothness properties, using only one (or a few) samples at a time.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Optimization · SGD</div>
       <h1>Stochastic Gradient Descent: The Noisy Hustle</h1>
       <p><strong>Stochastic Gradient Descent (SGD)</strong> is the engine of Deep Learning. While Batch Gradient Descent waits to see all 1 million data points before taking a single step, SGD takes a step after seeing just one (or a few). It is <strong>Fast</strong>, <strong>Noisy</strong>, and surprisingly effective at avoiding local traps.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-noise">Example 1: The Noisy Gradient</a>
-      <a href="#example-mini">Example 2: Mini-batch Training</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradient Descent</strong>: Understanding \(\nabla f\).</li>
@@ -149,13 +127,13 @@ for i in range(10):
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating the gradient of 1 billion samples takes a lot of time. <strong>SGD</strong> replaces wait with "Noise." Instead of the perfect "True Gradient," we use a "Noisy Estimate" from a single random data point. The estimate is wrong in the short term, but on average, it points exactly the same way as the true gradient. It’s like traveling by <strong>Drunkard's Walk</strong>—you stumble, but you still end up at the bottom of the hill.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
+        Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
         Batch Gradient Descent is like asking everyone in the city and taking the average direction. It's accurate, but it takes forever. 
         SGD is like asking the first person you see and walking that way. They might be wrong, but you're moving <strong>Right Now</strong>. If you ask someone new every 10 meters, eventually you'll reach the restaurant.
       </div>
@@ -169,8 +147,8 @@ for i in range(10):
       <li><strong>Noise Benefit</strong>: Because SGD is noisy, it can "jump out" of small, shallow local minima that would trap the smooth Batch Gradient Descent.</li>
     </ul>
 
-    <h2 id="example-noise">Example 1: The Noisy Gradient</h2>
-    <div class="example-box">
+    <h2 id="example-noise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Noisy Gradient</h2>
+    
       <h4>Problem: Comparing Step Quality</h4>
       <p>Population: [100, 150, 200]. Loss: Aiming for \(\mu\). Correct gradient for \(\mu=100\) is -100.</p>
       
@@ -199,10 +177,10 @@ for i in range(10):
           <strong>Result:</strong> Over time, the sum of SGD steps averages out to the Batch GD step. We trade <strong>Accuracy per Step</strong> for <strong>Speed of Iteration</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-mini">Example 2: Mini-batch Training</h2>
-    <div class="example-box">
+    <h2 id="example-mini" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Mini-batch Training</h2>
+    
       <h4>Problem: The Best of Both Worlds</h4>
       <p>Instead of 1 sample (Pure SGD) or all samples (Batch GD), we use a <strong>Mini-batch</strong> of 32 samples.</p>
       
@@ -223,9 +201,9 @@ for i in range(10):
           <strong>Intuition:</strong> Mini-batch SGD is the "Standard" for all Neural Networks (Adam, RMSProp, etc.). It gives us the <strong>Stability</strong> of Batch GD and the <strong>Computational Speed</strong> of SGD.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -265,18 +243,7 @@ print(f"Final Weights: {w[0]:.4f}")
       <p><strong>Convex Optimization</strong> is the statistical "Insurance Policy." in most Machine Learning problems, finding the absolute best solution is impossible. <strong>Convexity</strong> is the mathematical property that guarantees any local minimum you find is also the <strong>Global Minimum</strong>. It’s why Linear Regression and SVMs are so reliable.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#definition">Convex Sets vs. Convex Functions</a>
-      <a href="#example-bowl">Example 1: The Bowl vs. The Rollercoaster</a>
-      <a href="#example-linear">Example 2: Convex vs. Non-Convex ML</a>
-      <a href="#implementation">Implementation (Python/CVXPY)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradient Descent</strong>: Understanding minimization.</li>
@@ -284,13 +251,13 @@ print(f"Final Weights: {w[0]:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A function is <strong>Convex</strong> if you can draw a straight line between any two points on its curve and that line is always above the curve. If a loss surface is convex, it has no "Hidden Valleys" (Local Minima) that can trap your optimizer. No matter where you start, Gradient Descent will eventually roll down to the same single, perfect solution.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the difference as <strong>"Finding the Restaurant in a Bowl vs. a Maze."</strong> 
+        Think of the difference as <strong>"Finding the Restaurant in a Bowl vs. a Maze."</strong> 
         A <strong>Convex Space</strong> is like a perfectly smooth cereal bowl. If you drop a marble anywhere, it 100% will end up in the center. 
         A <strong>Non-Convex Space</strong> is a maze with dozens of "Fake" restaurants (Local Minima). You might get stuck in one and never know that a better one exists just over the next wall.
       </div>
@@ -302,8 +269,8 @@ print(f"Final Weights: {w[0]:.4f}")
       <li><strong>Convex Function:</strong> The "Epigraph" (the space above the curve) is a convex set.</li>
     </ul>
 
-    <h2 id="example-bowl">Example 1: The Bowl vs. The Rollercoaster</h2>
-    <div class="example-box">
+    <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bowl vs. The Rollercoaster</h2>
+    
       <h4>Problem: Identifying Guaranteed Solutions</h4>
       <p>Compare \(f(x) = x^2\) (Convex) vs. \(f(x) = \sin(x)\) (Non-Convex).</p>
       
@@ -324,10 +291,10 @@ print(f"Final Weights: {w[0]:.4f}")
           <strong>Result:</strong> Deep Learning is almost <strong>never</strong> convex, which is why it's so hard to train. Linear Regression is <strong>always</strong> convex, which is why it works every time.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-linear">Example 2: Convex vs. Non-Convex ML</h2>
-    <div class="example-box">
+    <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Convex vs. Non-Convex ML</h2>
+    
       <h4>Problem: Comparing Two Algorithms</h4>
       <p>Support Vector Machines (SVM) vs. Neural Networks (NN).</p>
       
@@ -348,9 +315,9 @@ print(f"Final Weights: {w[0]:.4f}")
           <strong>Intuition:</strong> Why do we use NN instead of SVM if they aren't convex? Because <strong>Capacity</strong> is more important than <strong>Guarantees</strong>. A chaotic NN can learn features that a "Guaranteed" SVM never could.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/CVXPY)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import cvxpy as cp
 import numpy as np
@@ -381,25 +348,14 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the global minimum is "too good"? What if the model simply memorizes the data? Explore <strong><a href="#/mathematics/optimization/regularization">Regularization (L1 & L2)</a></strong>.
     </div>
-  `},a={id:"regularization",title:"Regularization (L1 / L2)",description:"Regularization is a set of techniques used to reduce overfitting by adding a penalty term to the loss function.",color:"#F44336",html:String.raw`
+  `},s={id:"regularization",title:"Regularization (L1 / L2)",description:"Regularization is a set of techniques used to reduce overfitting by adding a penalty term to the loss function.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Optimization · Penalties</div>
       <h1>Regularization: The Constraints of Simplicity</h1>
       <p><strong>Regularization</strong> is a "Penalty" for being too complex. in most Machine Learning models, weights can grow wildly large as the model tries to memorize every outlier in your training set. <strong>L1 and L2 Regularization</strong> are the mathematical "Brakes" that keep the model honest and its weights small.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">L1 (Lasso) vs. L2 (Ridge)</a>
-      <a href="#example-diamond">Example 1: The L1 Diamond (Sparsity)</a>
-      <a href="#example-sphere">Example 2: The L2 Sphere (Smoothing)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Vector Norms</strong>: Understanding L1 and L2 norms.</li>
@@ -407,13 +363,13 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A machine that is "Too Smart" will often overfit. It will find tiny, meaningless patterns that only exist in your training set (Noise). <strong>Regularization</strong> works by saying: <em>"I want you to minimize the errors, BUT I will penalize you for using large weights."</em> This forces the model to only use the weights that are <strong>Absolutely Necessary</strong> to explain the data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Regularization as <strong>"Anchor Points."</strong> 
+        Think of Regularization as <strong>"Anchor Points."</strong> 
         Without it, your model can sail anywhere to fit the data. 
         With it, the model is anchored to the origin (Zero). 
         You only allow it to sail away from the anchor if the <strong>data is strong enough</strong> to pull it there. It keeps the model "Simple" and prevents it from overcomplicating things.
@@ -427,8 +383,8 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
       <li><strong>L2 (Ridge):</strong> Constraint is \(\sum w_i^2\). It encourages <strong>Small Weights</strong> (distributing the influence across many features).</li>
     </ul>
 
-    <h2 id="example-diamond">Example 1: The L1 Diamond (Sparsity)</h2>
-    <div class="example-box">
+    <h2 id="example-diamond" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The L1 Diamond (Sparsity)</h2>
+    
       <h4>Problem: Feature Selection</h4>
       <p>Imagine you have 1,000 features, but only 10 are actually useful. How do you find them?</p>
       
@@ -449,10 +405,10 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
           <strong>Result:</strong> This is why L1 is used for <strong>Automatic Feature Selection</strong>. It simplifies the model by deleting useless dimensions entirely.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-sphere">Example 2: The L2 Sphere (Smoothing)</h2>
-    <div class="example-box">
+    <h2 id="example-sphere" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The L2 Sphere (Smoothing)</h2>
+    
       <h4>Problem: Stability and Smoothing</h4>
       <p>Data: Two highly correlated features (e.g. Height in cm vs. Height in inches). Which one should get the weight?</p>
       
@@ -473,9 +429,9 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
           <strong>Intuition:</strong> L2 is used for <strong>Stability</strong>. It ensures that no single feature dominates the model too much. This makes the final model much more robust to small changes in any individual feature.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -510,7 +466,7 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the <strong>Linear Algebra</strong>, <strong>Calculus</strong>, <strong>Probability</strong>, <strong>Statistics</strong>, <strong>Information Theory</strong>, and <strong>Optimization</strong> expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.
     </div>
-  `},s={id:"optimization",title:"Optimization",description:"Optimization is the iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",keyConcepts:[{title:"Gradient Descent",description:"Batch updates following the steepest downward path."},{title:"Stochastic Gradients",description:"Frequent, noisy updates using a mini-batch of data."},{title:"Convexity",description:"Guarantees of reaching the global minimum without local traps."},{title:"Regularization",description:"Geometric constraints to prevent model overfitting (L1, L2)."}],introHtml:String.raw`
+  `},a={id:"optimization",title:"Optimization",description:"Optimization is the iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",keyConcepts:[{title:"Gradient Descent",description:"Batch updates following the steepest downward path."},{title:"Stochastic Gradients",description:"Frequent, noisy updates using a mini-batch of data."},{title:"Convexity",description:"Guarantees of reaching the global minimum without local traps."},{title:"Regularization",description:"Geometric constraints to prevent model overfitting (L1, L2)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -556,4 +512,4 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a]};export{s as OPTIMIZATION_DATA};
+  `,sections:[t,e,i,s]};export{a as OPTIMIZATION_DATA};

@@ -1,22 +1,11 @@
-const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE is a method of estimating the parameters of a probability distribution by maximizing a likelihood function.",color:"#D32F2F",html:String.raw`
+const t={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE is a method of estimating the parameters of a probability distribution by maximizing a likelihood function.",color:"#D32F2F",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Statistics · Estimation</div>
       <h1>Maximum Likelihood Estimation: Finding the Best Parameters</h1>
       <p><strong>Maximum Likelihood Estimation (MLE)</strong> is the fundamental way we "train" models. It asks a simple question: "Given this data, what are the most likely parameters that could have produced it?" In ML, this is how we find the optimal weights for our models.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-coin">Example 1: Estimating Coin Bias</a>
-      <a href="#example-gauss">Example 2: Mean of Gaussian Data</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Likelihood vs Probability</strong>: Understanding the difference in perspective.</li>
@@ -24,27 +13,27 @@ const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE i
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Probability allows us to predict data if we know the parameters. <strong>Likelihood</strong> works in reverse—we have the data, and we want to find the <strong>Parameters</strong>. <strong>MLE</strong> is the method of picking the parameter \(\theta\) that makes the observed data as "unsurprising" as possible.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of MLE as <strong>"Reverse Engineering."</strong> 
+        Think of MLE as <strong>"Reverse Engineering."</strong> 
         Imagine you find a machine that occasionally spits out Red or Blue balls. You see it spit out [Red, Red, Blue, Red]. 
         MLE asks: <em>"What is the most likely setting for the 'Red knob' on this machine?"</em> 
         If the knob is at 75%, this sequence is very likely. If the knob is at 10%, this sequence is a miracle. We pick 75%.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For i.i.d data \(x_1, \dots, x_n\), the likelihood is the product of individual probabilities:</p>
     <div class="math-block">$$L(\theta) = \prod_{i=1}^n P(x_i | \theta)$$</div>
     <p>We usually maximize the <strong>Log-Likelihood</strong> (\(\ell(\theta)\)) because it’s mathematically easier (it turns products into sums):</p>
     <div class="math-block">$$\ell(\theta) = \sum_{i=1}^n \log P(x_i | \theta)$$</div>
 
-    <h2 id="example-coin">Example 1: Estimating Coin Bias</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
+    
       <h4>Problem: Finding the "True" Chance of Heads</h4>
       <p>You flip a coin 10 times and get 7 Heads. Estimate the bias \(p\).</p>
       
@@ -73,10 +62,10 @@ const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE i
           <strong>Result:</strong> \(p = 0.7\). Our intuition matches the math: the most likely bias is exactly the observed ratio of successes.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-gauss">Example 2: Mean of Gaussian Data</h2>
-    <div class="example-box">
+    <h2 id="example-gauss" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Mean of Gaussian Data</h2>
+    
       <h4>Problem: Estimating the "Center" of Noise</h4>
       <p>Data: [10, 12, 11]. Assume data is Normal with unknown \(\mu\).</p>
       
@@ -97,9 +86,9 @@ const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE i
           <strong>Intuition:</strong> This is why we use <strong>MSE (Mean Squared Error)</strong> in Regression! It's not just a random choice; it is mathematically derived from the MLE of a Gaussian distribution. Max Likelihood = Min Error.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize
@@ -127,25 +116,14 @@ print(f"Sample Mean: {data.mean():.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we already have a <em>hunch</em> about the parameters before seeing data? Explore <strong><a href="#/mathematics/statistics/map">Maximum a Posteriori (MAP)</a></strong>.
     </div>
-  `},t={id:"map",title:"Maximum a Posteriori (MAP)",description:"MAP is a method of estimating parameters that incorporates 'Prior' knowledge or beliefs into the estimation process.",color:"#D32F2F",html:String.raw`
+  `},e={id:"map",title:"Maximum a Posteriori (MAP)",description:"MAP is a method of estimating parameters that incorporates 'Prior' knowledge or beliefs into the estimation process.",color:"#D32F2F",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📊 Statistics · Bayesian</div>
       <h1>Maximum a Posteriori: Combining Data and Belief</h1>
       <p><strong>Maximum a Posteriori (MAP)</strong> is the "Smarter" sibling of MLE. While MLE only cares about the current data, MAP allows us to input <strong>Prior Beliefs</strong> (e.g., "Weights should be small"). This is the mathematical foundation for <strong>Regularization</strong> in Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-coin">Example 1: Prior Belief about Coin Bias</a>
-      <a href="#example-ridge">Example 2: Ridge & Lasso Regularization</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>MLE</strong>: Understanding Likelihood.</li>
@@ -153,26 +131,26 @@ print(f"Sample Mean: {data.mean():.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>MLE asks: <em>"What parameters fit the data best?"</em> MAP asks: <em>"What parameters fit the data best <strong>AND</strong> make sense based on what I already know?"</em> If your dataset is tiny, MLE can be easily fooled by noise. MAP adds a "Brake" to the process, preventing the model from becoming too overconfident about extreme values.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of MAP as <strong>"Expert Advice."</strong> 
+        Think of MAP as <strong>"Expert Advice."</strong> 
         MLE is like an apprentice who only looks at the first 3 trials. If they see 3 heads, they scream "The coin is 100% rigged!" 
         MAP is like the Expert who says: <em>"I hear you, but my 20 years of experience (the Prior) tells me most coins are 50/50. I'll bet it's actually 60/40."</em> 
         MAP balances the data with your past knowledge.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>From Bayes' Theorem: \(P(\theta | X) \propto P(X | \theta) \cdot P(\theta)\). We maximize the log of this product:</p>
     <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} \left[ \log L(\theta) + \log P(\theta) \right]$$</div>
     <p>Notice how MAP is just <strong>MLE + a Prior Penalty</strong> (\(\log P(\theta)\)).</p>
 
-    <h2 id="example-coin">Example 1: Prior Belief about Coin Bias</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
+    
       <h4>Problem: Damping the Noise</h4>
       <p>Data: 2 Heads, 1 Tail. Bias from MLE is 66%. But your "Prior" is that coins are 50/50.</p>
       
@@ -201,10 +179,10 @@ print(f"Sample Mean: {data.mean():.4f}")
           <strong>Result:</strong> 57%. MAP pulled the wild 66% estimate back toward the 50% reality. It "smoothed" the data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-ridge">Example 2: Ridge & Lasso Regularization</h2>
-    <div class="example-box">
+    <h2 id="example-ridge" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Ridge & Lasso Regularization</h2>
+    
       <h4>Problem: Preventing Weights from Exploding</h4>
       <p>In Linear Regression, if you assume your weights follow a Gaussian prior \(\mathcal{N}(0, \sigma)\), what happens to the objective function?</p>
       
@@ -229,9 +207,9 @@ print(f"Sample Mean: {data.mean():.4f}")
           <strong>Intuition:</strong> This is exactly <strong>Ridge Regression (L2)</strong>! It's not just a trick to stop overfitting; it is the Bayesian decision to assume your weights are probably close to Zero.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize
@@ -266,18 +244,7 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
       <p>The <strong>Bias-Variance Tradeoff</strong> is the mathematical explanation of why our models fail. It decomposes the total error into two competing forces: <strong>Bias</strong> (Simplicity) and <strong>Variance</strong> (Wildness). Finding the "Sweet Spot" between them is the goal of all Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Decomposition</a>
-      <a href="#example-under">Example 1: Underfitting (High Bias)</a>
-      <a href="#example-over">Example 2: Overfitting (High Variance)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>MSE (Mean Squared Error)</strong>: How to measure residuals.</li>
@@ -285,13 +252,13 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If you build a model that is too simple (a straight line for a curvy road), you have <strong>High Bias</strong>—you are consistently wrong in a predictable way. If you build a model that is too complex (a line that touches every single data point), you have <strong>High Variance</strong>—you are reacting to noise, and your predictions will be wild on new data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the tradeoff as <strong>"The Storyteller's Dilemma."</strong> 
+        Think of the tradeoff as <strong>"The Storyteller's Dilemma."</strong> 
         A <strong>High Bias</strong> storyteller summarizes too much ("The hero won"). You miss the details. 
         A <strong>High Variance</strong> storyteller tells you every blade of grass the hero walked on. You can't see the Plot. 
         A <strong>Perfect Model</strong> tells you exactly the "General Lessons" (The Plot) without the noise.
@@ -306,8 +273,8 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
       <li><strong>Irreducible Error:</strong> Fundamental noise in the data (\(\sigma^2\)).</li>
     </ul>
 
-    <h2 id="example-under">Example 1: Underfitting (High Bias)</h2>
-    <div class="example-box">
+    <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
+    
       <h4>Problem: Trying to Fit a Parabola with a Line</h4>
       <p>Data: \(y = x^2\). Model: \(\hat{y} = ax + b\).</p>
       
@@ -328,10 +295,10 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
           <strong>Result:</strong> This model is <strong>Underfitting</strong>. It is too "Opinionated" (BIASED) to learn from the data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-over">Example 2: Overfitting (High Variance)</h2>
-    <div class="example-box">
+    <h2 id="example-over" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Overfitting (High Variance)</h2>
+    
       <h4>Problem: Fitting 5 Points with a 10th-Degree Polynomial</h4>
       <p>Data: [1, 2, 3, 4, 5]. Model: Complex curve passing through all 5 points exactly.</p>
       
@@ -352,9 +319,9 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
           <strong>Intuition:</strong> This model is <strong>Overfitting</strong>. It has high <strong>VARIANCE</strong> because even a tiny change in one of the 5 points would completely change the entire curve. It's too sensitive!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt
@@ -394,19 +361,7 @@ plt.show()
       <p><strong>Hypothesis Testing</strong> is the mathematical framework for making decisions. It asks the critical question: "Is the improvement in my model's accuracy a <strong>Real Signal</strong>, or was I just <strong>Lucky</strong> with this specific dataset?" In Machine Learning, we use these tests to validate our experiments and feature importance.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#process">The 4-Step Process</a>
-      <a href="#example-ttest">Example 1: T-Test (A/B Testing)</a>
-      <a href="#example-chi">Example 2: Chi-Square (Independence)</a>
-      <a href="#example-anova">Example 3: ANOVA (Comparing 3+ Labs)</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Normal, T, and Chi-Square.</li>
@@ -414,13 +369,13 @@ plt.show()
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the assumption that "Nothing happened, it's just noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (the data) is so overwhelming that it's highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your results if the "Nothing happened" assumption were true.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
+        Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
         The Model is <strong>"Innocent"</strong> of having any real effect until proven guilty. 
         The <strong>Evidence</strong> is your Test Data. 
         The <strong>P-Value</strong> is the "Reasonable Doubt." 
@@ -448,8 +403,8 @@ plt.show()
       </div>
     </div>
 
-    <h2 id="example-ttest">Example 1: T-Test (A/B Testing)</h2>
-    <div class="example-box">
+    <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
+    
       <h4>Problem: Does a New UI Increase Clicks?</h4>
       <p>Group A (Old UI) has 5% clicks. Group B (New UI) has 7% clicks. Is the 2% gain "Real"?</p>
       
@@ -470,10 +425,10 @@ plt.show()
           <strong>Result:</strong> If \(p=0.02\), we reject the "No difference" theory. The UI change is 98% likely to be a real improvement.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-chi">Example 2: Chi-Square (Independence)</h2>
-    <div class="example-box">
+    <h2 id="example-chi" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chi-Square (Independence)</h2>
+    
       <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>
       <p>Data: 200 people. Does knowing gender change the probability of purchase?</p>
       
@@ -494,10 +449,10 @@ plt.show()
           <strong>Intuition:</strong> In ML, we use Chi-Square for <strong>Feature Selection</strong>. If a feature and the target label are "Independent," the feature is useless—we drop it from the model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-anova">Example 3: ANOVA (Comparing 3+ Labs)</h2>
-    <div class="example-box">
+    <h2 id="example-anova" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> ANOVA (Comparing 3+ Labs)</h2>
+    
       <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
       <p>You run 10 training sessions with each optimizer. Is there a "Best" one?</p>
       
@@ -518,9 +473,9 @@ plt.show()
           <strong>Result:</strong> ANOVA tells you *if* a difference exists. You then follow up with "Post-hoc" tests to find out exactly which optimizer won.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy import stats
@@ -555,18 +510,7 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
       <p>A <strong>Confidence Interval (CI)</strong> is a mathematical "Safety Net." instead of giving a single point estimate (e.g., "The mean is 5.0"), it gives a range (e.g., "The mean is between 4.8 and 5.2"). In Machine Learning, this tells us exactly how much we should <strong>Trust</strong> our model's predictions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-error">Example 1: Error Bars on Predictions</a>
-      <a href="#example-boot">Example 2: Bootstrapping for UI Latency</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Standard Error</strong>: Standard deviation of the sample mean.</li>
@@ -574,13 +518,13 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A single number is extremely fragile—it can be easily swayed by one outlier in your data. <strong>Confidence Intervals</strong> quantify the <strong>Precision</strong> of your work. A 95% Confidence Interval doesn't mean "The truth is 95% likely to be inside." It means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em></p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Confidence Interval as <strong>"Honesty in Data."</strong> 
+        Think of a Confidence Interval as <strong>"Honesty in Data."</strong> 
         If you predict a house price is $500k, but your interval is [$300k, $700k], your model is saying: <em>"I'm guessing, but don't bet your life on it."</em> 
         If the interval is [$495k, $505k], your model is highly confident. 
         In ML, we want these intervals to be as <strong>Narrow</strong> as possible.
@@ -595,8 +539,8 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
       <li><strong>Standard Error</strong>: \(\frac{\sigma}{\sqrt{n}}\). Notice how larger samples (\(n\)) make the interval smaller/narrower!</li>
     </ul>
 
-    <h2 id="example-error">Example 1: Error Bars on Predictions</h2>
-    <div class="example-box">
+    <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
+    
       <h4>Problem: Finding the Range of Accuracy</h4>
       <p>Your model's mean accuracy is 85% with a Standard Error of 1% across 100 trials. What is the 95% Confidence Interval?</p>
       
@@ -621,10 +565,10 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
           <strong>Result:</strong> Your model isn't just "85% accurate." It is <strong>Statistically Proven</strong> to be between 83% and 87%. You are now communicating like a true scientist.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-boot">Example 2: Bootstrapping for UI Latency</h2>
-    <div class="example-box">
+    <h2 id="example-boot" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bootstrapping for UI Latency</h2>
+    
       <h4>Problem: Measuring 'Average' Speed in the Real World</h4>
       <p>Data: 5 Latency points [10ms, 12ms, 15ms, 200ms (Outlier!), 11ms]. How do we get a robust interval?</p>
       
@@ -645,9 +589,9 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
           <strong>Intuition:</strong> Even with small data or outliers, <strong>Bootstrapping</strong> gives us a reliable confidence interval without assuming the data is Normal. This is the "Gold Standard" for modern data science.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import scipy.stats as stats
@@ -724,4 +668,4 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
       </div>
 
     </div>
-  `,sections:[e,t,i,s,a]};export{o as STATISTICS_DATA};
+  `,sections:[t,e,i,s,a]};export{o as STATISTICS_DATA};

@@ -5,15 +5,6 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
       <p>Imagine you have a giant pile of unlabeled data points. You know there are groups inside, but you don't know where. <strong>k-Means</strong> is the simplest way to find these "hidden tribes" by placing <strong>Magnetic Centers</strong> (Centroids) into the pile and letting them pull in the closest points.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Objective Function</a>
-      <a href="#algorithm">The 4-Step Iteration</a>
-      <a href="#elbow">Selecting 'k': The Elbow Method</a>
-      <a href="#limitations">The "Spherical" Weakness</a>
-      <a href="#analogy">The "Magnetic Centers" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Objective Function</h2>
     <p>k-Means is a <strong>Centroid-Based</strong> algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
     <div class="math-block">$$WCSS = \sum_{j=1}^K \sum_{x \in C_j} \|x - \mu_j\|^2$$</div>
@@ -25,13 +16,13 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Center of Gravity."</strong> 
+        Think of it as <strong>"Finding the Center of Gravity."</strong> 
         The algorithm doesn't know where the clusters are at first. It just makes a <strong>Guess</strong>, calculates the average location of everyone who "joined" that guess, and then <strong>Moves</strong> the center to that average. It repeats this until the centers stop moving.
       </div>
     </div>
 
     <h2 id="algorithm">The k-Means Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Centroid Convergence Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -55,7 +46,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
           <strong>Convergence:</strong> Stop once the centroids no longer move or a maximum iteration limit is hit.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="elbow">Selecting 'k': The Elbow Method</h2>
     <p>How do you know if there are 3 clusters or 10? If you increase \(K\), your error (WCSS) will <strong>always</strong> go down. The goal is to find the "Elbow"—the point where adding more clusters doesn't give you a significantly better fit. It's the point of <strong>Diminishing Returns</strong>.</p>
@@ -74,8 +65,8 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Self-Grouping Party</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Self-Grouping Party</h2>
+    
       <h4>Scenario: Organizing 100 Strangers into 3 Teams</h4>
       <p>Imagine 100 people in a gym. You want them to form 3 compact groups. You don't have a list of who belongs where, so you let geometry do the work.</p>
       
@@ -101,12 +92,12 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> k-Means is <strong>Iterative</strong>. It "Converges" when the flags are perfectly centered in their tribes. It is the most "Geometric" way to find order in chaos.
+          k-Means is <strong>Iterative</strong>. It "Converges" when the flags are perfectly centered in their tribes. It is the most "Geometric" way to find order in chaos.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Finding the Tribes</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 100 observations, 2 features\n[Iteration 0] Placing 3 random centroids...\n[Iteration 5] Inertia dropped from 152.4 to 42.1\n[Convergence] Centroids stabilized at: [[1,2], [10,2], [6,8]]\n[Note] New point at (5,5) assigned to Cluster #2.">
 import numpy as np
 from sklearn.cluster import KMeans
@@ -142,15 +133,6 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
       <p>k-Means is a "Flat" algorithm—it just gives you $K$ groups. <strong>Hierarchical Clustering</strong> is different. It builds a <strong>Dendrogram</strong> (a tree) that shows how every single data point is related to every other. It's the "Family Tree" of your dataset.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Agglomerative vs. Divisive</a>
-      <a href="#linkage">Linkage Methods: Ward, Complete, Single</a>
-      <a href="#dendrogram">The Dendrogram: Visualizing Relationships</a>
-      <a href="#selection">Cutting the Tree</a>
-      <a href="#analogy">The "Family Reunion" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Agglomerative vs. Divisive</h2>
     <p>There are two primary ways to build a hierarchy:</p>
     <ul>
@@ -161,7 +143,7 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Closest Friend."</strong> 
+        Think of it as <strong>"Finding the Closest Friend."</strong> 
         In the Agglomerative approach, everyone in the room finds their <strong>most similar twin</strong> and holds hands. Now there are 50 pairs. Then those pairs find <strong>their</strong> closest pair, and they hold hands, forming 25 groups of 4. Eventually, everyone is holding hands in one giant circle.
       </div>
     </div>
@@ -192,7 +174,7 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </div>
 
     <h2 id="algorithm">The Hierarchical Algorithm (Agglomerative)</h2>
-    <div class="example-box">
+    
       <h4>The Bottom-Up Build</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -216,10 +198,10 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
           <strong>Completion:</strong> Repeat until everyone is merged into one single root cluster.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Family Reunion</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Family Reunion</h2>
+    
       <h4>Scenario: Tracing the Ancestry of 5 Strangers</h4>
       <p>Imagine 5 people at a park. You want to see their "Relationships" based on their DNA. You don't know the families yet, so you start local.</p>
       
@@ -245,12 +227,12 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Hierarchical Clustering's greatest power is <strong>Retrospective Cutting</strong>. You don't have to decide if there are 2 families or 4 at the start. You build the whole tree and then "Cut" it with a horizontal line later to get the granularity you need.
+          Hierarchical Clustering's greatest power is <strong>Retrospective Cutting</strong>. You don't have to decide if there are 2 families or 4 at the start. You build the whole tree and then "Cut" it with a horizontal line later to get the granularity you need.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Agglomerative Linkage</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Calculating initial Proximity Matrix...\n[Merge 1] Merging Point 0 & 1 (Distance: 0.1)\n[Merge 2] Merging Point 2 & 3 (Distance: 0.5)\n[Cutting] Applying forest cut at N=2 Clusters...\n[Result] Cluster Assignments: [A, A, B, B, A]\n[Analysis] Points 0, 1, and 4 successfully grouped despite the gap.">
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
@@ -286,29 +268,20 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
       <p>k-Means assumes your data is in nice, round balls. But real data is <strong>Messy</strong>. It can be shaped like a <strong>Crescent Moon</strong>, a <strong>Spiral</strong>, or have <strong>Random Noise</strong>. <strong>DBSCAN</strong> (Density-Based Spatial Clustering) is the only algorithm that can find "The Crowd" in a chaotic room.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Reachability & Density</a>
-      <a href="#points">The 3 Types: Core, Border, and Noise</a>
-      <a href="#epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</a>
-      <a href="#shapes">Handling Arbitrary Shapes</a>
-      <a href="#analogy">The "Party at the Club" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Reachability & Density</h2>
     <p>DBSCAN defines a cluster as a <strong>High-Density Region</strong>. If you have enough points packed into a small space, you have a cluster. If a point is by itself in a "Silent" region, it is called <strong>Noise</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Crowd."</strong> 
+        Think of it as <strong>"Finding the Crowd."</strong> 
         It's not about how many groups you want; it's about <strong>how many people are standing close together</strong>. 
         If 5 people are within 1 meter of each other, that's a <strong>Core Group</strong>. Anyone standing on the edge of that group is a <strong>Border Member</strong>. Anyone 10 meters away is <strong>Noise</strong>. 
       </div>
     </div>
 
     <h2 id="algorithm">The DBSCAN Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Density-Based Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -332,7 +305,7 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
           <strong>Outlier Removal:</strong> Any point that cannot reach a Core Point is labeled as <strong>Noise</strong>.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</h2>
     <p><strong>Epsilon (\(\epsilon\)):</strong> The maximum distance between two points to be considered neighbors. 
@@ -356,8 +329,8 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Viral Outbreak</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Viral Outbreak</h2>
+    
       <h4>Scenario: Identifying a Hotspot in a Crowded Park</h4>
       <p>Imagine 1,000 people in a park. You want to find where the "Parties" are happening without knowing how many groups exist.</p>
       
@@ -383,12 +356,12 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> DBSCAN is the king of <strong>Anomaly Detection</strong>. It's the only clustering algorithm that has the courage to say: "This point doesn't belong to <strong>any</strong> group." It finds "The Crowd," regardless of its shape.
+          DBSCAN is the king of <strong>Anomaly Detection</strong>. It's the only clustering algorithm that has the courage to say: "This point doesn't belong to <strong>any</strong> group." It finds "The Crowd," regardless of its shape.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Density Reachability</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Parameters: Eps=1.5, MinPts=2\n[Status] Scanning 7 data points...\n[Found] Cluster 0: Dense triplet detected at (1,2)\n[Found] Cluster 1: Dense triplet detected at (10,10)\n[Noise] Point (5,5) marked as Outlier (-1)\n[Assignments] Result: [0, 0, 0, 1, 1, 1, -1]\n[Insight] DBSCAN successfully ignored the lone point without forcing it into a group.">
 import numpy as np
 from sklearn.cluster import DBSCAN
@@ -423,15 +396,6 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
       <p>k-Means is "Hard"—every point belongs 100% to one cluster or 0% to another. <strong>Gaussian Mixture Models (GMM)</strong> are "Soft." They don't just find centers; they find <strong>Overlapping Distribution Clouds</strong>. A point can be 70% Cluster A and 30% Cluster B. It's a more realistic way to model the <strong>Uncertainty</strong> of data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Probability Density</a>
-      <a href="#soft">Soft Clustering: Membership Probability</a>
-      <a href="#em">The Algorithm: Expectation-Maximization (EM)</a>
-      <a href="#covariance">Covariance Types: Spherical, Tied, Diagonal, Full</a>
-      <a href="#analogy">The "Overlapping Fog" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Probability Density</h2>
     <p>GMM assumes that the data is generated from a mixture of <strong>Normal (Gaussian) Distributions</strong>. For every point $x$, we calculate the probability that it belongs to each of the $K$ Gaussians:</p>
     <div class="math-block">$$P(x) = \sum_{k=1}^K \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)$$</div>
@@ -446,14 +410,14 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Guessing Game."</strong> 
+        Think of it as <strong>"The Guessing Game."</strong> 
         Instead of a proctor pointing a finger, imagine the room is filled with <strong>3 Smells</strong> (Coffee, Pizza, and Flowers). 
         You stand in a spot. You smell 80% Coffee and 20% Pizza. You belong mostly to the "Coffee Cluster," but you acknowledge the "Pizza influence." 
       </div>
     </div>
 
     <h2 id="algorithm">The GMM Algorithm (Expectation-Maximization)</h2>
-    <div class="example-box">
+    
       <h4>The Probability Update Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -477,7 +441,7 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
           <strong>Convergence:</strong> Stop when the total probability stops improving significantly.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="covariance">Covariance Types</h2>
     <p>GMM's superpower is its flexibility. It can find <strong>Oblong (Elliptical)</strong> clusters. 
@@ -495,8 +459,8 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Overlapping Fog</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Overlapping Fog</h2>
+    
       <h4>Scenario: Walking through a room with mixed smells</h4>
       <p>Imagine a coffee shop where the smell of Fresh Coffee (Cloud A) and Fresh Cinnamon Rolls (Cloud B) are drifting through the air.</p>
       
@@ -522,12 +486,12 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> GMM is <strong>Generative</strong>. It doesn't just categorize; it tries to learn the <strong>Template</strong> for how each group was created. This allows it to handle overlapping groups and "uncertain" data points that would confuse k-Means.
+          GMM is <strong>Generative</strong>. It doesn't just categorize; it tries to learn the <strong>Template</strong> for how each group was created. This allows it to handle overlapping groups and "uncertain" data points that would confuse k-Means.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Soft Probability Mapping</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Action] Initializing 2 Gaussian Segments (EM Loop)...\n[Status] Calculating responsibilities for the 'Smell' clouds...\n[Converged] Mean A: (0.1, 0.1) | Mean B: (2.9, 2.9)\n[Test Point] (1.5, 1.5) -> Probability Map:\n- Coffee (Cloud 0): 72.1%\n- Cinnamon (Cloud 1): 27.9%\n[Insight] Unlike k-Means, we captured the uncertainty of the overlap.">
 import numpy as np
 from sklearn.mixture import GaussianMixture
@@ -558,19 +522,11 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Clustering is about grouping. But what if we have too many dimensions (features)? Explore <strong><a href="#/machine-learning/unsupervised-learning/dim-reduction-intro">Introduction to Dimensionality Reduction</a></strong>.
     </div>
-  `},i={id:"dim-reduction-intro",title:"Introduction to Dimensionality Reduction",description:"Dimensionality reduction is the process of reducing the number of random variables under consideration by obtaining a set of principal variables.",color:"#bc8cff",html:String.raw`
+  `},n={id:"dim-reduction-intro",title:"Introduction to Dimensionality Reduction",description:"Dimensionality reduction is the process of reducing the number of random variables under consideration by obtaining a set of principal variables.",color:"#bc8cff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧩 Unsupervised · Projection</div>
       <h1>Introduction to Dimensionality Reduction</h1>
       <p>Modern datasets have <strong>Thousands</strong> of features. But many of them are <strong>Redundant</strong>. If you know a person's Height and Weight, you can guess their T-shirt size. You don't need all three. <strong>Dimensionality Reduction</strong> is the art of simplifying the data without losing the <strong>Soul</strong> of the information.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#curse">The Curse of Dimensionality</a>
-      <a href="#feature-selection">Feature Selection vs. Feature Extraction</a>
-      <a href="#projections">Projections: The Shadow Metaphor</a>
-      <a href="#analogy">The "Shadow Puppet" Analogy</a>
     </div>
 
     <h2 id="curse">The Curse of Dimensionality</h2>
@@ -579,14 +535,14 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Busy Signal."</strong> 
+        Think of it as <strong>"The Busy Signal."</strong> 
         Imagine 1,000 people talking at you at the same time. That's 1,000 dimensions. It's just <strong>Noise</strong>. 
         If you find the 3 loudest, most informative people and only listen to them, you can actually <strong>understand the message</strong>. That is Dimensionality Reduction. 
       </div>
     </div>
 
     <h2 id="algorithm">The Reduction Process</h2>
-    <div class="example-box">
+    
       <h4>Simplification Workflow</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -610,7 +566,7 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
           <strong>Validation:</strong> Ensure that the simplified data still performs well in your ML model.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="projections">Projections: The Shadow Metaphor</h2>
     <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some <strong>Loss of Information</strong>. The goal is to find the projection that preserves the most <strong>Variance</strong> or <strong>Local Structure</strong>.</p>
@@ -627,8 +583,8 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Shadow on the Wall</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Shadow on the Wall</h2>
+    
       <h4>Scenario: Describing a 3D Dragon with a 2D Shadow</h4>
       <p>Imagine you have a complex 3D statue. You want to store its data, but your paper only has 2 dimensions. You have to "Squeeze" the complexity.</p>
       
@@ -654,12 +610,12 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Dimension Reduction is about finding the <strong>Best Perspective</strong>. We lose some details (the thickness of the wings), but we keep the patterns that define the object.
+          Dimension Reduction is about finding the <strong>Best Perspective</strong>. We lose some details (the thickness of the wings), but we keep the patterns that define the object.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Filtering the Noise</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Calculating Variance for 4 features...\n[Status] Feature 2 ('Constant_ID') has Variance: 0.0\n[Status] Feature 3 ('Random_Hiss') has Variance: 0.08\n[Action] Dropping Feature 2 (Zero Signal detected).\n[Result] Data reduced from 4D to 3D with ZERO loss of useful information.\n[Insight] Never carry a heavy suitcase full of constant values!">
 import numpy as np
 from sklearn.feature_selection import VarianceThreshold
@@ -687,20 +643,11 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What is the most famous tool for finding that "Best Side"? Explore <strong><a href="#/machine-learning/unsupervised-learning/pca">Principal Component Analysis (PCA)</a></strong>.
     </div>
-  `},a={id:"pca",title:"Principal Component Analysis (PCA)",description:"A statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components.",color:"#bc8cff",html:String.raw`
+  `},i={id:"pca",title:"Principal Component Analysis (PCA)",description:"A statistical procedure that uses an orthogonal transformation to convert a set of observations of possibly correlated variables into a set of values of linearly uncorrelated variables called principal components.",color:"#bc8cff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧩 Unsupervised · Variance</div>
       <h1>Principal Component Analysis (PCA)</h1>
       <p><strong>PCA</strong> is the most widely used Dimensionality Reduction algorithm. It doesn't delete features; it <strong>Squashes</strong> them into a new set of orthogonal axes that maximize the <strong>Variance</strong>. It's the ultimate "Signal vs. Noise" filter for your data.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Covariance & Eigen-decomposition</a>
-      <a href="#variance">The "First" Component: Maximum Variance</a>
-      <a href="#svd">Computational Trick: SVD</a>
-      <a href="#preprocessing">Requirement: Scaling & Mean Centering</a>
-      <a href="#analogy">The "Main Axis" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: Covariance & Eigen-decomposition</h2>
@@ -714,7 +661,7 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Axis of Change."</strong> 
+        Think of it as <strong>"Finding the Axis of Change."</strong> 
         Imagine a <strong>Rugby Ball</strong> floating in the air. 
         It has 3 dimensions (Length, Width, Height). 
         The <strong>1st Principal Component (PC1)</strong> is the <strong>Long Axis</strong>. 
@@ -744,7 +691,7 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     </div>
 
     <h2 id="algorithm">The PCA Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Variance Extraction Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -768,10 +715,10 @@ print(f"Kept Features (Mask): {selector.get_support()}")
           <strong>Projection:</strong> Multiply the original data by these eigenvectors to project it into the new, lower-dimensional space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Most Informative Angle</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Most Informative Angle</h2>
+    
       <h4>Scenario: Photographing a 100-Armed Alien</h4>
       <p>Imagine you meet an Alien with 100 arms and 4 heads. You only have a 2D piece of paper to draw it. Where do you stand?</p>
       
@@ -797,12 +744,12 @@ print(f"Kept Features (Mask): {selector.get_support()}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> PCA is <strong>Lossy</strong>. You throw away the "Thin" dimensions to save space. Usually, keeping the top 2 or 3 components is enough to visualize clusters that were invisible in 100D.
+          PCA is <strong>Lossy</strong>. You throw away the "Thin" dimensions to save space. Usually, keeping the top 2 or 3 components is enough to visualize clusters that were invisible in 100D.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Variance Extraction</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Scaling dataset for Mean=0, Std=1...\n[SVD] Calculating Principal Components...\n[Result] PC1 captures 95.2% of the variance (The Signal)\n[Result] PC2 captures 4.8% of the variance (The Shape)\n[Action] Projected high-dim data into 2D space.\n[Insight] Throwing away PC3 and PC4 results in ~0% loss of useful information.">
 import numpy as np
 from sklearn.decomposition import PCA
@@ -834,20 +781,11 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     <div class="linking-rule">
       <strong>Next Step:</strong> PCA captures "Global" variance. But what if we want to visualize "Local" clusters of points? Explore <strong><a href="#/machine-learning/unsupervised-learning/tsne">t-SNE Visualization</a></strong>.
     </div>
-  `},n={id:"tsne",title:"t-Distributed Stochastic Neighbor Embedding (t-SNE)",description:"A non-linear dimensionality reduction technique well-suited for embedding high-dimensional data for visualization in a low-dimensional space of two or three dimensions.",color:"#bc8cff",html:String.raw`
+  `},a={id:"tsne",title:"t-Distributed Stochastic Neighbor Embedding (t-SNE)",description:"A non-linear dimensionality reduction technique well-suited for embedding high-dimensional data for visualization in a low-dimensional space of two or three dimensions.",color:"#bc8cff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧩 Unsupervised · Visualization</div>
       <h1>t-SNE: The Neighborhood Plot</h1>
       <p>PCA looks for <strong>Global Variance</strong>—the big picture. <strong>t-SNE</strong> looks for <strong>Local Neighborhoods</strong>. It's the standard tool for "Sanity Checking" your high-dimensional data. If your data points are related (like handwritten '7's), t-SNE will huddle them together in a <strong>2D Map</strong>.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Probability Densities</a>
-      <a href="#gaussians">Gaussian-t Comparison</a>
-      <a href="#perplexity">The Perplexity Parameter</a>
-      <a href="#crowding">The "Crowding" Problem</a>
-      <a href="#analogy">The "Friendship Map" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: Probability Densities</h2>
@@ -858,7 +796,7 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Optimizing Friendships."</strong> 
+        Think of it as <strong>"Optimizing Friendships."</strong> 
         Imagine 1,000 people are friends in a 1,000D world. 
         You want to put them all in a <strong>Small Room (2D)</strong>. 
         t-SNE says: "If Person A and B were best friends in the 1,000D world, I'll do whatever it takes to keep them <strong>side-by-side</strong> in the room." 
@@ -887,7 +825,7 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     </div>
 
     <h2 id="algorithm">The t-SNE Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Neighborhood Preserving Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -911,10 +849,10 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
           <strong>Optimization:</strong> Use Gradient Descent to "Nudge" the 2D points until the KL Divergence is minimized.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Crowd Compression</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Crowd Compression</h2>
+    
       <h4>Scenario: Drawing a High School Reunion Seating Chart</h4>
       <p>Imagine 1,000 students from a 100-dimensional social network. You want to seat them at tables in a small 2D room.</p>
       
@@ -940,12 +878,12 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> t-SNE is a <strong>Non-Linear</strong> transformer. It can "Unroll" complex manifolds that PCA would just flatten. But beware: the distance between the "Jock" corner and the "Band" corner means <strong>nothing</strong>. Only the local huddles are real.
+          t-SNE is a <strong>Non-Linear</strong> transformer. It can "Unroll" complex manifolds that PCA would just flatten. But beware: the distance between the "Jock" corner and the "Band" corner means <strong>nothing</strong>. Only the local huddles are real.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Local Topology</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 2 High-Dim Cliques (100D space)\n[Action] Initializing t-SNE (Perplexity=30)...\n[Iter 250] Error: 1.45 (KL-Divergence dropping)\n[Iter 500] Error: 0.82 (Local huddles forming)\n[Result] 100D relationship preserved in 2D space.\n[Discovery] Cluster A and B are now perfectly separated on the map.">
 import numpy as np
 from sklearn.manifold import TSNE
@@ -979,22 +917,13 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
       <p>If t-SNE is the current standard, <strong>UMAP</strong> is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Simplicial Complexes</a>
-      <a href="#manifolds"> Riemannian Manifolds</a>
-      <a href="#global-local">Global vs. Local Structure</a>
-      <a href="#performance">Performance: Speed and Efficiency</a>
-      <a href="#analogy">The "Stretchy Net" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Simplicial Complexes</h2>
     <p>UMAP is built on <strong>Topological Data Analysis (TDA)</strong>. It assumes the data points are samples from a <strong>Manifold</strong> (a smooth surface) that is <strong>Locally Connected</strong>. It builds a "Fuzzy Simplicial Complex" (a complex graph-like structure) of your data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
+        Think of it as <strong>"Connecting the Dots."</strong> 
         Imagine your data points are <strong>Stars in a Galaxy</strong>. 
         <strong>Topology</strong> isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
         UMAP builds a mathematical constellation (the Complex) and then tries to <strong>Flatten it</strong> onto a 2D piece of paper while keeping the "Geometric Essence" intact. 
@@ -1021,7 +950,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     </div>
 
     <h2 id="algorithm">The UMAP Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Topological Flattening</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -1045,10 +974,10 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
           <strong>Layout Refinement:</strong> Use Stochastic Gradient Descent to minimize the Cross-Entropy between the High-D and Low-D graphs.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Topological Net</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Topological Net</h2>
+    
       <h4>Scenario: Unrolling a Crumpled Map of the Stars</h4>
       <p>Imagine your data is a crumpled ball of paper with a drawing on it. You want to see the drawing without tearing the paper or losing the relative distances between cities.</p>
       
@@ -1074,12 +1003,12 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> UMAP is the modern gold standard. It's 10-100x faster than t-SNE, scales to millions of data points, and is mathematically "Cleaner." If you're looking for clusters in 100,000 dimensions, start with UMAP.
+          UMAP is the modern gold standard. It's 10-100x faster than t-SNE, scales to millions of data points, and is mathematically "Cleaner." If you're looking for clusters in 100,000 dimensions, start with UMAP.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: High-Speed Manifold</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Constructing Fuzzy Simplicial Complex (n_neighbors=15)...\n[Action] Initializing Spectral Embedding for global stability...\n[Optimization] SGD Layout Refinement (1.2 seconds total)...\n[Result] 64D Digits dataset compressed to a 2D Topological Map.\n[Discovery] Found 10 distinct 'islands' representing digits 0-9.">
 import umap
 from sklearn.datasets import load_digits
@@ -1110,15 +1039,6 @@ print(f"Status: Local and Global structure successfully preserved.")
       <p>Traditional dimensionality reduction (like PCA) is <strong>Linear</strong>. But the world is <strong>Non-Linear</strong>. <strong>Autoencoders</strong> are neural networks designed to "bottleneck" information. They squeeze data into a tiny <strong>Latent Space</strong> and then try to <strong>reconstruct</strong> it perfectly. If they can rebuild the data from the bottleneck, they've successfully "learned" the essence of the information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Encoder & Decoder</a>
-      <a href="#bottleneck">The Bottleneck: Latent Space</a>
-      <a href="#loss">Reconstruction Loss: The Only Teacher</a>
-      <a href="#variations">Variations: Denoising & Variational (VAE)</a>
-      <a href="#analogy">The "Language Translator" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Encoder & Decoder</h2>
     <p>An Autoencoder is a <strong>Symmetric</strong> neural network with two halves:</p>
     <ul>
@@ -1129,7 +1049,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Summarize."</strong> 
+        Think of it as <strong>"Learning to Summarize."</strong> 
         The Encoder is like a <strong>Professional Notes-Taker</strong> who is forced to summarize a whole book into a <strong>Single Page</strong>. 
         The Decoder is like a <strong>Professor</strong> who has to recreate the whole book from that one page. 
         If the Professor's book is nearly identical to the original, the Notes-Taker has captured the <strong>True Essence</strong> of the story. 
@@ -1145,7 +1065,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     <p><strong>Note:</strong> We are teaching the machine to <strong>reproduce the truth</strong> using minimal resources.</p>
 
     <h2 id="variations">Variations: Denoising & Variational (VAE)</h2>
-    <div class="example-box">
+    
       <h4>Specialized Architectures:</h4>
       
       <div class="algorithm-steps">
@@ -1158,7 +1078,7 @@ print(f"Status: Local and Global structure successfully preserved.")
           <div><strong>VAE (Variational):</strong> Instead of a fixed vector, the bottleneck learns a <strong>Probability Distribution</strong>. This allows it to <strong>generate new data</strong> that has never existed before!</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Lossy Mp3" Analogy</h2>
     <div class="callout success">
@@ -1173,7 +1093,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     </div>
 
     <h2 id="algorithm">The Autoencoder Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Reconstruction Training Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -1197,10 +1117,10 @@ print(f"Status: Local and Global structure successfully preserved.")
           <strong>Optimization:</strong> Update weights to minimize the reconstruction error, forcing the network to learn a better "Squeeze."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Information Funnel</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Information Funnel</h2>
+    
       <h4>Scenario: Summarizing a 1,000-page Novel into 5 Core Themes</h4>
       <p>Imagine you have to explain the entire "Lord of the Rings" trilogy to someone who only has 5 seconds to listen. You can't tell the whole story, so you must capture the "Essence."</p>
       
@@ -1226,12 +1146,12 @@ print(f"Status: Local and Global structure successfully preserved.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Autoencoders are the "Swiss Army Knife" of Unsupervised Learning. They are used for <strong>Anomaly Detection</strong> (if the reconstruction error is too high, the data is weird), <strong>Denoising</strong>, and even <strong>Generating</strong> new data in the case of VAEs.
+          Autoencoders are the "Swiss Army Knife" of Unsupervised Learning. They are used for <strong>Anomaly Detection</strong> (if the reconstruction error is too high, the data is weird), <strong>Denoising</strong>, and even <strong>Generating</strong> new data in the case of VAEs.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Squeeze (Keras)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Input Layer: 784 pixels (Flattened 28x28 Image)\n[Action] Initializing bottleneck layer with 32 neurons (24.5x Squeeze)\n[Training] Epoch 50/50 - Reconstruction Loss (MSE): 0.0041\n[Result] Digit '7' reconstructed with 98.9% anatomical accuracy.\n[Discovery] The 32 summary-integers successfully captured 'Seven-ness'.">
 import tensorflow as tf
 from tensorflow.keras import layers, models
@@ -1309,4 +1229,4 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
       </div>
 
     </div>
-  `,sections:[e,t,s,o,i,a,n,r,l]};export{d as UNSUPERVISED_LEARNING_DATA};
+  `,sections:[e,t,s,o,n,i,a,r,l]};export{d as UNSUPERVISED_LEARNING_DATA};

@@ -12,16 +12,6 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       </div>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#subsets">1. Subsets ($\subseteq$)</a>
-      <a href="#union">2. Union ($\cup$)</a>
-      <a href="#intersection">3. Intersection ($\cap$)</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Table for Data Operations</a>
-      <a href="#ml-journey">Why this matters for ML</a>
-    </div>
-
     <h2 id="subsets">1. Subsets ($\subseteq$)</h2>
     <p>A set $A$ is a <strong>subset</strong> of $B$ if every element in $A$ is also in $B$.</p>
     <div class="callout info">
@@ -74,9 +64,9 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
 
     <hr class="premium-hr">
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Reconciling Customer Lists</h4>
       <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
       
@@ -97,9 +87,9 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
           <strong>Data Insight:</strong> Intersection is the foundation of <strong>Inner Joins</strong>, while Union represents a <strong>Full Outer Join</strong> without duplicates.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
       <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
       
@@ -124,7 +114,7 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
           <strong>ML Usage:</strong> This is a powerful technique for <strong>Data Auditing</strong>—quickly finding rows that exist in your local slice but are missing from the production database.
         </div>
       </div>
-    </div>
+    
 
     <hr class="premium-hr">
 
@@ -169,16 +159,6 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       <div class="premium-hero-badge">🧠 Discrete Math · Logic</div>
       <h1>Mathematical Logic in AI</h1>
       <p>In the field of AI, <strong>Logic</strong> is the framework that allows a machine to "reason." While modern Machine Learning is often probabilistic, Logic is the backbone of <strong>Symbolic AI</strong>, expert systems, and the "planning" modules used in robotics.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#propositional">1. Propositional Logic</a>
-      <a href="#fol">2. First-Order Logic (FOL)</a>
-      <a href="#applications">3. Applications in AI & Software</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Summary</a>
-      <a href="#ml-context">Logic in Data Science</a>
     </div>
 
     <h2 id="propositional">1. Propositional Logic</h2>
@@ -239,7 +219,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     <div class="callout info">
       <div class="callout-icon">📋</div>
       <div class="callout-body">
-        Example: $Symptoms(x, Fever) \land Symptoms(x, Cough) \to HasFlu(x)$
+        <span class="text-green-premium font-bold">Case Study:</span> $Symptoms(x, Fever) \land Symptoms(x, Cough) \to HasFlu(x)$
       </div>
     </div>
 
@@ -249,9 +229,9 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     <h3>C. Knowledge Representation</h3>
     <p>In <strong>Knowledge Graphs</strong>, logic helps infer new facts through transitivity and other logical properties.</p>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Evaluating a Medical Expert System Rule</h4>
       <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
       
@@ -276,9 +256,9 @@ filtered_df = df[df['user_id'].isin(subset_list)]
           <strong>Logic Insight:</strong> In expert systems, finding "False" cases helps debug the knowledge base; it indicates the rule is either too broad or missing a condition.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
       <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
       
@@ -299,7 +279,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
           <strong>Why it matters:</strong> Simplified logic reduces cognitive load for other developers and can prevent "nesting hell" in complex control flows.
         </div>
       </div>
-    </div>
+    
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
@@ -333,16 +313,6 @@ not_nyc = df[~(df['city'] == 'New York')]
       <div class="premium-hero-badge">🔢 Discrete Math · Counting</div>
       <h1>Combinatorics: The Art of Counting</h1>
       <p>In computer science and algorithm analysis, <strong>Combinatorics</strong> is the art of counting. In the AI/ML world, this is how we determine the size of a "search space" and the complexity of our models.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#counting-principle">1. Fundamental Counting Principle</a>
-      <a href="#permutations">2. Permutations (Order Matters)</a>
-      <a href="#combinations">3. Combinations (Order Doesn't Matter)</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Summary</a>
-      <a href="#ml-career">Why this matters for your AI/ML Career</a>
     </div>
 
     <h2 id="counting-principle">1. The Fundamental Counting Principle</h2>
@@ -399,9 +369,9 @@ not_nyc = df[~(df['city'] == 'New York')]
       </div>
     </div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
       <p>A deep learning researcher wants to test 3 distinct layers: <strong>Conv2D (C)</strong>, <strong>MaxPooling (M)</strong>, and <strong>Dropout (D)</strong>. How many ways can they be ordered in a block?</p>
       
@@ -426,9 +396,9 @@ not_nyc = df[~(df['city'] == 'New York')]
           <strong>ML Tip:</strong> While permutations give you the search space, <strong>Neural Architecture Search (NAS)</strong> uses algorithms to find the <em>best</em> permutation without testing all $n!$ combinations.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Feature Subset Selection (Combinations)</h4>
       <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
       
@@ -460,7 +430,7 @@ not_nyc = df[~(df['city'] == 'New York')]
           <strong>Core Theory:</strong> <strong>Combinatorial Explosion</strong> is the "Scaling Nightmare." If you have 100 features, there are more combinations of those features than there are atoms in the universe. This is why <strong>Brute Force</strong> is forbidden in AI; we always need clever shortcuts like <strong>Heuristics</strong> or <strong>Gradients</strong>.
         </div>
       </div>
-    </div>
+    
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>
@@ -510,16 +480,6 @@ combs = list(itertools.combinations(items, 2))
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
       <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like rows and columns, many real-world problems—like social networks and molecule structures—are better represented as a web of connected points.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#components">1. The Core Components</a>
-      <a href="#types">2. Types of Graphs</a>
-      <a href="#matrices">3. Adjacency Matrices</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#ai-ml">4. Why this matters for AI/ML</a>
-      <a href="#implementation">Python Implementation</a>
     </div>
 
     <h2 id="components">1. The Core Components</h2>
@@ -575,9 +535,9 @@ combs = list(itertools.combinations(items, 2))
       </div>
     </div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Building an Adjacency Matrix</h4>
       <p>Represent a simple <strong>Social Network</strong> of 4 users ($A, B, C, D$) where:
       <ul>
@@ -611,9 +571,9 @@ combs = list(itertools.combinations(items, 2))
           <strong>Graph Insight:</strong> Notice the <strong>Symmetry</strong> along the diagonal. For friend $A$ (Row 1), we see connections at Column 2 ($B$) and Column 3 ($C$).
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Calculating Degree Centrality</h4>
       <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
       
@@ -634,7 +594,7 @@ combs = list(itertools.combinations(items, 2))
           <strong>ML Usage:</strong> In GNNs, these degree counts are used for <strong>Normalization</strong> within Message Passing layers to prevent highly connected nodes from overwhelming the feature signals.
         </div>
       </div>
-    </div>
+    
     <ul>
       <li><strong>Knowledge Graphs:</strong> Powering search engines and LLMs by linking facts with semantic meanings.</li>
       <li><strong>Graph Neural Networks (GNNs):</strong> Predicting things like "Will these users become friends?" or "Is this molecule toxic?" using adjacency matrices and node features.</li>
@@ -648,7 +608,7 @@ combs = list(itertools.combinations(items, 2))
       </div>
     </div>
 
-    <h2 id="implementation">Python Implementation (NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

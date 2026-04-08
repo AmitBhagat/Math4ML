@@ -1,22 +1,11 @@
-const e={id:"entropy",title:"Entropy",description:"Entropy is a measure of the average 'Surprise' or 'Uncertainty' in a random variable. It is the fundamental limit of data compression.",color:"#9C27B0",html:String.raw`
+const t={id:"entropy",title:"Entropy",description:"Entropy is a measure of the average 'Surprise' or 'Uncertainty' in a random variable. It is the fundamental limit of data compression.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Info Theory · Entropy</div>
       <h1>Entropy: The Measure of Surprise</h1>
       <p><strong>Entropy</strong> (\(H\)) is the mathematical way we measure <strong>Uncertainty</strong>. It tells us how much "New Information" we receive, on average, from an outcome. If an event is 100% predictable, its entropy is zero—it contains no news.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-coin">Example 1: Fair vs. Biased Coin</a>
-      <a href="#example-surprise">Example 2: Surprise of Rare Events</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Logarithms and PMFs.</li>
@@ -24,26 +13,26 @@ const e={id:"entropy",title:"Entropy",description:"Entropy is a measure of the a
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine you live in a desert where it never rains. If someone says, <em>"It's sunny today,"</em> you have learned <strong>Zero Information</strong>. You already knew that. But if they say, <em>"It's snowing,"</em> you have received a massive amount of information. <strong>Entropy</strong> is the weighted average of this "Surprise" across all possible outcomes.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Entropy as <strong>"How many Yes/No questions do I need to ask?"</strong> 
+        Think of Entropy as <strong>"How many Yes/No questions do I need to ask?"</strong> 
         If a variable has high entropy, it is unpredictable, and you need many questions to figure it out. 
         If it has low entropy, it's a "sure thing." 
         In ML, we want our models to move from high-entropy (guessing) to low-entropy (confident predictions).
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(P(x_i)\), Entropy is:</p>
     <div class="math-block">$$H(X) = -\sum_{i} P(x_i) \log_2 P(x_i)$$</div>
     <p>The unit is <strong>Bits</strong> if using base-2, or <strong>Nats</strong> if using natural log (\(e\)).</p>
 
-    <h2 id="example-coin">Example 1: Fair vs. Biased Coin</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
+    
       <h4>Problem: Comparing Uncertainty Levels</h4>
       <p>Compare the entropy of a fair coin (\(p=0.5\)) vs. a heavily biased coin (\(p=0.9\)).</p>
       
@@ -64,10 +53,10 @@ const e={id:"entropy",title:"Entropy",description:"Entropy is a measure of the a
           <strong>Result:</strong> The fair coin has <strong>Maximum Entropy</strong> (1 bit). The biased coin is more predictable, so it carries less information (~0.47 bits). Prediction is easier when entropy is lower!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-surprise">Example 2: Surprise of Rare Events</h2>
-    <div class="example-box">
+    <h2 id="example-surprise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surprise of Rare Events</h2>
+    
       <h4>Problem: Information in Weather Warnings</h4>
       <p>Outcomes: [Sunny (90%), Rain (9%), Snow (1%)]. Calculate total entropy.</p>
       
@@ -92,9 +81,9 @@ const e={id:"entropy",title:"Entropy",description:"Entropy is a measure of the a
           <strong>Intuition:</strong> Even though the "Snow" event is tiny, its <strong>Information Content</strong> is huge. Entropy balances the impact of a rare event against its low frequency.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -119,25 +108,14 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     <div class="linking-rule">
       <strong>Next Step:</strong> Entropy measures one distribution. But how do we measure the "Distance" between what our model predicts and the truth? Explore <strong><a href="#/mathematics/information-theory/cross-entropy">Cross-Entropy</a></strong>.
     </div>
-  `},t={id:"cross-entropy",title:"Cross-Entropy",description:"Cross-Entropy measures the distance between two probability distributions. It is the most common loss function for training classification models.",color:"#9C27B0",html:String.raw`
+  `},e={id:"cross-entropy",title:"Cross-Entropy",description:"Cross-Entropy measures the distance between two probability distributions. It is the most common loss function for training classification models.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Info Theory · Loss</div>
       <h1>Cross-Entropy: The Price of Disbelief</h1>
       <p><strong>Cross-Entropy</strong> (\(H(P, Q)\)) is the measure of how well a predicted distribution \(Q\) matches the target distribution \(P\). In Machine Learning, we minimize cross-entropy to bridge the gap between our model's guesses and the ground truth.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-target">Example 1: Prediction vs. Target</a>
-      <a href="#example-cat">Example 2: Training a Dog Classifier</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Entropy</strong>: Measuring self-uncertainty.</li>
@@ -145,27 +123,27 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Entropy tells you how much information is in the truth. <strong>Cross-Entropy</strong> tells you how many bits of information you *think* are there because of your model. If your model is wrong, you pay a "penalty" in extra bits. By minimizing this penalty, you force the model's "beliefs" to align with reality.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Cross-Entropy as <strong>"The Wrong Map Penalty."</strong> 
+        Think of Cross-Entropy as <strong>"The Wrong Map Penalty."</strong> 
         The terrain is \(P\) (reality), but you're using map \(Q\) (your model). 
         If your map says "Go Left" but the terrain says "Go Right," you pay a price in wasted time (Entropy). 
         Cross-Entropy is the total cost of using your map. Training a model is just <strong>drawing a better map.</strong>
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a true distribution \(P\) and predicted distribution \(Q\):</p>
     <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
     <p>In binary classification (Cat vs. Not Cat), this simplifies to the famous Binary Cross-Entropy (BCE) loss:</p>
     <div class="math-block">$$L = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]$$</div>
 
-    <h2 id="example-target">Example 1: Prediction vs. Target</h2>
-    <div class="example-box">
+    <h2 id="example-target" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prediction vs. Target</h2>
+    
       <h4>Problem: Measuring the Gap</h4>
       <p>Target: [1, 0] (It is a Cat). Model Guess: [0.8, 0.2]. Calculate Cross-Entropy.</p>
       
@@ -190,10 +168,10 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
           <strong>Result:</strong> 0.22 nats. If the guess was better [0.99, 0.01], the loss would drop to 0.01. If it was worse [0.1, 0.9], the loss would explode to 2.30!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-cat">Example 2: Training a Dog Classifier</h2>
-    <div class="example-box">
+    <h2 id="example-cat" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Training a Dog Classifier</h2>
+    
       <h4>Problem: Exploding Loss on Confident Errors</h4>
       <p>A model is 99% sure an image is a "Dog," but the true label is "Cat."</p>
       
@@ -214,9 +192,9 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
           <strong>Result:</strong> 4.6. This is a very high loss! The model is penalized heavily for being <strong>"Confidently Wrong."</strong> This sends a massive signal during backpropagation for the model to fix its weights immediately.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -248,18 +226,7 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
       <p><strong>Kullback-Leibler (KL) Divergence</strong> (\(D_{KL}(P || Q)\)) measures how much information is lost when we use a "Surrogate" distribution \(Q\) to approximate the true distribution \(P\). In Machine Learning, it's the "Compass" that tells us how far our model's predictions are from reality.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-gap">Example 1: Normal vs. Uniform</a>
-      <a href="#example-compress">Example 2: Information Loss in Compression</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Entropy</strong>: Measuring self-uncertainty.</li>
@@ -267,13 +234,13 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Cross-Entropy is the <strong>Total Cost</strong> of using a model. But some of that cost is fixed (the Entropy of the truth itself). <strong>KL Divergence</strong> is the <strong>Extra Cost</strong>—the pure inefficiency of your model. If KL \(= 0\), your model is a perfect copy of the truth. If KL is high, your model is a poor approximation.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
+        Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
         You expect results to follow pattern \(Q\), but they actually follow \(P\). 
         KL Divergence is the measure of how <strong>surprised</strong> you are on average. 
         Note that it is <strong>Asymmetric</strong>: \(D_{KL}(P || Q) \neq D_{KL}(Q || P)\). 
@@ -281,15 +248,15 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>KL Divergence is defined as the difference between Cross-Entropy and Entropy:</p>
     <div class="math-block">$$D_{KL}(P || Q) = H(P, Q) - H(P)$$</div>
     <p>Explicitly:</p>
     <div class="math-block">$$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$</div>
     <p><strong>Note:</strong> KL Divergence is always \(\ge 0\). (Gibbs' Inequality).</p>
 
-    <h2 id="example-gap">Example 1: Normal vs. Uniform</h2>
-    <div class="example-box">
+    <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
+    
       <h4>Problem: Comparing Two Global Shapes</h4>
       <p>True distribution \(P\) is centralized (Normal). Proxy \(Q\) is flat (Uniform). Calculate the "Gap."</p>
       
@@ -310,10 +277,10 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
           <strong>Result:</strong> KL Divergence provides a single number that summarizes the <strong>Structural Difference</strong> between these two shapes.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-compress">Example 2: Information Loss in Compression</h2>
-    <div class="example-box">
+    <h2 id="example-compress" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Information Loss in Compression</h2>
+    
       <h4>Problem: Downsampling High-Res Predictions</h4>
       <p>You have a 100-class Softmax layer, but you compress it into 10 buckets for efficiency.</p>
       
@@ -334,9 +301,9 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
           <strong>Intuition:</strong> This is a key metric in <strong>Model Distillation</strong>. We try to force a small "Student" model's output to have a low KL Divergence with a large "Teacher" model's output.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 
@@ -409,4 +376,4 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
       </div>
 
     </div>
-  `,sections:[e,t,i]};export{s as INFORMATION_THEORY_DATA};
+  `,sections:[t,e,i]};export{s as INFORMATION_THEORY_DATA};

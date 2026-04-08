@@ -5,28 +5,19 @@ const e={id:"what-is-ml",title:"What is Machine Learning?",description:"Machine 
       <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." Instead of telling a computer exactly how to solve a problem, we give it a massive amount of data and let it figure out the patterns for itself.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: Rules vs. Patterns</a>
-      <a href="#analogy">The "Hidden Recipe" Analogy</a>
-      <a href="#why">Why Use ML?</a>
-      <a href="#workflow">The ML Workflow</a>
-    </div>
-
     <h2 id="theory">Core Theory: Rules vs. Patterns</h2>
     <p>In traditional software engineering, a human writes <strong>Rules</strong> (Logic) and provides <strong>Data</strong> to get an <strong>Answer</strong>. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Answers</strong> (Labels), and the computer produces the <strong>Rules</strong> (The Model).</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> 
         Traditional coding is like writing a very rigid cookbook. 
         Machine Learning is like taking a world-class chef to a 100-course dinner and asking them to <strong>guess the ingredients</strong> just by tasting the food. We don't tell them how to cook; we show them the finished product and let their "palate" (the algorithm) figure out the recipe.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Hidden Recipe</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hidden Recipe</h2>
+    
       <h4>Scenario: Predicting the Price of a House</h4>
       <p>Imagine you have a list of houses, their sizes, and what they sold for. You want to build a program that predicts the price of any new house.</p>
       
@@ -48,12 +39,12 @@ const e={id:"what-is-ml",title:"What is Machine Learning?",description:"Machine 
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Machine Learning is essentially <strong>Statistical Pattern Matching</strong> at scale. If a human can't easily explain "How" they know something (like recognizing a face), it's probably a good candidate for ML.
+          Machine Learning is essentially <strong>Statistical Pattern Matching</strong> at scale. If a human can't easily explain "How" they know something (like recognizing a face), it's probably a good candidate for ML.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Rules vs. Learning</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Traditional] Executing Hardcoded Rule: 500sqft * $400/sqft = $200,000\n[ML] Training LinearRegression on 5,000 samples...\n[ML] Pattern Found: Base price + ($385 * sqft) + neighborhood multiplier.\n\n[Result] Manual Price: $200,000\n[Result] ML Predicted Price: $212,450.67\n[Insight] The ML model picked up on 'Premium' neighborhood stats that the manual rule missed!">
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -64,7 +55,7 @@ def manual_rule(size):
     return size * 400 
 
 # 2. Machine Learning (Pattern Discovery)
-# Examples provided, computer 'discovers' the multiplier
+# <span class="text-green-premium font-bold">Case Study:</span> s provided, computer 'discovers' the multiplier
 sizes = np.array([[1000], [1500], [2000], [2500]])
 # Real prices have noise and neighborhood bonuses
 prices = np.array([410000, 580000, 820000, 1050000])
@@ -119,21 +110,13 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       <p>Not all learning is equal. How a machine learns depends entirely on the <strong>Feedback</strong> it receives. Do we have the correct answers labeled? Do we have no answers at all? Or do we reward the machine for good behavior? These categories define the "Flavors" of ML.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#supervised">Supervised: The Teacher</a>
-      <a href="#unsupervised">Unsupervised: The Explorer</a>
-      <a href="#semi-supervised">Semi-Supervised: The Hybrid</a>
-      <a href="#reinforcement">Reinforcement: The Dog Trainer</a>
-    </div>
-
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
-    <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input example comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
+    <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input <span class="text-green-premium font-bold">Case Study:</span> comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Classroom Teacher</strong>. 
+        Think of it as a <strong>Classroom Teacher</strong>. 
         You give the student a practice test with the answers on the back. The student tries to guess, flips the page, sees they're wrong, and adjusts their brain. Eventually, they learn enough to take the <strong>Final Exam</strong> (New Data) where the answers aren't provided.
       </div>
     </div>
@@ -155,7 +138,7 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> It's like having a <strong>Few Labeled Flashcards</strong>. 
+        It's like having a <strong>Few Labeled Flashcards</strong>. 
         You have 10,000 photos. You (the human) label 100 as "Dogs" and 100 as "Cats." The machine takes that small "Seed of Knowledge" and applies it to the other 9,800 photos by finding things that look like your seeds.
       </div>
     </div>
@@ -172,8 +155,8 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Library Sorting Game</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Library Sorting Game</h2>
+    
       <h4>Scenario: Sorting 10,000 Unlabeled Books from a Room</h4>
       <p>Imagine you are dropped in a messy library with 10,000 books on the floor. No covers, no database. How do you organize them?</p>
       
@@ -195,12 +178,12 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
+          Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Paradigms in Code</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Supervised] Input [1, 1] belongs to Class 'A'.\n[Unsupervised] Clustering 4 points into 2 groups...\n[Unsupervised] Labels assigned: [0, 0, 1, 1]\n\n[Insight] Notice how Supervised predicted a NAME, while Unsupervised just found a GROUP.">
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import KMeans
@@ -237,14 +220,6 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
       <p><strong>Supervised Learning</strong> is the machine equivalent of learning with a tutor. Every data point you feed the model comes with the <strong>"Right Answer"</strong> (the Label). The goal is for the model to learn a general mapping so it can guess the answers for data it has never seen before.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics: Mapping Inputs to Outputs</a>
-      <a href="#regression">Regression: Predicting Infinite Numbers</a>
-      <a href="#classification">Classification: Predicting Categories</a>
-      <a href="#limitations">The "Labeling Tax" (Limitations)</a>
-    </div>
-
     <h2 id="theory">The Mechanics: Mapping Inputs to Outputs</h2>
     <p>In Supervised Learning, we have an input vector \(X\) and a known target \(Y\). We want to find a function \(f\) such that:</p>
     <div class="math-block">$$Y = f(X) + \epsilon$$</div>
@@ -253,13 +228,13 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>"Flashcard Simulator."</strong> 
+        Think of it as a <strong>"Flashcard Simulator."</strong> 
         The machine sees a picture (Input), guesses "Cow" (Output), looks at the back of the card (Label), sees it says "Dog," and slightly tweaks its internal neural weights to be more "Dog-like" next time. Done 10,000 times, it builds a robust mapping.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Flashcard Challenge</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
+    
       <h4>Scenario: Training a Medical Assistant</h4>
       <p>Imagine you have 10,000 X-rays. 5,000 are "Healthy" and 5,000 have "Pneumonia."</p>
       
@@ -281,12 +256,12 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Supervised learning is <strong>Feedback-Driven</strong>. No label = No feedback = No learning.
+          Supervised learning is <strong>Feedback-Driven</strong>. No label = No feedback = No learning.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Regression vs. Classification</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Regression] Predicted House Price: $352,450\n[Classification] Predicted Email: Spam">
 import numpy as np
 from sklearn.linear_model import LinearRegression, LogisticRegression
@@ -313,19 +288,11 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have no labels? How can a machine find patterns on its own? Explore <strong><a href="#/machine-learning/foundation-ml/unsupervised">Unsupervised Learning</a></strong>.
     </div>
-  `},i={id:"unsupervised",title:"Unsupervised Learning",description:"Unsupervised Learning is a type of Machine Learning that looks for previously unknown patterns in a dataset without pre-existing labels.",color:"#FF9800",html:String.raw`
+  `},s={id:"unsupervised",title:"Unsupervised Learning",description:"Unsupervised Learning is a type of Machine Learning that looks for previously unknown patterns in a dataset without pre-existing labels.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Unsupervised</div>
       <h1>Unsupervised Learning: The Pattern Finder</h1>
       <p><strong>Unsupervised Learning</strong> is the machine equivalent of learning by observation. There are no "Teachers" and no "Answers." The machine looks for the <strong>Underlying Structure</strong> of the data. It's about finding out how things are related before we even know what they are.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Concepts: Structure over Labels</a>
-      <a href="#clustering">Clustering: Finding Groups</a>
-      <a href="#dimensionality-reduction">Dimensionality Reduction: Simplifying Space</a>
-      <a href="#analogy">The "Blind Archeologist" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Concepts: Structure over Labels</h2>
@@ -334,13 +301,13 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Secret Society</strong>. 
+        Think of it as a <strong>Secret Society</strong>. 
         You walk into a party where you don't know anyone. You don't have their name tags (Labels). But after 30 minutes, you see that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their behavior.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Secret Society Party</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>
+    
       <h4>Scenario: Crashing a High-Stakes Gala</h4>
       <p>Imagine you walk into a room of 500 people. You don't know anyone's name, job, or origin (No Labels).</p>
       
@@ -362,12 +329,12 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Unsupervised learning is about <strong>Discovery</strong>. It finds patterns in data that you didn't even know were there.
+          Unsupervised learning is about <strong>Discovery</strong>. It finds patterns in data that you didn't even know were there.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Clustering & PCA</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Clustering] Groups found: [0 0 1 1]\n[PCA] 2D Data reduced to 1D: [2.8, -2.8]">
 import numpy as np
 from sklearn.cluster import KMeans
@@ -390,18 +357,11 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have a little bit of help? Explore <strong><a href="#/machine-learning/foundation-ml/semi-supervised">Semi-Supervised Learning</a></strong>.
     </div>
-  `},s={id:"semi-supervised",title:"Semi-Supervised Learning",description:"Semi-Supervised Learning is a type of Machine Learning that uses both labeled and unlabeled data for training.",color:"#9C27B0",html:String.raw`
+  `},i={id:"semi-supervised",title:"Semi-Supervised Learning",description:"Semi-Supervised Learning is a type of Machine Learning that uses both labeled and unlabeled data for training.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Semi-Supervised</div>
       <h1>Semi-Supervised Learning: The Gold Rush</h1>
       <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground. In the real world, most data is unlabeled and "Messy." Labeling is expensive. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to find the value in a mountain of <strong>Unlabeled Dust</strong>.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Smoothing and Manifolds</a>
-      <a href="#example">The "Few High-Impact Samples" Approach</a>
-      <a href="#analogy">The "Foreign City" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: Smoothing and Manifolds</h2>
@@ -410,13 +370,13 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Infection of Knowledge."</strong> 
+        Think of it as <strong>"Infection of Knowledge."</strong> 
         You have 1,000 photos of cats and dogs. You only label 10. The machine looks at the 990 unlabeled photos. It notices that "Photo 11" looks almost exactly like "Labeled Dog 1." It decides to <strong>re-label</strong> Photo 11 as a dog. Now it has 11 dogs to help find more.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Tiny City Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
+    
       <h4>Scenario: Navigating a 1,000-Square-Mile City</h4>
       <p>Imagine you are in a massive city and you only have a <strong>1-page tourist map</strong> (The Labeled Data).</p>
       
@@ -438,12 +398,12 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> SSL is about <strong>Leverage</strong>. It uses a few expensive labels to unlock the value of thousands of free ones.
+          SSL is about <strong>Leverage</strong>. It uses a few expensive labels to unlock the value of thousands of free ones.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Label Propagation</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[SSL] Labeling the mountain of unknown data...\nPredicted Class for unlabeled point [2, 1]: Class 1 (Red)">
 import numpy as np
 from sklearn.semi_supervised import LabelPropagation
@@ -464,19 +424,11 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if there are no labels at all, just a feedback loop? Explore <strong><a href="#/machine-learning/foundation-ml/reinforcement">Reinforcement Learning</a></strong>.
     </div>
-  `},o={id:"reinforcement",title:"Reinforcement Learning",description:"Reinforcement Learning is a type of Machine Learning that trains agents to make sequences of decisions to maximize a cumulative reward.",color:"#F44336",html:String.raw`
+  `},n={id:"reinforcement",title:"Reinforcement Learning",description:"Reinforcement Learning is a type of Machine Learning that trains agents to make sequences of decisions to maximize a cumulative reward.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · RL</div>
       <h1>Reinforcement Learning: The Game Player</h1>
       <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" type of Machine Learning. There is no training data. The machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do this, I'll give you a cookie. If you do that, you'll fall into a pit." The agent learns to survive by <strong>Trial and Error</strong>.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: States, Actions, Rewards</a>
-      <a href="#exploitation">Exploration vs. Exploitation</a>
-      <a href="#example">AlphaZero and Game Logic</a>
-      <a href="#analogy">The "Video Game" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: States, Actions, Rewards</h2>
@@ -485,7 +437,7 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Ride a Bike."</strong> 
+        Think of it as <strong>"Learning to Ride a Bike."</strong> 
         You don't have a labeled dataset of "Sitting on a bike." You have to <strong>Try</strong>. 
         You tilt too far left (Action) and fall (Penalty). You tilt slightly right (Action) and stay upright (Reward). The "Policy" your brain builds is just a mapping of how to move your body to stay balanced.
       </div>
@@ -502,8 +454,8 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Blindfolded Mario</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Blindfolded Mario</h2>
+    
       <h4>Scenario: Crashing through Level 1-1</h4>
       <p>Imagine you are playing Super Mario Bros. for the first time, but you are <strong>blindfolded</strong>. You only have a speaker that beeps.</p>
       
@@ -525,12 +477,12 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> RL is <strong>Action-Focused</strong>. The goal isn't to predict a label, it's to find the sequence of moves that scores the most points.
+          RL is <strong>Action-Focused</strong>. The goal isn't to predict a label, it's to find the sequence of moves that scores the most points.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Simple Q-Learning</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Agent is learning the optimal path...\nOptimal Q-Table (State: Best Action):\nState 0: GO RIGHT\nState 1: GO RIGHT\nState 2: GO RIGHT\nFinal Reward Reached!">
 import numpy as np
 
@@ -564,19 +516,11 @@ for i in range(3):
     <div class="linking-rule">
       <strong>Next Step:</strong> Before we start training, we need to know how to measure our progress. Explore <strong><a href="#/machine-learning/foundation-ml/train-test-split">Training vs. Testing Data</a></strong>.
     </div>
-  `},n={id:"train-test-split",title:"Training vs. Testing Data",description:"To accurately evaluate a Machine Learning model, we must split our data into a Training set and a Test set.",color:"#4A90E2",html:String.raw`
+  `},o={id:"train-test-split",title:"Training vs. Testing Data",description:"To accurately evaluate a Machine Learning model, we must split our data into a Training set and a Test set.",color:"#4A90E2",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Evaluation</div>
       <h1>Training vs. Testing: The Golden Rule</h1>
       <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
-    </div>
-
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Generalization</a>
-      <a href="#split">The Standard 80/20 Split</a>
-      <a href="#contamination">Data Leakage: The Cheating Scandal</a>
-      <a href="#analogy">The "Exam Day" Analogy</a>
     </div>
 
     <h2 id="theory">Theoretical Core: Generalization</h2>
@@ -585,13 +529,13 @@ for i in range(3):
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Exam Day."</strong> 
+        Think of it as <strong>"Exam Day."</strong> 
         If a teacher gives the students the <strong>Exact Questions</strong> that will be on the final exam as "Homework" (Training Data), every student will get a 100%. But they didn't learn Math; they just memorized the answers. A real test uses <strong>New Questions</strong> to see if the students truly understand the subject.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Secret Sommelier</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
+    
       <h4>Scenario: Qualifying as a Master Wine Taster</h4>
       <p>Imagine you are training to be a <strong>Wine Master</strong>. You have a cellar with 100 bottles of wine. How do you prove you've actually learned to taste, rather than just memorized your cellar?</p>
       
@@ -617,12 +561,12 @@ for i in range(3):
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Training data is your <strong>Practice</strong>. Testing data is the <strong>Real World</strong>. If you skip the split, you're just lying to yourself about how good your model is. You must always maintain a "Firewall" between what the model sees to learn and what it sees to be judged.
+          Training data is your <strong>Practice</strong>. Testing data is the <strong>Real World</strong>. If you skip the split, you're just lying to yourself about how good your model is. You must always maintain a "Firewall" between what the model sees to learn and what it sees to be judged.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Partitioning the World</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset contains 1,000 samples and 10 features.\n[Action] Splitting data into 80/20 partitions...\n[Status] Training Set size: 800 samples\n[Status] Test Set size: 200 samples\n\n[Warning] The 200 Test samples are strictly HIDDEN from the training process.">
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_regression
@@ -654,21 +598,13 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       <p>A perfect Machine Learning model is like <strong>Goldilocks</strong>: not too complex, not too simple. <strong>Overfitting</strong> is when the model tries too hard (Memorization). <strong>Underfitting</strong> is when it doesn't try hard enough (Ignorance).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics of Complexity</a>
-      <a href="#overfitting">Overfitting: The Memorizer</a>
-      <a href="#underfitting">Underfitting: The Simpleton</a>
-      <a href="#analogy">The "School Exam" Analogy</a>
-    </div>
-
     <h2 id="theory">The Mechanics of Complexity</h2>
     <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
+        Think of it as <strong>"Connecting the Dots."</strong> 
         If you have 10 data points that roughly form a line: 
         <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
         <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
@@ -676,8 +612,8 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Three History Students</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
+    
       <h4>Scenario: Studying for a 1,000-page History Exam using only 5 Practice Questions</h4>
       <p>Imagine three students trying different strategies to pass the final exam. Their results on the real test determine their "Bias" and "Variance."</p>
       
@@ -703,12 +639,12 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
+          In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Visualizing the Pitfalls</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Fitting models to a curved Sine-Wave dataset...\n[Underfit] Linear: Struggles to even touch the trend. (MSE: 0.45)\n[Overfit] Degree-15: Chases every single noise point. (MSE-Train: 0.01, MSE-Test: 12.5)\n[Balanced] Degree-3: Smoothly follows the curve. (MSE-Test: 0.08)\n\n[Insight] Complexity is a power tool. Use too little and you can't build. Use too much and you destroy the project.">
 import numpy as np
 from sklearn.pipeline import make_pipeline
@@ -745,21 +681,13 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
       <p>Every Machine Learning model's error is made of three things: <strong>Bias</strong>, <strong>Variance</strong>, and <strong>Irreducible Noise</strong>. To build a great model, you have to find the <strong>Goldilocks Balance</strong> between being too "Stubborn" (Bias) and too "Dramatic" (Variance).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#bias">Bias: The Stubborn Model</a>
-      <a href="#variance">Variance: The Over-Sensitive Model</a>
-      <a href="#tradeoff">The Tradeoff Curve</a>
-      <a href="#analogy">The "Bullseye" Analogy</a>
-    </div>
-
     <h2 id="bias">Bias: The Stubborn Model</h2>
     <p><strong>Bias</strong> is the error from <strong>Incorrect Assumptions</strong>. A high-bias model is too simple. It thinks the world is a straight line when it's actually a curve. It "Ignores" the data because its brain isn't powerful enough to see the complexity.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Rigid Professor</strong>. 
+        Think of it as a <strong>Rigid Professor</strong>. 
         They've been teaching the same thing for 40 years. Even when you show them new evidence (the data), they refuse to change their mind. They are <strong>Underfitting</strong> because their internal "Rules" are too strong.
       </div>
     </div>
@@ -770,13 +698,13 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as an <strong>Anxious Student</strong>. 
+        Think of it as an <strong>Anxious Student</strong>. 
         They study so hard that they memorize the specific font and page numbers of the textbook. If the exam font is different, they fail. They are <strong>Overfitting</strong> because they are too reactive to minor details.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Archers of Error</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Archers of Error</h2>
+    
       <h4>Scenario: Trying to hit the Bullseye</h4>
       <p>Imagine four archers shooting at a target. Each represents a different way a machine learning model can fail.</p>
       
@@ -802,12 +730,12 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> You can't reach zero error. Your job as an engineer is to dial down the <strong>Stubbornness</strong> (Bias) without cranking up the <strong>Anxiety</strong> (Variance). If you make the model too complex, it gets anxious (Variance). If you make it too simple, it gets stubborn (Bias).
+          You can't reach zero error. Your job as an engineer is to dial down the <strong>Stubbornness</strong> (Bias) without cranking up the <strong>Anxiety</strong> (Variance). If you make the model too complex, it gets anxious (Variance). If you make it too simple, it gets stubborn (Bias).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Error Decomposition</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating model error profiles...\n[Model A] Simple Linear (Degrees: 1)\n- Result: Stubborn. Predicts a straight line for a sine wave.\n- Classification: High Bias, Low Variance.\n\n[Model B] Over-fit Polynomial (Degrees: 15)\n- Result: Jumpy. Mimics every noise point in the training data.\n- Classification: Low Bias, High Variance.\n\n[Insight] The 'Sweet Spot' is typically a moderate degree (3-5) that captures the bend but ignores the jitter.">
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -846,21 +774,13 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
       <p>If you split your data once (80/20), you're at the mercy of luck. What if that 20% "Test Set" happens to be the easiest data points? <strong>Cross-Validation</strong> is the standard way to ensure your model's performance isn't just a fluke. We rotate the data so every single piece gets to be the "Test Set" at some point.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Variance of Estimates</a>
-      <a href="#k-fold">K-Fold Cross-Validation</a>
-      <a href="#example">The Logic of K=5</a>
-      <a href="#analogy">The "Musical Chairs" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Variance of Estimates</h2>
     <p>A single Train/Test split gives you a single "Snapshot" of accuracy. But accuracy can vary depending on <strong>Which</strong> points are in the test set. Cross-Validation gives you an <strong>Average Accuracy</strong> and a <strong>Standard Deviation</strong>, telling you how much you can actually trust the model's performance.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Musical Chairs for Data."</strong> 
+        Think of it as <strong>"Musical Chairs for Data."</strong> 
         We have 5 chairs (Blocks of data). In every round, 4 chairs are for the "Training" and 1 chair is for the "Test." We repeat the game 5 times, rotating the test chair each time. By the end, every piece of data has had a turn to judge the model.
       </div>
     </div>
@@ -874,8 +794,8 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
       <li><strong>Final Result:</strong> Average the accuracy of all 5 iterations.</li>
     </ul>
 
-    <h2 id="example">Illustrated Example: The Chef's Rotating Audition</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Chef's Rotating Audition</h2>
+    
       <h4>Scenario: Auditioning for a Head Chef Position</h4>
       <p>Instead of one judge tasting one dish (A Single Split), you have 5 groups of judges looking for consistency across different conditions.</p>
       
@@ -901,12 +821,12 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Cross-Validation is the <strong>Bullshit Detector</strong> of ML. If your model gets 99% in one fold but 50% in another, it has just memorized a specific part of the data—it hasn't learned the general principle. Stable models have low variance across folds.
+          Cross-Validation is the <strong>Bullshit Detector</strong> of ML. If your model gets 99% in one fold but 50% in another, it has just memorized a specific part of the data—it hasn't learned the general principle. Stable models have low variance across folds.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Validating with K-Fold</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dividing 500 samples into 5 Folds...\n[Iteration 1] Training folds 2,3,4,5 | Testing fold 1... Accuracy: 84.5%\n[Iteration 2] Training folds 1,3,4,5 | Testing fold 2... Accuracy: 88.2%\n[Iteration 3] Training folds 1,2,4,5 | Testing fold 3... Accuracy: 82.1%\n[Iteration 4] Training folds 1,2,3,5 | Testing fold 4... Accuracy: 85.5%\n[Iteration 5] Training folds 1,2,3,4 | Testing fold 5... Accuracy: 86.8%\n\n[Result] Mean Accuracy: 85.4% (+/- 2.1%)\n[Insight] The low standard deviation (2.1%) proves the model is robust and reliable.">
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
@@ -936,29 +856,21 @@ print(f"Consistency (Std Dev): {scores.std():.3f}")
       <p>There is a famous saying: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm (like a Deep Neural Network) will fail if you give it "Bad" data. <strong>Feature Engineering</strong> is the act of turning raw, noisy numbers into meaningful <strong>Insights</strong> that the machine can easily understand.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics of Representation</a>
-      <a href="#creation">Feature Creation: The Meaning from Raw</a>
-      <a href="#selection">Feature Selection: The Minimalist</a>
-      <a href="#analogy">The "Master Chef" Analogy</a>
-    </div>
-
     <h2 id="theory">The Mechanics of Representation</h2>
     <p>A machine sees data as a <strong>Vector Space</strong>. Your job is to transform the data so that the "Distance" between points actually means something. Feature Engineering isn't about math; it's about <strong>Representing the World</strong> in a way that points the way toward the Answer.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Cooking Prep."</strong> 
+        Think of it as <strong>"Cooking Prep."</strong> 
         The machine is the <strong>Stove</strong>. The data is the <strong>Raw Ingredients</strong>. 
         If you throw a whole, unpeeled potato into the stove, the result is "Garbage." 
         If you peel it, chop it, and season it, you get a <strong>Gourmet Dish</strong>. Feature Engineering is the <strong>Chopping and Seasoning</strong> that happens before the cooking begins.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Gourmet Dish Prep</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Gourmet Dish Prep</h2>
+    
       <h4>Scenario: Prepping the Perfect Salad</h4>
       <p>Imagine the machine is a Master Chef, and your raw data is a pile of unwashed vegetables.</p>
       
@@ -980,12 +892,12 @@ print(f"Consistency (Std Dev): {scores.std():.3f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Model performance is <strong>90% Data, 10% Math</strong>. If you spend time making your features smart, even a simple model will beat a complex one using raw, noisy data.
+          Model performance is <strong>90% Data, 10% Math</strong>. If you spend time making your features smart, even a simple model will beat a complex one using raw, noisy data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Feature Engineering</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Original Data] Columns: ['Year_Built', 'Year_Sold', 'Color_of_Door']\n[Engineered] Dropped 'Color_of_Door' (Irrelevant)\n[Engineered] Created 'Age_at_Sale' (\n[Result] Predictor score improved by 40%!">
 import pandas as pd
 import numpy as np
@@ -1019,21 +931,13 @@ print(df[['Price', 'Age_at_Sale']])
       <p>Imagine your machine is comparing <strong>Weight (in grams)</strong> to <strong>Height (in kilometers)</strong>. A human sees that 1,000g is smaller than 1km, but the machine just sees <strong>1,000</strong> vs. <strong>1</strong>. It will "Think" that weight is 1,000x more important than height. <strong>Feature Scaling</strong> is the art of making every feature speak the same <strong>Numerical Language</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Magnitude vs. Importance</a>
-      <a href="#standardization">Standardization (Z-Score)</a>
-      <a href="#normalization">Normalization (Min-Max)</a>
-      <a href="#analogy">The "Multi-Currency" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Magnitude vs. Importance</h2>
     <p>Algorithms like <strong>Gradient Descent</strong> and <strong>K-Nearest Neighbors</strong> use "Distance" to calculate their updates. If one feature is on a much larger scale than another, the "Gradient" in that direction will be massive, while the other is tiny. This makes the optimization loop slow, unstable, or completely wrong.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Big Fish"</strong>. 
+        Think of it as <strong>"The Big Fish"</strong>. 
         If you have a feature like "House Price" (Millions) and another like "Number of Bedrooms" (1 to 5), the Millions will "Drown Out" the Bedrooms. To the machine, the 2nd bedroom is invisible because it's just a tiny "1" compared to a million. Scaling gives every feature a <strong>Fair Fight</strong>.
       </div>
     </div>
@@ -1048,8 +952,8 @@ print(df[['Price', 'Age_at_Sale']])
     <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
     <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
 
-    <h2 id="example">Illustrated Example: The Multi-Currency Exchange</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Currency Exchange</h2>
+    
       <h4>Scenario: Who is Richer?</h4>
       <p>Imagine comparing the wealth of two people. One has 1 million <strong>Yen</strong>. The other has 10,000 <strong>USD</strong>.</p>
       
@@ -1071,12 +975,12 @@ print(df[['Price', 'Age_at_Sale']])
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> If your features are on different scales (e.g., Age 0-100 vs. Income 0-1,000,000), your machine will "Drown Out" the smaller numbers. Scale your data or your model will be <strong>Numerically Blind</strong>.
+          If your features are on different scales (e.g., Age 0-100 vs. Income 0-1,000,000), your machine will "Drown Out" the smaller numbers. Scale your data or your model will be <strong>Numerically Blind</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Standardization vs. Normalization</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Original] Income: $50,000, Age: 25\n[Min-Max] Income: 0.5, Age: 0.25 (Fair Fight!)\n[Standardized] Income: 1.2Z, Age: -0.4Z\n[Now the machine 'sees' both features with equal importance]">
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
@@ -1103,14 +1007,6 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
       <p>Accuracy is a <strong>Lie</strong>. If 99% of your emails are "Not Spam," and your model just guesses "Not Spam" every single time, it is 99% accurate—but it is <strong>Useless</strong>. <strong>Evaluation Metrics</strong> are the "Scorecards" that tell the real story of how your model behaves.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#matrix">The Confusion Matrix</a>
-      <a href="#classification">Precision, Recall, F1-Score</a>
-      <a href="#regression">Regression: MAE, MSE, R-squared</a>
-      <a href="#analogy">The "Doctor's Diagnosis" Analogy</a>
-    </div>
-
     <h2 id="matrix">The Confusion Matrix</h2>
     <p>A table showing the 4 types of predictions:</p>
     <ul>
@@ -1121,8 +1017,8 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
     </ul>
 
     <h2 id="classification">Precision, Recall, F1-Score</h2>
-    <h2 id="example">Illustrated Example: The Fishing Trip</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>
+    
       <h4>Scenario: Catching Dinner in a Lake</h4>
       <p>Imagine you go fishing in a lake that contains 100 fish and 1,000 old boots.</p>
       
@@ -1144,12 +1040,12 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In a Medical Test, you want 100% <strong>Recall</strong> (don't miss anyone sick). In a Search Engine, you want 100% <strong>Precision</strong> (don't show me irrelevant results). Identify your priority!
+          In a Medical Test, you want 100% <strong>Recall</strong> (don't miss anyone sick). In a Search Engine, you want 100% <strong>Precision</strong> (don't show me irrelevant results). Identify your priority!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Classification & Regression</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Classification] Precision: 0.67, Recall: 1.00\n[Regression] MSE: 124.50, R-squared: 0.92\n[Note: The MSE is low relative to the range, suggesting a good fit]">
 from sklearn.metrics import precision_score, recall_score, mean_squared_error, r2_score
 import numpy as np
@@ -1221,4 +1117,4 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
       </div>
 
     </div>
-  `,sections:[e,t,a,i,s,o,n,r,l,d,h,c,g]};export{p as FOUNDATION_ML_DATA};
+  `,sections:[e,t,a,s,i,n,o,r,l,d,h,c,g]};export{p as FOUNDATION_ML_DATA};
