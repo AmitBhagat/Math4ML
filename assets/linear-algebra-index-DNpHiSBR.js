@@ -23,6 +23,8 @@ const t={id:"vectors",title:"Vectors",description:"A vector is a collection of n
       </div>
     </div>
 
+    <visualizer topic="Vectors" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) in \(\mathbb{R}^n\) is an ordered list of \(n\) real numbers:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
@@ -214,7 +216,7 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.
     </div>
-  `},s={id:"linear-independence",title:"Linear Independence",description:"Linear Independence ensures your vectors aren't redundant. If a vector can be written as a combination of others, it adds no new information.",color:"#FF9800",html:String.raw`
+  `},i={id:"linear-independence",title:"Linear Independence",description:"Linear Independence ensures your vectors aren't redundant. If a vector can be written as a combination of others, it adds no new information.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🏹 Linear Algebra · Linear Independence</div>
       <h1>Linear Independence: Zero Redundancy</h1>
@@ -315,7 +317,7 @@ print(f"Is Independent? {is_independent}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.
     </div>
-  `},i={id:"basis-dimension",title:"Basis and Dimension",description:"A Basis is the minimal set of vectors needed to build a space. Dimension is just the count of vectors in that set.",color:"#9C27B0",html:String.raw`
+  `},s={id:"basis-dimension",title:"Basis and Dimension",description:"A Basis is the minimal set of vectors needed to build a space. Dimension is just the count of vectors in that set.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Linear Algebra · Basis</div>
       <h1>Basis and Dimension</h1>
@@ -338,8 +340,10 @@ print(f"Is Independent? {is_independent}")
       </div>
     </div>
 
+    <visualizer topic="BasisChange" />
+
     <h2 id="dimension">2. Dimension vs. Rank</h2>
-    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For <span class="text-green-premium font-bold">Case Study:</span> , \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
+    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
 
     <h2 id="example-r2" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Standard Basis for ℝ²</h2>
     
@@ -440,6 +444,8 @@ print(f"Dimension of the created space: {dim}")
         Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
       </div>
     </div>
+
+    <visualizer topic="DotProduct" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
@@ -549,6 +555,8 @@ print(f"Dot Product: {dot}")
       </div>
     </div>
 
+    <visualizer topic="VectorNorms" />
+
     <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
     
       <h4>Problem: Comparing Distances for [3, 4]</h4>
@@ -637,6 +645,8 @@ print(f"L2: {l2}, L1: {l1}")
         Instead of calculating the price of one house at a time, you put all the house data into a matrix and multiply it by your weight vector. It’s the "Industrial Scale" version of vector math.
       </div>
     </div>
+
+    <visualizer topic="Matrices" />
 
     <h2 id="operations">Mathematical Operations</h2>
     <p>A matrix \(A \in \mathbb{R}^{m \times n}\) has \(m\) rows and \(n\) columns.</p>
@@ -957,6 +967,8 @@ else:
       </div>
     </div>
 
+    <visualizer topic="Determinants" />
+
     <h2 id="rules">2. Properties & Meaning</h2>
     <ul>
       <li>\(\det(A) > 0\): Space is stretched/shrunk but keeps its orientation.</li>
@@ -1052,6 +1064,8 @@ print(f"Determinant: {det:.2f}")
       </div>
     </div>
 
+    <visualizer topic="Rank" />
+
     <h2 id="rules">2. Properties of Rank</h2>
     <ul>
       <li><strong>Full Rank:</strong> If an \(n \times n\) matrix has \(\text{rank} = n\), it is invertible.</li>
@@ -1146,6 +1160,8 @@ print(f"Matrix Rank: {rank}")
         In ML, we use this to find the "closest" prediction to our real labels.
       </div>
     </div>
+
+    <visualizer topic="Projections" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>The projection of vector \(\mathbf{y}\) onto vector \(\mathbf{u}\) is:</p>
@@ -1246,6 +1262,8 @@ print(f"Shadow of y on u: {proj_y_u}")
         It stays in place while everything else transforms around it.
       </div>
     </div>
+
+    <visualizer topic="Eigenvalues" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
@@ -1448,6 +1466,8 @@ print(f"Is Matrix Positive Definite? {is_pd}")
       </div>
     </div>
 
+    <visualizer topic="SVD" />
+
     <h2 id="formula">2. The SVD Formula</h2>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
     <ul>
@@ -1544,6 +1564,8 @@ print(f"Singular values of A: {s}")
         PCA calculates that perfect "Side View" automatically.
       </div>
     </div>
+
+    <visualizer topic="PCA" />
 
     <h2 id="steps">2. The 5 Steps of PCA</h2>
     <div class="algorithm-steps">
@@ -1694,4 +1716,4 @@ print(f"Reduced Shape: {X_reduced.shape}")
       </div>
 
     </div>
-  `,sections:[t,e,s,i,a,n,o,r,l,d,c,h,p,g,m,v]};export{u as LINEAR_ALGEBRA_DATA};
+  `,sections:[t,e,i,s,a,n,o,r,l,d,c,h,p,g,m,v]};export{u as LINEAR_ALGEBRA_DATA};

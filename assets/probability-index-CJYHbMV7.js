@@ -137,6 +137,8 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
       </div>
     </div>
 
+    <visualizer topic="Distributions" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <ul>
       <li><strong>Probability Mass Function (PMF)</strong>: For Discrete RVs, \(P(X=x)\). The sum of all probabilities must be 1.</li>
@@ -241,6 +243,8 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
         In ML, we use this to find out if features are correlated or if they are "moving" together in predictable ways.
       </div>
     </div>
+
+    <visualizer topic="JointDistributions" />
 
     <h2 id="derivation">Mathematical Definition</h2>
     <ul>
@@ -357,6 +361,8 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
       </div>
     </div>
 
+    <visualizer topic="ConditionalProbability" />
+
     <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
     <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>
@@ -467,6 +473,8 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
         In ML, we love independence because it lets us calculate massive joint probabilities by just <strong>multiplying</strong> them (\(P(A) \times P(B) \times P(C)\)).
       </div>
     </div>
+
+    <visualizer topic="Independence" />
 
     <h2 id="derivation">Mathematical Definition</h2>
     <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
@@ -582,6 +590,8 @@ print(f"P(A) * P(B): {check:.4f}")
       </div>
     </div>
 
+    <visualizer topic="ExpectationVariance" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(p_i\):</p>
     <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>
@@ -693,6 +703,8 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
         In ML, high variance weights mean your model hasn't "converged" and is still stumbling around the solution.
       </div>
     </div>
+
+    <visualizer topic="ExpectationVariance" />
 
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Variance is the <strong>Expected Squared Deviation</strong> from the mean \(\mu\):</p>
@@ -811,6 +823,8 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
       </div>
     </div>
 
+    <visualizer topic="ExpectationVariance" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Let \(X_1, X_2, \dots, X_n\) be independent identically distributed (i.i.d) random variables with mean \(\mu\). The Sample Mean \(\overline{X}_n\) is defined as:</p>
     <div class="math-block">$$\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$</div>
@@ -917,6 +931,8 @@ print(f"Final Average: {running_avg[-1]:.4f}")
         In ML, this is why we can assume that our model's cumulative error is Gaussian.
       </div>
     </div>
+
+    <visualizer topic="CentralLimitTheorem" />
 
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Let \(X_1, X_2, \dots, X_n\) be independent random variables with mean \(\mu\) and variance \(\sigma^2\). As \(n\) becomes large, the distribution of their mean \(\overline{X}_n\) converges to:</p>
@@ -1028,6 +1044,8 @@ plt.show()
         It is the fundamental rule for how a machine "Learns" from experience.
       </div>
     </div>
+
+    <visualizer topic="BayesTheorem" />
 
     <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>

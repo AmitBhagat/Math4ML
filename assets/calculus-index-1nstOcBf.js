@@ -25,6 +25,8 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       </div>
     </div>
 
+    <visualizer topic="Differentiation" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
@@ -131,6 +133,8 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
         This is how a neural network isolates exactly which of its millions of weights is causing the most error.
       </div>
     </div>
+
+    <visualizer topic="PartialDerivatives" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y)\), the partial derivative with respect to \(x\) is defined by the limit where <strong>only \(x\)</strong> receives a nudge:</p>
@@ -243,6 +247,8 @@ print(f"Exact derivative (2x): {2*x_val}")
         Without this compass, training a neural network would just be blind guessing.
       </div>
     </div>
+
+    <visualizer topic="Gradient" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>For a scalar function \(f(x, y, \dots, z)\), the gradient \(\nabla f\) is a vector of its first-order partial derivatives:</p>
@@ -362,6 +368,8 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
         In ML, this is why we can train 100-layer "Deep" networks: we just keep multiplying the local gradients backwards!
       </div>
     </div>
+
+    <visualizer topic="ChainRule" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
@@ -483,6 +491,8 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
       </div>
     </div>
 
+    <visualizer topic="JacobianHessian" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(\mathbf{f}(\mathbf{x}) = [f_1, f_2, \dots, f_m]^T\) of input \(\mathbf{x} = [x_1, x_2, \dots, x_n]^T\), the Jacobian is:</p>
     <div class="math-block">$$ \mathbf{J} = \begin{bmatrix} 
@@ -603,6 +613,8 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
         If it's a saddle, you're at a "Switchback."
       </div>
     </div>
+
+    <visualizer topic="JacobianHessian" />
 
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
@@ -981,9 +993,12 @@ print(f"Value at Min: {res.fun}")
         <ul>
           <li><strong>Indefinite Integral</strong>: Finds the "Antiderivative"—the general form of the accumulation function.</li>
           <li><strong>Definite Integral</strong>: Calculates the actual "Net Area" between two specific points.</li>
+          <li><strong>Visualizing the Area Under the Curve:</strong></li>
         </ul>
       </div>
     </div>
+
+    <visualizer topic="AreaUnderCurve" />
 
     <h2 id="derivation">Formal Definition</h2>
 
@@ -1072,7 +1087,6 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <visualizer topic="AreaUnderCurve" />
     <ul>
       <li><strong>Expectation and Variance</strong>: Computing the average value of a continuous distribution: $E[X] = \int x f(x) \, dx$.</li>
       <li><strong>Bayesian Inference</strong>: Calculating the "Evidence" (the denominator in Bayes' Rule) often requires integrating over all possible parameter values.</li>
