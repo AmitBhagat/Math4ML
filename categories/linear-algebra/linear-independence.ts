@@ -42,9 +42,20 @@ export const linearIndependenceSection: TopicSection = {
       <h4>Problem: Identifying Noise</h4>
       <p>Are \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) independent?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Look for a scaling factor.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(\mathbf{v}_2 = 2 \times \mathbf{v}_1\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> \(\mathbf{v}_2\) is just a double of \(\mathbf{v}_1\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Look for a scaling factor.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculate:</strong> \(\mathbf{v}_2 = 2 \times \mathbf{v}_1\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> \(\mathbf{v}_2\) is just a double of \(\mathbf{v}_1\).</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>
@@ -59,9 +70,20 @@ export const linearIndependenceSection: TopicSection = {
       <h4>Problem: Checking ℝ² Independence</h4>
       <p>Are \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) independent?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Equation:</strong> \(c_1[1, 0] + c_2[0, 1] = [0, 0]\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Solve:</strong> \(c_1 = 0, c_2 = 0\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> There is <strong>no other way</strong> to get zero except by using zero.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Equation:</strong> \(c_1[1, 0] + c_2[0, 1] = [0, 0]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Solve:</strong> \(c_1 = 0, c_2 = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> There is <strong>no other way</strong> to get zero except by using zero.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

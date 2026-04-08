@@ -46,8 +46,16 @@ export const matrixRankSection: TopicSection = {
       <h4>Problem: Finding the Hidden Dimension</h4>
       <p>For \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \\ 3 & 6 \end{bmatrix}\), find the rank.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Rows:</strong> Row 2 is \(2 \times \text{Row 1}\). Row 3 is \(3 \times \text{Row 1}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Count Unique:</strong> Only Row 1 is independent.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Rows:</strong> Row 2 is \(2 \times \text{Row 1}\). Row 3 is \(3 \times \text{Row 1}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Count Unique:</strong> Only Row 1 is independent.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -62,8 +70,16 @@ export const matrixRankSection: TopicSection = {
       <h4>Problem: Checking for Invertibility</h4>
       <p>Is \(A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\) full rank?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> These are the standard basis vectors for \(\mathbb{R}^2\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Check Independence:</strong> Neither is a multiple of the other.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> These are the standard basis vectors for \(\mathbb{R}^2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Check Independence:</strong> Neither is a multiple of the other.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

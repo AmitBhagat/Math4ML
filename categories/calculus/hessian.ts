@@ -58,11 +58,28 @@ export const hessianSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the Hessian of \(f(x, y) = x^2 + 5xy + 3y^2\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Gradient:</strong> \(\nabla f = [2x + 5y, 5x + 6y]\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Second w.r.t \(x\):</strong> \(\frac{\partial}{\partial x}(2x + 5y) = 2\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Cross w.r.t \(y, x\):</strong> \(\frac{\partial}{\partial y}(2x + 5y) = 5\).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Second w.r.t \(y\):</strong> \(\frac{\partial}{\partial y}(5x + 6y) = 6\).</div></div>
-      <div class="step-box"><span class="step-num">5</span><div><strong>Resulting Matrix:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 5 \\ 5 & 6 \end{bmatrix}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Gradient:</strong> \(\nabla f = [2x + 5y, 5x + 6y]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Second w.r.t \(x\):</strong> \(\frac{\partial}{\partial x}(2x + 5y) = 2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Cross w.r.t \(y, x\):</strong> \(\frac{\partial}{\partial y}(2x + 5y) = 5\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Second w.r.t \(y\):</strong> \(\frac{\partial}{\partial y}(5x + 6y) = 6\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">5</span>
+          <div><strong>Resulting Matrix:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 5 \\ 5 & 6 \end{bmatrix}\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -77,8 +94,16 @@ export const hessianSection: TopicSection = {
       <h4>Problem: Taking a "Full Step" toward the Minimum</h4>
       <p>Given the Gradient \(\mathbf{g}\) and Hessian \(\mathbf{H}\), how does a smart optimizer take a step?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Newton's Update:</strong> \(\mathbf{x}_{new} = \mathbf{x}_{old} - \mathbf{H}^{-1}\mathbf{g}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Interpret:</strong> We aren't just moving opposite to the gradient; we are <strong>scaling</strong> the step size based on the inverse curvature.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Newton's Update:</strong> \(\mathbf{x}_{new} = \mathbf{x}_{old} - \mathbf{H}^{-1}\mathbf{g}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Interpret:</strong> We aren't just moving opposite to the gradient; we are <strong>scaling</strong> the step size based on the inverse curvature.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

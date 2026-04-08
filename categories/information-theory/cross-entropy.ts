@@ -55,9 +55,20 @@ export const crossEntropySection: TopicSection = {
       <h4>Problem: Measuring the Gap</h4>
       <p>Target: [1, 0] (It is a Cat). Model Guess: [0.8, 0.2]. Calculate Cross-Entropy.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(P = [1, 0], Q = [0.8, 0.2]\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Log Guess:</strong> \(\log(0.8) \approx -0.22, \log(0.2) = -1.60\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Sum:</strong> \(H = -(1 \times -0.22 + 0 \times -1.60) = 0.22 \text{ nats}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(P = [1, 0], Q = [0.8, 0.2]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Log Guess:</strong> \(\log(0.8) \approx -0.22, \log(0.2) = -1.60\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Sum:</strong> \(H = -(1 \times -0.22 + 0 \times -1.60) = 0.22 \text{ nats}\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,8 +83,16 @@ export const crossEntropySection: TopicSection = {
       <h4>Problem: Exploding Loss on Confident Errors</h4>
       <p>A model is 99% sure an image is a "Dog," but the true label is "Cat."</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Target \(P(\text{Cat})=1\). Model \(Q(\text{Cat})=0.01\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> \(H = -1 \log(0.01) \approx 4.6\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Target \(P(\text{Cat})=1\). Model \(Q(\text{Cat})=0.01\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculation:</strong> \(H = -1 \log(0.01) \approx 4.6\).</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>

@@ -55,8 +55,16 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <h4>Problem: Tracking Profit over Time</h4>
       <p>A casino game has a 51% chance for the house to win $1 and a 49% chance to lose $1.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Expectation (\(\mu\)):</strong> \((1 \times 0.51) + (-1 \times 0.49) = 0.02\). The house expects to make 2 cents per game.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>LLN:</strong> If they play 1,000,000 games, they will almost certainly be within a tiny fraction of $20,000 profit.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Expectation (\(\mu\)):</strong> \((1 \times 0.51) + (-1 \times 0.49) = 0.02\). The house expects to make 2 cents per game.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>LLN:</strong> If they play 1,000,000 games, they will almost certainly be within a tiny fraction of $20,000 profit.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,8 +79,16 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <h4>Problem: Measuring Error Stability</h4>
       <p>Data: Errors are drawn from a distribution with \(\mu = 0\) and \(\sigma = 10\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Small Sample (n=5):</strong> Average error might be 5.2. (Looks bad!).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Large Sample (n=10,000):</strong> Average error will be something like 0.001.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Small Sample (n=5):</strong> Average error might be 5.2. (Looks bad!).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Large Sample (n=10,000):</strong> Average error will be something like 0.001.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

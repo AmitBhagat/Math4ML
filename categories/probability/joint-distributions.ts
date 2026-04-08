@@ -60,8 +60,16 @@ export const jointDistributionsSection: TopicSection = {
         <tr><th>X=1 (Click)</th><td>0.05</td><td>0.25</td></tr>
       </table>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Find the probability that a customer clicks <strong>and</strong> purchases. \(P(1, 1) = 0.25\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Summing:</strong> The total must be 1: \(0.6 + 0.1 + 0.05 + 0.25 = 1.0\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Find the probability that a customer clicks <strong>and</strong> purchases. \(P(1, 1) = 0.25\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Summing:</strong> The total must be 1: \(0.6 + 0.1 + 0.05 + 0.25 = 1.0\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -76,8 +84,16 @@ export const jointDistributionsSection: TopicSection = {
       <h4>Problem: Finding the Overall Click-Rate</h4>
       <p>Given the table above, what is the probability that a customer clicks, regardless of whether they buy?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Formula:</strong> \(P(X=1) = P(1, 0) + P(1, 1)\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(0.05 + 0.25 = 0.30\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Formula:</strong> \(P(X=1) = P(1, 0) + P(1, 1)\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculate:</strong> \(0.05 + 0.25 = 0.30\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

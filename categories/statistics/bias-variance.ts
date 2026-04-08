@@ -57,8 +57,16 @@ export const biasVarianceSection: TopicSection = {
       <h4>Problem: Trying to Fit a Parabola with a Line</h4>
       <p>Data: \(y = x^2\). Model: \(\hat{y} = ax + b\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> No matter how you tune \(a\) and \(b\), the "Linear" assumptions can't capture the "Curved" truth.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Result:</strong> High Error on both training <strong>and</strong> testing sets.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> No matter how you tune \(a\) and \(b\), the "Linear" assumptions can't capture the "Curved" truth.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Result:</strong> High Error on both training <strong>and</strong> testing sets.</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>
@@ -73,8 +81,16 @@ export const biasVarianceSection: TopicSection = {
       <h4>Problem: Fitting 5 Points with a 10th-Degree Polynomial</h4>
       <p>Data: [1, 2, 3, 4, 5]. Model: Complex curve passing through all 5 points exactly.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The model has <strong>Zero Error</strong> on the training set. It captures every random wiggle.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Predict:</strong> When you give it a 6th point, the curve swings wildly off-target.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> The model has <strong>Zero Error</strong> on the training set. It captures every random wiggle.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Predict:</strong> When you give it a 6th point, the curve swings wildly off-target.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -45,8 +45,16 @@ export const matricesSection: TopicSection = {
       <h4>Problem: Visualizing Pixels</h4>
       <p>Represent a 2x2 grayscale image where the top-left pixel is white (255), bottom-right is black (0), and others are gray (128).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Rows/Cols:</strong> Two rows, two columns.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Fill Values:</strong> \(A = \begin{bmatrix} 255 & 128 \\ 128 & 0 \end{bmatrix}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Rows/Cols:</strong> Two rows, two columns.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Fill Values:</strong> \(A = \begin{bmatrix} 255 & 128 \\ 128 & 0 \end{bmatrix}\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -61,9 +69,20 @@ export const matricesSection: TopicSection = {
       <h4>Problem: Pivoting Features</h4>
       <p>A dataset \(D = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) has 2 samples (rows) and 2 features (cols). Find \(D^T\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Rotate:</strong> Turn the first row \([1, 2]\) into the first column.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Repeat:</strong> Turn the second row \([3, 4]\) into the second column.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(D^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Rotate:</strong> Turn the first row \([1, 2]\) into the first column.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Repeat:</strong> Turn the second row \([3, 4]\) into the second column.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Result:</strong> \(D^T = \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix}\).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

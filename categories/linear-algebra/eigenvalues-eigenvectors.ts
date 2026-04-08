@@ -46,9 +46,20 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       <h4>Problem: Identifying Eigenvalues for a Diagonal Matrix</h4>
       <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the eigenpairs.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Scaling is 3x on x and 2x on y.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Check:</strong> Multiplying \([1, 0]\) gives \([3, 0]\). Direct 3x scale.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> Multiplying \([0, 1]\) gives \([0, 2]\). Direct 2x scale.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Scaling is 3x on x and 2x on y.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Check:</strong> Multiplying \([1, 0]\) gives \([3, 0]\). Direct 3x scale.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> Multiplying \([0, 1]\) gives \([0, 2]\). Direct 2x scale.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -62,9 +73,20 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Solxing for λ of A = [[4, 1], [2, 3]]</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Set up:</strong> \(\det(A - \lambda I) = (4-\lambda)(3-\lambda) - 2 = 0\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Factor:</strong> \(\lambda^2 - 7\lambda + 10 = 0 \to (\lambda - 5)(\lambda - 2) = 0\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(\lambda = 5, 2\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Set up:</strong> \(\det(A - \lambda I) = (4-\lambda)(3-\lambda) - 2 = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Factor:</strong> \(\lambda^2 - 7\lambda + 10 = 0 \to (\lambda - 5)(\lambda - 2) = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Result:</strong> \(\lambda = 5, 2\).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -87,8 +87,16 @@ export const setTheorySection: TopicSection = {
       <h4>Problem: Reconciling Customer Lists</h4>
       <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -102,9 +110,20 @@ export const setTheorySection: TopicSection = {
       <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
       <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

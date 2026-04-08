@@ -52,8 +52,16 @@ export const dotProductSection: TopicSection = {
       <h4>Problem: Comparing Sentiments</h4>
       <p>Compare \(\mathbf{v}_1 = [1, 1]\) (Positive) and \(\mathbf{v}_2 = [1, -1]\) (Negative).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Dot Product:</strong> \((1 \times 1) + (1 \times -1) = 0\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Interpretation:</strong> The dot product is zero. These two vectors have no overlap.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Calculate Dot Product:</strong> \((1 \times 1) + (1 \times -1) = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Interpretation:</strong> The dot product is zero. These two vectors have no overlap.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -68,8 +76,16 @@ export const dotProductSection: TopicSection = {
       <h4>Problem: Similarity of [3, 4] and [4, 3]</h4>
       <p>Are these two vectors pointing in roughly the same direction?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Summing:</strong> \((3 \times 4) + (4 \times 3) = 12 + 12 = 24\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Result:</strong> High positive number.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Summing:</strong> \((3 \times 4) + (4 \times 3) = 12 + 12 = 24\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Result:</strong> High positive number.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

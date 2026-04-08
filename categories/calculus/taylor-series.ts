@@ -55,9 +55,20 @@ export const taylorSeriesSection: TopicSection = {
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>
       <p>Estimate \(e^{0.1}\) using a Taylor expansion centered at \(a = 0\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(f(x) = e^x, f(0) = 1, f'(0) = 1\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Linear Guess:</strong> \(f(0.1) \approx 1 + 1(0.1 - 0) = 1.1\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> Exact value is ~1.105.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(f(x) = e^x, f(0) = 1, f'(0) = 1\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Linear Guess:</strong> \(f(0.1) \approx 1 + 1(0.1 - 0) = 1.1\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> Exact value is ~1.105.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,10 +83,24 @@ export const taylorSeriesSection: TopicSection = {
       <h4>Problem: Finding the "Bowl" near our current weights</h4>
       <p>Given \(L(w) = w^4\) at \(w = 1\), find the quadratic approximation (\(n=2\)).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Value:</strong> \(L(1) = 1\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>First Deriv:</strong> \(4w^3 \to 4\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Second Deriv:</strong> \(12w^2 \to 12\).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Expansion:</strong> \(P_2(w) = 1 + 4(w-1) + \frac{12}{2}(w-1)^2 = 1 + 4(w-1) + 6(w-1)^2\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Value:</strong> \(L(1) = 1\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>First Deriv:</strong> \(4w^3 \to 4\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Second Deriv:</strong> \(12w^2 \to 12\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Expansion:</strong> \(P_2(w) = 1 + 4(w-1) + \frac{12}{2}(w-1)^2 = 1 + 4(w-1) + 6(w-1)^2\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

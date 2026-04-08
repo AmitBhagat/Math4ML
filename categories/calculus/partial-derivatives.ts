@@ -54,9 +54,20 @@ export const partialDerivativesSection: TopicSection = {
       <h4>Problem: Finding Slopes on \(f(x, y) = x^2 + y^2\)</h4>
       <p>Evaluate the partial derivatives at the point \((1, 2)\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Differentiate w.r.t \(x\):</strong> Treat \(y^2\) as a constant. Derivative of \(x^2 + \text{constant}\) is \(2x\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Differentiate w.r.t \(y\):</strong> Treat \(x^2\) as a constant. Derivative is \(2y\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Evaluate:</strong> At \((1, 2)\) \(\to \frac{\partial f}{\partial x} = 2(1) = 2\) and \(\frac{\partial f}{\partial y} = 2(2) = 4\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Differentiate w.r.t \(x\):</strong> Treat \(y^2\) as a constant. Derivative of \(x^2 + \text{constant}\) is \(2x\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Differentiate w.r.t \(y\):</strong> Treat \(x^2\) as a constant. Derivative is \(2y\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Evaluate:</strong> At \((1, 2)\) \(\to \frac{\partial f}{\partial x} = 2(1) = 2\) and \(\frac{\partial f}{\partial y} = 2(2) = 4\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,8 +82,16 @@ export const partialDerivativesSection: TopicSection = {
       <h4>Problem: Evaluating the Impact of Features</h4>
       <p>A simple model predicts house prices: \(P = 50x + 20y + 10\), where \(x\) is sq-footage and \(y\) is year-built. Calculate the "Partial Impact" of sq-footage.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> We want to know how much one unit of \(x\) moves the price, ignoring the year built.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Differentiate w.r.t \(x\):</strong> \(\frac{\partial P}{\partial x} = \frac{\partial}{\partial x}(50x) + \frac{\partial}{\partial x}(20y) + \frac{\partial}{\partial x}(10) = 50 + 0 + 0 = 50\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> We want to know how much one unit of \(x\) moves the price, ignoring the year built.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Differentiate w.r.t \(x\):</strong> \(\frac{\partial P}{\partial x} = \frac{\partial}{\partial x}(50x) + \frac{\partial}{\partial x}(20y) + \frac{\partial}{\partial x}(10) = 50 + 0 + 0 = 50\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

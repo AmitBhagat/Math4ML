@@ -1,0 +1,132 @@
+import { TopicSection } from '../../src/data/types';
+
+export const stackingSection: TopicSection = {
+  id: "stacking",
+  title: "Stacking (Stacked Generalization)",
+  description: "An ensemble learning technique that trains multiple base models and a meta-model that learns to combine the base models' predictions into a single final output.",
+  color: "#FF9800",
+  html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🧠 Advanced ML · Meta</div>
+      <h1>Stacking: The Council of Experts</h1>
+      <p>How do you know whether to trust an <strong>SVM</strong> or a <strong>Random Forest</strong> for a specific data point? You don't just vote (Bagging). You train <strong>Another Model</strong> to learn! <strong>Stacking</strong> uses a "Meta-Learner" that looks at the guesses of other models and learns their <strong>Strengths and Weaknesses</strong>.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#theory">Theoretical Core: Meta-Learning</a>
+      <a href="#architecture">The 2-Level Architecture</a>
+      <a href="#crossval">Avoiding Leakage (CV Stacking)</a>
+      <a href="#diversity">Heterogeneous Ensembles</a>
+      <a href="#analogy">The "Council of Experts" Analogy</a>
+    </div>
+
+    <h2 id="theory">Theoretical Core: Meta-Learning</h2>
+    <p>Stacking is about **Higher-Order Integration**. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning who to trust."</strong> 
+        The Meta-Learner says: "I've noticed that whenever the SVM says 'Spam', it's usually wrong, but when the Random Forest says 'Spam', it's 99% right. So, I will listen to the Forest." 
+        It learns the **Error Profile** of every sub-model.
+      </div>
+    </div>
+
+    <h2 id="architecture">The 2-Level Architecture</h2>
+    <ul>
+      <li><strong>Level 0 (Base Models):</strong> A diverse set of models (e.g., KNN, Logistic Regression, CNN). They all see the raw input and make a prediction.</li>
+      <li><strong>Level 1 (Meta-Learner):</strong> Usually a simple model (like Logistic Regression or a shallow Tree). It takes the predictions from Level 0 as its input and makes the final call.</li>
+    </ul>
+
+    <h2 id="crossval">The Training Secret: Cross-Validation</h2>
+    <p><strong>The Gotcha:</strong> You cannot train the Meta-Learner on the same data the Base Models saw! If you do, the Base Models will be "Too Confident," and the Meta-Learner will learn to trust them too much. We use <strong>Out-of-fold</strong> predictions to train the Meta-Learner, ensuring it sees "Honest" guesses.</p>
+
+    <h2 id="analogy">The "Council of Experts" Analogy</h2>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Analogy:</strong> Imagine you are a <strong>CEO (Meta-Learner)</strong> in a meeting. 
+        You have three experts:
+        * **Expert A (Statistician):** He's great at data but misses emotional nuances. 
+        * **Expert B (Marketing Guru):** He's great at emotions but bad at math. 
+        * **Expert C (Technician):** He's only good at the raw hardware facts. 
+        They each give you their recommendation. 
+        **You don't just "Average" their advice. You know from 10 years of experience that Expert A is usually right about the budget, while Expert B is right about the customer reaction. You combine their specific strengths to make the perfect decision.** 
+      </div>
+    </div>
+
+    <h2 id="algorithm">The Stacking Algorithm</h2>
+    <div class="example-box">
+      <h4>The Meta-Learning Loop</h4>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <strong>Base Training:</strong> Select a set of diverse "Base Models" (e.g., SVM, RNN, Random Forest).
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <strong>OOF Predictions:</strong> Use <strong>Out-of-Fold</strong> cross-validation to get predictions from each base model.
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <strong>Feature Creation:</strong> Combine these predictions to create a new "Meta-Feature" matrix. (The input to the next level).
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <strong>Meta-Training:</strong> Train a <strong>Meta-Learner</strong> (usually a simple Logistic Regression) to map these meta-features to the true labels.
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">5</span>
+          <strong>Inference:</strong> For a new case, get base predictions first, then pass them through the Meta-Learner for the final result.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example">Illustrated Example: The Orchestra Conductor</h2>
+    <p>Imagine an **Orchestra**. You have world-class musicians: a Violinist, a Cellist, and a Flutist.</p>
+    <ul>
+      <li><strong>The Base Models:</strong> Each musician plays the music (Predicts the output) in their own style. </li>
+      <li><strong>The Meta-Learner:</strong> Is the <strong>Conductor</strong>. He doesn't play an instrument himself. Instead, he listens to the musicians and decides when the Flute should be louder or when the Cello is making a mistake. </li>
+    </ul>
+    <p>The final music is better than any solo because the Conductor knows <strong>exactly how to blend</strong> the individual talents. <strong>Stacking is that Conductor.</strong></p>
+
+    <h2 id="python">Python Implementation</h2>
+    <div class="code-block">
+      <pre><code class="language-python">
+from sklearn.ensemble import StackingClassifier
+from sklearn.linear_model import LogisticRegression
+from sklearn.svm import SVC
+from sklearn.ensemble import RandomForestClassifier
+import numpy as np
+
+# 1. Diverse Base Models (Level 0)
+base_models = [
+    ('rf', RandomForestClassifier()),
+    ('svc', SVC(probability=True))
+]
+
+# 2. Meta-Learner (Level 1)
+meta_learner = LogisticRegression()
+
+# 3. Create the Stack
+stack = StackingClassifier(
+    estimators=base_models,
+    final_estimator=meta_learner,
+    cv=5 # Use 5-fold cross-validation for OOF predictions
+)
+
+# 4. Fit on mock data
+X = np.random.rand(100, 5)
+y = (X[:, 0] > 0.5).astype(int)
+stack.fit(X, y)
+
+print(f"Stacking Score: {stack.score(X, y)}")
+      </code></pre>
+    </div>
+
+    <div class="linking-rule">
+      <strong>Congratulations!</strong> You have reached the pinnacle of ensemble theory. Now, let's learn how to prep and "Clean" your raw datasets for these complex systems in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+    </div>
+  `
+};

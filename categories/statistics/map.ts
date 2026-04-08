@@ -54,10 +54,24 @@ export const mapSection: TopicSection = {
       <h4>Problem: Damping the Noise</h4>
       <p>Data: 2 Heads, 1 Tail. Bias from MLE is 66%. But your "Prior" is that coins are 50/50.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> We add "Virtual Trials" based on our belief.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Posterior Estimate:</strong> Add 2 virtual heads and 2 virtual tails (a Beta(2,2) prior).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Updated Data:</strong> (2+2) Heads, (1+2) Tails = 4H, 3T.</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Result:</strong> \(\hat{p} = 4/7 \approx 57\%\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> We add "Virtual Trials" based on our belief.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Posterior Estimate:</strong> Add 2 virtual heads and 2 virtual tails (a Beta(2,2) prior).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Updated Data:</strong> (2+2) Heads, (1+2) Tails = 4H, 3T.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Result:</strong> \(\hat{p} = 4/7 \approx 57\%\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,9 +86,20 @@ export const mapSection: TopicSection = {
       <h4>Problem: Preventing Weights from Exploding</h4>
       <p>In Linear Regression, if you assume your weights follow a Gaussian prior \(\mathcal{N}(0, \sigma)\), what happens to the objective function?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(\log L(\theta)\) is the Mean Squared Error.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Penalty:</strong> \(\log P(\theta)\) for a Gaussian is proportional to \(\theta^2\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Combine:</strong> Minimize \(\text{MSE} + \lambda \theta^2\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(\log L(\theta)\) is the Mean Squared Error.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Penalty:</strong> \(\log P(\theta)\) for a Gaussian is proportional to \(\theta^2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Combine:</strong> Minimize \(\text{MSE} + \lambda \theta^2\).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -57,9 +57,20 @@ export const confidenceIntervalsSection: TopicSection = {
       <h4>Problem: Finding the Range of Accuracy</h4>
       <p>Your model's mean accuracy is 85% with a Standard Error of 1% across 100 trials. What is the 95% Confidence Interval?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(\overline{X} = 0.85, SE = 0.01\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Margin:</strong> \(1.96 \times 0.01 = 0.0196\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Range:</strong> \(0.85 \pm 0.0196 \to [83\%, 87\%]\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(\overline{X} = 0.85, SE = 0.01\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Margin:</strong> \(1.96 \times 0.01 = 0.0196\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Range:</strong> \(0.85 \pm 0.0196 \to [83\%, 87\%]\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -74,8 +85,16 @@ export const confidenceIntervalsSection: TopicSection = {
       <h4>Problem: Measuring 'Average' Speed in the Real World</h4>
       <p>Data: 5 Latency points [10ms, 12ms, 15ms, 200ms (Outlier!), 11ms]. How do we get a robust interval?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Bootstrap Resampling</strong>. We create 1,000 "Virtual Datasets" by drawing samples with replacement.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> For every virtual dataset, we find the median. We then look for the 2.5% and 97.5% marks in our collection of 1,000 medians.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Test:</strong> <strong>Bootstrap Resampling</strong>. We create 1,000 "Virtual Datasets" by drawing samples with replacement.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculation:</strong> For every virtual dataset, we find the median. We then look for the 2.5% and 97.5% marks in our collection of 1,000 medians.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

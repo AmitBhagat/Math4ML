@@ -45,10 +45,24 @@ export const matrixInverseSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Determinant:</strong> \((4 \times 6) - (7 \times 2) = 10\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Rearrange:</strong> Swap diagonals (4 & 6), negate off-diagonals (7 & 2).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Resulting Matrix:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Final Scale:</strong> Divide all elements by 10.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Determinant:</strong> \((4 \times 6) - (7 \times 2) = 10\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Rearrange:</strong> Swap diagonals (4 & 6), negate off-diagonals (7 & 2).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Resulting Matrix:</strong> \(\begin{bmatrix} 6 & -7 \\ -2 & 4 \end{bmatrix}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Final Scale:</strong> Divide all elements by 10.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -63,9 +77,20 @@ export const matrixInverseSection: TopicSection = {
       <h4>Problem: Finding Inputs x given Outputs y</h4>
       <p>Assume \(A\mathbf{x} = \mathbf{b}\). If \(\mathbf{b} = [1, 2]\) and you have \(A^{-1}\), find \(\mathbf{x}\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Equation:</strong> Multiply both sides by \(A^{-1}\) from the left: \(\mathbf{x} = A^{-1}\mathbf{b}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Substitute:</strong> If \(A^{-1} = [[0.6, -0.7], [-0.2, 0.4]]\) and \(\mathbf{b} = [1, 2]\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(\mathbf{x} = [0.6 - 1.4, -0.2 + 0.8] = [-0.8, 0.6]\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Equation:</strong> Multiply both sides by \(A^{-1}\) from the left: \(\mathbf{x} = A^{-1}\mathbf{b}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Substitute:</strong> If \(A^{-1} = [[0.6, -0.7], [-0.2, 0.4]]\) and \(\mathbf{b} = [1, 2]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Result:</strong> \(\mathbf{x} = [0.6 - 1.4, -0.2 + 0.8] = [-0.8, 0.6]\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

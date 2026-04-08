@@ -56,8 +56,16 @@ export const regularizationSection: TopicSection = {
       <h4>Problem: Feature Selection</h4>
       <p>Imagine you have 1,000 features, but only 10 are actually useful. How do you find them?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use <strong>L1 Regularization</strong>. The geometry of L1 is a diamond-shaped surface with sharp "Corners" on the axes.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> The optimization process is much more likely to hit those corners. This forces the unimportant weights to hit 0 and stay there.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Use <strong>L1 Regularization</strong>. The geometry of L1 is a diamond-shaped surface with sharp "Corners" on the axes.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Observation:</strong> The optimization process is much more likely to hit those corners. This forces the unimportant weights to hit 0 and stay there.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,8 +80,16 @@ export const regularizationSection: TopicSection = {
       <h4>Problem: Stability and Smoothing</h4>
       <p>Data: Two highly correlated features (e.g. Height in cm vs. Height in inches). Which one should get the weight?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use <strong>L2 Regularization</strong>. The geometry of L2 is a smooth sphere centered at zero.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> Instead of picking one (like L1 might), L2 will gently spread the weight across both. It hates extreme values.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Use <strong>L2 Regularization</strong>. The geometry of L2 is a smooth sphere centered at zero.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Observation:</strong> Instead of picking one (like L1 might), L2 will gently spread the weight across both. It hates extreme values.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

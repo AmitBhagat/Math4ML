@@ -54,9 +54,20 @@ export const gradientSection: TopicSection = {
       <h4>Problem: Finding the Steering Direction</h4>
       <p>Let \(f(x, y) = x^2 + 3xy + 2y^2\). Find the gradient at the point \((1, 2)\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Partial w.r.t \(x\):</strong> \(\frac{\partial f}{\partial x} = 2x + 3y\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Partial w.r.t \(y\):</strong> \(\frac{\partial f}{\partial y} = 3x + 4y\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Evaluate:</strong> At \((1, 2) \to \nabla f = [2(1)+3(2), 3(1)+4(2)]^T = [8, 11]^T\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Partial w.r.t \(x\):</strong> \(\frac{\partial f}{\partial x} = 2x + 3y\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Partial w.r.t \(y\):</strong> \(\frac{\partial f}{\partial y} = 3x + 4y\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Evaluate:</strong> At \((1, 2) \to \nabla f = [2(1)+3(2), 3(1)+4(2)]^T = [8, 11]^T\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,9 +82,20 @@ export const gradientSection: TopicSection = {
       <h4>Problem: Slope Toward the Horizon</h4>
       <p>Find the slope of \(f(x, y) = x^2 + y^2\) at \((3, 4)\) in the direction of \(\mathbf{v} = [1, 1]\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Find Gradient:</strong> \(\nabla f = [2x, 2y]^T = [6, 8]^T\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Normalize Direction (v):</strong> \(\mathbf{v} = \frac{[1,1]}{\sqrt{2}}\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Dot Product:</strong> \(\nabla f \cdot \mathbf{v} = (6 \times \frac{1}{\sqrt{2}}) + (8 \times \frac{1}{\sqrt{2}}) = \frac{14}{\sqrt{2}} \approx 9.9\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Find Gradient:</strong> \(\nabla f = [2x, 2y]^T = [6, 8]^T\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Normalize Direction (v):</strong> \(\mathbf{v} = \frac{[1,1]}{\sqrt{2}}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Dot Product:</strong> \(\nabla f \cdot \mathbf{v} = (6 \times \frac{1}{\sqrt{2}}) + (8 \times \frac{1}{\sqrt{2}}) = \frac{14}{\sqrt{2}} \approx 9.9\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

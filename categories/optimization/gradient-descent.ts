@@ -57,9 +57,20 @@ export const gradientDescentSection: TopicSection = {
       <h4>Problem: Minimizing \(f(x) = x^2\)</h4>
       <p>Start at \(x = 4\). Use learning rate \(\eta = 0.1\). Find the next two positions.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Gradient:</strong> \(f'(x) = 2x\). At \(x=4\), the gradient is \(2(4) = 8\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Update 1:</strong> \(x_1 = 4 - 0.1(8) = 3.2\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Update 2:</strong> New gradient is \(2(3.2) = 6.4\). \(x_2 = 3.2 - 0.1(6.4) = 2.56\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Gradient:</strong> \(f'(x) = 2x\). At \(x=4\), the gradient is \(2(4) = 8\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Update 1:</strong> \(x_1 = 4 - 0.1(8) = 3.2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Update 2:</strong> New gradient is \(2(3.2) = 6.4\). \(x_2 = 3.2 - 0.1(6.4) = 2.56\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -74,8 +85,16 @@ export const gradientDescentSection: TopicSection = {
       <h4>Problem: Optimizing Two Weights simultaneously</h4>
       <p>Loss surface: \(J(w_1, w_2) = w_1^2 + 5w_2^2\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Gradient:</strong> \(\nabla J = \begin{bmatrix} 2w_1 \\ 10w_2 \end{bmatrix}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> The gradient in the \(w_2\) direction is much steeper (10 vs 2).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Gradient:</strong> \(\nabla J = \begin{bmatrix} 2w_1 \\ 10w_2 \end{bmatrix}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Observation:</strong> The gradient in the \(w_2\) direction is much steeper (10 vs 2).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

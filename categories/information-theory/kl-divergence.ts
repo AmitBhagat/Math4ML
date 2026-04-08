@@ -57,8 +57,16 @@ export const klDivergenceSection: TopicSection = {
       <h4>Problem: Comparing Two Global Shapes</h4>
       <p>True distribution \(P\) is centralized (Normal). Proxy \(Q\) is flat (Uniform). Calculate the "Gap."</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> For points where \(P(x)\) is high but \(Q(x)\) is low, \(\log(P/Q)\) is a large positive number.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Interpret:</strong> The KL Divergence will be high because the "Flat" proxy is a bad guess for the "Peaked" reality.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> For points where \(P(x)\) is high but \(Q(x)\) is low, \(\log(P/Q)\) is a large positive number.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Interpret:</strong> The KL Divergence will be high because the "Flat" proxy is a bad guess for the "Peaked" reality.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -73,8 +81,16 @@ export const klDivergenceSection: TopicSection = {
       <h4>Problem: Downsampling High-Res Predictions</h4>
       <p>You have a 100-class Softmax layer, but you compress it into 10 buckets for efficiency.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(P\) is the original 100-class distribution. \(Q\) is the 10-bucket approximation.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Measure:</strong> The KL Divergence tells the engineer exactly how much "Information Resolution" they lost during compression.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(P\) is the original 100-class distribution. \(Q\) is the 10-bucket approximation.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Measure:</strong> The KL Divergence tells the engineer exactly how much "Information Resolution" they lost during compression.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -88,11 +88,22 @@ export const graphTheorySection: TopicSection = {
       </ul>
       </p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Resulting Matrix:</strong>
-        <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
-      </div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Resulting Matrix:</strong>
+            <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
+          </div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -106,8 +117,16 @@ export const graphTheorySection: TopicSection = {
       <h4>Problem: Calculating Degree Centrality</h4>
       <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

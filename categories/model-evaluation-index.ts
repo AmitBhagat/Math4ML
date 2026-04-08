@@ -1,83 +1,76 @@
-import { CategoryData } from "../src/data/types";
+import { CategoryData } from '../src/data/types';
+import { confusionMatrixSection } from './model-evaluation/confusion-matrix';
+import { precisionSection } from './model-evaluation/precision';
+import { recallSection } from './model-evaluation/recall';
+import { f1ScoreSection } from './model-evaluation/f1-score';
+import { rocCurveSection } from './model-evaluation/roc-curve';
+import { aucSection } from './model-evaluation/auc';
 
+// =============================================================================
+// MODEL EVALUATION (The Science of Success and Failure)
+// =============================================================================
 export const MODEL_EVALUATION_DATA: CategoryData = {
   id: "model-evaluation",
   title: "Model Evaluation",
   description: "Rigorous metrics and validation strategies to assess model performance and ensure generalization to new data.",
   keyConcepts: [
-    { title: "Metrics", description: "Quantifying success via Precision, Recall, and AUC." },
-    { title: "Validation", description: "Cross-validation and statistical significance." }
+    { title: "The Truth Table", description: "Using Confusion Matrices to expose the exact nature of prediction errors." },
+    { title: "Precision-Recall Balance", description: "Optimizing the trade-off between false alarms and missed detections." },
+    { title: "Separation Power", description: "Quantifying global model performance across all possible thresholds via AUC." }
   ],
+  introHtml: String.raw`
+    <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
+      
+      <!-- Intro Section -->
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-headline font-semibold text-text-premium leading-tight">
+          Model Evaluation: <span class="text-accent italic">The Reality Check</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-text-premium font-normal leading-relaxed opacity-90">
+          Accuracy is often a lie. A model that predicts "Healthy" for every patient might be 99% accurate but it is 100% useless. To truly understand if a model works, we must look at <strong>Confusion</strong>, <strong>Precision</strong>, and the <strong>Area Under Curve</strong>.
+        </p>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- What to Expect -->
+      <div class="space-y-10 pb-12">
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          This category covers the six essential pillars of classification evaluation—moving beyond simple counts into the nuanced world of threshold analysis and diagnostic thoroughness.
+        </p>
+
+        <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-4xl font-serif">"</div>
+          <p class="text-xl md:text-2xl text-text-premium italic leading-relaxed font-light">
+            "If you only look at accuracy, you are flying blind. Evaluation is the art of knowing exactly how and why your model is failing."
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="w-8 h-[1px] bg-accent/30"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent/60">— The Applied ML Rulebook</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="pt-12 text-center border-t border-border-premium/50">
+        <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Start digging into the truth of your predictions.</p>
+        <a 
+          href="/#/machine-learning/model-evaluation/confusion-matrix" 
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
+        >
+          Begin with the Confusion Matrix
+        </a>
+      </div>
+
+    </div>
+  `,
   sections: [
-    {
-      id: "metrics",
-      title: "Performance Metrics",
-      description: "Probabilistic and categorical measures of predictive success beyond simple accuracy.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">📊 ML · Evaluation</div>
-          <h1>Performance Metrics</h1>
-          <p>Accuracy is often a lie. If 99% of your emails are not spam, a model that predicts "Not Spam" for every single email is 99% accurate—but it's also 100% useless. We need better metrics.</p>
-        </div>
-
-        <h2 id="precision-recall">1. Precision, Recall, and F1-Score</h2>
-        <p>Think of <strong>Precision</strong> as "how many of my 'yes' predictions were actually 'yes'." Think of <strong>Recall</strong> as "how many of the actual 'yes' cases did I manage to find."</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> To balance these two, we use the <strong>F1-Score</strong>, which is the <strong>Harmonic Mean</strong> of Precision ($P$) and Recall ($R$):
-            <div class="math-block">$$F_1 = 2 \cdot \frac{P \cdot R}{P + R}$$</div>
-            Why the harmonic mean? Because it penalizes extreme values. If your recall is 0, your F1-Score will be 0, no matter how high your precision is.
-          </div>
-        </div>
-
-        <h2 id="bias-variance">2. The Bias-Variance Tradeoff</h2>
-        <p>This is the fundamental struggle of every ML practitioner. You want a model that is complex enough to learn the pattern, but simple enough to ignore the noise.</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> The expected prediction error of a model can be decomposed into three components:
-            <div class="math-block">$$Err(x) = \text{Bias}^2 + \text{Variance} + \sigma^2$$</div>
-            Where <strong>Bias</strong> is the error from erroneous assumptions in the learning algorithm, <strong>Variance</strong> is the error from sensitivity to small fluctuations in the training set, and $\sigma^2$ is the <strong>Irreducible Error</strong> (noise).
-          </div>
-        </div>
-
-        <div class="linking-rule">
-          <strong>Next Step:</strong> Metrics tell us how the model did on a specific set of data. But how do we ensure it will work on <em>tomorrow's</em> data? Explore <strong><a href="#/machine-learning/model-evaluation/validation">Validation Strategies</a></strong>.
-        </div>
-      `,
-      tags: ["F1-Score", "AUC-ROC", "RMSE"],
-      color: "#58a6ff"
-    },
-    {
-      id: "validation",
-      title: "Validation Strategies",
-      description: "Holdout sets and K-Fold rotation to ensure the model generalizes to unseen data.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">🔄 ML · Evaluation</div>
-          <h1>Validation Strategies</h1>
-          <p>Training a model is easy. Proving it works on data it has never seen before is the real challenge. This is the science of <strong>Generalization</strong>.</p>
-        </div>
-
-        <h2 id="crossval">1. K-Fold Cross-Validation</h2>
-        <p>Don't just trust one split. In K-Fold, we split the data into $K$ pieces, train on $K-1$, and test on the last one. We repeat this $K$ times until every piece has been a test set.</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> The key goal of validation is to estimate the <strong>Generalization Error</strong>. By averaging performance across different folds, we reduce the variance of our evaluation, giving us a much more honest picture of how the model will perform in production.
-          </div>
-        </div>
-
-        <div class="linking-rule">
-          <strong>Congratulations!</strong> You have completed the core curriculum of Math for Machine Learning. You now have the mathematical foundation to master any ML architecture.
-        </div>
-      `,
-      tags: ["Cross-Val", "K-Fold", "Holdout"],
-      color: "#58a6ff"
-    }
+    confusionMatrixSection,
+    precisionSection,
+    recallSection,
+    f1ScoreSection,
+    rocCurveSection,
+    aucSection
   ]
 };

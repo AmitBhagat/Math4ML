@@ -53,9 +53,20 @@ export const independenceSection: TopicSection = {
       <h4>Problem: Successive Binary Trials</h4>
       <p>I toss a coin twice. Let \(A\) be 'Heads on 1st' and \(B\) be 'Heads on 2nd'. Are they independent?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Joint:</strong> The probability of \(P(A \cap B)\) (HH) is \(1/4\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Individual:</strong> \(P(A) = 1/2\) and \(P(B) = 1/2\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> \(1/2 \times 1/2 = 1/4\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Joint:</strong> The probability of \(P(A \cap B)\) (HH) is \(1/4\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Individual:</strong> \(P(A) = 1/2\) and \(P(B) = 1/2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> \(1/2 \times 1/2 = 1/4\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -70,8 +81,16 @@ export const independenceSection: TopicSection = {
       <h4>Problem: Clearing Up a Common Confusion</h4>
       <p>If two events are Mutually Exclusive (\(A\) and \(B\) can't both happen), can they be Independent?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> If \(A\) happens, \(P(B)\) <strong>instantly becomes zero</strong> because they can't both occur.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Interpret:</strong> Knowing \(A\) tells you a <strong>lot</strong> about \(B\) (that it is now impossible!).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> If \(A\) happens, \(P(B)\) <strong>instantly becomes zero</strong> because they can't both occur.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Interpret:</strong> Knowing \(A\) tells you a <strong>lot</strong> about \(B\) (that it is now impossible!).</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>

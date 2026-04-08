@@ -52,8 +52,16 @@ export const vectorNormsSection: TopicSection = {
     <h2 id="example-distance">Example 1: Manhattan vs. Euclidean</h2>
     <div class="example-box">
       <h4>Problem: Comparing Distances for [3, 4]</h4>
-      <div class="step-box"><span class="step-num">1</span><div><strong>L₂ (Crow):</strong> \(\sqrt{3^2 + 4^2} = \sqrt{25} = 5\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>L₁ (Taxi):</strong> \(3 + 4 = 7\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>L₂ (Crow):</strong> \(\sqrt{3^2 + 4^2} = \sqrt{25} = 5\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>L₁ (Taxi):</strong> \(3 + 4 = 7\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -68,8 +76,16 @@ export const vectorNormsSection: TopicSection = {
       <h4>Problem: Penalizing Large Weights</h4>
       <p>Assume your model weights are \(\mathbf{w} = [1, 0.01]\). Find the L₁ and L₂ penalties.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>L₁:</strong> \(|1| + |0.01| = 1.01\). (The "noisy" 0.01 is still heavily penalized).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>L₂:</strong> \(\sqrt{1^2 + 0.01^2} \approx 1\). (The small weight is almost ignored).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>L₁:</strong> \(|1| + |0.01| = 1.01\). (The "noisy" 0.01 is still heavily penalized).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>L₂:</strong> \(\sqrt{1^2 + 0.01^2} \approx 1\). (The small weight is almost ignored).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -45,9 +45,20 @@ export const vectorSpacesSection: TopicSection = {
       <h4>Problem: Visualizing Subspaces</h4>
       <p>Is the set of vectors \([x, y, 0]\) in \(\mathbb{R}^3\) a subspace?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> This set describes the "floor" (\(xy\)-plane) of a 3D room.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Check Origin:</strong> \([0, 0, 0]\) is in the set. (Pass).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check Addition:</strong> Adding any two "floor" vectors keeps you on the floor. (Pass).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> This set describes the "floor" (\(xy\)-plane) of a 3D room.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Check Origin:</strong> \([0, 0, 0]\) is in the set. (Pass).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check Addition:</strong> Adding any two "floor" vectors keeps you on the floor. (Pass).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -62,9 +73,20 @@ export const vectorSpacesSection: TopicSection = {
       <h4>Problem: Finding the "Exit"</h4>
       <p>Is the set of vectors \([x, 1]\) where \(x \in \mathbb{R}\) a vector space?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test Scale:</strong> Take \(\mathbf{v} = [2, 1]\). Now scale it by 2.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Result:</strong> \(2\mathbf{v} = [4, 2]\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> The second component is now 2, not 1.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Test Scale:</strong> Take \(\mathbf{v} = [2, 1]\). Now scale it by 2.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Result:</strong> \(2\mathbf{v} = [4, 2]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check:</strong> The second component is now 2, not 1.</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>

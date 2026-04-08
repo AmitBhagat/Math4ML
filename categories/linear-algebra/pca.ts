@@ -35,19 +35,44 @@ export const pcaSection: TopicSection = {
     </div>
 
     <h2 id="steps">2. The 5 Steps of PCA</h2>
-    <div class="step-box"><span class="step-num">1</span><div><strong>Standardize:</strong> Center the data (Mean = 0).</div></div>
-    <div class="step-box"><span class="step-num">2</span><div><strong>Covariance Matrix:</strong> Find how features vary together.</div></div>
-    <div class="step-box"><span class="step-num">3</span><div><strong>Eigen-analysis:</strong> Get eigenvalues/vectors of Covariance.</div></div>
-    <div class="step-box"><span class="step-num">4</span><div><strong>Sort:</strong> Rank vectors by eigenvalues (Variance).</div></div>
-    <div class="step-box"><span class="step-num">5</span><div><strong>Project:</strong> Multiply data by top-k vectors.</div></div>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>Standardize:</strong> Center the data (Mean = 0).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Covariance Matrix:</strong> Find how features vary together.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Eigen-analysis:</strong> Get eigenvalues/vectors of Covariance.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">4</span>
+        <div><strong>Sort:</strong> Rank vectors by eigenvalues (Variance).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">5</span>
+        <div><strong>Project:</strong> Multiply data by top-k vectors.</div>
+      </div>
+    </div>
 
     <h2 id="example-3d2d">Example 1: Reducing 3D Data to 2D</h2>
     <div class="example-box">
       <h4>Problem: Visualizing a High-D Cluster</h4>
       <p>Data has features: [Height, Weight, Age]. If Age and Height are 100% correlated, can we simplify?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Correlation exists. One axis is redundant.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>PCA:</strong> Finds two axes that capture 99% of the variance.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Correlation exists. One axis is redundant.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>PCA:</strong> Finds two axes that capture 99% of the variance.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -61,9 +86,20 @@ export const pcaSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the PC for Cov = [[2, 1], [1, 2]]</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate:</strong> \(\det(Cov - \lambda I) = \lambda^2 - 4\lambda + 3 = 0\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Roots:</strong> \(\lambda = 3, 1\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Interpret:</strong> PC1 has 3x more variance than PC2.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Calculate:</strong> \(\det(Cov - \lambda I) = \lambda^2 - 4\lambda + 3 = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Roots:</strong> \(\lambda = 3, 1\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Interpret:</strong> PC1 has 3x more variance than PC2.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

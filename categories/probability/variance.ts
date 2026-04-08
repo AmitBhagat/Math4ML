@@ -54,9 +54,20 @@ export const varianceSection: TopicSection = {
       <h4>Problem: Comparing Two Stocks</h4>
       <p>Stock A pays $5 every day. Stock B pays $20 half the time and -$10 the other half.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Stock A:</strong> \(\mathbb{E}[A] = 5\). Variance = 0. (Safe, consistent).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Stock B:</strong> \(\mathbb{E}[B] = (20 \times 0.5) + (-10 \times 0.5) = 5\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Variance B:</strong> \((20-5)^2 \times 0.5 + (-10-5)^2 \times 0.5 = 15^2 \times 0.5 + (-15)^2 \times 0.5 = 225\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Stock A:</strong> \(\mathbb{E}[A] = 5\). Variance = 0. (Safe, consistent).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Stock B:</strong> \(\mathbb{E}[B] = (20 \times 0.5) + (-10 \times 0.5) = 5\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Variance B:</strong> \((20-5)^2 \times 0.5 + (-10-5)^2 \times 0.5 = 15^2 \times 0.5 + (-15)^2 \times 0.5 = 225\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,9 +82,20 @@ export const varianceSection: TopicSection = {
       <h4>Problem: Measuring Reliability</h4>
       <p>Data: Predictions are off by [-1, 2, 0, -1]. Calculate the variance of the error.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Mean Error:</strong> \(\mu = (-1+2+0-1)/4 = 0\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Sum Squares:</strong> \((-1-0)^2 + (2-0)^2 + (0-0)^2 + (-1-0)^2 = 1 + 4 + 0 + 1 = 6\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Variance:</strong> \(6 / 4 = 1.5\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Mean Error:</strong> \(\mu = (-1+2+0-1)/4 = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Sum Squares:</strong> \((-1-0)^2 + (2-0)^2 + (0-0)^2 + (-1-0)^2 = 1 + 4 + 0 + 1 = 6\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Variance:</strong> \(6 / 4 = 1.5\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

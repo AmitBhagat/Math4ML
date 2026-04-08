@@ -53,10 +53,24 @@ export const chainRuleSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Derivative of \(f(x) = (3x^2 + 1)^4\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Let \(u = 3x^2 + 1\) (inner) and \(f = u^4\) (outer).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Inner Slope:</strong> \(\frac{du}{dx} = 6x\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Outer Slope:</strong> \(\frac{df}{du} = 4u^3\).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Chain:</strong> Multiply: \(4(3x^2 + 1)^3 \times 6x = 24x(3x^2 + 1)^3\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Let \(u = 3x^2 + 1\) (inner) and \(f = u^4\) (outer).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Inner Slope:</strong> \(\frac{du}{dx} = 6x\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Outer Slope:</strong> \(\frac{df}{du} = 4u^3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Chain:</strong> Multiply: \(4(3x^2 + 1)^3 \times 6x = 24x(3x^2 + 1)^3\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,9 +85,20 @@ export const chainRuleSection: TopicSection = {
       <h4>Problem: Error Sensitivity Flow</h4>
       <p>Let Loss \(L = e^a\) and activation \(a = wx\). Find how the loss changes with weight \(w\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Local Gradient 1:</strong> \(\frac{\partial L}{\partial a} = e^a\). (How the error cares about the activation).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Local Gradient 2:</strong> \(\frac{\partial a}{\partial w} = x\). (How the activation cares about the weight).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Final Gradient:</strong> \(\frac{\partial L}{\partial w} = e^a \cdot x\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Local Gradient 1:</strong> \(\frac{\partial L}{\partial a} = e^a\). (How the error cares about the activation).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Local Gradient 2:</strong> \(\frac{\partial a}{\partial w} = x\). (How the activation cares about the weight).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Final Gradient:</strong> \(\frac{\partial L}{\partial w} = e^a \cdot x\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

@@ -52,9 +52,20 @@ export const vectorsSection: TopicSection = {
       <h4>Problem: Real Estate Vectorization</h4>
       <p>A house has 3 bedrooms, 2 bathrooms, and is 1500 sq ft. Represent this as a vector \(\mathbf{h}\) and find the vector for a "double-sized" house.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Let bedrooms be \(v_1\), bathrooms \(v_2\), and sq ft \(v_3\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Represent:</strong> \(\mathbf{h} = [3, 2, 1500]^T\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Scale:</strong> To double the house, calculate \(2\mathbf{h} = [6, 4, 3000]^T\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Let bedrooms be \(v_1\), bathrooms \(v_2\), and sq ft \(v_3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Represent:</strong> \(\mathbf{h} = [3, 2, 1500]^T\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Scale:</strong> To double the house, calculate \(2\mathbf{h} = [6, 4, 3000]^T\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -69,8 +80,16 @@ export const vectorsSection: TopicSection = {
       <h4>Problem: Chaining Movements</h4>
       <p>You walk 3 units North (\(\mathbf{a} = [0, 3]\)) then 4 units East (\(\mathbf{b} = [4, 0]\)). Find your total displacement.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Sum:</strong> Add the components: \(\mathbf{a} + \mathbf{b} = [0+4, 3+0] = [4, 3]\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Interpretation:</strong> You are 5 units away from the start at an angle defined by this vector.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Sum:</strong> Add the components: \(\mathbf{a} + \mathbf{b} = [0+4, 3+0] = [4, 3]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Interpretation:</strong> You are 5 units away from the start at an angle defined by this vector.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -1,0 +1,122 @@
+import { TopicSection } from '../../src/data/types';
+
+export const representationSection: TopicSection = {
+  id: "representation",
+  title: "Representation Learning",
+  description: "The field of machine learning dedicated to learning meaningful, low-dimensional representations of data that reveal its underlying structure and features.",
+  color: "#E91E63",
+  html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🚀 Modern ML · Structure</div>
+      <h1>Representation: The Art of Simplification</h1>
+      <p>A 4K image has 8 million pixels. That is <strong>Too Much Information</strong>. To understand the image, you don't need the exact color of every pixel; you need the <strong>Identity</strong> of the object. <strong>Representation Learning</strong> (Feature Learning) is the process of compressing raw data into a set of <strong>Meaningful Numbers</strong> (Vectors) that capture the "Soul" of the information.</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#theory">Theoretical Core: Latent Space</a>
+      <a href="#disentanglement">Disentanglement: Separating Features</a>
+      <a href="#manifold">The Manifold Hypothesis</a>
+      <a href="#vectors">Embeddings: The Currency of AI</a>
+      <a href="#analogy">The "Sketch Artist" Analogy</a>
+    </div>
+
+    <h2 id="theory">Theoretical Core: Latent Space</h2>
+    <p>A <strong>Representation</strong> is just a point in a "Latent Space." If you take a picture of a <strong>Dog</strong> and a picture of a <strong>Wolf</strong>, their pixel values might be totally different. But in the model's <strong>Latent Space</strong>, they will be very close to each other. Representation learning is about finding the <strong>Mapping</strong> (\(f: X \to Z\)) that honors the semantic truth.</p>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Lossy but Smart Compression."</strong> 
+        If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
+        Those 3 attributes are the **Representations**. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
+      </div>
+    </div>
+
+    <h2 id="disentanglement">Disentanglement</h2>
+    <p>The "Holy Grail" of this field. We want every dimension in our latent space to represent <strong>One thing</strong>. 
+    * Dimension 1: <strong>Color</strong>.
+    * Dimension 2: <strong>Rotation</strong>.
+    * Dimension 3: <strong>Size</strong>.
+    If we change only Dimension 1, only the color should change. This is "Disentangled Representation."</p>
+
+    <h2 id="manifold">The Manifold Hypothesis</h2>
+    <p>This is the <strong>Reason SSL works</strong>. High-dimensional data (like images) actually lies on a much lower-dimensional, curvy "Surface" called a <strong>Manifold</strong>. Modern models try to "Unroll" this manifold so that everything becomes linear and logical.</p>
+
+    <h2 id="analogy">The "Police Sketch Artist" Analogy</h2>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Analogy:</strong> Imagine a <strong>Witness</strong> describing a criminal to a <strong>Police Sketch Artist</strong>. 
+        The Witness has the raw video in their head (Raw Data). 
+        The Artist doesn't draw the video. He asks: 
+        "Eyes? Round." 
+        "Nose? Pointy." 
+        "Hair? Short." 
+        Those <strong>Words</strong> are the **Representations**. They are a low-dimensional summary of the person's identity. 
+        **Representation learning is the Artist. He is finding the few 'Features' that allow us to reconstruct the truth without all the noise.** 
+      </div>
+    </div>
+
+    <h2 id="algorithm">The Representation Algorithm</h2>
+    <div class="example-box">
+      <h4>The Feature Extraction Pipeline</h4>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <strong>Observation:</strong> Pass high-dimensional raw input (pixels, text tokens) into a deep neural network.
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <strong>Mapping:</strong> Projected the data through layers with decreasing width to force a "Bottleneck."
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <strong>Encoding:</strong> Produce a fixed-length vector (e.g., 512 dimensions) that represents the input.
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <strong>Distance Learning:</strong> Ensure that similar signatures (two different photos of cats) move closer together in this new vector space.
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">5</span>
+          <strong>Downstream Use:</strong> Use these learned vectors as the "Input" for other models, making them 10x more efficient.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
+    <p>Imagine you take a <strong>5-course French Dinner</strong> and want to describe it to a friend.</p>
+    <ul>
+      <li><strong>Raw Data:</strong> The exact chemical composition of every sauce and the weight of every vegetable. (Millions of data points).</li>
+      <li><strong>The Representation:</strong> You summarize it using 5 features: <strong>Sweet, Sour, Salty, Bitter, and Umami</strong>. </li>
+    </ul>
+    <p>By mapping a complex meal into these 5 numbers, you've "Learned a Representation" of flavor. Now, you can compare any two meals in the world just by looking at their 5-number profile. <strong>Representation Learning is that palate.</strong></p>
+
+    <h2 id="python">Python Implementation (Keras)</h2>
+    <python-code>
+from tensorflow.keras import layers, models
+import numpy as np
+
+# 1. Create a simple 'Encoder' to learn representations
+input_shape = (28, 28, 1) # e.g. MNIST image
+latent_dim = 2 # Squeeze it into 2 numbers for visualization
+
+encoder = models.Sequential([
+    layers.Flatten(input_shape=input_shape),
+    layers.Dense(128, activation='relu'),
+    layers.Dense(latent_dim) # The 'Representation' layer
+])
+
+# 2. Simulate an image and get its 'Code'
+mock_image = np.random.rand(1, 28, 28, 1)
+representation = encoder.predict(mock_image)
+
+print(f"Original Pixels: 784 -> Learned Representation: {representation[0]}")
+    </python-code>
+
+    <div class="linking-rule">
+      <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
+    </div>
+  `
+};

@@ -55,9 +55,20 @@ export const jacobianSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Output 1 Gradient:</strong> \(\nabla f_1 = [2xy, x^2]\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Output 2 Gradient:</strong> \(\nabla f_2 = [5, \cos(y)]\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Stack:</strong> \(\mathbf{J} = \begin{bmatrix} 2xy & x^2 \\ 5 & \cos(y) \end{bmatrix}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Output 1 Gradient:</strong> \(\nabla f_1 = [2xy, x^2]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Output 2 Gradient:</strong> \(\nabla f_2 = [5, \cos(y)]\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Stack:</strong> \(\mathbf{J} = \begin{bmatrix} 2xy & x^2 \\ 5 & \cos(y) \end{bmatrix}\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,8 +83,16 @@ export const jacobianSection: TopicSection = {
       <h4>Problem: The Jacobian of a Probability Layer</h4>
       <p>Softmax turns scores into probabilities. If you increase Score #1, Probability #1 goes up, but #2 and #3 <strong>must</strong> go down to keep the sum at 100%.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Diagonal Elements:</strong> \(P_i(1 - P_i)\). (Self-sensitivity).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Off-Diagonal Elements:</strong> \(-P_i P_j\). (Cross-sensitivity).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Diagonal Elements:</strong> \(P_i(1 - P_i)\). (Self-sensitivity).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Off-Diagonal Elements:</strong> \(-P_i P_j\). (Cross-sensitivity).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

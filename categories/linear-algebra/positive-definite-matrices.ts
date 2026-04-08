@@ -45,8 +45,16 @@ export const positiveDefiniteSection: TopicSection = {
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Eigenvalues:</strong> \(\lambda_1 = 2, \lambda_2 = 3\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Check:</strong> Both are strictly positive.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Eigenvalues:</strong> \(\lambda_1 = 2, \lambda_2 = 3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Check:</strong> Both are strictly positive.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -60,8 +68,16 @@ export const positiveDefiniteSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Checking Convexity of f(x, y) = x² + 4y²</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Find Hessian:</strong> \(\nabla^2 f = \begin{bmatrix} 2 & 0 \\ 0 & 8 \end{bmatrix}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Eigenvalues:</strong> 2 and 8.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Find Hessian:</strong> \(\nabla^2 f = \begin{bmatrix} 2 & 0 \\ 0 & 8 \end{bmatrix}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Eigenvalues:</strong> 2 and 8.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

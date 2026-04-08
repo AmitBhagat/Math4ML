@@ -56,10 +56,24 @@ export const sgdSection: TopicSection = {
       <h4>Problem: Comparing Step Quality</h4>
       <p>Population: [100, 150, 200]. Loss: Aiming for \(\mu\). Correct gradient for \(\mu=100\) is -100.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Batch GD:</strong> \(\nabla = -100\) (Correct direction).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>SGD (Sample 1):</strong> \(\nabla = 0\) (No movement).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>SGD (Sample 2):</strong> \(\nabla = -50\) (Partial movement).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>SGD (Sample 3):</strong> \(\nabla = -100\) (Correct movement).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Batch GD:</strong> \(\nabla = -100\) (Correct direction).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>SGD (Sample 1):</strong> \(\nabla = 0\) (No movement).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>SGD (Sample 2):</strong> \(\nabla = -50\) (Partial movement).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>SGD (Sample 3):</strong> \(\nabla = -100\) (Correct movement).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -74,8 +88,16 @@ export const sgdSection: TopicSection = {
       <h4>Problem: The Best of Both Worlds</h4>
       <p>Instead of 1 sample (Pure SGD) or all samples (Batch GD), we use a <strong>Mini-batch</strong> of 32 samples.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Logic:</strong> We average the gradients of 32 points. This dramatically reduces the noise compared to pure SGD.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Speed:</strong> GPU hardware is optimized for processing 32 or 64 points simultaneously.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Logic:</strong> We average the gradients of 32 points. This dramatically reduces the noise compared to pure SGD.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Speed:</strong> GPU hardware is optimized for processing 32 or 64 points simultaneously.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

@@ -54,9 +54,20 @@ export const centralLimitTheoremSection: TopicSection = {
       <h4>Problem: Turning Flat space into a Bell Curve</h4>
       <p>A single U(0, 1) distribution is a flat rectangle. What if you sum 100 of them?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Individual:</strong> Each has \(\mu = 0.5\). (Flat).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Cumulative:</strong> Summing 100 results in \(\mu_{total} = 50\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Observation:</strong> The resulting sum will be almost perfectly shaped like a Bell Curve centered at 50.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Individual:</strong> Each has \(\mu = 0.5\). (Flat).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Cumulative:</strong> Summing 100 results in \(\mu_{total} = 50\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Observation:</strong> The resulting sum will be almost perfectly shaped like a Bell Curve centered at 50.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,8 +82,16 @@ export const centralLimitTheoremSection: TopicSection = {
       <h4>Problem: Tracking Compound Measurement Errors</h4>
       <p>Assume your sensor error is caused by temperature, vibration, and radiation. Each follows a wild distribution.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The <strong>Total Error</strong> is the sum of all these independent factors.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Conclusion:</strong> Regardless of how weird the individual errors are, the <strong>Aggregate Error</strong> will be Gaussian!</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> The <strong>Total Error</strong> is the sum of all these independent factors.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Conclusion:</strong> Regardless of how weird the individual errors are, the <strong>Aggregate Error</strong> will be Gaussian!</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

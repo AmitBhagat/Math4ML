@@ -56,9 +56,20 @@ export const randomVariablesSection: TopicSection = {
       <h4>Problem: Mapping Binary Outcomes</h4>
       <p>You flip a coin 3 times. Let \(X\) be the number of Heads. Find the values \(X\) can take.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Sample Space:</strong> \(S = \{HHH, HHT, HTH, THH, TTH, THT, HTT, TTT\}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Mapping:</strong> If outcome is \(TTH\), \(X(TTH) = 1\). If \(HHH\), \(X(HHH) = 3\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Range:</strong> \(X \in \{0, 1, 2, 3\}\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Sample Space:</strong> \(S = \{HHH, HHT, HTH, THH, TTH, THT, HTT, TTT\}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Mapping:</strong> If outcome is \(TTH\), \(X(TTH) = 1\). If \(HHH\), \(X(HHH) = 3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Range:</strong> \(X \in \{0, 1, 2, 3\}\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -73,8 +84,16 @@ export const randomVariablesSection: TopicSection = {
       <h4>Problem: Tracking Continuous Events</h4>
       <p>Let \(Y\) be the time (in minutes) you wait for a bus. What values can \(Y\) take?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> You can wait 2.5 minutes, 2.51 minutes, or forever.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Set:</strong> \(Y \in [0, \infty)\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> You can wait 2.5 minutes, 2.51 minutes, or forever.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Set:</strong> \(Y \in [0, \infty)\).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

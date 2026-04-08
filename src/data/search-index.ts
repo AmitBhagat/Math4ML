@@ -339,5 +339,499 @@ export const SEARCH_INDEX: SearchableTopic[] = [
     category: "Optimization",
     path: "/mathematics/optimization/regularization",
     keywords: ["regularization", "L1", "L2", "lasso", "ridge", "sparsity"]
+  },
+
+  // --- Foundation of Machine Learning ---
+  {
+    id: "what-is-ml",
+    title: "What is Machine Learning?",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/what-is-ml",
+    keywords: ["ml", "machine learning", "pattern", "data", "algorithm"]
+  },
+  {
+    id: "types-of-ml",
+    title: "Types of Machine Learning",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/types-of-ml",
+    keywords: ["paradigm", "supervised", "unsupervised", "reinforcement", "semi-supervised"]
+  },
+  {
+    id: "supervised",
+    title: "Supervised Learning",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/supervised",
+    keywords: ["labels", "regression", "classification", "teacher"]
+  },
+  {
+    id: "unsupervised",
+    title: "Unsupervised Learning",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/unsupervised",
+    keywords: ["clustering", "dimensionality", "pca", "patterns"]
+  },
+  {
+    id: "semi-supervised",
+    title: "Semi-Supervised Learning",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/semi-supervised",
+    keywords: ["labeled", "unlabeled", "hybrid", "SSL"]
+  },
+  {
+    id: "reinforcement",
+    title: "Reinforcement Learning",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/reinforcement",
+    keywords: ["agent", "reward", "policy", "trial and error", "q-learning"]
+  },
+  {
+    id: "train-test-split",
+    title: "Training vs. Testing Data",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/train-test-split",
+    keywords: ["split", "validation", "test set", "generalization", "data leakage"]
+  },
+  {
+    id: "overfitting-underfitting",
+    title: "Overfitting and Underfitting",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/overfitting-underfitting",
+    keywords: ["capacity", "memorization", "simpleton", "complexity"]
+  },
+  {
+    id: "bias-variance-tradeoff",
+    title: "Bias–Variance Tradeoff",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/bias-variance-tradeoff",
+    keywords: ["bias", "variance", "error", "bullseye", "tradeoff"]
+  },
+  {
+    id: "cross-validation",
+    title: "Cross-Validation",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/cross-validation",
+    keywords: ["k-fold", "rotation", "validation", "robustness"]
+  },
+  {
+    id: "feature-engineering",
+    title: "Feature Engineering",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/feature-engineering",
+    keywords: ["features", "domain knowledge", "extraction", "transformation"]
+  },
+  {
+    id: "scaling-normalization",
+    title: "Feature Scaling and Normalization",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/scaling-normalization",
+    keywords: ["scaling", "normalization", "standardization", "z-score", "min-max"]
+  },
+  {
+    id: "evaluation-metrics",
+    title: "Model Evaluation Metrics",
+    category: "Foundation of ML",
+    path: "/machine-learning/foundation-ml/evaluation-metrics",
+    keywords: ["accuracy", "precision", "recall", "f1", "confusion matrix", "mse", "mae"]
+  },
+
+  // --- Supervised Learning (Advanced) ---
+  {
+    id: "regression-intro",
+    title: "Regression Intro",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/regression-intro",
+    keywords: ["regression", "continuous", "prediction", "trend", "shadow"]
+  },
+  {
+    id: "linear-regression",
+    title: "Linear Regression",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/linear-regression",
+    keywords: ["linear", "OLS", "slope", "intercept", "least squares"]
+  },
+  {
+    id: "ridge-regression",
+    title: "Ridge Regression",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/ridge-regression",
+    keywords: ["ridge", "L2", "regularization", "shrinkage", "penalty"]
+  },
+  {
+    id: "lasso-regression",
+    title: "Lasso Regression",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/lasso-regression",
+    keywords: ["lasso", "L1", "regularization", "sparsity", "feature selection"]
+  },
+  {
+    id: "polynomial-regression",
+    title: "Polynomial Regression",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/polynomial-regression",
+    keywords: ["polynomial", "curve", "degree", "non-linear", "transformation"]
+  },
+  {
+    id: "classification-intro",
+    title: "Classification Intro",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/classification-intro",
+    keywords: ["classification", "discrete", "labels", "sorting hat", "boundary"]
+  },
+  {
+    id: "logistic-regression",
+    title: "Logistic Regression",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/logistic-regression",
+    keywords: ["logistic", "sigmoid", "probability", "binary", "log-loss"]
+  },
+  {
+    id: "naive-bayes",
+    title: "Naive Bayes",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/naive-bayes",
+    keywords: ["bayes", "naive", "probability", "independence", "sherlock"]
+  },
+  {
+    id: "knn",
+    title: "k-Nearest Neighbors (KNN)",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/knn",
+    keywords: ["knn", "neighbors", "distance", "euclidean", "manhattan", "lazy"]
+  },
+  {
+    id: "svm",
+    title: "Support Vector Machines (SVM)",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/svm",
+    keywords: ["svm", "hyperplane", "margin", "kernel", "support vectors"]
+  },
+  {
+    id: "decision-trees",
+    title: "Decision Trees",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/decision-trees",
+    keywords: ["tree", "entropy", "gini", "information gain", "split", "pruning"]
+  },
+  {
+    id: "random-forest",
+    title: "Random Forest",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/random-forest",
+    keywords: ["forest", "ensemble", "bagging", "bootstrap", "wisdom of crowds"]
+  },
+  {
+    id: "gradient-boosting",
+    title: "Gradient Boosting",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/gradient-boosting",
+    keywords: ["boosting", "residual", "sequential", "gradient", "learning rate"]
+  },
+  {
+    id: "advanced-boosting",
+    title: "XGBoost, LightGBM, CatBoost",
+    category: "Supervised Learning",
+    path: "/machine-learning/supervised-learning/advanced-boosting",
+    keywords: ["xgboost", "lightgbm", "catboost", "advanced boosting", "F1", "tree"]
+  },
+
+  // --- Unsupervised Learning (Advanced) ---
+  {
+    id: "kmeans",
+    title: "k-Means Clustering",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/kmeans",
+    keywords: ["kmeans", "clustering", "centroid", "inertia", "elbow method", "magnetic"]
+  },
+  {
+    id: "hierarchical",
+    title: "Hierarchical Clustering",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/hierarchical",
+    keywords: ["hierarchical", "dendrogram", "agglomerative", "divisive", "linkage", "family tree"]
+  },
+  {
+    id: "dbscan",
+    title: "DBSCAN",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/dbscan",
+    keywords: ["dbscan", "density", "epsilon", "minpts", "outliers", "core points", "noise"]
+  },
+  {
+    id: "gmm",
+    title: "Gaussian Mixture Models (GMM)",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/gmm",
+    keywords: ["gmm", "gaussian", "mixture", "em algorithm", "probabilistic", "soft clustering"]
+  },
+  {
+    id: "dim-reduction-intro",
+    title: "Dimensionality Reduction Intro",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/dim-reduction-intro",
+    keywords: ["dimensionality", "reduction", "projection", "curse of dimensionality", "shadow"]
+  },
+  {
+    id: "pca",
+    title: "PCA",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/pca",
+    keywords: ["pca", "variance", "eigenvalue", "eigenvector", "components", "projection", "svd"]
+  },
+  {
+    id: "tsne",
+    title: "t-SNE",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/tsne",
+    keywords: ["tsne", "visualization", "local structure", "perplexity", "neighborhood", "friendship"]
+  },
+  {
+    id: "umap",
+    title: "UMAP",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/umap",
+    keywords: ["umap", "topology", "manifold", "global structure", "speed", "stretchy net"]
+  },
+  {
+    id: "autoencoders",
+    title: "Autoencoders",
+    category: "Unsupervised Learning",
+    path: "/machine-learning/unsupervised-learning/autoencoders",
+    keywords: ["autoencoder", "encoder", "decoder", "latent space", "bottleneck", "hourglass", "neural"]
+  },
+
+  // --- Probabilistic & Graphical Models ---
+  {
+    id: "bayesian-networks",
+    title: "Bayesian Networks",
+    category: "Probabilistic & Graphical Models",
+    path: "/machine-learning/pgm/bayesian-networks",
+    keywords: ["bayesian network", "dag", "causality", "influence", "cpt", "inference"]
+  },
+  {
+    id: "hmm",
+    title: "Hidden Markov Models",
+    category: "Probabilistic & Graphical Models",
+    path: "/machine-learning/pgm/hmm",
+    keywords: ["hmm", "markov", "latent", "hidden state", "viterbi", "sequence"]
+  },
+  {
+    id: "em-algorithm",
+    title: "EM Algorithm",
+    category: "Probabilistic & Graphical Models",
+    path: "/machine-learning/pgm/em-algorithm",
+    keywords: ["em", "expectation maximization", "latent variable", "jensen", "log likelihood"]
+  },
+
+  // --- Neural Networks & Deep Learning ---
+  {
+    id: "perceptron",
+    title: "The Perceptron",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/perceptron",
+    keywords: ["perceptron", "step function", "binary", "threshold", "loan officer"]
+  },
+  {
+    id: "mlp",
+    title: "Multilayer Perceptron (MLP)",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/mlp",
+    keywords: ["mlp", "multilayer", "hidden layer", "universal approximation", "dense"]
+  },
+  {
+    id: "backpropagation",
+    title: "Backpropagation",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/backpropagation",
+    keywords: ["backpropagation", "backprop", "chain rule", "gradient", "blame"]
+  },
+  {
+    id: "activations",
+    title: "Activation functions",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/activations",
+    keywords: ["activation", "relu", "sigmoid", "tanh", "softmax", "non-linear"]
+  },
+  {
+    id: "loss-functions",
+    title: "Loss functions",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/loss-functions",
+    keywords: ["loss", "cost", "mse", "cross-entropy", "log-loss", "mistake"]
+  },
+  {
+    id: "architectures-intro",
+    title: "Deep Learning Architectures",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/architectures-intro",
+    keywords: ["architecture", "deep learning", "body", "wiring", "blueprint"]
+  },
+  {
+    id: "cnn",
+    title: "Convolutional Neural Networks (CNN)",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/cnn",
+    keywords: ["cnn", "convolution", "pooling", "spatial", "image", "flashlight"]
+  },
+  {
+    id: "rnn",
+    title: "Recurrent Neural Networks (RNN)",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/rnn",
+    keywords: ["rnn", "recurrent", "sequence", "memory", "state", "goldfish"]
+  },
+  {
+    id: "lstm-gru",
+    title: "LSTM / GRU",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/lstm-gru",
+    keywords: ["lstm", "gru", "long term memory", "gating", "forget gate"]
+  },
+  {
+    id: "transformers",
+    title: "Transformers",
+    category: "Neural Networks & Deep Learning",
+    path: "/machine-learning/deep-learning/transformers",
+    keywords: ["transformer", "attention", "self-attention", "query", "key", "value", "parallel"]
+  },
+
+  // --- Optimization in ML ---
+  {
+    id: "gradient-descent-ml",
+    title: "Gradient Descent (Batch)",
+    category: "Optimization in ML",
+    path: "/machine-learning/optimization-ml/gradient-descent",
+    keywords: ["gradient descent", "batch", "loss surface", "minima", "skier"]
+  },
+  {
+    id: "sgd-ml",
+    title: "Stochastic Gradient Descent (SGD)",
+    category: "Optimization in ML",
+    path: "/machine-learning/optimization-ml/sgd",
+    keywords: ["sgd", "stochastic", "mini-batch", "noise", "drunken sailor"]
+  },
+  {
+    id: "momentum-ml",
+    title: "Momentum",
+    category: "Optimization in ML",
+    path: "/machine-learning/optimization-ml/momentum",
+    keywords: ["momentum", "velocity", "inertia", "heavy boulder"]
+  },
+  {
+    id: "adam-ml",
+    title: "Adam Optimizer",
+    category: "Optimization in ML",
+    path: "/machine-learning/optimization-ml/adam",
+    keywords: ["adam", "adaptive", "rms prop", "first moment", "second moment", "athlete"]
+  },
+  {
+    id: "lr-scheduling-ml",
+    title: "Learning Rate Scheduling",
+    category: "Optimization in ML",
+    path: "/machine-learning/optimization-ml/lr-scheduling",
+    keywords: ["scheduling", "annealing", "decay", "cosine", "warmup", "runner"]
+  },
+
+  // --- Model Evaluation ---
+  {
+    id: "confusion-matrix",
+    title: "Confusion Matrix",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/confusion-matrix",
+    keywords: ["confusion matrix", "tp", "tn", "fp", "fn", "truth table", "type i", "type ii"]
+  },
+  {
+    id: "precision",
+    title: "Precision",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/precision",
+    keywords: ["precision", "quality", "false positive", "positive predictive value"]
+  },
+  {
+    id: "recall",
+    title: "Recall (Sensitivity)",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/recall",
+    keywords: ["recall", "sensitivity", "tpr", "false negative", "detection"]
+  },
+  {
+    id: "f1-score",
+    title: "F1 Score",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/f1-score",
+    keywords: ["f1", "fscore", "harmonic mean", "balance", "diplomat"]
+  },
+  {
+    id: "roc-curve",
+    title: "ROC Curve",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/roc-curve",
+    keywords: ["roc", "curve", "tpr", "fpr", "threshold", "sensitivity"]
+  },
+  {
+    id: "auc",
+    title: "AUC (Area Under Curve)",
+    category: "Model Evaluation",
+    path: "/machine-learning/model-evaluation/auc",
+    keywords: ["auc", "auroc", "area", "ranking", "separation"]
+  },
+
+  // --- Advanced ML Topics ---
+  {
+    id: "ensemble-intro",
+    title: "Ensemble Theory",
+    category: "Advanced ML Topics",
+    path: "/machine-learning/advanced-ml/ensemble-intro",
+    keywords: ["ensemble", "wisdom of crowd", "averaging", "bias", "variance"]
+  },
+  {
+    id: "bagging",
+    title: "Bagging",
+    category: "Advanced ML Topics",
+    path: "/machine-learning/advanced-ml/bagging",
+    keywords: ["bagging", "bootstrap", "aggregating", "parallel", "election"]
+  },
+  {
+    id: "boosting",
+    title: "Boosting",
+    category: "Advanced ML Topics",
+    path: "/machine-learning/advanced-ml/boosting",
+    keywords: ["boosting", "sequential", "bias", "weak learner", "tutor"]
+  },
+  {
+    id: "stacking",
+    title: "Stacking",
+    category: "Advanced ML Topics",
+    path: "/machine-learning/advanced-ml/stacking",
+    keywords: ["stacking", "meta-learner", "out-of-fold", "experts", "ceo"]
+  },
+
+  // --- Modern ML Topics ---
+  {
+    id: "self-supervised",
+    title: "Self-supervised learning",
+    category: "Modern ML Topics",
+    path: "/machine-learning/modern-ml/self-supervised",
+    keywords: ["ssl", "self-supervised", "pretext", "masking", "labels", "toddler"]
+  },
+  {
+    id: "transfer-learning",
+    title: "Transfer learning",
+    category: "Modern ML Topics",
+    path: "/machine-learning/modern-ml/transfer-learning",
+    keywords: ["transfer", "fine-tuning", "pre-training", "kung fu"]
+  },
+  {
+    id: "representation",
+    title: "Representation learning",
+    category: "Modern ML Topics",
+    path: "/machine-learning/modern-ml/representation",
+    keywords: ["representation", "latent", "space", "embedding", "sketch artist"]
+  },
+  {
+    id: "contrastive",
+    title: "Contrastive learning",
+    category: "Modern ML Topics",
+    path: "/machine-learning/modern-ml/contrastive",
+    keywords: ["contrastive", "simclr", "triplet loss", "rival", "similarity"]
   }
 ];

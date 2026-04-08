@@ -7,9 +7,10 @@ import { jacobianSection } from './calculus/jacobian';
 import { hessianSection } from './calculus/hessian';
 import { taylorSeriesSection } from './calculus/taylor-series';
 import { criticalPointsSection } from './calculus/critical-points';
+import { integralsSection } from './calculus/integrals';
 
 // =============================================================================
-// CALCULUS (High-Fidelity 8-Topic Edition)
+// CALCULUS (High-Fidelity 9-Topic Edition)
 // =============================================================================
 export const CALCULUS_DATA: CategoryData = {
   id: "calculus",
@@ -42,7 +43,7 @@ export const CALCULUS_DATA: CategoryData = {
       <!-- What to Expect -->
       <div class="space-y-10 pb-12">
         <p class="text-lg text-text-premium font-normal leading-relaxed">
-          This curriculum is broken into <strong>8 focused topics</strong>, moving from basic differentiation to advanced concepts like Jacobians, Hessians, and Critical Point analysis.
+          This curriculum is broken into <strong>9 focused topics</strong>, moving from basic differentiation to advanced concepts like Jacobians, Hessians, and Integral Calculus.
         </p>
 
         <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
@@ -78,6 +79,7 @@ export const CALCULUS_DATA: CategoryData = {
     jacobianSection,
     hessianSection,
     taylorSeriesSection,
-    criticalPointsSection
+    criticalPointsSection,
+    integralsSection
   ]
 };

@@ -54,9 +54,20 @@ export const expectationSection: TopicSection = {
       <h4>Problem: Evaluating a Lottery</h4>
       <p>A ticket costs $5. You have a 1% chance to win $400 and a 99% chance to win $0. What is your expectation?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(X \in \{400, 0\}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(\mathbb{E}[X] = (400 \times 0.01) + (0 \times 0.99) = 4\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Interpret:</strong> Your "Expected Payoff" is $4.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> \(X \in \{400, 0\}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculate:</strong> \(\mathbb{E}[X] = (400 \times 0.01) + (0 \times 0.99) = 4\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Interpret:</strong> Your "Expected Payoff" is $4.</div>
+        </div>
+      </div>
 
       <div class="callout error">
         <div class="callout-icon">✕</div>
@@ -71,8 +82,16 @@ export const expectationSection: TopicSection = {
       <h4>Problem: Finding the Center of Data</h4>
       <p>Data shows scores: [10, 10, 10, 50]. What's the expected score?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Probabilities:</strong> \(P(10) = 0.75\); \(P(50) = 0.25\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(\mathbb{E}[X] = (10 \times 0.75) + (50 \times 0.25) = 7.5 + 12.5 = 20\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Probabilities:</strong> \(P(10) = 0.75\); \(P(50) = 0.25\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculate:</strong> \(\mathbb{E}[X] = (10 \times 0.75) + (50 \times 0.25) = 7.5 + 12.5 = 20\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

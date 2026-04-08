@@ -96,9 +96,20 @@ export const logicSection: TopicSection = {
       <h4>Problem: Evaluating a Medical Expert System Rule</h4>
       <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -112,8 +123,16 @@ export const logicSection: TopicSection = {
       <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
       <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

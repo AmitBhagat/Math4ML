@@ -55,8 +55,16 @@ export const probabilityDistributionsSection: TopicSection = {
       <h4>Problem: Tracking a 1-Trial Experiment</h4>
       <p>A "Success" happens with probability \(p=0.7\). What is the PMF?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Let \(X=1\) be success and \(X=0\) be failure.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Mapping:</strong> \(P(X=1) = 0.7\); \(P(X=0) = 0.3\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> Let \(X=1\) be success and \(X=0\) be failure.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Mapping:</strong> \(P(X=1) = 0.7\); \(P(X=0) = 0.3\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,8 +79,16 @@ export const probabilityDistributionsSection: TopicSection = {
       <h4>Problem: Capturing Collective Data Distributions</h4>
       <p>Heights are Normally distributed with mean \(\mu = 70\) and standard deviation \(\sigma = 3\). Find the probability that someone is exactly 70 inches tall.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> For continuous variables, the probability of an "exact" point is zero! We measure intervals instead.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Measure:</strong> The probability of someone being <strong>between</strong> 67 and 73 inches is 68% (The 1-Sigma Rule).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> For continuous variables, the probability of an "exact" point is zero! We measure intervals instead.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Measure:</strong> The probability of someone being <strong>between</strong> 67 and 73 inches is 68% (The 1-Sigma Rule).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

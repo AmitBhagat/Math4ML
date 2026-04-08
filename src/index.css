@@ -262,6 +262,17 @@
     @apply shrink-0 bg-accent-premium text-bg font-bold p-1 rounded-full w-6 h-6 flex items-center justify-center text-[12px];
   }
 
+  /* ─── ENHANCED ALGORITHM LISTS (Integrated style) ─── */
+  .algorithm-steps {
+    @apply space-y-5 my-6;
+  }
+  .algorithm-step {
+    @apply flex items-start gap-4 text-[17px] leading-relaxed;
+  }
+  .step-badge {
+    @apply shrink-0 mt-1 w-6 h-6 rounded-full bg-accent-premium/10 text-accent-premium border border-accent-premium/30 flex items-center justify-center font-bold text-[11px];
+  }
+
   /* Solved Examples Patterns */
   .solved-card {
     @apply bg-bg-secondary border border-border-premium rounded-2xl my-8 overflow-hidden;

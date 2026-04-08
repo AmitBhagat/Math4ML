@@ -47,18 +47,40 @@ export const hypothesisTestingSection: TopicSection = {
     </div>
 
     <h2 id="process">The 4-Step Process</h2>
-    <div class="step-box"><span class="step-num">1</span><div><strong>State Hypotheses:</strong> \(H_0\) (No effect) vs. \(H_1\) (There is an effect).</div></div>
-    <div class="step-box"><span class="step-num">2</span><div><strong>Choose Alpha (\(\alpha\)):</strong> Usually 0.05. This is your "Threshold for Surprise."</div></div>
-    <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Test Statistic:</strong> Compute a score (Z, T, or \(\chi^2\)) based on your data.</div></div>
-    <div class="step-box"><span class="step-num">4</span><div><strong>Compare P-Value:</strong> If \(p < \alpha\), Reject \(H_0\).</div></div>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>State Hypotheses:</strong> \(H_0\) (No effect) vs. \(H_1\) (There is an effect).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Choose Alpha (\(\alpha\)):</strong> Usually 0.05. This is your "Threshold for Surprise."</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Calculate Test Statistic:</strong> Compute a score (Z, T, or \(\chi^2\)) based on your data.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">4</span>
+        <div><strong>Compare P-Value:</strong> If \(p < \alpha\), Reject \(H_0\).</div>
+      </div>
+    </div>
 
     <h2 id="example-ttest">Example 1: T-Test (A/B Testing)</h2>
     <div class="example-box">
       <h4>Problem: Does a New UI Increase Clicks?</h4>
       <p>Group A (Old UI) has 5% clicks. Group B (New UI) has 7% clicks. Is the 2% gain "Real"?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Independent 2-Sample T-Test</strong>. It compares the means of two independent groups.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> Factor in the "Noise" (Variance) of both groups. If the groups are large and consistent, the T-score will be high.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Test:</strong> <strong>Independent 2-Sample T-Test</strong>. It compares the means of two independent groups.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Calculation:</strong> Factor in the "Noise" (Variance) of both groups. If the groups are large and consistent, the T-score will be high.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -73,8 +95,16 @@ export const hypothesisTestingSection: TopicSection = {
       <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>
       <p>Data: 200 people. Does knowing gender change the probability of purchase?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Chi-Square Test of Independence</strong>. Best for categorical comparisons.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Logic:</strong> Compare the "Observed" counts in each category vs. "Expected" counts if they were totally independent.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Test:</strong> <strong>Chi-Square Test of Independence</strong>. Best for categorical comparisons.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Logic:</strong> Compare the "Observed" counts in each category vs. "Expected" counts if they were totally independent.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
@@ -89,8 +119,16 @@ export const hypothesisTestingSection: TopicSection = {
       <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
       <p>You run 10 training sessions with each optimizer. Is there a "Best" one?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>One-Way ANOVA</strong>. It checks if *at least one* group mean is different from the others.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Mechanism:</strong> It compares the "Variance between groups" vs. the "Variance within groups."</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Test:</strong> <strong>One-Way ANOVA</strong>. It checks if *at least one* group mean is different from the others.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Mechanism:</strong> It compares the "Variance between groups" vs. the "Variance within groups."</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

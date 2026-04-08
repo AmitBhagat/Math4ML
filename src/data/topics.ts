@@ -121,12 +121,12 @@ export const CATEGORY_META: CategoryMeta[] = [
   },
   {
     id: "deep-learning",
-    title: "Neural Networks",
-    description: "Biologically inspired architectures (ANN, CNN, RNN) that power modern computer vision and natural language processing.",
+    title: "Neural Networks & Deep Learning",
+    description: "The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",
     keyConcepts: [
-      { title: "Backpropagation", description: "Efficient weight adjustment via chain rule." },
-      { title: "Architectures", description: "Diverse layers for diverse data types." },
-      { title: "Activation", description: "Introducing non-linearity into neurons." }
+      { title: "Forward & Backprop", description: "The iterative cycle of activation and gradient-based learning." },
+      { title: "Inductive Biases", description: "Architectural constraints for specific data (Spatial for CNNs, Temporal for RNNs)." },
+      { title: "The Attention Era", description: "Moving from sequential processing to global parallelized attention (Transformers)." }
     ]
   },
   {
@@ -169,6 +169,57 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Convexity", description: "Guarantees of reaching the global minimum without local traps." },
       { title: "Regularization", description: "Geometric constraints to prevent model overfitting (L1, L2)." }
     ]
+  },
+  {
+    id: "foundation-ml",
+    title: "Foundation of Machine Learning",
+    description: "The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",
+    keyConcepts: [
+      { title: "What is ML?", description: "Learning patterns from data vs. manual rule-based programming." },
+      { title: "Learning Paradigms", description: "Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning." },
+      { title: "Overfitting & Bias", description: "The core trade-offs: Generalization vs. Memory and Rigid vs. Reactive." },
+      { title: "Feature Engineering", description: "The art of preparing data to maximize model insight." }
+    ]
+  },
+  {
+    id: "pgm",
+    title: "Probabilistic & Graphical Models",
+    description: "The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",
+    keyConcepts: [
+      { title: "Bayesian Networks", description: "Directed Acyclic Graphs (DAGs) for modeling causality and influence." },
+      { title: "Hidden Markov Models", description: "Sequential data modeling with latent states and stochastic transitions." },
+      { title: "EM Algorithm", description: "The iterative engine for optimizing models with missing or hidden variables." }
+    ]
+  },
+  {
+    id: "optimization-ml",
+    title: "Optimization in ML",
+    description: "The iterative engines that power model training—from basic Gradient Descent to the adaptive precision of the Adam optimizer.",
+    keyConcepts: [
+      { title: "Iterative Descent", description: "Finding the minimum of complex loss surfaces via gradients." },
+      { title: "Adaptive Moments", description: "Individual parameter step-sizes based on volatility (Adam)." },
+      { title: "Convergence Stability", description: "Using momentum and scheduling to prevent oscillations." }
+    ]
+  },
+  {
+    id: "advanced-ml",
+    title: "Advanced ML Topics",
+    description: "Beyond individual algorithms—exploring the synergy of multiple models through Bagging, Boosting, and Stacking.",
+    keyConcepts: [
+      { title: "Ensemble Theory", description: "Combining multiple weak learners to create one robust strong learner." },
+      { title: "Parallel vs Sequential", description: "Reducing variance (Bagging) vs reducing bias (Boosting)." },
+      { title: "Meta-Learning", description: "Hierarchical architectures where models learn from other models." }
+    ]
+  },
+  {
+    id: "modern-ml",
+    title: "Modern ML Topics",
+    description: "The current state-of-the-art—from Self-Supervised puzzles to the 'Gift of Experience' in Transfer Learning.",
+    keyConcepts: [
+      { title: "Self-Supervision", description: "Learning without human labels by solving innovative 'pretext' tasks." },
+      { title: "Knowledge Transfer", description: "Repurposing pre-trained global intelligence for specific tasks." },
+      { title: "Latent Manifolds", description: "Mapping raw data into low-dimensional semantic vector spaces." }
+    ]
   }
 ];
 
@@ -190,7 +241,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "machine-learning",
     title: "Machine Learning",
     description: "Architectural paradigms and learning strategies that transform raw data into predictive, autonomous systems.",
-    categories: ["supervised-learning", "unsupervised-learning", "deep-learning", "reinforcement-learning", "data-preprocessing", "model-evaluation"]
+    categories: ["foundation-ml", "supervised-learning", "unsupervised-learning", "pgm", "deep-learning", "reinforcement-learning", "data-preprocessing", "model-evaluation", "optimization-ml", "advanced-ml", "modern-ml"]
   }
 ];
 
@@ -200,7 +251,7 @@ export const CLUSTERS: ClusterMeta[] = [
 import {
   Layers, FunctionSquare, BarChart3, Dice5,
   Brain, Cpu, Network, Database, Activity, ShieldCheck,
-  Binary, GitBranch, Target
+  Binary, GitBranch, Target, Share2, Zap
 } from "lucide-react";
 
 export const ICON_MAP: Record<string, any> = {
@@ -218,6 +269,11 @@ export const ICON_MAP: Record<string, any> = {
   "information-theory": Binary,
   "discrete-math": GitBranch,
   "optimization": Target,
+  "foundation-ml": Brain,
+  "pgm": Share2,
+  "optimization-ml": Zap,
+  "advanced-ml": Layers,
+  "modern-ml": Activity,
 };
 
 // ---------------------------------------------------------------------------
@@ -242,6 +298,11 @@ const importMap: Record<string, () => Promise<any>> = {
   'data-preprocessing': () => import('../../categories/data-preprocessing-index'),
   'model-evaluation': () => import('../../categories/model-evaluation-index'),
   'optimization': () => import('../../categories/optimization-index'),
+  'foundation-ml': () => import('../../categories/foundation-ml-index'),
+  'pgm': () => import('../../categories/pgm-index'),
+  'optimization-ml': () => import('../../categories/optimization-ml-index'),
+  'advanced-ml': () => import('../../categories/advanced-ml-index'),
+  'modern-ml': () => import('../../categories/modern-ml-index'),
 };
 
 // Export name map (the const name inside each file)
@@ -261,6 +322,11 @@ const exportNameMap: Record<string, string> = {
   'data-preprocessing': 'DATA_PREPROCESSING_DATA',
   'model-evaluation': 'MODEL_EVALUATION_DATA',
   'optimization': 'OPTIMIZATION_DATA',
+  'foundation-ml': 'FOUNDATION_ML_DATA',
+  'pgm': 'PGM_DATA',
+  'optimization-ml': 'OPTIMIZATION_ML_DATA',
+  'advanced-ml': 'ADVANCED_ML_DATA',
+  'modern-ml': 'MODERN_ML_DATA',
 };
 
 /**

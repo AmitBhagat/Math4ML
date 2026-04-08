@@ -1,83 +1,82 @@
-import { CategoryData } from "../src/data/types";
+import { CategoryData } from '../src/data/types';
+import { kmeansSection } from './unsupervised-learning/kmeans';
+import { hierarchicalSection } from './unsupervised-learning/hierarchical';
+import { dbscanSection } from './unsupervised-learning/dbscan';
+import { gmmSection } from './unsupervised-learning/gmm';
+import { dimReductionIntroSection } from './unsupervised-learning/dim-reduction-intro';
+import { pcaSection } from './unsupervised-learning/pca';
+import { tsneSection } from './unsupervised-learning/tsne';
+import { umapSection } from './unsupervised-learning/umap';
+import { autoencodersSection } from './unsupervised-learning/autoencoders';
 
+// =============================================================================
+// UNSUPERVISED LEARNING (The 9-Topic Advanced Curriculum)
+// =============================================================================
 export const UNSUPERVISED_LEARNING_DATA: CategoryData = {
   id: "unsupervised-learning",
   title: "Unsupervised Learning",
-  description: "Extracting patterns and structures from unlabeled data. Essential for discovery and dimensionality reduction.",
+  description: "Extracting patterns, hidden tribes, and structural essence from data that has no labels.",
   keyConcepts: [
-    { title: "Clustering", description: "Grouping similar data points." },
-    { title: "D-Reduction", description: "Reducing features while preserving variance." }
+    { title: "Clustering Algorithms", description: "Finding the hidden tribes: k-Means, Hierarchical, DBSCAN, and GMM." },
+    { title: "Dimension Reduction", description: "Squashing information: PCA, t-SNE, and UMAP." },
+    { title: "Neural Manifolds", description: "Learning latent essentials: Autoencoders and Deep Embeddings." }
   ],
+  introHtml: String.raw`
+    <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
+      
+      <!-- Intro Section -->
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-headline font-semibold text-text-premium leading-tight">
+          Unsupervised Learning: <span class="text-accent italic">The Art of Discovery</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-text-premium font-normal leading-relaxed opacity-90">
+          In <strong>Unsupervised Learning</strong>, there is no teacher. No labels. No "Right Answer." The machine must look at the raw geometry of the data and find the <strong>Hidden Structure</strong> that defines it. It is the most challenging and creatively expressive field of Machine Learning.
+        </p>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- What to Expect -->
+      <div class="space-y-10 pb-12">
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          This comprehensive curriculum is broken into <strong>9 high-fidelity topics</strong>, starting with simple geometric partitioning (k-Means) and ending with complex neural architectures (Autoencoders). 
+        </p>
+
+        <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-4xl font-serif">"</div>
+          <p class="text-xl md:text-2xl text-text-premium italic leading-relaxed font-light">
+            "The goal of unsupervised learning is to create a compact, efficient, and useful representation of the world without the need for manual labels."
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="w-8 h-[1px] bg-accent/30"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent/60">— Yann LeCun</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="pt-12 text-center border-t border-border-premium/50">
+        <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Start exploring the hidden patterns of the universe.</p>
+        <a 
+          href="/#/machine-learning/unsupervised-learning/kmeans" 
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
+        >
+          Begin with k-Means Clustering
+        </a>
+      </div>
+
+    </div>
+  `,
   sections: [
-    {
-      id: "clustering",
-      title: "Clustering Algorithms",
-      description: "Grouping data points based on proximity or density in feature space.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">🧩 ML · Unsupervised</div>
-          <h1>Clustering Analysis</h1>
-          <p>Clustering is about finding the "hidden tribes" in your data. Since we don't have labels, we rely on the geometry of the data itself to tell us what belongs together.</p>
-        </div>
-
-        <h2 id="kmeans">1. K-Means Clustering</h2>
-        <p>Imagine you have a room full of people and you want to group them into $K$ teams. K-Means does this by iteratively moving the "center" of each team to the average location of its members.</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> K-Means is a <strong>Partitioning Optimizer</strong>. It aims to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>:
-            <div class="math-block">$$J = \sum_{j=1}^K \sum_{x \in C_j} ||x - \mu_j||^2$$</div>
-            Where $\mu_j$ is the centroid of cluster $C_j$. The algorithm alternates between <strong>Assignment</strong> (finding the closest $\mu$) and <strong>Update</strong> (calculating the mean of the assigned points).
-          </div>
-        </div>
-
-        <h2 id="density">2. Density-Based Clustering (DBSCAN)</h2>
-        <p>What if your data isn't in nice round circles? K-Means fails on complex shapes. DBSCAN looks for "crowds" (high-density regions) separated by "empty space" (low-density noise).</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> DBSCAN defines a point as a <strong>Core Point</strong> if it has at least <code>MinPts</code> neighbors within a radius $\epsilon$. It builds clusters by linking points that are <strong>Density-Reachable</strong> from each other. This allows it to find clusters of <strong>Arbitrary Shape</strong> and identify outliers automatically.
-          </div>
-        </div>
-
-        <div class="linking-rule">
-          <strong>Next Step:</strong> Clustering helps group data, but how do we simplify data with thousands of features? Move to <strong><a href="#/machine-learning/unsupervised-learning/dimensionality-reduction">Dimensionality Reduction</a></strong>.
-        </div>
-      `,
-      tags: ["K-Means", "DBSCAN", "Hierarchical"],
-      color: "#bc8cff"
-    },
-    {
-      id: "dimensionality-reduction",
-      title: "Dimensionality Reduction",
-      description: "Condensing high-dimensional data into lower-dimensional representations while preserving information.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">📉 ML · Unsupervised</div>
-          <h1>Dimensionality Reduction</h1>
-          <p>The "Curse of Dimensionality" tells us that data becomes sparse and unpredictable in high dimensions. We need to "squash" our data while keeping the most important signals.</p>
-        </div>
-
-        <h2 id="pca">1. Principal Component Analysis (PCA)</h2>
-        <p>Think of PCA as finding the best angle to take a 2D photograph of a 3D object so that you keep as much detail (variance) as possible.</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> PCA is conceptually the <strong>Eigen-decomposition</strong> of the data's <strong>Covariance Matrix</strong>. If $\mathbf{\Sigma}$ is the covariance matrix of our features, we solve:
-            <div class="math-block">$$\mathbf{\Sigma} \mathbf{v}_i = \lambda_i \mathbf{v}_i$$</div>
-            The <strong>Eigenvectors</strong> ($\mathbf{v}_i$) are the "Principal Components" (the directions of the data), and the <strong>Eigenvalues</strong> ($\lambda_i$) tell us exactly how much <strong>Variance</strong> is explained by each direction.
-          </div>
-        </div>
-
-        <div class="linking-rule">
-          <strong>Next Step:</strong> We've found patterns and reduced dimensions. Now, let's learn how to process the raw data that feeds these models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
-        </div>
-      `,
-      tags: ["PCA", "t-SNE", "UMAP"],
-      color: "#bc8cff"
-    }
+    kmeansSection,
+    hierarchicalSection,
+    dbscanSection,
+    gmmSection,
+    dimReductionIntroSection,
+    pcaSection,
+    tsneSection,
+    umapSection,
+    autoencodersSection
   ]
 };

@@ -54,9 +54,20 @@ export const conditionalProbabilitySection: TopicSection = {
       <h4>Problem: Narrowing Down Outcomes</h4>
       <p>I roll a fair six-sided die. If I tell you the result is \(> 3\), what is the probability that it is an even number?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Condition (B):</strong> \(B = \{4, 5, 6\}\). \(P(B) = 3/6 = 0.5\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Target (A \(\cap\) B):</strong> Even numbers that are also \(> 3\): \(\{4, 6\}\). \(P(A \cap B) = 2/6 = 0.33\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Apply Formula:</strong> \(0.33 / 0.5 = 0.66\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Condition (B):</strong> \(B = \{4, 5, 6\}\). \(P(B) = 3/6 = 0.5\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Identify Target (A \(\cap\) B):</strong> Even numbers that are also \(> 3\): \(\{4, 6\}\). \(P(A \cap B) = 2/6 = 0.33\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Apply Formula:</strong> \(0.33 / 0.5 = 0.66\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -71,8 +82,16 @@ export const conditionalProbabilitySection: TopicSection = {
       <h4>Problem: The Sensitivity of Models</h4>
       <p>A test for a disease is 90% accurate (if you have it, the test is positive). 1% of the population has it. If you test positive, how likely are you to actually have the disease?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> We want \(P(\text{Disease} | \text{Pos})\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Formula:</strong> Requires Bayes' Rule (an extension of conditional probability).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> We want \(P(\text{Disease} | \text{Pos})\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Formula:</strong> Requires Bayes' Rule (an extension of conditional probability).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

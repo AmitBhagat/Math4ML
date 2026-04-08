@@ -55,10 +55,24 @@ export const mleSection: TopicSection = {
       <h4>Problem: Finding the "True" Chance of Heads</h4>
       <p>You flip a coin 10 times and get 7 Heads. Estimate the bias \(p\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Likelihood Function:</strong> \(L(p) = p^7 (1-p)^3\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Log-Likelihood:</strong> \(\ell(p) = 7 \log(p) + 3 \log(1-p)\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Optimize:</strong> Set derivative to zero: \(\frac{7}{p} - \frac{3}{1-p} = 0\).</div></div>
-      <div class="step-box"><span class="step-num">4</span><div><strong>Solve:</strong> \(7(1-p) = 3p \to 7 - 7p = 3p \to 10p = 7 \to p = 0.7\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Likelihood Function:</strong> \(L(p) = p^7 (1-p)^3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Log-Likelihood:</strong> \(\ell(p) = 7 \log(p) + 3 \log(1-p)\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Optimize:</strong> Set derivative to zero: \(\frac{7}{p} - \frac{3}{1-p} = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Solve:</strong> \(7(1-p) = 3p \to 7 - 7p = 3p \to 10p = 7 \to p = 0.7\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -73,8 +87,16 @@ export const mleSection: TopicSection = {
       <h4>Problem: Estimating the "Center" of Noise</h4>
       <p>Data: [10, 12, 11]. Assume data is Normal with unknown \(\mu\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The Log-Likelihood of Gaussian data is proportional to the <strong>Negative Squared Error</strong> (\(-(x - \mu)^2\)).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Conclusion:</strong> To maximize the likelihood, we must <strong>minimize</strong> the squared error.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify:</strong> The Log-Likelihood of Gaussian data is proportional to the <strong>Negative Squared Error</strong> (\(-(x - \mu)^2\)).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Conclusion:</strong> To maximize the likelihood, we must <strong>minimize</strong> the squared error.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

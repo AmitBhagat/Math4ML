@@ -87,18 +87,29 @@ export const integralsSection: TopicSection = {
       <h4>Problem: Finding Range Probabilities</h4>
       <p>Given a simple PDF $f(x) = \frac{3}{8}x^2$ defined on the interval $[0, 2]$, find the probability that $x$ is between 1 and 2.</p>
       
-      <p><strong>Step-by-Step Solution:</strong></p>
-      <ol>
-        <li><strong>Set up the integral</strong>: $P(1 \leq x \leq 2) = \int_{1}^{2} \frac{3}{8}x^2 \, dx$.</li>
-        <li><strong>Find the antiderivative</strong>: $\int \frac{3}{8}x^2 \, dx = \frac{3}{8} \cdot \frac{x^3}{3} = \frac{1}{8}x^3$.</li>
-        <li><strong>Apply limits</strong>:
-          <ul>
-            <li>$F(2) = \frac{1}{8}(2)^3 = 1$.</li>
-            <li>$F(1) = \frac{1}{8}(1)^3 = 0.125$.</li>
-          </ul>
-        </li>
-        <li><strong>Subtract</strong>: $1 - 0.125 = 0.875$.</li>
-      </ol>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Set up the integral</strong>: \(P(1 \leq x \leq 2) = \int_{1}^{2} \frac{3}{8}x^2 \, dx\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Find the antiderivative</strong>: \(\int \frac{3}{8}x^2 \, dx = \frac{3}{8} \cdot \frac{x^3}{3} = \frac{1}{8}x^3\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Apply limits</strong>:
+            <ul>
+              <li>\(F(2) = \frac{1}{8}(2)^3 = 1\).</li>
+              <li>\(F(1) = \frac{1}{8}(1)^3 = 0.125\).</li>
+            </ul>
+          </div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Subtract</strong>: \(1 - 0.125 = 0.875\).</div>
+        </div>
+      </div>
       <p><strong>Result:</strong> There is an <strong>87.5%</strong> probability that $x$ falls in the range $[1, 2]$.</p>
     </div>
 

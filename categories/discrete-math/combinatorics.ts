@@ -82,9 +82,20 @@ export const combinatoricsSection: TopicSection = {
       <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
       <p>A deep learning researcher wants to test 3 distinct layers: <strong>Conv2D (C)</strong>, <strong>MaxPooling (M)</strong>, and <strong>Dropout (D)</strong>. How many ways can they be ordered in a block?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -98,9 +109,20 @@ export const combinatoricsSection: TopicSection = {
       <h4>Problem: Feature Subset Selection (Combinations)</h4>
       <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

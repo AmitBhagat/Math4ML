@@ -46,8 +46,16 @@ export const basisDimensionSection: TopicSection = {
       <h4>Problem: Finding the Simplest Basis</h4>
       <p>Prove that \(\mathbf{e}_1 = [1, 0]\) and \(\mathbf{e}_2 = [0, 1]\) form a basis for 2D space.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Check:</strong> Can we reach any point \([x, y]\)? Yes: \(x\mathbf{e}_1 + y\mathbf{e}_2\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Identify:</strong> These are independent directions (Horizontal and Vertical).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Check:</strong> Can we reach any point \([x, y]\)? Yes: \(x\mathbf{e}_1 + y\mathbf{e}_2\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Identify:</strong> These are independent directions (Horizontal and Vertical).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -62,8 +70,16 @@ export const basisDimensionSection: TopicSection = {
       <h4>Problem: Changing Perspective</h4>
       <p>In computer vision, we sometimes use a coordinate system tilted at 45°. Is \(\mathbf{b}_1 = [1, 1]\) and \(\mathbf{b}_2 = [1, -1]\) a valid basis?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Independence:</strong> Neither vector is a multiple of the other. (Pass).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Check:</strong> Two independent vectors in 2D space always span the space.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Independence:</strong> Neither vector is a multiple of the other. (Pass).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Check:</strong> Two independent vectors in 2D space always span the space.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

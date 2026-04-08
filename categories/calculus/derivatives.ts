@@ -56,8 +56,16 @@ export const derivativesSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Power Rule:</strong> \(\frac{d}{dx}x^2 = 2x\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Substitute:</strong> Evaluate at \(x = 3 \to 2(3) = 6\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Apply Power Rule:</strong> \(\frac{d}{dx}x^2 = 2x\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Substitute:</strong> Evaluate at \(x = 3 \to 2(3) = 6\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -72,8 +80,16 @@ export const derivativesSection: TopicSection = {
       <h4>Problem: Nudging a Single Parameter</h4>
       <p>Assume your Loss \(L = (b - 5)^2\) where \(b\) is a bias term. Calculate the sensitivity at \(b = 2\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Differentiate:</strong> Using the chain/power rule, \(\frac{dL}{db} = 2(b - 5)\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Evaluate:</strong> At \(b = 2 \to 2(2 - 5) = -6\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Differentiate:</strong> Using the chain/power rule, \(\frac{dL}{db} = 2(b - 5)\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Evaluate:</strong> At \(b = 2 \to 2(2 - 5) = -6\).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>

@@ -58,9 +58,20 @@ export const criticalPointsSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the Bottom of \(f(x, y) = x^2 + y^2 - 4x\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Gradient:</strong> \(\nabla f = [2x - 4, 2y]^T\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Set to Zero:</strong> \(2x - 4 = 0 \to x = 2\); \(2y = 0 \to y = 0\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Hessian:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}\). (Both \(\lambda = 2\)).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Gradient:</strong> \(\nabla f = [2x - 4, 2y]^T\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Set to Zero:</strong> \(2x - 4 = 0 \to x = 2\); \(2y = 0 \to y = 0\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Hessian:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 0 \\ 0 & 2 \end{bmatrix}\). (Both \(\lambda = 2\)).</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -74,9 +85,20 @@ export const criticalPointsSection: TopicSection = {
     <div class="example-box">
       <h4>Problem: Finding the Trap in \(f(x, y) = x^2 - y^2\)</h4>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Gradient:</strong> \(\nabla f = [2x, -2y]^T\). (Critical point at \((0, 0)\)).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Hessian:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Check Eigenvalues:</strong> \(\lambda = 2\) and \(\lambda = -2\).</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Gradient:</strong> \(\nabla f = [2x, -2y]^T\). (Critical point at \((0, 0)\)).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Hessian:</strong> \(\mathbf{H} = \begin{bmatrix} 2 & 0 \\ 0 & -2 \end{bmatrix}\).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Check Eigenvalues:</strong> \(\lambda = 2\) and \(\lambda = -2\).</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>

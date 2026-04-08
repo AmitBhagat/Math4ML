@@ -54,8 +54,16 @@ export const convexOptimizationSection: TopicSection = {
       <h4>Problem: Identifying Guaranteed Solutions</h4>
       <p>Compare \(f(x) = x^2\) (Convex) vs. \(f(x) = \sin(x)\) (Non-Convex).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Parabola (\(x^2\)):</strong> Gradient Descent will always reach \(x=0\), the absolute global minimum.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Sine (\(\sin x\)):</strong> Depending on where you start, you might get trapped at \(x = 3\pi/2\) or \(7\pi/2\). You have no way of knowing if there is a "Better" minimum elsewhere.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Parabola (\(x^2\)):</strong> Gradient Descent will always reach \(x=0\), the absolute global minimum.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Sine (\(\sin x\)):</strong> Depending on where you start, you might get trapped at \(x = 3\pi/2\) or \(7\pi/2\). You have no way of knowing if there is a "Better" minimum elsewhere.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -70,8 +78,16 @@ export const convexOptimizationSection: TopicSection = {
       <h4>Problem: Comparing Two Algorithms</h4>
       <p>Support Vector Machines (SVM) vs. Neural Networks (NN).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>SVM:</strong> Uses a Quadratic Programming (Convex) objective. Finding the "Best Margin" is a solved problem with one answer.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>NN:</strong> The loss surface is a chaotic landscape with billions of parameters. Finding the "Best" weights is a never-ending quest.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>SVM:</strong> Uses a Quadratic Programming (Convex) objective. Finding the "Best Margin" is a solved problem with one answer.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>NN:</strong> The loss surface is a chaotic landscape with billions of parameters. Finding the "Best" weights is a never-ending quest.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
