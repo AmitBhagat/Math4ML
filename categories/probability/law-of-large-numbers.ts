@@ -40,7 +40,7 @@ export const lawOfLargeNumbersSection: TopicSection = {
         <strong>Teacher's Intuition:</strong> Think of LLN as <strong>"The Truth Coming to Light."</strong> 
         In the short term, anyone can look like a genius (High Accuracy). 
         But in the long term, your <strong>True Average Skill</strong> will be revealed. 
-        In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the **True Error** of the model on the data distribution.
+        In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the <strong>True Error</strong> of the model on the data distribution.
       </div>
     </div>
 
@@ -61,7 +61,7 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Individual players can win (Luck), but the **Law of Large Numbers** means the casino **never loses in the long run**. It is mathematically impossible for them to lose over millions of trials.
+          <strong>Result:</strong> Individual players can win (Luck), but the <strong>Law of Large Numbers</strong> means the casino <strong>never loses in the long run</strong>. It is mathematically impossible for them to lose over millions of trials.
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> This is why we need **Large Datasets** in Deep Learning. If we only have 10 data points, our "Accuracy" is just noise. If we have 1,000,000, the LLN gives us the **Scientific Confidence** that our model is actually working.
+          <strong>Intuition:</strong> This is why we need <strong>Large Datasets</strong> in Deep Learning. If we only have 10 data points, our "Accuracy" is just noise. If we have 1,000,000, the LLN gives us the <strong>Scientific Confidence</strong> that our model is actually working.
         </div>
       </div>
     </div>

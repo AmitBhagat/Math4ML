@@ -61,7 +61,7 @@ export const varianceSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Both stocks have an **Expectation of $5**. But Stock B has high **Variance (225)**. This is why we use variance as a proxy for "Risk."
+          <strong>Result:</strong> Both stocks have an <strong>Expectation of $5</strong>. But Stock B has high <strong>Variance (225)</strong>. This is why we use variance as a proxy for "Risk."
         </div>
       </div>
     </div>
@@ -78,7 +78,7 @@ export const varianceSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> 1.5. This tells us our "Expected deviation" from the correct answer is fairly small. This is the foundation of **Least Squares Regression**.
+          <strong>Result:</strong> 1.5. This tells us our "Expected deviation" from the correct answer is fairly small. This is the foundation of <strong>Least Squares Regression</strong>.
         </div>
       </div>
     </div>

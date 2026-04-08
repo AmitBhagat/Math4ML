@@ -47,8 +47,8 @@ export const regularizationSection: TopicSection = {
     <h2 id="derivation">L1 (Lasso) vs. L2 (Ridge)</h2>
     <p>Loss = Error + \(\lambda \times\) Constraint.</p>
     <ul>
-      <li><strong>L1 (Lasso):</strong> Constraint is \(\sum |w_i|\). It encourages **Sparsity** (making most weights exactly zero).</li>
-      <li><strong>L2 (Ridge):</strong> Constraint is \(\sum w_i^2\). It encourages **Small Weights** (distributing the influence across many features).</li>
+      <li><strong>L1 (Lasso):</strong> Constraint is \(\sum |w_i|\). It encourages <strong>Sparsity</strong> (making most weights exactly zero).</li>
+      <li><strong>L2 (Ridge):</strong> Constraint is \(\sum w_i^2\). It encourages <strong>Small Weights</strong> (distributing the influence across many features).</li>
     </ul>
 
     <h2 id="example-diamond">Example 1: The L1 Diamond (Sparsity)</h2>
@@ -56,13 +56,13 @@ export const regularizationSection: TopicSection = {
       <h4>Problem: Feature Selection</h4>
       <p>Imagine you have 1,000 features, but only 10 are actually useful. How do you find them?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use **L1 Regularization**. The geometry of L1 is a diamond-shaped surface with sharp "Corners" on the axes.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use <strong>L1 Regularization</strong>. The geometry of L1 is a diamond-shaped surface with sharp "Corners" on the axes.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> The optimization process is much more likely to hit those corners. This forces the unimportant weights to hit 0 and stay there.</div></div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> This is why L1 is used for **Automatic Feature Selection**. It simplifies the model by deleting useless dimensions entirely.
+          <strong>Result:</strong> This is why L1 is used for <strong>Automatic Feature Selection</strong>. It simplifies the model by deleting useless dimensions entirely.
         </div>
       </div>
     </div>
@@ -72,13 +72,13 @@ export const regularizationSection: TopicSection = {
       <h4>Problem: Stability and Smoothing</h4>
       <p>Data: Two highly correlated features (e.g. Height in cm vs. Height in inches). Which one should get the weight?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use **L2 Regularization**. The geometry of L2 is a smooth sphere centered at zero.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Use <strong>L2 Regularization</strong>. The geometry of L2 is a smooth sphere centered at zero.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Observation:</strong> Instead of picking one (like L1 might), L2 will gently spread the weight across both. It hates extreme values.</div></div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> L2 is used for **Stability**. It ensures that no single feature dominates the model too much. This makes the final model much more robust to small changes in any individual feature.
+          <strong>Intuition:</strong> L2 is used for <strong>Stability</strong>. It ensures that no single feature dominates the model too much. This makes the final model much more robust to small changes in any individual feature.
         </div>
       </div>
     </div>
@@ -116,7 +116,7 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the **Linear Algebra**, **Calculus**, **Probability**, **Statistics**, **Information Theory**, and **Optimization** expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.
+      <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the <strong>Linear Algebra</strong>, <strong>Calculus</strong>, <strong>Probability</strong>, <strong>Statistics</strong>, <strong>Information Theory</strong>, and <strong>Optimization</strong> expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.
     </div>
   `
 };

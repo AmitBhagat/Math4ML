@@ -49,7 +49,7 @@ export const gradientDescentSection: TopicSection = {
     <div class="math-block">$$\theta_{new} = \theta_{old} - \eta \nabla J(\theta)$$</div>
     <ul>
       <li><strong>\(\nabla J(\theta)\)</strong>: The Gradient (the vector of partial derivatives).</li>
-      <li><strong>\(\eta\) (Eta)</strong>: The **Learning Rate**. This determines how big of a "step" we take.</li>
+      <li><strong>\(\eta\) (Eta)</strong>: The <strong>Learning Rate</strong>. This determines how big of a "step" we take.</li>
     </ul>
 
     <h2 id="example-parabola">Example 1: The 1D Parabola</h2>
@@ -80,7 +80,7 @@ export const gradientDescentSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> In 2D, the model will "zig-zag" more aggressively in the direction of the steeper slope. This is why **Feature Scaling** is so important—it makes the bowl "round" instead of an "elongated oval," helping Gradient Descent move straight to the center.
+          <strong>Intuition:</strong> In 2D, the model will "zig-zag" more aggressively in the direction of the steeper slope. This is why <strong>Feature Scaling</strong> is so important—it makes the bowl "round" instead of an "elongated oval," helping Gradient Descent move straight to the center.
         </div>
       </div>
     </div>

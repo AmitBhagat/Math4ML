@@ -120,7 +120,7 @@ export const DISCRETE_MATH_DATA: CategoryData = {
         </div>
 
         <p class="text-lg text-text-premium font-normal leading-relaxed">
-          You will learn to see data as a network of relationships, moving from simple vectors to complex topological structures. We focus on the **logic of structure** and the fundamental rules of calculation.
+          You will learn to see data as a network of relationships, moving from simple vectors to complex topological structures. We focus on the <strong>logic of structure</strong> and the fundamental rules of calculation.
         </p>
 
         <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">

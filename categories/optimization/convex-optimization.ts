@@ -60,7 +60,7 @@ export const convexOptimizationSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Deep Learning is almost **never** convex, which is why it's so hard to train. Linear Regression is **always** convex, which is why it works every time.
+          <strong>Result:</strong> Deep Learning is almost <strong>never</strong> convex, which is why it's so hard to train. Linear Regression is <strong>always</strong> convex, which is why it works every time.
         </div>
       </div>
     </div>
@@ -76,7 +76,7 @@ export const convexOptimizationSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Why do we use NN instead of SVM if they aren't convex? Because **Capacity** is more important than **Guarantees**. A chaotic NN can learn features that a "Guaranteed" SVM never could.
+          <strong>Intuition:</strong> Why do we use NN instead of SVM if they aren't convex? Because <strong>Capacity</strong> is more important than <strong>Guarantees</strong>. A chaotic NN can learn features that a "Guaranteed" SVM never could.
         </div>
       </div>
     </div>

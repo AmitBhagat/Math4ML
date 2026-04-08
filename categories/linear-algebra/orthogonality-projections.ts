@@ -88,7 +88,7 @@ print(f"Shadow of y on u: {proj_y_u}")
     <h2 id="applications">Applications in ML</h2>
     <ul>
       <li><strong>Linear Regression</strong>: The core solver (Normal Equation) is a sequence of projections.</li>
-      <li><strong>Gram-Schmidt Process</strong>: Turning any set of vectors into an **Orthogonal Basis** for training stability.</li>
+      <li><strong>Gram-Schmidt Process</strong>: Turning any set of vectors into an <strong>Orthogonal Basis</strong> for training stability.</li>
       <li><strong>Support Vector Machines (SVMs)</strong>: Finding the perpendicular distance from a sample to the decision boundary.</li>
     </ul>
 

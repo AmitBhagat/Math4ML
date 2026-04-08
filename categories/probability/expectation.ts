@@ -40,7 +40,7 @@ export const expectationSection: TopicSection = {
         <strong>Teacher's Intuition:</strong> Think of Expected Value as a <strong>"Fair Bet."</strong> 
         If you play a game 1,000 times, you'll sometimes win big and sometimes lose. 
         Your <strong>Expectation</strong> is the number that tells you if, in the long run, you'll walk away with more money than you started with. 
-        In ML, we don't care about a single "lucky" training batch; we care about the **Expected Performance** across all future data.
+        In ML, we don't care about a single "lucky" training batch; we care about the <strong>Expected Performance</strong> across all future data.
       </div>
     </div>
 
@@ -61,7 +61,7 @@ export const expectationSection: TopicSection = {
       <div class="callout error">
         <div class="callout-icon">✕</div>
         <div class="callout-body">
-          <strong>Result:</strong> Since the ticket costs $5 but only yields $4 on average, you will **lose $1** per ticket in the long run. The Expected Value is your reality check.
+          <strong>Result:</strong> Since the ticket costs $5 but only yields $4 on average, you will <strong>lose $1</strong> per ticket in the long run. The Expected Value is your reality check.
         </div>
       </div>
     </div>
@@ -102,8 +102,8 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
 
     <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>Cost Functions (Risk)</strong>: We minimize the **Expected Loss** (\(MSE\) or Cross-Entropy) because we want a model that is correct <em>on average</em>.</li>
-      <li><strong>Reinforcement Learning</strong>: An agent chooses actions that maximize the **Expected Reward** over time.</li>
+      <li><strong>Cost Functions (Risk)</strong>: We minimize the <strong>Expected Loss</strong> (\(MSE\) or Cross-Entropy) because we want a model that is correct <em>on average</em>.</li>
+      <li><strong>Reinforcement Learning</strong>: An agent chooses actions that maximize the <strong>Expected Reward</strong> over time.</li>
     </ul>
 
     <div class="linking-rule">

@@ -79,7 +79,7 @@ export const randomVariablesSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Unlike the coin flip, we can't list every possible wait time. This makes it a **Continuous Random Variable**, which we handle using Probability Density Functions (PDFs) instead of simple lists.
+          <strong>Intuition:</strong> Unlike the coin flip, we can't list every possible wait time. This makes it a <strong>Continuous Random Variable</strong>, which we handle using Probability Density Functions (PDFs) instead of simple lists.
         </div>
       </div>
     </div>

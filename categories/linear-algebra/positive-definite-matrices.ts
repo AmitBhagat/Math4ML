@@ -23,7 +23,7 @@ export const positiveDefiniteSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>In Optimization (Gradient Descent), we want to reach the minimum of a "loss surface." If the Hessian matrix (\(H\)) at a point is <strong>Positive Definite</strong>, it means the surface is locally curved like a bowl. No matter which way you move, you'll eventually "roll back down" to the center. This is the definition of **Convexity**.</p>
+    <p>In Optimization (Gradient Descent), we want to reach the minimum of a "loss surface." If the Hessian matrix (\(H\)) at a point is <strong>Positive Definite</strong>, it means the surface is locally curved like a bowl. No matter which way you move, you'll eventually "roll back down" to the center. This is the definition of <strong>Convexity</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -66,7 +66,7 @@ export const positiveDefiniteSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> The Hessian is Positive Definite. This means the loss function is **Globally Convex** and we can find the perfect weights using Gradient Descent.
+          <strong>Result:</strong> The Hessian is Positive Definite. This means the loss function is <strong>Globally Convex</strong> and we can find the perfect weights using Gradient Descent.
         </div>
       </div>
     </div>
@@ -86,7 +86,7 @@ print(f"Is Matrix Positive Definite? {is_pd}")
 
     <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>Kernel Methods (SVMs)</strong>: The Gram Matrix must be **Positive Semi-Definite** (\(\ge 0\)) to ensure a valid optimization problem.</li>
+      <li><strong>Kernel Methods (SVMs)</strong>: The Gram Matrix must be <strong>Positive Semi-Definite</strong> (\(\ge 0\)) to ensure a valid optimization problem.</li>
       <li><strong>Gaussian Processes</strong>: The Covariance Matrix is always Positive Semi-Definite.</li>
       <li><strong>Newton's Method</strong>: Relies on the Hessian being PD to guarantee convergence to a minimum.</li>
     </ul>

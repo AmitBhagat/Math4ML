@@ -9,7 +9,7 @@ export const gradientSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Gradient</div>
       <h1>The Gradient: The Compass of Optimization</h1>
-      <p>The <strong>Gradient</strong> (\(\nabla f\)) is a vector containing all the partial derivatives of a function. It is a mathematical "compass" that always points directly in the direction of the **steepest uphill** slope.</p>
+      <p>The <strong>Gradient</strong> (\(\nabla f\)) is a vector containing all the partial derivatives of a function. It is a mathematical "compass" that always points directly in the direction of the <strong>steepest uphill</strong> slope.</p>
     </div>
 
     <div class="toc">
@@ -78,7 +78,7 @@ export const gradientSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Moving diagonally at \((3, 4)\) results in a slope of ~9.9. This tells us the **Directional Sensitivity** of our model along a custom feature axis.
+          <strong>Result:</strong> Moving diagonally at \((3, 4)\) results in a slope of ~9.9. This tells us the <strong>Directional Sensitivity</strong> of our model along a custom feature axis.
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ import numpy as np
 
 def f(x_vec):
     x, y = x_vec[0], x_vec[1]
-    return x**2 + y**2
+    return x<strong>2 + y</strong>2
 
 def compute_gradient(x_vec, h=1e-5):
     # Finite difference approximation of the entire gradient

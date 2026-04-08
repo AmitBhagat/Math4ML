@@ -52,7 +52,7 @@ export const vectorSpacesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> YES. It's a valid subspace. In ML, when we perform **Dimensionality Reduction**, we're often projecting high-dimensional data onto a lower-dimensional subspace like this.
+          <strong>Result:</strong> YES. It's a valid subspace. In ML, when we perform <strong>Dimensionality Reduction</strong>, we're often projecting high-dimensional data onto a lower-dimensional subspace like this.
         </div>
       </div>
     </div>

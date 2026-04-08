@@ -32,14 +32,14 @@ export const centralLimitTheoremSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the **CLT** says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
+    <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the <strong>CLT</strong> says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
         If you ask one person to guess the price of a jar of jellybeans, they might be wildly wrong. 
-        But if you ask 10,000 people and take their **Average**, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
+        But if you ask 10,000 people and take their <strong>Average</strong>, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
         In ML, this is why we can assume that our model's cumulative error is Gaussian.
       </div>
     </div>
@@ -61,7 +61,7 @@ export const centralLimitTheoremSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> By summing 100 "flat" variables, we birthed a Gaussian one. This is the **CLT** in action.
+          <strong>Result:</strong> By summing 100 "flat" variables, we birthed a Gaussian one. This is the <strong>CLT</strong> in action.
         </div>
       </div>
     </div>
@@ -71,13 +71,13 @@ export const centralLimitTheoremSection: TopicSection = {
       <h4>Problem: Tracking Compound Measurement Errors</h4>
       <p>Assume your sensor error is caused by temperature, vibration, and radiation. Each follows a wild distribution.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The **Total Error** is the sum of all these independent factors.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The <strong>Total Error</strong> is the sum of all these independent factors.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Conclusion:</strong> Regardless of how weird the individual errors are, the <strong>Aggregate Error</strong> will be Gaussian!</div></div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> This is why we almost always use **MSE (Mean Squared Error)** in ML—it is mathematically the optimal loss function if you assume your data errors follow this CLT-driven Normal distribution.
+          <strong>Intuition:</strong> This is why we almost always use <strong>MSE (Mean Squared Error)</strong> in ML—it is mathematically the optimal loss function if you assume your data errors follow this CLT-driven Normal distribution.
         </div>
       </div>
     </div>

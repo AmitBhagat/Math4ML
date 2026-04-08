@@ -39,7 +39,7 @@ export const sgdSection: TopicSection = {
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
         Batch Gradient Descent is like asking everyone in the city and taking the average direction. It's accurate, but it takes forever. 
-        SGD is like asking the first person you see and walking that way. They might be wrong, but you're moving **Right Now**. If you ask someone new every 10 meters, eventually you'll reach the restaurant.
+        SGD is like asking the first person you see and walking that way. They might be wrong, but you're moving <strong>Right Now</strong>. If you ask someone new every 10 meters, eventually you'll reach the restaurant.
       </div>
     </div>
 
@@ -64,7 +64,7 @@ export const sgdSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Over time, the sum of SGD steps averages out to the Batch GD step. We trade **Accuracy per Step** for **Speed of Iteration**.
+          <strong>Result:</strong> Over time, the sum of SGD steps averages out to the Batch GD step. We trade <strong>Accuracy per Step</strong> for <strong>Speed of Iteration</strong>.
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@ export const sgdSection: TopicSection = {
     <h2 id="example-mini">Example 2: Mini-batch Training</h2>
     <div class="example-box">
       <h4>Problem: The Best of Both Worlds</h4>
-      <p>Instead of 1 sample (Pure SGD) or all samples (Batch GD), we use a **Mini-batch** of 32 samples.</p>
+      <p>Instead of 1 sample (Pure SGD) or all samples (Batch GD), we use a <strong>Mini-batch</strong> of 32 samples.</p>
       
       <div class="step-box"><span class="step-num">1</span><div><strong>Logic:</strong> We average the gradients of 32 points. This dramatically reduces the noise compared to pure SGD.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Speed:</strong> GPU hardware is optimized for processing 32 or 64 points simultaneously.</div></div>
@@ -80,7 +80,7 @@ export const sgdSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Mini-batch SGD is the "Standard" for all Neural Networks (Adam, RMSProp, etc.). It gives us the **Stability** of Batch GD and the **Computational Speed** of SGD.
+          <strong>Intuition:</strong> Mini-batch SGD is the "Standard" for all Neural Networks (Adam, RMSProp, etc.). It gives us the <strong>Stability</strong> of Batch GD and the <strong>Computational Speed</strong> of SGD.
         </div>
       </div>
     </div>

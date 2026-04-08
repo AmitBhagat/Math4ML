@@ -28,11 +28,11 @@ export const singularValueDecompositionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a lump of **Pizza Dough**. 
+        <strong>Teacher's Intuition:</strong> Think of a lump of <strong>Pizza Dough</strong>. 
         SVD says you can turn it into any final pizza in 3 steps: 
-        1. **Rotate** the dough to find the best axis, 
-        2. **Stretch** it into a circle (Scaling), 
-        3. **Rotate** it again to align it with the box.
+        1. <strong>Rotate</strong> the dough to find the best axis, 
+        2. <strong>Stretch</strong> it into a circle (Scaling), 
+        3. <strong>Rotate</strong> it again to align it with the box.
         Even the messiest matrix is just a sequence of these 3 clean movements.
       </div>
     </div>
@@ -71,7 +71,7 @@ export const singularValueDecompositionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> We kept **99%** of the information using only **half** the storage space. This is how high-res photos are transmitted over slow WiFi.
+          <strong>Result:</strong> We kept <strong>99%</strong> of the information using only <strong>half</strong> the storage space. This is how high-res photos are transmitted over slow WiFi.
         </div>
       </div>
     </div>

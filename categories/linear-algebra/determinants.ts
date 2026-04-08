@@ -53,7 +53,7 @@ export const determinantsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Any shape you draw in that space will have exactly **6 times** the area after the transformation.
+          <strong>Result:</strong> Any shape you draw in that space will have exactly <strong>6 times</strong> the area after the transformation.
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@ export const determinantsSection: TopicSection = {
       <div class="callout error">
         <div class="callout-icon">✕</div>
         <div class="callout-body">
-          <strong>Result:</strong> \(\det = 0\). This matrix squashed the 2D plane into a 1D line. No inverse exists. This is why **full rank** data is critical in ML.
+          <strong>Result:</strong> \(\det = 0\). This matrix squashed the 2D plane into a 1D line. No inverse exists. This is why <strong>full rank</strong> data is critical in ML.
         </div>
       </div>
     </div>

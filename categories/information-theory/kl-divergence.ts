@@ -37,9 +37,9 @@ export const klDivergenceSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of KL Divergence as **"The Surprise Penalty."** 
+        <strong>Teacher's Intuition:</strong> Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
         You expect results to follow pattern \(Q\), but they actually follow \(P\). 
-        KL Divergence is the measure of how **surprised** you are on average. 
+        KL Divergence is the measure of how <strong>surprised</strong> you are on average. 
         Note that it is <strong>Asymmetric</strong>: \(D_{KL}(P || Q) \neq D_{KL}(Q || P)\). 
         Being surprised that a rare event is common is not the same as being surprised that a common event is rare!
       </div>
@@ -79,7 +79,7 @@ export const klDivergenceSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> This is a key metric in **Model Distillation**. We try to force a small "Student" model's output to have a low KL Divergence with a large "Teacher" model's output.
+          <strong>Intuition:</strong> This is a key metric in <strong>Model Distillation</strong>. We try to force a small "Student" model's output to have a low KL Divergence with a large "Teacher" model's output.
         </div>
       </div>
     </div>
@@ -103,13 +103,13 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
 
     <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>VAE (Variational Autoencoders)</strong>: Loss = Reconstruction + **KL Divergence**. The KL term forces the model to stay close to a "Normal" latent space.</li>
+      <li><strong>VAE (Variational Autoencoders)</strong>: Loss = Reconstruction + <strong>KL Divergence</strong>. The KL term forces the model to stay close to a "Normal" latent space.</li>
       <li><strong>Knowledge Distillation</strong>: Training smaller models to mimic the "Soft" probabilities of larger models.</li>
       <li><strong>T-SNE Visualization</strong>: Uses KL Divergence to match the high-dimensional neighborhood of data to a 2D map.</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of **Linear Algebra, Calculus, Probabilty, Statistics, & Information Theory**. Ready to move into **Machine Learning Architectures**? Explore <strong><a href="#/supervised/basics">Supervised Learning</a></strong>.
+      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probabilty, Statistics, & Information Theory</strong>. Ready to move into <strong>Machine Learning Architectures</strong>? Explore <strong><a href="#/supervised/basics">Supervised Learning</a></strong>.
     </div>
   `
 };

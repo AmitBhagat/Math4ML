@@ -78,7 +78,7 @@ export const crossEntropySection: TopicSection = {
       <div class="callout error">
         <div class="callout-icon">✕</div>
         <div class="callout-body">
-          <strong>Result:</strong> 4.6. This is a very high loss! The model is penalized heavily for being **"Confidently Wrong."** This sends a massive signal during backpropagation for the model to fix its weights immediately.
+          <strong>Result:</strong> 4.6. This is a very high loss! The model is penalized heavily for being <strong>"Confidently Wrong."</strong> This sends a massive signal during backpropagation for the model to fix its weights immediately.
         </div>
       </div>
     </div>

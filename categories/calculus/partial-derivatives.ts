@@ -61,7 +61,7 @@ export const partialDerivativesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Moving toward x is a slope of 2; moving toward y is a slope of 4. Therefore, the function is **more sensitive** to changes in \(y\) at this specific point.
+          <strong>Result:</strong> Moving toward x is a slope of 2; moving toward y is a slope of 4. Therefore, the function is <strong>more sensitive</strong> to changes in \(y\) at this specific point.
         </div>
       </div>
     </div>
@@ -87,7 +87,7 @@ export const partialDerivativesSection: TopicSection = {
 import numpy as np
 
 def f(x, y):
-    return x**2 + y**2
+    return x<strong>2 + y</strong>2
 
 def partial_derivative_x(x, y, h=1e-5):
     # Only nudge x, keep y fixed

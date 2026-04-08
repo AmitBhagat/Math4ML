@@ -38,20 +38,20 @@ export const criticalPointsSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of a Critical Point like <strong>The End of a Path</strong>. 
-        If you arrive at a flat spot and the ground curves up in all directions, you've found a **Minimum** (Success!). 
-        If it curves down everyone, you've found a **Maximum** (Reverse success!). 
-        In Deep Learning, we often find **Saddle Points**—frustrating flat areas that trap our models and slow down training.
+        If you arrive at a flat spot and the ground curves up in all directions, you've found a <strong>Minimum</strong> (Success!). 
+        If it curves down everyone, you've found a <strong>Maximum</strong> (Reverse success!). 
+        In Deep Learning, we often find <strong>Saddle Points</strong>—frustrating flat areas that trap our models and slow down training.
       </div>
     </div>
 
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>We find critical points by solving the equation:</p>
     <div class="math-block">$$\nabla f(\mathbf{x}) = \mathbf{0}$$</div>
-    <p>To classify the point, we examine the **Eigenvalues** of the Hessian matrix \(\mathbf{H}\):</p>
+    <p>To classify the point, we examine the <strong>Eigenvalues</strong> of the Hessian matrix \(\mathbf{H}\):</p>
     <ul>
-      <li><strong>All \(\lambda > 0\):</strong> (PD) -> **Local Minimum**.</li>
-      <li><strong>All \(\lambda < 0\):</strong> (ND) -> **Local Maximum**.</li>
-      <li><strong>Mixed \(\lambda\):</strong> -> **Saddle Point**.</li>
+      <li><strong>All \(\lambda > 0\):</strong> (PD) -> <strong>Local Minimum</strong>.</li>
+      <li><strong>All \(\lambda < 0\):</strong> (ND) -> <strong>Local Maximum</strong>.</li>
+      <li><strong>Mixed \(\lambda\):</strong> -> <strong>Saddle Point</strong>.</li>
     </ul>
 
     <h2 id="example-minimum">Example 1: Finding Local Minima</h2>
@@ -65,7 +65,7 @@ export const criticalPointsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> \((2, 0)\) is a **Local Minimum**. This is the optimal configuration for this toy model.
+          <strong>Result:</strong> \((2, 0)\) is a <strong>Local Minimum</strong>. This is the optimal configuration for this toy model.
         </div>
       </div>
     </div>
@@ -81,7 +81,7 @@ export const criticalPointsSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> One eigenvalue is positive (Uphill along x), and one is negative (Downhill along y). This is a **Saddle Point**. In ML training, your optimizer might get stuck here forever because the "Net Gradient" is zero, even though lower points exist nearby.
+          <strong>Intuition:</strong> One eigenvalue is positive (Uphill along x), and one is negative (Downhill along y). This is a <strong>Saddle Point</strong>. In ML training, your optimizer might get stuck here forever because the "Net Gradient" is zero, even though lower points exist nearby.
         </div>
       </div>
     </div>
@@ -112,7 +112,7 @@ print(f"Value at Min: {res.fun}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve mastered the mechanics of optimization. Now, see how we deal with **Uncertainty** and <strong>Data Distributions</strong>. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the mechanics of optimization. Now, see how we deal with <strong>Uncertainty</strong> and <strong>Data Distributions</strong>. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
     </div>
   `
 };

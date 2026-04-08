@@ -62,7 +62,7 @@ export const taylorSeriesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> We got within **0.5%** of the true value with just a single derivative! This is why "First-order" optimizers like SGD are so effective.
+          <strong>Result:</strong> We got within <strong>0.5%</strong> of the true value with just a single derivative! This is why "First-order" optimizers like SGD are so effective.
         </div>
       </div>
     </div>

@@ -52,7 +52,7 @@ export const basisDimensionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> These vectors span the entire 2D plane. Since there are 2 vectors, the **Dimension** of our workspace is 2.
+          <strong>Result:</strong> These vectors span the entire 2D plane. Since there are 2 vectors, the <strong>Dimension</strong> of our workspace is 2.
         </div>
       </div>
     </div>
@@ -68,7 +68,7 @@ export const basisDimensionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> YES. You can reach any point using these two directions. This is the foundation of **Basis Change**, which helps models "see" patterns from different angles.
+          <strong>Result:</strong> YES. You can reach any point using these two directions. This is the foundation of <strong>Basis Change</strong>, which helps models "see" patterns from different angles.
         </div>
       </div>
     </div>

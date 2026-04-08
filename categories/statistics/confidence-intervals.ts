@@ -64,7 +64,7 @@ export const confidenceIntervalsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Your model isn't just "85% accurate." It is **Statistically Proven** to be between 83% and 87%. You are now communicating like a true scientist.
+          <strong>Result:</strong> Your model isn't just "85% accurate." It is <strong>Statistically Proven</strong> to be between 83% and 87%. You are now communicating like a true scientist.
         </div>
       </div>
     </div>
@@ -74,13 +74,13 @@ export const confidenceIntervalsSection: TopicSection = {
       <h4>Problem: Measuring 'Average' Speed in the Real World</h4>
       <p>Data: 5 Latency points [10ms, 12ms, 15ms, 200ms (Outlier!), 11ms]. How do we get a robust interval?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> **Bootstrap Resampling**. We create 1,000 "Virtual Datasets" by drawing samples with replacement.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Bootstrap Resampling</strong>. We create 1,000 "Virtual Datasets" by drawing samples with replacement.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> For every virtual dataset, we find the median. We then look for the 2.5% and 97.5% marks in our collection of 1,000 medians.</div></div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Even with small data or outliers, **Bootstrapping** gives us a reliable confidence interval without assuming the data is Normal. This is the "Gold Standard" for modern data science.
+          <strong>Intuition:</strong> Even with small data or outliers, <strong>Bootstrapping</strong> gives us a reliable confidence interval without assuming the data is Normal. This is the "Gold Standard" for modern data science.
         </div>
       </div>
     </div>
@@ -114,7 +114,7 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of **Linear Algebra, Calculus, Probability, & Statistics**. You are now ready to dive into the **Foundations of Information Theory**. Explore <strong><a href="#/mathematics/information-theory/basics">Information Theory Basics</a></strong>.
+      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probability, & Statistics</strong>. You are now ready to dive into the <strong>Foundations of Information Theory</strong>. Explore <strong><a href="#/mathematics/information-theory/basics">Information Theory Basics</a></strong>.
     </div>
   `
 };

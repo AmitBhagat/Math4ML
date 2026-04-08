@@ -32,7 +32,7 @@ export const probabilityDistributionsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model **Uncertainty**. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
+    <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model <strong>Uncertainty</strong>. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -61,7 +61,7 @@ export const probabilityDistributionsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> This is the simplest possible distribution. It's the building block for **Binary Classification** models (Cat vs. Not Cat).
+          <strong>Result:</strong> This is the simplest possible distribution. It's the building block for <strong>Binary Classification</strong> models (Cat vs. Not Cat).
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ export const probabilityDistributionsSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> In the Real World, most common errors (noise) result from many tiny independent factors. When added together, they almost always form this Bell Curve. This is why we use **Gaussian Naive Bayes**.
+          <strong>Intuition:</strong> In the Real World, most common errors (noise) result from many tiny independent factors. When added together, they almost always form this Bell Curve. This is why we use <strong>Gaussian Naive Bayes</strong>.
         </div>
       </div>
     </div>

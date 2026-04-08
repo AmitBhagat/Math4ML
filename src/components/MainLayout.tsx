@@ -3,6 +3,7 @@ import { Sidebar } from "./Sidebar";
 import { useState, useEffect, useRef } from "react";
 import { Menu, X } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
+import { Search } from "./Search";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -66,6 +67,9 @@ export const MainLayout = () => {
               <Menu className="w-4 h-4 group-hover:scale-110 transition-transform" />
               <span className="text-[12px] font-black uppercase tracking-widest hidden sm:block">Menu</span>
             </button>
+            <div className="hidden sm:block">
+              <Search />
+            </div>
           </div>
 
           {/* Centered Scroll Title */}

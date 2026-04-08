@@ -58,7 +58,7 @@ export const dotProductSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Zero indicates **Orthogonality**. In NLP, this means these two concepts are completely independent or "on different planets."
+          <strong>Result:</strong> Zero indicates <strong>Orthogonality</strong>. In NLP, this means these two concepts are completely independent or "on different planets."
         </div>
       </div>
     </div>

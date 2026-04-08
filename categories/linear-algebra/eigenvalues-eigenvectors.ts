@@ -23,7 +23,7 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find **Principal Components** in data.</p>
+    <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find <strong>Principal Components</strong> in data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

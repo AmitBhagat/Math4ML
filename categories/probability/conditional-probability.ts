@@ -61,7 +61,7 @@ export const conditionalProbabilitySection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Knowing the roll was \(> 3\) increased our confidence from 50% to **66%**. The world shrunk!
+          <strong>Result:</strong> Knowing the roll was \(> 3\) increased our confidence from 50% to <strong>66%</strong>. The world shrunk!
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ export const conditionalProbabilitySection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Even if the test is "accurate," if the disease is extremely rare, most positives will still be **False Positives**. Conditional probability helps us spot these biases in our ML models (like Spam filters).
+          <strong>Intuition:</strong> Even if the test is "accurate," if the disease is extremely rare, most positives will still be <strong>False Positives</strong>. Conditional probability helps us spot these biases in our ML models (like Spam filters).
         </div>
       </div>
     </div>

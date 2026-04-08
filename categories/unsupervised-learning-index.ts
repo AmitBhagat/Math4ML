@@ -38,7 +38,7 @@ export const UNSUPERVISED_LEARNING_DATA: CategoryData = {
         <div class="callout tip">
           <div class="callout-icon">💡</div>
           <div class="callout-body">
-            <strong>Core Theory:</strong> DBSCAN defines a point as a **Core Point** if it has at least <code>MinPts</code> neighbors within a radius $\epsilon$. It builds clusters by linking points that are <strong>Density-Reachable</strong> from each other. This allows it to find clusters of <strong>Arbitrary Shape</strong> and identify outliers automatically.
+            <strong>Core Theory:</strong> DBSCAN defines a point as a <strong>Core Point</strong> if it has at least <code>MinPts</code> neighbors within a radius $\epsilon$. It builds clusters by linking points that are <strong>Density-Reachable</strong> from each other. This allows it to find clusters of <strong>Arbitrary Shape</strong> and identify outliers automatically.
           </div>
         </div>
 

@@ -78,7 +78,7 @@ export const chainRuleSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> This is exactly how **Neural Network Training** works. We calculate the local impact at each step and multiply them to get the "Global" impact of the weight.
+          <strong>Result:</strong> This is exactly how <strong>Neural Network Training</strong> works. We calculate the local impact at each step and multiply them to get the "Global" impact of the weight.
         </div>
       </div>
     </div>

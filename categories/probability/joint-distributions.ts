@@ -32,7 +32,7 @@ export const jointDistributionsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" **and** "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
+    <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" <strong>and</strong> "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -60,7 +60,7 @@ export const jointDistributionsSection: TopicSection = {
         <tr><th>X=1 (Click)</th><td>0.05</td><td>0.25</td></tr>
       </table>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Find the probability that a customer clicks **and** purchases. \(P(1, 1) = 0.25\).</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Find the probability that a customer clicks <strong>and</strong> purchases. \(P(1, 1) = 0.25\).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Summing:</strong> The total must be 1: \(0.6 + 0.1 + 0.05 + 0.25 = 1.0\).</div></div>
 
       <div class="callout success">

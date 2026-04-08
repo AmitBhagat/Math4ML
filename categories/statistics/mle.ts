@@ -73,13 +73,13 @@ export const mleSection: TopicSection = {
       <h4>Problem: Estimating the "Center" of Noise</h4>
       <p>Data: [10, 12, 11]. Assume data is Normal with unknown \(\mu\).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The Log-Likelihood of Gaussian data is proportional to the **Negative Squared Error** (\(-(x - \mu)^2\)).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Conclusion:</strong> To maximize the likelihood, we must **minimize** the squared error.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> The Log-Likelihood of Gaussian data is proportional to the <strong>Negative Squared Error</strong> (\(-(x - \mu)^2\)).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Conclusion:</strong> To maximize the likelihood, we must <strong>minimize</strong> the squared error.</div></div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> This is why we use **MSE (Mean Squared Error)** in Regression! It's not just a random choice; it is mathematically derived from the MLE of a Gaussian distribution. Max Likelihood = Min Error.
+          <strong>Intuition:</strong> This is why we use <strong>MSE (Mean Squared Error)</strong> in Regression! It's not just a random choice; it is mathematically derived from the MLE of a Gaussian distribution. Max Likelihood = Min Error.
         </div>
       </div>
     </div>

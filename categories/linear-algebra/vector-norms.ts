@@ -45,7 +45,7 @@ export const vectorNormsSection: TopicSection = {
         <strong>Teacher's Intuition:</strong>
         Think of <strong>L₂</strong> as a straight line across a field. 
         Think of <strong>L₁</strong> as walking through a city grid—you can't cut corners; you have to follow the streets. 
-        In ML, **L₁** is used when you want a model to be "sparse" (selective), while **L₂** is used to keep weights small and stable.
+        In ML, <strong>L₁</strong> is used when you want a model to be "sparse" (selective), while <strong>L₂</strong> is used to keep weights small and stable.
       </div>
     </div>
 

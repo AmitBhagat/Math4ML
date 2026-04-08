@@ -78,7 +78,7 @@ export const derivativesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> The derivative is **negative**. This tells the model: "Increasing the bias \(b\) will **decrease** the loss." So the optimization algorithm will nudge \(b\) higher.
+          <strong>Result:</strong> The derivative is <strong>negative</strong>. This tells the model: "Increasing the bias \(b\) will <strong>decrease</strong> the loss." So the optimization algorithm will nudge \(b\) higher.
         </div>
       </div>
     </div>

@@ -29,7 +29,7 @@ export const matrixRankSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
-        If 5 people testify but 4 of them are just repeating exactly what the first person said, you only have **Rank 1** evidence. 
+        If 5 people testify but 4 of them are just repeating exactly what the first person said, you only have <strong>Rank 1</strong> evidence. 
         In ML, high rank means diverse, "independent" features. Low rank means "noisy" or redundant data.
       </div>
     </div>

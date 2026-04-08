@@ -66,7 +66,7 @@ export const bayesTheoremSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Your belief that the email is spam shot up from **10%** to **89%** just by seeing one word. This is how basic Spam filters function.
+          <strong>Result:</strong> Your belief that the email is spam shot up from <strong>10%</strong> to <strong>89%</strong> just by seeing one word. This is how basic Spam filters function.
         </div>
       </div>
     </div>
@@ -110,7 +110,7 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the **Rigid Statistics** of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the <strong>Rigid Statistics</strong> of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
     </div>
   `
 };

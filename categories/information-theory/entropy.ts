@@ -32,12 +32,12 @@ export const entropySection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>Imagine you live in a desert where it never rains. If someone says, <em>"It's sunny today,"</em> you have learned **Zero Information**. You already knew that. But if they say, <em>"It's snowing,"</em> you have received a massive amount of information. <strong>Entropy</strong> is the weighted average of this "Surprise" across all possible outcomes.</p>
+    <p>Imagine you live in a desert where it never rains. If someone says, <em>"It's sunny today,"</em> you have learned <strong>Zero Information</strong>. You already knew that. But if they say, <em>"It's snowing,"</em> you have received a massive amount of information. <strong>Entropy</strong> is the weighted average of this "Surprise" across all possible outcomes.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Entropy as **"How many Yes/No questions do I need to ask?"** 
+        <strong>Teacher's Intuition:</strong> Think of Entropy as <strong>"How many Yes/No questions do I need to ask?"</strong> 
         If a variable has high entropy, it is unpredictable, and you need many questions to figure it out. 
         If it has low entropy, it's a "sure thing." 
         In ML, we want our models to move from high-entropy (guessing) to low-entropy (confident predictions).
@@ -47,7 +47,7 @@ export const entropySection: TopicSection = {
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(P(x_i)\), Entropy is:</p>
     <div class="math-block">$$H(X) = -\sum_{i} P(x_i) \log_2 P(x_i)$$</div>
-    <p>The unit is **Bits** if using base-2, or **Nats** if using natural log (\(e\)).</p>
+    <p>The unit is <strong>Bits</strong> if using base-2, or <strong>Nats</strong> if using natural log (\(e\)).</p>
 
     <h2 id="example-coin">Example 1: Fair vs. Biased Coin</h2>
     <div class="example-box">
@@ -60,7 +60,7 @@ export const entropySection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> The fair coin has **Maximum Entropy** (1 bit). The biased coin is more predictable, so it carries less information (~0.47 bits). Prediction is easier when entropy is lower!
+          <strong>Result:</strong> The fair coin has <strong>Maximum Entropy</strong> (1 bit). The biased coin is more predictable, so it carries less information (~0.47 bits). Prediction is easier when entropy is lower!
         </div>
       </div>
     </div>
@@ -77,7 +77,7 @@ export const entropySection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> Even though the "Snow" event is tiny, its **Information Content** is huge. Entropy balances the impact of a rare event against its low frequency.
+          <strong>Intuition:</strong> Even though the "Snow" event is tiny, its <strong>Information Content</strong> is huge. Entropy balances the impact of a rare event against its low frequency.
         </div>
       </div>
     </div>
@@ -100,7 +100,7 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
 
     <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>Decision Trees</strong>: Algorithms like ID3 use **Information Gain** (reduction in entropy) to decide which feature to split on.</li>
+      <li><strong>Decision Trees</strong>: Algorithms like ID3 use <strong>Information Gain</strong> (reduction in entropy) to decide which feature to split on.</li>
       <li><strong>Model Confidence</strong>: We check the entropy of a Softmax output; if it's high, the model is "confused" between many classes.</li>
     </ul>
 

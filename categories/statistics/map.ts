@@ -32,7 +32,7 @@ export const mapSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>MLE asks: <em>"What parameters fit the data best?"</em> MAP asks: <em>"What parameters fit the data best **AND** make sense based on what I already know?"</em> If your dataset is tiny, MLE can be easily fooled by noise. MAP adds a "Brake" to the process, preventing the model from becoming too overconfident about extreme values.</p>
+    <p>MLE asks: <em>"What parameters fit the data best?"</em> MAP asks: <em>"What parameters fit the data best <strong>AND</strong> make sense based on what I already know?"</em> If your dataset is tiny, MLE can be easily fooled by noise. MAP adds a "Brake" to the process, preventing the model from becoming too overconfident about extreme values.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -47,7 +47,7 @@ export const mapSection: TopicSection = {
     <h2 id="derivation">Mathematical Derivation</h2>
     <p>From Bayes' Theorem: \(P(\theta | X) \propto P(X | \theta) \cdot P(\theta)\). We maximize the log of this product:</p>
     <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} \left[ \log L(\theta) + \log P(\theta) \right]$$</div>
-    <p>Notice how MAP is just **MLE + a Prior Penalty** (\(\log P(\theta)\)).</p>
+    <p>Notice how MAP is just <strong>MLE + a Prior Penalty</strong> (\(\log P(\theta)\)).</p>
 
     <h2 id="example-coin">Example 1: Prior Belief about Coin Bias</h2>
     <div class="example-box">
@@ -79,7 +79,7 @@ export const mapSection: TopicSection = {
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> This is exactly **Ridge Regression (L2)**! It's not just a trick to stop overfitting; it is the Bayesian decision to assume your weights are probably close to Zero.
+          <strong>Intuition:</strong> This is exactly <strong>Ridge Regression (L2)</strong>! It's not just a trick to stop overfitting; it is the Bayesian decision to assume your weights are probably close to Zero.
         </div>
       </div>
     </div>

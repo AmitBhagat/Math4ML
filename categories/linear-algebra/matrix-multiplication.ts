@@ -52,7 +52,7 @@ export const matrixMultiplicationSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Multiplication is **not commutative** (\(AB \neq BA\)). In the relay race, the order of runners matters!
+          <strong>Result:</strong> Multiplication is <strong>not commutative</strong> (\(AB \neq BA\)). In the relay race, the order of runners matters!
         </div>
       </div>
     </div>

@@ -80,7 +80,7 @@ export const combinatoricsSection: TopicSection = {
 
     <div class="example-box">
       <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
-      <p>A deep learning researcher wants to test 3 distinct layers: **Conv2D (C)**, **MaxPooling (M)**, and **Dropout (D)**. How many ways can they be ordered in a block?</p>
+      <p>A deep learning researcher wants to test 3 distinct layers: <strong>Conv2D (C)</strong>, <strong>MaxPooling (M)</strong>, and <strong>Dropout (D)</strong>. How many ways can they be ordered in a block?</p>
       
       <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div></div>

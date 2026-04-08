@@ -79,7 +79,7 @@ export const graphTheorySection: TopicSection = {
 
     <div class="example-box">
       <h4>Problem: Building an Adjacency Matrix</h4>
-      <p>Represent a simple **Social Network** of 4 users ($A, B, C, D$) where:
+      <p>Represent a simple <strong>Social Network</strong> of 4 users ($A, B, C, D$) where:
       <ul>
         <li>$A$ is friends with $B$ and $C$</li>
         <li>$B$ is friends with $A$ and $D$</li>

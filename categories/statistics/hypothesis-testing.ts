@@ -33,16 +33,16 @@ export const hypothesisTestingSection: TopicSection = {
     </div>
 
     <h2 id="theory">Core Theory: The "Why"</h2>
-    <p>Everything in statistics starts with the **Null Hypothesis (\(H_0\))**—the assumption that "Nothing happened, it's just noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (the data) is so overwhelming that it's highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your results if the "Nothing happened" assumption were true.</p>
+    <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the assumption that "Nothing happened, it's just noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (the data) is so overwhelming that it's highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your results if the "Nothing happened" assumption were true.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
-        The Model is **"Innocent"** of having any real effect until proven guilty. 
-        The **Evidence** is your Test Data. 
-        The **P-Value** is the "Reasonable Doubt." 
-        If the doubt is less than 5% (\(\alpha = 0.05\)), we "Convict" the Null and declare the effect **Statistically Significant**.
+        The Model is <strong>"Innocent"</strong> of having any real effect until proven guilty. 
+        The <strong>Evidence</strong> is your Test Data. 
+        The <strong>P-Value</strong> is the "Reasonable Doubt." 
+        If the doubt is less than 5% (\(\alpha = 0.05\)), we "Convict" the Null and declare the effect <strong>Statistically Significant</strong>.
       </div>
     </div>
 
@@ -57,7 +57,7 @@ export const hypothesisTestingSection: TopicSection = {
       <h4>Problem: Does a New UI Increase Clicks?</h4>
       <p>Group A (Old UI) has 5% clicks. Group B (New UI) has 7% clicks. Is the 2% gain "Real"?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> **Independent 2-Sample T-Test**. It compares the means of two independent groups.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Independent 2-Sample T-Test</strong>. It compares the means of two independent groups.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Calculation:</strong> Factor in the "Noise" (Variance) of both groups. If the groups are large and consistent, the T-score will be high.</div></div>
 
       <div class="callout success">
@@ -73,13 +73,13 @@ export const hypothesisTestingSection: TopicSection = {
       <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>
       <p>Data: 200 people. Does knowing gender change the probability of purchase?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> **Chi-Square Test of Independence**. Best for categorical comparisons.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>Chi-Square Test of Independence</strong>. Best for categorical comparisons.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Logic:</strong> Compare the "Observed" counts in each category vs. "Expected" counts if they were totally independent.</div></div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
         <div class="callout-body">
-          <strong>Intuition:</strong> In ML, we use Chi-Square for **Feature Selection**. If a feature and the target label are "Independent," the feature is useless—we drop it from the model.
+          <strong>Intuition:</strong> In ML, we use Chi-Square for <strong>Feature Selection</strong>. If a feature and the target label are "Independent," the feature is useless—we drop it from the model.
         </div>
       </div>
     </div>
@@ -89,7 +89,7 @@ export const hypothesisTestingSection: TopicSection = {
       <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
       <p>You run 10 training sessions with each optimizer. Is there a "Best" one?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> **One-Way ANOVA**. It checks if *at least one* group mean is different from the others.</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Test:</strong> <strong>One-Way ANOVA</strong>. It checks if *at least one* group mean is different from the others.</div></div>
       <div class="step-box"><span class="step-num">2</span><div><strong>Mechanism:</strong> It compares the "Variance between groups" vs. the "Variance within groups."</div></div>
 
       <div class="callout success">
