@@ -33,6 +33,8 @@ export const expectationSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="ExpectationVariance" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(p_i\):</p>
     <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>

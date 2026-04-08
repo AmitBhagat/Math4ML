@@ -33,6 +33,8 @@ export const partialDerivativesSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="PartialDerivatives" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y)\), the partial derivative with respect to \(x\) is defined by the limit where <strong>only \(x\)</strong> receives a nudge:</p>
     <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>

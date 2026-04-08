@@ -33,6 +33,8 @@ export const chainRuleSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="ChainRule" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>

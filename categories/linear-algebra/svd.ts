@@ -27,6 +27,8 @@ export const singularValueDecompositionSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="SVD" />
+
     <h2 id="formula">2. The SVD Formula</h2>
     <div class="math-block">$$A = U \Sigma V^T$$</div>
     <ul>

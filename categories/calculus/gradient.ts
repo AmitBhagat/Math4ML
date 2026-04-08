@@ -33,6 +33,8 @@ export const gradientSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Gradient" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For a scalar function \(f(x, y, \dots, z)\), the gradient \(\nabla f\) is a vector of its first-order partial derivatives:</p>
     <div class="math-block">$$\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \dots, \frac{\partial f}{\partial z} \right]^T$$</div>

@@ -24,6 +24,8 @@ export const orthogonalityProjectionsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Projections" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>The projection of vector \(\mathbf{y}\) onto vector \(\mathbf{u}\) is:</p>
     <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \hat{\mathbf{y}} = \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$</div>

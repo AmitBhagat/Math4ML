@@ -30,6 +30,8 @@ export const vectorsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Vectors" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) in \(\mathbb{R}^n\) is an ordered list of \(n\) real numbers:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>

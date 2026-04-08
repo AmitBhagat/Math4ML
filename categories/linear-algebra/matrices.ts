@@ -23,6 +23,8 @@ export const matricesSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Matrices" />
+
     <h2 id="operations">Mathematical Operations</h2>
     <p>A matrix \(A \in \mathbb{R}^{m \times n}\) has \(m\) rows and \(n\) columns.</p>
     <ul>

@@ -33,6 +33,8 @@ export const lawOfLargeNumbersSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="ExpectationVariance" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Let \(X_1, X_2, \dots, X_n\) be independent identically distributed (i.i.d) random variables with mean \(\mu\). The Sample Mean \(\overline{X}_n\) is defined as:</p>
     <div class="math-block">$$\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$</div>

@@ -33,6 +33,8 @@ export const varianceSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="ExpectationVariance" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Variance is the <strong>Expected Squared Deviation</strong> from the mean \(\mu\):</p>
     <div class="math-block">$$\text{Var}[X] = \mathbb{E}[(X - \mu)^2]$$</div>

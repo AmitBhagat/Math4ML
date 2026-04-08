@@ -18,8 +18,8 @@ const containerVariants = {
 const GridBackground = () => (
   <svg width="100%" height="100%" style={{ position: 'absolute', top: 0, left: 0 }} viewBox="-200 -200 400 400" preserveAspectRatio="xMidYMid slice">
     <defs>
-      <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse" x="-10" y="-10">
-        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5"/>
+      <pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse" x="-5" y="-5">
+        <path d="M 10 0 L 0 0 0 10" fill="none" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5"/>
       </pattern>
     </defs>
     <rect x="-400" y="-400" width="800" height="800" fill="url(#grid)" />

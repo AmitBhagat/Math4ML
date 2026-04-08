@@ -24,6 +24,8 @@ export const matrixRankSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Rank" />
+
     <h2 id="rules">2. Properties of Rank</h2>
     <ul>
       <li><strong>Full Rank:</strong> If an \(n \times n\) matrix has \(\text{rank} = n\), it is invertible.</li>

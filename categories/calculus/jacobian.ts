@@ -33,6 +33,8 @@ export const jacobianSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="JacobianHessian" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(\mathbf{f}(\mathbf{x}) = [f_1, f_2, \dots, f_m]^T\) of input \(\mathbf{x} = [x_1, x_2, \dots, x_n]^T\), the Jacobian is:</p>
     <div class="math-block">$$ \mathbf{J} = \begin{bmatrix} 

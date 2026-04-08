@@ -30,6 +30,8 @@ export const dotProductSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="DotProduct" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>

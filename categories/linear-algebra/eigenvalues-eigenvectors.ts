@@ -25,6 +25,8 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Eigenvalues" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>

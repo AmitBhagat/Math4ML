@@ -33,6 +33,8 @@ export const gradientDescentSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="GradientDescent" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>To update the weights \(\theta\), we use the update rule:</p>
     <div class="math-block">$$\theta_{new} = \theta_{old} - \eta \nabla J(\theta)$$</div>

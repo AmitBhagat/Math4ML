@@ -37,6 +37,8 @@ export const vectorNormsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="VectorNorms" />
+
     <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
     
       <h4>Problem: Comparing Distances for [3, 4]</h4>

@@ -35,6 +35,8 @@ export const hessianSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="JacobianHessian" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
     <div class="math-block">$$ \mathbf{H} = \begin{bmatrix} 

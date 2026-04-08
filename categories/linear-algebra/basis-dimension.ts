@@ -28,6 +28,8 @@ export const basisDimensionSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="BasisChange" />
+
     <h2 id="dimension">2. Dimension vs. Rank</h2>
     <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
 

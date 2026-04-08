@@ -24,6 +24,8 @@ export const pcaSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="PCA" />
+
     <h2 id="steps">2. The 5 Steps of PCA</h2>
     <div class="algorithm-steps">
       <div class="algorithm-step">

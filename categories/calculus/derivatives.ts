@@ -32,6 +32,8 @@ export const derivativesSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Differentiation" />
+
     <h2 id="derivation">Formal Definition</h2>
     <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>

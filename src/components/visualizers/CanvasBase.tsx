@@ -153,7 +153,7 @@ export function useAnimationFrame(cb: (elapsed: number, ts: number) => void, dep
 export function drawGrid(ctx: CanvasRenderingContext2D, w: number, h: number, scale: number, ox: number, oy: number, theme: VisualizerTheme = 'light') {
   const colors = C(theme);
   ctx.lineWidth = 0.5;
-  const step = scale;
+  const step = scale / 2;
   ctx.strokeStyle = colors.grid;
   for (let x = ox % step; x < w; x += step) {
     ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();

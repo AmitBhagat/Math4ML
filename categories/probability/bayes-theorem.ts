@@ -34,6 +34,8 @@ export const bayesTheoremSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="BayesTheorem" />
+
     <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
     <ul>

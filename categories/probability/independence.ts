@@ -33,6 +33,8 @@ export const independenceSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Independence" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
     <p>...which also implies that the conditional probability doesn't move: \(P(A|B) = P(A)\).</p>

@@ -34,6 +34,8 @@ export const conditionalProbabilitySection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="ConditionalProbability" />
+
     <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
     <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>

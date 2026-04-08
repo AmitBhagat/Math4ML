@@ -33,6 +33,8 @@ export const jointDistributionsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="JointDistributions" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <ul>
       <li><strong>Joint Probability Mass Function (PMF):</strong> \(P(X=x, Y=y)\). The sum over all x and y must be 1.</li>

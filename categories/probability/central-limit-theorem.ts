@@ -33,6 +33,8 @@ export const centralLimitTheoremSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="CentralLimitTheorem" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <p>Let \(X_1, X_2, \dots, X_n\) be independent random variables with mean \(\mu\) and variance \(\sigma^2\). As \(n\) becomes large, the distribution of their mean \(\overline{X}_n\) converges to:</p>
     <div class="math-block">$$\overline{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$</div>

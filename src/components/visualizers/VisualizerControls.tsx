@@ -156,14 +156,14 @@ export const VisualizerControls: React.FC<VisualizerControlsProps> = ({ topicId,
           <div className="space-y-4">
             <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
                <div className="grid grid-cols-2 gap-8">
-                  <SliderControl label="vx" value={params.vx ?? 3} min={-5} max={5} onChange={(v) => update("vx", v)} theme={theme} />
-                  <SliderControl label="vy" value={params.vy ?? 2} min={-5} max={5} onChange={(v) => update("vy", v)} theme={theme} />
+                  <SliderControl label="vx" value={params.vx ?? 3} min={-3.5} max={3.5} onChange={(v) => update("vx", v)} theme={theme} />
+                  <SliderControl label="vy" value={params.vy ?? 2} min={-3.5} max={3.5} onChange={(v) => update("vy", v)} theme={theme} />
                </div>
             </div>
             <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
                <div className="grid grid-cols-2 gap-8">
-                  <SliderControl label="wx" value={params.wx ?? -1} min={-5} max={5} onChange={(v) => update("wx", v)} theme={theme} />
-                  <SliderControl label="wy" value={params.wy ?? 2} min={-5} max={5} onChange={(v) => update("wy", v)} theme={theme} />
+                  <SliderControl label="wx" value={params.wx ?? -1} min={-3.5} max={3.5} onChange={(v) => update("wx", v)} theme={theme} />
+                  <SliderControl label="wy" value={params.wy ?? 2} min={-3.5} max={3.5} onChange={(v) => update("wy", v)} theme={theme} />
                </div>
             </div>
           </div>
@@ -209,19 +209,19 @@ export const VisualizerControls: React.FC<VisualizerControlsProps> = ({ topicId,
             <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
               <div className="text-[10px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.2em] mb-6 text-center">New Basis Vectors (B)</div>
               <div className="grid grid-cols-2 gap-8">
-                <SliderControl label="b₁x" value={params.e1x ?? 1} min={-3} max={3} onChange={(v) => update("e1x", v)} theme={theme} />
-                <SliderControl label="b₁y" value={params.e1y ?? 1} min={-3} max={3} onChange={(v) => update("e1y", v)} theme={theme} />
+                <SliderControl label="b₁x" value={params.e1x ?? 1} min={-2.2} max={2.2} onChange={(v) => update("e1x", v)} theme={theme} />
+                <SliderControl label="b₁y" value={params.e1y ?? 1} min={-2.2} max={2.2} onChange={(v) => update("e1y", v)} theme={theme} />
               </div>
               <div className="grid grid-cols-2 gap-8 mt-4">
-                <SliderControl label="b₂x" value={params.e2x ?? -1} min={-3} max={3} onChange={(v) => update("e2x", v)} theme={theme} />
-                <SliderControl label="b₂y" value={params.e2y ?? 1} min={-3} max={3} onChange={(v) => update("e2y", v)} theme={theme} />
+                <SliderControl label="b₂x" value={params.e2x ?? -1} min={-2.2} max={2.2} onChange={(v) => update("e2x", v)} theme={theme} />
+                <SliderControl label="b₂y" value={params.e2y ?? 1} min={-2.2} max={2.2} onChange={(v) => update("e2y", v)} theme={theme} />
               </div>
             </div>
             <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
               <div className="text-[10px] text-slate-400 dark:text-slate-500 font-black uppercase tracking-[0.2em] mb-6 text-center">Vector [V] in New Basis</div>
               <div className="grid grid-cols-2 gap-8">
-                <SliderControl label="vx" value={params.vx ?? 1} min={-4} max={4} onChange={(v) => update("vx", v)} theme={theme} />
-                <SliderControl label="vy" value={params.vy ?? 1} min={-4} max={4} onChange={(v) => update("vy", v)} theme={theme} />
+                <SliderControl label="vx" value={params.vx ?? 1} min={-2.5} max={2.5} onChange={(v) => update("vx", v)} theme={theme} />
+                <SliderControl label="vy" value={params.vy ?? 1} min={-2.5} max={2.5} onChange={(v) => update("vy", v)} theme={theme} />
               </div>
             </div>
           </div>
@@ -230,7 +230,7 @@ export const VisualizerControls: React.FC<VisualizerControlsProps> = ({ topicId,
       case "Differentiation":
         return (
           <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
-             <SliderControl label="Point a" value={params.a ?? 1} min={-4} max={4} onChange={(v) => update("a", v)} theme={theme} />
+             <SliderControl label="Point a" value={params.a ?? 1} min={-3} max={3} onChange={(v) => update("a", v)} theme={theme} />
           </div>
         );
 
@@ -327,7 +327,7 @@ export const VisualizerControls: React.FC<VisualizerControlsProps> = ({ topicId,
         return (
           <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
              <div className="grid grid-cols-2 gap-8">
-                <SliderControl label="Mean (μ)" value={params.mu ?? 0} min={-4} max={4} onChange={(v) => update("mu", v)} theme={theme} />
+                <SliderControl label="Mean (μ)" value={params.mu ?? 0} min={-3} max={3} onChange={(v) => update("mu", v)} theme={theme} />
                 <SliderControl label="Std Dev (σ)" value={params.sigma ?? 1} min={0.5} max={3} onChange={(v) => update("sigma", v)} theme={theme} />
              </div>
           </div>
@@ -344,8 +344,8 @@ export const VisualizerControls: React.FC<VisualizerControlsProps> = ({ topicId,
         return (
           <div className="bg-bg-secondary dark:bg-slate-900 border border-border-premium rounded-2xl p-6 shadow-sm transition-colors duration-500">
              <div className="grid grid-cols-2 gap-8">
-                <SliderControl label="x coordinate" value={params.x ?? 1} min={-3} max={3} onChange={(v) => update("x", v)} theme={theme} />
-                <SliderControl label="y coordinate" value={params.y ?? 1} min={-3} max={3} onChange={(v) => update("y", v)} theme={theme} />
+                <SliderControl label="x coordinate" value={params.x ?? 1} min={-2.2} max={2.2} onChange={(v) => update("x", v)} theme={theme} />
+                <SliderControl label="y coordinate" value={params.y ?? 1} min={-2.2} max={2.2} onChange={(v) => update("y", v)} theme={theme} />
              </div>
           </div>
         );

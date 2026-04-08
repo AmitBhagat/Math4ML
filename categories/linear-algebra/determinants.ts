@@ -25,6 +25,8 @@ export const determinantsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Determinants" />
+
     <h2 id="rules">2. Properties & Meaning</h2>
     <ul>
       <li>\(\det(A) > 0\): Space is stretched/shrunk but keeps its orientation.</li>

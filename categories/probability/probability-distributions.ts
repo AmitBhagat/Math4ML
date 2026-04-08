@@ -33,6 +33,8 @@ export const probabilityDistributionsSection: TopicSection = {
       </div>
     </div>
 
+    <visualizer topic="Distributions" />
+
     <h2 id="derivation">Mathematical Definition</h2>
     <ul>
       <li><strong>Probability Mass Function (PMF)</strong>: For Discrete RVs, \(P(X=x)\). The sum of all probabilities must be 1.</li>
