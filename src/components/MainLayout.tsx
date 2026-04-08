@@ -59,7 +59,7 @@ export const MainLayout = () => {
         
         {/* ─── Top Control Bar (Sticky Glass) ─── */}
         <header className="sticky top-0 z-[60] w-full bg-white/5 backdrop-blur-md border-b border-white/5 flex items-center justify-between h-14 px-6 shrink-0">
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 z-10 relative">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
               className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-bg-secondary border border-border-premium text-muted-premium hover:text-accent-premium hover:border-accent-premium/40 transition-all active:scale-95 group"
@@ -75,16 +75,16 @@ export const MainLayout = () => {
           {/* Centered Scroll Title */}
           <div 
             className={cn(
-              "absolute left-1/2 -translate-x-1/2 transition-all duration-500",
-              showScrollTitle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4 pointer-events-none"
+              "absolute inset-0 flex items-center justify-center pointer-events-none transition-all duration-500",
+              showScrollTitle ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
             )}
           >
-            <span className="text-[13px] font-black uppercase tracking-[0.25em] text-on-surface truncate max-w-[200px] sm:max-w-md">
+            <span className="text-[13px] font-black uppercase tracking-[0.25em] text-on-surface truncate max-w-[150px] sm:max-w-xs md:max-w-md">
               {formattedTitle}
             </span>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 z-10 relative">
             <ThemeToggle />
           </div>
         </header>
