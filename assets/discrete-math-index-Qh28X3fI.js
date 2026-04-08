@@ -80,8 +80,16 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       <h4>Problem: Reconciling Customer Lists</h4>
       <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Common Customers (Intersection):</strong> $A \cap B = \{103\}$. Only user 103 appears in both lists.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Total Unique Customers (Union):</strong> $A \cup B = \{101, 102, 103, 104, 105\}$. Note that 103 is only counted once.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -95,9 +103,20 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
       <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Set Difference $(A - B)$:</strong> $\{101, 102\}$ (Users in A but not B).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Set Difference $(B - A)$:</strong> $\{104, 105\}$ (Users in B but not A).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Symmetric Difference:</strong> $(A - B) \cup (B - A) = \{101, 102, 104, 105\}$.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
@@ -236,9 +255,20 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       <h4>Problem: Evaluating a Medical Expert System Rule</h4>
       <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify the Proposition:</strong> The logical form is $(P \land Q) \to R$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Analyze False Condition:</strong> An implication $A \to B$ is <strong>only false</strong> when $A$ is True and $B$ is False.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Specific Case:</strong> If the patient has a Fever and Cough ($P \land Q = T$) but does NOT have the Flu ($R = F$), the rule is triggered but the outcome is false.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -252,8 +282,16 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
       <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Apply De Morgan's:</strong> $\neg(A \lor B) \equiv (\neg A \land \neg B)$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Translate to Code:</strong> <code>if not is_admin and not has_permission:</code>.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
@@ -365,11 +403,22 @@ not_nyc = df[~(df['city'] == 'New York')]
 
     <div class="example-box">
       <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
-      <p>A deep learning researcher wants to test 3 distinct layers: **Conv2D (C)**, **MaxPooling (M)**, and **Dropout (D)**. How many ways can they be ordered in a block?</p>
+      <p>A deep learning researcher wants to test 3 distinct layers: <strong>Conv2D (C)</strong>, <strong>MaxPooling (M)</strong>, and <strong>Dropout (D)</strong>. How many ways can they be ordered in a block?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Constraints:</strong> The order matters (CMD is different from DCM). All 3 layers are used ($n=3, r=3$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Apply Formula:</strong> $P(3, 3) = 3! = 3 \times 2 \times 1 = 6$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>List Outcomes:</strong> {CMD, CDM, MCD, MDC, DCM, DMC}.</div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -383,9 +432,20 @@ not_nyc = df[~(df['city'] == 'New York')]
       <h4>Problem: Feature Subset Selection (Combinations)</h4>
       <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Constraints:</strong> The order of features in the model doesn't matter ($n=10, r=3$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Apply Formula:</strong> $\binom{10}{3} = \frac{10 \times 9 \times 8}{3 \times 2 \times 1}$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Solve:</strong> $\frac{720}{6} = 120$ possible subsets.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
@@ -445,7 +505,7 @@ combs = list(itertools.combinations(items, 2))
     <div class="linking-rule">
       <strong>Next Step:</strong> Counting arrangements is key. Now let's explore <strong><a href="#/mathematics/discrete-math/graph-theory">Graph Theory</a></strong> to see how entities and their relationships (like neurons in a network) are modeled.
     </div>
-  `},o={id:"graph-theory",title:"Graph Theory",description:"The study of relationships and connections. Explore Nodes, Edges, Adjacency Matrices, and their applications in GNNs and Knowledge Graphs.",color:"#C5CAE9",html:String.raw`
+  `},i={id:"graph-theory",title:"Graph Theory",description:"The study of relationships and connections. Explore Nodes, Edges, Adjacency Matrices, and their applications in GNNs and Knowledge Graphs.",color:"#C5CAE9",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
@@ -519,7 +579,7 @@ combs = list(itertools.combinations(items, 2))
 
     <div class="example-box">
       <h4>Problem: Building an Adjacency Matrix</h4>
-      <p>Represent a simple **Social Network** of 4 users ($A, B, C, D$) where:
+      <p>Represent a simple <strong>Social Network</strong> of 4 users ($A, B, C, D$) where:
       <ul>
         <li>$A$ is friends with $B$ and $C$</li>
         <li>$B$ is friends with $A$ and $D$</li>
@@ -528,11 +588,22 @@ combs = list(itertools.combinations(items, 2))
       </ul>
       </p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Resulting Matrix:</strong>
-        <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
-      </div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Identify Edges:</strong> $E = \{(A,B), (A,C), (B,D)\}$. Since friendship is mutual, this is an <strong>Undirected Graph</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Construct Matrix:</strong> Create a $4 \times 4$ matrix. $M_{ij}=1$ if a friendship exists.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Resulting Matrix:</strong>
+            <div class="math-block">$$M = \begin{bmatrix} 0 & 1 & 1 & 0 \\ 1 & 0 & 0 & 1 \\ 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \end{bmatrix}$$</div>
+          </div>
+        </div>
+      </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
@@ -546,8 +617,16 @@ combs = list(itertools.combinations(items, 2))
       <h4>Problem: Calculating Degree Centrality</h4>
       <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div></div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Sum Rows/Columns:</strong> $deg(A) = 2$, $deg(B) = 2$, $deg(C) = 1$, $deg(D) = 1$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Identify Maximum:</strong> Nodes $A$ and $B$ are equally the most connected.</div>
+        </div>
+      </div>
 
       <div class="callout tip">
         <div class="callout-icon">💡</div>
@@ -593,7 +672,7 @@ if adj_matrix[1, 2] == 1:
     <div class="linking-rule">
       <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
     </div>
-  `},i={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
+  `},o={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -696,7 +775,7 @@ if adj_matrix[1, 2] == 1:
         </div>
 
         <p class="text-lg text-text-premium font-normal leading-relaxed">
-          You will learn to see data as a network of relationships, moving from simple vectors to complex topological structures. We focus on the **logic of structure** and the fundamental rules of calculation.
+          You will learn to see data as a network of relationships, moving from simple vectors to complex topological structures. We focus on the <strong>logic of structure</strong> and the fundamental rules of calculation.
         </p>
 
         <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
@@ -727,4 +806,4 @@ if adj_matrix[1, 2] == 1:
       </div>
 
     </div>
-  `,sections:[t,e,s,o]};export{i as DISCRETE_MATH_DATA};
+  `,sections:[t,e,s,i]};export{o as DISCRETE_MATH_DATA};
