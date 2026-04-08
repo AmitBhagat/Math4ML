@@ -22,7 +22,7 @@ export const categoricalEncodingSection: TopicSection = {
 
     <h2 id="label">Label Encoding</h2>
     <p>Label Encoding maps each category to a unique integer (e.g., Red=0, Green=1, Blue=2). 
-    **The Gotcha:** This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
+    <strong>The Gotcha:</strong> This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
 
     <h2 id="onehot">One-Hot Encoding</h2>
     <p>Instead of one column with integers, we create a <strong>Binary Column</strong> for every category. 
@@ -45,8 +45,8 @@ export const categoricalEncodingSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Library</strong>. 
-        **Label Encoding** is like giving each genre a number (History=1, Fiction=2, Sci-Fi=3). This is fine for keeping track, but a computer might think History + Fiction = Sci-Fi. 
-        **One-Hot Encoding** is like giving each genre its own <strong>Shelf</strong>. 
+        <strong>Label Encoding</strong> is like giving each genre a number (History=1, Fiction=2, Sci-Fi=3). This is fine for keeping track, but a computer might think History + Fiction = Sci-Fi. 
+        <strong>One-Hot Encoding</strong> is like giving each genre its own <strong>Shelf</strong>. 
         A book can only be on one shelf at a time. This way, the genres are treated as distinct categories with no mathematical relationship.
       </div>
     </div>

@@ -50,9 +50,9 @@ export const rocCurveSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Security Metal Detector</strong> at a stadium. 
         There is a <strong>Knob (Threshold)</strong> that controls sensitivity. 
-        * **Max Sensitivity:** The alarm goes off for zippers, coins, and belt buckles. You catch every weapon (100% TPR), but you annoy everyone (100% FPR). 
-        * **Min Sensitivity:** The alarm only goes off for a giant sword. You annoy no one (0% FPR), but you miss smaller weapons (0% TPR). 
-        **The ROC Curve is the chart of the security guard's options. He looks at the curve and picks the knob setting that is 'Safe' but not 'Annoying.'**
+        * <strong>Max Sensitivity:</strong> The alarm goes off for zippers, coins, and belt buckles. You catch every weapon (100% TPR), but you annoy everyone (100% FPR). 
+        * <strong>Min Sensitivity:</strong> The alarm only goes off for a giant sword. You annoy no one (0% FPR), but you miss smaller weapons (0% TPR). 
+        <strong>The ROC Curve is the chart of the security guard's options. He looks at the curve and picks the knob setting that is 'Safe' but not 'Annoying.'</strong>
       </div>
     </div>
 

@@ -21,14 +21,14 @@ export const lassoRegressionSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: The L1 Absolute Penalty</h2>
-    <p>Lasso stands for **Least Absolute Shrinkage and Selection Operator**. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
+    <p>Lasso stands for <strong>Least Absolute Shrinkage and Selection Operator</strong>. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
     <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum |w_j|$$</div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Geometric Constraints."</strong> 
-        Ridge is a **Sphere** (it lets you move in any direction smoothly). Lasso is a **Diamond** (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
+        Ridge is a <strong>Sphere</strong> (it lets you move in any direction smoothly). Lasso is a <strong>Diamond</strong> (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
       </div>
     </div>
 
@@ -54,9 +54,9 @@ export const lassoRegressionSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>Casing Director</strong> for a movie with a <strong>Tiny Budget</strong>. 
-        **Ridge** is like paying every actor a "Minimal Wage" to keep them on set but giving them no lines. 
-        **Lasso** is the <strong>Brutal Executioner</strong>. It walks through the set and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>. Hand in your script." 
-        By the end, only the **Star Actors (Relevant Features)** are left.
+        <strong>Ridge</strong> is like paying every actor a "Minimal Wage" to keep them on set but giving them no lines. 
+        <strong>Lasso</strong> is the <strong>Brutal Executioner</strong>. It walks through the set and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>. Hand in your script." 
+        By the end, only the <strong>Star Actors (Relevant Features)</strong> are left.
       </div>
     </div>
 

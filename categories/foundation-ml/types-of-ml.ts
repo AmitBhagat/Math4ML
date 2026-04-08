@@ -77,7 +77,7 @@ export const typesOfMLSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Unsupervised Way:</strong> No librarian exists. You just start grouping books that "Feel" the same—maybe by thickness, paper smell, or language. You don't know the genres, but you find 10 distinct **Clusters**.</div>
+          <div><strong>The Unsupervised Way:</strong> No librarian exists. You just start grouping books that "Feel" the same—maybe by thickness, paper smell, or language. You don't know the genres, but you find 10 distinct <strong>Clusters</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -88,7 +88,7 @@ export const typesOfMLSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use **Supervised**. If you have raw data and need insight, use **Unsupervised**. If you have an environment and an objective (like a robot), use **Reinforcement**.
+          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
         </div>
       </div>
     </div>

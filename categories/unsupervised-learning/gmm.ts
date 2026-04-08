@@ -30,7 +30,7 @@ export const gmmSection: TopicSection = {
     </ul>
 
     <h2 id="soft">Soft Clustering: Membership Probability</h2>
-    <p>Unlike k-Means, which just says "Cluster 1," GMM gives you the <strong>Posterior Probability</strong> (Responsibilities). This is incredibly useful for finding points that live on the **Edge** of two groups.</p>
+    <p>Unlike k-Means, which just says "Cluster 1," GMM gives you the <strong>Posterior Probability</strong> (Responsibilities). This is incredibly useful for finding points that live on the <strong>Edge</strong> of two groups.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -70,8 +70,8 @@ export const gmmSection: TopicSection = {
 
     <h2 id="covariance">Covariance Types</h2>
     <p>GMM's superpower is its flexibility. It can find <strong>Oblong (Elliptical)</strong> clusters. 
-    **Spherical:** Clusters must be circles. 
-    **Full:** Clusters can be stretched and rotated in any direction.</p>
+    <strong>Spherical:</strong> Clusters must be circles. 
+    <strong>Full:</strong> Clusters can be stretched and rotated in any direction.</p>
 
     <h2 id="analogy">The "Overlapping Fog" Analogy</h2>
     <div class="callout success">
@@ -80,7 +80,7 @@ export const gmmSection: TopicSection = {
         <strong>Analogy:</strong> Imagine looking at <strong>3 Clouds of Fog</strong> on a dark night. 
         Where the clouds meet, the air is thick with moisture. 
         One cloud is a <strong>Tall, Thin Pillar</strong> (Narrow Covariance). One is a <strong>Flat, Wide Carpet</strong> (Wide Covariance). 
-        **GMM** is the physics that describes those clouds. It doesn't draw a line where one ends; it tells you exactly how "Damp" every spot is from each cloud. 
+        <strong>GMM</strong> is the physics that describes those clouds. It doesn't draw a line where one ends; it tells you exactly how "Damp" every spot is from each cloud. 
       </div>
     </div>
 

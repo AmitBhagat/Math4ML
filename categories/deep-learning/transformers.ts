@@ -9,7 +9,7 @@ export const transformersSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Attention</div>
       <h1>The Transformer: The Attention Spotlight</h1>
-      <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with **Attention**—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the **Parallelization** of intelligence.</p>
+      <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with <strong>Attention</strong>—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the <strong>Parallelization</strong> of intelligence.</p>
     </div>
 
     <div class="toc">
@@ -33,8 +33,8 @@ export const transformersSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Context."</strong> 
-        In the sentence "The **Bank** was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
-        In "The **Bank** of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
+        In the sentence "The <strong>Bank</strong> was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
+        In "The <strong>Bank</strong> of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
         Attention is the <strong>Exact Mathematical Calculation</strong> of that relationship.
       </div>
     </div>
@@ -42,7 +42,7 @@ export const transformersSection: TopicSection = {
     <h2 id="attention">Self-Attention Mechanism</h2>
     <p>We calculate the <strong>Compatibility</strong> between Queries and Keys using the <strong>Dot Product</strong>. This creates a weight (Attention Score). We then use those weights to create a <strong>Weighted Sum</strong> of the Values.</p>
     <div class="math-block">$$Attention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</div>
-    <p>**The Power:** This happens for <strong>Every Word at the Same Time</strong>. There is no "Looping." This makes training 100x faster than RNNs.</p>
+    <p><strong>The Power:</strong> This happens for <strong>Every Word at the Same Time</strong>. There is no "Looping." This makes training 100x faster than RNNs.</p>
 
     <h2 id="multi-head">Multi-Head Attention</h2>
     <p>Instead of just one "Search Engine," we have 8 or 12. 
@@ -63,7 +63,7 @@ export const transformersSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The New Way (Attention):</strong> **EVERY Actor** has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
+          <div><strong>The New Way (Attention):</strong> <strong>EVERY Actor</strong> has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>

@@ -33,12 +33,13 @@ export const linearRegressionSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Relationship."</strong> 
-        If \(w = 2\), the model says: "For every 1 extra room in a house, the price goes up by $2,000." It's a simple, logical rule that humans and machines can both understand.
+        If \(w = 2\), the model says: "For every 1 extra room in a house, the price goes up by $2,000." If you miss a House Price by $1,000, that's okay. 
+        It's a simple, logical rule that humans and machines can both understand.
       </div>
     </div>
 
     <h2 id="ols">Ordinary Least Squares (OLS)</h2>
-    <p>How do we find the "Best" \(w\) and \(b\)? We minimize the **Mean Squared Error (MSE)**. In simple cases, there is a **Closed-Form Solution** (The Normal Equation) that gives us the answer instantly without needing Gradient Descent:</p>
+    <p>How do we find the "Best" \(w\) and \(b\)? We minimize the <strong>Mean Squared Error (MSE)</strong>. In simple cases, there is a <strong>Closed-Form Solution</strong> (The Normal Equation) that gives us the answer instantly without needing Gradient Descent:</p>
     <div class="math-block">$$w = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$</div>
 
     <h2 id="assumptions">The "Linear" Assumptions</h2>
@@ -55,7 +56,7 @@ export const linearRegressionSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your data points are <strong>Metal Pegs</strong> on a board. 
         You have a <strong>Long Elastic String</strong>. You want to stretch the string so it passes through the pegs. 
-        **Ordinary Least Squares** is the "Tension" in the string pulling it toward the average position of all the pegs. The string ends up in the **Optimal Position** where the total pulling force (Squared Error) is balanced.
+        <strong>Ordinary Least Squares</strong> is the "Tension" in the string pulling it toward the average position of all the pegs. The string ends up in the <strong>Optimal Position</strong> where the total pulling force (Squared Error) is balanced.
       </div>
     </div>
 
@@ -65,23 +66,23 @@ export const linearRegressionSection: TopicSection = {
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <strong>Initialize:</strong> Calculate the mean of input $\bar{x}$ and target $\bar{y}$.
+          <strong>Initialize:</strong> Calculate the mean of input \(\bar{x}\) and target \(\bar{y}\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <strong>Numerator:</strong> Calculate the sum of products of differences: $\sum (x_i - \bar{x})(y_i - \bar{y})$.
+          <strong>Numerator:</strong> Calculate the sum of products of differences: \(\sum (x_i - \bar{x})(y_i - \bar{y})\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <strong>Denominator:</strong> Calculate the sum of squares of differences: $\sum (x_i - \bar{x})^2$.
+          <strong>Denominator:</strong> Calculate the sum of squares of differences: \(\sum (x_i - \bar{x})^2\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <strong>Coefficient:</strong> Compute $w = \text{Numerator} / \text{Denominator}$.
+          <strong>Coefficient:</strong> Compute \(w = \text{Numerator} / \text{Denominator}\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">5</span>
-          <strong>Intercept:</strong> Compute $b = \bar{y} - w\bar{x}$.
+          <strong>Intercept:</strong> Compute \(b = \bar{y} - w\bar{x}\).
         </div>
       </div>
     </div>
@@ -136,9 +137,9 @@ w = model.coef_[0]
 b = model.intercept_
 prediction = model.predict([[2000]])
 
-print(f"Learned Weight (Price per Sqft): \${w:.2f}")
-print(f"Learned Bias (Base Price): \${b:.2f}")
-print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
+print("Learned Weight (Price per Sqft): $" + f"{w:.2f}")
+print("Learned Bias (Base Price): $" + f"{b:.2f}")
+print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     </python-code>
 
     <div class="linking-rule">

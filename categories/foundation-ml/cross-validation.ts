@@ -32,7 +32,7 @@ export const crossValidationSection: TopicSection = {
     </div>
 
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
-    <p>The most common form is **K-Fold**. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
+    <p>The most common form is <strong>K-Fold</strong>. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
     <ul>
       <li><strong>Iteration 1:</strong> Fold 1 is the Test, Folds 2-5 are Training.</li>
       <li><strong>Iteration 2:</strong> Fold 2 is the Test, Folds 1, 3-5 are Training.</li>

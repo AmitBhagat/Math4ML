@@ -38,20 +38,20 @@ export const tsneSection: TopicSection = {
     </div>
 
     <h2 id="gaussians">Gaussian-t Comparison</h2>
-    <p>The "t" in t-SNE stands for the **Student's t-Distribution**. This distribution has <strong>Fatter Tails</strong> than a normal Gaussian. This is its secret weapon. 
-    **The Gotcha:** Normal Gaussians are too "Tight." In 2D, points get "Crowded" in the middle. The fatter tails of the t-distribution allow clusters to <strong>Spread Out</strong>, making them easier to see in your plot.</p>
+    <p>The "t" in t-SNE stands for the <strong>Student's t-Distribution</strong>. This distribution has <strong>Fatter Tails</strong> than a normal Gaussian. This is its secret weapon. 
+    <strong>The Gotcha:</strong> Normal Gaussians are too "Tight." In 2D, points get "Crowded" in the middle. The fatter tails of the t-distribution allow clusters to <strong>Spread Out</strong>, making them easier to see in your plot.</p>
 
     <h2 id="perplexity">The Perplexity Parameter</h2>
-    <p><strong>Perplexity</strong> is the "Density" of the neighbors. If you set it to 5, t-SNE only cares about your 5 closest neighbors. If you set it to 50, it tries to keep larger groups together. It's the **Number of Friends** each point tries to keep close.</p>
+    <p><strong>Perplexity</strong> is the "Density" of the neighbors. If you set it to 5, t-SNE only cares about your 5 closest neighbors. If you set it to 50, it tries to keep larger groups together. It's the <strong>Number of Friends</strong> each point tries to keep close.</p>
 
     <h2 id="analogy">The "Friendship Map" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a huge **1,000D Party**. 
+        <strong>Analogy:</strong> Imagine a huge <strong>1,000D Party</strong>. 
         You want to draw a <strong>2D Seating Chart</strong> for the afterlife. 
-        **PCA** would try to put people based on their <strong>Height or Wealth</strong> (Global Variance). 
-        **t-SNE** ignores height and wealth. It only asks: "Who was Person A talking to?" 
+        <strong>PCA</strong> would try to put people based on their <strong>Height or Wealth</strong> (Global Variance). 
+        <strong>t-SNE</strong> ignores height and wealth. It only asks: "Who was Person A talking to?" 
         If Person A was talking to Person B, they get the <strong>Same Table</strong>. 
         The result is a chart where <strong>Cliques (Clusters)</strong> are perfectly clear, but the "Distance" between tables doesn't mean much. 
       </div>

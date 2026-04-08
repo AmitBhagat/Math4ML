@@ -38,7 +38,7 @@ export const precisionSection: TopicSection = {
     <div class="math-block">$$Precision = \frac{TP}{TP + FP}$$</div>
     <ul>
       <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FP:</strong> **Total Predicted Positives** (Everything you called 'Yes').</li>
+      <li><strong>TP + FP:</strong> <strong>Total Predicted Positives</strong> (Everything you called 'Yes').</li>
     </ul>
 
     <h2 id="use-case">When Precision is King</h2>
@@ -52,11 +52,11 @@ export const precisionSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Mailroom Clerk** sorting mail. 
+        <strong>Analogy:</strong> Imagine a <strong>Mailroom Clerk</strong> sorting mail. 
         If he marks a simple bill as <strong>"Junk" (FP)</strong>, you miss your payment. 
         If he marks a <strong>"Win a Free Cruise!"</strong> email as "Good" (FN), you just delete it. 
         The "Junk" box mistake is <strong>Much Worse</strong>. 
-        **So, the clerk's PRECISION is the most important metric. He must only call something 'Junk' if he is absolutely certain.**
+        <strong>So, the clerk's PRECISION is the most important metric. He must only call something 'Junk' if he is absolutely certain.</strong>
       </div>
     </div>
 

@@ -22,7 +22,7 @@ export const backpropagationSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: The Chain Rule</h2>
-    <p>Backpropagation is a <strong>Differential</strong> algorithm. It works by propagating the <strong>Error</strong> from the output layer <strong>Backwards</strong> to the input. We use the **Chain Rule** to find the derivative of the Loss function \(\mathcal{L}\) with respect to any weight \(w\).</p>
+    <p>Backpropagation is a <strong>Differential</strong> algorithm. It works by propagating the <strong>Error</strong> from the output layer <strong>Backwards</strong> to the input. We use the <strong>Chain Rule</strong> to find the derivative of the Loss function \(\mathcal{L}\) with respect to any weight \(w\).</p>
     <div class="math-block">$$\frac{\partial \mathcal{L}}{\partial w_{jk}^{(L)}} = \frac{\partial \mathcal{L}}{\partial a_j^{(L)}} \times \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{jk}^{(L)}}$$</div>
     <ul>
       <li><strong>Error in Output:</strong> How much the loss changes if the output changes.</li>

@@ -22,14 +22,14 @@ export const stackingSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: Meta-Learning</h2>
-    <p>Stacking is about **Higher-Order Integration**. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
+    <p>Stacking is about <strong>Higher-Order Integration</strong>. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning who to trust."</strong> 
         The Meta-Learner says: "I've noticed that whenever the SVM says 'Spam', it's usually wrong, but when the Random Forest says 'Spam', it's 99% right. So, I will listen to the Forest." 
-        It learns the **Error Profile** of every sub-model.
+        It learns the <strong>Error Profile</strong> of every sub-model.
       </div>
     </div>
 
@@ -48,11 +48,11 @@ export const stackingSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>CEO (Meta-Learner)</strong> in a meeting. 
         You have three experts:
-        * **Expert A (Statistician):** He's great at data but misses emotional nuances. 
-        * **Expert B (Marketing Guru):** He's great at emotions but bad at math. 
-        * **Expert C (Technician):** He's only good at the raw hardware facts. 
+        * <strong>Expert A (Statistician):</strong> He's great at data but misses emotional nuances. 
+        * <strong>Expert B (Marketing Guru):</strong> He's great at emotions but bad at math. 
+        * <strong>Expert C (Technician):</strong> He's only good at the raw hardware facts. 
         They each give you their recommendation. 
-        **You don't just "Average" their advice. You know from 10 years of experience that Expert A is usually right about the budget, while Expert B is right about the customer reaction. You combine their specific strengths to make the perfect decision.** 
+        <strong>You don't just "Average" their advice. You know from 10 years of experience that Expert A is usually right about the budget, while Expert B is right about the customer reaction. You combine their specific strengths to make the perfect decision.</strong> 
       </div>
     </div>
 

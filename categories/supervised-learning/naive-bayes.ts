@@ -48,7 +48,7 @@ export const naiveBayesSection: TopicSection = {
     <p>To predict, we simply pick the Class $C$ that results in the <strong>Maximum A Posteriori (MAP)</strong> value.</p>
 
     <h2 id="laplace">Laplace Smoothing: The Zero-Frequency Fix</h2>
-    <p><strong>The Gotcha:</strong> If you see a word in a test email that <strong>never</strong> appeared in your training set for "Spam," the probability becomes **0**. Since everything is multiplied, the whole class probability becomes 0! 
+    <p><strong>The Gotcha:</strong> If you see a word in a test email that <strong>never</strong> appeared in your training set for "Spam," the probability becomes <strong>0</strong>. Since everything is multiplied, the whole class probability becomes 0! 
     <strong>The Fix:</strong> We add 1 to every count (Laplace Smoothing) so that nothing is ever truly impossible.</p>
 
     <h2 id="analogy">The "Sherlock Holmes" Analogy</h2>
@@ -57,9 +57,9 @@ export const naiveBayesSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine <strong>Sherlock Holmes solving a crime</strong>. 
         He has three clues: [Mud on shoes, Smell of tobacco, Left-handedness]. 
-        **Naive Bayes** assumes these clues happened completely separately. 
+        <strong>Naive Bayes</strong> assumes these clues happened completely separately. 
         It asks: "Out of 100 criminals, how many have mud? How many smoke tobacco? How many are lefties?" 
-        Then it <strong>multiplies</strong> those chances together to see if the suspect is "Guilty" or "Innocent." It ignores the fact that a leftie smoker might be more likely to have mud. It's **Simple, Fast, and often gets the Killer.**
+        Then it <strong>multiplies</strong> those chances together to see if the suspect is "Guilty" or "Innocent." It ignores the fact that a leftie smoker might be more likely to have mud. It's <strong>Simple, Fast, and often gets the Killer.</strong>
       </div>
     </div>
 
@@ -91,11 +91,11 @@ export const naiveBayesSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Sleuth's Email Filter</h2>
-    <p>Imagine Sherlock Holmes is classifying an email as **Spam** or **Ham** based on three words: "Prize", "Money", and "Meeting".</p>
+    <p>Imagine Sherlock Holmes is classifying an email as <strong>Spam</strong> or <strong>Ham</strong> based on three words: "Prize", "Money", and "Meeting".</p>
     <ul>
       <li><strong>The Clues:</strong> "Prize" appears in 80% of Spam but only 1% of Ham. "Meeting" appears in 50% of Ham but only 2% of Spam.</li>
       <li><strong>The Detection:</strong> An email arrives with "Prize" and "Meeting". </li>
-      <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the **Spam** probability win out.</li>
+      <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the <strong>Spam</strong> probability win out.</li>
     </ul>
 
     <h2 id="example">Illustrated Example: The Bayesian Sleuth</h2>

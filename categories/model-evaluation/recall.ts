@@ -37,7 +37,7 @@ export const recallSection: TopicSection = {
     <div class="math-block">$$Recall = \frac{TP}{TP + FN}$$</div>
     <ul>
       <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FN:</strong> **Total Actual Positives** (Everything that is 'Yes' in reality).</li>
+      <li><strong>TP + FN:</strong> <strong>Total Actual Positives</strong> (Everything that is 'Yes' in reality).</li>
     </ul>
 
     <h2 id="use-case">When Recall is King</h2>
@@ -55,9 +55,9 @@ export const recallSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you dropped your <strong>Contact Lens</strong> in a swimming pool full of <strong>Plastic Rings</strong>. 
-        * **Case 1 (High Precision):** You only grab something if you are 100% sure it's the lens. You might leave the lens behind if you aren't sure. 
-        * **Case 2 (High Recall):** You use a <strong>Giant Net</strong> and pull out <strong>EVERYTHING</strong> from the pool. You definitely found the lens, but you also found 50 plastic rings. 
-        **The Giant Net approach has 100% RECALL. You didn't miss the lens, but your Precision was low because you caught a lot of junk.**
+        * <strong>Case 1 (High Precision):</strong> You only grab something if you are 100% sure it's the lens. You might leave the lens behind if you aren't sure. 
+        * <strong>Case 2 (High Recall):</strong> You use a <strong>Giant Net</strong> and pull out <strong>EVERYTHING</strong> from the pool. You definitely found the lens, but you also found 50 plastic rings. 
+        <strong>The Giant Net approach has 100% RECALL. You didn't miss the lens, but your Precision was low because you caught a lot of junk.</strong>
       </div>
     </div>
 

@@ -28,11 +28,11 @@ export const lstmGruSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Selective Writing."</strong> 
-        The cell state is the **Permanent Ink**. 
-        The gates are **Electronic Checkpoints**. 
-        Checkpoint 1 (Forget Gate) decides what to **Erase**. 
-        Checkpoint 2 (Input Gate) decides what to **Add**. 
-        Checkpoint 3 (Output Gate) decides what to **Read**. 
+        The cell state is the <strong>Permanent Ink</strong>. 
+        The gates are <strong>Electronic Checkpoints</strong>. 
+        Checkpoint 1 (Forget Gate) decides what to <strong>Erase</strong>. 
+        Checkpoint 2 (Input Gate) decides what to <strong>Add</strong>. 
+        Checkpoint 3 (Output Gate) decides what to <strong>Read</strong>. 
       </div>
     </div>
 
@@ -56,8 +56,8 @@ export const lstmGruSection: TopicSection = {
     </div>
 
     <h2 id="gru">The GRU: Gating Simplified</h2>
-    <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into **One**, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
-    **Why use it?** It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
+    <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into <strong>One</strong>, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
+    <strong>Why use it?</strong> It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
 
     <h2 id="example">Illustrated Example: The Disciplined Scientist</h2>
     <div class="example-box">

@@ -73,7 +73,7 @@ y_reg = np.array([250000, 300000, 350000, 450000])
 
 reg_model = LinearRegression().fit(X_reg, y_reg)
 price_pred = reg_model.predict([[1810]])[0]
-print(f"[Regression] Predicted House Price: \${price_pred:,.0f}")
+print("[Regression] Predicted House Price: $" + f"{price_pred:,.0f}")
 
 # 2. Classification (Predicting a Category)
 # Input: [Word Count, 'Win' count], Output: [0=Normal, 1=Spam]

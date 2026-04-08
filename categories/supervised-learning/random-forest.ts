@@ -21,7 +21,7 @@ export const randomForestSection: TopicSection = {
     </div>
 
     <h2 id="bagging">Bagging: Bootstrap Aggregating</h2>
-    <p>How do we make each tree "Different"? We use **Bagging**. We take a random sample of our data <strong>with replacement</strong> (Bootstrapping). Some data points are picked twice; some are never picked. Every tree gets a <strong>Unique Perspective</strong> on the world.</p>
+    <p>How do we make each tree "Different"? We use <strong>Bagging</strong>. We take a random sample of our data <strong>with replacement</strong> (Bootstrapping). Some data points are picked twice; some are never picked. Every tree gets a <strong>Unique Perspective</strong> on the world.</p>
 
     <h2 id="feature-randomness">Feature Randomness: Diverse Perspectives</h2>
     <div class="example-box">
@@ -35,20 +35,20 @@ export const randomForestSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> We create a <strong>Diverse Forest</strong>. Some trees learn about the roof; some learn about the school district. When they <strong>Vote</strong> together, they find the **Deep Truth** of the data.</div>
+          <div><strong>Result:</strong> We create a <strong>Diverse Forest</strong>. Some trees learn about the roof; some learn about the school district. When they <strong>Vote</strong> together, they find the <strong>Deep Truth</strong> of the data.</div>
         </div>
       </div>
     </div>
 
     <h2 id="theory">Theoretical Core: Ensemble Variance</h2>
-    <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly **$1/B$** of the original. By "Averaging" the trees, we **kill the noise** and keep the **signal**.</p>
+    <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly <strong>$1/B$</strong> of the original. By "Averaging" the trees, we <strong>kill the noise</strong> and keep the <strong>signal</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Guess the Jellybeans Contest."</strong> 
         One person might guess 500 (Way too low). Another might guess 5,000 (Way too high). 
-        But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. **Random Forest** is that average.
+        But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. <strong>Random Forest</strong> is that average.
       </div>
     </div>
 
@@ -59,7 +59,7 @@ export const randomForestSection: TopicSection = {
         <strong>Analogy:</strong> Imagine a <strong>Courtroom Jury</strong>. 
         Instead of one judge (a Single Tree) who might have a <strong>Personal Bias</strong>, you have 12 diverse citizens from different backgrounds. 
         Each juror hears the <strong>Same Case</strong> (The Data) but processes it with their own unique "Rules" (The Decision Trees). 
-        By **Deliberating and Voting (Aggregating)**, the final verdict is much more **Reasonable and Stable** than one person's opinion.
+        By <strong>Deliberating and Voting (Aggregating)</strong>, the final verdict is much more <strong>Reasonable and Stable</strong> than one person's opinion.
       </div>
     </div>
 

@@ -38,7 +38,7 @@ export const advancedBoostingSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Shortcut Expert."</strong> 
-        It says: "Why look at all 1,000,000 samples? I'll look only at the ones where I'm <strong>most wrong (High Gradient)</strong>." It doesn't grow trees layer-by-layer; it just grows the **Most Promising Leaf** until it's done.
+        It says: "Why look at all 1,000,000 samples? I'll look only at the ones where I'm <strong>most wrong (High Gradient)</strong>." It doesn't grow trees layer-by-layer; it just grows the <strong>Most Promising Leaf</strong> until it's done.
       </div>
     </div>
 
@@ -58,10 +58,10 @@ export const advancedBoostingSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are building a <strong>Race Car</strong>. 
-        * **Standard GBDT (Gradient Boost):** A fast street car. 
-        * **XGBoost:** An <strong>F1 Car</strong> with advanced aerodynamics (Regularization) to keep it stable at high speeds. 
-        * **LightGBM:** A <strong>Drag Racer</strong>. It is built purely for <strong>Acceleration (Speed)</strong> and can handle a 100-mile long track in seconds. 
-        * **CatBoost:** The <strong>Rally Car</strong>. It can go through "Muddy Data" (Categorical values) that would make other cars spin out of control.
+        * <strong>Standard GBDT (Gradient Boost):</strong> A fast street car. 
+        * <strong>XGBoost:</strong> An <strong>F1 Car</strong> with advanced aerodynamics (Regularization) to keep it stable at high speeds. 
+        * <strong>LightGBM:</strong> A <strong>Drag Racer</strong>. It is built purely for <strong>Acceleration (Speed)</strong> and can handle a 100-mile long track in seconds. 
+        * <strong>CatBoost:</strong> The <strong>Rally Car</strong>. It can go through "Muddy Data" (Categorical values) that would make other cars spin out of control.
       </div>
     </div>
 

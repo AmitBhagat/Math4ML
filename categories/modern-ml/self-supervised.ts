@@ -51,7 +51,7 @@ export const selfSupervisedSection: TopicSection = {
         No one is telling him "This is a dog" or "This is a tree." 
         But to put the pieces together, he has to learn that <strong>Edges</strong> match edges and <strong>Colors</strong> flow into each other. 
         By the time he finishes 1,000 puzzles, he doesn't know the <strong>Names</strong> of things, but he <strong>Understand Concepts</strong> like eyes, wheels, and grass perfectly. 
-        **Self-Supervised learning is that Toddler. The Jigsaw entries are the Pretext Tasks.**
+        <strong>Self-Supervised learning is that Toddler. The Jigsaw entries are the Pretext Tasks.</strong>
       </div>
     </div>
 

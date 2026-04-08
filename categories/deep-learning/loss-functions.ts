@@ -29,7 +29,7 @@ export const lossFunctionsSection: TopicSection = {
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Price of Failure."</strong> 
         Different problems have <strong>different penalties</strong>. 
-        If you miss a <strong>House Price</strong> by \$1,000, that's okay. 
+        If you miss a <strong>House Price</strong> by $1,000, that's okay. 
         If you are <strong>100% Confident</strong> that a Dog is a Cat, the penalty should be massive. The type of loss tells the machine <strong>what matters</strong>.
       </div>
     </div>
@@ -37,7 +37,7 @@ export const lossFunctionsSection: TopicSection = {
     <h2 id="regression">Mean Squared Error (MSE)</h2>
     <p>Used for Regression. It calculates the <strong>Average of the Squared Differences</strong> between the true value $y$ and predicted $\hat{y}$.</p>
     <div class="math-block">$$MSE = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2$$</div>
-    <p>**The Gotcha:** Squaring the error makes <strong>Large Mistakes</strong> much more expensive than small ones. This forces the model to ignore small noise and focus on big outliers.</p>
+    <p><strong>The Gotcha:</strong> Squaring the error makes <strong>Large Mistakes</strong> much more expensive than small ones. This forces the model to ignore small noise and focus on big outliers.</p>
 
     <h2 id="classification">Cross-Entropy Loss (Log-Loss)</h2>
     <p>Used for Classification. It measures the <strong>Distance between Probabilities</strong>. If the model predicts a 10% chance of a "Spam" email when it is actually Spam, the loss is huge.</p>
@@ -47,7 +47,7 @@ export const lossFunctionsSection: TopicSection = {
     <h2 id="example">Illustrated Example: The Coach's Rulebook</h2>
     <div class="example-box">
       <h4>Scenario: Training an Athlete for the Olympics</h4>
-      <p>The **Loss** is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
+      <p>The <strong>Loss</strong> is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">

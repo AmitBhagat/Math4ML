@@ -58,11 +58,11 @@ export const confusionMatrixSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Security Guard</strong> at an airport. 
-        * **True Positive:** He stops a terrorist. (Success!) 
-        * **True Negative:** He lets a regular passenger through. (Success!) 
-        * **False Positive:** He stops an innocent grandmother for a 4-hour search. (Inconvenient, but safe). 
-        * **False Negative:** He lets a terrorist onto the plane. (Catastrophic Failure). 
-        **The Confusion Matrix tells the Guard's boss exactly how many grandmothers were annoyed and how many terrorists were missed.**
+        * <strong>True Positive:</strong> He stops a terrorist. (Success!) 
+        * <strong>True Negative:</strong> He lets a regular passenger through. (Success!) 
+        * <strong>False Positive:</strong> He stops an innocent grandmother for a 4-hour search. (Inconvenient, but safe). 
+        * <strong>False Negative:</strong> He lets a terrorist onto the plane. (Catastrophic Failure). 
+        <strong>The Confusion Matrix tells the Guard's boss exactly how many grandmothers were annoyed and how many terrorists were missed.</strong>
       </div>
     </div>
 

@@ -9,7 +9,7 @@ export const rnnSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Sequence</div>
       <h1>RNN: The Goldfish with a Notebook</h1>
-      <p>How do you understand a **Sentence**? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
+      <p>How do you understand a <strong>Sentence</strong>? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
     </div>
 
     <div class="toc">
@@ -42,7 +42,7 @@ export const rnnSection: TopicSection = {
     <h2 id="bptt">BPTT: Backpropagation Through Time</h2>
     <p>How do we train an RNN? We "Unroll" it! 
     Imagine a network with 100 time steps as one giant 100-layer MLP where every layer <strong>Shares the Same Weights</strong>. This is <strong>Backpropagation Through Time (BPTT)</strong>. 
-    **The Gotcha:** Because we use the same weights over and over, small errors can <strong>Explode</strong> or <strong>Vanish</strong> exponentially over time.</p>
+    <strong>The Gotcha:</strong> Because we use the same weights over and over, small errors can <strong>Explode</strong> or <strong>Vanish</strong> exponentially over time.</p>
 
     <h2 id="limitations">The Short-Term Memory Problem</h2>
     <p><strong>The Reality:</strong> Simple RNNs have <strong>Terrible Memory</strong>. If a sentence is 20 words long, by the time the RNN reaches the last word, it has usually <strong>forgotten</strong> the first word. It only has "Short-Term" persistence.</p>

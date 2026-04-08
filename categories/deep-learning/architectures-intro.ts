@@ -9,7 +9,7 @@ export const architecturesIntroSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Overview</div>
       <h1>Deep Learning Architectures</h1>
-      <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an **Image Model** needs layers that "See," and a **Speech Model** needs layers that "Listen."</p>
+      <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an <strong>Image Model</strong> needs layers that "See," and a <strong>Speech Model</strong> needs layers that "Listen."</p>
     </div>
 
     <div class="toc">
@@ -35,7 +35,7 @@ export const architecturesIntroSection: TopicSection = {
     </div>
 
     <h2 id="inductive-bias">Inductive Bias: The Secret Assumption</h2>
-    <p>Every architecture has an **Inductive Bias**—a set of assumptions the model makes about the data <strong>before</strong> it sees it.</p>
+    <p>Every architecture has an <strong>Inductive Bias</strong>—a set of assumptions the model makes about the data <strong>before</strong> it sees it.</p>
     <ul>
       <li><strong>CNN Bias:</strong> "Nearby pixels are related." (Spatial Invariance).</li>
       <li><strong>RNN Bias:</strong> "The current word depends on the previous one." (Temporal Continuity).</li>

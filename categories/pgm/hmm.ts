@@ -77,15 +77,15 @@ export const hmmSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Observations:</strong> Your Guard walks by. Sometimes he has an **Umbrella**, sometimes he has **Sunshades**. (Emission).</div>
+          <div><strong>The Observations:</strong> Your Guard walks by. Sometimes he has an <strong>Umbrella</strong>, sometimes he has <strong>Sunshades</strong>. (Emission).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Transitions:</strong> If it's Raining today, there's a 70% chance it will still be Raining tomorrow. This is the **Markov Property**.</div>
+          <div><strong>The Transitions:</strong> If it's Raining today, there's a 70% chance it will still be Raining tomorrow. This is the <strong>Markov Property</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Decoding (Viterbi):</strong> You see [Umbrella, Umbrella, Sunshades]. You calculate the **Most Likely Path** and conclude: "It rained for two days, and then the sun came out."</div>
+          <div><strong>The Decoding (Viterbi):</strong> You see [Umbrella, Umbrella, Sunshades]. You calculate the <strong>Most Likely Path</strong> and conclude: "It rained for two days, and then the sun came out."</div>
         </div>
       </div>
 

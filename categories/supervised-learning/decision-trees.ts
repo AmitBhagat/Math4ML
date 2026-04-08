@@ -35,7 +35,7 @@ export const decisionTreesSection: TopicSection = {
     </div>
 
     <h2 id="entropy">The Chaos Metric: Entropy & Gini</h2>
-    <p>How does the machine know which question is "Best"? It measures **Order**. Two main formulas are used:</p>
+    <p>How does the machine know which question is "Best"? It measures <strong>Order</strong>. Two main formulas are used:</p>
     <ul>
       <li><strong>Entropy (\(H\)):</strong> A measure of randomness or disorder level. If a pile is 50/50, \(H=1\) (Max Chaos). If it's 100% pure, \(H=0\) (Perfect Order).</li>
       <div class="math-block">$$H(D) = -\sum_{i} p_i \log_2(p_i)$$</div>
@@ -127,7 +127,7 @@ export const decisionTreesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a **Random Forest**.
+          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a <strong>Random Forest</strong>.
         </div>
       </div>
     </div>

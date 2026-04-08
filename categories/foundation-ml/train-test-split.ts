@@ -9,7 +9,7 @@ export const trainTestSplitSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Evaluation</div>
       <h1>Training vs. Testing: The Golden Rule</h1>
-      <p>The **Golden Rule** of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
+      <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
     </div>
 
     <div class="toc">

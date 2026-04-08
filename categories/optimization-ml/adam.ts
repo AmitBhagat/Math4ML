@@ -32,7 +32,7 @@ export const adamSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Dampening the Noisy Ones."</strong> 
-        If a weight is <strong>Bouncing</strong> around wildly, the 2nd moment (\(v_t\)) will be **High**. Adam divides the update by \(\sqrt{v_t}\), effectively <strong>Slowing Down</strong> the noisy weight. 
+        If a weight is <strong>Bouncing</strong> around wildly, the 2nd moment (\(v_t\)) will be <strong>High</strong>. Adam divides the update by \(\sqrt{v_t}\), effectively <strong>Slowing Down</strong> the noisy weight. 
         If a weight is <strong>Steadily</strong> moving in one direction, Adam <strong>Speeds It Up</strong>. 
       </div>
     </div>

@@ -53,13 +53,13 @@ export const classificationIntroSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine the <strong>Sorting Hat from Harry Potter</strong>. 
         It has a <strong>Decision Boundary</strong> for each House (Gryffindor, Slytherin, etc.). 
-        It "Reads" your features (Brave, Ambitious, Loyal). It doesn't say you are "40% Gryffindor." It says "You belong in **Gryffindor!**" 
-        **Classification** is that hat. The "Learning" was the hat looking at 1,000 years of students to find the <strong>Patterns of Personality</strong> that define each house.
+        It "Reads" your features (Brave, Ambitious, Loyal). It doesn't say you are "40% Gryffindor." It says "You belong in <strong>Gryffindor!</strong>" 
+        <strong>Classification</strong> is that hat. The "Learning" was the hat looking at 1,000 years of students to find the <strong>Patterns of Personality</strong> that define each house.
       </div>
     </div>
 
     <h2 id="objective">The Goal: Decision Boundaries</h2>
-    <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more **robust and accurate** that fence is.</p>
+    <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more <strong>robust and accurate</strong> that fence is.</p>
 
     <h2 id="algorithm">The Classification Algorithm</h2>
     <div class="example-box">
@@ -100,7 +100,7 @@ export const classificationIntroSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Calculation:</strong> It doesn't just guess 'Spam'. It calculates: **95% chance of Spam**.</div>
+          <div><strong>The Calculation:</strong> It doesn't just guess 'Spam'. It calculates: <strong>95% chance of Spam</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>

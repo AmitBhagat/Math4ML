@@ -45,18 +45,18 @@ export const hierarchicalSection: TopicSection = {
     </ul>
 
     <h2 id="dendrogram">The Dendrogram: Visualizing Relationships</h2>
-    <p>The <strong>Dendrogram</strong> is a chart that looks like an upside-down tree. The **Height** of the vertical lines represents the <strong>Distance</strong> at which two clusters were merged. The longer the line, the more "Unlike" the two groups are.</p>
+    <p>The <strong>Dendrogram</strong> is a chart that looks like an upside-down tree. The <strong>Height</strong> of the vertical lines represents the <strong>Distance</strong> at which two clusters were merged. The longer the line, the more "Unlike" the two groups are.</p>
 
     <h2 id="selection">Cutting the Tree</h2>
-    <p><strong>The Beauty:</strong> You don't have to choose $K$ at the start. You build the whole tree, and then you "Cut" it at a specific height. If you cut high, you get 2 huge clusters. If you cut low, you get 20 tiny clusters. You can choose the **level of granularity** AFTER seeing the data.</p>
+    <p><strong>The Beauty:</strong> You don't have to choose $K$ at the start. You build the whole tree, and then you "Cut" it at a specific height. If you cut high, you get 2 huge clusters. If you cut low, you get 20 tiny clusters. You can choose the <strong>level of granularity</strong> AFTER seeing the data.</p>
 
     <h2 id="analogy">The "Family Reunion" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a huge **Family Reunion**. 
+        <strong>Analogy:</strong> Imagine a huge <strong>Family Reunion</strong>. 
         You have cousins, siblings, and strangers. 
-        **Hierarchical Clustering** starts by putting you with your **Twin**. Then it puts you and your twin with your **Siblings**. Then it merges your family with your **Cousins**. 
+        <strong>Hierarchical Clustering</strong> starts by putting you with your <strong>Twin</strong>. Then it puts you and your twin with your <strong>Siblings</strong>. Then it merges your family with your <strong>Cousins</strong>. 
         By looking at the tree, you can see exactly who is "Direct family" and who is a "Distant relative." It's not just a group; it's a <strong>Historical Record of Similarity.</strong> 
       </div>
     </div>
@@ -108,7 +108,7 @@ export const hierarchicalSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Global Root:</strong> Eventually, everyone is holding hands in one giant "Humanity" cluster. The **Dendrogram** is the map of how those hand-holds happened.</div>
+          <div><strong>The Global Root:</strong> Eventually, everyone is holding hands in one giant "Humanity" cluster. The <strong>Dendrogram</strong> is the map of how those hand-holds happened.</div>
         </div>
       </div>
 

@@ -9,7 +9,7 @@ export const missingDataSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🚫 ML · Preprocessing</div>
       <h1>Handling Missing Data: The Hole in the Map</h1>
-      <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). **Handling Missing Data** is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
+      <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). <strong>Handling Missing Data</strong> is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
     </div>
 
     <div class="toc">
@@ -30,8 +30,8 @@ export const missingDataSection: TopicSection = {
 
     <h2 id="deletion">Deletion Strategies</h2>
     <p><strong>Listwise Deletion:</strong> Throw away the <strong>entire row</strong>. 
-    **Pros:** Fast and simple. 
-    **Cons:** You might lose 50% of your data if every row has at least one missing feature! <strong>Dangerous</strong> if the missingness isn't random.</p>
+    <strong>Pros:</strong> Fast and simple. 
+    <strong>Cons:</strong> You might lose 50% of your data if every row has at least one missing feature! <strong>Dangerous</strong> if the missingness isn't random.</p>
 
     <h2 id="imputation">Imputation: Filling the Gaps</h2>
     <p>Instead of throwing it away, we <strong>Guess</strong> the value:</p>
@@ -45,7 +45,7 @@ export const missingDataSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Data Surgery."</strong> 
-        If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. **Imputation** is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
+        If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. <strong>Imputation</strong> is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
       </div>
     </div>
 
@@ -53,11 +53,11 @@ export const missingDataSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Crime Scene** with 10 witnesses. 
+        <strong>Analogy:</strong> Imagine a <strong>Crime Scene</strong> with 10 witnesses. 
         Witness #4 is missing. 
-        **Deletion** means you close the case because you don't have all the info. 
-        **Mean Imputation** is like asking the other 9 witnesses what color the car was. Most say "Red," so you assume Witness #4 would have said "Red" too. 
-        **KNN Imputation** is like finding the 2 witnesses who were <strong>Standing right next to</strong> Witness #4 and asking <strong>them</strong> what they saw.
+        <strong>Deletion</strong> means you close the case because you don't have all the info. 
+        <strong>Mean Imputation</strong> is like asking the other 9 witnesses what color the car was. Most say "Red," so you assume Witness #4 would have said "Red" too. 
+        <strong>KNN Imputation</strong> is like finding the 2 witnesses who were <strong>Standing right next to</strong> Witness #4 and asking <strong>them</strong> what they saw.
       </div>
     </div>
 

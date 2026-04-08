@@ -9,7 +9,7 @@ export const activationsSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
-      <p>Without an **Activation Function**, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the **Non-Linear Magic** that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
+      <p>Without an <strong>Activation Function</strong>, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the <strong>Non-Linear Magic</strong> that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
     </div>
 
     <div class="toc">
@@ -41,7 +41,7 @@ export const activationsSection: TopicSection = {
 
     <h2 id="relu">ReLU: Rectified Linear Unit</h2>
     <p><strong>The Theory:</strong> \(f(x) = \max(0, x)\). If the input is negative, it's zero. If it's positive, it passes through unchanged. 
-    **Why it's King:** ReLU is computationally <strong>very fast</strong> and doesn't suffer from the "Vanishing Gradient" problem as badly as Sigmoid. It is the secret ingredient that made <strong>Deep Learning</strong> possible in the 2010s.</p>
+    <strong>Why it's King:</strong> ReLU is computationally <strong>very fast</strong> and doesn't suffer from the "Vanishing Gradient" problem as badly as Sigmoid. It is the secret ingredient that made <strong>Deep Learning</strong> possible in the 2010s.</p>
 
     <h2 id="softmax">Softmax: The Final Judge</h2>
     <p>Used in the <strong>Output Layer</strong> for classification. It takes a vector of raw scores (logits) and converts them into a <strong>Probability Distribution</strong> where the sum of all elements is 1.</p>

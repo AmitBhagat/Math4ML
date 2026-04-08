@@ -9,7 +9,7 @@ export const mlpSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Architecture</div>
       <h1>Multilayer Perceptron (MLP)</h1>
-      <p>If a single Perceptron is a lone loan officer, an **MLP** is the **Entire Bank Headquarters**. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the **Universal Function Approximator** that solves the XOR crisis and everything beyond.</p>
+      <p>If a single Perceptron is a lone loan officer, an <strong>MLP</strong> is the <strong>Entire Bank Headquarters</strong>. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the <strong>Universal Function Approximator</strong> that solves the XOR crisis and everything beyond.</p>
     </div>
 
     <div class="toc">
@@ -22,7 +22,7 @@ export const mlpSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: The Deep Stack</h2>
-    <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an **Input Layer**, one or more <strong>Hidden Layers</strong>, and an **Output Layer**. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
+    <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an <strong>Input Layer</strong>, one or more <strong>Hidden Layers</strong>, and an <strong>Output Layer</strong>. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -46,7 +46,7 @@ export const mlpSection: TopicSection = {
 
     <h2 id="approximation">Universal Approximation Theorem</h2>
     <p><strong>The Theory:</strong> It states that a neural network with just <strong>One Hidden Layer</strong> and enough neurons can approximate <strong>Any Continuous Function</strong> to any degree of accuracy. 
-    **The Reality:** While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
+    <strong>The Reality:</strong> While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
 
     <h2 id="example">Illustrated Example: The Multi-Tiered Courtroom</h2>
     <div class="example-box">

@@ -33,10 +33,10 @@ export const pcaSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Axis of Change."</strong> 
-        Imagine a **Rugby Ball** floating in the air. 
+        Imagine a <strong>Rugby Ball</strong> floating in the air. 
         It has 3 dimensions (Length, Width, Height). 
-        The **1st Principal Component (PC1)** is the <strong>Long Axis</strong>. 
-        The **2nd Principal Component (PC2)** is the **Width**. 
+        The <strong>1st Principal Component (PC1)</strong> is the <strong>Long Axis</strong>. 
+        The <strong>2nd Principal Component (PC2)</strong> is the <strong>Width</strong>. 
         If you only have 1 dimension, you choose the <strong>Long Axis</strong> because it captures 80% of the ball's shape. 
       </div>
     </div>
@@ -45,10 +45,10 @@ export const pcaSection: TopicSection = {
     <p>Variance is <strong>Information</strong>. If a feature has zero variance (all points are the same), it tells you nothing. PCA finds the direction where the data is <strong>most spread out</strong>. PC1 is the strongest signal, PC2 is the second strongest, and so on.</p>
 
     <h2 id="preprocessing">Requirement: Scaling & Mean Centering</h2>
-    <p><strong>The Gotcha:</strong> PCA is hypersensitive to **Scale**. If your "Income" is in Millions and "Age" is in 10s, PCA will spend 100% of its energy on Income. You **MUST** scale your data (Standardization) so that every feature has a <strong>Fair Chance</strong> to be a Principal Component.</p>
+    <p><strong>The Gotcha:</strong> PCA is hypersensitive to <strong>Scale</strong>. If your "Income" is in Millions and "Age" is in 10s, PCA will spend 100% of its energy on Income. You <strong>MUST</strong> scale your data (Standardization) so that every feature has a <strong>Fair Chance</strong> to be a Principal Component.</p>
 
     <h2 id="svd">Computational Trick: SVD</h2>
-    <p>In modern libraries (like Scikit-Learn), we don't actually calculate the Covariance Matrix. We use **Singular Value Decomposition (SVD)** directly on the data matrix \(X\). It is numerically more stable and much faster for huge datasets.</p>
+    <p>In modern libraries (like Scikit-Learn), we don't actually calculate the Covariance Matrix. We use <strong>Singular Value Decomposition (SVD)</strong> directly on the data matrix \(X\). It is numerically more stable and much faster for huge datasets.</p>
 
     <h2 id="analogy">The "Best Photograph" Analogy</h2>
     <div class="callout success">
@@ -57,7 +57,7 @@ export const pcaSection: TopicSection = {
         <strong>Analogy:</strong> Imagine you are a <strong>Photographer taking a 2D picture</strong> of a 100D alien. 
         Where do you stand? 
         If you stand 100 meters away at a random angle, you just get a flat blob. (Information loss). 
-        **PCA** is the algorithm that calculates the <strong>exact orbital position</strong> to stand so that your 2D photo shows the <strong>most detail</strong> (the most spread) of the alien's 100D body. 
+        <strong>PCA</strong> is the algorithm that calculates the <strong>exact orbital position</strong> to stand so that your 2D photo shows the <strong>most detail</strong> (the most spread) of the alien's 100D body. 
       </div>
     </div>
 

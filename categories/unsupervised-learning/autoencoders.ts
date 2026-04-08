@@ -22,7 +22,7 @@ export const autoencodersSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: Encoder & Decoder</h2>
-    <p>An Autoencoder is a **Symmetric** neural network with two halves:</p>
+    <p>An Autoencoder is a <strong>Symmetric</strong> neural network with two halves:</p>
     <ul>
       <li><strong>Encoder:</strong> A series of layers that progressively <strong>shrink</strong> the input data into a lower-dimensional vector.</li>
       <li><strong>Decoder:</strong> A series of layers that progressively <strong>expand</strong> that vector back into the original input shape.</li>
@@ -42,7 +42,7 @@ export const autoencodersSection: TopicSection = {
     <p>The <strong>Bottleneck</strong> (middle layer) is the most important part. Its size is the number of <strong>Latent Dimensions</strong>. If the input is 10,000 pixels (an image) and the bottleneck is 32, the network is forced to find the <strong>32 most important features</strong> (like hair color, eye shape, smile) to describe the face.</p>
 
     <h2 id="loss">Reconstruction Loss: The Only Teacher</h2>
-    <p>Autoencoders are **Self-Supervised**. The target is the <strong>Input itself</strong>. We minimize the difference (usually MSE) between the input \(x\) and the reconstructed output \(\hat{x}\):</p>
+    <p>Autoencoders are <strong>Self-Supervised</strong>. The target is the <strong>Input itself</strong>. We minimize the difference (usually MSE) between the input \(x\) and the reconstructed output \(\hat{x}\):</p>
     <div class="math-block">$$Loss = \|x - \hat{x}\|^2$$</div>
     <p><strong>Note:</strong> We are teaching the machine to <strong>reproduce the truth</strong> using minimal resources.</p>
 
@@ -68,9 +68,9 @@ export const autoencodersSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine an <strong>MP3 file</strong>. 
         It is a compressed version of a <strong>FLAC (Perfect) recording</strong>. 
-        The **Encoder** is the compression algorithm. It throws away the sounds that humans can't hear. 
-        The **Decoder** is your headphones. 
-        If the song still sounds <strong>Beautiful and Accurate</strong>, the compression has "Learned" the soul of the music. **Autoencoders are the machine's way of finding that perfect compression for any data.** 
+        The <strong>Encoder</strong> is the compression algorithm. It throws away the sounds that humans can't hear. 
+        The <strong>Decoder</strong> is your headphones. 
+        If the song still sounds <strong>Beautiful and Accurate</strong>, the compression has "Learned" the soul of the music. <strong>Autoencoders are the machine's way of finding that perfect compression for any data.</strong> 
       </div>
     </div>
 

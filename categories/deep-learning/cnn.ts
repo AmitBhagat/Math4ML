@@ -9,7 +9,7 @@ export const cnnSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Vision</div>
       <h1>CNN: The Flashlight in the Dark</h1>
-      <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use **Filters** to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
+      <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use <strong>Filters</strong> to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
     </div>
 
     <div class="toc">
@@ -33,7 +33,7 @@ export const cnnSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Signature."</strong> 
-        The first layer has filters for **Vertical Edges**. 
+        The first layer has filters for <strong>Vertical Edges</strong>. 
         If a filter "Hits" a vertical line, the output is high. 
         It doesn't matter <strong>where</strong> in the image the edge is; the filter will find it.
       </div>
@@ -41,7 +41,7 @@ export const cnnSection: TopicSection = {
 
     <h2 id="pooling">Pooling: Reducing the Resolution</h2>
     <p>After we find the edges, we don't need the exact pixel locations anymore. We just need to know "Was there an edge in this general area?" 
-    **Max Pooling** takes the <strong>Largest Value</strong> from a region. This makes the model robust to <strong>Small Shifts</strong> in the image (Translation Invariance).</p>
+    <strong>Max Pooling</strong> takes the <strong>Largest Value</strong> from a region. This makes the model robust to <strong>Small Shifts</strong> in the image (Translation Invariance).</p>
 
     <h2 id="bias">Translation Invariance</h2>
     <p>If you see a <strong>Cat in the top-left</strong> or a <strong>Cat in the bottom-right</strong>, it's still a cat. CNNs are specifically designed to ignore the <strong>Where</strong> and focus on the <strong>What</strong>. This is their core "Inductive Bias."</p>

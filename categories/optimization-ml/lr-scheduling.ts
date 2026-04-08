@@ -9,7 +9,7 @@ export const lrSchedulingSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>LR Scheduling: The Slowing Pace</h1>
-      <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the **Resort (The Minimum)**, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
+      <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the <strong>Resort (The Minimum)</strong>, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
     </div>
 
     <div class="toc">
@@ -36,20 +36,20 @@ export const lrSchedulingSection: TopicSection = {
 
     <h2 id="decay">Step Decay</h2>
     <p><strong>The Strategy:</strong> Reduce the learning rate by a fixed factor \(\gamma\) every \(N\) epochs. (e.g., Divide by 10 every 30 epochs). 
-    **The Visual:** It looks like a <strong>Staircase</strong>. The model learns in bursts, then stabilizes, then bursts again.</p>
+    <strong>The Visual:</strong> It looks like a <strong>Staircase</strong>. The model learns in bursts, then stabilizes, then bursts again.</p>
 
     <h2 id="cosine">Cosine Annealing</h2>
     <p><strong>The Strategy:</strong> Use a <strong>Cosine Wave</strong> to smoothly reduce the learning rate from the initial value to <strong>Zero</strong>. 
-    **Why use it?** It is <strong>Continuous</strong> and requires fewer "Step" hyper-parameters. It's often the <strong>State-of-the-art</strong> choice for training Vision Transformers and LLMs.</p>
+    <strong>Why use it?</strong> It is <strong>Continuous</strong> and requires fewer "Step" hyper-parameters. It's often the <strong>State-of-the-art</strong> choice for training Vision Transformers and LLMs.</p>
 
     <h2 id="warmup">Learning Rate Warmup</h2>
-    <p><strong>The Gotcha:</strong> At the very first iteration, the model is **Randomly Initialized**. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
-    **Warmup** starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
+    <p><strong>The Gotcha:</strong> At the very first iteration, the model is <strong>Randomly Initialized</strong>. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
+    <strong>Warmup</strong> starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
 
     <h2 id="example">Illustrated Example: The Controlled Descent</h2>
     <div class="example-box">
       <h4>Scenario: Landing a Plane on a High-Altitude Runway</h4>
-      <p>Imagine you are a pilot. You can't land at 500 mph (High LR). You also can't fly at 10 mph for the whole trip (Low LR). You need a **Systematic Decrease** in speed.</p>
+      <p>Imagine you are a pilot. You can't land at 500 mph (High LR). You also can't fly at 10 mph for the whole trip (Low LR). You need a <strong>Systematic Decrease</strong> in speed.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">

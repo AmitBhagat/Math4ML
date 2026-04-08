@@ -33,7 +33,7 @@ export const emAlgorithmSection: TopicSection = {
     </div>
 
     <h2 id="math">Jensen's Inequality & Lower Bound</h2>
-    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to **Jensen's Inequality**, the average of the logs is less than or equal to the log of the averages.</p>
+    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to <strong>Jensen's Inequality</strong>, the average of the logs is less than or equal to the log of the averages.</p>
     <div class="math-block">$$\log \sum_z P(x, z \mid \theta) \ge \sum_z Q(z) \log \frac{P(x, z \mid \theta)}{Q(z)}$$</div>
 
     <h2 id="steps">The 2 Big Steps: E and M</h2>
@@ -59,7 +59,7 @@ export const emAlgorithmSection: TopicSection = {
     <h2 id="example">Illustrated Example: The Blind Schoolteacher</h2>
     <div class="example-box">
       <h4>Scenario: Sorting 100 Students into Two Voice-Pitch Teams</h4>
-      <p>Imagine a blind teacher trying to sort 100 students into two teams: **The High-Pitch Sopranos** and **The Low-Pitch Basses**. The teacher doesn't know who is who.</p>
+      <p>Imagine a blind teacher trying to sort 100 students into two teams: <strong>The High-Pitch Sopranos</strong> and <strong>The Low-Pitch Basses</strong>. The teacher doesn't know who is who.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -68,7 +68,7 @@ export const emAlgorithmSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Expectation (E-Step):</strong> A student speaks. Based on the current guesses, the teacher says: "You sound 80% like a Soprano." This is a **Soft Assignment** (Filling the latent variable).</div>
+          <div><strong>Expectation (E-Step):</strong> A student speaks. Based on the current guesses, the teacher says: "You sound 80% like a Soprano." This is a <strong>Soft Assignment</strong> (Filling the latent variable).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>

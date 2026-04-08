@@ -62,7 +62,7 @@ export const dbscanSection: TopicSection = {
 
     <h2 id="epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</h2>
     <p><strong>Epsilon (\(\epsilon\)):</strong> The maximum distance between two points to be considered neighbors. 
-    **MinPts:** The minimum number of points required to form a cluster.</p>
+    <strong>MinPts:</strong> The minimum number of points required to form a cluster.</p>
     <div class="math-block">$$N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$$</div>
     <p><strong>Note:</strong> If you set \(\epsilon\) too small, everything becomes noise. If you set it too large, everything merges into one giant cluster.</p>
 
@@ -74,8 +74,8 @@ export const dbscanSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Nightclub</strong> at 2 AM. 
-        **k-Means** would try to group everyone into 3 circles (Groups). 
-        **DBSCAN** looks for the <strong>Dense Dancefloor</strong> (A Cluster). 
+        <strong>k-Means</strong> would try to group everyone into 3 circles (Groups). 
+        <strong>DBSCAN</strong> looks for the <strong>Dense Dancefloor</strong> (A Cluster). 
         It doesn't care if the dancefloor is circular or a <strong>Long Line</strong> leading to the bar. 
         As long as people are standing shoulder-to-shoulder, they are part of the "Crowd." 
         The lonely person standing in the <strong>Corner</strong> (Noise) is correctly ignored. 

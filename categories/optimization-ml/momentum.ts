@@ -37,11 +37,11 @@ export const momentumSection: TopicSection = {
     </div>
 
     <h2 id="physics">The Physics of Optimization</h2>
-    <p>We call \(\gamma\) (usually 0.9) the **Momentum Coefficient**. 
+    <p>We call \(\gamma\) (usually 0.9) the <strong>Momentum Coefficient</strong>. 
     Mathematically, it represents <strong>Friction</strong>. Without it, the "Boulder" would roll forever and never stop at the bottom. With it, the boulder eventually <strong>settles</strong> at the minimum of the valley.</p>
 
     <h2 id="saddle">Dampening the Oscillations</h2>
-    <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. **Momentum** smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
+    <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. <strong>Momentum</strong> smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
 
     <h2 id="example">Illustrated Example: The Heavy Boulder</h2>
     <div class="example-box">

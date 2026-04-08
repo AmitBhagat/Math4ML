@@ -50,8 +50,8 @@ export const transferLearningSection: TopicSection = {
         <strong>Analogy:</strong> Imagine a <strong>Kung Fu Master</strong> who has spent 30 years mastering <strong>Body Mechanics</strong>, balance, and speed. 
         One day, he decides he wants to learn <strong>Tennis</strong>. 
         Does he start like a toddler? No. He already has the footwork, the reflexes, and the discipline. 
-        He only needs to learn the <strong>Racket Grip</strong> and the **Rules of the Court**. 
-        **Transfer learning is that Master. The 30 years of Kung Fu is the Pre-training. The Tennis lessons are the Fine-tuning.**
+        He only needs to learn the <strong>Racket Grip</strong> and the <strong>Rules of the Court</strong>. 
+        <strong>Transfer learning is that Master. The 30 years of Kung Fu is the Pre-training. The Tennis lessons are the Fine-tuning.</strong>
       </div>
     </div>
 
@@ -98,7 +98,7 @@ export const transferLearningSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they **Express** their existing skill (The New Head).</div>
+          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they <strong>Express</strong> their existing skill (The New Head).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>

@@ -60,17 +60,17 @@ export const dimReductionIntroSection: TopicSection = {
     </div>
 
     <h2 id="projections">Projections: The Shadow Metaphor</h2>
-    <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some **Loss of Information**. The goal is to find the projection that preserves the most **Variance** or **Local Structure**.</p>
+    <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some <strong>Loss of Information</strong>. The goal is to find the projection that preserves the most <strong>Variance</strong> or <strong>Local Structure</strong>.</p>
 
     <h2 id="analogy">The "Shadow Puppet" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a complex **3D Statue of a Dragon**. 
+        <strong>Analogy:</strong> Imagine a complex <strong>3D Statue of a Dragon</strong>. 
         You want to describe the dragon using only a <strong>2D Shadow on the wall</strong>. 
         If you take a photo from the <strong>Top-Down</strong>, you just get a flat blob. (Bad Projection). 
         If you take it from the <strong>Side</strong>, you see the head, wings, and tail. (Good Projection). 
-        **Dimensionality Reduction** is the physics of finding the <strong>Best Angle</strong> for that shadow puppet. 
+        <strong>Dimensionality Reduction</strong> is the physics of finding the <strong>Best Angle</strong> for that shadow puppet. 
       </div>
     </div>
 

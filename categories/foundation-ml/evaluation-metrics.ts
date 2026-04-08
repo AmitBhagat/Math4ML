@@ -82,7 +82,7 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have completed the foundation. You possess the **Intuition** and **Math** to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
+      <strong>Next Step:</strong> You have completed the foundation. You possess the <strong>Intuition</strong> and <strong>Math</strong> to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
     </div>
   `
 };

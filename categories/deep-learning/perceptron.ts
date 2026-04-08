@@ -45,7 +45,7 @@ export const perceptronSection: TopicSection = {
 
     <h2 id="logic">Logic Gates & The XOR Crisis</h2>
     <p>A single Perceptron can perfectly model <strong>AND</strong> and <strong>OR</strong> gates. However, it <strong>cannot</strong> model the <strong>XOR (Exclusive OR)</strong> gate. Why? Because XOR is not <strong>Linearly Separable</strong>. You cannot draw a single straight line to separate the classes. 
-    **The Gotcha:** This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
+    <strong>The Gotcha:</strong> This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
 
     <h2 id="example">Illustrated Example: The Binary Voter</h2>
     <div class="example-box">

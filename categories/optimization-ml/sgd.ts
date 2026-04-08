@@ -37,7 +37,7 @@ export const sgdSection: TopicSection = {
     <h2 id="math">The Mini-Batch Update</h2>
     <p>For a mini-batch \(\mathcal{B}\), the update rule is:</p>
     <div class="math-block">$$\theta \gets \theta - \alpha \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla \mathcal{L}_i(\theta)$$</div>
-    <p>**The Speed:** Because we process data in chunks, we can use <strong>GPUs</strong> to calculate the gradients in parallel, making it 10,000x faster than sequential CPU loops.</p>
+    <p><strong>The Speed:</strong> Because we process data in chunks, we can use <strong>GPUs</strong> to calculate the gradients in parallel, making it 10,000x faster than sequential CPU loops.</p>
 
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
     <p>Batch GD follows a <strong>Smooth Straight Line</strong>. SGD looks like a <strong>Confused Bee</strong>. It jiggles left and right, but the <strong>Average Direction</strong> is still down the mountain. As we get closer to the bottom, the noise makes it bounce around the minimum. This is why we <strong>Slow Down</strong> (Schedule) the learning rate at the end.</p>

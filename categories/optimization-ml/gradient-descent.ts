@@ -30,8 +30,8 @@ export const gradientDescentSection: TopicSection = {
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Listening to the Ground."</strong> 
         The gradient tells you two things: 
-        1. **Direction:** Which way is "Down"? 
-        2. **Magnitude:** How "Steep" is the slope? 
+        1. <strong>Direction:</strong> Which way is "Down"? 
+        2. <strong>Magnitude:</strong> How "Steep" is the slope? 
         If the mountain is flat, the gradient is zero, and you have reached your destination.
       </div>
     </div>
@@ -47,8 +47,8 @@ export const gradientDescentSection: TopicSection = {
 
     <h2 id="batch">Batch Gradient Descent</h2>
     <p>In <strong>Batch GD</strong>, we use <strong>Every Single Data Point</strong> in the dataset to calculate the gradient before taking one step. 
-    **The Upside:** The descent is very smooth and stable. 
-    **The Downside:** If you have 1 billion data points, your computer will <strong>Run out of Memory</strong> before you take your first step.</p>
+    <strong>The Upside:</strong> The descent is very smooth and stable. 
+    <strong>The Downside:</strong> If you have 1 billion data points, your computer will <strong>Run out of Memory</strong> before you take your first step.</p>
 
     <h2 id="example">Illustrated Example: The Blindfolded Mountain Climber</h2>
     <div class="example-box">

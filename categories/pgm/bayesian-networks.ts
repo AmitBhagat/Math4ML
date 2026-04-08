@@ -65,7 +65,7 @@ export const bayesianNetworksSection: TopicSection = {
     <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
     <div class="example-box">
       <h4>Scenario: Explaining Away the Broken Window</h4>
-      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A **Burglar** or a **Baseball** thrown by a neighborhood kid.</p>
+      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A <strong>Burglar</strong> or a <strong>Baseball</strong> thrown by a neighborhood kid.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">

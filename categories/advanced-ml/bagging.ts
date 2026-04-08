@@ -34,7 +34,7 @@ export const baggingSection: TopicSection = {
     </div>
 
     <h2 id="bootstrap">Bootstrapping: The "Bag" of Samples</h2>
-    <p>How do we make the models "Different"? We use <strong>Sampling with Replacement</strong>. From a dataset of $N$ points, we pull $N$ points randomly, allowing the same point to be picked twice. Each model gets its own "Bag" of data. On average, each bag contains about **63% of the unique samples**.</p>
+    <p>How do we make the models "Different"? We use <strong>Sampling with Replacement</strong>. From a dataset of $N$ points, we pull $N$ points randomly, allowing the same point to be picked twice. Each model gets its own "Bag" of data. On average, each bag contains about <strong>63% of the unique samples</strong>.</p>
 
     <h2 id="averaging">Aggregating: The Vote</h2>
     <ul>
@@ -49,10 +49,10 @@ export const baggingSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Presidential Election**. 
-        If only **One Person** decided the president (Single Model), the choice would be highly volatile and depend on that one person's mood. 
-        **Bagging** is the election. We have 100,000,000 people (Models). Each person sees a slightly different part of reality (Bootstrapping). 
-        When they all **Vote (Aggregating)**, the final result is <strong>Stable</strong>. The "Crazy" guesses of one individual are drowned out by the collective wisdom of the majority.
+        <strong>Analogy:</strong> Imagine a <strong>Presidential Election</strong>. 
+        If only <strong>One Person</strong> decided the president (Single Model), the choice would be highly volatile and depend on that one person's mood. 
+        <strong>Bagging</strong> is the election. We have 100,000,000 people (Models). Each person sees a slightly different part of reality (Bootstrapping). 
+        When they all <strong>Vote (Aggregating)</strong>, the final result is <strong>Stable</strong>. The "Crazy" guesses of one individual are drowned out by the collective wisdom of the majority.
       </div>
     </div>
 

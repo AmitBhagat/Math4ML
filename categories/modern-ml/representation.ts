@@ -29,7 +29,7 @@ export const representationSection: TopicSection = {
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Lossy but Smart Compression."</strong> 
         If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
-        Those 3 attributes are the **Representations**. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
+        Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
       </div>
     </div>
 
@@ -53,8 +53,8 @@ export const representationSection: TopicSection = {
         "Eyes? Round." 
         "Nose? Pointy." 
         "Hair? Short." 
-        Those <strong>Words</strong> are the **Representations**. They are a low-dimensional summary of the person's identity. 
-        **Representation learning is the Artist. He is finding the few 'Features' that allow us to reconstruct the truth without all the noise.** 
+        Those <strong>Words</strong> are the <strong>Representations</strong>. They are a low-dimensional summary of the person's identity. 
+        <strong>Representation learning is the Artist. He is finding the few 'Features' that allow us to reconstruct the truth without all the noise.</strong> 
       </div>
     </div>
 
@@ -88,7 +88,7 @@ export const representationSection: TopicSection = {
     <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
     <div class="example-box">
       <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
-      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use **Features**.</p>
+      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use <strong>Features</strong>.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -97,7 +97,7 @@ export const representationSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: **[Sweet, Sour, Salty, Bitter, Umami]**.</div>
+          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: <strong>[Sweet, Sour, Salty, Bitter, Umami]</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>

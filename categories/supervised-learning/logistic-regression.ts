@@ -9,7 +9,7 @@ export const logisticRegressionSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Probability</div>
       <h1>Logistic Regression</h1>
-      <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for **Binary Decisions**.</p>
+      <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for <strong>Binary Decisions</strong>.</p>
     </div>
 
     <div class="toc">
@@ -40,7 +40,7 @@ export const logisticRegressionSection: TopicSection = {
     <h2 id="decision">The Decision Threshold</h2>
     <div class="example-box">
       <h4>Scenario: Email Filter</h4>
-      <p>The model outputs **0.85** from the Sigmoid.</p>
+      <p>The model outputs <strong>0.85</strong> from the Sigmoid.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -49,7 +49,7 @@ export const logisticRegressionSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Logic:</strong> You can tune this! If you are a <strong>Doctor</strong>, you might set the threshold to 0.1 because you'd rather have a **False Positive** than a **False Negative**.</div>
+          <div><strong>The Logic:</strong> You can tune this! If you are a <strong>Doctor</strong>, you might set the threshold to 0.1 because you'd rather have a <strong>False Positive</strong> than a <strong>False Negative</strong>.</div>
         </div>
       </div>
     </div>
@@ -60,7 +60,7 @@ export const logisticRegressionSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are <strong>Filtering Water</strong>. 
         Raw data (Unfiltered water) is very messy. The Linear model (\(wx + b\)) is your <strong>Pipe</strong>—it moves the water. 
-        The **Sigmoid Function** is the <strong>Filter Membrane</strong>. 
+        The <strong>Sigmoid Function</strong> is the <strong>Filter Membrane</strong>. 
         It only lets the "Pure" results through. If the water has enough "Signal" to overcome the membrane's resistance, it comes out as <strong>Clean (1)</strong>. If not, it stays <strong>Dirty (0)</strong>. 
         The "Threshold" is you deciding <strong>how clean</strong> the water has to be before you drink it.
       </div>
@@ -105,7 +105,7 @@ export const logisticRegressionSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Sigmoid Squash:</strong> We pass 5.0 through the S-curve. It comes out as **0.993**.</div>
+          <div><strong>The Sigmoid Squash:</strong> We pass 5.0 through the S-curve. It comes out as <strong>0.993</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>

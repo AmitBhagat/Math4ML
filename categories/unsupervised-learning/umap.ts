@@ -9,7 +9,7 @@ export const umapSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧩 Unsupervised · Manifold</div>
       <h1>UMAP: The Topology Map</h1>
-      <p>If t-SNE is the current standard, **UMAP** is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
+      <p>If t-SNE is the current standard, <strong>UMAP</strong> is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
     </div>
 
     <div class="toc">
@@ -29,7 +29,7 @@ export const umapSection: TopicSection = {
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
         Imagine your data points are <strong>Stars in a Galaxy</strong>. 
-        **Topology** isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
+        <strong>Topology</strong> isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
         UMAP builds a mathematical constellation (the Complex) and then tries to <strong>Flatten it</strong> onto a 2D piece of paper while keeping the "Geometric Essence" intact. 
       </div>
     </div>
@@ -38,7 +38,7 @@ export const umapSection: TopicSection = {
     <p>In t-SNE, clusters are perfect, but the distance between clusters is <strong>Mean-ingless</strong>. In UMAP, the distance between groups reflects their true <strong>Dissimilarity</strong>. This makes it a better tool for understanding the <strong>Relationship between Clusters</strong>.</p>
 
     <h2 id="performance">Performance: Speed and Efficiency</h2>
-    <p><strong>The Magic:</strong> UMAP is 10x to 100x faster than t-SNE. While t-SNE struggles with 10,000 points, UMAP can handle <strong>Millions</strong> of points without a sweat. This makes it the only choice for **Single-Cell Genomics** or large-scale NLP embeddings.</p>
+    <p><strong>The Magic:</strong> UMAP is 10x to 100x faster than t-SNE. While t-SNE struggles with 10,000 points, UMAP can handle <strong>Millions</strong> of points without a sweat. This makes it the only choice for <strong>Single-Cell Genomics</strong> or large-scale NLP embeddings.</p>
 
     <h2 id="analogy">The "Stretchy Net" Analogy</h2>
     <div class="callout success">
@@ -46,7 +46,7 @@ export const umapSection: TopicSection = {
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your high-dimensional data is a <strong>Giant Ball of Wool</strong>. 
         Inside that wool, some threads are tightly knotted (Clusters). 
-        **UMAP** is like taking a <strong>High-Stretching Net</strong> and laying it over the wool. 
+        <strong>UMAP</strong> is like taking a <strong>High-Stretching Net</strong> and laying it over the wool. 
         It hooks onto the knots (Local) but it also stretches between the knots (Global). 
         Then, you <strong>Pull the Net Flat</strong> onto a table. 
         Because the net is "Stretchy," it doesn't break the knots, and it keeps the <strong>Overall Shape</strong> of the original wool ball. 

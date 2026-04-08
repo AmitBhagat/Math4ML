@@ -55,7 +55,7 @@ export const aucSection: TopicSection = {
         If you pick one random Math student and one random Art student, what is the chance the Math student got a higher grade? 
         If they are both equally good at chemistry, it's 50% (AUC = 0.5). 
         If Math students are consistently better, the chance might be 85% (AUC = 0.85). 
-        **AUC is that percentage. It describes how well your "Chemistry Test" (Model) separates the two groups.** 
+        <strong>AUC is that percentage. It describes how well your "Chemistry Test" (Model) separates the two groups.</strong> 
       </div>
     </div>
 

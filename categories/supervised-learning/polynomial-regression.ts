@@ -59,8 +59,8 @@ export const polynomialRegressionSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are trying to measure a <strong>Bumpy Hill</strong>. 
-        **Linear Regression** is like using a <strong>Rigid Wooden Ruler</strong>. No matter how you tilt it, you can't follow the bumps. 
-        **Polynomial Regression** is like using a <strong>Flexible Plastic Ruler</strong>. You can bend it to follow the hills and valleys. 
+        <strong>Linear Regression</strong> is like using a <strong>Rigid Wooden Ruler</strong>. No matter how you tilt it, you can't follow the bumps. 
+        <strong>Polynomial Regression</strong> is like using a <strong>Flexible Plastic Ruler</strong>. You can bend it to follow the hills and valleys. 
         But beware: if the ruler is <strong>too flexible (Too high degree)</strong>, you can fold it in half and make it touch any speck of dirt on the hill. It ceases to be a ruler and becomes <strong>Chaos</strong>.
       </div>
     </div>

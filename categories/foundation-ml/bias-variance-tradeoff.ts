@@ -54,11 +54,11 @@ export const biasVarianceTradeoffSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>High Bias, Low Variance (The Stubborn):</strong> Every arrow hits exactly 10 inches to the left. The archer is consistent (Low Variance) but systematically wrong (High Bias). This is **Underfitting**.</div>
+          <div><strong>High Bias, Low Variance (The Stubborn):</strong> Every arrow hits exactly 10 inches to the left. The archer is consistent (Low Variance) but systematically wrong (High Bias). This is <strong>Underfitting</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>Low Bias, High Variance (The Chaotic):</strong> Arrows are scattered all over the board. On average, they are centered, but any single shot is wild. This archer is "Over-Anxious" and reacts to every gust of wind. This is **Overfitting**.</div>
+          <div><strong>Low Bias, High Variance (The Chaotic):</strong> Arrows are scattered all over the board. On average, they are centered, but any single shot is wild. This archer is "Over-Anxious" and reacts to every gust of wind. This is <strong>Overfitting</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>

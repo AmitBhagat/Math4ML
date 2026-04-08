@@ -30,7 +30,7 @@ export const gradientBoostingSection: TopicSection = {
         The first tree makes a <strong>Rough Guess</strong>. 
         The second tree doesn't look at the original data; it looks at the <strong>Error (The Residual)</strong> of the first tree. 
         It says: "I see Tree 1 missed these 10 samples. I'll focus <strong>only</strong> on them." 
-        **Boosting** builds a "Tower of Guesses" that get more and more precise.
+        <strong>Boosting</strong> builds a "Tower of Guesses" that get more and more precise.
       </div>
     </div>
 
@@ -46,7 +46,7 @@ export const gradientBoostingSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Tree 2 Goal:</strong> Don't predict 30. **Predict 8**.</div>
+          <div><strong>The Tree 2 Goal:</strong> Don't predict 30. <strong>Predict 8</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -56,20 +56,20 @@ export const gradientBoostingSection: TopicSection = {
     </div>
 
     <h2 id="learning-rate">Shrinkage: The Learning Rate</h2>
-    <p><strong>The Gotcha:</strong> If you add 100% of the new tree's guess every time, the model will **Overfit** instantly. 
-    **Shrinkage** means we only add a tiny fraction (\(\eta = 0.1\)) of the new tree. This is the **Learning Rate**. It forces the model to take 1,000 "Small Steps" toward the truth rather than 10 "Giant Leaps" into chaos.</p>
+    <p><strong>The Gotcha:</strong> If you add 100% of the new tree's guess every time, the model will <strong>Overfit</strong> instantly. 
+    <strong>Shrinkage</strong> means we only add a tiny fraction (\(\eta = 0.1\)) of the new tree. This is the <strong>Learning Rate</strong>. It forces the model to take 1,000 "Small Steps" toward the truth rather than 10 "Giant Leaps" into chaos.</p>
 
     <h2 id="analogy">The "Golf Course" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you're playing <strong>Golf</strong>. 
-        **Random Forest** is like 10 people hitting 1 ball at the same time and taking the <strong>Average</strong> of where it lands. 
-        **Gradient Boosting** is like <strong>One Person playing multiple shots</strong>. 
-        * **Shot 1 (Tree 1):** You hit the ball 200 yards. 
-        * **Shot 2 (Tree 2):** You don't aim for the pin again from the tee; you look at the <strong>Residual Distance</strong> (remaining 50 yards) and hit a smaller shot. 
-        * **Shot 3 (Tree 3):** You look at the final 5 yards and hit a <strong>Putter shot</strong>. 
-        **Boosting** is that final, perfect putt.
+        <strong>Random Forest</strong> is like 10 people hitting 1 ball at the same time and taking the <strong>Average</strong> of where it lands. 
+        <strong>Gradient Boosting</strong> is like <strong>One Person playing multiple shots</strong>. 
+        * <strong>Shot 1 (Tree 1):</strong> You hit the ball 200 yards. 
+        * <strong>Shot 2 (Tree 2):</strong> You don't aim for the pin again from the tee; you look at the <strong>Residual Distance</strong> (remaining 50 yards) and hit a smaller shot. 
+        * <strong>Shot 3 (Tree 3):</strong> You look at the final 5 yards and hit a <strong>Putter shot</strong>. 
+        <strong>Boosting</strong> is that final, perfect putt.
       </div>
     </div>
 

@@ -22,7 +22,7 @@ export const f1ScoreSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: The Harmonic Mean</h2>
-    <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the **Harmonic Mean** because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
+    <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the <strong>Harmonic Mean</strong> because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -51,11 +51,11 @@ export const f1ScoreSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Diplomat</strong> negotiating between two warring countries: **Country P (Precision)** and **Country R (Recall)**. 
-        * **Country P** wants to be perfectly right. 
-        * **Country R** wants to be perfectly thorough. 
+        <strong>Analogy:</strong> Imagine a <strong>Diplomat</strong> negotiating between two warring countries: <strong>Country P (Precision)</strong> and <strong>Country R (Recall)</strong>. 
+        * <strong>Country P</strong> wants to be perfectly right. 
+        * <strong>Country R</strong> wants to be perfectly thorough. 
         If the Diplomat only listens to one side, the treaty fails. 
-        **The F1 Score is that treaty. It only "Signs" the deal (reaches 1.0) if both countries are satisfied. If one country feels cheated, the whole F1 Score falls apart.**
+        <strong>The F1 Score is that treaty. It only "Signs" the deal (reaches 1.0) if both countries are satisfied. If one country feels cheated, the whole F1 Score falls apart.</strong>
       </div>
     </div>
 
@@ -113,7 +113,7 @@ export const f1ScoreSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. **Accuracy is a lie; F1 is the truth.**
+          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ export const ridgeRegressionSection: TopicSection = {
     </div>
 
     <h2 id="benefit">The Variance Reduction</h2>
-    <p>Ridge is especially useful when features are **Correlated** (Multicollinearity). In standard OLS, the weights become unstable and explode. Ridge "Stabilizes" the weights, making the model more robust to new data.</p>
+    <p>Ridge is especially useful when features are <strong>Correlated</strong> (Multicollinearity). In standard OLS, the weights become unstable and explode. Ridge "Stabilizes" the weights, making the model more robust to new data.</p>
     
     <div class="callout success">
       <div class="callout-icon">✓</div>
@@ -50,8 +50,8 @@ export const ridgeRegressionSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your line is a <strong>Tent Pole</strong> trying to stay upright in a storm. 
-        **Standard OLS** is just let the pole lean wherever the wind (Noise) blows it. 
-        **Ridge Regression** is like attaching <strong>Elastic Cords (Springs)</strong> from the pole to the ground. 
+        <strong>Standard OLS</strong> is just let the pole lean wherever the wind (Noise) blows it. 
+        <strong>Ridge Regression</strong> is like attaching <strong>Elastic Cords (Springs)</strong> from the pole to the ground. 
         The cords pull the pole back toward the center (Weight 0). The pole can still move if the wind is <strong>Truly Strong (Real Data)</strong>, but it won't wiggle for every tiny breeze (Noise).
       </div>
     </div>
@@ -103,7 +103,7 @@ export const ridgeRegressionSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The pole is rock-solid. It only moves for the **real trends** like 'Hours Studied'.</div>
+          <div><strong>The Result:</strong> The pole is rock-solid. It only moves for the <strong>real trends</strong> like 'Hours Studied'.</div>
         </div>
       </div>
 

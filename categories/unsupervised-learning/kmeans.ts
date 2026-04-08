@@ -22,7 +22,7 @@ export const kmeansSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: Objective Function</h2>
-    <p>k-Means is a **Centroid-Based** algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
+    <p>k-Means is a <strong>Centroid-Based</strong> algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
     <div class="math-block">$$WCSS = \sum_{j=1}^K \sum_{x \in C_j} \|x - \mu_j\|^2$$</div>
     <ul>
       <li><strong>\(K\):</strong> The number of clusters (chosen by the user).</li>
@@ -68,7 +68,7 @@ export const kmeansSection: TopicSection = {
     <p>How do you know if there are 3 clusters or 10? If you increase \(K\), your error (WCSS) will <strong>always</strong> go down. The goal is to find the "Elbow"—the point where adding more clusters doesn't give you a significantly better fit. It's the point of <strong>Diminishing Returns</strong>.</p>
 
     <h2 id="limitations">The "Spherical" Weakness</h2>
-    <p><strong>The Gotcha:</strong> k-Means assumes clusters are <strong>Circular (Spherical)</strong> and of similar size. If your data is shaped like a **Crescent Moon** or a **Ring**, k-Means will fail miserably because it only knows how to find "Round Blobs."</p>
+    <p><strong>The Gotcha:</strong> k-Means assumes clusters are <strong>Circular (Spherical)</strong> and of similar size. If your data is shaped like a <strong>Crescent Moon</strong> or a <strong>Ring</strong>, k-Means will fail miserably because it only knows how to find "Round Blobs."</p>
 
     <h2 id="analogy">The "Magnetic Centers" Analogy</h2>
     <div class="callout success">
@@ -77,7 +77,7 @@ export const kmeansSection: TopicSection = {
         <strong>Analogy:</strong> Imagine a <strong>Standardized Test Room</strong> with 100 students and 3 <strong>Proctors</strong>. 
         The proctors start in random corners. They say: "Everyone, find the proctor closest to you." (Assignment). 
         Once the students are grouped, each proctor walks to the <strong>Exact Center</strong> of their group (Update). 
-        The students adjust to the new centers. Eventually, everyone is perfectly grouped around the proctors. **k-Means is those proctors.** 
+        The students adjust to the new centers. Eventually, everyone is perfectly grouped around the proctors. <strong>k-Means is those proctors.</strong> 
       </div>
     </div>
 

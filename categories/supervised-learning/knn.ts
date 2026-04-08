@@ -22,7 +22,7 @@ export const knnSection: TopicSection = {
     </div>
 
     <h2 id="theory">Theoretical Core: The Distance Metric</h2>
-    <p>KNN is a **Non-Parametric** algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
+    <p>KNN is a <strong>Non-Parametric</strong> algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -30,7 +30,7 @@ export const knnSection: TopicSection = {
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Voting by Proximity."</strong> 
         It's like moving to a new city and trying to figure out which political party to join. 
         You don't read the manifesto (Parameters); you just ask the <strong>3 nearest neighbors</strong> whom they voted for. If 2 voted for Party A, you join Party A. 
-        **KNN** is purely local—it only cares about what's physically around it.
+        <strong>KNN</strong> is purely local—it only cares about what's physically around it.
       </div>
     </div>
 
@@ -57,7 +57,7 @@ export const knnSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Fix:</strong> Usually, use an **Odd Number** for $k$ to avoid ties. Use **Cross-Validation** to find the "Sweet Spot" (usually around 3, 5, or 7).</div>
+          <div><strong>The Fix:</strong> Usually, use an <strong>Odd Number</strong> for $k$ to avoid ties. Use <strong>Cross-Validation</strong> to find the "Sweet Spot" (usually around 3, 5, or 7).</div>
         </div>
       </div>
     </div>
@@ -72,7 +72,7 @@ export const knnSection: TopicSection = {
         <strong>Analogy:</strong> Imagine you are an <strong>Appraiser judging a House Price</strong>. 
         You don't have a complicated formula for the whole city. Instead, you look at the <strong>5 most similar houses</strong> that sold recently in that specific neighborhood. 
         If those 5 houses (Your Neighbors) sold for an average of $500k, you'll guess $500k. 
-        **KNN** is that appraiser. It's **Simple, Intuitive, and Lazy.** (It only does work when you ask it for a prediction).
+        <strong>KNN</strong> is that appraiser. It's <strong>Simple, Intuitive, and Lazy.</strong> (It only does work when you ask it for a prediction).
       </div>
     </div>
 

@@ -37,7 +37,7 @@ export const contrastiveSection: TopicSection = {
 
     <h2 id="augmentation">Creating "Friends" with Augmentation</h2>
     <p>In <strong>Self-Supervised Contrastive Learning</strong> (like SimCLR), we create our own positive pairs. We take one image and create two versions: one cropped, one flipped. 
-    **The Logic:** Even though they look different to a computer (different pixels), they are the <strong>Same Object</strong>. We force the model to acknowledge this "Similarity."</p>
+    <strong>The Logic:</strong> Even though they look different to a computer (different pixels), they are the <strong>Same Object</strong>. We force the model to acknowledge this "Similarity."</p>
 
     <h2 id="triplet">The Triplet Loss</h2>
     <div class="math-block">$$\mathcal{L} = \max(0, d(a, p) - d(a, n) + \alpha)$$</div>
@@ -52,11 +52,11 @@ export const contrastiveSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are at a **Crowded Party**. 
-        * **Contrastive Learning:** You want to be <strong>Right next</strong> to your Best Friend (Positive Pair). 
+        <strong>Analogy:</strong> Imagine you are at a <strong>Crowded Party</strong>. 
+        * <strong>Contrastive Learning:</strong> You want to be <strong>Right next</strong> to your Best Friend (Positive Pair). 
         * But you also want to be <strong>As far as possible</strong> from your Ex-Rival (Negative Pair). 
         As you move through the room, you are constantly checking these two distances. 
-        **By the end of the night, if everyone does this, the room will be 'Clustered' into groups of friends. The model learns these groups without anyone telling it the 'Social Hierarchy.'** 
+        <strong>By the end of the night, if everyone does this, the room will be 'Clustered' into groups of friends. The model learns these groups without anyone telling it the 'Social Hierarchy.'</strong> 
       </div>
     </div>
 

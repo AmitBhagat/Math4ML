@@ -81,8 +81,8 @@ model.fit(sizes, prices)
 
 # Compare on a 500 sqft studio
 test_size = np.array([[500]])
-print(f"Manual Price: \${manual_rule(500):,.0f}")
-print(f"ML Price:     \${model.predict(test_size)[0]:,.2f}")
+print("Manual Price: $" + f"{manual_rule(500):,.0f}")
+print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
     </python-code>
 
     <h2 id="why">Why Use ML?</h2>

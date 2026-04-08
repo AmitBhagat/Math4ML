@@ -21,7 +21,7 @@ export const overfittingUnderfittingSection: TopicSection = {
     </div>
 
     <h2 id="theory">The Mechanics of Complexity</h2>
-    <p>Every model has a **Capacity** (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
+    <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -30,7 +30,7 @@ export const overfittingUnderfittingSection: TopicSection = {
         If you have 10 data points that roughly form a line: 
         <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
         <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
-        The **Truth** is a slightly wobbly line that catches the general trend.
+        The <strong>Truth</strong> is a slightly wobbly line that catches the general trend.
       </div>
     </div>
 
@@ -61,7 +61,7 @@ export const overfittingUnderfittingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are **Overfitting**. If you fail both, you are **Underfitting**.
+          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
         </div>
       </div>
     </div>

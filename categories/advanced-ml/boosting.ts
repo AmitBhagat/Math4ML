@@ -28,7 +28,7 @@ export const boostingSection: TopicSection = {
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Adaptive Learning."</strong> 
-        In school, you don't spend time studying what you already know. You focus on the **Hard Problems**. 
+        In school, you don't spend time studying what you already know. You focus on the <strong>Hard Problems</strong>. 
         Boosting does the same. It "Gives more weight" to the <strong>Difficult Samples</strong> so the next model is forced to solve them.
       </div>
     </div>
@@ -71,11 +71,11 @@ export const boostingSection: TopicSection = {
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>Student preparing for the SAT</strong>. 
-        * **1st Round:** You take a practice test. You get the math questions right but miss all the <strong>Grammar</strong> questions. 
-        * **2nd Round:** You hire a **Grammar Tutor**. You focus 100% on grammar and learn the rules. 
-        * **3rd Round:** You take another test. Now you know grammar, but you miss the <strong>Vocabulary</strong> questions. 
-        * **4th Round:** You hire a **Vocabulary Tutor**. 
-        **By the end of the semester, you have an "Ensemble" of 3 different skillsets that cover every weakness. Boosting is that relentless focus on what you don't yet understand.** 
+        * <strong>1st Round:</strong> You take a practice test. You get the math questions right but miss all the <strong>Grammar</strong> questions. 
+        * <strong>2nd Round:</strong> You hire a <strong>Grammar Tutor</strong>. You focus 100% on grammar and learn the rules. 
+        * <strong>3rd Round:</strong> You take another test. Now you know grammar, but you miss the <strong>Vocabulary</strong> questions. 
+        * <strong>4th Round:</strong> You hire a <strong>Vocabulary Tutor</strong>. 
+        <strong>By the end of the semester, you have an "Ensemble" of 3 different skillsets that cover every weakness. Boosting is that relentless focus on what you don't yet understand.</strong> 
       </div>
     </div>
 

@@ -32,12 +32,12 @@ export const scalingNormalizationSection: TopicSection = {
     </div>
 
     <h2 id="standardization">Standardization (Z-Score)</h2>
-    <p>This transforms your data to have a **Mean of 0** and a **Standard Deviation of 1** (Standard Normal Distribution).</p>
+    <p>This transforms your data to have a <strong>Mean of 0</strong> and a <strong>Standard Deviation of 1</strong> (Standard Normal Distribution).</p>
     <div class="math-block">$$x' = \frac{x - \mu}{\sigma}$$</div>
     <p><strong>Note:</strong> Most algorithms (like SVMs and Neural Nets) prefer this because it handles "Outliers" more gracefully than Min-Max.</p>
 
     <h2 id="normalization">Normalization (Min-Max)</h2>
-    <p>This "Squeezes" all your data into a fixed range, usually **[0, 1]**.</p>
+    <p>This "Squeezes" all your data into a fixed range, usually <strong>[0, 1]</strong>.</p>
     <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
     <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
 

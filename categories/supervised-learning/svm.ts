@@ -35,10 +35,10 @@ export const svmSection: TopicSection = {
     </div>
 
     <h2 id="support-vectors">The Pivot Points: Support Vectors</h2>
-    <p>The most important discovery of SVM is that <strong>only a few points matter.</strong> The points that are "Almost on the highway" are called **Support Vectors**. If you move any other point in the dataset, the highway doesn't move. These points are the <strong>scaffolding</strong> that holds up the whole model.</p>
+    <p>The most important discovery of SVM is that <strong>only a few points matter.</strong> The points that are "Almost on the highway" are called <strong>Support Vectors</strong>. If you move any other point in the dataset, the highway doesn't move. These points are the <strong>scaffolding</strong> that holds up the whole model.</p>
 
     <h2 id="slack">Soft Margin & Slack Variables</h2>
-    <p>What if your data is <strong>Messy</strong>? What if one rogue "Dog" is deep inside "Cat Territory"? If you try to build a perfect highway, you'll fail. <strong>Soft Margin SVM</strong> introduces "Slack Variables" (\(\xi\)). It allows some points to "Cheat" (be on the wrong side) for a small penalty. This makes the model much more **Stable and Generalizable.**</p>
+    <p>What if your data is <strong>Messy</strong>? What if one rogue "Dog" is deep inside "Cat Territory"? If you try to build a perfect highway, you'll fail. <strong>Soft Margin SVM</strong> introduces "Slack Variables" (\(\xi\)). It allows some points to "Cheat" (be on the wrong side) for a small penalty. This makes the model much more <strong>Stable and Generalizable.</strong></p>
 
     <h2 id="kernel">The Kernel Trick: Folding Space</h2>
     <p><strong>The Magic:</strong> What if the data isn't a line? What if it's a <strong>Circle</strong>? 
@@ -51,7 +51,7 @@ export const svmSection: TopicSection = {
         <strong>Analogy:</strong> Imagine two <strong>Feuding Kingdoms (Cats vs. Dogs)</strong>. 
         Instead of just a fence, you want a <strong>Giant River (The Moat)</strong>. 
         You want the river to be <strong>as wide as possible</strong> to prevent any random person from accidentally crossing over (The Noise). 
-        The only things the river cares about are the <strong>Soldiers (Support Vectors)</strong> standing right on the edge of the water. If the king of Cats moves his palace in the back, the river doesn't change. It only moves if the Soldiers on the edge move. **SVM is the Architect of the River.**
+        The only things the river cares about are the <strong>Soldiers (Support Vectors)</strong> standing right on the edge of the water. If the king of Cats moves his palace in the back, the river doesn't change. It only moves if the Soldiers on the edge move. <strong>SVM is the Architect of the River.</strong>
       </div>
     </div>
 
@@ -98,7 +98,7 @@ export const svmSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Kernel Trick:</strong> If the kingdoms are mixed up (a circle of Blue inside a ring of Red), SVM **Bends Space** so it can still draw a straight river in 3D.</div>
+          <div><strong>The Kernel Trick:</strong> If the kingdoms are mixed up (a circle of Blue inside a ring of Red), SVM <strong>Bends Space</strong> so it can still draw a straight river in 3D.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>

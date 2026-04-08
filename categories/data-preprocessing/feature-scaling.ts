@@ -44,18 +44,18 @@ export const featureScalingSection: TopicSection = {
     </div>
 
     <h2 id="importance">Why Scale? The Gradient Speedup</h2>
-    <p>If features have different scales, the <strong>Loss Surface</strong> looks like a long, narrow "Taco Shell." Gradient Descent will bounce back and forth, taking forever to reach the bottom. When you scale, the surface becomes a **Symmetric Bowl**, and the gravity of the gradient pulls the model straight to the minimum 10x faster.</p>
+    <p>If features have different scales, the <strong>Loss Surface</strong> looks like a long, narrow "Taco Shell." Gradient Descent will bounce back and forth, taking forever to reach the bottom. When you scale, the surface becomes a <strong>Symmetric Bowl</strong>, and the gravity of the gradient pulls the model straight to the minimum 10x faster.</p>
 
     <h2 id="analogy">The "School Grades" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine comparing two students. 
-        Student A got a **90%** on a Math test. 
-        Student B got an **800** on the SAT. 
+        Student A got a <strong>90%</strong> on a Math test. 
+        Student B got an <strong>800</strong> on the SAT. 
         Is 800 better than 90? Of course not—they are on different scales! 
         To compare them fairly, you have to <strong>Scale</strong> them to a common range (like 0 to 100) or check how many <strong>Standard Deviations</strong> they are above the class average. 
-        **Scaling is the universal translator for data.**
+        <strong>Scaling is the universal translator for data.</strong>
       </div>
     </div>
 
