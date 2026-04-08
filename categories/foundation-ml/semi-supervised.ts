@@ -30,32 +30,51 @@ export const semiSupervisedLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">The "Few High-Impact Samples" Approach</h2>
+    <h2 id="example">Illustrated Example: The Tiny City Map</h2>
     <div class="example-box">
-      <h4>Scenario: Training a Sentiment Analyzer</h4>
-      <p>You want to know if Tweets are happy or sad. You have 1 million Tweets, but only 500 have been manually labeled.</p>
+      <h4>Scenario: Navigating a 1,000-Square-Mile City</h4>
+      <p>Imagine you are in a massive city and you only have a <strong>1-page tourist map</strong> (The Labeled Data).</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>The Goal:</strong> Use the 500 labels to find "Anchor points" in the word cloud.</div>
+          <div><strong>The Anchor:</strong> You find "Central Park" on your tiny map. You are standing right there.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> Words like "Excellent" are labeled as Happy. The machine notices that words like "Stellar" often appear next to "Excellent" in the 1 million unlabeled Tweets. It correctly guesses "Stellar" is also Happy.</div>
+          <div><strong>The Expansion:</strong> You look at the unlabeled streets around you. Since they are physically connected to Central Park, you infer they must be part of the "Manhattan" district.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Result:</strong> You've mapped out 100 blocks of the city even though your map only showed one. Your "Seeds of Knowledge" have sprouted into a forest.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> SSL is about <strong>Leverage</strong>. It uses a few expensive labels to unlock the value of thousands of free ones.
         </div>
       </div>
     </div>
 
-    <h2 id="analogy">The "Foreign City" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are <strong>Lost in a Foreign City</strong> where you don't speak the language. 
-        Most signs are gibberish (Unlabeled). But you have a <strong>Tiny Tourist Map</strong> (Labeled). 
-        You find one landmark on your map. You look around and see that the "Unlabeled" streets nearby are full of restaurants and shops. Even though they aren't on your tiny map, you've <strong>learned</strong> that this neighborhood is the "Entertainment District."
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Label Propagation</h2>
+    <python-code static-output="[SSL] Labeling the mountain of unknown data...\nPredicted Class for unlabeled point [2, 1]: Class 1 (Red)">
+import numpy as np
+from sklearn.semi_supervised import LabelPropagation
+
+# 1. Very Little Labeled Data (0 and 1)
+# -1 means 'Unlabeled'
+X = np.array([[1, 1], [1, 2], [10, 10], [9, 9], [2, 1], [9, 8]])
+y = np.array([0, 0, 1, 1, -1, -1]) # Only 4 points are labeled
+
+# 2. Let the labels 'flow' to the neighbors
+lp = LabelPropagation().fit(X, y)
+y_pred = lp.predict(X)
+
+print(f"[SSL] Final Labels: {y_pred}")
+print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if there are no labels at all, just a feedback loop? Explore <strong><a href="#/machine-learning/foundation-ml/reinforcement">Reinforcement Learning</a></strong>.

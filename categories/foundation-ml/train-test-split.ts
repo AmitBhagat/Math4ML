@@ -31,43 +31,59 @@ export const trainTestSplitSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="split">The Standard 80/20 Split</h2>
+    <h2 id="example">Illustrated Example: The Secret Sommelier</h2>
     <div class="example-box">
-      <h4>Problem: Allocating your Limited Data</h4>
-      <p>Imagine you have 10,000 credit card transactions. 100 of them are Fraud. How do you split them?</p>
+      <h4>Scenario: Qualifying as a Master Wine Taster</h4>
+      <p>Imagine you are training to be a <strong>Wine Master</strong>. You have a cellar with 100 bottles of wine. How do you prove you've actually learned to taste, rather than just memorized your cellar?</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Training Set (80%):</strong> 8,000 transactions. The model "Sees" these and adjusts its internal weights using Gradient Descent.</div>
+          <div><strong>The Training Set (80 Bottles):</strong> You spend 3 months tasting these. you learn every aroma, every label, and every cork. You are 100% accurate on these specific 80.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Test Set (20%):</strong> 2,000 transactions. These are locked in a "Bank Vault." The model <strong>never</strong> sees them until the very last stage of evaluation.</div>
+          <div><strong>The Hold-out Set (20 Bottles):</strong> Before you started, you took 20 random bottles and locked them in a <strong>Mystery Room</strong>. You haven't seen them, smelled them, or read their labels.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Moment of Truth (Testing):</strong> On exam day, you are given a glass from the <strong>Mystery Room</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Evaluation:</strong> If you can identify those 20 mystery wines, you have learned the <strong>General Concept</strong> of grapes and regions. If you fail, you've just memorized your home cellar.</div>
         </div>
       </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Key Result:</strong> The accuracy on the 2,000 "Hidden" transactions is the only number that <strong>truly matters</strong>.
+          <strong>Teacher's Hint:</strong> Training data is your <strong>Practice</strong>. Testing data is the <strong>Real World</strong>. If you skip the split, you're just lying to yourself about how good your model is. You must always maintain a "Firewall" between what the model sees to learn and what it sees to be judged.
         </div>
       </div>
     </div>
 
-    <h2 id="contamination">Data Leakage: The Cheating Scandal</h2>
-    <p><strong>Data Leakage</strong> happens when information from the Test set "Leaks" into the Training set during preprocessing (like calculating the "Mean" of all data before splitting). This is the #1 mistake in junior ML engineering. It leads to models that look perfect in the lab but <strong>Crash in the real world</strong>.</p>
-    
-    <h2 id="analogy">The "Hidden Secret" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>Blind Wine Taster</strong>. 
-        You have 8 glasses of "Practice Wine" (Training). You learn to recognize their profiles. 
-        Then, I bring you 2 "Mystery Glasses" (Test) that you've <strong>never tasted</strong>. 
-        If you can still correctly identify the grape in the mystery glasses, you are a <strong>True Sommelier</strong> (a Generalizing Model). If you can't, you just memorized the first 8 glasses' labels.
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Partitioning the World</h2>
+    <python-code static-output="[Scan] Dataset contains 1,000 samples and 10 features.\n[Action] Splitting data into 80/20 partitions...\n[Status] Training Set size: 800 samples\n[Status] Test Set size: 200 samples\n\n[Warning] The 200 Test samples are strictly HIDDEN from the training process.">
+from sklearn.model_selection import train_test_split
+from sklearn.datasets import make_regression
+
+# 1. Create a large dummy dataset
+X, y = make_regression(n_samples=1000, n_features=10, random_state=42)
+
+# 2. Perform the Split
+# test_size=0.2 means 80% for training, 20% for testing
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42
+)
+
+# 3. Verify the counts
+print(f"Total Database: {X.shape[0]} samples")
+print(f"Training Pool (Knowledge): {X_train.shape[0]} samples")
+print(f"Testing Pool (Ground Truth): {X_test.shape[0]} samples")
+
+print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when the model memorizes too much? Explore <strong><a href="#/machine-learning/foundation-ml/overfitting-underfitting">Overfitting and Underfitting</a></strong>.

@@ -88,31 +88,59 @@ export const recallSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Giant Net</h2>
-    <p>Imagine you dropped your <strong>Diamond Ring</strong> in a swimming pool filled with <strong>1,000 Plastic Toys</strong>.</p>
-    <ul>
-      <li><strong>The Strategy:</strong> You don't want to reach in and grab things one by one. You use a <strong>Giant Pool Net</strong> and scoop up every single item in the pool. </li>
-      <li><strong>The Result:</strong> You definitely have your ring. Your <strong>Recall</strong> is $100\%$. </li>
-    </ul>
-    <p>However, you also have 1,000 plastic toys to sort through (Low Precision). But in a life-or-death situation (like a medical scan), this "Messy but Thorough" approach is exactly what you want. <strong>Recall is about the cost of missing out.</strong></p>
+    <h2 id="example">Illustrated Example: The Net of Inclusion</h2>
+    <div class="example-box">
+      <h4>Scenario: Searching for an Engagement Ring in a Swimming Pool</h4>
+      <p>Imagine you dropped your diamond ring in a public pool filled with 1,000 random plastic toys. You <strong>cannot</strong> leave without it.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Action:</strong> You use a giant industrial net and scoop up every single item in the pool. You are being "Aggressive."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Verification:</strong> You sift through the pile. You found the ring (True Positive)!</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Hidden Truth:</strong> Even though you also caught 1,000 toys (False Positives), your <strong>Recall</strong> is a perfect $1 / 1 = 100\%$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> You are 100% "Thorough." You didn't "Miss" the target (Zero False Negatives). This is what matters in life-or-death situations.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import recall_score
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> High recall usually means your model is <strong>Aggressive</strong>. It's like a paranoid security guard who checks everyone. It's the "Quantity" metric—perfect for when the cost of a miss (False Negative) is catastrophic, like cancer or fraud.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Measuring Thoroughness</h2>
+    <python-code static-output="[Scan] Reality: 4 Actual Positive cases (Spam/Sick) identified.\n[Action] Running Model Inference...\n[Verify] Correctly Found (TP): 3\n[Verify] Dangerous Misses (FN): 1\n[Result] Recall (Sensitivity) = 3/4 = 75.0%\n[Insight] The model 'Caught' 75% of the truth, but let one target 'Escape'.">
 import numpy as np
+from sklearn.metrics import recall_score
 
-# 1. Reality vs Model
-y_true = [1, 1, 1, 1, 1, 0, 0] # 5 Real Positives
-y_pred = [1, 1, 0, 1, 1, 0, 0] # Model missed ONE (FN)
+# 1. Reality vs. Model Predictions
+# 1 = Sick, 0 = Healthy
+y_true = [0, 1, 0, 1, 0, 0, 1, 0, 0, 1]
+y_pred = [0, 1, 0, 0, 0, 1, 1, 0, 0, 1]
 
-# 2. Calculate Recall
+# 2. Calculate Recall (TP / (TP + FN))
+# Only cares about how much of the REAL '1's were found
 recall = recall_score(y_true, y_pred)
 
-print(f"Recall Score: {recall:.2f}")
-# Result 0.80: 4 out of 5 were caught.
-      </code></pre>
-    </div>
+print(f"Model Recall Score: {recall:.2%}")
+
+# 3. Manual Check for Clarity
+# Total Reality: indices 1, 3, 6, 9 are '1'
+# Model found 1, 6, 9. It missed 3 (False Negative).
+print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> High Precision makes us too picky. High Recall makes us too messy. How do we find the "Perfect" middle ground? Explore <strong><a href="#/machine-learning/model-evaluation/f1-score">F1 Score</a></strong>.

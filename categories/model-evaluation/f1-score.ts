@@ -87,30 +87,57 @@ export const f1ScoreSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The All-Rounder Interview</h2>
-    <p>Imagine you are hiring a <strong>Lead Developer</strong>. You have two criteria:</p>
-    <ul>
-      <li><strong>Criterion 1:</strong> Coding Skill (Precision).</li>
-      <li><strong>Criterion 2:</strong> Communication Skill (Recall).</li>
-    </ul>
-    <p>If a candidate is a <strong>Genius Coder</strong> but can't talk to humans, they fail. If they are a <strong>Great Communicator</strong> but can't write a line of code, they fail. You need someone with a high <strong>F1 Score</strong>—someone who is competent in <strong>Both</strong>. A candidate with a score of 95 in one and 5 in the other results in a terrible F1, while two 50s results in a decent F1. <strong>F1 Score is the hiring manager of ML.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Hiring a Developer for a Startup</h4>
+      <p>You have two criteria: Coding Skill (Precision) and Communication (Recall). Since you have a small team, you need a "Balanced All-Rounder."</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Candidate A:</strong> A coding genius (Score: 100) but can't talk to humans (Score: 0). The Harmonic Mean (F1) is <strong>0</strong>. (REJECTED).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Candidate B:</strong> A social butterfly (Score: 100) who can't write a line of code (Score: 0). The F1 Score is <strong>0</strong>. (REJECTED).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Candidate C:</strong> Decent coder (Score: 60) and decent talker (Score: 60). The Harmonic Mean (F1) is <strong>60</strong>. (HIRED).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Lesson:</strong> The F1 Score is a "Diplomat" that refuses to ignore failure. It punishes extremes and rewards balance.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import f1_score
-import numpy as np
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. **Accuracy is a lie; F1 is the truth.**
+        </div>
+      </div>
+    </div>
 
-# 1. High-tension predictions
-y_true = [0, 1, 0, 1, 1, 0, 1]
-y_pred = [0, 1, 0, 0, 1, 1, 1] # A mix of FN and FP
+    <h2 id="python">Python Implementation: Finding the Harmonic Balance</h2>
+    <python-code static-output="[Scan] Reality: 4 Targets, Model: 5 Predictions\n[Component] Precision (Quality): 60.0% (3/5 were right)\n[Component] Recall (Thoroughness): 75.0% (3/4 found)\n[Action] Calculating Harmonic Mean (P*R)/(P+R) * 2...\n[Result] F1-Score: 66.7%\n[Insight] The F1 centers between P and R, leaning toward the lower value.">
+from sklearn.metrics import precision_score, recall_score, f1_score
 
-# 2. Calculate F1
+# 1. Reality vs. Model Guesses
+# 1 = Target class (e.g. Fraudulent transaction)
+y_true = [0, 1, 0, 1, 0, 0, 1, 0, 0, 1]
+y_pred = [0, 1, 0, 0, 0, 1, 1, 1, 0, 1] 
+
+# 2. Individual metrics
+p = precision_score(y_true, y_pred)
+r = recall_score(y_true, y_pred)
+
+# 3. F1 Balance
 f1 = f1_score(y_true, y_pred)
 
-print(f"F1 Score (Balanced): {f1:.2f}")
-# The result accounts for both accuracy and missed targets.
-      </code></pre>
-    </div>
+print(f"Precision: {p:.2f}")
+print(f"Recall: {r:.2f}")
+print(f"F1 Final Score: {f1:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Metrics give us numbers. But how do we visualize the tradeoff across different levels of confidence? Explore <strong><a href="#/machine-learning/model-evaluation/roc-curve">ROC Curves</a></strong>.

@@ -91,29 +91,57 @@ export const randomForestSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Medical Jury</h2>
-    <p>Imagine a patient with a rare symptom. Instead of asking one doctor, we assemble a <strong>Medical Jury</strong> of 100 specialists.</p>
-    <ul>
-      <li><strong>The Randomness:</strong> Doctor 1 only sees the Blood Work. Doctor 2 only sees the X-Rays. Doctor 3 only sees the Family History.</li>
-      <li><strong>The Debate:</strong> Each doctor makes a diagnosis based on their "Specific Slice" of the truth.</li>
-      <li><strong>The Verdict:</strong> If 85 doctors say "Condition A" and 15 say "Condition B," the Forest confidently predicts **Condition A**. The individual errors of any one doctor are "Drowned out" by the collective wisdom.</li>
-    </ul>
+    <div class="example-box">
+      <h4>Scenario: Making a Life-Saving Diagnosis</h4>
+      <p>Instead of trusting one biased doctor, you assemble a diverse committee of 100 specialists.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Diverse Slices:</strong> Doctor A only sees Blood Work. Doctor B only sees X-Rays. (Feature Randomness).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Unique Experiences:</strong> Each doctor studied at a different school. (Bagging/Bootstrapping).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Vote:</strong> Every doctor writes their diagnosis on a piece of paper and drops it in a hat.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Conclusion:</strong> If 85 doctors say 'Healthy' and 15 say 'Sick', you trust the majority. The individual mistakes are "drowned out" by the <strong>Forest's Verdict</strong>.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.ensemble import RandomForestClassifier
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Random Forest is a <strong>Parallel Learner</strong>. All trees are built at once without talking to each other. This makes it incredibly fast on modern multi-core computers.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Majority Vote</h2>
+    <python-code static-output="[Training] Growing 100 unique trees with random data slices...\n[Consultation] Testing a new case with features [1, 0, 0]...\n[Voting] 87 trees voted POSITIVE, 13 trees voted NEGATIVE.\n[Final Verdict] Classification: POSITIVE (Confidence: 87.0%)\n[Insight] The forest's confidence score is literally the % of trees that agreed!">
 import numpy as np
+from sklearn.ensemble import RandomForestClassifier
 
-# 1. Complex data: [Feature_A, Feature_B, Feature_C]
+# 1. Dataset: [Symptom_A, Symptom_B, Symptom_C]
 X = np.array([[1, 0, 1], [0, 1, 0], [1, 1, 1], [0, 0, 0]])
 y = np.array([1, 0, 1, 0])
 
 # 2. Train the 'Forest of 100 Trees'
-model = RandomForestClassifier(n_estimators=100)
+model = RandomForestClassifier(n_estimators=100, random_state=42)
 model.fit(X, y)
 
-# 3. Predict for a new case
+# 3. New Case
 new_case = np.array([[1, 0, 0]])
-result = "Positive" if model.predict(new_case)[0] == 1 else "Negative"
-print(f"Forest Verdict: {result}")
+prediction = model.predict(new_case)[0]
+votes = model.predict_proba(new_case)[0]
+
+print(f"Forest Verdict: {'Positive' if prediction == 1 else 'Negative'}")
+print(f"Confidence Score: {votes[1]:.1%}")
     </python-code>
 
     <div class="linking-rule">

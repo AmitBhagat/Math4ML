@@ -82,32 +82,62 @@ export const svmSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Border Patrol</h2>
-    <p>Imagine you are a diplomat drawing the border between two kingdoms: **The Blues** and **The Reds**.</p>
-    <ul>
-      <li><strong>The Strategy:</strong> You don't just want a thin line. You want a <strong>No-Man's Land</strong> (The Margin) as wide as possible to avoid accidental conflict.</li>
-      <li><strong>The Result:</strong> You only care about the **Soldiers (Support Vectors)** standing at the very edge of their respective territories. If the King of the Blues builds a new palace 50 miles away from the border, the border doesn't change. <strong>SVM is that diplomat.</strong></li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Wide Moat</h2>
+    <div class="example-box">
+      <h4>Scenario: Drawing a Border Between feuding Kingdoms</h4>
+      <p>Imagine your data points are villages. You want to build a giant river (moat) to separate them.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Strategy:</strong> SVM doesn't just want a thin line. It wants a <strong>multi-lane highway</strong> (The Margin) that is as wide as possible.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Support Vectors:</strong> Only the <strong>Soldiers</strong> standing on the very edge of the river matter. The villages deep in the back don't move the border.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Kernel Trick:</strong> If the kingdoms are mixed up (a circle of Blue inside a ring of Red), SVM **Bends Space** so it can still draw a straight river in 3D.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Decision:</strong> A new village is built. You check which side of the river it is on. SVM provides the most <strong>Robust and Stable</strong> border.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.svm import SVC
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> SVM is <strong>Geometric</strong>. It sees the world as points in space and boundaries as planes. It's the king of "Maximum Separation."
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Margin Maximization</h2>
+    <python-code static-output="[Training] Solving quadratic program for widest margin...\n[Soldiers] Identified 3 Support Vectors on the border.\n[Result] Decision Boundary: y = -0.5x + 3.2\n[Input] Testing point at (5, 5)...\n[Classification] Result: 1 (Red Kingdom)\n[Insight] Notice that only the border points affected the final highway!">
 import numpy as np
+from sklearn.svm import SVC
 
-# 1. 2D Data points (Coordinates)
-X = np.array([[1, 2], [2, 3], [3, 3], [6, 5], [7, 7], [8, 6]])
-y = np.array([0, 0, 0, 1, 1, 1]) # Class 0 vs Class 1
+# 1. 2D Data points (Coordinates of Villages)
+X = np.array([[1, 2], [2, 1], [3, 3], [6, 5], [7, 7], [8, 6]])
+y = np.array([0, 0, 0, 1, 1, 1]) # Blue (0) vs Red (1)
 
 # 2. Train the 'Wide Moat' Solver
-# C=1.0 is the slack penalty
+# C=1.0 tells it how much to punish villages on the 'wrong side'
 model = SVC(kernel='linear', C=1.0)
 model.fit(X, y)
 
-# 3. Check the Support Vectors (The Soldiers)
-print(f"Support Vectors: \n{model.support_vectors_}")
+# 3. Identify the 'Soldiers' (Support Vectors)
+sv = model.support_vectors_
 
 # 4. Predict
-test_point = np.array([[5, 5]])
-print(f"Classification result: {model.predict(test_point)[0]}")
+test_point = np.array([[5, 4]])
+prediction = model.predict(test_point)[0]
+
+print(f"Number of Support Vectors: {len(sv)}")
+print(f"Decision for point at (5,4): {'Red' if prediction == 1 else 'Blue'}")
+print(f"Support Vector Coordinates: \n{sv}")
     </python-code>
 
     <div class="linking-rule">

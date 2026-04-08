@@ -29,6 +29,8 @@
   --color-on-surface-variant: var(--muted);
 
   --shadow-premium-glow: 0 0 20px -5px var(--accent);
+  --shadow-glass: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+  --radius-organic: 32px;
 }
 
 @layer base {
@@ -79,6 +81,12 @@
 
   body {
     background: var(--bg);
+    background-image: 
+      radial-gradient(at 0% 0%, color-mix(in srgb, var(--accent) 5%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, color-mix(in srgb, var(--purple) 5%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, color-mix(in srgb, var(--gold) 5%, transparent) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, color-mix(in srgb, var(--green) 5%, transparent) 0px, transparent 50%);
+    background-attachment: fixed;
     color: var(--text);
     font-family: 'Outfit', sans-serif;
     font-size: 18px;
@@ -86,7 +94,6 @@
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     min-height: 100vh;
-    /* transition removed to prevent diagonal jitter during navigation resets */
   }
 
   .no-transition, .no-transition * {
@@ -114,30 +121,35 @@
     --theme-primary: var(--category-primary, var(--accent));
     --theme-secondary: var(--category-secondary, var(--purple));
     
-    background: linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 8%, transparent) 0%, color-mix(in srgb, var(--theme-secondary) 5%, transparent) 100%);
-    border: 1px solid color-mix(in srgb, var(--theme-primary) 20%, transparent);
-    @apply rounded-2xl p-10 mb-12 relative overflow-hidden;
+    @apply backdrop-blur-3xl rounded-[40px] p-10 mb-12 relative overflow-hidden;
+    background: linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 12%, transparent) 0%, color-mix(in srgb, var(--theme-secondary) 8%, transparent) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.3),
+      0 20px 40px -10px color-mix(in srgb, var(--theme-primary) 20%, transparent);
   }
   .premium-hero::before {
     content: '';
     position: absolute;
-    top: -40px; right: -40px;
-    width: 180px; height: 180px;
-    background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary) 12%, transparent) 0%, transparent 70%);
+    top: -20%; right: -10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--theme-primary) 30%, transparent) 0%, transparent 70%);
+    filter: blur(60px);
     pointer-events: none;
+    z-index: -1;
   }
   .premium-hero-badge {
-    @apply inline-flex items-center gap-1.5 bg-accent-premium/15 border border-accent-premium/30 rounded-full px-3 py-1 text-xs font-medium mb-4;
+    @apply inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold mb-6 shadow-sm backdrop-blur-md;
     color: var(--theme-primary, var(--accent));
-    background-color: color-mix(in srgb, var(--theme-primary, var(--accent)) 15%, transparent);
-    border-color: color-mix(in srgb, var(--theme-primary, var(--accent)) 30%, transparent);
+    background-color: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
   }
   .premium-hero h1 {
     font-family: 'Crimson Pro', serif;
-    @apply text-4xl lg:text-[36px] font-semibold leading-tight mb-2 text-text-premium;
+    @apply text-5xl lg:text-[42px] font-bold leading-tight mb-4 text-text-premium tracking-tight;
   }
   .premium-hero p {
-    @apply text-[17px] leading-relaxed font-normal text-muted-premium max-w-3xl;
+    @apply text-[18px] leading-relaxed font-normal text-muted-premium max-w-3xl opacity-90;
   }
 
   /* ─── SECTION HEADERS ─── */
@@ -173,20 +185,34 @@
 
   /* ─── DEFINITIONS & CASE STUDIES ─── */
   .premium-def-box {
-    @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
+    @apply backdrop-blur-2xl rounded-3xl p-8 mb-10 border border-white/20 transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    box-shadow: 
+      inset 0 1px 1px rgba(255, 255, 255, 0.2),
+      0 10px 30px -5px rgba(0, 0, 0, 0.05);
   }
   .premium-def-title {
-    @apply font-mono text-[13px] text-purple-premium uppercase tracking-widest mb-2.5;
+    @apply font-mono text-[12px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-70;
   }
 
   .premium-case-study {
-    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-6 mb-8;
+    @apply relative overflow-hidden backdrop-blur-2xl border border-white/20 rounded-[32px] p-8 mb-10 transition-all duration-500 hover:scale-[1.01];
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
   }
-  .premium-case-study h4 { @apply text-green-premium mt-0; }
+  .premium-case-study::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: radial-gradient(circle at top right, color-mix(in srgb, var(--green) 15%, transparent), transparent 70%);
+  }
+  .premium-case-study h4 { @apply text-green-premium mt-0 mb-3 font-bold; }
 
   /* ─── MATH & TABLES ─── */
   .premium-math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[17px] max-w-full;
+    @apply backdrop-blur-3xl rounded-[28px] mt-8 pt-8 pb-8 px-6 mb-8 overflow-x-auto text-[18px] border border-white/10;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
   }
   
   .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
@@ -219,22 +245,40 @@
   .toc a.sub { @apply pl-4 text-[15px]; }
 
   .def-box {
-    @apply bg-bg-tertiary border border-border-premium rounded-xl p-6 mb-8;
+    @apply backdrop-blur-2xl bg-white/10 border border-white/20 rounded-[28px] p-8 mb-10 shadow-sm transition-all;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
+  }
+  .dark .def-box {
+    background: rgba(255, 255, 255, 0.03);
   }
   .def-title {
-    @apply font-mono text-[13px] text-purple-premium uppercase tracking-widest mb-2.5;
+    @apply font-mono text-[11px] text-purple-premium uppercase tracking-[0.3em] mb-4 opacity-80;
   }
 
   .example-box {
-    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-6 mb-8;
+    @apply relative overflow-hidden backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 mb-12 shadow-xl transition-all duration-500 hover:shadow-2xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
   }
-  .example-box h4 { @apply text-green-premium mt-0 mb-3 font-semibold; }
+  .example-box::before {
+    content: '';
+    position: absolute;
+    top: -50px; right: -50px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, color-mix(in srgb, var(--category-primary, var(--green)) 20%, transparent), transparent 70%);
+    filter: blur(40px);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .example-box h4 { @apply text-category-primary font-headline text-3xl font-bold mt-0 mb-6; }
 
-  .callout { @apply rounded-xl p-4 mb-6 flex gap-3; }
-  .callout.info { @apply bg-accent-premium/10 border border-accent-premium/25; }
-  .callout.warn { @apply bg-gold-premium/10 border border-gold-premium/25; }
-  .callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
-  .callout.tip { @apply bg-purple-premium/10 border border-purple-premium/25; }
+  .callout { 
+    @apply rounded-[24px] p-6 mb-8 flex gap-5 backdrop-blur-xl border border-white/20 transition-all; 
+    box-shadow: 0 4px 20px -5px rgba(0,0,0,0.05);
+  }
+  .callout.info { background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), rgba(255,255,255,0.05)); }
+  .callout.warn { background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 8%, transparent), rgba(255,255,255,0.05)); }
+  .callout.success { background: linear-gradient(135deg, color-mix(in srgb, var(--green) 8%, transparent), rgba(255,255,255,0.05)); }
+  .callout.tip { background: linear-gradient(135deg, color-mix(in srgb, var(--purple) 8%, transparent), rgba(255,255,255,0.05)); }
   .callout-icon { @apply text-lg mt-0.5 shrink-0; }
   .callout-body { @apply text-base font-normal text-text-premium; }
   .callout-body strong { @apply font-semibold text-accent-premium; }
@@ -310,8 +354,22 @@
   .surface-elevated-low {
     @apply bg-surface-container-low border border-border-premium/50 shadow-sm rounded-xl p-4;
   }
-  .surface-elevated-high {
-    @apply bg-surface-container-high border border-border-premium shadow-xl rounded-3xl p-8;
+  /* ─── GLASSMORPHISM UTILITIES ─── */
+  .glass-panel {
+    @apply backdrop-blur-xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
+      0 8px 32px 0 rgba(0, 0, 0, 0.1);
+  }
+  
+  .dark .glass-panel {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.3) 100%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 
+      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1),
+      0 8px 32px 0 rgba(0, 0, 0, 0.4);
   }
 }
 

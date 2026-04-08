@@ -20,23 +20,33 @@ import { MatrixOperationsInteractive } from "@/src/components/visualizers/Matrix
 const ParsedContent = ({ html }: { html: string }) => {
   if (!html) return null;
   // Match both <python-code> and <visualizer topic="..." />
-  const segments = html.split(/(<python-code>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
+    const segments = html.split(/(<python-code[\s\S]*?>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
   
   return (
     <>
       {segments.map((segment, idx) => {
-        if (segment.startsWith('<python-code>')) {
-          const code = segment
-            .replace('<python-code>', '')
-            .replace('</python-code>', '')
-            .trim();
-          
-          return (
-            <div key={idx}>
-              <CodeSnippet code={code} />
-            </div>
-          );
+        if (segment.startsWith('<python-code')) {
+          // Extract attributes and content from <python-code ...>content</python-code>
+          const match = segment.match(/<python-code([^>]*)>([\s\S]*?)<\/python-code>/);
+          if (match) {
+            const attrString = match[1];
+            const code = match[2].trim();
+            
+            // Basic static-output extractor
+            const staticOutputMatch = attrString.match(/static-output="([^"]*)"/);
+            const staticOutput = staticOutputMatch ? staticOutputMatch[1].replace(/\\n/g, '\n') : undefined;
+
+            const runnableMatch = attrString.match(/runnable="([^"]*)"/);
+            const runnable = runnableMatch ? runnableMatch[1] === "true" : true;
+
+            return (
+              <div key={idx}>
+                <CodeSnippet code={code} staticOutput={staticOutput} runnable={runnable} />
+              </div>
+            );
+          }
         }
+
 
         if (segment.startsWith('<visualizer')) {
           const match = segment.match(/topic="([^"]*)"/);

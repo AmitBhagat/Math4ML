@@ -33,42 +33,57 @@ export const supervisedLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="regression">Regression: Predicting Infinite Numbers</h2>
+    <h2 id="example">Illustrated Example: The Flashcard Challenge</h2>
     <div class="example-box">
-      <h4>Problem: Predicting a Continuous Value</h4>
-      <p>Imagine you're predicting the temperature tomorrow or the stock price of a company.</p>
+      <h4>Scenario: Training a Medical Assistant</h4>
+      <p>Imagine you have 10,000 X-rays. 5,000 are "Healthy" and 5,000 have "Pneumonia."</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>The Goal:</strong> Find a trend line that goes through the middle of all your data points.</div>
+          <div><strong>The Input (X):</strong> The raw pixels of the X-ray images.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Analogy:</strong> Predicting how much a 10-year-old will weigh. You look at their height, their parents' weight, and their diet. The answer is a <strong>Continuous Number</strong> (e.g. 35.4 kg).</div>
+          <div><strong>The Label (Y):</strong> The doctor's handwritten note: "Sick" or "Healthy."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Process:</strong> The model guesses. If it says "Healthy" for a sick patient, the loss function screams at it. The model adjusts its weights (its 'brain') to not make that mistake again.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Supervised learning is <strong>Feedback-Driven</strong>. No label = No feedback = No learning.
         </div>
       </div>
     </div>
 
-    <h2 id="classification">Classification: Predicting Categories</h2>
-    <div class="example-box">
-      <h4>Problem: Sorting into Buckets</h4>
-      <p>Is this email "Spam" or "Not Spam"? Is this image a "Cat" or a "Car"?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>The Goal:</strong> Find a <strong>Boundary</strong> (a "Fence") that separates the different groups as clearly as possible.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Analogy:</strong> Sorting mail in a post office. You look at the address and throw it into the "NY" bucket or the "CA" bucket. The answer is a <strong>Discrete Category</strong>.</div>
-        </div>
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Regression vs. Classification</h2>
+    <python-code static-output="[Regression] Predicted House Price: $352,450\n[Classification] Predicted Email: Spam">
+import numpy as np
+from sklearn.linear_model import LinearRegression, LogisticRegression
 
-    <h2 id="limitations">The "Labeling Tax" (Limitations)</h2>
-    <p>Supervised Learning is powerful, but it has one huge bottleneck: <strong>Humans are slow.</strong> To train a model to recognize cancer, you need to pay expensive doctors to manually highlight thousands of X-rays. If you don't have good labels, you can't do Supervised Learning.</p>
+# 1. Regression (Predicting a Number)
+# Input: [Square Footage], Output: [Price]
+X_reg = np.array([[1200], [1500], [1800], [2200]])
+y_reg = np.array([250000, 300000, 350000, 450000])
+
+reg_model = LinearRegression().fit(X_reg, y_reg)
+price_pred = reg_model.predict([[1810]])[0]
+print(f"[Regression] Predicted House Price: \${price_pred:,.0f}")
+
+# 2. Classification (Predicting a Category)
+# Input: [Word Count, 'Win' count], Output: [0=Normal, 1=Spam]
+X_clf = np.array([[100, 0], [150, 0], [50, 10], [40, 8]])
+y_clf = np.array([0, 0, 1, 1])
+
+clf_model = LogisticRegression().fit(X_clf, y_clf)
+label_pred = clf_model.predict([[45, 9]])[0]
+print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Normal'}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have no labels? How can a machine find patterns on its own? Explore <strong><a href="#/machine-learning/foundation-ml/unsupervised">Unsupervised Learning</a></strong>.

@@ -65,17 +65,58 @@ export const architecturesIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="analogy">The "Blueprints of Intelligence" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are building a <strong>Factory</strong>. 
-        * **MLP Factory:** Every worker talks to every other worker. (Chaos for big tasks). 
-        * **CNN Factory:** An **Assembly Line**. Each worker only looks at the **Small Part** in front of them and passes it on. 
-        * **RNN Factory:** A <strong>Conveyor Belt</strong> that loops back. Everyone remembers what the previous person did. 
-        **The Architecture is the Floor Plan of the factory. It determines how fast and how well the final product is built.**
+    <h2 id="example">Illustrated Example: The Intelligence Factory</h2>
+    <div class="example-box">
+      <h4>Scenario: Organizing your Labor Force for Big Data</h4>
+      <p>Imagine your neurons are workers. How you arrange them determines their specialty and efficiency.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Fully Connected (MLP):</strong> Every worker talks to everyone else. Great for small teams (CSV data), but in a massive factory (4K Video), the shouting would be deafening.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Convolutional (CNN):</strong> The <strong>Assembly Line</strong>. Each worker only looks at the <strong>Small Part</strong> (a 3x3 square) directly in front of them. This is how we detect edges without going crazy.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Recurrent (RNN):</strong> The <strong>Conveyor Belt</strong>. Each worker has a "Note" to remember what the previous worker said. Perfect for understanding that "The cat sat on the..." usually ends with "mat."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Transformer:</strong> The <strong>Global Spotlight</strong>. Everyone can look at anyone else simultaneously, but they use "Attention" to focus only on the most relevant colleague.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Architecture is <strong>Inductive Bias</strong>. It's the assumptions we "Hardwire" into the network to help it see the world the way we do. Without it, the model would drown in raw data.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Parameter Efficiency</h2>
+    <python-code static-output="[Dense Configuration] Input: 224x224 (50,176 pixels) -> 1 Output\n[Local Configuration] Filter Size: 3x3 (9 pixels)\n[Result] Dense Params: 50,176 vs. CNN Params: 9\n[Efficiency] CNN uses 99.98% fewer parameters for the same feature detection!\n[Insight] This is why you can't train a deep MLP on raw images.">
+import numpy as np
+
+# 1. Scenario: Feature detection on a 224x224 image
+img_dim = 224
+input_pixels = img_dim * img_dim
+
+# 2. Fully Connected approach (Every pixel gets a weight)
+weights_dense = np.zeros(input_pixels)
+
+# 3. Convolutional approach (Shared weights - 3x3 kernel)
+kernel_size = 3 * 3
+weights_cnn = np.zeros(kernel_size)
+
+print(f"--- Structural Complexity ---")
+print(f"MLP (Dense) Weight Count: {input_pixels}")
+print(f"CNN (Local) Weight Count: {kernel_size}")
+print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's look at the assembly line for images. Explore <strong><a href="#/machine-learning/deep-learning/cnn">Convolutional Neural Networks (CNN)</a></strong>.

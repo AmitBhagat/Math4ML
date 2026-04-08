@@ -83,36 +83,59 @@ export const selfSupervisedSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Master Jigsaw Solver</h2>
-    <p>Imagine you have a toddler and 1,000 blank **Jigsaw Puzzles**. You don't tell the toddler what the picture is (No Labels).</p>
-    <ul>
-      <li><strong>The Task:</strong> You scramble the pieces. The toddler's only goal is to make them fit together. </li>
-      <li><strong>The Insight:</strong> To fit the pieces, the toddler accidentally learns that <strong>Blue bits go with Blue bits</strong> and <strong>Curvy edges go with Curvy edges</strong>. </li>
-    </ul>
-    <p>By the time the puzzles are done, the toddler understands the **Structure of Images** perfectly, even without knowing the names of the objects. <strong>SSL is that toddler.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Training a Child with 1,000 Blank Jigsaws</h4>
+      <p>Imagine you have 1,000 jigsaw puzzles, but you don't show the child the "Final Picture" on the box (No Labels).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Pretext Task:</strong> You scramble the pieces and tell the child: "Just make them fit."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Discovery:</strong> To fit the pieces, the child accidentally learns that <strong>Blue bits go with Blue bits</strong> and <strong>Curvy edges go with Curvy edges</strong>. They learn to recognize "Sky," "Water," and "Grass" textures without knowing their names.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Transfer:</strong> One day, you show the child a picture of a "Dog." Because they already understand "Eyes," "Fur," and "Edges," they learn what a "Dog" is in 2 seconds.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
-import torch
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (SimCLR Concept)</h2>
+    <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
 import torchvision.transforms as T
 from PIL import Image
 
-# 1. Self-supervised Preprocessing:
-# We 'scramble' an unlabeled image to create a pretext puzzle.
-image = Image.new('RGB', (224, 224), color='red') # Mock image
+# 1. Take one unlabeled image
+img = Image.open("urban_scene.jpg") 
 
-# Common 'breaks' for SSL pre-training
-pretext_transform = T.Compose([
+# 2. Create 'Self-Generated' Puzzles
+# We break the image in two different ways.
+# The model must learn they are the SAME underlying object.
+view_A = T.Compose([
+    T.RandomResizedCrop(224),
+    T.ColorJitter(0.8, 0.8, 0.8),
+    T.RandomGrayscale(p=0.2)
+])(img)
+
+view_B = T.Compose([
     T.RandomResizedCrop(224),
     T.RandomHorizontalFlip(),
-    T.ColorJitter(brightness=0.5), # Change the lighting
-    T.RandomRotation(90)           # Rotate the 'puzzle'
-])
+    T.GaussianBlur(kernel_size=23)
+])(img)
 
-# Generate a pretext pair
-scrambled_v1 = pretext_transform(image)
-scrambled_v2 = pretext_transform(image)
-
-print("Pretext samples created. Model will now learn if these came from the SAME image.")
+# 3. Contrastive Objective
+# minimize_distance(Representation(view_A), Representation(view_B))
+print("Views created. Model will now learn if these came from the SAME image.")
     </python-code>
 
     <div class="linking-rule">

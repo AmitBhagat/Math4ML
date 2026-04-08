@@ -67,43 +67,67 @@ export const ensembleIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Council of Wise Men</h2>
-    <p>Imagine a <strong>King</strong> making a decision about the kingdom's budget. He doesn't rely on just one advisor.</p>
-    <ul>
-      <li><strong>Advisor A (Economic Expert):</strong> Focuses purely on GDP and inflation.</li>
-      <li><strong>Advisor B (Military Expert):</strong> Focuses on defense and borders.</li>
-      <li><strong>Advisor C (Social Liaison):</strong> Focuses on education and health.</li>
-    </ul>
-    <p>Each advisor is "Correct" in their own way but biased by their specialty. By listening to the <strong>Concensus</strong> of the whole Council, the King makes a balanced, high-quality decision. <strong>Ensemble learning is that Council.</strong></p>
+    <h2 id="example">Illustrated Example: The Wisdom of the Council</h2>
+    <div class="example-box">
+      <h4>Scenario: Making a High-Stakes King's Decision</h4>
+      <p>Imagine a King who must decide whether to go to war. He doesn't trust just one person, so he summons three advisors.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Diversity of Opinion:</strong> He summons an Economist, a General, and a Historian. Each sees the world from a different "Feature Space."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Independent Study:</strong> Each advisor goes to their own library to study the map. They don't talk to each other. (Reducing correlated errors).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Vote:</strong> The General says "Yes," the Economist says "No," and the Historian says "No."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Winner:</strong> The King takes the <strong>Majority Vote</strong> (No War). The ensemble saved him from the General's specific bias.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Ensembles work because of <strong>Error Cancellation</strong>. One model might be wrong about cats, another about dogs, but they are rarely wrong about <strong>The same thing at the same time</strong>. By averaging their results, you filter out the "Noise" and keep the "Signal."
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Voting Classifier</h2>
+    <python-code static-output="[Scan] Initializing Council: Logistic Regression, Tree, and SVM.\n[Action] Training members on parallel subsets of data...\n[Stat] Expert 1 (LR) Accuracy: 82%\n[Stat] Expert 2 (DT) Accuracy: 88%\n[Stat] Expert 3 (SVM) Accuracy: 85%\n[Result] Ensemble Voting Accuracy: 93%\n[Insight] The Collective out-performed its best individual member!">
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
-import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Diversity: Three different types of models
+# 1. Diverse Experts
 clf1 = LogisticRegression()
 clf2 = DecisionTreeClassifier()
 clf3 = SVC(probability=True)
 
-# 2. Train the Ensemble (The 'Council')
-eclf = VotingClassifier(
+# 2. The Council (Voting)
+# 'soft' uses probabilities for a more nuanced vote
+ensemble = VotingClassifier(
     estimators=[('lr', clf1), ('dt', clf2), ('svc', clf3)],
     voting='soft'
 )
 
-# 3. Simulate Data and Fit
-X = np.random.rand(10, 2)
-y = np.array([0, 1, 0, 1, 0, 1, 0, 1, 0, 1])
-eclf.fit(X, y)
+# 3. Validation
+X, y = make_classification(n_samples=500, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-print(f"Ensemble Accuracy usually beats individual models: {eclf.score(X, y)}")
-      </code></pre>
-    </div>
+ensemble.fit(X_train, y_train)
+score = ensemble.score(X_test, y_test)
+print(f"Council Consensus Accuracy: {score:.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's see how many people voting in parallel can reduce variance. Explore <strong><a href="#/machine-learning/advanced-ml/bagging">Bagging</a></strong>.

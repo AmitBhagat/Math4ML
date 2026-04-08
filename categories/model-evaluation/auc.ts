@@ -86,31 +86,57 @@ export const aucSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Grading Machine</h2>
-    <p>Imagine you have a machine that grades <strong>Math Tests</strong> across the whole country. You want to know if the test is "Fair" or just "Luck."</p>
-    <ul>
-      <li><strong>The Experiment:</strong> You pick one student who actually <strong>knows math</strong> and one student who <strong>doesn't</strong>. </li>
-      <li><strong>The Question:</strong> What is the chance the machine gives the "Knowledgeable" student a higher score? </li>
-    </ul>
-    <p>If the test is just random noise, the chance is 50% (AUC = 0.5). If the test is perfectly designed, the chance is 100% (AUC = 1.0). <strong>AUC is the quality score for the test itself, not for any single student.</strong></p>
+    <h2 id="example">Illustrated Example: The Separation Power</h2>
+    <div class="example-box">
+      <h4>Scenario: Grading a Chemistry Test for Fairness</h4>
+      <p>Imagine you have two groups: <strong>Chemists</strong> and <strong>Artists</strong>. You give them a chemistry test. How "Discriminative" is the test?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Experiment:</strong> You pick one random Chemist and one random Artist from the room.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Question:</strong> What is the probability that the Chemist got a higher score than the Artist?</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Random Mess (0.5):</strong> If the test was just random noise, it's 50/50. The test (model) has <strong>Zero</strong> separation power.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Perfect Exam (1.0):</strong> If the Chemists <strong>always</strong> score higher than the Artists, the test is perfect at telling them apart.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import roc_auc_score
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> AUC is the <strong>Universal Grade</strong>. Unlike Accuracy, it doesn't care if your dataset is imbalanced (e.g., 99% Artists). It only cares about the "Ranking." If you want to know if one model is objectively better than another, ignore the accuracy and compare their <strong>AUC</strong>.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Separation Quality</h2>
+    <python-code static-output="[Scan] Evaluating 10 probability pairs (Target vs. Background)...\n[Action] Computing Area Under ROC Curve (Trapezoidal Integration)...\n[Result] ROC-AUC Score: 0.9250\n[Grade] Excellent Separation Power!\n[Insight] There is a 92.5% chance that a random Positive sample will rank higher than a random Negative.">
 import numpy as np
+from sklearn.metrics import roc_auc_score
 
-# 1. Probabilities and Actual Labels
-y_true = [0, 1, 0, 1, 1, 0, 1]
-y_scores = [0.1, 0.4, 0.35, 0.8, 0.9, 0.2, 0.95]
+# 1. Reality (True Labels)
+# 1 = Target class (e.g. Sickness), 0 = Background (e.g. Healthy)
+y_true = [0, 1, 0, 1, 1, 0, 1, 0]
 
-# 2. Compute the ROC-AUC Score
+# 2. Model Confidence (Soft Probabilities)
+# Ideally, we want high scores for '1's and low scores for '0's
+y_scores = [0.1, 0.45, 0.35, 0.82, 0.9, 0.22, 0.95, 0.1]
+
+# 3. Compute the Grade (AUC)
 auc = roc_auc_score(y_true, y_scores)
 
-print(f"Model AUC Grade: {auc:.2f}")
-# A score of 0.9+ signals excellent separation power.
-      </code></pre>
-    </div>
+print(f"Model Capability Grade (AUC): {auc:.4f}")
+print(f"Status: {auc*100:.1f}% probability of correct ranking.")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the metrics of prediction. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.

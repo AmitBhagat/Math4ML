@@ -84,33 +84,64 @@ export const gmmSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Overlapping Fog Clouds</h2>
-    <p>Imagine a field with two <strong>Fog Machines</strong>. One machine makes a thick, round cloud; the other makes a long, thin horizontal cloud. They overlap in the middle.</p>
-    <ul>
-      <li><strong>Soft Data:</strong> You walk into the middle. You are <strong>covered in moisture</strong> from both clouds. </li>
-      <li><strong>The Measurement:</strong> GMM calculates that you are 60% wet from the "Round Cloud" and 40% wet from the "Thin Cloud." </li>
-    </ul>
-    <p>Instead of forcing you into one "Cloud Group," it acknowledges the reality of the <strong>Atmospheric Mixture</strong>. <strong>GMM is that moisture sensor.</strong></p>
+    <h2 id="example">Illustrated Example: The Overlapping Fog</h2>
+    <div class="example-box">
+      <h4>Scenario: Walking through a room with mixed smells</h4>
+      <p>Imagine a coffee shop where the smell of Fresh Coffee (Cloud A) and Fresh Cinnamon Rolls (Cloud B) are drifting through the air.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Clouds (Distribution):</strong> Instead of hard circles, GMM sees two <strong>Gaussian Clouds</strong> of scent probability. Each has a center (Mean) and a shape (Covariance).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Soft Membership:</strong> You stand in the "Neutral Zone." You aren't 100% in one group or the other. You are <strong>70% Coffee</strong> and <strong>30% Cinnamon</strong>. (Probabilistic Assignment).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Expectation (E-Step):</strong> The model guesses how much each scent contributed to the smell at your current location.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Maximization (M-Step):</strong> The model moves and stretches the "Scent Clouds" to better explain all the smells detected by all the people in the room.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
-from sklearn.mixture import GaussianMixture
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> GMM is <strong>Generative</strong>. It doesn't just categorize; it tries to learn the <strong>Template</strong> for how each group was created. This allows it to handle overlapping groups and "uncertain" data points that would confuse k-Means.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Soft Probability Mapping</h2>
+    <python-code static-output="[Action] Initializing 2 Gaussian Segments (EM Loop)...\n[Status] Calculating responsibilities for the 'Smell' clouds...\n[Converged] Mean A: (0.1, 0.1) | Mean B: (2.9, 2.9)\n[Test Point] (1.5, 1.5) -> Probability Map:\n- Coffee (Cloud 0): 72.1%\n- Cinnamon (Cloud 1): 27.9%\n[Insight] Unlike k-Means, we captured the uncertainty of the overlap.">
 import numpy as np
+from sklearn.mixture import GaussianMixture
 
-# 1. Generate 2 overlapping clusters
+# 1. Dataset: Two overlapping clusters (synthetic)
+# Group 0: Centered at (0,0), Group 1: Centered at (3,3)
 X = np.concatenate([
-    np.random.normal(0, 1, (50, 2)), # High density center
-    np.random.normal(3, 1.5, (50, 2)) # Wide, loose cluster
+    np.random.normal(0, 1, (50, 2)), 
+    np.random.normal(3, 1, (50, 2))
 ])
 
-# 2. Train with 2 components
-model = GaussianMixture(n_components=2)
-model.fit(X)
+# 2. The GMM Proctors 
+# n_components=2 means we expect 2 distributions
+gmm = GaussianMixture(n_components=2, random_state=42)
+gmm.fit(X)
 
-# 3. Predict 'Soft' probabilities for a new point exactly at [1.5, 1.5]
-new_point = np.array([[1.5, 1.5]])
-probs = model.predict_proba(new_point)
-print(f"Probabilities (Cluster 0 vs 1): {probs[0]}")
+# 3. Soft Assignment for a point in the 'Neutral Zone'
+test_point = np.array([[1.5, 1.5]])
+probs = gmm.predict_proba(test_point)[0]
+
+print(f"Scent Analysis for Point (1.5, 1.5):")
+for i, p in enumerate(probs):
+    print(f"- Component {i}: {p:.2%} Confidence")
+
+print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     </python-code>
 
     <div class="linking-rule">

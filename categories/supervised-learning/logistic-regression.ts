@@ -93,30 +93,58 @@ export const logisticRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: Predicting Customer Churn</h2>
-    <p>Imagine you run a <strong>Gym</strong>. You want to know if a member is about to cancel their subscription (Churn) based on their behavior.</p>
-    <ul>
-      <li><strong>Features:</strong> Times visited per week, Number of months as a member.</li>
-      <li><strong>The Logic:</strong> If someone visits 0 times a week but has been a member for 2 years, the Sigmoid score might be **0.9** (High probability of churn).</li>
-      <li><strong>The Result:</strong> You can automatically send a **"We Miss You"** discount code to everyone with a Churn Probability $> 0.7$.</li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Squeezed Tube of Truth</h2>
+    <div class="example-box">
+      <h4>Scenario: Predicting if a Gym Member will Churn</h4>
+      <p>Imagine your linear prediction is a long, infinite pipe. You need to squash it into a 0-to-1 probability tube.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Linear Score (z):</strong> A member visits 0 times/week. The linear formula says: $z = 10 \times (Months) - 50 \times (Visits) = 5.0$.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Sigmoid Squash:</strong> We pass 5.0 through the S-curve. It comes out as **0.993**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Decision:</strong> Since 0.993 > 0.5, we are extremely confident this person is about to cancel.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Outcome:</strong> You send them a "Free Shake" coupon to keep them! Logistic regression just saved a customer.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.linear_model import LogisticRegression
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Logistic Regression is the <strong>Basis of Neural Networks</strong>. A single neuron in a brain-like model is often just a logistic regression unit! It's the simplest "Switch" in AI.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Sigmoid Mapping</h2>
+    <python-code static-output="[Internal] Linear Score (z) for input: 2.12\n[Sigmoid] Squashing 2.12 into probability space...\n[Result] Probability of Churn: 89.1%\n[Decision] Predicted Class: 1 (Churn)\n[Insight] As visits per week DROPPED, the Sigmoid score CLIMBED.">
 import numpy as np
+from sklearn.linear_model import LogisticRegression
 
-# 1. Customer data: [Visits_Per_Week, Membership_Months]
+# 1. Dataset: [Visits_Per_Week, Membership_Months]
 X = np.array([[5, 12], [0, 24], [4, 6], [1, 2]])
 y = np.array([0, 1, 0, 1]) # 1 = Left (Churned), 0 = Stayed
 
-# 2. Initialize and Train
+# 2. Train the Model
 model = LogisticRegression()
 model.fit(X, y)
 
-# 3. Predict for a member who visits 1 time/week and joined 12 months ago
+# 3. New Customer (Visits 1 time/week, Joined 12 months ago)
 new_customer = np.array([[1, 12]])
-probability = model.predict_proba(new_customer)[0][1]
-print(f"Prob. of churn: {probability:.1%}")
+prob = model.predict_proba(new_customer)[0]
+
+print(f"Prob. of Staying: {prob[0]:.2%}")
+print(f"Prob. of Churning: {prob[1]:.2%}")
+print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     </python-code>
 
     <div class="linking-rule">

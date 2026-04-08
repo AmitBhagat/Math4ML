@@ -74,12 +74,14 @@ interface CodeSnippetProps {
   code: string;
   language?: string;
   staticOutput?: string; // expected output to show before any Run click
+  runnable?: boolean;    // if false, hide the Run button
 }
 
-export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSnippetProps) => {
+export const CodeSnippet = ({ code, language = "python", staticOutput, runnable = true }: CodeSnippetProps) => {
   const [editedCode, setEditedCode] = useState(code);
   const [runState, setRunState] = useState<RunState>("idle");
   const [liveOutput, setLiveOutput] = useState<string | null>(null);
+  const [showOutput, setShowOutput] = useState(false);
   const [copied, setCopied] = useState(false);
   const { theme } = useTheme();
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -111,13 +113,15 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   useEffect(() => {
     setEditedCode(code);
     setLiveOutput(null);
+    setShowOutput(false);
     setRunState("idle");
   }, [code]);
 
   // Run the currently edited code through Pyodide
   const handleRun = useCallback(async () => {
+    if (!runnable) return;
     setRunState("loading-pyodide");
-    // Removed setLiveOutput(null) to prevent output area flickering during re-runs.
+    setShowOutput(true); // Open panel immediately to stabilize layout
     try {
       const result = await runPython(editedCode);
       setLiveOutput(result);
@@ -127,13 +131,14 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
       setLiveOutput(`[Error] ${msg}`);
       setRunState("error");
     }
-  }, [editedCode]);
+  }, [editedCode, runnable]);
 
   // Reset to original code & clear live output
   const handleReset = useCallback(() => {
     setEditedCode(code);
     setRunState("idle");
     setLiveOutput(null);
+    setShowOutput(false); // Close panel on reset
   }, [code]);
 
   const handleCopy = useCallback(() => {
@@ -153,17 +158,17 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
   };
 
   // Shared font & typography metrics for perfect alignment
-  const editorMetrics = "text-[15.5px] font-mono leading-relaxed px-6 md:px-10 py-6 md:py-8";
+  const editorMetrics = "text-[13px] md:text-[15.5px] font-mono leading-relaxed px-4 md:px-10 py-4 md:py-8";
 
   return (
-    <div className="my-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
-      {/* ── Main Code Window (Adaptive Container) ── */}
-      <div className={`rounded-[24px] shadow-2xl border overflow-hidden transition-colors duration-500
-        ${isDark ? "bg-[#2b213a] border-white/5" : "bg-bg-secondary border-border-premium/60 shadow-lg"}`}>
+    <div className="my-8 md:my-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
+      {/* ── Main Code Window (Glassmorphism Container) ── */}
+      <div className={`rounded-[24px] shadow-2xl overflow-hidden transition-all duration-500 glass-panel
+        ${isDark ? "shadow-indigo-500/10" : "shadow-slate-200"}`}>
 
-      {/* ── Header bar (Adaptive UI) ── */}
-      <div className={`px-6 py-4 flex items-center justify-between border-b transition-colors duration-500
-        ${isDark ? "bg-[#21192d]/80 border-white/5" : "bg-bg-tertiary border-border-premium/40"}`}>
+      {/* ── Header bar (Semi-transparent glossy overlay) ── */}
+      <div className={`px-4 md:px-6 py-3 md:py-4 flex items-center justify-between border-b transition-colors duration-500
+        ${isDark ? "bg-white/5 border-white/10" : "bg-white/40 border-black/5"}`}>
         <div className="flex items-center gap-6">
           {/* Traffic Lights (macOS Colors) */}
           <div className="flex gap-2 mr-2">
@@ -199,45 +204,49 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
                   {copied ? "Copied" : "Copy"}
                 </span>
               </button>
+              
+              {runnable && (
+                <>
+                  {/* ↺ Reset */}
+                  {(editedCode !== code || liveOutput !== null) && (
+                    <button
+                      onClick={handleReset}
+                      className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
+                        ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
+                      title="Restore original code"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      <span className="text-[12px] font-black uppercase tracking-widest hidden lg:inline">Reset</span>
+                    </button>
+                  )}
 
-              {/* ↺ Reset */}
-              {(editedCode !== code || liveOutput !== null) && (
-                <button
-                  onClick={handleReset}
-                  className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
-                    ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
-                  title="Restore original code"
-                >
-                  <RotateCcw className="w-3.5 h-3.5" />
-                  <span className="text-[12px] font-black uppercase tracking-widest hidden lg:inline">Reset</span>
-                </button>
+                  {/* ▶ Run */}
+                  <button
+                    onClick={handleRun}
+                    disabled={isRunning}
+                    className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
+                      ${isRunning
+                        ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
+                        : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white cursor-pointer"
+                      }`}
+                  >
+                    {isRunning ? (
+                      <>
+                        <svg className="w-3 h-3 animate-spin" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                          <circle cx="6" cy="6" r="4" strokeOpacity="0.3" />
+                          <path d="M6 2a4 4 0 0 1 4 4" strokeLinecap="round" />
+                        </svg>
+                        <span className="hidden sm:inline">Running</span>
+                      </>
+                    ) : (
+                      <>
+                        <Play className="w-3 h-3 fill-current" />
+                        <span>Run</span>
+                      </>
+                    )}
+                  </button>
+                </>
               )}
-
-              {/* ▶ Run */}
-              <button
-                onClick={handleRun}
-                disabled={isRunning}
-                className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
-                  ${isRunning
-                    ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
-                    : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white cursor-pointer"
-                  }`}
-              >
-                {isRunning ? (
-                  <>
-                    <svg className="w-3 h-3 animate-spin" viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
-                      <circle cx="6" cy="6" r="4" strokeOpacity="0.3" />
-                      <path d="M6 2a4 4 0 0 1 4 4" strokeLinecap="round" />
-                    </svg>
-                    <span className="hidden sm:inline">Running</span>
-                  </>
-                ) : (
-                  <>
-                    <Play className="w-3 h-3 fill-current" />
-                    <span>Run</span>
-                  </>
-                )}
-              </button>
             </>
           )}
 
@@ -246,8 +255,8 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
         </div>
       </div>
 
-      {/* ── Code Editor Layer (Ray.so Minimalist Theme) ── */}
-      <div className="relative bg-[#2b213a] overflow-hidden group">
+      {/* ── Code Editor Layer (Transparent to allow glass effect) ── */}
+      <div className="relative bg-transparent overflow-hidden group">
         {/* Layer 1: Highlighted Display */}
         <pre
           ref={preRef}
@@ -276,18 +285,18 @@ export const CodeSnippet = ({ code, language = "python", staticOutput }: CodeSni
         />
       </div>
 
-      {/* ── Single output panel (Adaptive UI) ── */}
-      {shownOutput !== null && (
-        <div className={`border-t border-border-premium animate-in fade-in slide-in-from-top-2 duration-300 transition-colors
-          ${isDark ? "bg-[#2b213a]" : "bg-bg-secondary"}`}>
-          <div className={`px-8 py-3 border-b border-border-premium/50 flex flex-wrap items-center justify-between transition-colors
-            ${runState === "error" ? "bg-red-500/10" : isDark ? "bg-accent-premium/10" : "bg-bg-tertiary"}`}>
+      {/* ── Single output panel (Glassmorphism continuation) ── */}
+      {showOutput && shownOutput !== null && (
+        <div className={`border-t animate-in fade-in slide-in-from-top-2 duration-300 transition-colors
+          ${isDark ? "border-white/5 bg-slate-900/20" : "border-black/5 bg-white/20"}`}>
+          <div className={`px-8 py-3 border-b border-white/5 flex flex-wrap items-center justify-between transition-colors
+            ${runState === "error" ? "bg-red-500/10" : isDark ? "bg-white/5" : "bg-black/5"}`}>
             <span className={`text-[12px] font-black uppercase tracking-[0.2em]
               ${runState === "error" ? "text-red-500" : isDark ? "text-white/40" : "text-muted-premium"}`}>
               {runState === "error" ? "⚠ System Error" : "▸ Output"}
             </span>
           </div>
-          <div className={`px-4 md:px-8 py-4 md:py-6 text-[15px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
+          <div className={`px-4 md:px-8 py-3 md:py-6 text-[13px] md:text-[15px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
             ${isDark ? "text-white/90" : "text-text-premium"}`}>
             {(() => {
               const lines = shownOutput.split("\n");

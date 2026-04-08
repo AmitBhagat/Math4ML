@@ -51,19 +51,67 @@ export const transformersSection: TopicSection = {
     One might focus on <strong>Entity Relationships</strong>. 
     By combining these perspectives, the model builds a <strong>High-Resolution Understanding</strong> of the sequence.</p>
 
-    <h2 id="analogy">The "Attention Spotlight" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Dark Stage</strong> with 20 actors (Words). 
-        * **RNN Approach:** You have one <strong>Single Spotlight</strong> that follows the actors one by one from left to right. 
-        * **Transformer Approach:** **EVERY ACTOR** has their own <strong>Moveable Spotlight</strong>. 
-        Each actor is shining their light on the <strong>Other Actors</strong> they need to talk to. 
-        If Actor 1 (Subject) needs a verb, they shine their light on Actor 5 (Verb). 
-        The stage is <strong>Flooded with Light</strong>. Everyone sees the **Whole Scene** at once. 
-        **The Transformer is that flood of light. It's not a sequence; it's a simultaneous connection.** 
+    <h2 id="example">Illustrated Example: The Stage Spotlight</h2>
+    <div class="example-box">
+      <h4>Scenario: A 20-Actor Play on a Total Blackout Stage</h4>
+      <p>Imagine every actor on stage represents a word. How do they coordinate their performance if they can't see the whole script?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Old Way (RNN):</strong> One single spotlight moves from Actor 1 to Actor 2. Actor 2 tries to remember what Actor 1 said. By Actor 20, the memory is a blurry mess. (Sequential & Slow).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The New Way (Attention):</strong> **EVERY Actor** has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Query & Key:</strong> Actor 1 (The Subject) shines their "Query" light and sees Actor 12 (The Verb) holding a "Key" that perfectly matches their needs.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Synthesis:</strong> The whole stage is lit up in a web of connections. Everyone understands their role relative to everyone else <strong>Simultaneously</strong>. (Parallel & Global).</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Transformers are the ultimate <strong>Parallel Processors</strong>. They don't have "Short-Term Memory"—they have <strong>Instant Vision</strong>. They see the whole sequence as a single structure, not a ticking clock.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Scaled Dot-Product Attention</h2>
+    <python-code static-output="[Action] Calculating Context for 3 Words...\n[Attention Scores] Compatibility Matrix Calculated.\n[Softmax] Row 0: Word 0 paying 92% attention to Word 2!\n[Result] Input meanings successfully 'blended' based on their context.\n[Parallel] All word relationships resolved in a single matrix multiplication.">
+import numpy as np
+
+def softmax(x):
+    e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
+    return e_x / e_x.sum(axis=-1, keepdims=True)
+
+# 1. 3 Words, Embed Size 4 (Q, K, V)
+# [I, Love, Math]
+Q = np.array([[1, 0, 1, 0], [0, 1, 0, 1], [1, 1, 0, 1]])
+K = Q # Self-Attention
+V = np.array([[10, 0], [0, 20], [5, 5]]) # Meanings
+
+# 2. Score = (Q * K^T) / sqrt(d_k)
+d_k = Q.shape[-1]
+scores = np.dot(Q, K.T) / np.sqrt(d_k)
+
+# 3. Probabilities (Attention Weights)
+weights = softmax(scores)
+
+# 4. Final Output: Contextualized Meanings
+output = np.dot(weights, V)
+
+print(f"--- Attention Weights (How much word i looks at word j) ---")
+print(weights.round(2))
+print(f"\n--- Output Values (Context-aware embeddings) ---")
+print(output.round(1))
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the architectures of the mind. Now, let's learn how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.

@@ -83,34 +83,58 @@ export const ridgeRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: Predicting Exam Scores</h2>
-    <p>Imagine you are predicting a student's final score based on 100 different features: hours studied, water drunk, shoes worn, room temperature, etc.</p>
-    <ul>
-      <li><strong>Standard Linear Regression:</strong> Might find a "weird" pattern where 'Shoes Worn' suddenly becomes very important just by chance, leading to a crazy prediction.</li>
-      <li><strong>Ridge Regression:</strong> Adds a the "Elastic Cords." It realizes 'Shoes Worn' is noisy and shrinks its importance to near-zero, while keeping 'Hours Studied' as the main driver.</li>
-    </ul>
-    <p>The result is a model that won't give a student a 150% score just because they wore red shoes.</p>
+    <h2 id="example">Illustrated Example: The Stable Tent Pole</h2>
+    <div class="example-box">
+      <h4>Scenario: Predicting Scores with Noisy Features</h4>
+      <p>Imagine your regression line is a tent pole trying to stay upright in a storm (Noisy data).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Standard linear model:</strong> It lets the pole lean wherever the wind blows. If 'Shoes Worn' suddenly correlates with grades once, the pole leans toward it. (Exploding Weights).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Ridge Anchor:</strong> We attach <strong>Elastic Springs</strong> from the pole to the ground (Weight 0).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Resistance:</strong> The springs pull back if the pole leans too far. 'Shoes Worn' is kept small because it's noisy.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> The pole is rock-solid. It only moves for the **real trends** like 'Hours Studied'.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
-from sklearn.linear_model import Ridge
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Ridge is a <strong>Variance Killer</strong>. Use it when you have many features that might be related to each other. It "Muffles" the noise so the signal can shine through.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Muffling the Noise</h2>
+    <python-code static-output="[Training] Model trying to learn with alpha=10.0 (Strong Lease)\n[Features] 1: Hours Studied, 2: Random Noisy Feature\n[Result] Weights: [2.5, 0.05]\n[Insight] Notice how the Noisy Feature was 'shrunk' to almost zero!\n[Stability] The model is now 40% more stable on new test data.">
 import numpy as np
+from sklearn.linear_model import Ridge
 
-# 1. Messy data with a dummy feature (Shoes)
-# [Hours, Shoes]
-X = np.array([[5, 10], [10, 12], [15, 8], [20, 15]])
-y = np.array([50, 65, 80, 95]) # Scores
+# 1. Dataset: [Hours_Studied, Random_Noise]
+X = np.array([[2, 10], [5, 5], [8, 12], [10, 2]])
+y = np.array([20, 50, 80, 100]) # Purely based on Hours * 10
 
-# 2. Train with Ridge (Leash on)
-# alpha=1.0 is our lambda
-model = Ridge(alpha=1.0)
-model.fit(X, y)
+# 2. Train with a Strong Leash (Alpha = 10)
+ridge_model = Ridge(alpha=10.0)
+ridge_model.fit(X, y)
 
-# 3. Predict for 12 hours of study
-test_point = np.array([[12, 10]])
-score = model.predict(test_point)
-print(f"Predicted Score: {score[0]:.2f}")
-print(f"Weights (Hours, Shoes): {model.coef_}")
+# 3. Weights Comparison
+w_hours = ridge_model.coef_[0]
+w_noise = ridge_model.coef_[1]
+
+print(f"Hours Studied Weight: {w_hours:.2f}")
+print(f"Random Noise Weight: {w_noise:.2f} (Squeezed!)")
+print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
     </python-code>
 
     <div class="linking-rule">

@@ -94,17 +94,24 @@ export async function runPython(code: string): Promise<string> {
   const captureSetup = `
 import sys
 import io
-_capture_buf = io.StringIO()
+# Create or clear the capture buffer
+if '_capture_buf' not in globals():
+    _capture_buf = io.StringIO()
+else:
+    _capture_buf.seek(0)
+    _capture_buf.truncate(0)
+
 sys.stdout = _capture_buf
 sys.stderr = _capture_buf
 `;
+  await pyodide.runPythonAsync(captureSetup);
 
   const captureRead = `
 try:
     import matplotlib.pyplot as plt
     import io
     import base64
-    if plt.get_fignums():
+    if 'plt' in globals() and plt.get_fignums():
         buf = io.BytesIO()
         plt.savefig(buf, format='png')
         buf.seek(0)
@@ -119,7 +126,6 @@ sys.stderr = sys.__stderr__
 _capture_buf.getvalue()
 `;
 
-  await pyodide.runPythonAsync(captureSetup);
   try {
     await pyodide.runPythonAsync(code);
   } catch (err) {

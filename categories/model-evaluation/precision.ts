@@ -87,33 +87,59 @@ export const precisionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Cautious Mailroom Clerk</h2>
-    <p>Imagine a **Mailroom Clerk** sorting through 1,000 envelopes.</p>
-    <ul>
-      <li><strong>The Goal:</strong> He only wants to mark an envelope as <strong>"Urgent"</strong> if it truly contains a time-sensitive check. </li>
-      <li><strong>The Strategy:</strong> He is extremely picky. If he's not 100% sure, he marks it as "Regular." </li>
-      <li><strong>The Result:</strong> He only marks 10 envelopes as Urgent. 9 of them are checks, and 1 is a regular letter. </li>
-    </ul>
-    <p>His <strong>Precision</strong> is $9/10 = 90\%$. He missed some other checks (High False Negatives), but when he <em>did</em> alert you, he was almost always right. <strong>Precision is about making your 'YES' mean something.</strong></p>
+    <h2 id="example">Illustrated Example: The Honest Witness</h2>
+    <div class="example-box">
+      <h4>Scenario: Declaring "Urgent" Mail in a Mailroom</h4>
+      <p>Imagine a clerk sorting 1,000 envelopes. He only wants to mark an envelope as <strong>"Urgent"</strong> if it definitely contains a time-sensitive check. He is a perfectionist.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Action:</strong> Out of the 1,000 envelopes, he only pulls out 10 as "Urgent". (Total Predicted Positives).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Verification:</strong> You open those 10. You find 9 actual checks (True Positives) and 1 random coupon (False Positive).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Math:</strong> Precision = $9 / (9 + 1) = 90\%$. This is his <strong>Credibility Score</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> When this clerk yells "Urgent!", everyone listens because his "Quality" is elite. He'd rather be quiet than be wrong.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import precision_score
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> High precision usually means your model is <strong>Conservative</strong>. It's like a witness who only speaks when they are 100% sure. It's the "Quality" metric—perfect for when the cost of a mistake (False Positive) is high.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Calculating Credibility</h2>
+    <python-code static-output="[Scan] Analyzing 10 predictions vs. Reality...\n[Status] Total 'YES' predictions: 4\n[Verification] Correct 'YES' (TP): 3\n[Verification] False Alarms (FP): 1\n[Result] Precision = 3/4 = 75.0%\n[Insight] If this model flags an email as Spam, it's correct 75% of the time.">
 import numpy as np
+from sklearn.metrics import precision_score
 
-# 1. Predictions vs Reality
-y_true = [0, 1, 0, 1, 1, 0, 1]
-y_pred = [0, 1, 0, 0, 1, 1, 1] # Model made 1 mistake (FP)
+# 1. Truth vs. Model Predictions
+# 1 = Spam, 0 = Clean
+y_true = [0, 1, 0, 1, 0, 0, 1, 0, 0, 1]
+y_pred = [0, 1, 0, 0, 0, 1, 1, 0, 0, 1]
 
-# 2. Calculate Precision
-# 'macro' for multi-class, or default for binary
+# 2. Calculate Precision (TP / (TP + FP))
+# Only cares about the 'Quality' of the '1' predictions
 precision = precision_score(y_true, y_pred)
 
-print(f"Precision Score: {precision:.2f}")
-# Result 0.75: Out of 4 'Positive' guesses, only 3 were right.
-      </code></pre>
-    </div>
+print(f"Model Precision Score: {precision:.2%}")
+
+# 3. Manual Check for Clarity
+# TP: indices 1, 6, 9 (Correct Spam)
+# FP: index 5 (Clean email marked as Spam)
+print(f"Credibility: 3 correct out of 4 positive guesses.")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Precision makes us cautious. But what if we are <em>too</em> cautious and miss something important? Explore <strong><a href="#/machine-learning/model-evaluation/recall">Recall</a></strong>.

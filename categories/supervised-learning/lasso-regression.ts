@@ -87,36 +87,60 @@ export const lassoRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Gene Hunter</h2>
-    <p>Imagine a scientist looking for the cause of a rare disease. They measure 5,000 different <strong>Genes</strong> in 100 patients.</p>
-    <ul>
-      <li><strong>The Problem:</strong> Most of those genes have nothing to do with the disease. They are just "Noise."</li>
-      <li><strong>The Solution:</strong> Lasso Regression treats the 5,000 genes as features. Because it is the "Brutal Executioner," it kills the weights for 4,995 irrelevant genes.</li>
-      <li><strong>The Result:</strong> The scientist is left with a list of exactly <strong>5 target genes</strong> to study in the lab.</li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Brutal Casting Director</h2>
+    <div class="example-box">
+      <h4>Scenario: Reducing a Cast of 100 to 5 Essential Stars</h4>
+      <p>Imagine your data features are actors auditioning for a movie. You have a tiny budget.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Standard linear model:</strong> It hires every single person who shows up, giving them all tiny 'Background' roles. (Dense Weights).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Lasso Director:</strong> He walks through the set and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Zero-Constraint (L1):</strong> Because the penalty is on the <strong>Absolute Value</strong>, weights are pushed hard against the '0' floor.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> The director hands in a script with only 5 names. The other 95 are <strong>Exactly zero</strong>. (Sparse Weights).</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
-from sklearn.linear_model import Lasso
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Lasso is a <strong>Feature Selector</strong>. Use it when you want to simplify your model and answer the question: "Which of these 1,000 variables actually matter?"
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Weight Killer</h2>
+    <python-code static-output="[Training] Model trying to learn with alpha=5.0 (Brutal Executioner)\n[Input] 1 Useful Feature, 4 Random Noisy Features\n[Result] Learned Weights: [8.5, 0.0, 0.0, 0.0, 0.0]\n[Discovery] Lasso killed all 4 junk features exactly!\n[Interpretation] Feature 0 is the only one 'worth' the L1 penalty.">
 import numpy as np
+from sklearn.linear_model import Lasso
 
-# 1. 5 Features (only the 1st one matters)
+# 1. Dataset: 1 useful feature and 4 random junk ones
 X = np.array([
-    [10, 0, 0, 0, 0],
-    [20, 1, 0, 1, 0],
-    [30, 0, 1, 0, 1],
-    [40, 1, 1, 1, 1]
+    [10, 5, 2, 8, 1],
+    [20, 1, 9, 3, 5],
+    [30, 4, 1, 6, 9],
+    [40, 2, 5, 7, 3]
 ])
-y = np.array([100, 200, 300, 400]) # Purely based on Feature 0
+y = np.array([100, 200, 300, 400]) # Depends ONLY on Feature 0 (Target: w=10)
 
-# 2. Train Lasso (Brutal Executioner)
-# alpha=10 is a strong penalty
-model = Lasso(alpha=10)
-model.fit(X, y)
+# 2. Train with Lasso (Alpha = 5.0)
+lasso_model = Lasso(alpha=5.0)
+lasso_model.fit(X, y)
 
-# 3. Check which features survived
-print(f"Weights of the 5 features: {model.coef_}")
-# You will see [9.something, 0, 0, 0, 0]
+# 3. Check survival
+weights = lasso_model.coef_
+print(f"Feature Weights: {weights}")
+print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     </python-code>
 
     <div class="linking-rule">

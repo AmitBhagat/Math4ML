@@ -62,17 +62,65 @@ export const bayesianNetworksSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="analogy">The "Crime Scene" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Detective investigating a break-in</strong>. 
-        Clues: [Broken Window, Muddy Footprints, Empty Safe]. 
-        The detective has a <strong>Mental Map</strong>: A Broken Window could be caused by a Burglar (90%) or a Baseball (10%). 
-        **Bayesian Networks** are that mental map in mathematical form. 
-        When the detective sees the "Broken Window," the probability of "Burglar" goes up. But if he then sees a "Baseball" on the floor, the probability of "Burglar" might go back down. This is <strong>Explaining Away</strong>—a unique power of graphical models.
+    <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
+    <div class="example-box">
+      <h4>Scenario: Explaining Away the Broken Window</h4>
+      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A **Burglar** or a **Baseball** thrown by a neighborhood kid.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Initial Evidence:</strong> The Window is Broken. The probability of "Burglar" jumps from 1% to 80%. (Cause A is the prime suspect).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>New Discovery:</strong> A baseball is found lying on the floor inside the room.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Explaining Away:</strong> The probability of "Burglar" immediately drops back down to 5%. Why? Because the "Baseball" is a much simpler, logical explanation for the broken window.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Conclusion:</strong> In a Bayesian Network, things that were independent (Burglar vs. Baseball) become <strong>Linked</strong> once you see their shared effects (Broken Window).</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Explaining Away</h2>
+    <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
+import numpy as np
+
+# 1. Priors (Historical frequencies)
+p_burglar = 0.01
+p_baseball = 0.02
+
+# 2. Conditional Probability of Broken Window (BW)
+# P(BW | Burglar, Baseball)
+def get_p_bw(burglar, baseball):
+    if burglar and baseball: return 0.99
+    if burglar: return 0.95
+    if baseball: return 0.90
+    return 0.001 # Random noise
+
+# 3. Bayes Rule: Suspicion = P(Burglar | BrokenWindow)
+# We won't code the full joint sum here, just the logic flow
+suspicion_init = (0.95 * p_burglar) / (0.95 * p_burglar + 0.15 * p_baseball) # Mock calc
+
+# 4. Adding 'Baseball' evidence
+# suspicion_new = P(Burglar | BW, Baseball)
+suspicion_new = (0.99 * p_burglar * p_baseball) / (0.99 * p_burglar * p_baseball + 0.90 * p_baseball)
+
+print(f"P(Burglar | Window): {suspicion_init:.2f}")
+print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the arrows follow a sequence in time? Explore <strong><a href="#/machine-learning/pgm/hmm">Hidden Markov Models (HMM)</a></strong>.

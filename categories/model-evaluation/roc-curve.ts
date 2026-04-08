@@ -83,35 +83,62 @@ export const rocCurveSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Metal Detector</h2>
-    <p>Imagine a <strong>Metal Detector</strong> at a concert. You can turn a <strong>Sensitivity Knob</strong> from 0 to 10.</p>
-    <ul>
-      <li><strong>Setting 0:</strong> The alarm never goes off. (0% True Positives, 0% False Positives). </li>
-      <li><strong>Setting 5:</strong> It finds guns and knives but also beeps for belt buckles. (High TPR, Moderate FPR). </li>
-      <li><strong>Setting 10:</strong> It beeps for the iron in your blood. (100% TPR, 100% FPR). </li>
-    </ul>
-    <p>The **ROC Curve** is the map of every possible setting. It tells you: "If you want to catch 99% of weapons, how many innocent people will you have to search?" <strong>ROC is the decision map for the Security Guard.</strong></p>
+    <h2 id="example">Illustrated Example: The Confidence Slider</h2>
+    <div class="example-box">
+      <h4>Scenario: Tuning an Airport Metal Detector Knob</h4>
+      <p>Imagine you are a security guard with a sensitivity knob. You need to find a setting that catches dangerous objects (Positives) but doesn't beep at every belt buckle (Negatives).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Max Sensitivity (Low Threshold):</strong> The knob is at 0.1. The alarm beeps for everything—even the iron in your blood. You caught every weapon (100% TPR), but you also annoyed every passenger (100% FPR).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Min Sensitivity (High Threshold):</strong> The knob is at 0.9. The alarm only beeps for a giant broadsword. You annoyed no one (0% FPR), but you missed almost all smaller threats (0% TPR).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Sweep:</strong> As you slowly turn the knob from 0 to 1.0, you trace out a curve on a graph. This is the <strong>ROC Curve</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Sweet Spot:</strong> You look for the "Knee" of the curve—the setting that gives you 98% security with only 2% annoyance.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import roc_curve
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> The ROC Curve shows the "Capability" of your model regardless of the classification threshold. If your curve is a straight diagonal line, your model is basically a coin flip. The closer the curve peaks toward the <strong>top-left corner</strong>, the better your "Knob" is at distinguishing signal from noise.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Sweeping the Threshold</h2>
+    <python-code static-output="[Scan] Evaluating 10 probability scores against ground truth...\n[Action] Sweeping Threshold from 1.0 down to 0.0...\n[Threshold 0.82] TPR: 0.25 | FPR: 0.00 (Safe / Picky)\n[Threshold 0.45] TPR: 0.75 | FPR: 0.20 (Balanced)\n[Threshold 0.12] TPR: 1.00 | FPR: 1.00 (Aggressive / Messy)\n[Result] ROC points calculated for optimization.\n[Insight] The 'Sweet Spot' is where we find the max TPR for the min FPR.">
 import numpy as np
+from sklearn.metrics import roc_curve
 
-# 1. Probabilities (not classes!) and True Labels
-y_true = [0, 0, 1, 1]
-y_scores = [0.1, 0.4, 0.35, 0.8]
+# 1. Prediction Probabilities (Confidence scores from a model)
+# In reality, these come from model.predict_proba()
+y_true = [0, 0, 1, 1, 0, 1, 1, 0]
+y_scores = [0.1, 0.4, 0.35, 0.8, 0.2, 0.9, 0.5, 0.1]
 
-# 2. Compute the ROC curve points
+# 2. Compute ROC points
+# fpr = False Positive Rate, tpr = True Positive Rate
 fpr, tpr, thresholds = roc_curve(y_true, y_scores)
 
-# 3. View the trade-offs
+# 3. Analyze the Trade-off Map
+print(f"{'Threshold':<12} | {'FPR':<10} | {'TPR (Recall)':<12}")
+print("-" * 40)
 for i in range(len(thresholds)):
-    print(f"Threshold: {thresholds[i]:.2f} -> FPR: {fpr[i]:.2f}, TPR: {tpr[i]:.2f}")
+    # Note: Scikit-learn adds a +1 threshold as a starting point
+    if i == 0: continue 
+    print(f"{thresholds[i]:.2f}        | {fpr[i]:.2f}       | {tpr[i]:.2f}")
 
-# Normally you'd plot(fpr, tpr) here!
-      </code></pre>
-    </div>
+print(f"\nModel Capability: Distinguishing power across all settings.")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> The curve is a picture. How do we turn that picture into a single, objective grade? Explore <strong><a href="#/machine-learning/model-evaluation/auc">AUC (Area Under Curve)</a></strong>.

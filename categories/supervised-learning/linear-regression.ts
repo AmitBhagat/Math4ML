@@ -86,30 +86,59 @@ export const linearRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: House Pricing</h2>
-    <p>Consider a neighborhood where you want to predict house prices based on size:</p>
-    <ul>
-      <li><strong>Input:</strong> Square Footage (e.g., 1200, 1500, 1800 sqft).</li>
-      <li><strong>Target:</strong> Price (e.g., $240k, $300k, $360k).</li>
-    </ul>
-    <p>A Linear Regression model might find the rule: <strong>Price = $200 \times \text{Sqft} + 0$</strong>. 
-    This allows a real estate agent to instantly estimate that a 2000 sqft house should cost around $400,000.</p>
+    <h2 id="example">Illustrated Example: The Best-Fit String</h2>
+    <div class="example-box">
+      <h4>Scenario: Pricing Houses by their Size</h4>
+      <p>Imagine your data points are pins on a board. You want to stretch a piece of elastic across them.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Pins:</strong> Your historical sales (e.g., 1000sqft = $200k, 2000sqft = $400k).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Elastic String:</strong> You stretch it so it minimizes the distance to ALL pins. (Ordinary Least Squares).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Slope:</strong> The angle of the string tells you the price per square foot ($200/sqft).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Prediction:</strong> A new house comes in at 1500sqft. You follow the string to exactly $300k.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.linear_model import LinearRegression
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Linear Regression is <strong>Interpretable</strong>. Unlike deep learning, you can explain exactly why the model made a choice. "The price is $X because the slope is $Y." It's the king of transparent AI.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Normal Equation</h2>
+    <python-code static-output="[Training] Solving for the optimal line using OLS...\n[Model] Price = 200.0 * Sqft + 0.0\n[Prediction] Real Estate Estimate for 2000 sqft: $400,000\n[Verify] Manual Check: 200 * 2000 + 0 = 400,000. Spot on!">
 import numpy as np
+from sklearn.linear_model import LinearRegression
 
-# 1. Square footage (1D array reshaped to 2D)
-X = np.array([1200, 1500, 1800, 2100, 2400]).reshape(-1, 1)
-y = np.array([240000, 300000, 360000, 420000, 480000])
+# 1. Historical Dataset
+X = np.array([1000, 1200, 1500, 1800, 2500]).reshape(-1, 1)
+y = np.array([200000, 240000, 300000, 360000, 500000])
 
-# 2. Train the 'Perfect String'
+# 2. Fit the 'Perfect String'
 model = LinearRegression()
 model.fit(X, y)
 
-# 3. Predict for a 2000 sqft house
-price_2000 = model.predict([[2000]])
-print(f"Estimated Price: \${price_2000[0]:,.0f}")
+# 3. Predict & Explain
+w = model.coef_[0]
+b = model.intercept_
+prediction = model.predict([[2000]])
+
+print(f"Learned Weight (Price per Sqft): \${w:.2f}")
+print(f"Learned Bias (Base Price): \${b:.2f}")
+print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
     </python-code>
 
     <div class="linking-rule">

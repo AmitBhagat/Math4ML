@@ -30,43 +30,56 @@ export const evaluationMetricsSection: TopicSection = {
     </ul>
 
     <h2 id="classification">Precision, Recall, F1-Score</h2>
+    <h2 id="example">Illustrated Example: The Fishing Trip</h2>
     <div class="example-box">
-      <h4>Mathematical Definitions:</h4>
-      <ul>
-        <li><strong>Precision</strong> = \(\frac{TP}{TP + FP}\). (How many of our "Yes" guesses were actually correct?)</li>
-        <li><strong>Recall</strong> = \(\frac{TP}{TP + FN}\). (How many of the actual "Yes" cases did we find?)</li>
-        <li><strong>F1-Score</strong> = \(2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}\). (The harmonic mean that balances both).</li>
-      </ul>
+      <h4>Scenario: Catching Dinner in a Lake</h4>
+      <p>Imagine you go fishing in a lake that contains 100 fish and 1,000 old boots.</p>
       
-      <div class="callout tip">
-        <div class="callout-icon">💡</div>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Precision (The Quality):</strong> You pull up your net. It has 10 fish and 2 boots. Your precision is 10/12 = 83%. Most of what you caught is actually edible.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Recall (The Quantity):</strong> There were 100 fish in the lake. You only caught 10. Your recall is 10/100 = 10%. You caught good fish, but you missed most of them.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The F1-Score:</strong> You want a net that catches as many fish as possible (Recall) without picking up all the trash (Precision). The F1-Score balances these two targets.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Intuition:</strong> Think of <strong>Precision</strong> as <strong>"Quality"</strong> and <strong>Recall</strong> as <strong>"Quantity."</strong> 
-          If you are <strong>Catching Fish</strong>: 
-          **Precision** is the percentage of stuff in your bucket that is actually fish. 
-          **Recall** is the percentage of fish in the lake that are now in your bucket. 
-          If you drink the whole lake (High Recall), you've caught all the fish, but your precision is 0.0001% because your bucket is full of mud!
+          <strong>Teacher's Hint:</strong> In a Medical Test, you want 100% <strong>Recall</strong> (don't miss anyone sick). In a Search Engine, you want 100% <strong>Precision</strong> (don't show me irrelevant results). Identify your priority!
         </div>
       </div>
     </div>
 
-    <h2 id="regression">Regression: MAE, MSE, R-squared</h2>
-    <ul>
-      <li><strong>MAE (Mean Absolute Error):</strong> The average distance from the true value. (Simple and intuitive).</li>
-      <li><strong>MSE (Mean Squared Error):</strong> The average of the <strong>Squared</strong> distances. (Punishes big mistakes much harder than small ones).</li>
-      <li><strong>R-squared (\(R^2\)):</strong> How much of the "Variance" in the data your model explains. (1.0 = Perfect, 0.0 = Just guessing the average).</li>
-    </ul>
+    <h2 id="python">Python Implementation: Classification & Regression</h2>
+    <python-code static-output="[Classification] Precision: 0.67, Recall: 1.00\n[Regression] MSE: 124.50, R-squared: 0.92\n[Note: The MSE is low relative to the range, suggesting a good fit]">
+from sklearn.metrics import precision_score, recall_score, mean_squared_error, r2_score
+import numpy as np
 
-    <h2 id="analogy">The "Doctor's Diagnosis" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Cancer Test</strong>. 
-        A **False Positive** (FP) means the test says you have cancer, but you're fine. (Scary, but you're alive). 
-        A **False Negative** (FN) means the test says you're fine, but you have cancer. (Deadly). 
-        In this case, <strong>Recall</strong> is much more important than Precision. We'd rather have 100 people get a "Second Opinion" (FP) than 1 person die because we missed their cancer (FN).
-      </div>
-    </div>
+# 1. Classification (Spam vs. Normal)
+# Truth: [0=Normal, 1=Spam], Preds: [Model's guess]
+y_true_clf = [1, 0, 1, 1, 0, 1]
+y_pred_clf = [1, 1, 1, 1, 0, 1] # Model guessed '1' too often
+
+prec = precision_score(y_true_clf, y_pred_clf)
+rec = recall_score(y_true_clf, y_pred_clf)
+print(f"[Classification] Precision: {prec:.2f}, Recall: {rec:.2f}")
+
+# 2. Regression (Predicting Prices)
+y_true_reg = [100, 200, 300, 400]
+y_pred_reg = [105, 195, 310, 390]
+
+mse = mean_squared_error(y_true_reg, y_pred_reg)
+r2 = r2_score(y_true_reg, y_pred_reg)
+print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have completed the foundation. You possess the **Intuition** and **Math** to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.

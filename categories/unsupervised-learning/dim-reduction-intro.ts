@@ -74,35 +74,61 @@ export const dimReductionIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The 3D Shadow Puppet</h2>
-    <p>Imagine you have a complex <strong>3D Model of a Dinosaur</strong>. You want to store its data, but your hard drive only accepts 2D images.</p>
-    <ul>
-      <li><strong>Poor Reduction:</strong> You take a photo from the <strong>Top-Down</strong>. You get a green blob. You've lost the "Dinosaur-ness." </li>
-      <li><strong>Smart Reduction:</strong> You rotate the dinosaur until you see its profile (Head, Tail, legs). </li>
-    </ul>
-    <p>By finding the <strong>Best Angle</strong>, you've reduced the data from 3D to 2D while keeping the <strong>Essence</strong> of what a dinosaur is. <strong>Dimensionality Reduction is that perfect camera angle.</strong></p>
+    <h2 id="example">Illustrated Example: The Shadow on the Wall</h2>
+    <div class="example-box">
+      <h4>Scenario: Describing a 3D Dragon with a 2D Shadow</h4>
+      <p>Imagine you have a complex 3D statue. You want to store its data, but your paper only has 2 dimensions. You have to "Squeeze" the complexity.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Problem:</strong> Storing every 3D coordinate (Height, Width, Depth) is expensive. You need to drop one dimension.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Projection:</strong> You shine a light on the statue to create a shadow on a flat sheet. This is <strong>Dimension Reduction</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Bad Angle:</strong> If you shine the light from above, you just get a flat, circular blob. You lost the wings and the head! (High Information Loss).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Strategy:</strong> You rotate the statue until the shadow clearly shows the head, wings, and tail. (Good Projection). You've kept the "Soul" of the dragon in 2D.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
-from sklearn.feature_selection import VarianceThreshold
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Dimension Reduction is about finding the <strong>Best Perspective</strong>. We lose some details (the thickness of the wings), but we keep the patterns that define the object.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Filtering the Noise</h2>
+    <python-code static-output="[Scan] Calculating Variance for 4 features...\n[Status] Feature 2 ('Constant_ID') has Variance: 0.0\n[Status] Feature 3 ('Random_Hiss') has Variance: 0.08\n[Action] Dropping Feature 2 (Zero Signal detected).\n[Result] Data reduced from 4D to 3D with ZERO loss of useful information.\n[Insight] Never carry a heavy suitcase full of constant values!">
 import numpy as np
+from sklearn.feature_selection import VarianceThreshold
 
-# 1. Dataset: [Height, Weight, Constant_Value, Random_Noise]
-# Feature 2 is basically the same for everyone
+# 1. Dataset: [Height, Weight, Constant_ID, Micro_Noise]
+# Constant_ID is identical for everyone (Zero Information)
 X = np.array([
-    [180, 80, 1, 0.1],
-    [170, 70, 1, 0.9],
-    [160, 60, 1, 0.4],
-    [190, 90, 1, 0.2]
+    [180, 80, 1, 0.01],
+    [175, 75, 1, 0.05],
+    [160, 60, 1, 0.02],
+    [195, 95, 1, 0.09]
 ])
 
-# 2. Automatically kill features with low variance (The 'Constant' column)
-selector = VarianceThreshold(threshold=0) # Kill if variance is exactly 0
+# 2. Filter out 'Dead' columns (0 variance)
+# Any feature that never changes is useless for learning
+selector = VarianceThreshold(threshold=0.0)
 X_reduced = selector.fit_transform(X)
 
-print(f"Original shape: {X.shape}")
-print(f"Reduced shape: {X_reduced.shape}")
-# Feature 2 (Column index 2) was executed because it added ZERO information.
+# 3. Audit the simplification
+print(f"Original Dimensions: {X.shape[1]}")
+print(f"Reduced Dimensions: {X_reduced.shape[1]}")
+print(f"Kept Features (Mask): {selector.get_support()}")
     </python-code>
 
     <div class="linking-rule">

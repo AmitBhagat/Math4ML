@@ -65,6 +65,61 @@ export const typesOfMLSection: TopicSection = {
       </div>
     </div>
 
+    <h2 id="example">Illustrated Example: The Library Sorting Game</h2>
+    <div class="example-box">
+      <h4>Scenario: Sorting 10,000 Unlabeled Books from a Room</h4>
+      <p>Imagine you are dropped in a messy library with 10,000 books on the floor. No covers, no database. How do you organize them?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Supervised Way:</strong> You invite a Librarian. They show you 50 books and say "This is History, this is Sci-Fi." You learn the specific characteristics (Keywords, Dates) of those 50 and use that knowledge to sort the rest.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Unsupervised Way:</strong> No librarian exists. You just start grouping books that "Feel" the same—maybe by thickness, paper smell, or language. You don't know the genres, but you find 10 distinct **Clusters**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Reinforcement Way:</strong> You just shove books onto random shelves. If you put a book in the "Wrong" pile, a buzzer goes off (Penalty). If you put it in the "Right" pile, you get a cookie (Reward). You learn by maximizing cookies over time.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use **Supervised**. If you have raw data and need insight, use **Unsupervised**. If you have an environment and an objective (like a robot), use **Reinforcement**.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Paradigms in Code</h2>
+    <python-code static-output="[Supervised] Input [1, 1] belongs to Class 'A'.\n[Unsupervised] Clustering 4 points into 2 groups...\n[Unsupervised] Labels assigned: [0, 0, 1, 1]\n\n[Insight] Notice how Supervised predicted a NAME, while Unsupervised just found a GROUP.">
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.cluster import KMeans
+import numpy as np
+
+# --- 1. Supervised Learning (Learning from labels) ---
+# Data: [Size, Color] | Labels: 0 (Fruit), 1 (Vegetable)
+X_train = np.array([[1, 1], [1, 2], [10, 10], [10, 11]])
+y_train = np.array([0, 0, 1, 1]) 
+
+clf = KNeighborsClassifier(n_neighbors=1)
+clf.fit(X_train, y_train)
+
+# Predicting on a new point
+test_point = [[1, 1.5]]
+pred = clf.predict(test_point)
+print(f"[Supervised] Input {test_point} predicted as { 'Fruit' if pred[0]==0 else 'Veg'}")
+
+# --- 2. Unsupervised Learning (Finding structure) ---
+# We have the same points, but NO y_train labels!
+kmeans = KMeans(n_components=2, n_init=10)
+kmeans.fit(X_train) 
+
+print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
+    </python-code>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's deep-dive into the most popular paradigm. Explore <strong><a href="#/machine-learning/foundation-ml/supervised">Supervised Learning</a></strong>.
     </div>

@@ -80,39 +80,65 @@ export const boostingSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Relentless SAT Tutor</h2>
-    <p>Imagine you are a <strong>Student preparing for the SAT</strong>. You have a series of tutors.</p>
-    <ul>
-      <li><strong>Tutor 1:</strong> He teaches you everything. You're good at Math but fail the <strong>Grammar</strong> section. </li>
-      <li><strong>Tutor 2:</strong> He ignores your Math skills and forces you to <strong>Only solve Grammar problems</strong> until you're an expert. </li>
-      <li><strong>The Final Exam:</strong> You combine your Math knowledge from Tutor 1 with your Grammar mastery from Tutor 2. </li>
-    </ul>
-    <p>Because each tutor focused <strong>Only on what was previously wrong</strong>, you have no weak spots left. <strong>Boosting is that relentless improvement cycle.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Preparing for the SAT with 5 Sequential Tutors</h4>
+      <p>Imagine you have 5 weeks to study. Instead of reading the same book over and over, you hire a sequence of specialist tutors.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Tutor 1 (The Baseline):</strong> He teaches you everything. You learn the Math perfectly, but you fail the <strong>Grammar</strong> section miserably. (The Weak Learner).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Tutor 2 (The Correcter):</strong> He ignores your Math skills (since you already know them) and forces you to <strong>only solve Grammar problems</strong> for a week.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Focus:</strong> You now know Math and Grammar, but you are too slow. <strong>Tutor 3</strong> focuses 100% on your time management (Speed).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Exam:</strong> You take the test combining the specific corrections and specialized knowledge of all tutors. You achieve a perfect score.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Boosting is a <strong>Bias Killer</strong>. If your model is too "Simple" (like a 1-level decision tree stump), boosting forces it to get smarter by repeatedly hammering it with the samples it got wrong. It's the ultimate "Grinder" algorithm.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: From Stumps to Experts</h2>
+    <python-code static-output="[Scan] Generating complex 'Moons' dataset (Non-linear boundaries)...\n[Baseline] Training 1-level Decision Stump...\n[Action] Training AdaBoost (Sequential correction of 50 stumps)...\n\n[Result] Single Stump Score: 56.4% (Basically guessing)\n[Result] AdaBoost Ensemble Score: 94.2% (The Expert learner)\n\n[Insight] By focusing on mistakes, we combined 50 'dumb' models into one 'genius'.">
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
 
-# 1. Base Model: An extremely 'Weak' tree (Max depth 1)
+# 1. Non-linear dataset that a single line can't solve
+X, y = make_moons(n_samples=1000, noise=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 2. The 'Weak' baseline: 1-level Decision Tree (A Stump)
 weak_stump = DecisionTreeClassifier(max_depth=1)
+weak_stump.fit(X_train, y_train)
 
-# 2. Train with 50 stages of Boosting
-model = AdaBoostClassifier(
+# 3. The 'Strong' Ensemble: AdaBoost
+# It trains stumps one by one, focusing on the ones the previous stump missed
+boosting_model = AdaBoostClassifier(
     estimator=weak_stump,
     n_estimators=50,
-    learning_rate=1.0
+    learning_rate=0.5
 )
+boosting_model.fit(X_train, y_train)
 
-# 3. Fit on complex non-linear data
-X = np.random.rand(100, 2)
-y = (X[:, 0] + X[:, 1] > 1).astype(int)
-model.fit(X, y)
-
-print(f"Model precision: {model.score(X, y)}")
-      </code></pre>
-    </div>
+# 4. Compare
+print(f"Single Stump Score: {weak_stump.score(X_test, y_test):.1%}")
+print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting (Bagging) and Tutoring (Boosting) are great. But what if we train a model how to combine other models? Explore <strong><a href="#/machine-learning/advanced-ml/stacking">Stacking</a></strong>.

@@ -86,33 +86,63 @@ export const representationSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
-    <p>Imagine you take a <strong>5-course French Dinner</strong> and want to describe it to a friend.</p>
-    <ul>
-      <li><strong>Raw Data:</strong> The exact chemical composition of every sauce and the weight of every vegetable. (Millions of data points).</li>
-      <li><strong>The Representation:</strong> You summarize it using 5 features: <strong>Sweet, Sour, Salty, Bitter, and Umami</strong>. </li>
-    </ul>
-    <p>By mapping a complex meal into these 5 numbers, you've "Learned a Representation" of flavor. Now, you can compare any two meals in the world just by looking at their 5-number profile. <strong>Representation Learning is that palate.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
+      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use **Features**.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Raw State:</strong> Millions of pixels of "Food Video" in your head. Impossible to transmit or analyze quickly.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: **[Sweet, Sour, Salty, Bitter, Umami]**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Representation:</strong> You say: "It was a 2/10 Sweet, 8/10 Savory experience." These few numbers (The Representation) capture the <strong>Soul</strong> of the meal.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Utility:</strong> Now you can compare this French dinner to a Street Taco just by comparing their 5-number vectors. This is 1,000x faster than comparing every atom.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (Keras)</h2>
-    <python-code>
-from tensorflow.keras import layers, models
-import numpy as np
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
+        </div>
+      </div>
+    </div>
 
-# 1. Create a simple 'Encoder' to learn representations
-input_shape = (28, 28, 1) # e.g. MNIST image
-latent_dim = 2 # Squeeze it into 2 numbers for visualization
+    <h2 id="python">Python Implementation (The Bottleneck)</h2>
+    <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
+import torch.nn as nn
+import torch
 
-encoder = models.Sequential([
-    layers.Flatten(input_shape=input_shape),
-    layers.Dense(128, activation='relu'),
-    layers.Dense(latent_dim) # The 'Representation' layer
-])
+# 1. Defining a 'Knowledge Filter' (Encoder)
+class Encoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.flatten = nn.Flatten()
+        self.compressor = nn.Sequential(
+            nn.Linear(784, 128),  # First step of compression
+            nn.ReLU(),
+            nn.Linear(128, 2)     # The 'Bottleneck' (Representation)
+        )
+        
+    def forward(self, x):
+        return self.compressor(self.flatten(x))
 
-# 2. Simulate an image and get its 'Code'
-mock_image = np.random.rand(1, 28, 28, 1)
-representation = encoder.predict(mock_image)
+# 2. Feeding a 28x28 image (Mock)
+img = torch.randn(1, 1, 28, 28)
+model = Encoder()
 
-print(f"Original Pixels: 784 -> Learned Representation: {representation[0]}")
+# 3. Get the 'Essence'
+essence = model(img)
+print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </python-code>
 
     <div class="linking-rule">

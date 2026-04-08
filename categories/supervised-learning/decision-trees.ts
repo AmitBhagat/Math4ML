@@ -101,28 +101,43 @@ export const decisionTreesSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Job Offer Flowchart</h2>
-    <p>Imagine you just received a <strong>Job Offer</strong> and need to decide whether to accept it. You use a mental Decision Tree:</p>
-    <ul>
-      <li><strong>Node 1:</strong> Is the Salary > $100k? 
-        <ul>
-          <li><strong>Yes:</strong> Go to Node 2.</li>
-          <li><strong>No:</strong> REJECT.</li>
-        </ul>
-      </li>
-      <li><strong>Node 2:</strong> Is the Commute < 30 minutes?
-        <ul>
-          <li><strong>Yes:</strong> ACCEPT.</li>
-          <li><strong>No:</strong> Go to Node 3.</li>
-        </ul>
-      </li>
-      <li><strong>Node 3:</strong> Does it offer free coffee? ... and so on.</li>
-    </ul>
+    <div class="example-box">
+      <h4>Scenario: Should I Accept this Job?</h4>
+      <p>Imagine your brain is a series of 'If-Then' switches. That is a Decision Tree.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Root Node:</strong> "Is the Salary > $100k?" (The most important question).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Split:</strong> If 'No', you reject immediately. If 'Yes', you ask the next most important question.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Leaf:</strong> "Is the Commute < 30 mins?" If 'Yes', you reach the final decision.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Outcome:</strong> <strong>ACCEPT</strong>. The tree has mapped a complex life choice into a simple, logical path.</div>
+        </div>
+      </div>
 
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a **Random Forest**.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Logical Splitter</h2>
+    <python-code static-output="[Training] Growing a tree of depth 2...\n[Root] Top Split Feature: Salary > 100k\n[Importance] Salary: 1.0, Commute: 0.0 (Salary alone perfectly sorted this small dataset!)\n[Decision] For $120k salary: ACCEPT\n[Insight] The tree 'discovered' that salary was the only factor that mattered here.">
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
-# 1. Features: [Salary > 100k (1/0), Commute < 30 (1/0)]
+# 1. Dataset: [Salary > 100k (Binary), Commute < 30 (Binary)]
 X = np.array([[1, 1], [1, 0], [0, 1], [0, 0]])
 y = np.array([1, 1, 0, 0]) # 1=Accept, 0=Reject
 
@@ -130,10 +145,12 @@ y = np.array([1, 1, 0, 0]) # 1=Accept, 0=Reject
 model = DecisionTreeClassifier(max_depth=2)
 model.fit(X, y)
 
-# 3. Predict for a job: 90k salary, 15 min commute [0, 1]
-new_job = np.array([[0, 1]])
-result = "Accept" if model.predict(new_job)[0] == 1 else "Reject"
-print(f"Decision: {result}")
+# 3. New Job ($120k salary, 45 min commute) -> [1, 0]
+new_job = np.array([[1, 0]])
+prediction = model.predict(new_job)[0]
+
+print(f"Decision: {'Accept' if prediction == 1 else 'Reject'}")
+print(f"Feature Importances: {model.feature_importances_}")
     </python-code>
 
     <div class="linking-rule">

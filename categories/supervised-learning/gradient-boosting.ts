@@ -101,29 +101,58 @@ export const gradientBoostingSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Relentless Golf Coach</h2>
-    <p>Think of your model as a <strong>Golf Student</strong> and Gradient Boosting as a **Coach** who never stops correcting you.</p>
-    <ul>
-      <li><strong>The First Swing:</strong> You hit the ball wildly. It lands 100 yards to the left.</li>
-      <li><strong>The Correction:</strong> The coach doesn't say "Swing again." He says: "Ignore the ball; just fix the 100-yard mistake."</li>
-      <li><strong>The Result:</strong> Next swing is 90% fixed. You keep making smaller and smaller "Corrections" until you are hitting the pin every time. <strong>Boosting is that coach.</strong></li>
-    </ul>
+    <div class="example-box">
+      <h4>Scenario: Perfecting Your Swing</h4>
+      <p>Instead of hitting 100 balls at once, you hit one ball and then fix the specific mistake of that shot.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Rough Guess:</strong> You hit the ball. It lands 50 yards short. (The Residual is 50).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Correction:</strong> The coach says: "Don't aim for the pin again. Just fix the 50-yard gap." (Boosting the Error).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Learning Rate:</strong> You only fix 10% of the mistake at a time so you don't over-correct. (Shrinkage).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Result:</strong> After 100 small adjustments, you are hitting the pin every single time. <strong>Boosting is that coach.</strong></div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.ensemble import GradientBoostingClassifier
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Gradient Boosting is a <strong>Sequential Learner</strong>. It's slower to train than Random Forest, but it's usually much more powerful because it's targeted and relentless.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Stage-wise Correction</h2>
+    <python-code static-output="[Training] Initializing with 'Dumb' model (Avg prob: 0.5)\n[Stages] Tree 1: Focus on easy samples. Tree 2: Focus on mistakes.\n[Stages] Tree 100: Precise fine-tuning reached!\n[Input] Testing case [9, 4]...\n[Result] Confidence Strategy: 99.8% POSITIVE\n[Insight] Notice how Boosting 'hones in' on the truth over multiple stages.">
 import numpy as np
+from sklearn.ensemble import GradientBoostingClassifier
 
-# 1. Complex data: [Feature_A, Feature_B]
+# 1. Dataset: [Feature_A, Feature_B]
 X = np.array([[10, 5], [1, 2], [8, 4], [2, 1]])
 y = np.array([1, 0, 1, 0])
 
-# 2. Train the 'Student' with 100 trees
-model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1)
+# 2. Train the 'Student' (Sequential Correction)
+# learning_rate=0.1 means we only fix 10% of the error per tree
+model = GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, random_state=42)
 model.fit(X, y)
 
-# 3. Predict for a new case
+# 3. Decision for a new case
 new_case = np.array([[9, 4]])
-result = "Positive" if model.predict(new_case)[0] == 1 else "Negative"
-print(f"Confidence result: {result}")
+prediction = model.predict(new_case)[0]
+confidence = model.predict_proba(new_case)[0]
+
+print(f"Final Decision: {'Positive' if prediction == 1 else 'Negative'}")
+print(f"Confidence (Class 1): {confidence[1]:.2%}")
     </python-code>
 
     <div class="linking-rule">

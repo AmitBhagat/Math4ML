@@ -93,38 +93,64 @@ export const confusionMatrixSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Airport Security Check</h2>
-    <p>Think of an <strong>Airport X-Ray Machine</strong> scanning 1,000 bags for "Prohibited Items."</p>
-    <ul>
-      <li><strong>True Positive:</strong> The machine beeps for a knife. (Great!) </li>
-      <li><strong>True Negative:</strong> The machine stays silent for a toothbrush. (Great!) </li>
-      <li><strong>False Positive:</strong> The machine beeps for a metal spoon. (The "Inconvenience" cost).</li>
-      <li><strong>False Negative:</strong> The machine stays silent for a ceramic blade. (The "Safety" cost). </li>
-    </ul>
-    <p>A "Highly Sensitive" machine will have high FP (too many beeps), while a "Lazy" machine will have high FN (danger!). <strong>The Confusion Matrix is the report card for that machine.</strong></p>
+    <h2 id="example">Illustrated Example: The Truth Table</h2>
+    <div class="example-box">
+      <h4>Scenario: Testing for a Rare Disease</h4>
+      <p>Imagine you test 100 people for a disease. 10 actually have it, 90 do not. Your model makes some mistakes.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>True Positive (TP):</strong> You tell a sick person they are sick. (9 cases). They get the help they need. (Success!)</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>True Negative (TN):</strong> You tell a healthy person they are fine. (85 cases). No unnecessary stress. (Success!)</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>False Positive (FP):</strong> You tell a healthy person they are sick. (5 cases). (Type I Error: False Alarm). Frustration and wasted resources.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>False Negative (FN):</strong> You tell a sick person they are healthy. (1 case). (Type II Error: Dangerous Miss). This person goes home without treatment.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
-from sklearn.metrics import confusion_matrix
+      <div class="callout warning">
+        <div class="callout-icon">⚠️</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> The Matrix forces you to choose your poison. For a <strong>rare cancer</strong>, you'd rather have a few False Positives (over-testing) than a single False Negative (death). For a <strong>spam filter</strong>, you'd rather let spam in (FN) than delete a job offer (FP).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Tallying the Truth</h2>
+    <python-code static-output="[Scan] Comparing 10 Predictions against Ground Truth...\n[Result] Confusion Matrix Grid:\n\n             Predicted: NO | Predicted: YES\nActual: NO  [[    5      ,      1      ],\nActual: YES  [    1      ,      3      ]]\n\n[Insight] Accuracy: 80.0%\n[Insight] 1 innocent email was marked as Spam (False Positive).\n[Insight] 1 Spam email was missed (False Negative).">
 import numpy as np
+from sklearn.metrics import confusion_matrix
 
-# 1. Mock Data: Actual Truth vs. Model's Guesses
-# 1 = Spam, 0 = Not Spam
+# 1. Ground Truth (Real) vs. Predictions (Model)
+# 1 = Spam/Sick, 0 = Clean/Healthy
 y_true = [0, 1, 0, 1, 0, 0, 1, 0, 0, 1]
 y_pred = [0, 1, 0, 0, 0, 1, 1, 0, 0, 1]
 
-# 2. Compute the Matrix
-labels = [0, 1]
-cm = confusion_matrix(y_true, y_pred, labels=labels)
-
+# 2. Extract the 4 Quadrants
+# By default, rows are Actual, columns are Predicted
+cm = confusion_matrix(y_true, y_pred)
 tn, fp, fn, tp = cm.ravel()
 
-print(f"Confusion Matrix Grid:\n{cm}")
-print(f"False Alarms (FP): {fp}")
-print(f"Missed Detections (FN): {fn}")
-      </code></pre>
-    </div>
+# 3. Report the 'Confusion'
+print(f"Confusion Matrix:\n{cm}")
+print(f"\nBreakdown:")
+print(f"- Correct Rejections (TN): {tn}")
+print(f"- False Alarms (FP): {fp}")
+print(f"- Dangerous Misses (FN): {fn}")
+print(f"- Successful Hits (TP): {tp}")
+
+accuracy = (tp + tn) / (tp + tn + fp + fn)
+print(f"\nFinal Accuracy: {accuracy:.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we have the counts, how do we calculate the "Quality" of our guesses? Explore <strong><a href="#/machine-learning/model-evaluation/precision">Precision</a></strong>.

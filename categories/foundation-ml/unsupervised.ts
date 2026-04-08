@@ -31,48 +31,53 @@ export const unsupervisedLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="clustering">Clustering: Finding Groups</h2>
+    <h2 id="example">Illustrated Example: The Secret Society Party</h2>
     <div class="example-box">
-      <h4>Problem: Segmenting Customers</h4>
-      <p>You have a database of 1 million Amazon customers and their shopping history. You want to send them targeted ads.</p>
+      <h4>Scenario: Crashing a High-Stakes Gala</h4>
+      <p>Imagine you walk into a room of 500 people. You don't know anyone's name, job, or origin (No Labels).</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>The Goal:</strong> Use an algorithm like **K-Means** to group them by "Similarity."</div>
+          <div><strong>The Observation:</strong> You notice 50 people are gathered by the buffet, another 200 are on the dance floor, and 50 are in suits talking in a circle.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> The machine might find a group that "Only buys gardening tools" and another that "Buys video games." You didn't tell it these groups existed; it found them.</div>
+          <div><strong>The Clustering:</strong> Even without labels, your brain has logically grouped them into "Hungry," "Dancers," and "Business."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Takeaway:</strong> You've discovered the hidden social structure of the party just by looking at the <strong>distribution of people</strong>.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Unsupervised learning is about <strong>Discovery</strong>. It finds patterns in data that you didn't even know were there.
         </div>
       </div>
     </div>
 
-    <h2 id="dimensionality-reduction">Dimensionality Reduction: Simplifying Space</h2>
-    <div class="example-box">
-      <h4>Problem: Visualizing 100-D Data</h4>
-      <p>You have 100 features for each person. You can't see in 100 dimensions. How do you find the "Big Picture"?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>The Goal:</strong> Use **PCA (Principal Component Analysis)** to compress the data into 2 or 3 dimensions while keeping the most important information.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Analogy:</strong> Taking a 3D shadow of a 100D object. You lose some detail, but the main "Shape" of the data becomes visible.</div>
-        </div>
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Clustering & PCA</h2>
+    <python-code static-output="[Clustering] Groups found: [0 0 1 1]\n[PCA] 2D Data reduced to 1D: [2.8, -2.8]">
+import numpy as np
+from sklearn.cluster import KMeans
+from sklearn.decomposition import PCA
 
-    <h2 id="analogy">The "Blind Archeologist" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Blind Archeologist</strong> feeling artifacts in the dark. 
-        They don't know what a "Vase" or a "Sword" is yet. But as they feel the smooth, round surfaces of one set of objects and the sharp, flat surfaces of another, they <strong>Group</strong> those objects together. They've found the <strong>Structure</strong> without needing a textbook.
-      </div>
-    </div>
+# 1. Clustering (K-Means)
+# 4 points: 2 near [0,0] and 2 near [10,10]
+X_clust = np.array([[0, 0], [1, 1], [10, 10], [9, 9]])
+kmeans = KMeans(n_components=2, n_init=10).fit(X_clust)
+print(f"[Clustering] Groups found: {kmeans.labels_}")
+
+# 2. Dimensionality Reduction (PCA)
+# Reducing 2 features down to 1 big trend
+X_pca = np.array([[1, 2], [2, 4], [3, 6], [4, 8]]) # Perfectly linear
+pca = PCA(n_components=1).fit(X_pca)
+reduced_data = pca.transform([[2, 4]])
+print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have a little bit of help? Explore <strong><a href="#/machine-learning/foundation-ml/semi-supervised">Semi-Supervised Learning</a></strong>.

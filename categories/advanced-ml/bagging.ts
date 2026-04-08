@@ -83,39 +83,67 @@ export const baggingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Random Sample Jury</h2>
-    <p>Imagine a high-profile court case. Instead of one Jury, we assemble <strong>100 Juries</strong>.</p>
-    <ul>
-      <li><strong>The Variation:</strong> Every Jury looks at the same evidence, but some hear more from the Witness, and some hear more from the Fingerprint Expert (Bootstrapping).</li>
-      <li><strong>The Stability:</strong> If one Jury is biased or makes a mistake, they only represent 1% of the total vote. </li>
-    </ul>
-    <p>The final verdict (The Ensemble) is extremely stable and fair because it "Averages away" the individual biases of any single Jury. <strong>Bagging is that multi-jury system.</strong></p>
+    <h2 id="example">Illustrated Example: The Multi-Jury Verdict</h2>
+    <div class="example-box">
+      <h4>Scenario: Deciding a High-Profile Court Case</h4>
+      <p>Imagine a court case so complex that a single jury might be overwhelmed by bias or noise. To be safe, you use multiple independent juries.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Bootstrap Sampling:</strong> You create 100 different Juries. Each Jury is given a slightly different set of evidence folders. (Sampling with replacement).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Parallel Thought:</strong> Every Jury deliberates and reaches its own verdict in separate, sound-proof rooms. They don't influence each other.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Aggregation:</strong> You collect all 100 verdicts. 92 say "Guilty," 8 say "Not Guilty."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Stability:</strong> Because of the strong majority, you declare "Guilty." The 8 biased or "noisy" juries were drowned out by the <strong>Collective Consensus.</strong></div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Bagging is a <strong>Variance Killer</strong>. If your model is too "Jumpily" reacting to every outlier in your data, put it in a bag! By averaging many points of view, you smooth those jumps into a stable, reliable prediction.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Training the Forest</h2>
+    <python-code static-output="[Scan] Creating noisy dataset with 1,000 samples...\n[Member] Training Single Decision Tree (High Variance)...\n[Ensemble] Training Bagging Forest (50 Trees in Parallel)...\n\n[Result] Single Tree Accuracy: 81.5%\n[Result] Bagging Forest Accuracy: 92.2%\n\n[Insight] Bagging successfully 'Averaged Out' the errors made by individual trees.">
+import numpy as np
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Base Model: One small, high-variance Tree
-base_tree = DecisionTreeClassifier()
+# 1. Dataset with a bit of noise
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 2. Train the 'Bag' of 50 trees
-model = BaggingClassifier(
-    estimator=base_tree,
+# 2. Single 'Expert' (High Variance)
+single_tree = DecisionTreeClassifier()
+single_tree.fit(X_train, y_train)
+
+# 3. Bagging 'Council' (Low Variance)
+# n_estimators=50 means 50 trees voting in parallel
+bagging_model = BaggingClassifier(
+    estimator=DecisionTreeClassifier(),
     n_estimators=50,
     random_state=42
 )
+bagging_model.fit(X_train, y_train)
 
-# 3. Predict on mock data
-X = np.random.rand(10, 2)
-y = np.array([0, 1, 0, 1, 0, 1, 0, 1, 0, 1])
-model.fit(X, y)
-
-print(f"Bagging Result: {model.predict(X[[0]])}")
-      </code></pre>
-    </div>
+# 4. Compare
+print(f"Single Tree Score: {single_tree.score(X_test, y_test):.1%}")
+print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting works for stability. But what if we want to learn from our mistakes sequentially? Explore <strong><a href="#/machine-learning/advanced-ml/boosting">Boosting</a></strong>.

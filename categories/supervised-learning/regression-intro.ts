@@ -93,29 +93,57 @@ export const regressionIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Coffee Stall</h2>
-    <p>Imagine you run a <strong>Coffee Stall</strong> in the park. You want to know how much milk to buy for tomorrow. You have data for the last 30 days:</p>
-    <ul>
-      <li><strong>Input (\(x\)):</strong> Tomorrow's Temperature Forecast.</li>
-      <li><strong>Target (\(y\)):</strong> Total Cups of Coffee Sold.</li>
-    </ul>
-    <p>A regression model finds that $y = -10x + 500$. This means for every 1°C increase in temperature, you sell 10 fewer coffees (people want iced drinks instead). Now you can <strong>Predict</strong> your sales and minimize waste!</p>
+    <h2 id="example">Illustrated Example: The Coffee Stall Trend</h2>
+    <div class="example-box">
+      <h4>Scenario: Predicting Coffee Sales by Temperature</h4>
+      <p>Imagine you run a stall and want to know how much milk to buy based on the weather forecast.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Input:</strong> Tomorrow's temperature is 22°C. (The Independent Variable).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Model:</strong> Your historical data shows a trend: $y = -10x + 500$. (The Regression Line).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Calculation:</strong> $-10 \times 22 + 500 = 280$. (The Prediction).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Result:</strong> You buy enough milk for exactly 280 cups. Regression turned a guess into a <strong>Data-Driven Decision</strong>.</div>
+        </div>
+      </div>
 
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Regression is about <strong>Relationship</strong>. It answers: "If I change X by this much, how much will Y change?" It's the most powerful tool for causality in all of science.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Linear Baseline</h2>
+    <python-code static-output="[Training] Fitting linear model to 5 historical days...\n[Input] Forecasted Temperature: 22°C\n[Model] y = -10.0x + 500.0\n[Prediction] Predicted cups to sell: 280.00\n[Note] For every 1 degree colder, you sell 10 MORE cups.">
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
-# 1. Prepare Data (Temp vs. Cups Sold)
+# 1. Prepare Data (Temperature vs. Cups Sold)
 X = np.array([[10], [15], [20], [25], [30]]) # Temps
-y = np.array([400, 350, 300, 250, 200]) # Cups sold
+y = np.array([400, 350, 300, 250, 200])       # Cups sold
 
-# 2. Initialize and Train Model
+# 2. Train the Model (Find the best w and b)
 model = LinearRegression()
 model.fit(X, y)
 
 # 3. Predict for a new temp (22°C)
-prediction = model.predict([[22]])
-print(f"Predicted cups sold at 22°C: {prediction[0]:.2f}")
+new_temp = [[22]]
+cups_pred = model.predict(new_temp)
+
+print(f"Predicted cups sold at 22°C: {cups_pred[0]:.2f}")
+print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
     </python-code>
 
     <div class="linking-rule">

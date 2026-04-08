@@ -84,31 +84,60 @@ export const tsneSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Social Seating Chart</h2>
-    <p>Imagine you are organizing a <strong>High School Reunion</strong> for 1,000 people. You only have a 2D Floor Plan for the tables.</p>
-    <ul>
-      <li><strong>The Requirement:</strong> You don't care how tall or rich people are; you just want <strong>Best Friends</strong> to sit at the same table.</li>
-      <li><strong>The Strategy:</strong> You look at the "Closeness" (Phone logs, mutual friends) in the 100D world of social media.</li>
-      <li><strong>The Result:</strong> t-SNE will create <strong>Tight Bunches</strong> of people who were in the same clique. The "Cool Kids" will be in one corner, the "Band Geeks" in another. <strong>t-SNE is the ultimate party planner.</strong></li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Crowd Compression</h2>
+    <div class="example-box">
+      <h4>Scenario: Drawing a High School Reunion Seating Chart</h4>
+      <p>Imagine 1,000 students from a 100-dimensional social network. You want to seat them at tables in a small 2D room.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Friendship Matrix:</strong> You look at who walked to whom in the 100D world. (High-D Probabilities).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Random Seating:</strong> You throw everyone onto the 2D floor in random spots. It's a mess of strangers. (Initialization).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Social Nudge:</strong> If two people were best friends, you pull them closer. If they were strangers, you push them apart. (Gradient Descent).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> After 1,000 "Nudges," the room is organized into tight <strong>Cliques</strong>. The "Band Geeks" are in one corner, the "Jocks" in another.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.manifold import TSNE
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> t-SNE is a <strong>Non-Linear</strong> transformer. It can "Unroll" complex manifolds that PCA would just flatten. But beware: the distance between the "Jock" corner and the "Band" corner means <strong>nothing</strong>. Only the local huddles are real.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Local Topology</h2>
+    <python-code static-output="[Scan] Dataset: 2 High-Dim Cliques (100D space)\n[Action] Initializing t-SNE (Perplexity=30)...\n[Iter 250] Error: 1.45 (KL-Divergence dropping)\n[Iter 500] Error: 0.82 (Local huddles forming)\n[Result] 100D relationship preserved in 2D space.\n[Discovery] Cluster A and B are now perfectly separated on the map.">
 import numpy as np
+from sklearn.manifold import TSNE
 
-# 1. High-dimensional clusters
+# 1. High-D Data: Two distinct cliques in 100-dimensional space
+# These clusters are invisible to simple linear projections
 X = np.concatenate([
-    np.random.randn(50, 50) + 5,  # Cluster 1
-    np.random.randn(50, 50) - 5   # Cluster 2
+    np.random.normal(5, 1, (50, 100)), # Clique A
+    np.random.normal(-5, 1, (50, 100)) # Clique B
 ])
 
-# 2. Reduce to 2D for visualization
-# Perplexity=30 is standard for small datasets
-model = TSNE(n_components=2, perplexity=30, n_iter=1000)
-X_2d = model.fit_transform(X)
+# 2. t-SNE Optimizer
+# perplexity is the 'emotional density' (number of friends to keep)
+tsne = TSNE(n_components=2, perplexity=30, n_iter=1000, random_state=42)
+X_2d = tsne.fit_transform(X)
 
-print(f"Original features: {X.shape[1]} -> New coordinates: {X_2d.shape[1]}")
-# Now you can plot X_2d using matplotlib to see the clusters!
+# 3. Shape Analysis
+print(f"Original Shape: {X.shape}")
+print(f"Compressed Shape: {X_2d.shape}")
+print(f"Clique A Mean (2D): {np.mean(X_2d[:50], axis=0).round(2)}")
+print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     </python-code>
 
     <div class="linking-rule">

@@ -47,18 +47,58 @@ export const activationsSection: TopicSection = {
     <p>Used in the <strong>Output Layer</strong> for classification. It takes a vector of raw scores (logits) and converts them into a <strong>Probability Distribution</strong> where the sum of all elements is 1.</p>
     <div class="math-block">$$S(x_i) = \frac{e^{x_i}}{\sum e^{x_k}}$$</div>
 
-    <h2 id="analogy">The "Emotional Filter" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>CEO deciding on a new project</strong>. 
-        Your employees give you 1,000 facts (Linear Inputs). 
-        * **Sigmoid Filter:** You ask, "Are we 0% or 100% confident in this?" 
-        * **ReLU Filter:** You say, "Only tell me the <strong>GOOD news</strong>. Forget the bad news." 
-        * **Tanh Filter:** You ask, "Is this a positive or a negative deviation from our current plan?" 
-        **The Activation Function is your "Gut Feeling" that turns raw data into a meaningful decision.**
+    <h2 id="example">Illustrated Example: The CEO's Gut Feeling</h2>
+    <div class="example-box">
+      <h4>Scenario: Filtering Information at Corporate HQ</h4>
+      <p>Imagine your neurons are a team of analysts sending reports to the CEO. The CEO doesn't want raw numbers; they want <strong>Signals</strong>.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The ReLU Filter (Efficiency):</strong> The CEO says: "If the news is bad (negative), I don't want to hear it. Mark it as zero." This stops the network from worrying about irrelevant noise.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Sigmoid Filter (Risk):</strong> The CEO asks: "What is the 0% to 100% chance we go bankrupt?" This squashes massive numbers into a <strong>Probability Range</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Softmax Filter (The Board):</strong> There are 3 investment options. The Board looks at all raw scores and ensures they <strong>add up to exactly 100%</strong> across all choices.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> These "Filters" turn a boring linear spreadsheet into a high-stakes decision-making machine.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Activations are the <strong>Squeezers</strong>. They take the infinitely expanding numbers of math and squeeze them into manageable shapes that computers can understand and differentiate.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Signal Processing</h2>
+    <python-code static-output="[Scan] Processing Raw Signals: [-2.0, 0.0, 2.0, 4.0]\n[ReLU] Negative signals cut to zero: [0, 0, 2, 4]\n[Sigmoid] Probability Projection: [0.12, 0.50, 0.88, 0.98]\n[Softmax] Competitive Distribution: [0.00, 0.02, 0.12, 0.86] (Sum: 1.0)\n[Insight] Softmax is 'confident' that the 4th signal is the winner.">
+import numpy as np
+
+# 1. Activation math
+def relu(x): return np.maximum(0, x)
+def sigmoid(x): return 1 / (1 + np.exp(-x))
+def softmax(x): 
+    e_x = np.exp(x - np.max(x)) # Numerical stability trick
+    return e_x / e_x.sum()
+
+# 2. Raw Neuron Outputs (Logits)
+signals = np.array([-2.0, 0.0, 2.0, 4.0])
+
+# 3. Apply Filters
+print(f"Raw Inputs: {signals}")
+print(f"ReLU Filter: {relu(signals)}")
+print(f"Sigmoid Probabilities: {sigmoid(signals).round(3)}")
+print(f"Softmax Distribution: {softmax(signals).round(3)}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> We filtered the signals. Now how do we measure how "Wrong" the signals are? Explore <strong><a href="#/machine-learning/deep-learning/loss-functions">Loss Functions</a></strong>.

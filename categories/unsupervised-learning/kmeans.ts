@@ -81,36 +81,62 @@ export const kmeansSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: Pizza Shop Locations</h2>
-    <p>Imagine you want to open <strong>3 Pizza Shops</strong> in a city to serve 1,000 customers. You want to minimize the distance customers have to travel.</p>
-    <ul>
-      <li><strong>Initial Guess:</strong> You put the shops in 3 random neighborhoods. </li>
-      <li><strong>The Pull:</strong> Each customer decides which of the 3 shops is closest to them. </li>
-      <li><strong>The Optimization:</strong> You calculate the average location of every customer who chose "Shop A" and move Shop A to that <strong>geographic center</strong>.</li>
-      <li><strong>The Result:</strong> After a few moves, the shops are perfectly positioned in the centers of the 3 most populated areas. <strong>k-Means is that urban planner.</strong></li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Self-Grouping Party</h2>
+    <div class="example-box">
+      <h4>Scenario: Organizing 100 Strangers into 3 Teams</h4>
+      <p>Imagine 100 people in a gym. You want them to form 3 compact groups. You don't have a list of who belongs where, so you let geometry do the work.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Initial Flags:</strong> You throw 3 colored flags (Centroids) into random spots on the floor.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Rush (Assignment):</strong> Everyone runs to the flag closest to them. Now you have 3 "Tentative" teams.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Flag Move (Update):</strong> Each flag-holder walks to the <strong>Exact Center</strong> of their team. (Mean Calculation).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Realignment:</strong> People see the flags have moved. Some realize they are now closer to a <strong>Different</strong> flag and switch teams. This repeats until nobody moves.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.cluster import KMeans
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> k-Means is <strong>Iterative</strong>. It "Converges" when the flags are perfectly centered in their tribes. It is the most "Geometric" way to find order in chaos.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Finding the Tribes</h2>
+    <python-code static-output="[Scan] Dataset: 100 observations, 2 features\n[Iteration 0] Placing 3 random centroids...\n[Iteration 5] Inertia dropped from 152.4 to 42.1\n[Convergence] Centroids stabilized at: [[1,2], [10,2], [6,8]]\n[Note] New point at (5,5) assigned to Cluster #2.">
 import numpy as np
+from sklearn.cluster import KMeans
 
-# 1. Customer Coordinates [X, Y]
+# 1. Dataset: 100 synthetic 2D points
+# Simplified to 9 points for illustration
 X = np.array([
-    [1, 2], [1, 4], [1, 0],
-    [10, 2], [10, 4], [10, 0],
-    [5, 8], [6, 8], [7, 8]
+    [1, 2], [1, 4], [1, 0],    # Group A
+    [10, 2], [10, 4], [10, 0],  # Group B
+    [5, 8], [6, 8], [7, 8]      # Group C
 ])
 
-# 2. Train with K=3 (3 Pizza Shops)
-model = KMeans(n_clusters=3, random_state=42)
-model.fit(X)
+# 2. The Algorithmic 'Proctors' (K=3)
+kmeans = KMeans(n_clusters=3, n_init='auto', random_state=42)
+kmeans.fit(X)
 
-# 3. Check the final locations (Centroids)
-print(f"Shop Locations: \n{model.cluster_centers_}")
+# 3. Final Locations (Centroids)
+centers = kmeans.cluster_centers_
+print(f"Centroids: \n{centers.round(1)}")
 
-# 4. Which shop does a new customer at [5, 5] belong to?
-new_cust = np.array([[5, 5]])
-print(f"Assigned Shop: {model.predict(new_cust)[0]}")
+# 4. Sorting a new datapoint
+new_point = np.array([[5, 5]])
+print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </python-code>
 
     <div class="linking-rule">

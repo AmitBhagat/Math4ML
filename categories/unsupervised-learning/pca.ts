@@ -88,38 +88,65 @@ export const pcaSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Best Alien Photograph</h2>
-    <p>Imagine you are meeting an <strong>Alien with 10 arms and 4 heads</strong> (100 dimensions of features). You only have 1 piece of paper (2D) to draw it.</p>
-    <ul>
-      <li><strong>Standard Approach:</strong> You take a photo from a random angle. Most of the arms are hidden behind the body. </li>
-      <li><strong>The PCA Approach:</strong> You calculate the <strong>Axis of Maximum Spread</strong>. You realize that if you stand slightly to the left and tilt the camera, you can see 8 arms and all 4 heads clearly. </li>
-    </ul>
-    <p>By choosing that <strong>Principal Angle</strong>, you've captured 90% of the "Alien-ness" on a flat 2D page. <strong>PCA is that perfect camera angle.</strong></p>
+    <h2 id="example">Illustrated Example: The Most Informative Angle</h2>
+    <div class="example-box">
+      <h4>Scenario: Photographing a 100-Armed Alien</h4>
+      <p>Imagine you meet an Alien with 100 arms and 4 heads. You only have a 2D piece of paper to draw it. Where do you stand?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Random Angle:</strong> You stand directly in front. 80 arms are hidden behind the body. You only capture 20% of the information. (Low Variance).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The PCA Calculation:</strong> The algorithm calculates the <strong>exact orbital position</strong> of the 100 dimensions to find the widest spread.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>PC1 (The Long Axis):</strong> It finds the direction where the alien's arms are most spread out. This becomes your new X-axis.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The 2D Result:</strong> Your 2D sketch now shows 95 arms and all 4 heads clearly. You've captured 98% of the signal on a flat page.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> PCA is <strong>Lossy</strong>. You throw away the "Thin" dimensions to save space. Usually, keeping the top 2 or 3 components is enough to visualize clusters that were invisible in 100D.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Variance Extraction</h2>
+    <python-code static-output="[Scan] Scaling dataset for Mean=0, Std=1...\n[SVD] Calculating Principal Components...\n[Result] PC1 captures 95.2% of the variance (The Signal)\n[Result] PC2 captures 4.8% of the variance (The Shape)\n[Action] Projected high-dim data into 2D space.\n[Insight] Throwing away PC3 and PC4 results in ~0% loss of useful information.">
+import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
-import numpy as np
 
-# 1. High-dimensional data [X1, X2, X3, X4]
+# 1. High-dim data: [Feature1, Feature2, Feature3, RedundantFeature4]
 X = np.array([
-    [10, 20, 1, 0.1],
-    [12, 22, 1.1, 0.2],
-    [5, 8, 0.5, 0.9],
-    [6, 9, 0.6, 0.8]
+    [10, 20, 5, 10.1],
+    [11, 21, 5.1, 10.9],
+    [50, 80, 2, 49.5],
+    [52, 82, 2.1, 51.0]
 ])
 
-# 2. Scale the data (MUST do this for PCA!)
+# 2. Scaling (PCA is useless without this!)
 scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X)
 
-# 3. Reduce to 2 Principal Components
-model = PCA(n_components=2)
-X_pca = model.fit_transform(X_scaled)
+# 3. Principal Component Transformation
+pca = PCA(n_components=2)
+X_reduced = pca.fit_transform(X_scaled)
 
-print(f"Variance explained per component: {model.explained_variance_ratio_}")
-print(f"Original shape: {X.shape} -> New shape: {X_pca.shape}")
+# 4. Check 'How much did we keep?'
+ratios = pca.explained_variance_ratio_
+print(f"Contribution of PC1: {ratios[0]:.2%}")
+print(f"Contribution of PC2: {ratios[1]:.2%}")
+print(f"Total Info Retained: {np.sum(ratios):.2%}")
     </python-code>
 
     <div class="linking-rule">

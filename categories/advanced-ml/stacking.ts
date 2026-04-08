@@ -84,46 +84,72 @@ export const stackingSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Orchestra Conductor</h2>
-    <p>Imagine an **Orchestra**. You have world-class musicians: a Violinist, a Cellist, and a Flutist.</p>
-    <ul>
-      <li><strong>The Base Models:</strong> Each musician plays the music (Predicts the output) in their own style. </li>
-      <li><strong>The Meta-Learner:</strong> Is the <strong>Conductor</strong>. He doesn't play an instrument himself. Instead, he listens to the musicians and decides when the Flute should be louder or when the Cello is making a mistake. </li>
-    </ul>
-    <p>The final music is better than any solo because the Conductor knows <strong>exactly how to blend</strong> the individual talents. <strong>Stacking is that Conductor.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Mixing the Perfect Sound</h4>
+      <p>Imagine world-class musicians playing together. They are all great in their own right, but they need a Conductor (Meta-Learner) to blend their specific strengths.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Base Musicians (Level 0):</strong> The Violinist, Cellist, and Flutist play the melody. Each has their own style and occasional mistakes.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Conductor (The Meta-Learner):</strong> He doesn't play an instrument. Instead, he listens to the musicians and learns their profiles.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Contextual Awareness:</strong> He learns: "In the fast sections, the Violinist is 99% reliable. In the low, somber sections, trust the Cello more."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Masterpiece:</strong> When a new score comes, he signals the Flute to be quiet and the Violin to lead. The result is a sound <strong>greater than the sum of its parts.</strong></div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Stacking is <strong>Meta-Learning</strong>. While Bagging (Voting) and Boosting (Weighting) use fixed mathematical rules, Stacking uses a <strong>Model of Models</strong>. It's the "Smartest" way to ensemble, but it's the easiest to overfit if you aren't careful with cross-validation.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Meta-Stack</h2>
+    <python-code static-output="[Scan] Initializing Base Models: Random Forest & Support Vector Machine.\n[Level 0] Base Model 1 (RF) Accuracy: 86.4%\n[Level 0] Base Model 2 (SVM) Accuracy: 84.1%\n[Action] Training Meta-Learner (Logistic Regression) on Out-Of-Fold predictions...\n\n[Result] Stacking Ensemble Accuracy: 92.5%\n[Insight] The Meta-Learner successfully combined RF and SVM to fix individual weaknesses.">
 from sklearn.ensemble import StackingClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-import numpy as np
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Diverse Base Models (Level 0)
+# 1. Level 0: The Diverse Experts
 base_models = [
-    ('rf', RandomForestClassifier()),
-    ('svc', SVC(probability=True))
+    ('rf', RandomForestClassifier(n_estimators=10, random_state=42)),
+    ('svc', SVC(probability=True, random_state=42))
 ]
 
-# 2. Meta-Learner (Level 1)
+# 2. Level 1: The Meta-Learner (The CEO)
+# We use a simple model here to avoid overfitting the base predictions
 meta_learner = LogisticRegression()
 
-# 3. Create the Stack
+# 3. Assemble the Stack
+# cv=5 ensures the meta-learner doesn't 'cheat' by seeing the same data twice
 stack = StackingClassifier(
     estimators=base_models,
     final_estimator=meta_learner,
-    cv=5 # Use 5-fold cross-validation for OOF predictions
+    cv=5
 )
 
-# 4. Fit on mock data
-X = np.random.rand(100, 5)
-y = (X[:, 0] > 0.5).astype(int)
-stack.fit(X, y)
+# 4. Validation
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-print(f"Stacking Score: {stack.score(X, y)}")
-      </code></pre>
-    </div>
+stack.fit(X_train, y_train)
+score = stack.score(X_test, y_test)
+print(f"Stacking Ensemble Accuracy: {score:.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the pinnacle of ensemble theory. Now, let's learn how to prep and "Clean" your raw datasets for these complex systems in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.

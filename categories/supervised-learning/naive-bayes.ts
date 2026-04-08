@@ -98,15 +98,49 @@ export const naiveBayesSection: TopicSection = {
       <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the **Spam** probability win out.</li>
     </ul>
 
-    <python-code>
+    <h2 id="example">Illustrated Example: The Bayesian Sleuth</h2>
+    <div class="example-box">
+      <h4>Scenario: Is this suspect 'Guilty' or 'Innocent'?</h4>
+      <p>Imagine Sherlock Holmes has three clues. He assumes they are independent (The Naive part).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Prior Probability:</strong> 2% of the population are criminals. (P(Criminal)).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Likelihood:</strong> 80% of criminals smoke this specific tobacco. (P(Tobacco | Criminal)).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Evidence:</strong> The suspect smokes that tobacco.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Update:</strong> Sherlock multiplies $(0.02 \times 0.80)$ and normalizes. The suspect is now 15% likely to be the killer.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Naive Bayes is <strong>Log-Linear</strong>. Even though it looks like multiplication, computers usually add the <strong>Logs</strong> of the probabilities to avoid "Underflow" (where numbers get so small the computer thinks they are zero).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Multinomial NB</h2>
+    <python-code static-output="[Training] Learning from 4 labeled emails...\n[Input] New Email: 'Win prize money'\n[Finding] 'Prize' is 100% correlated with Spam in this dataset.\n[Finding] 'Money' is 100% correlated with Spam in this dataset.\n[Result] Classification: Spam\n[Insight] Even with Laplace smoothing, the evidence for Spam was overwhelming.">
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
+import numpy as np
 
 # 1. Simple text data
 emails = ["Get your prize now", "Meeting at 10am", "Cheap money prize", "Project update meeting"]
 labels = [1, 0, 1, 0] # 1=Spam, 0=Ham
 
-# 2. Convert text to 'Word Counts'
+# 2. Vectorization (Word Counting)
 vectorizer = CountVectorizer()
 X = vectorizer.fit_transform(emails)
 
@@ -114,11 +148,14 @@ X = vectorizer.fit_transform(emails)
 model = MultinomialNB()
 model.fit(X, labels)
 
-# 4. Predict for a new email
+# 4. Predict
 test_email = ["Win prize money"]
 test_X = vectorizer.transform(test_email)
-prediction = "Spam" if model.predict(test_X)[0] == 1 else "Ham"
-print(f"Classification result: {prediction}")
+prob = model.predict_proba(test_X)[0]
+prediction = model.predict(test_X)[0]
+
+print(f"Probabilities [Ham, Spam]: {prob}")
+print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
     </python-code>
 
     <div class="linking-rule">

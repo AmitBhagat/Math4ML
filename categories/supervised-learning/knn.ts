@@ -103,30 +103,58 @@ export const knnSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: Movie Recommendations</h2>
-    <p>Imagine <strong>Netflix</strong> trying to decide if you'll like a new movie based on your past behavior.</p>
-    <ul>
-      <li><strong>Data:</strong> Every movie is rated on 2 axes: [Action vs. Romance].</li>
-      <li><strong>The Query:</strong> You just finished a new movie. </li>
-      <li><strong>The Neighbors:</strong> KNN looks at the 3 nearest movies you've watched. If 2 of them were Action and 1 was Romance, KNN predicts: **Action**.</li>
-    </ul>
+    <h2 id="example">Illustrated Example: The Neighborhood Voter</h2>
+    <div class="example-box">
+      <h4>Scenario: Predicting if a new Movie is 'Action' or 'Romance'</h4>
+      <p>Imagine your movies are plotted on a map based on how many Explosions vs. Kisses they have.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Newcomer:</strong> A new movie arrives. It has 8 Explosions and 2 Kisses.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Search:</strong> The model looks at the 3 closest movies already on the map ($k=3$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Majority:</strong> It finds 2 'Action' movies and 1 'Romance' movie in that immediate neighborhood.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Decision:</strong> Action wins! The movie is classified as 'Action' because of its social circle.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.neighbors import KNeighborsClassifier
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> KNN is <strong>Memory-Heavy but Calculation-Light</strong> during training. It doesn't "Learn" a concept of what an action movie is; it just looks at what's nearby. This makes it very fast to update with new data!
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Consultation</h2>
+    <python-code static-output="[Query] New Movie (8 Action, 3 Romance)\n[Computation] Calculating distances to 4 neighbors...\n[Finding] Top 3 neighbors: ['Action', 'Action', 'Romance']\n[Result] Majority Vote: Action\n[Insight] KNN correctly identified the cluster despite 1 outlier neighbor!">
 import numpy as np
+from sklearn.neighbors import KNeighborsClassifier
 
 # 1. Movie features: [Action_Score, Romance_Score]
 X = np.array([[10, 1], [9, 2], [1, 10], [2, 9]])
 y = np.array(["Action", "Action", "Romance", "Romance"])
 
-# 2. Train the 'Social Learner'
+# 2. Train the 'Social Learner' (Lazy training)
 model = KNeighborsClassifier(n_neighbors=3)
 model.fit(X, y)
 
-# 3. New movie: high action, low romance
+# 3. Predict for a new movie
 new_movie = np.array([[8, 3]])
 result = model.predict(new_movie)
-print(f"Predicted genre: {result[0]}")
+distances, indices = model.kneighbors(new_movie)
+
+print(f"Closest Movie Types: {y[indices][0]}")
+print(f"Final Classification: {result[0]}")
     </python-code>
 
     <div class="linking-rule">

@@ -88,35 +88,55 @@ export const contrastiveSection: TopicSection = {
     </div>
 
     <h2 id="example">Illustrated Example: The Twin Study</h2>
-    <p>Imagine you have a group of 100 people. You take two photos of every person (The Twins).</p>
-    <ul>
-      <li><strong>The Requirement:</strong> You don't know anyone's name. But you know that the two photos of "Person A" represent the same human. </li>
-      <li><strong>The Pull:</strong> You move the two Photo A's closer together on the table. </li>
-      <li><strong>The Push:</strong> You make sure that the Photo B's are <strong>as far away</strong> as possible from the Photo A's. </li>
-    </ul>
-    <p>By doing this for everyone, you've learned to identify people's <strong>Faces</strong> without ever needing a name tag. <strong>Contrastive Learning is that twin matching game.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Matching 100 sets of Identical Twins</h4>
+      <p>Imagine you have a group of 200 people (100 sets of identical twins) in a dark room. You don't know anyone's name. Your only goal is to organize them.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Pull (Positives):</strong> When you find two people who look the same (the twins), you make them sit at the same table. You are "Pulling" their representations together.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Push (Negatives):</strong> If two people look different, you force them to sit at opposite ends of the room. You are "Pushing" their representations away.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Result:</strong> By the end of the night, the room is perfectly organized by <strong>Face Structure</strong>. You didn't need a name tag (Label) to do it; you just needed to know who was a "mismatch."</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Contrastive learning is about <strong>Relative Understanding</strong>. It doesn't care that a point is at exactly (0.5, 0.5). It only cares that (0.5, 0.5) is *closer* to its twin than it is to anything else. This makes it incredibly robust for finding patterns in massive, messy datasets.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (Similarity Logic)</h2>
+    <python-code runnable="false" static-output="[Scan] Input: Batch of 128 Image Pairs\n[Action] Extracting 512-dim features using ResNet-18...\n[Loss] Similarity(Twins) = 0.98 (High)\n[Loss] Similarity(Strangers) = 0.05 (Low)\n\n[Status] Gradient Step: Pulling twins closer, pushing strangers away.\n[Insight] The latent space is beginning to cluster 'Architecture' vs 'Nature'.">
 import torch
 import torch.nn.functional as F
 
-# 1. Siamese similarity logic
-# z1 and z2 are features of the SAME image (two views)
-def contrastive_loss(z1, z2, temperature=0.5):
-    # Normalize the vectors
-    z1 = F.normalize(z1, dim=1)
-    z2 = F.normalize(z2, dim=1)
-    
-    # Calculate similarity (Cosine)
-    sim_matrix = torch.matmul(z1, z2.T) / temperature
-    
-    # The 'Target' is for the diagonal (matching indices) to be high
-    labels = torch.arange(z1.size(0))
-    loss = F.cross_entropy(sim_matrix, labels)
-    return loss
+# 1. Mock Feature Vectors (Embeddings)
+# Positive Pair: Two views of the SAME cat
+v_anchor = torch.tensor([0.1, 0.9, 0.2])
+v_positive = torch.tensor([0.15, 0.85, 0.25]) # Very similar
 
-print("Loss function ready to Pull 'Friends' and Push 'Enemies'.")
+# Negative: A picture of a truck
+v_negative = torch.tensor([0.9, 0.1, -0.8])  # Very different
+
+# 2. Measure 'Closeness' (Cosine Similarity)
+def similarity(a, b):
+    return F.cosine_similarity(a.unsqueeze(0), b.unsqueeze(0)).item()
+
+print(f"Similarity (Anchor vs Positive): {similarity(v_anchor, v_positive):.3f}")
+print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}")
+
+# 3. Decision
+# We want Positive Sim -> 1.0 and Negative Sim -> 0.0
     </python-code>
 
     <div class="linking-rule">

@@ -6,12 +6,15 @@ import { getCategoryTheme } from "../lib/themeUtils";
 import { ChevronDown, ChevronRight, LayoutPanelLeft, Loader2, Menu, X, Clock } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
+import { useTheme } from "../hooks/useTheme";
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
 export const Sidebar = ({ onClose, className }: { onClose?: () => void; className?: string }) => {
+  const { theme } = useTheme();
+  const isDark = theme === "dark";
   const location = useLocation();
   const pathParts = location.pathname.split('/').filter(Boolean);
   
@@ -66,15 +69,19 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
 
   return (
     <aside className={cn(
-      "h-full bg-bg-secondary border-r border-border-premium overflow-y-auto z-[100] desktop-drawer scroll-smooth custom-scrollbar flex flex-col shrink-0",
+      "h-full backdrop-blur-3xl overflow-y-auto z-[100] desktop-drawer scroll-smooth custom-scrollbar flex flex-col shrink-0 transition-colors duration-500",
+      isDark ? "bg-slate-900/40 border-r border-white/5" : "bg-white/40 border-r border-black/5",
       className
     )}>
-      <div className="p-5 pb-6 mb-4 border-b border-border-premium flex items-center justify-between">
-        <Link to="/" className="group flex flex-col gap-0.5 no-underline">
-          <span className="font-sans font-semibold text-xl text-accent-premium tracking-tight group-hover:text-accent-premium-light transition-colors">
+      <div className="p-8 pb-10 mb-4 flex items-center justify-between relative overflow-hidden">
+        {/* Glossy sheen on sidebar header */}
+        <div className="absolute top-0 left-0 w-full h-px bg-white/20" />
+        
+        <Link to="/" className="group flex flex-col gap-1 no-underline">
+          <span className="font-headline font-bold text-3xl text-accent-premium tracking-tight group-hover:scale-105 transition-transform">
             Math4ML
           </span>
-          <span className="text-[12px] uppercase tracking-wider text-muted-premium font-light group-hover:text-text-premium transition-colors">
+          <span className="text-[11px] font-black uppercase tracking-[0.3em] text-muted-premium opacity-50 group-hover:opacity-100 transition-opacity">
             Mathematics for Machine Learning
           </span>
         </Link>
@@ -134,10 +141,13 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                       >
                         <span 
                           className={cn(
-                            "w-1 h-1 rounded-full shrink-0 transition-all",
-                            activeOrHover ? "scale-150" : "bg-muted-premium/30"
+                            "w-1.5 h-1.5 rounded-full shrink-0 transition-all duration-300 shadow-sm",
+                            activeOrHover ? "scale-125 opacity-100" : "bg-muted-premium/30 opacity-40"
                           )} 
-                          style={{ backgroundColor: activeOrHover ? theme.primary : undefined }}
+                          style={{ 
+                            backgroundColor: activeOrHover ? theme.primary : undefined,
+                            boxShadow: activeOrHover ? `0 0 10px ${theme.primary}80` : undefined
+                          }}
                         />
                         <span className="truncate">{category.title}</span>
                       </Link>
@@ -214,10 +224,10 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
       </nav>
 
       {/* Sidebar Footer */}
-      <div className="mt-auto p-6 border-t border-border-premium bg-bg-secondary/50 backdrop-blur-sm sticky bottom-0">
-        <div className="flex flex-col gap-1">
-          <span className="text-[12px] font-black uppercase tracking-widest text-muted-premium">System</span>
-          <span className="text-[12px] text-text-premium/50 font-mono">v1.2.0 • Immersive Edition</span>
+      <div className="mt-auto p-8 border-t border-white/5 bg-white/5 backdrop-blur-md sticky bottom-0">
+        <div className="flex flex-col gap-1.5">
+          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent-premium opacity-50">System Interface</span>
+          <span className="text-[11px] text-text-premium/40 font-mono tracking-tighter italic">v1.2.0 • Immersive Glass Edition</span>
         </div>
       </div>
     </aside>

@@ -82,32 +82,61 @@ export const dbscanSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Crowded Concert</h2>
-    <p>Imagine a <strong>Music Festival</strong> in a giant park. You want to identify different groups of fans.</p>
-    <ul>
-      <li><strong>Clusters:</strong> Large crowds huddled in front of the 3 main stages. Even if the crowds are long and thin or shaped like a <strong>U-turn</strong>, DBSCAN identifies them as single entities.</li>
-      <li><strong>Noise:</strong> People walking alone between stages or looking for the bathroom. They aren't "Dense" enough to be a group.</li>
-    </ul>
-    <p>Unlike k-Means, DBSCAN doesn't force these lonely people into a category; it recognizes they are <strong>Outliers</strong>. <strong>DBSCAN is that stadium security guard.</strong></p>
+    <h2 id="example">Illustrated Example: The Viral Outbreak</h2>
+    <div class="example-box">
+      <h4>Scenario: Identifying a Hotspot in a Crowded Park</h4>
+      <p>Imagine 1,000 people in a park. You want to find where the "Parties" are happening without knowing how many groups exist.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Density Rule (MinPts):</strong> You define a "Party" as at least 4 people standing within 2 meters (Epsilon) of each other.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Core Members:</strong> If a person has 4 friends nearby, they are a <strong>Core Point</strong>. The "Vibe" starts with them.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Chain Reaction:</strong> The party expands to anyone who is close to a Core Member. Even if the party is a long, curved conga line, DBSCAN keeps it together.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Outlier:</strong> A person sitting alone on a far-off bench isn't close to anyone. DBSCAN labels them as <strong>Noise (-1)</strong>.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.cluster import DBSCAN
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> DBSCAN is the king of <strong>Anomaly Detection</strong>. It's the only clustering algorithm that has the courage to say: "This point doesn't belong to <strong>any</strong> group." It finds "The Crowd," regardless of its shape.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Density Reachability</h2>
+    <python-code static-output="[Scan] Parameters: Eps=1.5, MinPts=2\n[Status] Scanning 7 data points...\n[Found] Cluster 0: Dense triplet detected at (1,2)\n[Found] Cluster 1: Dense triplet detected at (10,10)\n[Noise] Point (5,5) marked as Outlier (-1)\n[Assignments] Result: [0, 0, 0, 1, 1, 1, -1]\n[Insight] DBSCAN successfully ignored the lone point without forcing it into a group.">
 import numpy as np
+from sklearn.cluster import DBSCAN
 
-# 1. Messy data [X, Y]
+# 1. Dataset: Two dense clusters and one lone outlier
 X = np.array([
-    [1, 2], [1.1, 2.1], [0.9, 1.9], # Cluster 1
-    [10, 10], [10.1, 10.1], [9.9, 9.9], # Cluster 2
-    [5, 5] # Noise Point
+    [1, 2], [1.1, 2.1], [0.9, 1.9],  # Cluster 0
+    [10, 10], [9.8, 10.2], [10.2, 9.8], # Cluster 1
+    [5, 5]                          # The Lone Outlier (Noise)
 ])
 
-# 2. Train with Epsilon=1.5 and MinPts=2
+# 2. Train with density constraints
+# eps is the radius, min_samples is the density threshold
 model = DBSCAN(eps=1.5, min_samples=2)
 labels = model.fit_predict(X)
 
-# 3. Check labels
-print(f"Cluster IDs: {labels}")
-# Expected: [0, 0, 0, 1, 1, 1, -1] -> -1 means Noise!
+# 3. Results Analysis
+for i, coord in enumerate(X):
+    status = f"Cluster {labels[i]}" if labels[i] != -1 else "NOISE"
+    print(f"Point {coord} -> {status}")
+
+print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     </python-code>
 
     <div class="linking-rule">

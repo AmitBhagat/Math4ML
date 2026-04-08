@@ -82,33 +82,59 @@ export const transferLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: From Kung Fu to Tennis</h2>
-    <p>Imagine a <strong>Kung Fu Master</strong> with 30 years of training in balance, speed, and focus. He decides to learn <strong>Tennis</strong>.</p>
-    <ul>
-      <li><strong>Pre-training:</strong> 30 years of martial arts (Learning the "Edges and Shapes" of body movement). </li>
-      <li><strong>Small Dataset:</strong> He only has 2 hours of coaching on how to hold a racket. </li>
-      <li><strong>The Transfer:</strong> He doesn't start like a baby. He uses his existing balance and speed (Frozen layers) and just learns the <strong>Grip and Swing</strong> (New Head). </li>
-    </ul>
-    <p>Because he has "Transferred" his physical intelligence, he plays like a pro in 1 day. <strong>Transfer Learning is that Master.</strong></p>
+    <h2 id="example">Illustrated Example: The Musician's Pivot</h2>
+    <div class="example-box">
+      <h4>Scenario: A Classical Pianist learning Jazz Improvisation</h4>
+      <p>Imagine a pianist who has spent 20 years mastering <strong>Classical Music</strong>. They decide they want to learn <strong>Jazz</strong>. Do they start from scratch?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Pre-training:</strong> 20 years of scales, finger strength, and music theory. They already understand "The Language of Music" (The Base Model).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Freezing:</strong> They don't need to relearn how to move their fingers or read a cleft. Those skills are "Locked in" (Frozen Layers).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they **Express** their existing skill (The New Head).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Efficiency:</strong> Within a month, they play Jazz better than a beginner who has been practicing for 5 years without a classical background.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (The Head Swap)</h2>
+    <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
 import torch.nn as nn
 from torchvision import models
 
-# 1. Load a pre-trained ResNet-18 (The 'Master')
-model = models.resnet18(pretrained=True)
+# 1. Load a high-IQ base model
+# This model already 'understands' edges, textures, and shapes
+model = models.resnet50(pretrained=True)
 
-# 2. Freeze all feature layers
+# 2. Freeze the 'Body'
+# We don't want to ruin the pre-trained wisdom
 for param in model.parameters():
     param.requires_grad = False
 
-# 3. Replace the final 'Head' for a 2-class task (e.g. 'Rare Ant' classifier)
+# 3. Graft a new 'Head'
+# We replace the final layer to suit our specific task (2 classes)
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 
-# 4. Now, we only train 'model.fc'!
-print("Ready for fine-tuning on our small, specialized dataset.")
+# 4. Only the new Head will be updated during training
+print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </python-code>
 
     <div class="linking-rule">

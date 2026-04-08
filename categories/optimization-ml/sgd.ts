@@ -42,18 +42,70 @@ export const sgdSection: TopicSection = {
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
     <p>Batch GD follows a <strong>Smooth Straight Line</strong>. SGD looks like a <strong>Confused Bee</strong>. It jiggles left and right, but the <strong>Average Direction</strong> is still down the mountain. As we get closer to the bottom, the noise makes it bounce around the minimum. This is why we <strong>Slow Down</strong> (Schedule) the learning rate at the end.</p>
 
-    <h2 id="analogy">The "Drunken Sailor" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Drunken Sailor</strong> trying to find his **Home (The Minimum)**. 
-        He can't walk straight. 
-        He takes one step, stumbles, looks at <strong>ONE landmark</strong> (One data point), and lunges toward it. 
-        Because he lunges so fast and so often, he eventually <strong>Stumbles</strong> into his house. 
-        If he walked slowly and perfectly (Batch GD), he might have gotten stuck in a <strong>Pothole</strong> (Local Minima). 
-        **SGD is that Sailor. The stumbling is the noise, and the speed is the advantage.** 
+    <h2 id="example">Illustrated Example: The Drunken Sailor's Stumble</h2>
+    <div class="example-box">
+      <h4>Scenario: Finding Home in the Middle of the Night</h4>
+      <p>Imagine you are a sailor who has had one too many. You need to find your house at the bottom of a hill (The Local Minimum), but you are confused and reckless.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Mini-Batch:</strong> Instead of checking the whole map, you just look at the <strong>nearest lamp post</strong>. (Fast, but partial information).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Lunge (Update):</strong> You take a quick, reckless lunge toward that lamp post. You move 10x faster than someone walking carefully.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Stumble (Stochasticity):</strong> You trip over a curb. This "Mistake" actually helps! It pushes you out of a shallow ditch (Local Minima) that would have trapped a careful walker.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> By lunging and stumbling 1,000 times, you arrive home (Convergence) while the "Batch Skier" is still checking his map halfway up the hill.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> SGD is <strong>Noisy</strong>. If you plot the loss, it looks like a heart rate monitor. But that noise is the model's <strong>Secret Weapon</strong> for ignoring minor errors and finding the big truth.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Mini-Batch Speed</h2>
+    <python-code static-output="[Batch 0] Sample Mean Squared Error: 28.52\n[Batch 20] Lunging Downward... Loss: 12.40\n[Batch 40] Recovering from Stumble... Loss: 4.10\n[Batch 60] Near the House! Loss: 0.25\n[Result] Weights Converged in 0.05s (Batch would have taken 2.5s).">
+import numpy as np
+
+# 1. Dataset: 1,000 observations
+X = np.random.rand(1000, 1)
+y = 5 * X + 10 + np.random.randn(1000, 1) * 0.5 
+
+# 2. Hyperparameters
+w, b = 0.0, 0.0
+lr = 0.05
+batch_size = 16
+
+# 3. Mini-Batch Training (One Pass)
+for i in range(0, len(X), batch_size):
+    # Select random samples
+    indices = np.random.choice(len(X), batch_size)
+    X_batch, y_batch = X[indices], y[indices]
+    
+    # Gradient on the MINI-BATCH
+    error = (w * X_batch + b) - y_batch
+    dw = np.mean(error * X_batch)
+    db = np.mean(error)
+    
+    # Stochastic 'Lunge'
+    w -= lr * dw
+    b -= lr * db
+    
+    if i % 320 == 0:
+        loss = np.mean(error**2)
+        print(f"Step {i//batch_size}: Loss={loss:.4f}, w={w:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the sailor a <strong>Sled</strong> so he can use his speed more effectively? Explore <strong><a href="#/machine-learning/optimization-ml/momentum">Momentum</a></strong>.

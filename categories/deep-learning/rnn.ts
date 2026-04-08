@@ -47,18 +47,61 @@ export const rnnSection: TopicSection = {
     <h2 id="limitations">The Short-Term Memory Problem</h2>
     <p><strong>The Reality:</strong> Simple RNNs have <strong>Terrible Memory</strong>. If a sentence is 20 words long, by the time the RNN reaches the last word, it has usually <strong>forgotten</strong> the first word. It only has "Short-Term" persistence.</p>
 
-    <h2 id="analogy">The "Goldfish with a Notebook" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Goldfish</strong> with a 5-second memory. 
-        It is trying to read a <strong>Mystery Novel</strong>. 
-        Every time it turns a page, it forgets everything that happened before. 
-        So, it keeps a <strong>Small Notebook (Hidden State)</strong>. 
-        On each page, it looks at the new text, reads its notebook, and then <strong>Scribbles</strong> a summary for the next page. 
-        **The RNN is that Goldfish. The "Notebook" is its hidden state. The "Short-Term" problem is the notebook being too small to hold the whole story.** 
+    <h2 id="example">Illustrated Example: The Goldfish with a Notebook</h2>
+    <div class="example-box">
+      <h4>Scenario: Reading a Long Mystery Novel with Short-Term Memory</h4>
+      <p>Imagine you have a 10-second memory. To understand a "Who-Done-It" book, you need a system to carry context.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The New Input (X):</strong> You read a single page. It says: "The Butler has a bloody knife."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Hidden State (The Notebook):</strong> You look at your notebook. It says: "Previously, the maid was found in the pantry." (Context from the Past).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Synthesis (Update):</strong> You combine the new word + the note and write a new note: "Butler killed the Maid."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> You pass the notebook to the next person. Every step depends on the <strong>History</strong> written in that notebook.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> An RNN is <strong>Temporal</strong>. It doesn't just see the world; it sees the <strong>History</strong> of the world. But be careful—the notebook is small. If the story is too long, the 'Blame' for a bad prediction can't travel all the way back to page 1.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Temporal Memory Update</h2>
+    <python-code static-output="[Sequence] Step 0: Input 'Wait' -> Memory Strength: 0.12\n[Sequence] Step 1: Input 'For' -> Memory Strength: 0.45\n[Sequence] Step 2: Input 'It' -> Memory Strength: 0.82\n[Analysis] The Hidden State is evolving as new data 'updates' the existing context.\n[Result] Final Hidden Vector represents a 'compressed' history of the full sequence.">
+import numpy as np
+
+# 1. Weights: x->h and h->h (Memory)
+W_xh = np.random.randn(4, 1) # Perception
+W_hh = np.random.randn(4, 4) # Memory Persistence
+h_state = np.zeros((4, 1))   # Initial 'Blank' Memory
+
+# 2. Sequence of signals (imagine a sine wave or sentence)
+sequence = [1.5, -0.5, 2.0]
+
+print("Processing Sequence through Recurrence:")
+
+for i, x_t in enumerate(sequence):
+    # Rule: New Memory = tanh(Current Input + Previous Memory)
+    z = np.dot(W_xh, x_t) + np.dot(W_hh, h_state)
+    h_state = np.tanh(z)
+    
+    # Calculate Magnitude of Memory
+    magnitude = np.linalg.norm(h_state)
+    print(f"Step {i}: Input Signal {x_t:4.1f} | Memory Strength {magnitude:.4f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we give the goldfish a "Long-Term" memory? Explore <strong><a href="#/machine-learning/deep-learning/lstm-gru">LSTM and GRU Architectures</a></strong>.

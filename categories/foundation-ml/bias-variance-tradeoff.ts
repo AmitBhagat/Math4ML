@@ -42,37 +42,66 @@ export const biasVarianceTradeoffSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="tradeoff">The Tradeoff Curve</h2>
+    <h2 id="example">Illustrated Example: The Archers of Error</h2>
     <div class="example-box">
-      <h4>Mathematical Goal: Minimize Total Error</h4>
-      <p>Error = \(\text{Bias}^2 + \text{Variance} + \text{Noise}\)</p>
+      <h4>Scenario: Trying to hit the Bullseye</h4>
+      <p>Imagine four archers shooting at a target. Each represents a different way a machine learning model can fail.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Simple Models:</strong> High Bias, Low Variance. (e.g., Linear Regression).</div>
+          <div><strong>Low Bias, Low Variance (The Master):</strong> Every arrow hits the center. This is a model that understands the true pattern and isn't distracted by noise.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Complex Models:</strong> Low Bias, High Variance. (e.g., Deep Neural Networks).</div>
+          <div><strong>High Bias, Low Variance (The Stubborn):</strong> Every arrow hits exactly 10 inches to the left. The archer is consistent (Low Variance) but systematically wrong (High Bias). This is **Underfitting**.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Goal:</strong> Find the <strong>Minimum Total Error</strong> halfway between the two extremes.</div>
+          <div><strong>Low Bias, High Variance (The Chaotic):</strong> Arrows are scattered all over the board. On average, they are centered, but any single shot is wild. This archer is "Over-Anxious" and reacts to every gust of wind. This is **Overfitting**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>High Bias, High Variance (The Disaster):</strong> Arrows are scattered, and the average is far from the center. This is a model that is both too simple and too sensitive.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> You can't reach zero error. Your job as an engineer is to dial down the <strong>Stubbornness</strong> (Bias) without cranking up the <strong>Anxiety</strong> (Variance). If you make the model too complex, it gets anxious (Variance). If you make it too simple, it gets stubborn (Bias).
         </div>
       </div>
     </div>
 
-    <h2 id="analogy">The "Bullseye" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine <strong>Darts hitting a Target</strong>. 
-        * **Low Bias, Low Variance (The Goal):** All darts hit the bullseye reliably. 
-        * **High Bias, Low Variance:** All darts hit the same spot, but it's <strong>Far Away</strong> from the bullseye. (Consistently wrong). 
-        * **Low Bias, High Variance:** Darts are scattered all over the board, but the <strong>Average</strong> of the shots is the bullseye. (Inconsistent but correct on average).
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Error Decomposition</h2>
+    <python-code static-output="[Scan] Evaluating model error profiles...\n[Model A] Simple Linear (Degrees: 1)\n- Result: Stubborn. Predicts a straight line for a sine wave.\n- Classification: High Bias, Low Variance.\n\n[Model B] Over-fit Polynomial (Degrees: 15)\n- Result: Jumpy. Mimics every noise point in the training data.\n- Classification: Low Bias, High Variance.\n\n[Insight] The 'Sweet Spot' is typically a moderate degree (3-5) that captures the bend but ignores the jitter.">
+import numpy as np
+from sklearn.linear_model import LinearRegression
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
+
+# 1. The Ground Truth (Complex pattern)
+def ground_truth(x): return np.sin(x)
+
+# 2. Creating Noisy Data
+X_train = np.sort(np.random.rand(20, 1) * 2 * np.pi, axis=0)
+y_train = ground_truth(X_train).ravel() + np.random.randn(20) * 0.2
+
+# 3. Two Extremes
+# Underfit (Degrees=1) vs Overfit (Degrees=15)
+underfit = LinearRegression()
+overfit = make_pipeline(PolynomialFeatures(15), LinearRegression())
+
+underfit.fit(X_train, y_train)
+overfit.fit(X_train, y_train)
+
+# 4. The Tradeoff Check
+test_val = [[3.14]] # Pi
+print(f"Truth: {ground_truth(3.14):.2f}")
+print(f"Underfit Prediction: {underfit.predict(test_val)[0]:.2f}")
+print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How can we measure where we are on this scale? Explore <strong><a href="#/machine-learning/foundation-ml/cross-validation">Cross-Validation</a></strong>.

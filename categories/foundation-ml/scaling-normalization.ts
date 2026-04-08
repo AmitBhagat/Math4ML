@@ -41,32 +41,50 @@ export const scalingNormalizationSection: TopicSection = {
     <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
     <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
 
-    <h2 id="analogy">The "Ruler" Analogy</h2>
+    <h2 id="example">Illustrated Example: The Multi-Currency Exchange</h2>
     <div class="example-box">
-      <h4>Scenario: Comparing Two Rulers</h4>
-      <p>Data: Height in **mm** [1800, 1900] and Height in **Inches** [70, 75].</p>
+      <h4>Scenario: Who is Richer?</h4>
+      <p>Imagine comparing the wealth of two people. One has 1 million <strong>Yen</strong>. The other has 10,000 <strong>USD</strong>.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Problem:</strong> The "mm" feature has a much larger <strong>range</strong> (100 vs. 5). The machine will incorrectly assume the first feature is 20x more informative.</div>
+          <div><strong>Raw Data:</strong> The machine sees 1,000,000 vs. 10,000. It thinks the first person is 100x richer because the "Number" is bigger.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> After scaling, both features will live in the <strong>[-1, 1]</strong> or <strong>[0, 1]</strong> range. Now, the machine treats them with <strong>Equal Respect</strong>.</div>
+          <div><strong>The Exchange Rate:</strong> Scaling is the "Exchange Rate." It converts both into a common currency (like a range of 0 to 1).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Truth:</strong> After scaling, the machine realizes the 10,000 USD is actually worth more. You've given the features a <strong>Common Numerical Language</strong>.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> If your features are on different scales (e.g., Age 0-100 vs. Income 0-1,000,000), your machine will "Drown Out" the smaller numbers. Scale your data or your model will be <strong>Numerically Blind</strong>.
         </div>
       </div>
     </div>
 
-    <h2 id="analogy">The "Multi-Currency" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are <strong>Comparing the Wealth of two people</strong>. 
-        One has 1 million <strong>Yen</strong>. The other has 10,000 <strong>Dollars</strong>. 
-        If you just look at the raw numbers (1,000,000 vs. 10,000), you'll think the first person is much richer. Scaling is the <strong>"Exchange Rate"</strong> that lets you see the true value in a common currency.
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Standardization vs. Normalization</h2>
+    <python-code static-output="[Original] Income: $50,000, Age: 25\n[Min-Max] Income: 0.5, Age: 0.25 (Fair Fight!)\n[Standardized] Income: 1.2Z, Age: -0.4Z\n[Now the machine 'sees' both features with equal importance]">
+import numpy as np
+from sklearn.preprocessing import StandardScaler, MinMaxScaler
+
+# 1. Huge scale difference: [Income, Age]
+X = np.array([[20000, 18], [50000, 35], [120000, 60]])
+
+# 2. Normalization (Min-Max: 0 to 1)
+scaler_minmax = MinMaxScaler().fit_transform(X)
+print(f"Min-Max Normalized (0 to 1):\n{scaler_minmax}")
+
+# 3. Standardization (Z-Score: Mean 0, Std 1)
+scaler_std = StandardScaler().fit_transform(X)
+print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You've prepped the data. The model has learned. Now, how do we know if it's actually any good? Explore <strong><a href="#/machine-learning/foundation-ml/evaluation-metrics">Model Evaluation Metrics</a></strong>.

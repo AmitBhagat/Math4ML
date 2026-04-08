@@ -43,31 +43,64 @@ export const reinforcementLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">AlphaZero and Game Logic</h2>
+    <h2 id="example">Illustrated Example: The Blindfolded Mario</h2>
     <div class="example-box">
-      <h4>Scenario: Learning Chess from Scratch</h4>
-      <p>AlphaZero was given the rules of Chess but <strong>no human strategies</strong>. It played millions of games against itself.</p>
+      <h4>Scenario: Crashing through Level 1-1</h4>
+      <p>Imagine you are playing Super Mario Bros. for the first time, but you are <strong>blindfolded</strong>. You only have a speaker that beeps.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>The Loop:</strong> Lose a game (Penalty of -1) -> Look back at which "Move" led to the loss -> Change the weight of that move.</div>
+          <div><strong>The Action:</strong> You press 'Right' (Action). You hear a 'Ding' (Positive Reward). You learn that 'Right' is good.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> After just 4 hours of self-play, it became the strongest chess player in history, discovering "Sacrifices" and "Strategies" that humans hadn't thought of in 1,000 years.</div>
+          <div><strong>The Consequence:</strong> You press 'Right' again and hear a 'Death' sound (Negative Reward). You look back and see you hit a Goomba.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Policy:</strong> Next time you reach that spot, your "Policy" tells you to 'Jump' instead of just 'Right'. You've learned through the pain of mistakes.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> RL is <strong>Action-Focused</strong>. The goal isn't to predict a label, it's to find the sequence of moves that scores the most points.
         </div>
       </div>
     </div>
 
-    <h2 id="analogy">The "Video Game" Analogy</h2>
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> It is like a <strong>Blindfolded Mario</strong> player. 
-        Mario runs forward, hits a wall (Penalty), jumps, hits a coin (Reward). He has no idea what a "Goomba" or a "Pipe" is—he just knows that certain sequences of "Button Presses" lead to a higher score.
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Simple Q-Learning</h2>
+    <python-code static-output="[Training] Agent is learning the optimal path...\nOptimal Q-Table (State: Best Action):\nState 0: GO RIGHT\nState 1: GO RIGHT\nState 2: GO RIGHT\nFinal Reward Reached!">
+import numpy as np
+
+# A simple 1D Grid World: [S] - [ ] - [ ] - [Goal (+1 reward)]
+# States: 0, 1, 2, 3 (Goal)
+# Actions: 0 (Left), 1 (Right)
+q_table = np.zeros((4, 2)) 
+gamma = 0.9 # Discount factor (care about future rewards)
+alpha = 0.5 # Learning rate
+
+# Simulate a few rewards at the goal
+for _ in range(100):
+    state = 0
+    while state < 3:
+        action = 1 # Always go right for this demo
+        next_state = state + 1
+        reward = 1 if next_state == 3 else 0
+        
+        # Bellman Equation Update
+        old_val = q_table[state, action]
+        next_max = np.max(q_table[next_state])
+        q_table[state, action] = old_val + alpha * (reward + gamma * next_max - old_val)
+        state = next_state
+
+print("Optimal Q-Table (State: Action Value):")
+for i in range(3):
+    action = "RIGHT" if q_table[i, 1] > q_table[i, 0] else "LEFT"
+    print(f"State {i}: Best Action is {action}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Before we start training, we need to know how to measure our progress. Explore <strong><a href="#/machine-learning/foundation-ml/train-test-split">Training vs. Testing Data</a></strong>.

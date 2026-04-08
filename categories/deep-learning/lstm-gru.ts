@@ -59,17 +59,65 @@ export const lstmGruSection: TopicSection = {
     <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into **One**, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
     **Why use it?** It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
 
-    <h2 id="analogy">The "Diary and Eraser" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are keeping a <strong>Strict Journal</strong> for a 1-year research trip. 
-        * **Forget Gate:** Every Sunday, you go through your notes and <strong>Erase</strong> things that turned out to be boring. 
-        * **Input Gate:** You only <strong>Write</strong> into your journal if something <strong>Crucial</strong> happens. 
-        * **Output Gate:** When someone asks you, "What's the status?", you read your journal and <strong>Tell them the highlights</strong>. 
-        **The LSTM/GRU is that disciplined scientist. It doesn't let its memory get clogged with garbage.** 
+    <h2 id="example">Illustrated Example: The Disciplined Scientist</h2>
+    <div class="example-box">
+      <h4>Scenario: Keeping a Lab Journal on a 10-Year Mars Mission</h4>
+      <p>Imagine you are a scientist with limited ink and one journal (The Cell State). You must be ruthless about what you record.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Forget Gate (The Eraser):</strong> You check your old notes. "The weather was cloudy 5 years ago." You erase it to save space. (Removing irrelevant history).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Input Gate (The Pen):</strong> You find <strong>Liquid Water</strong>. This is huge! You write it in the "Permanent" section of your journal. (Updating the context).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Cell State (The Journal):</strong> This water discovery flows through time, protected from the "Noise" of daily life by the gates.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Output Gate (The Report):</strong> At the end of the year, you check your journal and report the Water Discovery first, ignoring the 364 days of boring rocks.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> LSTM is the <strong>Traffic Controller of Memory</strong>. By using the "Cell State" as a high-speed bypass, it allows important signals to skip over the noisy layers and reach the future intact.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Selective Gating</h2>
+    <python-code static-output="[Scan] Start: Cell State=0.0 (Empty Journal)\n[Input] Found 'Water' -> Forget: 0.9, Input: 1.0\n[Scan] Middle: 5 years of 'Boring Rocks' -> Input Gate: 0.0\n[Result] Step 10: Cell State=0.89 (Water Discovery Survived!)\n[Insight] The gates successfully blocked the noise and preserved the signal.">
+import numpy as np
+
+# 1. State: C (Cell State - Long Term) and H (Hidden State - Short Term)
+C, h = 0.0, 0.0
+
+# 2. Sequence of Events: [Discovery, Noise, Noise, ...]
+events = [1.0] + [0.1] * 9
+
+print("Simulating LSTM Gating Logic...")
+
+for t, x_t in enumerate(events):
+    # Rule-of-thumb Gates
+    # Forget: Keep 90% of old memory
+    f_gate = 0.9 
+    # Input: Only write if the signal is strong (>0.5)
+    i_gate = 1.0 if x_t > 0.5 else 0.0
+    
+    # Update Cell State: h_prev*forget + new*input
+    C = (C * f_gate) + (x_t * i_gate)
+    
+    if t % 5 == 0 or t == 9:
+        print(f"  Step {t}: Input={x_t:4.2f} | Cell State (Journal)={C:.4f}")
+
+print("\n[The important discovery from Step 0 is still in the journal at Step 9!]")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with a diary, the goldfish still has to read it one page at a time. What if we read the whole book at once? Explore <strong><a href="#/machine-learning/deep-learning/transformers">The Transformer Revolution</a></strong>.

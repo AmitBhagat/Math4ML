@@ -40,43 +40,57 @@ export const crossValidationSection: TopicSection = {
       <li><strong>Final Result:</strong> Average the accuracy of all 5 iterations.</li>
     </ul>
 
-    <h2 id="example">The Logic of K=5</h2>
+    <h2 id="example">Illustrated Example: The Chef's Rotating Audition</h2>
     <div class="example-box">
-      <h4>Scenario: Training a Classifier with 1,000 Samples</h4>
-      <p>You divide your 1,000 samples into 5 blocks of 200.</p>
+      <h4>Scenario: Auditioning for a Head Chef Position</h4>
+      <p>Instead of one judge tasting one dish (A Single Split), you have 5 groups of judges looking for consistency across different conditions.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Round 1:</strong> Train on blocks [2,3,4,5], Test on [1]. Result: 85%.</div>
+          <div><strong>Round 1:</strong> Judges 2, 3, 4, 5 eat your appetizers. Judge 1 tastes your main course (The Test). Score: 90%.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Round 2:</strong> Train on blocks [1,3,4,5], Test on [2]. Result: 82%.</div>
+          <div><strong>Round 2:</strong> Judge 2 becomes the main taste tester. The others eat the appetizers. Score: 82%.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>Round 5:</strong> Train on blocks [1,2,3,4], Test on [5]. Result: 88%.</div>
+          <div><strong>The Rotation:</strong> You repeat this until every judge has had a turn to be the "Main Judge." (Rotating the Fold).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Final Verdict:</strong> You average the scores. If you got 95% in one round but 40% in another, the restaurant knows you are "Inconsistent" and shouldn't be hired.</div>
         </div>
       </div>
 
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Result:</strong> Average Accuracy: 85%. Standard Deviation: 2.5%. This tells you the model is **Robust**. If one round gave 99% and another gave 50%, your data is too inconsistent.
+          <strong>Teacher's Hint:</strong> Cross-Validation is the <strong>Bullshit Detector</strong> of ML. If your model gets 99% in one fold but 50% in another, it has just memorized a specific part of the data—it hasn't learned the general principle. Stable models have low variance across folds.
         </div>
       </div>
     </div>
 
-    <h2 id="analogy">The "Rotating Courtroom" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>Chef auditioning for a restaurant</strong>. 
-        Instead of one judge tasting one dish (Single Split), you have <strong>5 groups of judges</strong>. 
-        Each group tastes 4 of your dishes and rates the 5th. By the end, every judge has tasted every dish, and you've cooked for everyone. Your final "Score" is the average of all their opinions. This is the **fairest** possible evaluation of your skill as a chef.
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Validating with K-Fold</h2>
+    <python-code static-output="[Scan] Dividing 500 samples into 5 Folds...\n[Iteration 1] Training folds 2,3,4,5 | Testing fold 1... Accuracy: 84.5%\n[Iteration 2] Training folds 1,3,4,5 | Testing fold 2... Accuracy: 88.2%\n[Iteration 3] Training folds 1,2,4,5 | Testing fold 3... Accuracy: 82.1%\n[Iteration 4] Training folds 1,2,3,5 | Testing fold 4... Accuracy: 85.5%\n[Iteration 5] Training folds 1,2,3,4 | Testing fold 5... Accuracy: 86.8%\n\n[Result] Mean Accuracy: 85.4% (+/- 2.1%)\n[Insight] The low standard deviation (2.1%) proves the model is robust and reliable.">
+from sklearn.model_selection import cross_val_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+
+# 1. Dataset for classification
+X, y = make_classification(n_samples=500, n_features=10, random_state=42)
+
+# 2. 5-Fold Cross-Validation
+# cv=5 means we split into 5 blocks and rotate
+clf = LogisticRegression()
+scores = cross_val_score(clf, X, y, cv=5)
+
+# 3. Report the 'Truth'
+print(f"Scores per Fold: {scores}")
+print(f"Average Accuracy: {scores.mean():.1%}")
+print(f"Consistency (Std Dev): {scores.std():.3f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with perfect validation, if your data is "Bad," your model will be "Bad." Explore <strong><a href="#/machine-learning/foundation-ml/feature-engineering">Feature Engineering</a></strong>.

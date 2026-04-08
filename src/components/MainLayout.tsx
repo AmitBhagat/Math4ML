@@ -39,12 +39,12 @@ export const MainLayout = () => {
   ).join(' ');
 
   return (
-    <div className="h-screen flex bg-bg text-text-premium font-sans selection:bg-accent/20 overflow-hidden">
+    <div className="h-screen flex bg-transparent text-text-premium font-sans selection:bg-accent/20 overflow-hidden">
       
       {/* ─── Sidebar Layer (Universal Push) ─── */}
       <div 
         className={cn(
-          "h-full bg-bg-secondary transition-all duration-500 ease-in-out border-r border-border-premium z-[100] shrink-0 overflow-hidden",
+          "h-full transition-all duration-500 ease-in-out z-[100] shrink-0 overflow-hidden",
           isSidebarOpen ? "w-[var(--sidebar-w)] opacity-100" : "w-0 opacity-0 border-none"
         )}
       >
@@ -57,8 +57,8 @@ export const MainLayout = () => {
       {/* ─── Main View Layer ─── */}
       <div className="flex-1 flex flex-col min-w-0 relative h-full">
         
-        {/* ─── Top Control Bar (Sticky) ─── */}
-        <header className="sticky top-0 z-[60] w-full bg-bg/80 backdrop-blur-md border-b border-white/5 flex items-center justify-between h-14 px-6 shrink-0">
+        {/* ─── Top Control Bar (Sticky Glass) ─── */}
+        <header className="sticky top-0 z-[60] w-full bg-white/5 backdrop-blur-md border-b border-white/5 flex items-center justify-between h-14 px-6 shrink-0">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}

@@ -88,30 +88,62 @@ export const hierarchicalSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Evolution of Languages</h2>
-    <p>Think of how <strong>Languages</strong> are related. They don't just exist in isolation; they branched off from each other over centuries.</p>
-    <ul>
-      <li><strong>Small Clusters:</strong> Spanish and Italian are very close (The "Dialect" merge).</li>
-      <li><strong>Medium Clusters:</strong> Romance languages merge with Germanic languages (The "European" merge).</li>
-      <li><strong>The Root:</strong> Eventually, everything traces back to a "Proto-Indo-European" root.</li>
-    </ul>
-    <p>By looking at the <strong>Dendrogram</strong> of languages, you can see not just the groups, but the <strong>History</strong> of how they split. <strong>Hierarchical Clustering is that linguistic historian.</strong></p>
+    <h2 id="example">Illustrated Example: The Family Reunion</h2>
+    <div class="example-box">
+      <h4>Scenario: Tracing the Ancestry of 5 Strangers</h4>
+      <p>Imagine 5 people at a park. You want to see their "Relationships" based on their DNA. You don't know the families yet, so you start local.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Bottom-Up Start:</strong> Every person is their own "Cluster" of 1. Alice is a group, Bob is a group, etc.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The First Merge:</strong> Alice and Bob are 99.9% similar (Identical Twins). They hold hands and become one "Mega-Person" for the next calculation.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Expansion:</strong> Charlie sees that Alice/Bob are more similar to him than anyone else. He joins them, forming a 3-person "Family" cluster.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Global Root:</strong> Eventually, everyone is holding hands in one giant "Humanity" cluster. The **Dendrogram** is the map of how those hand-holds happened.</div>
+        </div>
+      </div>
 
-    <python-code>
-from sklearn.cluster import AgglomerativeClustering
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Hierarchical Clustering's greatest power is <strong>Retrospective Cutting</strong>. You don't have to decide if there are 2 families or 4 at the start. You build the whole tree and then "Cut" it with a horizontal line later to get the granularity you need.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Agglomerative Linkage</h2>
+    <python-code static-output="[Scan] Calculating initial Proximity Matrix...\n[Merge 1] Merging Point 0 & 1 (Distance: 0.1)\n[Merge 2] Merging Point 2 & 3 (Distance: 0.5)\n[Cutting] Applying forest cut at N=2 Clusters...\n[Result] Cluster Assignments: [A, A, B, B, A]\n[Analysis] Points 0, 1, and 4 successfully grouped despite the gap.">
 import numpy as np
+from sklearn.cluster import AgglomerativeClustering
 
-# 1. Similarity data [Dimension_A, Dimension_B]
-X = np.array([[1, 2], [1, 3], [5, 8], [6, 9], [1, 1]])
+# 1. Similarity data [DNA_Score_1, DNA_Score_2]
+# Alice, Twin_Bob, Charlie, Cousin_Dave, Outlier_Zane
+X = np.array([
+    [1, 2], [1.1, 2.1], # Alice & Bob
+    [10, 8], [10.2, 7.9], # Charlie & Dave
+    [1, 1]              # Zane (Closer to A)
+])
 
-# 2. Train with 2 Clusters
-# linkage='ward' minimizes variance within clusters
+# 2. Build the 'Family Tree'
+# linkage='ward' minimizes variance within the resulting groups
 model = AgglomerativeClustering(n_clusters=2, linkage='ward')
 labels = model.fit_predict(X)
 
-# 3. Check which points are grouped together
-print(f"Cluster Assignments: {labels}")
-# Expected: [0, 0, 1, 1, 0]
+# 3. Analyze the results
+for i, label in enumerate(labels):
+    print(f"Subject {i}: DNA {X[i]} -> Assigned Family {label}")
+
+print(f"\n[Family 0 has {np.sum(labels == 0)} members]")
+print(f"[Family 1 has {np.sum(labels == 1)} members]")
     </python-code>
 
     <div class="linking-rule">

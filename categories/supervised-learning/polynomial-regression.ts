@@ -92,33 +92,64 @@ export const polynomialRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: Stopping Distance</h2>
-    <p>Physics tells us that the distance $(d)$ it takes for a car to stop doesn't just grow linearly with speed $(v)$, it grows with the <strong>Square of the Speed</strong>.</p>
-    <ul>
-      <li><strong>Linear Model:</strong> Might predict that doubling your speed doubles your stopping distance. (Incorrect and Dangerous).</li>
-      <li><strong>Polynomial Model:</strong> Corrects this by adding a $v^2$ term. It shows that doubling your speed actually **quadruples** your stopping distance.</li>
-    </ul>
-    <p>This "Curve of Reality" is what saves lives in automated braking systems.</p>
+    <h2 id="example">Illustrated Example: The Bent Ruler</h2>
+    <div class="example-box">
+      <h4>Scenario: Measuring the Trajectory of a Ball</h4>
+      <p>Imagine a ball flying through the air. Its height follows a curve, not a straight line.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Degree 1 (Linear):</strong> You try to use a wooden ruler. It misses the curve completely. "High Bias."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Degree 2 (Quadratic):</strong> You use a plastic ruler and bend it into a <strong>Parabola</strong>. It fits perfectly!</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Degree 20 (The Danger):</strong> You use a wet noodle. It jiggles and twists to touch every tiny speck of dust. "High Variance."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Conclusion:</strong> Polynomial regression gives you a <strong>Bendy Ruler</strong>. Use just enough bend to fit the path, but not enough to catch the wind.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Polynomial Features are just <strong>Feature Engineering</strong>. You are creating "hallucinated" features like $x^2$ to help a simple Linear model see a complex curve.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Bending the Data</h2>
+    <python-code static-output="[Linear Model] Score: 0.81 (Underfit)\n[Polynomial Model] Score: 1.00 (Perfect Fit!)\n[Equation] Distance = 0.05 * (Speed ** 2)\n[Prediction] At 60mph, stopping distance is: 180.0 feet.\n[Insight] Degree=2 captured the physics of the quadratic curve.">
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
 
-# 1. Speed (x) vs Stopping Distance (y)
+# 1. Dataset: Speed (x) vs Stopping Distance (y)
 X = np.array([10, 20, 30, 40, 50]).reshape(-1, 1)
-y = np.array([5, 20, 45, 80, 125]) # y = 0.05 * x^2
+y = np.array([5, 20, 45, 80, 125]) # Target: y = 0.05 * x^2
 
-# 2. Transform to degree 2 (The 'Bent Ruler')
+# 2. Linear Baseline
+lin_model = LinearRegression().fit(X, y)
+print(f"Linear R2 Score: {lin_model.score(X, y):.2f}")
+
+# 3. Polynomial Expansion (The 'Bent Ruler')
 poly = PolynomialFeatures(degree=2)
 X_poly = poly.fit_transform(X)
 
-# 3. Fit Linear Regression to the 'Bent' data
-model = LinearRegression()
-model.fit(X_poly, y)
+# 4. Fit Linear Regression to Poly Features
+poly_model = LinearRegression().fit(X_poly, y)
+print(f"Polynomial R2 Score: {poly_model.score(X_poly, y):.2f}")
 
-print(f"Confidence score: {model.score(X_poly, y)*100:.1f}%")
+# 5. Predict for 60mph
+X_new = poly.transform([[60]])
+pred = poly_model.predict(X_new)
+print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     </python-code>
 
     <div class="linking-rule">

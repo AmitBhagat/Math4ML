@@ -34,50 +34,64 @@ export const overfittingUnderfittingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="overfitting">Overfitting: The Memorizer</h2>
+    <h2 id="example">Illustrated Example: The Three History Students</h2>
     <div class="example-box">
-      <h4>What it Looks Like:</h4>
-      <p>Training Error: **0.1%** | Test Error: **25%**</p>
+      <h4>Scenario: Studying for a 1,000-page History Exam using only 5 Practice Questions</h4>
+      <p>Imagine three students trying different strategies to pass the final exam. Their results on the real test determine their "Bias" and "Variance."</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Cause:</strong> The model is so powerful it has "Memorized" the random noise in the training set. It thinks it found a pattern, but that pattern doesn't actually exist in the real world.</div>
+          <div><strong>The Underfitter (Student A):</strong> Only reads the table of contents. On the exam, they guess "War" for every question. They are too simple to see the detail. (High Bias).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Correction:</strong> Simplify the model. Use **Regularization** (penalize large weights) or provide <strong>More Data</strong>.</div>
+          <div><strong>The Overfitter (Student B):</strong> Memorizes the exact page numbers, font sizes, and coffee stains on the 5 practice questions. If the real exam has a different font, they fail. They memorized the individual noise. (High Variance).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Master (Student C):</strong> Learns the underlying <strong>Concepts</strong> (Cause and Effect). They understand <em>why</em> the events happened. They can answer a new question because they learned the <strong>Truth</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Moral:</strong> Underfitting is being too lazy (Simplicity). Overfitting is being too obsessive (Complexity). Machine Learning is the search for the "Balanced Score."</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are **Overfitting**. If you fail both, you are **Underfitting**.
         </div>
       </div>
     </div>
 
-    <h2 id="underfitting">Underfitting: The Simpleton</h2>
-    <div class="example-box">
-      <h4>What it Looks Like:</h4>
-      <p>Training Error: **30%** | Test Error: **31%**</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Cause:</strong> The model is too "Dumb" to see the pattern. For example, using a simple linear line to fit a complex, curved dataset.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Correction:</strong> Increase complexity. Use a more powerful algorithm (like a Deep Neural Net) or <strong>Engineer Better Features</strong>.</div>
-        </div>
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Visualizing the Pitfalls</h2>
+    <python-code static-output="[Scan] Fitting models to a curved Sine-Wave dataset...\n[Underfit] Linear: Struggles to even touch the trend. (MSE: 0.45)\n[Overfit] Degree-15: Chases every single noise point. (MSE-Train: 0.01, MSE-Test: 12.5)\n[Balanced] Degree-3: Smoothly follows the curve. (MSE-Test: 0.08)\n\n[Insight] Complexity is a power tool. Use too little and you can't build. Use too much and you destroy the project.">
+import numpy as np
+from sklearn.pipeline import make_pipeline
+from sklearn.preprocessing import PolynomialFeatures
+from sklearn.linear_model import LinearRegression
 
-    <h2 id="analogy">The "School Exam" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine two students studying for a <strong>History Exam</strong>. 
-        <strong>Overfitting Student:</strong> Memorizes the exact dates and typos on the study guide. If the exam question is slightly different, they fail. They memorized the noise. 
-        <strong>Underfitting Student:</strong> Only learns "history was about people fighting." They miss all the nuances and details. They fail because they over-simplified. 
-        <strong>Best Student:</strong> Understands the **Causes and Effects**. They can answer a new question because they learned the **Concept**, not the words.
-      </div>
-    </div>
+# 1. Truth: A Curve + Random Jitter (Noise)
+X = np.sort(np.random.rand(20, 1) * 2 * np.pi, axis=0)
+y = np.sin(X).ravel() + np.random.randn(20) * 0.15
+
+# 2. Underfit (Too Linear)
+underfit = LinearRegression().fit(X, y)
+
+# 3. Overfit (Too Complex)
+# 20 degrees for 20 points means it can hit EVERY point perfectly
+overfit = make_pipeline(PolynomialFeatures(20), LinearRegression()).fit(X, y)
+
+# 4. Balanced (Just right)
+balanced = make_pipeline(PolynomialFeatures(3), LinearRegression()).fit(X, y)
+
+print(f"X=Pi Evaluation:")
+print(f"Underfit Prediction: {underfit.predict([[3.14]])[0]:.2f}")
+print(f"Overfit Prediction:  {overfit.predict([[3.14]])[0]:.2f}")
+print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> This trade-off between complexity and simplicity is the most famous conflict in ML. Explore <strong><a href="#/machine-learning/foundation-ml/bias-variance-tradeoff">Bias–Variance Tradeoff</a></strong>.

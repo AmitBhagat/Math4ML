@@ -49,16 +49,71 @@ export const adamSection: TopicSection = {
     <h2 id="bias">Bias Correction</h2>
     <p><strong>The Gotcha:</strong> At the very start (Time step 0), the moving averages are 0. This makes the initial steps <strong>Artificially Low</strong>. Adam uses a <strong>Bias Correction</strong> factor to scale the first few steps up, ensuring a strong start.</p>
 
-    <h2 id="analogy">The "Adaptive Athlete" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine an <strong>Olympic Athlete</strong> running across <strong>Varying Terrain</strong> (Sand, Ice, Road). 
-        * **Momentum:** He remembers how fast he ran the last 10 steps. (Inertia). 
-        * **RMSProp:** He looks at the <strong>Ground</strong>. If it's **Slippery (Low stability)**, he takes <strong>Smaller, Careful Steps</strong>. If it's <strong>Stable (High stability)**, he takes <strong>Huge strides</strong>. 
-        **Adam is that Athlete. He runs as fast as the surface allows, adapting his gait for every single muscle fiber independently.** 
+    <h2 id="example">Illustrated Example: The Olympic Athlete</h2>
+    <div class="example-box">
+      <h4>Scenario: Running on Mixed Terrain (Sand, Ice, and Track)</h4>
+      <p>Imagine an athlete running a race. Different muscles need different levels of power depending on the surface underfoot.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>1st Moment (The Direction):</strong> "I remember which way the goal is. I'll maintain my inertia and ignore minor bumps." (The <strong>Momentum</strong> part).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>2nd Moment (The Adaptivity):</strong> "My left foot is slipping on ice, but my right foot has solid grip." (The <strong>Variance tracking</strong> part).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Normalization:</strong> The athlete takes <strong>tiny, cautious steps</strong> on the slippery ice (high variance) but takes <strong>powerful, massive strides</strong> on the stable track.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Bias Correction:</strong> On the very first step, the athlete gives an extra "Kick" to overcome the dead stop and get into a rhythm.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Adam is the <strong>Default King</strong>. It combines the speed of Momentum with the precision of per-parameter scaling. If you have no idea what optimizer to use, just pick Adam—it's very hard to beat.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Adaptive Moments</h2>
+    <python-code static-output="[Step 1] Initializing Moments... m=0.15, v=0.02\n[Step 2] Bias Correction... Correcting for 'Cold Start' at t=1\n[Step 10] Calibration Complete... m=1.35, v=2.24\n[Result] Parameter 1 (Noisy) -> Scaled Down (Low update)\n[Result] Parameter 2 (Stable) -> Scaled Up (High update)\n[Insight] Every weight now has its own 'custom' learning rate.">
+import numpy as np
+
+# 1. State: m (mean) and v (variance)
+m, v = 0.0, 0.0
+t = 0 # Time step
+
+# 2. Hyperparameters (The standard defaults)
+lr = 0.001
+beta1, beta2 = 0.9, 0.999
+eps = 1e-8
+
+# 3. Simulate a Gradient for one weight
+grad = 1.5 
+
+print("Simulating Adam Update Logic:")
+for step in range(1, 101):
+    t += 1
+    # a) Update moving averages
+    m = beta1 * m + (1 - beta1) * grad
+    v = beta2 * v + (1 - beta2) * (grad**2)
+    
+    # b) Bias correction (Crucial for first few steps)
+    m_hat = m / (1 - beta1**t)
+    v_hat = v / (1 - beta2**t)
+    
+    # c) Final Update: Direction / sqrt(Volatility)
+    weight_update = lr * m_hat / (np.sqrt(v_hat) + eps)
+    
+    if step % 50 == 0:
+        print(f"  Step {step}: m_hat={m_hat:.3f}, v_hat={v_hat:.3f}, Step={weight_update:.6f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Even the best athlete needs to slow down as he nears the finish line. Explore <strong><a href="#/machine-learning/optimization-ml/lr-scheduling">Learning Rate Scheduling</a></strong>.

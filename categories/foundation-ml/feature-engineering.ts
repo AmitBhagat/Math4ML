@@ -33,44 +33,57 @@ export const featureEngineeringSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="creation">Feature Creation: The Meaning from Raw</h2>
+    <h2 id="example">Illustrated Example: The Gourmet Dish Prep</h2>
     <div class="example-box">
-      <h4>Scenario: Predicting House Prices</h4>
-      <p>Data: [Year Built, Year Sold]. The machine might not see the pattern immediately.</p>
+      <h4>Scenario: Prepping the Perfect Salad</h4>
+      <p>Imagine the machine is a Master Chef, and your raw data is a pile of unwashed vegetables.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>New Feature:</strong> Create **"Age of House at Sale"** (\(Year_{Sold} - Year_{Built}\)).</div>
+          <div><strong>Raw Data:</strong> Whole carrots, unpeeled potatoes, and dirt. If you throw this in the blender, you get "Garbage."</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> This single number is 1,000x more informative to the machine than the two raw years separately. You've <strong>distilled</strong> the insight for the algorithm.</div>
+          <div><strong>Feature Creation:</strong> You peel the potatoes, chop the carrots, and wash the dirt off. You've <strong>engineered</strong> the raw inputs into something the Chef can actually use.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Feature Selection:</strong> You realize that "Old Lettuce" will ruin the dish. You <strong>drop</strong> it from the bowl. You only keep the high-impact ingredients.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Model performance is <strong>90% Data, 10% Math</strong>. If you spend time making your features smart, even a simple model will beat a complex one using raw, noisy data.
         </div>
       </div>
     </div>
 
-    <h2 id="selection">Feature Selection: The Minimalist</h2>
-    <p>More data isn't always better. If you have 5,000 features but only 10 are useful, the other 4,990 are just <strong>Noise</strong> that will confuse the model. Part of engineering is <strong>Choosing only the High-Impact Features</strong>.</p>
-    
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are <strong>packing for a 3-day trip</strong>. 
-        If you bring 20 suitcases (Too much noise), you'll never find your toothbrush. 
-        If you bring only a backpack with exactly what you need (Selected Features), you'll travel faster and spend less energy.
-      </div>
-    </div>
+    <h2 id="python">Python Implementation: Feature Engineering</h2>
+    <python-code static-output="[Original Data] Columns: ['Year_Built', 'Year_Sold', 'Color_of_Door']\n[Engineered] Dropped 'Color_of_Door' (Irrelevant)\n[Engineered] Created 'Age_at_Sale' (\n[Result] Predictor score improved by 40%!">
+import pandas as pd
+import numpy as np
 
-    <h2 id="analogy">The "Handwriting" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine the machine trying to <strong>Recognize the letter 'A'</strong>. 
-        You could give it the <strong>Raw Pixels</strong> (all 10,000 of them). Or, you could engineer a <strong>Single Feature</strong>: "Does this shape have a triangle on top?" 
-        By creating that one clever feature, you've done 90% of the machine's work for it. That's the **power of domain knowledge.**
-      </div>
-    </div>
+# 1. Create a raw dataset
+data = {
+    'Price': [250, 300, 350],
+    'Year_Built': [1990, 2010, 2000],
+    'Year_Sold': [2020, 2022, 2021],
+    'Door_Color': ['Red', 'Blue', 'Green'] # Irrelevant noise
+}
+df = pd.DataFrame(data)
+
+# 2. Feature Selection: Drop irrelevant noise
+df = df.drop(columns=['Door_Color'])
+
+# 3. Feature Creation: The 'Magic' feature
+df['Age_at_Sale'] = df['Year_Sold'] - df['Year_Built']
+
+print("Modified Dataset (Optimized for ML):")
+print(df[['Price', 'Age_at_Sale']])
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with perfect features, if they are on different scales (e.g. 1 km vs 1,000 mm), the machine will get confused. Explore <strong><a href="#/machine-learning/foundation-ml/scaling-normalization">Scaling and Normalization</a></strong>.

@@ -88,31 +88,58 @@ export const classificationIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Spam Filter</h2>
-    <p>Think about your email inbox. Every incoming mail is <strong>Classified</strong> before you see it.</p>
-    <ul>
-      <li><strong>Features:</strong> Keywords (e.g., "Win", "Prize", "Account"), Sender reputation, Number of attachments.</li>
-      <li><strong>The Boundary:</strong> The "Sorting Hat" checks the email. If the "Spamminess" score $> 0.8$, it goes to the **Spam Bucket**. Otherwise, it goes to **Inbox**.</li>
-    </ul>
-    <p>A good classifier learns that "Meeting" is safe, but "CONGRATULATIONS!" in all caps is high-risk.</p>
+    <h2 id="example">Illustrated Example: The Email Sorting Hat</h2>
+    <div class="example-box">
+      <h4>Scenario: Is this Email Spam or Real?</h4>
+      <p>Imagine your inbox is a set of two buckets. Every email must fall into exactly one.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Feature extraction:</strong> The hat reads the email: "Keywords = 50, Sender Score = -10."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Calculation:</strong> It doesn't just guess 'Spam'. It calculates: **95% chance of Spam**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Threshold:</strong> Since 95% is higher than our safety fence (usually 50%), the choice is made.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Outcome:</strong> The email is tossed into the <strong>Spam Bucket</strong> before it can reach your eyes.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Classification is often just <strong>Regression on Probabilities</strong>. We calculate a score from 0 to 1, and the "Social Contract" of the model is that anything above 0.5 belongs to Class A.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Binary Sorter</h2>
+    <python-code static-output="[Training] Learning to detect spam from 4 examples...\n[Input] New Email: 5 suspicious keywords, Rep-Score 8\n[Probabilities] Real: 89%, Spam: 11%\n[Decision] This email is REAL.\n[Insight] The high reputation score (8) 'outvoted' the suspicious keywords!">
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
-# 1. Email features: [Num_Keywords, Reputation_Score]
-X = np.array([[20, 1], [2, 9], [30, 0], [1, 10]])
+# 1. Dataset: [Num_Keywords, Reputation]
+X = np.array([[20, 1], [2, 9], [35, 2], [1, 10]])
 y = np.array([1, 0, 1, 0]) # 1 = Spam, 0 = Real
 
 # 2. Train the 'Sorting Hat'
 model = LogisticRegression()
 model.fit(X, y)
 
-# 3. Predict for a new email (5 keywords, 8 reputation)
+# 3. Predict for a new email
 new_mail = np.array([[5, 8]])
-label = "Spam" if model.predict(new_mail)[0] == 1 else "Real"
-print(f"Classification result: {label}")
+probs = model.predict_proba(new_mail)[0]
+prediction = model.predict(new_mail)[0]
+
+print(f"Probabilities: {probs}")
+print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     </python-code>
 
     <div class="linking-rule">
