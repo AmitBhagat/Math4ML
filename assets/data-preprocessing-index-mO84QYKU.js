@@ -37,18 +37,18 @@ const e={id:"scaling",title:"Feature Scaling",description:"Standardization vs. N
     </div>
 
     <h2 id="importance">Why Scale? The Gradient Speedup</h2>
-    <p>If features have different scales, the <strong>Loss Surface</strong> looks like a long, narrow "Taco Shell." Gradient Descent will bounce back and forth, taking forever to reach the bottom. When you scale, the surface becomes a **Symmetric Bowl**, and the gravity of the gradient pulls the model straight to the minimum 10x faster.</p>
+    <p>If features have different scales, the <strong>Loss Surface</strong> looks like a long, narrow "Taco Shell." Gradient Descent will bounce back and forth, taking forever to reach the bottom. When you scale, the surface becomes a <strong>Symmetric Bowl</strong>, and the gravity of the gradient pulls the model straight to the minimum 10x faster.</p>
 
     <h2 id="analogy">The "School Grades" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine comparing two students. 
-        Student A got a **90%** on a Math test. 
-        Student B got an **800** on the SAT. 
+        Student A got a <strong>90%</strong> on a Math test. 
+        Student B got an <strong>800</strong> on the SAT. 
         Is 800 better than 90? Of course not—they are on different scales! 
         To compare them fairly, you have to <strong>Scale</strong> them to a common range (like 0 to 100) or check how many <strong>Standard Deviations</strong> they are above the class average. 
-        **Scaling is the universal translator for data.**
+        <strong>Scaling is the universal translator for data.</strong>
       </div>
     </div>
 
@@ -128,7 +128,7 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
 
     <h2 id="label">Label Encoding</h2>
     <p>Label Encoding maps each category to a unique integer (e.g., Red=0, Green=1, Blue=2). 
-    **The Gotcha:** This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
+    <strong>The Gotcha:</strong> This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
 
     <h2 id="onehot">One-Hot Encoding</h2>
     <p>Instead of one column with integers, we create a <strong>Binary Column</strong> for every category. 
@@ -151,8 +151,8 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Library</strong>. 
-        **Label Encoding** is like giving each genre a number (History=1, Fiction=2, Sci-Fi=3). This is fine for keeping track, but a computer might think History + Fiction = Sci-Fi. 
-        **One-Hot Encoding** is like giving each genre its own <strong>Shelf</strong>. 
+        <strong>Label Encoding</strong> is like giving each genre a number (History=1, Fiction=2, Sci-Fi=3). This is fine for keeping track, but a computer might think History + Fiction = Sci-Fi. 
+        <strong>One-Hot Encoding</strong> is like giving each genre its own <strong>Shelf</strong>. 
         A book can only be on one shelf at a time. This way, the genres are treated as distinct categories with no mathematical relationship.
       </div>
     </div>
@@ -219,7 +219,7 @@ print(df_ohe)
     <div class="premium-hero">
       <div class="premium-hero-badge">🚫 ML · Preprocessing</div>
       <h1>Handling Missing Data: The Hole in the Map</h1>
-      <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). **Handling Missing Data** is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
+      <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). <strong>Handling Missing Data</strong> is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
     </div>
 
     <div class="toc">
@@ -240,8 +240,8 @@ print(df_ohe)
 
     <h2 id="deletion">Deletion Strategies</h2>
     <p><strong>Listwise Deletion:</strong> Throw away the <strong>entire row</strong>. 
-    **Pros:** Fast and simple. 
-    **Cons:** You might lose 50% of your data if every row has at least one missing feature! <strong>Dangerous</strong> if the missingness isn't random.</p>
+    <strong>Pros:</strong> Fast and simple. 
+    <strong>Cons:</strong> You might lose 50% of your data if every row has at least one missing feature! <strong>Dangerous</strong> if the missingness isn't random.</p>
 
     <h2 id="imputation">Imputation: Filling the Gaps</h2>
     <p>Instead of throwing it away, we <strong>Guess</strong> the value:</p>
@@ -255,7 +255,7 @@ print(df_ohe)
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Data Surgery."</strong> 
-        If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. **Imputation** is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
+        If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. <strong>Imputation</strong> is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
       </div>
     </div>
 
@@ -263,11 +263,11 @@ print(df_ohe)
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Crime Scene** with 10 witnesses. 
+        <strong>Analogy:</strong> Imagine a <strong>Crime Scene</strong> with 10 witnesses. 
         Witness #4 is missing. 
-        **Deletion** means you close the case because you don't have all the info. 
-        **Mean Imputation** is like asking the other 9 witnesses what color the car was. Most say "Red," so you assume Witness #4 would have said "Red" too. 
-        **KNN Imputation** is like finding the 2 witnesses who were <strong>Standing right next to</strong> Witness #4 and asking <strong>them</strong> what they saw.
+        <strong>Deletion</strong> means you close the case because you don't have all the info. 
+        <strong>Mean Imputation</strong> is like asking the other 9 witnesses what color the car was. Most say "Red," so you assume Witness #4 would have said "Red" too. 
+        <strong>KNN Imputation</strong> is like finding the 2 witnesses who were <strong>Standing right next to</strong> Witness #4 and asking <strong>them</strong> what they saw.
       </div>
     </div>
 

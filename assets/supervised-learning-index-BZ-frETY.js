@@ -170,12 +170,13 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Relationship."</strong> 
-        If \(w = 2\), the model says: "For every 1 extra room in a house, the price goes up by $2,000." It's a simple, logical rule that humans and machines can both understand.
+        If \(w = 2\), the model says: "For every 1 extra room in a house, the price goes up by $2,000." If you miss a House Price by $1,000, that's okay. 
+        It's a simple, logical rule that humans and machines can both understand.
       </div>
     </div>
 
     <h2 id="ols">Ordinary Least Squares (OLS)</h2>
-    <p>How do we find the "Best" \(w\) and \(b\)? We minimize the **Mean Squared Error (MSE)**. In simple cases, there is a **Closed-Form Solution** (The Normal Equation) that gives us the answer instantly without needing Gradient Descent:</p>
+    <p>How do we find the "Best" \(w\) and \(b\)? We minimize the <strong>Mean Squared Error (MSE)</strong>. In simple cases, there is a <strong>Closed-Form Solution</strong> (The Normal Equation) that gives us the answer instantly without needing Gradient Descent:</p>
     <div class="math-block">$$w = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$</div>
 
     <h2 id="assumptions">The "Linear" Assumptions</h2>
@@ -192,7 +193,7 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your data points are <strong>Metal Pegs</strong> on a board. 
         You have a <strong>Long Elastic String</strong>. You want to stretch the string so it passes through the pegs. 
-        **Ordinary Least Squares** is the "Tension" in the string pulling it toward the average position of all the pegs. The string ends up in the **Optimal Position** where the total pulling force (Squared Error) is balanced.
+        <strong>Ordinary Least Squares</strong> is the "Tension" in the string pulling it toward the average position of all the pegs. The string ends up in the <strong>Optimal Position</strong> where the total pulling force (Squared Error) is balanced.
       </div>
     </div>
 
@@ -202,23 +203,23 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <strong>Initialize:</strong> Calculate the mean of input $\bar{x}$ and target $\bar{y}$.
+          <strong>Initialize:</strong> Calculate the mean of input \(\bar{x}\) and target \(\bar{y}\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <strong>Numerator:</strong> Calculate the sum of products of differences: $\sum (x_i - \bar{x})(y_i - \bar{y})$.
+          <strong>Numerator:</strong> Calculate the sum of products of differences: \(\sum (x_i - \bar{x})(y_i - \bar{y})\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <strong>Denominator:</strong> Calculate the sum of squares of differences: $\sum (x_i - \bar{x})^2$.
+          <strong>Denominator:</strong> Calculate the sum of squares of differences: \(\sum (x_i - \bar{x})^2\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <strong>Coefficient:</strong> Compute $w = \text{Numerator} / \text{Denominator}$.
+          <strong>Coefficient:</strong> Compute \(w = \text{Numerator} / \text{Denominator}\).
         </div>
         <div class="algorithm-step">
           <span class="step-badge">5</span>
-          <strong>Intercept:</strong> Compute $b = \bar{y} - w\bar{x}$.
+          <strong>Intercept:</strong> Compute \(b = \bar{y} - w\bar{x}\).
         </div>
       </div>
     </div>
@@ -273,9 +274,9 @@ w = model.coef_[0]
 b = model.intercept_
 prediction = model.predict([[2000]])
 
-print(f"Learned Weight (Price per Sqft): \${w:.2f}")
-print(f"Learned Bias (Base Price): \${b:.2f}")
-print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
+print("Learned Weight (Price per Sqft): $" + f"{w:.2f}")
+print("Learned Bias (Base Price): $" + f"{b:.2f}")
+print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     </python-code>
 
     <div class="linking-rule">
@@ -312,7 +313,7 @@ print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
     </div>
 
     <h2 id="benefit">The Variance Reduction</h2>
-    <p>Ridge is especially useful when features are **Correlated** (Multicollinearity). In standard OLS, the weights become unstable and explode. Ridge "Stabilizes" the weights, making the model more robust to new data.</p>
+    <p>Ridge is especially useful when features are <strong>Correlated</strong> (Multicollinearity). In standard OLS, the weights become unstable and explode. Ridge "Stabilizes" the weights, making the model more robust to new data.</p>
     
     <div class="callout success">
       <div class="callout-icon">✓</div>
@@ -326,8 +327,8 @@ print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your line is a <strong>Tent Pole</strong> trying to stay upright in a storm. 
-        **Standard OLS** is just let the pole lean wherever the wind (Noise) blows it. 
-        **Ridge Regression** is like attaching <strong>Elastic Cords (Springs)</strong> from the pole to the ground. 
+        <strong>Standard OLS</strong> is just let the pole lean wherever the wind (Noise) blows it. 
+        <strong>Ridge Regression</strong> is like attaching <strong>Elastic Cords (Springs)</strong> from the pole to the ground. 
         The cords pull the pole back toward the center (Weight 0). The pole can still move if the wind is <strong>Truly Strong (Real Data)</strong>, but it won't wiggle for every tiny breeze (Noise).
       </div>
     </div>
@@ -379,7 +380,7 @@ print(f"Estimate for 2000 sqft house: \${prediction[0]:,.0f}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The pole is rock-solid. It only moves for the **real trends** like 'Hours Studied'.</div>
+          <div><strong>The Result:</strong> The pole is rock-solid. It only moves for the <strong>real trends</strong> like 'Hours Studied'.</div>
         </div>
       </div>
 
@@ -432,14 +433,14 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
     </div>
 
     <h2 id="theory">Theoretical Core: The L1 Absolute Penalty</h2>
-    <p>Lasso stands for **Least Absolute Shrinkage and Selection Operator**. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
+    <p>Lasso stands for <strong>Least Absolute Shrinkage and Selection Operator</strong>. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
     <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum |w_j|$$</div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Geometric Constraints."</strong> 
-        Ridge is a **Sphere** (it lets you move in any direction smoothly). Lasso is a **Diamond** (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
+        Ridge is a <strong>Sphere</strong> (it lets you move in any direction smoothly). Lasso is a <strong>Diamond</strong> (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
       </div>
     </div>
 
@@ -465,9 +466,9 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>Casing Director</strong> for a movie with a <strong>Tiny Budget</strong>. 
-        **Ridge** is like paying every actor a "Minimal Wage" to keep them on set but giving them no lines. 
-        **Lasso** is the <strong>Brutal Executioner</strong>. It walks through the set and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>. Hand in your script." 
-        By the end, only the **Star Actors (Relevant Features)** are left.
+        <strong>Ridge</strong> is like paying every actor a "Minimal Wage" to keep them on set but giving them no lines. 
+        <strong>Lasso</strong> is the <strong>Brutal Executioner</strong>. It walks through the set and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>. Hand in your script." 
+        By the end, only the <strong>Star Actors (Relevant Features)</strong> are left.
       </div>
     </div>
 
@@ -557,7 +558,7 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if a straight line isn't enough, even with regularization? Explore <strong><a href="#/machine-learning/supervised-learning/polynomial-regression">Polynomial Regression</a></strong>.
     </div>
-  `},a={id:"polynomial-regression",title:"Polynomial Regression",description:"Polynomial Regression models non-linear relationships by transforming features into cross-products and higher-order terms.",color:"#58a6ff",html:String.raw`
+  `},o={id:"polynomial-regression",title:"Polynomial Regression",description:"Polynomial Regression models non-linear relationships by transforming features into cross-products and higher-order terms.",color:"#58a6ff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Non-Linear</div>
       <h1>Polynomial Regression</h1>
@@ -611,8 +612,8 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are trying to measure a <strong>Bumpy Hill</strong>. 
-        **Linear Regression** is like using a <strong>Rigid Wooden Ruler</strong>. No matter how you tilt it, you can't follow the bumps. 
-        **Polynomial Regression** is like using a <strong>Flexible Plastic Ruler</strong>. You can bend it to follow the hills and valleys. 
+        <strong>Linear Regression</strong> is like using a <strong>Rigid Wooden Ruler</strong>. No matter how you tilt it, you can't follow the bumps. 
+        <strong>Polynomial Regression</strong> is like using a <strong>Flexible Plastic Ruler</strong>. You can bend it to follow the hills and valleys. 
         But beware: if the ruler is <strong>too flexible (Too high degree)</strong>, you can fold it in half and make it touch any speck of dirt on the hill. It ceases to be a ruler and becomes <strong>Chaos</strong>.
       </div>
     </div>
@@ -707,7 +708,7 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     <div class="linking-rule">
       <strong>Next Step:</strong> Enough with numbers. How do we build a model that can "Sort" things into buckets? Explore <strong><a href="#/machine-learning/supervised-learning/classification-intro">Introduction to Classification</a></strong>.
     </div>
-  `},o={id:"classification-intro",title:"Introduction to Classification",description:"Classification is the task of predicting a discrete category (a label) from input features.",color:"#58a6ff",html:String.raw`
+  `},a={id:"classification-intro",title:"Introduction to Classification",description:"Classification is the task of predicting a discrete category (a label) from input features.",color:"#58a6ff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Core</div>
       <h1>Introduction to Classification</h1>
@@ -755,13 +756,13 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine the <strong>Sorting Hat from Harry Potter</strong>. 
         It has a <strong>Decision Boundary</strong> for each House (Gryffindor, Slytherin, etc.). 
-        It "Reads" your features (Brave, Ambitious, Loyal). It doesn't say you are "40% Gryffindor." It says "You belong in **Gryffindor!**" 
-        **Classification** is that hat. The "Learning" was the hat looking at 1,000 years of students to find the <strong>Patterns of Personality</strong> that define each house.
+        It "Reads" your features (Brave, Ambitious, Loyal). It doesn't say you are "40% Gryffindor." It says "You belong in <strong>Gryffindor!</strong>" 
+        <strong>Classification</strong> is that hat. The "Learning" was the hat looking at 1,000 years of students to find the <strong>Patterns of Personality</strong> that define each house.
       </div>
     </div>
 
     <h2 id="objective">The Goal: Decision Boundaries</h2>
-    <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more **robust and accurate** that fence is.</p>
+    <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more <strong>robust and accurate</strong> that fence is.</p>
 
     <h2 id="algorithm">The Classification Algorithm</h2>
     <div class="example-box">
@@ -802,7 +803,7 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Calculation:</strong> It doesn't just guess 'Spam'. It calculates: **95% chance of Spam**.</div>
+          <div><strong>The Calculation:</strong> It doesn't just guess 'Spam'. It calculates: <strong>95% chance of Spam</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -851,7 +852,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Probability</div>
       <h1>Logistic Regression</h1>
-      <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for **Binary Decisions**.</p>
+      <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for <strong>Binary Decisions</strong>.</p>
     </div>
 
     <div class="toc">
@@ -882,7 +883,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     <h2 id="decision">The Decision Threshold</h2>
     <div class="example-box">
       <h4>Scenario: Email Filter</h4>
-      <p>The model outputs **0.85** from the Sigmoid.</p>
+      <p>The model outputs <strong>0.85</strong> from the Sigmoid.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -891,7 +892,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Logic:</strong> You can tune this! If you are a <strong>Doctor</strong>, you might set the threshold to 0.1 because you'd rather have a **False Positive** than a **False Negative**.</div>
+          <div><strong>The Logic:</strong> You can tune this! If you are a <strong>Doctor</strong>, you might set the threshold to 0.1 because you'd rather have a <strong>False Positive</strong> than a <strong>False Negative</strong>.</div>
         </div>
       </div>
     </div>
@@ -902,7 +903,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are <strong>Filtering Water</strong>. 
         Raw data (Unfiltered water) is very messy. The Linear model (\(wx + b\)) is your <strong>Pipe</strong>—it moves the water. 
-        The **Sigmoid Function** is the <strong>Filter Membrane</strong>. 
+        The <strong>Sigmoid Function</strong> is the <strong>Filter Membrane</strong>. 
         It only lets the "Pure" results through. If the water has enough "Signal" to overcome the membrane's resistance, it comes out as <strong>Clean (1)</strong>. If not, it stays <strong>Dirty (0)</strong>. 
         The "Threshold" is you deciding <strong>how clean</strong> the water has to be before you drink it.
       </div>
@@ -947,7 +948,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Sigmoid Squash:</strong> We pass 5.0 through the S-curve. It comes out as **0.993**.</div>
+          <div><strong>The Sigmoid Squash:</strong> We pass 5.0 through the S-curve. It comes out as <strong>0.993</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -1035,7 +1036,7 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     <p>To predict, we simply pick the Class $C$ that results in the <strong>Maximum A Posteriori (MAP)</strong> value.</p>
 
     <h2 id="laplace">Laplace Smoothing: The Zero-Frequency Fix</h2>
-    <p><strong>The Gotcha:</strong> If you see a word in a test email that <strong>never</strong> appeared in your training set for "Spam," the probability becomes **0**. Since everything is multiplied, the whole class probability becomes 0! 
+    <p><strong>The Gotcha:</strong> If you see a word in a test email that <strong>never</strong> appeared in your training set for "Spam," the probability becomes <strong>0</strong>. Since everything is multiplied, the whole class probability becomes 0! 
     <strong>The Fix:</strong> We add 1 to every count (Laplace Smoothing) so that nothing is ever truly impossible.</p>
 
     <h2 id="analogy">The "Sherlock Holmes" Analogy</h2>
@@ -1044,9 +1045,9 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine <strong>Sherlock Holmes solving a crime</strong>. 
         He has three clues: [Mud on shoes, Smell of tobacco, Left-handedness]. 
-        **Naive Bayes** assumes these clues happened completely separately. 
+        <strong>Naive Bayes</strong> assumes these clues happened completely separately. 
         It asks: "Out of 100 criminals, how many have mud? How many smoke tobacco? How many are lefties?" 
-        Then it <strong>multiplies</strong> those chances together to see if the suspect is "Guilty" or "Innocent." It ignores the fact that a leftie smoker might be more likely to have mud. It's **Simple, Fast, and often gets the Killer.**
+        Then it <strong>multiplies</strong> those chances together to see if the suspect is "Guilty" or "Innocent." It ignores the fact that a leftie smoker might be more likely to have mud. It's <strong>Simple, Fast, and often gets the Killer.</strong>
       </div>
     </div>
 
@@ -1078,11 +1079,11 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     </div>
 
     <h2 id="example">Illustrated Example: The Sleuth's Email Filter</h2>
-    <p>Imagine Sherlock Holmes is classifying an email as **Spam** or **Ham** based on three words: "Prize", "Money", and "Meeting".</p>
+    <p>Imagine Sherlock Holmes is classifying an email as <strong>Spam</strong> or <strong>Ham</strong> based on three words: "Prize", "Money", and "Meeting".</p>
     <ul>
       <li><strong>The Clues:</strong> "Prize" appears in 80% of Spam but only 1% of Ham. "Meeting" appears in 50% of Ham but only 2% of Spam.</li>
       <li><strong>The Detection:</strong> An email arrives with "Prize" and "Meeting". </li>
-      <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the **Spam** probability win out.</li>
+      <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the <strong>Spam</strong> probability win out.</li>
     </ul>
 
     <h2 id="example">Illustrated Example: The Bayesian Sleuth</h2>
@@ -1165,7 +1166,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
     </div>
 
     <h2 id="theory">Theoretical Core: The Distance Metric</h2>
-    <p>KNN is a **Non-Parametric** algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
+    <p>KNN is a <strong>Non-Parametric</strong> algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -1173,7 +1174,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Voting by Proximity."</strong> 
         It's like moving to a new city and trying to figure out which political party to join. 
         You don't read the manifesto (Parameters); you just ask the <strong>3 nearest neighbors</strong> whom they voted for. If 2 voted for Party A, you join Party A. 
-        **KNN** is purely local—it only cares about what's physically around it.
+        <strong>KNN</strong> is purely local—it only cares about what's physically around it.
       </div>
     </div>
 
@@ -1200,7 +1201,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Fix:</strong> Usually, use an **Odd Number** for $k$ to avoid ties. Use **Cross-Validation** to find the "Sweet Spot" (usually around 3, 5, or 7).</div>
+          <div><strong>The Fix:</strong> Usually, use an <strong>Odd Number</strong> for $k$ to avoid ties. Use <strong>Cross-Validation</strong> to find the "Sweet Spot" (usually around 3, 5, or 7).</div>
         </div>
       </div>
     </div>
@@ -1215,7 +1216,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
         <strong>Analogy:</strong> Imagine you are an <strong>Appraiser judging a House Price</strong>. 
         You don't have a complicated formula for the whole city. Instead, you look at the <strong>5 most similar houses</strong> that sold recently in that specific neighborhood. 
         If those 5 houses (Your Neighbors) sold for an average of $500k, you'll guess $500k. 
-        **KNN** is that appraiser. It's **Simple, Intuitive, and Lazy.** (It only does work when you ask it for a prediction).
+        <strong>KNN</strong> is that appraiser. It's <strong>Simple, Intuitive, and Lazy.</strong> (It only does work when you ask it for a prediction).
       </div>
     </div>
 
@@ -1333,10 +1334,10 @@ print(f"Final Classification: {result[0]}")
     </div>
 
     <h2 id="support-vectors">The Pivot Points: Support Vectors</h2>
-    <p>The most important discovery of SVM is that <strong>only a few points matter.</strong> The points that are "Almost on the highway" are called **Support Vectors**. If you move any other point in the dataset, the highway doesn't move. These points are the <strong>scaffolding</strong> that holds up the whole model.</p>
+    <p>The most important discovery of SVM is that <strong>only a few points matter.</strong> The points that are "Almost on the highway" are called <strong>Support Vectors</strong>. If you move any other point in the dataset, the highway doesn't move. These points are the <strong>scaffolding</strong> that holds up the whole model.</p>
 
     <h2 id="slack">Soft Margin & Slack Variables</h2>
-    <p>What if your data is <strong>Messy</strong>? What if one rogue "Dog" is deep inside "Cat Territory"? If you try to build a perfect highway, you'll fail. <strong>Soft Margin SVM</strong> introduces "Slack Variables" (\(\xi\)). It allows some points to "Cheat" (be on the wrong side) for a small penalty. This makes the model much more **Stable and Generalizable.**</p>
+    <p>What if your data is <strong>Messy</strong>? What if one rogue "Dog" is deep inside "Cat Territory"? If you try to build a perfect highway, you'll fail. <strong>Soft Margin SVM</strong> introduces "Slack Variables" (\(\xi\)). It allows some points to "Cheat" (be on the wrong side) for a small penalty. This makes the model much more <strong>Stable and Generalizable.</strong></p>
 
     <h2 id="kernel">The Kernel Trick: Folding Space</h2>
     <p><strong>The Magic:</strong> What if the data isn't a line? What if it's a <strong>Circle</strong>? 
@@ -1349,7 +1350,7 @@ print(f"Final Classification: {result[0]}")
         <strong>Analogy:</strong> Imagine two <strong>Feuding Kingdoms (Cats vs. Dogs)</strong>. 
         Instead of just a fence, you want a <strong>Giant River (The Moat)</strong>. 
         You want the river to be <strong>as wide as possible</strong> to prevent any random person from accidentally crossing over (The Noise). 
-        The only things the river cares about are the <strong>Soldiers (Support Vectors)</strong> standing right on the edge of the water. If the king of Cats moves his palace in the back, the river doesn't change. It only moves if the Soldiers on the edge move. **SVM is the Architect of the River.**
+        The only things the river cares about are the <strong>Soldiers (Support Vectors)</strong> standing right on the edge of the water. If the king of Cats moves his palace in the back, the river doesn't change. It only moves if the Soldiers on the edge move. <strong>SVM is the Architect of the River.</strong>
       </div>
     </div>
 
@@ -1396,7 +1397,7 @@ print(f"Final Classification: {result[0]}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Kernel Trick:</strong> If the kingdoms are mixed up (a circle of Blue inside a ring of Red), SVM **Bends Space** so it can still draw a straight river in 3D.</div>
+          <div><strong>The Kernel Trick:</strong> If the kingdoms are mixed up (a circle of Blue inside a ring of Red), SVM <strong>Bends Space</strong> so it can still draw a straight river in 3D.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
@@ -1441,7 +1442,7 @@ print(f"Support Vector Coordinates: \n{sv}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want a model that acts like a "Flowchart" instead of a river? Explore <strong><a href="#/machine-learning/supervised-learning/decision-trees">Decision Trees</a></strong>.
     </div>
-  `},h={id:"decision-trees",title:"Decision Trees",description:"A non-parametric classification and regression algorithm that builds a tree-like structure based on a series of feature-based splits.",color:"#4CAF50",html:String.raw`
+  `},g={id:"decision-trees",title:"Decision Trees",description:"A non-parametric classification and regression algorithm that builds a tree-like structure based on a series of feature-based splits.",color:"#4CAF50",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Logic</div>
       <h1>Decision Trees: The Flowchart</h1>
@@ -1471,7 +1472,7 @@ print(f"Support Vector Coordinates: \n{sv}")
     </div>
 
     <h2 id="entropy">The Chaos Metric: Entropy & Gini</h2>
-    <p>How does the machine know which question is "Best"? It measures **Order**. Two main formulas are used:</p>
+    <p>How does the machine know which question is "Best"? It measures <strong>Order</strong>. Two main formulas are used:</p>
     <ul>
       <li><strong>Entropy (\(H\)):</strong> A measure of randomness or disorder level. If a pile is 50/50, \(H=1\) (Max Chaos). If it's 100% pure, \(H=0\) (Perfect Order).</li>
       <div class="math-block">$$H(D) = -\sum_{i} p_i \log_2(p_i)$$</div>
@@ -1563,7 +1564,7 @@ print(f"Support Vector Coordinates: \n{sv}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a **Random Forest**.
+          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a <strong>Random Forest</strong>.
         </div>
       </div>
     </div>
@@ -1592,7 +1593,7 @@ print(f"Feature Importances: {model.feature_importances_}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we use a whole "Grave of Trees"? Explore <strong><a href="#/machine-learning/supervised-learning/random-forest">Random Forest Classification</a></strong>.
     </div>
-  `},g={id:"random-forest",title:"Random Forest",description:"An ensemble learning method that fits multiple decision trees on various sub-samples of the dataset and uses averaging to improve predictive accuracy.",color:"#4CAF50",html:String.raw`
+  `},h={id:"random-forest",title:"Random Forest",description:"An ensemble learning method that fits multiple decision trees on various sub-samples of the dataset and uses averaging to improve predictive accuracy.",color:"#4CAF50",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Ensemble</div>
       <h1>Random Forest: The Wisdom of Crowds</h1>
@@ -1608,7 +1609,7 @@ print(f"Feature Importances: {model.feature_importances_}")
     </div>
 
     <h2 id="bagging">Bagging: Bootstrap Aggregating</h2>
-    <p>How do we make each tree "Different"? We use **Bagging**. We take a random sample of our data <strong>with replacement</strong> (Bootstrapping). Some data points are picked twice; some are never picked. Every tree gets a <strong>Unique Perspective</strong> on the world.</p>
+    <p>How do we make each tree "Different"? We use <strong>Bagging</strong>. We take a random sample of our data <strong>with replacement</strong> (Bootstrapping). Some data points are picked twice; some are never picked. Every tree gets a <strong>Unique Perspective</strong> on the world.</p>
 
     <h2 id="feature-randomness">Feature Randomness: Diverse Perspectives</h2>
     <div class="example-box">
@@ -1622,20 +1623,20 @@ print(f"Feature Importances: {model.feature_importances_}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Result:</strong> We create a <strong>Diverse Forest</strong>. Some trees learn about the roof; some learn about the school district. When they <strong>Vote</strong> together, they find the **Deep Truth** of the data.</div>
+          <div><strong>Result:</strong> We create a <strong>Diverse Forest</strong>. Some trees learn about the roof; some learn about the school district. When they <strong>Vote</strong> together, they find the <strong>Deep Truth</strong> of the data.</div>
         </div>
       </div>
     </div>
 
     <h2 id="theory">Theoretical Core: Ensemble Variance</h2>
-    <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly **$1/B$** of the original. By "Averaging" the trees, we **kill the noise** and keep the **signal**.</p>
+    <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly <strong>$1/B$</strong> of the original. By "Averaging" the trees, we <strong>kill the noise</strong> and keep the <strong>signal</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Guess the Jellybeans Contest."</strong> 
         One person might guess 500 (Way too low). Another might guess 5,000 (Way too high). 
-        But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. **Random Forest** is that average.
+        But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. <strong>Random Forest</strong> is that average.
       </div>
     </div>
 
@@ -1646,7 +1647,7 @@ print(f"Feature Importances: {model.feature_importances_}")
         <strong>Analogy:</strong> Imagine a <strong>Courtroom Jury</strong>. 
         Instead of one judge (a Single Tree) who might have a <strong>Personal Bias</strong>, you have 12 diverse citizens from different backgrounds. 
         Each juror hears the <strong>Same Case</strong> (The Data) but processes it with their own unique "Rules" (The Decision Trees). 
-        By **Deliberating and Voting (Aggregating)**, the final verdict is much more **Reasonable and Stable** than one person's opinion.
+        By <strong>Deliberating and Voting (Aggregating)</strong>, the final verdict is much more <strong>Reasonable and Stable</strong> than one person's opinion.
       </div>
     </div>
 
@@ -1759,7 +1760,7 @@ print(f"Confidence Score: {votes[1]:.1%}")
         The first tree makes a <strong>Rough Guess</strong>. 
         The second tree doesn't look at the original data; it looks at the <strong>Error (The Residual)</strong> of the first tree. 
         It says: "I see Tree 1 missed these 10 samples. I'll focus <strong>only</strong> on them." 
-        **Boosting** builds a "Tower of Guesses" that get more and more precise.
+        <strong>Boosting</strong> builds a "Tower of Guesses" that get more and more precise.
       </div>
     </div>
 
@@ -1775,7 +1776,7 @@ print(f"Confidence Score: {votes[1]:.1%}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Tree 2 Goal:</strong> Don't predict 30. **Predict 8**.</div>
+          <div><strong>The Tree 2 Goal:</strong> Don't predict 30. <strong>Predict 8</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -1785,20 +1786,20 @@ print(f"Confidence Score: {votes[1]:.1%}")
     </div>
 
     <h2 id="learning-rate">Shrinkage: The Learning Rate</h2>
-    <p><strong>The Gotcha:</strong> If you add 100% of the new tree's guess every time, the model will **Overfit** instantly. 
-    **Shrinkage** means we only add a tiny fraction (\(\eta = 0.1\)) of the new tree. This is the **Learning Rate**. It forces the model to take 1,000 "Small Steps" toward the truth rather than 10 "Giant Leaps" into chaos.</p>
+    <p><strong>The Gotcha:</strong> If you add 100% of the new tree's guess every time, the model will <strong>Overfit</strong> instantly. 
+    <strong>Shrinkage</strong> means we only add a tiny fraction (\(\eta = 0.1\)) of the new tree. This is the <strong>Learning Rate</strong>. It forces the model to take 1,000 "Small Steps" toward the truth rather than 10 "Giant Leaps" into chaos.</p>
 
     <h2 id="analogy">The "Golf Course" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you're playing <strong>Golf</strong>. 
-        **Random Forest** is like 10 people hitting 1 ball at the same time and taking the <strong>Average</strong> of where it lands. 
-        **Gradient Boosting** is like <strong>One Person playing multiple shots</strong>. 
-        * **Shot 1 (Tree 1):** You hit the ball 200 yards. 
-        * **Shot 2 (Tree 2):** You don't aim for the pin again from the tee; you look at the <strong>Residual Distance</strong> (remaining 50 yards) and hit a smaller shot. 
-        * **Shot 3 (Tree 3):** You look at the final 5 yards and hit a <strong>Putter shot</strong>. 
-        **Boosting** is that final, perfect putt.
+        <strong>Random Forest</strong> is like 10 people hitting 1 ball at the same time and taking the <strong>Average</strong> of where it lands. 
+        <strong>Gradient Boosting</strong> is like <strong>One Person playing multiple shots</strong>. 
+        * <strong>Shot 1 (Tree 1):</strong> You hit the ball 200 yards. 
+        * <strong>Shot 2 (Tree 2):</strong> You don't aim for the pin again from the tee; you look at the <strong>Residual Distance</strong> (remaining 50 yards) and hit a smaller shot. 
+        * <strong>Shot 3 (Tree 3):</strong> You look at the final 5 yards and hit a <strong>Putter shot</strong>. 
+        <strong>Boosting</strong> is that final, perfect putt.
       </div>
     </div>
 
@@ -1920,7 +1921,7 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Shortcut Expert."</strong> 
-        It says: "Why look at all 1,000,000 samples? I'll look only at the ones where I'm <strong>most wrong (High Gradient)</strong>." It doesn't grow trees layer-by-layer; it just grows the **Most Promising Leaf** until it's done.
+        It says: "Why look at all 1,000,000 samples? I'll look only at the ones where I'm <strong>most wrong (High Gradient)</strong>." It doesn't grow trees layer-by-layer; it just grows the <strong>Most Promising Leaf</strong> until it's done.
       </div>
     </div>
 
@@ -1940,10 +1941,10 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are building a <strong>Race Car</strong>. 
-        * **Standard GBDT (Gradient Boost):** A fast street car. 
-        * **XGBoost:** An <strong>F1 Car</strong> with advanced aerodynamics (Regularization) to keep it stable at high speeds. 
-        * **LightGBM:** A <strong>Drag Racer</strong>. It is built purely for <strong>Acceleration (Speed)</strong> and can handle a 100-mile long track in seconds. 
-        * **CatBoost:** The <strong>Rally Car</strong>. It can go through "Muddy Data" (Categorical values) that would make other cars spin out of control.
+        * <strong>Standard GBDT (Gradient Boost):</strong> A fast street car. 
+        * <strong>XGBoost:</strong> An <strong>F1 Car</strong> with advanced aerodynamics (Regularization) to keep it stable at high speeds. 
+        * <strong>LightGBM:</strong> A <strong>Drag Racer</strong>. It is built purely for <strong>Acceleration (Speed)</strong> and can handle a 100-mile long track in seconds. 
+        * <strong>CatBoost:</strong> The <strong>Rally Car</strong>. It can go through "Muddy Data" (Categorical values) that would make other cars spin out of control.
       </div>
     </div>
 
@@ -2079,4 +2080,4 @@ print(f"Confidence Verdict: {prediction}")
       </div>
 
     </div>
-  `,sections:[e,t,s,i,a,o,n,r,l,d,h,g,c,p]};export{u as SUPERVISED_LEARNING_DATA};
+  `,sections:[e,t,s,i,o,a,n,r,l,d,g,h,c,p]};export{u as SUPERVISED_LEARNING_DATA};

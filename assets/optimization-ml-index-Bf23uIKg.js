@@ -23,8 +23,8 @@ const e={id:"gradient-descent-ml",title:"Gradient Descent (Batch)",description:"
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Listening to the Ground."</strong> 
         The gradient tells you two things: 
-        1. **Direction:** Which way is "Down"? 
-        2. **Magnitude:** How "Steep" is the slope? 
+        1. <strong>Direction:</strong> Which way is "Down"? 
+        2. <strong>Magnitude:</strong> How "Steep" is the slope? 
         If the mountain is flat, the gradient is zero, and you have reached your destination.
       </div>
     </div>
@@ -40,8 +40,8 @@ const e={id:"gradient-descent-ml",title:"Gradient Descent (Batch)",description:"
 
     <h2 id="batch">Batch Gradient Descent</h2>
     <p>In <strong>Batch GD</strong>, we use <strong>Every Single Data Point</strong> in the dataset to calculate the gradient before taking one step. 
-    **The Upside:** The descent is very smooth and stable. 
-    **The Downside:** If you have 1 billion data points, your computer will <strong>Run out of Memory</strong> before you take your first step.</p>
+    <strong>The Upside:</strong> The descent is very smooth and stable. 
+    <strong>The Downside:</strong> If you have 1 billion data points, your computer will <strong>Run out of Memory</strong> before you take your first step.</p>
 
     <h2 id="example">Illustrated Example: The Blindfolded Mountain Climber</h2>
     <div class="example-box">
@@ -140,7 +140,7 @@ for epoch in range(101):
     <h2 id="math">The Mini-Batch Update</h2>
     <p>For a mini-batch \(\mathcal{B}\), the update rule is:</p>
     <div class="math-block">$$\theta \gets \theta - \alpha \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla \mathcal{L}_i(\theta)$$</div>
-    <p>**The Speed:** Because we process data in chunks, we can use <strong>GPUs</strong> to calculate the gradients in parallel, making it 10,000x faster than sequential CPU loops.</p>
+    <p><strong>The Speed:</strong> Because we process data in chunks, we can use <strong>GPUs</strong> to calculate the gradients in parallel, making it 10,000x faster than sequential CPU loops.</p>
 
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
     <p>Batch GD follows a <strong>Smooth Straight Line</strong>. SGD looks like a <strong>Confused Bee</strong>. It jiggles left and right, but the <strong>Average Direction</strong> is still down the mountain. As we get closer to the bottom, the noise makes it bounce around the minimum. This is why we <strong>Slow Down</strong> (Schedule) the learning rate at the end.</p>
@@ -245,11 +245,11 @@ for i in range(0, len(X), batch_size):
     </div>
 
     <h2 id="physics">The Physics of Optimization</h2>
-    <p>We call \(\gamma\) (usually 0.9) the **Momentum Coefficient**. 
+    <p>We call \(\gamma\) (usually 0.9) the <strong>Momentum Coefficient</strong>. 
     Mathematically, it represents <strong>Friction</strong>. Without it, the "Boulder" would roll forever and never stop at the bottom. With it, the boulder eventually <strong>settles</strong> at the minimum of the valley.</p>
 
     <h2 id="saddle">Dampening the Oscillations</h2>
-    <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. **Momentum** smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
+    <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. <strong>Momentum</strong> smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
 
     <h2 id="example">Illustrated Example: The Heavy Boulder</h2>
     <div class="example-box">
@@ -341,7 +341,7 @@ for i in range(11):
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Dampening the Noisy Ones."</strong> 
-        If a weight is <strong>Bouncing</strong> around wildly, the 2nd moment (\(v_t\)) will be **High**. Adam divides the update by \(\sqrt{v_t}\), effectively <strong>Slowing Down</strong> the noisy weight. 
+        If a weight is <strong>Bouncing</strong> around wildly, the 2nd moment (\(v_t\)) will be <strong>High</strong>. Adam divides the update by \(\sqrt{v_t}\), effectively <strong>Slowing Down</strong> the noisy weight. 
         If a weight is <strong>Steadily</strong> moving in one direction, Adam <strong>Speeds It Up</strong>. 
       </div>
     </div>
@@ -431,7 +431,7 @@ for step in range(1, 101):
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>LR Scheduling: The Slowing Pace</h1>
-      <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the **Resort (The Minimum)**, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
+      <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the <strong>Resort (The Minimum)</strong>, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
     </div>
 
     <div class="toc">
@@ -458,20 +458,20 @@ for step in range(1, 101):
 
     <h2 id="decay">Step Decay</h2>
     <p><strong>The Strategy:</strong> Reduce the learning rate by a fixed factor \(\gamma\) every \(N\) epochs. (e.g., Divide by 10 every 30 epochs). 
-    **The Visual:** It looks like a <strong>Staircase</strong>. The model learns in bursts, then stabilizes, then bursts again.</p>
+    <strong>The Visual:</strong> It looks like a <strong>Staircase</strong>. The model learns in bursts, then stabilizes, then bursts again.</p>
 
     <h2 id="cosine">Cosine Annealing</h2>
     <p><strong>The Strategy:</strong> Use a <strong>Cosine Wave</strong> to smoothly reduce the learning rate from the initial value to <strong>Zero</strong>. 
-    **Why use it?** It is <strong>Continuous</strong> and requires fewer "Step" hyper-parameters. It's often the <strong>State-of-the-art</strong> choice for training Vision Transformers and LLMs.</p>
+    <strong>Why use it?</strong> It is <strong>Continuous</strong> and requires fewer "Step" hyper-parameters. It's often the <strong>State-of-the-art</strong> choice for training Vision Transformers and LLMs.</p>
 
     <h2 id="warmup">Learning Rate Warmup</h2>
-    <p><strong>The Gotcha:</strong> At the very first iteration, the model is **Randomly Initialized**. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
-    **Warmup** starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
+    <p><strong>The Gotcha:</strong> At the very first iteration, the model is <strong>Randomly Initialized</strong>. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
+    <strong>Warmup</strong> starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
 
     <h2 id="example">Illustrated Example: The Controlled Descent</h2>
     <div class="example-box">
       <h4>Scenario: Landing a Plane on a High-Altitude Runway</h4>
-      <p>Imagine you are a pilot. You can't land at 500 mph (High LR). You also can't fly at 10 mph for the whole trip (Low LR). You need a **Systematic Decrease** in speed.</p>
+      <p>Imagine you are a pilot. You can't land at 500 mph (High LR). You also can't fly at 10 mph for the whole trip (Low LR). You need a <strong>Systematic Decrease</strong> in speed.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">

@@ -154,7 +154,7 @@ print(f"Council Consensus Accuracy: {score:.1%}")
     </div>
 
     <h2 id="bootstrap">Bootstrapping: The "Bag" of Samples</h2>
-    <p>How do we make the models "Different"? We use <strong>Sampling with Replacement</strong>. From a dataset of $N$ points, we pull $N$ points randomly, allowing the same point to be picked twice. Each model gets its own "Bag" of data. On average, each bag contains about **63% of the unique samples**.</p>
+    <p>How do we make the models "Different"? We use <strong>Sampling with Replacement</strong>. From a dataset of $N$ points, we pull $N$ points randomly, allowing the same point to be picked twice. Each model gets its own "Bag" of data. On average, each bag contains about <strong>63% of the unique samples</strong>.</p>
 
     <h2 id="averaging">Aggregating: The Vote</h2>
     <ul>
@@ -169,10 +169,10 @@ print(f"Council Consensus Accuracy: {score:.1%}")
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Presidential Election**. 
-        If only **One Person** decided the president (Single Model), the choice would be highly volatile and depend on that one person's mood. 
-        **Bagging** is the election. We have 100,000,000 people (Models). Each person sees a slightly different part of reality (Bootstrapping). 
-        When they all **Vote (Aggregating)**, the final result is <strong>Stable</strong>. The "Crazy" guesses of one individual are drowned out by the collective wisdom of the majority.
+        <strong>Analogy:</strong> Imagine a <strong>Presidential Election</strong>. 
+        If only <strong>One Person</strong> decided the president (Single Model), the choice would be highly volatile and depend on that one person's mood. 
+        <strong>Bagging</strong> is the election. We have 100,000,000 people (Models). Each person sees a slightly different part of reality (Bootstrapping). 
+        When they all <strong>Vote (Aggregating)</strong>, the final result is <strong>Stable</strong>. The "Crazy" guesses of one individual are drowned out by the collective wisdom of the majority.
       </div>
     </div>
 
@@ -291,7 +291,7 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Adaptive Learning."</strong> 
-        In school, you don't spend time studying what you already know. You focus on the **Hard Problems**. 
+        In school, you don't spend time studying what you already know. You focus on the <strong>Hard Problems</strong>. 
         Boosting does the same. It "Gives more weight" to the <strong>Difficult Samples</strong> so the next model is forced to solve them.
       </div>
     </div>
@@ -334,11 +334,11 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>Student preparing for the SAT</strong>. 
-        * **1st Round:** You take a practice test. You get the math questions right but miss all the <strong>Grammar</strong> questions. 
-        * **2nd Round:** You hire a **Grammar Tutor**. You focus 100% on grammar and learn the rules. 
-        * **3rd Round:** You take another test. Now you know grammar, but you miss the <strong>Vocabulary</strong> questions. 
-        * **4th Round:** You hire a **Vocabulary Tutor**. 
-        **By the end of the semester, you have an "Ensemble" of 3 different skillsets that cover every weakness. Boosting is that relentless focus on what you don't yet understand.** 
+        * <strong>1st Round:</strong> You take a practice test. You get the math questions right but miss all the <strong>Grammar</strong> questions. 
+        * <strong>2nd Round:</strong> You hire a <strong>Grammar Tutor</strong>. You focus 100% on grammar and learn the rules. 
+        * <strong>3rd Round:</strong> You take another test. Now you know grammar, but you miss the <strong>Vocabulary</strong> questions. 
+        * <strong>4th Round:</strong> You hire a <strong>Vocabulary Tutor</strong>. 
+        <strong>By the end of the semester, you have an "Ensemble" of 3 different skillsets that cover every weakness. Boosting is that relentless focus on what you don't yet understand.</strong> 
       </div>
     </div>
 
@@ -423,14 +423,14 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
     </div>
 
     <h2 id="theory">Theoretical Core: Meta-Learning</h2>
-    <p>Stacking is about **Higher-Order Integration**. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
+    <p>Stacking is about <strong>Higher-Order Integration</strong>. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning who to trust."</strong> 
         The Meta-Learner says: "I've noticed that whenever the SVM says 'Spam', it's usually wrong, but when the Random Forest says 'Spam', it's 99% right. So, I will listen to the Forest." 
-        It learns the **Error Profile** of every sub-model.
+        It learns the <strong>Error Profile</strong> of every sub-model.
       </div>
     </div>
 
@@ -449,11 +449,11 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you are a <strong>CEO (Meta-Learner)</strong> in a meeting. 
         You have three experts:
-        * **Expert A (Statistician):** He's great at data but misses emotional nuances. 
-        * **Expert B (Marketing Guru):** He's great at emotions but bad at math. 
-        * **Expert C (Technician):** He's only good at the raw hardware facts. 
+        * <strong>Expert A (Statistician):</strong> He's great at data but misses emotional nuances. 
+        * <strong>Expert B (Marketing Guru):</strong> He's great at emotions but bad at math. 
+        * <strong>Expert C (Technician):</strong> He's only good at the raw hardware facts. 
         They each give you their recommendation. 
-        **You don't just "Average" their advice. You know from 10 years of experience that Expert A is usually right about the budget, while Expert B is right about the customer reaction. You combine their specific strengths to make the perfect decision.** 
+        <strong>You don't just "Average" their advice. You know from 10 years of experience that Expert A is usually right about the budget, while Expert B is right about the customer reaction. You combine their specific strengths to make the perfect decision.</strong> 
       </div>
     </div>
 

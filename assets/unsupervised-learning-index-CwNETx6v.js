@@ -15,7 +15,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
     </div>
 
     <h2 id="theory">Theoretical Core: Objective Function</h2>
-    <p>k-Means is a **Centroid-Based** algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
+    <p>k-Means is a <strong>Centroid-Based</strong> algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
     <div class="math-block">$$WCSS = \sum_{j=1}^K \sum_{x \in C_j} \|x - \mu_j\|^2$$</div>
     <ul>
       <li><strong>\(K\):</strong> The number of clusters (chosen by the user).</li>
@@ -61,7 +61,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
     <p>How do you know if there are 3 clusters or 10? If you increase \(K\), your error (WCSS) will <strong>always</strong> go down. The goal is to find the "Elbow"—the point where adding more clusters doesn't give you a significantly better fit. It's the point of <strong>Diminishing Returns</strong>.</p>
 
     <h2 id="limitations">The "Spherical" Weakness</h2>
-    <p><strong>The Gotcha:</strong> k-Means assumes clusters are <strong>Circular (Spherical)</strong> and of similar size. If your data is shaped like a **Crescent Moon** or a **Ring**, k-Means will fail miserably because it only knows how to find "Round Blobs."</p>
+    <p><strong>The Gotcha:</strong> k-Means assumes clusters are <strong>Circular (Spherical)</strong> and of similar size. If your data is shaped like a <strong>Crescent Moon</strong> or a <strong>Ring</strong>, k-Means will fail miserably because it only knows how to find "Round Blobs."</p>
 
     <h2 id="analogy">The "Magnetic Centers" Analogy</h2>
     <div class="callout success">
@@ -70,7 +70,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
         <strong>Analogy:</strong> Imagine a <strong>Standardized Test Room</strong> with 100 students and 3 <strong>Proctors</strong>. 
         The proctors start in random corners. They say: "Everyone, find the proctor closest to you." (Assignment). 
         Once the students are grouped, each proctor walks to the <strong>Exact Center</strong> of their group (Update). 
-        The students adjust to the new centers. Eventually, everyone is perfectly grouped around the proctors. **k-Means is those proctors.** 
+        The students adjust to the new centers. Eventually, everyone is perfectly grouped around the proctors. <strong>k-Means is those proctors.</strong> 
       </div>
     </div>
 
@@ -175,18 +175,18 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </ul>
 
     <h2 id="dendrogram">The Dendrogram: Visualizing Relationships</h2>
-    <p>The <strong>Dendrogram</strong> is a chart that looks like an upside-down tree. The **Height** of the vertical lines represents the <strong>Distance</strong> at which two clusters were merged. The longer the line, the more "Unlike" the two groups are.</p>
+    <p>The <strong>Dendrogram</strong> is a chart that looks like an upside-down tree. The <strong>Height</strong> of the vertical lines represents the <strong>Distance</strong> at which two clusters were merged. The longer the line, the more "Unlike" the two groups are.</p>
 
     <h2 id="selection">Cutting the Tree</h2>
-    <p><strong>The Beauty:</strong> You don't have to choose $K$ at the start. You build the whole tree, and then you "Cut" it at a specific height. If you cut high, you get 2 huge clusters. If you cut low, you get 20 tiny clusters. You can choose the **level of granularity** AFTER seeing the data.</p>
+    <p><strong>The Beauty:</strong> You don't have to choose $K$ at the start. You build the whole tree, and then you "Cut" it at a specific height. If you cut high, you get 2 huge clusters. If you cut low, you get 20 tiny clusters. You can choose the <strong>level of granularity</strong> AFTER seeing the data.</p>
 
     <h2 id="analogy">The "Family Reunion" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a huge **Family Reunion**. 
+        <strong>Analogy:</strong> Imagine a huge <strong>Family Reunion</strong>. 
         You have cousins, siblings, and strangers. 
-        **Hierarchical Clustering** starts by putting you with your **Twin**. Then it puts you and your twin with your **Siblings**. Then it merges your family with your **Cousins**. 
+        <strong>Hierarchical Clustering</strong> starts by putting you with your <strong>Twin</strong>. Then it puts you and your twin with your <strong>Siblings</strong>. Then it merges your family with your <strong>Cousins</strong>. 
         By looking at the tree, you can see exactly who is "Direct family" and who is a "Distant relative." It's not just a group; it's a <strong>Historical Record of Similarity.</strong> 
       </div>
     </div>
@@ -238,7 +238,7 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Global Root:</strong> Eventually, everyone is holding hands in one giant "Humanity" cluster. The **Dendrogram** is the map of how those hand-holds happened.</div>
+          <div><strong>The Global Root:</strong> Eventually, everyone is holding hands in one giant "Humanity" cluster. The <strong>Dendrogram</strong> is the map of how those hand-holds happened.</div>
         </div>
       </div>
 
@@ -336,7 +336,7 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
 
     <h2 id="epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</h2>
     <p><strong>Epsilon (\(\epsilon\)):</strong> The maximum distance between two points to be considered neighbors. 
-    **MinPts:** The minimum number of points required to form a cluster.</p>
+    <strong>MinPts:</strong> The minimum number of points required to form a cluster.</p>
     <div class="math-block">$$N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$$</div>
     <p><strong>Note:</strong> If you set \(\epsilon\) too small, everything becomes noise. If you set it too large, everything merges into one giant cluster.</p>
 
@@ -348,8 +348,8 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Nightclub</strong> at 2 AM. 
-        **k-Means** would try to group everyone into 3 circles (Groups). 
-        **DBSCAN** looks for the <strong>Dense Dancefloor</strong> (A Cluster). 
+        <strong>k-Means</strong> would try to group everyone into 3 circles (Groups). 
+        <strong>DBSCAN</strong> looks for the <strong>Dense Dancefloor</strong> (A Cluster). 
         It doesn't care if the dancefloor is circular or a <strong>Long Line</strong> leading to the bar. 
         As long as people are standing shoulder-to-shoulder, they are part of the "Crowd." 
         The lonely person standing in the <strong>Corner</strong> (Noise) is correctly ignored. 
@@ -441,7 +441,7 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     </ul>
 
     <h2 id="soft">Soft Clustering: Membership Probability</h2>
-    <p>Unlike k-Means, which just says "Cluster 1," GMM gives you the <strong>Posterior Probability</strong> (Responsibilities). This is incredibly useful for finding points that live on the **Edge** of two groups.</p>
+    <p>Unlike k-Means, which just says "Cluster 1," GMM gives you the <strong>Posterior Probability</strong> (Responsibilities). This is incredibly useful for finding points that live on the <strong>Edge</strong> of two groups.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -481,8 +481,8 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
 
     <h2 id="covariance">Covariance Types</h2>
     <p>GMM's superpower is its flexibility. It can find <strong>Oblong (Elliptical)</strong> clusters. 
-    **Spherical:** Clusters must be circles. 
-    **Full:** Clusters can be stretched and rotated in any direction.</p>
+    <strong>Spherical:</strong> Clusters must be circles. 
+    <strong>Full:</strong> Clusters can be stretched and rotated in any direction.</p>
 
     <h2 id="analogy">The "Overlapping Fog" Analogy</h2>
     <div class="callout success">
@@ -491,7 +491,7 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
         <strong>Analogy:</strong> Imagine looking at <strong>3 Clouds of Fog</strong> on a dark night. 
         Where the clouds meet, the air is thick with moisture. 
         One cloud is a <strong>Tall, Thin Pillar</strong> (Narrow Covariance). One is a <strong>Flat, Wide Carpet</strong> (Wide Covariance). 
-        **GMM** is the physics that describes those clouds. It doesn't draw a line where one ends; it tells you exactly how "Damp" every spot is from each cloud. 
+        <strong>GMM</strong> is the physics that describes those clouds. It doesn't draw a line where one ends; it tells you exactly how "Damp" every spot is from each cloud. 
       </div>
     </div>
 
@@ -613,17 +613,17 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     </div>
 
     <h2 id="projections">Projections: The Shadow Metaphor</h2>
-    <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some **Loss of Information**. The goal is to find the projection that preserves the most **Variance** or **Local Structure**.</p>
+    <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some <strong>Loss of Information</strong>. The goal is to find the projection that preserves the most <strong>Variance</strong> or <strong>Local Structure</strong>.</p>
 
     <h2 id="analogy">The "Shadow Puppet" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a complex **3D Statue of a Dragon**. 
+        <strong>Analogy:</strong> Imagine a complex <strong>3D Statue of a Dragon</strong>. 
         You want to describe the dragon using only a <strong>2D Shadow on the wall</strong>. 
         If you take a photo from the <strong>Top-Down</strong>, you just get a flat blob. (Bad Projection). 
         If you take it from the <strong>Side</strong>, you see the head, wings, and tail. (Good Projection). 
-        **Dimensionality Reduction** is the physics of finding the <strong>Best Angle</strong> for that shadow puppet. 
+        <strong>Dimensionality Reduction</strong> is the physics of finding the <strong>Best Angle</strong> for that shadow puppet. 
       </div>
     </div>
 
@@ -715,10 +715,10 @@ print(f"Kept Features (Mask): {selector.get_support()}")
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Axis of Change."</strong> 
-        Imagine a **Rugby Ball** floating in the air. 
+        Imagine a <strong>Rugby Ball</strong> floating in the air. 
         It has 3 dimensions (Length, Width, Height). 
-        The **1st Principal Component (PC1)** is the <strong>Long Axis</strong>. 
-        The **2nd Principal Component (PC2)** is the **Width**. 
+        The <strong>1st Principal Component (PC1)</strong> is the <strong>Long Axis</strong>. 
+        The <strong>2nd Principal Component (PC2)</strong> is the <strong>Width</strong>. 
         If you only have 1 dimension, you choose the <strong>Long Axis</strong> because it captures 80% of the ball's shape. 
       </div>
     </div>
@@ -727,10 +727,10 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     <p>Variance is <strong>Information</strong>. If a feature has zero variance (all points are the same), it tells you nothing. PCA finds the direction where the data is <strong>most spread out</strong>. PC1 is the strongest signal, PC2 is the second strongest, and so on.</p>
 
     <h2 id="preprocessing">Requirement: Scaling & Mean Centering</h2>
-    <p><strong>The Gotcha:</strong> PCA is hypersensitive to **Scale**. If your "Income" is in Millions and "Age" is in 10s, PCA will spend 100% of its energy on Income. You **MUST** scale your data (Standardization) so that every feature has a <strong>Fair Chance</strong> to be a Principal Component.</p>
+    <p><strong>The Gotcha:</strong> PCA is hypersensitive to <strong>Scale</strong>. If your "Income" is in Millions and "Age" is in 10s, PCA will spend 100% of its energy on Income. You <strong>MUST</strong> scale your data (Standardization) so that every feature has a <strong>Fair Chance</strong> to be a Principal Component.</p>
 
     <h2 id="svd">Computational Trick: SVD</h2>
-    <p>In modern libraries (like Scikit-Learn), we don't actually calculate the Covariance Matrix. We use **Singular Value Decomposition (SVD)** directly on the data matrix \(X\). It is numerically more stable and much faster for huge datasets.</p>
+    <p>In modern libraries (like Scikit-Learn), we don't actually calculate the Covariance Matrix. We use <strong>Singular Value Decomposition (SVD)</strong> directly on the data matrix \(X\). It is numerically more stable and much faster for huge datasets.</p>
 
     <h2 id="analogy">The "Best Photograph" Analogy</h2>
     <div class="callout success">
@@ -739,7 +739,7 @@ print(f"Kept Features (Mask): {selector.get_support()}")
         <strong>Analogy:</strong> Imagine you are a <strong>Photographer taking a 2D picture</strong> of a 100D alien. 
         Where do you stand? 
         If you stand 100 meters away at a random angle, you just get a flat blob. (Information loss). 
-        **PCA** is the algorithm that calculates the <strong>exact orbital position</strong> to stand so that your 2D photo shows the <strong>most detail</strong> (the most spread) of the alien's 100D body. 
+        <strong>PCA</strong> is the algorithm that calculates the <strong>exact orbital position</strong> to stand so that your 2D photo shows the <strong>most detail</strong> (the most spread) of the alien's 100D body. 
       </div>
     </div>
 
@@ -867,20 +867,20 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     </div>
 
     <h2 id="gaussians">Gaussian-t Comparison</h2>
-    <p>The "t" in t-SNE stands for the **Student's t-Distribution**. This distribution has <strong>Fatter Tails</strong> than a normal Gaussian. This is its secret weapon. 
-    **The Gotcha:** Normal Gaussians are too "Tight." In 2D, points get "Crowded" in the middle. The fatter tails of the t-distribution allow clusters to <strong>Spread Out</strong>, making them easier to see in your plot.</p>
+    <p>The "t" in t-SNE stands for the <strong>Student's t-Distribution</strong>. This distribution has <strong>Fatter Tails</strong> than a normal Gaussian. This is its secret weapon. 
+    <strong>The Gotcha:</strong> Normal Gaussians are too "Tight." In 2D, points get "Crowded" in the middle. The fatter tails of the t-distribution allow clusters to <strong>Spread Out</strong>, making them easier to see in your plot.</p>
 
     <h2 id="perplexity">The Perplexity Parameter</h2>
-    <p><strong>Perplexity</strong> is the "Density" of the neighbors. If you set it to 5, t-SNE only cares about your 5 closest neighbors. If you set it to 50, it tries to keep larger groups together. It's the **Number of Friends** each point tries to keep close.</p>
+    <p><strong>Perplexity</strong> is the "Density" of the neighbors. If you set it to 5, t-SNE only cares about your 5 closest neighbors. If you set it to 50, it tries to keep larger groups together. It's the <strong>Number of Friends</strong> each point tries to keep close.</p>
 
     <h2 id="analogy">The "Friendship Map" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a huge **1,000D Party**. 
+        <strong>Analogy:</strong> Imagine a huge <strong>1,000D Party</strong>. 
         You want to draw a <strong>2D Seating Chart</strong> for the afterlife. 
-        **PCA** would try to put people based on their <strong>Height or Wealth</strong> (Global Variance). 
-        **t-SNE** ignores height and wealth. It only asks: "Who was Person A talking to?" 
+        <strong>PCA</strong> would try to put people based on their <strong>Height or Wealth</strong> (Global Variance). 
+        <strong>t-SNE</strong> ignores height and wealth. It only asks: "Who was Person A talking to?" 
         If Person A was talking to Person B, they get the <strong>Same Table</strong>. 
         The result is a chart where <strong>Cliques (Clusters)</strong> are perfectly clear, but the "Distance" between tables doesn't mean much. 
       </div>
@@ -976,7 +976,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     <div class="premium-hero">
       <div class="premium-hero-badge">🧩 Unsupervised · Manifold</div>
       <h1>UMAP: The Topology Map</h1>
-      <p>If t-SNE is the current standard, **UMAP** is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
+      <p>If t-SNE is the current standard, <strong>UMAP</strong> is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
     </div>
 
     <div class="toc">
@@ -996,7 +996,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
         Imagine your data points are <strong>Stars in a Galaxy</strong>. 
-        **Topology** isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
+        <strong>Topology</strong> isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
         UMAP builds a mathematical constellation (the Complex) and then tries to <strong>Flatten it</strong> onto a 2D piece of paper while keeping the "Geometric Essence" intact. 
       </div>
     </div>
@@ -1005,7 +1005,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     <p>In t-SNE, clusters are perfect, but the distance between clusters is <strong>Mean-ingless</strong>. In UMAP, the distance between groups reflects their true <strong>Dissimilarity</strong>. This makes it a better tool for understanding the <strong>Relationship between Clusters</strong>.</p>
 
     <h2 id="performance">Performance: Speed and Efficiency</h2>
-    <p><strong>The Magic:</strong> UMAP is 10x to 100x faster than t-SNE. While t-SNE struggles with 10,000 points, UMAP can handle <strong>Millions</strong> of points without a sweat. This makes it the only choice for **Single-Cell Genomics** or large-scale NLP embeddings.</p>
+    <p><strong>The Magic:</strong> UMAP is 10x to 100x faster than t-SNE. While t-SNE struggles with 10,000 points, UMAP can handle <strong>Millions</strong> of points without a sweat. This makes it the only choice for <strong>Single-Cell Genomics</strong> or large-scale NLP embeddings.</p>
 
     <h2 id="analogy">The "Stretchy Net" Analogy</h2>
     <div class="callout success">
@@ -1013,7 +1013,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine your high-dimensional data is a <strong>Giant Ball of Wool</strong>. 
         Inside that wool, some threads are tightly knotted (Clusters). 
-        **UMAP** is like taking a <strong>High-Stretching Net</strong> and laying it over the wool. 
+        <strong>UMAP</strong> is like taking a <strong>High-Stretching Net</strong> and laying it over the wool. 
         It hooks onto the knots (Local) but it also stretches between the knots (Global). 
         Then, you <strong>Pull the Net Flat</strong> onto a table. 
         Because the net is "Stretchy," it doesn't break the knots, and it keeps the <strong>Overall Shape</strong> of the original wool ball. 
@@ -1120,7 +1120,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     </div>
 
     <h2 id="theory">Theoretical Core: Encoder & Decoder</h2>
-    <p>An Autoencoder is a **Symmetric** neural network with two halves:</p>
+    <p>An Autoencoder is a <strong>Symmetric</strong> neural network with two halves:</p>
     <ul>
       <li><strong>Encoder:</strong> A series of layers that progressively <strong>shrink</strong> the input data into a lower-dimensional vector.</li>
       <li><strong>Decoder:</strong> A series of layers that progressively <strong>expand</strong> that vector back into the original input shape.</li>
@@ -1140,7 +1140,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     <p>The <strong>Bottleneck</strong> (middle layer) is the most important part. Its size is the number of <strong>Latent Dimensions</strong>. If the input is 10,000 pixels (an image) and the bottleneck is 32, the network is forced to find the <strong>32 most important features</strong> (like hair color, eye shape, smile) to describe the face.</p>
 
     <h2 id="loss">Reconstruction Loss: The Only Teacher</h2>
-    <p>Autoencoders are **Self-Supervised**. The target is the <strong>Input itself</strong>. We minimize the difference (usually MSE) between the input \(x\) and the reconstructed output \(\hat{x}\):</p>
+    <p>Autoencoders are <strong>Self-Supervised</strong>. The target is the <strong>Input itself</strong>. We minimize the difference (usually MSE) between the input \(x\) and the reconstructed output \(\hat{x}\):</p>
     <div class="math-block">$$Loss = \|x - \hat{x}\|^2$$</div>
     <p><strong>Note:</strong> We are teaching the machine to <strong>reproduce the truth</strong> using minimal resources.</p>
 
@@ -1166,9 +1166,9 @@ print(f"Status: Local and Global structure successfully preserved.")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine an <strong>MP3 file</strong>. 
         It is a compressed version of a <strong>FLAC (Perfect) recording</strong>. 
-        The **Encoder** is the compression algorithm. It throws away the sounds that humans can't hear. 
-        The **Decoder** is your headphones. 
-        If the song still sounds <strong>Beautiful and Accurate</strong>, the compression has "Learned" the soul of the music. **Autoencoders are the machine's way of finding that perfect compression for any data.** 
+        The <strong>Encoder</strong> is the compression algorithm. It throws away the sounds that humans can't hear. 
+        The <strong>Decoder</strong> is your headphones. 
+        If the song still sounds <strong>Beautiful and Accurate</strong>, the compression has "Learned" the soul of the music. <strong>Autoencoders are the machine's way of finding that perfect compression for any data.</strong> 
       </div>
     </div>
 

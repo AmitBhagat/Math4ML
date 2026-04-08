@@ -51,11 +51,11 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Security Guard</strong> at an airport. 
-        * **True Positive:** He stops a terrorist. (Success!) 
-        * **True Negative:** He lets a regular passenger through. (Success!) 
-        * **False Positive:** He stops an innocent grandmother for a 4-hour search. (Inconvenient, but safe). 
-        * **False Negative:** He lets a terrorist onto the plane. (Catastrophic Failure). 
-        **The Confusion Matrix tells the Guard's boss exactly how many grandmothers were annoyed and how many terrorists were missed.**
+        * <strong>True Positive:</strong> He stops a terrorist. (Success!) 
+        * <strong>True Negative:</strong> He lets a regular passenger through. (Success!) 
+        * <strong>False Positive:</strong> He stops an innocent grandmother for a 4-hour search. (Inconvenient, but safe). 
+        * <strong>False Negative:</strong> He lets a terrorist onto the plane. (Catastrophic Failure). 
+        <strong>The Confusion Matrix tells the Guard's boss exactly how many grandmothers were annoyed and how many terrorists were missed.</strong>
       </div>
     </div>
 
@@ -181,7 +181,7 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     <div class="math-block">$$Precision = \frac{TP}{TP + FP}$$</div>
     <ul>
       <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FP:</strong> **Total Predicted Positives** (Everything you called 'Yes').</li>
+      <li><strong>TP + FP:</strong> <strong>Total Predicted Positives</strong> (Everything you called 'Yes').</li>
     </ul>
 
     <h2 id="use-case">When Precision is King</h2>
@@ -195,11 +195,11 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Mailroom Clerk** sorting mail. 
+        <strong>Analogy:</strong> Imagine a <strong>Mailroom Clerk</strong> sorting mail. 
         If he marks a simple bill as <strong>"Junk" (FP)</strong>, you miss your payment. 
         If he marks a <strong>"Win a Free Cruise!"</strong> email as "Good" (FN), you just delete it. 
         The "Junk" box mistake is <strong>Much Worse</strong>. 
-        **So, the clerk's PRECISION is the most important metric. He must only call something 'Junk' if he is absolutely certain.**
+        <strong>So, the clerk's PRECISION is the most important metric. He must only call something 'Junk' if he is absolutely certain.</strong>
       </div>
     </div>
 
@@ -319,7 +319,7 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     <div class="math-block">$$Recall = \frac{TP}{TP + FN}$$</div>
     <ul>
       <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FN:</strong> **Total Actual Positives** (Everything that is 'Yes' in reality).</li>
+      <li><strong>TP + FN:</strong> <strong>Total Actual Positives</strong> (Everything that is 'Yes' in reality).</li>
     </ul>
 
     <h2 id="use-case">When Recall is King</h2>
@@ -337,9 +337,9 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
       <div class="callout-icon">✓</div>
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine you dropped your <strong>Contact Lens</strong> in a swimming pool full of <strong>Plastic Rings</strong>. 
-        * **Case 1 (High Precision):** You only grab something if you are 100% sure it's the lens. You might leave the lens behind if you aren't sure. 
-        * **Case 2 (High Recall):** You use a <strong>Giant Net</strong> and pull out <strong>EVERYTHING</strong> from the pool. You definitely found the lens, but you also found 50 plastic rings. 
-        **The Giant Net approach has 100% RECALL. You didn't miss the lens, but your Precision was low because you caught a lot of junk.**
+        * <strong>Case 1 (High Precision):</strong> You only grab something if you are 100% sure it's the lens. You might leave the lens behind if you aren't sure. 
+        * <strong>Case 2 (High Recall):</strong> You use a <strong>Giant Net</strong> and pull out <strong>EVERYTHING</strong> from the pool. You definitely found the lens, but you also found 50 plastic rings. 
+        <strong>The Giant Net approach has 100% RECALL. You didn't miss the lens, but your Precision was low because you caught a lot of junk.</strong>
       </div>
     </div>
 
@@ -444,7 +444,7 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     </div>
 
     <h2 id="theory">Theoretical Core: The Harmonic Mean</h2>
-    <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the **Harmonic Mean** because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
+    <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the <strong>Harmonic Mean</strong> because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -473,11 +473,11 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Diplomat</strong> negotiating between two warring countries: **Country P (Precision)** and **Country R (Recall)**. 
-        * **Country P** wants to be perfectly right. 
-        * **Country R** wants to be perfectly thorough. 
+        <strong>Analogy:</strong> Imagine a <strong>Diplomat</strong> negotiating between two warring countries: <strong>Country P (Precision)</strong> and <strong>Country R (Recall)</strong>. 
+        * <strong>Country P</strong> wants to be perfectly right. 
+        * <strong>Country R</strong> wants to be perfectly thorough. 
         If the Diplomat only listens to one side, the treaty fails. 
-        **The F1 Score is that treaty. It only "Signs" the deal (reaches 1.0) if both countries are satisfied. If one country feels cheated, the whole F1 Score falls apart.**
+        <strong>The F1 Score is that treaty. It only "Signs" the deal (reaches 1.0) if both countries are satisfied. If one country feels cheated, the whole F1 Score falls apart.</strong>
       </div>
     </div>
 
@@ -535,7 +535,7 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. **Accuracy is a lie; F1 is the truth.**
+          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
         </div>
       </div>
     </div>
@@ -609,9 +609,9 @@ print(f"F1 Final Score: {f1:.2f}")
       <div class="callout-body">
         <strong>Analogy:</strong> Imagine a <strong>Security Metal Detector</strong> at a stadium. 
         There is a <strong>Knob (Threshold)</strong> that controls sensitivity. 
-        * **Max Sensitivity:** The alarm goes off for zippers, coins, and belt buckles. You catch every weapon (100% TPR), but you annoy everyone (100% FPR). 
-        * **Min Sensitivity:** The alarm only goes off for a giant sword. You annoy no one (0% FPR), but you miss smaller weapons (0% TPR). 
-        **The ROC Curve is the chart of the security guard's options. He looks at the curve and picks the knob setting that is 'Safe' but not 'Annoying.'**
+        * <strong>Max Sensitivity:</strong> The alarm goes off for zippers, coins, and belt buckles. You catch every weapon (100% TPR), but you annoy everyone (100% FPR). 
+        * <strong>Min Sensitivity:</strong> The alarm only goes off for a giant sword. You annoy no one (0% FPR), but you miss smaller weapons (0% TPR). 
+        <strong>The ROC Curve is the chart of the security guard's options. He looks at the curve and picks the knob setting that is 'Safe' but not 'Annoying.'</strong>
       </div>
     </div>
 
@@ -752,7 +752,7 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
         If you pick one random Math student and one random Art student, what is the chance the Math student got a higher grade? 
         If they are both equally good at chemistry, it's 50% (AUC = 0.5). 
         If Math students are consistently better, the chance might be 85% (AUC = 0.85). 
-        **AUC is that percentage. It describes how well your "Chemistry Test" (Model) separates the two groups.** 
+        <strong>AUC is that percentage. It describes how well your "Chemistry Test" (Model) separates the two groups.</strong> 
       </div>
     </div>
 

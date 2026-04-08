@@ -38,7 +38,7 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
 
     <h2 id="logic">Logic Gates & The XOR Crisis</h2>
     <p>A single Perceptron can perfectly model <strong>AND</strong> and <strong>OR</strong> gates. However, it <strong>cannot</strong> model the <strong>XOR (Exclusive OR)</strong> gate. Why? Because XOR is not <strong>Linearly Separable</strong>. You cannot draw a single straight line to separate the classes. 
-    **The Gotcha:** This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
+    <strong>The Gotcha:</strong> This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
 
     <h2 id="example">Illustrated Example: The Binary Voter</h2>
     <div class="example-box">
@@ -111,7 +111,7 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Architecture</div>
       <h1>Multilayer Perceptron (MLP)</h1>
-      <p>If a single Perceptron is a lone loan officer, an **MLP** is the **Entire Bank Headquarters**. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the **Universal Function Approximator** that solves the XOR crisis and everything beyond.</p>
+      <p>If a single Perceptron is a lone loan officer, an <strong>MLP</strong> is the <strong>Entire Bank Headquarters</strong>. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the <strong>Universal Function Approximator</strong> that solves the XOR crisis and everything beyond.</p>
     </div>
 
     <div class="toc">
@@ -124,7 +124,7 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     </div>
 
     <h2 id="theory">Theoretical Core: The Deep Stack</h2>
-    <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an **Input Layer**, one or more <strong>Hidden Layers</strong>, and an **Output Layer**. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
+    <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an <strong>Input Layer</strong>, one or more <strong>Hidden Layers</strong>, and an <strong>Output Layer</strong>. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -148,7 +148,7 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
 
     <h2 id="approximation">Universal Approximation Theorem</h2>
     <p><strong>The Theory:</strong> It states that a neural network with just <strong>One Hidden Layer</strong> and enough neurons can approximate <strong>Any Continuous Function</strong> to any degree of accuracy. 
-    **The Reality:** While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
+    <strong>The Reality:</strong> While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
 
     <h2 id="example">Illustrated Example: The Multi-Tiered Courtroom</h2>
     <div class="example-box">
@@ -226,7 +226,7 @@ for i, test in enumerate(test_cases):
     </div>
 
     <h2 id="theory">Theoretical Core: The Chain Rule</h2>
-    <p>Backpropagation is a <strong>Differential</strong> algorithm. It works by propagating the <strong>Error</strong> from the output layer <strong>Backwards</strong> to the input. We use the **Chain Rule** to find the derivative of the Loss function \(\mathcal{L}\) with respect to any weight \(w\).</p>
+    <p>Backpropagation is a <strong>Differential</strong> algorithm. It works by propagating the <strong>Error</strong> from the output layer <strong>Backwards</strong> to the input. We use the <strong>Chain Rule</strong> to find the derivative of the Loss function \(\mathcal{L}\) with respect to any weight \(w\).</p>
     <div class="math-block">$$\frac{\partial \mathcal{L}}{\partial w_{jk}^{(L)}} = \frac{\partial \mathcal{L}}{\partial a_j^{(L)}} \times \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{jk}^{(L)}}$$</div>
     <ul>
       <li><strong>Error in Output:</strong> How much the loss changes if the output changes.</li>
@@ -331,11 +331,11 @@ print(f"New Improved Weight: {w:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>
-  `},a={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
+  `},n={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
-      <p>Without an **Activation Function**, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the **Non-Linear Magic** that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
+      <p>Without an <strong>Activation Function</strong>, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the <strong>Non-Linear Magic</strong> that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
     </div>
 
     <div class="toc">
@@ -367,7 +367,7 @@ print(f"New Improved Weight: {w:.4f}")
 
     <h2 id="relu">ReLU: Rectified Linear Unit</h2>
     <p><strong>The Theory:</strong> \(f(x) = \max(0, x)\). If the input is negative, it's zero. If it's positive, it passes through unchanged. 
-    **Why it's King:** ReLU is computationally <strong>very fast</strong> and doesn't suffer from the "Vanishing Gradient" problem as badly as Sigmoid. It is the secret ingredient that made <strong>Deep Learning</strong> possible in the 2010s.</p>
+    <strong>Why it's King:</strong> ReLU is computationally <strong>very fast</strong> and doesn't suffer from the "Vanishing Gradient" problem as badly as Sigmoid. It is the secret ingredient that made <strong>Deep Learning</strong> possible in the 2010s.</p>
 
     <h2 id="softmax">Softmax: The Final Judge</h2>
     <p>Used in the <strong>Output Layer</strong> for classification. It takes a vector of raw scores (logits) and converts them into a <strong>Probability Distribution</strong> where the sum of all elements is 1.</p>
@@ -429,7 +429,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We filtered the signals. Now how do we measure how "Wrong" the signals are? Explore <strong><a href="#/machine-learning/deep-learning/loss-functions">Loss Functions</a></strong>.
     </div>
-  `},n={id:"loss-functions",title:"Loss Functions",description:"The mathematical 'yardsticks' that measure how well (or poorly) a neural network's predictions match the true reality.",color:"#e3b341",html:String.raw`
+  `},o={id:"loss-functions",title:"Loss Functions",description:"The mathematical 'yardsticks' that measure how well (or poorly) a neural network's predictions match the true reality.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Loss Functions: The Moral Compass</h1>
@@ -453,7 +453,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Price of Failure."</strong> 
         Different problems have <strong>different penalties</strong>. 
-        If you miss a <strong>House Price</strong> by \$1,000, that's okay. 
+        If you miss a <strong>House Price</strong> by $1,000, that's okay. 
         If you are <strong>100% Confident</strong> that a Dog is a Cat, the penalty should be massive. The type of loss tells the machine <strong>what matters</strong>.
       </div>
     </div>
@@ -461,7 +461,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     <h2 id="regression">Mean Squared Error (MSE)</h2>
     <p>Used for Regression. It calculates the <strong>Average of the Squared Differences</strong> between the true value $y$ and predicted $\hat{y}$.</p>
     <div class="math-block">$$MSE = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2$$</div>
-    <p>**The Gotcha:** Squaring the error makes <strong>Large Mistakes</strong> much more expensive than small ones. This forces the model to ignore small noise and focus on big outliers.</p>
+    <p><strong>The Gotcha:</strong> Squaring the error makes <strong>Large Mistakes</strong> much more expensive than small ones. This forces the model to ignore small noise and focus on big outliers.</p>
 
     <h2 id="classification">Cross-Entropy Loss (Log-Loss)</h2>
     <p>Used for Classification. It measures the <strong>Distance between Probabilities</strong>. If the model predicts a 10% chance of a "Spam" email when it is actually Spam, the loss is huge.</p>
@@ -471,7 +471,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     <h2 id="example">Illustrated Example: The Coach's Rulebook</h2>
     <div class="example-box">
       <h4>Scenario: Training an Athlete for the Olympics</h4>
-      <p>The **Loss** is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
+      <p>The <strong>Loss</strong> is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -522,11 +522,11 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the components. Now how do we arrange them into powerful configurations? Explore <strong><a href="#/machine-learning/deep-learning/architectures-intro">Deep Learning Architectures</a></strong>.
     </div>
-  `},i={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
+  `},a={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Overview</div>
       <h1>Deep Learning Architectures</h1>
-      <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an **Image Model** needs layers that "See," and a **Speech Model** needs layers that "Listen."</p>
+      <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an <strong>Image Model</strong> needs layers that "See," and a <strong>Speech Model</strong> needs layers that "Listen."</p>
     </div>
 
     <div class="toc">
@@ -552,7 +552,7 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     </div>
 
     <h2 id="inductive-bias">Inductive Bias: The Secret Assumption</h2>
-    <p>Every architecture has an **Inductive Bias**—a set of assumptions the model makes about the data <strong>before</strong> it sees it.</p>
+    <p>Every architecture has an <strong>Inductive Bias</strong>—a set of assumptions the model makes about the data <strong>before</strong> it sees it.</p>
     <ul>
       <li><strong>CNN Bias:</strong> "Nearby pixels are related." (Spatial Invariance).</li>
       <li><strong>RNN Bias:</strong> "The current word depends on the previous one." (Temporal Continuity).</li>
@@ -638,11 +638,11 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's look at the assembly line for images. Explore <strong><a href="#/machine-learning/deep-learning/cnn">Convolutional Neural Networks (CNN)</a></strong>.
     </div>
-  `},o={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
+  `},i={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Vision</div>
       <h1>CNN: The Flashlight in the Dark</h1>
-      <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use **Filters** to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
+      <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use <strong>Filters</strong> to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
     </div>
 
     <div class="toc">
@@ -666,7 +666,7 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Signature."</strong> 
-        The first layer has filters for **Vertical Edges**. 
+        The first layer has filters for <strong>Vertical Edges</strong>. 
         If a filter "Hits" a vertical line, the output is high. 
         It doesn't matter <strong>where</strong> in the image the edge is; the filter will find it.
       </div>
@@ -674,7 +674,7 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
 
     <h2 id="pooling">Pooling: Reducing the Resolution</h2>
     <p>After we find the edges, we don't need the exact pixel locations anymore. We just need to know "Was there an edge in this general area?" 
-    **Max Pooling** takes the <strong>Largest Value</strong> from a region. This makes the model robust to <strong>Small Shifts</strong> in the image (Translation Invariance).</p>
+    <strong>Max Pooling</strong> takes the <strong>Largest Value</strong> from a region. This makes the model robust to <strong>Small Shifts</strong> in the image (Translation Invariance).</p>
 
     <h2 id="bias">Translation Invariance</h2>
     <p>If you see a <strong>Cat in the top-left</strong> or a <strong>Cat in the bottom-right</strong>, it's still a cat. CNNs are specifically designed to ignore the <strong>Where</strong> and focus on the <strong>What</strong>. This is their core "Inductive Bias."</p>
@@ -748,7 +748,7 @@ print(f"Kernel Response: {output[3:7]}")
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Sequence</div>
       <h1>RNN: The Goldfish with a Notebook</h1>
-      <p>How do you understand a **Sentence**? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
+      <p>How do you understand a <strong>Sentence</strong>? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
     </div>
 
     <div class="toc">
@@ -781,7 +781,7 @@ print(f"Kernel Response: {output[3:7]}")
     <h2 id="bptt">BPTT: Backpropagation Through Time</h2>
     <p>How do we train an RNN? We "Unroll" it! 
     Imagine a network with 100 time steps as one giant 100-layer MLP where every layer <strong>Shares the Same Weights</strong>. This is <strong>Backpropagation Through Time (BPTT)</strong>. 
-    **The Gotcha:** Because we use the same weights over and over, small errors can <strong>Explode</strong> or <strong>Vanish</strong> exponentially over time.</p>
+    <strong>The Gotcha:</strong> Because we use the same weights over and over, small errors can <strong>Explode</strong> or <strong>Vanish</strong> exponentially over time.</p>
 
     <h2 id="limitations">The Short-Term Memory Problem</h2>
     <p><strong>The Reality:</strong> Simple RNNs have <strong>Terrible Memory</strong>. If a sentence is 20 words long, by the time the RNN reaches the last word, it has usually <strong>forgotten</strong> the first word. It only has "Short-Term" persistence.</p>
@@ -868,11 +868,11 @@ for i, x_t in enumerate(sequence):
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Selective Writing."</strong> 
-        The cell state is the **Permanent Ink**. 
-        The gates are **Electronic Checkpoints**. 
-        Checkpoint 1 (Forget Gate) decides what to **Erase**. 
-        Checkpoint 2 (Input Gate) decides what to **Add**. 
-        Checkpoint 3 (Output Gate) decides what to **Read**. 
+        The cell state is the <strong>Permanent Ink</strong>. 
+        The gates are <strong>Electronic Checkpoints</strong>. 
+        Checkpoint 1 (Forget Gate) decides what to <strong>Erase</strong>. 
+        Checkpoint 2 (Input Gate) decides what to <strong>Add</strong>. 
+        Checkpoint 3 (Output Gate) decides what to <strong>Read</strong>. 
       </div>
     </div>
 
@@ -896,8 +896,8 @@ for i, x_t in enumerate(sequence):
     </div>
 
     <h2 id="gru">The GRU: Gating Simplified</h2>
-    <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into **One**, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
-    **Why use it?** It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
+    <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into <strong>One</strong>, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
+    <strong>Why use it?</strong> It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
 
     <h2 id="example">Illustrated Example: The Disciplined Scientist</h2>
     <div class="example-box">
@@ -966,7 +966,7 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Attention</div>
       <h1>The Transformer: The Attention Spotlight</h1>
-      <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with **Attention**—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the **Parallelization** of intelligence.</p>
+      <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with <strong>Attention</strong>—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the <strong>Parallelization</strong> of intelligence.</p>
     </div>
 
     <div class="toc">
@@ -990,8 +990,8 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Context."</strong> 
-        In the sentence "The **Bank** was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
-        In "The **Bank** of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
+        In the sentence "The <strong>Bank</strong> was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
+        In "The <strong>Bank</strong> of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
         Attention is the <strong>Exact Mathematical Calculation</strong> of that relationship.
       </div>
     </div>
@@ -999,7 +999,7 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
     <h2 id="attention">Self-Attention Mechanism</h2>
     <p>We calculate the <strong>Compatibility</strong> between Queries and Keys using the <strong>Dot Product</strong>. This creates a weight (Attention Score). We then use those weights to create a <strong>Weighted Sum</strong> of the Values.</p>
     <div class="math-block">$$Attention(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$</div>
-    <p>**The Power:** This happens for <strong>Every Word at the Same Time</strong>. There is no "Looping." This makes training 100x faster than RNNs.</p>
+    <p><strong>The Power:</strong> This happens for <strong>Every Word at the Same Time</strong>. There is no "Looping." This makes training 100x faster than RNNs.</p>
 
     <h2 id="multi-head">Multi-Head Attention</h2>
     <p>Instead of just one "Search Engine," we have 8 or 12. 
@@ -1020,7 +1020,7 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The New Way (Attention):</strong> **EVERY Actor** has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
+          <div><strong>The New Way (Attention):</strong> <strong>EVERY Actor</strong> has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -1119,4 +1119,4 @@ print(output.round(1))
       </div>
 
     </div>
-  `,sections:[e,t,s,a,n,i,o,r,l,h]};export{d as DEEP_LEARNING_DATA};
+  `,sections:[e,t,s,n,o,a,i,r,l,h]};export{d as DEEP_LEARNING_DATA};

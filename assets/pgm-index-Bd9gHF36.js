@@ -58,7 +58,7 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
     <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
     <div class="example-box">
       <h4>Scenario: Explaining Away the Broken Window</h4>
-      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A **Burglar** or a **Baseball** thrown by a neighborhood kid.</p>
+      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A <strong>Burglar</strong> or a <strong>Baseball</strong> thrown by a neighborhood kid.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -190,15 +190,15 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Observations:</strong> Your Guard walks by. Sometimes he has an **Umbrella**, sometimes he has **Sunshades**. (Emission).</div>
+          <div><strong>The Observations:</strong> Your Guard walks by. Sometimes he has an <strong>Umbrella</strong>, sometimes he has <strong>Sunshades</strong>. (Emission).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>The Transitions:</strong> If it's Raining today, there's a 70% chance it will still be Raining tomorrow. This is the **Markov Property**.</div>
+          <div><strong>The Transitions:</strong> If it's Raining today, there's a 70% chance it will still be Raining tomorrow. This is the <strong>Markov Property</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Decoding (Viterbi):</strong> You see [Umbrella, Umbrella, Sunshades]. You calculate the **Most Likely Path** and conclude: "It rained for two days, and then the sun came out."</div>
+          <div><strong>The Decoding (Viterbi):</strong> You see [Umbrella, Umbrella, Sunshades]. You calculate the <strong>Most Likely Path</strong> and conclude: "It rained for two days, and then the sun came out."</div>
         </div>
       </div>
 
@@ -265,7 +265,7 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     </div>
 
     <h2 id="math">Jensen's Inequality & Lower Bound</h2>
-    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to **Jensen's Inequality**, the average of the logs is less than or equal to the log of the averages.</p>
+    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to <strong>Jensen's Inequality</strong>, the average of the logs is less than or equal to the log of the averages.</p>
     <div class="math-block">$$\log \sum_z P(x, z \mid \theta) \ge \sum_z Q(z) \log \frac{P(x, z \mid \theta)}{Q(z)}$$</div>
 
     <h2 id="steps">The 2 Big Steps: E and M</h2>
@@ -291,7 +291,7 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     <h2 id="example">Illustrated Example: The Blind Schoolteacher</h2>
     <div class="example-box">
       <h4>Scenario: Sorting 100 Students into Two Voice-Pitch Teams</h4>
-      <p>Imagine a blind teacher trying to sort 100 students into two teams: **The High-Pitch Sopranos** and **The Low-Pitch Basses**. The teacher doesn't know who is who.</p>
+      <p>Imagine a blind teacher trying to sort 100 students into two teams: <strong>The High-Pitch Sopranos</strong> and <strong>The Low-Pitch Basses</strong>. The teacher doesn't know who is who.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -300,7 +300,7 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Expectation (E-Step):</strong> A student speaks. Based on the current guesses, the teacher says: "You sound 80% like a Soprano." This is a **Soft Assignment** (Filling the latent variable).</div>
+          <div><strong>Expectation (E-Step):</strong> A student speaks. Based on the current guesses, the teacher says: "You sound 80% like a Soprano." This is a <strong>Soft Assignment</strong> (Filling the latent variable).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -353,7 +353,7 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},i={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
+  `},s={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -399,4 +399,4 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
       </div>
 
     </div>
-  `,sections:[e,t,a]};export{i as PGM_DATA};
+  `,sections:[e,t,a]};export{s as PGM_DATA};

@@ -44,7 +44,7 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
         No one is telling him "This is a dog" or "This is a tree." 
         But to put the pieces together, he has to learn that <strong>Edges</strong> match edges and <strong>Colors</strong> flow into each other. 
         By the time he finishes 1,000 puzzles, he doesn't know the <strong>Names</strong> of things, but he <strong>Understand Concepts</strong> like eyes, wheels, and grass perfectly. 
-        **Self-Supervised learning is that Toddler. The Jigsaw entries are the Pretext Tasks.**
+        <strong>Self-Supervised learning is that Toddler. The Jigsaw entries are the Pretext Tasks.</strong>
       </div>
     </div>
 
@@ -179,8 +179,8 @@ print("Views created. Model will now learn if these came from the SAME image.")
         <strong>Analogy:</strong> Imagine a <strong>Kung Fu Master</strong> who has spent 30 years mastering <strong>Body Mechanics</strong>, balance, and speed. 
         One day, he decides he wants to learn <strong>Tennis</strong>. 
         Does he start like a toddler? No. He already has the footwork, the reflexes, and the discipline. 
-        He only needs to learn the <strong>Racket Grip</strong> and the **Rules of the Court**. 
-        **Transfer learning is that Master. The 30 years of Kung Fu is the Pre-training. The Tennis lessons are the Fine-tuning.**
+        He only needs to learn the <strong>Racket Grip</strong> and the <strong>Rules of the Court</strong>. 
+        <strong>Transfer learning is that Master. The 30 years of Kung Fu is the Pre-training. The Tennis lessons are the Fine-tuning.</strong>
       </div>
     </div>
 
@@ -227,7 +227,7 @@ print("Views created. Model will now learn if these came from the SAME image.")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they **Express** their existing skill (The New Head).</div>
+          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they <strong>Express</strong> their existing skill (The New Head).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
@@ -293,7 +293,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
       <div class="callout-body">
         <strong>Teacher's Intuition:</strong> Think of it as <strong>"Lossy but Smart Compression."</strong> 
         If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
-        Those 3 attributes are the **Representations**. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
+        Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
       </div>
     </div>
 
@@ -317,8 +317,8 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
         "Eyes? Round." 
         "Nose? Pointy." 
         "Hair? Short." 
-        Those <strong>Words</strong> are the **Representations**. They are a low-dimensional summary of the person's identity. 
-        **Representation learning is the Artist. He is finding the few 'Features' that allow us to reconstruct the truth without all the noise.** 
+        Those <strong>Words</strong> are the <strong>Representations</strong>. They are a low-dimensional summary of the person's identity. 
+        <strong>Representation learning is the Artist. He is finding the few 'Features' that allow us to reconstruct the truth without all the noise.</strong> 
       </div>
     </div>
 
@@ -352,7 +352,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
     <div class="example-box">
       <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
-      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use **Features**.</p>
+      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use <strong>Features</strong>.</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -361,7 +361,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: **[Sweet, Sour, Salty, Bitter, Umami]**.</div>
+          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: <strong>[Sweet, Sour, Salty, Bitter, Umami]</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -444,7 +444,7 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
 
     <h2 id="augmentation">Creating "Friends" with Augmentation</h2>
     <p>In <strong>Self-Supervised Contrastive Learning</strong> (like SimCLR), we create our own positive pairs. We take one image and create two versions: one cropped, one flipped. 
-    **The Logic:** Even though they look different to a computer (different pixels), they are the <strong>Same Object</strong>. We force the model to acknowledge this "Similarity."</p>
+    <strong>The Logic:</strong> Even though they look different to a computer (different pixels), they are the <strong>Same Object</strong>. We force the model to acknowledge this "Similarity."</p>
 
     <h2 id="triplet">The Triplet Loss</h2>
     <div class="math-block">$$\mathcal{L} = \max(0, d(a, p) - d(a, n) + \alpha)$$</div>
@@ -459,11 +459,11 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are at a **Crowded Party**. 
-        * **Contrastive Learning:** You want to be <strong>Right next</strong> to your Best Friend (Positive Pair). 
+        <strong>Analogy:</strong> Imagine you are at a <strong>Crowded Party</strong>. 
+        * <strong>Contrastive Learning:</strong> You want to be <strong>Right next</strong> to your Best Friend (Positive Pair). 
         * But you also want to be <strong>As far as possible</strong> from your Ex-Rival (Negative Pair). 
         As you move through the room, you are constantly checking these two distances. 
-        **By the end of the night, if everyone does this, the room will be 'Clustered' into groups of friends. The model learns these groups without anyone telling it the 'Social Hierarchy.'** 
+        <strong>By the end of the night, if everyone does this, the room will be 'Clustered' into groups of friends. The model learns these groups without anyone telling it the 'Social Hierarchy.'</strong> 
       </div>
     </div>
 

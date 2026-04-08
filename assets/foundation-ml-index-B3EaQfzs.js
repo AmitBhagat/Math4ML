@@ -74,8 +74,8 @@ model.fit(sizes, prices)
 
 # Compare on a 500 sqft studio
 test_size = np.array([[500]])
-print(f"Manual Price: \${manual_rule(500):,.0f}")
-print(f"ML Price:     \${model.predict(test_size)[0]:,.2f}")
+print("Manual Price: $" + f"{manual_rule(500):,.0f}")
+print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
     </python-code>
 
     <h2 id="why">Why Use ML?</h2>
@@ -184,7 +184,7 @@ print(f"ML Price:     \${model.predict(test_size)[0]:,.2f}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>The Unsupervised Way:</strong> No librarian exists. You just start grouping books that "Feel" the same—maybe by thickness, paper smell, or language. You don't know the genres, but you find 10 distinct **Clusters**.</div>
+          <div><strong>The Unsupervised Way:</strong> No librarian exists. You just start grouping books that "Feel" the same—maybe by thickness, paper smell, or language. You don't know the genres, but you find 10 distinct <strong>Clusters</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
@@ -195,7 +195,7 @@ print(f"ML Price:     \${model.predict(test_size)[0]:,.2f}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use **Supervised**. If you have raw data and need insight, use **Unsupervised**. If you have an environment and an objective (like a robot), use **Reinforcement**.
+          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
         </div>
       </div>
     </div>
@@ -298,7 +298,7 @@ y_reg = np.array([250000, 300000, 350000, 450000])
 
 reg_model = LinearRegression().fit(X_reg, y_reg)
 price_pred = reg_model.predict([[1810]])[0]
-print(f"[Regression] Predicted House Price: \${price_pred:,.0f}")
+print("[Regression] Predicted House Price: $" + f"{price_pred:,.0f}")
 
 # 2. Classification (Predicting a Category)
 # Input: [Word Count, 'Win' count], Output: [0=Normal, 1=Spam]
@@ -568,7 +568,7 @@ for i in range(3):
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Evaluation</div>
       <h1>Training vs. Testing: The Golden Rule</h1>
-      <p>The **Golden Rule** of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
+      <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
     </div>
 
     <div class="toc">
@@ -663,7 +663,7 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
     </div>
 
     <h2 id="theory">The Mechanics of Complexity</h2>
-    <p>Every model has a **Capacity** (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
+    <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -672,7 +672,7 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
         If you have 10 data points that roughly form a line: 
         <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
         <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
-        The **Truth** is a slightly wobbly line that catches the general trend.
+        The <strong>Truth</strong> is a slightly wobbly line that catches the general trend.
       </div>
     </div>
 
@@ -703,7 +703,7 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are **Overfitting**. If you fail both, you are **Underfitting**.
+          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
         </div>
       </div>
     </div>
@@ -787,11 +787,11 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>High Bias, Low Variance (The Stubborn):</strong> Every arrow hits exactly 10 inches to the left. The archer is consistent (Low Variance) but systematically wrong (High Bias). This is **Underfitting**.</div>
+          <div><strong>High Bias, Low Variance (The Stubborn):</strong> Every arrow hits exactly 10 inches to the left. The archer is consistent (Low Variance) but systematically wrong (High Bias). This is <strong>Underfitting</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">3</span>
-          <div><strong>Low Bias, High Variance (The Chaotic):</strong> Arrows are scattered all over the board. On average, they are centered, but any single shot is wild. This archer is "Over-Anxious" and reacts to every gust of wind. This is **Overfitting**.</div>
+          <div><strong>Low Bias, High Variance (The Chaotic):</strong> Arrows are scattered all over the board. On average, they are centered, but any single shot is wild. This archer is "Over-Anxious" and reacts to every gust of wind. This is <strong>Overfitting</strong>.</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
@@ -866,7 +866,7 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
     </div>
 
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
-    <p>The most common form is **K-Fold**. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
+    <p>The most common form is <strong>K-Fold</strong>. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
     <ul>
       <li><strong>Iteration 1:</strong> Fold 1 is the Test, Folds 2-5 are Training.</li>
       <li><strong>Iteration 2:</strong> Fold 2 is the Test, Folds 1, 3-5 are Training.</li>
@@ -1039,12 +1039,12 @@ print(df[['Price', 'Age_at_Sale']])
     </div>
 
     <h2 id="standardization">Standardization (Z-Score)</h2>
-    <p>This transforms your data to have a **Mean of 0** and a **Standard Deviation of 1** (Standard Normal Distribution).</p>
+    <p>This transforms your data to have a <strong>Mean of 0</strong> and a <strong>Standard Deviation of 1</strong> (Standard Normal Distribution).</p>
     <div class="math-block">$$x' = \frac{x - \mu}{\sigma}$$</div>
     <p><strong>Note:</strong> Most algorithms (like SVMs and Neural Nets) prefer this because it handles "Outliers" more gracefully than Min-Max.</p>
 
     <h2 id="normalization">Normalization (Min-Max)</h2>
-    <p>This "Squeezes" all your data into a fixed range, usually **[0, 1]**.</p>
+    <p>This "Squeezes" all your data into a fixed range, usually <strong>[0, 1]</strong>.</p>
     <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
     <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
 
@@ -1173,7 +1173,7 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have completed the foundation. You possess the **Intuition** and **Math** to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
+      <strong>Next Step:</strong> You have completed the foundation. You possess the <strong>Intuition</strong> and <strong>Math</strong> to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
     </div>
   `},p={id:"foundation-ml",title:"Foundation of Machine Learning",description:"The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",keyConcepts:[{title:"What is ML?",description:"Learning patterns from data vs. manual rule-based programming."},{title:"Learning Paradigms",description:"Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning."},{title:"Model Performance",description:"The core trade-offs: Generalization vs. Overfitting and Bias vs. Variance."},{title:"Data Preparation",description:"The art of Feature Engineering and Scaling to maximize model insight."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
