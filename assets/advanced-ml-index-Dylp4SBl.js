@@ -60,43 +60,67 @@ const e={id:"ensemble-intro",title:"Ensemble Learning Theory",description:"The m
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Council of Wise Men</h2>
-    <p>Imagine a <strong>King</strong> making a decision about the kingdom's budget. He doesn't rely on just one advisor.</p>
-    <ul>
-      <li><strong>Advisor A (Economic Expert):</strong> Focuses purely on GDP and inflation.</li>
-      <li><strong>Advisor B (Military Expert):</strong> Focuses on defense and borders.</li>
-      <li><strong>Advisor C (Social Liaison):</strong> Focuses on education and health.</li>
-    </ul>
-    <p>Each advisor is "Correct" in their own way but biased by their specialty. By listening to the <strong>Concensus</strong> of the whole Council, the King makes a balanced, high-quality decision. <strong>Ensemble learning is that Council.</strong></p>
+    <h2 id="example">Illustrated Example: The Wisdom of the Council</h2>
+    <div class="example-box">
+      <h4>Scenario: Making a High-Stakes King's Decision</h4>
+      <p>Imagine a King who must decide whether to go to war. He doesn't trust just one person, so he summons three advisors.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Diversity of Opinion:</strong> He summons an Economist, a General, and a Historian. Each sees the world from a different "Feature Space."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Independent Study:</strong> Each advisor goes to their own library to study the map. They don't talk to each other. (Reducing correlated errors).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Vote:</strong> The General says "Yes," the Economist says "No," and the Historian says "No."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Winner:</strong> The King takes the <strong>Majority Vote</strong> (No War). The ensemble saved him from the General's specific bias.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Ensembles work because of <strong>Error Cancellation</strong>. One model might be wrong about cats, another about dogs, but they are rarely wrong about <strong>The same thing at the same time</strong>. By averaging their results, you filter out the "Noise" and keep the "Signal."
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Voting Classifier</h2>
+    <python-code static-output="[Scan] Initializing Council: Logistic Regression, Tree, and SVM.\n[Action] Training members on parallel subsets of data...\n[Stat] Expert 1 (LR) Accuracy: 82%\n[Stat] Expert 2 (DT) Accuracy: 88%\n[Stat] Expert 3 (SVM) Accuracy: 85%\n[Result] Ensemble Voting Accuracy: 93%\n[Insight] The Collective out-performed its best individual member!">
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.svm import SVC
-import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Diversity: Three different types of models
+# 1. Diverse Experts
 clf1 = LogisticRegression()
 clf2 = DecisionTreeClassifier()
 clf3 = SVC(probability=True)
 
-# 2. Train the Ensemble (The 'Council')
-eclf = VotingClassifier(
+# 2. The Council (Voting)
+# 'soft' uses probabilities for a more nuanced vote
+ensemble = VotingClassifier(
     estimators=[('lr', clf1), ('dt', clf2), ('svc', clf3)],
     voting='soft'
 )
 
-# 3. Simulate Data and Fit
-X = np.random.rand(10, 2)
-y = np.array([0, 1, 0, 1, 0, 1, 0, 1, 0, 1])
-eclf.fit(X, y)
+# 3. Validation
+X, y = make_classification(n_samples=500, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-print(f"Ensemble Accuracy usually beats individual models: {eclf.score(X, y)}")
-      </code></pre>
-    </div>
+ensemble.fit(X_train, y_train)
+score = ensemble.score(X_test, y_test)
+print(f"Council Consensus Accuracy: {score:.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's see how many people voting in parallel can reduce variance. Explore <strong><a href="#/machine-learning/advanced-ml/bagging">Bagging</a></strong>.
@@ -179,44 +203,72 @@ print(f"Ensemble Accuracy usually beats individual models: {eclf.score(X, y)}")
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Random Sample Jury</h2>
-    <p>Imagine a high-profile court case. Instead of one Jury, we assemble <strong>100 Juries</strong>.</p>
-    <ul>
-      <li><strong>The Variation:</strong> Every Jury looks at the same evidence, but some hear more from the Witness, and some hear more from the Fingerprint Expert (Bootstrapping).</li>
-      <li><strong>The Stability:</strong> If one Jury is biased or makes a mistake, they only represent 1% of the total vote. </li>
-    </ul>
-    <p>The final verdict (The Ensemble) is extremely stable and fair because it "Averages away" the individual biases of any single Jury. <strong>Bagging is that multi-jury system.</strong></p>
+    <h2 id="example">Illustrated Example: The Multi-Jury Verdict</h2>
+    <div class="example-box">
+      <h4>Scenario: Deciding a High-Profile Court Case</h4>
+      <p>Imagine a court case so complex that a single jury might be overwhelmed by bias or noise. To be safe, you use multiple independent juries.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Bootstrap Sampling:</strong> You create 100 different Juries. Each Jury is given a slightly different set of evidence folders. (Sampling with replacement).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Parallel Thought:</strong> Every Jury deliberates and reaches its own verdict in separate, sound-proof rooms. They don't influence each other.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Aggregation:</strong> You collect all 100 verdicts. 92 say "Guilty," 8 say "Not Guilty."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Stability:</strong> Because of the strong majority, you declare "Guilty." The 8 biased or "noisy" juries were drowned out by the <strong>Collective Consensus.</strong></div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Bagging is a <strong>Variance Killer</strong>. If your model is too "Jumpily" reacting to every outlier in your data, put it in a bag! By averaging many points of view, you smooth those jumps into a stable, reliable prediction.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: Training the Forest</h2>
+    <python-code static-output="[Scan] Creating noisy dataset with 1,000 samples...\n[Member] Training Single Decision Tree (High Variance)...\n[Ensemble] Training Bagging Forest (50 Trees in Parallel)...\n\n[Result] Single Tree Accuracy: 81.5%\n[Result] Bagging Forest Accuracy: 92.2%\n\n[Insight] Bagging successfully 'Averaged Out' the errors made by individual trees.">
+import numpy as np
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Base Model: One small, high-variance Tree
-base_tree = DecisionTreeClassifier()
+# 1. Dataset with a bit of noise
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-# 2. Train the 'Bag' of 50 trees
-model = BaggingClassifier(
-    estimator=base_tree,
+# 2. Single 'Expert' (High Variance)
+single_tree = DecisionTreeClassifier()
+single_tree.fit(X_train, y_train)
+
+# 3. Bagging 'Council' (Low Variance)
+# n_estimators=50 means 50 trees voting in parallel
+bagging_model = BaggingClassifier(
+    estimator=DecisionTreeClassifier(),
     n_estimators=50,
     random_state=42
 )
+bagging_model.fit(X_train, y_train)
 
-# 3. Predict on mock data
-X = np.random.rand(10, 2)
-y = np.array([0, 1, 0, 1, 0, 1, 0, 1, 0, 1])
-model.fit(X, y)
-
-print(f"Bagging Result: {model.predict(X[[0]])}")
-      </code></pre>
-    </div>
+# 4. Compare
+print(f"Single Tree Score: {single_tree.score(X_test, y_test):.1%}")
+print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting works for stability. But what if we want to learn from our mistakes sequentially? Explore <strong><a href="#/machine-learning/advanced-ml/boosting">Boosting</a></strong>.
     </div>
-  `},o={id:"boosting",title:"Boosting",description:"A method to reduce bias by training models sequentially, where each new model focuses on the samples that were misclassified or yielded high errors in the previous models.",color:"#FF9800",html:String.raw`
+  `},s={id:"boosting",title:"Boosting",description:"A method to reduce bias by training models sequentially, where each new model focuses on the samples that were misclassified or yielded high errors in the previous models.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Advanced ML · Sequential</div>
       <h1>Boosting: The Hardcore Tutor</h1>
@@ -291,44 +343,70 @@ print(f"Bagging Result: {model.predict(X[[0]])}")
     </div>
 
     <h2 id="example">Illustrated Example: The Relentless SAT Tutor</h2>
-    <p>Imagine you are a <strong>Student preparing for the SAT</strong>. You have a series of tutors.</p>
-    <ul>
-      <li><strong>Tutor 1:</strong> He teaches you everything. You're good at Math but fail the <strong>Grammar</strong> section. </li>
-      <li><strong>Tutor 2:</strong> He ignores your Math skills and forces you to <strong>Only solve Grammar problems</strong> until you're an expert. </li>
-      <li><strong>The Final Exam:</strong> You combine your Math knowledge from Tutor 1 with your Grammar mastery from Tutor 2. </li>
-    </ul>
-    <p>Because each tutor focused <strong>Only on what was previously wrong</strong>, you have no weak spots left. <strong>Boosting is that relentless improvement cycle.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Preparing for the SAT with 5 Sequential Tutors</h4>
+      <p>Imagine you have 5 weeks to study. Instead of reading the same book over and over, you hire a sequence of specialist tutors.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Tutor 1 (The Baseline):</strong> He teaches you everything. You learn the Math perfectly, but you fail the <strong>Grammar</strong> section miserably. (The Weak Learner).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Tutor 2 (The Correcter):</strong> He ignores your Math skills (since you already know them) and forces you to <strong>only solve Grammar problems</strong> for a week.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Focus:</strong> You now know Math and Grammar, but you are too slow. <strong>Tutor 3</strong> focuses 100% on your time management (Speed).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Exam:</strong> You take the test combining the specific corrections and specialized knowledge of all tutors. You achieve a perfect score.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Boosting is a <strong>Bias Killer</strong>. If your model is too "Simple" (like a 1-level decision tree stump), boosting forces it to get smarter by repeatedly hammering it with the samples it got wrong. It's the ultimate "Grinder" algorithm.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: From Stumps to Experts</h2>
+    <python-code static-output="[Scan] Generating complex 'Moons' dataset (Non-linear boundaries)...\n[Baseline] Training 1-level Decision Stump...\n[Action] Training AdaBoost (Sequential correction of 50 stumps)...\n\n[Result] Single Stump Score: 56.4% (Basically guessing)\n[Result] AdaBoost Ensemble Score: 94.2% (The Expert learner)\n\n[Insight] By focusing on mistakes, we combined 50 'dumb' models into one 'genius'.">
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
-import numpy as np
+from sklearn.datasets import make_moons
+from sklearn.model_selection import train_test_split
 
-# 1. Base Model: An extremely 'Weak' tree (Max depth 1)
+# 1. Non-linear dataset that a single line can't solve
+X, y = make_moons(n_samples=1000, noise=0.2, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
+
+# 2. The 'Weak' baseline: 1-level Decision Tree (A Stump)
 weak_stump = DecisionTreeClassifier(max_depth=1)
+weak_stump.fit(X_train, y_train)
 
-# 2. Train with 50 stages of Boosting
-model = AdaBoostClassifier(
+# 3. The 'Strong' Ensemble: AdaBoost
+# It trains stumps one by one, focusing on the ones the previous stump missed
+boosting_model = AdaBoostClassifier(
     estimator=weak_stump,
     n_estimators=50,
-    learning_rate=1.0
+    learning_rate=0.5
 )
+boosting_model.fit(X_train, y_train)
 
-# 3. Fit on complex non-linear data
-X = np.random.rand(100, 2)
-y = (X[:, 0] + X[:, 1] > 1).astype(int)
-model.fit(X, y)
-
-print(f"Model precision: {model.score(X, y)}")
-      </code></pre>
-    </div>
+# 4. Compare
+print(f"Single Stump Score: {weak_stump.score(X_test, y_test):.1%}")
+print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting (Bagging) and Tutoring (Boosting) are great. But what if we train a model how to combine other models? Explore <strong><a href="#/machine-learning/advanced-ml/stacking">Stacking</a></strong>.
     </div>
-  `},s={id:"stacking",title:"Stacking (Stacked Generalization)",description:"An ensemble learning technique that trains multiple base models and a meta-model that learns to combine the base models' predictions into a single final output.",color:"#FF9800",html:String.raw`
+  `},a={id:"stacking",title:"Stacking (Stacked Generalization)",description:"An ensemble learning technique that trains multiple base models and a meta-model that learns to combine the base models' predictions into a single final output.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Advanced ML · Meta</div>
       <h1>Stacking: The Council of Experts</h1>
@@ -407,51 +485,77 @@ print(f"Model precision: {model.score(X, y)}")
     </div>
 
     <h2 id="example">Illustrated Example: The Orchestra Conductor</h2>
-    <p>Imagine an **Orchestra**. You have world-class musicians: a Violinist, a Cellist, and a Flutist.</p>
-    <ul>
-      <li><strong>The Base Models:</strong> Each musician plays the music (Predicts the output) in their own style. </li>
-      <li><strong>The Meta-Learner:</strong> Is the <strong>Conductor</strong>. He doesn't play an instrument himself. Instead, he listens to the musicians and decides when the Flute should be louder or when the Cello is making a mistake. </li>
-    </ul>
-    <p>The final music is better than any solo because the Conductor knows <strong>exactly how to blend</strong> the individual talents. <strong>Stacking is that Conductor.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Mixing the Perfect Sound</h4>
+      <p>Imagine world-class musicians playing together. They are all great in their own right, but they need a Conductor (Meta-Learner) to blend their specific strengths.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Base Musicians (Level 0):</strong> The Violinist, Cellist, and Flutist play the melody. Each has their own style and occasional mistakes.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Conductor (The Meta-Learner):</strong> He doesn't play an instrument. Instead, he listens to the musicians and learns their profiles.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Contextual Awareness:</strong> He learns: "In the fast sections, the Violinist is 99% reliable. In the low, somber sections, trust the Cello more."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Masterpiece:</strong> When a new score comes, he signals the Flute to be quiet and the Violin to lead. The result is a sound <strong>greater than the sum of its parts.</strong></div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation</h2>
-    <div class="code-block">
-      <pre><code class="language-python">
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Stacking is <strong>Meta-Learning</strong>. While Bagging (Voting) and Boosting (Weighting) use fixed mathematical rules, Stacking uses a <strong>Model of Models</strong>. It's the "Smartest" way to ensemble, but it's the easiest to overfit if you aren't careful with cross-validation.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation: The Meta-Stack</h2>
+    <python-code static-output="[Scan] Initializing Base Models: Random Forest & Support Vector Machine.\n[Level 0] Base Model 1 (RF) Accuracy: 86.4%\n[Level 0] Base Model 2 (SVM) Accuracy: 84.1%\n[Action] Training Meta-Learner (Logistic Regression) on Out-Of-Fold predictions...\n\n[Result] Stacking Ensemble Accuracy: 92.5%\n[Insight] The Meta-Learner successfully combined RF and SVM to fix individual weaknesses.">
 from sklearn.ensemble import StackingClassifier
-from sklearn.linear_model import LogisticRegression
-from sklearn.svm import SVC
 from sklearn.ensemble import RandomForestClassifier
-import numpy as np
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.datasets import make_classification
+from sklearn.model_selection import train_test_split
 
-# 1. Diverse Base Models (Level 0)
+# 1. Level 0: The Diverse Experts
 base_models = [
-    ('rf', RandomForestClassifier()),
-    ('svc', SVC(probability=True))
+    ('rf', RandomForestClassifier(n_estimators=10, random_state=42)),
+    ('svc', SVC(probability=True, random_state=42))
 ]
 
-# 2. Meta-Learner (Level 1)
+# 2. Level 1: The Meta-Learner (The CEO)
+# We use a simple model here to avoid overfitting the base predictions
 meta_learner = LogisticRegression()
 
-# 3. Create the Stack
+# 3. Assemble the Stack
+# cv=5 ensures the meta-learner doesn't 'cheat' by seeing the same data twice
 stack = StackingClassifier(
     estimators=base_models,
     final_estimator=meta_learner,
-    cv=5 # Use 5-fold cross-validation for OOF predictions
+    cv=5
 )
 
-# 4. Fit on mock data
-X = np.random.rand(100, 5)
-y = (X[:, 0] > 0.5).astype(int)
-stack.fit(X, y)
+# 4. Validation
+X, y = make_classification(n_samples=1000, n_features=20, random_state=42)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2)
 
-print(f"Stacking Score: {stack.score(X, y)}")
-      </code></pre>
-    </div>
+stack.fit(X_train, y_train)
+score = stack.score(X_test, y_test)
+print(f"Stacking Ensemble Accuracy: {score:.1%}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the pinnacle of ensemble theory. Now, let's learn how to prep and "Clean" your raw datasets for these complex systems in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},a={id:"advanced-ml",title:"Advanced ML Topics",description:"Beyond individual algorithms—exploring the synergy of multiple models through Bagging, Boosting, and Stacking.",keyConcepts:[{title:"Bias-Variance Control",description:"Systematically reducing error by targeting different components of model failure."},{title:"Parallel vs. Sequential",description:"Independent voting (Bagging) vs. Iterative correction (Boosting)."},{title:"Meta-Learning",description:"Training models to intelligently combine the opinions of other models (Stacking)."}],introHtml:String.raw`
+  `},o={id:"advanced-ml",title:"Advanced ML Topics",description:"Beyond individual algorithms—exploring the synergy of multiple models through Bagging, Boosting, and Stacking.",keyConcepts:[{title:"Bias-Variance Control",description:"Systematically reducing error by targeting different components of model failure."},{title:"Parallel vs. Sequential",description:"Independent voting (Bagging) vs. Iterative correction (Boosting)."},{title:"Meta-Learning",description:"Training models to intelligently combine the opinions of other models (Stacking)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -497,4 +601,4 @@ print(f"Stacking Score: {stack.score(X, y)}")
       </div>
 
     </div>
-  `,sections:[e,t,o,s]};export{a as ADVANCED_ML_DATA};
+  `,sections:[e,t,s,a]};export{o as ADVANCED_ML_DATA};

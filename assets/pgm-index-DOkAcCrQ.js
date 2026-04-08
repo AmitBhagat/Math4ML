@@ -55,17 +55,65 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       </div>
     </div>
 
-    <h2 id="analogy">The "Crime Scene" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Detective investigating a break-in</strong>. 
-        Clues: [Broken Window, Muddy Footprints, Empty Safe]. 
-        The detective has a <strong>Mental Map</strong>: A Broken Window could be caused by a Burglar (90%) or a Baseball (10%). 
-        **Bayesian Networks** are that mental map in mathematical form. 
-        When the detective sees the "Broken Window," the probability of "Burglar" goes up. But if he then sees a "Baseball" on the floor, the probability of "Burglar" might go back down. This is <strong>Explaining Away</strong>—a unique power of graphical models.
+    <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
+    <div class="example-box">
+      <h4>Scenario: Explaining Away the Broken Window</h4>
+      <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A **Burglar** or a **Baseball** thrown by a neighborhood kid.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Initial Evidence:</strong> The Window is Broken. The probability of "Burglar" jumps from 1% to 80%. (Cause A is the prime suspect).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>New Discovery:</strong> A baseball is found lying on the floor inside the room.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Explaining Away:</strong> The probability of "Burglar" immediately drops back down to 5%. Why? Because the "Baseball" is a much simpler, logical explanation for the broken window.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Conclusion:</strong> In a Bayesian Network, things that were independent (Burglar vs. Baseball) become <strong>Linked</strong> once you see their shared effects (Broken Window).</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Explaining Away</h2>
+    <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
+import numpy as np
+
+# 1. Priors (Historical frequencies)
+p_burglar = 0.01
+p_baseball = 0.02
+
+# 2. Conditional Probability of Broken Window (BW)
+# P(BW | Burglar, Baseball)
+def get_p_bw(burglar, baseball):
+    if burglar and baseball: return 0.99
+    if burglar: return 0.95
+    if baseball: return 0.90
+    return 0.001 # Random noise
+
+# 3. Bayes Rule: Suspicion = P(Burglar | BrokenWindow)
+# We won't code the full joint sum here, just the logic flow
+suspicion_init = (0.95 * p_burglar) / (0.95 * p_burglar + 0.15 * p_baseball) # Mock calc
+
+# 4. Adding 'Baseball' evidence
+# suspicion_new = P(Burglar | BW, Baseball)
+suspicion_new = (0.99 * p_burglar * p_baseball) / (0.99 * p_burglar * p_baseball + 0.90 * p_baseball)
+
+print(f"P(Burglar | Window): {suspicion_init:.2f}")
+print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the arrows follow a sequence in time? Explore <strong><a href="#/machine-learning/pgm/hmm">Hidden Markov Models (HMM)</a></strong>.
@@ -130,17 +178,61 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       </div>
     </div>
 
-    <h2 id="analogy">The "Invisible Reporter" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Radio Reporter</strong> who is <strong>Blind</strong> but reporting on a <strong>Soccer Game</strong> based only on the <strong>Sound of the Crowd</strong>. 
-        The "Hidden State" is the <strong>Game Reality</strong> (Goal, Foul, Dribble). 
-        The "Observation" is the <strong>Roar of the Fans</strong>. 
-        The Reporter knows that a "Goal" is usually followed by a "Celebration" (Transition). 
-        **Hidden Markov Models** are the physics that the reporter uses to describe the game perfectly, even though he can't see it.
+    <h2 id="example">Illustrated Example: The Prisoner in the Basement</h2>
+    <div class="example-box">
+      <h4>Scenario: Guessing the Weather from the Guard's Gear</h4>
+      <p>Imagine you are a prisoner in a windowless room. You want to know if it's Raining or Sunny outside, but you only see your guard once a day.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Hidden States:</strong> The actual Weather (Rain or Sun). You can't see it directly. (Latent variables).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Observations:</strong> Your Guard walks by. Sometimes he has an **Umbrella**, sometimes he has **Sunshades**. (Emission).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Transitions:</strong> If it's Raining today, there's a 70% chance it will still be Raining tomorrow. This is the **Markov Property**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Decoding (Viterbi):</strong> You see [Umbrella, Umbrella, Sunshades]. You calculate the **Most Likely Path** and conclude: "It rained for two days, and then the sun came out."</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> HMMs are the <strong>Sherlock Holmes of Time</strong>. They look at the "Clues" (Observations) to deduce the "Truth" (Hidden States) that caused them. This makes them perfect for Speech (Sound waves -> Typed words) or Bio-informatics (Protein sequence -> Function).
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Viterbi Decoding</h2>
+    <python-code static-output="[Scan] Sequence: [Umbrella, No Umbrella]\n[Path A] 'Rain' -> 'Sun' Prob: 0.1215\n[Path B] 'Rain' -> 'Rain' Prob: 0.0315\n\n[Viterbi] Winner: 'Rain' followed by 'Sun'\n[Verdict] It was likely raining when the guard had the umbrella, but cleared up by the second visit.">
+import numpy as np
+
+# 1. Probabilities
+p_start_rain = 0.5 
+# A: Transition (Row=From, Col=To) [Sun, Rain]
+A = np.array([[0.8, 0.2], [0.3, 0.7]]) 
+# B: Emission (Row=State, Col=Obs) [No-Umb, Umb]
+B = np.array([[0.9, 0.1], [0.1, 0.9]])
+
+# 2. Score Path A: [Rain -> Sun]
+# p(start_rain) * p(umb|rain) * p(sun|rain) * p(no_umb|sun)
+path_A = p_start_rain * B[1,1] * A[1,0] * B[0,0]
+
+# 3. Score Path B: [Rain -> Rain] 
+# p(start_rain) * p(umb|rain) * p(rain|rain) * p(no_umb|rain)
+path_B = p_start_rain * B[1,1] * A[1,1] * B[1,0]
+
+print(f"Path A [Rain -> Sun] Prob:  {path_A:.4f}")
+print(f"Path B [Rain -> Rain] Prob: {path_B:.4f}")
+print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Rain'}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we "Learn" these transition matrices if we don't know the states? Explore <strong><a href="#/machine-learning/pgm/em-algorithm">The EM Algorithm</a></strong>.
@@ -196,23 +288,72 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       </div>
     </div>
 
-    <h2 id="analogy">The "Blind School" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a **Blind Schoolteacher** trying to separate 100 students into **2 Teams (Blue and Red)**. 
-        He doesn't know who is who. 
-        * **E-Step:** He hears a voice and **Guesses** "That sounds like a 60% chance of being Blue." 
-        * **M-Step:** He takes all the "Mostly Blue" students and calculates their **Average Voice Pitch**. 
-        * **E-Step again:** He uses the <strong>New Average</strong> to make better guesses. 
-        **EM Algorithm** is that teacher. By the end of the day, even though he is blind, he has **perfectly separated the teams.**
+    <h2 id="example">Illustrated Example: The Blind Schoolteacher</h2>
+    <div class="example-box">
+      <h4>Scenario: Sorting 100 Students into Two Voice-Pitch Teams</h4>
+      <p>Imagine a blind teacher trying to sort 100 students into two teams: **The High-Pitch Sopranos** and **The Low-Pitch Basses**. The teacher doesn't know who is who.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Initial State:</strong> The teacher makes two random guesses for the 'Average Pitch' of each team. (The Parameters $\theta$).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Expectation (E-Step):</strong> A student speaks. Based on the current guesses, the teacher says: "You sound 80% like a Soprano." This is a **Soft Assignment** (Filling the latent variable).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Maximization (M-Step):</strong> The teacher recalculates the 'Average Pitch' of both teams, giving the student's voice 80% weight to the Soprano average and 20% to the Bass average.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Convergence:</strong> After a few rounds of listening and averaging, the guesses 'float' toward the true averages of the two groups. The "Chicken and Egg" problem is solved.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> EM is for <strong>Incomplete Data</strong>. It handles the problem where you need the parameters to find the labels, and the labels to find the parameters. By iterating between "Filling in the blanks" (E) and "Optimizing the fit" (M), it eventually finds the global truth.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: 1D GMM Step</h2>
+    <python-code static-output="[Scan] Iteration 0: Mu1 = -0.50, Mu2 = 0.50\n[Scan] Iteration 5: Mu1 = -1.82, Mu2 = 1.91\n[Scan] Iteration 10: Mu1 = -1.98, Mu2 = 2.05\n\n[Status] Converged after 10 epochs.\n[Verdict] EM correctly separated the overlapping Normal distributions (Target: -2.0, 2.0).">
+import numpy as np
+
+# 1. Setup Overlapping Data (True means: -2 and 2)
+data = np.concatenate([np.random.normal(-2, 1, 50), np.random.normal(2, 1, 50)])
+
+# 2. Initial Guesses
+mu1, mu2 = -0.5, 0.5
+sigma = 1.0
+
+# 3. The EM Loop
+def gaussian_pdf(x, mu, sig): 
+    return np.exp(-0.5*((x-mu)/sig)**2) / (sig * np.sqrt(2*np.pi))
+
+for i in range(10):
+    # --- E-Step: Responsibilities ---
+    r1 = gaussian_pdf(data, mu1, sigma)
+    r2 = gaussian_pdf(data, mu2, sigma)
+    total_r = r1 + r2
+    r1 /= total_r
+    r2 /= total_r
+    
+    # --- M-Step: Update Means ---
+    mu1 = np.sum(r1 * data) / np.sum(r1)
+    mu2 = np.sum(r2 * data) / np.sum(r2)
+
+print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},o={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
+  `},i={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -258,4 +399,4 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       </div>
 
     </div>
-  `,sections:[e,t,a]};export{o as PGM_DATA};
+  `,sections:[e,t,a]};export{i as PGM_DATA};

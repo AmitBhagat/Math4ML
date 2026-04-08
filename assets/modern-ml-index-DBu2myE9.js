@@ -76,36 +76,59 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
     </div>
 
     <h2 id="example">Illustrated Example: The Master Jigsaw Solver</h2>
-    <p>Imagine you have a toddler and 1,000 blank **Jigsaw Puzzles**. You don't tell the toddler what the picture is (No Labels).</p>
-    <ul>
-      <li><strong>The Task:</strong> You scramble the pieces. The toddler's only goal is to make them fit together. </li>
-      <li><strong>The Insight:</strong> To fit the pieces, the toddler accidentally learns that <strong>Blue bits go with Blue bits</strong> and <strong>Curvy edges go with Curvy edges</strong>. </li>
-    </ul>
-    <p>By the time the puzzles are done, the toddler understands the **Structure of Images** perfectly, even without knowing the names of the objects. <strong>SSL is that toddler.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Training a Child with 1,000 Blank Jigsaws</h4>
+      <p>Imagine you have 1,000 jigsaw puzzles, but you don't show the child the "Final Picture" on the box (No Labels).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Pretext Task:</strong> You scramble the pieces and tell the child: "Just make them fit."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Discovery:</strong> To fit the pieces, the child accidentally learns that <strong>Blue bits go with Blue bits</strong> and <strong>Curvy edges go with Curvy edges</strong>. They learn to recognize "Sky," "Water," and "Grass" textures without knowing their names.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Transfer:</strong> One day, you show the child a picture of a "Dog." Because they already understand "Eyes," "Fur," and "Edges," they learn what a "Dog" is in 2 seconds.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
-import torch
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (SimCLR Concept)</h2>
+    <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
 import torchvision.transforms as T
 from PIL import Image
 
-# 1. Self-supervised Preprocessing:
-# We 'scramble' an unlabeled image to create a pretext puzzle.
-image = Image.new('RGB', (224, 224), color='red') # Mock image
+# 1. Take one unlabeled image
+img = Image.open("urban_scene.jpg") 
 
-# Common 'breaks' for SSL pre-training
-pretext_transform = T.Compose([
+# 2. Create 'Self-Generated' Puzzles
+# We break the image in two different ways.
+# The model must learn they are the SAME underlying object.
+view_A = T.Compose([
+    T.RandomResizedCrop(224),
+    T.ColorJitter(0.8, 0.8, 0.8),
+    T.RandomGrayscale(p=0.2)
+])(img)
+
+view_B = T.Compose([
     T.RandomResizedCrop(224),
     T.RandomHorizontalFlip(),
-    T.ColorJitter(brightness=0.5), # Change the lighting
-    T.RandomRotation(90)           # Rotate the 'puzzle'
-])
+    T.GaussianBlur(kernel_size=23)
+])(img)
 
-# Generate a pretext pair
-scrambled_v1 = pretext_transform(image)
-scrambled_v2 = pretext_transform(image)
-
-print("Pretext samples created. Model will now learn if these came from the SAME image.")
+# 3. Contrastive Objective
+# minimize_distance(Representation(view_A), Representation(view_B))
+print("Views created. Model will now learn if these came from the SAME image.")
     </python-code>
 
     <div class="linking-rule">
@@ -188,39 +211,65 @@ print("Pretext samples created. Model will now learn if these came from the SAME
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: From Kung Fu to Tennis</h2>
-    <p>Imagine a <strong>Kung Fu Master</strong> with 30 years of training in balance, speed, and focus. He decides to learn <strong>Tennis</strong>.</p>
-    <ul>
-      <li><strong>Pre-training:</strong> 30 years of martial arts (Learning the "Edges and Shapes" of body movement). </li>
-      <li><strong>Small Dataset:</strong> He only has 2 hours of coaching on how to hold a racket. </li>
-      <li><strong>The Transfer:</strong> He doesn't start like a baby. He uses his existing balance and speed (Frozen layers) and just learns the <strong>Grip and Swing</strong> (New Head). </li>
-    </ul>
-    <p>Because he has "Transferred" his physical intelligence, he plays like a pro in 1 day. <strong>Transfer Learning is that Master.</strong></p>
+    <h2 id="example">Illustrated Example: The Musician's Pivot</h2>
+    <div class="example-box">
+      <h4>Scenario: A Classical Pianist learning Jazz Improvisation</h4>
+      <p>Imagine a pianist who has spent 20 years mastering <strong>Classical Music</strong>. They decide they want to learn <strong>Jazz</strong>. Do they start from scratch?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Pre-training:</strong> 20 years of scales, finger strength, and music theory. They already understand "The Language of Music" (The Base Model).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Freezing:</strong> They don't need to relearn how to move their fingers or read a cleft. Those skills are "Locked in" (Frozen Layers).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Fine-tuning:</strong> They spend 2 weeks learning specific Jazz chords and "swing" timing. They only change the way they **Express** their existing skill (The New Head).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Efficiency:</strong> Within a month, they play Jazz better than a beginner who has been practicing for 5 years without a classical background.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (The Head Swap)</h2>
+    <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
 import torch.nn as nn
 from torchvision import models
 
-# 1. Load a pre-trained ResNet-18 (The 'Master')
-model = models.resnet18(pretrained=True)
+# 1. Load a high-IQ base model
+# This model already 'understands' edges, textures, and shapes
+model = models.resnet50(pretrained=True)
 
-# 2. Freeze all feature layers
+# 2. Freeze the 'Body'
+# We don't want to ruin the pre-trained wisdom
 for param in model.parameters():
     param.requires_grad = False
 
-# 3. Replace the final 'Head' for a 2-class task (e.g. 'Rare Ant' classifier)
+# 3. Graft a new 'Head'
+# We replace the final layer to suit our specific task (2 classes)
 num_ftrs = model.fc.in_features
 model.fc = nn.Linear(num_ftrs, 2)
 
-# 4. Now, we only train 'model.fc'!
-print("Ready for fine-tuning on our small, specialized dataset.")
+# 4. Only the new Head will be updated during training
+print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What exactly is the model "Gifting"? It's the way it simplifies data. Explore <strong><a href="#/machine-learning/modern-ml/representation">Representation Learning</a></strong>.
     </div>
-  `},a={id:"representation",title:"Representation Learning",description:"The field of machine learning dedicated to learning meaningful, low-dimensional representations of data that reveal its underlying structure and features.",color:"#E91E63",html:String.raw`
+  `},s={id:"representation",title:"Representation Learning",description:"The field of machine learning dedicated to learning meaningful, low-dimensional representations of data that reveal its underlying structure and features.",color:"#E91E63",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚀 Modern ML · Structure</div>
       <h1>Representation: The Art of Simplification</h1>
@@ -301,39 +350,69 @@ print("Ready for fine-tuning on our small, specialized dataset.")
     </div>
 
     <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
-    <p>Imagine you take a <strong>5-course French Dinner</strong> and want to describe it to a friend.</p>
-    <ul>
-      <li><strong>Raw Data:</strong> The exact chemical composition of every sauce and the weight of every vegetable. (Millions of data points).</li>
-      <li><strong>The Representation:</strong> You summarize it using 5 features: <strong>Sweet, Sour, Salty, Bitter, and Umami</strong>. </li>
-    </ul>
-    <p>By mapping a complex meal into these 5 numbers, you've "Learned a Representation" of flavor. Now, you can compare any two meals in the world just by looking at their 5-number profile. <strong>Representation Learning is that palate.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
+      <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use **Features**.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Raw State:</strong> Millions of pixels of "Food Video" in your head. Impossible to transmit or analyze quickly.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Encoding:</strong> Your brain "compresses" the experience into 5 numbers: **[Sweet, Sour, Salty, Bitter, Umami]**.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Representation:</strong> You say: "It was a 2/10 Sweet, 8/10 Savory experience." These few numbers (The Representation) capture the <strong>Soul</strong> of the meal.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Utility:</strong> Now you can compare this French dinner to a Street Taco just by comparing their 5-number vectors. This is 1,000x faster than comparing every atom.</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (Keras)</h2>
-    <python-code>
-from tensorflow.keras import layers, models
-import numpy as np
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
+        </div>
+      </div>
+    </div>
 
-# 1. Create a simple 'Encoder' to learn representations
-input_shape = (28, 28, 1) # e.g. MNIST image
-latent_dim = 2 # Squeeze it into 2 numbers for visualization
+    <h2 id="python">Python Implementation (The Bottleneck)</h2>
+    <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
+import torch.nn as nn
+import torch
 
-encoder = models.Sequential([
-    layers.Flatten(input_shape=input_shape),
-    layers.Dense(128, activation='relu'),
-    layers.Dense(latent_dim) # The 'Representation' layer
-])
+# 1. Defining a 'Knowledge Filter' (Encoder)
+class Encoder(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.flatten = nn.Flatten()
+        self.compressor = nn.Sequential(
+            nn.Linear(784, 128),  # First step of compression
+            nn.ReLU(),
+            nn.Linear(128, 2)     # The 'Bottleneck' (Representation)
+        )
+        
+    def forward(self, x):
+        return self.compressor(self.flatten(x))
 
-# 2. Simulate an image and get its 'Code'
-mock_image = np.random.rand(1, 28, 28, 1)
-representation = encoder.predict(mock_image)
+# 2. Feeding a 28x28 image (Mock)
+img = torch.randn(1, 1, 28, 28)
+model = Encoder()
 
-print(f"Original Pixels: 784 -> Learned Representation: {representation[0]}")
+# 3. Get the 'Essence'
+essence = model(img)
+print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
     </div>
-  `},s={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
+  `},a={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚀 Modern ML · Similarity</div>
       <h1>Contrastive: Spot the Difference</h1>
@@ -416,35 +495,55 @@ print(f"Original Pixels: 784 -> Learned Representation: {representation[0]}")
     </div>
 
     <h2 id="example">Illustrated Example: The Twin Study</h2>
-    <p>Imagine you have a group of 100 people. You take two photos of every person (The Twins).</p>
-    <ul>
-      <li><strong>The Requirement:</strong> You don't know anyone's name. But you know that the two photos of "Person A" represent the same human. </li>
-      <li><strong>The Pull:</strong> You move the two Photo A's closer together on the table. </li>
-      <li><strong>The Push:</strong> You make sure that the Photo B's are <strong>as far away</strong> as possible from the Photo A's. </li>
-    </ul>
-    <p>By doing this for everyone, you've learned to identify people's <strong>Faces</strong> without ever needing a name tag. <strong>Contrastive Learning is that twin matching game.</strong></p>
+    <div class="example-box">
+      <h4>Scenario: Matching 100 sets of Identical Twins</h4>
+      <p>Imagine you have a group of 200 people (100 sets of identical twins) in a dark room. You don't know anyone's name. Your only goal is to organize them.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Pull (Positives):</strong> When you find two people who look the same (the twins), you make them sit at the same table. You are "Pulling" their representations together.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Push (Negatives):</strong> If two people look different, you force them to sit at opposite ends of the room. You are "Pushing" their representations away.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Result:</strong> By the end of the night, the room is perfectly organized by <strong>Face Structure</strong>. You didn't need a name tag (Label) to do it; you just needed to know who was a "mismatch."</div>
+        </div>
+      </div>
 
-    <h2 id="python">Python Implementation (PyTorch)</h2>
-    <python-code>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Contrastive learning is about <strong>Relative Understanding</strong>. It doesn't care that a point is at exactly (0.5, 0.5). It only cares that (0.5, 0.5) is *closer* to its twin than it is to anything else. This makes it incredibly robust for finding patterns in massive, messy datasets.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="python">Python Implementation (Similarity Logic)</h2>
+    <python-code runnable="false" static-output="[Scan] Input: Batch of 128 Image Pairs\n[Action] Extracting 512-dim features using ResNet-18...\n[Loss] Similarity(Twins) = 0.98 (High)\n[Loss] Similarity(Strangers) = 0.05 (Low)\n\n[Status] Gradient Step: Pulling twins closer, pushing strangers away.\n[Insight] The latent space is beginning to cluster 'Architecture' vs 'Nature'.">
 import torch
 import torch.nn.functional as F
 
-# 1. Siamese similarity logic
-# z1 and z2 are features of the SAME image (two views)
-def contrastive_loss(z1, z2, temperature=0.5):
-    # Normalize the vectors
-    z1 = F.normalize(z1, dim=1)
-    z2 = F.normalize(z2, dim=1)
-    
-    # Calculate similarity (Cosine)
-    sim_matrix = torch.matmul(z1, z2.T) / temperature
-    
-    # The 'Target' is for the diagonal (matching indices) to be high
-    labels = torch.arange(z1.size(0))
-    loss = F.cross_entropy(sim_matrix, labels)
-    return loss
+# 1. Mock Feature Vectors (Embeddings)
+# Positive Pair: Two views of the SAME cat
+v_anchor = torch.tensor([0.1, 0.9, 0.2])
+v_positive = torch.tensor([0.15, 0.85, 0.25]) # Very similar
 
-print("Loss function ready to Pull 'Friends' and Push 'Enemies'.")
+# Negative: A picture of a truck
+v_negative = torch.tensor([0.9, 0.1, -0.8])  # Very different
+
+# 2. Measure 'Closeness' (Cosine Similarity)
+def similarity(a, b):
+    return F.cosine_similarity(a.unsqueeze(0), b.unsqueeze(0)).item()
+
+print(f"Similarity (Anchor vs Positive): {similarity(v_anchor, v_positive):.3f}")
+print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}")
+
+# 3. Decision
+# We want Positive Sim -> 1.0 and Negative Sim -> 0.0
     </python-code>
 
     <div class="linking-rule">
@@ -496,4 +595,4 @@ print("Loss function ready to Pull 'Friends' and Push 'Enemies'.")
       </div>
 
     </div>
-  `,sections:[e,t,a,s]};export{n as MODERN_ML_DATA};
+  `,sections:[e,t,s,a]};export{n as MODERN_ML_DATA};

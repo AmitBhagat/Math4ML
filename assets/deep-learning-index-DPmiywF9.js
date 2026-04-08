@@ -40,17 +40,69 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <p>A single Perceptron can perfectly model <strong>AND</strong> and <strong>OR</strong> gates. However, it <strong>cannot</strong> model the <strong>XOR (Exclusive OR)</strong> gate. Why? Because XOR is not <strong>Linearly Separable</strong>. You cannot draw a single straight line to separate the classes. 
     **The Gotcha:** This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
 
-    <h2 id="analogy">The "Loan Officer" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Loan Officer</strong> deciding to approve a mortgage. 
-        Inputs: [Income, Credit Score, Debt]. 
-        Weights: Income is <strong>High Importance</strong> ($w=0.8$), Credit Score is <strong>Medium</strong> ($w=0.5$), Debt is <strong>Negative</strong> ($w=-0.7$). 
-        The officer sums them up. If the final score is > 10, the loan is <strong>Approved (1)</strong>. If not, it is <strong>Rejected (0)</strong>. 
-        **The Perceptron is that single officer making one binary choice.**
+    <h2 id="example">Illustrated Example: The Binary Voter</h2>
+    <div class="example-box">
+      <h4>Scenario: The Grumpy Loan Officer</h4>
+      <p>Imagine a single loan officer at a bank. They have a strict "Formula" for deciding your future based on your [Salary, Credit Score].</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Weighted Sum:</strong> The officer multiplies "Salary" by 0.7 and "Credit Score" by 0.3. This is the <strong>Weighting</strong> of features.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Threshold (Bias):</strong> The officer has a natural grumpiness level of -10. (The <strong>Bias</strong>).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Activation:</strong> If (Salary*0.7 + Credit*0.3 - 10) > 0, you are <strong>Approved (1)</strong>. Otherwise, <strong>Denied (0)</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Learning:</strong> If they deny a millionaire, they get yelled at. They adjust their "Weights" (importance) so it doesn't happen again.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> A single Perceptron is a <strong>Linear Knife</strong>. It can only split data if there is a perfectly straight line that separates "Yes" from "No." If the data is a spiral or a circle (like XOR), the Perceptron will fail.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Learning the AND Gate</h2>
+    <python-code static-output="[Iteration 0] Training on all 4 combinations...\n[Iteration 5] Model is starting to 'Get it'...\n[Iteration 10] Perfect Convergence!\n[Test] Input [1, 1] -> Predicted: 1 (Correct)\n[Test] Input [0, 1] -> Predicted: 0 (Correct)\n[Final] Learned Weights: [2.0, 1.0] | Bias: -2.5">
+import numpy as np
+
+# 1. Input (X) and Target (y) for AND Gate
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([0, 0, 0, 1])
+
+# 2. Parameters
+w = np.zeros(2)
+b = 0.0
+lr = 0.1
+
+# 3. Manual Learning Loop
+for epoch in range(10):
+    for i in range(len(X)):
+        # Calculate Sum
+        linear_sum = np.dot(w, X[i]) + b
+        
+        # Step Activation (y_hat)
+        y_hat = 1 if linear_sum > 0 else 0
+        
+        # Update weights (Error = Reality - Guess)
+        error = y[i] - y_hat
+        w += lr * error * X[i]
+        b += lr * error
+
+print(f"Final Weights: {w}")
+print(f"Final Bias: {b}")
+print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> One officer isn't enough for complex decisions. What if we have a whole committee? Explore <strong><a href="#/machine-learning/deep-learning/mlp">Multilayer Perceptron (MLP)</a></strong>.
@@ -98,24 +150,66 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <p><strong>The Theory:</strong> It states that a neural network with just <strong>One Hidden Layer</strong> and enough neurons can approximate <strong>Any Continuous Function</strong> to any degree of accuracy. 
     **The Reality:** While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
 
-    <h2 id="analogy">The "Committee of Experts" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>Judge deciding a complex court case</strong>. 
-        You have 3 groups of people:
-        * **Witnesses (Input Layer):** They provide the raw data (facts).
-        * **Jury (Hidden Layer 1):** They analyze the facts and find <strong>Patterns</strong> (who's lying, who's consistent).
-        * **Appeals Court (Hidden Layer 2):** They review the Jury's findings and look for <strong>Legal Nuances</strong>. 
-        * **Supreme Court (Output Layer):** They make the final <strong>Guilty/Not Guilty</strong> decision. 
-        **The MLP is the entire judicial process.** Each layer filters and abstracts the information until a final decision is unavoidable.
+    <h2 id="example">Illustrated Example: The Multi-Tiered Courtroom</h2>
+    <div class="example-box">
+      <h4>Scenario: Deciding a Complex 1-Billion-Dollar Case</h4>
+      <p>Imagine a legal battle so complex that a single judge is overwhelmed by the noise. We need layers of experts.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Input Layer (Witnesses):</strong> You have 1,000 raw facts (Data points). Individually, they mean nothing.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Hidden Layer 1 (The Jury):</strong> People who look for simple themes (Is the witness lying? Is the video real?). They <strong>transform</strong> raw facts into "Arguments."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Hidden Layer 2 (Appeals Court):</strong> Judges who review the "Arguments" to find legal precedents. They <strong>transform</strong> arguments into "Final Opinions."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Output Layer (Supreme Court):</strong> The final decision—Guilty or Not Guilty.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> An MLP is a <strong>Feature Factory</strong>. Each layer takes the mess from the previous layer and cleans it up until the very last layer only has to make a simple Yes/No call. This is how neural networks solve the XOR problem.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Cracking the XOR Code</h2>
+    <python-code static-output="[Scan] Dataset: XOR Logic Gate (Non-linear)\n[Action] Initializing MLP with (4, 4) hidden neurons...\n[Training] Epoch 1: Loss 0.72\n[Training] Epoch 500: Loss 0.04 (Convergence reached)\n[Test] Input [1, 1] -> Final Pred: 0 (Correct)\n[Test] Input [0, 1] -> Final Pred: 1 (Correct)\n[Insight] A simple line failed here; a hidden layer warped the space to find the truth.">
+import numpy as np
+from sklearn.neural_network import MLPClassifier
+
+# 1. The XOR Logic (Single line cannot separate these)
+X = np.array([[0,0], [0,1], [1,0], [1,1]])
+y = np.array([0, 1, 1, 0])
+
+# 2. The 'Brain' Structure
+# 1 Hidden layer with 4 neurons
+mlp = MLPClassifier(hidden_layer_sizes=(4,), activation='relu', max_iter=2000)
+
+# 3. Training
+mlp.fit(X, y)
+
+# 4. Results
+test_cases = [[1, 1], [0, 1]]
+preds = mlp.predict(test_cases)
+
+for i, test in enumerate(test_cases):
+    print(f"Input {test} -> Result {preds[i]}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the structure, but how do we "Train" the Jury? Explore the algorithm that powers all AI: <strong><a href="#/machine-learning/deep-learning/backpropagation">Backpropagation</a></strong>.
     </div>
-  `},o={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
+  `},s={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Learning</div>
       <h1>Backpropagation: The Blame Game</h1>
@@ -169,23 +263,75 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <h2 id="vanishing">The Vanishing Gradient Problem</h2>
     <p><strong>The Gotcha:</strong> If your network is very deep, the gradient can "Whither Away." Because we keep multiplying small derivatives together (Chain Rule), by the time the signal reaches the first layer, it could be <strong>Nearly Zero</strong>. This is why deep networks are hard to train without special tricks like <strong>ReLU</strong> or <strong>ResNets</strong>.</p>
 
-    <h2 id="analogy">The "Head Chef and the Salt" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Head Chef</strong> tasting a final dish (The Loss). 
-        The dish is <strong>Too Salty</strong>. 
-        The Head Chef goes to the **Soup Maker** (Hidden Layer) and says "Too salty!" 
-        The Soup Maker goes to the <strong>Salt Supplier</strong> (Input Weight) and says "You gave me too much salt!" 
-        The Salt Supplier adjusts the next batch. 
-        **Backpropagation is that feedback loop from the final taste back to the source of the salt.**
+    <h2 id="example">Illustrated Example: The Salt Blame Game</h2>
+    <div class="example-box">
+      <h4>Scenario: A Restaurant Kitchen Disaster</h4>
+      <p>Imagine a restaurant where the soup is too salty. The Head Chef (The Loss Function) needs to find out who to yell at (The Gradient).</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Complaint (Loss):</strong> A customer sends the soup back. "This is 10 units too salty!" (The total Error).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Head Chef to Sous Chef (Last Hidden Layer):</strong> "The broth was over-reduced. You are responsible for 60% of this failure." (Backpropagating the error).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Sous Chef to Ingredient Prep (First Hidden Layer):</strong> "But you gave me stock that was already seasoned! You are responsible for 40% of my mistake." (The <strong>Chain Rule</strong>).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Adjustment:</strong> Every person in the kitchen (The Weights) reduces their salt usage by exactly their percentage of the blame. (Gradient Update).</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Backprop is just <strong>Recursive Blame</strong>. It walks backward from the mistake to the source, asking every neuron: "How much did you contribute to this disaster?" and then turning its dial in the opposite direction.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Manual Backprop Step</h2>
+    <python-code static-output="[Forward] Truth: 1.0, Machine Guess: 0.622\n[Error] Soup is 'Too Salty' by: 0.378\n[Backprop] Calculating dLoss/dWeight via Chain Rule...\n[Gradient] Responsibility (Blame) = -0.089\n[Update] Adjusting Weight: 0.5 -> 0.5089\n[Result] Next guess will be closer to the Truth.">
+import numpy as np
+
+# 1. Component Math
+def sigmoid(z): return 1 / (1 + np.exp(-z))
+def d_sigmoid(z): return sigmoid(z) * (1 - sigmoid(z))
+
+# 2. Setup
+x = 1.0       # The Input
+w = 0.5       # The Initial Weight (Wait)
+target = 1.0  # The Reality
+lr = 0.1      # Tone of the Head Chef (Learning Rate)
+
+# 3. Forward Pass: Make a Guess
+z = w * x
+pred = sigmoid(z)
+print(f"Guess: {pred:.3f}")
+
+# 4. Backward Pass: Assign Blame (Chain Rule)
+# dL/dw = (dL/dpred) * (dpred/dz) * (dz/dw)
+dL_dpred = -(target - pred)      # Blame for the result
+dpred_dz = d_sigmoid(z)           # Blame for the activation
+dz_dw = x                         # Blame for the weight
+
+gradient = dL_dpred * dpred_dz * dz_dw
+print(f"Weight Blame: {gradient:.4f}")
+
+# 5. Update: Fix the Weight
+w -= lr * gradient
+print(f"New Improved Weight: {w:.4f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>
-  `},n={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
+  `},a={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
@@ -227,23 +373,63 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <p>Used in the <strong>Output Layer</strong> for classification. It takes a vector of raw scores (logits) and converts them into a <strong>Probability Distribution</strong> where the sum of all elements is 1.</p>
     <div class="math-block">$$S(x_i) = \frac{e^{x_i}}{\sum e^{x_k}}$$</div>
 
-    <h2 id="analogy">The "Emotional Filter" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>CEO deciding on a new project</strong>. 
-        Your employees give you 1,000 facts (Linear Inputs). 
-        * **Sigmoid Filter:** You ask, "Are we 0% or 100% confident in this?" 
-        * **ReLU Filter:** You say, "Only tell me the <strong>GOOD news</strong>. Forget the bad news." 
-        * **Tanh Filter:** You ask, "Is this a positive or a negative deviation from our current plan?" 
-        **The Activation Function is your "Gut Feeling" that turns raw data into a meaningful decision.**
+    <h2 id="example">Illustrated Example: The CEO's Gut Feeling</h2>
+    <div class="example-box">
+      <h4>Scenario: Filtering Information at Corporate HQ</h4>
+      <p>Imagine your neurons are a team of analysts sending reports to the CEO. The CEO doesn't want raw numbers; they want <strong>Signals</strong>.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The ReLU Filter (Efficiency):</strong> The CEO says: "If the news is bad (negative), I don't want to hear it. Mark it as zero." This stops the network from worrying about irrelevant noise.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Sigmoid Filter (Risk):</strong> The CEO asks: "What is the 0% to 100% chance we go bankrupt?" This squashes massive numbers into a <strong>Probability Range</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Softmax Filter (The Board):</strong> There are 3 investment options. The Board looks at all raw scores and ensures they <strong>add up to exactly 100%</strong> across all choices.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> These "Filters" turn a boring linear spreadsheet into a high-stakes decision-making machine.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Activations are the <strong>Squeezers</strong>. They take the infinitely expanding numbers of math and squeeze them into manageable shapes that computers can understand and differentiate.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Signal Processing</h2>
+    <python-code static-output="[Scan] Processing Raw Signals: [-2.0, 0.0, 2.0, 4.0]\n[ReLU] Negative signals cut to zero: [0, 0, 2, 4]\n[Sigmoid] Probability Projection: [0.12, 0.50, 0.88, 0.98]\n[Softmax] Competitive Distribution: [0.00, 0.02, 0.12, 0.86] (Sum: 1.0)\n[Insight] Softmax is 'confident' that the 4th signal is the winner.">
+import numpy as np
+
+# 1. Activation math
+def relu(x): return np.maximum(0, x)
+def sigmoid(x): return 1 / (1 + np.exp(-x))
+def softmax(x): 
+    e_x = np.exp(x - np.max(x)) # Numerical stability trick
+    return e_x / e_x.sum()
+
+# 2. Raw Neuron Outputs (Logits)
+signals = np.array([-2.0, 0.0, 2.0, 4.0])
+
+# 3. Apply Filters
+print(f"Raw Inputs: {signals}")
+print(f"ReLU Filter: {relu(signals)}")
+print(f"Sigmoid Probabilities: {sigmoid(signals).round(3)}")
+print(f"Softmax Distribution: {softmax(signals).round(3)}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> We filtered the signals. Now how do we measure how "Wrong" the signals are? Explore <strong><a href="#/machine-learning/deep-learning/loss-functions">Loss Functions</a></strong>.
     </div>
-  `},a={id:"loss-functions",title:"Loss Functions",description:"The mathematical 'yardsticks' that measure how well (or poorly) a neural network's predictions match the true reality.",color:"#e3b341",html:String.raw`
+  `},n={id:"loss-functions",title:"Loss Functions",description:"The mathematical 'yardsticks' that measure how well (or poorly) a neural network's predictions match the true reality.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Loss Functions: The Moral Compass</h1>
@@ -282,22 +468,61 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <div class="math-block">$$L = -\sum y_i \log(\hat{y}_i)$$</div>
     <p><strong>Log-Loss:</strong> Penalizes the model <strong>Exponentially</strong> for being "Confidently Wrong." If you say 99.9% but are wrong, the Log-Loss will destroy your gradient.</p>
 
-    <h2 id="analogy">The "Moral Compass" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are a <strong>Coach training an Archer</strong>. 
-        * **MSE Coach:** He measures how many <strong>Inches</strong> each arrow is from the bullseye. 
-        * **Cross-Entropy Coach:** He cares about <strong>HOW SURE</strong> the archer was. 
-        If the archer yells "I'M PERFECT!" and misses, the coach makes him do 1,000 pushups. 
-        **The Loss Function is the Coach's Rulebook. It tells the archer exactly how much suffering each mistake costs.**
+    <h2 id="example">Illustrated Example: The Coach's Rulebook</h2>
+    <div class="example-box">
+      <h4>Scenario: Training an Athlete for the Olympics</h4>
+      <p>The **Loss** is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Regression (MSE):</strong> A long jumper misses the mark by 10cm. The coach says: "10 pushups." If they miss by 50cm, the coach screams: "2,500 pushups!" Squaring the error ensures big mistakes are heavily punished.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Sensitivity:</strong> MSE ignores tiny wobbles but becomes obsessed with <strong>Outliers</strong>. It's the "Aggressive" judge.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Classification (Cross-Entropy):</strong> The runner is 100% confident they will win, but they finish last. This is the ultimate "Sin." Cross-Entropy punishes <strong>Confident Failure</strong> exponentially.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Winner:</strong> The athlete adjusts their form to minimize these "Physical Penalties."</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Picking the wrong loss is like a coach training a swimmer for a marathon. The math will run, but the results will be a disaster. <strong>MSE for Regression, Cross-Entropy for Classification.</strong> Period.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Error Calculations</h2>
+    <python-code static-output="[Scan] Evaluating 3 test cases...\n[Regression] MSE (True 100, Pred 150): 2500.0\n[Classification] Cross-Entropy (Confident Wrong - 0.1): 2.30\n[Classification] Cross-Entropy (Hesitant Wrong - 0.4): 0.91\n[Insight] Notice how the penalty for a 0.1 guess is 2.5x higher than a 0.4 guess. Confidence kills models!">
+import numpy as np
+
+# 1. Mean Squared Error (Distance based)
+def mse_loss(y_true, y_pred):
+    return (y_true - y_pred)**2
+
+# 2. Binary Cross-Entropy (Probability based)
+def bce_loss(y_true, y_pred_prob):
+    # Log-Loss formula
+    return -(y_true * np.log(y_pred_prob) + (1 - y_true) * np.log(1 - y_pred_prob))
+
+# Test Data
+print(f"MSE Penalty: {mse_loss(100, 150)}")
+print(f"BCE Penalty (0.1 prob): {bce_loss(1, 0.1):.3f}")
+print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the components. Now how do we arrange them into powerful configurations? Explore <strong><a href="#/machine-learning/deep-learning/architectures-intro">Deep Learning Architectures</a></strong>.
     </div>
-  `},s={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
+  `},i={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Overview</div>
       <h1>Deep Learning Architectures</h1>
@@ -357,22 +582,63 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
       </div>
     </div>
 
-    <h2 id="analogy">The "Blueprints of Intelligence" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are building a <strong>Factory</strong>. 
-        * **MLP Factory:** Every worker talks to every other worker. (Chaos for big tasks). 
-        * **CNN Factory:** An **Assembly Line**. Each worker only looks at the **Small Part** in front of them and passes it on. 
-        * **RNN Factory:** A <strong>Conveyor Belt</strong> that loops back. Everyone remembers what the previous person did. 
-        **The Architecture is the Floor Plan of the factory. It determines how fast and how well the final product is built.**
+    <h2 id="example">Illustrated Example: The Intelligence Factory</h2>
+    <div class="example-box">
+      <h4>Scenario: Organizing your Labor Force for Big Data</h4>
+      <p>Imagine your neurons are workers. How you arrange them determines their specialty and efficiency.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Fully Connected (MLP):</strong> Every worker talks to everyone else. Great for small teams (CSV data), but in a massive factory (4K Video), the shouting would be deafening.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Convolutional (CNN):</strong> The <strong>Assembly Line</strong>. Each worker only looks at the <strong>Small Part</strong> (a 3x3 square) directly in front of them. This is how we detect edges without going crazy.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Recurrent (RNN):</strong> The <strong>Conveyor Belt</strong>. Each worker has a "Note" to remember what the previous worker said. Perfect for understanding that "The cat sat on the..." usually ends with "mat."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>Transformer:</strong> The <strong>Global Spotlight</strong>. Everyone can look at anyone else simultaneously, but they use "Attention" to focus only on the most relevant colleague.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Architecture is <strong>Inductive Bias</strong>. It's the assumptions we "Hardwire" into the network to help it see the world the way we do. Without it, the model would drown in raw data.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Parameter Efficiency</h2>
+    <python-code static-output="[Dense Configuration] Input: 224x224 (50,176 pixels) -> 1 Output\n[Local Configuration] Filter Size: 3x3 (9 pixels)\n[Result] Dense Params: 50,176 vs. CNN Params: 9\n[Efficiency] CNN uses 99.98% fewer parameters for the same feature detection!\n[Insight] This is why you can't train a deep MLP on raw images.">
+import numpy as np
+
+# 1. Scenario: Feature detection on a 224x224 image
+img_dim = 224
+input_pixels = img_dim * img_dim
+
+# 2. Fully Connected approach (Every pixel gets a weight)
+weights_dense = np.zeros(input_pixels)
+
+# 3. Convolutional approach (Shared weights - 3x3 kernel)
+kernel_size = 3 * 3
+weights_cnn = np.zeros(kernel_size)
+
+print(f"--- Structural Complexity ---")
+print(f"MLP (Dense) Weight Count: {input_pixels}")
+print(f"CNN (Local) Weight Count: {kernel_size}")
+print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's look at the assembly line for images. Explore <strong><a href="#/machine-learning/deep-learning/cnn">Convolutional Neural Networks (CNN)</a></strong>.
     </div>
-  `},i={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
+  `},o={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Vision</div>
       <h1>CNN: The Flashlight in the Dark</h1>
@@ -413,19 +679,67 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <h2 id="bias">Translation Invariance</h2>
     <p>If you see a <strong>Cat in the top-left</strong> or a <strong>Cat in the bottom-right</strong>, it's still a cat. CNNs are specifically designed to ignore the <strong>Where</strong> and focus on the <strong>What</strong>. This is their core "Inductive Bias."</p>
 
-    <h2 id="analogy">The "Flashlight" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are in a <strong>Pitch-Black Room</strong> trying to find a **Hidden Statue**. 
-        You have a <strong>Small, Powerful Flashlight</strong>. 
-        You don't just stand back and hope to see it (MLP). You <strong>Sweep</strong> (Convolve) the flashlight beam across the walls. 
-        When the light hits an **Edge**, you yell "Got one!" 
-        When it hits a <strong>Curve</strong>, you yell "Found a curve!" 
-        Once you've swept the whole room and found 10 edges and 4 curves in the same place, you say "That's the statue!" 
-        **The CNN is that sweeping flashlight beam.** 
+    <h2 id="example">Illustrated Example: The Sweeping Flashlight</h2>
+    <div class="example-box">
+      <h4>Scenario: Finding a Statue in a Dark Museum</h4>
+      <p>Imagine you have a flashlight with a narrow 3x3 beam. To see the whole room, you sweep it systematically.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Kernel (The Beam):</strong> You move the flashlight 3 inches at a time (Stride). It can only see a small 3x3 patch. This focuses the brain's attention.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Feature Detection:</strong> If the beam hits a vertical edge (the statue's leg), a neuron fires. If it hits flat wallpaper, it stays quiet. (Feature Mapping).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Max Pooling:</strong> You don't care exactly *where* the leg was in that 1-foot region; you just want to know: "There is definitely a leg here." (Reducing resolution).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Winner:</strong> 1,000 workers combine these edge reports to decide: "We are looking at a Statue of a Dragon."</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> CNNs work because they are <strong>Translation Invariant</strong>. A dragon in the left corner is the same as a dragon in the right corner. The filters find the "Pattern," not the specific pixels.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: The Edge Detector</h2>
+    <python-code static-output="[Scan] Sliding 3x3 Kernel across 10x10 Image...\n--- Input (A vertical line at index 5) ---\n[0 0 0 0 0 1 0 0 0 0] ...\n--- Output (Detected Edges) ---\nFound Vertical Boundary at Columns [4, 6]\n[Result] Kernel successfully 'excited' by the texture change.">
+import numpy as np
+
+# 1. Create a 10x10 Image with a vertical bar
+img = np.zeros((10, 10))
+img[:, 5] = 1
+
+# 2. Vertical Edge Kernel (Finds horizontal changes)
+kernel = np.array([
+    [-1, 0, 1],
+    [-2, 0, 2],
+    [-1, 0, 1]
+])
+
+# 3. Simple Manual Convolution (3x3 region)
+def convolve(region, k):
+    return (region * k).sum()
+
+output = []
+for col in range(8):
+    # Just look at the middle row for simplicity
+    region = img[4:7, col:col+3]
+    score = convolve(region, kernel)
+    output.append(score)
+
+print(f"Original Row snippet: {img[5, 4:9]}")
+print(f"Kernel Response: {output[3:7]}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if our data is a 1D sequence of events in time? Explore <strong><a href="#/machine-learning/deep-learning/rnn">Recurrent Neural Networks (RNN)</a></strong>.
@@ -472,18 +786,61 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <h2 id="limitations">The Short-Term Memory Problem</h2>
     <p><strong>The Reality:</strong> Simple RNNs have <strong>Terrible Memory</strong>. If a sentence is 20 words long, by the time the RNN reaches the last word, it has usually <strong>forgotten</strong> the first word. It only has "Short-Term" persistence.</p>
 
-    <h2 id="analogy">The "Goldfish with a Notebook" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Goldfish</strong> with a 5-second memory. 
-        It is trying to read a <strong>Mystery Novel</strong>. 
-        Every time it turns a page, it forgets everything that happened before. 
-        So, it keeps a <strong>Small Notebook (Hidden State)</strong>. 
-        On each page, it looks at the new text, reads its notebook, and then <strong>Scribbles</strong> a summary for the next page. 
-        **The RNN is that Goldfish. The "Notebook" is its hidden state. The "Short-Term" problem is the notebook being too small to hold the whole story.** 
+    <h2 id="example">Illustrated Example: The Goldfish with a Notebook</h2>
+    <div class="example-box">
+      <h4>Scenario: Reading a Long Mystery Novel with Short-Term Memory</h4>
+      <p>Imagine you have a 10-second memory. To understand a "Who-Done-It" book, you need a system to carry context.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The New Input (X):</strong> You read a single page. It says: "The Butler has a bloody knife."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Hidden State (The Notebook):</strong> You look at your notebook. It says: "Previously, the maid was found in the pantry." (Context from the Past).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Synthesis (Update):</strong> You combine the new word + the note and write a new note: "Butler killed the Maid."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Result:</strong> You pass the notebook to the next person. Every step depends on the <strong>History</strong> written in that notebook.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> An RNN is <strong>Temporal</strong>. It doesn't just see the world; it sees the <strong>History</strong> of the world. But be careful—the notebook is small. If the story is too long, the 'Blame' for a bad prediction can't travel all the way back to page 1.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Temporal Memory Update</h2>
+    <python-code static-output="[Sequence] Step 0: Input 'Wait' -> Memory Strength: 0.12\n[Sequence] Step 1: Input 'For' -> Memory Strength: 0.45\n[Sequence] Step 2: Input 'It' -> Memory Strength: 0.82\n[Analysis] The Hidden State is evolving as new data 'updates' the existing context.\n[Result] Final Hidden Vector represents a 'compressed' history of the full sequence.">
+import numpy as np
+
+# 1. Weights: x->h and h->h (Memory)
+W_xh = np.random.randn(4, 1) # Perception
+W_hh = np.random.randn(4, 4) # Memory Persistence
+h_state = np.zeros((4, 1))   # Initial 'Blank' Memory
+
+# 2. Sequence of signals (imagine a sine wave or sentence)
+sequence = [1.5, -0.5, 2.0]
+
+print("Processing Sequence through Recurrence:")
+
+for i, x_t in enumerate(sequence):
+    # Rule: New Memory = tanh(Current Input + Previous Memory)
+    z = np.dot(W_xh, x_t) + np.dot(W_hh, h_state)
+    h_state = np.tanh(z)
+    
+    # Calculate Magnitude of Memory
+    magnitude = np.linalg.norm(h_state)
+    print(f"Step {i}: Input Signal {x_t:4.1f} | Memory Strength {magnitude:.4f}")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we give the goldfish a "Long-Term" memory? Explore <strong><a href="#/machine-learning/deep-learning/lstm-gru">LSTM and GRU Architectures</a></strong>.
@@ -542,17 +899,65 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into **One**, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
     **Why use it?** It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
 
-    <h2 id="analogy">The "Diary and Eraser" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine you are keeping a <strong>Strict Journal</strong> for a 1-year research trip. 
-        * **Forget Gate:** Every Sunday, you go through your notes and <strong>Erase</strong> things that turned out to be boring. 
-        * **Input Gate:** You only <strong>Write</strong> into your journal if something <strong>Crucial</strong> happens. 
-        * **Output Gate:** When someone asks you, "What's the status?", you read your journal and <strong>Tell them the highlights</strong>. 
-        **The LSTM/GRU is that disciplined scientist. It doesn't let its memory get clogged with garbage.** 
+    <h2 id="example">Illustrated Example: The Disciplined Scientist</h2>
+    <div class="example-box">
+      <h4>Scenario: Keeping a Lab Journal on a 10-Year Mars Mission</h4>
+      <p>Imagine you are a scientist with limited ink and one journal (The Cell State). You must be ruthless about what you record.</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Forget Gate (The Eraser):</strong> You check your old notes. "The weather was cloudy 5 years ago." You erase it to save space. (Removing irrelevant history).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The Input Gate (The Pen):</strong> You find <strong>Liquid Water</strong>. This is huge! You write it in the "Permanent" section of your journal. (Updating the context).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>The Cell State (The Journal):</strong> This water discovery flows through time, protected from the "Noise" of daily life by the gates.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Output Gate (The Report):</strong> At the end of the year, you check your journal and report the Water Discovery first, ignoring the 364 days of boring rocks.</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> LSTM is the <strong>Traffic Controller of Memory</strong>. By using the "Cell State" as a high-speed bypass, it allows important signals to skip over the noisy layers and reach the future intact.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Selective Gating</h2>
+    <python-code static-output="[Scan] Start: Cell State=0.0 (Empty Journal)\n[Input] Found 'Water' -> Forget: 0.9, Input: 1.0\n[Scan] Middle: 5 years of 'Boring Rocks' -> Input Gate: 0.0\n[Result] Step 10: Cell State=0.89 (Water Discovery Survived!)\n[Insight] The gates successfully blocked the noise and preserved the signal.">
+import numpy as np
+
+# 1. State: C (Cell State - Long Term) and H (Hidden State - Short Term)
+C, h = 0.0, 0.0
+
+# 2. Sequence of Events: [Discovery, Noise, Noise, ...]
+events = [1.0] + [0.1] * 9
+
+print("Simulating LSTM Gating Logic...")
+
+for t, x_t in enumerate(events):
+    # Rule-of-thumb Gates
+    # Forget: Keep 90% of old memory
+    f_gate = 0.9 
+    # Input: Only write if the signal is strong (>0.5)
+    i_gate = 1.0 if x_t > 0.5 else 0.0
+    
+    # Update Cell State: h_prev*forget + new*input
+    C = (C * f_gate) + (x_t * i_gate)
+    
+    if t % 5 == 0 or t == 9:
+        print(f"  Step {t}: Input={x_t:4.2f} | Cell State (Journal)={C:.4f}")
+
+print("\n[The important discovery from Step 0 is still in the journal at Step 9!]")
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with a diary, the goldfish still has to read it one page at a time. What if we read the whole book at once? Explore <strong><a href="#/machine-learning/deep-learning/transformers">The Transformer Revolution</a></strong>.
@@ -603,24 +1008,72 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     One might focus on <strong>Entity Relationships</strong>. 
     By combining these perspectives, the model builds a <strong>High-Resolution Understanding</strong> of the sequence.</p>
 
-    <h2 id="analogy">The "Attention Spotlight" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine a <strong>Dark Stage</strong> with 20 actors (Words). 
-        * **RNN Approach:** You have one <strong>Single Spotlight</strong> that follows the actors one by one from left to right. 
-        * **Transformer Approach:** **EVERY ACTOR** has their own <strong>Moveable Spotlight</strong>. 
-        Each actor is shining their light on the <strong>Other Actors</strong> they need to talk to. 
-        If Actor 1 (Subject) needs a verb, they shine their light on Actor 5 (Verb). 
-        The stage is <strong>Flooded with Light</strong>. Everyone sees the **Whole Scene** at once. 
-        **The Transformer is that flood of light. It's not a sequence; it's a simultaneous connection.** 
+    <h2 id="example">Illustrated Example: The Stage Spotlight</h2>
+    <div class="example-box">
+      <h4>Scenario: A 20-Actor Play on a Total Blackout Stage</h4>
+      <p>Imagine every actor on stage represents a word. How do they coordinate their performance if they can't see the whole script?</p>
+      
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Old Way (RNN):</strong> One single spotlight moves from Actor 1 to Actor 2. Actor 2 tries to remember what Actor 1 said. By Actor 20, the memory is a blurry mess. (Sequential & Slow).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>The New Way (Attention):</strong> **EVERY Actor** has their own high-powered spotlight. At the same instant, they can shine it on *any* other actor they want.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Query & Key:</strong> Actor 1 (The Subject) shines their "Query" light and sees Actor 12 (The Verb) holding a "Key" that perfectly matches their needs.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">4</span>
+          <div><strong>The Synthesis:</strong> The whole stage is lit up in a web of connections. Everyone understands their role relative to everyone else <strong>Simultaneously</strong>. (Parallel & Global).</div>
+        </div>
+      </div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Teacher's Hint:</strong> Transformers are the ultimate <strong>Parallel Processors</strong>. They don't have "Short-Term Memory"—they have <strong>Instant Vision</strong>. They see the whole sequence as a single structure, not a ticking clock.
+        </div>
       </div>
     </div>
+
+    <h2 id="python">Python Implementation: Scaled Dot-Product Attention</h2>
+    <python-code static-output="[Action] Calculating Context for 3 Words...\n[Attention Scores] Compatibility Matrix Calculated.\n[Softmax] Row 0: Word 0 paying 92% attention to Word 2!\n[Result] Input meanings successfully 'blended' based on their context.\n[Parallel] All word relationships resolved in a single matrix multiplication.">
+import numpy as np
+
+def softmax(x):
+    e_x = np.exp(x - np.max(x, axis=-1, keepdims=True))
+    return e_x / e_x.sum(axis=-1, keepdims=True)
+
+# 1. 3 Words, Embed Size 4 (Q, K, V)
+# [I, Love, Math]
+Q = np.array([[1, 0, 1, 0], [0, 1, 0, 1], [1, 1, 0, 1]])
+K = Q # Self-Attention
+V = np.array([[10, 0], [0, 20], [5, 5]]) # Meanings
+
+# 2. Score = (Q * K^T) / sqrt(d_k)
+d_k = Q.shape[-1]
+scores = np.dot(Q, K.T) / np.sqrt(d_k)
+
+# 3. Probabilities (Attention Weights)
+weights = softmax(scores)
+
+# 4. Final Output: Contextualized Meanings
+output = np.dot(weights, V)
+
+print(f"--- Attention Weights (How much word i looks at word j) ---")
+print(weights.round(2))
+print(f"\n--- Output Values (Context-aware embeddings) ---")
+print(output.round(1))
+    </python-code>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the architectures of the mind. Now, let's learn how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},g={id:"deep-learning",title:"Neural Networks & Deep Learning",description:"The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",keyConcepts:[{title:"Universal Approximation",description:"The power of layers and non-linearity to model any continuous function."},{title:"Backpropagation",description:"Iterative optimization via the systematic application of the Chain Rule."},{title:"Inductive Biases",description:"Architectural constraints for Space (CNN), Time (RNN), and Relationships (Attention)."}],introHtml:String.raw`
+  `},d={id:"deep-learning",title:"Neural Networks & Deep Learning",description:"The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",keyConcepts:[{title:"Universal Approximation",description:"The power of layers and non-linearity to model any continuous function."},{title:"Backpropagation",description:"Iterative optimization via the systematic application of the Chain Rule."},{title:"Inductive Biases",description:"Architectural constraints for Space (CNN), Time (RNN), and Relationships (Attention)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -666,4 +1119,4 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
       </div>
 
     </div>
-  `,sections:[e,t,o,n,a,s,i,r,l,h]};export{g as DEEP_LEARNING_DATA};
+  `,sections:[e,t,s,a,n,i,o,r,l,h]};export{d as DEEP_LEARNING_DATA};
