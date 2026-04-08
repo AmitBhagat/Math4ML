@@ -29,7 +29,7 @@ export const basisDimensionSection: TopicSection = {
     </div>
 
     <h2 id="dimension">2. Dimension vs. Rank</h2>
-    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For <span class="text-green-premium font-bold">Case Study:</span> , \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
+    <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
 
     <h2 id="example-r2" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Standard Basis for ℝ²</h2>
     
