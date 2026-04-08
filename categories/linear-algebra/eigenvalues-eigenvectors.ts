@@ -3,108 +3,74 @@ import { TopicSection } from '../../src/data/types';
 export const eigenvaluesEigenvectorsSection: TopicSection = {
   id: "eigenvalues-eigenvectors",
   title: "Eigenvalues and Eigenvectors",
-  description: "Eigen-analysis reveals the internal structure of a matrix — its eigenvalues and eigenvectors — which are the foundations of PCA, Singular Value Decomposition, and spectral analysis.",
-  color: "#FFD600",
+  description: "Eigenvectors are the 'Hidden Axes' of a matrix that don't rotate when transformed. Eigenvalues tell you how much they stretch.",
+  color: "#3F51B5",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🏹 Linear Algebra · Spectral Theory</div>
-      <h1>Eigenvalues and Eigenvectors</h1>
-      <p>In Linear Algebra, <strong>Eigenvalues</strong> and <strong>Eigenvectors</strong> provide a way to decompose a matrix into its most fundamental components. When a linear transformation (represented by a matrix \(A\)) is applied to most vectors, they change both their magnitude and their direction. However, <strong>Eigenvectors</strong> are special vectors that only change in magnitude (scale) when the transformation is applied; their direction remains the same.</p>
+      <div class="premium-hero-badge">🧬 Linear Algebra · Eigenpairs</div>
+      <h1>Eigenvalues & Eigenvectors</h1>
+      <p>An <strong>Eigenvector</strong> is a vector that, when multiplied by a matrix, <strong>never changes direction</strong>—it only scales. The <strong>Eigenvalue</strong> \(\lambda\) is the scaling factor. They are the "Fingerprints" of a linear transformation.</p>
     </div>
-
-    <visualizer topic="Eigenvalues" />
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#theory">1. Core Theory: Scaling & Span</a>
-      <a href="#derivation">2. Mathematical Derivation (λ and v)</a>
-      <a href="#example">3. Illustrative Example Walkthrough</a>
-      <a href="#stability">4. Stability of Neural Networks (Spectral Radius)</a>
-      <a href="#pca">5. Application: PCA & Spectral Clustering</a>
-      <a href="#factorization">6. Application: Matrix Factorization</a>
+      <a href="#theory">Core Theory: The "Why"</a>
+      <a href="#derivation">Mathematical Derivation</a>
+      <a href="#example-diagonal">Example 1: Finding Hidden Axes</a>
+      <a href="#example-chareq">Example 2: Characteristic Equation Walkthrough</a>
       <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Real-world AI Applications</a>
-      <a href="#takeaways">Key Takeaways</a>
+      <a href="#applications">Applications in ML</a>
     </div>
 
-    <div class="def-box">
-      <div class="def-title">Prerequisites</div>
-      <ul style="margin:0">
-        <li><strong>Matrix Multiplication:</strong> \(A\mathbf{v}\).</li>
-        <li><strong>Determinants:</strong> To solve the characteristic equation.</li>
-        <li><strong>Identity Matrix:</strong> \(I\).</li>
-      </ul>
-    </div>
-
-    <h2 id="theory">1. Core Theory: Scaling & Span</h2>
-    <p>For a square matrix \(A\), a non-zero vector \(\mathbf{v}\) is an <strong>Eigenvector</strong> if:</p>
-    <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
-    <p>where \(\lambda\) (Lambda) is a scalar called the <strong>Eigenvalue</strong> corresponding to that eigenvector. This means the vector \(\mathbf{v}\) essentially points in a direction that \(A\) does not rotate; it only stretches or shrinks it by \(\lambda\).</p>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> Most vectors get knocked off their path in a transformation. <strong>Eigenvectors</strong> are the survivors: they stay on their span. In ML, these are the **principal axes** of your data. The eigenvalue $\lambda$ is the "energy" or variance along that axis.
-      </div>
-    </div>
-
-    <h2 id="derivation">2. Mathematical Derivation (λ and v)</h2>
-    <p>To find \(\lambda\), we rearrange the equation to \((A - \lambda I)\mathbf{v} = 0\). For a non-trivial solution (\(\mathbf{v} \neq 0\)), the matrix \((A - \lambda I)\) must be singular:</p>
+    <h2 id="theory">Core Theory: The "Why"</h2>
+    <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find **Principal Components** in data.</p>
     
-    <div class="step-box"><span class="step-num">1</span><strong>The Characteristic Equation:</strong> Solve \(\det(A - \lambda I) = 0\) to find the eigenvalues.</div>
-    <div class="step-box"><span class="step-num">2</span><strong>Finding Vectors:</strong> For each \(\lambda\), solve the linear system \((A - \lambda I)\mathbf{v} = 0\) to find the corresponding eigenvectors.</div>
-
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Core Theory:</strong> To find the eigenvalues, we look for when $(A - \lambda I)$ squashes space (determinant = 0). This polynomial $\det(A - \lambda I)$ is the "DNA" of the matrix. Once you have the roots, you have the spectral map of the transformation.
+        <strong>Teacher's Intuition:</strong> Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
+        If you spin a globe, every point moves—except for the North and South Poles. 
+        The "Line through the Poles" is the <strong>Eigenvector</strong>. 
+        It stays in place while everything else transforms around it.
       </div>
     </div>
 
-    <h2 id="example">3. Illustrative Example Walkthrough</h2>
+    <h2 id="derivation">Mathematical Derivation</h2>
+    <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
+    <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
+    <p>To find \(\lambda\), we solve the <strong>Characteristic Equation</strong>:</p>
+    <div class="math-block">$$\det(A - \lambda I) = 0$$</div>
+
+    <h2 id="example-diagonal">Example 1: Finding Hidden Axes</h2>
     <div class="example-box">
-      <h4>Problem: Finding Eigenvalues & Eigenvectors</h4>
-      <p>Find the eigenpairs for \(A = \begin{bmatrix} 4 & 1 \\ 2 & 3 \end{bmatrix}\).</p>
+      <h4>Problem: Identifying Eigenvalues for a Diagonal Matrix</h4>
+      <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the eigenpairs.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Solve the Characteristic Equation:</strong> \(\det(A - \lambda I) = 0\).</div></div>
-      <div class="math-block">$$(4-\lambda)(3-\lambda) - 2 = \lambda^2 - 7\lambda + 10 = 0$$</div>
-      
-      <div class="step-box"><span class="step-num">2</span><div><strong>Factor the Quadratic:</strong> \((\lambda - 5)(\lambda - 2) = 0\).</div></div>
-      <div class="math-block">$$\lambda_1 = 5, \quad \lambda_2 = 2$$</div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Scaling is 3x on x and 2x on y.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Check:</strong> Multiplying \([1, 0]\) gives \([3, 0]\). Direct 3x scale.</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Check:</strong> Multiplying \([0, 1]\) gives \([0, 2]\). Direct 2x scale.</div></div>
 
-      <div class="step-box"><span class="step-num">3</span><div><strong>Compute Eigenvector for \(\lambda_1 = 5\):</strong> Solve \((A - 5I)\mathbf{v} = 0\).</div></div>
-      <div class="math-block">$$\begin{bmatrix} -1 & 1 \\ 2 & -2 \end{bmatrix} \begin{bmatrix} v_1 \\ v_2 \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \end{bmatrix} \implies \mathbf{v}_1 = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$$</div>
-
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> We found two eigenpairs. The most "dominant" eigenvalue is 5, representing the primary direction of scaling.</div></div>
-    </div>
-
-    <h2 id="stability">4. Stability of Neural Networks (Spectral Radius)</h2>
-    <p>In Deep Learning, the <strong>Spectral Radius</strong> (the largest absolute eigenvalue) of your weight matrices determines if signals will explode or vanish. This is the cornerstone of <strong>Weight Initialization</strong> strategies.</p>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> The Spectral Radius $\rho(A)$ is the "gain" of your layer. If $\rho(A) > 1$, gradients explode after many layers. If $\rho(A) < 1$, they vanish. Modern init strategies like <strong>Xavier/He</strong> keep this near 1 for stability.
-      </div>
-    </div>
-    <div class="callout info">
-      <div class="callout-icon">🚀</div>
-      <div class="callout-body">
-        <strong>The Rule:</strong> If \(\lambda_{max} > 1\), weights grow exponentially (Exploding Gradients). If \(\lambda_{max} << 1\), signals can vanish (Vanishing Gradients).
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> \(\lambda_1 = 3, \mathbf{v}_1 = [1, 0]\) and \(\lambda_2 = 2, \mathbf{v}_2 = [0, 1]\). Diagonal matrices already show their eigen-secrets!
+        </div>
       </div>
     </div>
 
-    <h2 id="pca">5. Application: PCA & Spectral Clustering</h2>
-    <p><strong>PCA</strong> finds the eigenvectors of the data's covariance matrix. This reduces 100 features to the 10 most important ones without losing critical patterns.</p>
-    <p><strong>Spectral Clustering</strong> uses the eigenvalues of a Graph Laplacian matrix \(L = D - A\) to map data into a space where clusters are easily separable, outperforming K-Means on non-spherical data.</p>
+    <h2 id="example-chareq">Example 2: Characteristic Equation Walkthrough</h2>
+    <div class="example-box">
+      <h4>Problem: Solxing for λ of A = [[4, 1], [2, 3]]</h4>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Set up:</strong> \(\det(A - \lambda I) = (4-\lambda)(3-\lambda) - 2 = 0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Factor:</strong> \(\lambda^2 - 7\lambda + 10 = 0 \to (\lambda - 5)(\lambda - 2) = 0\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Result:</strong> \(\lambda = 5, 2\).</div></div>
 
-    <h2 id="factorization">6. Application: Matrix Factorization</h2>
-    <p>If \(A\) is a symmetric matrix, it can be factored as \(A = Q \Lambda Q^T\), where \(Q\) is a matrix of eigenvectors and \(\Lambda\) is a diagonal matrix of eigenvalues. This is used in Recommendation Systems (like Netflix) to discover "latent features"—detecting a user's preference for 'Action' vs. 'Sci-Fi' from raw ratings.</p>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> If $A$ is symmetric, it can be perfectly "decoupled" into independent axes. ML uses this to find <strong>hidden factors</strong>. In a movie matrix, $Q$ might represent Genres, and $\Lambda$ tells you how much a person likes each genre.
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Intuition:</strong> \(\lambda = 5\) is your "Main Signal." The direction corresponding to this eigenvalue contains the most <strong>Variance</strong> in your data.
+        </div>
       </div>
     </div>
 
@@ -112,38 +78,24 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
     <python-code>
 import numpy as np
 
-# A symmetric matrix (e.g., a covariance matrix)
-A = np.array([[4, 2], [2, 3]])
+A = np.array([[4, 1], [2, 3]])
 
-# Calculate Eigenvalues and Eigenvectors
-eigenvalues, eigenvectors = np.linalg.eig(A)
+# Calculating eigenvalues and eigenvectors
+vals, vecs = np.linalg.eig(A)
 
-print("Eigenvalues:", eigenvalues)
-print("Eigenvectors (Columns):\n", eigenvectors)
-
-# Verification: Av = lambda * v
-v1 = eigenvectors[:, 0]
-lambda1 = eigenvalues[0]
-print("\nMatch Av == lv:", np.allclose(A @ v1, lambda1 * v1))
+print(f"Eigenvalues: {vals}")
+print(f"Eigenvectors:\n{vecs}")
     </python-code>
 
-    <h2 id="applications">Real-world AI Applications</h2>
+    <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>Principal Component Analysis (PCA):</strong> Dimensionality reduction for data visualization and feature engineering.</li>
-      <li><strong>Computer Vision:</strong> <strong>Eigenfaces</strong> uses eigenvectors of face images for facial recognition.</li>
-      <li><strong>Google PageRank:</strong> The importance of a webpage is calculated as the dominant eigenvalue of the web-link matrix.</li>
-    </ul>
-
-    <h2 id="takeaways">Key Takeaways</h2>
-    <ul>
-      <li><strong>Eigenvectors</strong> define the "axes" or directions of a transformation.</li>
-      <li><strong>Eigenvalues</strong> define the "strength" or magnitude of scaling along those axes.</li>
-      <li>Large eigenvalues in a covariance matrix signify the most important patterns in data.</li>
+      <li><strong>Principal Component Analysis (PCA)</strong>: Finding the eigenvectors of the data's covariance matrix to reduce dimensions.</li>
+      <li><strong>Google PageRank</strong>: Your search results are ranked based on the leading eigenvector of a massive "Web matrix."</li>
+      <li><strong>Spectral Clustering</strong>: Using eigenvalues to find groups (clusters) in complex data networks.</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> With the theory mastered, let's explore practical <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors-pca">Solved SVD & PCA Examples</a></strong>.
-    </div>
+      <strong>Next Step:</strong> Some matrices have "Good Behavior" and always produce positive scaling factors. Explore <strong><a href="#/mathematics/linear-algebra/positive-definite">Positive Definite Matrices</a></strong>.
     </div>
   `
 };

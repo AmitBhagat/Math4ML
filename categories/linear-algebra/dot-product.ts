@@ -1,0 +1,105 @@
+import { TopicSection } from '../../src/data/types';
+
+export const dotProductSection: TopicSection = {
+  id: "dot-product",
+  title: "Dot Product",
+  description: "The Dot Product measures the 'overlap' or 'alignment' between two vectors. It's the engine behind similarity and attention.",
+  color: "#D32F2F",
+  html: String.raw`
+    <div class="premium-hero">
+      <div class="premium-hero-badge">🔢 Linear Algebra · Dot Product</div>
+      <h1>Dot Product: The Similarity Engine</h1>
+      <p>The <strong>Dot Product</strong> (or inner product) is the mathematical heart of almost every modern ML model, from Linear Regression to Large Language Models (LLMs).</p>
+    </div>
+
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <a href="#prerequisites">Prerequisites</a>
+      <a href="#theory">Core Theory: The "Why"</a>
+      <a href="#derivation">Mathematical Derivation</a>
+      <a href="#example-nlp">Example 1: Word Similarity in NLP</a>
+      <a href="#example-orthogonality">Example 2: Orthogonality Check</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
+      <a href="#applications">Applications in ML</a>
+    </div>
+
+    <h2 id="prerequisites">Prerequisites</h2>
+    <div class="def-box">
+      <ul style="margin:0">
+        <li><strong>Vector Basics</strong>: Multiplying and summing components.</li>
+        <li><strong>Trigonometry</strong>: Understanding the Cosine (\(\cos\)) of an angle.</li>
+      </ul>
+    </div>
+
+    <h2 id="theory">Core Theory: The "Why"</h2>
+    <p>At its core, the Dot Product answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em></p>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
+      </div>
+    </div>
+
+    <h2 id="derivation">Mathematical Derivation</h2>
+    <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
+    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
+    <p>Alternatively, using the angle \(\theta\) between them:</p>
+    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta)$$</div>
+
+    <h2 id="example-nlp">Example 1: Word Similarity in NLP</h2>
+    <div class="example-box">
+      <h4>Problem: Comparing Sentiments</h4>
+      <p>Compare \(\mathbf{v}_1 = [1, 1]\) (Positive) and \(\mathbf{v}_2 = [1, -1]\) (Negative).</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Dot Product:</strong> \((1 \times 1) + (1 \times -1) = 0\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Interpretation:</strong> The dot product is zero. These two vectors have no overlap.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> Zero indicates **Orthogonality**. In NLP, this means these two concepts are completely independent or "on different planets."
+        </div>
+      </div>
+    </div>
+
+    <h2 id="example-orthogonality">Example 2: Alignment Check</h2>
+    <div class="example-box">
+      <h4>Problem: Similarity of [3, 4] and [4, 3]</h4>
+      <p>Are these two vectors pointing in roughly the same direction?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Summing:</strong> \((3 \times 4) + (4 \times 3) = 12 + 12 = 24\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Result:</strong> High positive number.</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> YES. High dot product means high alignment. They share most of their "energy" in the same directions.
+        </div>
+      </div>
+    </div>
+
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <python-code>
+import numpy as np
+
+a = np.array([1, 2])
+b = np.array([3, 4])
+
+# Dot product
+dot = np.dot(a, b) # or a @ b
+
+print(f"Dot Product: {dot}")
+    </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <ul>
+      <li><strong>Attention Mechanisms</strong>: Transformers (like ChatGPT) use dot products to decide which words are relevant to the ones it just read.</li>
+      <li><strong>Linear Regression</strong>: Your prediction \(\hat{y} = \mathbf{w} \cdot \mathbf{x}\) is just a dot product of weights and features.</li>
+    </ul>
+
+    <div class="linking-rule">
+      <strong>Next Step:</strong> Dot product is affected by vector length. How do we measure that length individually? Explore <strong><a href="#/mathematics/linear-algebra/vector-norms">Vector Norms (L1, L2)</a></strong>.
+    </div>
+  `
+};

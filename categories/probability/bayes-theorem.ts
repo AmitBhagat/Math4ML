@@ -2,175 +2,115 @@ import { TopicSection } from '../../src/data/types';
 
 export const bayesTheoremSection: TopicSection = {
   id: "bayes-theorem",
-  title: "Bayes' Theorem",
-  description: "Bayes' Theorem is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available.",
+  title: "Bayes Theorem",
+  description: "Bayes Theorem is the ultimate tool for Updating Beliefs in the face of new evidence. It allows us to calculate the probability of a cause given its effect.",
+  color: "#FF6F00",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🔄 Probability · Bayes' Theorem</div>
-      <h1>Bayes' Theorem</h1>
-      <p><strong>Bayes' Theorem</strong> is a fundamental principle in probability that describes how to update the probability of a hypothesis as more evidence or information becomes available. It transitions us from "prior" knowledge to "posterior" knowledge. In ML, it is the mathematical engine behind everything from simple spam filters to complex uncertainty estimation in Deep Learning.</p>
+      <div class="premium-hero-badge">🎲 Probability · Bayesian Inference</div>
+      <h1>Bayes' Theorem: The Logic of Science</h1>
+      <p><strong>Bayes' Theorem</strong> (\(P(A|B)\)) is a mathematical formula used to determine the probability of an event based on prior knowledge of conditions that might be related to the event. In Machine Learning, it's the core of everything from <strong>Naive Bayes Classifiers</strong> to <strong>Bayesian Neural Networks</strong>.</p>
     </div>
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#why">Core Theory: The "Why"</a>
-      <a href="#formula">The Formula &amp; Key Components</a>
+      <a href="#prerequisites">Prerequisites</a>
+      <a href="#theory">Core Theory: The "Why"</a>
       <a href="#derivation">Mathematical Derivation</a>
-      <a href="#applications">Core Applications in ML</a>
-      <a href="#applications" class="sub">↳ 1. Naive Bayes</a>
-      <a href="#applications" class="sub">↳ 2. Bayesian Inference</a>
-      <a href="#applications" class="sub">↳ 3. Bayesian Neural Networks (BNNs)</a>
-      <a href="#example">4. Illustrative Example: Medical Testing</a>
-      <a href="#spam-example">5. Illustrative Example: Spam Filters</a>
-      <a href="#implementation">Implementation: Naive Bayes Logic in Python</a>
-      <a href="#takeaways">Key Takeaways</a>
+      <a href="#example-spam">Example 1: Spam Filter (Prior/Posterior)</a>
+      <a href="#example-monty">Example 2: The Monty Hall Problem</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
+      <a href="#applications">Applications in ML</a>
     </div>
 
+    <h2 id="prerequisites">Prerequisites</h2>
     <div class="def-box">
-      <div class="def-title">Prerequisites</div>
       <ul style="margin:0">
-        <li><strong>Basic Axioms of Probability:</strong> Sample space and events.</li>
-        <li><strong>Conditional Probability:</strong> \(P(A|B) = \frac{P(A \cap B)}{P(B)}\).</li>
-        <li><strong>Product Rule:</strong> \(P(A \cap B) = P(A|B)P(B) = P(B|A)P(A)\).</li>
+        <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
+        <li><strong>Joint Probability</strong>: Understanding \(P(A \cap B)\).</li>
       </ul>
     </div>
 
-    <h2 id="why">Core Theory: The "Why"</h2>
-    <p>In many real-world scenarios, we know the probability of an effect given a cause, but we want to find the probability of the <strong>cause given the effect</strong>.</p>
-    <p>For example, we might know the probability that a patient has a cough given they have the flu, but a doctor needs to know the probability the patient has the flu given they have a cough. Bayes' Theorem provides the exact formula for this "inversion."</p>
-
-    <h2 id="formula">The Formula</h2>
-    <div class="premium-math-block" style="text-align: center;">
-      <div style="font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Bayes' Theorem</div>
-      $$P(H|E) = \frac{P(E|H) \cdot P(H)}{P(E)}$$
-    </div>
-
+    <h2 id="theory">Core Theory: The "Why"</h2>
+    <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief.</p>
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Core Theory:</strong> Bayes' Theorem is a <strong>"Common Sense Correction."</strong> It tells you exactly how much you should update your mind after seeing a piece of data. If the evidence is strong, you move closer to the hypothesis. If your initial belief (Prior) was rock-solid, it takes a lot of evidence to budge you.
-      </div>
-    </div>
-
-    <div class="premium-toc" style="background: transparent; border: none; padding: 0;">
-      <div class="perspectives-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0;">
-        <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px;">P(H|E) — Posterior</div>
-          <p style="margin: 0; font-size: 13.5px; font-weight: 300;">The probability of Hypothesis \(H\) <em>after</em> seeing Evidence \(E\).</p>
-        </div>
-        <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px;">P(E|H) — Likelihood</div>
-          <p style="margin: 0; font-size: 13.5px; font-weight: 300;">The probability of seeing Evidence \(E\) if the Hypothesis \(H\) is true.</p>
-        </div>
-        <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px;">P(H) — Prior</div>
-          <p style="margin: 0; font-size: 13.5px; font-weight: 300;">Our initial belief about the Hypothesis before seeing any evidence.</p>
-        </div>
-        <div class="persp-card" style="background: var(--bg-tertiary); border: 1px solid var(--border-premium); border-radius: 8px; padding: 14px 16px;">
-          <div style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); margin-bottom: 6px;">P(E) — Evidence / Marginal</div>
-          <p style="margin: 0; font-size: 13.5px; font-weight: 300;">The total probability of the evidence occurring under all possible hypotheses.</p>
-        </div>
-      </div>
-    </div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> The <strong>Prior</strong> $P(H)$ is where <strong>Expert Knowledge</strong> enters the model. The <strong>Likelihood</strong> $P(E|H)$ is where the <strong>Data</strong> enters. Bayes is the mathematical marriage of these two sources of information.
+        <strong>Teacher's Intuition:</strong> Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
+        You start with a guess (the Prior). 
+        You see some evidence (the Data). 
+        Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
+        It is the fundamental rule for how a machine "Learns" from experience.
       </div>
     </div>
 
     <h2 id="derivation">Mathematical Derivation</h2>
-    <p>The derivation is a direct consequence of the <strong>Definition of Conditional Probability</strong>.</p>
-    <div class="step-box"><span class="step-num">1</span><div><strong>Conditional Definition:</strong> \(P(H|E) = \frac{P(H \cap E)}{P(E)}\).</div></div>
-    <div class="step-box"><span class="step-num">2</span><div><strong>Product Rule:</strong> \(P(H \cap E) = P(E|H) \cdot P(H)\).</div></div>
-    <div class="step-box"><span class="step-num">3</span><div><strong>Substitution:</strong> Combine the two to get the inverted relationship.</div></div>
-    <div class="math-block">$$P(H|E) = \frac{P(E|H)P(H)}{P(E)}$$</div>
-    <p>To calculate \(P(E)\), we often use the <strong>Law of Total Probability</strong>:</p>
-    <div class="math-block">$$P(E) = P(E|H)P(H) + P(E|H^c)P(H^c)$$</div>
+    <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
+    <ul>
+      <li><strong>\(P(A|B)\)</strong>: Posterior (Belief after seeing data).</li>
+      <li><strong>\(P(B|A)\)</strong>: Likelihood (How well the data fits the cause).</li>
+      <li><strong>\(P(A)\)</strong>: Prior (Initial belief).</li>
+      <li><strong>\(P(B)\)</strong>: Evidence (Normalization constant).</li>
+    </ul>
 
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> That denominator $P(E)$ is the <strong>Normalization Factor</strong>. Its only job is to ensure that all possible hypotheses sum up to 100%. Without it, we wouldn't have a valid probability distribution—just a set of relative "scores."
+    <h2 id="example-spam">Example 1: Spam Filter (Prior/Posterior)</h2>
+    <div class="example-box">
+      <h4>Problem: Identifying Junk Emails</h4>
+      <p>10% of emails are Spam. 80% of Spam contains the word "Free." Only 1% of ham (good emails) contains "Free." If an email has "Free," is it spam?</p>
+      
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> \(P(S) = 0.1, P(F|S) = 0.8, P(F|H) = 0.01\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Filter:</strong> \(P(\text{Spam} | \text{Free}) = \frac{P(\text{Free}|\text{Spam}) P(\text{Spam})}{P(\text{Free})}\).</div></div>
+      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate:</strong> \(\frac{0.8 \times 0.1}{ (0.8 \times 0.1) + (0.01 \times 0.9) } = \frac{0.08}{0.089} \approx 0.89\).</div></div>
+
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> Your belief that the email is spam shot up from **10%** to **89%** just by seeing one word. This is how basic Spam filters function.
+        </div>
       </div>
     </div>
 
-    <h2 id="applications">Core Applications in ML</h2>
-
-    <h3>1. Naive Bayes</h3>
-    <p>This is a classification algorithm that applies Bayes' Theorem with a "Naive" assumption: <strong>all features are independent of each other</strong> given the class label.</p>
-    <div class="callout info"><div class="callout-icon">💡</div><div class="callout-body"><strong>Why use it?</strong> It drastically simplifies the calculation of \(P(E|H)\) by multiplying individual feature probabilities: \(P(x_1, x_2 | H) = P(x_1|H) \cdot P(x_2|H)\).</div></div>
-
-    <h3>2. Bayesian Inference</h3>
-    <p>This is the process of using Bayes' Theorem to update a probability distribution for a parameter as more data is collected. Unlike frequentist statistics (which gives a single "best" estimate), Bayesian inference gives a <strong>distribution</strong> showing our uncertainty.</p>
-
-    <h3>3. Bayesian Neural Networks (BNNs)</h3>
-    <p>In standard Neural Networks, weights are fixed numbers. In <strong>BNNs</strong>, weights are <strong>probability distributions</strong>.</p>
-    <div class="callout info"><div class="callout-icon">🧠</div><div class="callout-body"><strong>Benefit:</strong> The model can tell you "I don't know." If it sees data far from its training set, the variance in the weight distributions leads to high uncertainty in the output.</div></div>
-
-    <h2 id="example">4. Illustrative Example: Medical Testing</h2>
+    <h2 id="example-monty">Example 2: The Monty Hall Problem</h2>
     <div class="example-box">
-      <h4>Problem: The Disease Testing Paradox</h4>
-      <p>A disease affects <strong>1%</strong> of the population (\(P(H) = 0.01\)). A test is <strong>99% accurate</strong> (\(P(E|H) = 0.99\)) but has a <strong>2% false positive rate</strong> (\(P(E|H^c) = 0.02\)). If you test positive, what is the probability you have the disease?</p>
+      <h4>Problem: Updating Knowledge with Evidence</h4>
+      <p>You choose Door #1. The host opens Door #3 (Evidence). Should you switch to Door #2?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Calculate Evidence \(P(E)\):</strong> Total probability of a positive test.</div></div>
-      <div class="math-block">$$P(E) = (0.99 \times 0.01) + (0.02 \times 0.99) = 0.0297$$</div>
-      
-      <div class="step-box"><span class="step-num">2</span><div><strong>Apply Bayes:</strong> \(P(H|E) = \frac{0.99 \times 0.01}{0.0297}\).</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Initial:</strong> \(P(1)=1/3, P(2)=1/3, P(3)=1/3\).</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>New Info:</strong> The host *can't* open the door with the car. So \(P(\text{Evidence} | \text{Car at 2})\) is 1, while \(P(\text{Evidence} | \text{Car at 1})\) is 0.5.</div></div>
 
-      <div class="math-block">$$P(H|E) \approx 0.333$$</div>
-
-      <div class="callout warn"><div class="callout-icon">⚠️</div><div class="callout-body"><strong>Result:</strong> Despite the "99% accuracy," the posterior is only <strong>33.3%</strong>. This happens because the disease is so rare that the small false positive rate still produces more "false" positives than "true" ones.</div></div>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Intuition:</strong> Bayes' Theorem shows that <strong>Door #2</strong> now has a <strong>2/3</strong> chance! Switching doubles your odds because the host's action provided <strong>Information</strong> that updated your Bayesian state.
+        </div>
+      </div>
     </div>
 
-    <h2 id="spam-example">5. Illustrative Example: Spam Filters</h2>
-    <div class="example-box">
-      <h4>Problem: Classifying "Urgent" Emails</h4>
-      <p>40% of your emails are Spam. The word <strong>"Urgent"</strong> appears in 80% of Spam but only 10% of Ham (Normal). You receive an email with "Urgent". Is it Spam?</p>
-      
-      <div class="step-box"><span class="step-num">1</span><div><strong>Define Priors:</strong> \(P(\text{Spam}) = 0.4\), \(P(\text{Ham}) = 0.6\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Likelihoods:</strong> \(P(\text{Urgent}|\text{Spam}) = 0.8\), \(P(\text{Urgent}|\text{Ham}) = 0.1\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Calculate Posterior:</strong> \(P(\text{Spam}|\text{Urgent}) = \frac{0.8 \times 0.4}{(0.8 \times 0.4) + (0.1 \times 0.6)}\).</div></div>
-
-      <div class="math-block">$$P(\text{Spam}|\text{Urgent}) = \frac{0.32}{0.32 + 0.06} = \frac{0.32}{0.38} \approx 0.84$$</div>
-
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Decision:</strong> Since the probability (84%) is high, the model correctly flags this as Spam. Knowledge of the word "Urgent" shifted our belief from 40% to 84%.</div></div>
-    </div>
-    <div class="my-10">
-       <visualizer topic="BayesTheorem" />
-    </div>
-
-    <h2 id="implementation">Implementation: Naive Bayes Logic in Python</h2>
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>
-import numpy as np
+def bayes_inference(prior, likelihood_pos, likelihood_neg):
+    # P(Cause|Effect) = (P(Effect|Cause) * P(Cause)) / P(Effect)
+    evidence = (likelihood_pos * prior) + (likelihood_neg * (1 - prior))
+    posterior = (likelihood_pos * prior) / evidence
+    return posterior
 
-# P(Spam) = 0.4, P(Ham) = 0.6
-prior_spam = 0.4
-prior_ham = 0.6
+prior_spam = 0.1
+l_spam = 0.8 # P("Free" | Spam)
+l_ham = 0.01 # P("Free" | Ham)
 
-# Likelihood of word "Offer" given Spam or Ham
-p_offer_given_spam = 0.8
-p_offer_given_ham = 0.1
-
-# Evidence: P(Offer)
-p_offer = (p_offer_given_spam * prior_spam) + (p_offer_given_ham * prior_ham)
-
-# Posterior: P(Spam | Offer)
-p_spam_given_offer = (p_offer_given_spam * prior_spam) / p_offer
-
-print(f"Probability it is Spam given the word 'Offer': {p_spam_given_offer:.2f}")
+print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     </python-code>
 
-    <h2 id="takeaways">Key Takeaways</h2>
+    <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>Priors Matter:</strong> Your initial belief heavily influences the final result, especially with small amounts of data.</li>
-      <li><strong>The "Naive" part:</strong> In Naive Bayes, we assume features don't interact, which makes the math fast but potentially less accurate.</li>
-      <li><strong>Uncertainty:</strong> Bayesian methods are the gold standard for quantifying how "sure" a model is about its prediction.</li>
+      <li><strong>Naive Bayes Classifier</strong>: The most famous application of this theorem in supervised learning for text classification.</li>
+      <li><strong>A/B Testing</strong>: Bayesian methods help companies decide if a "Change" (Evidence) actually caused an "Improvement" (Cause).</li>
+      <li><strong>Kalman Filters</strong>: Predicting the trajectory of self-driving cars by combining sensor data (Evidence) with the previous physics state (Prior).</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Bayes' Theorem works on events. To handle data, we must map these events to numbers using <strong><a href="#/mathematics/probability/random-variables">Random Variables & Functions</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the **Rigid Statistics** of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
     </div>
   `
 };

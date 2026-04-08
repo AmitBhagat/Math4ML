@@ -3,206 +3,107 @@ import { TopicSection } from '../../src/data/types';
 export const probabilityDistributionsSection: TopicSection = {
   id: "probability-distributions",
   title: "Probability Distributions",
-  description: "A probability distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes. Choosing the right distribution is the first step in building any probabilistic model.",
+  description: "A Probability Distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes in an experiment.",
+  color: "#FF6F00",
   html: String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">📉 Probability · Distributions</div>
-      <h1>Probability Distributions</h1>
-      <p>In Machine Learning, we don't just look at individual data points; we look at the <strong>distribution</strong> they follow. A probability distribution is a mathematical function that provides the probabilities of occurrence of different possible outcomes. Choosing the right distribution is the first step in building any probabilistic model, from <strong>Logistic Regression</strong> to <strong>Variational Autoencoders</strong>.</p>
+      <div class="premium-hero-badge">🎲 Probability · Distributions</div>
+      <h1>Probability Distributions: The Shapes of Chance</h1>
+      <p>A <strong>Probability Distribution</strong> is the "Shape" of a Random Variable. It tells us exactly how likely different outcomes are. In Machine Learning, we almost always assume our data follows some distribution (like the "Bell Curve") to make predictions.</p>
     </div>
 
     <div class="toc">
       <div class="toc-title">Table of Contents</div>
-      <a href="#discrete">Discrete Distributions</a>
-      <a href="#discrete" class="sub">↳ 1. Bernoulli · 2. Binomial · 3. Poisson</a>
-      <a href="#continuous">Continuous Distributions</a>
-      <a href="#continuous" class="sub">↳ 4. Gaussian · 5. Uniform · 6. Exponential · 7. Laplace</a>
-      <a href="#derivation">Mathematical Derivation: Gaussian to Standard Normal</a>
-      <a href="#binomial-example">3. Illustrative Example: Binomial (Successes)</a>
-      <a href="#gaussian-example">4. Illustrative Example: Gaussian (Z-score)</a>
-      <a href="#implementation">Implementation in Python (SciPy)</a>
+      <a href="#prerequisites">Prerequisites</a>
+      <a href="#theory">Core Theory: The "Why"</a>
+      <a href="#derivation">Mathematical Definition</a>
+      <a href="#example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</a>
+      <a href="#example-normal">Example 2: Normal (The Bell Curve)</a>
+      <a href="#implementation">Implementation (Python/NumPy)</a>
       <a href="#applications">Applications in ML</a>
-      <a href="#takeaways">Key Takeaways</a>
     </div>
 
+    <h2 id="prerequisites">Prerequisites</h2>
     <div class="def-box">
-      <div class="def-title">Prerequisites</div>
       <ul style="margin:0">
-        <li><strong>Random Variables:</strong> Knowing the difference between Discrete and Continuous.</li>
-        <li><strong>PMF/PDF:</strong> Understanding how we measure probability for different types of variables.</li>
-        <li><strong>Expectation &amp; Variance:</strong> These are the "parameters" that define the shape of the distributions below.</li>
+        <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
+        <li><strong>Integrals</strong>: For calculating areas under continuous curves.</li>
       </ul>
     </div>
 
-    <h2 id="discrete">Discrete Distributions</h2>
-    <p>These are used when outcomes are countable (e.g., Yes/No, number of clicks).</p>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0;">
-      <div class="premium-def-box">
-        <div class="premium-def-title">Discrete · #1</div>
-        <h4>Bernoulli Distribution</h4>
-        <p>The simplest distribution. Models a single trial with two outcomes: Success \((x=1)\) or Failure \((x=0)\).</p>
-        <p><strong>Parameter:</strong> \(p\) (Probability of success).</p>
-        <p><strong>PMF:</strong> \(P(x) = p^x(1-p)^{1-x}\)</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> The output of a binary classifier (before thresholding) is a Bernoulli parameter.</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> Bernoulli is the <strong>"Atomic Unit"</strong> of probability. It represents a single bit of information: Yes or No. In ML, every time you use a <strong>Sigmoid</strong> activation, you are predicting the parameter $p$ of a Bernoulli distribution.
-          </div>
-        </div>
-      </div>
-      <div class="premium-def-box">
-        <div class="premium-def-title">Discrete · #2</div>
-        <h4>Binomial Distribution</h4>
-        <p>Models the number of successes in \(n\) independent Bernoulli trials.</p>
-        <p><strong>Parameters:</strong> \(n\) (trials), \(p\) (success probability).</p>
-        <p><strong>PMF:</strong> \(P(x) = \binom{n}{x} p^x (1-p)^{n-x}\)</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Modeling the number of users who will click an ad out of a batch of 100.</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> If Bernoulli is a single coin flip, Binomial is the entire <strong>"Stack of Successes."</strong> It tells you the probability of getting $k$ successes in $n$ tries. It assumes every trial is independent—an assumption we often make in ML batches.
-          </div>
-        </div>
-      </div>
-      <div class="premium-def-box" style="grid-column: span 2;">
-        <div class="premium-def-title">Discrete · #3</div>
-        <h4>Poisson Distribution</h4>
-        <p>Models the number of events occurring in a fixed interval of time or space.</p>
-        <p><strong>Parameter:</strong> \(\lambda\) (Average rate of occurrence).</p>
-        <p><strong>PMF:</strong> \(P(x) = \dfrac{e^{-\lambda} \lambda^x}{x!}\)</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Predicting the number of support tickets received per day or web traffic spikes.</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> Poisson is the <strong>"Event Stream"</strong> intuition. It models <em>counts</em> over time. Use this when events are rare but happen at a constant average rate. In AI, it’s used for modeling request spikes in cloud infrastructure.
-          </div>
-        </div>
+    <h2 id="theory">Core Theory: The "Why"</h2>
+    <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model **Uncertainty**. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <strong>Teacher's Intuition:</strong> Think of a Probability Distribution as a <strong>Heat Map</strong>. 
+        Where the map is "hot" (high probability), outcomes are common. 
+        Where the map is "cold," outcomes are rare. 
+        In ML, we want to find the parameters of this map that best explain the data we've already seen.
       </div>
     </div>
 
-    <h2 id="continuous">Continuous Distributions</h2>
-    <p>These model data that can take any real value (e.g., height, time, pixel intensity).</p>
+    <h2 id="derivation">Mathematical Definition</h2>
+    <ul>
+      <li><strong>Probability Mass Function (PMF)</strong>: For Discrete RVs, \(P(X=x)\). The sum of all probabilities must be 1.</li>
+      <li><strong>Probability Density Function (PDF)</strong>: For Continuous RVs, \(f(x)\). The total area under the curve must be 1.</li>
+    </ul>
 
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0;">
-      <div class="premium-def-box" style="grid-column: span 2;">
-        <div class="premium-def-title">Continuous · #4 — The "King"</div>
-        <h4>Gaussian (Normal) Distribution</h4>
-        <p>The "King" of distributions due to the <strong>Central Limit Theorem</strong>. It is symmetric and bell-shaped.</p>
-        <p><strong>Parameters:</strong> \(\mu\) (mean), \(\sigma^2\) (variance).</p>
-        <p><strong>PDF:</strong> \(f(x) = \dfrac{1}{\sigma\sqrt{2\pi}} e^{-\frac{1}{2}\left(\frac{x-\mu}{\sigma}\right)^2}\)</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Standardizing features, Gaussian Naive Bayes, and modeling noise in Linear Regression.</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> The Gaussian is the <strong>"Universal Attractor."</strong> Thanks to the <strong>Central Limit Theorem</strong>, if you sum up enough random effects, the result will <em>always</em> look like a Bell Curve. This is why we assume modern "Normal" noise in almost all ML regression models.
-          </div>
-        </div>
-      </div>
-      <div class="my-10" style="grid-column: span 2;">
-        <visualizer topic="Distributions" />
-      </div>
-      <div class="premium-def-box">
-        <div class="premium-def-title">Continuous · #5</div>
-        <h4>Uniform Distribution</h4>
-        <p>All outcomes in the interval \([a, b]\) are equally likely.</p>
-        <p><strong>Parameters:</strong> \(a\) (start), \(b\) (end).</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Weight initialization in Neural Networks (e.g., Xavier/Glorot initialization).</div>
-      </div>
-      <div class="premium-def-box">
-        <div class="premium-def-title">Continuous · #6</div>
-        <h4>Exponential Distribution</h4>
-        <p>Models the time between events in a Poisson process (time until the next event).</p>
-        <p><strong>Parameter:</strong> \(\lambda\) (rate).</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Survival analysis, modeling the "Time-to-Click" in marketing.</div>
-      </div>
-      <div class="premium-def-box" style="grid-column: span 2;">
-        <div class="premium-def-title">Continuous · #7</div>
-        <h4>Laplace Distribution</h4>
-        <p>Similar to Gaussian but with a sharper peak and "heavier tails."</p>
-        <p><strong>Parameters:</strong> \(\mu\) (location), \(b\) (scale).</p>
-        <div style="font-size:12.5px; color:var(--muted-premium); margin-top:8px;"><strong>ML Use:</strong> Linked to <strong>L1 Regularization (Lasso)</strong>. While Gaussian noise leads to L2, Laplace noise leads to L1, encouraging sparsity in models.</div>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> Laplace is <strong>"Gaussian with Spikes."</strong> It has a much sharper peak at the mean. In ML, assuming a Laplace prior on your weights leads to <strong>Sparsity</strong> (L1 regularization), because the distribution practically begs for common values to be exactly zero.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 id="derivation">Mathematical Derivation: Gaussian to Standard Normal</h2>
-    <p>To compare different Gaussian distributions, we transform them into the <strong>Standard Normal Distribution</strong> \((\mu=0, \sigma=1)\) using the <strong>Z-score</strong>:</p>
-    <div class="math-block">$$Z = \frac{x - \mu}{\sigma}$$</div>
-    <p>If \(X \sim \mathcal{N}(\mu, \sigma^2)\), then \(Z \sim \mathcal{N}(0, 1)\). This is the math behind <code>StandardScaler</code> in Scikit-Learn.</p>
-
-    <h2 id="binomial-example">3. Illustrative Example: Binomial (Binary Successes)</h2>
+    <h2 id="example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</h2>
     <div class="example-box">
-      <h4>Problem: Tracking Clicks on Ad Impressions</h4>
-      <p>An ad has a Click-Through Rate (CTR) of \(p=0.1\). If we show it to \(n=5\) users, what is the probability that <strong>exactly 2</strong> will click?</p>
+      <h4>Problem: Tracking a 1-Trial Experiment</h4>
+      <p>A "Success" happens with probability \(p=0.7\). What is the PMF?</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Apply Formula:</strong> \(P(X=k) = \binom{n}{k} p^k (1-p)^{n-k}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Plug in Values:</strong> \(\binom{5}{2} = 10\). Calculated as \(\frac{5!}{2!3!} = 10\).</div></div>
-      <div class="step-box"><span class="step-num">3</span><div><strong>Solve:</strong> \(10 \times (0.1)^2 \times (0.9)^3\).</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> Let \(X=1\) be success and \(X=0\) be failure.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Mapping:</strong> \(P(X=1) = 0.7\); \(P(X=0) = 0.3\).</div></div>
 
-      <div class="math-block">$$P(X=2) = 10 \times 0.01 \times 0.729 = 0.0729$$</div>
-
-      <div class="callout success"><div class="callout-icon">✓</div><div class="callout-body"><strong>Result:</strong> There is a ~7.3% chance of getting exactly 2 clicks. Note how the probability drops off as we move away from the expectation of \(np = 0.5\).</div></div>
+      <div class="callout success">
+        <div class="callout-icon">✓</div>
+        <div class="callout-body">
+          <strong>Result:</strong> This is the simplest possible distribution. It's the building block for **Binary Classification** models (Cat vs. Not Cat).
+        </div>
+      </div>
     </div>
 
-    <h2 id="gaussian-example">4. Illustrative Example: Gaussian (Z-score)</h2>
+    <h2 id="example-normal">Example 2: Normal (The Bell Curve)</h2>
     <div class="example-box">
-      <h4>Problem: Standardizing "Wait Times"</h4>
-      <p>A server's response time follows \(\mathcal{N}(500ms, 100^2)\). If a request takes \(650ms\), how many standard deviations from the mean is it?</p>
+      <h4>Problem: Capturing Collective Data Distributions</h4>
+      <p>Heights are Normally distributed with mean \(\mu = 70\) and standard deviation \(\sigma = 3\). Find the probability that someone is exactly 70 inches tall.</p>
       
-      <div class="step-box"><span class="step-num">1</span><div><strong>Recall Formula:</strong> \(Z = \frac{x - \mu}{\sigma}\).</div></div>
-      <div class="step-box"><span class="step-num">2</span><div><strong>Calculate:</strong> \(Z = \frac{650 - 500}{100} = \frac{150}{100} = 1.5\).</div></div>
+      <div class="step-box"><span class="step-num">1</span><div><strong>Identify:</strong> For continuous variables, the probability of an "exact" point is zero! We measure intervals instead.</div></div>
+      <div class="step-box"><span class="step-num">2</span><div><strong>Measure:</strong> The probability of someone being <strong>between</strong> 67 and 73 inches is 68% (The 1-Sigma Rule).</div></div>
 
-      <div class="callout tip"><div class="callout-icon">💡</div><div class="callout-body"><strong>Intuition:</strong> A Z-score of 1.5 means the request was significantly slower than average. In ML, we often <strong>clip</strong> values with Z-scores \(|Z| > 3\) as they are likely outliers.</div></div>
+      <div class="callout tip">
+        <div class="callout-icon">💡</div>
+        <div class="callout-body">
+          <strong>Intuition:</strong> In the Real World, most common errors (noise) result from many tiny independent factors. When added together, they almost always form this Bell Curve. This is why we use **Gaussian Naive Bayes**.
+        </div>
+      </div>
     </div>
 
-    <h2 id="implementation">Implementation in Python (SciPy)</h2>
+    <h2 id="implementation">Implementation (Python/NumPy)</h2>
     <python-code>
 import numpy as np
-from scipy import stats
+import matplotlib.pyplot as plt
 
-# 1. Binomial: 10 tosses, p=0.5. Prob of getting exactly 5 heads?
-prob_5_heads = stats.binom.pmf(5, n=10, p=0.5)
+# Bernoulli trials
+successes = np.random.binomial(1, 0.7, size=100)
 
-# 2. Poisson: Avg 3 emails/hour. Prob of getting 5 emails?
-prob_5_emails = stats.poisson.pmf(5, mu=3)
+# Normal distribution
+data = np.random.normal(0, 1, 1000)
 
-# 3. Gaussian: Mean 100, Std 15 (IQ score). Prob of IQ < 85?
-prob_lower_iq = stats.norm.cdf(85, loc=100, scale=15)
-
-print(f"Binomial (5 Heads): {prob_5_heads:.4f}")
-print(f"Poisson (5 Emails): {prob_5_emails:.4f}")
-print(f"Gaussian (IQ < 85): {prob_lower_iq:.4f}")
+print(f"Mean of Normal Data: {data.mean():.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
     <ul>
-      <li><strong>L1 vs L2 Regularization:</strong> L2 assumes weights follow a Gaussian prior; L1 assumes they follow a Laplace prior.</li>
-      <li><strong>Maximum Likelihood Estimation (MLE):</strong> We pick distribution parameters that make the observed data most likely.</li>
-      <li><strong>Initialization:</strong> Uniform and Gaussian distributions are the defaults for starting weight values in Deep Learning.</li>
-    </ul>
-
-    <h2 id="takeaways">Key Takeaways</h2>
-    <ul>
-      <li><strong>Normal (Gaussian)</strong> is the default for most natural phenomena.</li>
-      <li><strong>Bernoulli</strong> is for binary choices \((0/1)\).</li>
-      <li><strong>Laplace</strong> is "pointier" than Gaussian and handles outliers differently.</li>
-      <li><strong>Poisson</strong> is for counts; <strong>Exponential</strong> is for time between counts.</li>
+      <li><strong>Softmax Layer</strong>: The final output of a neural network is a probability distribution over classes.</li>
+      <li><strong>Gaussian Models</strong>: In anomaly detection, we model the "Normal" behavior and flag anything that falls too far into the tails.</li>
     </ul>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Understanding single-variable distributions leads directly to <strong><a href="#/mathematics/probability/multivariate-probability">Multivariate Probability</a></strong>, where we model complex feature vectors.
+      <strong>Next Step:</strong> What if we have two random variables that affect each other? Explore <strong><a href="#/mathematics/probability/joint-distributions">Joint Distributions</a></strong>.
     </div>
   `
 };

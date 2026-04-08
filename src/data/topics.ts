@@ -158,6 +158,17 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Cross-Validation", description: "Ensuring robustness across data splits." },
       { title: "Overfitting", description: "Detecting and preventing model memorization." }
     ]
+  },
+  {
+    id: "optimization",
+    title: "Optimization",
+    description: "The iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",
+    keyConcepts: [
+      { title: "Gradient Descent", description: "Batch updates following the steepest downward path." },
+      { title: "Stochastic Gradients", description: "Frequent, noisy updates using a mini-batch of data." },
+      { title: "Convexity", description: "Guarantees of reaching the global minimum without local traps." },
+      { title: "Regularization", description: "Geometric constraints to prevent model overfitting (L1, L2)." }
+    ]
   }
 ];
 
@@ -173,7 +184,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "Mathematics",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "probability", "statistics", "calculus", "information-theory", "discrete-math"]
+    categories: ["linear-algebra", "probability", "statistics", "calculus", "information-theory", "discrete-math", "optimization"]
   },
   {
     id: "machine-learning",
@@ -189,7 +200,7 @@ export const CLUSTERS: ClusterMeta[] = [
 import {
   Layers, FunctionSquare, BarChart3, Dice5,
   Brain, Cpu, Network, Database, Activity, ShieldCheck,
-  Binary, GitBranch
+  Binary, GitBranch, Target
 } from "lucide-react";
 
 export const ICON_MAP: Record<string, any> = {
@@ -206,6 +217,7 @@ export const ICON_MAP: Record<string, any> = {
   "model-evaluation": ShieldCheck,
   "information-theory": Binary,
   "discrete-math": GitBranch,
+  "optimization": Target,
 };
 
 // ---------------------------------------------------------------------------
@@ -229,6 +241,7 @@ const importMap: Record<string, () => Promise<any>> = {
   'reinforcement-learning': () => import('../../categories/reinforcement-learning-index'),
   'data-preprocessing': () => import('../../categories/data-preprocessing-index'),
   'model-evaluation': () => import('../../categories/model-evaluation-index'),
+  'optimization': () => import('../../categories/optimization-index'),
 };
 
 // Export name map (the const name inside each file)
@@ -247,6 +260,7 @@ const exportNameMap: Record<string, string> = {
   'reinforcement-learning': 'REINFORCEMENT_LEARNING_DATA',
   'data-preprocessing': 'DATA_PREPROCESSING_DATA',
   'model-evaluation': 'MODEL_EVALUATION_DATA',
+  'optimization': 'OPTIMIZATION_DATA',
 };
 
 /**
