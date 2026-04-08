@@ -12,29 +12,20 @@ export const boostingSection: TopicSection = {
       <p>If Bagging is a democratic election (Parallel), <strong>Boosting</strong> is a <strong>Intense Tutoring Session</strong> (Sequential). We don't train all models at once. Instead, we train one, look at its <strong>Mistakes</strong>, and then train the next model to <strong>Specifically Fix those Mistakes</strong>. We turn a "Weak Learner" into an "Unstoppable Expert."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Bias Reduction</a>
-      <a href="#process">The Sequential Loop</a>
-      <a href="#weighting">Sample Weighting: Focusing on Errors</a>
-      <a href="#algorithms">AdaBoost vs. Gradient Boosting</a>
-      <a href="#analogy">The "Hardcore Tutor" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Bias Reduction</h2>
     <p>Bias is the error caused by a model being too <strong>Simple</strong>. If your model thinks 2+2=5, it is biased. Boosting forces the model to <strong>Get Smarter</strong> by iteratively pointing out where it was stupid.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Adaptive Learning."</strong> 
+        Think of it as <strong>"Adaptive Learning."</strong> 
         In school, you don't spend time studying what you already know. You focus on the <strong>Hard Problems</strong>. 
         Boosting does the same. It "Gives more weight" to the <strong>Difficult Samples</strong> so the next model is forced to solve them.
       </div>
     </div>
 
     <h2 id="algorithm">The Boosting Algorithm (AdaBoost)</h2>
-    <div class="example-box">
+    
       <h4>The Error Focus Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -58,7 +49,7 @@ export const boostingSection: TopicSection = {
           <strong>Completion:</strong> Repeat $M$ times. The final answer is a weighted vote of all your tutors.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="algorithms">Core Algorithms</h2>
     <ul>
@@ -79,8 +70,8 @@ export const boostingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Relentless SAT Tutor</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Relentless SAT Tutor</h2>
+    
       <h4>Scenario: Preparing for the SAT with 5 Sequential Tutors</h4>
       <p>Imagine you have 5 weeks to study. Instead of reading the same book over and over, you hire a sequence of specialist tutors.</p>
       
@@ -106,12 +97,12 @@ export const boostingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Boosting is a <strong>Bias Killer</strong>. If your model is too "Simple" (like a 1-level decision tree stump), boosting forces it to get smarter by repeatedly hammering it with the samples it got wrong. It's the ultimate "Grinder" algorithm.
+          Boosting is a <strong>Bias Killer</strong>. If your model is too "Simple" (like a 1-level decision tree stump), boosting forces it to get smarter by repeatedly hammering it with the samples it got wrong. It's the ultimate "Grinder" algorithm.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: From Stumps to Experts</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Generating complex 'Moons' dataset (Non-linear boundaries)...\n[Baseline] Training 1-level Decision Stump...\n[Action] Training AdaBoost (Sequential correction of 50 stumps)...\n\n[Result] Single Stump Score: 56.4% (Basically guessing)\n[Result] AdaBoost Ensemble Score: 94.2% (The Expert learner)\n\n[Insight] By focusing on mistakes, we combined 50 'dumb' models into one 'genius'.">
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier

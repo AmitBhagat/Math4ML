@@ -12,27 +12,19 @@ export const classificationIntroSection: TopicSection = {
       <p>If Regression answers "How Much?", <strong>Classification</strong> answers "What is it?". Whether it's telling a Cat from a Dog or identifying Fraudent credit card transactions, Classification is the art of <strong>Drawing Boundaries</strong> in data space.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics: Mapping to Discrete Buckets</a>
-      <a href="#binary">Binary vs. Multi-class</a>
-      <a href="#analogy">The "Sorting Hat" Analogy</a>
-      <a href="#objective">The Goal: Decision Boundaries</a>
-    </div>
-
     <h2 id="theory">The Mechanics: Mapping to Discrete Buckets</h2>
     <p>In Classification, your output \(Y\) is a <strong>Category</strong>. For a machine, we usually encode these as integers (0, 1, 2...). Our model doesn't just guess a number; it calculates the <strong>Probability</strong> that an input belongs to each bucket.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Drawing a Line in the Sand."</strong> 
+        Think of it as <strong>"Drawing a Line in the Sand."</strong> 
         Classification is like an <strong>Apple Sorter</strong>. You see a fruit. You check its weight and color. Is it a "Fuji" or a "Granny Smith"? Unlike regression, there is no "in-between." You have to commit to <strong>one bucket</strong>.
       </div>
     </div>
 
     <h2 id="binary">Binary vs. Multi-class</h2>
-    <div class="example-box">
+    
       <h4>Scenario: The Complexity of Buckets</h4>
       
       <div class="algorithm-steps">
@@ -45,7 +37,7 @@ export const classificationIntroSection: TopicSection = {
           <div><strong>Multi-class:</strong> Choosing one from many. (e.g. Recognizing digits 0-9). <strong>The Goal:</strong> Partition the space into multiple "Regions of Influence."</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Sorting Hat" Analogy</h2>
     <div class="callout success">
@@ -62,7 +54,7 @@ export const classificationIntroSection: TopicSection = {
     <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more <strong>robust and accurate</strong> that fence is.</p>
 
     <h2 id="algorithm">The Classification Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Sorting Process</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -86,10 +78,10 @@ export const classificationIntroSection: TopicSection = {
           <strong>Inference:</strong> For a new point, calculate the probability of each class and choose the <strong>Maximum Probability</strong> bucket.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Email Sorting Hat</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Email Sorting Hat</h2>
+    
       <h4>Scenario: Is this Email Spam or Real?</h4>
       <p>Imagine your inbox is a set of two buckets. Every email must fall into exactly one.</p>
       
@@ -115,12 +107,12 @@ export const classificationIntroSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Classification is often just <strong>Regression on Probabilities</strong>. We calculate a score from 0 to 1, and the "Social Contract" of the model is that anything above 0.5 belongs to Class A.
+          Classification is often just <strong>Regression on Probabilities</strong>. We calculate a score from 0 to 1, and the "Social Contract" of the model is that anything above 0.5 belongs to Class A.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Binary Sorter</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Learning to detect spam from 4 examples...\n[Input] New Email: 5 suspicious keywords, Rep-Score 8\n[Probabilities] Real: 89%, Spam: 11%\n[Decision] This email is REAL.\n[Insight] The high reputation score (8) 'outvoted' the suspicious keywords!">
 from sklearn.linear_model import LogisticRegression
 import numpy as np

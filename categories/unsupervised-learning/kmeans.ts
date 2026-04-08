@@ -12,15 +12,6 @@ export const kmeansSection: TopicSection = {
       <p>Imagine you have a giant pile of unlabeled data points. You know there are groups inside, but you don't know where. <strong>k-Means</strong> is the simplest way to find these "hidden tribes" by placing <strong>Magnetic Centers</strong> (Centroids) into the pile and letting them pull in the closest points.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Objective Function</a>
-      <a href="#algorithm">The 4-Step Iteration</a>
-      <a href="#elbow">Selecting 'k': The Elbow Method</a>
-      <a href="#limitations">The "Spherical" Weakness</a>
-      <a href="#analogy">The "Magnetic Centers" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Objective Function</h2>
     <p>k-Means is a <strong>Centroid-Based</strong> algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
     <div class="math-block">$$WCSS = \sum_{j=1}^K \sum_{x \in C_j} \|x - \mu_j\|^2$$</div>
@@ -32,13 +23,13 @@ export const kmeansSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Center of Gravity."</strong> 
+        Think of it as <strong>"Finding the Center of Gravity."</strong> 
         The algorithm doesn't know where the clusters are at first. It just makes a <strong>Guess</strong>, calculates the average location of everyone who "joined" that guess, and then <strong>Moves</strong> the center to that average. It repeats this until the centers stop moving.
       </div>
     </div>
 
     <h2 id="algorithm">The k-Means Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Centroid Convergence Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -62,7 +53,7 @@ export const kmeansSection: TopicSection = {
           <strong>Convergence:</strong> Stop once the centroids no longer move or a maximum iteration limit is hit.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="elbow">Selecting 'k': The Elbow Method</h2>
     <p>How do you know if there are 3 clusters or 10? If you increase \(K\), your error (WCSS) will <strong>always</strong> go down. The goal is to find the "Elbow"—the point where adding more clusters doesn't give you a significantly better fit. It's the point of <strong>Diminishing Returns</strong>.</p>
@@ -81,8 +72,8 @@ export const kmeansSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Self-Grouping Party</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Self-Grouping Party</h2>
+    
       <h4>Scenario: Organizing 100 Strangers into 3 Teams</h4>
       <p>Imagine 100 people in a gym. You want them to form 3 compact groups. You don't have a list of who belongs where, so you let geometry do the work.</p>
       
@@ -108,12 +99,12 @@ export const kmeansSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> k-Means is <strong>Iterative</strong>. It "Converges" when the flags are perfectly centered in their tribes. It is the most "Geometric" way to find order in chaos.
+          k-Means is <strong>Iterative</strong>. It "Converges" when the flags are perfectly centered in their tribes. It is the most "Geometric" way to find order in chaos.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Finding the Tribes</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 100 observations, 2 features\n[Iteration 0] Placing 3 random centroids...\n[Iteration 5] Inertia dropped from 152.4 to 42.1\n[Convergence] Centroids stabilized at: [[1,2], [10,2], [6,8]]\n[Note] New point at (5,5) assigned to Cluster #2.">
 import numpy as np
 from sklearn.cluster import KMeans

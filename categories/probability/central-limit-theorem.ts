@@ -12,18 +12,7 @@ export const centralLimitTheoremSection: TopicSection = {
       <p>The <strong>Central Limit Theorem (CLT)</strong> is the "Master Rule" of statistics. It says that if you add together many independent random variables, their <strong>Sum</strong> (and Mean) will always eventually form a <strong>Normal Distribution</strong> (Bell Curve). This is why the Normal distribution is so pervasive in Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-uniform">Example 1: Sum of Uniform Distributions</a>
-      <a href="#example-noise">Example 2: Why Error is usually Normal</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -31,13 +20,13 @@ export const centralLimitTheoremSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the <strong>CLT</strong> says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
+        Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
         If you ask one person to guess the price of a jar of jellybeans, they might be wildly wrong. 
         But if you ask 10,000 people and take their <strong>Average</strong>, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
         In ML, this is why we can assume that our model's cumulative error is Gaussian.
@@ -49,8 +38,8 @@ export const centralLimitTheoremSection: TopicSection = {
     <div class="math-block">$$\overline{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
     <p>The <strong>Z-score</strong> of the sample mean is: \(Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}\).</p>
 
-    <h2 id="example-uniform">Example 1: Sum of Uniform Distributions</h2>
-    <div class="example-box">
+    <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
+    
       <h4>Problem: Turning Flat space into a Bell Curve</h4>
       <p>A single U(0, 1) distribution is a flat rectangle. What if you sum 100 of them?</p>
       
@@ -75,10 +64,10 @@ export const centralLimitTheoremSection: TopicSection = {
           <strong>Result:</strong> By summing 100 "flat" variables, we birthed a Gaussian one. This is the <strong>CLT</strong> in action.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-noise">Example 2: Why Error is usually Normal</h2>
-    <div class="example-box">
+    <h2 id="example-noise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Why Error is usually Normal</h2>
+    
       <h4>Problem: Tracking Compound Measurement Errors</h4>
       <p>Assume your sensor error is caused by temperature, vibration, and radiation. Each follows a wild distribution.</p>
       
@@ -99,9 +88,9 @@ export const centralLimitTheoremSection: TopicSection = {
           <strong>Intuition:</strong> This is why we almost always use <strong>MSE (Mean Squared Error)</strong> in ML—it is mathematically the optimal loss function if you assume your data errors follow this CLT-driven Normal distribution.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt

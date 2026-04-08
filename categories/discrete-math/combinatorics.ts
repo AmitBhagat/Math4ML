@@ -12,16 +12,6 @@ export const combinatoricsSection: TopicSection = {
       <p>In computer science and algorithm analysis, <strong>Combinatorics</strong> is the art of counting. In the AI/ML world, this is how we determine the size of a "search space" and the complexity of our models.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#counting-principle">1. Fundamental Counting Principle</a>
-      <a href="#permutations">2. Permutations (Order Matters)</a>
-      <a href="#combinations">3. Combinations (Order Doesn't Matter)</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Summary</a>
-      <a href="#ml-career">Why this matters for your AI/ML Career</a>
-    </div>
-
     <h2 id="counting-principle">1. The Fundamental Counting Principle</h2>
     <p>If there are $n$ ways to do one thing and $m$ ways to do another, there are $n \times m$ ways to do both.</p>
 
@@ -76,9 +66,9 @@ export const combinatoricsSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Hyperparameter Layer Ordering (Permutations)</h4>
       <p>A deep learning researcher wants to test 3 distinct layers: <strong>Conv2D (C)</strong>, <strong>MaxPooling (M)</strong>, and <strong>Dropout (D)</strong>. How many ways can they be ordered in a block?</p>
       
@@ -103,9 +93,9 @@ export const combinatoricsSection: TopicSection = {
           <strong>ML Tip:</strong> While permutations give you the search space, <strong>Neural Architecture Search (NAS)</strong> uses algorithms to find the <em>best</em> permutation without testing all $n!$ combinations.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Feature Subset Selection (Combinations)</h4>
       <p>A data scientist has 10 potential features for a linear model but wants to select exactly 3 to avoid overfitting. How many unique subsets of 3 features can be formed?</p>
       
@@ -137,7 +127,7 @@ export const combinatoricsSection: TopicSection = {
           <strong>Core Theory:</strong> <strong>Combinatorial Explosion</strong> is the "Scaling Nightmare." If you have 100 features, there are more combinations of those features than there are atoms in the universe. This is why <strong>Brute Force</strong> is forbidden in AI; we always need clever shortcuts like <strong>Heuristics</strong> or <strong>Gradients</strong>.
         </div>
       </div>
-    </div>
+    
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>

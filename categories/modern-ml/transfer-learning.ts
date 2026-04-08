@@ -12,22 +12,13 @@ export const transferLearningSection: TopicSection = {
       <p>Why start from scratch? In the old days, every model was born "Stupid" and had to learn the alphabet. <strong>Transfer Learning</strong> allows a model to be born with <strong>10 years of experience</strong> from another field. It's the secret sauce behind modern Large Language Models and medical AI.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Knowledge Extraction</a>
-      <a href="#process">The 3 Pillars: Pre-train, Freeze, Fine-tune</a>
-      <a href="#domain">Domain Adaptation & Shift</a>
-      <a href="#benefits">The 'Sample Efficiency' Advantage</a>
-      <a href="#analogy">The "Kung Fu" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Hierarchical Knowledge</h2>
     <p>Neural networks learn <strong>Hierarchical Features</strong>. The first layers see <strong>Edges</strong>, the middle layers see <strong>Shapes</strong>, and only the final layers see <strong>Specific Objects</strong>. Transfer Learning keeps the "Edges" and "Shapes" knowledge and only replaces the "Specific Object" part.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Academic Credit."</strong> 
+        Think of it as <strong>"Academic Credit."</strong> 
         If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry. You <strong>Transfer</strong> your understanding of math and logic. 
         In ML, a model that saw 100 million generic internet photos already knows what <strong>Shadows</strong> and <strong>Textures</strong> look like. We just teach it to use that knowledge for <strong>MRI Scans</strong>.
       </div>
@@ -56,7 +47,7 @@ export const transferLearningSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Transfer Learning Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Knowledge Grafting Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -80,10 +71,10 @@ export const transferLearningSection: TopicSection = {
           <strong>Unfreezing (Optional):</strong> Gradually unfreeze the later base layers and train with a tiny learning rate to "Fine-tune" the results.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Musician's Pivot</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Musician's Pivot</h2>
+    
       <h4>Scenario: A Classical Pianist learning Jazz Improvisation</h4>
       <p>Imagine a pianist who has spent 20 years mastering <strong>Classical Music</strong>. They decide they want to learn <strong>Jazz</strong>. Do they start from scratch?</p>
       
@@ -109,12 +100,12 @@ export const transferLearningSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
+          Transfer learning is the <strong>Great Equalizer</strong>. It allows a small startup with only 1,000 data points to achieve state-of-the-art performance by "standing on the shoulders of giants" (models like ResNet or BERT pre-trained on billions of samples).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (The Head Swap)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
 import torch.nn as nn
 from torchvision import models

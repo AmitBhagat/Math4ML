@@ -12,14 +12,6 @@ export const polynomialRegressionSection: TopicSection = {
       <p>Sometimes, a straight line is just too <strong>dumb</strong>. If you're predicting the growth of a virus or the trajectory of a ball, the relationship is a <strong>Curve</strong>. <strong>Polynomial Regression</strong> is the trick we use to make a linear tool fit a non-linear world.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Transformation of Basis</a>
-      <a href="#complexity">The Danger of Overfitting</a>
-      <a href="#math">The Degree Polynomial</a>
-      <a href="#analogy">The "Bent Ruler" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Transformation of Basis</h2>
     <p>Wait, if it has curves (\(x^2, x^3\)), is it still "Linear"? <strong>Yes!</strong> It's linear in the <strong>weights</strong> (\(w\)). We just "Expand" our features. Instead of just having \(x\), we create new features: \(x^2\), \(x^3\), and so on.</p>
     <div class="math-block">$$y = w_0 + w_1 x + w_2 x^2 + w_3 x^3 + \epsilon$$</div>
@@ -27,14 +19,14 @@ export const polynomialRegressionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Data Hallucination."</strong> 
+        Think of it as <strong>"Data Hallucination."</strong> 
         The machine only knows how to draw straight lines. So, we "Trick" it. 
         We take our flat data and <strong>bend it into 3D space</strong>. In that higher-dimensional space, the relationship looks like a straight line again. When we "Project" it back to our 1D world, it looks like a <strong>Beautiful Curve</strong>.
       </div>
     </div>
 
     <h2 id="complexity">The Danger of Overfitting</h2>
-    <div class="example-box">
+    
       <h4>Scenario: The Complexity Trap</h4>
       <p>Data: 5 points. Goal: Predict the 6th point.</p>
       
@@ -52,7 +44,7 @@ export const polynomialRegressionSection: TopicSection = {
           <div><strong>Result:</strong> If you use a degree that is too high, the model "Hallucinates" patterns that aren't there. It catches the <strong>Noise</strong>, not the <strong>Signal</strong>.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Bent Ruler" Analogy</h2>
     <div class="callout success">
@@ -66,7 +58,7 @@ export const polynomialRegressionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Polynomial Regression Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Linearity in Higher Dimensions</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -90,10 +82,10 @@ export const polynomialRegressionSection: TopicSection = {
           <strong>Projection:</strong> The resulting "Straight line" in the expanded space appears as a curve when plotted against the original $x$.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Bent Ruler</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bent Ruler</h2>
+    
       <h4>Scenario: Measuring the Trajectory of a Ball</h4>
       <p>Imagine a ball flying through the air. Its height follows a curve, not a straight line.</p>
       
@@ -119,12 +111,12 @@ export const polynomialRegressionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Polynomial Features are just <strong>Feature Engineering</strong>. You are creating "hallucinated" features like $x^2$ to help a simple Linear model see a complex curve.
+          Polynomial Features are just <strong>Feature Engineering</strong>. You are creating "hallucinated" features like $x^2$ to help a simple Linear model see a complex curve.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Bending the Data</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Linear Model] Score: 0.81 (Underfit)\n[Polynomial Model] Score: 1.00 (Perfect Fit!)\n[Equation] Distance = 0.05 * (Speed ** 2)\n[Prediction] At 60mph, stopping distance is: 180.0 feet.\n[Insight] Degree=2 captured the physics of the quadratic curve.">
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures

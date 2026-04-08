@@ -12,19 +12,7 @@ export const hypothesisTestingSection: TopicSection = {
       <p><strong>Hypothesis Testing</strong> is the mathematical framework for making decisions. It asks the critical question: "Is the improvement in my model's accuracy a <strong>Real Signal</strong>, or was I just <strong>Lucky</strong> with this specific dataset?" In Machine Learning, we use these tests to validate our experiments and feature importance.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#process">The 4-Step Process</a>
-      <a href="#example-ttest">Example 1: T-Test (A/B Testing)</a>
-      <a href="#example-chi">Example 2: Chi-Square (Independence)</a>
-      <a href="#example-anova">Example 3: ANOVA (Comparing 3+ Labs)</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Normal, T, and Chi-Square.</li>
@@ -32,13 +20,13 @@ export const hypothesisTestingSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the assumption that "Nothing happened, it's just noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (the data) is so overwhelming that it's highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your results if the "Nothing happened" assumption were true.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
+        Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
         The Model is <strong>"Innocent"</strong> of having any real effect until proven guilty. 
         The <strong>Evidence</strong> is your Test Data. 
         The <strong>P-Value</strong> is the "Reasonable Doubt." 
@@ -66,8 +54,8 @@ export const hypothesisTestingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example-ttest">Example 1: T-Test (A/B Testing)</h2>
-    <div class="example-box">
+    <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
+    
       <h4>Problem: Does a New UI Increase Clicks?</h4>
       <p>Group A (Old UI) has 5% clicks. Group B (New UI) has 7% clicks. Is the 2% gain "Real"?</p>
       
@@ -88,10 +76,10 @@ export const hypothesisTestingSection: TopicSection = {
           <strong>Result:</strong> If \(p=0.02\), we reject the "No difference" theory. The UI change is 98% likely to be a real improvement.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-chi">Example 2: Chi-Square (Independence)</h2>
-    <div class="example-box">
+    <h2 id="example-chi" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chi-Square (Independence)</h2>
+    
       <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>
       <p>Data: 200 people. Does knowing gender change the probability of purchase?</p>
       
@@ -112,10 +100,10 @@ export const hypothesisTestingSection: TopicSection = {
           <strong>Intuition:</strong> In ML, we use Chi-Square for <strong>Feature Selection</strong>. If a feature and the target label are "Independent," the feature is useless—we drop it from the model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-anova">Example 3: ANOVA (Comparing 3+ Labs)</h2>
-    <div class="example-box">
+    <h2 id="example-anova" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> ANOVA (Comparing 3+ Labs)</h2>
+    
       <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
       <p>You run 10 training sessions with each optimizer. Is there a "Best" one?</p>
       
@@ -136,9 +124,9 @@ export const hypothesisTestingSection: TopicSection = {
           <strong>Result:</strong> ANOVA tells you *if* a difference exists. You then follow up with "Post-hoc" tests to find out exactly which optimizer won.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy import stats

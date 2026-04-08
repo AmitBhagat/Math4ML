@@ -12,28 +12,20 @@ export const dimReductionIntroSection: TopicSection = {
       <p>Modern datasets have <strong>Thousands</strong> of features. But many of them are <strong>Redundant</strong>. If you know a person's Height and Weight, you can guess their T-shirt size. You don't need all three. <strong>Dimensionality Reduction</strong> is the art of simplifying the data without losing the <strong>Soul</strong> of the information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#curse">The Curse of Dimensionality</a>
-      <a href="#feature-selection">Feature Selection vs. Feature Extraction</a>
-      <a href="#projections">Projections: The Shadow Metaphor</a>
-      <a href="#analogy">The "Shadow Puppet" Analogy</a>
-    </div>
-
     <h2 id="curse">The Curse of Dimensionality</h2>
     <p>In 2D or 3D, our intuition works. In 1,000D, <strong>everything is far away</strong> from everything else. The volume of the space grows exponentially faster than the number of data points. This makes models slow, unstable, and prone to overfitting. We need to <strong>Reduce</strong> the dimensions to make the data "Learnable" again.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Busy Signal."</strong> 
+        Think of it as <strong>"The Busy Signal."</strong> 
         Imagine 1,000 people talking at you at the same time. That's 1,000 dimensions. It's just <strong>Noise</strong>. 
         If you find the 3 loudest, most informative people and only listen to them, you can actually <strong>understand the message</strong>. That is Dimensionality Reduction. 
       </div>
     </div>
 
     <h2 id="algorithm">The Reduction Process</h2>
-    <div class="example-box">
+    
       <h4>Simplification Workflow</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -57,7 +49,7 @@ export const dimReductionIntroSection: TopicSection = {
           <strong>Validation:</strong> Ensure that the simplified data still performs well in your ML model.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="projections">Projections: The Shadow Metaphor</h2>
     <p>We reduce dimensions by <strong>Projecting</strong> the data onto a lower-dimensional subspace. Every project involves some <strong>Loss of Information</strong>. The goal is to find the projection that preserves the most <strong>Variance</strong> or <strong>Local Structure</strong>.</p>
@@ -74,8 +66,8 @@ export const dimReductionIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Shadow on the Wall</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Shadow on the Wall</h2>
+    
       <h4>Scenario: Describing a 3D Dragon with a 2D Shadow</h4>
       <p>Imagine you have a complex 3D statue. You want to store its data, but your paper only has 2 dimensions. You have to "Squeeze" the complexity.</p>
       
@@ -101,12 +93,12 @@ export const dimReductionIntroSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Dimension Reduction is about finding the <strong>Best Perspective</strong>. We lose some details (the thickness of the wings), but we keep the patterns that define the object.
+          Dimension Reduction is about finding the <strong>Best Perspective</strong>. We lose some details (the thickness of the wings), but we keep the patterns that define the object.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Filtering the Noise</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Calculating Variance for 4 features...\n[Status] Feature 2 ('Constant_ID') has Variance: 0.0\n[Status] Feature 3 ('Random_Hiss') has Variance: 0.08\n[Action] Dropping Feature 2 (Zero Signal detected).\n[Result] Data reduced from 4D to 3D with ZERO loss of useful information.\n[Insight] Never carry a heavy suitcase full of constant values!">
 import numpy as np
 from sklearn.feature_selection import VarianceThreshold

@@ -12,22 +12,13 @@ export const recallSection: TopicSection = {
       <p>If you are testing for a <strong>Deadly Disease</strong>, you don't care if you annoy a few healthy people (FP). You care about finding <strong>Every Single Sick Person</strong>. <strong>Recall</strong> (also called Sensitivity) is the metric that asks: "Of all the actual positives that exist in reality, how many did you <strong>Manage to Find</strong>?"</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Denominator of Reality</a>
-      <a href="#math">The Recall Formula</a>
-      <a href="#missed">Avoiding Missed Opportunities</a>
-      <a href="#use-case">When Recall is King</a>
-      <a href="#analogy">The "Security Dog" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Denominator of Reality</h2>
     <p>While <strong>Precision</strong> looks at your guesses, <strong>Recall</strong> looks at <strong>Reality</strong>. It doesn't care about your false alarms (FP). It only cares about the positive cases you <strong>Missed (FN)</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Thoroughness Score."</strong> 
+        Think of it as <strong>"The Thoroughness Score."</strong> 
         If there are 100 criminals in the city, and you catch all 100, your recall is 1.0 (even if you accidentally arrested 50 innocent people along with them). 
         Recall is about <strong>Not leaving anyone behind</strong>.
       </div>
@@ -43,8 +34,8 @@ export const recallSection: TopicSection = {
     <h2 id="use-case">When Recall is King</h2>
     <p>Recall is the most important metric when the <strong>Cost of a False Negative is HIGH</strong>.</p>
     <ul>
-      <li><strong>Example 1:</strong> Cancer Screening. Missing a tumor (FN) is a death sentence. Over-diagnosing (FP) just leads to more tests. </li>
-      <li><strong>Example 2:</strong> Fraud Detection. You'd rather flag a legitimate transaction for review than let a hacker steal \$10,000.</li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Cancer Screening. Missing a tumor (FN) is a death sentence. Over-diagnosing (FP) just leads to more tests. </li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Fraud Detection. You'd rather flag a legitimate transaction for review than let a hacker steal \$10,000.</li>
     </ul>
 
     <h2 id="false-alarms">The Tension between P and R</h2>
@@ -62,7 +53,7 @@ export const recallSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Recall Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Comprehensive Finder Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -86,10 +77,10 @@ export const recallSection: TopicSection = {
           <div><strong>Interpret:</strong> A score of 0.99 means the model found 99% of the targets, only missing 1%.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Net of Inclusion</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Net of Inclusion</h2>
+    
       <h4>Scenario: Searching for an Engagement Ring in a Swimming Pool</h4>
       <p>Imagine you dropped your diamond ring in a public pool filled with 1,000 random plastic toys. You <strong>cannot</strong> leave without it.</p>
       
@@ -115,12 +106,12 @@ export const recallSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> High recall usually means your model is <strong>Aggressive</strong>. It's like a paranoid security guard who checks everyone. It's the "Quantity" metric—perfect for when the cost of a miss (False Negative) is catastrophic, like cancer or fraud.
+          High recall usually means your model is <strong>Aggressive</strong>. It's like a paranoid security guard who checks everyone. It's the "Quantity" metric—perfect for when the cost of a miss (False Negative) is catastrophic, like cancer or fraud.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Measuring Thoroughness</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Reality: 4 Actual Positive cases (Spam/Sick) identified.\n[Action] Running Model Inference...\n[Verify] Correctly Found (TP): 3\n[Verify] Dangerous Misses (FN): 1\n[Result] Recall (Sensitivity) = 3/4 = 75.0%\n[Insight] The model 'Caught' 75% of the truth, but let one target 'Escape'.">
 import numpy as np
 from sklearn.metrics import recall_score

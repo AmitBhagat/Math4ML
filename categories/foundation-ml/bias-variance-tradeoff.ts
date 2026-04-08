@@ -12,21 +12,13 @@ export const biasVarianceTradeoffSection: TopicSection = {
       <p>Every Machine Learning model's error is made of three things: <strong>Bias</strong>, <strong>Variance</strong>, and <strong>Irreducible Noise</strong>. To build a great model, you have to find the <strong>Goldilocks Balance</strong> between being too "Stubborn" (Bias) and too "Dramatic" (Variance).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#bias">Bias: The Stubborn Model</a>
-      <a href="#variance">Variance: The Over-Sensitive Model</a>
-      <a href="#tradeoff">The Tradeoff Curve</a>
-      <a href="#analogy">The "Bullseye" Analogy</a>
-    </div>
-
     <h2 id="bias">Bias: The Stubborn Model</h2>
     <p><strong>Bias</strong> is the error from <strong>Incorrect Assumptions</strong>. A high-bias model is too simple. It thinks the world is a straight line when it's actually a curve. It "Ignores" the data because its brain isn't powerful enough to see the complexity.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Rigid Professor</strong>. 
+        Think of it as a <strong>Rigid Professor</strong>. 
         They've been teaching the same thing for 40 years. Even when you show them new evidence (the data), they refuse to change their mind. They are <strong>Underfitting</strong> because their internal "Rules" are too strong.
       </div>
     </div>
@@ -37,13 +29,13 @@ export const biasVarianceTradeoffSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as an <strong>Anxious Student</strong>. 
+        Think of it as an <strong>Anxious Student</strong>. 
         They study so hard that they memorize the specific font and page numbers of the textbook. If the exam font is different, they fail. They are <strong>Overfitting</strong> because they are too reactive to minor details.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Archers of Error</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Archers of Error</h2>
+    
       <h4>Scenario: Trying to hit the Bullseye</h4>
       <p>Imagine four archers shooting at a target. Each represents a different way a machine learning model can fail.</p>
       
@@ -69,12 +61,12 @@ export const biasVarianceTradeoffSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> You can't reach zero error. Your job as an engineer is to dial down the <strong>Stubbornness</strong> (Bias) without cranking up the <strong>Anxiety</strong> (Variance). If you make the model too complex, it gets anxious (Variance). If you make it too simple, it gets stubborn (Bias).
+          You can't reach zero error. Your job as an engineer is to dial down the <strong>Stubbornness</strong> (Bias) without cranking up the <strong>Anxiety</strong> (Variance). If you make the model too complex, it gets anxious (Variance). If you make it too simple, it gets stubborn (Bias).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Error Decomposition</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating model error profiles...\n[Model A] Simple Linear (Degrees: 1)\n- Result: Stubborn. Predicts a straight line for a sine wave.\n- Classification: High Bias, Low Variance.\n\n[Model B] Over-fit Polynomial (Degrees: 15)\n- Result: Jumpy. Mimics every noise point in the training data.\n- Classification: Low Bias, High Variance.\n\n[Insight] The 'Sweet Spot' is typically a moderate degree (3-5) that captures the bend but ignores the jitter.">
 import numpy as np
 from sklearn.linear_model import LinearRegression

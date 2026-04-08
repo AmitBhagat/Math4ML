@@ -12,28 +12,19 @@ export const selfSupervisedSection: TopicSection = {
       <p>Supervised learning is <strong>Expensive</strong>. It requires humans to label millions of images. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. It looks at the world and creates its own puzzles to solve. By solving these "Pretext Tasks," it learns the <strong>Structure of Reality</strong> for free.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Pretext Tasks</a>
-      <a href="#masking">Masked Modeling: The BERT Strategy</a>
-      <a href="#contrastive">Contrastive SSL: Similarity as Label</a>
-      <a href="#downstream">Pre-training vs. Downstream Tasks</a>
-      <a href="#analogy">The "Jigsaw Puzzle" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Pretext Tasks</h2>
     <p>In SSL, we hide a part of the data and ask the model to <strong>Predict the Missing Part</strong>. This "Fake" objective is called a <strong>Pretext Task</strong>. The goal isn't to be good at the puzzle—it's to learn the <strong>Representations</strong> required to solve it.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Read by Context."</strong> 
+        Think of it as <strong>"Learning to Read by Context."</strong> 
         If I give you a sentence with a missing [MASK] word, you use the surrounding words to guess it. 
         To guess correctly, you must understand <strong>Grammar, Logic, and Facts</strong>. You learned English without me giving you a dictionary of "Word Categories." 
       </div>
     </div>
 
-    <h2 id="masking">Examples of Pretext Tasks</h2>
+    <h2 id="masking" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> s of Pretext Tasks</h2>
     <ul>
       <li><strong>NLP (Masked LM):</strong> "The [MASK] sat on the mat." -> Model learns "Cat".</li>
       <li><strong>Computer Vision (Jigsaw):</strong> Scramble an image into 9 tiles. Model learns to <strong>Reassemble</strong> them. To do this, it must recognize arms, legs, and backgrounds.</li>
@@ -56,7 +47,7 @@ export const selfSupervisedSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Self-Supervised Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Pretext Optimization Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -80,10 +71,10 @@ export const selfSupervisedSection: TopicSection = {
           <strong>Transfer:</strong> Use the learned weights (which now "understand" the data) for any downstream task.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Master Jigsaw Solver</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Master Jigsaw Solver</h2>
+    
       <h4>Scenario: Training a Child with 1,000 Blank Jigsaws</h4>
       <p>Imagine you have 1,000 jigsaw puzzles, but you don't show the child the "Final Picture" on the box (No Labels).</p>
       
@@ -105,12 +96,12 @@ export const selfSupervisedSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
+          SSL is how humans learn. We don't need a parent to point at every single object in the world and say its name. We observe patterns (the pretext) and then "fine-tune" our categories later. This is why SSL is the future of Foundation Models like GPT.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (SimCLR Concept)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
 import torchvision.transforms as T
 from PIL import Image

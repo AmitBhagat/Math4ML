@@ -12,22 +12,13 @@ export const representationSection: TopicSection = {
       <p>A 4K image has 8 million pixels. That is <strong>Too Much Information</strong>. To understand the image, you don't need the exact color of every pixel; you need the <strong>Identity</strong> of the object. <strong>Representation Learning</strong> (Feature Learning) is the process of compressing raw data into a set of <strong>Meaningful Numbers</strong> (Vectors) that capture the "Soul" of the information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Latent Space</a>
-      <a href="#disentanglement">Disentanglement: Separating Features</a>
-      <a href="#manifold">The Manifold Hypothesis</a>
-      <a href="#vectors">Embeddings: The Currency of AI</a>
-      <a href="#analogy">The "Sketch Artist" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Latent Space</h2>
     <p>A <strong>Representation</strong> is just a point in a "Latent Space." If you take a picture of a <strong>Dog</strong> and a picture of a <strong>Wolf</strong>, their pixel values might be totally different. But in the model's <strong>Latent Space</strong>, they will be very close to each other. Representation learning is about finding the <strong>Mapping</strong> (\(f: X \to Z\)) that honors the semantic truth.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Lossy but Smart Compression."</strong> 
+        Think of it as <strong>"Lossy but Smart Compression."</strong> 
         If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
         Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
       </div>
@@ -59,7 +50,7 @@ export const representationSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Representation Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Feature Extraction Pipeline</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -83,10 +74,10 @@ export const representationSection: TopicSection = {
           <strong>Downstream Use:</strong> Use these learned vectors as the "Input" for other models, making them 10x more efficient.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Chef's Taste Profile</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Chef's Taste Profile</h2>
+    
       <h4>Scenario: Describing a 5-course French Dinner to a Friend</h4>
       <p>Imagine you want to tell a friend about a complex meal you just had. You could describe the exact weight of every onion and the chemical formula of the salt (Raw Data), but that's useless. Instead, you use <strong>Features</strong>.</p>
       
@@ -112,12 +103,12 @@ export const representationSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
+          In ML, we call this the <strong>Bottleneck Principle</strong>. By forcing the data through a very narrow bridge (the latent layer), the model is forced to throw away the "Noise" (the pixel color of a plate) and keep only the "Signal" (the identity of the food).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation (The Bottleneck)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
 import torch.nn as nn
 import torch

@@ -12,18 +12,7 @@ export const bayesTheoremSection: TopicSection = {
       <p><strong>Bayes' Theorem</strong> (\(P(A|B)\)) is a mathematical formula used to determine the probability of an event based on prior knowledge of conditions that might be related to the event. In Machine Learning, it's the core of everything from <strong>Naive Bayes Classifiers</strong> to <strong>Bayesian Neural Networks</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-spam">Example 1: Spam Filter (Prior/Posterior)</a>
-      <a href="#example-monty">Example 2: The Monty Hall Problem</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
@@ -31,13 +20,13 @@ export const bayesTheoremSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
+        Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
         You start with a guess (the Prior). 
         You see some evidence (the Data). 
         Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
@@ -45,7 +34,7 @@ export const bayesTheoremSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
     <ul>
       <li><strong>\(P(A|B)\)</strong>: Posterior (Belief after seeing data).</li>
@@ -54,8 +43,8 @@ export const bayesTheoremSection: TopicSection = {
       <li><strong>\(P(B)\)</strong>: Evidence (Normalization constant).</li>
     </ul>
 
-    <h2 id="example-spam">Example 1: Spam Filter (Prior/Posterior)</h2>
-    <div class="example-box">
+    <h2 id="example-spam" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter (Prior/Posterior)</h2>
+    
       <h4>Problem: Identifying Junk Emails</h4>
       <p>10% of emails are Spam. 80% of Spam contains the word "Free." Only 1% of ham (good emails) contains "Free." If an email has "Free," is it spam?</p>
       
@@ -80,10 +69,10 @@ export const bayesTheoremSection: TopicSection = {
           <strong>Result:</strong> Your belief that the email is spam shot up from <strong>10%</strong> to <strong>89%</strong> just by seeing one word. This is how basic Spam filters function.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-monty">Example 2: The Monty Hall Problem</h2>
-    <div class="example-box">
+    <h2 id="example-monty" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Monty Hall Problem</h2>
+    
       <h4>Problem: Updating Knowledge with Evidence</h4>
       <p>You choose Door #1. The host opens Door #3 (Evidence). Should you switch to Door #2?</p>
       
@@ -104,9 +93,9 @@ export const bayesTheoremSection: TopicSection = {
           <strong>Intuition:</strong> Bayes' Theorem shows that <strong>Door #2</strong> now has a <strong>2/3</strong> chance! Switching doubles your odds because the host's action provided <strong>Information</strong> that updated your Bayesian state.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 def bayes_inference(prior, likelihood_pos, likelihood_neg):
     # P(Cause|Effect) = (P(Effect|Cause) * P(Cause)) / P(Effect)

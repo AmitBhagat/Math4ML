@@ -12,18 +12,7 @@ export const convexOptimizationSection: TopicSection = {
       <p><strong>Convex Optimization</strong> is the statistical "Insurance Policy." in most Machine Learning problems, finding the absolute best solution is impossible. <strong>Convexity</strong> is the mathematical property that guarantees any local minimum you find is also the <strong>Global Minimum</strong>. It’s why Linear Regression and SVMs are so reliable.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#definition">Convex Sets vs. Convex Functions</a>
-      <a href="#example-bowl">Example 1: The Bowl vs. The Rollercoaster</a>
-      <a href="#example-linear">Example 2: Convex vs. Non-Convex ML</a>
-      <a href="#implementation">Implementation (Python/CVXPY)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradient Descent</strong>: Understanding minimization.</li>
@@ -31,13 +20,13 @@ export const convexOptimizationSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A function is <strong>Convex</strong> if you can draw a straight line between any two points on its curve and that line is always above the curve. If a loss surface is convex, it has no "Hidden Valleys" (Local Minima) that can trap your optimizer. No matter where you start, Gradient Descent will eventually roll down to the same single, perfect solution.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the difference as <strong>"Finding the Restaurant in a Bowl vs. a Maze."</strong> 
+        Think of the difference as <strong>"Finding the Restaurant in a Bowl vs. a Maze."</strong> 
         A <strong>Convex Space</strong> is like a perfectly smooth cereal bowl. If you drop a marble anywhere, it 100% will end up in the center. 
         A <strong>Non-Convex Space</strong> is a maze with dozens of "Fake" restaurants (Local Minima). You might get stuck in one and never know that a better one exists just over the next wall.
       </div>
@@ -49,8 +38,8 @@ export const convexOptimizationSection: TopicSection = {
       <li><strong>Convex Function:</strong> The "Epigraph" (the space above the curve) is a convex set.</li>
     </ul>
 
-    <h2 id="example-bowl">Example 1: The Bowl vs. The Rollercoaster</h2>
-    <div class="example-box">
+    <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bowl vs. The Rollercoaster</h2>
+    
       <h4>Problem: Identifying Guaranteed Solutions</h4>
       <p>Compare \(f(x) = x^2\) (Convex) vs. \(f(x) = \sin(x)\) (Non-Convex).</p>
       
@@ -71,10 +60,10 @@ export const convexOptimizationSection: TopicSection = {
           <strong>Result:</strong> Deep Learning is almost <strong>never</strong> convex, which is why it's so hard to train. Linear Regression is <strong>always</strong> convex, which is why it works every time.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-linear">Example 2: Convex vs. Non-Convex ML</h2>
-    <div class="example-box">
+    <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Convex vs. Non-Convex ML</h2>
+    
       <h4>Problem: Comparing Two Algorithms</h4>
       <p>Support Vector Machines (SVM) vs. Neural Networks (NN).</p>
       
@@ -95,9 +84,9 @@ export const convexOptimizationSection: TopicSection = {
           <strong>Intuition:</strong> Why do we use NN instead of SVM if they aren't convex? Because <strong>Capacity</strong> is more important than <strong>Guarantees</strong>. A chaotic NN can learn features that a "Guaranteed" SVM never could.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/CVXPY)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import cvxpy as cp
 import numpy as np

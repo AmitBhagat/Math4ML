@@ -12,18 +12,7 @@ export const gradientDescentSection: TopicSection = {
       <p><strong>Gradient Descent</strong> is the fundamental "Algorithm of Learning." It is how a machine moves from a random guess to a perfectly tuned model. By calculating the <strong>Gradient</strong> (the direction of steepest ascent) and moving the opposite way, we "slide" down the loss surface toward the minimum error.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-parabola">Example 1: The 1D Parabola</a>
-      <a href="#example-surface">Example 2: Sliding Down a 2D Bowl</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>The Gradient</strong>: Understanding \(\nabla f\).</li>
@@ -31,13 +20,13 @@ export const gradientDescentSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, we have a <strong>Loss Function</strong> that measures how wrong our model is. We want to find the parameter weights \(w\) that make this error as small as possible. Since we can't solve for the perfect \(w\) in one step for complex models (like Neural Networks), we take many tiny steps downhill. Each step is guided by the <strong>Gradient</strong>, which tells us exactly which way is "Down."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Imagine you are a <strong>Drunkard on a Foggy Mountain</strong>. 
+        Imagine you are a <strong>Drunkard on a Foggy Mountain</strong>. 
         You want to reach the pub at the bottom, but you can only see the ground directly beneath your feet. 
         You feel the slope with your boots. If the ground slopes up to the North, you take a step South. 
         Repeat this 1,000 times, and eventually, you'll be having a drink at the <strong>Local Minimum</strong>.
@@ -52,8 +41,8 @@ export const gradientDescentSection: TopicSection = {
       <li><strong>\(\eta\) (Eta)</strong>: The <strong>Learning Rate</strong>. This determines how big of a "step" we take.</li>
     </ul>
 
-    <h2 id="example-parabola">Example 1: The 1D Parabola</h2>
-    <div class="example-box">
+    <h2 id="example-parabola" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The 1D Parabola</h2>
+    
       <h4>Problem: Minimizing \(f(x) = x^2\)</h4>
       <p>Start at \(x = 4\). Use learning rate \(\eta = 0.1\). Find the next two positions.</p>
       
@@ -78,10 +67,10 @@ export const gradientDescentSection: TopicSection = {
           <strong>Result:</strong> Notice how the steps (\(0.8, 0.64, \dots\)) get smaller as we get closer to the bottom (\(x=0\)). The gradient naturally slows down as the slope flattens.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-surface">Example 2: Sliding Down a 2D Bowl</h2>
-    <div class="example-box">
+    <h2 id="example-surface" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sliding Down a 2D Bowl</h2>
+    
       <h4>Problem: Optimizing Two Weights simultaneously</h4>
       <p>Loss surface: \(J(w_1, w_2) = w_1^2 + 5w_2^2\).</p>
       
@@ -102,9 +91,9 @@ export const gradientDescentSection: TopicSection = {
           <strong>Intuition:</strong> In 2D, the model will "zig-zag" more aggressively in the direction of the steeper slope. This is why <strong>Feature Scaling</strong> is so important—it makes the bowl "round" instead of an "elongated oval," helping Gradient Descent move straight to the center.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

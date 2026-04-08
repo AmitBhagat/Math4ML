@@ -11,17 +11,7 @@ export const integralsSection: TopicSection = {
       <p><strong>Integral Calculus</strong> is the inverse of differential calculus. While derivatives measure the rate of change (the slope), integrals measure the <strong>accumulation</strong> of quantities (the area under a curve). In Machine Learning and Data Science, integration is the fundamental tool used to compute probabilities, expectations, and normalize complex distributions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example">Illustrative Example</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Differential Calculus</strong>: Understanding that $\frac{d}{dx}(\text{Integral}) = \text{Function}$.</li>
@@ -30,7 +20,7 @@ export const integralsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In ML, we often deal with <strong>Probability Density Functions (PDFs)</strong>. A PDF $f(x)$ tells us the relative likelihood of a continuous random variable. However, the probability of a single exact point (e.g., "What is the probability a person is exactly 175.0000... cm tall?") is zero.</p>
     
     <div class="callout tip">
@@ -44,7 +34,7 @@ export const integralsSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
 
     <h3>1. The Indefinite Integral</h3>
     <p>If $F'(x) = f(x)$, then:</p>
@@ -82,8 +72,8 @@ export const integralsSection: TopicSection = {
     <p>The probability that $X$ falls between $a$ and $b$ is:</p>
     <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
 
-    <h2 id="example">Illustrative Example</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
+    
       <h4>Problem: Finding Range Probabilities</h4>
       <p>Given a simple PDF $f(x) = \frac{3}{8}x^2$ defined on the interval $[0, 2]$, find the probability that $x$ is between 1 and 2.</p>
       
@@ -111,9 +101,9 @@ export const integralsSection: TopicSection = {
         </div>
       </div>
       <p><strong>Result:</strong> There is an <strong>87.5%</strong> probability that $x$ falls in the range $[1, 2]$.</p>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <p>While we use integrals theoretically, in AI we often perform <strong>Numerical Integration</strong> when the function is too complex to solve by hand.</p>
     <python-code>
 import numpy as np

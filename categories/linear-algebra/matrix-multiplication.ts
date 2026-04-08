@@ -12,36 +12,26 @@ export const matrixMultiplicationSection: TopicSection = {
       <p>Combining two matrices (\(AB\)) is not just multiplication—it's <strong>Composition</strong>. It's the mathematical way of saying, "Do Transformation B, then do Transformation A." This is exactly what happens in every layer of a Neural Network.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-composition">Example 1: Chaining Transformations</a>
-      <a href="#example-shape">Example 2: Shape Mismatch Survival Guide</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. Matrix multiplication (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. This allows us to collapse multiple complex steps into a single matrix.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Matrix Multiplication as a <strong>Relay Race</strong>. 
+        Think of Matrix Multiplication as a <strong>Relay Race</strong>. 
         Matrix B runs the first leg (processes the input), then hands the baton to Matrix A (processes B's output). 
         The product \(AB\) is the <strong>entire race</strong> condensed into one motion. 
         In ML, this is how a model goes from "Raw Image Pixels" to "Cat or Dog."
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For \(C = AB\), the element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of A and the \(j\)-th column of B:</p>
     <div class="math-block">$$c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$$</div>
     <p><strong>Crucial Rule:</strong> The number of <strong>columns</strong> in A must match the number of <strong>rows</strong> in B.</p>
 
-    <h2 id="example-composition">Example 1: Chaining Transformations</h2>
-    <div class="example-box">
+    <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
+    
       <h4>Problem: Finding the Combined Rule</h4>
       <p>Let \(A = \begin{bmatrix} 1 & 2 \\ 3 & 1 \end{bmatrix}, B = \begin{bmatrix} 1 & 0 \\ 0 & 2 \end{bmatrix}\). Calculate \(AB\).</p>
       
@@ -66,10 +56,10 @@ export const matrixMultiplicationSection: TopicSection = {
           <strong>Result:</strong> Multiplication is <strong>not commutative</strong> (\(AB \neq BA\)). In the relay race, the order of runners matters!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-shape">Example 2: Shape Mismatch Survival Guide</h2>
-    <div class="example-box">
+    <h2 id="example-shape" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Shape Mismatch Survival Guide</h2>
+    
       <h4>Problem: Can they Multiply?</h4>
       <p>Check if \(A (3 \times 2)\) can multiply \(B (2 \times 5)\).</p>
       
@@ -94,9 +84,9 @@ export const matrixMultiplicationSection: TopicSection = {
           <strong>Result:</strong> YES. They align. This is the #1 debugging skill in building Neural Networks.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

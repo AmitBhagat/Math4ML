@@ -12,18 +12,7 @@ export const sgdSection: TopicSection = {
       <p><strong>Stochastic Gradient Descent (SGD)</strong> is the engine of Deep Learning. While Batch Gradient Descent waits to see all 1 million data points before taking a single step, SGD takes a step after seeing just one (or a few). It is <strong>Fast</strong>, <strong>Noisy</strong>, and surprisingly effective at avoiding local traps.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-noise">Example 1: The Noisy Gradient</a>
-      <a href="#example-mini">Example 2: Mini-batch Training</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradient Descent</strong>: Understanding \(\nabla f\).</li>
@@ -31,13 +20,13 @@ export const sgdSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating the gradient of 1 billion samples takes a lot of time. <strong>SGD</strong> replaces wait with "Noise." Instead of the perfect "True Gradient," we use a "Noisy Estimate" from a single random data point. The estimate is wrong in the short term, but on average, it points exactly the same way as the true gradient. It’s like traveling by <strong>Drunkard's Walk</strong>—you stumble, but you still end up at the bottom of the hill.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
+        Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
         Batch Gradient Descent is like asking everyone in the city and taking the average direction. It's accurate, but it takes forever. 
         SGD is like asking the first person you see and walking that way. They might be wrong, but you're moving <strong>Right Now</strong>. If you ask someone new every 10 meters, eventually you'll reach the restaurant.
       </div>
@@ -51,8 +40,8 @@ export const sgdSection: TopicSection = {
       <li><strong>Noise Benefit</strong>: Because SGD is noisy, it can "jump out" of small, shallow local minima that would trap the smooth Batch Gradient Descent.</li>
     </ul>
 
-    <h2 id="example-noise">Example 1: The Noisy Gradient</h2>
-    <div class="example-box">
+    <h2 id="example-noise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Noisy Gradient</h2>
+    
       <h4>Problem: Comparing Step Quality</h4>
       <p>Population: [100, 150, 200]. Loss: Aiming for \(\mu\). Correct gradient for \(\mu=100\) is -100.</p>
       
@@ -81,10 +70,10 @@ export const sgdSection: TopicSection = {
           <strong>Result:</strong> Over time, the sum of SGD steps averages out to the Batch GD step. We trade <strong>Accuracy per Step</strong> for <strong>Speed of Iteration</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-mini">Example 2: Mini-batch Training</h2>
-    <div class="example-box">
+    <h2 id="example-mini" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Mini-batch Training</h2>
+    
       <h4>Problem: The Best of Both Worlds</h4>
       <p>Instead of 1 sample (Pure SGD) or all samples (Batch GD), we use a <strong>Mini-batch</strong> of 32 samples.</p>
       
@@ -105,9 +94,9 @@ export const sgdSection: TopicSection = {
           <strong>Intuition:</strong> Mini-batch SGD is the "Standard" for all Neural Networks (Adam, RMSProp, etc.). It gives us the <strong>Stability</strong> of Batch GD and the <strong>Computational Speed</strong> of SGD.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

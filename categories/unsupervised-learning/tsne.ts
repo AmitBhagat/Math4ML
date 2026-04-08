@@ -12,15 +12,6 @@ export const tsneSection: TopicSection = {
       <p>PCA looks for <strong>Global Variance</strong>—the big picture. <strong>t-SNE</strong> looks for <strong>Local Neighborhoods</strong>. It's the standard tool for "Sanity Checking" your high-dimensional data. If your data points are related (like handwritten '7's), t-SNE will huddle them together in a <strong>2D Map</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Probability Densities</a>
-      <a href="#gaussians">Gaussian-t Comparison</a>
-      <a href="#perplexity">The Perplexity Parameter</a>
-      <a href="#crowding">The "Crowding" Problem</a>
-      <a href="#analogy">The "Friendship Map" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Probability Densities</h2>
     <p>t-SNE converts <strong>Distances</strong> into <strong>Probabilities</strong>. In the high-dimensional space, it calculates the probability that point $i$ would pick point $j$ as its neighbor. Then, it tries to find a 2D layout that <strong>mimics these probabilities</strong> as closely as possible.</p>
     <div class="math-block">$$p_{ij} = \frac{\exp(-\|x_i - x_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq l} \exp(-\|x_k - x_l\|^2 / 2\sigma_k^2)}$$</div>
@@ -29,7 +20,7 @@ export const tsneSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Optimizing Friendships."</strong> 
+        Think of it as <strong>"Optimizing Friendships."</strong> 
         Imagine 1,000 people are friends in a 1,000D world. 
         You want to put them all in a <strong>Small Room (2D)</strong>. 
         t-SNE says: "If Person A and B were best friends in the 1,000D world, I'll do whatever it takes to keep them <strong>side-by-side</strong> in the room." 
@@ -58,7 +49,7 @@ export const tsneSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The t-SNE Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Neighborhood Preserving Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -82,10 +73,10 @@ export const tsneSection: TopicSection = {
           <strong>Optimization:</strong> Use Gradient Descent to "Nudge" the 2D points until the KL Divergence is minimized.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Crowd Compression</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Crowd Compression</h2>
+    
       <h4>Scenario: Drawing a High School Reunion Seating Chart</h4>
       <p>Imagine 1,000 students from a 100-dimensional social network. You want to seat them at tables in a small 2D room.</p>
       
@@ -111,12 +102,12 @@ export const tsneSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> t-SNE is a <strong>Non-Linear</strong> transformer. It can "Unroll" complex manifolds that PCA would just flatten. But beware: the distance between the "Jock" corner and the "Band" corner means <strong>nothing</strong>. Only the local huddles are real.
+          t-SNE is a <strong>Non-Linear</strong> transformer. It can "Unroll" complex manifolds that PCA would just flatten. But beware: the distance between the "Jock" corner and the "Band" corner means <strong>nothing</strong>. Only the local huddles are real.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Local Topology</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 2 High-Dim Cliques (100D space)\n[Action] Initializing t-SNE (Perplexity=30)...\n[Iter 250] Error: 1.45 (KL-Divergence dropping)\n[Iter 500] Error: 0.82 (Local huddles forming)\n[Result] 100D relationship preserved in 2D space.\n[Discovery] Cluster A and B are now perfectly separated on the map.">
 import numpy as np
 from sklearn.manifold import TSNE

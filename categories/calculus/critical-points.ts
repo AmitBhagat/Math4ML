@@ -12,18 +12,7 @@ export const criticalPointsSection: TopicSection = {
       <p>A <strong>Critical Point</strong> is any point where the gradient of a function is exactly zero (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a struggle to find a specific type of critical point: the <strong>Global Minimum</strong> of our error function.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-minimum">Example 1: Finding Local Minima</a>
-      <a href="#example-saddle">Example 2: Detecting Saddle Points in 2D</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Gradients</strong>: How to find vectors of slopes.</li>
@@ -31,20 +20,20 @@ export const criticalPointsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>When you are hiking, you are at a "Critical Point" if the ground at your feet is perfectly flat. This could mean you are at the <strong>Top of a Peak</strong> (Maximize Reward), the <strong>Bottom of a Valley</strong> (Minimize Loss), or on a <strong>Saddle Point</strong> (Flat from one side, steep from another). To build a model that actually works, we need to distinguish between these cases.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Critical Point like <strong>The End of a Path</strong>. 
+        Think of a Critical Point like <strong>The End of a Path</strong>. 
         If you arrive at a flat spot and the ground curves up in all directions, you've found a <strong>Minimum</strong> (Success!). 
         If it curves down everyone, you've found a <strong>Maximum</strong> (Reverse success!). 
         In Deep Learning, we often find <strong>Saddle Points</strong>—frustrating flat areas that trap our models and slow down training.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>We find critical points by solving the equation:</p>
     <div class="math-block">$$\nabla f(\mathbf{x}) = \mathbf{0}$$</div>
     <p>To classify the point, we examine the <strong>Eigenvalues</strong> of the Hessian matrix \(\mathbf{H}\):</p>
@@ -54,8 +43,8 @@ export const criticalPointsSection: TopicSection = {
       <li><strong>Mixed \(\lambda\):</strong> -> <strong>Saddle Point</strong>.</li>
     </ul>
 
-    <h2 id="example-minimum">Example 1: Finding Local Minima</h2>
-    <div class="example-box">
+    <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
+    
       <h4>Problem: Finding the Bottom of \(f(x, y) = x^2 + y^2 - 4x\)</h4>
       
       <div class="algorithm-steps">
@@ -79,10 +68,10 @@ export const criticalPointsSection: TopicSection = {
           <strong>Result:</strong> \((2, 0)\) is a <strong>Local Minimum</strong>. This is the optimal configuration for this toy model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-saddle">Example 2: Detecting Saddle Points in 2D</h2>
-    <div class="example-box">
+    <h2 id="example-saddle" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Detecting Saddle Points in 2D</h2>
+    
       <h4>Problem: Finding the Trap in \(f(x, y) = x^2 - y^2\)</h4>
       
       <div class="algorithm-steps">
@@ -106,9 +95,9 @@ export const criticalPointsSection: TopicSection = {
           <strong>Intuition:</strong> One eigenvalue is positive (Uphill along x), and one is negative (Downhill along y). This is a <strong>Saddle Point</strong>. In ML training, your optimizer might get stuck here forever because the "Net Gradient" is zero, even though lower points exist nearby.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize

@@ -12,15 +12,6 @@ export const svmSection: TopicSection = {
       <p><strong>Support Vector Machines (SVM)</strong> is perhaps the most Elegant and Mathematically beautiful classification algorithm. It doesn't just want a "Decision Boundary" (a line). It wants the <strong>Widest Possible Road</strong> (The Margin) between two classes. It's the most robust way to draw a line in the sand.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The "Max-Margin" Hyperplane</a>
-      <a href="#support-vectors">The Pivot Points: Support Vectors</a>
-      <a href="#slack">Soft Margin & Slack Variables</a>
-      <a href="#kernel">The Kernel Trick: Folding Space</a>
-      <a href="#analogy">The "Moat & Castle" Analogy</a>
-    </div>
-
     <h2 id="theory">The "Max-Margin" Hyperplane</h2>
     <p>A standard classifier just wants a line that separates the dots. But there are <strong>infinite</strong> lines that can do that. SVM says: "I want the unique line that is <strong>as far as possible</strong> from the nearest dots of both classes." This is called the <strong>Optimal Hyperplane</strong>.</p>
     <div class="math-block">$$y = w \cdot x + b = 0$$</div>
@@ -29,7 +20,7 @@ export const svmSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Building a Super-Highway."</strong> 
+        Think of it as <strong>"Building a Super-Highway."</strong> 
         It's not just a narrow painted line. It's a <strong>multi-lane road</strong>. The highway has to be as wide as possible without hitting any "House" (a data point) on either side. SVM is the <strong>Civic Engineer</strong> who finds the perfect path for that highway.
       </div>
     </div>
@@ -56,7 +47,7 @@ export const svmSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The SVM Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Geometric Solver</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -80,10 +71,10 @@ export const svmSection: TopicSection = {
           <strong>Inference:</strong> For a new point, check which side of the "Road Center" it falls on.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Wide Moat</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Wide Moat</h2>
+    
       <h4>Scenario: Drawing a Border Between feuding Kingdoms</h4>
       <p>Imagine your data points are villages. You want to build a giant river (moat) to separate them.</p>
       
@@ -109,12 +100,12 @@ export const svmSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> SVM is <strong>Geometric</strong>. It sees the world as points in space and boundaries as planes. It's the king of "Maximum Separation."
+          SVM is <strong>Geometric</strong>. It sees the world as points in space and boundaries as planes. It's the king of "Maximum Separation."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Margin Maximization</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Solving quadratic program for widest margin...\n[Soldiers] Identified 3 Support Vectors on the border.\n[Result] Decision Boundary: y = -0.5x + 3.2\n[Input] Testing point at (5, 5)...\n[Classification] Result: 1 (Red Kingdom)\n[Insight] Notice that only the border points affected the final highway!">
 import numpy as np
 from sklearn.svm import SVC

@@ -12,29 +12,21 @@ export const featureEngineeringSection: TopicSection = {
       <p>There is a famous saying: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm (like a Deep Neural Network) will fail if you give it "Bad" data. <strong>Feature Engineering</strong> is the act of turning raw, noisy numbers into meaningful <strong>Insights</strong> that the machine can easily understand.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics of Representation</a>
-      <a href="#creation">Feature Creation: The Meaning from Raw</a>
-      <a href="#selection">Feature Selection: The Minimalist</a>
-      <a href="#analogy">The "Master Chef" Analogy</a>
-    </div>
-
     <h2 id="theory">The Mechanics of Representation</h2>
     <p>A machine sees data as a <strong>Vector Space</strong>. Your job is to transform the data so that the "Distance" between points actually means something. Feature Engineering isn't about math; it's about <strong>Representing the World</strong> in a way that points the way toward the Answer.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Cooking Prep."</strong> 
+        Think of it as <strong>"Cooking Prep."</strong> 
         The machine is the <strong>Stove</strong>. The data is the <strong>Raw Ingredients</strong>. 
         If you throw a whole, unpeeled potato into the stove, the result is "Garbage." 
         If you peel it, chop it, and season it, you get a <strong>Gourmet Dish</strong>. Feature Engineering is the <strong>Chopping and Seasoning</strong> that happens before the cooking begins.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Gourmet Dish Prep</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Gourmet Dish Prep</h2>
+    
       <h4>Scenario: Prepping the Perfect Salad</h4>
       <p>Imagine the machine is a Master Chef, and your raw data is a pile of unwashed vegetables.</p>
       
@@ -56,12 +48,12 @@ export const featureEngineeringSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Model performance is <strong>90% Data, 10% Math</strong>. If you spend time making your features smart, even a simple model will beat a complex one using raw, noisy data.
+          Model performance is <strong>90% Data, 10% Math</strong>. If you spend time making your features smart, even a simple model will beat a complex one using raw, noisy data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Feature Engineering</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Original Data] Columns: ['Year_Built', 'Year_Sold', 'Color_of_Door']\n[Engineered] Dropped 'Color_of_Door' (Irrelevant)\n[Engineered] Created 'Age_at_Sale' (\n[Result] Predictor score improved by 40%!">
 import pandas as pd
 import numpy as np

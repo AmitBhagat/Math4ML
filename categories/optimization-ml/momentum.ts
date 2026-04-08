@@ -12,15 +12,6 @@ export const momentumSection: TopicSection = {
       <p>If SGD is a <strong>Drunken Sailor</strong>, <strong>Momentum</strong> is that sailor in a <strong>Heavy Lead Sled</strong>. Once he starts moving down the mountain, he builds up <strong>Speed</strong> and is harder to stop. If he hits a small bump or a "Saddle Point," he just <strong>Rides Over It</strong> because he has momentum. He's faster and more direct.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Exponentially Weighted Averages</a>
-      <a href="#math">The Velocity Update Rule</a>
-      <a href="#physics">The Physics of Optimization</a>
-      <a href="#saddle">Dampening the Oscillations</a>
-      <a href="#analogy">The "Boulder" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Moving Average</h2>
     <p>Momentum maintains a <strong>Velocity (\(v\))</strong>. At every step, we update the velocity using the current gradient <strong>plus</strong> a fraction \(\gamma\) of the previous velocity. This is an <strong>Exponentially Weighted Moving Average</strong>.</p>
     <div class="math-block">$$v_t = \gamma v_{t-1} + \eta \nabla \mathcal{L}(\theta_t)$$</div>
@@ -29,7 +20,7 @@ export const momentumSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Memory for Direction."</strong> 
+        Think of it as <strong>"Memory for Direction."</strong> 
         The "Noise" in SGD makes the sailor zigzag left and right. 
         If he zig-zags, the <strong>Left and Right</strong> cancel each other out over time, but the <strong>Forward</strong> direction (downhill) keeps <strong>Adding Up</strong>. 
         Momentum "Accumulates" the downhill force while "Canceling" the noise. 
@@ -43,8 +34,8 @@ export const momentumSection: TopicSection = {
     <h2 id="saddle">Dampening the Oscillations</h2>
     <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. <strong>Momentum</strong> smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
 
-    <h2 id="example">Illustrated Example: The Heavy Boulder</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>
+    
       <h4>Scenario: Pushing a Boulder through a Narrow Ravine</h4>
       <p>Imagine a long, narrow valley that is very steep on the sides but flat in the middle. We want to reach the center of the valley floor.</p>
       
@@ -70,12 +61,12 @@ export const momentumSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Momentum is the <strong>Smoother</strong>. It ignores the jiggles in your gradient and focus exclusively on the <strong>Major Trend</strong>. If your loss is oscillating wildly, you need more momentum.
+          Momentum is the <strong>Smoother</strong>. It ignores the jiggles in your gradient and focus exclusively on the <strong>Major Trend</strong>. If your loss is oscillating wildly, you need more momentum.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: SGD vs. Momentum</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Comparison] Running for 10 steps on a 1D parabolic surface...\n[Step 0] SGD Pos: 8.00 | Mom Pos: 8.50 (Initial drag)\n[Step 5] SGD Pos: 1.07 | Mom Pos: 0.22 (Momentum has built speed!)\n[Step 10] SGD Pos: 0.12 | Mom Pos: 0.00 (Momentum reached the target!)\n[Result] Momentum is 3.5x faster at reaching the 'Center' than vanilla SGD.">
 import numpy as np
 

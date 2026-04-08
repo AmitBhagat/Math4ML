@@ -12,22 +12,13 @@ export const aucSection: TopicSection = {
       <p>If the ROC curve is a picture of the model's potential, <strong>AUC</strong> is its Final Grade. It is a single number between <strong>0 and 1</strong>. It tells us: <strong>How good is this model at telling two things apart?</strong> A score of 0.8 means the model is "Pretty Good," while 0.5 means it's just flipping a coin.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Probability of Correct Ranking</a>
-      <a href="#interpretation">Interpreting the Score (0.5 to 1.0)</a>
-      <a href="#imbalance">Handling Imbalanced Sets</a>
-      <a href="#limitations">When AUC Lies to You</a>
-      <a href="#analogy">The "Blind Comparison" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Ranking Probability</h2>
     <p>The <strong>AUC (Area Under the ROC Curve)</strong> has a beautiful probabilistic meaning. If you pick one <strong>Random Positive</strong> sample and one <strong>Random Negative</strong> sample, AUC is the probability that your model will give the Positive sample a <strong>Higher Score</strong> than the Negative one.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Separation Power."</strong> 
+        Think of it as <strong>"Separation Power."</strong> 
         It doesn't care about the threshold. It asks: "Are the 'Yes' people actually getting higher numbers than the 'No' people?" 
         If they are perfectly separated, AUC is <strong>1.0</strong>. 
         If they are completely mixed up, AUC is <strong>0.5</strong>.
@@ -60,7 +51,7 @@ export const aucSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The AUC Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Area Integration Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -84,10 +75,10 @@ export const aucSection: TopicSection = {
           <div><strong>Validation:</strong> Ensure a score of 1.0 (The perfect square) or 0.5 (The purely random triangle).</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Separation Power</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Separation Power</h2>
+    
       <h4>Scenario: Grading a Chemistry Test for Fairness</h4>
       <p>Imagine you have two groups: <strong>Chemists</strong> and <strong>Artists</strong>. You give them a chemistry test. How "Discriminative" is the test?</p>
       
@@ -113,12 +104,12 @@ export const aucSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> AUC is the <strong>Universal Grade</strong>. Unlike Accuracy, it doesn't care if your dataset is imbalanced (e.g., 99% Artists). It only cares about the "Ranking." If you want to know if one model is objectively better than another, ignore the accuracy and compare their <strong>AUC</strong>.
+          AUC is the <strong>Universal Grade</strong>. Unlike Accuracy, it doesn't care if your dataset is imbalanced (e.g., 99% Artists). It only cares about the "Ranking." If you want to know if one model is objectively better than another, ignore the accuracy and compare their <strong>AUC</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Separation Quality</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating 10 probability pairs (Target vs. Background)...\n[Action] Computing Area Under ROC Curve (Trapezoidal Integration)...\n[Result] ROC-AUC Score: 0.9250\n[Grade] Excellent Separation Power!\n[Insight] There is a 92.5% chance that a random Positive sample will rank higher than a random Negative.">
 import numpy as np
 from sklearn.metrics import roc_auc_score

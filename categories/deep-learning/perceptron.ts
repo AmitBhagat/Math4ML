@@ -12,15 +12,6 @@ export const perceptronSection: TopicSection = {
       <p>Invented in 1958 by Frank Rosenblatt, the <strong>Perceptron</strong> is the biological inspiration that started it all. It is the absolute simplest "unit" of intelligence. It takes multiple inputs, weights them by importance, and makes a <strong>Yes/No</strong> decision based on a threshold.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Decision Function</a>
-      <a href="#math">The Learning Rule: Hebbian Foundation</a>
-      <a href="#logic">Logic Gates: AND, OR, and the XOR Crisis</a>
-      <a href="#convergence">Perceptron Convergence Theorem</a>
-      <a href="#analogy">The "Loan Approval" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Decision Function</h2>
     <p>A Perceptron takes a vector of inputs $\mathbf{x}$ and applies a linear transformation followed by a <strong>Step Function</strong> (Heaviside). If the sum exceeds zero, it outputs 1; otherwise, 0.</p>
     <div class="math-block">$$\hat{y} = \begin{cases} 1 & \text{if } \sum_{i=1}^n w_i x_i + b > 0 \\ 0 & \text{otherwise} \end{cases}$$</div>
@@ -32,7 +23,7 @@ export const perceptronSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Geometric Decision Making."</strong> 
+        Think of it as <strong>"Geometric Decision Making."</strong> 
         The weights and bias define a <strong>Hyperplane</strong> (a straight line in 2D). 
         The Perceptron simply asks: "Is this data point on the <strong>Left</strong> or the <strong>Right</strong> side of the line?" 
       </div>
@@ -47,8 +38,8 @@ export const perceptronSection: TopicSection = {
     <p>A single Perceptron can perfectly model <strong>AND</strong> and <strong>OR</strong> gates. However, it <strong>cannot</strong> model the <strong>XOR (Exclusive OR)</strong> gate. Why? Because XOR is not <strong>Linearly Separable</strong>. You cannot draw a single straight line to separate the classes. 
     <strong>The Gotcha:</strong> This limitation almost killed Neural Network research in 1969. The solution? Multi-Layer networks.</p>
 
-    <h2 id="example">Illustrated Example: The Binary Voter</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Binary Voter</h2>
+    
       <h4>Scenario: The Grumpy Loan Officer</h4>
       <p>Imagine a single loan officer at a bank. They have a strict "Formula" for deciding your future based on your [Salary, Credit Score].</p>
       
@@ -74,12 +65,12 @@ export const perceptronSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> A single Perceptron is a <strong>Linear Knife</strong>. It can only split data if there is a perfectly straight line that separates "Yes" from "No." If the data is a spiral or a circle (like XOR), the Perceptron will fail.
+          A single Perceptron is a <strong>Linear Knife</strong>. It can only split data if there is a perfectly straight line that separates "Yes" from "No." If the data is a spiral or a circle (like XOR), the Perceptron will fail.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Learning the AND Gate</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Iteration 0] Training on all 4 combinations...\n[Iteration 5] Model is starting to 'Get it'...\n[Iteration 10] Perfect Convergence!\n[Test] Input [1, 1] -> Predicted: 1 (Correct)\n[Test] Input [0, 1] -> Predicted: 0 (Correct)\n[Final] Learned Weights: [2.0, 1.0] | Bias: -2.5">
 import numpy as np
 

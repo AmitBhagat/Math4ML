@@ -12,15 +12,6 @@ export const cnnSection: TopicSection = {
       <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use <strong>Filters</strong> to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Convolution Operation</a>
-      <a href="#filters">Filters & Feature Maps</a>
-      <a href="#pooling">Pooling: Reducing the Resolution</a>
-      <a href="#bias">Translation Invariance: The Power of Kernels</a>
-      <a href="#analogy">The "Flashlight" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Convolution Operation</h2>
     <p>A Convolution is a <strong>Mathematical Sliding Window</strong>. Instead of looking at the whole image at once, the model takes a small square (e.g., $3 \times 3$) and slides it across the pixels. It calculates the dot product between the <strong>Filter (Kernel)</strong> and the image patches.</p>
     <div class="math-block">$$(I * K)(i, j) = \sum_m \sum_n I(i+m, j+n) K(m, n)$$</div>
@@ -32,7 +23,7 @@ export const cnnSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Signature."</strong> 
+        Think of it as <strong>"Finding the Signature."</strong> 
         The first layer has filters for <strong>Vertical Edges</strong>. 
         If a filter "Hits" a vertical line, the output is high. 
         It doesn't matter <strong>where</strong> in the image the edge is; the filter will find it.
@@ -46,8 +37,8 @@ export const cnnSection: TopicSection = {
     <h2 id="bias">Translation Invariance</h2>
     <p>If you see a <strong>Cat in the top-left</strong> or a <strong>Cat in the bottom-right</strong>, it's still a cat. CNNs are specifically designed to ignore the <strong>Where</strong> and focus on the <strong>What</strong>. This is their core "Inductive Bias."</p>
 
-    <h2 id="example">Illustrated Example: The Sweeping Flashlight</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Sweeping Flashlight</h2>
+    
       <h4>Scenario: Finding a Statue in a Dark Museum</h4>
       <p>Imagine you have a flashlight with a narrow 3x3 beam. To see the whole room, you sweep it systematically.</p>
       
@@ -73,12 +64,12 @@ export const cnnSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> CNNs work because they are <strong>Translation Invariant</strong>. A dragon in the left corner is the same as a dragon in the right corner. The filters find the "Pattern," not the specific pixels.
+          CNNs work because they are <strong>Translation Invariant</strong>. A dragon in the left corner is the same as a dragon in the right corner. The filters find the "Pattern," not the specific pixels.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Edge Detector</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Sliding 3x3 Kernel across 10x10 Image...\n--- Input (A vertical line at index 5) ---\n[0 0 0 0 0 1 0 0 0 0] ...\n--- Output (Detected Edges) ---\nFound Vertical Boundary at Columns [4, 6]\n[Result] Kernel successfully 'excited' by the texture change.">
 import numpy as np
 

@@ -12,22 +12,13 @@ export const lrSchedulingSection: TopicSection = {
       <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the <strong>Resort (The Minimum)</strong>, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Annealing</a>
-      <a href="#decay">Step Decay: The Ladder Descent</a>
-      <a href="#cosine">Cosine Annealing: The Smooth Slide</a>
-      <a href="#warmup">Warmup: The Gentle Start</a>
-      <a href="#analogy">The "Finish Line" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Annealing</h2>
     <p>Annealing is a concept from <strong>Metallurgy</strong>. If you want a metal to be perfect, you <strong>Heat it up</strong> (High LR) so the atoms can move freely, and then <strong>Cool it down</strong> (Low LR) very slowly so they settle into the <strong>Lowest Energy State</strong>. If you cool it too fast, it becomes <strong>Brittle (Suboptimal)</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Narrowing the Focus."</strong> 
+        Think of it as <strong>"Narrowing the Focus."</strong> 
         Start <strong>Wide</strong> to find the right <strong>Neighborhood</strong>. 
         End <strong>Narrow</strong> to find the <strong>Specific House</strong>. 
         If you never slow down, you'll just <strong>Circle the house</strong> forever, never going in. 
@@ -46,8 +37,8 @@ export const lrSchedulingSection: TopicSection = {
     <p><strong>The Gotcha:</strong> At the very first iteration, the model is <strong>Randomly Initialized</strong>. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
     <strong>Warmup</strong> starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
 
-    <h2 id="example">Illustrated Example: The Controlled Descent</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>
+    
       <h4>Scenario: Landing a Plane on a High-Altitude Runway</h4>
       <p>Imagine you are a pilot. You can't land at 500 mph (High LR). You also can't fly at 10 mph for the whole trip (Low LR). You need a <strong>Systematic Decrease</strong> in speed.</p>
       
@@ -73,12 +64,12 @@ export const lrSchedulingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> LR Scheduling is your <strong>Braking System</strong>. Without it, your model will keep jumping back and forth across a narrow valley, unable to ever reach the very bottom. A good schedule is often the difference between a 95% and a 99% accuracy model.
+          LR Scheduling is your <strong>Braking System</strong>. Without it, your model will keep jumping back and forth across a narrow valley, unable to ever reach the very bottom. A good schedule is often the difference between a 95% and a 99% accuracy model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Visualizing Schedules</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Schedule] Initial LR detected: 0.1\n[Stage 1] Step Decay: Dropping by factor 0.1 at Epoch 50.\n[Stage 2] Cosine: Smoothly curving toward 0.0.\n\nEpoch 0:   Step-LR=0.1000 | Cosine-LR=0.1000\nEpoch 25:  Step-LR=0.1000 | Cosine-LR=0.0854\nEpoch 50:  Step-LR=0.0100 | Cosine-LR=0.0500\nEpoch 75:  Step-LR=0.0100 | Cosine-LR=0.0146\nEpoch 100: Step-LR=0.0010 | Cosine-LR=0.0000\n\n[Verdict] Cosine Annealing leads to a smoother 'Flight Path' than Step Decay.">
 import numpy as np
 

@@ -12,14 +12,6 @@ export const evaluationMetricsSection: TopicSection = {
       <p>Accuracy is a <strong>Lie</strong>. If 99% of your emails are "Not Spam," and your model just guesses "Not Spam" every single time, it is 99% accurate—but it is <strong>Useless</strong>. <strong>Evaluation Metrics</strong> are the "Scorecards" that tell the real story of how your model behaves.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#matrix">The Confusion Matrix</a>
-      <a href="#classification">Precision, Recall, F1-Score</a>
-      <a href="#regression">Regression: MAE, MSE, R-squared</a>
-      <a href="#analogy">The "Doctor's Diagnosis" Analogy</a>
-    </div>
-
     <h2 id="matrix">The Confusion Matrix</h2>
     <p>A table showing the 4 types of predictions:</p>
     <ul>
@@ -30,8 +22,8 @@ export const evaluationMetricsSection: TopicSection = {
     </ul>
 
     <h2 id="classification">Precision, Recall, F1-Score</h2>
-    <h2 id="example">Illustrated Example: The Fishing Trip</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>
+    
       <h4>Scenario: Catching Dinner in a Lake</h4>
       <p>Imagine you go fishing in a lake that contains 100 fish and 1,000 old boots.</p>
       
@@ -53,12 +45,12 @@ export const evaluationMetricsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In a Medical Test, you want 100% <strong>Recall</strong> (don't miss anyone sick). In a Search Engine, you want 100% <strong>Precision</strong> (don't show me irrelevant results). Identify your priority!
+          In a Medical Test, you want 100% <strong>Recall</strong> (don't miss anyone sick). In a Search Engine, you want 100% <strong>Precision</strong> (don't show me irrelevant results). Identify your priority!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Classification & Regression</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Classification] Precision: 0.67, Recall: 1.00\n[Regression] MSE: 124.50, R-squared: 0.92\n[Note: The MSE is low relative to the range, suggesting a good fit]">
 from sklearn.metrics import precision_score, recall_score, mean_squared_error, r2_score
 import numpy as np

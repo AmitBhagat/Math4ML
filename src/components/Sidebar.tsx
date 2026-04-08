@@ -223,13 +223,6 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
         ))}
       </nav>
 
-      {/* Sidebar Footer */}
-      <div className="mt-auto p-8 border-t border-white/5 bg-white/5 backdrop-blur-md sticky bottom-0">
-        <div className="flex flex-col gap-1.5">
-          <span className="text-[10px] font-black uppercase tracking-[0.3em] text-accent-premium opacity-50">System Interface</span>
-          <span className="text-[11px] text-text-premium/40 font-mono tracking-tighter italic">v1.2.0 • Immersive Glass Edition</span>
-        </div>
-      </div>
     </aside>
   );
 };

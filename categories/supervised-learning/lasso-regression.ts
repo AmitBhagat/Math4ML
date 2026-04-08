@@ -12,14 +12,6 @@ export const lassoRegressionSection: TopicSection = {
       <p>While Ridge minimizes every weight slightly, <strong>Lasso (L1)</strong> is more aggressive. It doesn't just "Muffle" noisy features; it <strong>Kills</strong> them. Lasso is your best friend when you have 100 features but suspect only 5 actually matter.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The L1 Absolute Penalty</a>
-      <a href="#sparsity">Sparsity: The Zero-Weight Magic</a>
-      <a href="#math">The Lasso Loss Function</a>
-      <a href="#analogy">The "Brutal Executioner" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The L1 Absolute Penalty</h2>
     <p>Lasso stands for <strong>Least Absolute Shrinkage and Selection Operator</strong>. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
     <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum |w_j|$$</div>
@@ -27,13 +19,13 @@ export const lassoRegressionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Geometric Constraints."</strong> 
+        Think of it as <strong>"Geometric Constraints."</strong> 
         Ridge is a <strong>Sphere</strong> (it lets you move in any direction smoothly). Lasso is a <strong>Diamond</strong> (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
       </div>
     </div>
 
     <h2 id="sparsity">Sparsity: The Zero-Weight Magic</h2>
-    <div class="example-box">
+    
       <h4>Scenario: Predicting Disease from Genes</h4>
       <p>Data: 20,000 genes. Target: [Diabetes Risk].</p>
       
@@ -47,7 +39,7 @@ export const lassoRegressionSection: TopicSection = {
           <strong>Result with Lasso:</strong> It sets 19,980 weights to <strong>zero</strong>. It effectively <strong>Selects the Features</strong> for you, giving you a lean, interpretable model.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Brutal Executioner" Analogy</h2>
     <div class="callout success">
@@ -61,7 +53,7 @@ export const lassoRegressionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Lasso Regression Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Mathematical Process</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -85,10 +77,10 @@ export const lassoRegressionSection: TopicSection = {
           <strong>Feature Selection:</strong> Review the final model to see which features were "Executed" (killed) by the Lasso.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Brutal Casting Director</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Brutal Casting Director</h2>
+    
       <h4>Scenario: Reducing a Cast of 100 to 5 Essential Stars</h4>
       <p>Imagine your data features are actors auditioning for a movie. You have a tiny budget.</p>
       
@@ -114,12 +106,12 @@ export const lassoRegressionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Lasso is a <strong>Feature Selector</strong>. Use it when you want to simplify your model and answer the question: "Which of these 1,000 variables actually matter?"
+          Lasso is a <strong>Feature Selector</strong>. Use it when you want to simplify your model and answer the question: "Which of these 1,000 variables actually matter?"
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Weight Killer</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Model trying to learn with alpha=5.0 (Brutal Executioner)\n[Input] 1 Useful Feature, 4 Random Noisy Features\n[Result] Learned Weights: [8.5, 0.0, 0.0, 0.0, 0.0]\n[Discovery] Lasso killed all 4 junk features exactly!\n[Interpretation] Feature 0 is the only one 'worth' the L1 penalty.">
 import numpy as np
 from sklearn.linear_model import Lasso

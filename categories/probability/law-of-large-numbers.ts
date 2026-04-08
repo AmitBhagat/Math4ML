@@ -12,18 +12,7 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <p>The <strong>Law of Large Numbers (LLN)</strong> is the "Anchor" of probability. It mathematically guarantees that if you take enough samples, the <strong>Sample Mean</strong> will eventually land on the <strong>True Theoretical Mean</strong> of the population.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-casino">Example 1: The Casino's House Edge</a>
-      <a href="#example-sample">Example 2: Sample Mean Convergence</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -31,13 +20,13 @@ export const lawOfLargeNumbersSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If you flip a coin 5 times, you might get 4 heads (80%). This is just "luck." But if you flip a coin 5,000,000 times, you will almost certainly have extremely close to 50% heads. The <strong>LLN</strong> says that individual "luck" (Variability) gets washed away as the sample size grows. This is why we can trust our model's performance on a large test set.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of LLN as <strong>"The Truth Coming to Light."</strong> 
+        Think of LLN as <strong>"The Truth Coming to Light."</strong> 
         In the short term, anyone can look like a genius (High Accuracy). 
         But in the long term, your <strong>True Average Skill</strong> will be revealed. 
         In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the <strong>True Error</strong> of the model on the data distribution.
@@ -50,8 +39,8 @@ export const lawOfLargeNumbersSection: TopicSection = {
     <p>The <strong>Strong LLN</strong> states:</p>
     <div class="math-block">$$\overline{X}_n \xrightarrow{a.s.} \mu \text{ as } n \to \infty$$</div>
 
-    <h2 id="example-casino">Example 1: The Casino's House Edge</h2>
-    <div class="example-box">
+    <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
+    
       <h4>Problem: Tracking Profit over Time</h4>
       <p>A casino game has a 51% chance for the house to win $1 and a 49% chance to lose $1.</p>
       
@@ -72,10 +61,10 @@ export const lawOfLargeNumbersSection: TopicSection = {
           <strong>Result:</strong> Individual players can win (Luck), but the <strong>Law of Large Numbers</strong> means the casino <strong>never loses in the long run</strong>. It is mathematically impossible for them to lose over millions of trials.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-sample">Example 2: Sample Mean Convergence</h2>
-    <div class="example-box">
+    <h2 id="example-sample" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sample Mean Convergence</h2>
+    
       <h4>Problem: Measuring Error Stability</h4>
       <p>Data: Errors are drawn from a distribution with \(\mu = 0\) and \(\sigma = 10\).</p>
       
@@ -96,9 +85,9 @@ export const lawOfLargeNumbersSection: TopicSection = {
           <strong>Intuition:</strong> This is why we need <strong>Large Datasets</strong> in Deep Learning. If we only have 10 data points, our "Accuracy" is just noise. If we have 1,000,000, the LLN gives us the <strong>Scientific Confidence</strong> that our model is actually working.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt

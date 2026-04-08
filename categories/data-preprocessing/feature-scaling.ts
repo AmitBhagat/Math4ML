@@ -12,14 +12,6 @@ export const featureScalingSection: TopicSection = {
       <p>Imagine trying to compare a person's <strong>Height in meters</strong> (1.8) with their <strong>Annual Income</strong> (80,000). To a computer, 80,000 is objectively "bigger" and "more important" than 1.8. Without scaling, your model will ignore height and obsess over income. <strong>Feature Scaling</strong> ensures every variable gets a fair vote.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#normalization">Normalization (Min-Max)</a>
-      <a href="#standardization">Standardization (Z-Score)</a>
-      <a href="#importance">Why Scale? The Gradient Speedup</a>
-      <a href="#analogy">The "Compare Apples to Oranges" Analogy</a>
-    </div>
-
     <h2 id="normalization">Normalization (Min-Max Scaling)</h2>
     <p>Normalization squashes all your data into a fixed range, usually <strong>[0, 1]</strong>. It's the best choice when your data has a fixed boundary (like image pixels 0-255) and follow a non-Gaussian distribution.</p>
     
@@ -39,7 +31,7 @@ export const featureScalingSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Standardization doesn't just "shrink" the numbers; it translates them into <strong>"Standard Deviation Steps."</strong> Instead of saying "You earn $80k," the model sees "You are 2.5 standard deviations above the average earner." This is much more informative for the math.
+        Standardization doesn't just "shrink" the numbers; it translates them into <strong>"Standard Deviation Steps."</strong> Instead of saying "You earn $80k," the model sees "You are 2.5 standard deviations above the average earner." This is much more informative for the math.
       </div>
     </div>
 
@@ -59,8 +51,8 @@ export const featureScalingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Fair Athlete</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fair Athlete</h2>
+    
       <h4>Scenario: Comparing a Sprinter and a Weightlifter</h4>
       <p>How do you decide who is the "Best Athlete" when one measures performance in <strong>Seconds</strong> (10.0) and the other in <strong>Grams</strong> (200,000)?</p>
       
@@ -86,12 +78,12 @@ export const featureScalingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Scaling is the <strong>Universal Translator</strong> for data. Without it, your model isn't learning logic; it's just following the biggest units. If your model is taking 1,000 epochs to move an inch, check your scales!
+          Scaling is the <strong>Universal Translator</strong> for data. Without it, your model isn't learning logic; it's just following the biggest units. If your model is taking 1,000 epochs to move an inch, check your scales!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Standardization in Action</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Input: Height (m) vs. Income ($)\n[Action] Initializing Scikit-Learn StandardScaler (Z-Score)...\n[Mapping] Row 1: [1.8m, $80k]  -> [ 0.9,  0.8]\n[Mapping] Row 2: [1.6m, $40k]  -> [-1.3, -1.1]\n[Status] Features are now centered at 0 with unit variance.\n[Insight] The model now sees 'Height' and 'Income' as equally influential voters.">
 import numpy as np
 from sklearn.preprocessing import StandardScaler

@@ -12,29 +12,20 @@ export const dbscanSection: TopicSection = {
       <p>k-Means assumes your data is in nice, round balls. But real data is <strong>Messy</strong>. It can be shaped like a <strong>Crescent Moon</strong>, a <strong>Spiral</strong>, or have <strong>Random Noise</strong>. <strong>DBSCAN</strong> (Density-Based Spatial Clustering) is the only algorithm that can find "The Crowd" in a chaotic room.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Reachability & Density</a>
-      <a href="#points">The 3 Types: Core, Border, and Noise</a>
-      <a href="#epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</a>
-      <a href="#shapes">Handling Arbitrary Shapes</a>
-      <a href="#analogy">The "Party at the Club" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Reachability & Density</h2>
     <p>DBSCAN defines a cluster as a <strong>High-Density Region</strong>. If you have enough points packed into a small space, you have a cluster. If a point is by itself in a "Silent" region, it is called <strong>Noise</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Crowd."</strong> 
+        Think of it as <strong>"Finding the Crowd."</strong> 
         It's not about how many groups you want; it's about <strong>how many people are standing close together</strong>. 
         If 5 people are within 1 meter of each other, that's a <strong>Core Group</strong>. Anyone standing on the edge of that group is a <strong>Border Member</strong>. Anyone 10 meters away is <strong>Noise</strong>. 
       </div>
     </div>
 
     <h2 id="algorithm">The DBSCAN Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Density-Based Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -58,7 +49,7 @@ export const dbscanSection: TopicSection = {
           <strong>Outlier Removal:</strong> Any point that cannot reach a Core Point is labeled as <strong>Noise</strong>.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</h2>
     <p><strong>Epsilon (\(\epsilon\)):</strong> The maximum distance between two points to be considered neighbors. 
@@ -82,8 +73,8 @@ export const dbscanSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Viral Outbreak</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Viral Outbreak</h2>
+    
       <h4>Scenario: Identifying a Hotspot in a Crowded Park</h4>
       <p>Imagine 1,000 people in a park. You want to find where the "Parties" are happening without knowing how many groups exist.</p>
       
@@ -109,12 +100,12 @@ export const dbscanSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> DBSCAN is the king of <strong>Anomaly Detection</strong>. It's the only clustering algorithm that has the courage to say: "This point doesn't belong to <strong>any</strong> group." It finds "The Crowd," regardless of its shape.
+          DBSCAN is the king of <strong>Anomaly Detection</strong>. It's the only clustering algorithm that has the courage to say: "This point doesn't belong to <strong>any</strong> group." It finds "The Crowd," regardless of its shape.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Density Reachability</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Parameters: Eps=1.5, MinPts=2\n[Status] Scanning 7 data points...\n[Found] Cluster 0: Dense triplet detected at (1,2)\n[Found] Cluster 1: Dense triplet detected at (10,10)\n[Noise] Point (5,5) marked as Outlier (-1)\n[Assignments] Result: [0, 0, 0, 1, 1, 1, -1]\n[Insight] DBSCAN successfully ignored the lone point without forcing it into a group.">
 import numpy as np
 from sklearn.cluster import DBSCAN

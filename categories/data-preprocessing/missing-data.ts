@@ -12,14 +12,6 @@ export const missingDataSection: TopicSection = {
       <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). <strong>Handling Missing Data</strong> is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#types">The 3 Types of Missingness</a>
-      <a href="#deletion">Deletion Strategies</a>
-      <a href="#imputation">Imputation: Filling the Gaps</a>
-      <a href="#analogy">The "Missing Witness" Analogy</a>
-    </div>
-
     <h2 id="types">The 3 Types of Missingness</h2>
     <p>Not all missing data is created equal. Understanding <strong>Why</strong> it's missing is critical:</p>
     <ul>
@@ -44,7 +36,7 @@ export const missingDataSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Data Surgery."</strong> 
+        Think of it as <strong>"Data Surgery."</strong> 
         If you have a thousand points and one is missing, Deletion is like cutting off an arm to fix a splinter. <strong>Imputation</strong> is like getting a prosthetic. It's not the original part, but it allows the body (your model) to keep functioning. 
       </div>
     </div>
@@ -61,8 +53,8 @@ export const missingDataSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Hole in the Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hole in the Map</h2>
+    
       <h4>Scenario: Predicting House Prices with Missing Features</h4>
       <p>A house listing is missing its 'Number of Bathrooms' feature. We can't let the model crash, so we have to fill the hole.</p>
       
@@ -88,12 +80,12 @@ export const missingDataSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Handling missing data is about <strong>preserving signal</strong> without introducing <strong>hallucinations</strong>. If 50% of a column is missing, don't impute—just delete the column. You can't perform surgery on a ghost.
+          Handling missing data is about <strong>preserving signal</strong> without introducing <strong>hallucinations</strong>. If 50% of a column is missing, don't impute—just delete the column. You can't perform surgery on a ghost.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Imputing Values</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset identified with NaN values in 'Bathrooms' and 'Color'.\n[Median] Filling 'Bathrooms' holes with the middle value...\n[Result] Missing bathroom replaced with: 2.5\n[Mode] Filling 'Color' holes with most frequent value...\n[Result] Missing color replaced with: 'White'\n[Status] Dataset finalized and ready for ML training.">
 import numpy as np
 import pandas as pd

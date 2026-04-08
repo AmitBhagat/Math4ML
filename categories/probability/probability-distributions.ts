@@ -12,18 +12,7 @@ export const probabilityDistributionsSection: TopicSection = {
       <p>A <strong>Probability Distribution</strong> is the "Shape" of a Random Variable. It tells us exactly how likely different outcomes are. In Machine Learning, we almost always assume our data follows some distribution (like the "Bell Curve") to make predictions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</a>
-      <a href="#example-normal">Example 2: Normal (The Bell Curve)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -31,13 +20,13 @@ export const probabilityDistributionsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model <strong>Uncertainty</strong>. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Probability Distribution as a <strong>Heat Map</strong>. 
+        Think of a Probability Distribution as a <strong>Heat Map</strong>. 
         Where the map is "hot" (high probability), outcomes are common. 
         Where the map is "cold," outcomes are rare. 
         In ML, we want to find the parameters of this map that best explain the data we've already seen.
@@ -50,8 +39,8 @@ export const probabilityDistributionsSection: TopicSection = {
       <li><strong>Probability Density Function (PDF)</strong>: For Continuous RVs, \(f(x)\). The total area under the curve must be 1.</li>
     </ul>
 
-    <h2 id="example-bernoulli">Example 1: Bernoulli (Success vs. Failure)</h2>
-    <div class="example-box">
+    <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
+    
       <h4>Problem: Tracking a 1-Trial Experiment</h4>
       <p>A "Success" happens with probability \(p=0.7\). What is the PMF?</p>
       
@@ -72,10 +61,10 @@ export const probabilityDistributionsSection: TopicSection = {
           <strong>Result:</strong> This is the simplest possible distribution. It's the building block for <strong>Binary Classification</strong> models (Cat vs. Not Cat).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-normal">Example 2: Normal (The Bell Curve)</h2>
-    <div class="example-box">
+    <h2 id="example-normal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal (The Bell Curve)</h2>
+    
       <h4>Problem: Capturing Collective Data Distributions</h4>
       <p>Heights are Normally distributed with mean \(\mu = 70\) and standard deviation \(\sigma = 3\). Find the probability that someone is exactly 70 inches tall.</p>
       
@@ -96,9 +85,9 @@ export const probabilityDistributionsSection: TopicSection = {
           <strong>Intuition:</strong> In the Real World, most common errors (noise) result from many tiny independent factors. When added together, they almost always form this Bell Curve. This is why we use <strong>Gaussian Naive Bayes</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt

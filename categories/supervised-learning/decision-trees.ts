@@ -12,22 +12,13 @@ export const decisionTreesSection: TopicSection = {
       <p>A <strong>Decision Tree</strong> is the most intuitive and human-like classification algorithm. It doesn't use math like lines or moats. It just asks a <strong>series of questions</strong>. If you want a model that can explain <strong>Exactly Why</strong> an email was marked as Spam, it's the 1st choice.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The "Best Split"</a>
-      <a href="#entropy">The Chaos Metric: Entropy & Gini</a>
-      <a href="#gain">Information Gain: Reducing Disorder</a>
-      <a href="#overfitting">The Danger: Growing Too Deep</a>
-      <a href="#analogy">The "20 Questions Game" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The "Best Split"</h2>
     <p>A Decision Tree works by <strong>Partitioning</strong> the feature space into buckets. At each step (Node), it picks the feature that "Splits" the data into the <strong>Purest Possible Piles</strong>. The more pure the piles, the easier it is to make a final decision.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Sorting Laundry."</strong> 
+        Think of it as <strong>"Sorting Laundry."</strong> 
         You have a huge pile of white socks and black shirts. 
         Your 1st question: "Is it a sock or a shirt?" 
         If you get this right, you've solved 90% of the problem. That's a <strong>Deep Information Gain</strong> because your piles are now mostly "Pure."
@@ -46,7 +37,7 @@ export const decisionTreesSection: TopicSection = {
     <p><strong>Information Gain (IG)</strong> is the "Value" of a question. It is the change in Entropy before and after the split. The algorithm tries to find the feature that provides the <strong>Max IG</strong> at every node.</p>
 
     <h2 id="overfitting">The Danger: Growing Too Deep</h2>
-    <div class="example-box">
+    
       <h4>What happens when a tree is too tall?</h4>
       <p>If you don't stop a tree from growing, it will keep asking questions until every single data point is in its own "Leaf."</p>
       
@@ -60,7 +51,7 @@ export const decisionTreesSection: TopicSection = {
           <div><strong>The Fix:</strong> <strong>Pruning</strong> (cutting back branches) and <strong>Max-Depth</strong> (limiting the number of questions).</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "20 Questions Game" Analogy</h2>
     <div class="callout success">
@@ -74,7 +65,7 @@ export const decisionTreesSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Decision Tree Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Flowchart Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -98,10 +89,10 @@ export const decisionTreesSection: TopicSection = {
           <strong>Leaf Assignment:</strong> Each final node (leaf) represents the majority class of the data that landed there.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Job Offer Flowchart</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Job Offer Flowchart</h2>
+    
       <h4>Scenario: Should I Accept this Job?</h4>
       <p>Imagine your brain is a series of 'If-Then' switches. That is a Decision Tree.</p>
       
@@ -127,12 +118,12 @@ export const decisionTreesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a <strong>Random Forest</strong>.
+          Decision Trees are <strong>Greedy</strong>. They make the "Best" choice at every step without looking ahead. Sometimes this is short-sighted, which is why we combine hundreds of trees into a <strong>Random Forest</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Logical Splitter</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Growing a tree of depth 2...\n[Root] Top Split Feature: Salary > 100k\n[Importance] Salary: 1.0, Commute: 0.0 (Salary alone perfectly sorted this small dataset!)\n[Decision] For $120k salary: ACCEPT\n[Insight] The tree 'discovered' that salary was the only factor that mattered here.">
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np

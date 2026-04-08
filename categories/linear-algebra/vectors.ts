@@ -12,18 +12,7 @@ export const vectorsSection: TopicSection = {
       <p>A <strong>Vector</strong> is the most fundamental object in modern mathematics. In Machine Learning, we don't see "objects"—we see vectors. An image is a vector of pixels; a house is a vector of features like size and price.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-data">Example 1: Data Representation</a>
-      <a href="#example-navigation">Example 2: Vector Navigation</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Basic Arithmetic</strong>: Summing and multiplying numbers.</li>
@@ -31,24 +20,24 @@ export const vectorsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Why do we care about vectors? Because they allow us to treat <strong>features</strong> as <strong>directions</strong>. If you are predicting house prices, the number of bedrooms is one axis and the square footage is another. A single house then becomes a "location" in this feature space.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a vector as a <strong>Recipe</strong>. The numbers inside tell you exactly how much of each "ingredient" (direction) to mix to reach your destination. If you change one number, you change the entire flavor (data point).
+        Think of a vector as a <strong>Recipe</strong>. The numbers inside tell you exactly how much of each "ingredient" (direction) to mix to reach your destination. If you change one number, you change the entire flavor (data point).
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) in \(\mathbb{R}^n\) is an ordered list of \(n\) real numbers:</p>
     <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
     <p><strong>Vector Addition:</strong> We add vectors component-wise: \(\mathbf{a} + \mathbf{b} = [a_1+b_1, a_2+b_2]^T\).</p>
     <p><strong>Scalar Multiplication:</strong> Scaling a vector grows or shrinks it: \(c\mathbf{v} = [cv_1, cv_2]^T\).</p>
 
-    <h2 id="example-data">Example 1: Data Representation</h2>
-    <div class="example-box">
+    <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
+    
       <h4>Problem: Real Estate Vectorization</h4>
       <p>A house has 3 bedrooms, 2 bathrooms, and is 1500 sq ft. Represent this as a vector \(\mathbf{h}\) and find the vector for a "double-sized" house.</p>
       
@@ -73,10 +62,10 @@ export const vectorsSection: TopicSection = {
           <strong>Result:</strong> We've mathematically represented a physical object. This is "Feature Engineering" in its purest form.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-navigation">Example 2: Vector Navigation</h2>
-    <div class="example-box">
+    <h2 id="example-navigation" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Vector Navigation</h2>
+    
       <h4>Problem: Chaining Movements</h4>
       <p>You walk 3 units North (\(\mathbf{a} = [0, 3]\)) then 4 units East (\(\mathbf{b} = [4, 0]\)). Find your total displacement.</p>
       
@@ -97,9 +86,9 @@ export const vectorsSection: TopicSection = {
           <strong>Intuition:</strong> Addition is like <strong>Step-by-Step Directions</strong>. The total movement is the result of taking every advice in order.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

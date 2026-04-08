@@ -12,15 +12,6 @@ export const pcaSection: TopicSection = {
       <p><strong>PCA</strong> is the most widely used Dimensionality Reduction algorithm. It doesn't delete features; it <strong>Squashes</strong> them into a new set of orthogonal axes that maximize the <strong>Variance</strong>. It's the ultimate "Signal vs. Noise" filter for your data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Covariance & Eigen-decomposition</a>
-      <a href="#variance">The "First" Component: Maximum Variance</a>
-      <a href="#svd">Computational Trick: SVD</a>
-      <a href="#preprocessing">Requirement: Scaling & Mean Centering</a>
-      <a href="#analogy">The "Main Axis" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Covariance & Eigen-decomposition</h2>
     <p>PCA treats the data as a <strong>Cloud</strong>. It calculates the <strong>Covariance Matrix</strong> \(\Sigma\) to see how the features "Move Together." Then, it finds the <strong>Eigenvectors</strong> of that matrix.</p>
     <div class="math-block">$$\Sigma \mathbf{v}_i = \lambda_i \mathbf{v}_i$$</div>
@@ -32,7 +23,7 @@ export const pcaSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Axis of Change."</strong> 
+        Think of it as <strong>"Finding the Axis of Change."</strong> 
         Imagine a <strong>Rugby Ball</strong> floating in the air. 
         It has 3 dimensions (Length, Width, Height). 
         The <strong>1st Principal Component (PC1)</strong> is the <strong>Long Axis</strong>. 
@@ -62,7 +53,7 @@ export const pcaSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The PCA Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Variance Extraction Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -86,10 +77,10 @@ export const pcaSection: TopicSection = {
           <strong>Projection:</strong> Multiply the original data by these eigenvectors to project it into the new, lower-dimensional space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Most Informative Angle</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Most Informative Angle</h2>
+    
       <h4>Scenario: Photographing a 100-Armed Alien</h4>
       <p>Imagine you meet an Alien with 100 arms and 4 heads. You only have a 2D piece of paper to draw it. Where do you stand?</p>
       
@@ -115,12 +106,12 @@ export const pcaSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> PCA is <strong>Lossy</strong>. You throw away the "Thin" dimensions to save space. Usually, keeping the top 2 or 3 components is enough to visualize clusters that were invisible in 100D.
+          PCA is <strong>Lossy</strong>. You throw away the "Thin" dimensions to save space. Usually, keeping the top 2 or 3 components is enough to visualize clusters that were invisible in 100D.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Variance Extraction</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Scaling dataset for Mean=0, Std=1...\n[SVD] Calculating Principal Components...\n[Result] PC1 captures 95.2% of the variance (The Signal)\n[Result] PC2 captures 4.8% of the variance (The Shape)\n[Action] Projected high-dim data into 2D space.\n[Insight] Throwing away PC3 and PC4 results in ~0% loss of useful information.">
 import numpy as np
 from sklearn.decomposition import PCA

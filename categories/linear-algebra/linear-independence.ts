@@ -12,16 +12,6 @@ export const linearIndependenceSection: TopicSection = {
       <p>Linear Independence is a way to measure the <strong>uniqueness</strong> of information. In Machine Learning, if two features are linearly dependent, you have redundant info that could slow down your model or cause errors.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#definition">1. The Definition</a>
-      <a href="#intuition">2. The "No Help" Intuition</a>
-      <a href="#example-redundancy">Example 1: Redundant Feature Check</a>
-      <a href="#example-zero">Example 2: The Zero Solution Test</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
     <h2 id="definition">1. The Definition</h2>
     <p>A set of vectors \(\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_n\}\) is <strong>Linearly Independent</strong> if the only solution to the following equation is all zeros (\(c_i = 0\)):</p>
     <div class="math-block">$$c_1\mathbf{v}_1 + c_2\mathbf{v}_2 + \dots + c_n\mathbf{v}_n = \mathbf{0}$$</div>
@@ -30,15 +20,15 @@ export const linearIndependenceSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of vectors as <strong>Speakers</strong> in a debate. 
+        Think of vectors as <strong>Speakers</strong> in a debate. 
         If Speaker A says something new, they are independent. 
         But if Speaker B just repeats exactly what Speaker A said (or a mix of A and C), then Speaker B is <strong>Linearly Dependent</strong>. 
         They add no "news" to the conversation.
       </div>
     </div>
 
-    <h2 id="example-redundancy">Example 1: Redundant Feature Check</h2>
-    <div class="example-box">
+    <h2 id="example-redundancy" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Redundant Feature Check</h2>
+    
       <h4>Problem: Identifying Noise</h4>
       <p>Are \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) independent?</p>
       
@@ -63,10 +53,10 @@ export const linearIndependenceSection: TopicSection = {
           <strong>Result:</strong> Dependent. They are just the same line. In ML, this could be like having "Temperature in Celsius" and "Temperature in Kelvin" as two separate features—they are mathematically redundant.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-zero">Example 2: The Zero Solution Test</h2>
-    <div class="example-box">
+    <h2 id="example-zero" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Zero Solution Test</h2>
+    
       <h4>Problem: Checking ℝ² Independence</h4>
       <p>Are \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) independent?</p>
       
@@ -91,9 +81,9 @@ export const linearIndependenceSection: TopicSection = {
           <strong>Result:</strong> YES. Independent. They point in completely different directions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

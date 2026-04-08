@@ -12,23 +12,13 @@ export const determinantsSection: TopicSection = {
       <p>The <strong>Determinant</strong> \(\det(A)\) is a scalar value that tells you how a linear transformation changes the <strong>volume</strong> of space. It’s the "Scale Factor" of the matrix.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#rules">2. Properties & Meaning</a>
-      <a href="#example-area">Example 1: Area Scaling of a Unit Square</a>
-      <a href="#example-singularity">Example 2: Singularity Check (Det = 0)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine a unit square on a grid (area = 1). When you multiply it by a matrix, it might stretch into a larger rectangle or rotate into a diamond. The <strong>Determinant</strong> is the area of that new shape. If \(\det = 2\), the space doubled; if \(\det = 0\), the space was squashed into a flat line.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Determinant as a <strong>"Dimension Watchdog."</strong> 
+        Think of the Determinant as a <strong>"Dimension Watchdog."</strong> 
         If the determinant is zero, your matrix has "deleted" a dimension. 
         It’s like turning a 3D sphere into a 2D pancake—you can't go back! 
         That’s why matrices with zero determinant have no inverse (Singular Matrices).
@@ -42,8 +32,8 @@ export const determinantsSection: TopicSection = {
       <li>\(\det(A) = 0\): Matrix is non-invertible (Singular).</li>
     </ul>
 
-    <h2 id="example-area">Example 1: Area Scaling of a Unit Square</h2>
-    <div class="example-box">
+    <h2 id="example-area" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Area Scaling of a Unit Square</h2>
+    
       <h4>Problem: Finding the Scale Factor</h4>
       <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the determinant and interpret it.</p>
       
@@ -64,10 +54,10 @@ export const determinantsSection: TopicSection = {
           <strong>Result:</strong> Any shape you draw in that space will have exactly <strong>6 times</strong> the area after the transformation.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-singularity">Example 2: Singularity Check (Det = 0)</h2>
-    <div class="example-box">
+    <h2 id="example-singularity" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Singularity Check (Det = 0)</h2>
+    
       <h4>Problem: Is this "Undoable"?</h4>
       <p>Check if \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \end{bmatrix}\) has an inverse.</p>
       
@@ -88,9 +78,9 @@ export const determinantsSection: TopicSection = {
           <strong>Result:</strong> \(\det = 0\). This matrix squashed the 2D plane into a 1D line. No inverse exists. This is why <strong>full rank</strong> data is critical in ML.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

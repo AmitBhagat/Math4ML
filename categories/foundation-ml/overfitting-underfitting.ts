@@ -12,21 +12,13 @@ export const overfittingUnderfittingSection: TopicSection = {
       <p>A perfect Machine Learning model is like <strong>Goldilocks</strong>: not too complex, not too simple. <strong>Overfitting</strong> is when the model tries too hard (Memorization). <strong>Underfitting</strong> is when it doesn't try hard enough (Ignorance).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics of Complexity</a>
-      <a href="#overfitting">Overfitting: The Memorizer</a>
-      <a href="#underfitting">Underfitting: The Simpleton</a>
-      <a href="#analogy">The "School Exam" Analogy</a>
-    </div>
-
     <h2 id="theory">The Mechanics of Complexity</h2>
     <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
+        Think of it as <strong>"Connecting the Dots."</strong> 
         If you have 10 data points that roughly form a line: 
         <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
         <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
@@ -34,8 +26,8 @@ export const overfittingUnderfittingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Three History Students</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
+    
       <h4>Scenario: Studying for a 1,000-page History Exam using only 5 Practice Questions</h4>
       <p>Imagine three students trying different strategies to pass the final exam. Their results on the real test determine their "Bias" and "Variance."</p>
       
@@ -61,12 +53,12 @@ export const overfittingUnderfittingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
+          In ML, the "History Exam" is your <strong>Test Set</strong>. If you perform perfectly on the practice questions but fail the exam, you are <strong>Overfitting</strong>. If you fail both, you are <strong>Underfitting</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Visualizing the Pitfalls</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Fitting models to a curved Sine-Wave dataset...\n[Underfit] Linear: Struggles to even touch the trend. (MSE: 0.45)\n[Overfit] Degree-15: Chases every single noise point. (MSE-Train: 0.01, MSE-Test: 12.5)\n[Balanced] Degree-3: Smoothly follows the curve. (MSE-Test: 0.08)\n\n[Insight] Complexity is a power tool. Use too little and you can't build. Use too much and you destroy the project.">
 import numpy as np
 from sklearn.pipeline import make_pipeline

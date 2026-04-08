@@ -12,15 +12,6 @@ export const rocCurveSection: TopicSection = {
       <p>A classifier doesn't just say "Yes" or "No." It gives a <strong>Probability</strong> (e.g., 0.72). You choose where to draw the line. <strong>ROC (Receiver Operating Characteristic)</strong> curves show us the <strong>Trade-off</strong> between capturing more positives and crying wolf more often as we slide that line from 0 to 1.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: TPR vs. FPR</a>
-      <a href="#math">The Axis: Sensitivity & 1-Specificity</a>
-      <a href="#threshold">The Threshold Slide</a>
-      <a href="#optimal">The "Knee" of the Curve</a>
-      <a href="#analogy">The "Security Door" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: TPR vs. FPR</h2>
     <p>The ROC curve plots two things against each other:</p>
     <ul>
@@ -31,7 +22,7 @@ export const rocCurveSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Trade-off Map."</strong> 
+        Think of it as <strong>"The Trade-off Map."</strong> 
         Every point on the curve represents a different <strong>Threshold</strong> (e.g., "Only flag if probability > 0.3" vs. "Only flag if > 0.9"). 
         If you are <strong>Lenient</strong> (Low Threshold), you get 100% Recall but also 100% False Positives. 
         If you are <strong>Strict</strong> (High Threshold), you get 0% Recall but also 0% False Positives.
@@ -57,7 +48,7 @@ export const rocCurveSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The ROC Curve Plotting Process</h2>
-    <div class="example-box">
+    
       <h4>The Threshold Sweep</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -81,10 +72,10 @@ export const rocCurveSection: TopicSection = {
           <strong>Plotting:</strong> Map every (FPR, TPR) pair to a dot on the grid and connect them to form the curve.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Confidence Slider</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Confidence Slider</h2>
+    
       <h4>Scenario: Tuning an Airport Metal Detector Knob</h4>
       <p>Imagine you are a security guard with a sensitivity knob. You need to find a setting that catches dangerous objects (Positives) but doesn't beep at every belt buckle (Negatives).</p>
       
@@ -110,12 +101,12 @@ export const rocCurveSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> The ROC Curve shows the "Capability" of your model regardless of the classification threshold. If your curve is a straight diagonal line, your model is basically a coin flip. The closer the curve peaks toward the <strong>top-left corner</strong>, the better your "Knob" is at distinguishing signal from noise.
+          The ROC Curve shows the "Capability" of your model regardless of the classification threshold. If your curve is a straight diagonal line, your model is basically a coin flip. The closer the curve peaks toward the <strong>top-left corner</strong>, the better your "Knob" is at distinguishing signal from noise.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Sweeping the Threshold</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating 10 probability scores against ground truth...\n[Action] Sweeping Threshold from 1.0 down to 0.0...\n[Threshold 0.82] TPR: 0.25 | FPR: 0.00 (Safe / Picky)\n[Threshold 0.45] TPR: 0.75 | FPR: 0.20 (Balanced)\n[Threshold 0.12] TPR: 1.00 | FPR: 1.00 (Aggressive / Messy)\n[Result] ROC points calculated for optimization.\n[Insight] The 'Sweet Spot' is where we find the max TPR for the min FPR.">
 import numpy as np
 from sklearn.metrics import roc_curve

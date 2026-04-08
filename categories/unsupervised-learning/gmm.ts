@@ -12,15 +12,6 @@ export const gmmSection: TopicSection = {
       <p>k-Means is "Hard"—every point belongs 100% to one cluster or 0% to another. <strong>Gaussian Mixture Models (GMM)</strong> are "Soft." They don't just find centers; they find <strong>Overlapping Distribution Clouds</strong>. A point can be 70% Cluster A and 30% Cluster B. It's a more realistic way to model the <strong>Uncertainty</strong> of data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Probability Density</a>
-      <a href="#soft">Soft Clustering: Membership Probability</a>
-      <a href="#em">The Algorithm: Expectation-Maximization (EM)</a>
-      <a href="#covariance">Covariance Types: Spherical, Tied, Diagonal, Full</a>
-      <a href="#analogy">The "Overlapping Fog" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Probability Density</h2>
     <p>GMM assumes that the data is generated from a mixture of <strong>Normal (Gaussian) Distributions</strong>. For every point $x$, we calculate the probability that it belongs to each of the $K$ Gaussians:</p>
     <div class="math-block">$$P(x) = \sum_{k=1}^K \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)$$</div>
@@ -35,14 +26,14 @@ export const gmmSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Guessing Game."</strong> 
+        Think of it as <strong>"The Guessing Game."</strong> 
         Instead of a proctor pointing a finger, imagine the room is filled with <strong>3 Smells</strong> (Coffee, Pizza, and Flowers). 
         You stand in a spot. You smell 80% Coffee and 20% Pizza. You belong mostly to the "Coffee Cluster," but you acknowledge the "Pizza influence." 
       </div>
     </div>
 
     <h2 id="algorithm">The GMM Algorithm (Expectation-Maximization)</h2>
-    <div class="example-box">
+    
       <h4>The Probability Update Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -66,7 +57,7 @@ export const gmmSection: TopicSection = {
           <strong>Convergence:</strong> Stop when the total probability stops improving significantly.
         </div>
       </div>
-    </div>
+    
 
     <h2 id="covariance">Covariance Types</h2>
     <p>GMM's superpower is its flexibility. It can find <strong>Oblong (Elliptical)</strong> clusters. 
@@ -84,8 +75,8 @@ export const gmmSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Overlapping Fog</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Overlapping Fog</h2>
+    
       <h4>Scenario: Walking through a room with mixed smells</h4>
       <p>Imagine a coffee shop where the smell of Fresh Coffee (Cloud A) and Fresh Cinnamon Rolls (Cloud B) are drifting through the air.</p>
       
@@ -111,12 +102,12 @@ export const gmmSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> GMM is <strong>Generative</strong>. It doesn't just categorize; it tries to learn the <strong>Template</strong> for how each group was created. This allows it to handle overlapping groups and "uncertain" data points that would confuse k-Means.
+          GMM is <strong>Generative</strong>. It doesn't just categorize; it tries to learn the <strong>Template</strong> for how each group was created. This allows it to handle overlapping groups and "uncertain" data points that would confuse k-Means.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Soft Probability Mapping</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Action] Initializing 2 Gaussian Segments (EM Loop)...\n[Status] Calculating responsibilities for the 'Smell' clouds...\n[Converged] Mean A: (0.1, 0.1) | Mean B: (2.9, 2.9)\n[Test Point] (1.5, 1.5) -> Probability Map:\n- Coffee (Cloud 0): 72.1%\n- Cinnamon (Cloud 1): 27.9%\n[Insight] Unlike k-Means, we captured the uncertainty of the overlap.">
 import numpy as np
 from sklearn.mixture import GaussianMixture

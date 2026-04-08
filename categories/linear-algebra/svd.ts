@@ -12,23 +12,13 @@ export const singularValueDecompositionSection: TopicSection = {
       <p>SVD is the <strong>Swiss Army Knife</strong> of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> matrix—even the "messy" rectangular ones. It is the core algorithm behind image compression and recommendation systems.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#formula">2. The SVD Formula</a>
-      <a href="#example-reconstruction">Example 1: Rotation-Scaling-Rotation Breakdown</a>
-      <a href="#example-compression">Example 2: Image Compression (Rank-k)</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Every linear transformation can be broken down into three simple steps: Rotate, Stretch, Rotate. SVD allows us to take a "chaos" matrix and find the core directions that contain all the information. In Machine Learning, this helps us find the "structure" in noisy data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a lump of <strong>Pizza Dough</strong>. 
+        Think of a lump of <strong>Pizza Dough</strong>. 
         SVD says you can turn it into any final pizza in 3 steps: 
         1. <strong>Rotate</strong> the dough to find the best axis, 
         2. <strong>Stretch</strong> it into a circle (Scaling), 
@@ -45,8 +35,8 @@ export const singularValueDecompositionSection: TopicSection = {
       <li><strong>Vᵀ:</strong> Right Singular Vectors (Rotates the input space).</li>
     </ul>
 
-    <h2 id="example-reconstruction">Example 1: Rotation-Scaling-Rotation Breakdown</h2>
-    <div class="example-box">
+    <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
+    
       <h4>Problem: Reconstructing A = [[1, 0], [0, 2]]</h4>
       
       <div class="algorithm-steps">
@@ -66,10 +56,10 @@ export const singularValueDecompositionSection: TopicSection = {
           <strong>Result:</strong> SVD found the "most important" axis is \([0, 1]\) with a strength of 2. It automatically sorts information by power.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-compression">Example 2: Image Compression (Rank-k)</h2>
-    <div class="example-box">
+    <h2 id="example-compression" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Image Compression (Rank-k)</h2>
+    
       <h4>Problem: Reducing 2D Noise</h4>
       <p>Assume your matrix \(A\) has singular values \(\Sigma = [100, 1]\). Reconstruct it with only the top value.</p>
       
@@ -90,9 +80,9 @@ export const singularValueDecompositionSection: TopicSection = {
           <strong>Result:</strong> We kept <strong>99%</strong> of the information using only <strong>half</strong> the storage space. This is how high-res photos are transmitted over slow WiFi.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.linalg import svd

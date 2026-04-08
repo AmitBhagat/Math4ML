@@ -12,15 +12,6 @@ export const transformersSection: TopicSection = {
       <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with <strong>Attention</strong>—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the <strong>Parallelization</strong> of intelligence.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Query, Key, and Value</a>
-      <a href="#attention">Self-Attention Mechanism</a>
-      <a href="#multi-head">Multi-Head Attention: Diverse Perspectives</a>
-      <a href="#positional">Positional Encodings: The Only Order</a>
-      <a href="#analogy">The "Spotlight" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Query, Key, and Value</h2>
     <p>Transformers treat information like a <strong>Search Engine (Database Retrieve)</strong>. Each word creates three vectors:</p>
     <ul>
@@ -32,7 +23,7 @@ export const transformersSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Context."</strong> 
+        Think of it as <strong>"Finding the Context."</strong> 
         In the sentence "The <strong>Bank</strong> was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
         In "The <strong>Bank</strong> of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
         Attention is the <strong>Exact Mathematical Calculation</strong> of that relationship.
@@ -51,8 +42,8 @@ export const transformersSection: TopicSection = {
     One might focus on <strong>Entity Relationships</strong>. 
     By combining these perspectives, the model builds a <strong>High-Resolution Understanding</strong> of the sequence.</p>
 
-    <h2 id="example">Illustrated Example: The Stage Spotlight</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Stage Spotlight</h2>
+    
       <h4>Scenario: A 20-Actor Play on a Total Blackout Stage</h4>
       <p>Imagine every actor on stage represents a word. How do they coordinate their performance if they can't see the whole script?</p>
       
@@ -78,12 +69,12 @@ export const transformersSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Transformers are the ultimate <strong>Parallel Processors</strong>. They don't have "Short-Term Memory"—they have <strong>Instant Vision</strong>. They see the whole sequence as a single structure, not a ticking clock.
+          Transformers are the ultimate <strong>Parallel Processors</strong>. They don't have "Short-Term Memory"—they have <strong>Instant Vision</strong>. They see the whole sequence as a single structure, not a ticking clock.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Scaled Dot-Product Attention</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Action] Calculating Context for 3 Words...\n[Attention Scores] Compatibility Matrix Calculated.\n[Softmax] Row 0: Word 0 paying 92% attention to Word 2!\n[Result] Input meanings successfully 'blended' based on their context.\n[Parallel] All word relationships resolved in a single matrix multiplication.">
 import numpy as np
 

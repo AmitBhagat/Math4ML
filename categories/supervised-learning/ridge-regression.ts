@@ -12,14 +12,6 @@ export const ridgeRegressionSection: TopicSection = {
       <p>Sometimes, Linear Regression is <strong>too eager to please</strong>. If you have noise in your data, the model might try to follow it so closely that it overfits. <strong>Ridge Regression</strong> is like putting a "Leash" on the model's weights to keep them under control.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The L2 Penalty</a>
-      <a href="#benefit">The Variance Reduction</a>
-      <a href="#math">The Ridge Loss Function</a>
-      <a href="#analogy">The "Elastic Anchor" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The L2 Penalty</h2>
     <p>In standard OLS, we just minimize the error. In Ridge, we minimize the error <strong>PLUS</strong> a penalty for how large our weights are. We want the model to be accurate, but we also want the weights (\(w\)) to be small.</p>
     <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum w_j^2$$</div>
@@ -30,7 +22,7 @@ export const ridgeRegressionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Shrinkage Effect."</strong> 
+        Think of it as <strong>"The Shrinkage Effect."</strong> 
         Ridge doesn't delete features; it just <strong>muffles</strong> them. It says: "You can use this feature, but don't rely too much on it." It forces the model to spread its "trust" across all features rather than betting everything on one.
       </div>
     </div>
@@ -57,7 +49,7 @@ export const ridgeRegressionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Ridge Regression Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Mathematical Process</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -81,10 +73,10 @@ export const ridgeRegressionSection: TopicSection = {
           <strong>Shrinkage:</strong> Observe that weights are pulled toward zero, effectively stabilizing the model against collinearity.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Stable Tent Pole</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Stable Tent Pole</h2>
+    
       <h4>Scenario: Predicting Scores with Noisy Features</h4>
       <p>Imagine your regression line is a tent pole trying to stay upright in a storm (Noisy data).</p>
       
@@ -110,12 +102,12 @@ export const ridgeRegressionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Ridge is a <strong>Variance Killer</strong>. Use it when you have many features that might be related to each other. It "Muffles" the noise so the signal can shine through.
+          Ridge is a <strong>Variance Killer</strong>. Use it when you have many features that might be related to each other. It "Muffles" the noise so the signal can shine through.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Muffling the Noise</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Model trying to learn with alpha=10.0 (Strong Lease)\n[Features] 1: Hours Studied, 2: Random Noisy Feature\n[Result] Weights: [2.5, 0.05]\n[Insight] Notice how the Noisy Feature was 'shrunk' to almost zero!\n[Stability] The model is now 40% more stable on new test data.">
 import numpy as np
 from sklearn.linear_model import Ridge

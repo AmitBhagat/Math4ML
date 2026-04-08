@@ -12,22 +12,13 @@ export const umapSection: TopicSection = {
       <p>If t-SNE is the current standard, <strong>UMAP</strong> is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Simplicial Complexes</a>
-      <a href="#manifolds"> Riemannian Manifolds</a>
-      <a href="#global-local">Global vs. Local Structure</a>
-      <a href="#performance">Performance: Speed and Efficiency</a>
-      <a href="#analogy">The "Stretchy Net" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Simplicial Complexes</h2>
     <p>UMAP is built on <strong>Topological Data Analysis (TDA)</strong>. It assumes the data points are samples from a <strong>Manifold</strong> (a smooth surface) that is <strong>Locally Connected</strong>. It builds a "Fuzzy Simplicial Complex" (a complex graph-like structure) of your data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots."</strong> 
+        Think of it as <strong>"Connecting the Dots."</strong> 
         Imagine your data points are <strong>Stars in a Galaxy</strong>. 
         <strong>Topology</strong> isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
         UMAP builds a mathematical constellation (the Complex) and then tries to <strong>Flatten it</strong> onto a 2D piece of paper while keeping the "Geometric Essence" intact. 
@@ -54,7 +45,7 @@ export const umapSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The UMAP Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Topological Flattening</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -78,10 +69,10 @@ export const umapSection: TopicSection = {
           <strong>Layout Refinement:</strong> Use Stochastic Gradient Descent to minimize the Cross-Entropy between the High-D and Low-D graphs.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Topological Net</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Topological Net</h2>
+    
       <h4>Scenario: Unrolling a Crumpled Map of the Stars</h4>
       <p>Imagine your data is a crumpled ball of paper with a drawing on it. You want to see the drawing without tearing the paper or losing the relative distances between cities.</p>
       
@@ -107,12 +98,12 @@ export const umapSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> UMAP is the modern gold standard. It's 10-100x faster than t-SNE, scales to millions of data points, and is mathematically "Cleaner." If you're looking for clusters in 100,000 dimensions, start with UMAP.
+          UMAP is the modern gold standard. It's 10-100x faster than t-SNE, scales to millions of data points, and is mathematically "Cleaner." If you're looking for clusters in 100,000 dimensions, start with UMAP.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: High-Speed Manifold</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Constructing Fuzzy Simplicial Complex (n_neighbors=15)...\n[Action] Initializing Spectral Embedding for global stability...\n[Optimization] SGD Layout Refinement (1.2 seconds total)...\n[Result] 64D Digits dataset compressed to a 2D Topological Map.\n[Discovery] Found 10 distinct 'islands' representing digits 0-9.">
 import umap
 from sklearn.datasets import load_digits

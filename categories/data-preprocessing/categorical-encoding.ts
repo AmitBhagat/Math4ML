@@ -12,14 +12,6 @@ export const categoricalEncodingSection: TopicSection = {
       <p>Computers don't know what "London," "Berlin," or "Paris" mean. They only know <strong>Numbers</strong>. To teach them about categories, we have to translate words into a mathematical language that doesn't imply a false order or weight. <strong>Categorical Encoding</strong> is that translator.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#label">Label Encoding: The Integer Map</a>
-      <a href="#onehot">One-Hot Encoding: The Binary Vector</a>
-      <a href="#trap">The Dummy Variable Trap</a>
-      <a href="#analogy">The "Traffic Light" Analogy</a>
-    </div>
-
     <h2 id="label">Label Encoding</h2>
     <p>Label Encoding maps each category to a unique integer (e.g., Red=0, Green=1, Blue=2). 
     <strong>The Gotcha:</strong> This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
@@ -31,7 +23,7 @@ export const categoricalEncodingSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> One-Hot Encoding is like <strong>"Voting Panels."</strong> 
+        One-Hot Encoding is like <strong>"Voting Panels."</strong> 
         Instead of a single dial, you have a row of buttons. If you press the "Berlin" button, all other buttons pop up. It's the safest way to encode nominal data without introducing bias.
       </div>
     </div>
@@ -51,8 +43,8 @@ export const categoricalEncodingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Label Translator</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Label Translator</h2>
+    
       <h4>Scenario: Teaching a Model about Fruit</h4>
       <p>How do we represent 'Apple', 'Banana', and 'Cherry' without making the computer think one is "Greater" than the other? A computer sees integers as having magnitude (2 > 1).</p>
       
@@ -78,12 +70,12 @@ export const categoricalEncodingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Always use <strong>One-Hot</strong> for nominal data (Categories with no order like Cities or Colors). Save <strong>Label Encoding</strong> for ordinal data where the order actually matters (like "Small", "Medium", "Large").
+          Always use <strong>One-Hot</strong> for nominal data (Categories with no order like Cities or Colors). Save <strong>Label Encoding</strong> for ordinal data where the order actually matters (like "Small", "Medium", "Large").
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: One-Hot vs. Label Encoding</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: 4 nominal categories (Cities)\n[Label] Running LabelEncoder: {'Berlin':0, 'London':1, 'Paris':2}\n[OHE] Running get_dummies (One-Hot Encoding)...\n[Mapping] Row 0: 'London' -> [0, 1, 0] (as binary vector)\n[Insight] One-Hot encoding added 2 new features to eliminate false ordering.\n[Efficiency] Using 'drop_first=True' to avoid the Dummy Variable Trap.">
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder

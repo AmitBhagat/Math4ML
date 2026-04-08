@@ -12,22 +12,13 @@ export const knnSection: TopicSection = {
       <p><strong>k-Nearest Neighbors (KNN)</strong> is the "Copycat" of Machine Learning. It doesn't build a model or learn any weights; it just <strong>remembers</strong> the training data. When a new point arrives, it looks at its closest neighbors to see what they are. It's the ultimate implementation of the saying: "Show me who your friends are, and I'll tell you who you are."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Distance Metric</a>
-      <a href="#metrics">Common Distances: Euclidean, Manhattan, Minkowski</a>
-      <a href="#k-selection">Selecting 'k': Underfitting vs. Overfitting</a>
-      <a href="#curse">The "Curse of Dimensionality"</a>
-      <a href="#analogy">The "Neighborhood Property Value" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Distance Metric</h2>
     <p>KNN is a <strong>Non-Parametric</strong> algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Voting by Proximity."</strong> 
+        Think of it as <strong>"Voting by Proximity."</strong> 
         It's like moving to a new city and trying to figure out which political party to join. 
         You don't read the manifesto (Parameters); you just ask the <strong>3 nearest neighbors</strong> whom they voted for. If 2 voted for Party A, you join Party A. 
         <strong>KNN</strong> is purely local—it only cares about what's physically around it.
@@ -43,7 +34,7 @@ export const knnSection: TopicSection = {
     </ul>
 
     <h2 id="k-selection">Selecting 'k': Underfitting vs. Overfitting</h2>
-    <div class="example-box">
+    
       <h4>The Goldilocks Problem for K</h4>
       
       <div class="algorithm-steps">
@@ -60,7 +51,7 @@ export const knnSection: TopicSection = {
           <div><strong>The Fix:</strong> Usually, use an <strong>Odd Number</strong> for $k$ to avoid ties. Use <strong>Cross-Validation</strong> to find the "Sweet Spot" (usually around 3, 5, or 7).</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="curse">The "Curse of Dimensionality"</h2>
     <p><strong>The Gotcha:</strong> KNN <strong>dies</strong> in high dimensions. Why? Because in 1,000-dimensional space, everything is "Far Away" from everything else. The concept of "Nearest" becomes meaningless because the volume of the space grows exponentially faster than the number of points.</p>
@@ -77,7 +68,7 @@ export const knnSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The KNN Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Social Voter Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -101,10 +92,10 @@ export const knnSection: TopicSection = {
           <strong>Classify:</strong> Assign the label that has the <strong>majority vote</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Neighborhood Voter</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Neighborhood Voter</h2>
+    
       <h4>Scenario: Predicting if a new Movie is 'Action' or 'Romance'</h4>
       <p>Imagine your movies are plotted on a map based on how many Explosions vs. Kisses they have.</p>
       
@@ -130,12 +121,12 @@ export const knnSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> KNN is <strong>Memory-Heavy but Calculation-Light</strong> during training. It doesn't "Learn" a concept of what an action movie is; it just looks at what's nearby. This makes it very fast to update with new data!
+          KNN is <strong>Memory-Heavy but Calculation-Light</strong> during training. It doesn't "Learn" a concept of what an action movie is; it just looks at what's nearby. This makes it very fast to update with new data!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Consultation</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Query] New Movie (8 Action, 3 Romance)\n[Computation] Calculating distances to 4 neighbors...\n[Finding] Top 3 neighbors: ['Action', 'Action', 'Romance']\n[Result] Majority Vote: Action\n[Insight] KNN correctly identified the cluster despite 1 outlier neighbor!">
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier

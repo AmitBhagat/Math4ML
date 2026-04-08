@@ -12,18 +12,7 @@ export const randomVariablesSection: TopicSection = {
       <p>A <strong>Random Variable</strong> (RV) is the bridge between actual physical events (like flipping a coin) and the world of numbers. In Machine Learning, every data point is a realization of some underlying random variable.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-coin">Example 1: Discrete (Coin Flips)</a>
-      <a href="#example-wait">Example 2: Continuous (Wait Times)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Sample Space</strong>: The set of all possible outcomes.</li>
@@ -31,13 +20,13 @@ export const randomVariablesSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Math doesn't like "Heads" or "Tails." It likes 0s and 1s. A Random Variable is the "Translator" that takes an outcome from the messy real world and turns it into a number we can actually perform math on. Without them, we couldn't calculate averages, variances, or train any model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Random Variable as a <strong>Scorecard</strong>. 
+        Think of a Random Variable as a <strong>Scorecard</strong>. 
         The experiment happens behind a curtain (e.g., a customer buys a product). 
         The Random Variable is the number on the scorecard (e.g., the price they paid). 
         Different customers (outcomes) result in different scores.
@@ -51,8 +40,8 @@ export const randomVariablesSection: TopicSection = {
       <li><strong>Continuous:</strong> Outcomes you can measure (e.g., height, time, temperature).</li>
     </ul>
 
-    <h2 id="example-coin">Example 1: Discrete (Coin Flips)</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
+    
       <h4>Problem: Mapping Binary Outcomes</h4>
       <p>You flip a coin 3 times. Let \(X\) be the number of Heads. Find the values \(X\) can take.</p>
       
@@ -77,10 +66,10 @@ export const randomVariablesSection: TopicSection = {
           <strong>Result:</strong> We've successfully converted 8 abstract outcomes into a simple set of numbers. This is the first step toward calculating the "Average" number of heads.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-wait">Example 2: Continuous (Wait Times)</h2>
-    <div class="example-box">
+    <h2 id="example-wait" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Continuous (Wait Times)</h2>
+    
       <h4>Problem: Tracking Continuous Events</h4>
       <p>Let \(Y\) be the time (in minutes) you wait for a bus. What values can \(Y\) take?</p>
       
@@ -101,9 +90,9 @@ export const randomVariablesSection: TopicSection = {
           <strong>Intuition:</strong> Unlike the coin flip, we can't list every possible wait time. This makes it a <strong>Continuous Random Variable</strong>, which we handle using Probability Density Functions (PDFs) instead of simple lists.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,22 +12,13 @@ export const architecturesIntroSection: TopicSection = {
       <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an <strong>Image Model</strong> needs layers that "See," and a <strong>Speech Model</strong> needs layers that "Listen."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Design Principles</a>
-      <a href="#inductive-bias">Inductive Bias: The Architectural Assumption</a>
-      <a href="#landscape">The Modern Landscape: CNN, RNN, Transformers</a>
-      <a href="#connectivity">Density vs. Sparsity</a>
-      <a href="#analogy">The "Blueprints of Intelligence" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Design Principles</h2>
     <p>Architectural design is about <strong>Efficiency</strong>. In a fully-connected MLP, every neuron listens to everyone else. This is <strong>Too Much Information</strong> for an image with 1,000,000 pixels. We design architectures to <strong>Focus</strong> the network's attention on what matters.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Optimizing the Wiring."</strong> 
+        Think of it as <strong>"Optimizing the Wiring."</strong> 
         If you want to understand a <strong>Sentence</strong>, you need wires that carry meaning through <strong>Time</strong>. (RNN). 
         If you want to recognize a <strong>Face</strong>, you need wires that look at <strong>Space</strong>. (CNN). 
         The architecture is the <strong>Hardcoded Strategy</strong> for solving a specific domain.
@@ -43,7 +34,7 @@ export const architecturesIntroSection: TopicSection = {
     </ul>
 
     <h2 id="landscape">The Modern Landscape</h2>
-    <div class="example-box">
+    
       <h4>Types of Bodies:</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -63,10 +54,10 @@ export const architecturesIntroSection: TopicSection = {
           <div><strong>Transformers:</strong> For everything. Specializes in <strong>Relationships</strong> and context via "Attention."</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Intelligence Factory</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Intelligence Factory</h2>
+    
       <h4>Scenario: Organizing your Labor Force for Big Data</h4>
       <p>Imagine your neurons are workers. How you arrange them determines their specialty and efficiency.</p>
       
@@ -92,12 +83,12 @@ export const architecturesIntroSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Architecture is <strong>Inductive Bias</strong>. It's the assumptions we "Hardwire" into the network to help it see the world the way we do. Without it, the model would drown in raw data.
+          Architecture is <strong>Inductive Bias</strong>. It's the assumptions we "Hardwire" into the network to help it see the world the way we do. Without it, the model would drown in raw data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Parameter Efficiency</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Dense Configuration] Input: 224x224 (50,176 pixels) -> 1 Output\n[Local Configuration] Filter Size: 3x3 (9 pixels)\n[Result] Dense Params: 50,176 vs. CNN Params: 9\n[Efficiency] CNN uses 99.98% fewer parameters for the same feature detection!\n[Insight] This is why you can't train a deep MLP on raw images.">
 import numpy as np
 

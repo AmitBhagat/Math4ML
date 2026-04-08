@@ -12,16 +12,6 @@ export const logicSection: TopicSection = {
       <p>In the field of AI, <strong>Logic</strong> is the framework that allows a machine to "reason." While modern Machine Learning is often probabilistic, Logic is the backbone of <strong>Symbolic AI</strong>, expert systems, and the "planning" modules used in robotics.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#propositional">1. Propositional Logic</a>
-      <a href="#fol">2. First-Order Logic (FOL)</a>
-      <a href="#applications">3. Applications in AI & Software</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Summary</a>
-      <a href="#ml-context">Logic in Data Science</a>
-    </div>
-
     <h2 id="propositional">1. Propositional Logic</h2>
     <p>This is the simplest form of logic. It deals with <strong>propositions</strong>—statements that are either <strong>True</strong> or <strong>False</strong>.</p>
 
@@ -80,7 +70,7 @@ export const logicSection: TopicSection = {
     <div class="callout info">
       <div class="callout-icon">📋</div>
       <div class="callout-body">
-        Example: $Symptoms(x, Fever) \land Symptoms(x, Cough) \to HasFlu(x)$
+        <span class="text-green-premium font-bold">Case Study:</span> $Symptoms(x, Fever) \land Symptoms(x, Cough) \to HasFlu(x)$
       </div>
     </div>
 
@@ -90,9 +80,9 @@ export const logicSection: TopicSection = {
     <h3>C. Knowledge Representation</h3>
     <p>In <strong>Knowledge Graphs</strong>, logic helps infer new facts through transitivity and other logical properties.</p>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Evaluating a Medical Expert System Rule</h4>
       <p>A diagnostic rule states: <strong>"If a patient has a Fever ($P$) AND a Persistent Cough ($Q$), then they might have the Flu ($R$)."</strong> Construct a truth table segment to find when the rule is invalidated.</p>
       
@@ -117,9 +107,9 @@ export const logicSection: TopicSection = {
           <strong>Logic Insight:</strong> In expert systems, finding "False" cases helps debug the knowledge base; it indicates the rule is either too broad or missing a condition.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Simplifying Code with De Morgan's Laws</h4>
       <p>A developer wrote: <code>if not (is_admin or has_permission):</code>. Use logic to simplify this for better readability.</p>
       
@@ -140,7 +130,7 @@ export const logicSection: TopicSection = {
           <strong>Why it matters:</strong> Simplified logic reduces cognitive load for other developers and can prevent "nesting hell" in complex control flows.
         </div>
       </div>
-    </div>
+    
     <div class="premium-table-wrap">
       <table class="premium-table">
         <thead>

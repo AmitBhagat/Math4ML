@@ -12,16 +12,6 @@ export const vectorSpacesSection: TopicSection = {
       <p>A <strong>Vector Space</strong> is a set of vectors that follows a consistent set of rules. It ensures that when you add or scale vectors, you stay within the "playground" and don't exit the mathematical universe.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#rules">1. Axioms: The Rules</a>
-      <a href="#subspaces">2. Subspaces</a>
-      <a href="#example-subspace">Example 1: A 2D Plane in 3D Space</a>
-      <a href="#example-closure">Example 2: Closure Property Check</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
     <h2 id="rules">1. Axioms: The Rules</h2>
     <p>A set of vectors \(V\) is a <strong>Vector Space</strong> if it is "closed" under addition and scalar multiplication. <strong>Closure</strong> means:</p>
     <ul>
@@ -32,7 +22,7 @@ export const vectorSpacesSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a <strong>Vector Space</strong> like a <strong>Gaming World</strong>. No matter where you move your character or how high they jump (scale), you should never "fall out of the map." 
+        Think of a <strong>Vector Space</strong> like a <strong>Gaming World</strong>. No matter where you move your character or how high they jump (scale), you should never "fall out of the map." 
         If you can navigate any combination of features without hitting a mathematical "dead end," you're in a vector space.
       </div>
     </div>
@@ -40,8 +30,8 @@ export const vectorSpacesSection: TopicSection = {
     <h2 id="subspaces">2. Subspaces</h2>
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
-    <h2 id="example-subspace">Example 1: A 2D Plane in 3D Space</h2>
-    <div class="example-box">
+    <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>
+    
       <h4>Problem: Visualizing Subspaces</h4>
       <p>Is the set of vectors \([x, y, 0]\) in \(\mathbb{R}^3\) a subspace?</p>
       
@@ -66,10 +56,10 @@ export const vectorSpacesSection: TopicSection = {
           <strong>Result:</strong> YES. It's a valid subspace. In ML, when we perform <strong>Dimensionality Reduction</strong>, we're often projecting high-dimensional data onto a lower-dimensional subspace like this.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-closure">Example 2: Closure Property Check</h2>
-    <div class="example-box">
+    <h2 id="example-closure" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Closure Property Check</h2>
+    
       <h4>Problem: Finding the "Exit"</h4>
       <p>Is the set of vectors \([x, 1]\) where \(x \in \mathbb{R}\) a vector space?</p>
       
@@ -94,9 +84,9 @@ export const vectorSpacesSection: TopicSection = {
           <strong>Result:</strong> NO. Addition/Scaling "pushed us out" of the set. This set doesn't form a vector space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

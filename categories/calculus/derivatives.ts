@@ -12,18 +12,7 @@ export const derivativesSection: TopicSection = {
       <p>A <strong>Derivative</strong> measures how "sensitive" a function is to a tiny change in its input. In Machine Learning, we use derivatives to determine exactly how small adjustments to model weights will affect our error (loss).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-tangent">Example 1: Finding Tangent Slopes</a>
-      <a href="#example-loss">Example 2: Sensitivity of Loss to Bias</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Functions</strong>: Understanding \(f(x)\).</li>
@@ -31,19 +20,19 @@ export const derivativesSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculus is the "Language of Sensitivity." It answers the question: <em>"If I nudge this variable by a hair, how much does the result move?"</em> If you are standing on a hill, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. ML models always want to move "downhill" to find the minimum error.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
+        Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
         If you're driving, the speedometer doesn't tell you where you've been; it tells you exactly how fast you're changing your position <em>right now</em>. 
         In ML, the derivative tells the model how fast the error is changing with respect to its weights <em>at this exact moment</em>.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
     <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
     <p><strong>Common Rules:</strong></p>
@@ -52,8 +41,8 @@ export const derivativesSection: TopicSection = {
       <li><strong>Constant Rule:</strong> \(\frac{d}{dx}C = 0\).</li>
     </ul>
 
-    <h2 id="example-tangent">Example 1: Finding Tangent Slopes</h2>
-    <div class="example-box">
+    <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
+    
       <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
       
       <div class="algorithm-steps">
@@ -73,10 +62,10 @@ export const derivativesSection: TopicSection = {
           <strong>Result:</strong> The slope (rate of change) is 6. For every 0.01 unit you increase \(x\), the output \(y\) will increase by approximately 0.06 units.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-loss">Example 2: Sensitivity of Loss to Bias</h2>
-    <div class="example-box">
+    <h2 id="example-loss" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sensitivity of Loss to Bias</h2>
+    
       <h4>Problem: Nudging a Single Parameter</h4>
       <p>Assume your Loss \(L = (b - 5)^2\) where \(b\) is a bias term. Calculate the sensitivity at \(b = 2\).</p>
       
@@ -97,9 +86,9 @@ export const derivativesSection: TopicSection = {
           <strong>Result:</strong> The derivative is <strong>negative</strong>. This tells the model: "Increasing the bias \(b\) will <strong>decrease</strong> the loss." So the optimization algorithm will nudge \(b\) higher.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 def f(x):
     return x**2

@@ -12,22 +12,13 @@ export const mlpSection: TopicSection = {
       <p>If a single Perceptron is a lone loan officer, an <strong>MLP</strong> is the <strong>Entire Bank Headquarters</strong>. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the <strong>Universal Function Approximator</strong> that solves the XOR crisis and everything beyond.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Deep Stack</a>
-      <a href="#math">Forward Propagation: Affine & Activation</a>
-      <a href="#layers">Hidden Layers: Feature Engineering</a>
-      <a href="#approximation">Universal Approximation Theorem</a>
-      <a href="#analogy">The "Committee of Experts" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Deep Stack</h2>
     <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an <strong>Input Layer</strong>, one or more <strong>Hidden Layers</strong>, and an <strong>Output Layer</strong>. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Hierarchical Filtering."</strong> 
+        Think of it as <strong>"Hierarchical Filtering."</strong> 
         The first layer might look for small edges. 
         The second layer might combine those edges into shapes (circles, squares). 
         The third layer might combine shapes into objects (faces, cars). 
@@ -48,8 +39,8 @@ export const mlpSection: TopicSection = {
     <p><strong>The Theory:</strong> It states that a neural network with just <strong>One Hidden Layer</strong> and enough neurons can approximate <strong>Any Continuous Function</strong> to any degree of accuracy. 
     <strong>The Reality:</strong> While one layer is enough in "theory," <strong>Deep Networks</strong> (many layers) are far more efficient in practice because they represent objects as a hierarchy of simpler concepts.</p>
 
-    <h2 id="example">Illustrated Example: The Multi-Tiered Courtroom</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Tiered Courtroom</h2>
+    
       <h4>Scenario: Deciding a Complex 1-Billion-Dollar Case</h4>
       <p>Imagine a legal battle so complex that a single judge is overwhelmed by the noise. We need layers of experts.</p>
       
@@ -75,12 +66,12 @@ export const mlpSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> An MLP is a <strong>Feature Factory</strong>. Each layer takes the mess from the previous layer and cleans it up until the very last layer only has to make a simple Yes/No call. This is how neural networks solve the XOR problem.
+          An MLP is a <strong>Feature Factory</strong>. Each layer takes the mess from the previous layer and cleans it up until the very last layer only has to make a simple Yes/No call. This is how neural networks solve the XOR problem.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Cracking the XOR Code</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset: XOR Logic Gate (Non-linear)\n[Action] Initializing MLP with (4, 4) hidden neurons...\n[Training] Epoch 1: Loss 0.72\n[Training] Epoch 500: Loss 0.04 (Convergence reached)\n[Test] Input [1, 1] -> Final Pred: 0 (Correct)\n[Test] Input [0, 1] -> Final Pred: 1 (Correct)\n[Insight] A simple line failed here; a hidden layer warped the space to find the truth.">
 import numpy as np
 from sklearn.neural_network import MLPClassifier

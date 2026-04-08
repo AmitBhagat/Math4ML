@@ -12,17 +12,6 @@ export const vectorNormsSection: TopicSection = {
       <p>A <strong>Norm</strong> is a mathematical function that assigns a strictly positive "length" to a vector. In Machine Learning, we use norms to prevent models from "overfitting" by penalizing large weights.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#definition">1. Definition of a Norm</a>
-      <a href="#l2">2. L₂ Norm (Euclidean)</a>
-      <a href="#l1">3. L₁ Norm (Manhattan)</a>
-      <a href="#example-distance">Example 1: Manhattan vs. Euclidean</a>
-      <a href="#example-reg">Example 2: Lasso vs. Ridge Regularization</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
     <h2 id="definition">1. Definition of a Norm</h2>
     <p>A function \(\|\mathbf{x}\|\) is a norm if it satisfies these properties:</p>
     <ul>
@@ -42,15 +31,14 @@ export const vectorNormsSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong>
         Think of <strong>L₂</strong> as a straight line across a field. 
         Think of <strong>L₁</strong> as walking through a city grid—you can't cut corners; you have to follow the streets. 
         In ML, <strong>L₁</strong> is used when you want a model to be "sparse" (selective), while <strong>L₂</strong> is used to keep weights small and stable.
       </div>
     </div>
 
-    <h2 id="example-distance">Example 1: Manhattan vs. Euclidean</h2>
-    <div class="example-box">
+    <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
+    
       <h4>Problem: Comparing Distances for [3, 4]</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -69,10 +57,10 @@ export const vectorNormsSection: TopicSection = {
           <strong>Result:</strong> L₁ distance is always \(\ge\) L₂. L₁ is "harsher" and easier for models to interpret as binary decisions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-reg">Example 2: Lasso vs. Ridge Regularization</h2>
-    <div class="example-box">
+    <h2 id="example-reg" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Lasso vs. Ridge Regularization</h2>
+    
       <h4>Problem: Penalizing Large Weights</h4>
       <p>Assume your model weights are \(\mathbf{w} = [1, 0.01]\). Find the L₁ and L₂ penalties.</p>
       
@@ -93,9 +81,9 @@ export const vectorNormsSection: TopicSection = {
           <strong>Intuition:</strong> L₁ (Lasso) will often force small weights to exactly 0, effectively deleting irrelevant features. L₂ (Ridge) just keeps all weights tiny.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

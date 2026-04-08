@@ -12,28 +12,19 @@ export const whatIsMLSection: TopicSection = {
       <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." Instead of telling a computer exactly how to solve a problem, we give it a massive amount of data and let it figure out the patterns for itself.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: Rules vs. Patterns</a>
-      <a href="#analogy">The "Hidden Recipe" Analogy</a>
-      <a href="#why">Why Use ML?</a>
-      <a href="#workflow">The ML Workflow</a>
-    </div>
-
     <h2 id="theory">Core Theory: Rules vs. Patterns</h2>
     <p>In traditional software engineering, a human writes <strong>Rules</strong> (Logic) and provides <strong>Data</strong> to get an <strong>Answer</strong>. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Answers</strong> (Labels), and the computer produces the <strong>Rules</strong> (The Model).</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> 
         Traditional coding is like writing a very rigid cookbook. 
         Machine Learning is like taking a world-class chef to a 100-course dinner and asking them to <strong>guess the ingredients</strong> just by tasting the food. We don't tell them how to cook; we show them the finished product and let their "palate" (the algorithm) figure out the recipe.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Hidden Recipe</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hidden Recipe</h2>
+    
       <h4>Scenario: Predicting the Price of a House</h4>
       <p>Imagine you have a list of houses, their sizes, and what they sold for. You want to build a program that predicts the price of any new house.</p>
       
@@ -55,12 +46,12 @@ export const whatIsMLSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Machine Learning is essentially <strong>Statistical Pattern Matching</strong> at scale. If a human can't easily explain "How" they know something (like recognizing a face), it's probably a good candidate for ML.
+          Machine Learning is essentially <strong>Statistical Pattern Matching</strong> at scale. If a human can't easily explain "How" they know something (like recognizing a face), it's probably a good candidate for ML.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Rules vs. Learning</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Traditional] Executing Hardcoded Rule: 500sqft * $400/sqft = $200,000\n[ML] Training LinearRegression on 5,000 samples...\n[ML] Pattern Found: Base price + ($385 * sqft) + neighborhood multiplier.\n\n[Result] Manual Price: $200,000\n[Result] ML Predicted Price: $212,450.67\n[Insight] The ML model picked up on 'Premium' neighborhood stats that the manual rule missed!">
 import numpy as np
 from sklearn.linear_model import LinearRegression
@@ -71,7 +62,7 @@ def manual_rule(size):
     return size * 400 
 
 # 2. Machine Learning (Pattern Discovery)
-# Examples provided, computer 'discovers' the multiplier
+# <span class="text-green-premium font-bold">Case Study:</span> s provided, computer 'discovers' the multiplier
 sizes = np.array([[1000], [1500], [2000], [2500]])
 # Real prices have noise and neighborhood bonuses
 prices = np.array([410000, 580000, 820000, 1050000])

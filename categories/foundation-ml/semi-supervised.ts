@@ -12,26 +12,19 @@ export const semiSupervisedLearningSection: TopicSection = {
       <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground. In the real world, most data is unlabeled and "Messy." Labeling is expensive. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to find the value in a mountain of <strong>Unlabeled Dust</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Smoothing and Manifolds</a>
-      <a href="#example">The "Few High-Impact Samples" Approach</a>
-      <a href="#analogy">The "Foreign City" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Smoothing and Manifolds</h2>
     <p>SSL relies on the <strong>Continuity Assumption</strong>: If two points \(x_1\) and \(x_2\) are close in space, they should probably have the same label. If we label 10 points, the machine "Spreads" those labels to nearby neighbors in the unlabeled set.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Infection of Knowledge."</strong> 
+        Think of it as <strong>"Infection of Knowledge."</strong> 
         You have 1,000 photos of cats and dogs. You only label 10. The machine looks at the 990 unlabeled photos. It notices that "Photo 11" looks almost exactly like "Labeled Dog 1." It decides to <strong>re-label</strong> Photo 11 as a dog. Now it has 11 dogs to help find more.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Tiny City Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
+    
       <h4>Scenario: Navigating a 1,000-Square-Mile City</h4>
       <p>Imagine you are in a massive city and you only have a <strong>1-page tourist map</strong> (The Labeled Data).</p>
       
@@ -53,12 +46,12 @@ export const semiSupervisedLearningSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> SSL is about <strong>Leverage</strong>. It uses a few expensive labels to unlock the value of thousands of free ones.
+          SSL is about <strong>Leverage</strong>. It uses a few expensive labels to unlock the value of thousands of free ones.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Label Propagation</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[SSL] Labeling the mountain of unknown data...\nPredicted Class for unlabeled point [2, 1]: Class 1 (Red)">
 import numpy as np
 from sklearn.semi_supervised import LabelPropagation

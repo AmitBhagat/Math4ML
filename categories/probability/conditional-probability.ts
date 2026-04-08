@@ -12,18 +12,7 @@ export const conditionalProbabilitySection: TopicSection = {
       <p><strong>Conditional Probability</strong> (\(P(A|B)\)) measures the likelihood of Event A occurring, <strong>given</strong> that Event B is already known to have happened. In Machine Learning, this is the "Secret Sauce" that allows us to refine a prediction as we receive new data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-die">Example 1: Die Roll Given > 3</a>
-      <a href="#example-test">Example 2: Diagnostic Test Accuracy</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Joint Probability</strong>: Understanding \(P(A, B)\).</li>
@@ -31,13 +20,13 @@ export const conditionalProbabilitySection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Normally, your perspective covers the entire universe. But once I tell you "Condition B is true," your world shrinks. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Conditional Probability as a <strong>"Filter."</strong> 
+        Think of Conditional Probability as a <strong>"Filter."</strong> 
         Imagine a pool of 1,000 customers. You want to know if someone will buy. 
         Once I tell you "They put an item in the cart" (Condition B), you <strong>filter out</strong> everyone who didn't. 
         Your universe is now smaller, and the likelihood of a purchase is much higher. 
@@ -45,12 +34,12 @@ export const conditionalProbabilitySection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
     <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>
 
-    <h2 id="example-die">Example 1: Die Roll Given > 3</h2>
-    <div class="example-box">
+    <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
+    
       <h4>Problem: Narrowing Down Outcomes</h4>
       <p>I roll a fair six-sided die. If I tell you the result is \(> 3\), what is the probability that it is an even number?</p>
       
@@ -75,10 +64,10 @@ export const conditionalProbabilitySection: TopicSection = {
           <strong>Result:</strong> Knowing the roll was \(> 3\) increased our confidence from 50% to <strong>66%</strong>. The world shrunk!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-test">Example 2: Diagnostic Test Accuracy</h2>
-    <div class="example-box">
+    <h2 id="example-test" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Diagnostic Test Accuracy</h2>
+    
       <h4>Problem: The Sensitivity of Models</h4>
       <p>A test for a disease is 90% accurate (if you have it, the test is positive). 1% of the population has it. If you test positive, how likely are you to actually have the disease?</p>
       
@@ -99,9 +88,9 @@ export const conditionalProbabilitySection: TopicSection = {
           <strong>Intuition:</strong> Even if the test is "accurate," if the disease is extremely rare, most positives will still be <strong>False Positives</strong>. Conditional probability helps us spot these biases in our ML models (like Spam filters).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,21 +12,13 @@ export const reinforcementLearningSection: TopicSection = {
       <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" type of Machine Learning. There is no training data. The machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do this, I'll give you a cookie. If you do that, you'll fall into a pit." The agent learns to survive by <strong>Trial and Error</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: States, Actions, Rewards</a>
-      <a href="#exploitation">Exploration vs. Exploitation</a>
-      <a href="#example">AlphaZero and Game Logic</a>
-      <a href="#analogy">The "Video Game" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: States, Actions, Rewards</h2>
     <p>RL is modeled as a <strong>Markov Decision Process (MDP)</strong>. At each time step \(t\), the agent is in a <strong>State</strong> (\(S_t\)). It takes an <strong>Action</strong> (\(A_t\)) and receives a <strong>Reward</strong> (\(R_{t+1}\)) while moving to a new <strong>State</strong> (\(S_{t+1}\)).</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Ride a Bike."</strong> 
+        Think of it as <strong>"Learning to Ride a Bike."</strong> 
         You don't have a labeled dataset of "Sitting on a bike." You have to <strong>Try</strong>. 
         You tilt too far left (Action) and fall (Penalty). You tilt slightly right (Action) and stay upright (Reward). The "Policy" your brain builds is just a mapping of how to move your body to stay balanced.
       </div>
@@ -43,8 +35,8 @@ export const reinforcementLearningSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Blindfolded Mario</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Blindfolded Mario</h2>
+    
       <h4>Scenario: Crashing through Level 1-1</h4>
       <p>Imagine you are playing Super Mario Bros. for the first time, but you are <strong>blindfolded</strong>. You only have a speaker that beeps.</p>
       
@@ -66,12 +58,12 @@ export const reinforcementLearningSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> RL is <strong>Action-Focused</strong>. The goal isn't to predict a label, it's to find the sequence of moves that scores the most points.
+          RL is <strong>Action-Focused</strong>. The goal isn't to predict a label, it's to find the sequence of moves that scores the most points.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Simple Q-Learning</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Agent is learning the optimal path...\nOptimal Q-Table (State: Best Action):\nState 0: GO RIGHT\nState 1: GO RIGHT\nState 2: GO RIGHT\nFinal Reward Reached!">
 import numpy as np
 

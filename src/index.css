@@ -37,43 +37,63 @@
 
 @layer base {
   :root {
-    /* ─── PREMIUM LIGHT THEME (Default) ─── */
-    --bg: #fcfcfc;
-    --bg2: #f6f8fa;
+    /* ─── AESTHETIC SOFT MESH THEME (Design System Overhaul) ─── */
+    --bg: #fdfaf9;
+    --bg2: #fef1ed;
     --bg3: #ffffff;
-    --border: #d0d7de;
-    --accent: #0969da;
-    --accent2: #54aeff;
-    --gold: #9a6700;
-    --green: #1a7f37;
-    --purple: #8250df;
-    --text: #111827;
-    --muted: #374151;
+    --border: rgba(0, 0, 0, 0.04);
     
-    --s-container: #f0f2f5;
-    --s-container-low: #f6f8fa;
-    --s-container-high: #e1e4e8;
+    /* Candy Accent Palette from Reference */
+    --accent: #ff835c;    /* Vibrant Coral Orange */
+    --accent2: #ff9e7d;
+    --gold: #f6ad55;      /* Warm Amber */
+    --green: #48bb78;     /* Mint/Leaf Green */
+    --purple: #b794f4;    /* Soft Lavender */
+    
+    --text: #171923;      /* Deep Modern Charcoal */
+    --muted: #4a5568;
+    
+    /* Glassmorphism Containers */
+    --s-container: rgba(255, 255, 255, 0.5);
+    --s-container-low: rgba(255, 255, 255, 0.3);
+    --s-container-high: rgba(255, 255, 255, 0.7);
     
     --sidebar-w: 280px;
+
+    /* Mesh Configuration */
+    --mesh-1: color-mix(in srgb, var(--accent) 18%, transparent);
+    --mesh-2: color-mix(in srgb, var(--purple) 18%, transparent);
+    --mesh-3: color-mix(in srgb, var(--gold) 15%, transparent);
+    --mesh-4: color-mix(in srgb, var(--green) 12%, transparent);
+    --mesh-centre: color-mix(in srgb, var(--bg2) 65%, transparent);
   }
 
   .dark {
-    /* ─── PREMIUM DARK THEME (Refined) ─── */
-    --bg: #0f172a;        /* Deep charcoal instead of dead-black */
-    --bg2: #020617;       /* Softer secondary background */
-    --bg3: #1e293b;       /* Distinct elevated surface */
-    --border: #334155;    /* Subtle border contrast */
-    --accent: #60a5fa;    /* Slightly desaturated accent for comfort */
-    --accent2: #93c5fd;
-    --gold: #fbbf24;      /* Warmer gold */
-    --green: #4ade80;     /* Fresh green */
-    --purple: #c084fc;    /* Muted purple */
-    --text: #e2e8f0;      /* Muted off-white reduces "glow" */
-    --muted: #94a3b8;     /* Balanced muted text */
+    /* ─── MIDNIGHT MESH (Soothing Dark Overhaul) ─── */
+    --bg: #0a0e14;
+    --bg2: #020617;
+    --bg3: #111827;
+    --border: rgba(255, 255, 255, 0.05);
+    
+    --accent: #fb923c;    /* Soft Peach */
+    --accent2: #fdba74;
+    --gold: #f6ad55;
+    --green: #2dd4bf;     /* Muted Teal */
+    --purple: #c084fc;    /* Muted Lavender */
+    
+    --text: #cbd5e1;      /* Non-glaring Off-white */
+    --muted: #94a3b8;     /* Slate 400 - Clearer muted text */
 
-    --s-container: #1e293b;
-    --s-container-low: #0f172a;
-    --s-container-high: #334155;
+    --s-container: rgba(17, 24, 39, 0.6);
+    --s-container-low: rgba(2, 6, 23, 0.4);
+    --s-container-high: rgba(31, 41, 55, 0.8);
+
+    /* Dark Mesh Configuration */
+    --mesh-1: color-mix(in srgb, var(--accent) 9%, transparent);
+    --mesh-2: color-mix(in srgb, var(--purple) 9%, transparent);
+    --mesh-3: color-mix(in srgb, var(--gold) 6%, transparent);
+    --mesh-4: color-mix(in srgb, var(--green) 6%, transparent);
+    --mesh-centre: rgba(30, 27, 75, 0.2);
   }
 
   html {
@@ -84,10 +104,12 @@
   body {
     background: var(--bg);
     background-image: 
-      radial-gradient(at 0% 0%, color-mix(in srgb, var(--accent) 5%, transparent) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, color-mix(in srgb, var(--purple) 5%, transparent) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, color-mix(in srgb, var(--gold) 5%, transparent) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, color-mix(in srgb, var(--green) 5%, transparent) 0px, transparent 50%);
+      radial-gradient(at 10% 20%, var(--mesh-1) 0px, transparent 45%),
+      radial-gradient(at 90% 10%, var(--mesh-2) 0px, transparent 45%),
+      radial-gradient(at 80% 90%, var(--mesh-3) 0px, transparent 45%),
+      radial-gradient(at 20% 80%, var(--mesh-4) 0px, transparent 45%),
+      radial-gradient(at 50% 50%, var(--mesh-centre) 0px, transparent 100%),
+      radial-gradient(at 40% 10%, color-mix(in srgb, #e8edf5 20%, transparent) 0px, transparent 60%);
     background-attachment: fixed;
     color: var(--text);
     font-family: 'Outfit', sans-serif;
@@ -141,7 +163,7 @@
     @apply text-5xl lg:text-[42px] font-bold leading-tight mb-4 text-text-premium tracking-tight;
   }
   .premium-hero p {
-    @apply text-[18px] leading-relaxed font-normal text-muted-premium max-w-3xl opacity-90;
+    @apply text-[18px] leading-relaxed font-normal text-text-premium max-w-3xl opacity-80;
   }
 
   /* ─── SECTION HEADERS ─── */
@@ -265,7 +287,7 @@
 
   /* Linking Rules */
   .linking-rule {
-    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-muted-premium;
+    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-text-premium;
   }
   .linking-rule strong { @apply text-accent-premium font-semibold; }
 

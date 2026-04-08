@@ -12,15 +12,6 @@ export const confusionMatrixSection: TopicSection = {
       <p>Accuracy is a dangerous metric. If you are testing for a <strong>Rare Disease</strong> that affects 1% of the population, a model that simply says "Healthy" to everyone is <strong>99% Accurate</strong>—but it's a <strong>Total Failure</strong>. The <strong>Confusion Matrix</strong> is the "Truth Table" that exposes exactly where your model is being fooled.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The 4 Quadrants</a>
-      <a href="#math">TP, TN, FP, FN</a>
-      <a href="#errors">Type I vs. Type II Errors</a>
-      <a href="#interpretation">Reading the Grid</a>
-      <a href="#analogy">The "Security Guard" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The 4 Quadrants</h2>
     <p>A Confusion Matrix is a \(2 \times 2\) grid (for binary classification) that compares <strong>Reality</strong> (Rows) vs. <strong>Perception</strong> (Columns).</p>
     <div class="math-block">
@@ -38,7 +29,7 @@ export const confusionMatrixSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Story of Your Mistakes."</strong> 
+        Think of it as <strong>"The Story of Your Mistakes."</strong> 
         It's not just that you were <strong>Wrong</strong>; it's <strong>HOW</strong> you were wrong. 
         Did you cry wolf when there was no wolf? (FP). Or did you sleep while the wolf attacked? (FN). Real-world problems often care <strong>Much More</strong> about one type of mistake than the other.
       </div>
@@ -67,7 +58,7 @@ export const confusionMatrixSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Confusion Matrix Process</h2>
-    <div class="example-box">
+    
       <h4>The Reality Check Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -91,10 +82,10 @@ export const confusionMatrixSection: TopicSection = {
           <div><strong>Analysis:</strong> Use the counts to derive higher-level metrics like Precision and Recall.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Truth Table</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Truth Table</h2>
+    
       <h4>Scenario: Testing for a Rare Disease</h4>
       <p>Imagine you test 100 people for a disease. 10 actually have it, 90 do not. Your model makes some mistakes.</p>
       
@@ -120,12 +111,12 @@ export const confusionMatrixSection: TopicSection = {
       <div class="callout warning">
         <div class="callout-icon">⚠️</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> The Matrix forces you to choose your poison. For a <strong>rare cancer</strong>, you'd rather have a few False Positives (over-testing) than a single False Negative (death). For a <strong>spam filter</strong>, you'd rather let spam in (FN) than delete a job offer (FP).
+          The Matrix forces you to choose your poison. For a <strong>rare cancer</strong>, you'd rather have a few False Positives (over-testing) than a single False Negative (death). For a <strong>spam filter</strong>, you'd rather let spam in (FN) than delete a job offer (FP).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Tallying the Truth</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Comparing 10 Predictions against Ground Truth...\n[Result] Confusion Matrix Grid:\n\n             Predicted: NO | Predicted: YES\nActual: NO  [[    5      ,      1      ],\nActual: YES  [    1      ,      3      ]]\n\n[Insight] Accuracy: 80.0%\n[Insight] 1 innocent email was marked as Spam (False Positive).\n[Insight] 1 Spam email was missed (False Negative).">
 import numpy as np
 from sklearn.metrics import confusion_matrix

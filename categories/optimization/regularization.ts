@@ -12,18 +12,7 @@ export const regularizationSection: TopicSection = {
       <p><strong>Regularization</strong> is a "Penalty" for being too complex. in most Machine Learning models, weights can grow wildly large as the model tries to memorize every outlier in your training set. <strong>L1 and L2 Regularization</strong> are the mathematical "Brakes" that keep the model honest and its weights small.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">L1 (Lasso) vs. L2 (Ridge)</a>
-      <a href="#example-diamond">Example 1: The L1 Diamond (Sparsity)</a>
-      <a href="#example-sphere">Example 2: The L2 Sphere (Smoothing)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Vector Norms</strong>: Understanding L1 and L2 norms.</li>
@@ -31,13 +20,13 @@ export const regularizationSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A machine that is "Too Smart" will often overfit. It will find tiny, meaningless patterns that only exist in your training set (Noise). <strong>Regularization</strong> works by saying: <em>"I want you to minimize the errors, BUT I will penalize you for using large weights."</em> This forces the model to only use the weights that are <strong>Absolutely Necessary</strong> to explain the data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Regularization as <strong>"Anchor Points."</strong> 
+        Think of Regularization as <strong>"Anchor Points."</strong> 
         Without it, your model can sail anywhere to fit the data. 
         With it, the model is anchored to the origin (Zero). 
         You only allow it to sail away from the anchor if the <strong>data is strong enough</strong> to pull it there. It keeps the model "Simple" and prevents it from overcomplicating things.
@@ -51,8 +40,8 @@ export const regularizationSection: TopicSection = {
       <li><strong>L2 (Ridge):</strong> Constraint is \(\sum w_i^2\). It encourages <strong>Small Weights</strong> (distributing the influence across many features).</li>
     </ul>
 
-    <h2 id="example-diamond">Example 1: The L1 Diamond (Sparsity)</h2>
-    <div class="example-box">
+    <h2 id="example-diamond" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The L1 Diamond (Sparsity)</h2>
+    
       <h4>Problem: Feature Selection</h4>
       <p>Imagine you have 1,000 features, but only 10 are actually useful. How do you find them?</p>
       
@@ -73,10 +62,10 @@ export const regularizationSection: TopicSection = {
           <strong>Result:</strong> This is why L1 is used for <strong>Automatic Feature Selection</strong>. It simplifies the model by deleting useless dimensions entirely.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-sphere">Example 2: The L2 Sphere (Smoothing)</h2>
-    <div class="example-box">
+    <h2 id="example-sphere" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The L2 Sphere (Smoothing)</h2>
+    
       <h4>Problem: Stability and Smoothing</h4>
       <p>Data: Two highly correlated features (e.g. Height in cm vs. Height in inches). Which one should get the weight?</p>
       
@@ -97,9 +86,9 @@ export const regularizationSection: TopicSection = {
           <strong>Intuition:</strong> L2 is used for <strong>Stability</strong>. It ensures that no single feature dominates the model too much. This makes the final model much more robust to small changes in any individual feature.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

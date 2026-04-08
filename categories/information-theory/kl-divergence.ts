@@ -12,18 +12,7 @@ export const klDivergenceSection: TopicSection = {
       <p><strong>Kullback-Leibler (KL) Divergence</strong> (\(D_{KL}(P || Q)\)) measures how much information is lost when we use a "Surrogate" distribution \(Q\) to approximate the true distribution \(P\). In Machine Learning, it's the "Compass" that tells us how far our model's predictions are from reality.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-gap">Example 1: Normal vs. Uniform</a>
-      <a href="#example-compress">Example 2: Information Loss in Compression</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Entropy</strong>: Measuring self-uncertainty.</li>
@@ -31,13 +20,13 @@ export const klDivergenceSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Cross-Entropy is the <strong>Total Cost</strong> of using a model. But some of that cost is fixed (the Entropy of the truth itself). <strong>KL Divergence</strong> is the <strong>Extra Cost</strong>—the pure inefficiency of your model. If KL \(= 0\), your model is a perfect copy of the truth. If KL is high, your model is a poor approximation.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
+        Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
         You expect results to follow pattern \(Q\), but they actually follow \(P\). 
         KL Divergence is the measure of how <strong>surprised</strong> you are on average. 
         Note that it is <strong>Asymmetric</strong>: \(D_{KL}(P || Q) \neq D_{KL}(Q || P)\). 
@@ -45,15 +34,15 @@ export const klDivergenceSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>KL Divergence is defined as the difference between Cross-Entropy and Entropy:</p>
     <div class="math-block">$$D_{KL}(P || Q) = H(P, Q) - H(P)$$</div>
     <p>Explicitly:</p>
     <div class="math-block">$$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$</div>
     <p><strong>Note:</strong> KL Divergence is always \(\ge 0\). (Gibbs' Inequality).</p>
 
-    <h2 id="example-gap">Example 1: Normal vs. Uniform</h2>
-    <div class="example-box">
+    <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
+    
       <h4>Problem: Comparing Two Global Shapes</h4>
       <p>True distribution \(P\) is centralized (Normal). Proxy \(Q\) is flat (Uniform). Calculate the "Gap."</p>
       
@@ -74,10 +63,10 @@ export const klDivergenceSection: TopicSection = {
           <strong>Result:</strong> KL Divergence provides a single number that summarizes the <strong>Structural Difference</strong> between these two shapes.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-compress">Example 2: Information Loss in Compression</h2>
-    <div class="example-box">
+    <h2 id="example-compress" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Information Loss in Compression</h2>
+    
       <h4>Problem: Downsampling High-Res Predictions</h4>
       <p>You have a 100-class Softmax layer, but you compress it into 10 buckets for efficiency.</p>
       
@@ -98,9 +87,9 @@ export const klDivergenceSection: TopicSection = {
           <strong>Intuition:</strong> This is a key metric in <strong>Model Distillation</strong>. We try to force a small "Student" model's output to have a low KL Divergence with a large "Teacher" model's output.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

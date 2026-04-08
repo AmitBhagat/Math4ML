@@ -12,21 +12,13 @@ export const typesOfMLSection: TopicSection = {
       <p>Not all learning is equal. How a machine learns depends entirely on the <strong>Feedback</strong> it receives. Do we have the correct answers labeled? Do we have no answers at all? Or do we reward the machine for good behavior? These categories define the "Flavors" of ML.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#supervised">Supervised: The Teacher</a>
-      <a href="#unsupervised">Unsupervised: The Explorer</a>
-      <a href="#semi-supervised">Semi-Supervised: The Hybrid</a>
-      <a href="#reinforcement">Reinforcement: The Dog Trainer</a>
-    </div>
-
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
-    <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input example comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
+    <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input <span class="text-green-premium font-bold">Case Study:</span> comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Classroom Teacher</strong>. 
+        Think of it as a <strong>Classroom Teacher</strong>. 
         You give the student a practice test with the answers on the back. The student tries to guess, flips the page, sees they're wrong, and adjusts their brain. Eventually, they learn enough to take the <strong>Final Exam</strong> (New Data) where the answers aren't provided.
       </div>
     </div>
@@ -48,7 +40,7 @@ export const typesOfMLSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> It's like having a <strong>Few Labeled Flashcards</strong>. 
+        It's like having a <strong>Few Labeled Flashcards</strong>. 
         You have 10,000 photos. You (the human) label 100 as "Dogs" and 100 as "Cats." The machine takes that small "Seed of Knowledge" and applies it to the other 9,800 photos by finding things that look like your seeds.
       </div>
     </div>
@@ -65,8 +57,8 @@ export const typesOfMLSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Library Sorting Game</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Library Sorting Game</h2>
+    
       <h4>Scenario: Sorting 10,000 Unlabeled Books from a Room</h4>
       <p>Imagine you are dropped in a messy library with 10,000 books on the floor. No covers, no database. How do you organize them?</p>
       
@@ -88,12 +80,12 @@ export const typesOfMLSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
+          Choose your paradigm based on your data availability. If you have labels, use <strong>Supervised</strong>. If you have raw data and need insight, use <strong>Unsupervised</strong>. If you have an environment and an objective (like a robot), use <strong>Reinforcement</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Paradigms in Code</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Supervised] Input [1, 1] belongs to Class 'A'.\n[Unsupervised] Clustering 4 points into 2 groups...\n[Unsupervised] Labels assigned: [0, 0, 1, 1]\n\n[Insight] Notice how Supervised predicted a NAME, while Unsupervised just found a GROUP.">
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import KMeans

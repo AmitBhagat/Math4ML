@@ -12,27 +12,19 @@ export const unsupervisedLearningSection: TopicSection = {
       <p><strong>Unsupervised Learning</strong> is the machine equivalent of learning by observation. There are no "Teachers" and no "Answers." The machine looks for the <strong>Underlying Structure</strong> of the data. It's about finding out how things are related before we even know what they are.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Concepts: Structure over Labels</a>
-      <a href="#clustering">Clustering: Finding Groups</a>
-      <a href="#dimensionality-reduction">Dimensionality Reduction: Simplifying Space</a>
-      <a href="#analogy">The "Blind Archeologist" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Concepts: Structure over Labels</h2>
     <p>In Unsupervised Learning, the input is just \(X\). There is no \(Y\) to predict. The machine's objective is to model the <strong>Probability Density</strong> (\(P(X)\)) or the <strong>Geometric Topology</strong> of the data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>Secret Society</strong>. 
+        Think of it as a <strong>Secret Society</strong>. 
         You walk into a party where you don't know anyone. You don't have their name tags (Labels). But after 30 minutes, you see that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their behavior.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Secret Society Party</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>
+    
       <h4>Scenario: Crashing a High-Stakes Gala</h4>
       <p>Imagine you walk into a room of 500 people. You don't know anyone's name, job, or origin (No Labels).</p>
       
@@ -54,12 +46,12 @@ export const unsupervisedLearningSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Unsupervised learning is about <strong>Discovery</strong>. It finds patterns in data that you didn't even know were there.
+          Unsupervised learning is about <strong>Discovery</strong>. It finds patterns in data that you didn't even know were there.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Clustering & PCA</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Clustering] Groups found: [0 0 1 1]\n[PCA] 2D Data reduced to 1D: [2.8, -2.8]">
 import numpy as np
 from sklearn.cluster import KMeans

@@ -12,15 +12,6 @@ export const hierarchicalSection: TopicSection = {
       <p>k-Means is a "Flat" algorithm—it just gives you $K$ groups. <strong>Hierarchical Clustering</strong> is different. It builds a <strong>Dendrogram</strong> (a tree) that shows how every single data point is related to every other. It's the "Family Tree" of your dataset.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Agglomerative vs. Divisive</a>
-      <a href="#linkage">Linkage Methods: Ward, Complete, Single</a>
-      <a href="#dendrogram">The Dendrogram: Visualizing Relationships</a>
-      <a href="#selection">Cutting the Tree</a>
-      <a href="#analogy">The "Family Reunion" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Agglomerative vs. Divisive</h2>
     <p>There are two primary ways to build a hierarchy:</p>
     <ul>
@@ -31,7 +22,7 @@ export const hierarchicalSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Closest Friend."</strong> 
+        Think of it as <strong>"Finding the Closest Friend."</strong> 
         In the Agglomerative approach, everyone in the room finds their <strong>most similar twin</strong> and holds hands. Now there are 50 pairs. Then those pairs find <strong>their</strong> closest pair, and they hold hands, forming 25 groups of 4. Eventually, everyone is holding hands in one giant circle.
       </div>
     </div>
@@ -62,7 +53,7 @@ export const hierarchicalSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Hierarchical Algorithm (Agglomerative)</h2>
-    <div class="example-box">
+    
       <h4>The Bottom-Up Build</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -86,10 +77,10 @@ export const hierarchicalSection: TopicSection = {
           <strong>Completion:</strong> Repeat until everyone is merged into one single root cluster.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Family Reunion</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Family Reunion</h2>
+    
       <h4>Scenario: Tracing the Ancestry of 5 Strangers</h4>
       <p>Imagine 5 people at a park. You want to see their "Relationships" based on their DNA. You don't know the families yet, so you start local.</p>
       
@@ -115,12 +106,12 @@ export const hierarchicalSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Hierarchical Clustering's greatest power is <strong>Retrospective Cutting</strong>. You don't have to decide if there are 2 families or 4 at the start. You build the whole tree and then "Cut" it with a horizontal line later to get the granularity you need.
+          Hierarchical Clustering's greatest power is <strong>Retrospective Cutting</strong>. You don't have to decide if there are 2 families or 4 at the start. You build the whole tree and then "Cut" it with a horizontal line later to get the granularity you need.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Agglomerative Linkage</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Calculating initial Proximity Matrix...\n[Merge 1] Merging Point 0 & 1 (Distance: 0.1)\n[Merge 2] Merging Point 2 & 3 (Distance: 0.5)\n[Cutting] Applying forest cut at N=2 Clusters...\n[Result] Cluster Assignments: [A, A, B, B, A]\n[Analysis] Points 0, 1, and 4 successfully grouped despite the gap.">
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering

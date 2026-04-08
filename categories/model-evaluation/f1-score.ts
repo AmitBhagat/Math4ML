@@ -12,22 +12,13 @@ export const f1ScoreSection: TopicSection = {
       <p>Precision and Recall are like a <strong>Sports Car</strong> and a <strong>Tank</strong>. You want speed (Precision), but you also want durability (Recall). How do you compare them? You can't just take a simple average! <strong>F1 Score</strong> is the <strong>Harmonic Mean</strong> that forces both values to be high for the score to look good.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Harmonic Mean</a>
-      <a href="#math">The F1 Formula</a>
-      <a href="#avg">Arithmetic vs. Harmonic Mean</a>
-      <a href="#imbalance">Imbalanced Data: Why F1 Matters</a>
-      <a href="#analogy">The "Balanced Diplomat" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Harmonic Mean</h2>
     <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the <strong>Harmonic Mean</strong> because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Weakest Link"</strong> metric. 
+        Think of it as <strong>"The Weakest Link"</strong> metric. 
         It forces your model to be <strong>All-Rounder</strong>. 
         You can't "Cheat" the F1 Score by having infinite recall and terrible precision (catching everyone by arresting the whole city). 
         The F1 Score will only be 1.0 if <strong>Both</strong> metrics are 1.0.
@@ -60,7 +51,7 @@ export const f1ScoreSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The F1 Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Harmonic Balancing Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -84,10 +75,10 @@ export const f1ScoreSection: TopicSection = {
           <div><strong>Final Score:</strong> The resulting $F_1$ value will be closer to the <strong>smaller</strong> of the two numbers, forcing a balance.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The All-Rounder Interview</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The All-Rounder Interview</h2>
+    
       <h4>Scenario: Hiring a Developer for a Startup</h4>
       <p>You have two criteria: Coding Skill (Precision) and Communication (Recall). Since you have a small team, you need a "Balanced All-Rounder."</p>
       
@@ -113,12 +104,12 @@ export const f1ScoreSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
+          In the real world, data is messy and classes are imbalanced. If you have 99% 'Negative' cases, a model that always says 'No' is 99% accurate but has 0 F1 Score. <strong>Accuracy is a lie; F1 is the truth.</strong>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Finding the Harmonic Balance</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Reality: 4 Targets, Model: 5 Predictions\n[Component] Precision (Quality): 60.0% (3/5 were right)\n[Component] Recall (Thoroughness): 75.0% (3/4 found)\n[Action] Calculating Harmonic Mean (P*R)/(P+R) * 2...\n[Result] F1-Score: 66.7%\n[Insight] The F1 centers between P and R, leaning toward the lower value.">
 from sklearn.metrics import precision_score, recall_score, f1_score
 

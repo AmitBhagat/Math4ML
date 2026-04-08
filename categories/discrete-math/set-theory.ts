@@ -19,16 +19,6 @@ export const setTheorySection: TopicSection = {
       </div>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#subsets">1. Subsets ($\subseteq$)</a>
-      <a href="#union">2. Union ($\cup$)</a>
-      <a href="#intersection">3. Intersection ($\cap$)</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#comparison">Comparison Table for Data Operations</a>
-      <a href="#ml-journey">Why this matters for ML</a>
-    </div>
-
     <h2 id="subsets">1. Subsets ($\subseteq$)</h2>
     <p>A set $A$ is a <strong>subset</strong> of $B$ if every element in $A$ is also in $B$.</p>
     <div class="callout info">
@@ -81,9 +71,9 @@ export const setTheorySection: TopicSection = {
 
     <hr class="premium-hr">
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Reconciling Customer Lists</h4>
       <p>A marketing team has two lists of user IDs. List $A = \{101, 102, 103\}$ and List $B = \{103, 104, 105\}$. Find the common and total unique customers.</p>
       
@@ -104,9 +94,9 @@ export const setTheorySection: TopicSection = {
           <strong>Data Insight:</strong> Intersection is the foundation of <strong>Inner Joins</strong>, while Union represents a <strong>Full Outer Join</strong> without duplicates.
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Identifying Discrepancies (Symmetric Difference)</h4>
       <p>Identify which users are *only* in one of the two lists $A$ or $B$ (e.g., to find platform-specific users).</p>
       
@@ -131,7 +121,7 @@ export const setTheorySection: TopicSection = {
           <strong>ML Usage:</strong> This is a powerful technique for <strong>Data Auditing</strong>—quickly finding rows that exist in your local slice but are missing from the production database.
         </div>
       </div>
-    </div>
+    
 
     <hr class="premium-hr">
 

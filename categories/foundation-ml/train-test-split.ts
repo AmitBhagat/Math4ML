@@ -12,27 +12,19 @@ export const trainTestSplitSection: TopicSection = {
       <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Generalization</a>
-      <a href="#split">The Standard 80/20 Split</a>
-      <a href="#contamination">Data Leakage: The Cheating Scandal</a>
-      <a href="#analogy">The "Exam Day" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Generalization</h2>
     <p>The point of ML isn't to get 100% accuracy on the data you have. It's to <strong>Generalize</strong> to the data you <em>don't</em> have. If a model performs well on the Training set but poorly on the Test set, it has failed to learn the "Underlying Rule" and has instead just "Memorized the Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Exam Day."</strong> 
+        Think of it as <strong>"Exam Day."</strong> 
         If a teacher gives the students the <strong>Exact Questions</strong> that will be on the final exam as "Homework" (Training Data), every student will get a 100%. But they didn't learn Math; they just memorized the answers. A real test uses <strong>New Questions</strong> to see if the students truly understand the subject.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Secret Sommelier</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
+    
       <h4>Scenario: Qualifying as a Master Wine Taster</h4>
       <p>Imagine you are training to be a <strong>Wine Master</strong>. You have a cellar with 100 bottles of wine. How do you prove you've actually learned to taste, rather than just memorized your cellar?</p>
       
@@ -58,12 +50,12 @@ export const trainTestSplitSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Training data is your <strong>Practice</strong>. Testing data is the <strong>Real World</strong>. If you skip the split, you're just lying to yourself about how good your model is. You must always maintain a "Firewall" between what the model sees to learn and what it sees to be judged.
+          Training data is your <strong>Practice</strong>. Testing data is the <strong>Real World</strong>. If you skip the split, you're just lying to yourself about how good your model is. You must always maintain a "Firewall" between what the model sees to learn and what it sees to be judged.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Partitioning the World</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Dataset contains 1,000 samples and 10 features.\n[Action] Splitting data into 80/20 partitions...\n[Status] Training Set size: 800 samples\n[Status] Test Set size: 200 samples\n\n[Warning] The 200 Test samples are strictly HIDDEN from the training process.">
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_regression

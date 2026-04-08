@@ -12,19 +12,11 @@ export const randomForestSection: TopicSection = {
       <p>A single Decision Tree is prone to <strong>Overfitting</strong>. It memorizes the noise. <strong>Random Forest</strong> fixes this by building hundreds of <strong>Different Trees</strong> from different pieces of the data. It's the ultimate implementation of the "Jury Trial"—where many diverse opinions lead to a much <strong>Better and More Robust Verdict</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#bagging">Bagging: Bootstrap Aggregating</a>
-      <a href="#feature-randomness">Feature Randomness: Diverse Perspectives</a>
-      <a href="#theory">Theoretical Core: Ensemble Variance</a>
-      <a href="#analogy">The "Corporate Committee" Analogy</a>
-    </div>
-
     <h2 id="bagging">Bagging: Bootstrap Aggregating</h2>
     <p>How do we make each tree "Different"? We use <strong>Bagging</strong>. We take a random sample of our data <strong>with replacement</strong> (Bootstrapping). Some data points are picked twice; some are never picked. Every tree gets a <strong>Unique Perspective</strong> on the world.</p>
 
     <h2 id="feature-randomness">Feature Randomness: Diverse Perspectives</h2>
-    <div class="example-box">
+    
       <h4>The "Random" in Random Forest</h4>
       <p>Not only does each tree see different data, it also only gets to see a <strong>Random Subset of Features</strong> at each node.</p>
       
@@ -38,7 +30,7 @@ export const randomForestSection: TopicSection = {
           <div><strong>Result:</strong> We create a <strong>Diverse Forest</strong>. Some trees learn about the roof; some learn about the school district. When they <strong>Vote</strong> together, they find the <strong>Deep Truth</strong> of the data.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="theory">Theoretical Core: Ensemble Variance</h2>
     <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly <strong>$1/B$</strong> of the original. By "Averaging" the trees, we <strong>kill the noise</strong> and keep the <strong>signal</strong>.</p>
@@ -46,7 +38,7 @@ export const randomForestSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Guess the Jellybeans Contest."</strong> 
+        Think of it as <strong>"The Guess the Jellybeans Contest."</strong> 
         One person might guess 500 (Way too low). Another might guess 5,000 (Way too high). 
         But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. <strong>Random Forest</strong> is that average.
       </div>
@@ -64,7 +56,7 @@ export const randomForestSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Random Forest Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Collective Intelligence Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -88,10 +80,10 @@ export const randomForestSection: TopicSection = {
           <strong>Aggregating:</strong> For a new point, total the votes from all $B$ trees and pick the winner.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Medical Jury</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Medical Jury</h2>
+    
       <h4>Scenario: Making a Life-Saving Diagnosis</h4>
       <p>Instead of trusting one biased doctor, you assemble a diverse committee of 100 specialists.</p>
       
@@ -117,12 +109,12 @@ export const randomForestSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Random Forest is a <strong>Parallel Learner</strong>. All trees are built at once without talking to each other. This makes it incredibly fast on modern multi-core computers.
+          Random Forest is a <strong>Parallel Learner</strong>. All trees are built at once without talking to each other. This makes it incredibly fast on modern multi-core computers.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Majority Vote</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Growing 100 unique trees with random data slices...\n[Consultation] Testing a new case with features [1, 0, 0]...\n[Voting] 87 trees voted POSITIVE, 13 trees voted NEGATIVE.\n[Final Verdict] Classification: POSITIVE (Confidence: 87.0%)\n[Insight] The forest's confidence score is literally the % of trees that agreed!">
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier

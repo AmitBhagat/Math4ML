@@ -12,22 +12,13 @@ export const activationsSection: TopicSection = {
       <p>Without an <strong>Activation Function</strong>, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the <strong>Non-Linear Magic</strong> that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Why Non-Linearity?</a>
-      <a href="#sigmoid">Sigmoid & Tanh: The Classics</a>
-      <a href="#relu">ReLU: The Modern King</a>
-      <a href="#softmax">Softmax: The Final Judge</a>
-      <a href="#analogy">The "Emotional Filter" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Why Non-Linearity?</h2>
     <p>A linear function + a linear function = a linear function. No matter how many layers you stack, without activations, your network is just <strong>One Straight Line</strong>. Activation functions "Bend" the space, allowing the network to wrap its decision boundary around complex, non-linear data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Filter for Significance."</strong> 
+        Think of it as <strong>"Filter for Significance."</strong> 
         The raw input might be a <strong>Massive Wave</strong> of noise. 
         Activations say: "I only care if the signal is <strong>positive</strong>" (ReLU) or "I'll squash all values between <strong>0 and 1</strong>" (Sigmoid). It's a way to normalize and selectively pass on meaning.
       </div>
@@ -47,8 +38,8 @@ export const activationsSection: TopicSection = {
     <p>Used in the <strong>Output Layer</strong> for classification. It takes a vector of raw scores (logits) and converts them into a <strong>Probability Distribution</strong> where the sum of all elements is 1.</p>
     <div class="math-block">$$S(x_i) = \frac{e^{x_i}}{\sum e^{x_k}}$$</div>
 
-    <h2 id="example">Illustrated Example: The CEO's Gut Feeling</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The CEO's Gut Feeling</h2>
+    
       <h4>Scenario: Filtering Information at Corporate HQ</h4>
       <p>Imagine your neurons are a team of analysts sending reports to the CEO. The CEO doesn't want raw numbers; they want <strong>Signals</strong>.</p>
       
@@ -74,12 +65,12 @@ export const activationsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Activations are the <strong>Squeezers</strong>. They take the infinitely expanding numbers of math and squeeze them into manageable shapes that computers can understand and differentiate.
+          Activations are the <strong>Squeezers</strong>. They take the infinitely expanding numbers of math and squeeze them into manageable shapes that computers can understand and differentiate.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Signal Processing</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Processing Raw Signals: [-2.0, 0.0, 2.0, 4.0]\n[ReLU] Negative signals cut to zero: [0, 0, 2, 4]\n[Sigmoid] Probability Projection: [0.12, 0.50, 0.88, 0.98]\n[Softmax] Competitive Distribution: [0.00, 0.02, 0.12, 0.86] (Sum: 1.0)\n[Insight] Softmax is 'confident' that the 4th signal is the winner.">
 import numpy as np
 

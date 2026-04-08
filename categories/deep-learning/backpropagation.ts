@@ -12,15 +12,6 @@ export const backpropagationSection: TopicSection = {
       <p>If the architecture is the "body," <strong>Backpropagation</strong> is the "Brain" figuring out what it did wrong. It is simply the <strong>Chain Rule</strong> from Calculus applied to a multi-billion-parameter network. It tells us exactly which weight to "Twist" and in which direction to reduce the error.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Chain Rule</a>
-      <a href="#math">The Recursive Gradient Calculation</a>
-      <a href="#vanishing">The Vanishing Gradient Problem</a>
-      <a href="#descent">Connection to SGD</a>
-      <a href="#analogy">The "Chef and the Salt" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Chain Rule</h2>
     <p>Backpropagation is a <strong>Differential</strong> algorithm. It works by propagating the <strong>Error</strong> from the output layer <strong>Backwards</strong> to the input. We use the <strong>Chain Rule</strong> to find the derivative of the Loss function \(\mathcal{L}\) with respect to any weight \(w\).</p>
     <div class="math-block">$$\frac{\partial \mathcal{L}}{\partial w_{jk}^{(L)}} = \frac{\partial \mathcal{L}}{\partial a_j^{(L)}} \times \frac{\partial a_j^{(L)}}{\partial z_j^{(L)}} \times \frac{\partial z_j^{(L)}}{\partial w_{jk}^{(L)}}$$</div>
@@ -33,7 +24,7 @@ export const backpropagationSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Responsible Party."</strong> 
+        Think of it as <strong>"Finding the Responsible Party."</strong> 
         The final loss says "WE FAILED!" 
         Backprop walks back to the <strong>Hidden Layer</strong> and says "You contributed 40% to that failure." 
         Then it walks back to the <strong>Input Layer</strong> and says "This specific input weight caused your failure." 
@@ -42,7 +33,7 @@ export const backpropagationSection: TopicSection = {
     </div>
 
     <h2 id="math">Forward vs. Backward Pass</h2>
-    <div class="example-box">
+    
       <h4>The 2-Phase Cycle:</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -54,13 +45,13 @@ export const backpropagationSection: TopicSection = {
           <div><strong>Backward Pass:</strong> We start at the end and calculate the partial derivatives (Gradients) layer by layer using the cached values. We then update the weights: $W \gets W - \eta \nabla W$.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="vanishing">The Vanishing Gradient Problem</h2>
     <p><strong>The Gotcha:</strong> If your network is very deep, the gradient can "Whither Away." Because we keep multiplying small derivatives together (Chain Rule), by the time the signal reaches the first layer, it could be <strong>Nearly Zero</strong>. This is why deep networks are hard to train without special tricks like <strong>ReLU</strong> or <strong>ResNets</strong>.</p>
 
-    <h2 id="example">Illustrated Example: The Salt Blame Game</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Salt Blame Game</h2>
+    
       <h4>Scenario: A Restaurant Kitchen Disaster</h4>
       <p>Imagine a restaurant where the soup is too salty. The Head Chef (The Loss Function) needs to find out who to yell at (The Gradient).</p>
       
@@ -86,12 +77,12 @@ export const backpropagationSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Backprop is just <strong>Recursive Blame</strong>. It walks backward from the mistake to the source, asking every neuron: "How much did you contribute to this disaster?" and then turning its dial in the opposite direction.
+          Backprop is just <strong>Recursive Blame</strong>. It walks backward from the mistake to the source, asking every neuron: "How much did you contribute to this disaster?" and then turning its dial in the opposite direction.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Manual Backprop Step</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Forward] Truth: 1.0, Machine Guess: 0.622\n[Error] Soup is 'Too Salty' by: 0.378\n[Backprop] Calculating dLoss/dWeight via Chain Rule...\n[Gradient] Responsibility (Blame) = -0.089\n[Update] Adjusting Weight: 0.5 -> 0.5089\n[Result] Next guess will be closer to the Truth.">
 import numpy as np
 

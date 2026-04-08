@@ -12,37 +12,27 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       <p>An <strong>Eigenvector</strong> is a vector that, when multiplied by a matrix, <strong>never changes direction</strong>—it only scales. The <strong>Eigenvalue</strong> \(\lambda\) is the scaling factor. They are the "Fingerprints" of a linear transformation.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-diagonal">Example 1: Finding Hidden Axes</a>
-      <a href="#example-chareq">Example 2: Characteristic Equation Walkthrough</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find <strong>Principal Components</strong> in data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
+        Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
         If you spin a globe, every point moves—except for the North and South Poles. 
         The "Line through the Poles" is the <strong>Eigenvector</strong>. 
         It stays in place while everything else transforms around it.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
     <div class="math-block">$$A\mathbf{v} = \lambda\mathbf{v}$$</div>
     <p>To find \(\lambda\), we solve the <strong>Characteristic Equation</strong>:</p>
     <div class="math-block">$$\det(A - \lambda I) = 0$$</div>
 
-    <h2 id="example-diagonal">Example 1: Finding Hidden Axes</h2>
-    <div class="example-box">
+    <h2 id="example-diagonal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Hidden Axes</h2>
+    
       <h4>Problem: Identifying Eigenvalues for a Diagonal Matrix</h4>
       <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the eigenpairs.</p>
       
@@ -67,10 +57,10 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
           <strong>Result:</strong> \(\lambda_1 = 3, \mathbf{v}_1 = [1, 0]\) and \(\lambda_2 = 2, \mathbf{v}_2 = [0, 1]\). Diagonal matrices already show their eigen-secrets!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-chareq">Example 2: Characteristic Equation Walkthrough</h2>
-    <div class="example-box">
+    <h2 id="example-chareq" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Characteristic Equation Walkthrough</h2>
+    
       <h4>Problem: Solxing for λ of A = [[4, 1], [2, 3]]</h4>
       
       <div class="algorithm-steps">
@@ -94,9 +84,9 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
           <strong>Intuition:</strong> \(\lambda = 5\) is your "Main Signal." The direction corresponding to this eigenvalue contains the most <strong>Variance</strong> in your data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

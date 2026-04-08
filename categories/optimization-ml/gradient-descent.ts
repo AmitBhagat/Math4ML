@@ -12,15 +12,6 @@ export const gradientDescentSection: TopicSection = {
       <p>Imagine you are a <strong>Skier</strong> at the top of a foggy mountain. You want to reach the <strong>Ski Resort</strong> at the bottom (The Minimum Loss), but you can't see more than 2 feet ahead. What do you do? You feel the slope with your feet and take a step in the <strong>Steepest Downward Direction</strong>. Repeat this 1,000 times, and you'll reach the base.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Gradient</a>
-      <a href="#math">The Update Rule</a>
-      <a href="#surface">The Loss Surface: Convex vs. Non-Convex</a>
-      <a href="#batch">Batch processing: The Global View</a>
-      <a href="#analogy">The "Skier" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Gradient</h2>
     <p>The <strong>Gradient (\(\nabla \mathcal{L}\))</strong> is a vector of partial derivatives. It points in the direction of the <strong>Greatest Increase</strong> of the Loss function. To minimize the loss, we move in the <strong>Opposite Direction</strong> (\(-\nabla \mathcal{L}\)).</p>
     <div class="math-block">$$\nabla \mathcal{L}(\theta) = \begin{bmatrix} \frac{\partial \mathcal{L}}{\partial \theta_1} \\ \vdots \\ \frac{\partial \mathcal{L}}{\partial \theta_n} \end{bmatrix}$$</div>
@@ -28,7 +19,7 @@ export const gradientDescentSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Listening to the Ground."</strong> 
+        Think of it as <strong>"Listening to the Ground."</strong> 
         The gradient tells you two things: 
         1. <strong>Direction:</strong> Which way is "Down"? 
         2. <strong>Magnitude:</strong> How "Steep" is the slope? 
@@ -50,8 +41,8 @@ export const gradientDescentSection: TopicSection = {
     <strong>The Upside:</strong> The descent is very smooth and stable. 
     <strong>The Downside:</strong> If you have 1 billion data points, your computer will <strong>Run out of Memory</strong> before you take your first step.</p>
 
-    <h2 id="example">Illustrated Example: The Blindfolded Mountain Climber</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Blindfolded Mountain Climber</h2>
+    
       <h4>Scenario: Navigating a Foggy Mountain in a Blizzard</h4>
       <p>Imagine you are stranded at the peak of a mountain. You need to reach the village at the base (The Minimum Loss), but you are blindfolded and can only feel the ground with your feet.</p>
       
@@ -77,12 +68,12 @@ export const gradientDescentSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Batch GD is the "Diligence" algorithm. It looks at <strong>all the data</strong> before moving. This makes the path to the minimum very smooth, but it's <strong>Painfully Slow</strong> for massive datasets.
+          Batch GD is the "Diligence" algorithm. It looks at <strong>all the data</strong> before moving. This makes the path to the minimum very smooth, but it's <strong>Painfully Slow</strong> for massive datasets.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Manual Convergence</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Epoch 0] Initial Loss: 14.22 | w: 0.00, b: 0.00\n[Epoch 25] Stepping Down... Loss: 4.85 | w: 1.42, b: 0.95\n[Epoch 50] Middle Slope... Loss: 0.82 | w: 2.75, b: 1.82\n[Epoch 100] At the Base! Loss: 0.01 | w: 2.99, b: 1.99\n[Result] Convergence Achieved. Global Minimum Found.">
 import numpy as np
 

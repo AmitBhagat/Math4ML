@@ -12,23 +12,13 @@ export const pcaSection: TopicSection = {
       <p><strong>PCA</strong> is the most popular technique for <strong>Dimensionality Reduction</strong>. It uses the power of Eigenvalues and SVD to find the absolute best "Perspective" for looking at high-dimensional data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#steps">2. The 5 Steps of PCA</a>
-      <a href="#example-3d2d">Example 1: Reducing 3D Data to 2D</a>
-      <a href="#example-variance">Example 2: Covariance Matrix Eigen-analysis</a>
-      <a href="#implementation">Implementation (Python/Scikit-Learn)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, "More Features" is not always better. Features can be redundant (High-Correlation) or noisy. PCA finds the <strong>Principal Components</strong>—the directions in which the data is most spread out. By projecting data onto these components, we can keep the "Signal" while deleting the "Noise."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of PCA as <strong>Finding the Best Camera Angle</strong>. 
+        Think of PCA as <strong>Finding the Best Camera Angle</strong>. 
         Imagine a clear 3D statue of a horse. If you take a picture from the front, you might just see a circle. But if you take it from the side (the direction of maximum spread), you capture the whole horse in 2D. 
         PCA calculates that perfect "Side View" automatically.
       </div>
@@ -58,8 +48,8 @@ export const pcaSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example-3d2d">Example 1: Reducing 3D Data to 2D</h2>
-    <div class="example-box">
+    <h2 id="example-3d2d" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Reducing 3D Data to 2D</h2>
+    
       <h4>Problem: Visualizing a High-D Cluster</h4>
       <p>Data has features: [Height, Weight, Age]. If Age and Height are 100% correlated, can we simplify?</p>
       
@@ -80,10 +70,10 @@ export const pcaSection: TopicSection = {
           <strong>Result:</strong> We can plot this 3D data on a 2D screen without losing any important trends.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-variance">Example 2: Covariance Matrix Eigen-analysis</h2>
-    <div class="example-box">
+    <h2 id="example-variance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Covariance Matrix Eigen-analysis</h2>
+    
       <h4>Problem: Finding the PC for Cov = [[2, 1], [1, 2]]</h4>
       
       <div class="algorithm-steps">
@@ -107,9 +97,9 @@ export const pcaSection: TopicSection = {
           <strong>Result:</strong> By choosing PC1, you capture <strong>75%</strong> of the total variance (\(3 / (3+1)\)) with just one feature!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/Scikit-Learn)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 from sklearn.decomposition import PCA
 import numpy as np

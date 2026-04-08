@@ -12,15 +12,6 @@ export const hmmSection: TopicSection = {
       <p>Imagine you are a <strong>Prisoner in a Basement</strong>. You cannot see the weather (Rain or Sun). But every day, you see your <strong>Guard</strong> come in with or without an <strong>Umbrella</strong>. <strong>Hidden Markov Models</strong> are the math for guessing the "Hidden" weather based on the "Observable" guard. It's the standard tool for Speech Recognition and DNA Sequencing.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Latent vs. Observed</a>
-      <a href="#markov">The Markov Property: No Memory</a>
-      <a href="#math">Transition & Emission Matrices</a>
-      <a href="#viterbi">The Viterbi Search: Finding the Sequence</a>
-      <a href="#analogy">The "Invisible Reporter" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Latent vs. Observed</h2>
     <p>An HMM has two layers:</p>
     <ul>
@@ -31,7 +22,7 @@ export const hmmSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Connecting the Dots in Time."</strong> 
+        Think of it as <strong>"Connecting the Dots in Time."</strong> 
         The hidden states (\(Z_t\)) are the <strong>Reality</strong>. The observations (\(X_t\)) are the <strong>Symptoms</strong>. 
         Because the reality changes over time, we use a <strong>Markov Chain</strong> to model the transitions.
       </div>
@@ -49,7 +40,7 @@ export const hmmSection: TopicSection = {
     </ul>
 
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
-    <div class="example-box">
+    
       <h4>Scenario: What is the most likely sequence?</h4>
       <p>If you see [Umbrella, No Umbrella, Umbrella], what was the weather? [Rain, Sun, Rain] or [Rain, Rain, Rain]?</p>
       
@@ -63,10 +54,10 @@ export const hmmSection: TopicSection = {
           <div><strong>The Method:</strong> We use the <strong>Viterbi Algorithm</strong> (a Dynamic Programming trick) to find the "Best Path" through the trellis of possibilities.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Prisoner in the Basement</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Prisoner in the Basement</h2>
+    
       <h4>Scenario: Guessing the Weather from the Guard's Gear</h4>
       <p>Imagine you are a prisoner in a windowless room. You want to know if it's Raining or Sunny outside, but you only see your guard once a day.</p>
       
@@ -92,12 +83,12 @@ export const hmmSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> HMMs are the <strong>Sherlock Holmes of Time</strong>. They look at the "Clues" (Observations) to deduce the "Truth" (Hidden States) that caused them. This makes them perfect for Speech (Sound waves -> Typed words) or Bio-informatics (Protein sequence -> Function).
+          HMMs are the <strong>Sherlock Holmes of Time</strong>. They look at the "Clues" (Observations) to deduce the "Truth" (Hidden States) that caused them. This makes them perfect for Speech (Sound waves -> Typed words) or Bio-informatics (Protein sequence -> Function).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Viterbi Decoding</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Sequence: [Umbrella, No Umbrella]\n[Path A] 'Rain' -> 'Sun' Prob: 0.1215\n[Path B] 'Rain' -> 'Rain' Prob: 0.0315\n\n[Viterbi] Winner: 'Rain' followed by 'Sun'\n[Verdict] It was likely raining when the guard had the umbrella, but cleared up by the second visit.">
 import numpy as np
 

@@ -12,18 +12,7 @@ export const mleSection: TopicSection = {
       <p><strong>Maximum Likelihood Estimation (MLE)</strong> is the fundamental way we "train" models. It asks a simple question: "Given this data, what are the most likely parameters that could have produced it?" In ML, this is how we find the optimal weights for our models.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-coin">Example 1: Estimating Coin Bias</a>
-      <a href="#example-gauss">Example 2: Mean of Gaussian Data</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Likelihood vs Probability</strong>: Understanding the difference in perspective.</li>
@@ -31,27 +20,27 @@ export const mleSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>Probability allows us to predict data if we know the parameters. <strong>Likelihood</strong> works in reverse—we have the data, and we want to find the <strong>Parameters</strong>. <strong>MLE</strong> is the method of picking the parameter \(\theta\) that makes the observed data as "unsurprising" as possible.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of MLE as <strong>"Reverse Engineering."</strong> 
+        Think of MLE as <strong>"Reverse Engineering."</strong> 
         Imagine you find a machine that occasionally spits out Red or Blue balls. You see it spit out [Red, Red, Blue, Red]. 
         MLE asks: <em>"What is the most likely setting for the 'Red knob' on this machine?"</em> 
         If the knob is at 75%, this sequence is very likely. If the knob is at 10%, this sequence is a miracle. We pick 75%.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For i.i.d data \(x_1, \dots, x_n\), the likelihood is the product of individual probabilities:</p>
     <div class="math-block">$$L(\theta) = \prod_{i=1}^n P(x_i | \theta)$$</div>
     <p>We usually maximize the <strong>Log-Likelihood</strong> (\(\ell(\theta)\)) because it’s mathematically easier (it turns products into sums):</p>
     <div class="math-block">$$\ell(\theta) = \sum_{i=1}^n \log P(x_i | \theta)$$</div>
 
-    <h2 id="example-coin">Example 1: Estimating Coin Bias</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
+    
       <h4>Problem: Finding the "True" Chance of Heads</h4>
       <p>You flip a coin 10 times and get 7 Heads. Estimate the bias \(p\).</p>
       
@@ -80,10 +69,10 @@ export const mleSection: TopicSection = {
           <strong>Result:</strong> \(p = 0.7\). Our intuition matches the math: the most likely bias is exactly the observed ratio of successes.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-gauss">Example 2: Mean of Gaussian Data</h2>
-    <div class="example-box">
+    <h2 id="example-gauss" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Mean of Gaussian Data</h2>
+    
       <h4>Problem: Estimating the "Center" of Noise</h4>
       <p>Data: [10, 12, 11]. Assume data is Normal with unknown \(\mu\).</p>
       
@@ -104,9 +93,9 @@ export const mleSection: TopicSection = {
           <strong>Intuition:</strong> This is why we use <strong>MSE (Mean Squared Error)</strong> in Regression! It's not just a random choice; it is mathematically derived from the MLE of a Gaussian distribution. Max Likelihood = Min Error.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize

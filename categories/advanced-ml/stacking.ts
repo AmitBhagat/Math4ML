@@ -12,22 +12,13 @@ export const stackingSection: TopicSection = {
       <p>How do you know whether to trust an <strong>SVM</strong> or a <strong>Random Forest</strong> for a specific data point? You don't just vote (Bagging). You train <strong>Another Model</strong> to learn! <strong>Stacking</strong> uses a "Meta-Learner" that looks at the guesses of other models and learns their <strong>Strengths and Weaknesses</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Meta-Learning</a>
-      <a href="#architecture">The 2-Level Architecture</a>
-      <a href="#crossval">Avoiding Leakage (CV Stacking)</a>
-      <a href="#diversity">Heterogeneous Ensembles</a>
-      <a href="#analogy">The "Council of Experts" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Meta-Learning</h2>
     <p>Stacking is about <strong>Higher-Order Integration</strong>. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning who to trust."</strong> 
+        Think of it as <strong>"Learning who to trust."</strong> 
         The Meta-Learner says: "I've noticed that whenever the SVM says 'Spam', it's usually wrong, but when the Random Forest says 'Spam', it's 99% right. So, I will listen to the Forest." 
         It learns the <strong>Error Profile</strong> of every sub-model.
       </div>
@@ -57,7 +48,7 @@ export const stackingSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Stacking Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Meta-Learning Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -81,10 +72,10 @@ export const stackingSection: TopicSection = {
           <strong>Inference:</strong> For a new case, get base predictions first, then pass them through the Meta-Learner for the final result.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Orchestra Conductor</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Orchestra Conductor</h2>
+    
       <h4>Scenario: Mixing the Perfect Sound</h4>
       <p>Imagine world-class musicians playing together. They are all great in their own right, but they need a Conductor (Meta-Learner) to blend their specific strengths.</p>
       
@@ -110,12 +101,12 @@ export const stackingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Stacking is <strong>Meta-Learning</strong>. While Bagging (Voting) and Boosting (Weighting) use fixed mathematical rules, Stacking uses a <strong>Model of Models</strong>. It's the "Smartest" way to ensemble, but it's the easiest to overfit if you aren't careful with cross-validation.
+          Stacking is <strong>Meta-Learning</strong>. While Bagging (Voting) and Boosting (Weighting) use fixed mathematical rules, Stacking uses a <strong>Model of Models</strong>. It's the "Smartest" way to ensemble, but it's the easiest to overfit if you aren't careful with cross-validation.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Meta-Stack</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Initializing Base Models: Random Forest & Support Vector Machine.\n[Level 0] Base Model 1 (RF) Accuracy: 86.4%\n[Level 0] Base Model 2 (SVM) Accuracy: 84.1%\n[Action] Training Meta-Learner (Logistic Regression) on Out-Of-Fold predictions...\n\n[Result] Stacking Ensemble Accuracy: 92.5%\n[Insight] The Meta-Learner successfully combined RF and SVM to fix individual weaknesses.">
 from sklearn.ensemble import StackingClassifier
 from sklearn.ensemble import RandomForestClassifier

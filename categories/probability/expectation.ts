@@ -12,18 +12,7 @@ export const expectationSection: TopicSection = {
       <p>The <strong>Expected Value</strong> \(\mathbb{E}[X]\) is the average outcome you would get if you repeated a random experiment infinitely many times. In Machine Learning, we optimize models to minimize the <strong>Expected Loss</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-payoff">Example 1: Long-term Average Payoff</a>
-      <a href="#example-weighted">Example 2: Weighted Sum of Features</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Random Variables</strong>: Discrete vs. Continuous.</li>
@@ -31,13 +20,13 @@ export const expectationSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Probability Distribution says: <em>"Anything could happen."</em> Expectation says: <em>"On average, this is what will happen."</em> It is the <strong>Balance Point</strong> of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In ML, every prediction is essentially an "Expected Value" calculated from the data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Expected Value as a <strong>"Fair Bet."</strong> 
+        Think of Expected Value as a <strong>"Fair Bet."</strong> 
         If you play a game 1,000 times, you'll sometimes win big and sometimes lose. 
         Your <strong>Expectation</strong> is the number that tells you if, in the long run, you'll walk away with more money than you started with. 
         In ML, we don't care about a single "lucky" training batch; we care about the <strong>Expected Performance</strong> across all future data.
@@ -49,8 +38,8 @@ export const expectationSection: TopicSection = {
     <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>
     <p><strong>Linearity:</strong> \(\mathbb{E}[aX + b] = a\mathbb{E}[X] + b\). The average of a sum is the sum of the averages!</p>
 
-    <h2 id="example-payoff">Example 1: Long-term Average Payoff</h2>
-    <div class="example-box">
+    <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
+    
       <h4>Problem: Evaluating a Lottery</h4>
       <p>A ticket costs $5. You have a 1% chance to win $400 and a 99% chance to win $0. What is your expectation?</p>
       
@@ -75,10 +64,10 @@ export const expectationSection: TopicSection = {
           <strong>Result:</strong> Since the ticket costs $5 but only yields $4 on average, you will <strong>lose $1</strong> per ticket in the long run. The Expected Value is your reality check.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-weighted">Example 2: Weighted Sum of Features</h2>
-    <div class="example-box">
+    <h2 id="example-weighted" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Weighted Sum of Features</h2>
+    
       <h4>Problem: Finding the Center of Data</h4>
       <p>Data shows scores: [10, 10, 10, 50]. What's the expected score?</p>
       
@@ -99,9 +88,9 @@ export const expectationSection: TopicSection = {
           <strong>Result:</strong> 20 is the "Average" score. In Linear Regression, your prediction is essentially calculating this weighted expectation from the input features.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,23 +12,13 @@ export const matricesSection: TopicSection = {
       <p>A <strong>Matrix</strong> is a rectangular grid of numbers organized into rows and columns. In Machine Learning, matrices are used to represent everything from image pixel values to the weights of a neural network.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#operations">Mathematical Operations</a>
-      <a href="#example-image">Example 1: Grayscale Image Representation</a>
-      <a href="#example-transpose">Example 2: Matrix Transpose in Data Alignment</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If a vector is a single data point, a matrix is an <strong>entire dataset</strong>. Each row might represent a different house, and each column a different feature (price, size, year). Matrices allow us to process thousands of inputs in a single mathematical "swing."</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Matrix as a <strong>Batch Processor</strong>. 
+        Think of a Matrix as a <strong>Batch Processor</strong>. 
         Instead of calculating the price of one house at a time, you put all the house data into a matrix and multiply it by your weight vector. It’s the "Industrial Scale" version of vector math.
       </div>
     </div>
@@ -40,8 +30,8 @@ export const matricesSection: TopicSection = {
       <li><strong>Transpose (\(A^T\)):</strong> Flips the matrix over its diagonal, switching rows and columns.</li>
     </ul>
 
-    <h2 id="example-image">Example 1: Grayscale Image Representation</h2>
-    <div class="example-box">
+    <h2 id="example-image" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Grayscale Image Representation</h2>
+    
       <h4>Problem: Visualizing Pixels</h4>
       <p>Represent a 2x2 grayscale image where the top-left pixel is white (255), bottom-right is black (0), and others are gray (128).</p>
       
@@ -62,10 +52,10 @@ export const matricesSection: TopicSection = {
           <strong>Result:</strong> We've converted a visual concept into a matrix. Computer vision models "see" by reading these matrix values.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-transpose">Example 2: Matrix Transpose in Data Alignment</h2>
-    <div class="example-box">
+    <h2 id="example-transpose" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Matrix Transpose in Data Alignment</h2>
+    
       <h4>Problem: Pivoting Features</h4>
       <p>A dataset \(D = \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix}\) has 2 samples (rows) and 2 features (cols). Find \(D^T\).</p>
       
@@ -90,9 +80,9 @@ export const matricesSection: TopicSection = {
           <strong>Intuition:</strong> Transposing is like <strong>Rotating a Map</strong>. The info is the same, but the perspective changes—now features are rows and samples are columns. This is essential for calculating Correlation Matrices.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

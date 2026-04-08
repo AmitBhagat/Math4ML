@@ -12,15 +12,6 @@ export const ensembleIntroSection: TopicSection = {
       <p>Why use one model when you can use 1,000? <strong>Ensemble Learning</strong> is based on one powerful truth: <strong>The collective opinion of a diverse group is often more accurate than any single expert.</strong> By combining models that make different kinds of mistakes, we can "Average out" the errors and find the signal in the noise.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Error Decomposition</a>
-      <a href="#diversity">The Importance of Diversity</a>
-      <a href="#types">3 Core Strategies: Bagging, Boosting, Stacking</a>
-      <a href="#why">Why it Works: The Averaging Effect</a>
-      <a href="#analogy">The "Wisdom of the Crowd" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Error Decomposition</h2>
     <p>Total error can be broken down into <strong>Bias</strong>, <strong>Variance</strong>, and <strong>Irreducible Noise</strong>. Ensemble methods focus on reducing one of these two:</p>
     <ul>
@@ -31,7 +22,7 @@ export const ensembleIntroSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Correction through Collaboration."</strong> 
+        Think of it as <strong>"Correction through Collaboration."</strong> 
         If Model A thinks a 'Dog' is a 'Cat', but Model B, C, and D all think it's a 'Dog', the majority wins. The ensemble effectively <strong>Filters</strong> individual mistakes.
       </div>
     </div>
@@ -41,7 +32,7 @@ export const ensembleIntroSection: TopicSection = {
 
     <h2 id="types">The 3 Core Strategies</h2>
     <h2 id="algorithm">The Ensemble Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Ensemble Logic</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -65,10 +56,10 @@ export const ensembleIntroSection: TopicSection = {
           <strong>Output:</strong> The final "Strong" prediction is more robust than any individual guess.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Wisdom of the Council</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Wisdom of the Council</h2>
+    
       <h4>Scenario: Making a High-Stakes King's Decision</h4>
       <p>Imagine a King who must decide whether to go to war. He doesn't trust just one person, so he summons three advisors.</p>
       
@@ -94,12 +85,12 @@ export const ensembleIntroSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Ensembles work because of <strong>Error Cancellation</strong>. One model might be wrong about cats, another about dogs, but they are rarely wrong about <strong>The same thing at the same time</strong>. By averaging their results, you filter out the "Noise" and keep the "Signal."
+          Ensembles work because of <strong>Error Cancellation</strong>. One model might be wrong about cats, another about dogs, but they are rarely wrong about <strong>The same thing at the same time</strong>. By averaging their results, you filter out the "Noise" and keep the "Signal."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Voting Classifier</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Initializing Council: Logistic Regression, Tree, and SVM.\n[Action] Training members on parallel subsets of data...\n[Stat] Expert 1 (LR) Accuracy: 82%\n[Stat] Expert 2 (DT) Accuracy: 88%\n[Stat] Expert 3 (SVM) Accuracy: 85%\n[Result] Ensemble Voting Accuracy: 93%\n[Insight] The Collective out-performed its best individual member!">
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression

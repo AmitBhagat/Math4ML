@@ -12,15 +12,6 @@ export const rnnSection: TopicSection = {
       <p>How do you understand a <strong>Sentence</strong>? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Hidden State</a>
-      <a href="#math">The Recurrence Relation</a>
-      <a href="#bptt">BPTT: Backpropagation Through Time</a>
-      <a href="#limitations">The Short-Term Memory Problem</a>
-      <a href="#analogy">The "Goldfish" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Hidden State</h2>
     <p>An RNN has a <strong>Hidden State (\(h_t\))</strong> that acts as its memory. At each time step \(t\), the network takes two inputs: the <strong>Current Data (\(x_t\))</strong> and the <strong>Previous Memory (\(h_{t-1}\))</strong>.</p>
     <div class="math-block">$$h_t = \sigma(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$$</div>
@@ -32,7 +23,7 @@ export const rnnSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Updating your Story."</strong> 
+        Think of it as <strong>"Updating your Story."</strong> 
         The hidden state is the <strong>Current Version of the Story</strong>. 
         When a new word comes in, you update your story based on that word and your previous memory. 
         The story keeps <strong>evolving</strong> as the sequence progresses.
@@ -47,8 +38,8 @@ export const rnnSection: TopicSection = {
     <h2 id="limitations">The Short-Term Memory Problem</h2>
     <p><strong>The Reality:</strong> Simple RNNs have <strong>Terrible Memory</strong>. If a sentence is 20 words long, by the time the RNN reaches the last word, it has usually <strong>forgotten</strong> the first word. It only has "Short-Term" persistence.</p>
 
-    <h2 id="example">Illustrated Example: The Goldfish with a Notebook</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Goldfish with a Notebook</h2>
+    
       <h4>Scenario: Reading a Long Mystery Novel with Short-Term Memory</h4>
       <p>Imagine you have a 10-second memory. To understand a "Who-Done-It" book, you need a system to carry context.</p>
       
@@ -74,12 +65,12 @@ export const rnnSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> An RNN is <strong>Temporal</strong>. It doesn't just see the world; it sees the <strong>History</strong> of the world. But be careful—the notebook is small. If the story is too long, the 'Blame' for a bad prediction can't travel all the way back to page 1.
+          An RNN is <strong>Temporal</strong>. It doesn't just see the world; it sees the <strong>History</strong> of the world. But be careful—the notebook is small. If the story is too long, the 'Blame' for a bad prediction can't travel all the way back to page 1.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Temporal Memory Update</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Sequence] Step 0: Input 'Wait' -> Memory Strength: 0.12\n[Sequence] Step 1: Input 'For' -> Memory Strength: 0.45\n[Sequence] Step 2: Input 'It' -> Memory Strength: 0.82\n[Analysis] The Hidden State is evolving as new data 'updates' the existing context.\n[Result] Final Hidden Vector represents a 'compressed' history of the full sequence.">
 import numpy as np
 

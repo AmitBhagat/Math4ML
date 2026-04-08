@@ -12,18 +12,7 @@ export const hessianSection: TopicSection = {
       <p>The <strong>Hessian Matrix</strong> (\(\mathbf{H}\)) is a square grid containing <strong>all second-order partial derivatives</strong>. While the Gradient tells us "Direction" (Velocity), the Hessian tells us "Curvature" (Acceleration). In Machine Learning, it's the key to understanding if we are at a local minimum, a local maximum, or a saddle point.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-hessian">Example 1: Finding Curvature at a Point</a>
-      <a href="#example-newton">Example 2: Second-order Optimization (Newton)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Partial Derivatives</strong>: How to nudging one variable.</li>
@@ -31,13 +20,13 @@ export const hessianSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A Gradient (\(\nabla f\)) tells you which way to walk to reduce the loss. But it doesn't tell you how <strong>fast</strong> the slope is changing. Are you on a sharp peak? A flat valley? A <strong>Hessian</strong> tells the optimizer: <em>"Slow down, the ground is curving upwards!"</em> or <em>"Speed up, the slope is constant."</em> This is the difference between simple Gradient Descent and advanced "Second-Order" methods.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Hessian as <strong>The Road Condition</strong>. 
+        Think of the Hessian as <strong>The Road Condition</strong>. 
         The Gradient is your <strong>Steering Wheel</strong>. 
         The Hessian is how much you need to <strong>Brake or Accelerate</strong> because the road is curving. 
         If you are at the bottom of a bowl, the Hessian is "Positive Definite" (all curvas are up). 
@@ -46,7 +35,7 @@ export const hessianSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
     <div class="math-block">$$ \mathbf{H} = \begin{bmatrix} 
     \frac{\partial^2 f}{\partial x_1^2} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
@@ -54,8 +43,8 @@ export const hessianSection: TopicSection = {
     \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n^2} \end{bmatrix} $$</div>
     <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
 
-    <h2 id="example-hessian">Example 1: Finding Curvature at a Point</h2>
-    <div class="example-box">
+    <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Curvature at a Point</h2>
+    
       <h4>Problem: Finding the Hessian of \(f(x, y) = x^2 + 5xy + 3y^2\)</h4>
       
       <div class="algorithm-steps">
@@ -87,10 +76,10 @@ export const hessianSection: TopicSection = {
           <strong>Result:</strong> We now have a complete model of how the entire surface is "bending."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-newton">Example 2: Second-order Optimization (Newton)</h2>
-    <div class="example-box">
+    <h2 id="example-newton" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Second-order Optimization (Newton)</h2>
+    
       <h4>Problem: Taking a "Full Step" toward the Minimum</h4>
       <p>Given the Gradient \(\mathbf{g}\) and Hessian \(\mathbf{H}\), how does a smart optimizer take a step?</p>
       
@@ -111,9 +100,9 @@ export const hessianSection: TopicSection = {
           <strong>Intuition:</strong> If the ground is very curved (large Hessian), we take a smaller, careful step. If the ground is flat, we take a massive, confident step. This is much faster than simple Gradient Descent.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,22 +12,13 @@ export const precisionSection: TopicSection = {
       <p>If your model shouts <strong>"SPAM!"</strong> for every email, it's very effective at finding spam—but it also ruins your inbox. <strong>Precision</strong> is the metric that asks: "Of all the times you yelled 'Positive', how many were <strong>Actually</strong> positive?" It's the measure of your <strong>Credibility</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Denominator of Guesses</a>
-      <a href="#math">The Precision Formula</a>
-      <a href="#false-alarms">Avoiding False Alarms</a>
-      <a href="#use-case">When Precision is King</a>
-      <a href="#analogy">The "Detective" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Denominator of Guesses</h2>
     <p>Precision focuses <strong>Only</strong> on your positive predictions. It ignores the things you correctly ignored (TN). It only cares about the times you took <strong>Action</strong> and whether that action was <strong>Right</strong>.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Reliability Score."</strong> 
+        Think of it as <strong>"The Reliability Score."</strong> 
         If you say "Buy this Stock!", and it goes up, your precision is high. 
         If you say "Buy this Stock!", and it crashes, your precision is low. 
         Precision is about <strong>Not being a False Prophet</strong>.
@@ -44,8 +35,8 @@ export const precisionSection: TopicSection = {
     <h2 id="use-case">When Precision is King</h2>
     <p>Precision is the most important metric when the <strong>Cost of a False Positive is HIGH</strong>.</p>
     <ul>
-      <li><strong>Example 1:</strong> Sentencing someone to prison. If you are wrong (FP), an innocent person goes to jail. Precision must be <strong>Near 100%</strong>.</li>
-      <li><strong>Example 2:</strong> Content Moderation. If you block a harmless YouTube video (FP), the creator loses income. </li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Sentencing someone to prison. If you are wrong (FP), an innocent person goes to jail. Precision must be <strong>Near 100%</strong>.</li>
+      <li><strong><span class="text-green-premium font-bold">Case Study:</span> </strong> Content Moderation. If you block a harmless YouTube video (FP), the creator loses income. </li>
     </ul>
 
     <h2 id="analogy">The "Email Spam Filter" Analogy</h2>
@@ -61,7 +52,7 @@ export const precisionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Precision Calculation</h2>
-    <div class="example-box">
+    
       <h4>The Guess Validation Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -85,10 +76,10 @@ export const precisionSection: TopicSection = {
           <div><strong>Interpret:</strong> A score of 0.95 means every time the model says "Positive", it's right 95% of the time.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Honest Witness</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Honest Witness</h2>
+    
       <h4>Scenario: Declaring "Urgent" Mail in a Mailroom</h4>
       <p>Imagine a clerk sorting 1,000 envelopes. He only wants to mark an envelope as <strong>"Urgent"</strong> if it definitely contains a time-sensitive check. He is a perfectionist.</p>
       
@@ -114,12 +105,12 @@ export const precisionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> High precision usually means your model is <strong>Conservative</strong>. It's like a witness who only speaks when they are 100% sure. It's the "Quality" metric—perfect for when the cost of a mistake (False Positive) is high.
+          High precision usually means your model is <strong>Conservative</strong>. It's like a witness who only speaks when they are 100% sure. It's the "Quality" metric—perfect for when the cost of a mistake (False Positive) is high.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Calculating Credibility</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Analyzing 10 predictions vs. Reality...\n[Status] Total 'YES' predictions: 4\n[Verification] Correct 'YES' (TP): 3\n[Verification] False Alarms (FP): 1\n[Result] Precision = 3/4 = 75.0%\n[Insight] If this model flags an email as Spam, it's correct 75% of the time.">
 import numpy as np
 from sklearn.metrics import precision_score

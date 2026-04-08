@@ -12,18 +12,7 @@ export const confidenceIntervalsSection: TopicSection = {
       <p>A <strong>Confidence Interval (CI)</strong> is a mathematical "Safety Net." instead of giving a single point estimate (e.g., "The mean is 5.0"), it gives a range (e.g., "The mean is between 4.8 and 5.2"). In Machine Learning, this tells us exactly how much we should <strong>Trust</strong> our model's predictions.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-error">Example 1: Error Bars on Predictions</a>
-      <a href="#example-boot">Example 2: Bootstrapping for UI Latency</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Standard Error</strong>: Standard deviation of the sample mean.</li>
@@ -31,13 +20,13 @@ export const confidenceIntervalsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A single number is extremely fragile—it can be easily swayed by one outlier in your data. <strong>Confidence Intervals</strong> quantify the <strong>Precision</strong> of your work. A 95% Confidence Interval doesn't mean "The truth is 95% likely to be inside." It means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em></p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Confidence Interval as <strong>"Honesty in Data."</strong> 
+        Think of a Confidence Interval as <strong>"Honesty in Data."</strong> 
         If you predict a house price is $500k, but your interval is [$300k, $700k], your model is saying: <em>"I'm guessing, but don't bet your life on it."</em> 
         If the interval is [$495k, $505k], your model is highly confident. 
         In ML, we want these intervals to be as <strong>Narrow</strong> as possible.
@@ -52,8 +41,8 @@ export const confidenceIntervalsSection: TopicSection = {
       <li><strong>Standard Error</strong>: \(\frac{\sigma}{\sqrt{n}}\). Notice how larger samples (\(n\)) make the interval smaller/narrower!</li>
     </ul>
 
-    <h2 id="example-error">Example 1: Error Bars on Predictions</h2>
-    <div class="example-box">
+    <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
+    
       <h4>Problem: Finding the Range of Accuracy</h4>
       <p>Your model's mean accuracy is 85% with a Standard Error of 1% across 100 trials. What is the 95% Confidence Interval?</p>
       
@@ -78,10 +67,10 @@ export const confidenceIntervalsSection: TopicSection = {
           <strong>Result:</strong> Your model isn't just "85% accurate." It is <strong>Statistically Proven</strong> to be between 83% and 87%. You are now communicating like a true scientist.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-boot">Example 2: Bootstrapping for UI Latency</h2>
-    <div class="example-box">
+    <h2 id="example-boot" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bootstrapping for UI Latency</h2>
+    
       <h4>Problem: Measuring 'Average' Speed in the Real World</h4>
       <p>Data: 5 Latency points [10ms, 12ms, 15ms, 200ms (Outlier!), 11ms]. How do we get a robust interval?</p>
       
@@ -102,9 +91,9 @@ export const confidenceIntervalsSection: TopicSection = {
           <strong>Intuition:</strong> Even with small data or outliers, <strong>Bootstrapping</strong> gives us a reliable confidence interval without assuming the data is Normal. This is the "Gold Standard" for modern data science.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import scipy.stats as stats

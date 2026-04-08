@@ -12,18 +12,7 @@ export const mapSection: TopicSection = {
       <p><strong>Maximum a Posteriori (MAP)</strong> is the "Smarter" sibling of MLE. While MLE only cares about the current data, MAP allows us to input <strong>Prior Beliefs</strong> (e.g., "Weights should be small"). This is the mathematical foundation for <strong>Regularization</strong> in Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-coin">Example 1: Prior Belief about Coin Bias</a>
-      <a href="#example-ridge">Example 2: Ridge & Lasso Regularization</a>
-      <a href="#implementation">Implementation (Python/SciPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>MLE</strong>: Understanding Likelihood.</li>
@@ -31,26 +20,26 @@ export const mapSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>MLE asks: <em>"What parameters fit the data best?"</em> MAP asks: <em>"What parameters fit the data best <strong>AND</strong> make sense based on what I already know?"</em> If your dataset is tiny, MLE can be easily fooled by noise. MAP adds a "Brake" to the process, preventing the model from becoming too overconfident about extreme values.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of MAP as <strong>"Expert Advice."</strong> 
+        Think of MAP as <strong>"Expert Advice."</strong> 
         MLE is like an apprentice who only looks at the first 3 trials. If they see 3 heads, they scream "The coin is 100% rigged!" 
         MAP is like the Expert who says: <em>"I hear you, but my 20 years of experience (the Prior) tells me most coins are 50/50. I'll bet it's actually 60/40."</em> 
         MAP balances the data with your past knowledge.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>From Bayes' Theorem: \(P(\theta | X) \propto P(X | \theta) \cdot P(\theta)\). We maximize the log of this product:</p>
     <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} \left[ \log L(\theta) + \log P(\theta) \right]$$</div>
     <p>Notice how MAP is just <strong>MLE + a Prior Penalty</strong> (\(\log P(\theta)\)).</p>
 
-    <h2 id="example-coin">Example 1: Prior Belief about Coin Bias</h2>
-    <div class="example-box">
+    <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
+    
       <h4>Problem: Damping the Noise</h4>
       <p>Data: 2 Heads, 1 Tail. Bias from MLE is 66%. But your "Prior" is that coins are 50/50.</p>
       
@@ -79,10 +68,10 @@ export const mapSection: TopicSection = {
           <strong>Result:</strong> 57%. MAP pulled the wild 66% estimate back toward the 50% reality. It "smoothed" the data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-ridge">Example 2: Ridge & Lasso Regularization</h2>
-    <div class="example-box">
+    <h2 id="example-ridge" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Ridge & Lasso Regularization</h2>
+    
       <h4>Problem: Preventing Weights from Exploding</h4>
       <p>In Linear Regression, if you assume your weights follow a Gaussian prior \(\mathcal{N}(0, \sigma)\), what happens to the objective function?</p>
       
@@ -107,9 +96,9 @@ export const mapSection: TopicSection = {
           <strong>Intuition:</strong> This is exactly <strong>Ridge Regression (L2)</strong>! It's not just a trick to stop overfitting; it is the Bayesian decision to assume your weights are probably close to Zero.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/SciPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 from scipy.optimize import minimize

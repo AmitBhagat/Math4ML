@@ -12,18 +12,7 @@ export const chainRuleSection: TopicSection = {
       <p>The <strong>Chain Rule</strong> is the mathematical "telephone wire" that connects every layer of a neural network. It allows us to calculate how <strong>sensitive</strong> the final error is to a weight deep inside the model by multiplying the local sensitivities of every intermediate step.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-composite">Example 1: Composite Functions</a>
-      <a href="#example-backprop">Example 2: Backpropagation in a 2-Layer NN</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Simple Derivatives</strong>: How to differentiate individual terms.</li>
@@ -31,26 +20,26 @@ export const chainRuleSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>In Machine Learning, we don't just have one function mapping input to output. We have a <strong>Chain</strong> of functions: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\to\) Error. To train the network, we need to know: <em>"How much does that deep weight \(w\) affect the Final Error?"</em> The Chain Rule says we can just multiply the slopes of every connection along the path to find the answer.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Chain Rule as <strong>Passing a Secret</strong>. 
+        Think of the Chain Rule as <strong>Passing a Secret</strong>. 
         If Person A whispers to B, and B whispers to C, and C screams at D—how does A's whisper affect D's scream? 
         The Chain Rule multiplies the "loudness" (slope) of every person in the chain. 
         In ML, this is why we can train 100-layer "Deep" networks: we just keep multiplying the local gradients backwards!
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
     <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
     <p>For multivariable functions, you sum the paths: \(\frac{\partial f}{\partial t} = \sum_{i} \frac{\partial f}{\partial x_i} \cdot \frac{\partial x_i}{\partial t}\).</p>
 
-    <h2 id="example-composite">Example 1: Composite Functions</h2>
-    <div class="example-box">
+    <h2 id="example-composite" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Composite Functions</h2>
+    
       <h4>Problem: Derivative of \(f(x) = (3x^2 + 1)^4\)</h4>
       
       <div class="algorithm-steps">
@@ -78,10 +67,10 @@ export const chainRuleSection: TopicSection = {
           <strong>Result:</strong> We solved a complex problem by breaking it into two simple "linked" parts.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-backprop">Example 2: Backpropagation in a 2-Layer NN</h2>
-    <div class="example-box">
+    <h2 id="example-backprop" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Backpropagation in a 2-Layer NN</h2>
+    
       <h4>Problem: Error Sensitivity Flow</h4>
       <p>Let Loss \(L = e^a\) and activation \(a = wx\). Find how the loss changes with weight \(w\).</p>
       
@@ -106,9 +95,9 @@ export const chainRuleSection: TopicSection = {
           <strong>Result:</strong> This is exactly how <strong>Neural Network Training</strong> works. We calculate the local impact at each step and multiply them to get the "Global" impact of the weight.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,15 +12,6 @@ export const autoencodersSection: TopicSection = {
       <p>Traditional dimensionality reduction (like PCA) is <strong>Linear</strong>. But the world is <strong>Non-Linear</strong>. <strong>Autoencoders</strong> are neural networks designed to "bottleneck" information. They squeeze data into a tiny <strong>Latent Space</strong> and then try to <strong>reconstruct</strong> it perfectly. If they can rebuild the data from the bottleneck, they've successfully "learned" the essence of the information.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Encoder & Decoder</a>
-      <a href="#bottleneck">The Bottleneck: Latent Space</a>
-      <a href="#loss">Reconstruction Loss: The Only Teacher</a>
-      <a href="#variations">Variations: Denoising & Variational (VAE)</a>
-      <a href="#analogy">The "Language Translator" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Encoder & Decoder</h2>
     <p>An Autoencoder is a <strong>Symmetric</strong> neural network with two halves:</p>
     <ul>
@@ -31,7 +22,7 @@ export const autoencodersSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Learning to Summarize."</strong> 
+        Think of it as <strong>"Learning to Summarize."</strong> 
         The Encoder is like a <strong>Professional Notes-Taker</strong> who is forced to summarize a whole book into a <strong>Single Page</strong>. 
         The Decoder is like a <strong>Professor</strong> who has to recreate the whole book from that one page. 
         If the Professor's book is nearly identical to the original, the Notes-Taker has captured the <strong>True Essence</strong> of the story. 
@@ -47,7 +38,7 @@ export const autoencodersSection: TopicSection = {
     <p><strong>Note:</strong> We are teaching the machine to <strong>reproduce the truth</strong> using minimal resources.</p>
 
     <h2 id="variations">Variations: Denoising & Variational (VAE)</h2>
-    <div class="example-box">
+    
       <h4>Specialized Architectures:</h4>
       
       <div class="algorithm-steps">
@@ -60,7 +51,7 @@ export const autoencodersSection: TopicSection = {
           <div><strong>VAE (Variational):</strong> Instead of a fixed vector, the bottleneck learns a <strong>Probability Distribution</strong>. This allows it to <strong>generate new data</strong> that has never existed before!</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Lossy Mp3" Analogy</h2>
     <div class="callout success">
@@ -75,7 +66,7 @@ export const autoencodersSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Autoencoder Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Reconstruction Training Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -99,10 +90,10 @@ export const autoencodersSection: TopicSection = {
           <strong>Optimization:</strong> Update weights to minimize the reconstruction error, forcing the network to learn a better "Squeeze."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Information Funnel</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Information Funnel</h2>
+    
       <h4>Scenario: Summarizing a 1,000-page Novel into 5 Core Themes</h4>
       <p>Imagine you have to explain the entire "Lord of the Rings" trilogy to someone who only has 5 seconds to listen. You can't tell the whole story, so you must capture the "Essence."</p>
       
@@ -128,12 +119,12 @@ export const autoencodersSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Autoencoders are the "Swiss Army Knife" of Unsupervised Learning. They are used for <strong>Anomaly Detection</strong> (if the reconstruction error is too high, the data is weird), <strong>Denoising</strong>, and even <strong>Generating</strong> new data in the case of VAEs.
+          Autoencoders are the "Swiss Army Knife" of Unsupervised Learning. They are used for <strong>Anomaly Detection</strong> (if the reconstruction error is too high, the data is weird), <strong>Denoising</strong>, and even <strong>Generating</strong> new data in the case of VAEs.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Squeeze (Keras)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Scan] Input Layer: 784 pixels (Flattened 28x28 Image)\n[Action] Initializing bottleneck layer with 32 neurons (24.5x Squeeze)\n[Training] Epoch 50/50 - Reconstruction Loss (MSE): 0.0041\n[Result] Digit '7' reconstructed with 98.9% anatomical accuracy.\n[Discovery] The 32 summary-integers successfully captured 'Seven-ness'.">
 import tensorflow as tf
 from tensorflow.keras import layers, models

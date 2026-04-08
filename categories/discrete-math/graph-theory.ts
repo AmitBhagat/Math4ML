@@ -12,16 +12,6 @@ export const graphTheorySection: TopicSection = {
       <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like rows and columns, many real-world problems—like social networks and molecule structures—are better represented as a web of connected points.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#components">1. The Core Components</a>
-      <a href="#types">2. Types of Graphs</a>
-      <a href="#matrices">3. Adjacency Matrices</a>
-      <a href="#examples">Illustrative Examples</a>
-      <a href="#ai-ml">4. Why this matters for AI/ML</a>
-      <a href="#implementation">Python Implementation</a>
-    </div>
-
     <h2 id="components">1. The Core Components</h2>
     <p>Every graph $G$ is defined by two sets: $G = (V, E)$.</p>
     <div class="def-box">
@@ -75,9 +65,9 @@ export const graphTheorySection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="examples">Illustrative Examples</h2>
+    <h2 id="examples" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> s</h2>
 
-    <div class="example-box">
+    
       <h4>Problem: Building an Adjacency Matrix</h4>
       <p>Represent a simple <strong>Social Network</strong> of 4 users ($A, B, C, D$) where:
       <ul>
@@ -111,9 +101,9 @@ export const graphTheorySection: TopicSection = {
           <strong>Graph Insight:</strong> Notice the <strong>Symmetry</strong> along the diagonal. For friend $A$ (Row 1), we see connections at Column 2 ($B$) and Column 3 ($C$).
         </div>
       </div>
-    </div>
+    
 
-    <div class="example-box">
+    
       <h4>Problem: Calculating Degree Centrality</h4>
       <p>Identify the most influential node in the previous graph by calculating "Degree Centrality"—the number of direct edges connected to a node.</p>
       
@@ -134,7 +124,7 @@ export const graphTheorySection: TopicSection = {
           <strong>ML Usage:</strong> In GNNs, these degree counts are used for <strong>Normalization</strong> within Message Passing layers to prevent highly connected nodes from overwhelming the feature signals.
         </div>
       </div>
-    </div>
+    
     <ul>
       <li><strong>Knowledge Graphs:</strong> Powering search engines and LLMs by linking facts with semantic meanings.</li>
       <li><strong>Graph Neural Networks (GNNs):</strong> Predicting things like "Will these users become friends?" or "Is this molecule toxic?" using adjacency matrices and node features.</li>
@@ -148,7 +138,7 @@ export const graphTheorySection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="implementation">Python Implementation (NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

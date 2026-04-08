@@ -12,14 +12,6 @@ export const logisticRegressionSection: TopicSection = {
       <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for <strong>Binary Decisions</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Sigmoid: The Probability Filter</a>
-      <a href="#loss">Log-Loss: The Penalty for Being Wrong</a>
-      <a href="#decision">The Decision Threshold</a>
-      <a href="#analogy">The "Water Filter" Analogy</a>
-    </div>
-
     <h2 id="theory">The Sigmoid: The Probability Filter</h2>
     <p>In Linear Regression, your output can be anything (-\(\infty\) to \(\infty\)). That doesn't work for probability. To fix this, we pass the linear output \(z = wx + b\) through the <strong>Sigmoid Function</strong>:</p>
     <div class="math-block">$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</div>
@@ -27,7 +19,7 @@ export const logisticRegressionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Commitment."</strong> 
+        Think of it as <strong>"Commitment."</strong> 
         The linear part \(z\) is very "Wobbly"—it moves up and down. The Sigmoid is the <strong>S-Curve</strong> that says: "Anything above 0, I'm leaning toward 1 (Yes). Anything below 0, I'm leaning toward 0 (No)." It's the <strong>Soft Fence</strong>.
       </div>
     </div>
@@ -38,7 +30,7 @@ export const logisticRegressionSection: TopicSection = {
     <p><strong>Note:</strong> This loss function is <strong>BRUTAL</strong>. If the model is 99.9% confident that a picture is a Cat, but it's actually a Dog, the penalty is nearly <strong>Infinite</strong>. It forces the model to be honest about its uncertainty.</p>
 
     <h2 id="decision">The Decision Threshold</h2>
-    <div class="example-box">
+    
       <h4>Scenario: Email Filter</h4>
       <p>The model outputs <strong>0.85</strong> from the Sigmoid.</p>
       
@@ -52,7 +44,7 @@ export const logisticRegressionSection: TopicSection = {
           <div><strong>The Logic:</strong> You can tune this! If you are a <strong>Doctor</strong>, you might set the threshold to 0.1 because you'd rather have a <strong>False Positive</strong> than a <strong>False Negative</strong>.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="analogy">The "Water Filter" Analogy</h2>
     <div class="callout success">
@@ -67,7 +59,7 @@ export const logisticRegressionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Logistic Regression Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Probability Mapping</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -91,10 +83,10 @@ export const logisticRegressionSection: TopicSection = {
           <strong>Thresholding:</strong> Convert the final probability $\hat{y}$ into a label (e.g., if $\hat{y} > 0.5$, class = 1).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Squeezed Tube of Truth</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Squeezed Tube of Truth</h2>
+    
       <h4>Scenario: Predicting if a Gym Member will Churn</h4>
       <p>Imagine your linear prediction is a long, infinite pipe. You need to squash it into a 0-to-1 probability tube.</p>
       
@@ -120,12 +112,12 @@ export const logisticRegressionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Logistic Regression is the <strong>Basis of Neural Networks</strong>. A single neuron in a brain-like model is often just a logistic regression unit! It's the simplest "Switch" in AI.
+          Logistic Regression is the <strong>Basis of Neural Networks</strong>. A single neuron in a brain-like model is often just a logistic regression unit! It's the simplest "Switch" in AI.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Sigmoid Mapping</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Internal] Linear Score (z) for input: 2.12\n[Sigmoid] Squashing 2.12 into probability space...\n[Result] Probability of Churn: 89.1%\n[Decision] Predicted Class: 1 (Churn)\n[Insight] As visits per week DROPPED, the Sigmoid score CLIMBED.">
 import numpy as np
 from sklearn.linear_model import LogisticRegression

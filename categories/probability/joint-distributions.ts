@@ -12,18 +12,7 @@ export const jointDistributionsSection: TopicSection = {
       <p>A <strong>Joint Distribution</strong> (\(P(X, Y)\)) is a mathematical function that models the probability of two or more random variables occurring at the same time. In Machine Learning, we don't just care about one feature; we care about the <strong>Interaction</strong> between all our features.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Definition</a>
-      <a href="#example-scatter">Example 1: Scatter of Features</a>
-      <a href="#example-marginal">Example 2: Marginalizing Out a Variable</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Scalar PMFs and PDFs.</li>
@@ -31,13 +20,13 @@ export const jointDistributionsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" <strong>and</strong> "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
+        Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
         Instead of just one axis of data, you have two. 
         The "peaks" on this map tell you which combinations of (X, Y) are most common. 
         In ML, we use this to find out if features are correlated or if they are "moving" together in predictable ways.
@@ -50,8 +39,8 @@ export const jointDistributionsSection: TopicSection = {
       <li><strong>Marginal Distribution:</strong> To find the probability of just one variable, you "sum out" (marginalize) the others: \(P(X=x) = \sum_{y} P(x, y)\).</li>
     </ul>
 
-    <h2 id="example-scatter">Example 1: Scatter of Binary Features</h2>
-    <div class="example-box">
+    <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
+    
       <h4>Problem: Tracking Clicks and Purchases</h4>
       <p>Let \(X=1\) be a customer who clicked a link, and \(Y=1\) be a customer who made a purchase. The joint probabilities are:</p>
       <table>
@@ -77,10 +66,10 @@ export const jointDistributionsSection: TopicSection = {
           <strong>Result:</strong> Most customers don't click and don't buy (0.6). But knowing the click (\(X=1\)) significantly shifts our expectation that they might buy.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-marginal">Example 2: Marginalizing Out a Variable</h2>
-    <div class="example-box">
+    <h2 id="example-marginal" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Marginalizing Out a Variable</h2>
+    
       <h4>Problem: Finding the Overall Click-Rate</h4>
       <p>Given the table above, what is the probability that a customer clicks, regardless of whether they buy?</p>
       
@@ -101,9 +90,9 @@ export const jointDistributionsSection: TopicSection = {
           <strong>Result:</strong> 30% of our customers click. By "Marginalizing" out the purchase variable, we simplified a 2D problem back down to a 1D problem.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

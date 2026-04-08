@@ -12,15 +12,6 @@ export const naiveBayesSection: TopicSection = {
       <p><strong>Naive Bayes</strong> is one of the most efficient and surprisingly effective classifiers in Machine Learning. It doesn't look for geometric boundaries; it calculates the <strong>Probability</strong> of a class given a set of clues. It is "Naive" because it assumes every clue is independent of the others—a simplify-to-win strategy.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Foundation: Bayes' Theorem</a>
-      <a href="#naive">Why "Naive"? The Independence Assumption</a>
-      <a href="#formula">The Mathematical Derivation</a>
-      <a href="#laplace">Smoothing: The Zero-Frequency Fix</a>
-      <a href="#analogy">The "Sherlock Holmes" Analogy</a>
-    </div>
-
     <h2 id="theory">The Foundation: Bayes' Theorem</h2>
     <p>At its heart, Naive Bayes uses the most famous formula in probability to update our belief about a class based on new evidence:</p>
     <div class="math-block">$$P(C|x) = \frac{P(x|C) \cdot P(C)}{P(x)}$$</div>
@@ -37,12 +28,12 @@ export const naiveBayesSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Logic says we should look at how features interact. But Naive Bayes says: "I don't care about the drama between features. I'm just going to <strong>multiply</strong> all their individual probabilities and see what's left." 
+        Logic says we should look at how features interact. But Naive Bayes says: "I don't care about the drama between features. I'm just going to <strong>multiply</strong> all their individual probabilities and see what's left." 
         Even though this assumption is technically "Wrong," the resulting classifier is often <strong>95% as good</strong> as complex models but 1,000x faster.
       </div>
     </div>
 
-    <h2 id="formula">The Mathematical Derivation</h2>
+    <h2 id="formula">The Formal Definition</h2>
     <p>Because we assume independence, the Likelihood \(P(x|C)\) becomes the product of individual feature likelihoods:</p>
     <div class="math-block">$$P(C | x_1, \dots, x_n) \propto P(C) \prod_{i=1}^n P(x_i | C)$$</div>
     <p>To predict, we simply pick the Class $C$ that results in the <strong>Maximum A Posteriori (MAP)</strong> value.</p>
@@ -64,7 +55,7 @@ export const naiveBayesSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Naive Bayes Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Bayesian Workflow</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -88,9 +79,9 @@ export const naiveBayesSection: TopicSection = {
           <strong>Normalization:</strong> Pick the class with the <strong>Highest Score</strong>.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Sleuth's Email Filter</h2>
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Sleuth's Email Filter</h2>
     <p>Imagine Sherlock Holmes is classifying an email as <strong>Spam</strong> or <strong>Ham</strong> based on three words: "Prize", "Money", and "Meeting".</p>
     <ul>
       <li><strong>The Clues:</strong> "Prize" appears in 80% of Spam but only 1% of Ham. "Meeting" appears in 50% of Ham but only 2% of Spam.</li>
@@ -98,8 +89,8 @@ export const naiveBayesSection: TopicSection = {
       <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the <strong>Spam</strong> probability win out.</li>
     </ul>
 
-    <h2 id="example">Illustrated Example: The Bayesian Sleuth</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bayesian Sleuth</h2>
+    
       <h4>Scenario: Is this suspect 'Guilty' or 'Innocent'?</h4>
       <p>Imagine Sherlock Holmes has three clues. He assumes they are independent (The Naive part).</p>
       
@@ -125,12 +116,12 @@ export const naiveBayesSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Naive Bayes is <strong>Log-Linear</strong>. Even though it looks like multiplication, computers usually add the <strong>Logs</strong> of the probabilities to avoid "Underflow" (where numbers get so small the computer thinks they are zero).
+          Naive Bayes is <strong>Log-Linear</strong>. Even though it looks like multiplication, computers usually add the <strong>Logs</strong> of the probabilities to avoid "Underflow" (where numbers get so small the computer thinks they are zero).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Multinomial NB</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Learning from 4 labeled emails...\n[Input] New Email: 'Win prize money'\n[Finding] 'Prize' is 100% correlated with Spam in this dataset.\n[Finding] 'Money' is 100% correlated with Spam in this dataset.\n[Result] Classification: Spam\n[Insight] Even with Laplace smoothing, the evidence for Spam was overwhelming.">
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer

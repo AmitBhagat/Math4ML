@@ -12,22 +12,13 @@ export const baggingSection: TopicSection = {
       <p>How do you stop a model from being "Over-Sensitive"? You let it be part of a <strong>Democratic Election</strong>. <strong>Bagging</strong> (Bootstrap Aggregating) creates many versions of the same model, each trained on a slightly different "Slice" of the world. By <strong>Voting (Parallel processing)</strong>, the errors of any single model are canceled out by the others.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Variance Reduction</a>
-      <a href="#bootstrap">Bootstrapping: Sampling with Replacement</a>
-      <a href="#averaging">Aggregating: The Final Vote</a>
-      <a href="#forest">The Connection: Random Forest</a>
-      <a href="#analogy">The "Democratic Election" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Variance Reduction</h2>
     <p>Variance is the error caused by a model being too sensitive to <strong>Small Fluctuations</strong> in the training data. If you change 3 points in your dataset and your model's predictions change completely, you have high variance. Bagging averages these fluctuations away.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Taking Multiple Looks."</strong> 
+        Think of it as <strong>"Taking Multiple Looks."</strong> 
         If you look at a crime scene once, you might miss a clue. 
         If 100 detectives look at the scene from different angles, and we combine their reports, the final summary will be <strong>much more stable</strong>. 
       </div>
@@ -57,7 +48,7 @@ export const baggingSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Bagging Algorithm</h2>
-    <div class="example-box">
+    
       <h4>Parallel Diversity Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -81,10 +72,10 @@ export const baggingSection: TopicSection = {
           <strong>Output:</strong> Return the aggregated result, which has significantly lower variance than any individual model.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Multi-Jury Verdict</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Jury Verdict</h2>
+    
       <h4>Scenario: Deciding a High-Profile Court Case</h4>
       <p>Imagine a court case so complex that a single jury might be overwhelmed by bias or noise. To be safe, you use multiple independent juries.</p>
       
@@ -110,12 +101,12 @@ export const baggingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Bagging is a <strong>Variance Killer</strong>. If your model is too "Jumpily" reacting to every outlier in your data, put it in a bag! By averaging many points of view, you smooth those jumps into a stable, reliable prediction.
+          Bagging is a <strong>Variance Killer</strong>. If your model is too "Jumpily" reacting to every outlier in your data, put it in a bag! By averaging many points of view, you smooth those jumps into a stable, reliable prediction.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Training the Forest</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Creating noisy dataset with 1,000 samples...\n[Member] Training Single Decision Tree (High Variance)...\n[Ensemble] Training Bagging Forest (50 Trees in Parallel)...\n\n[Result] Single Tree Accuracy: 81.5%\n[Result] Bagging Forest Accuracy: 92.2%\n\n[Insight] Bagging successfully 'Averaged Out' the errors made by individual trees.">
 import numpy as np
 from sklearn.ensemble import BaggingClassifier

@@ -12,22 +12,13 @@ export const bayesianNetworksSection: TopicSection = {
       <p>Probabilities are rarely isolated. If it's raining, your grass is likely wet. If your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these <strong>Causal Relationships</strong>. By using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows through a complex system of uncertainty.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The DAG Structure</a>
-      <a href="#independence">Local Markov Property</a>
-      <a href="#math">Joint Probability Factorization</a>
-      <a href="#inference">Inference: Predicting the Unseen</a>
-      <a href="#analogy">The "Crime Scene" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The DAG Structure</h2>
     <p>A Bayesian Network consists of <strong>Nodes</strong> (Random Variables) and <strong>Edges</strong> (Direct Influence). The graph must be <strong>Acyclic</strong> (no loops), because a variable cannot be its own cause.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Storyboard."</strong> 
+        Think of it as <strong>"The Storyboard."</strong> 
         Each node is an event. The arrows tell the story of <strong>Who Influences Whom</strong>. 
         If there is no arrow between two nodes, it doesn't mean they aren't related—it just means they only talk to each other through <strong>intermediaries</strong>.
       </div>
@@ -42,7 +33,7 @@ export const bayesianNetworksSection: TopicSection = {
     <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
 
     <h2 id="inference">Inference: Predicting the Unseen</h2>
-    <div class="example-box">
+    
       <h4>Scenario: The Alarm System</h4>
       <p>Variables: [Burglary, Earthquake, Alarm, JohnCalls, MaryCalls]</p>
       
@@ -60,10 +51,10 @@ export const bayesianNetworksSection: TopicSection = {
           <div><strong>The Method:</strong> We use <strong>Variable Elimination</strong> or <strong>Belief Propagation</strong> to "Flow" the probability from the observation back to the cause.</div>
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Detective's Mental Map</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Detective's Mental Map</h2>
+    
       <h4>Scenario: Explaining Away the Broken Window</h4>
       <p>Imagine a detective finds a broken window in a mansion. There are two potential causes: A <strong>Burglar</strong> or a <strong>Baseball</strong> thrown by a neighborhood kid.</p>
       
@@ -89,12 +80,12 @@ export const bayesianNetworksSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
+          Bayesian Networks excel at this kind of <strong>Joint Reasoning</strong>. Unlike a standard Neural Network, you can track the exact flow of evidence and see *why* the model changed its mind. It is "Glass Box" AI.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Explaining Away</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
 import numpy as np
 

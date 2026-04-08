@@ -5,52 +5,42 @@ import { Copy, Check, Play, RotateCcw } from "lucide-react";
 import { useTheme } from "@/src/hooks/useTheme";
 
 // ── MONOKAI SYNTAX HIGHLIGHTER (Lightweight Regex) ──
-const highlightPython = (code: string) => {
-  // Common Colors (Synchronized with dark palette)
-  const colors = {
-    keyword: "#ff57a0", // Pink
-    type: "#50E3C2",    // Mint
-    function: "#ff9ac1", // Salmon
-    string: "#f8e71c",  // Yellow
-    number: "#ae81ff",  // Purple
-    comment: "#75715e", // Grey
-    special: "#ae81ff", // Purple
+const highlightPython = (code: string, isDark: boolean = true) => {
+  const colors = isDark ? {
+    kw: "#ff57a0", ty: "#50E3C2", fn: "#ff9ac1", str: "#f8e71c", num: "#ae81ff", com: "#75715e", sp: "#ae81ff"
+  } : {
+    kw: "#c71585", ty: "#006d5b", fn: "#9d174d", str: "#9a6700", num: "#7c3aed", com: "#64748b", sp: "#7c3aed"
   };
 
-  // 1. Define placeholders and storage for strings and comments
-  const protectedMap: Record<string, string> = {};
-  let protectedCounter = 0;
+  // Escaping logic
+  const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-  // Single-pass regex to identify strings and comments to preserve them
-  const protectedRegex = /(#.*)|(['"])(?:(?!\2|\\).|\\.)*\2/g;
-  
-  let html = code
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;");
+  // Single-pass aggregate regex:
+  // 1: Comments, 2: Strings, 3: Keywords, 4: Special constants, 5: Types (Capitalized), 6: Functions, 7: Numbers
+  const regex = /(#.*)|(['"](?:(?!\2|\\).|\\.)*\2)|(\b(?:def|class|if|else|elif|for|while|return|import|from|as|try|except|with|in|is|not|and|or|yield|pass|break|continue)\b)|(\b(?:self|cls|True|False|None)\b)|(\b[A-Z][a-zA-Z0-9_]*\b)|(\b[a-zA-Z_][a-zA-Z0-9_]*\b(?=\())|(\b\d+(?:\.\d+)?\b)/g;
 
-  // Protect potentially volatile tokens
-  html = html.replace(protectedRegex, (match, p1, p2) => {
-    const id = `__PROT_${protectedCounter++}__`;
-    const color = p1 ? colors.comment : colors.string;
-    protectedMap[id] = `<span style="color: ${color}">${match}</span>`;
-    return id;
+  let lastIndex = 0;
+  let html = "";
+
+  code.replace(regex, (match, com, str, kw, sp, ty, fn, num, offset) => {
+    // Add plain text between matches
+    html += escape(code.slice(lastIndex, offset));
+    
+    // Determine style based on which capture group matched
+    if (com) html += `<span style="color: ${colors.com}; font-weight: normal">${escape(match)}</span>`;
+    else if (str) html += `<span style="color: ${colors.str}; font-weight: 600">${escape(match)}</span>`;
+    else if (kw) html += `<span style="color: ${colors.kw}; font-weight: 600">${escape(match)}</span>`;
+    else if (sp) html += `<span style="color: ${colors.sp}; font-weight: 600">${escape(match)}</span>`;
+    else if (ty) html += `<span style="color: ${colors.ty}; font-weight: 600">${escape(match)}</span>`;
+    else if (fn) html += `<span style="color: ${colors.fn}; font-weight: normal">${escape(match)}</span>`;
+    else if (num) html += `<span style="color: ${colors.num}; font-weight: normal">${escape(match)}</span>`;
+    
+    lastIndex = offset + match.length;
+    return match;
   });
 
-  // 2. Highlighting keywords and other patterns on "clean" code
-  const keywords = /\b(def|class|if|else|elif|for|while|return|import|from|as|try|except|with|in|is|not|and|or|yield|pass|break|continue)\b/g;
-  html = html.replace(keywords, `<span style="color: ${colors.keyword}">$1</span>`);
-
-  html = html.replace(/\b([A-Z][a-zA-Z0-9_]*)\b/g, `<span style="color: ${colors.type}">$1</span>`);
-  html = html.replace(/\b(self|cls|True|False|None)\b/g, `<span style="color: ${colors.special}">$1</span>`);
-  html = html.replace(/\b(\d+(\.\d+)?)\b/g, `<span style="color: ${colors.number}">$1</span>`);
-  html = html.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)(?=\()/g, `<span style="color: ${colors.function}">$1</span>`);
-
-  // 3. Restore protected tokens
-  Object.keys(protectedMap).forEach(id => {
-    html = html.replace(id, protectedMap[id]);
-  });
-
+  // Add remaining text
+  html += escape(code.slice(lastIndex));
   return html;
 };
 
@@ -161,7 +151,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
   const editorMetrics = "text-[13px] md:text-[15.5px] font-mono leading-relaxed px-4 md:px-10 py-4 md:py-8";
 
   return (
-    <div className="my-8 md:my-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
+    <div className="mt-4 mb-10 md:mt-6 md:mb-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
       {/* ── Main Code Window (Glassmorphism Container) ── */}
       <div className={`rounded-[24px] shadow-2xl overflow-hidden transition-all duration-500 glass-panel
         ${isDark ? "shadow-indigo-500/10" : "shadow-slate-200"}`}>
@@ -262,8 +252,8 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
           ref={preRef}
           aria-hidden="true"
           className={`absolute inset-0 m-0 pointer-events-none whitespace-pre overflow-hidden ${editorMetrics}`}
-          style={{ color: "#ffffff" }}
-          dangerouslySetInnerHTML={{ __html: highlightPython(editedCode) + "\n" }}
+          style={{ color: isDark ? "#ffffff" : "var(--text)" }}
+          dangerouslySetInnerHTML={{ __html: highlightPython(editedCode, isDark) + "\n" }}
         />
 
         {/* Layer 2: Interactive Textarea */}
@@ -277,7 +267,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
           onScroll={handleScroll}
           spellCheck={false}
           wrap="off"
-          className={`relative w-full bg-transparent text-transparent caret-white 
+          className={`relative w-full bg-transparent text-transparent ${isDark ? "caret-white" : "caret-black"} 
                      resize-none outline-none border-none focus:outline-none transition-colors 
                      overflow-x-auto min-h-[120px] ${editorMetrics}`}
           style={{ overflowY: "hidden" }}

@@ -12,22 +12,13 @@ export const lossFunctionsSection: TopicSection = {
       <p>How do we tell a machine it is failing? We need a single number that represents the <strong>Magnitude of its Error</strong>. <strong>Loss Functions</strong> (or Cost Functions) are the mathematical judges that penalize wrong predictions. The goal of all Gradient Descent is to find the bottom of this "Loss Valley."</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Error Surface</a>
-      <a href="#regression">Regression: Mean Squared Error (MSE)</a>
-      <a href="#classification">Classification: Cross-Entropy</a>
-      <a href="#log-loss">Log-Loss: Penalizing Confidence</a>
-      <a href="#analogy">The "Moral Compass" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Error Surface</h2>
     <p>Loss functions define a <strong>Higher-Dimensional Surface</strong>. If your parameters are perfect, you are at the <strong>Global Minimum</strong> (Zero Loss). If you are wrong, the loss value is high. Gradient Descent "Rolls" the ball down the slope of this surface to reach the bottom.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Price of Failure."</strong> 
+        Think of it as <strong>"The Price of Failure."</strong> 
         Different problems have <strong>different penalties</strong>. 
         If you miss a <strong>House Price</strong> by $1,000, that's okay. 
         If you are <strong>100% Confident</strong> that a Dog is a Cat, the penalty should be massive. The type of loss tells the machine <strong>what matters</strong>.
@@ -44,8 +35,8 @@ export const lossFunctionsSection: TopicSection = {
     <div class="math-block">$$L = -\sum y_i \log(\hat{y}_i)$$</div>
     <p><strong>Log-Loss:</strong> Penalizes the model <strong>Exponentially</strong> for being "Confidently Wrong." If you say 99.9% but are wrong, the Log-Loss will destroy your gradient.</p>
 
-    <h2 id="example">Illustrated Example: The Coach's Rulebook</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Coach's Rulebook</h2>
+    
       <h4>Scenario: Training an Athlete for the Olympics</h4>
       <p>The <strong>Loss</strong> is the punishment for a bad result. The 'Judge' (Loss Function) chooses the penalty.</p>
       
@@ -71,12 +62,12 @@ export const lossFunctionsSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Picking the wrong loss is like a coach training a swimmer for a marathon. The math will run, but the results will be a disaster. <strong>MSE for Regression, Cross-Entropy for Classification.</strong> Period.
+          Picking the wrong loss is like a coach training a swimmer for a marathon. The math will run, but the results will be a disaster. <strong>MSE for Regression, Cross-Entropy for Classification.</strong> Period.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Error Calculations</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Evaluating 3 test cases...\n[Regression] MSE (True 100, Pred 150): 2500.0\n[Classification] Cross-Entropy (Confident Wrong - 0.1): 2.30\n[Classification] Cross-Entropy (Hesitant Wrong - 0.4): 0.91\n[Insight] Notice how the penalty for a 0.1 guess is 2.5x higher than a 0.4 guess. Confidence kills models!">
 import numpy as np
 

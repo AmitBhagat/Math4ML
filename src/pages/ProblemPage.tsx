@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 // @ts-expect-error - Contribution types missing
 import renderMathInElement from 'katex/dist/contrib/auto-render';
-import { ChevronRight, ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronRight, ArrowLeft } from "lucide-react";
 import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 import { CategoryData, TopicSection, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
@@ -240,52 +240,6 @@ export const ProblemPage = () => {
         )}
       </div>
 
-      {/* ─── Navigation Footer ─── */}
-      <nav className="mt-24 pt-10 border-t border-border-premium flex flex-col sm:flex-row items-center justify-between gap-6">
-          {prevProblem ? (
-            <Link 
-              to={clusterId ? `/${clusterId}/${categoryId}/${prevProblem.id}` : `/${categoryId}/${prevProblem.id}`}
-              className="flex flex-col gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline"
-              style={{
-                borderColor: prevProblem.color ? `${prevProblem.color}40` : undefined,
-              }}
-            >
-              <span 
-                className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] transition-colors"
-                style={{ color: prevProblem.color || undefined }}
-              >
-                <ArrowLeft className="w-3.5 h-3.5" /> Previous Section
-              </span>
-              <h3 className="font-headline font-black text-xl text-on-surface group-hover:opacity-80 transition-opacity">
-                {prevProblem.title}
-              </h3>
-            </Link>
-          ) : (
-            <div className="hidden sm:block min-w-[280px]"></div>
-          )}
-
-          {nextProblem ? (
-            <Link 
-              to={clusterId ? `/${clusterId}/${categoryId}/${nextProblem.id}` : `/${categoryId}/${nextProblem.id}`}
-              className="flex flex-col items-end gap-1.5 p-6 rounded-xl bg-bg-secondary border border-border-premium hover:bg-bg-tertiary transition-all group w-full sm:w-auto sm:min-w-[280px] no-underline text-right"
-              style={{
-                borderColor: nextProblem.color ? `${nextProblem.color}40` : undefined,
-              }}
-            >
-              <span 
-                className="flex items-center gap-2 text-[10px] font-black text-muted-premium uppercase tracking-[0.2em] transition-colors"
-                style={{ color: nextProblem.color || undefined }}
-              >
-                Next Section <ArrowRight className="w-3.5 h-3.5" />
-              </span>
-              <h3 className="font-headline font-black text-xl text-on-surface group-hover:opacity-80 transition-opacity">
-                {nextProblem.title}
-              </h3>
-            </Link>
-          ) : (
-            <div className="hidden sm:block min-w-[280px]"></div>
-          )}
-      </nav>
     </div>
   );
 };

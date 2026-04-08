@@ -12,21 +12,13 @@ export const gradientBoostingSection: TopicSection = {
       <p>While <strong>Random Forest</strong> builds trees in parallel (Bagging), <strong>Gradient Boosting</strong> builds them <strong>In Sequence</strong>. Each new tree has one goal: <strong>Fix the Mistakes</strong> of the previous group. It's the most powerful way to extract the "Hard Patterns" from complex data.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: Negative Gradients</a>
-      <a href="#residuals">Residuals: The Target Shift</a>
-      <a href="#learning-rate">Shrinkage: The Learning Rate</a>
-      <a href="#analogy">The "Golf Course" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: Negative Gradients</h2>
     <p>Think of Gradient Boosting as <strong>Gradient Descent in Function Space</strong>. We have an existing model \(F_{t-1}(x)\). We want a new model \(F_t(x) = F_{t-1}(x) + h_t(x)\) where \(h_t(x)\) minimizes the loss function. The "Answer" to this problem is to make \(h_t(x)\) follow the <strong>Negative Gradient</strong> of the Loss.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Layering the Model."</strong> 
+        Think of it as <strong>"Layering the Model."</strong> 
         The first tree makes a <strong>Rough Guess</strong>. 
         The second tree doesn't look at the original data; it looks at the <strong>Error (The Residual)</strong> of the first tree. 
         It says: "I see Tree 1 missed these 10 samples. I'll focus <strong>only</strong> on them." 
@@ -35,7 +27,7 @@ export const gradientBoostingSection: TopicSection = {
     </div>
 
     <h2 id="residuals">Residuals: The Target Shift</h2>
-    <div class="example-box">
+    
       <h4>Scenario: Predicting Age</h4>
       <p>Target Age: 30. Tree 1 Guess: 22.</p>
       
@@ -53,7 +45,7 @@ export const gradientBoostingSection: TopicSection = {
           <div><strong>The Result:</strong> Combine them. \(22 + 8 = 30\). We've reached the Truth by <strong>Incremental Correction</strong>.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="learning-rate">Shrinkage: The Learning Rate</h2>
     <p><strong>The Gotcha:</strong> If you add 100% of the new tree's guess every time, the model will <strong>Overfit</strong> instantly. 
@@ -74,7 +66,7 @@ export const gradientBoostingSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Gradient Boosting Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The Iterative Correction Loop</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -98,10 +90,10 @@ export const gradientBoostingSection: TopicSection = {
           <strong>Repeat:</strong> Continue until the mistakes are tiny or you reach the tree limit.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Relentless Golf Coach</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Relentless Golf Coach</h2>
+    
       <h4>Scenario: Perfecting Your Swing</h4>
       <p>Instead of hitting 100 balls at once, you hit one ball and then fix the specific mistake of that shot.</p>
       
@@ -127,12 +119,12 @@ export const gradientBoostingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Gradient Boosting is a <strong>Sequential Learner</strong>. It's slower to train than Random Forest, but it's usually much more powerful because it's targeted and relentless.
+          Gradient Boosting is a <strong>Sequential Learner</strong>. It's slower to train than Random Forest, but it's usually much more powerful because it's targeted and relentless.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Stage-wise Correction</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Initializing with 'Dumb' model (Avg prob: 0.5)\n[Stages] Tree 1: Focus on easy samples. Tree 2: Focus on mistakes.\n[Stages] Tree 100: Precise fine-tuning reached!\n[Input] Testing case [9, 4]...\n[Result] Confidence Strategy: 99.8% POSITIVE\n[Insight] Notice how Boosting 'hones in' on the truth over multiple stages.">
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier

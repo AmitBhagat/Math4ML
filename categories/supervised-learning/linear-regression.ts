@@ -12,14 +12,6 @@ export const linearRegressionSection: TopicSection = {
       <p>Imagine you have a cloud of data points and you want to draw a <strong>single straight line</strong> that passes as close to all of them as possible. That is <strong>Linear Regression</strong>. It's the "Hello World" of Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Line Equation</a>
-      <a href="#ols">Ordinary Least Squares (OLS)</a>
-      <a href="#assumptions">The "Linear" Assumptions</a>
-      <a href="#analogy">The "Perfect String" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Line Equation</h2>
     <p>In Simple Linear Regression (one feature), we model the relationship as:</p>
     <div class="math-block">$$y = w \cdot x + b + \epsilon$$</div>
@@ -32,7 +24,7 @@ export const linearRegressionSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Finding the Relationship."</strong> 
+        Think of it as <strong>"Finding the Relationship."</strong> 
         If \(w = 2\), the model says: "For every 1 extra room in a house, the price goes up by $2,000." If you miss a House Price by $1,000, that's okay. 
         It's a simple, logical rule that humans and machines can both understand.
       </div>
@@ -61,7 +53,7 @@ export const linearRegressionSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Linear Regression Algorithm (OLS)</h2>
-    <div class="example-box">
+    
       <h4>Closed-Form Solution Steps</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -85,10 +77,10 @@ export const linearRegressionSection: TopicSection = {
           <strong>Intercept:</strong> Compute \(b = \bar{y} - w\bar{x}\).
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The Best-Fit String</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Best-Fit String</h2>
+    
       <h4>Scenario: Pricing Houses by their Size</h4>
       <p>Imagine your data points are pins on a board. You want to stretch a piece of elastic across them.</p>
       
@@ -114,12 +106,12 @@ export const linearRegressionSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Linear Regression is <strong>Interpretable</strong>. Unlike deep learning, you can explain exactly why the model made a choice. "The price is $X because the slope is $Y." It's the king of transparent AI.
+          Linear Regression is <strong>Interpretable</strong>. Unlike deep learning, you can explain exactly why the model made a choice. "The price is $X because the slope is $Y." It's the king of transparent AI.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The Normal Equation</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Training] Solving for the optimal line using OLS...\n[Model] Price = 200.0 * Sqft + 0.0\n[Prediction] Real Estate Estimate for 2000 sqft: $400,000\n[Verify] Manual Check: 200 * 2000 + 0 = 400,000. Spot on!">
 import numpy as np
 from sklearn.linear_model import LinearRegression

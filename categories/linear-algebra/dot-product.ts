@@ -12,18 +12,7 @@ export const dotProductSection: TopicSection = {
       <p>The <strong>Dot Product</strong> (or inner product) is the mathematical heart of almost every modern ML model, from Linear Regression to Large Language Models (LLMs).</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Derivation</a>
-      <a href="#example-nlp">Example 1: Word Similarity in NLP</a>
-      <a href="#example-orthogonality">Example 2: Orthogonality Check</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>Vector Basics</strong>: Multiplying and summing components.</li>
@@ -31,24 +20,24 @@ export const dotProductSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>At its core, the Dot Product answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em></p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
+        Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
       </div>
     </div>
 
-    <h2 id="derivation">Mathematical Derivation</h2>
+    <h2 id="derivation">Formal Definition</h2>
     <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
     <p>Alternatively, using the angle \(\theta\) between them:</p>
     <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta)$$</div>
 
-    <h2 id="example-nlp">Example 1: Word Similarity in NLP</h2>
-    <div class="example-box">
+    <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
+    
       <h4>Problem: Comparing Sentiments</h4>
       <p>Compare \(\mathbf{v}_1 = [1, 1]\) (Positive) and \(\mathbf{v}_2 = [1, -1]\) (Negative).</p>
       
@@ -69,10 +58,10 @@ export const dotProductSection: TopicSection = {
           <strong>Result:</strong> Zero indicates <strong>Orthogonality</strong>. In NLP, this means these two concepts are completely independent or "on different planets."
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-orthogonality">Example 2: Alignment Check</h2>
-    <div class="example-box">
+    <h2 id="example-orthogonality" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Alignment Check</h2>
+    
       <h4>Problem: Similarity of [3, 4] and [4, 3]</h4>
       <p>Are these two vectors pointing in roughly the same direction?</p>
       
@@ -93,9 +82,9 @@ export const dotProductSection: TopicSection = {
           <strong>Result:</strong> YES. High dot product means high alignment. They share most of their "energy" in the same directions.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

@@ -12,22 +12,13 @@ export const lstmGruSection: TopicSection = {
       <p>How do we give a Goldfish a memory that lasts longer than 5 seconds? We give it a <strong>Hardcover Diary</strong>. <strong>Long Short-Term Memory (LSTM)</strong> and <strong>Gated Recurrent Units (GRU)</strong> are the evolution of the RNN. They use <strong>Gates</strong> to decide which information is worth keeping for 100 pages and which should be forgotten immediately.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Theoretical Core: The Constant Cell State</a>
-      <a href="#gates">3 Gates of the LSTM: Forget, Input, Output</a>
-      <a href="#gru">The Leaner Brother: GRU Architecture</a>
-      <a href="#vanishing">Solving the Vanishing Gradient</a>
-      <a href="#analogy">The "Diary and Eraser" Analogy</a>
-    </div>
-
     <h2 id="theory">Theoretical Core: The Constant Cell State</h2>
     <p>A simple RNN is one big mess of gradients. LSTM introduces a <strong>Cell State (\(C_t\))</strong> that acts as a <strong>Conveyor Belt</strong> through time. Information can flow across it with <strong>Zero Change</strong> if the gates allow it. This is how we remember the beginning of a paragraph at the end of a book.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"Selective Writing."</strong> 
+        Think of it as <strong>"Selective Writing."</strong> 
         The cell state is the <strong>Permanent Ink</strong>. 
         The gates are <strong>Electronic Checkpoints</strong>. 
         Checkpoint 1 (Forget Gate) decides what to <strong>Erase</strong>. 
@@ -37,7 +28,7 @@ export const lstmGruSection: TopicSection = {
     </div>
 
     <h2 id="gates">The 3 Gates of the LSTM</h2>
-    <div class="example-box">
+    
       <h4>How to Control the Flow:</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -53,14 +44,14 @@ export const lstmGruSection: TopicSection = {
           <div><strong>Output Gate (\(o_t\)):</strong> Decides what to "Report" based on the internal diary and the current input.</div>
         </div>
       </div>
-    </div>
+    
 
     <h2 id="gru">The GRU: Gating Simplified</h2>
     <p><strong>The Theory:</strong> GRU is a simplified version of LSTM. It merges the cell state and hidden state into <strong>One</strong>, and combines the Forget and Input gates into a single <strong>Update Gate</strong>. 
     <strong>Why use it?</strong> It's almost as powerful as LSTM but <strong>Much Faster to Train</strong> because it has fewer parameters. It is the modern choice for smaller datasets.</p>
 
-    <h2 id="example">Illustrated Example: The Disciplined Scientist</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Disciplined Scientist</h2>
+    
       <h4>Scenario: Keeping a Lab Journal on a 10-Year Mars Mission</h4>
       <p>Imagine you are a scientist with limited ink and one journal (The Cell State). You must be ruthless about what you record.</p>
       
@@ -86,12 +77,12 @@ export const lstmGruSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> LSTM is the <strong>Traffic Controller of Memory</strong>. By using the "Cell State" as a high-speed bypass, it allows important signals to skip over the noisy layers and reach the future intact.
+          LSTM is the <strong>Traffic Controller of Memory</strong>. By using the "Cell State" as a high-speed bypass, it allows important signals to skip over the noisy layers and reach the future intact.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Selective Gating</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Scan] Start: Cell State=0.0 (Empty Journal)\n[Input] Found 'Water' -> Forget: 0.9, Input: 1.0\n[Scan] Middle: 5 years of 'Boring Rocks' -> Input Gate: 0.0\n[Result] Step 10: Cell State=0.89 (Water Discovery Survived!)\n[Insight] The gates successfully blocked the noise and preserved the signal.">
 import numpy as np
 

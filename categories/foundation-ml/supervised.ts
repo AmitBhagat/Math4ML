@@ -12,14 +12,6 @@ export const supervisedLearningSection: TopicSection = {
       <p><strong>Supervised Learning</strong> is the machine equivalent of learning with a tutor. Every data point you feed the model comes with the <strong>"Right Answer"</strong> (the Label). The goal is for the model to learn a general mapping so it can guess the answers for data it has never seen before.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">The Mechanics: Mapping Inputs to Outputs</a>
-      <a href="#regression">Regression: Predicting Infinite Numbers</a>
-      <a href="#classification">Classification: Predicting Categories</a>
-      <a href="#limitations">The "Labeling Tax" (Limitations)</a>
-    </div>
-
     <h2 id="theory">The Mechanics: Mapping Inputs to Outputs</h2>
     <p>In Supervised Learning, we have an input vector \(X\) and a known target \(Y\). We want to find a function \(f\) such that:</p>
     <div class="math-block">$$Y = f(X) + \epsilon$$</div>
@@ -28,13 +20,13 @@ export const supervisedLearningSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as a <strong>"Flashcard Simulator."</strong> 
+        Think of it as a <strong>"Flashcard Simulator."</strong> 
         The machine sees a picture (Input), guesses "Cow" (Output), looks at the back of the card (Label), sees it says "Dog," and slightly tweaks its internal neural weights to be more "Dog-like" next time. Done 10,000 times, it builds a robust mapping.
       </div>
     </div>
 
-    <h2 id="example">Illustrated Example: The Flashcard Challenge</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
+    
       <h4>Scenario: Training a Medical Assistant</h4>
       <p>Imagine you have 10,000 X-rays. 5,000 are "Healthy" and 5,000 have "Pneumonia."</p>
       
@@ -56,12 +48,12 @@ export const supervisedLearningSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> Supervised learning is <strong>Feedback-Driven</strong>. No label = No feedback = No learning.
+          Supervised learning is <strong>Feedback-Driven</strong>. No label = No feedback = No learning.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: Regression vs. Classification</h2>
+    <h2 id="python">Implementation</h2>
     <python-code static-output="[Regression] Predicted House Price: $352,450\n[Classification] Predicted Email: Spam">
 import numpy as np
 from sklearn.linear_model import LinearRegression, LogisticRegression

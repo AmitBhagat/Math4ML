@@ -12,23 +12,13 @@ export const matrixRankSection: TopicSection = {
       <p>The <strong>Rank</strong> of a Matrix is the maximum number of linearly independent rows or columns. It tells you the <strong>true dimension</strong> of the data hidden within the grid.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#rules">2. Properties of Rank</a>
-      <a href="#example-redundant">Example 1: Detecting Rank-Deficient Data</a>
-      <a href="#example-density">Example 2: Rank as Information Density</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>You might have a spreadsheet with 100 columns (features), but if 80 of them are just combinations of others, your <strong>Matrix Rank</strong> is only 20. Rank is the "Reality Check" that tells you how much unique information you actually have before you start training a model.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
+        Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
         If 5 people testify but 4 of them are just repeating exactly what the first person said, you only have <strong>Rank 1</strong> evidence. 
         In ML, high rank means diverse, "independent" features. Low rank means "noisy" or redundant data.
       </div>
@@ -41,8 +31,8 @@ export const matrixRankSection: TopicSection = {
       <li><strong>Column Rank = Row Rank:</strong> The number of unique columns always equals the number of unique rows!</li>
     </ul>
 
-    <h2 id="example-redundant">Example 1: Detecting Rank-Deficient Data</h2>
-    <div class="example-box">
+    <h2 id="example-redundant" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Detecting Rank-Deficient Data</h2>
+    
       <h4>Problem: Finding the Hidden Dimension</h4>
       <p>For \(A = \begin{bmatrix} 1 & 2 \\ 2 & 4 \\ 3 & 6 \end{bmatrix}\), find the rank.</p>
       
@@ -63,10 +53,10 @@ export const matrixRankSection: TopicSection = {
           <strong>Result:</strong> \(\text{Rank} = 1\). Despite having 3 rows, this matrix only contains information along a single 1D line in 3D space.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-density">Example 2: Rank as Information Density</h2>
-    <div class="example-box">
+    <h2 id="example-density" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rank as Information Density</h2>
+    
       <h4>Problem: Checking for Invertibility</h4>
       <p>Is \(A = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}\) full rank?</p>
       
@@ -87,9 +77,9 @@ export const matrixRankSection: TopicSection = {
           <strong>Result:</strong> \(\text{Rank} = 2\). Since it's a 2x2 matrix, it's "Full Rank" and fully invertible. No data is being squashed here.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 

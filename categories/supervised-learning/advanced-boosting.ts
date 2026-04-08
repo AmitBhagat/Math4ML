@@ -12,21 +12,13 @@ export const advancedBoostingSection: TopicSection = {
       <p>In the world of <strong>Tabular Data</strong> (Excel sheets, SQL tables), Deep Learning is often beaten by <strong>Gradient Boosting Engines</strong>. These are the "Formula 1" cars of Machine Learning. They take the core concept of Boosting and add advanced engineering to make it <strong>Blazing Fast</strong> and <strong>Incredibly Accurate</strong>.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#xgboost">XGBoost: The Extensible Optimizer</a>
-      <a href="#lightgbm">LightGBM: The Speed Demon</a>
-      <a href="#catboost">CatBoost: The Categorical King</a>
-      <a href="#analogy">The "Race Car" Analogy</a>
-    </div>
-
     <h2 id="xgboost">XGBoost: The Extensible Optimizer</h2>
     <p><strong>XGBoost</strong> became famous by winning almost every Kaggle competition. It adds <strong>L1/L2 Regularized Loss</strong> directly into the tree-building process. It doesn't just grow trees; it <strong>Prunes</strong> them using the "Systematic Gain" (Similarity Score).</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Sharpest Mind."</strong> 
+        Think of it as <strong>"The Sharpest Mind."</strong> 
         It is very clever. It calculates exactly how much "Information" it's gaining at every split and <strong>prunes</strong> branches that don't help much. It handles missing values for you and is mathematically very "Clean."
       </div>
     </div>
@@ -37,7 +29,7 @@ export const advancedBoostingSection: TopicSection = {
     <div class="callout success">
       <div class="callout-icon">✓</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Shortcut Expert."</strong> 
+        Think of it as <strong>"The Shortcut Expert."</strong> 
         It says: "Why look at all 1,000,000 samples? I'll look only at the ones where I'm <strong>most wrong (High Gradient)</strong>." It doesn't grow trees layer-by-layer; it just grows the <strong>Most Promising Leaf</strong> until it's done.
       </div>
     </div>
@@ -48,7 +40,7 @@ export const advancedBoostingSection: TopicSection = {
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of it as <strong>"The Expert Translator."</strong> 
+        Think of it as <strong>"The Expert Translator."</strong> 
         It understands that "City Name" is important. It uses <strong>Symmetric Trees</strong> (the same split at each level) which makes it incredibly fast at <strong>Inference Time</strong> (running the model for customers).
       </div>
     </div>
@@ -66,7 +58,7 @@ export const advancedBoostingSection: TopicSection = {
     </div>
 
     <h2 id="algorithm">The Advanced Boosting Algorithm</h2>
-    <div class="example-box">
+    
       <h4>The High-Performance Engineering</h4>
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -90,10 +82,10 @@ export const advancedBoostingSection: TopicSection = {
           <strong>Ensemble Summation:</strong> Combine thousands of trees into a single, high-dimensional decision engine.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example">Illustrated Example: The F1 Pit Crew</h2>
-    <div class="example-box">
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The F1 Pit Crew</h2>
+    
       <h4>Scenario: Optimizing for the World Championship</h4>
       <p>Standard Boosting is a fast car, but the "Big Three" (XGB, LGBM, Cat) are the elite pit crews that make it win.</p>
       
@@ -119,12 +111,12 @@ export const advancedBoostingSection: TopicSection = {
       <div class="callout success">
         <div class="callout-icon">✓</div>
         <div class="callout-body">
-          <strong>Teacher's Hint:</strong> If you are competing on <strong>Kaggle</strong>, start with LightGBM for speed and then switch to XGBoost for the final squeeze. If your data is 80% text/categories, go straight to CatBoost.
+          If you are competing on <strong>Kaggle</strong>, start with LightGBM for speed and then switch to XGBoost for the final squeeze. If your data is 80% text/categories, go straight to CatBoost.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="python">Python Implementation: The F1 Engine (XGBoost)</h2>
+    <h2 id="python">Implementation</h2>
     <python-code runnable="false" static-output="[Library] Loading XGBoost (High-Performance Engine)...\n[Training] Iterating through 100 boosting rounds...\n[Accuracy] Logic Check: 100.0% (The model perfectly learned Rule: x0 + x1 > 1)\n[Input] Testing case [0.8, 0.5] -> Sum 1.3\n[Result] Prediction: 1 (Positive)\n[Benchmark] This model is 10x faster than standard GBDT on large datasets.">
 import xgboost as xgb
 import numpy as np

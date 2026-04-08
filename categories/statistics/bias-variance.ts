@@ -12,18 +12,7 @@ export const biasVarianceSection: TopicSection = {
       <p>The <strong>Bias-Variance Tradeoff</strong> is the mathematical explanation of why our models fail. It decomposes the total error into two competing forces: <strong>Bias</strong> (Simplicity) and <strong>Variance</strong> (Wildness). Finding the "Sweet Spot" between them is the goal of all Machine Learning.</p>
     </div>
 
-    <div class="toc">
-      <div class="toc-title">Table of Contents</div>
-      <a href="#prerequisites">Prerequisites</a>
-      <a href="#theory">Core Theory: The "Why"</a>
-      <a href="#derivation">Mathematical Decomposition</a>
-      <a href="#example-under">Example 1: Underfitting (High Bias)</a>
-      <a href="#example-over">Example 2: Overfitting (High Variance)</a>
-      <a href="#implementation">Implementation (Python/NumPy)</a>
-      <a href="#applications">Applications in ML</a>
-    </div>
-
-    <h2 id="prerequisites">Prerequisites</h2>
+    <h2 id="prerequisites">Foundational Requirements</h2>
     <div class="def-box">
       <ul style="margin:0">
         <li><strong>MSE (Mean Squared Error)</strong>: How to measure residuals.</li>
@@ -31,13 +20,13 @@ export const biasVarianceSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Core Theory: The "Why"</h2>
+    <h2 id="theory">Intuition & Motivation</h2>
     <p>If you build a model that is too simple (a straight line for a curvy road), you have <strong>High Bias</strong>—you are consistently wrong in a predictable way. If you build a model that is too complex (a line that touches every single data point), you have <strong>High Variance</strong>—you are reacting to noise, and your predictions will be wild on new data.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        <strong>Teacher's Intuition:</strong> Think of the tradeoff as <strong>"The Storyteller's Dilemma."</strong> 
+        Think of the tradeoff as <strong>"The Storyteller's Dilemma."</strong> 
         A <strong>High Bias</strong> storyteller summarizes too much ("The hero won"). You miss the details. 
         A <strong>High Variance</strong> storyteller tells you every blade of grass the hero walked on. You can't see the Plot. 
         A <strong>Perfect Model</strong> tells you exactly the "General Lessons" (The Plot) without the noise.
@@ -52,8 +41,8 @@ export const biasVarianceSection: TopicSection = {
       <li><strong>Irreducible Error:</strong> Fundamental noise in the data (\(\sigma^2\)).</li>
     </ul>
 
-    <h2 id="example-under">Example 1: Underfitting (High Bias)</h2>
-    <div class="example-box">
+    <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
+    
       <h4>Problem: Trying to Fit a Parabola with a Line</h4>
       <p>Data: \(y = x^2\). Model: \(\hat{y} = ax + b\).</p>
       
@@ -74,10 +63,10 @@ export const biasVarianceSection: TopicSection = {
           <strong>Result:</strong> This model is <strong>Underfitting</strong>. It is too "Opinionated" (BIASED) to learn from the data.
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="example-over">Example 2: Overfitting (High Variance)</h2>
-    <div class="example-box">
+    <h2 id="example-over" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Overfitting (High Variance)</h2>
+    
       <h4>Problem: Fitting 5 Points with a 10th-Degree Polynomial</h4>
       <p>Data: [1, 2, 3, 4, 5]. Model: Complex curve passing through all 5 points exactly.</p>
       
@@ -98,9 +87,9 @@ export const biasVarianceSection: TopicSection = {
           <strong>Intuition:</strong> This model is <strong>Overfitting</strong>. It has high <strong>VARIANCE</strong> because even a tiny change in one of the 5 points would completely change the entire curve. It's too sensitive!
         </div>
       </div>
-    </div>
+    
 
-    <h2 id="implementation">Implementation (Python/NumPy)</h2>
+    <h2 id="implementation">Implementation</h2>
     <python-code>
 import numpy as np
 import matplotlib.pyplot as plt
