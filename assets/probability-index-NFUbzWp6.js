@@ -14,25 +14,24 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Math doesn't like "Heads" or "Tails." It likes 0s and 1s. A Random Variable is the "Translator" that takes an outcome from the messy real world and turns it into a number we can actually perform math on. Without them, we couldn't calculate averages, variances, or train any model.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Random Variable as a <strong>Scorecard</strong>. 
-        The experiment happens behind a curtain (e.g., a customer buys a product). 
-        The Random Variable is the number on the scorecard (e.g., the price they paid). 
-        Different customers (outcomes) result in different scores.
+    <p>Math doesn't like abstract concepts like "Red," "Cold," or "Spam." It likes numbers. A <strong>Random Variable</strong> is the "Translator" or "Sensor" that takes an outcome from the messy, fuzzy real world and turns it into a hard real number we can actually perform calculus on. Without this mapping, we couldn't calculate averages, track variances, or feed data into a neural network. It is the fundamental bridge that allows us to turn <strong>Observations</strong> into <strong>Quantities</strong>. Every feature in your ML dataset—whether it's house square footage or pixel brightness—is a realization of a Random Variable.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Numerical Mapping</div>
+      <p>Given a probability space $(\Omega, \mathcal{F}, P)$, a **Random Variable** $X$ is a measurable function $X: \Omega \to \mathbb{R}$ that assigns a real number to each outcome in the sample space. Random variables are categorized by the nature of their range:</p>
+      <div class="math-block">
+        $$X(\omega) = x, \quad \omega \in \Omega, x \in \mathbb{R}$$
       </div>
+      <p>The behavior of an RV is described by its probability distribution:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Discrete RV</strong>: Maps to a countable set. Defined by a <strong>PMF</strong> $p(x) = P(X = x)$ where $\sum p(x_i) = 1$.</li>
+        <li><strong>Continuous RV</strong>: Maps to an uncountable set (intervals). Defined by a <strong>PDF</strong> $f(x)$ such that $P(a \le X \le b) = \int_a^b f(x) dx$.</li>
+        <li><strong>Cumulative Property</strong>: All RVs possess a <strong>CDF</strong> $F(x) = P(X \le x)$, which is non-decreasing and bounded between 0 and 1.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we treat features as realizations of underlying random variables $X_1, X_2, \dots, X_n$.</p>
     </div>
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>A Random Variable \(X\) is a function \(X: S \to \mathbb{R}\) that maps every element in the sample space \(S\) to a real number. We categorize them into two types:</p>
-    <ul>
-      <li><strong>Discrete:</strong> Outcomes you can count (e.g., number of clicks, dice rolls).</li>
-      <li><strong>Continuous:</strong> Outcomes you can measure (e.g., height, time, temperature).</li>
-    </ul>
-
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
     
       <h4>Problem: Mapping Binary Outcomes</h4>
@@ -125,26 +124,24 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model <strong>Uncertainty</strong>. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Probability Distribution as a <strong>Heat Map</strong>. 
-        Where the map is "hot" (high probability), outcomes are common. 
-        Where the map is "cold," outcomes are rare. 
-        In ML, we want to find the parameters of this map that best explain the data we've already seen.
+    <p>A Random Variable is just a placeholder, like a "Potential Weather" or "Future Stock Price." But a <strong>Probability Distribution</strong> is the actual personality or "DNA" of that variable. It doesn't just list what could happen; it tells you exactly how the universe is "loaded." Distributions allow us to quantify <strong>Uncertainty</strong> so we can stop guessing. Instead of a single point-prediction like "This house will sell for $500k," a distribution gives us a full spectrum of likelihood. In ML, every model we train is essentially trying to find the "Shape" that best fits the scattered dots of our training data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Probability Laws</div>
+      <p>A **Probability Distribution** is a mathematical descriptor that provides the likelihood of every possible value of a random variable $X$. It is defined either by its discrete or continuous nature:</p>
+      <div class="math-block">
+        $$F(x) = P(X \le x), \quad x \in \mathbb{R}$$
       </div>
+      <p>The behavior is characterized by two fundamental functional forms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Mass Function (PMF)</strong>: For discrete $X$, $p(x) = P(X = x)$, satisfying $\sum p(x_i) = 1$.</li>
+        <li><strong>Density Function (PDF)</strong>: For continuous $X$, $f(x) = \frac{d}{dx}F(x)$, satisfying $\int_{-\infty}^\infty f(x) dx = 1$.</li>
+        <li><strong>Normalization</strong>: Both forms ensure the total "volume" of probability is exactly 1, representing certainty that <em>some</em> outcome must occur.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
     </div>
-
-    <visualizer topic="Distributions" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <ul>
-      <li><strong>Probability Mass Function (PMF)</strong>: For Discrete RVs, \(P(X=x)\). The sum of all probabilities must be 1.</li>
-      <li><strong>Probability Density Function (PDF)</strong>: For Continuous RVs, \(f(x)\). The total area under the curve must be 1.</li>
-    </ul>
-
+    
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
     
       <h4>Problem: Tracking a 1-Trial Experiment</h4>
@@ -232,26 +229,24 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" <strong>and</strong> "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
-        Instead of just one axis of data, you have two. 
-        The "peaks" on this map tell you which combinations of (X, Y) are most common. 
-        In ML, we use this to find out if features are correlated or if they are "moving" together in predictable ways.
+    <p>A single distribution for "House Price" or "Number of Bedrooms" is helpful, but in the real world, these things don't live in isolation. They are linked. High bedrooms usually lead to a high price—they interact. <strong>Joint Distributions</strong> allow us to track this multi-dimensional relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset. We can see not just the individual traits, but the underlying <strong>Coupling</strong> between variables. In AI, this is the difference between looking at individual pixel colors and seeing an actual object formed by those pixels moving together.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Multi-Dimensional PDF</div>
+      <p>For two random variables $X$ and $Y$, the **Joint Distribution** specifies the probability that $X$ and $Y$ fall within any specified range or set of values simultaneously. It is defined by the Joint Cumulative Distribution Function:</p>
+      <div class="math-block">
+        $$F_{X,Y}(x, y) = P(X \le x, Y \le y)$$
       </div>
+      <p>The joint behavior is expressed through two primary functional forms depending on the variable types:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Joint PMF</strong>: For discrete variables, $p(x, y) = P(X=x, Y=y)$, satisfying $\sum_x \sum_y p(x, y) = 1$.</li>
+        <li><strong>Joint PDF</strong>: For continuous variables, $f(x, y)$ is the surface such that the volume under it over a region $A$ is $P((X, Y) \in A) = \iint_A f(x, y) dx dy$.</li>
+        <li><strong>Marginalization</strong>: The distribution of a single variable $X$ is obtained by "summing out" the other variable: $f_X(x) = \int_{-\infty}^\infty f(x, y) dy$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
     </div>
-
-    <visualizer topic="JointDistributions" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <ul>
-      <li><strong>Joint Probability Mass Function (PMF):</strong> \(P(X=x, Y=y)\). The sum over all x and y must be 1.</li>
-      <li><strong>Marginal Distribution:</strong> To find the probability of just one variable, you "sum out" (marginalize) the others: \(P(X=x) = \sum_{y} P(x, y)\).</li>
-    </ul>
-
+    
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     
       <h4>Problem: Tracking Clicks and Purchases</h4>
@@ -348,25 +343,24 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Normally, your perspective covers the entire universe. But once I tell you "Condition B is true," your world shrinks. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Conditional Probability as a <strong>"Filter."</strong> 
-        Imagine a pool of 1,000 customers. You want to know if someone will buy. 
-        Once I tell you "They put an item in the cart" (Condition B), you <strong>filter out</strong> everyone who didn't. 
-        Your universe is now smaller, and the likelihood of a purchase is much higher. 
-        In ML, we use this "filter" to calculate the odds of a class given the input features.
+    <p>Normally, your perspective covers the entire universe of possibilities. But once I tell you "Condition B is true," your world shrinks instantly. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition. In Machine Learning, this is the "Secret Sauce." When we ask a model, "Is this a cat?", we are really asking for the probability of 'Cat' <strong>given</strong> the features we see. We are filtering out every other possible object and looking only at the slice of reality that matches the image pixels.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Restricted Sample Space</div>
+      <p>For two events $A$ and $B$ in a probability space, the **Conditional Probability** of $A$ given $B$ is defined as the probability that $A$ occurs, restricted to the subset of the sample space where $B$ has already occurred:</p>
+      <div class="math-block">
+        $$P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{for } P(B) > 0$$
       </div>
+      <p>This definition entails several critical mathematical properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Multiplication Rule</strong>: $P(A \cap B) = P(A | B)P(B)$. This allows for the sequential decomposition of joint events.</li>
+        <li><strong>Law of Total Probability</strong>: $P(A) = \sum_i P(A | B_i)P(B_i)$ for a partition $\{B_i\}$ of the sample space.</li>
+        <li><strong>Belief Revision</strong>: Conditioning serves as the mathematical engine for updating prior knowledge $P(A)$ with new evidence $B$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Discriminative ML models (e.g., Logistic Regression) directly estimate the conditional distribution $P(y | \mathbf{x})$ to predict labels from features.</p>
     </div>
-
-    <visualizer topic="ConditionalProbability" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
-    <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>
-
+    
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
     
       <h4>Problem: Narrowing Down Outcomes</h4>
@@ -462,24 +456,24 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>If you tell me "It is raining," my probability of "Someone buying an umbrella" increases. These events are <strong>Dependent</strong>. But if you tell me "My coin land on Heads," does that affect the probability of "It raining"? No. Those events are <strong>Independent</strong>. Understanding independence allows us to simplify complex joint probabilities into simple products.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Independence as <strong>"Emotional Distance."</strong> 
-        If two variables are independent, they don't care about each other. 
-        They don't share any secrets. 
-        In ML, we love independence because it lets us calculate massive joint probabilities by just <strong>multiplying</strong> them (\(P(A) \times P(B) \times P(C)\)).
+    <p>If you tell me "It is raining," my probability of "Someone buying an umbrella" increases significantly. These events are <strong>Dependent</strong>. But if you tell me "My coin landed on Heads," does that affect the probability of "It raining"? No. Those events are <strong>Independent</strong>. Independence is the mathematical way of saying two things have zero overlap in their underlying causes. Understanding independence allows us to simplify the massive, messy joint probabilities of the real world into simple, bite-sized products. In Machine Learning, we often *force* independence through assumptions (like Naive Bayes) just so our computers don't crash trying to handle every possible cross-correlation.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Factorization of Probability</div>
+      <p>Two events $A$ and $B$ are **Independent** if the occurrence of one does not alter the probability of the other. Formally, this is defined by the product rule of their joint probability:</p>
+      <div class="math-block">
+        $$P(A \cap B) = P(A) \cdot P(B)$$
       </div>
+      <p>For random variables $X$ and $Y$, independence implies the factorization of their density or mass functions:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Equality of Conditionals</strong>: If $A$ and $B$ are independent, $P(A | B) = P(A)$ and $P(B | A) = P(B)$.</li>
+        <li><strong>Mutual Independence</strong>: A set of events $\{A_i\}$ is independent if $P(\bigcap_{i \in S} A_i) = \prod_{i \in S} P(A_i)$ for every subset $S$.</li>
+        <li><strong>Conditional Independence</strong>: $X \perp Y \mid Z$ if $P(X, Y | Z) = P(X | Z)P(Y | Z)$. This is the "Naive" assumption in probabilistic modeling.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
     </div>
-
-    <visualizer topic="Independence" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
-    <p>...which also implies that the conditional probability doesn't move: \(P(A|B) = P(A)\).</p>
-
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
     
       <h4>Problem: Successive Binary Trials</h4>
@@ -578,25 +572,25 @@ print(f"P(A) * P(B): {check:.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Probability Distribution says: <em>"Anything could happen."</em> Expectation says: <em>"On average, this is what will happen."</em> It is the <strong>Balance Point</strong> of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In ML, every prediction is essentially an "Expected Value" calculated from the data.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Expected Value as a <strong>"Fair Bet."</strong> 
-        If you play a game 1,000 times, you'll sometimes win big and sometimes lose. 
-        Your <strong>Expectation</strong> is the number that tells you if, in the long run, you'll walk away with more money than you started with. 
-        In ML, we don't care about a single "lucky" training batch; we care about the <strong>Expected Performance</strong> across all future data.
+    <p>A Probability Distribution tells you what *could* happen, but the Expectation tells you what *will* happen if you play the long game. It is the "Balance Point" of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In Machine Learning, we don't care about a single "lucky" training batch; we care about the <strong>Aggregate Truth</strong>. We build models that minimize <strong>Expected Loss</strong> because we want the model to be correct across the entire lifetime of its deployment, not just once.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Weighted Average</div>
+      <p>The **Expected Value** (or first moment) of a random variable $X$ represents the long-run average value of repetitions of the experiment. It is calculated by weighing each possible outcome by its probability:</p>
+      <div class="math-block">
+        $$\mathbb{E}[X] = \int_{\Omega} X(\omega) dP(\omega)$$
       </div>
+      <p>In practical settings, this generalizes to discrete and continuous forms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Discrete</strong>: $\mathbb{E}[X] = \sum_i x_i P(X = x_i)$.</li>
+        <li><strong>Continuous</strong>: $\mathbb{E}[X] = \int_{-\infty}^\infty x f(x) dx$.</li>
+        <li><strong>Law of the Unconscious Statistician</strong>: $\mathbb{E}[g(X)] = \int g(x) f(x) dx$.</li>
+        <li><strong>Linearity</strong>: $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$. This property holds even if $X$ and $Y$ are dependent.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML training, the "Risk" we minimize is the expected value of the loss function over the data generating distribution.</p>
     </div>
-
-    <visualizer topic="ExpectationVariance" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(p_i\):</p>
-    <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>
-    <p><strong>Linearity:</strong> \(\mathbb{E}[aX + b] = a\mathbb{E}[X] + b\). The average of a sum is the sum of the averages!</p>
-
+    
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     
       <h4>Problem: Evaluating a Lottery</h4>
@@ -692,25 +686,25 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Expectation (Average) tells you where your data is <strong>centered</strong>. Variance tells you how much your data <strong>mistrusts</strong> that center. A high variance model is "noisy" and unpredictable. A low variance model is consistent. In ML, we often trade off some accuracy (Bias) to get a more consistent model (Low Variance).</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Variance as <strong>"Drunkenness."</strong> 
-        If you walk in a straight line, your variance is zero. 
-        If you stumble randomly back and forth while moving forward, your <strong>average path</strong> might still be a straight line, but your <strong>Variance</strong> is high. 
-        In ML, high variance weights mean your model hasn't "converged" and is still stumbling around the solution.
+    <p>Expectation (Average) tells you where your data is <strong>centered</strong>, but Variance tells you how much your data <strong>mistrusts</strong> that center. It is a measure of "Spread" or "Chaos." A high variance model is "noisy" and unpredictable—it catches every tiny jitter in the data. A low variance model is consistent but might be too rigid. In ML, this is the ultimate trade-off: do you want a model that hits the bullseye 1% of the time with wild misses, or a model that consistently hits the outer ring? Variance is the mathematical way we quantify that <strong>Reliability</strong>.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Second Central Moment</div>
+      <p>The **Variance** (denoted $Var(X)$ or $\sigma^2$) of a random variable $X$ with mean $\mu = \mathbb{E}[X]$ measures the expected squared distance of the variable from its average:</p>
+      <div class="math-block">
+        $$\text{Var}(X) = \mathbb{E}\left[(X - \mu)^2\right]$$
       </div>
+      <p>This quantity provides the foundation for measuring uncertainty and dispersion in data series:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Computational Identity</strong>: $\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$. This is often easier to compute than the definition.</li>
+        <li><strong>Scaling Property</strong>: $\text{Var}(aX + b) = a^2 \text{Var}(X)$. Shifts ($b$) do not affect dispersion; resizing ($a$) affects it quadratically.</li>
+        <li><strong>Standard Deviation</strong>: $\sigma = \sqrt{\text{Var}(X)}$. This returns the measure to the same units as the original data.</li>
+        <li><strong>Additivity</strong>: If $X$ and $Y$ are independent, $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In the **Bias-Variance Tradeoff**, variance represents the error stemming from a model's sensitivity to specific fluctuations in the training data.</p>
     </div>
-
-    <visualizer topic="ExpectationVariance" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>Variance is the <strong>Expected Squared Deviation</strong> from the mean \(\mu\):</p>
-    <div class="math-block">$$\text{Var}[X] = \mathbb{E}[(X - \mu)^2]$$</div>
-    <p><strong>Common Shortcut:</strong> \(\text{Var}[X] = \mathbb{E}[X^2] - (\mathbb{E}[X])^2\). (Mean of squares minus square of means).</p>
-
+    
     <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
     
       <h4>Problem: Comparing Two Stocks</h4>
@@ -811,26 +805,24 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>If you flip a coin 5 times, you might get 4 heads (80%). This is just "luck." But if you flip a coin 5,000,000 times, you will almost certainly have extremely close to 50% heads. The <strong>LLN</strong> says that individual "luck" (Variability) gets washed away as the sample size grows. This is why we can trust our model's performance on a large test set.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of LLN as <strong>"The Truth Coming to Light."</strong> 
-        In the short term, anyone can look like a genius (High Accuracy). 
-        But in the long term, your <strong>True Average Skill</strong> will be revealed. 
-        In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the <strong>True Error</strong> of the model on the data distribution.
+    <p>If you flip a coin 5 times, you might get 4 heads (80%). This isn't science—it's just a "blip" of luck. But if you flip that coin 5,000,000 times, you will almost certainly land on exactly 50% heads. The <strong>Law of Large Numbers (LLN)</strong> is the "Anchor" that stops the world from being pure chaos. It guarantees that as you collect more data, the individual noise and "lucky streaks" get washed away, leaving only the <strong>Cold, Hard Truth</strong> of the underlying average. In Machine Learning, this is why we can trust our model's performance on a large test set; it ensures that our measured error eventually represents the <strong>True Global Error</strong>.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Convergence of Averages</div>
+      <p>The **Law of Large Numbers** governs the behavior of the sample mean as the number of independent trials increases. Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables with finite mean $\mu = \mathbb{E}[X_i]$ and sample mean $\bar{X}_n$. The theorem exists in two primary strengths:</p>
+      <div class="math-block">
+        $$\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$
       </div>
+      <p>The convergence of this average to the theoretical mean is expressed as:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Weak Law (WLLN)</strong>: $\bar{X}_n \xrightarrow{P} \mu$. For any $\epsilon > 0$, $\lim_{n \to \infty} P(|\bar{X}_n - \mu| > \epsilon) = 0$. This implies convergence in probability.</li>
+        <li><strong>Strong Law (SLLN)</strong>: $\bar{X}_n \xrightarrow{a.s.} \mu$. The probability that the limit of the sequence equals $\mu$ is 1. This implies almost sure convergence.</li>
+        <li><strong>Implications for Data</strong>: As sample size increases, the influence of individual outliers and noise vanishes, revealing the stable properties of the underlying distribution.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, LLN justifies the use of finite training sets to estimate the loss over the entire population (Empirical Risk Minimization).</p>
     </div>
-
-    <visualizer topic="ExpectationVariance" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>Let \(X_1, X_2, \dots, X_n\) be independent identically distributed (i.i.d) random variables with mean \(\mu\). The Sample Mean \(\overline{X}_n\) is defined as:</p>
-    <div class="math-block">$$\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$</div>
-    <p>The <strong>Strong LLN</strong> states:</p>
-    <div class="math-block">$$\overline{X}_n \xrightarrow{a.s.} \mu \text{ as } n \to \infty$$</div>
-
+    
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
     
       <h4>Problem: Tracking Profit over Time</h4>
@@ -920,25 +912,24 @@ print(f"Final Average: {running_avg[-1]:.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the <strong>CLT</strong> says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
-        If you ask one person to guess the price of a jar of jellybeans, they might be wildly wrong. 
-        But if you ask 10,000 people and take their <strong>Average</strong>, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
-        In ML, this is why we can assume that our model's cumulative error is Gaussian.
+    <p>Individual random variables are usually pure chaos—some are Bernoulli (0 or 1), some are Uniform (flat), and some are just absolute noise. But the <strong>CLT</strong> is the "Master Law" that restores order. It states that when you combine enough small, independent factors, their collective behavior stops being chaotic and starts being perfectly predictable. The "Chaos" cancels itself out, and a smooth, symmetrical Bell Curve emerges. In Machine Learning, this is our saving grace: it allows us to assume that our total prediction error will be Gaussian, no matter how weird the individual data points are.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Universal Convergence</div>
+      <p>The **Central Limit Theorem (CLT)** states that given a sufficiently large sample size $n$ from a population with a finite variance, the distribution of the sample mean will be approximately normal, regardless of the population's distribution. Let $X_1, \dots, X_n$ be i.i.d. random variables with $\mathbb{E}[X_i] = \mu$ and $\text{Var}(X_i) = \sigma^2$. As $n \to \infty$:</p>
+      <div class="math-block">
+        $$\text{The standardized sum } Z = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)$$
       </div>
+      <p>This theorem provides three fundamental pillars for statistical modeling:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Distributional Independence</strong>: The result holds whether the underlying $X_i$ are Bernoulli, Poisson, or any other distribution (provided $\sigma^2 < \infty$).</li>
+        <li><strong>Sample Mean Distribution</strong>: The sample mean $\bar{X}_n$ follows $\mathcal{N}(\mu, \sigma^2/n)$. The "Standard Error" decreases at a rate of $1/\sqrt{n}$.</li>
+        <li><strong>Z-Score Standardization</strong>: The formula $\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}$ is used to calculate probabilities on the standard normal curve.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">CLT is the reason why **Squared Loss** (MSE) is the optimal objective under the assumption of aggregate, independent noise terms.</p>
     </div>
-
-    <visualizer topic="CentralLimitTheorem" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>Let \(X_1, X_2, \dots, X_n\) be independent random variables with mean \(\mu\) and variance \(\sigma^2\). As \(n\) becomes large, the distribution of their mean \(\overline{X}_n\) converges to:</p>
-    <div class="math-block">$$\overline{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
-    <p>The <strong>Z-score</strong> of the sample mean is: \(Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}\).</p>
-
+    
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
     
       <h4>Problem: Turning Flat space into a Bell Curve</h4>
@@ -1023,38 +1014,41 @@ plt.show()
       <p><strong>Bayes' Theorem</strong> (\(P(A|B)\)) is a mathematical formula used to determine the probability of an event based on prior knowledge of conditions that might be related to the event. In Machine Learning, it's the core of everything from <strong>Naive Bayes Classifiers</strong> to <strong>Bayesian Neural Networks</strong>.</p>
     </div>
 
-    <h2 id="prerequisites">Foundational Requirements</h2>
-    <div class="def-box">
-      <ul style="margin:0">
-        <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
-        <li><strong>Joint Probability</strong>: Understanding \(P(A \cap B)\).</li>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy, like guessing if it will rain given a dark cloud. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief. It is the mathematical engine of "Self-Correction"—it tells us exactly how much to update our worldview when new facts hit the table. Without it, machines couldn't learn from experience; they would just be static calculators.</p>
+    
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Bayesian Inference & Posterior Update</div>
+      <p>Bayes' Theorem provides a rigorous method for updating the probability of a hypothesis $\theta$ relative to observed data $\mathcal{D}$. It is the foundation of structural and parameter uncertainty in machine learning.</p>
+      
+      <p>The posterior probability is given by the relationship:</p>
+      <div class="math-block">
+        $$P(\theta \mid \mathcal{D}) = \frac{P(\mathcal{D} \mid \theta) P(\theta)}{P(\mathcal{D})}$$
+      </div>
+
+      <p>Where the components are characterized as follows:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Posterior ($P(\theta \mid \mathcal{D})$)</strong>: The probability that the hypothesis $\theta$ is true *after* considering data $\mathcal{D}$.</li>
+        <li><strong>Likelihood ($P(\mathcal{D} \mid \theta)$)</strong>: The probability that the data $\mathcal{D}$ would have been observed given that $\theta$ is true.</li>
+        <li><strong>Prior ($P(\theta)$)</strong>: The probability of $\theta$ before receiving any data, representing initial beliefs or domain knowledge.</li>
+        <li><strong>Evidence ($P(\mathcal{D})$)</strong>: The marginal probability of the data, acting as a normalization constant: $P(\mathcal{D}) = \sum_{\theta'} P(\mathcal{D} \mid \theta') P(\theta')$.</li>
       </ul>
+      
+      <p class="text-xs opacity-70 mt-2">Bayes' Theorem is the mathematical prerequisite for **Naive Bayes Classifiers**, **Bayesian Optimization**, and **Gaussian Processes**.</p>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief.</p>
-    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
-        You start with a guess (the Prior). 
-        You see some evidence (the Data). 
+        Think of Bayes' Theorem as a <strong>"Scientific Tuning Machine"</strong> or a <strong>"Bullshit Detector."</strong> 
+        You start with a guess (the Prior: "I think this email might be spam"). 
+        You see some evidence (the Data: "It contains the word 'FREE' in all caps"). 
         Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
-        It is the fundamental rule for how a machine "Learns" from experience.
+        It is the fundamental rule for how a machine "Learns" from experience. 
+        It forces the model to balance its existing knowledge with the cold, hard facts of the new data, preventing it from jumping to conclusions too quickly or ignoring new evidence entirely.
       </div>
     </div>
-
-    <visualizer topic="BayesTheorem" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
-    <ul>
-      <li><strong>\(P(A|B)\)</strong>: Posterior (Belief after seeing data).</li>
-      <li><strong>\(P(B|A)\)</strong>: Likelihood (How well the data fits the cause).</li>
-      <li><strong>\(P(A)\)</strong>: Prior (Initial belief).</li>
-      <li><strong>\(P(B)\)</strong>: Evidence (Normalization constant).</li>
-    </ul>
 
     <h2 id="example-spam" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter (Prior/Posterior)</h2>
     

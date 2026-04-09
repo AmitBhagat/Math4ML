@@ -2,14 +2,44 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
-      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
+      <p>Set theory is the branch of mathematical logic that studies collections of objects. In machine learning, sets define the sample spaces, hypothesis classes, and feature domains.</p>
+    </div>
 
-      <div class="callout tip">
-        <div class="callout-icon">💡</div>
-        <div class="callout-body">
-          <strong>Core Theory:</strong> A <strong>Set</strong> is a <strong>"Box of Unique Items."</strong> In Python, this is exactly what the <code>set()</code> object does—it forces everything inside to be unique. If you try to add a duplicate, the set just ignores it. This is the bedrock of <strong>Data Deduplication</strong>.
-        </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In the digital world, data never arrives as a single, clean block; it is scattered across different tables, logs, and databases. <strong>Set Theory</strong> is the foundation of how we manipulate these fragments, providing the mathematical logic for joining, filtering, and deduplicating information. Think of each <strong>set</strong> as a "Box of Unique Items" where duplicates are forbidden and boundaries are absolute. In Data Science, set theory isn't just a theoretical curiosity—it is the direct parent of SQL Joins and Pandas filtering. Understanding how sets overlap, merge, and differ is the key to transforming raw, chaotic data into a structured signal that an ML model can actually understand. It is the tactical framework for "Data Wrangling."</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Axiomatic Collections & Inclusion</div>
+      <p>Set theory is the branch of mathematical logic that studies collections of objects. In machine learning, sets define the sample spaces, hypothesis classes, and feature domains.</p>
+      
+      <p>Given sets $A$ and $B$, the fundamental operators are defined as:</p>
+      <div class="math-block">
+        \begin{aligned}
+        \text{Union:} \quad & A \cup B = \{x \mid x \in A \lor x \in B\} \\
+        \text{Intersection:} \quad & A \cap B = \{x \mid x \in A \land x \in B\} \\
+        \text{Difference:} \quad & A \setminus B = \{x \mid x \in A \land x \notin B\}
+        \end{aligned}
       </div>
+
+      <p>The structural properties of sets facilitate critical data operations:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Cardinality ($|S|$)</strong>: The measure of the number of elements in a set. In feature engineering, the cardinality of a categorical variable determines the dimensionality of the resulting One-Hot encoding.</li>
+        <li><strong>Power Set ($\mathcal{P}(S)$)</strong>: The set of all subsets of $S$. This is the basis for exploring all possible combinations of features in attribute selection problems.</li>
+        <li><strong>Inclusion ($\subseteq$)</strong>: A subset relationship where every element of the internal set is a member of the external set, defining the hierarchy of filtered data.</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Set Theory as <strong>"The Digital Library Catalog"</strong> or <strong>"The Sorting Room."</strong> 
+        Imagine you have two boxes of Legos. A <strong>Union</strong> is pouring them both into a single pile, but tossing out any exact duplicates. An <strong>Intersection</strong> is finding only the specific bricks that appear in both boxes. 
+        In Python, this is exactly what the <code>set()</code> object does. It translates raw lists into distinct collections where the math of "AND," "OR," and "NOT" can be applied with perfect precision. It is the bedrock of <strong>Data Integrity</strong>: ensuring that every vote or feature you count is a unique, valid piece of the truth.
+      </div>
+    </div>
     </div>
 
     <h2 id="subsets">1. Subsets ($\subseteq$)</h2>
@@ -158,7 +188,40 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Discrete Math · Logic</div>
       <h1>Mathematical Logic in AI</h1>
-      <p>In the field of AI, <strong>Logic</strong> is the framework that allows a machine to "reason." While modern Machine Learning is often probabilistic, Logic is the backbone of <strong>Symbolic AI</strong>, expert systems, and the "planning" modules used in robotics.</p>
+      <p>In the field of AI, Logic is the mathematical framework that allows a machine to "reason" with absolute certainty.</p>
+    </div>
+
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In the field of AI, <strong>Logic</strong> is the mathematical framework that allows a machine to "reason" with absolute certainty. While modern Machine Learning is often probabilistic and "fuzzy," logic is the backbone of symbolic AI, expert systems, and the high-level planning modules used in robotics. It is the tactical way we formalize human knowledge into a series of "If-Then" rules that a computer can execute without error. Understanding logic is the key to building systems that don't just guess patterns, but actually follow a rigorous chain of thought. It is the original language of Artificial Intelligence, providing the "Sanity Check" for complex decision-making processes.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Symbolic Inference & Predicate Calculus</div>
+      <p>Mathematical logic is the formal study of valid reasoning through symbolic structures. In AI, it provides the deterministic engine for rule-based systems and formal verification.</p>
+      
+      <p>The hierarchy of logic includes two primary systems:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Propositional Logic</strong>: Concerned with atomic statements $P, Q$ that are either True ($1$) or False ($0$). Connectivity is defined by truth-functional operators: $\land$ (AND), $\lor$ (OR), and $\neg$ (NOT). The **Implication** operator $P \to Q$ (material conditional) is defined as $\neg P \lor Q$.</li>
+        <li><strong>First-Order Logic (FOL)</strong>: Extends propositional logic by introducing **Quantifiers** and **Predicates** to describe properties of objects within a domain $\mathcal{D}$.
+          <ul class="pl-4 mt-1 opacity-90">
+            <li><strong>Universal ($\forall x \in \mathcal{D}$)</strong>: The property holds for the entire domain.</li>
+            <li><strong>Existential ($\exists x \in \mathcal{D}$)</strong>: There exists at least one element satisfying the predicate.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="text-xs opacity-80 mt-2"><strong>De Morgan's Laws</strong>: These laws define the duality between conjunction and disjunction, essential for simplifying complex code conditionals: $\neg(P \land Q) \equiv \neg P \lor \neg Q$ and $\neg(P \lor Q) \equiv \neg P \land \neg Q$.</p>
+      
+      <p class="text-xs opacity-70 mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Mathematical Logic as <strong>"The Legal Contract"</strong> or <strong>"The Light Switch Circuit."</strong> 
+        Propositional Logic is the simplest form—everything is either <strong>True (ON)</strong> or <strong>False (OFF)</strong>. First-Order Logic is more like a sophisticated "Object-Oriented" language that can describe not just states, but the properties and relationships of every entity in your system. Whether you are building a medical diagnosis system or a complex SQL query, you are essentially writing a logical proof that the computer must satisfy. It is the science of making sure your "If" statements actually cover every possible "Then."
+      </div>
+    </div>
     </div>
 
     <h2 id="propositional">1. Propositional Logic</h2>
@@ -312,7 +375,42 @@ not_nyc = df[~(df['city'] == 'New York')]
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Discrete Math · Counting</div>
       <h1>Combinatorics: The Art of Counting</h1>
-      <p>In computer science and algorithm analysis, <strong>Combinatorics</strong> is the art of counting. In the AI/ML world, this is how we determine the size of a "search space" and the complexity of our models.</p>
+      <p>Combinatorics is the art of counting—determining the scale of a problem and the complexity of its search space for AI and Machine Learning.</p>
+    </div>
+
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In computer science and algorithm analysis, <strong>Combinatorics</strong> is the art of counting—not just simple counting, but determining the sheer scale of a problem before you even start coding. In the AI/ML world, this is how we understand the "Search Space" and the complexity of our models. If you have 10 features and you want to test every possible subset, combinatorics tells you exactly how many trials you need to run. It is the mathematical warning system that prevents us from attempting "Brute Force" solutions on problems that would take until the heat death of the universe to solve. It is the tactical assessment of <strong>Possibility</strong>.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Enumerative Combinatorics & Search Spaces</div>
+      <p>Combinatorics provides the mathematical framework for counting arrangements and selections within finite sets. This is critical for determining the complexity of hyperparameters and feature subsets.</p>
+      
+      <p>Given $n$ objects, the foundational counting rules for selecting $k$ items are:</p>
+      <div class="math-block">
+        \begin{aligned}
+        \text{Permutations (Order Matters):} \quad & P(n, k) = \frac{n!}{(n-k)!} \\
+        \text{Combinations (Order Invariant):} \quad & C(n, k) = \binom{n}{k} = \frac{n!}{k!(n-k)!}
+        \end{aligned}
+      </div>
+
+      <p>Combinatorial analysis highlights two major challenges in AI:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>The Fundamental Counting Principle</strong>: If a sequence of choices has $n_1, n_2, \dots, n_k$ possibilities, the total configurations are $\prod n_i$. This explains why grid searching over 10 hyperparameters each with 10 values leads to 10 billion trials.</li>
+        <li><strong>Combinatorial Explosion</strong>: As $n$ increases, the number of ways to arrange or select elements grows factorially or exponentially. The search space for feature selection grows at $2^n$, necessitating greedy or stochastic optimization rather than exhaustive search.</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">Combinatorics is the prerequisite for **Discrete Probability** and the analysis of **Algorithm Complexity**. </p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Combinatorics as <strong>"The Scaling Nightmare"</strong> or <strong>"The Options per Slot."</strong> 
+        Imagine you are building a 3-layer neural network and each layer has 10 possible sizes; that's 1,000 possible architectures. Now imagine you have 100 hyperparameters to tune. 
+        <strong>Combinatorial Explosion</strong> is the reason we can't just try everything. Algorithms like Genetic Algorithms or Bayesian Optimization are essentially "Cheats" that help us find the winning combination without counting every grain of sand in the universe. Combinatorics is the map of that universe, showing us exactly how big the maze really is.
+      </div>
+    </div>
     </div>
 
     <h2 id="counting-principle">1. The Fundamental Counting Principle</h2>
@@ -479,7 +577,41 @@ combs = list(itertools.combinations(items, 2))
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
-      <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like rows and columns, many real-world problems—like social networks and molecule structures—are better represented as a web of connected points.</p>
+      <p>Graph theory is the study of relationships and connections. It provides the mathematical framework for Knowledge Graphs and GNNs.</p>
+    </div>
+
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like flat rows and columns, many real-world problems—like social networks, protein structures, and global logistics—are better represented as a web of connected points. Graph theory gives us the language to describe these "Connections" as first-class citizens. By treating the lines between data points as being just as important as the data points themselves, we can model complex systems like causality, influence, and the spread of information. It is the mathematical framework for <strong>Connectivity</strong>, allowing our models to "see" the structure of the world rather than just a list of numbers.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Relational Structures & Network Topology</div>
+      <p>A graph $G$ is an ordered pair $(V, E)$ consisting of a set of vertices $V$ and a set of edges $E$. In machine learning, graphs formalize both the structure of data (Relational Graphs) and the structure of computations (DAGs).</p>
+      
+      <p>The mathematical properties of $G$ are defined as:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Vertices ($V$)</strong>: Represent discrete entities or states in a system. The cardinality $|V|$ defines the order of the graph.</li>
+        <li><strong>Edges ($E$)</strong>: Represent the relationships between vertices.
+          <ul class="pl-4 mt-1 opacity-90">
+            <li><strong>Directed</strong>: Relationships possess a relative orientation (e.g., $u \to v$ in causal models).</li>
+            <li><strong>Weighted</strong>: Every edge is associated with a scalar $w \in \mathbb{R}$, representing proximity, cost, or probability.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="text-xs opacity-80 mt-2"><strong>Adjacency Matrix ($\mathbf{A}$)</strong>: A matrix where $A_{ij} = 1$ if there is an edge $(v_i, v_j)$ and $0$ otherwise. This matrix bridges graph theory with Linear Algebra, enabling spectral analysis and the matrix-form implementation of Graph Neural Networks.</p>
+      
+      <p class="text-xs opacity-70 mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Graph Theory as <strong>"The Web of Influence"</strong> or <strong>"The Science of Relationships."</strong> 
+        In a standard database, you have isolated records. In a <strong>Knowledge Graph</strong>, you focus on the lines <em>between</em> the records. This is how Google understands that "Paris" isn't just a word, it is the "Capital Of" "France." 
+        Whether you are predicting a user's next purchase or finding the fastest route for a delivery truck, you are traversing a graph. <strong>Graph Neural Networks (GNNs)</strong> take this even further, allowing nodes to "talk" to their neighbors to learn about their environment. It is the ultimate tool for modeling a world that is fundamentally interconnected.
+      </div>
+    </div>
     </div>
 
     <h2 id="components">1. The Core Components</h2>

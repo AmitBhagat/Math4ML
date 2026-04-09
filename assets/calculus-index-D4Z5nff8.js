@@ -1,4 +1,4 @@
-const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the study of how functions change when their inputs change by infinitesimal amounts. It's the primary engine for machine learning optimization.",color:"#1B5E20",html:String.raw`
+const e={id:"derivatives",title:"Derivatives",description:"The Derivative is the study of how functions change when their inputs change by infinitesimal amounts. It's the primary engine for machine learning optimization.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Derivatives</div>
       <h1>Derivatives: The Rate of Change</h1>
@@ -14,28 +14,24 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculus is the "Language of Sensitivity." It answers the question: <em>"If I nudge this variable by a hair, how much does the result move?"</em> If you are standing on a hill, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. ML models always want to move "downhill" to find the minimum error.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
-        If you're driving, the speedometer doesn't tell you where you've been; it tells you exactly how fast you're changing your position <em>right now</em>. 
-        In ML, the derivative tells the model how fast the error is changing with respect to its weights <em>at this exact moment</em>.
+    <p>Calculus is the "Language of Sensitivity." It answers the core question of Machine Learning: <em>"If I nudge this specific variable by a hair, how much does the final result move?"</em> If you are standing on a landscape of data, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. By calculating these slopes for every single weight in a neural network, we gain a clear map of how to move. It is the fundamental difference between blind guessing and having a scientific plan to reduce error.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Instantaneous Rate</div>
+      <p>For a continuous function $f(x)$, the derivative $f'(x)$ (also denoted $\frac{df}{dx}$) represents the limit of the average rate of change as the interval $\Delta x$ shrinks to zero:</p>
+      <div class="math-block">
+        $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
       </div>
+      <p>A function is **Differentiable** at $x$ if this limit exists. The derivative provides an linear approximation of the function at a specific point, governed by several fundamental rules:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Power Rule</strong>: $\frac{d}{dx}x^n = nx^{n-1}$.</li>
+        <li><strong>Linearity</strong>: $\frac{d}{dx}[af(x) + bg(x)] = af'(x) + bg'(x)$.</li>
+        <li><strong>Product Rule</strong>: $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
     </div>
-
-    <visualizer topic="Differentiation" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
-    <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
-    <p><strong>Common Rules:</strong></p>
-    <ul>
-      <li><strong>Power Rule:</strong> \(\frac{d}{dx}x^n = nx^{n-1}\).</li>
-      <li><strong>Constant Rule:</strong> \(\frac{d}{dx}C = 0\).</li>
-    </ul>
-
+    
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     
       <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
@@ -98,15 +94,17 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Calculus is the "Language of Sensitivity." It answers the core question: "If I nudge this variable by a hair, how much does the final error move?"</p>
     <ul>
-      <li><strong>Activation Functions</strong>: We calculate derivatives of sigmoid or ReLU to update network weights.</li>
-      <li><strong>Optimizer Steps</strong>: Calculating how small parameter changes reduce total error.</li>
+      <li><strong>Learning Rates</strong>: A derivative tells us the slope, but the "Learning Rate" decides how big a step we take down it. If the derivative is huge (steep hill), the AI knows it's far from the goal and needs to move decisively rather than crawl.</li>
+      <li><strong>Gradient Clipping</strong>: Sometimes a derivative becomes massive (an "Exploding Gradient"). We use the derivative's value like a fuse—if it gets too high, we "clip" it to prevent the model from making a wild, unstable jump that ruins the training.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, derivatives are the compass that tells the model exactly which way to turn to reach the valley of minimum error. Without them, we're just guessing in the dark.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Single variables are rare in ML. How do we find slopes on multidimensional planes? Explore <strong><a href="#/mathematics/calculus/partial-derivatives">Partial Derivatives</a></strong>.
     </div>
-  `},i={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
+  `},t={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Multivariable</div>
       <h1>Partial Derivatives: The Specialized Slope</h1>
@@ -122,25 +120,23 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you are standing on a mountain (the Loss Surface). To optimize your model, you need to know: <em>"If I step strictly North (towards Weight A), does it go up? If I step strictly East (towards Weight B), does it go down?"</em> A partial derivative is that <strong>directional "step"</strong> along a single axis.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Partial Derivatives as <strong>Selective Vision</strong>. 
-        If you have a function with 10 variables, the partial derivative w.r.t \(x_1\) "blurs out" everyone else. 
-        It treats \(x_2, x_3, \dots\) as if they were fixed constant numbers like 5 or 10. 
-        This is how a neural network isolates exactly which of its millions of weights is causing the most error.
+    <p>Imagine you are standing on a massive 3D mountain range (the <strong>Loss Surface</strong>). To improve your model, you need to know: <em>"If I step strictly North (nudging Weight A), does it go up? If I step strictly East (nudging Weight B), does it go down?"</em> A <strong>Partial Derivative</strong> is exactly that—it isolates the influence of a single variable while freezing every other part of the universe. In Machine Learning, where models have millions of weights, these allow us to diagnose exactly which specific parameter is causing the most trouble without getting overwhelmed by the sheer complexity of the whole system.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Variable-wise Sensitivity</div>
+      <p>For a multivariable function $f(x_1, x_2, \dots, x_n)$, the partial derivative $\frac{\partial f}{\partial x_i}$ is defined as the traditional derivative taken with respect to $x_i$ while treating all other variables $x_j$ (where $j \neq i$) as constant parameters:</p>
+      <div class="math-block">
+        $$\frac{\partial f}{\partial x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_n)}{h}$$
       </div>
+      <p>This operation measures the instantaneous rate of change of $f$ in the direction of the $i$-th coordinate axis. Key details include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Independence</strong>: $\frac{\partial f}{\partial x_i}$ ignores interactions between $x_i$ and other variables during the computation.</li>
+        <li><strong>Notation</strong>: Often written as $f_{x_i}$ or $\partial_{x_i} f$.</li>
+        <li><strong>Geometry</strong>: It represents the slope of the tangent line to the curve formed by intersecting the surface with a plane parallel to the $x_i$-axis.</li>
+      </ul>
     </div>
-
-    <visualizer topic="PartialDerivatives" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(f(x, y)\), the partial derivative with respect to \(x\) is defined by the limit where <strong>only \(x\)</strong> receives a nudge:</p>
-    <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>
-    <p>Notice that \(y\) stays exactly the same in both parts of the fraction.</p>
-
+    
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     
       <h4>Problem: Finding Slopes on \(f(x, y) = x^2 + y^2\)</h4>
@@ -212,15 +208,17 @@ print(f"Exact derivative (2x): {2*x_val}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Partial Derivative is "Specialized Sensitivity." It isolates the influence of a single variable while freezing the rest of the universe.</p>
     <ul>
-      <li><strong>Building Gradient Vectors</strong>: All partial derivatives are stacked to create the "Gradient compass."</li>
-      <li><strong>Weight Isolation</strong>: Calculating how one specific weight in a layer contributes to the total error.</li>
+      <li><strong>Backpropagation in Individual Weights</strong>: When training a massive model, we use partial derivatives to find the "Responsible Weight." It tells the AI exactly how much a tiny nudge to Weight #59,302 affects the final decision, allowing for pinpoint corrections.</li>
+      <li><strong>Feature Importance (Sensitivity Analysis)</strong>: In models like house price predictors, partial derivatives allow us to calculate exactly which feature is most vital. By checking the partial derivative for "Square Footage," the model can tell if it's more important than "Year Built."</li>
     </ul>
+    <p>Teacher's Final Word: In ML, we often have thousands of variables at once. Partial derivatives allow us to diagnose exactly which specific parameter is helping (or hurting) our predictions without getting lost in the noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, partial derivatives tell us slopes along axes. How do we combine them to find the true "upward" direction? Explore <strong><a href="#/mathematics/calculus/gradient">The Gradient</a></strong>.
     </div>
-  `},e={id:"gradient",title:"The Gradient",description:"The Gradient is a vector of all partial derivatives. It points in the direction of the steepest ascent on a high-dimensional surface.",color:"#1B5E20",html:String.raw`
+  `},i={id:"gradient",title:"The Gradient",description:"The Gradient is a vector of all partial derivatives. It points in the direction of the steepest ascent on a high-dimensional surface.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Gradient</div>
       <h1>The Gradient: The Compass of Optimization</h1>
@@ -236,25 +234,24 @@ print(f"Exact derivative (2x): {2*x_val}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East. The <strong>Gradient</strong> combines these into a single arrow that points exactly "Uphill." In Machine Learning, we want to go "Downhill," so we simply take a step in the <strong>opposite direction</strong> of the gradient.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Gradient like a <strong>Treasure Compass</strong>. 
-        Except instead of pointing toward North, it points toward where the error is growing fastest. 
-        By "negating" the compass (\(-\nabla f\)), we get a direct path to the <strong>Global Minimum</strong> (the treasure). 
-        Without this compass, training a neural network would just be blind guessing.
+    <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East—but the real world (and real data) is rarely that simple. The <strong>Gradient</strong> (\(\nabla f\)) combines all these individual slopes into a single, powerful arrow that points exactly in the direction of the <strong>steepest ascent</strong>. It is the mathematical "North Star" for optimization. In Machine Learning, our goal is to decrease error as fast as possible, so we simply take our current position and move in the <strong>exact opposite direction</strong> of the gradient.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Multi-Dimensional Slope Vector</div>
+      <p>For a differentiable scalar function $f: \mathbb{R}^n \to \mathbb{R}$, the **Gradient** $\nabla f$ (pronounced "del f") is a vector-valued function defined as the collection of all its partial derivatives:</p>
+      <div class="math-block">
+        $$\nabla f(\mathbf{x}) = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^\top$$
       </div>
+      <p>The gradient possesses three properties that make it the engine of machine learning optimization:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Steepest Ascent</strong>: $\nabla f$ points in the direction of the maximum rate of increase of $f$ at $\mathbf{x}$.</li>
+        <li><strong>Directional Derivative</strong>: The slope in any arbitrary direction $\mathbf{v}$ (unit vector) is given by $D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}$.</li>
+        <li><strong>Geometry</strong>: The gradient vector is always orthogonal to the level set (contour line) of the function at that point.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
     </div>
-
-    <visualizer topic="Gradient" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a scalar function \(f(x, y, \dots, z)\), the gradient \(\nabla f\) is a vector of its first-order partial derivatives:</p>
-    <div class="math-block">$$\nabla f = \left[ \frac{\partial f}{\partial x}, \frac{\partial f}{\partial y}, \dots, \frac{\partial f}{\partial z} \right]^T$$</div>
-    <p><strong>Directional Derivative:</strong> To find the slope in any arbitrary direction vector \(\mathbf{v}\), you take the dot product: \(D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}\).</p>
-
+    
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
     
       <h4>Problem: Finding the Steering Direction</h4>
@@ -333,10 +330,12 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Gradient is the "Compass of Optimization." It combines all your individual partial slopes into a single, powerful arrow that points exactly "Uphill."</p>
     <ul>
-      <li><strong>Gradient Descent</strong>: The backbone of training every modern AI. We follow the negative gradient to lower the error.</li>
-      <li><strong>Hyperparameter Optimization</strong>: Finding the best learning rate or architecture size by treating them as axes.</li>
+      <li><strong>Stochastic Gradient Descent (SGD)</strong>: In massive datasets, calculating the gradient for all 1,000,000 rows at once is too slow. Instead, we calculate an "Approximate Gradient" using just a tiny random batch. This "Noisy Compass" is the secret to how AI trains on the entire internet in a reasonable amount of time.</li>
+      <li><strong>Adversarial Attacks</strong>: Hackers can use the gradient of an image-recognition AI to find its "Most Sensitive Pixels." By subtly changing pixels in the direction of the gradient, they can trick an AI into seeing a "Toaster" instead of a "Stop Sign," while the image still looks perfect to human eyes.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, we simply look where the gradient is pointing and run the other way to find the valley of minimum error. It is the most fundamental tool in the entire machine learning toolkit.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Optimization often requires calculating how deeply nested layers affect the error. This is the <strong><ctrl42> <a href="#/mathematics/calculus/chain-rule">Chain Rule</a></strong>.
@@ -357,24 +356,33 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In Machine Learning, we don't just have one function mapping input to output. We have a <strong>Chain</strong> of functions: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\to\) Error. To train the network, we need to know: <em>"How much does that deep weight \(w\) affect the Final Error?"</em> The Chain Rule says we can just multiply the slopes of every connection along the path to find the answer.</p>
+    <p>In modern AI, we don't just have one function—we have a <strong>Chain</strong> of hundreds of layers: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\dots \to\) Error. To train the model, we need to know: <em>"How much does that deep weight \(w\) in Layer 1 affect the Final Error?"</em> The <strong>Chain Rule</strong> is the mathematical "Telephone Wire" that carries this sensitivity information all the way back from the error to the initial weights. It says that the global sensitivity is simply the product of every local sensitivity along the path. Without this rule, training deep neural networks would be mathematically impossible.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Calculus of Connectivity</div>
+      <p>The **Chain Rule** provides a mechanism to differentiate composite functions. If $y = f(u)$ and $u = g(x)$, then the change in $y$ relative to $x$ is the product of intermediate rates:</p>
+      <div class="math-block">
+        $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+      </div>
+      <p>For multivariable systems (the foundation of Backpropagation), if $z = f(x_1, \dots, x_n)$ where each $x_i$ is a function of $t$, the total derivative is:</p>
+      <div class="math-block">
+        $$\frac{dz}{dt} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of the Chain Rule as <strong>Passing a Secret</strong>. 
-        If Person A whispers to B, and B whispers to C, and C screams at D—how does A's whisper affect D's scream? 
-        The Chain Rule multiplies the "loudness" (slope) of every person in the chain. 
-        In ML, this is why we can train 100-layer "Deep" networks: we just keep multiplying the local gradients backwards!
+        Think of the Chain Rule as <strong>"Passing a Secret"</strong> or a <strong>"Cascade of Influence."</strong> 
+        If Person A whispers to B, and B whispers to C, and C screams at D—how does A's original whisper affect D's final scream? 
+        The Chain Rule multiplies the "Loudness" (slope) of every single person in that chain to find the final impact. 
+        In Deep Learning, this is the core logic behind <strong>Backpropagation</strong>: we calculate the error at the end, and then "Chain" those gradients backwards to tell every single neuron in the network exactly how it needs to change to make the model smarter.
       </div>
     </div>
 
     <visualizer topic="ChainRule" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
-    <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
-    <p>For multivariable functions, you sum the paths: \(\frac{\partial f}{\partial t} = \sum_{i} \frac{\partial f}{\partial x_i} \cdot \frac{\partial x_i}{\partial t}\).</p>
 
     <h2 id="example-composite" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Composite Functions</h2>
     
@@ -455,10 +463,12 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Chain Rule is the "Telephone Wire" of AI. It passes a message of error from the very end of the model all the way back to the beginning.</p>
     <ul>
-      <li><strong>Backpropagation</strong>: Calculating gradients through 50+ layers of weights.</li>
-      <li><strong>Optimization</strong>: Ensuring that updates to early layers move in sync with the error at the end.</li>
+      <li><strong>Backpropagation</strong>: This is how we train deep networks with 100+ layers. The Chain Rule allows the error at the final output to "trickle down." It multiplies the small impacts of every neuron along the way to tell the very first layer how it needs to change to reduce the overall error.</li>
+      <li><strong>Automatic Differentiation (Autograd)</strong>: Modern libraries like PyTorch or TensorFlow don't actually know the "math formula" for your complex model. Instead, they use the Chain Rule to break your code into tiny, simple operations and multiply their derivatives together to find the overall gradient automatically.</li>
     </ul>
+    <p>Teacher's Final Word: By multiplying the "Loudness" of every step in the chain, the Chain Rule ensures that even the deepest, most hidden neuron gets the memo on how to improve. Without it, modern Deep Learning wouldn't exist.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have multiple inputs <em>and</em> multiple outputs? How do we track <strong>all</strong> the sensitivities? Explore <strong><a href="#/mathematics/calculus/jacobian">The Jacobian Matrix</a></strong>.
@@ -479,27 +489,26 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A simple derivative (\(df/dx\)) is for one input and one output. A Gradient (\(\nabla f\)) is for many inputs and one output. But in Deep Learning, every layer takes a vector and spits out a <strong>new vector</strong>. To track the sensitivity of this transformation, we need a grid where every row is the gradient of a different output.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Jacobian as a <strong>"Responsibility Matrix."</strong> 
-        The row tells you: <em>"How much does Output #1 care about Input #1, #2, #3?"</em> 
-        The column tells you: <em>"How much does Input #1 affect Output #1, #2, #3?"</em> 
-        Without this grid, we couldn't pass gradients through complex "Vector Layers" like Softmax or fully connected layers.
+    <p>A simple derivative is for one input and one output. A Gradient is for many inputs and one output. But in Deep Learning, every layer takes a vector and transforms it into a <strong>new vector</strong>. To track this complex interaction, we need the <strong>Jacobian Matrix</strong>—a complete grid where every row is the gradient of a different output neuron. It tells us exactly how every single input in a layer influences every single output in the next. Without this map, we wouldn't be able to "link" the chain of sensitivities together to train deep neural networks.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix of Sensitivities</div>
+      <p>For a vector-valued function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$, the **Jacobian Matrix** $\mathbf{J}$ (or $\mathbf{Df}$) is the matrix of all first-order partial derivatives. It represents the best linear approximation of the function at a point $\mathbf{x}$:</p>
+      <div class="math-block">
+        $$\mathbf{J} = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} = \begin{bmatrix} 
+        \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$
       </div>
+      <p>The Jacobian plays three critical roles in advanced mathematical modeling:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Multivariate Chain Rule</strong>: To differentiate $\mathbf{f}(\mathbf{g}(\mathbf{x}))$, we multiply their Jacobians: $\mathbf{J}_{\mathbf{f} \circ \mathbf{g}} = \mathbf{J}_{\mathbf{f}} \cdot \mathbf{J}_{\mathbf{g}}$.</li>
+        <li><strong>Local Linearization</strong>: Near $\mathbf{x}$, the change in output is predicted by $\Delta \mathbf{f} \approx \mathbf{J} \Delta \mathbf{x}$.</li>
+        <li><strong>Volume Scaling</strong>: If $n=m$, $|\det(\mathbf{J})|$ measures how the transformation expands or shrinks space locally.</li>
+      </ul>
     </div>
-
-    <visualizer topic="JacobianHessian" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(\mathbf{f}(\mathbf{x}) = [f_1, f_2, \dots, f_m]^T\) of input \(\mathbf{x} = [x_1, x_2, \dots, x_n]^T\), the Jacobian is:</p>
-    <div class="math-block">$$ \mathbf{J} = \begin{bmatrix} 
-    \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
-    \vdots & \ddots & \vdots \\
-    \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix} $$</div>
-
+    
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>
@@ -576,10 +585,12 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Jacobian is a "Sensitivity Grid." It tracks exactly how every single neuron in one layer affects every single neuron in the next.</p>
     <ul>
-      <li><strong>Backpropagation through Vector Layers</strong>: Passing gradients through Softmax or batch normalization layers.</li>
-      <li><strong>Automatic Differentiation</strong>: Libraries like PyTorch build these Jacobians internally to solve the network.</li>
+      <li><strong>Backpropagation in Vector Layers</strong>: In layers like Softmax or Batch Norm, it's not just one input affecting one output. The Jacobian is the matrix that tracks the multi-node connectivity, allowing the error to flow perfectly through these complex layers.</li>
+      <li><strong>Generative Models (Latent Space Warping)</strong>: In models like Variational Autoencoders (VAEs), the Jacobian measures how the AI's "Latent Space" is being stretched to create an image. This ensures that the generated images are diverse and don't all collapse into the same pattern.</li>
     </ul>
+    <p>Teacher's Final Word: While a simple derivative tracks one-to-one changes, the Jacobian tracks **all possible interactions**. It’s the master map that tells the model exactly how every single parameter contributes to the final complex behavior of the network.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Jacobians tell us about "first-order" velocity. What about the "Acceleration" or the curvature of the loss? Explore <strong><a href="#/mathematics/calculus/hessian">The Hessian Matrix</a></strong>.
@@ -600,29 +611,29 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Gradient (\(\nabla f\)) tells you which way to walk to reduce the loss. But it doesn't tell you how <strong>fast</strong> the slope is changing. Are you on a sharp peak? A flat valley? A <strong>Hessian</strong> tells the optimizer: <em>"Slow down, the ground is curving upwards!"</em> or <em>"Speed up, the slope is constant."</em> This is the difference between simple Gradient Descent and advanced "Second-Order" methods.</p>
+    <p>A Gradient tells you which way to walk to reduce the loss—but it doesn't tell you how <strong>fast</strong> the ground is changing under your feet. The <strong>Hessian Matrix</strong> is the "Grid of Curvatures" that measures the second-order sensitivity of your function. It tells you if you are walking into a sharp, narrow crevice or a broad, flat valley. In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix of Curvature</div>
+      <p>For a twice-differentiable scalar function $f: \mathbb{R}^n \to \mathbb{R}$, the **Hessian Matrix** $\mathbf{H}$ (or $\nabla^2 f$) is a square matrix containing all second-order partial derivatives. It quantifies how the gradient of the function changes as you move:</p>
+      <div class="math-block">
+        $$\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$
+      </div>
+      <p>The Hessian is the fundamental tool for "Second-Order" optimization and stability analysis:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Characterizing Extrema</strong>: If $\nabla f(\mathbf{x}) = \mathbf{0}$ and $\mathbf{H}(\mathbf{x})$ is positive definite, $\mathbf{x}$ is a local minimum. If $\mathbf{H}(\mathbf{x})$ is negative definite, it is a local maximum.</li>
+        <li><strong>Taylor Approximation</strong>: The Hessian defines the parabolic (quadratic) shape of the function locally.</li>
+        <li><strong>Conditioning</strong>: The ratio of max/min eigenvalues of $\mathbf{H}$ tells us if the "bowl" is perfectly circular or a narrow, stretched canyon (making gradient descent slow).</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of the Hessian as <strong>The Road Condition</strong>. 
-        The Gradient is your <strong>Steering Wheel</strong>. 
-        The Hessian is how much you need to <strong>Brake or Accelerate</strong> because the road is curving. 
-        If you are at the bottom of a bowl, the Hessian is "Positive Definite" (all curvas are up). 
-        If you are at the top of a hill, it's "Negative Definite" (all curvas are down). 
-        If it's a saddle, you're at a "Switchback."
+        <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
       </div>
     </div>
-
-    <visualizer topic="JacobianHessian" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
-    <div class="math-block">$$ \mathbf{H} = \begin{bmatrix} 
-    \frac{\partial^2 f}{\partial x_1^2} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
-    \vdots & \ddots & \vdots \\
-    \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n^2} \end{bmatrix} $$</div>
-    <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
 
     <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Curvature at a Point</h2>
     
@@ -716,10 +727,12 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>If the Gradient is "Velocity" (which way am I moving?), the Hessian is "Acceleration" (how is the road bending?). It tells you if you are in a stable valley, a volatile sharp peak, or a tricky saddle point.</p>
     <ul>
-      <li><strong>Second-Order Optimizers (L-BFGS)</strong>: Approximating the Hessian to find the local minimum much faster than simple Adam/SGD.</li>
-      <li><strong>Second-Order Regularization</strong>: Penalizing curvature to ensure the model surface is smooth.</li>
+      <li><strong>Newton’s Method Optimization</strong>: Standard Gradient Descent is like walking blindly downhill. Newton's Method uses the Hessian to see the *curvature* of the mountain. It allows the AI to take a massive, confident step if the ground is flat and a small, cautious step if the ground is sharply curved.</li>
+      <li><strong>Model Pruning (OBD)</strong>: In "Optimal Brain Damage," we use the Hessian to determine which weights in a neural network are the least important. If the second-order sensitivity is near zero, it means removing that weight won't affect the model's accuracy, allowing us to shrink the AI for mobile phones.</li>
     </ul>
+    <p>Teacher's Final Word: In real ML, we rarely calculate the full Hessian because it's too big—we use clever "second-order approximations" instead to get most of the benefits without the massive computational cost.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Sometimes a function is too complex to solve exactly. How do we approximate it with a simpler "Flat" or "Parabolic" version? Explore <strong><a href="#/mathematics/calculus/taylor-series">Taylor Series Approximation</a></strong>.
@@ -740,24 +753,23 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating a 100-layer neural network's exact output at every possible point is impossible. But if we are currently at weights \(\mathbf{w}_0\), we only need to know what the loss surface looks like <strong>nearby</strong>. A "First-order" Taylor expansion is just a <strong>Tangent Line</strong>. A "Second-order" expansion is a <strong>Parabola</strong>. These approximations are the foundation of almost all numerical solvers.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Taylor Series as <strong>"Drawing a Map from Memory."</strong> 
-        If you are at point A, you know the height (Value), the slope (1st Derivative), and how the ground is curving (2nd Derivative). 
-        By combining these, you can guess what point B looks like without actually going there. 
-        The more derivatives you use (\(n\)-th degree), the more <strong>accurate</strong> your map becomes.
+    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola. These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Polynomial Approximation</div>
+      <p>If a function $f(x)$ is infinitely differentiable at a point $a$, its **Taylor Series** is the power series:</p>
+      <div class="math-block">
+        $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n$$
       </div>
+      <p>In Machine Learning, we rarely use the infinite series, instead relying on low-degree **Taylor Polynomials** for local optimization:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>First-Order (Linear)</strong>: $f(x) \approx f(a) + f'(a)(x-a)$. Used in Gradient Descent.</li>
+        <li><strong>Second-Order (Quadratic)</strong>: $f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2$. Used in Newton's Method.</li>
+        <li><strong>Remainder</strong>: The Taylor theorem ensures that the error $R_n(x)$ becomes negligible as $x$ approaches $a$.</li>
+      </ul>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The \(n\)-th order Taylor polynomial of \(f(x)\) around a center point \(a\) is:</p>
-    <div class="math-block">$$P_n(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n$$</div>
-    <p><strong>First Order (Linear):</strong> \(f(x) \approx f(a) + f'(a)(x-a)\).</p>
-    <p><strong>Second Order (Quadratic):</strong> \(f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2\).</p>
-
+    
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>
@@ -839,10 +851,12 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Taylor Series is the "Ultimate Simplifier." It allows us to take a complex, "bumpy" loss function and mimic it using simpler pieces like lines and parabolas.</p>
     <ul>
-      <li><strong>Optimization</strong>: All second-order optimizers assume the loss function can be represented by a local quadratic Taylor expansion.</li>
-      <li><strong>Model Interpretation</strong>: Local Surrogate models (LIME) use first-order Taylor expansions to explain why a black-box model made a prediction.</li>
+      <li><strong>Fast Kernel Approximations (RFF)</strong>: Training on millions of data points with complex math is too slow. We use Taylor Series to approximate these complex functions with simple polynomials. This allows "Support Vector Machines" (SVMs) to scale to massive datasets without crashing your computer.</li>
+      <li><strong>Trust-Region Optimization</strong>: In safety-critical AI, we don't just follow the gradient blindly. We create a Taylor expansion and define a "Trust Region"—a safe zone where our approximation is guaranteed to be accurate. The model only moves within this zone to avoid disastrous, unpredictable jumps in logic.</li>
     </ul>
+    <p>Teacher's Final Word: Even if we don't know the "Whole Universe" of the loss function, the Taylor expansion gives us a reliable **Local Map** to decide our next step. It's how we navigate the unknown with scientific precision.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Approximations help us find the "Low points" on a curve. But how do we identify them exactly? Explore <strong><a href="#/mathematics/calculus/critical-points">Critical Points</a></strong>.
@@ -863,28 +877,24 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>When you are hiking, you are at a "Critical Point" if the ground at your feet is perfectly flat. This could mean you are at the <strong>Top of a Peak</strong> (Maximize Reward), the <strong>Bottom of a Valley</strong> (Minimize Loss), or on a <strong>Saddle Point</strong> (Flat from one side, steep from another). To build a model that actually works, we need to distinguish between these cases.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Critical Point like <strong>The End of a Path</strong>. 
-        If you arrive at a flat spot and the ground curves up in all directions, you've found a <strong>Minimum</strong> (Success!). 
-        If it curves down everyone, you've found a <strong>Maximum</strong> (Reverse success!). 
-        In Deep Learning, we often find <strong>Saddle Points</strong>—frustrating flat areas that trap our models and slow down training.
+    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>. We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Stationary Conditions</div>
+      <p>For a differentiable function $f: \mathbb{R}^n \to \mathbb{R}$, a point $\mathbf{x}^*$ in the domain is a **Critical Point** (or stationary point) if the gradient is zero:</p>
+      <div class="math-block">
+        $$\nabla f(\mathbf{x}^*) = \mathbf{0}$$
       </div>
+      <p>To determine the nature of a critical point, we utilize the **Second Derivative Test** based on the eigenvalues ($\lambda_i$) of the Hessian matrix $\mathbf{H}$ at $\mathbf{x}^*$:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Local Minimum</strong>: $\mathbf{H}$ is positive definite ($\lambda_i > 0$ for all $i$). Geometrically, all directions lead uphill.</li>
+        <li><strong>Local Maximum</strong>: $\mathbf{H}$ is negative definite ($\lambda_i < 0$ for all $i$). Geometrically, all directions lead downhill.</li>
+        <li><strong>Saddle Point</strong>: $\mathbf{H}$ is indefinite (both positive and negative eigenvalues exist). The point is a minimum in one direction and a maximum in another.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>We find critical points by solving the equation:</p>
-    <div class="math-block">$$\nabla f(\mathbf{x}) = \mathbf{0}$$</div>
-    <p>To classify the point, we examine the <strong>Eigenvalues</strong> of the Hessian matrix \(\mathbf{H}\):</p>
-    <ul>
-      <li><strong>All \(\lambda > 0\):</strong> (PD) -> <strong>Local Minimum</strong>.</li>
-      <li><strong>All \(\lambda < 0\):</strong> (ND) -> <strong>Local Maximum</strong>.</li>
-      <li><strong>Mixed \(\lambda\):</strong> -> <strong>Saddle Point</strong>.</li>
-    </ul>
-
+    
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     
       <h4>Problem: Finding the Bottom of \(f(x, y) = x^2 + y^2 - 4x\)</h4>
@@ -959,10 +969,12 @@ print(f"Value at Min: {res.fun}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Critical Point is any location where the ground beneath your feet is perfectly flat. In ML, training is a search for the best "Bottom" point.</p>
     <ul>
-      <li><strong>Cost Function Optimization</strong>: Everything in ML is about finding the weights that reach the lowest critical point.</li>
-      <li><strong>Convergence Analysis</strong>: Understanding why models stop improving—often because they are trapped at a saddle point or a local minimum.</li>
+      <li><strong>Global vs. Local Minima</strong>: In Deep Learning, the "Error Surface" is a jagged mountain range with billions of pits (local minima). The quest of training is to find the deepest pit possible to minimize error. While we rarely find the *perfect* Global Minimum, we use techniques like "Momentum" to skip over shallow pits and find a good enough spot to stop.</li>
+      <li><strong>The Saddle Point Problem</strong>: In high-dimensional models (like LLMs), most critical points aren't actually peaks or pits—they are "Saddle Points" (flat in one direction, sloped in another). Modern optimizers like Adam are designed to "Vibrate" and escape these traps so the model can keep learning.</li>
     </ul>
+    <p>Teacher's Final Word: Finding the right critical point is the art of AI. If you stop too early, your model is underdeveloped; if you get trapped on a peak, your model is broken. We want the deepest valley we can find.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve mastered the mechanics of optimization. Now, see how we deal with <strong>Uncertainty</strong> and <strong>Data Distributions</strong>. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
@@ -984,60 +996,24 @@ print(f"Value at Min: {res.fun}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In ML, we often deal with <strong>Probability Density Functions (PDFs)</strong>. A PDF $f(x)$ tells us the relative likelihood of a continuous random variable. However, the probability of a single exact point (e.g., "What is the probability a person is exactly 175.0000... cm tall?") is zero.</p>
+    <p>If derivatives are the "Speedometer" (measuring instant change), then <strong>Integrals</strong> are the "Odometer" (measuring total distance traveled). In Machine Learning, we often know the local rules or probabilities, and we need to find the <strong>Total Result</strong>. Whether it's calculating the total probability of an event or finding the expected value across a continuous range, integrals allow us to sum up an infinite number of tiny, infinitesimal slices to reconstruct a whole reality. It is the mathematical bridge between local slope and global accumulation.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Limit of Accumulation</div>
+      <p>For a continuous function $f(x)$, the **Definite Integral** over the interval $[a, b]$ is defined as the signed area between the $x$-axis and the graph, calculated as the limit of Riemann sums:</p>
+      <div class="math-block">
+        $$\int_a^b f(x) dx = \lim_{\Delta x \to 0} \sum_{i} f(x_i^*) \Delta x_i$$
+      </div>
+      <p>The relationship between integration and differentiation is codified by the **Fundamental Theorem of Calculus**:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Antidifferentiation</strong>: If $F(x) = \int f(x) dx$, then $F'(x) = f(x)$.</li>
+        <li><strong>Definite Integral Calculation</strong>: $\int_a^b f(x) dx = F(b) - F(a)$.</li>
+        <li><strong>ML Utility</strong>: In probability theory, the area under a density function $p(x)$ determines the cumulative mass: $P(X \le k) = \int_{-\infty}^k p(x) dx$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Integrals enable the transition from discrete sets to continuous distributions, a requirement for high-fidelity modeling in Statistics and Bayesian Inference.</p>
+    </div>
     
-    <div class="callout tip">
-      <div class="callout-icon">🏗️</div>
-      <div class="callout-body">
-        We use <strong>Integration</strong> to find the probability over a range (e.g., "between 170 and 180 cm").
-        <ul>
-          <li><strong>Indefinite Integral</strong>: Finds the "Antiderivative"—the general form of the accumulation function.</li>
-          <li><strong>Definite Integral</strong>: Calculates the actual "Net Area" between two specific points.</li>
-          <li><strong>Visualizing the Area Under the Curve:</strong></li>
-        </ul>
-      </div>
-    </div>
-
-    <visualizer topic="AreaUnderCurve" />
-
-    <h2 id="derivation">Formal Definition</h2>
-
-    <h3>1. The Indefinite Integral</h3>
-    <p>If $F'(x) = f(x)$, then:</p>
-    <div class="math-block">$$\int f(x) \, dx = F(x) + C$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> The <strong>Indefinite Integral</strong> is like a "Reverse Engineering" process. If you know how fast a car is accelerating at every moment (the derivative), the integral helps you reconstruct its position. In ML, if we have the gradient of a loss function, the integral helps us understand the global "shape" of the loss surface.
-      </div>
-    </div>
-    <p>where $C$ is the constant of integration (representing the fact that shifting a graph vertically doesn't change its slope).</p>
-
-    <h3>2. The Definite Integral (Fundamental Theorem of Calculus)</h3>
-    <p>To find the area under $f(x)$ from $a$ to $b$:</p>
-    <div class="math-block">$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> This is the <strong>Fundamental Theorem of Calculus</strong>. It bridges the gap between slopes and areas. By simply subtracting the values of the antiderivative at two points, we can find the total area (accumulation) without having to sum up infinite infinitesimal rectangles manually.
-      </div>
-    </div>
-
-    <h3>3. Integration in Probability</h3>
-    <p>For a continuous random variable $X$ to be a valid probability distribution, the total area under its PDF must be 1:</p>
-    <div class="math-block">$$\int_{-\infty}^{\infty} f(x) \, dx = 1$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> In probability, <strong>Integration = Normalization</strong>. We integrate over all possible outcomes to ensure the total probability space captures everything. If the area isn't exactly 1, your model isn't a valid probability distribution.
-      </div>
-    </div>
-    <p>The probability that $X$ falls between $a$ and $b$ is:</p>
-    <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
-
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
     
       <h4>Problem: Finding Range Probabilities</h4>
@@ -1087,12 +1063,12 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>If derivatives are the "Speedometer" (instant change), then Integrals are the "Odometer" (total distance traveled). They allow us to sum up infinite tiny slices to find a whole reality.</p>
     <ul>
-      <li><strong>Expectation and Variance</strong>: Computing the average value of a continuous distribution: $E[X] = \int x f(x) \, dx$.</li>
-      <li><strong>Bayesian Inference</strong>: Calculating the "Evidence" (the denominator in Bayes' Rule) often requires integrating over all possible parameter values.</li>
-      <li><strong>Gaussian Distributions</strong>: The Bell Curve is defined by an integral that ensures its total area equals 1.</li>
-      <li><strong>Kernel Density Estimation (KDE)</strong>: Used in data visualization and non-parametric modeling.</li>
+      <li><strong>Expected Value Calculation</strong>: In AI, we don't just want to know what's possible; we want to know what's *likely*. We use integrals to sum up all outcomes of a model, weighted by their probability, to find the "Expected Value"—the core of how AI makes safe, long-term decisions.</li>
+      <li><strong>Evidence in Bayesian Inference</strong>: To update an AI's belief, we must calculate the "Evidence"—the total probability of our data across all possible parameter settings. This requires integrating over every single possibility to ensure the model's new belief is mathematically sound.</li>
     </ul>
+    <p>Teacher's Final Word: Integrals are the ultimate tool for "Global Understanding." They take the local rules of probability and scale them up to show us the big picture of a dataset or a model's behavior.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Integration measures accumulation. Now, find the 'best' possible values by exploring <strong><a href="#/mathematics/calculus/optimization">Optimization Theory</a></strong>.
@@ -1143,4 +1119,4 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       </div>
 
     </div>
-  `,sections:[t,i,e,a,s,n,o,r,l]};export{d as CALCULUS_DATA};
+  `,sections:[e,t,i,a,s,n,o,r,l]};export{d as CALCULUS_DATA};

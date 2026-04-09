@@ -5,15 +5,30 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
       <p>Supervised learning is <strong>Expensive</strong>. It requires humans to label millions of images. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. It looks at the world and creates its own puzzles to solve. By solving these "Pretext Tasks," it learns the <strong>Structure of Reality</strong> for free.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Pretext Tasks</h2>
-    <p>In SSL, we hide a part of the data and ask the model to <strong>Predict the Missing Part</strong>. This "Fake" objective is called a <strong>Pretext Task</strong>. The goal isn't to be good at the puzzle—it's to learn the <strong>Representations</strong> required to solve it.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Supervised learning is <strong>Expensive</strong>. It requires an army of humans to label millions of images, which is slow and prone to error. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. Instead of waiting for a teacher to provide answers, the model looks at the world and creates its own puzzles—or "Pretext Tasks"—to solve. By trying to predict a hidden part of an image or the next word in a sentence, the model is forced to learn the underlying <strong>Structure of Reality</strong> for free. It is the tactical decision to leverage the infinite supply of unlabeled data to build a core "General Intelligence" before ever being asked to perform a specific task.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Pretext Task</div>
+      <p>In self-supervised learning, labels $y$ are automatically generated from the data $\mathbf{x}$ using a function $\mathcal{G}(\mathbf{x})$. The objective is to learn a representation $f_\theta(\mathbf{x})$ by solving a surrogate task:</p>
+      <div class="math-block">
+        $$\min_\theta \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathcal{G}(\mathbf{x})) ]$$
+      </div>
+      <p>Where $\tilde{\mathbf{x}}$ is a corrupted or partial version of $\mathbf{x}$. Common paradigms include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Auto-encoding</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with noise; $\mathcal{G}(\mathbf{x}) = \mathbf{x}$.</li>
+        <li><strong>Masking</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with missing parts (e.g., in BERT); $\mathcal{G}(\mathbf{x})$ is the missing segment.</li>
+        <li><strong>Instance Discrimination</strong>: Learning to distinguish $\mathbf{x}$ from other samples (Contrastive Learning).</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Learning to Read by Context."</strong> 
-        If I give you a sentence with a missing [MASK] word, you use the surrounding words to guess it. 
-        To guess correctly, you must understand <strong>Grammar, Logic, and Facts</strong>. You learned English without me giving you a dictionary of "Word Categories." 
+        Think of Self-Supervised Learning as <strong>"Learning to Read by Context"</strong> or <strong>"The Master Jigsaw Solver."</strong> 
+        Imagine a child playing with 1,000 blank jigsaw puzzles. No one tells them "This is a dog" or "This is a tree." But to make the pieces fit, the child <strong>accidentally</strong> learns that edges match edges and colors flow into each other. By the time they finish, they don't know the <strong>Names</strong> of things, but they <strong>Understand Concepts</strong> like eyes, wheels, and grass perfectly. 
+        In SSL, we "break" the data (scramble it, hide parts, or rotate it) and tell the model to "Fix it." In the process of fixing the puzzle, the model develops a deep, intuitive understanding of what the data represents.
       </div>
     </div>
 
@@ -132,15 +147,30 @@ print("Views created. Model will now learn if these came from the SAME image.")
       <p>Why start from scratch? In the old days, every model was born "Stupid" and had to learn the alphabet. <strong>Transfer Learning</strong> allows a model to be born with <strong>10 years of experience</strong> from another field. It's the secret sauce behind modern Large Language Models and medical AI.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Hierarchical Knowledge</h2>
-    <p>Neural networks learn <strong>Hierarchical Features</strong>. The first layers see <strong>Edges</strong>, the middle layers see <strong>Shapes</strong>, and only the final layers see <strong>Specific Objects</strong>. Transfer Learning keeps the "Edges" and "Shapes" knowledge and only replaces the "Specific Object" part.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Why start from scratch? In the traditional machine learning paradigm, every model was born "blind" and had to learn the basic alphabet of data from zero. <strong>Transfer Learning</strong> changes the game by allowing a model to be born with 10 years of "experience" gifted from a related field. It is based on the fact that neural networks learn <strong>Hierarchical Features</strong>: the first layers learn simple things like edges and textures, which are universal across almost all data. By keeping these "low-level" brains and only training the final layers for a specific task—like identifying a rare disease on an MRI—we can achieve state-of-the-art results with tiny datasets. It is the tactical decision to stand on the shoulders of giants rather than trying to reinvent the wheel.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Cross-Domain Knowledge Transfer</div>
+      <p>Transfer learning leverages knowledge from a source domain $\mathcal{D}_S$ and task $\mathcal{T}_S$ to improve performance on a target domain $\mathcal{D}_T$ and task $\mathcal{T}_T$. Formally, we aim to learn a target function $f_T(\mathbf{x})$ such that:</p>
+      <div class="math-block">
+        $$\mathcal{T}_T = \{ \mathcal{Y}_T, P(Y_T | X_T) \}$$
+      </div>
+      <p>This is achieved by either **Pre-training** the weights $\theta_S$ on $\mathcal{D}_S$ and then **Fine-tuning** them on $\mathcal{D}_T$, or by using the source model as a fixed **Feature Extractor** $\phi(\cdot)$:</p>
+      <div class="math-block">
+        $$\hat{y}_T = f_T(\phi(\mathbf{x}_T; \theta_S); \theta_T)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Academic Credit."</strong> 
-        If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry. You <strong>Transfer</strong> your understanding of math and logic. 
-        In ML, a model that saw 100 million generic internet photos already knows what <strong>Shadows</strong> and <strong>Textures</strong> look like. We just teach it to use that knowledge for <strong>MRI Scans</strong>.
+        Think of Transfer Learning as <strong>"Academic Credit"</strong> or <strong>"The Kung Fu Master."</strong> 
+        If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry—you <strong>Transfer</strong> your understanding of logic and numbers. 
+        Imagine a **Kung Fu Master** who has spent 30 years mastering body mechanics, reflexes, and balance. One day, he decides to learn <strong>Tennis</strong>. He doesn't start like a toddler; he already has the footwork and discipline. He only needs to learn the racket grip and the rules of the court. 
+        In ML, the 30 years of Kung Fu is the <strong>Pre-training</strong> (on a massive dataset like ImageNet), and the tennis lessons are the <strong>Fine-tuning</strong> (on your specific, small dataset).
       </div>
     </div>
 
@@ -251,22 +281,36 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What exactly is the model "Gifting"? It's the way it simplifies data. Explore <strong><a href="#/machine-learning/modern-ml/representation">Representation Learning</a></strong>.
     </div>
-  `},s={id:"representation",title:"Representation Learning",description:"The field of machine learning dedicated to learning meaningful, low-dimensional representations of data that reveal its underlying structure and features.",color:"#E91E63",html:String.raw`
+  `},a={id:"representation",title:"Representation Learning",description:"The field of machine learning dedicated to learning meaningful, low-dimensional representations of data that reveal its underlying structure and features.",color:"#E91E63",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚀 Modern ML · Structure</div>
       <h1>Representation: The Art of Simplification</h1>
       <p>A 4K image has 8 million pixels. That is <strong>Too Much Information</strong>. To understand the image, you don't need the exact color of every pixel; you need the <strong>Identity</strong> of the object. <strong>Representation Learning</strong> (Feature Learning) is the process of compressing raw data into a set of <strong>Meaningful Numbers</strong> (Vectors) that capture the "Soul" of the information.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent Space</h2>
-    <p>A <strong>Representation</strong> is just a point in a "Latent Space." If you take a picture of a <strong>Dog</strong> and a picture of a <strong>Wolf</strong>, their pixel values might be totally different. But in the model's <strong>Latent Space</strong>, they will be very close to each other. Representation learning is about finding the <strong>Mapping</strong> (\(f: X \to Z\)) that honors the semantic truth.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A single 4K image contains over 8 million pixels. For a computer, that is <strong>Too Much Information</strong> to process effectively. To truly understand data, you don't need the exact color of every microscopic pixel; you need the <strong>Identity</strong> and <strong>Context</strong> of the objects within it. <strong>Representation Learning</strong> is the process of compressing high-dimensional raw data into a set of meaningful, low-dimensional numbers—vectors—that capture the "Soul" of the information. It is the art of finding a mapping that honors the semantic truth of the data, ensuring that a "Dog" and a "Wolf" are mapped to nearby coordinates in a "Latent Space," even if their raw pixel values are completely different. It is the tactical decision to trade precision for meaning.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Latent Mapping</div>
+      <p>Representation learning aims to find a function $f_\theta: \mathcal{X} \to \mathbb{R}^d$ that maps high-dimensional input $\mathbf{x}$ to a lower-dimensional latent vector $\mathbf{z}$ while preserving task-relevant information. A principal objective is **Disentanglement**, where factors of variation are separated:</p>
+      <div class="math-block">
+        $$\mathbf{z} = f_\theta(\mathbf{x}), \quad \text{where } \mathbf{x} \approx g_\phi(\mathbf{z})$$
+      </div>
+      <p>A robust representation satisfies **The Manifold Hypothesis**, assuming that data lies on a low-dimensional topological manifold $\mathcal{M}$. The learning objective often involves minimizing reproduction error or maximizing mutual information:</p>
+      <div class="math-block">
+        $$\max_{\theta} I(\mathbf{x}; f_\theta(\mathbf{x}))$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Lossy but Smart Compression."</strong> 
-        If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
-        Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
+        Think of Representation Learning as <strong>"The Police Sketch Artist"</strong> or <strong>"Lossy but Smart Compression."</strong> 
+        Imagine a witness describing a criminal to a sketch artist. The witness has the raw video in their head (the Raw Data). The artist doesn't draw every skin cell; he asks: "Round eyes? Pointy nose? Short hair?" 
+        Those specific words are the <strong>Representations</strong>. They are a low-dimensional summary that contains 99% of the important information. In machine learning, we use a <strong>Bottleneck</strong> to force the data through a narrow bridge, stripping away the noise (like the color of a plate) and keeping only the signal (the identity of the food).
       </div>
     </div>
 
@@ -385,24 +429,33 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
     </div>
-  `},n={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
+  `},s={id:"contrastive",title:"Contrastive Learning",description:"A technique that learns representations by contrasting positive pairs (similar data points) against negative pairs (dissimilar data points) in a latent space.",color:"#E91E63",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚀 Modern ML · Similarity</div>
       <h1>Contrastive: Spot the Difference</h1>
       <p>How do you learn what a "Face" is if you don't have labels? You learn by <strong>Comparison</strong>. If I show you two photos of the same person, you know they should look similar in your head. If I show you a person and a car, you know they should look different. <strong>Contrastive Learning</strong> is the art of <strong>Pulling Friends Close</strong> and <strong>Pushing Enemies Away</strong> in latent space.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Contrastive Divergence</h2>
-    <p>We want to learn an embedding function \(f_{\theta}\) such that the distance between similar items (\(x, x^+\)) is minimized, and the distance between different items (\(x, x^-\)) is maximized.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you learn what a "Face" is if no one ever gives you a label? You learn by <strong>Comparison</strong>. If I show you two photos of the same person, you know they should look similar in your head. If I show you a person and a car, you know they should look fundamentally different. <strong>Contrastive Learning</strong> is the art of teaching a model to recognize these relative differences. By "Pulling Friends Close"—minimizing the distance between similar data points in latent space—and "Pushing Enemies Away"—maximizing the distance from dissimilar ones—the model learns the deep features of the data without ever needing a single human-provided tag. It is the math of finding patterns through comparison rather than instruction.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The InfoNCE Objective</div>
+      <p>Contrastive learning aims to learn an encoder $f_\theta$ that maps inputs to a latent space where similar samples are close. Given a positive pair $(\mathbf{z}_i, \mathbf{z}_j)$, the **InfoNCE** (Information Noise-Contrastive Estimation) loss is defined as:</p>
+      <div class="math-block">
+        $$\mathcal{L}_{i,j} = -\log \frac{\exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_k) / \tau)}$$
+      </div>
+      <p>Where $\text{sim}(\mathbf{u}, \mathbf{v})$ is the cosine similarity and $\tau$ is a temperature hyperparameter. The model must correctly identify the "positive" sample $j$ among a set of $2N-1$ "negative" distractors.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Social Distancing in Vector Space."</strong> 
-        The "Loss Function" acts like a spring. 
-        It <strong>Pulls</strong> similar ideas together until they overlap. 
-        It <strong>Pushes</strong> dissimilar ideas apart until they never touch. 
-        Because it only cares about <strong>Relative</strong> distances, it doesn't need to know the 'Categories'. 
+        Think of Contrastive Learning as <strong>"Social Distancing in Vector Space"</strong> or <strong>"The Twin Study."</strong> 
+        Imagine you are in a crowded dark room with 100 sets of identical twins (200 people total). You don't know anyone's name. Your only goal is to organize them. 
+        When you find two people who look the same (the <strong>Positive Pair</strong>), you make them sit at the same table (you "Pull" them together). If two people look different (the <strong>Negative Pair</strong>), you force them to opposite ends of the room. 
+        By the end of the night, if every twin does this, the room will be perfectly clustered by facial structure. You didn't need a name tag (a Label) to do it; you just needed to know who was a "mismatch."
       </div>
     </div>
 
@@ -513,7 +566,7 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the edge of modern research. You now understand the paradigms powering the world's most advanced AI systems.
     </div>
-  `},a={id:"modern-ml",title:"Modern ML Topics",description:"Beyond traditional architectures—exploring the paradigms of Self-Supervised, Transfer, and Contrastive learning.",keyConcepts:[{title:"Self-Supervision",description:"Learning without human labels by solving innovative 'pretext' puzzles."},{title:"Knowledge Transfer",description:"Repurposing pre-trained global intelligence for specific downstream expertise."},{title:"Latent Embeddings",description:"The art of compressing high-dimensional reality into meaningful semantic vectors."}],introHtml:String.raw`
+  `},n={id:"modern-ml",title:"Modern ML Topics",description:"Beyond traditional architectures—exploring the paradigms of Self-Supervised, Transfer, and Contrastive learning.",keyConcepts:[{title:"Self-Supervision",description:"Learning without human labels by solving innovative 'pretext' puzzles."},{title:"Knowledge Transfer",description:"Repurposing pre-trained global intelligence for specific downstream expertise."},{title:"Latent Embeddings",description:"The art of compressing high-dimensional reality into meaningful semantic vectors."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -559,4 +612,4 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
       </div>
 
     </div>
-  `,sections:[e,t,s,n]};export{a as MODERN_ML_DATA};
+  `,sections:[e,t,a,s]};export{n as MODERN_ML_DATA};

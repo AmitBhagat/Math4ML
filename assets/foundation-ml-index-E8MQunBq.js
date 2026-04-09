@@ -5,14 +5,32 @@ const e={id:"what-is-ml",title:"What is Machine Learning?",description:"Machine 
       <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." Instead of telling a computer exactly how to solve a problem, we give it a massive amount of data and let it figure out the patterns for itself.</p>
     </div>
 
-    <h2 id="theory">Core Theory: Rules vs. Patterns</h2>
-    <p>In traditional software engineering, a human writes <strong>Rules</strong> (Logic) and provides <strong>Data</strong> to get an <strong>Answer</strong>. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Answers</strong> (Labels), and the computer produces the <strong>Rules</strong> (The Model).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." In traditional software engineering, a human writes the logic (If/Then statements) and provides data to get an answer. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Final Answers</strong> (the labels), and the computer's job is to figure out the <strong>Rules</strong> that link them together. It is about automating the discovery of patterns that are too complex, too high-dimensional, or too subtle for a human brain to hardcode. Rules are no longer written; they are <strong>discovered</strong> through the lens of pure mathematics.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Experience-Task-Performance Triad</div>
+      <p>A computer program is said to **learn** from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a **Hypothesis Space** $\mathcal{H}$:</p>
+      
+      <div class="math-block">
+        $$\hat{h} = \arg \min_{h \in \mathcal{H}} \frac{1}{n} \sum_{i=1}^n L(y_i, h(\mathbf{x}_i))$$
+      </div>
+      <p>Where the learning process is defined by:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Task ($T$)</strong>: The problem being solved (e.g., Image Classification, Price Prediction).</li>
+        <li><strong>Experience ($E$)</strong>: The training data $\mathcal{D} = \{(\mathbf{x}_1, y_1), \dots, (\mathbf{x}_n, y_n)\}$ provided to the system.</li>
+        <li><strong>Performance Measure ($P$)</strong>: The **Loss Function** $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Traditional coding is like writing a very rigid cookbook. 
-        Machine Learning is like taking a world-class chef to a 100-course dinner and asking them to <strong>guess the ingredients</strong> just by tasting the food. We don't tell them how to cook; we show them the finished product and let their "palate" (the algorithm) figure out the recipe.
+        Think of traditional coding as writing a <strong>Rigid Cookbook</strong>. If a step is missing, the chef fails. 
+        <strong>Machine Learning</strong> is like taking a <strong>World-Class Chef</strong> to a 100-course dinner and asking them to <strong>Guess the Ingredients</strong> just by tasting the finished food. 
+        We don't tell them how to cook; we show them the final product and let their "Palate" (the algorithm) figure out the hidden recipe. This is how we solve problems like <strong>Face Recognition</strong> or <strong>Spam Detection</strong>—tasks where a human knows the answer instinctively but couldn't possibly write down every "If" statement required to explain it to a machine.
       </div>
     </div>
 
@@ -100,6 +118,14 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       </div>
     </div>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Machine Learning is the pivot from "Rules" to "Examples." Instead of telling a computer exactly how to solve a problem, we provide the data and let the algorithm discover the hidden recipe for itself.</p>
+    <ul>
+      <li><strong>Email Spam Filtering</strong>: Early spam filters used manual rules (like "If subject contains 'Winner', mark as spam"). Today, ML models look at millions of emails, noticing subtle patterns in sender reputation and word usage that no human could ever hardcode. The computer "learns" what junk looks like by seeing enough of it.</li>
+      <li><strong>Financial Credit Scoring</strong>: When you apply for a loan, an ML model predicts your reliability. It doesn't just look at your bank balance; it analyzes thousands of data points—from spending frequency to bill payment history—finding the hidden relationships that determine "Creditworthiness" across a massive population.</li>
+    </ul>
+    <p>Teacher's Final Word: If you can't write a rule for it, but you have 10,000 examples of it, use Machine Learning. It's the only way to solve problems that are governed by complexity and human intuition rather than fixed logic.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Not all learning is the same. How does the machine actually "learn"? Explore <strong><a href="#/machine-learning/foundation-ml/types-of-ml">Types of Machine Learning</a></strong>.
     </div>
@@ -110,6 +136,34 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       <p>Not all learning is equal. How a machine learns depends entirely on the <strong>Feedback</strong> it receives. Do we have the correct answers labeled? Do we have no answers at all? Or do we reward the machine for good behavior? These categories define the "Flavors" of ML.</p>
     </div>
 
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How does intelligence actually grow? In the natural world, we learn in three distinct ways: by being taught, by observing patterns on our own, or by trial and error. Machine Learning mirrors these biological strategies. If we provide the machine with a "Teacher" (labeled data), it learns to map inputs to outputs. If we let it "Explore" (unlabeled data), it finds hidden structures we might have missed. And if we treat it like a "Player" in a game (rewards and penalties), it develops a strategy for survival. Choosing the right learning paradigm is the first and most critical decision in building any AI system—it defines the <strong>Feedback Loop</strong> that will shape the model's brain.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Four Supervisory Signals</div>
+      <p>Machine learning is categorized by the nature of the training signal and the operational goal of the system. The paradigms are defined by their mapping objectives and data requirements:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Supervised (Predictive)</h4>
+          <p class="text-xs mb-1">Learning a mapping $f: \mathcal{X} \to \mathcal{Y}$ from labeled examples to minimize expected risk. Primarily used for classification and regression.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Unsupervised (Descriptive)</h4>
+          <p class="text-xs mb-1">Discovering latent structure, density $P(\mathbf{x})$, or dimensionality reduction from context-free data. Primarily used for clustering and anomaly detection.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">3. Reinforcement (Prescriptive)</h4>
+          <p class="text-xs mb-1">Optimizing a policy $\pi(a \mid s)$ to maximize cumulative discounted rewards in a dynamic environment (MDP). Primarily used for robotics and gaming.</p>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like **Semi-Supervised Learning** utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
+    </div>
+    
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
     <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input <span class="text-green-premium font-bold">Case Study:</span> comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
     
@@ -213,26 +267,32 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's deep-dive into the most popular paradigm. Explore <strong><a href="#/machine-learning/foundation-ml/supervised">Supervised Learning</a></strong>.
     </div>
-  `},a={id:"supervised",title:"Supervised Learning",description:"Supervised Learning is the most common form of Machine Learning, where a model is trained on a labeled dataset.",color:"#4CAF50",html:String.raw`
+  `},i={id:"supervised",title:"Supervised Learning",description:"Supervised Learning is the most common form of Machine Learning, where a model is trained on a labeled dataset.",color:"#4CAF50",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Supervised</div>
       <h1>Supervised Learning: The Guided Path</h1>
       <p><strong>Supervised Learning</strong> is the machine equivalent of learning with a tutor. Every data point you feed the model comes with the <strong>"Right Answer"</strong> (the Label). The goal is for the model to learn a general mapping so it can guess the answers for data it has never seen before.</p>
     </div>
 
-    <h2 id="theory">The Mechanics: Mapping Inputs to Outputs</h2>
-    <p>In Supervised Learning, we have an input vector \(X\) and a known target \(Y\). We want to find a function \(f\) such that:</p>
-    <div class="math-block">$$Y = f(X) + \epsilon$$</div>
-    <p>Where \(\epsilon\) is the noise we can't explain. The "Learning" happens as we minimize the difference between the model's prediction (\(\hat{Y}\)) and the actual truth (\(Y\)).</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as a <strong>"Flashcard Simulator."</strong> 
-        The machine sees a picture (Input), guesses "Cow" (Output), looks at the back of the card (Label), sees it says "Dog," and slightly tweaks its internal neural weights to be more "Dog-like" next time. Done 10,000 times, it builds a robust mapping.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Supervised Learning is the process of learning by example. Imagine a student practicing with flashcards where the answer is written on the back. The objective isn't just to memorize those specific cards, but to understand the underlying patterns so that when a <strong>new</strong> card appears, the student can predict the correct answer with high confidence. In machine learning, we act as the "Supervisor," providing the ground truth for every sample. By repeatedly comparing its guesses to these truths and calculating a "Loss," the model gradually shifts its internal logic to align with reality. It is the tactical way we build everything from spam filters to autonomous driving systems.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Inductive Mapping from Labeled Samples</div>
+      <p>Given a training set of $N$ observations $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$, where $\mathbf{x} \in \mathcal{X}$ is the feature vector and $y \in \mathcal{Y}$ is the label, the goal is to find a hypothesis $\hat{f} \in \mathcal{H}$ that minimizes the empirical risk:</p>
+      <div class="math-block">
+        $$\hat{f} = \arg \min_{f \in \mathcal{H}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(\mathbf{x}_i))$$
+      </div>
+      <p>The paradigm is bifurcated into two distinct mathematical problems:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Regression</strong>: $\mathcal{Y}$ is a continuous space ($\mathbb{R}$). The objective is to estimate a numerical value based on continuous or categorical features.</li>
+        <li><strong>Classification</strong>: $\mathcal{Y}$ is a discrete set of classes $\{C_1, \dots, C_k\}$. The objective is to determine the decision boundaries that separate these categories in high-dimensional space.</li>
+        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use **MSE**; for classification, we use **Cross-Entropy**.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
     
       <h4>Scenario: Training a Medical Assistant</h4>
@@ -288,24 +348,42 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have no labels? How can a machine find patterns on its own? Explore <strong><a href="#/machine-learning/foundation-ml/unsupervised">Unsupervised Learning</a></strong>.
     </div>
-  `},s={id:"unsupervised",title:"Unsupervised Learning",description:"Unsupervised Learning is a type of Machine Learning that looks for previously unknown patterns in a dataset without pre-existing labels.",color:"#FF9800",html:String.raw`
+  `},a={id:"unsupervised",title:"Unsupervised Learning",description:"Unsupervised Learning is a type of Machine Learning that looks for previously unknown patterns in a dataset without pre-existing labels.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Unsupervised</div>
       <h1>Unsupervised Learning: The Pattern Finder</h1>
       <p><strong>Unsupervised Learning</strong> is the machine equivalent of learning by observation. There are no "Teachers" and no "Answers." The machine looks for the <strong>Underlying Structure</strong> of the data. It's about finding out how things are related before we even know what they are.</p>
     </div>
 
-    <h2 id="theory">Theoretical Concepts: Structure over Labels</h2>
-    <p>In Unsupervised Learning, the input is just \(X\). There is no \(Y\) to predict. The machine's objective is to model the <strong>Probability Density</strong> (\(P(X)\)) or the <strong>Geometric Topology</strong> of the data.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as a <strong>Secret Society</strong>. 
-        You walk into a party where you don't know anyone. You don't have their name tags (Labels). But after 30 minutes, you see that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their behavior.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Unsupervised Learning is the machine equivalent of learning by observation. Imagine walking into a party where you don't know anyone. You don't have their name tags (Labels), but after 30 minutes, you notice that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their patterns and behavior. In machine learning, we look for the <strong>Underlying Structure</strong> of the data without any "Teachers" or "Answers." It is about discovering the hidden groups, dimensions, and rules that govern a dataset before we even know what they are. It is the tactical way we find the "Signal" when there are no labels to point the way.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Latent Structure and Representation Learning</div>
+      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of **Unsupervised Learning** is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Clustering (Partitioning)</h4>
+          <p class="text-xs mb-1">Grouping data into a set of clusters $\mathcal{C}$ such that similarity is maximized within groups and minimized between groups:</p>
+          <div class="math-block">
+            $$\arg \min_{\mathcal{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Dimensionality Reduction</h4>
+          <p class="text-xs mb-1">Identifying a lower-dimensional subspace $\mathcal{Z} \subset \mathcal{X}$ that retains maximal information (variance) about the original data:</p>
+          <div class="math-block">
+            $$\mathbf{z} = \mathbf{x} \mathbf{W} \quad \text{s.t.} \quad \text{Tr}(\mathbf{W}^\top \text{Cov}(\mathbf{X}) \mathbf{W}) \text{ is maximized.}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of **Density Estimation** $P(\mathbf{x})$, **Intrinsic Dimensionality**, and **Manifold Fidelity**, rather than explicit label accuracy.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>
     
       <h4>Scenario: Crashing a High-Stakes Gala</h4>
@@ -357,24 +435,32 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have a little bit of help? Explore <strong><a href="#/machine-learning/foundation-ml/semi-supervised">Semi-Supervised Learning</a></strong>.
     </div>
-  `},i={id:"semi-supervised",title:"Semi-Supervised Learning",description:"Semi-Supervised Learning is a type of Machine Learning that uses both labeled and unlabeled data for training.",color:"#9C27B0",html:String.raw`
+  `},s={id:"semi-supervised",title:"Semi-Supervised Learning",description:"Semi-Supervised Learning is a type of Machine Learning that uses both labeled and unlabeled data for training.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Foundations · Semi-Supervised</div>
       <h1>Semi-Supervised Learning: The Gold Rush</h1>
       <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground. In the real world, most data is unlabeled and "Messy." Labeling is expensive. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to find the value in a mountain of <strong>Unlabeled Dust</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Smoothing and Manifolds</h2>
-    <p>SSL relies on the <strong>Continuity Assumption</strong>: If two points \(x_1\) and \(x_2\) are close in space, they should probably have the same label. If we label 10 points, the machine "Spreads" those labels to nearby neighbors in the unlabeled set.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Infection of Knowledge."</strong> 
-        You have 1,000 photos of cats and dogs. You only label 10. The machine looks at the 990 unlabeled photos. It notices that "Photo 11" looks almost exactly like "Labeled Dog 1." It decides to <strong>re-label</strong> Photo 11 as a dog. Now it has 11 dogs to help find more.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground between having a perfect teacher and being completely lost in the dark. In the real world, labeling data is expensive and time-consuming (a human has to sit down and do it). However, unlabeled data is cheap and abundant—think of billions of photos on the internet. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to reveal the hidden value in a mountain of <strong>Unlabeled Dust</strong>. It assumes that if two points are close together in space, they probably share the same label. By spreading the "seeds" of known knowledge to nearby neighbors, we can train powerful models with only a fraction of the manual effort required for pure supervised learning.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Hybrid Risk Objective</div>
+      <p>Semi-supervised learning involves a training set $\mathcal{D}$ composed of a small labeled subset $\mathcal{L} = \{(\mathbf{x}_i, y_i)\}_{i=1}^l$ and a large unlabeled subset $\mathcal{U} = \{\mathbf{x}_i\}_{i=l+1}^{l+u}$. The objective is to minimize a loss function $J(f)$ that incorporates both supervised and structural components:</p>
+      <div class="math-block">
+        $$J(f) = \sum_{i=1}^l L(y_i, f(\mathbf{x}_i)) + \lambda \cdot \Omega(f, \mathcal{U})$$
+      </div>
+      <p>The **Unsupervised Regularizer** $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Smoothness Assumption</strong>: If $\mathbf{x}_i$ and $\mathbf{x}_j$ are close in high-density regions, their outputs $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$ should be similar.</li>
+        <li><strong>Low-Density Separation</strong>: The decision boundary should pass through areas where the marginal density $P(\mathbf{x})$ is low, effectively avoiding the "splitting" of natural clusters.</li>
+        <li><strong>Manifold Assumption</strong>: Data points are assumed to lie on a low-dimensional manifold $\mathcal{M}$. SSL uses $\mathcal{U}$ to approximate $\mathcal{M}$ and ensures the model varies smoothly only along the manifold's surface.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">By leveraging the underlying geometry of $\mathcal{U}$, we reduce the sample complexity of $f$ significantly compared to pure supervised methods.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
     
       <h4>Scenario: Navigating a 1,000-Square-Mile City</h4>
@@ -431,18 +517,32 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
       <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" type of Machine Learning. There is no training data. The machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do this, I'll give you a cookie. If you do that, you'll fall into a pit." The agent learns to survive by <strong>Trial and Error</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: States, Actions, Rewards</h2>
-    <p>RL is modeled as a <strong>Markov Decision Process (MDP)</strong>. At each time step \(t\), the agent is in a <strong>State</strong> (\(S_t\)). It takes an <strong>Action</strong> (\(A_t\)) and receives a <strong>Reward</strong> (\(R_{t+1}\)) while moving to a new <strong>State</strong> (\(S_{t+1}\)).</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Learning to Ride a Bike."</strong> 
-        You don't have a labeled dataset of "Sitting on a bike." You have to <strong>Try</strong>. 
-        You tilt too far left (Action) and fall (Penalty). You tilt slightly right (Action) and stay upright (Reward). The "Policy" your brain builds is just a mapping of how to move your body to stay balanced.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" way a machine can learn. Unlike supervised learning, there is no expert to show the machine the right answer. Instead, the machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do something good, I'll give you a reward. If you do something bad, you’ll be penalized." The agent learns purely through <strong>Trial and Error</strong>, building a strategy for survival by interacting with the world. It is the tactical decision to learn through experience rather than instruction. In RL, we aren't predicting a label; we are discovering a <strong>Policy</strong>—a sequence of decisions that maximizes long-term success.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Markov Decision Process (MDP)</div>
+      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an **MDP** tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. The State-Action Space</h4>
+          <p class="text-xs mb-1">The agent perceives a state $s \in \mathcal{S}$ and executes an action $a \in \mathcal{A}$. The environment transitions to a new state $s'$ with probability $P(s' \mid s, a)$ and provides a reward $r$.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. The Optimization Goal</h4>
+          <p class="text-xs mb-1">The objective is to find an optimal **Policy** $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
+          <div class="math-block">
+            $$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the **Bellman Equation**, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
+    </div>
+    
     <h2 id="exploitation">Exploration vs. Exploitation</h2>
     <p>This is the fundamental struggle of RL. Should the agent try a new, unknown action to find a potentially bigger reward (<strong>Exploration</strong>), or should it stick with the best action it has found so far (<strong>Exploitation</strong>)?</p>
     
@@ -523,17 +623,35 @@ for i in range(3):
       <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Generalization</h2>
-    <p>The point of ML isn't to get 100% accuracy on the data you have. It's to <strong>Generalize</strong> to the data you <em>don't</em> have. If a model performs well on the Training set but poorly on the Test set, it has failed to learn the "Underlying Rule" and has instead just "Memorized the Noise."</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Exam Day."</strong> 
-        If a teacher gives the students the <strong>Exact Questions</strong> that will be on the final exam as "Homework" (Training Data), every student will get a 100%. But they didn't learn Math; they just memorized the answers. A real test uses <strong>New Questions</strong> to see if the students truly understand the subject.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>The <strong>Golden Rule</strong> of Machine Learning is simple: never test your model on the same data you used to train it. If you do, you aren't measuring "Learning"—you're measuring "Memory." The whole point of AI is <strong>Generalization</strong>: the ability to take a learned principle and apply it to a situation the model has never encountered before. If a model performs perfectly on the training set but fails on the test set, it hasn't actually learned anything useful; it has just memorized the noise of its environment. To build something that works in the real world, you must maintain a strict "Firewall" between what the model sees to learn and what it sees to be judged.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Data Partitioning Protocol</div>
+      <p>Data partitioning is the process of dividing a dataset $\mathcal{D}$ into mutually exclusive subsets to provide an unbiased estimate of the generalization error. The standard split involves three distinct roles:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Training Set ($D_{train}$)</h4>
+          <p class="text-xs mb-1">Used to minimize the objective function and fit model parameters $\theta$:</p>
+          <div class="math-block">
+            $$\hat{\theta} = \arg \min_\theta \sum_{(x,y) \in D_{train}} L(y, f(x; \theta))$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Test Set ($D_{test}$)</h4>
+          <p class="text-xs mb-1">The "Hold-out" set, strictly forbidden during training, used to calculate the final out-of-sample error:</p>
+          <div class="math-block">
+            $$\text{Error}_{\text{test}} = \frac{1}{|D_{test}|} \sum_{(x,y) \in D_{test}} L(y, f(x; \hat{\theta}))$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">To prevent **Data Leakage**, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
     
       <h4>Scenario: Qualifying as a Master Wine Taster</h4>
@@ -598,20 +716,25 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       <p>A perfect Machine Learning model is like <strong>Goldilocks</strong>: not too complex, not too simple. <strong>Overfitting</strong> is when the model tries too hard (Memorization). <strong>Underfitting</strong> is when it doesn't try hard enough (Ignorance).</p>
     </div>
 
-    <h2 id="theory">The Mechanics of Complexity</h2>
-    <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Connecting the Dots."</strong> 
-        If you have 10 data points that roughly form a line: 
-        <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
-        <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
-        The <strong>Truth</strong> is a slightly wobbly line that catches the general trend.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A perfect Machine Learning model is like the "Goldilocks" of data—it is not too complex, and not too simple. <strong>Underfitting</strong> occurs when your model is too "Lazy" or simple to capture the underlying trend; it’s like trying to describe a complex portrait using only a single straight line. <strong>Overfitting</strong> occurs when your model is too "Obsessive"; it memorizes every tiny, random jitter in your training data, effectively mistaking the noise for the signal. The goal of every machine learning engineer is <strong>Generalization</strong>: building a model that understands the fundamental truth of the data so well that it can perform just as accurately on information it has never seen before as it does on its training set.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Generalization Gap</div>
+      <p>The performance of a model $h$ is defined by the difference between its **Empirical Risk** $\hat{R}(h)$ (training error) and its **Structural Risk** $R(h)$ (true error on unseen data):</p>
+      <div class="math-block">
+        $$\text{Gap} = R(h) - \hat{R}(h)$$
+      </div>
+      <p>The learning process is governed by two critical failure states:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Underfitting (High Bias)</strong>: The hypothesis space $\mathcal{H}$ is too restrictive. Both training and test errors are high. The model fails to solve the "optimization" part of the problem.</li>
+        <li><strong>Overfitting (High Variance)</strong>: The model has excessive capacity, allowing it to minimize $\hat{R}(h)$ by interpolating noise. This leads to a massive generalization gap where $R(h) \gg \hat{R}(h)$.</li>
+        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via **Regularization** ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
     
       <h4>Scenario: Studying for a 1,000-page History Exam using only 5 Practice Questions</h4>
@@ -681,6 +804,25 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
       <p>Every Machine Learning model's error is made of three things: <strong>Bias</strong>, <strong>Variance</strong>, and <strong>Irreducible Noise</strong>. To build a great model, you have to find the <strong>Goldilocks Balance</strong> between being too "Stubborn" (Bias) and too "Dramatic" (Variance).</p>
     </div>
 
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Building a machine learning model is a balancing act between two fundamental failures: being too "Stubborn" (Bias) and being too "Anxious" (Variance). <strong>Bias</strong> occurs when your model makes a simplification that is just plain wrong—like trying to fit a straight line to a spiral. <strong>Variance</strong> occurs when your model gets so obsessed with the specific jitter and noise of your training data that it fails to see the bigger picture. The <strong>Bias-Variance Tradeoff</strong> is the central math problem of AI: how do we make a model complex enough to learn the truth, but simple enough to ignore the distractions? It is the search for the "Goldilocks" level of complexity where the total error is at its absolute minimum.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Bias-Variance Decomposition</div>
+      <p>The **Bias-Variance Tradeoff** is a mathematical derivation of the Expected Mean Squared Error (MSE) of an estimator $\hat{f}$ at a point $x$. The error decomposes into three distinct components:</p>
+      <div class="math-block">
+        $$\mathbb{E}_D \left[ (y - \hat{f}(x; D))^2 \right] = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \sigma^2$$
+      </div>
+      <p>The constituents of the generalization error are defined as follows:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to **Underfitting**.</li>
+        <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to **Overfitting**.</li>
+        <li><strong>Irreducible Error ($\sigma^2$)</strong>: The lower bound on error caused by inherent noise in the true underlying process $y = f(x) + \epsilon$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>
+    </div>
+    
     <h2 id="bias">Bias: The Stubborn Model</h2>
     <p><strong>Bias</strong> is the error from <strong>Incorrect Assumptions</strong>. A high-bias model is too simple. It thinks the world is a straight line when it's actually a curve. It "Ignores" the data because its brain isn't powerful enough to see the complexity.</p>
     
@@ -774,17 +916,26 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
       <p>If you split your data once (80/20), you're at the mercy of luck. What if that 20% "Test Set" happens to be the easiest data points? <strong>Cross-Validation</strong> is the standard way to ensure your model's performance isn't just a fluke. We rotate the data so every single piece gets to be the "Test Set" at some point.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Variance of Estimates</h2>
-    <p>A single Train/Test split gives you a single "Snapshot" of accuracy. But accuracy can vary depending on <strong>Which</strong> points are in the test set. Cross-Validation gives you an <strong>Average Accuracy</strong> and a <strong>Standard Deviation</strong>, telling you how much you can actually trust the model's performance.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Musical Chairs for Data."</strong> 
-        We have 5 chairs (Blocks of data). In every round, 4 chairs are for the "Training" and 1 chair is for the "Test." We repeat the game 5 times, rotating the test chair each time. By the end, every piece of data has had a turn to judge the model.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If you split your data once into a simple train-test set (like the classic 80/20 split), your model's perceived performance is at the mercy of luck. What if that 20% "Test Set" happens to contain the easiest data points? You’d think your model is a genius, only for it to fail miserably in production. <strong>Cross-Validation</strong> is the "Rotating Jury" that ensures your model’s success isn't just a fluke. By rotating the data through multiple rounds—where every single piece of information gets a chance to be the "Judge" (the test set)—we get a much more honest and stable estimate of the model's true skill. It is the tactical decision to trade computation time for certainty.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The K-Fold Partition</div>
+      <p>Given a dataset $\mathcal{D}$, **K-Fold Cross-Validation** partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
+      <div class="math-block">
+        $$\text{CV}(\hat{f}) = \frac{1}{k} \sum_{i=1}^k \mathcal{L}(\mathcal{D}_i, \hat{f}_{(-i)})$$
+      </div>
+      <p>The process follows a strict rotation protocol:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Training Phase</strong>: For each fold $i$, the model $\hat{f}_{(-i)}$ is trained on the union of all folds *except* $\mathcal{D}_i$.</li>
+        <li><strong>Validation Phase</strong>: The trained model is evaluated on the held-out fold $\mathcal{D}_i$ to produce a local loss $\mathcal{L}_i$.</li>
+        <li><strong>Model Selection</strong>: This technique is primarily used for hyperparameter tuning to ensure that chosen parameters generalize across the entire data distribution.</li>
+        <li><strong>Variance vs. Bias</strong>: Increasing $k$ decreases the bias of the error estimate (as training sets look more like the full dataset) but increases the variance and computational cost.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Commonly, $k=5$ or $k=10$ provides a sufficient balance for most industrial ML applications.</p>
+    </div>
+    
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
     <p>The most common form is <strong>K-Fold</strong>. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
     <ul>
@@ -856,19 +1007,35 @@ print(f"Consistency (Std Dev): {scores.std():.3f}")
       <p>There is a famous saying: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm (like a Deep Neural Network) will fail if you give it "Bad" data. <strong>Feature Engineering</strong> is the act of turning raw, noisy numbers into meaningful <strong>Insights</strong> that the machine can easily understand.</p>
     </div>
 
-    <h2 id="theory">The Mechanics of Representation</h2>
-    <p>A machine sees data as a <strong>Vector Space</strong>. Your job is to transform the data so that the "Distance" between points actually means something. Feature Engineering isn't about math; it's about <strong>Representing the World</strong> in a way that points the way toward the Answer.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Cooking Prep."</strong> 
-        The machine is the <strong>Stove</strong>. The data is the <strong>Raw Ingredients</strong>. 
-        If you throw a whole, unpeeled potato into the stove, the result is "Garbage." 
-        If you peel it, chop it, and season it, you get a <strong>Gourmet Dish</strong>. Feature Engineering is the <strong>Chopping and Seasoning</strong> that happens before the cooking begins.
-      </div>
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>There is a famous saying in machine learning: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm in the world—like a massive Deep Neural Network—will fail if you feed it raw, noisy, or irrelevant data. <strong>Feature Engineering</strong> is the act of using your domain knowledge to transform raw numbers into meaningful <strong>Insights</strong> that the machine can actually digest. It is the "Art" of data science; it’s about figuring out which characteristics (features) truly matter for the problem you are trying to solve. When you engineer a feature, you are effectively pointing the way toward the answer, making the learning process 10x easier for the model. Model performance is often 90% data quality and only 10% mathematical complexity.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Data Transformation Mapping</div>
+      <p>Feature Engineering is the process of defining a mapping $\Phi: \mathcal{X}_{raw} \to \mathcal{X}_{feat}$ that transforms raw data into a numerical representation optimized for a learning objective. This process is governed by three primary operations:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Feature Construction</h4>
+          <p class="text-xs mb-1">Applying non-linear transformations or domain-specific logic to raw variables to expose latent relationships (e.g., $x_3 = x_1 / x_2$):</p>
+          <div class="math-block">
+            $$\Phi(x) = [\phi_1(x), \phi_2(x), \dots, \phi_d(x)]^\top$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Feature Selection</h4>
+          <p class="text-xs mb-1">Identifying a subset of features $\mathcal{S} \subset \{1, \dots, D\}$ that maximizes the mutual information $I(X_\mathcal{S}; Y)$ while minimizing redundancy:</p>
+          <div class="math-block">
+            $$\arg \max_{\mathcal{S}} I(X_{\mathcal{S}}; Y)$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">Mathematically, good feature engineering reduces the <strong>VC-Dimension</strong> required for the model to achieve a low generalization error. By embedding domain knowledge into the features, we reduce the amount of data needed for the model to "converge" on the true underlying pattern.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Gourmet Dish Prep</h2>
     
       <h4>Scenario: Prepping the Perfect Salad</h4>
@@ -931,27 +1098,35 @@ print(df[['Price', 'Age_at_Sale']])
       <p>Imagine your machine is comparing <strong>Weight (in grams)</strong> to <strong>Height (in kilometers)</strong>. A human sees that 1,000g is smaller than 1km, but the machine just sees <strong>1,000</strong> vs. <strong>1</strong>. It will "Think" that weight is 1,000x more important than height. <strong>Feature Scaling</strong> is the art of making every feature speak the same <strong>Numerical Language</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Magnitude vs. Importance</h2>
-    <p>Algorithms like <strong>Gradient Descent</strong> and <strong>K-Nearest Neighbors</strong> use "Distance" to calculate their updates. If one feature is on a much larger scale than another, the "Gradient" in that direction will be massive, while the other is tiny. This makes the optimization loop slow, unstable, or completely wrong.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"The Big Fish"</strong>. 
-        If you have a feature like "House Price" (Millions) and another like "Number of Bedrooms" (1 to 5), the Millions will "Drown Out" the Bedrooms. To the machine, the 2nd bedroom is invisible because it's just a tiny "1" compared to a million. Scaling gives every feature a <strong>Fair Fight</strong>.
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Algorithms like <strong>Gradient Descent</strong> and <strong>K-Nearest Neighbors</strong> use "Distance" to calculate their updates. If one feature is on a much larger scale than another (e.g., House Price $1M vs. Bedrooms 3), the gradient in the expensive direction will be massive, while the other is tiny. This makes the optimization loop slow, unstable, or completely wrong. <strong>Feature Scaling</strong> is the "Exchange Rate" of data—it converts every feature into a common numerical language so they can have a fair fight for the model's attention. Without scaling, your model is numerically blind to the smaller numbers, potentially missing the most important signals in your data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Numerical Common Language</div>
+      <p>Feature Scaling is the transformation of individual variables to a standard range or distribution. This is mathematically necessary for algorithms sensitive to the magnitude of values:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Standardization (Z-Score)</h4>
+          <p class="text-xs mb-1">Maps the feature to a distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$:</p>
+          <div class="math-block">
+            $$z = \frac{x - \mu}{\sigma}$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Normalization (Min-Max)</h4>
+          <p class="text-xs mb-1">Rescales the range of the feature to $[0, 1]$:</p>
+          <div class="math-block">
+            $$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$
+          </div>
+        </div>
       </div>
+
+      <p class="text-xs opacity-80 mt-2">The algebraic goal is to improve the <strong>Condition Number</strong> of the optimization surface. In Gradient Descent, scaling prevents "elongated" loss contours, allowing for larger learning rates and significantly faster convergence.</p>
     </div>
-
-    <h2 id="standardization">Standardization (Z-Score)</h2>
-    <p>This transforms your data to have a <strong>Mean of 0</strong> and a <strong>Standard Deviation of 1</strong> (Standard Normal Distribution).</p>
-    <div class="math-block">$$x' = \frac{x - \mu}{\sigma}$$</div>
-    <p><strong>Note:</strong> Most algorithms (like SVMs and Neural Nets) prefer this because it handles "Outliers" more gracefully than Min-Max.</p>
-
-    <h2 id="normalization">Normalization (Min-Max)</h2>
-    <p>This "Squeezes" all your data into a fixed range, usually <strong>[0, 1]</strong>.</p>
-    <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
-    <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
-
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Currency Exchange</h2>
     
       <h4>Scenario: Who is Richer?</h4>
@@ -1007,16 +1182,36 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
       <p>Accuracy is a <strong>Lie</strong>. If 99% of your emails are "Not Spam," and your model just guesses "Not Spam" every single time, it is 99% accurate—but it is <strong>Useless</strong>. <strong>Evaluation Metrics</strong> are the "Scorecards" that tell the real story of how your model behaves.</p>
     </div>
 
-    <h2 id="matrix">The Confusion Matrix</h2>
-    <p>A table showing the 4 types of predictions:</p>
-    <ul>
-      <li><strong>True Positive (TP)</strong>: Correctly guessed "Yes."</li>
-      <li><strong>True Negative (TN)</strong>: Correctly guessed "No."</li>
-      <li><strong>False Positive (FP)</strong>: Wrongly guessed "Yes" (Type I Error).</li>
-      <li><strong>False Negative (FN)</strong>: Wrongly guessed "No" (Type II Error).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In machine learning, your choice of metric is your <strong>Definition of Success</strong>. A model that is 99% accurate can still be a complete failure if that 1% error occurs on life-critical data (like a medical diagnosis). We use specialized metrics to look past simple "Correct vs. Incorrect" ratios. <strong>Precision</strong> tells us if we can trust a positive result; <strong>Recall</strong> tells us if we missed anyone important. By choosing the right metric, we align the model's mathematical optimization with the real-world consequences of its mistakes. It is the tactical way we ensure our machines solve the right problem, not just the easiest one.</p>
 
-    <h2 id="classification">Precision, Recall, F1-Score</h2>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Scoring Mechanics</div>
+      <p>Model evaluation is the process of quantifying the proximity of a predicted distribution $\hat{\mathcal{P}}$ to the true empirical distribution $\mathcal{P}$. The metrics are categorized by the nature of the target variable $y$:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Classification Metrics (Discrete)</h4>
+          <p class="text-xs mb-1">Based on the **Confusion Matrix** (TP, TN, FP, FN):</p>
+          <div class="math-block">
+            $$\text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + FN}$$
+            $$\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Regression Metrics (Continuous)</h4>
+          <p class="text-xs mb-1">Measuring the magnitude of residual errors $e_i = y_i - \hat{y}_i$:</p>
+          <div class="math-block">
+            $$\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 \quad R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-70 mt-2">Metrics like **Cross-Entropy** are used for training (optimization), while metrics like **Accuracy** or **AUC-ROC** are used for final validation and model comparison.</p>
+    </div>
+    
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>
     
       <h4>Scenario: Catching Dinner in a Lake</h4>
@@ -1071,7 +1266,7 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have completed the foundation. You possess the <strong>Intuition</strong> and <strong>Math</strong> to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
     </div>
-  `},p={id:"foundation-ml",title:"Foundation of Machine Learning",description:"The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",keyConcepts:[{title:"What is ML?",description:"Learning patterns from data vs. manual rule-based programming."},{title:"Learning Paradigms",description:"Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning."},{title:"Model Performance",description:"The core trade-offs: Generalization vs. Overfitting and Bias vs. Variance."},{title:"Data Preparation",description:"The art of Feature Engineering and Scaling to maximize model insight."}],introHtml:String.raw`
+  `},m={id:"foundation-ml",title:"Foundation of Machine Learning",description:"The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",keyConcepts:[{title:"What is ML?",description:"Learning patterns from data vs. manual rule-based programming."},{title:"Learning Paradigms",description:"Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning."},{title:"Model Performance",description:"The core trade-offs: Generalization vs. Overfitting and Bias vs. Variance."},{title:"Data Preparation",description:"The art of Feature Engineering and Scaling to maximize model insight."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -1117,4 +1312,4 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
       </div>
 
     </div>
-  `,sections:[e,t,a,s,i,n,o,r,l,d,h,c,g]};export{p as FOUNDATION_ML_DATA};
+  `,sections:[e,t,i,a,s,n,o,r,l,d,h,c,g]};export{m as FOUNDATION_ML_DATA};

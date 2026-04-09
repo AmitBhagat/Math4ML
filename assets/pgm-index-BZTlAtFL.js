@@ -5,25 +5,32 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
       <p>Probabilities are rarely isolated. If it's raining, your grass is likely wet. If your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these <strong>Causal Relationships</strong>. By using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows through a complex system of uncertainty.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The DAG Structure</h2>
-    <p>A Bayesian Network consists of <strong>Nodes</strong> (Random Variables) and <strong>Edges</strong> (Direct Influence). The graph must be <strong>Acyclic</strong> (no loops), because a variable cannot be its own cause.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Probabilities are rarely isolated. If it is raining, your grass is likely wet; if your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these causal ripples—the "Web of Influence" that defines complex systems of uncertainty. Using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows from one cause to an effect, allowing us to reason about the unseen. It’s a "Glass Box" approach to AI: unlike a black-box neural network, you can trace exactly why the model has reached a conclusion by looking at the logical connections between variables.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Directed Probabilistic Factorization</div>
+      <p>A **Bayesian Network** $\mathcal{B}$ represents a joint probability distribution over a set of random variables $\mathcal{X} = \{X_1, \dots, X_n\}$ through a graph structure and a set of local parameters:</p>
+      <div class="math-block">
+        $$\mathcal{B} = \langle G, P \rangle$$
+      </div>
+      <p>where $G$ is a Directed Acyclic Graph (DAG) and $P$ is a set of Conditional Probability Distributions (CPDs). The structure satisfies the following properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Factorization</strong>: $P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Pa}_G(X_i))$. The joint distribution is the product of the probability of each node given its parents.</li>
+        <li><strong>Local Markov Property</strong>: Every variable $X_i$ is conditionally independent of its non-descendants given its parents $\text{Pa}_G(X_i)$.</li>
+        <li><strong>D-Separation</strong>: A graphical criterion used to identify global independence relations ($X \perp Y \mid Z$) without explicitly computing the probability tables.</li>
+        <li><strong>CPDs</strong>: For discrete variables, these are Conditional Probability Tables (CPTs); for continuous variables, these are functional mappings (e.g., Linear Gaussians).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Bayesian Networks allow for efficient **Inference** (updating beliefs based on evidence) and **Learning** (discovering the graph structure and parameters from data).</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Storyboard."</strong> 
-        Each node is an event. The arrows tell the story of <strong>Who Influences Whom</strong>. 
-        If there is no arrow between two nodes, it doesn't mean they aren't related—it just means they only talk to each other through <strong>intermediaries</strong>.
+        <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
       </div>
     </div>
-
-    <h2 id="independence">Local Markov Property</h2>
-    <p>The "Magic" of Bayesian Networks is the <strong>Conditional Independence</strong> assumption. It states that a node is independent of its ancestors <strong>given its parents</strong>. This allows us to represent a massive joint probability table using just a few small <strong>Conditional Probability Tables (CPTs)</strong>.</p>
-
-    <h2 id="math">Joint Probability Factorization</h2>
-    <p>Because of the graph structure, the total probability of the entire system can be decomposed into a simple product:</p>
-    <div class="math-block">$$P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid Parents(x_i))$$</div>
-    <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
 
     <h2 id="inference">Inference: Predicting the Unseen</h2>
     
@@ -116,33 +123,26 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
       <p>Imagine you are a <strong>Prisoner in a Basement</strong>. You cannot see the weather (Rain or Sun). But every day, you see your <strong>Guard</strong> come in with or without an <strong>Umbrella</strong>. <strong>Hidden Markov Models</strong> are the math for guessing the "Hidden" weather based on the "Observable" guard. It's the standard tool for Speech Recognition and DNA Sequencing.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent vs. Observed</h2>
-    <p>An HMM has two layers:</p>
-    <ul>
-      <li><strong>Hidden States (\(Z\)):</strong> The internal variables we care about but cannot see (e.g., Weather, Part-of-Speech).</li>
-      <li><strong>Observations (\(X\)):</strong> The evidence we can measure (e.g., Umbrella, Words).</li>
-    </ul>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Connecting the Dots in Time."</strong> 
-        The hidden states (\(Z_t\)) are the <strong>Reality</strong>. The observations (\(X_t\)) are the <strong>Symptoms</strong>. 
-        Because the reality changes over time, we use a <strong>Markov Chain</strong> to model the transitions.
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A <strong>Hidden Markov Model (HMM)</strong> is the Sherlock Holmes of time-series data. It is designed for situations where you can see the "Symptoms" but not the "Reality" that caused them. Imagine you are a prisoner in a windowless basement; you can't see the weather (the Hidden State), but you see your guard walk in every day with or without an umbrella (the Observation). By modeling the transition between hidden states (is it likely to be sunny tomorrow if it rained today?) and the emission of observations (how likely is an umbrella if it’s raining?), HMMs allow us to deduce the hidden truth. It is the gold standard for Speech Recognition, DNA sequencing, and any domain where we must infer an invisible process from visible clues.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Latent Sequence Model</div>
+      <p>A **Hidden Markov Model (HMM)** is defined by a 5-tuple $\lambda = (S, V, A, B, \pi)$ representing a system where the state sequence $\{q_1, q_2, \dots, q_T\}$ is unobservable (latent) and must be inferred from a sequence of observations $\{O_1, O_2, \dots, O_T\}$:</p>
+      <div class="math-block">
+        $$P(\mathbf{O}, \mathbf{q} \mid \lambda) = \pi_{q_1} b_{q_1}(O_1) \prod_{t=2}^T a_{q_{t-1}q_t} b_{q_t}(O_t)$$
       </div>
+      <p>The model’s behavior is strictly governed by three fundamental parameter sets:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Transition Matrix ($A$)</strong>: $a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)$. Encodes the dynamics of the hidden reality over time.</li>
+        <li><strong>Emission Matrix ($B$)</strong>: $b_j(k) = P(O_t = v_k \mid q_t = S_j)$. Encodes the probability of producing a specific observation from a specific hidden state.</li>
+        <li><strong>Initial Distribution ($\pi$)</strong>: $\pi_i = P(q_1 = S_i)$. The starting probability vector for the hidden states.</li>
+        <li><strong>Markov Property</strong>: The next state $q_{t+1}$ depends only on the current state $q_t$, not on the entire history.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
     </div>
-
-    <h2 id="markov">The Markov Property: No Memory</h2>
-    <p>HMMs assume the <strong>1st-Order Markov Property</strong>. This means the probability of tomorrow's weather only depends on <strong>Today</strong>. It doesn't care what happened a month ago. This makes the math incredibly efficient.</p>
-    <div class="math-block">$$P(Z_t \mid Z_{t-1}, Z_{t-2}, \dots, Z_1) = P(Z_t \mid Z_{t-1})$$</div>
-
-    <h2 id="math">Transition & Emission Matrices</h2>
-    <p>We describe the model with two matrices:</p>
-    <ul>
-      <li><strong>Transition Matrix (A):</strong> $P(Rain \mid Sun)$. How likely is the weather to change?</li>
-      <li><strong>Emission Matrix (B):</strong> $P(Umbrella \mid Rain)$. How likely is the guard to bring an umbrella if it's raining?</li>
-    </ul>
-
+    
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
     
       <h4>Scenario: What is the most likely sequence?</h4>
@@ -219,28 +219,32 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we "Learn" these transition matrices if we don't know the states? Explore <strong><a href="#/machine-learning/pgm/em-algorithm">The EM Algorithm</a></strong>.
     </div>
-  `},a={id:"em-algorithm",title:"Expectation-Maximization (EM) Algorithm",description:"An iterative method to find maximum likelihood or maximum a posteriori (MAP) estimates of parameters in statistical models, where the model depends on unobserved latent variables.",color:"#FF5722",html:String.raw`
+  `},i={id:"em-algorithm",title:"Expectation-Maximization (EM) Algorithm",description:"An iterative method to find maximum likelihood or maximum a posteriori (MAP) estimates of parameters in statistical models, where the model depends on unobserved latent variables.",color:"#FF5722",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 PGM · Inference</div>
       <h1>EM Algorithm: The Chicken & Egg Solver</h1>
       <p>How do you find the <strong>Average Height</strong> of two different species if you don't know <strong>Which Height belongs to Which Species</strong>? You can't find the average without the species, and you can't find the species without the average. This is the "Chicken and Egg" problem of Latent Variables. <strong>Expectation-Maximization (EM)</strong> is the algorithm that guesses its way to the truth.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent Variables</h2>
-    <p>In many real-world problems, we have <strong>Latent Variables (Z)</strong>—things that exist but aren't in our dataset. If we knew \(Z\), the problem would be simple. If we don't, we have to <strong>Iterate</strong>. EM is the engine that powers Gaussian Mixture Models (GMM) and Hidden Markov Model (HMM) training.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Soft Guessing."</strong> 
-        The algorithm doesn't say "Point A *definitely* belongs to Species 1." It says "Point A belongs to Species 1 with <strong>70% probability</strong>." This "Soft" assignment is what allows the algorithm to converge smoothly.
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you find the average height of two different species if you don't know which height measurement belongs to which species? You can't find the average without knowing the group, and you can't find the group without knowing the average. This is the <strong>"Chicken and Egg" problem</strong> of Latent Variables (unseen factors). The <strong>Expectation-Maximization (EM)</strong> algorithm is the iterative engine that solves this by "Soft Guessing." It alternates between filling in the missing labels (Expectation) and optimizing the parameters based on those guesses (Maximization). It is the foundational algorithm for clustering and training complex probabilistic models where the ground truth is hidden from view.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Iterative Maximum Likelihood with Latent Variables</div>
+      <p>The **EM Algorithm** is a strategy for maximum likelihood estimation in models with latent variables $\mathbf{Z}$. It iteratively improves a lower bound on the log-likelihood $\ell(\theta) = \log P(\mathbf{X} \mid \theta)$ through two coordinate-ascent steps:</p>
+      <div class="math-block">
+        $$Q(\theta \mid \theta^{(t)}) = \mathbb{E}_{\mathbf{Z} \mid \mathbf{X}, \theta^{(t)}} [ \log P(\mathbf{X}, \mathbf{Z} \mid \theta) ]$$
       </div>
+      <p>The optimization process follows this rigorous cycle:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>E-Step (Expectation)</strong>: Calculate the posterior probability $P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)})$ of the hidden variables given the observed data and current parameters.</li>
+        <li><strong>M-Step (Maximization)</strong>: Find $\theta^{(t+1)} = \arg \max_\theta Q(\theta \mid \theta^{(t)})$. Update parameters to maximize the expected log-likelihood.</li>
+        <li><strong>Jensen's Inequality</strong>: EM guarantees that the likelihood $P(\mathbf{X} \mid \theta)$ is non-decreasing at each step by optimizing the Evidence Lower Bound (ELBO).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
     </div>
-
-    <h2 id="math">Jensen's Inequality & Lower Bound</h2>
-    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to <strong>Jensen's Inequality</strong>, the average of the logs is less than or equal to the log of the averages.</p>
-    <div class="math-block">$$\log \sum_z P(x, z \mid \theta) \ge \sum_z Q(z) \log \frac{P(x, z \mid \theta)}{Q(z)}$$</div>
-
+    
     <h2 id="steps">The 2 Big Steps: E and M</h2>
     
       <h4>How to solve the unsolvable:</h4>
@@ -326,7 +330,7 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},s={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
+  `},a={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -372,4 +376,4 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
       </div>
 
     </div>
-  `,sections:[e,t,a]};export{s as PGM_DATA};
+  `,sections:[e,t,i]};export{a as PGM_DATA};

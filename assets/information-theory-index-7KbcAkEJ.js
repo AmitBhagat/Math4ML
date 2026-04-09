@@ -1,4 +1,4 @@
-const t={id:"entropy",title:"Entropy",description:"Entropy is a measure of the average 'Surprise' or 'Uncertainty' in a random variable. It is the fundamental limit of data compression.",color:"#9C27B0",html:String.raw`
+const e={id:"entropy",title:"Entropy",description:"Entropy is a measure of the average 'Surprise' or 'Uncertainty' in a random variable. It is the fundamental limit of data compression.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Info Theory · Entropy</div>
       <h1>Entropy: The Measure of Surprise</h1>
@@ -14,23 +14,25 @@ const t={id:"entropy",title:"Entropy",description:"Entropy is a measure of the a
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you live in a desert where it never rains. If someone says, <em>"It's sunny today,"</em> you have learned <strong>Zero Information</strong>. You already knew that. But if they say, <em>"It's snowing,"</em> you have received a massive amount of information. <strong>Entropy</strong> is the weighted average of this "Surprise" across all possible outcomes.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Entropy as <strong>"How many Yes/No questions do I need to ask?"</strong> 
-        If a variable has high entropy, it is unpredictable, and you need many questions to figure it out. 
-        If it has low entropy, it's a "sure thing." 
-        In ML, we want our models to move from high-entropy (guessing) to low-entropy (confident predictions).
+    <p><strong>Entropy</strong> (\(H\)) is the mathematical unit of <strong>Uncertainty</strong>. In the natural world, information is essentially "Surprise." If I tell you it’s sunny in the middle of a desert, I have given you zero information because you already knew that—the outcome had no surprise. But if I tell you it’s snowing in that same desert, the information content is massive because the event is so rare and unexpected. Entropy is the weighted average of this surprise across every possible outcome of a system. It defines the fundamental limit of how much we can compress data; it is the tactical measurement of how much "News" a random variable actually contains. In machine learning, our goal is often to move from a state of high entropy (guessing randomly) to a state of low entropy (confident, accurate predictions).</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Shannon Information Content</div>
+      <p>The **Shannon Entropy** $H(X)$ of a discrete random variable $X$ with set of possible outcomes $\mathcal{X}$ and probability mass function $P(x)$ is the expected value of the self-information:</p>
+      <div class="math-block">
+        $$H(X) = -\sum_{x \in \mathcal{X}} P(x) \log_b P(x)$$
       </div>
+      <p>This measurement is defined by the following mathematical axioms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Self-Information</strong>: The "Surprise" of an individual outcome is $-\log P(x)$. Rare events have high surprise.</li>
+        <li><strong>Units</strong>: If $b=2$, the unit is **Bits** (standard in CS). If $b=e$, the unit is **Nats** (standard in physics/continuous math).</li>
+        <li><strong>Maximization</strong>: $H(X)$ is maximized when all outcomes are equally likely ($P(x) = 1/|\mathcal{X}|$), indicating total uncertainty.</li>
+        <li><strong>Minimization</strong>: $H(X) = 0$ if and only if one outcome has probability 1. The result is perfectly predictable ("No news").</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(P(x_i)\), Entropy is:</p>
-    <div class="math-block">$$H(X) = -\sum_{i} P(x_i) \log_2 P(x_i)$$</div>
-    <p>The unit is <strong>Bits</strong> if using base-2, or <strong>Nats</strong> if using natural log (\(e\)).</p>
-
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
     
       <h4>Problem: Comparing Uncertainty Levels</h4>
@@ -108,7 +110,7 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     <div class="linking-rule">
       <strong>Next Step:</strong> Entropy measures one distribution. But how do we measure the "Distance" between what our model predicts and the truth? Explore <strong><a href="#/mathematics/information-theory/cross-entropy">Cross-Entropy</a></strong>.
     </div>
-  `},e={id:"cross-entropy",title:"Cross-Entropy",description:"Cross-Entropy measures the distance between two probability distributions. It is the most common loss function for training classification models.",color:"#9C27B0",html:String.raw`
+  `},t={id:"cross-entropy",title:"Cross-Entropy",description:"Cross-Entropy measures the distance between two probability distributions. It is the most common loss function for training classification models.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 Info Theory · Loss</div>
       <h1>Cross-Entropy: The Price of Disbelief</h1>
@@ -124,24 +126,25 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Entropy tells you how much information is in the truth. <strong>Cross-Entropy</strong> tells you how many bits of information you *think* are there because of your model. If your model is wrong, you pay a "penalty" in extra bits. By minimizing this penalty, you force the model's "beliefs" to align with reality.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Cross-Entropy as <strong>"The Wrong Map Penalty."</strong> 
-        The terrain is \(P\) (reality), but you're using map \(Q\) (your model). 
-        If your map says "Go Left" but the terrain says "Go Right," you pay a price in wasted time (Entropy). 
-        Cross-Entropy is the total cost of using your map. Training a model is just <strong>drawing a better map.</strong>
+    <p>Entropy tells you how much information is in the truth, but <strong>Cross-Entropy</strong> (\(H(P, Q)\)) measures the cost of your disbelief. It tells you how many bits of information you *think* are required to describe a system because you are using a flawed model. In machine learning, we treat the ground truth as the target distribution (\(P\)) and our model's prediction as the guess (\(Q\)). If your model is perfectly aligned with reality, the cross-entropy equals the entropy of the data. However, if your model is wrong, you pay a "penalty" in extra bits. By minimizing cross-entropy, we are essentially forcing the model's internal map of the world to perfectly overlap with the actual terrain of the data. It is the tactical way we punish a model for being "Confidently Wrong."</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Penalty of Flawed Models</div>
+      <p>The **Cross-Entropy** $H(P, Q)$ between a true distribution $P$ and an estimated distribution $Q$ is the expected number of bits required to identify an event from $P$ when using a coding scheme optimized for $Q$:</p>
+      <div class="math-block">
+        $$H(P, Q) = -\sum_{x \in \mathcal{X}} P(x) \log Q(x)$$
       </div>
+      <p>This measure is fundamental to supervised learning due to these mathematical properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Information Decomposition</strong>: $H(P, Q) = H(P) + D_{KL}(P \parallel Q)$. It measures the intrinsic entropy of the data plus the "extra surprise" caused by our model's inaccuracy.</li>
+        <li><strong>Gibbs' Inequality</strong>: $H(P, Q) \ge H(P)$, with equality if and only if $P = Q$. This ensures that minimizing cross-entropy forces $Q$ to converge to $P$.</li>
+        <li><strong>Binary Cross-Entropy (BCE)</strong>: For a binary label $y \in \{0, 1\}$, it simplifies to $-(y \log \hat{y} + (1-y) \log(1-\hat{y}))$.</li>
+        <li><strong>Sensitivity</strong>: Unlike Mean Squared Error, cross-entropy produces very large gradients when the model predicts the wrong class with high confidence, pushing the model to correct itself aggressively.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Cross-entropy is the standard objective for training classifiers, as it directly minimizes the information gap between model predictions and reality.</p>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a true distribution \(P\) and predicted distribution \(Q\):</p>
-    <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
-    <p>In binary classification (Cat vs. Not Cat), this simplifies to the famous Binary Cross-Entropy (BCE) loss:</p>
-    <div class="math-block">$$L = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]$$</div>
-
+    
     <h2 id="example-target" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prediction vs. Target</h2>
     
       <h4>Problem: Measuring the Gap</h4>
@@ -235,26 +238,24 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Cross-Entropy is the <strong>Total Cost</strong> of using a model. But some of that cost is fixed (the Entropy of the truth itself). <strong>KL Divergence</strong> is the <strong>Extra Cost</strong>—the pure inefficiency of your model. If KL \(= 0\), your model is a perfect copy of the truth. If KL is high, your model is a poor approximation.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
-        You expect results to follow pattern \(Q\), but they actually follow \(P\). 
-        KL Divergence is the measure of how <strong>surprised</strong> you are on average. 
-        Note that it is <strong>Asymmetric</strong>: \(D_{KL}(P || Q) \neq D_{KL}(Q || P)\). 
-        Being surprised that a rare event is common is not the same as being surprised that a common event is rare!
+    <p>Cross-Entropy tells you the <strong>Total Cost</strong> of using a model to describe reality, but not all of that cost is your model’s fault. Some of it is just the inherent chaos (Entropy) of the data itself. <strong>KL Divergence</strong> (\(D_{KL}(P || Q)\)) is the <strong>Extra Cost</strong>—the pure, unadulterated inefficiency of your approximation. It acts as the mathematical compass that measures the "Information Loss" or the gap between your model's beliefs (\(Q\)) and the ground truth (\(P\)). If KL is zero, your model is a perfect clone of reality. If KL is high, your model is a poor surrogate. Critically, KL is <strong>Asymmetric</strong>; being surprised that a rare event is common is fundamentally different from being surprised that a common event is rare. It is the tactical measurement of how much "Inefficiency Tax" you pay for using a simplified model.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Relative Entropy & Distributional Divergence</div>
+      <p>The **KL Divergence** $D_{KL}(P \parallel Q)$ measures the relative entropy of distribution $P$ with respect to $Q$. It quantifies how one probability distribution is different from a second, reference distribution:</p>
+      <div class="math-block">
+        $$D_{KL}(P \parallel Q) = \sum_{x \in \mathcal{X}} P(x) \log \frac{P(x)}{Q(x)}$$
       </div>
+      <p>This measure is governed by the following core mathematical constraints:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Gibbs' Inequality</strong>: $D_{KL}(P \parallel Q) \ge 0$. The information loss is never negative. It is exactly zero if and only if $P = Q$.</li>
+        <li><strong>Non-Symmetry</strong>: $D_{KL}(P \parallel Q) \neq D_{KL}(Q \parallel P)$. Approximating a complex reality with a simple model is not the same as the reverse. Thus, KL is a **Divergence**, not a metric.</li>
+        <li><strong>Relation to Loss</strong>: $D_{KL}(P \parallel Q) = H(P, Q) - H(P)$. It is the "pure" inaccuracy of the model, stripped of the data's inherent entropy.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we use KL divergence to force latent spaces to follow specific shapes (VAEs) and to transfer knowledge between models (Distillation).</p>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>KL Divergence is defined as the difference between Cross-Entropy and Entropy:</p>
-    <div class="math-block">$$D_{KL}(P || Q) = H(P, Q) - H(P)$$</div>
-    <p>Explicitly:</p>
-    <div class="math-block">$$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$</div>
-    <p><strong>Note:</strong> KL Divergence is always \(\ge 0\). (Gibbs' Inequality).</p>
-
+    
     <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
     
       <h4>Problem: Comparing Two Global Shapes</h4>
@@ -376,4 +377,4 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
       </div>
 
     </div>
-  `,sections:[t,e,i]};export{s as INFORMATION_THEORY_DATA};
+  `,sections:[e,t,i]};export{s as INFORMATION_THEORY_DATA};
