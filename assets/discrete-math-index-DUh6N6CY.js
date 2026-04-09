@@ -23,13 +23,13 @@ const t={id:"set-theory",title:"Set Theory",description:"The foundation for data
       </div>
 
       <p>The structural properties of sets facilitate critical data operations:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Cardinality ($|S|$)</strong>: The measure of the number of elements in a set. In feature engineering, the cardinality of a categorical variable determines the dimensionality of the resulting One-Hot encoding.</li>
         <li><strong>Power Set ($\mathcal{P}(S)$)</strong>: The set of all subsets of $S$. This is the basis for exploring all possible combinations of features in attribute selection problems.</li>
         <li><strong>Inclusion ($\subseteq$)</strong>: A subset relationship where every element of the internal set is a member of the external set, defining the hierarchy of filtered data.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
+      <p class="mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
     </div>
     
     <div class="callout tip">
@@ -200,7 +200,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
       <p>Mathematical logic is the formal study of valid reasoning through symbolic structures. In AI, it provides the deterministic engine for rule-based systems and formal verification.</p>
       
       <p>The hierarchy of logic includes two primary systems:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Propositional Logic</strong>: Concerned with atomic statements $P, Q$ that are either True ($1$) or False ($0$). Connectivity is defined by truth-functional operators: $\land$ (AND), $\lor$ (OR), and $\neg$ (NOT). The **Implication** operator $P \to Q$ (material conditional) is defined as $\neg P \lor Q$.</li>
         <li><strong>First-Order Logic (FOL)</strong>: Extends propositional logic by introducing **Quantifiers** and **Predicates** to describe properties of objects within a domain $\mathcal{D}$.
           <ul class="pl-4 mt-1 opacity-90">
@@ -212,7 +212,7 @@ filtered_df = df[df['user_id'].isin(subset_list)]
 
       <p class="text-xs opacity-80 mt-2"><strong>De Morgan's Laws</strong>: These laws define the duality between conjunction and disjunction, essential for simplifying complex code conditionals: $\neg(P \land Q) \equiv \neg P \lor \neg Q$ and $\neg(P \lor Q) \equiv \neg P \land \neg Q$.</p>
       
-      <p class="text-xs opacity-70 mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
+      <p class="mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
     </div>
     
     <div class="callout tip">
@@ -395,12 +395,12 @@ not_nyc = df[~(df['city'] == 'New York')]
       </div>
 
       <p>Combinatorial analysis highlights two major challenges in AI:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>The Fundamental Counting Principle</strong>: If a sequence of choices has $n_1, n_2, \dots, n_k$ possibilities, the total configurations are $\prod n_i$. This explains why grid searching over 10 hyperparameters each with 10 values leads to 10 billion trials.</li>
         <li><strong>Combinatorial Explosion</strong>: As $n$ increases, the number of ways to arrange or select elements grows factorially or exponentially. The search space for feature selection grows at $2^n$, necessitating greedy or stochastic optimization rather than exhaustive search.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Combinatorics is the prerequisite for **Discrete Probability** and the analysis of **Algorithm Complexity**. </p>
+      <p class="mt-2">Combinatorics is the prerequisite for **Discrete Probability** and the analysis of **Algorithm Complexity**. </p>
     </div>
     
     <div class="callout tip">
@@ -589,7 +589,7 @@ combs = list(itertools.combinations(items, 2))
       <p>A graph $G$ is an ordered pair $(V, E)$ consisting of a set of vertices $V$ and a set of edges $E$. In machine learning, graphs formalize both the structure of data (Relational Graphs) and the structure of computations (DAGs).</p>
       
       <p>The mathematical properties of $G$ are defined as:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Vertices ($V$)</strong>: Represent discrete entities or states in a system. The cardinality $|V|$ defines the order of the graph.</li>
         <li><strong>Edges ($E$)</strong>: Represent the relationships between vertices.
           <ul class="pl-4 mt-1 opacity-90">
@@ -601,7 +601,7 @@ combs = list(itertools.combinations(items, 2))
 
       <p class="text-xs opacity-80 mt-2"><strong>Adjacency Matrix ($\mathbf{A}$)</strong>: A matrix where $A_{ij} = 1$ if there is an edge $(v_i, v_j)$ and $0$ otherwise. This matrix bridges graph theory with Linear Algebra, enabling spectral analysis and the matrix-form implementation of Graph Neural Networks.</p>
       
-      <p class="text-xs opacity-70 mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
+      <p class="mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
     </div>
     
     <div class="callout tip">

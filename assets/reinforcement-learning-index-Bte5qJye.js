@@ -16,14 +16,14 @@ const e={id:"fundamentals",title:"Markov Decision Processes (MDP)",description:"
         $$P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \dots) = P(S_{t+1} | S_t, A_t)$$
       </div>
       <p>The components of the learning environment are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>State Space ($\mathcal{S}$)</strong>: The set of all possible situations the agent can be in.</li>
         <li><strong>Action Space ($\mathcal{A}$)</strong>: The set of all possible moves the agent can take.</li>
         <li><strong>Transition Probability ($\mathcal{P}$)</strong>: The probability $P(s' | s, a)$ of landing in state $s'$ after taking action $a$ in state $s$.</li>
         <li><strong>Reward Function ($\mathcal{R}$)</strong>: The immediate feedback $R(s, a)$ provided by the environment.</li>
         <li><strong>Discount Factor ($\gamma$)</strong>: A value in $[0, 1)$ that determines the present value of future rewards.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The agent's objective is to find a **Policy** $\pi(s)$ that maximizes the expected cumulative discounted Reward (the Return).</p>
+      <p class="mt-2">The agent's objective is to find a **Policy** $\pi(s)$ that maximizes the expected cumulative discounted Reward (the Return).</p>
     </div>
     
     <div class="callout tip">
@@ -63,7 +63,7 @@ const e={id:"fundamentals",title:"Markov Decision Processes (MDP)",description:"
     
 
     <h2 id="implementation">Implementation Concept</h2>
-    <python-code static-output="[Environment] GridWorld Initialized (Size: 5x5)\n[Agent] Current State: (0, 0)\n[Action] Move Right -> New State: (0, 1), Reward: -1\n[Action] Move Down -> New State: (1, 1), Reward: -1\n[Insight] Every step costs -1; the agent must find the shortest path to the goal (+100).">
+    <python-code>
 import numpy as np
 
 class SimpleEnv:
@@ -119,7 +119,7 @@ print(f"Action taken. New State: {state}, Reward: {reward}")
         $$Q(s, a) \leftarrow Q(s, a) + \alpha \underbrace{[R + \gamma \max_{a'} Q(s', a') - Q(s, a)]}_{\text{TD Error}}$$
       </div>
       <p class="text-xs opacity-80 mt-2">Where:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TD Error</strong>: The difference between the "Updated Target" and the current estimate.</li>
         <li><strong>Learning Rate ($\alpha$)</strong>: How quickly the agent forgets old knowledge in favor of new experiences.</li>
         <li><strong>Exploration ($\epsilon$-greedy)</strong>: The agent occasionally takes random actions to discover better "Golden Paths" it hasn't seen yet.</li>
@@ -163,7 +163,7 @@ print(f"Action taken. New State: {state}, Reward: {reward}")
     
 
     <h2 id="implementation">Implementation Concept</h2>
-    <python-code static-output="[Training] Running 1,000 episodes of Q-Learning...\n[Update] Episode 100: Found Goal! Propagating reward...\n[Update] Episode 500: Q-Table starting to converge.\n[Result] Optimal Policy Learned: [Right, Right, Down, Down]\n[Insight] The agent learned to take a longer path to avoid the -100 penalty trap!">
+    <python-code>
 import numpy as np
 
 # A tiny 1D world: [Start, Path, Path, Trap, Goal]

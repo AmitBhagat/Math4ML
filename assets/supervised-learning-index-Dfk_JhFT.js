@@ -119,7 +119,7 @@ const e={id:"regression-intro",title:"Introduction to Regression",description:"R
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Fitting linear model to 5 historical days...\n[Input] Forecasted Temperature: 22°C\n[Model] y = -10.0x + 500.0\n[Prediction] Predicted cups to sell: 280.00\n[Note] For every 1 degree colder, you sell 10 MORE cups.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -258,7 +258,7 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Solving for the optimal line using OLS...\n[Model] Price = 200.0 * Sqft + 0.0\n[Prediction] Real Estate Estimate for 2000 sqft: $400,000\n[Verify] Manual Check: 200 * 2000 + 0 = 400,000. Spot on!">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -408,7 +408,7 @@ print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Model trying to learn with alpha=10.0 (Strong Lease)\n[Features] 1: Hours Studied, 2: Random Noisy Feature\n[Result] Weights: [2.5, 0.05]\n[Insight] Notice how the Noisy Feature was 'shrunk' to almost zero!\n[Stability] The model is now 40% more stable on new test data.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import Ridge
 
@@ -552,7 +552,7 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Model trying to learn with alpha=5.0 (Brutal Executioner)\n[Input] 1 Useful Feature, 4 Random Noisy Features\n[Result] Learned Weights: [8.5, 0.0, 0.0, 0.0, 0.0]\n[Discovery] Lasso killed all 4 junk features exactly!\n[Interpretation] Feature 0 is the only one 'worth' the L1 penalty.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import Lasso
 
@@ -707,7 +707,7 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Linear Model] Score: 0.81 (Underfit)\n[Polynomial Model] Score: 1.00 (Perfect Fit!)\n[Equation] Distance = 0.05 * (Speed ** 2)\n[Prediction] At 60mph, stopping distance is: 180.0 feet.\n[Insight] Degree=2 captured the physics of the quadratic curve.">
+    <python-code>
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -865,7 +865,7 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Learning to detect spam from 4 examples...\n[Input] New Email: 5 suspicious keywords, Rep-Score 8\n[Probabilities] Real: 89%, Spam: 11%\n[Decision] This email is REAL.\n[Insight] The high reputation score (8) 'outvoted' the suspicious keywords!">
+    <python-code>
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
@@ -1020,7 +1020,7 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Internal] Linear Score (z) for input: 2.12\n[Sigmoid] Squashing 2.12 into probability space...\n[Result] Probability of Churn: 89.1%\n[Decision] Predicted Class: 1 (Churn)\n[Insight] As visits per week DROPPED, the Sigmoid score CLIMBED.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
@@ -1149,7 +1149,7 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Learning from 4 labeled emails...\n[Input] New Email: 'Win prize money'\n[Finding] 'Prize' is 100% correlated with Spam in this dataset.\n[Finding] 'Money' is 100% correlated with Spam in this dataset.\n[Result] Classification: Spam\n[Insight] Even with Laplace smoothing, the evidence for Spam was overwhelming.">
+    <python-code>
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
@@ -1204,7 +1204,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
       <div class="math-block">
         $$\hat{f}(x) = \text{arg}\max_{c \in \mathcal{Y}} \sum_{i \in \mathcal{N}_k(x)} I(y_i = c)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
+      <p class="mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
     </div>
     
     <div class="callout tip">
@@ -1311,7 +1311,7 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Query] New Movie (8 Action, 3 Romance)\n[Computation] Calculating distances to 4 neighbors...\n[Finding] Top 3 neighbors: ['Action', 'Action', 'Romance']\n[Result] Majority Vote: Action\n[Insight] KNN correctly identified the cluster despite 1 outlier neighbor!">
+    <python-code>
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -1361,7 +1361,7 @@ print(f"Final Classification: {result[0]}")
         $$\text{arg}\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^n \xi_i$$
       </div>
       <p>Subject to the constraints: $y_i(\mathbf{w}^T \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i$ and $\xi_i \ge 0$.</p>
-      <p class="text-xs opacity-70 mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
+      <p class="mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
     </div>
     
     <div class="callout tip">
@@ -1450,7 +1450,7 @@ print(f"Final Classification: {result[0]}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Solving quadratic program for widest margin...\n[Soldiers] Identified 3 Support Vectors on the border.\n[Result] Decision Boundary: y = -0.5x + 3.2\n[Input] Testing point at (5, 5)...\n[Classification] Result: 1 (Red Kingdom)\n[Insight] Notice that only the border points affected the final highway!">
+    <python-code>
 import numpy as np
 from sklearn.svm import SVC
 
@@ -1507,7 +1507,7 @@ print(f"Support Vector Coordinates: \n{sv}")
       <div class="math-block">
         $$G = \sum_{k=1}^K p_{mk}(1 - p_{mk})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
+      <p class="mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
     </div>
     
     <div class="callout tip">
@@ -1592,7 +1592,7 @@ print(f"Support Vector Coordinates: \n{sv}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Growing a tree of depth 2...\n[Root] Top Split Feature: Salary > 100k\n[Importance] Salary: 1.0, Commute: 0.0 (Salary alone perfectly sorted this small dataset!)\n[Decision] For $120k salary: ACCEPT\n[Insight] The tree 'discovered' that salary was the only factor that mattered here.">
+    <python-code>
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
@@ -1661,7 +1661,7 @@ print(f"Feature Importances: {model.feature_importances_}")
         $$\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^B T_b(x, \Theta_b)$$
       </div>
       <p>Where $\Theta_b$ represents the random parameters for the $b$-th tree, generated through:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Bootstrap Aggregating (Bagging)</strong>: Training each tree on a sample drawn with replacement.</li>
         <li><strong>Feature Selection</strong>: Choosing the best split from a random subset of $m \approx \sqrt{d}$ features.</li>
       </ul>
@@ -1743,7 +1743,7 @@ print(f"Feature Importances: {model.feature_importances_}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Growing 100 unique trees with random data slices...\n[Consultation] Testing a new case with features [1, 0, 0]...\n[Voting] 87 trees voted POSITIVE, 13 trees voted NEGATIVE.\n[Final Verdict] Classification: POSITIVE (Confidence: 87.0%)\n[Insight] The forest's confidence score is literally the % of trees that agreed!">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 
@@ -1796,7 +1796,7 @@ print(f"Confidence Score: {votes[1]:.1%}")
       <div class="math-block">
         $$r_{im} = -\left[ \frac{\partial \mathcal{L}(y_i, F(x_i))}{\partial F(x_i)} \right]_{F(x)=F_{m-1}(x)}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
+      <p class="mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
     </div>
     
     <div class="callout tip">
@@ -1903,7 +1903,7 @@ print(f"Confidence Score: {votes[1]:.1%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Initializing with 'Dumb' model (Avg prob: 0.5)\n[Stages] Tree 1: Focus on easy samples. Tree 2: Focus on mistakes.\n[Stages] Tree 100: Precise fine-tuning reached!\n[Input] Testing case [9, 4]...\n[Result] Confidence Strategy: 99.8% POSITIVE\n[Insight] Notice how Boosting 'hones in' on the truth over multiple stages.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
 
@@ -2068,7 +2068,7 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Library] Loading XGBoost (High-Performance Engine)...\n[Training] Iterating through 100 boosting rounds...\n[Accuracy] Logic Check: 100.0% (The model perfectly learned Rule: x0 + x1 > 1)\n[Input] Testing case [0.8, 0.5] -> Sum 1.3\n[Result] Prediction: 1 (Positive)\n[Benchmark] This model is 10x faster than standard GBDT on large datasets.">
+    <python-code runnable="false">
 import xgboost as xgb
 import numpy as np
 

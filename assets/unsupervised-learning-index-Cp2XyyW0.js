@@ -16,7 +16,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
         $$\text{arg}\min_{\mathbf{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
       </div>
       <p>Where $\mu_i$ is the mean of points in $S_i$. The algorithm iteratively performs two steps:</p>
-      <ol class="text-xs opacity-80 mt-2 space-y-1">
+      <ol class="mt-2 space-y-1">
         <li><strong>Assignment</strong>: Assign each observation to the cluster with the nearest mean: $S_i^{(t)} = \{x_p : \|x_p - \mu_i^{(t)}\|^2 \le \|x_p - \mu_j^{(t)}\|^2 \forall j \}$.</li>
         <li><strong>Update</strong>: Calculate the new means (centroids) of the observations in the new clusters: $\mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$.</li>
       </ol>
@@ -103,7 +103,7 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: 100 observations, 2 features\n[Iteration 0] Placing 3 random centroids...\n[Iteration 5] Inertia dropped from 152.4 to 42.1\n[Convergence] Centroids stabilized at: [[1,2], [10,2], [6,8]]\n[Note] New point at (5,5) assigned to Cluster #2.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import KMeans
 
@@ -254,7 +254,7 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Calculating initial Proximity Matrix...\n[Merge 1] Merging Point 0 & 1 (Distance: 0.1)\n[Merge 2] Merging Point 2 & 3 (Distance: 0.5)\n[Cutting] Applying forest cut at N=2 Clusters...\n[Result] Cluster Assignments: [A, A, B, B, A]\n[Analysis] Points 0, 1, and 4 successfully grouped despite the gap.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 
@@ -304,7 +304,7 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: DBSCAN Clustering</div>
       <p>Given parameters $\epsilon$ (radius) and $MinPts$ (density threshold), DBSCAN classifies points into three categories based on their $\epsilon$-neighborhood $N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Core Point</strong>: $|N_{\epsilon}(p)| \ge MinPts$.</li>
         <li><strong>Border Point</strong>: $|N_{\epsilon}(p)| < MinPts$, but $p$ is reachable from a core point.</li>
         <li><strong>Noise Point</strong>: Neither of the above.</li>
@@ -397,7 +397,7 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Parameters: Eps=1.5, MinPts=2\n[Status] Scanning 7 data points...\n[Found] Cluster 0: Dense triplet detected at (1,2)\n[Found] Cluster 1: Dense triplet detected at (10,10)\n[Noise] Point (5,5) marked as Outlier (-1)\n[Assignments] Result: [0, 0, 0, 1, 1, 1, -1]\n[Insight] DBSCAN successfully ignored the lone point without forcing it into a group.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import DBSCAN
 
@@ -543,7 +543,7 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Action] Initializing 2 Gaussian Segments (EM Loop)...\n[Status] Calculating responsibilities for the 'Smell' clouds...\n[Converged] Mean A: (0.1, 0.1) | Mean B: (2.9, 2.9)\n[Test Point] (1.5, 1.5) -> Probability Map:\n- Coffee (Cloud 0): 72.1%\n- Cinnamon (Cloud 1): 27.9%\n[Insight] Unlike k-Means, we captured the uncertainty of the overlap.">
+    <python-code>
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
@@ -599,7 +599,7 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
         $$\mathbf{z}_i = f(\mathbf{x}_i) \in \mathbb{R}^k$$
       </div>
       <p>The choice of $f$ depends on what the algorithm prioritizes:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Linear (PCA)</strong>: Preserves maximum variance via orthogonal projection.</li>
         <li><strong>Manifold (t-SNE/UMAP)</strong>: Preserves the local/topological structure of the data.</li>
         <li><strong>Feature Selection</strong>: Prunes redundant or zero-variance dimensions from the set.</li>
@@ -690,7 +690,7 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Calculating Variance for 4 features...\n[Status] Feature 2 ('Constant_ID') has Variance: 0.0\n[Status] Feature 3 ('Random_Hiss') has Variance: 0.08\n[Action] Dropping Feature 2 (Zero Signal detected).\n[Result] Data reduced from 4D to 3D with ZERO loss of useful information.\n[Insight] Never carry a heavy suitcase full of constant values!">
+    <python-code>
 import numpy as np
 from sklearn.feature_selection import VarianceThreshold
 
@@ -837,7 +837,7 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Scaling dataset for Mean=0, Std=1...\n[SVD] Calculating Principal Components...\n[Result] PC1 captures 95.2% of the variance (The Signal)\n[Result] PC2 captures 4.8% of the variance (The Shape)\n[Action] Projected high-dim data into 2D space.\n[Insight] Throwing away PC3 and PC4 results in ~0% loss of useful information.">
+    <python-code>
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -897,7 +897,7 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
       <div class="math-block">
         $$\mathcal{C} = KL(P \| Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
+      <p class="mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
     </div>
     
     <div class="callout tip">
@@ -991,7 +991,7 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: 2 High-Dim Cliques (100D space)\n[Action] Initializing t-SNE (Perplexity=30)...\n[Iter 250] Error: 1.45 (KL-Divergence dropping)\n[Iter 500] Error: 0.82 (Local huddles forming)\n[Result] 100D relationship preserved in 2D space.\n[Discovery] Cluster A and B are now perfectly separated on the map.">
+    <python-code>
 import numpy as np
 from sklearn.manifold import TSNE
 
@@ -1046,7 +1046,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
       <div class="math-block">
         $$\text{CE}(P, Q) = \sum_{e} \left[ p_e \log\left(\frac{p_e}{q_e}\right) + (1-p_e) \log\left(\frac{1-p_e}{1-q_e}\right) \right]$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
+      <p class="mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
     </div>
     
     <div class="callout tip">
@@ -1137,7 +1137,7 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Constructing Fuzzy Simplicial Complex (n_neighbors=15)...\n[Action] Initializing Spectral Embedding for global stability...\n[Optimization] SGD Layout Refinement (1.2 seconds total)...\n[Result] 64D Digits dataset compressed to a 2D Topological Map.\n[Discovery] Found 10 distinct 'islands' representing digits 0-9.">
+    <python-code runnable="false">
 import umap
 from sklearn.datasets import load_digits
 
@@ -1298,7 +1298,7 @@ print(f"Status: Local and Global structure successfully preserved.")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input Layer: 784 pixels (Flattened 28x28 Image)\n[Action] Initializing bottleneck layer with 32 neurons (24.5x Squeeze)\n[Training] Epoch 50/50 - Reconstruction Loss (MSE): 0.0041\n[Result] Digit '7' reconstructed with 98.9% anatomical accuracy.\n[Discovery] The 32 summary-integers successfully captured 'Seven-ness'.">
+    <python-code runnable="false">
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
@@ -1373,7 +1373,7 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
       <div class="premium-def-title">Isolation Depth Multiplier</div>
       <p>The shorter the path length from the root of a random tree to a point, the more likely that point is an anomaly.</p>
       <div class="math-block">$$s(x, n) = 2^{-\frac{E(h(x))}{c(n)}}$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $E(h(x))$ is the average path length and $c(n)$ is the average path length of unsuccessful search in BST.</p>
+      <p class="mt-2">Where $E(h(x))$ is the average path length and $c(n)$ is the average path length of unsuccessful search in BST.</p>
     </div>
 
     <h2 id="one-class-svm">One-Class SVM: The Frontier</h2>
@@ -1419,7 +1419,7 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: 1000 normal transactions, 5 fraud attempts\n[Model] Initializing IsolationForest (n_estimators=100)\n[Fit] Learning the boundary of 'Normal' behavior...\n[Predict] Identifying anomalies...\n[Result] Detected 5 outliers with Anomaly Score > 0.65\n[Action] Flagging transactions #42, #108 for manual review.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import IsolationForest
 

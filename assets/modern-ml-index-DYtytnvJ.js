@@ -16,7 +16,7 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
         $$\min_\theta \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathcal{G}(\mathbf{x})) ]$$
       </div>
       <p>Where $\tilde{\mathbf{x}}$ is a corrupted or partial version of $\mathbf{x}$. Common paradigms include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Auto-encoding</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with noise; $\mathcal{G}(\mathbf{x}) = \mathbf{x}$.</li>
         <li><strong>Masking</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with missing parts (e.g., in BERT); $\mathcal{G}(\mathbf{x})$ is the missing segment.</li>
         <li><strong>Instance Discrimination</strong>: Learning to distinguish $\mathbf{x}$ from other samples (Contrastive Learning).</li>
@@ -110,7 +110,7 @@ const e={id:"self-supervised",title:"Self-Supervised Learning",description:"A le
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
+    <python-code runnable="false" static-output="[Action] Generating Pretext Viewpoints...\n[View A] RandomCrop(224) + ColorJitter (Slightly gray, cropped top-left)\n[View B] RandomCrop(224) + GaussianBlur (Blurry, cropped bottom-right)\n[Status] Calculating Cosine Similarity between Latent Signatures...\n[Result] Similarity: 0.942 (Model recognizes these as the same source image).\n[Insight] Feature invariance achieved across color and focus distortions.">
 import torchvision.transforms as T
 from PIL import Image
 
@@ -137,6 +137,14 @@ view_B = T.Compose([
 print("Views created. Model will now learn if these came from the SAME image.")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Self-Supervised Learning is the "Autodidact" of AI. It allows models to learn from the infinite supply of raw, unlabeled data by creating their own internal puzzles, building a core "General Intelligence" for free.</p>
+    <ul>
+      <li><strong>Natural Language Model Pre-training (BERT/GPT)</strong>: When you train a model on the entire internet, you can't have humans label every sentence. Instead, the model uses SSL by "Masking"—hiding 15% of the words in a sentence and forcing itself to guess what they are. By millions of these small guesses, the model accidentally learns the grammar, facts, and reasoning required to understand human language.</li>
+      <li><strong>Contrastive Image Feature Learning</strong>: Before a self-driving car model knows what a "Pedestrian" is, it can learn the structure of the world through SSL. By taking two different crops of the same video frame and challenging itself to recognize that they belong to the same "Scene," the model learns to identify objects, edges, and depth without ever seeing a single human-provided label.</li>
+    </ul>
+    <p>Teacher's Final Word: You don't need a teacher to learn; you just need curiosity and a way to test your own guesses. SSL is the bridge that allows our machines to move past the bottleneck of human labeling and reach the scale of true, planetary-level intelligence.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we have a model that understands the world, how do we "Gift" that knowledge to another task? Explore <strong><a href="#/machine-learning/modern-ml/transfer-learning">Transfer Learning</a></strong>.
     </div>
@@ -161,7 +169,7 @@ print("Views created. Model will now learn if these came from the SAME image.")
       <div class="math-block">
         $$\hat{y}_T = f_T(\phi(\mathbf{x}_T; \theta_S); \theta_T)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
+      <p class="mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
     </div>
     
     <div class="callout tip">
@@ -256,7 +264,7 @@ print("Views created. Model will now learn if these came from the SAME image.")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
+    <python-code runnable="false" static-output="[Action] Grafting New Task Head onto Pre-trained Base...\n[Base] ResNet-50 loaded (25.6M weights frozen)\n[Layer] fc.features -> in: 2048 | out: 1000 (Dropped)\n[Layer] fc.head -> in: 2048 | out: 2 (Grafted)\n[Result] Model ready for fine-tuning with only 4,096 trainable parameters.\n[Insight] Leveraging weights that already 'understand' 1,000 object categories.">
 import torch.nn as nn
 from torchvision import models
 
@@ -277,6 +285,14 @@ model.fc = nn.Linear(num_ftrs, 2)
 # 4. Only the new Head will be updated during training
 print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Transfer Learning is the "Great Equalizer." It allows companies and researchers with small datasets to achieve world-class performance by standing on the shoulders of the massive models trained by tech giants.</p>
+    <ul>
+      <li><strong>Medical Tumor Diagnosis from X-rays</strong>: It's hard to find 10 million labeled X-rays of a rare cancer. Instead, doctors take a model that already knows how to see "Edges," "Textures," and "Shapes" from millions of dog and cat photos (ImageNet). By "Fine-tuning" just the last few layers on a small hospital dataset, the model can reach expert-level diagnostic accuracy in a fraction of the time.</li>
+      <li><strong>Specialized Customer Service Bots</strong>: Instead of training a language model from scratch, companies take a pre-trained "Foundation Model" (like GPT or Llama) and give it a small finishing school using their own legal and billing documentation. This "Gifts" the model a universal understanding of language while focusing its final output on the specific rules of the company.</li>
+    </ul>
+    <p>Teacher's Final Word: Wisdom is reusable. Don't start from scratch when you can start from the finish line of a billionaire's research lab. Transfer learning is the reason AI is moving so fast—we are building a collective brain, layer by layer, and then gifting the early layers to the next generation of problems.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What exactly is the model "Gifting"? It's the way it simplifies data. Explore <strong><a href="#/machine-learning/modern-ml/representation">Representation Learning</a></strong>.
@@ -302,7 +318,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
       <div class="math-block">
         $$\max_{\theta} I(\mathbf{x}; f_\theta(\mathbf{x}))$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
+      <p class="mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
     </div>
     
     <div class="callout tip">
@@ -399,7 +415,7 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
+    <python-code runnable="false" static-output="[Action] Mapping Input through Encoder Bottleneck...\n[Layer 1] Flattening 28x28 (784 pixels) -> Tensor\n[Layer 2] Linear Compression (128 units)\n[Output] Final Latent Vector (2 dimensions): [-0.42, 1.89]\n[Result] High-dimensional image successfully mapped to a single coordinate.">
 import torch.nn as nn
 import torch
 
@@ -425,6 +441,14 @@ model = Encoder()
 essence = model(img)
 print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Representation Learning is the "Internal Translation" of AI. It turns the messy, high-dimensional reality of the world into a clean, geometric point in space, allowing models to compare meanings rather than just raw data bytes.</p>
+    <ul>
+      <li><strong>Reverse Image Search (Google Lens)</strong>: When you take a photo of a flower to identify it, Google doesn't compare the pixels of your photo to billions of others. Instead, it uses a pre-trained model to extract a "Representation Vector" (the essence of the flower). It then performs a high-speed search in "Latent Space" to find the closest neighbor. This turns a multi-petabyte search problem into a simple geometry problem.</li>
+      <li><strong>Recommendation System Embeddings</strong>: Netflix and Spotify don't just see you as a list of movies; they represent your taste as a multi-dimensional coordinate. By mapping you and every movie into the same "Taste Space," the system can find the "Next Best Watch" by simply looking at which movie vectors are sitting right next to your user vector in the dark.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't show the machine the pixels; show it the meaning. A good representation is worth a million raw bytes. Mastering the latent space is the difference between a model that merely memorizes data and one that truly understands the hidden mechanics of reality.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
@@ -540,7 +564,7 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input: Batch of 128 Image Pairs\n[Action] Extracting 512-dim features using ResNet-18...\n[Loss] Similarity(Twins) = 0.98 (High)\n[Loss] Similarity(Strangers) = 0.05 (Low)\n\n[Status] Gradient Step: Pulling twins closer, pushing strangers away.\n[Insight] The latent space is beginning to cluster 'Architecture' vs 'Nature'.">
+    <python-code runnable="false" static-output="[Action] Pre-calculating Similarity Metrics...\n[Pair A] Anchor (Cat_1) vs Positive (Cat_2) -> Sim: 0.985\n[Pair B] Anchor (Cat_1) vs Negative (Truck_1) -> Sim: -0.104\n[Result] High similarity cluster detected for positive pair.\n[Conclusion] Model successfully learned to ignore lighting and pose for Cat embeddings.">
 import torch
 import torch.nn.functional as F
 
@@ -562,6 +586,14 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
 # 3. Decision
 # We want Positive Sim -> 1.0 and Negative Sim -> 0.0
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Contrastive Learning is the "Spot the Difference" engine of AI. It learns the essence of an object by pulling "Similar" things together and pushing "Different" things apart in mathematical space, creating a highly organized map of reality.</p>
+    <ul>
+      <li><strong>FaceID Biometric Unlock</strong>: When you set up FaceID on your phone, the model isn't memorizing your exact pixels. Instead, it's learning to map your face to a unique point in a high-dimensional space. Using contrastive learning, the system is trained to pull different photos of *your* face (in different lighting or angles) into a tight cluster, while pushing photos of *anyone else* millions of miles away. If the "Distance" between your current face and your stored cluster is small enough, the phone unlocks.</li>
+      <li><strong>Semantic News Duplication Detection</strong>: News aggregators like Google News need to recognize that 500 different articles from 500 different outlets are all reporting the same "Story." By using contrastive learning on the text embeddings, the system maps articles about the same event to the same semantic location, while pushing articles about different events (even if they use similar words like "President" or "Election") far apart.</li>
+    </ul>
+    <p>Teacher's Final Word: Understanding isn't just knowing what something IS; it's knowing everything that it ISN'T. Contrastive learning teaches us that the most powerful way to learn the truth is through comparison—by defining things not in isolation, but by their relationship to the rest of the world.</p>
 
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the edge of modern research. You now understand the paradigms powering the world's most advanced AI systems.

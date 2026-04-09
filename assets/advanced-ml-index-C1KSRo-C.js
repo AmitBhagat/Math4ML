@@ -19,7 +19,7 @@ const e={id:"ensemble-intro",title:"Ensemble Learning Theory",description:"The m
       <div class="math-block">
         $$\text{Error}_{\text{ens}} = \overline{\text{Error}}_{\text{ind}} - \text{Ambiguity}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where Ambiguity measures the disagreement between models. This implies that the ensemble is always at least as accurate as the average of its members, provided they are diverse.</p>
+      <p class="mt-2">Where Ambiguity measures the disagreement between models. This implies that the ensemble is always at least as accurate as the average of its members, provided they are diverse.</p>
     </div>
     
     <div class="callout tip">
@@ -95,7 +95,7 @@ const e={id:"ensemble-intro",title:"Ensemble Learning Theory",description:"The m
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Initializing Council: Logistic Regression, Tree, and SVM.\n[Action] Training members on parallel subsets of data...\n[Stat] Expert 1 (LR) Accuracy: 82%\n[Stat] Expert 2 (DT) Accuracy: 88%\n[Stat] Expert 3 (SVM) Accuracy: 85%\n[Result] Ensemble Voting Accuracy: 93%\n[Insight] The Collective out-performed its best individual member!">
+    <python-code>
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -153,7 +153,7 @@ print(f"Council Consensus Accuracy: {score:.1%}")
         $$\text{Regression: } \hat{f}_{bag}(\mathbf{x}) = \frac{1}{m} \sum_{i=1}^m \hat{f}_i(\mathbf{x})$$
         $$\text{Classification: } \hat{f}_{bag}(\mathbf{x}) = \text{mode}\{ \hat{f}_1(\mathbf{x}), \dots, \hat{f}_m(\mathbf{x}) \}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\hat{f}_i$ is the model trained on the $i$-th bootstrap sample. This process reduces the expected error by decreasing the variance component without significantly increasing bias.</p>
+      <p class="mt-2">Where $\hat{f}_i$ is the model trained on the $i$-th bootstrap sample. This process reduces the expected error by decreasing the variance component without significantly increasing bias.</p>
     </div>
     
     <div class="callout tip">
@@ -249,7 +249,7 @@ print(f"Council Consensus Accuracy: {score:.1%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Creating noisy dataset with 1,000 samples...\n[Member] Training Single Decision Tree (High Variance)...\n[Ensemble] Training Bagging Forest (50 Trees in Parallel)...\n\n[Result] Single Tree Accuracy: 81.5%\n[Result] Bagging Forest Accuracy: 92.2%\n\n[Insight] Bagging successfully 'Averaged Out' the errors made by individual trees.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -310,7 +310,7 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
       <div class="math-block">
         $$h_m = \arg\min_{h \in \mathcal{H}} \sum_{i=1}^n \left( -\left[ \frac{\partial \mathcal{L}(y_i, F_{m-1}(\mathbf{x}_i))}{\partial F_{m-1}(\mathbf{x}_i)} \right] - h(\mathbf{x}_i) \right)^2$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate (shrinkage). This process iteratively moves the ensemble toward the global minimum of the loss surface.</p>
+      <p class="mt-2">Where $\eta$ is the learning rate (shrinkage). This process iteratively moves the ensemble toward the global minimum of the loss surface.</p>
     </div>
     
     <div class="callout tip">
@@ -402,7 +402,7 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Generating complex 'Moons' dataset (Non-linear boundaries)...\n[Baseline] Training 1-level Decision Stump...\n[Action] Training AdaBoost (Sequential correction of 50 stumps)...\n\n[Result] Single Stump Score: 56.4% (Basically guessing)\n[Result] AdaBoost Ensemble Score: 94.2% (The Expert learner)\n\n[Insight] By focusing on mistakes, we combined 50 'dumb' models into one 'genius'.">
+    <python-code>
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import make_moons
@@ -462,7 +462,7 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
       <div class="math-block">
         $$z_{i,m} = h_m^{(-i)}(\mathbf{x}_i)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $h_m^{(-i)}$ is the $m$-th model trained on a subset of the data that excludes sample $i$.</p>
+      <p class="mt-2">Where $h_m^{(-i)}$ is the $m$-th model trained on a subset of the data that excludes sample $i$.</p>
     </div>
     
     <div class="callout tip">
@@ -558,7 +558,7 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Initializing Base Models: Random Forest & Support Vector Machine.\n[Level 0] Base Model 1 (RF) Accuracy: 86.4%\n[Level 0] Base Model 2 (SVM) Accuracy: 84.1%\n[Action] Training Meta-Learner (Logistic Regression) on Out-Of-Fold predictions...\n\n[Result] Stacking Ensemble Accuracy: 92.5%\n[Insight] The Meta-Learner successfully combined RF and SVM to fix individual weaknesses.">
+    <python-code>
 from sklearn.ensemble import StackingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -625,7 +625,7 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
       <div class="math-block">
         $$J = \sum_{(u,i) \in \mathcal{K}} (r_{u,i} - \mathbf{p}_u \mathbf{q}_i^T)^2 + \lambda \left( \sum_{u} \|\mathbf{p}_u\|^2 + \sum_{i} \|\mathbf{q}_i\|^2 \right)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\lambda$ controls the bias-variance tradeoff (regularization). This captures the high-level "DNA" of user taste and item attributes.</p>
+      <p class="mt-2">Where $\lambda$ controls the bias-variance tradeoff (regularization). This captures the high-level "DNA" of user taste and item attributes.</p>
     </div>
     
     <div class="callout tip">
@@ -644,7 +644,7 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
     <div class="premium-def-box">
       <div class="premium-def-title">The Fundamental Approximation</div>
       <div class="math-block">$$R \approx U \cdot V^T$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $R$ is the User-Item rating matrix, $U$ contains User preferences, and $V$ contains Item characteristics in a low-dimensional "Latent Space."</p>
+      <p class="mt-2">Where $R$ is the User-Item rating matrix, $U$ contains User preferences, and $V$ contains Item characteristics in a low-dimensional "Latent Space."</p>
     </div>
 
     <h2 id="filtering-types">Two Ways to Match</h2>
@@ -693,7 +693,7 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: 100 users, 500 movies\n[Action] Calculating Cosine Similarity between Users...\n[Model] Matrix Factorization (N_Factors=20)...\n[Predict] Ranking top 5 unseen items for User #42...\n\n[Recommendation 1] Blade Runner (Match: 98%)\n[Recommendation 2] Dune (Match: 94%)\n[Recommendation 3] Alien (Match: 91%)\n\n[Insight] User #42 has high affinity for 'Dystopian Sci-Fi' latent factor.">
+    <python-code>
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -769,7 +769,7 @@ print(f"\nUser4 Recommendation for 'The_Matrix' (interpolated): 1.8 stars (Low M
     <div class="premium-def-box">
       <div class="premium-def-title">Noise Addition Formula</div>
       <div class="math-block">$$q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t \mathbf{I})$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $\beta_t$ is the noise schedule that controls how much "static" we add at each step $t$.</p>
+      <p class="mt-2">Where $\beta_t$ is the noise schedule that controls how much "static" we add at each step $t$.</p>
     </div>
 
     <h2 id="reverse-process">The Reverse Process (Recovery)</h2>
@@ -818,7 +818,7 @@ print(f"\nUser4 Recommendation for 'The_Matrix' (interpolated): 1.8 stars (Low M
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: Gaussian Noise (Mean=0, Std=1)\n[Action] Running Reverse Diffusion Markov Chain (T=1000)...\n[Predict] U-Net predicting noise kernel at step t=800...\n[Update] Noise subtracted. Structural SNR increasing...\n\n[Status] Image Manifold reached at t=0.\n[Visual] Signal recovered from 100% entropy.">
+    <python-code runnable="false" static-output="[Scan] Latent Space: 64x64 Noise Pattern\n[Action] Initializing Reverse Diffusion (T=1000)\n[Step 999] High-entropy chaos detected.\n[Step 500] Structural blobs forming (\u03bc=0.02)\n[Step 1] Denoising complete.\n[Result] High-fidelity image recovered from pure static.">
 import torch
 import numpy as np
 

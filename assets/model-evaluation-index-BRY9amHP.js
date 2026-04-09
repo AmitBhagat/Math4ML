@@ -16,13 +16,13 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
         $$\mathbf{C} = \begin{bmatrix} TN & FP \\ FN & TP \end{bmatrix}$$
       </div>
       <p>The four quadrants represent the possible outcomes of a binary test:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positive)</strong>: The model correctly predicted the positive class.</li>
         <li><strong>TN (True Negative)</strong>: The model correctly predicted the negative class.</li>
         <li><strong>FP (False Positive)</strong>: The model predicted positive for an actual negative (Type I Error).</li>
         <li><strong>FN (False Negative)</strong>: The model predicted negative for an actual positive (Type II Error).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
+      <p class="mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
     </div>
     
     <div class="callout tip">
@@ -118,7 +118,7 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Comparing 10 Predictions against Ground Truth...\n[Result] Confusion Matrix Grid:\n\n             Predicted: NO | Predicted: YES\nActual: NO  [[    5      ,      1      ],\nActual: YES  [    1      ,      3      ]]\n\n[Insight] Accuracy: 80.0%\n[Insight] 1 innocent email was marked as Spam (False Positive).\n[Insight] 1 Spam email was missed (False Negative).">
+    <python-code>
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
@@ -165,12 +165,12 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
         $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1) = \frac{TP}{TP + FP}$$
       </div>
       <p>The components of the precision estimate are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positives)</strong>: Samples correctly identified as positive.</li>
         <li><strong>FP (False Positives)</strong>: Samples wrongly identified as positive (Type I Error).</li>
         <li><strong>Trade-off</strong>: Precision is often inversely related to **Recall**. Increasing the classification threshold (being "stricter") increases precision by reducing false alarms, but at the risk of missing genuine signals.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
+      <p class="mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
     </div>
     
     <div class="callout tip">
@@ -261,7 +261,7 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Analyzing 10 predictions vs. Reality...\n[Status] Total 'YES' predictions: 4\n[Verification] Correct 'YES' (TP): 3\n[Verification] False Alarms (FP): 1\n[Result] Precision = 3/4 = 75.0%\n[Insight] If this model flags an email as Spam, it's correct 75% of the time.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import precision_score
 
@@ -303,12 +303,12 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
         $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1) = \frac{TP}{TP + FN}$$
       </div>
       <p>The components of the recall estimate are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positives)</strong>: Actual positive samples correctly identified as such.</li>
         <li><strong>FN (False Negatives)</strong>: Actual positive samples incorrectly labeled as negative (Type II Error).</li>
         <li><strong>Inclusion Property</strong>: Recall is independent of the number of **False Positives**. It strictly focuses on the "Inclusion" of all positive samples, even at the cost of capturing irrelevant noise (mislabeling negatives).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
+      <p class="mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
     </div>
     
     <div class="callout tip">
@@ -403,7 +403,7 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Reality: 4 Actual Positive cases (Spam/Sick) identified.\n[Action] Running Model Inference...\n[Verify] Correctly Found (TP): 3\n[Verify] Dangerous Misses (FN): 1\n[Result] Recall (Sensitivity) = 3/4 = 75.0%\n[Insight] The model 'Caught' 75% of the truth, but let one target 'Escape'.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import recall_score
 
@@ -445,14 +445,14 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
         $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
       </div>
       <p>The mathematical properties that make F1 superior to a simple average include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Sensitivity to Extremes</strong>: The harmonic mean is closer to the minimum of the two values. If either $P$ or $R$ drops to zero, the $F_1$ score drops to zero, correctly signaling a total failure of the model.</li>
         <li><strong>Robustness to Skew</strong>: In imbalanced datasets where one class dominates, F1 measures performance on the "Case of Interest" (the positive class) without being inflated by the "Easy" negative predictions.</li>
         <li><strong>Generalized Form ($F_\beta$)</strong>: The score can be weighted to emphasize one metric over the other using a $\beta$ parameter:
           $$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R}$$
         </li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
+      <p class="mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
     </div>
     
     <div class="callout tip">
@@ -546,7 +546,7 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Reality: 4 Targets, Model: 5 Predictions\n[Component] Precision (Quality): 60.0% (3/5 were right)\n[Component] Recall (Thoroughness): 75.0% (3/4 found)\n[Action] Calculating Harmonic Mean (P*R)/(P+R) * 2...\n[Result] F1-Score: 66.7%\n[Insight] The F1 centers between P and R, leaning toward the lower value.">
+    <python-code>
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 # 1. Reality vs. Model Guesses
@@ -589,12 +589,12 @@ print(f"F1 Final Score: {f1:.2f}")
       </div>
       
       <p>The axes are defined by conditional probabilities:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>True Positive Rate (TPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=1)$. This measures the probability of detecting a positive instance correctly.</li>
         <li><strong>False Positive Rate (FPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=0)$. This measures the probability of a "False Alarm" in the negative class.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
+      <p class="mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
     </div>
     
     <div class="callout tip">
@@ -686,7 +686,7 @@ print(f"F1 Final Score: {f1:.2f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 10 probability scores against ground truth...\n[Action] Sweeping Threshold from 1.0 down to 0.0...\n[Threshold 0.82] TPR: 0.25 | FPR: 0.00 (Safe / Picky)\n[Threshold 0.45] TPR: 0.75 | FPR: 0.20 (Balanced)\n[Threshold 0.12] TPR: 1.00 | FPR: 1.00 (Aggressive / Messy)\n[Result] ROC points calculated for optimization.\n[Insight] The 'Sweet Spot' is where we find the max TPR for the min FPR.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import roc_curve
 
@@ -737,12 +737,12 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
         $$\text{AUC} = \mathbb{P}(f(\mathbf{x}_+) > f(\mathbf{x}_-))$$
       </div>
 
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Separation Power</strong>: $\text{AUC} = 1.0$ implies a perfectly separated distribution where the lowest-scoring positive still ranks higher than the highest-scoring negative.</li>
         <li><strong>Random Baseline</strong>: $\text{AUC} = 0.5$ implies the distributions are overlapping and the model has no discriminative power (equivalent to a coin flip).</li>
         <li><strong>Invariance</strong>: AUC is invariant to the classification threshold and invariant to the prior class distribution (class skew).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
+      <p class="mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
     </div>
     
     <div class="callout tip">
@@ -841,7 +841,7 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 10 probability pairs (Target vs. Background)...\n[Action] Computing Area Under ROC Curve (Trapezoidal Integration)...\n[Result] ROC-AUC Score: 0.9250\n[Grade] Excellent Separation Power!\n[Insight] There is a 92.5% chance that a random Positive sample will rank higher than a random Negative.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import roc_auc_score
 

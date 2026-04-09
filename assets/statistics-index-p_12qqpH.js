@@ -24,12 +24,12 @@ const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE i
         $$L(\theta) = \prod_{i=1}^n f(x_i | \theta)$$
       </div>
       <p>The **Maximum Likelihood Estimate** is the parameter value that produces the highest likelihood for the observed evidence:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Log-Transformation</strong>: Maximizing $L(\theta)$ is equivalent to maximizing the <strong>Log-Likelihood</strong> $\ell(\theta) = \sum \log f(x_i | \theta)$, which simplifies products into sums.</li>
         <li><strong>Numerical Optimization</strong>: In ML, we typically minimize the <strong>Negative Log-Likelihood (NLL)</strong>. This aligns statistical estimation with standard optimization frameworks.</li>
         <li><strong>Sufficient Statistics</strong>: MLE often depends only on a few aggregate metrics of the data (like the sample mean or variance).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
+      <p class="mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
@@ -144,12 +144,12 @@ print(f"Sample Mean: {data.mean():.4f}")
         $$\hat{\theta}_{MAP} = \arg\max_{\theta} P(\theta | \mathbf{X}) = \arg\max_{\theta} \frac{P(\mathbf{X} | \theta) P(\theta)}{P(\mathbf{X})}$$
       </div>
       <p>Since the denominator $P(\mathbf{X})$ is independent of $\theta$, we optimize the product of Likelihood and Prior:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Penalized Log-Likelihood</strong>: In practice, we maximize $\ell_{MAP}(\theta) = \sum \log f(x_i | \theta) + \log \pi(\theta)$. The prior term acts as a "penalty" against improbable parameters.</li>
         <li><strong>Regularization Link</strong>: Setting a Gaussian prior $\pi(\theta) \sim \mathcal{N}(0, \sigma^2)$ is mathematically equivalent to adding an $L_2$ norm penalty ($Ridge$) to the loss function.</li>
         <li><strong>Data Dominance</strong>: As the sample size $n \to \infty$, the likelihood term dominates the prior, and the MAP estimate converges to the MLE estimate.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
+      <p class="mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
@@ -268,12 +268,12 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
         $$\text{Total Error} = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \text{Irreducible Noise}$$
       </div>
       <p>This identity reveals the core constraints of supervised learning:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Bias</strong> ($\mathbb{E}[\hat{f}] - f$): Error from the difference between the average prediction and the truth. High bias leads to <strong>Underfitting</strong>.</li>
         <li><strong>Variance</strong> ($\mathbb{E}[(\hat{f} - \mathbb{E}[\hat{f}])^2]$): Error from the consistency of the model's predictions across different datasets. High variance leads to <strong>Overfitting</strong>.</li>
         <li><strong>Irreducible Error</strong> ($\sigma^2$): The fundamental "floor" of error caused by noise in the data itself.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Optimal generalization occurs when the "Sweet Spot" is reached—minimizing the sum of both squared bias and variance via techniques like Regularization or Ensemble methods.</p>
+      <p class="mt-2">Optimal generalization occurs when the "Sweet Spot" is reached—minimizing the sum of both squared bias and variance via techniques like Regularization or Ensemble methods.</p>
     </div>
     
     <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
@@ -384,13 +384,13 @@ plt.show()
         $$H_0: \theta = \theta_0, \quad H_a: \theta \neq \theta_0$$
       </div>
       <p>The decision is governed by the following analytical components:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Test Statistic ($T_{obs}$)</strong>: A numerical value calculated from sample data (e.g., $Z$, $t$, or $\chi^2$) that measures the deviation from $H_0$.</li>
         <li><strong>p-value</strong>: $P(T \ge T_{obs} \mid H_0)$. The probability of observing results as extreme as yours if the Null Hypothesis were true.</li>
         <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is **Statistically Significant**, and $H_0$ is rejected.</li>
         <li><strong>Decision Errors</strong>: **Type I** (rejecting a true $H_0$) and **Type II** (failing to reject a false $H_0$).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
+      <p class="mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
     </div>
     
     <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
@@ -521,13 +521,13 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
         $$P(L \le \theta \le U) = 1 - \alpha$$
       </div>
       <p>For estimating the population mean $\mu$ under the assumption of normality, the interval is constructed as:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Standard Formula</strong>: $CI = \bar{x} \pm z^* \left( \frac{\sigma}{\sqrt{n}} \right)$, where $\bar{x}$ is the sample mean.</li>
         <li><strong>Margin of Error</strong>: The term $z^* \frac{\sigma}{\sqrt{n}}$ represents the maximum expected distance between the point estimate and the true parameter.</li>
         <li><strong>Critical Value ($z^*$)</strong>: Determined by the level of confidence; for a 95% CI, $z^* \approx 1.96$ (from the standard normal distribution).</li>
         <li><strong>Sample Size Impact</strong>: The width of the interval is inversely proportional to $\sqrt{n}$. Tripling the confidence level requires a much larger sample to maintain the same precision.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
+      <p class="mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
     </div>
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>

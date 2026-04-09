@@ -16,13 +16,13 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
         $$\mathcal{B} = \langle G, P \rangle$$
       </div>
       <p>where $G$ is a Directed Acyclic Graph (DAG) and $P$ is a set of Conditional Probability Distributions (CPDs). The structure satisfies the following properties:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Factorization</strong>: $P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Pa}_G(X_i))$. The joint distribution is the product of the probability of each node given its parents.</li>
         <li><strong>Local Markov Property</strong>: Every variable $X_i$ is conditionally independent of its non-descendants given its parents $\text{Pa}_G(X_i)$.</li>
         <li><strong>D-Separation</strong>: A graphical criterion used to identify global independence relations ($X \perp Y \mid Z$) without explicitly computing the probability tables.</li>
         <li><strong>CPDs</strong>: For discrete variables, these are Conditional Probability Tables (CPTs); for continuous variables, these are functional mappings (e.g., Linear Gaussians).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Bayesian Networks allow for efficient **Inference** (updating beliefs based on evidence) and **Learning** (discovering the graph structure and parameters from data).</p>
+      <p class="mt-2">Bayesian Networks allow for efficient **Inference** (updating beliefs based on evidence) and **Learning** (discovering the graph structure and parameters from data).</p>
     </div>
     
     <div class="callout tip">
@@ -86,7 +86,7 @@ const e={id:"bayesian-networks",title:"Bayesian Networks",description:"A probabi
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
+    <python-code>
 import numpy as np
 
 # 1. Priors (Historical frequencies)
@@ -113,6 +113,14 @@ print(f"P(Burglar | Window): {suspicion_init:.2f}")
 print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Bayesian Networks are the "Map of Influence." They allow us to reason through complex webs of cause-and-effect, making them far more interpretable than "black-box" neural networks.</p>
+    <ul>
+      <li><strong>Root Cause Fault Diagnosis</strong>: Large data centers and manufacturing plants use Bayesian networks to find why a system failed. By modeling the causal web of sensors—heat, power consumption, and mechanical vibrations—the model can see a "Heat Spike" and calculate whether it was caused by a "Cooling Failure" or a "CPU Overload." It effectively reasons backward from the symptoms to the source.</li>
+      <li><strong>Medical Symptom Influence Mapping</strong>: Doctors use Bayesian networks to predict diseases based on a massive array of potential symptoms. Since different diseases (like the Flu and COVID-19) share many symptoms, the network uses the "Causal Strength" of each connection to decide which diagnosis is most probable given the specific combination of signs found in the patient.</li>
+    </ul>
+    <p>Teacher's Final Word: Logic is simple; the truth is a web. Bayesian networks are how we turn that messy web of human intuition and physical cause-and-effect into a cold, hard mathematical calculation. They don't just give you an answer; they show you the exact logic of how they got there.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the arrows follow a sequence in time? Explore <strong><a href="#/machine-learning/pgm/hmm">Hidden Markov Models (HMM)</a></strong>.
     </div>
@@ -134,13 +142,13 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
         $$P(\mathbf{O}, \mathbf{q} \mid \lambda) = \pi_{q_1} b_{q_1}(O_1) \prod_{t=2}^T a_{q_{t-1}q_t} b_{q_t}(O_t)$$
       </div>
       <p>The model’s behavior is strictly governed by three fundamental parameter sets:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Transition Matrix ($A$)</strong>: $a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)$. Encodes the dynamics of the hidden reality over time.</li>
         <li><strong>Emission Matrix ($B$)</strong>: $b_j(k) = P(O_t = v_k \mid q_t = S_j)$. Encodes the probability of producing a specific observation from a specific hidden state.</li>
         <li><strong>Initial Distribution ($\pi$)</strong>: $\pi_i = P(q_1 = S_i)$. The starting probability vector for the hidden states.</li>
         <li><strong>Markov Property</strong>: The next state $q_{t+1}$ depends only on the current state $q_t$, not on the entire history.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
+      <p class="mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
     </div>
     
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
@@ -193,7 +201,7 @@ print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Sequence: [Umbrella, No Umbrella]\n[Path A] 'Rain' -> 'Sun' Prob: 0.1215\n[Path B] 'Rain' -> 'Rain' Prob: 0.0315\n\n[Viterbi] Winner: 'Rain' followed by 'Sun'\n[Verdict] It was likely raining when the guard had the umbrella, but cleared up by the second visit.">
+    <python-code>
 import numpy as np
 
 # 1. Probabilities
@@ -216,10 +224,18 @@ print(f"Path B [Rain -> Rain] Prob: {path_B:.4f}")
 print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Rain'}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Hidden Markov Models are the "Time-Traveler's Logic." They allow us to deduce the hidden truth from a sequence of visible clues, making them essential for understanding anything that unfolds over time.</p>
+    <ul>
+      <li><strong>Speech-to-Text Transcription</strong>: When you talk to Siri or Alexa, the "Hidden States" are the words you intended to say, and the "Observations" are the raw sound waves recorded by the microphone. The HMM calculates the most likely sequence of words that would have produced those exact sound frequencies, accounting for the grammatical transitions (the probability of one word following another).</li>
+      <li><strong>Bioinformatics Gene Profiling</strong>: Scientists use HMMs to find genes in a long string of DNA. The "Hidden States" are the functional roles of the DNA (e.g., protein-coding vs. non-coding), and the "Observations" are the sequence of bases (A, C, G, T). The model "decodes" the invisible biological map of the genome by analyzing the observed sequence structures.</li>
+    </ul>
+    <p>Teacher's Final Word: Just because you can't see the truth doesn't mean you can't calculate its shadow. HMMs teach us that a sequence of clues is just as good as a direct observation if you have the math to connect the dots across time.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we "Learn" these transition matrices if we don't know the states? Explore <strong><a href="#/machine-learning/pgm/em-algorithm">The EM Algorithm</a></strong>.
     </div>
-  `},i={id:"em-algorithm",title:"Expectation-Maximization (EM) Algorithm",description:"An iterative method to find maximum likelihood or maximum a posteriori (MAP) estimates of parameters in statistical models, where the model depends on unobserved latent variables.",color:"#FF5722",html:String.raw`
+  `},a={id:"em-algorithm",title:"Expectation-Maximization (EM) Algorithm",description:"An iterative method to find maximum likelihood or maximum a posteriori (MAP) estimates of parameters in statistical models, where the model depends on unobserved latent variables.",color:"#FF5722",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧬 PGM · Inference</div>
       <h1>EM Algorithm: The Chicken & Egg Solver</h1>
@@ -237,12 +253,12 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
         $$Q(\theta \mid \theta^{(t)}) = \mathbb{E}_{\mathbf{Z} \mid \mathbf{X}, \theta^{(t)}} [ \log P(\mathbf{X}, \mathbf{Z} \mid \theta) ]$$
       </div>
       <p>The optimization process follows this rigorous cycle:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>E-Step (Expectation)</strong>: Calculate the posterior probability $P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)})$ of the hidden variables given the observed data and current parameters.</li>
         <li><strong>M-Step (Maximization)</strong>: Find $\theta^{(t+1)} = \arg \max_\theta Q(\theta \mid \theta^{(t)})$. Update parameters to maximize the expected log-likelihood.</li>
         <li><strong>Jensen's Inequality</strong>: EM guarantees that the likelihood $P(\mathbf{X} \mid \theta)$ is non-decreasing at each step by optimizing the Evidence Lower Bound (ELBO).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
+      <p class="mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
     </div>
     
     <h2 id="steps">The 2 Big Steps: E and M</h2>
@@ -298,7 +314,7 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Iteration 0: Mu1 = -0.50, Mu2 = 0.50\n[Scan] Iteration 5: Mu1 = -1.82, Mu2 = 1.91\n[Scan] Iteration 10: Mu1 = -1.98, Mu2 = 2.05\n\n[Status] Converged after 10 epochs.\n[Verdict] EM correctly separated the overlapping Normal distributions (Target: -2.0, 2.0).">
+    <python-code>
 import numpy as np
 
 # 1. Setup Overlapping Data (True means: -2 and 2)
@@ -327,10 +343,18 @@ for i in range(10):
 print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>The EM algorithm is the "Chicken-and-Egg Negotiator." It allows us to train complex models even when we are missing critical information about the data labels, making it the bedrock of unsupervised and semi-supervised learning.</p>
+    <ul>
+      <li><strong>Image Segmentation (Object vs. Background)</strong>: When you use a "Background Blur" feature on a video call, an EM-like process is at work. The model doesn't know which pixels are "You" and which are "The Wall." It starts with a guess, identifies the probable regions (E-Step), and then refines the color and edge boundaries of those regions (M-Step) until it has a clean separation between the person and the room.</li>
+      <li><strong>Latent Consumer Profile Analysis</strong>: Market researchers use EM to find "Hidden Types" of shoppers in a massive dataset of purchase history. They don't have labels for "Budget Conscious" or "Luxury Buyer." The algorithm iterates through the data, assigning consumers to probable profiles (Expectation) and then updating the characteristics of those profiles (Maximization) until the true market segments emerge from the noise.</li>
+    </ul>
+    <p>Teacher's Final Word: When you don't know the answer, start with a guess and keep refining it until the math stops arguing with you. EM teaches us that even if the truth is hidden, we can still reach it through the persistence of iterative logic.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},a={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
+  `},i={id:"pgm",title:"Probabilistic & Graphical Models",description:"The marriage of graph theory and probability to model complex conditional dependencies and latent structures.",keyConcepts:[{title:"Network Representation",description:"Directed Acyclic Graphs (DAGs) for modeling influence and causality."},{title:"Sequence Modeling",description:"Markovian transitions and observable symptoms over time."},{title:"Likelihood Inference",description:"Solving 'Chicken and Egg' problems via Expectation-Maximization."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -376,4 +400,4 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
       </div>
 
     </div>
-  `,sections:[e,t,i]};export{a as PGM_DATA};
+  `,sections:[e,t,a]};export{i as PGM_DATA};

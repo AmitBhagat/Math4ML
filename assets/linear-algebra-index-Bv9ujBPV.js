@@ -24,11 +24,11 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
         $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
       </div>
       <p>Vectors are defined by two primary operations:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Addition</strong>: $\mathbf{u} + \mathbf{v} = [u_1+v_1, \dots, u_n+v_n]^T$ (Combining directions).</li>
         <li><strong>Scaling</strong>: $c\mathbf{v} = [cv_1, \dots, cv_n]^T$ (Altering magnitude while preserving or reversing direction).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
+      <p class="mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
     </div>
     
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
@@ -101,13 +101,12 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, vectors are the DNA of data—they are the way we encode real-world complexity into a geometric language that a computer can actually process.</p>
+    <p>Vectors are the "DNA of Data." In ML, we don't see objects; we see coordinates in a high-dimensional reality where every quality—from the price of a stock to the pixel color of a cat's ear—is mapped to a specific numeric direction.</p>
     <ul>
-      <li><strong>Computer Vision</strong>: Every image is treated as a massive vector where each number represents a pixel's brightness. By mapping an image to a single point in high-dimensional space, we can mathematically compare two photos to see how "close" they are, which is how Face ID identifies you.</li>
-      <li><strong>Natural Language (NLP)</strong>: Words are converted into "Embeddings"—vectors in a 300D space. This geometry allows the computer to calculate relationships; for example, if you move from "King" in the same direction and distance that separates "Man" and "Woman," you land on the "Queen" vector.</li>
-      <li><strong>Self-Driving Cars</strong>: LiDAR sensors see a "Cloud of Points," where each point is a 3D vector. The car navigates by performing vector addition and subtraction to calculate trajectories and avoid obstacles in real-time.</li>
+      <li><strong>Semantic Word Embeddings (NLP)</strong>: Modern AI doesn't read words; it reads "Embeddings." Every word is translated into a 300-dimension vector. This geometry allows the computer to find relationships through subtraction: if you take the vector for "King," subtract the vector for "Man," and add the vector for "Woman," the resulting point in space is mathematically closest to the vector for "Queen." It’s a geometric logic for human language.</li>
+      <li><strong>IoT Industrial Sensor Fusion</strong>: In a modern factory, a single "State Vector" can represent the entire health of a machine by combining temperature, vibration frequency, and power consumption into a single point. By tracking how this vector "moves" through time, engineers can detect an impending failure before it happens, simply by watching for the vector to drift into a "Danger Zone" in the coordinate space.</li>
     </ul>
-    <p>Ultimately, vectorization is the tactical process of turning messy reality into a neat coordinate system, allowing our models to use the raw geometry of space to discover patterns.</p>
+    <p>Teacher's Final Word: Vectorization is the tactical process of turning messy reality into a neat coordinate system. Once you can represent a complex problem as a point in space, you can use the raw, elegant geometry of the universe to find your solution.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, vectors are points. Where do these points "live"? Explore <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
@@ -220,12 +219,12 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, a vector space is the "Arena" where all your data exists. It defines the playground and the rules that your algorithm must follow to stay logically consistent.</p>
+    <p>A vector space is the "Arena" where your data lives. It defines the playground and the rules that your algorithm must follow to stay logically consistent across billions of operations.</p>
     <ul>
-      <li><strong>Generative AI (Latent Spaces)</strong>: In models like Midjourney or Stable Diffusion, the AI doesn't store a library of images. Instead, it creates a "Latent Space"—a high-dimensional vector space where every coordinate is a unique potential image. Moving through this space is how the AI morphs one concept into another.</li>
-      <li><strong>Word Embeddings (NLP)</strong>: Every word we use is mapped to a vector space. Because the space follows specific rules (Axioms), it ensures that if you start at the vector for "Apple" and add "Technology," the result stays in the logical "Subspace" of electronics rather than fruit.</li>
+      <li><strong>Latent Space Semantic Search</strong>: In search engines like Pinterest, every image is mapped to a high-dimensional vector space. When you search for "Modern Kitchen," the system doesn't look for those exact words. Instead, it looks for the "Subspace" where images of kitchens reside. This ensures that even if two images are different (one is a sketch, one is a photo), they are "Neighbors" in the same vector space because they share a semantic identity.</li>
+      <li><strong>Noise Reduction via Subspace Projection</strong>: Real-world data is noisy (e.g., a recording with background static). We treat the "Clean Signal" as a low-dimensional subspace within a high-dimensional noisy space. By projecting the noisy data onto this "Signal Subspace," we mathematically strip away the dimensions that represent the noise, leaving only the "Essential Truth" of the recording.</li>
     </ul>
-    <p>Teacher's Final Word: Think of a vector space as the "Laws of Physics" for your data. By setting these rules, we ensure that no matter how much our algorithms mix, match, or scale the data, the results still make sense within our mathematical universe.</p>
+    <p>Teacher's Final Word: Think of a vector space as the "Laws of Physics" for your data. By working within these rules, we ensure that no matter how much our algorithms mix, match, or scale the data, the results never exit the boundaries of our mathematical universe.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.
@@ -248,7 +247,7 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
         $$\sum_{i=1}^k c_i \mathbf{v}_i = \mathbf{0}$$
       </div>
       <p>is satisfied **only** when $c_1 = c_2 = \dots = c_k = 0$. If there exists a non-trivial solution (where at least one $c_i \neq 0$), the set is **Linearly Dependent**.</p>
-      <p class="text-xs opacity-70 mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
+      <p class="mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
     </div>
     
     <div class="callout tip">
@@ -335,10 +334,10 @@ print(f"Is Independent? {is_independent}")
     <h2 id="applications">Applications in ML</h2>
     <p>Linear Independence is the ultimate measure of "Efficiency." It asks your data: "Are you actually telling me something new, or are you just a remix of what I already know?"</p>
     <ul>
-      <li><strong>Signal De-noising</strong>: When processing audio or sensor data, we look for independent signals. If two sensors give you the same data stream, they are dependent; one is just redundancy. We use linear independence to strip away the "copycats" and keep only the raw, unique signal.</li>
-      <li><strong>Feature Selection</strong>: In predictive modeling, having independent features is the key to stability. If your model uses both "Total Sales" and "Tax Paid" where tax is a fixed percentage, the features are dependent. This can cause the math to "explode" during training (Singular Matrix).</li>
+      <li><strong>Automated Feature Selection</strong>: In predictive modeling, we use linear independence to strip away the "copycats." If your dataset includes "Total Sales" and "Tax Paid" where tax is a fixed 10%, these features are linearly dependent. One adds exactly zero new information. By identifying and removing these dependent features, we reduce the computational load and prevent the model from getting "distracted" by redundant data.</li>
+      <li><strong>Detecting Multicollinearity in Regression</strong>: If you try to train a Linear Regression model on dependent features, the math literally explodes—the matrix becomes "Singular" and cannot be inverted. This is <strong>Multicollinearity</strong>. By ensuring our features are independent, we guarantee that the model has a stable, unique solution rather than a chaotic range of infinite possibilities.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages.</p>
+    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages. Independence isn't just a property; it's a requirement for stability.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.
@@ -357,7 +356,7 @@ print(f"Is Independent? {is_independent}")
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Spanning Sets and Cardinality</div>
       <p>A set of vectors $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is a **Basis** for a vector space $V$ if it satisfies two conditions:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Independence</strong>: No vector in $\mathcal{B}$ can be expressed as a linear combination of the others.</li>
         <li><strong>Span</strong>: Every vector $\mathbf{v} \in V$ can be uniquely expressed as: $\mathbf{v} = \sum_{i=1}^n c_i \mathbf{b}_i$.</li>
       </ul>
@@ -445,12 +444,12 @@ print(f"Dimension of the created space: {dim}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>A Basis is the "Minimalist Skeleton" of your dataset. It’s like the Primary Colors in an art class—you only need a few to build every other shade in the visible universe.</p>
+    <p>A Basis is the "Minimalist Skeleton" of your dataset. It’s like the Primary Colors in an art class—you only need a few to build every other shade in the visible universe, stripping away the noise of redundancy.</p>
     <ul>
-      <li><strong>Image Compression</strong>: When you save a photo as a JPEG, the computer finds a "Basis" of sine waves that can build the image. By using only the 100 most important "Basis Waves" instead of 1,000,000 raw pixels, we shrink the file by 90% almost invisibly.</li>
-      <li><strong>Matrix Factorization (RecSys)</strong>: Streaming services like Spotify find a small set of "Basis Genres" (like Calm, Upbeat, Acoustic). Your taste is just a linear combination of these few dimensions, making it possible to recommend music to millions of people without tracking every single song.</li>
+      <li><strong>Image Compression (Discrete Cosine Transform)</strong>: When you save a photo as a JPEG, the computer doesn't save every pixel. Instead, it finds a "Basis" of sine waves that can reconstruct the image. By representing the picture using only the most important "Basis Coefficients" instead of millions of raw raw bytes, we can shrink files by 90% without the human eye noticing.</li>
+      <li><strong>Topic Modeling (Latent Dirichlet Allocation)</strong>: In NLP, we can treat "Topics" as a basis for a document. Instead of seeing a news article as a list of 10,000 words, we see it as a linear combination of a few "Basis Topics" like [0.8 Politics, 0.1 local, 0.1 Sports]. This allows us to organize billions of articles by their "DNA" rather than their raw vocabulary.</li>
     </ul>
-    <p>Teacher's Final Word: Identifying the basis of your data lets you ignore the noisy distractions and focus on the few "Atom-level" directions that actually define the shape of your information.</p>
+    <p>Teacher's Final Word: Identifying the basis of your data lets you ignore the noisy distractions and focus on the few "Atom-level" directions that actually define the shape of your information. The dimension of your basis is the ultimate limit of how much you can simplify your world before you start losing the truth.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is defined. Now how do we measure the "Alignment" and "Overlap" between our vectors? Explore <strong><a href="#/mathematics/linear-algebra/dot-product">Dot Product</a></strong>.
@@ -484,7 +483,7 @@ print(f"Dimension of the created space: {dim}")
       <div class="math-block">
         $$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
+      <p class="mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
     </div>
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
@@ -549,12 +548,12 @@ print(f"Dot Product: {dot}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Think of the Dot Product as a "Similarity Radar." It tells you exactly how much two vectors are "pointing in the same direction."</p>
+    <p>Think of the Dot Product as a "Similarity Radar." It is the fundamental way computers measure the conceptual overlap between words, images, or even customer personalities.</p>
     <ul>
-      <li><strong>Semantic Search</strong>: When you search for "Healthy Recipes," Google converts your query and millions of web pages into vectors. It then calculates the Dot Product between them. A high dot product means the "Directions" align, signalling a perfect match.</li>
-      <li><strong>Cosine Similarity (RecSys)</strong>: E-commerce sites use the dot product to find "People like you." If your shopping-habit vector and another user's vector have a massive dot product, the system assumes you have the same taste and recommends their favorites to you.</li>
+      <li><strong>Content-Based Movie Recommendations</strong>: Netflix represents movies as vectors based on features like "Action Score," "Romance Score," and "Director Style." When you watch a film, the system calculates the dot product between that film's vector and every other movie in the library. A high dot product indicates that the "Directions" (the vibes) align perfectly, signaling a match you'll likely enjoy.</li>
+      <li><strong>Transformer Attention Mechanics (Large Language Models)</strong>: Every time you ask ChatGPT a question, it uses billions of dot products to decide which words to focus on. Each word creates a "Query" vector and a "Key" vector; the dot product between them calculates the "Attention Score." A high score essentially tells the model: "When looking at word A, you must pay heavy attention to word B." It is the mathematical engine of human-like context.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we use this simple calculation to measure the conceptual overlap between words, images, or even customer personalities. It is the fundamental way computers understand "Similarity."</p>
+    <p>Teacher's Final Word: In AI, the dot product is the universal gauge of alignment. Whether you're finding a girlfriend on a dating app or training a trillion-parameter LLM, you are essentially asking the math to find the vectors that are pointing in the same direction.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Dot product is affected by vector length. How do we measure that length individually? Explore <strong><a href="#/mathematics/linear-algebra/vector-norms">Vector Norms (L1, L2)</a></strong>.
@@ -577,12 +576,12 @@ print(f"Dot Product: {dot}")
         $$\|\mathbf{x}\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$$
       </div>
       <p>The three most critical variations in Machine Learning are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>$L^1$ Norm</strong>: $\sum |x_i|$. Promotes sparsity (Lasso).</li>
         <li><strong>$L^2$ Norm</strong>: $\sqrt{\sum x_i^2}$. Promotes small, distributed weights (Ridge).</li>
         <li><strong>$L^\infty$ Norm</strong>: $\max_i |x_i|$. Measures the maximum deviation.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
+      <p class="mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
     </div>
     
     <div class="callout tip">
@@ -659,12 +658,12 @@ print(f"L2: {l2}, L1: {l1}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Norms are the "Police Officers" of Machine Learning. They measure the total "Mass" of your weights to keep them from growing out of control.</p>
+    <p>Norms are the "Police Officers" of Machine Learning. They measure the total "Mass" of your weights to keep them from growing out of control, or quantify the distance between what you're seeing and what you expect.</p>
     <ul>
-      <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our error function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise.</li>
-      <li><strong>K-Nearest Neighbors (k-NN)</strong>: To classify an object, the k-NN algorithm calculates the L2 norm (straight-line distance) between that object and every other labeled point. The "Length" provided by the norm tells the AI exactly who the closest neighbors are.</li>
+      <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our loss function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise. L1 (Lasso) is particularly ruthless; it acts like a "Pruning Tool" that shrinks useless weights of irrelevant features to exactly zero, effectively deleting them from the model.</li>
+      <li><strong>Anomaly Detection in Server Logs</strong>: To find a hacker in millions of server requests, we represent each request as a vector (Time, Data Size, Frequency). We then calculate the <strong>Distance (Norm)</strong> of every new request from the "Normal" average vector. If the norm is massive, it means the request is a geometric outlier—a "weird" point in space that requires immediate attention.</li>
     </ul>
-    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional vector and boils it down to a single number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
+    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Vectors are building blocks. Let's arrange them into grids. Explore <strong><a href="#/mathematics/linear-algebra/matrices">Matrices</a></strong>.
@@ -687,12 +686,12 @@ print(f"L2: {l2}, L1: {l1}")
         $$A = \begin{bmatrix} a_{1,1} & \dots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \dots & a_{m,n} \end{bmatrix}$$
       </div>
       <p>Key algebraic operations include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Matrix Addition</strong>: $(A + B)_{ij} = A_{ij} + B_{ij}$.</li>
         <li><strong>Scalar Scaling</strong>: $(c A)_{ij} = c A_{ij}$.</li>
         <li><strong>Transpose</strong>: $(A^\top)_{ij} = A_{ji}$ (Swapping rows and columns).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In the context of data, $A$ often represents $m$ observations each with $n$ features, or the synaptic weights connecting two layers in a neural network.</p>
+      <p class="mt-2">In the context of data, $A$ often represents $m$ observations each with $n$ features, or the synaptic weights connecting two layers in a neural network.</p>
     </div>
     
     <div class="callout tip">
@@ -781,12 +780,12 @@ print(f"Transpose:\n{A_t}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, matrices are the "Industrial Spreadsheets" that organize and transform entire universes of data in a single operation.</p>
+    <p>In Machine Learning, matrices are the "Industrial Spreadsheets" that organize and transform entire universes of data in a single pulse. They are the storage blocks for everything an AI knows.</p>
     <ul>
-      <li><strong>Synaptic Weight Storage</strong>: In a Neural Network, every connection between layers has a specific "weight." We store these millions of weights in a matrix. As data passes through, the matrix decides which features to amplify and which to ignore.</li>
-      <li><strong>Covariance Analysis</strong>: Matrices are used to calculate "Covariance." This tells the algorithm if features like "Customer Age" and "Spending Power" move together, helping it discover hidden relationships in massive datasets.</li>
+      <li><strong>Computer Vision Convolutional Kernels</strong>: When an AI "looks" at an image, it uses small matrices called "Kernels" or "Filters." By sliding these matrices over the image matrix and performing specific operations, the model can detect edges, textures, or even more complex features like "curved lines" or "dog ears." The matrix is literally the model's eyes.</li>
+      <li><strong>User-Item Rating Matrices (Netflix/Amazon)</strong>: Recommendation engines organize the entire world into a giant matrix where rows are Users and columns are Products. The numbers inside are ratings. Since most people haven't seen most movies, the matrix is "Sparse" (mostly zeros). The AI's job is a massive matrix game: predicting the missing values to guess what you'd buy next.</li>
     </ul>
-    <p>Teacher's Final Word: Think of a Matrix as a **Batch Processor**. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
+    <p>Teacher's Final Word: Think of a Matrix as a **Batch Processor**. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" math to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, matrices are static. How do we make them interact? Explore <strong><a href="#/mathematics/linear-algebra/matrix-multiplication">Matrix Multiplication</a></strong>.
@@ -812,7 +811,7 @@ print(f"Transpose:\n{A_t}")
       <div class="math-block">
         $$(f \circ g)(\mathbf{x}) = A(B\mathbf{x})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
+      <p class="mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
     </div>
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
@@ -889,12 +888,12 @@ print(f"Product: {C}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Matrix multiplication is the "Engine" of AI. It is the mathematical way of saying, "Take these results and process them even more."</p>
+    <p>Matrix multiplication is the "Engine" of AI. It is the mathematical way of saying, "Take these results and process them even more," allowing us to stack influence until we reach a decision.</p>
     <ul>
-      <li><strong>Neural Network Inference</strong>: Each "Layer" in a deep network is really just a massive matrix multiplication. It takes the pattern discovered in the previous layer and mixes it with its own weights to find an even deeper pattern.</li>
-      <li><strong>Attention Mechanisms (LLMs)</strong>: The brain of models like ChatGPT is built on multiplying "Query" and "Key" matrices. This multiplication decides exactly which words in a long sentence should "pay attention" to each other to understand context.</li>
+      <li><strong>Neural Network Forward Pass</strong>: Every single layer in a deep network is really just a massive matrix multiplication. It takes the input vector from the previous layer and multiplies it by a "Weight Matrix." This operation mixes the features together, intensifying the signal that matters and killing the noise that doesn't. Without this operation, modern AI simply wouldn't exist.</li>
+      <li><strong>3D Coordinate Transformations in AR/VR</strong>: When you move your head while wearing a VR headset, the computer must recalculate every pixel in the 3D world. It uses matrix multiplication to rotate, scale, and translate millions of points in space instantly, ensuring the virtual world moves in perfect sync with your real-world motion.</li>
     </ul>
-    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer.</p>
+    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Multiplication is the forward pass. But how do we work backwards? Explore <strong><a href="#/mathematics/linear-algebra/matrix-inverse">Matrix Inverse</a></strong>.
@@ -920,7 +919,7 @@ print(f"Product: {C}")
       <div class="math-block">
         $$A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
+      <p class="mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
     </div>
     
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
@@ -997,12 +996,12 @@ else:
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>The Inverse is your mathematical "Undo Button." It allows you to work backwards from an output to find the original input.</p>
+    <p>The Inverse is your mathematical "Undo Button." It allows you to work backwards from an output to find the hidden original input that caused it.</p>
     <ul>
-      <li><strong>Newton’s Method (Optimization)</strong>: When an AI is trying to find the absolute lowest point of an error curve, it uses the Inverse of the "Hessian" matrix to calculate the perfect step size, cutting down training time significantly.</li>
-      <li><strong>Image Deblurring</strong>: If an image is blurred by a known lens distortion, we can find the Inverse of that transformation to "un-blur" the photo and recover the original high-resolution details.</li>
+      <li><strong>The Normal Equation for Linear Regression</strong>: When we want the absolute best-fit line through a cloud of data points, we don't always have to use Gradient Descent. We can use the <strong>Normal Equation</strong> $(X^TX)^{-1}X^Ty$. By inverting the feature matrix, we solve for the model's weights in a single, surgical mathematical stroke, finding the global minimum instantly.</li>
+      <li><strong>Cryptographic Decoding</strong>: Many encryption schemes (like the Hill Cipher) treat a message as a vector and multiply it by a secret "Key Matrix." To read the message, the receiver must calculate the inverse of that key matrix to "un-scramble" the data and return it to its readable form. Without the inverse, the noise is permanent.</li>
     </ul>
-    <p>Teacher's Final Word: In real-world ML, we often avoid calculating the inverse directly because it’s computationally heavy. Instead, we use "Solver" algorithms that give us the same result with 10x more efficiency.</p>
+    <p>Teacher's Final Word: In real-world ML, we often avoid calculating the inverse of massive matrices directly because it’s computationally heavy (O(n³)). Instead, we use "Solvers" like LU decomposition that give us the same result with 10x more efficiency. But whether we calculate it or not, the theory of the inverse is what keeps the back-and-forth door of math open.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when a matrix *can't* be inverted? What is that number that decides? Explore <strong><a href="#/mathematics/linear-algebra/determinants">Determinants</a></strong>.
@@ -1025,7 +1024,7 @@ else:
         $$\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}$$
       </div>
       <p>Where $S_n$ is the set of all permutations of $\{1, \dots, n\}$. Geometrically, $\det(A)$ represents the signed **Volume Scaling Factor** of the linear transformation. Essential takeaways include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Invertibility</strong>: $A$ is invertible $\iff \det(A) \neq 0$.</li>
         <li><strong>Composition</strong>: $\det(AB) = \det(A)\det(B)$.</li>
         <li><strong>Linear Dependence</strong>: $\det(A) = 0$ implies the rows/columns are linearly dependent.</li>
@@ -1112,12 +1111,12 @@ print(f"Determinant: {det:.2f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Think of the Determinant as a "Dimension Watchdog." It monitors how much a transformation "stretches" or "squashes" your information universe.</p>
+    <p>Think of the Determinant as a "Dimension Watchdog." It monitors how much a transformation "stretches" or "squashes" your information universe, ensuring you aren't accidentally erasing your data.</p>
     <ul>
-      <li><strong>Change of Variables (Flow Models)</strong>: In generative models like "Normalizing Flows" (which create realistic data), the determinant of the Jacobian ensures that as we warp a simple distribution into a complex one, the total probability still sums to 1.</li>
-      <li><strong>Outlier & Anomaly Detection</strong>: The "Volume" of a dataset can be measured using the determinant of its covariance matrix. If a new data point falls way outside this volume, the determinant helps flag it as a potential fraud or error.</li>
+      <li><strong>Normalizing Multivariate Gaussians</strong>: In statistics and AI, a "Bell Curve" in multiple dimensions is defined by its covariance matrix. The determinant of this matrix tells us the "Volume" of the probability cloud. To make the probability sum to exactly 1.0, we divide by the square root of the determinant. It is the mathematical anchor of probability theory.</li>
+      <li><strong>Jacobian Transformations in Deep Learning</strong>: When we use "Normalizing Flows" or "Change of Variables" in a loss function, we need to know how much our model is warping the space. We multiply by the determinant of the <strong>Jacobian Matrix</strong> to "account for the stretch" so the math stays balanced. If we ignore the determinant, our model will literally lose track of where the data is located.</li>
     </ul>
-    <p>Teacher's Final Word: If the determinant is zero, your matrix has "erased" a dimension of data forever. In AI, preventing accidental "data erasure" is why we watch the determinant like a hawk.</p>
+    <p>Teacher's Final Word: If the determinant is zero, your matrix has "erased" a dimension of data forever. In AI, preventing accidental "data erasure" is why we watch the determinant like a hawk. It is the difference between a model that learns and a model that squashes everything into a meaningless pancake.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Determinants tell us if space is squashed. But how *much* space is left? Explore <strong><a href="#/mathematics/linear-algebra/matrix-rank">Matrix Rank</a></strong>.
@@ -1140,7 +1139,7 @@ print(f"Determinant: {det:.2f}")
         $$\text{rank}(A) = \dim(\text{col}(A)) = \dim(\text{row}(A))$$
       </div>
       <p>Crucially, $\text{rank}(A) \le \min(m, n)$. A matrix is called **Full Rank** if its rank equals the smaller of its two dimensions. Key implications include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Invertibility</strong>: A square $n \times n$ matrix is invertible iff $\text{rank}(A) = n$.</li>
         <li><strong>Redundancy</strong>: If $\text{rank}(A) < n$, then there exist linearly dependent columns (i.e., redundant features).</li>
         <li><strong>Rank-Nullity Theorem</strong>: $\text{rank}(A) + \dim(\text{null}(A)) = n$.</li>
@@ -1227,12 +1226,12 @@ print(f"Matrix Rank: {rank}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Rank is the "Reality Check" of your data. It tells you the **True Information Density**—the actual number of independent stories your data is telling once you strip away all the duplicates.</p>
+    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the **True Information Density** of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
     <ul>
-      <li><strong>Collaborative Filtering (RecSys)</strong>: Streaming services like Netflix use "Low-Rank Matrix Factorization." They assume that among 10,000 movies, there are only about 20 "Rank" dimensions (like Action, Romance, or Nostalgia) that actually explain everyone's taste.</li>
-      <li><strong>Multicollinearity Detection</strong>: If your feature matrix has a low rank relative to its width, your model will be unstable. We use rank to detect "copycat" features so we can prune them for a faster, more reliable model.</li>
+      <li><strong>Low-Rank Recommendation Systems</strong>: Services like Netflix treat user ratings as a giant matrix. By forcing the model to find a "Low-Rank" approximation of this matrix, we discover the core "Latent Factors" (like Preference for Sci-Fi or Hate for Musicals) that explain millions of ratings. This turns a sparse, messy grid into a lean, predictive engine.</li>
+      <li><strong>Identifying Degrees of Freedom</strong>: In physics-based ML or robotics, the rank of a "Jacobian Matrix" tells you the actual number of ways a robot arm can move. If the rank drops (due to a mechanical limit), the robot loses a "Degree of Freedom." By monitoring rank, we ensure the system always knows the limits of its own physical agency.</li>
     </ul>
-    <p>Teacher's Final Word: Rank is what separates a rich, diverse dataset from a loud but repetitive one. In AI, find the rank to find the truth.</p>
+    <p>Teacher's Final Word: Rank is what separates a rich, diverse dataset from a loud but repetitive one. No matter how many columns you have, the Rank is the ultimate truth of your data's variety. In the world of AI, high rank is intelligence; low rank is just noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Rank ensures our directions are unique. How do we find the "Distance" between those directions? Explore <strong><a href="#/mathematics/linear-algebra/orthogonality-projections">Orthogonality & Projections</a></strong>.
@@ -1256,7 +1255,7 @@ print(f"Matrix Rank: {rank}")
         $$\text{proj}_{\mathbf{v}} \mathbf{x} = \frac{\mathbf{x} \cdot \mathbf{v}}{\|\mathbf{v}\|^2} \mathbf{v}$$
       </div>
       <p>Properties of the projection include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Optimality</strong>: $\hat{\mathbf{x}}$ is the vector in $W$ that minimizes the distance $\|\mathbf{x} - \mathbf{v}\|$ for all $\mathbf{v} \in W$.</li>
         <li><strong>Linearity</strong>: $\text{proj}_W (c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1\text{proj}_W \mathbf{x}_1 + c_2\text{proj}_W \mathbf{x}_2$.</li>
         <li><strong>Residual</strong>: The vector $\mathbf{e} = \mathbf{x} - \hat{\mathbf{x}}$ represents the component of $\mathbf{x}$ orthogonal to $W$.</li>
@@ -1329,12 +1328,12 @@ print(f"Shadow of y on u: {proj_y_u}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Projections are the mathematical way to find the "Best Approximation." They allow us to filter out the noise that doesn't align with our chosen features.</p>
+    <p>Projections are the mathematical way to find the "Best Approximation." They allow us to filter out the noise that doesn't align with our chosen features, leaving only the "Truth" of the signal.</p>
     <ul>
-      <li><strong>Gram-Schmidt Preprocessing</strong>: When training models, highly correlated (parallel) features can cause the weights to "explode." We use projections to "orthogonalize" the features—stripping away their mutual overlap so the model sees 100% unique info from every input.</li>
-      <li><strong>SVM Margin Calculation</strong>: In Support Vector Machines, we need to find the "Gap" between two classes. The algorithm uses vertical projections to find the absolute closest distance from a data point to the decision boundary, ensuring we maximize the safety margin.</li>
+      <li><strong>Linear Subspace Denoising</strong>: Real-world data is often corrupted by "White Noise"—random values scattered in every direction. However, the "Clean Signal" (like a person's voice or a clear image) usually lies in a specific low-dimensional subspace. By <strong>Projecting</strong> the noisy data onto that clean signal basis, we mathematically "flatten" the noise while preserving the essential pattern of the data.</li>
+      <li><strong>Gram-Schmidt Orthogonalization in Simulation</strong>: In numerical optimization and climate modeling, we need vectors to stay 100% independent to prevent rounding errors from crashing the simulation. We use projections to "Orthogonalize" the vectors, stripping away any parallel overlap. This ensures that every step the model takes is in a fundamentally "New" direction, maintaining total numerical stability.</li>
     </ul>
-    <p>Teacher's Final Word: A projection is like casting a shadow to see the core shape of an object while ignoring the distracting glare. In AI, it's how we find the "Truth" hidden within a noisy spreadsheet.</p>
+    <p>Teacher's Final Word: A projection is like casting a shadow to see the core shape of an object while ignoring the distracting glare. In AI, it's how we find the "Truth" hidden within a noisy spreadsheet. Without the math of the projection, we'd be lost in the glare of the noise forever.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Projections give us "shadows." But what about the vectors that *never* move? Explore <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.
@@ -1360,7 +1359,7 @@ print(f"Shadow of y on u: {proj_y_u}")
       <div class="math-block">
         $$\det(A - \lambda I) = 0$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
+      <p class="mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
     </div>
     
     <div class="callout tip">
@@ -1450,12 +1449,12 @@ print(f"Eigenvectors:\n{vecs}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Eigenvectors are the "Hidden Axes" of your data. While the rest of the world rotates into chaos, these special directions stay perfectly aligned.</p>
+    <p>Eigenvectors are the "Hidden Axes" of your data. While the rest of the world rotates into chaos during a transformation, these special directions stay perfectly aligned, revealing the underlying structure of the system.</p>
     <ul>
-      <li><strong>Google PageRank</strong>: The reason Google became a giant is an eigenvalue problem. It treats the entire web as a matrix and finds the "Principal Eigenvector." The values in this vector tell the system exactly which websites are the most influential and deserve to be at the top of your search.</li>
-      <li><strong>Spectral Clustering</strong>: When data moves in complex "Swirls" that standard algorithms can't handle, we use eigenvalues to find the hidden gaps in the network. This allows the AI to successfully group data points even when they are physically tangled together.</li>
+      <li><strong>Principal Component Analysis (PCA)</strong>: In data science, we look for the eigenvectors of the <strong>Covariance Matrix</strong>. The eigenvector with the largest eigenvalue is the direction where your data is most "Spread Out." By focusing only on these top eigenvalues, we can squash a 10,000-dimension dataset into 2 dimensions while keeping 99% of the important information.</li>
+      <li><strong>Google PageRank</strong>: The reason Google became a giant is essentially a massive eigenvalue problem. It treats the entire web as a transition matrix and finds the <strong>Principal Eigenvector</strong>. The values in this vector tell the system exactly how "Important" or "Influential" each website is based on its connections, putting the best answers at the top of your search.</li>
     </ul>
-    <p>Teacher's Final Word: Finding the eigenpairs of your data is like finding its "Soul." It reveals the core directions where all the real action happens, allowing you to ignore the noisy wiggles and focus on the main signal.</p>
+    <p>Teacher's Final Word: Finding the eigenpairs of your data is like finding its "Soul." It reveals the core directions where all the real action happens. In the world of Big Data, if you aren't looking at the eigenvectors, you're just looking at the noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Some matrices have "Good Behavior" and always produce positive scaling factors. Explore <strong><a href="#/mathematics/linear-algebra/positive-definite">Positive Definite Matrices</a></strong>.
@@ -1478,12 +1477,12 @@ print(f"Eigenvectors:\n{vecs}")
         $$\mathbf{x}^\top A \mathbf{x} > 0, \quad \forall \mathbf{x} \in \mathbb{R}^n \setminus \{\mathbf{0}\}$$
       </div>
       <p>This definition implies several strictly equivalent properties that are easier to check in practice:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Eigenvalue Test</strong>: Each eigenvalue $\lambda_i$ of $A$ satisfies $\lambda_i > 0$.</li>
         <li><strong>Determinant Test</strong>: Every leading principal minor (top-left sub-matrices) has a positive determinant.</li>
         <li><strong>Factorization</strong>: $A$ can be decomposed as $L L^\top$ (Cholesky Factorization), where $L$ is lower triangular.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">If $\mathbf{x}^\top A \mathbf{x} \ge 0$, the matrix is **Positive Semi-Definite**, a condition crucial for valid Kernels and Covariance matrices.</p>
+      <p class="mt-2">If $\mathbf{x}^\top A \mathbf{x} \ge 0$, the matrix is **Positive Semi-Definite**, a condition crucial for valid Kernels and Covariance matrices.</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
@@ -1547,12 +1546,12 @@ print(f"Is Matrix Positive Definite? {is_pd}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Think of a Positive Definite matrix as a "Stability Guarantee." It ensures that your optimization surface is a stable bowl rather than a volatile mountain range.</p>
+    <p>A Positive Definite matrix is a "Stability Guarantee." It ensures that your optimization surface is a stable bowl rather than a volatile mountain range, allowing your AI to find the "Truth" without getting lost in the fog.</p>
     <ul>
-      <li><strong>Optimization Stability</strong>: For a model to converge, its "Loss Surface" needs to be convex (a bowl). A Positive Definite Hessian matrix is the math that guarantees this stability, ensuring Gradient Descent always finds the unique bottom point.</li>
-      <li><strong>Gaussian Processes & Kernels</strong>: In SVMs and GP regression, we use "Kernel Matrices" to measure data relationships. These must be Positive Semi-Definite to ensure that the model's "Uncertainty" calculations are logically valid and never result in impossible negative probabilities.</li>
+      <li><strong>Ensuring Convexity in Optimization</strong>: For an AI to find the best possible weights, the "Loss Landscape" must be convex (bowl-shaped). We check if the <strong>Hessian Matrix</strong> (the second derivative of the loss) is Positive Definite. If it is, we have a mathematical guarantee that Gradient Descent will eventually roll down to a unique, global minimum rather than getting stuck in a local trap.</li>
+      <li><strong>Covariance Scaling in Financial Risk</strong>: In FinTech AI, we use Positive Definite matrices to represent the <strong>Covariance</strong> of stock returns. Since a stock's variance can never be negative, the matrix must be PD (or semi-definite). This ensures that when the AI calculates the "Risk" of a portfolio, it never arrives at an impossible negative number, preventing a total system crash during market volatility.</li>
     </ul>
-    <p>Teacher's Final Word: Positive Definiteness is the difference between a model that finishes its training and one that wanders forever in a mathematical fog. If you want a stable AI, you need PD matrices.</p>
+    <p>Teacher's Final Word: Positive Definiteness is the difference between a model that converges in minutes and one that wanders forever in a "flat" or "volatile" nightmare. If you want a stable AI, you need to ensure your math is "Bowl-Shaped" and your matrices are PD.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> PD matrices are stable. Now, learn the "Swiss Army Knife" that decomposes <em>any</em> matrix into these components. Explore <strong><a href="#/mathematics/linear-algebra/svd">Singular Value Decomposition (SVD)</a></strong>.
@@ -1575,12 +1574,12 @@ print(f"Is Matrix Positive Definite? {is_pd}")
         $$A = U \Sigma V^\top$$
       </div>
       <p>where the components provide a structural breakdown of the transformation:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>$U \in \mathbb{R}^{m \times m}$</strong>: An orthogonal matrix whose columns (left-singular vectors) represent the geometry of the output space.</li>
         <li><strong>$\Sigma \in \mathbb{R}^{m \times n}$</strong>: A diagonal matrix of singular values $\sigma_i$, representing the "strength" of the transformation along each axis.</li>
         <li><strong>$V \in \mathbb{R}^{n \times n}$</strong>: An orthogonal matrix whose columns (right-singular vectors) represent the geometry of the input space.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
+      <p class="mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
     </div>
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
@@ -1644,12 +1643,12 @@ print(f"Singular values of A: {s}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>SVD is the "Swiss Army Knife" of data science. It allows you to take any messy, complex matrix and break it down into three simple, elegant steps: **Rotate, Stretch, Rotate.**</p>
+    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: **Rotate, Stretch, Rotate.**</p>
     <ul>
-      <li><strong>Latent Semantic Analysis (LSA)</strong>: SVD can read 1,000,000 documents and find the "Hidden Topics" inside. By decomposing the matrix, it discovers that words like "Piston" and "Spark" are physically linked to the same latent "Topic" (singular value), even if they never appear on the same page.</li>
-      <li><strong>Background Subtraction in Video</strong>: Security systems use SVD to separate "Static" background (low-rank singular values) from "Moving" intruders (high-rank noise). This is how the AI knows to ignore a stationary wall but follow a moving person.</li>
+      <li><strong>Concept Search (Latent Semantic Analysis)</strong>: Google and Bing don't just look for keywords; they look for "Concepts." SVD takes a giant matrix of billions of words and documents and finds the "Hidden Dimensions" (Topics). This allows the system to realize that a paper about "Quantum Computing" and a blog post about "Qubits" are semantically identical, even if they share zero identical words, because they align on the same singular value axis.</li>
+      <li><strong>Top-k Image Denoising</strong>: In scientific imaging or astrophotography, pictures are often buried under a haze of sensor "noise." Since the "Real Image" is a high-rank pattern and noise is random jitter, we use SVD to keep only the top-k singular values. This mathematically "kills" the noise while keeping the sharp edges of the galaxy or the cell, essentially distilling the signal from the static.</li>
     </ul>
-    <p>Teacher's Final Word: SVD is the ultimate "Noise Filter." It allows you to find the signal buried under a mountain of static, ensuring your model focuses only on the high-rank patterns that actually matter.</p>
+    <p>Teacher's Final Word: SVD is the "Swiss Army Knife" of math for a reason—it works on every matrix in existence. If you find the singular values, you've found the strength of every signal in your dataset. In the world of AI, if you aren't using SVD, you're probably just drowning in noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD is the math. Now, let's look at the ultimate application in data science. Explore <strong><a href="#/mathematics/linear-algebra/pca">Principal Component Analysis (PCA)</a></strong>.
@@ -1672,7 +1671,7 @@ print(f"Singular values of A: {s}")
         $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \|X\mathbf{w}\|^2 = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^\top \Sigma \mathbf{w}$$
       </div>
       <p>Where $\Sigma = \frac{1}{n} X^\top X$ is the covariance matrix. The solution to this optimization problem leads to several critical properties:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Spectral Theorem</strong>: The principal components are the eigenvectors of $\Sigma$.</li>
         <li><strong>Variance Capture</strong>: The eigenvalue $\lambda_i$ represents the variance captured by the $i$-th component.</li>
         <li><strong>Decoupling</strong>: The transformed features (scores) are linearly uncorrelated.</li>
@@ -1785,12 +1784,12 @@ print(f"Reduced Shape: {X_reduced.shape}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>PCA is like "Finding the Best Camera Angle." It identifies the directions of maximum spread in your data so you can capture its essence without the weight of unnecessary details.</p>
+    <p>PCA is the ultimate "Noise Cancellation" for your data. It separates the "Soul" of the story from the irrelevant details, allowing your models to run faster and see clearer by focusing only on the directions of maximum spread.</p>
     <ul>
-      <li><strong>Genomics Visualization</strong>: Scientists often work with 10,000 genes per patient. PCA projects that massive data onto a 2D plot. Suddenly, patients with similar diseases "Cluster" together on the screen, revealing patterns that were invisible in the raw numbers.</li>
-      <li><strong>Real-time Face Detection</strong>: Your phone doesn't look at every single pixel. It uses PCA to find the 50 most important "Eigenfaces"—the primary directions of variation in human features. By looking only at these 50 values, the AI can recognize you in milliseconds.</li>
+      <li><strong>Eigenfaces for Face Recognition</strong>: Your phone's biometric system doesn't compare every pixel of your face to a database. It uses PCA to find the 50 most important "Eigenfaces"—the primary directions of variation in human features (like jawline width or eye distance). By looking only at these 50 values, the AI identifies you in milliseconds, ignoring the "noise" of lighting or individual pimples.</li>
+      <li><strong>Genomics & Disease Clustering</strong>: Scientists often work with 10,000+ genes per patient. PCA squashes that massive, unreadable data onto a 2D plot. Suddenly, patients with similar medical conditions "Cluster" together on the screen, revealing hidden geometric relationships between genetic markers and diseases that were invisible in the raw spreadsheet.</li>
     </ul>
-    <p>Teacher's Final Word: PCA is the ultimate "Noise Cancellation" for your data. It separates the "Soul" of the story from the irrelevant details, allowing your models to run faster and see clearer.</p>
+    <p>Teacher's Final Word: PCA is the difference between memorizing a thousand boring details and understanding the one main story. It’s the "Best Camera Angle" for your data, ensuring that every dimension you keep is actually contributing to the truth of your model.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict the future in <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.

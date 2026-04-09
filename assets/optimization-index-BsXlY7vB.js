@@ -18,12 +18,12 @@ const t={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
       </div>
       
       <p>The components of the update are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>$\nabla_\theta J(\theta)$ (The Gradient)</strong>: The vector of partial derivatives $\left[ \frac{\partial J}{\partial \theta_1}, \dots, \frac{\partial J}{\partial \theta_d} \right]^\top$. It points in the direction of the steepest local increase.</li>
         <li><strong>$\eta$ (Learning Rate)</strong>: A positive scalar determining the step size. If $\eta$ is too large, the algorithm may overshoot the minimum; if too small, convergence becomes computationally prohibitive.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">For a **Convex** function, gradient descent is guaranteed to reach the global minimum. In deep learning (non-convex surfaces), the algorithm typically converges to a high-quality local minimum or a saddle point.</p>
+      <p class="mt-2">For a **Convex** function, gradient descent is guaranteed to reach the global minimum. In deep learning (non-convex surfaces), the algorithm typically converges to a high-quality local minimum or a saddle point.</p>
     </div>
     
     <div class="callout tip">
@@ -137,13 +137,13 @@ for i in range(10):
       </div>
       
       <p>The mathematical properties that distinguish SGD from Batch GD include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Unbiased Estimation</strong>: The stochastic gradient is an unbiased estimator of the true gradient, meaning $\mathbb{E}[\nabla f_{i_t}(\theta_t)] = \nabla J(\theta_t)$. On average, the algorithm moves in the correct direction.</li>
         <li><strong>Stochastic Noise</strong>: The variance in the gradient estimate introduces "jitter" into the optimization path. This noise acts as a natural regularizer, allowing the model to "jump" out of shallow local minima and find flatter, more generalizable minima.</li>
         <li><strong>Convergence</strong>: Convergence to a stationary point is guaranteed under the **Robbins-Monro conditions** (e.g., using a decaying learning rate).</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
+      <p class="mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
     </div>
     
     <div class="callout tip">
@@ -266,13 +266,13 @@ print(f"Final Weights: {w[0]:.4f}")
       </div>
 
       <p>The core mathematical foundations include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Convex Set ($\mathcal{C}$)</strong>: A set where every line segment connecting two points in the set is entirely contained within the set: $\forall \mathbf{x}, \mathbf{y} \in \mathcal{C}, \forall \theta \in [0, 1] \implies (1-\theta)\mathbf{x} + \theta\mathbf{y} \in \mathcal{C}$.</li>
         <li><strong>Convex Function</strong>: A function $f$ whose epigraph is a convex set, satisfying <strong>Jensen's Inequality</strong>: $f((1-\theta)\mathbf{x} + \theta\mathbf{y}) \le (1-\theta)f(\mathbf{x}) + \theta f(\mathbf{y})$.</li>
         <li><strong>The Global Property</strong>: For a convex function on a convex domain, any **local minimum is also the global minimum**. This property ensures that first-order methods (like Gradient Descent) will never converge to a sub-optimal basin.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Convexity is the gold standard for reliability in optimization, utilized extensively in Linear Regression, Logistic Regression, and Support Vector Machines.</p>
+      <p class="mt-2">Convexity is the gold standard for reliability in optimization, utilized extensively in Linear Regression, Logistic Regression, and Support Vector Machines.</p>
     </div>
     
     <div class="callout tip">
@@ -384,12 +384,12 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
       </div>
       
       <p>Two primary paradigms dominate the field:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>L2 Regularization (Ridge)</strong>: $\Omega(\theta) = \frac{1}{2} \|\theta\|_2^2$. This adds a quadratic penalty that discourages high-magnitude weights, equivalent to assuming a Gaussian prior $P(\theta) \sim \mathcal{N}(0, \sigma^2)$. It results in **Weight Decay**.</li>
         <li><strong>L1 Regularization (Lasso)</strong>: $\Omega(\theta) = \|\theta\|_1$. This adds an absolute magnitude penalty, equivalent to a Laplace prior. Because the L1 norm has a singular derivative at zero, it promotes **Sparsity**, effectively zeroing out irrelevant features.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">The hyperparameter $\lambda$ (Lambda) determines the strength of the constraint. High $\lambda$ leads to **Underfitting** (too much bias); low $\lambda$ leads to **Overfitting** (too much variance).</p>
+      <p class="mt-2">The hyperparameter $\lambda$ (Lambda) determines the strength of the constraint. High $\lambda$ leads to **Underfitting** (too much bias); low $\lambda$ leads to **Overfitting** (too much variance).</p>
     </div>
     
     <div class="callout tip">

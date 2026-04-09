@@ -24,12 +24,12 @@ const e={id:"derivatives",title:"Derivatives",description:"The Derivative is the
         $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
       </div>
       <p>A function is **Differentiable** at $x$ if this limit exists. The derivative provides an linear approximation of the function at a specific point, governed by several fundamental rules:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Power Rule</strong>: $\frac{d}{dx}x^n = nx^{n-1}$.</li>
         <li><strong>Linearity</strong>: $\frac{d}{dx}[af(x) + bg(x)] = af'(x) + bg'(x)$.</li>
         <li><strong>Product Rule</strong>: $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
+      <p class="mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
     </div>
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
@@ -130,7 +130,7 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
         $$\frac{\partial f}{\partial x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_n)}{h}$$
       </div>
       <p>This operation measures the instantaneous rate of change of $f$ in the direction of the $i$-th coordinate axis. Key details include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Independence</strong>: $\frac{\partial f}{\partial x_i}$ ignores interactions between $x_i$ and other variables during the computation.</li>
         <li><strong>Notation</strong>: Often written as $f_{x_i}$ or $\partial_{x_i} f$.</li>
         <li><strong>Geometry</strong>: It represents the slope of the tangent line to the curve formed by intersecting the surface with a plane parallel to the $x_i$-axis.</li>
@@ -244,12 +244,12 @@ print(f"Exact derivative (2x): {2*x_val}")
         $$\nabla f(\mathbf{x}) = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^\top$$
       </div>
       <p>The gradient possesses three properties that make it the engine of machine learning optimization:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Steepest Ascent</strong>: $\nabla f$ points in the direction of the maximum rate of increase of $f$ at $\mathbf{x}$.</li>
         <li><strong>Directional Derivative</strong>: The slope in any arbitrary direction $\mathbf{v}$ (unit vector) is given by $D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}$.</li>
         <li><strong>Geometry</strong>: The gradient vector is always orthogonal to the level set (contour line) of the function at that point.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
+      <p class="mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
     </div>
     
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
@@ -369,7 +369,7 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
       <div class="math-block">
         $$\frac{dz}{dt} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
+      <p class="mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
     </div>
     
     <div class="callout tip">
@@ -502,7 +502,7 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
         \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$
       </div>
       <p>The Jacobian plays three critical roles in advanced mathematical modeling:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Multivariate Chain Rule</strong>: To differentiate $\mathbf{f}(\mathbf{g}(\mathbf{x}))$, we multiply their Jacobians: $\mathbf{J}_{\mathbf{f} \circ \mathbf{g}} = \mathbf{J}_{\mathbf{f}} \cdot \mathbf{J}_{\mathbf{g}}$.</li>
         <li><strong>Local Linearization</strong>: Near $\mathbf{x}$, the change in output is predicted by $\Delta \mathbf{f} \approx \mathbf{J} \Delta \mathbf{x}$.</li>
         <li><strong>Volume Scaling</strong>: If $n=m$, $|\det(\mathbf{J})|$ measures how the transformation expands or shrinks space locally.</li>
@@ -621,7 +621,7 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
         $$\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$
       </div>
       <p>The Hessian is the fundamental tool for "Second-Order" optimization and stability analysis:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Characterizing Extrema</strong>: If $\nabla f(\mathbf{x}) = \mathbf{0}$ and $\mathbf{H}(\mathbf{x})$ is positive definite, $\mathbf{x}$ is a local minimum. If $\mathbf{H}(\mathbf{x})$ is negative definite, it is a local maximum.</li>
         <li><strong>Taylor Approximation</strong>: The Hessian defines the parabolic (quadratic) shape of the function locally.</li>
         <li><strong>Conditioning</strong>: The ratio of max/min eigenvalues of $\mathbf{H}$ tells us if the "bowl" is perfectly circular or a narrow, stretched canyon (making gradient descent slow).</li>
@@ -763,7 +763,7 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
         $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n$$
       </div>
       <p>In Machine Learning, we rarely use the infinite series, instead relying on low-degree **Taylor Polynomials** for local optimization:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>First-Order (Linear)</strong>: $f(x) \approx f(a) + f'(a)(x-a)$. Used in Gradient Descent.</li>
         <li><strong>Second-Order (Quadratic)</strong>: $f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2$. Used in Newton's Method.</li>
         <li><strong>Remainder</strong>: The Taylor theorem ensures that the error $R_n(x)$ becomes negligible as $x$ approaches $a$.</li>
@@ -887,12 +887,12 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
         $$\nabla f(\mathbf{x}^*) = \mathbf{0}$$
       </div>
       <p>To determine the nature of a critical point, we utilize the **Second Derivative Test** based on the eigenvalues ($\lambda_i$) of the Hessian matrix $\mathbf{H}$ at $\mathbf{x}^*$:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Local Minimum</strong>: $\mathbf{H}$ is positive definite ($\lambda_i > 0$ for all $i$). Geometrically, all directions lead uphill.</li>
         <li><strong>Local Maximum</strong>: $\mathbf{H}$ is negative definite ($\lambda_i < 0$ for all $i$). Geometrically, all directions lead downhill.</li>
         <li><strong>Saddle Point</strong>: $\mathbf{H}$ is indefinite (both positive and negative eigenvalues exist). The point is a minimum in one direction and a maximum in another.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
+      <p class="mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
@@ -1006,12 +1006,12 @@ print(f"Value at Min: {res.fun}")
         $$\int_a^b f(x) dx = \lim_{\Delta x \to 0} \sum_{i} f(x_i^*) \Delta x_i$$
       </div>
       <p>The relationship between integration and differentiation is codified by the **Fundamental Theorem of Calculus**:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Antidifferentiation</strong>: If $F(x) = \int f(x) dx$, then $F'(x) = f(x)$.</li>
         <li><strong>Definite Integral Calculation</strong>: $\int_a^b f(x) dx = F(b) - F(a)$.</li>
         <li><strong>ML Utility</strong>: In probability theory, the area under a density function $p(x)$ determines the cumulative mass: $P(X \le k) = \int_{-\infty}^k p(x) dx$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Integrals enable the transition from discrete sets to continuous distributions, a requirement for high-fidelity modeling in Statistics and Bayesian Inference.</p>
+      <p class="mt-2">Integrals enable the transition from discrete sets to continuous distributions, a requirement for high-fidelity modeling in Statistics and Bayesian Inference.</p>
     </div>
     
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>

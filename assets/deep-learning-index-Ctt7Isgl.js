@@ -19,7 +19,7 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
       <div class="math-block">
         $$\mathbf{w}_{t+1} = \mathbf{w}_t + \eta(y - \hat{y})\mathbf{x}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
+      <p class="mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
     </div>
     
     <div class="callout tip">
@@ -74,7 +74,7 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Iteration 0] Training on all 4 combinations...\n[Iteration 5] Model is starting to 'Get it'...\n[Iteration 10] Perfect Convergence!\n[Test] Input [1, 1] -> Predicted: 1 (Correct)\n[Test] Input [0, 1] -> Predicted: 0 (Correct)\n[Final] Learned Weights: [2.0, 1.0] | Bias: -2.5">
+    <python-code>
 import numpy as np
 
 # 1. Input (X) and Target (y) for AND Gate
@@ -191,7 +191,7 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: XOR Logic Gate (Non-linear)\n[Action] Initializing MLP with (4, 4) hidden neurons...\n[Training] Epoch 1: Loss 0.72\n[Training] Epoch 500: Loss 0.04 (Convergence reached)\n[Test] Input [1, 1] -> Final Pred: 0 (Correct)\n[Test] Input [0, 1] -> Final Pred: 1 (Correct)\n[Insight] A simple line failed here; a hidden layer warped the space to find the truth.">
+    <python-code>
 import numpy as np
 from sklearn.neural_network import MLPClassifier
 
@@ -225,7 +225,7 @@ for i, test in enumerate(test_cases):
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the structure, but how do we "Train" the Jury? Explore the algorithm that powers all AI: <strong><a href="#/machine-learning/deep-learning/backpropagation">Backpropagation</a></strong>.
     </div>
-  `},i={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
+  `},a={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Learning</div>
       <h1>Backpropagation: The Blame Game</h1>
@@ -246,7 +246,7 @@ for i, test in enumerate(test_cases):
       <div class="math-block">
         $$\delta^{(l)} = \left( (\mathbf{W}^{(l+1)})^T \delta^{(l+1)} \right) \odot \sigma'(\mathbf{z}^{(l)})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\odot$ represents the Hadamard product (element-wise multiplication).</p>
+      <p class="mt-2">Where $\odot$ represents the Hadamard product (element-wise multiplication).</p>
     </div>
     
     <div class="callout tip">
@@ -310,7 +310,7 @@ for i, test in enumerate(test_cases):
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Forward] Truth: 1.0, Machine Guess: 0.622\n[Error] Soup is 'Too Salty' by: 0.378\n[Backprop] Calculating dLoss/dWeight via Chain Rule...\n[Gradient] Responsibility (Blame) = -0.089\n[Update] Adjusting Weight: 0.5 -> 0.5089\n[Result] Next guess will be closer to the Truth.">
+    <python-code>
 import numpy as np
 
 # 1. Component Math
@@ -353,7 +353,7 @@ print(f"New Improved Weight: {w:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>
-  `},a={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
+  `},i={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
@@ -372,7 +372,7 @@ print(f"New Improved Weight: {w:.4f}")
         $$\text{Sigmoid: } \frac{1}{1 + e^{-z}}$$
         $$\text{Softmax: } \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
+      <p class="mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
     </div>
     
     <div class="callout tip">
@@ -432,7 +432,7 @@ print(f"New Improved Weight: {w:.4f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Processing Raw Signals: [-2.0, 0.0, 2.0, 4.0]\n[ReLU] Negative signals cut to zero: [0, 0, 2, 4]\n[Sigmoid] Probability Projection: [0.12, 0.50, 0.88, 0.98]\n[Softmax] Competitive Distribution: [0.00, 0.02, 0.12, 0.86] (Sum: 1.0)\n[Insight] Softmax is 'confident' that the 4th signal is the winner.">
+    <python-code>
 import numpy as np
 
 # 1. Activation math
@@ -481,7 +481,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
         $$J(\theta) = \frac{1}{n} \sum_{i=1}^n \mathcal{L}(f(\mathbf{x}_i; \theta), y_i)$$
       </div>
       <p>The choice of $\mathcal{L}$ is typically dictated by the output distribution of the data:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Gaussian (Regression)</strong>: $\mathcal{L} = (\hat{y} - y)^2$ (Mean Squared Error)</li>
         <li><strong>Bernoulli (Binary)</strong>: $\mathcal{L} = -(y \log \hat{y} + (1-y) \log (1-\hat{y}))$ (Log Loss)</li>
         <li><strong>Multinoulli (Multi-class)</strong>: $\mathcal{L} = -\sum y_k \log \hat{y}_k$ (Cross-Entropy)</li>
@@ -540,7 +540,7 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 3 test cases...\n[Regression] MSE (True 100, Pred 150): 2500.0\n[Classification] Cross-Entropy (Confident Wrong - 0.1): 2.30\n[Classification] Cross-Entropy (Hesitant Wrong - 0.4): 0.91\n[Insight] Notice how the penalty for a 0.1 guess is 2.5x higher than a 0.4 guess. Confidence kills models!">
+    <python-code>
 import numpy as np
 
 # 1. Mean Squared Error (Distance based)
@@ -569,7 +569,7 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the components. Now how do we arrange them into powerful configurations? Explore <strong><a href="#/machine-learning/deep-learning/architectures-intro">Deep Learning Architectures</a></strong>.
     </div>
-  `},n={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
+  `},o={id:"architectures-intro",title:"Deep Learning Architectures",description:"Introduction to the structural patterns and connectivity paradigms that define different types of neural networks.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Overview</div>
       <h1>Deep Learning Architectures</h1>
@@ -587,7 +587,7 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
         $$\mathbf{y} = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
       </div>
       <p>Common structural paradigms include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Feedforward (MLP)</strong>: Dense connectivity; assumes no specific topological relationship.</li>
         <li><strong>Convolutional (CNN)</strong>: Sparse connectivity and weight sharing; assumes **translation invariance** and local spatial correlation.</li>
         <li><strong>Recurrent (RNN)</strong>: Cyclic connectivity; assumes **temporal dependency** and sequential order.</li>
@@ -668,7 +668,7 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Dense Configuration] Input: 224x224 (50,176 pixels) -> 1 Output\n[Local Configuration] Filter Size: 3x3 (9 pixels)\n[Result] Dense Params: 50,176 vs. CNN Params: 9\n[Efficiency] CNN uses 99.98% fewer parameters for the same feature detection!\n[Insight] This is why you can't train a deep MLP on raw images.">
+    <python-code>
 import numpy as np
 
 # 1. Scenario: Feature detection on a 224x224 image
@@ -699,7 +699,7 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's look at the assembly line for images. Explore <strong><a href="#/machine-learning/deep-learning/cnn">Convolutional Neural Networks (CNN)</a></strong>.
     </div>
-  `},o={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
+  `},n={id:"cnn",title:"Convolutional Neural Networks (CNN)",description:"Deeper insight into convolutional layers, pooling, and the inductive bias for spatial and translation invariant data.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Vision</div>
       <h1>CNN: The Flashlight in the Dark</h1>
@@ -771,7 +771,7 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Sliding 3x3 Kernel across 10x10 Image...\n--- Input (A vertical line at index 5) ---\n[0 0 0 0 0 1 0 0 0 0] ...\n--- Output (Detected Edges) ---\nFound Vertical Boundary at Columns [4, 6]\n[Result] Kernel successfully 'excited' by the texture change.">
+    <python-code>
 import numpy as np
 
 # 1. Create a 10x10 Image with a vertical bar
@@ -832,7 +832,7 @@ print(f"Kernel Response: {output[3:7]}")
       <div class="math-block">
         $$\mathbf{y}_t = \text{Softmax}(\mathbf{W}_{hy} \mathbf{h}_t + \mathbf{b}_y)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
+      <p class="mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
     </div>
     
     <div class="callout tip">
@@ -885,7 +885,7 @@ print(f"Kernel Response: {output[3:7]}")
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Sequence] Step 0: Input 'Wait' -> Memory Strength: 0.12\n[Sequence] Step 1: Input 'For' -> Memory Strength: 0.45\n[Sequence] Step 2: Input 'It' -> Memory Strength: 0.82\n[Analysis] The Hidden State is evolving as new data 'updates' the existing context.\n[Result] Final Hidden Vector represents a 'compressed' history of the full sequence.">
+    <python-code>
 import numpy as np
 
 # 1. Weights: x->h and h->h (Memory)
@@ -943,7 +943,7 @@ for i, x_t in enumerate(sequence):
         $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)$$
         $$h_t = o_t \odot \tanh(C_t)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
+      <p class="mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
     </div>
     
     <div class="callout tip">
@@ -1013,7 +1013,7 @@ for i, x_t in enumerate(sequence):
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Start: Cell State=0.0 (Empty Journal)\n[Input] Found 'Water' -> Forget: 0.9, Input: 1.0\n[Scan] Middle: 5 years of 'Boring Rocks' -> Input Gate: 0.0\n[Result] Step 10: Cell State=0.89 (Water Discovery Survived!)\n[Insight] The gates successfully blocked the noise and preserved the signal.">
+    <python-code>
 import numpy as np
 
 # 1. State: C (Cell State - Long Term) and H (Hidden State - Short Term)
@@ -1072,7 +1072,7 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
       <div class="math-block">
         $$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
+      <p class="mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
     </div>
     
     <div class="callout tip">
@@ -1130,7 +1130,7 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Action] Calculating Context for 3 Words...\n[Attention Scores] Compatibility Matrix Calculated.\n[Softmax] Row 0: Word 0 paying 92% attention to Word 2!\n[Result] Input meanings successfully 'blended' based on their context.\n[Parallel] All word relationships resolved in a single matrix multiplication.">
+    <python-code>
 import numpy as np
 
 def softmax(x):
@@ -1207,7 +1207,7 @@ print(output.round(1))
     <div class="premium-def-box">
       <div class="premium-def-title">The Value Function</div>
       <div class="math-block">$$\min_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $D(x)$ is the probability that $x$ is real, and $G(z)$ is the forged image generated from random noise $z$.</p>
+      <p class="mt-2">Where $D(x)$ is the probability that $x$ is real, and $G(z)$ is the forged image generated from random noise $z$.</p>
     </div>
 
     <h2 id="components">The Dynamic Duo</h2>
@@ -1257,7 +1257,7 @@ print(output.round(1))
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: MNIST (Handwritten Digits)\n[Round 100] D_Loss: 0.1, G_Loss: 2.3 (Detective is winning)\n[Round 1000] D_Loss: 0.5, G_Loss: 0.8 (Forger is catching up)\n\n[Status] Equilibrium reached (Nash Equilibrium)\n[Output] Generated Digit #4 looks distinctly 'real'.\n[Insight] Generator has learned the 'Geometry of Four-ness'.">
+    <python-code runnable="false" static-output="[Action] Initializing Adversarial Duel...\n[Setup] Generator: 784-dim MLP | Discriminator: Binary Classifier\n[Epoch 1] G-Loss: 4.8 | D-Loss: 0.2 (Detective is dominating)\n[Epoch 50] G-Loss: 1.2 | D-Loss: 0.6 (Forger is learning trickery)\n[Epoch 200] Equilibrium reached (p=0.5)\n[Result] High-fidelity synthetic faces successfully generated.">
 import torch
 import torch.nn as nn
 
@@ -1343,4 +1343,4 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,n,o,r,l,h,d]};export{c as DEEP_LEARNING_DATA};
+  `,sections:[e,t,a,i,s,o,n,r,l,h,d]};export{c as DEEP_LEARNING_DATA};
