@@ -19,7 +19,7 @@ export const basisDimensionSection: TopicSection = {
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Spanning Sets and Cardinality</div>
       <p>A set of vectors $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is a **Basis** for a vector space $V$ if it satisfies two conditions:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Independence</strong>: No vector in $\mathcal{B}$ can be expressed as a linear combination of the others.</li>
         <li><strong>Span</strong>: Every vector $\mathbf{v} \in V$ can be uniquely expressed as: $\mathbf{v} = \sum_{i=1}^n c_i \mathbf{b}_i$.</li>
       </ul>
@@ -119,3 +119,4 @@ print(f"Dimension of the created space: {dim}")
     </div>
   `
 };
+

@@ -23,12 +23,12 @@ export const overfittingUnderfittingSection: TopicSection = {
         $$\text{Gap} = R(h) - \hat{R}(h)$$
       </div>
       <p>The learning process is governed by two critical failure states:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Underfitting (High Bias)</strong>: The hypothesis space $\mathcal{H}$ is too restrictive. Both training and test errors are high. The model fails to solve the "optimization" part of the problem.</li>
         <li><strong>Overfitting (High Variance)</strong>: The model has excessive capacity, allowing it to minimize $\hat{R}(h)$ by interpolating noise. This leads to a massive generalization gap where $R(h) \gg \hat{R}(h)$.</li>
         <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via **Regularization** ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
+      <p class="mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
@@ -103,5 +103,6 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
     </div>
   `
 };
+
 
 

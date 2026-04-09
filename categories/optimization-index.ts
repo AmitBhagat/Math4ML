@@ -71,3 +71,4 @@ export const OPTIMIZATION_DATA: CategoryData = {
     regularizationSection
   ]
 };
+

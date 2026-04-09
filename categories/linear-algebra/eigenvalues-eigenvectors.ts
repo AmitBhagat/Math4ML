@@ -26,7 +26,7 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       <div class="math-block">
         $$\det(A - \lambda I) = 0$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
+      <p class="mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
     </div>
     
     <div class="callout tip">
@@ -128,3 +128,4 @@ print(f"Eigenvectors:\n{vecs}")
     </div>
   `
 };
+

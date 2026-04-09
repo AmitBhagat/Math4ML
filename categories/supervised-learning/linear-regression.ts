@@ -149,3 +149,4 @@ print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
   `
 };
 
+

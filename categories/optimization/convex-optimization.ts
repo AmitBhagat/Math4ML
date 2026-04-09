@@ -25,13 +25,13 @@ export const convexOptimizationSection: TopicSection = {
       </div>
 
       <p>The core mathematical foundations include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Convex Set ($\mathcal{C}$)</strong>: A set where every line segment connecting two points in the set is entirely contained within the set: $\forall \mathbf{x}, \mathbf{y} \in \mathcal{C}, \forall \theta \in [0, 1] \implies (1-\theta)\mathbf{x} + \theta\mathbf{y} \in \mathcal{C}$.</li>
         <li><strong>Convex Function</strong>: A function $f$ whose epigraph is a convex set, satisfying <strong>Jensen's Inequality</strong>: $f((1-\theta)\mathbf{x} + \theta\mathbf{y}) \le (1-\theta)f(\mathbf{x}) + \theta f(\mathbf{y})$.</li>
         <li><strong>The Global Property</strong>: For a convex function on a convex domain, any **local minimum is also the global minimum**. This property ensures that first-order methods (like Gradient Descent) will never converge to a sub-optimal basin.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Convexity is the gold standard for reliability in optimization, utilized extensively in Linear Regression, Logistic Regression, and Support Vector Machines.</p>
+      <p class="mt-2">Convexity is the gold standard for reliability in optimization, utilized extensively in Linear Regression, Logistic Regression, and Support Vector Machines.</p>
     </div>
     
     <div class="callout tip">
@@ -125,3 +125,4 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
     </div>
   `
 };
+

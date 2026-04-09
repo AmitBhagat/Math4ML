@@ -23,7 +23,7 @@ export const baggingSection: TopicSection = {
         $$\text{Regression: } \hat{f}_{bag}(\mathbf{x}) = \frac{1}{m} \sum_{i=1}^m \hat{f}_i(\mathbf{x})$$
         $$\text{Classification: } \hat{f}_{bag}(\mathbf{x}) = \text{mode}\{ \hat{f}_1(\mathbf{x}), \dots, \hat{f}_m(\mathbf{x}) \}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\hat{f}_i$ is the model trained on the $i$-th bootstrap sample. This process reduces the expected error by decreasing the variance component without significantly increasing bias.</p>
+      <p class="mt-2">Where $\hat{f}_i$ is the model trained on the $i$-th bootstrap sample. This process reduces the expected error by decreasing the variance component without significantly increasing bias.</p>
     </div>
     
     <div class="callout tip">
@@ -161,4 +161,5 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
     </div>
   `
 };
+
 

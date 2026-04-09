@@ -26,7 +26,7 @@ export const backpropagationSection: TopicSection = {
       <div class="math-block">
         $$\delta^{(l)} = \left( (\mathbf{W}^{(l+1)})^T \delta^{(l+1)} \right) \odot \sigma'(\mathbf{z}^{(l)})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\odot$ represents the Hadamard product (element-wise multiplication).</p>
+      <p class="mt-2">Where $\odot$ represents the Hadamard product (element-wise multiplication).</p>
     </div>
     
     <div class="callout tip">
@@ -135,4 +135,5 @@ print(f"New Improved Weight: {w:.4f}")
     </div>
   `
 };
+
 

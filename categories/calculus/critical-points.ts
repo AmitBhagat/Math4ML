@@ -31,12 +31,12 @@ export const criticalPointsSection: TopicSection = {
         $$\nabla f(\mathbf{x}^*) = \mathbf{0}$$
       </div>
       <p>To determine the nature of a critical point, we utilize the **Second Derivative Test** based on the eigenvalues ($\lambda_i$) of the Hessian matrix $\mathbf{H}$ at $\mathbf{x}^*$:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Local Minimum</strong>: $\mathbf{H}$ is positive definite ($\lambda_i > 0$ for all $i$). Geometrically, all directions lead uphill.</li>
         <li><strong>Local Maximum</strong>: $\mathbf{H}$ is negative definite ($\lambda_i < 0$ for all $i$). Geometrically, all directions lead downhill.</li>
         <li><strong>Saddle Point</strong>: $\mathbf{H}$ is indefinite (both positive and negative eigenvalues exist). The point is a minimum in one direction and a maximum in another.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
+      <p class="mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
@@ -125,4 +125,5 @@ print(f"Value at Min: {res.fun}")
     </div>
   `
 };
+
 

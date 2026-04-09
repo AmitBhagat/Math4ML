@@ -26,7 +26,7 @@ export const decisionTreesSection: TopicSection = {
       <div class="math-block">
         $$G = \sum_{k=1}^K p_{mk}(1 - p_{mk})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
+      <p class="mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
     </div>
     
     <div class="callout tip">
@@ -144,4 +144,5 @@ print(f"Feature Importances: {model.feature_importances_}")
     </div>
   `
 };
+
 

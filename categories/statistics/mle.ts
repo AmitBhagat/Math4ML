@@ -31,12 +31,12 @@ export const mleSection: TopicSection = {
         $$L(\theta) = \prod_{i=1}^n f(x_i | \theta)$$
       </div>
       <p>The **Maximum Likelihood Estimate** is the parameter value that produces the highest likelihood for the observed evidence:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Log-Transformation</strong>: Maximizing $L(\theta)$ is equivalent to maximizing the <strong>Log-Likelihood</strong> $\ell(\theta) = \sum \log f(x_i | \theta)$, which simplifies products into sums.</li>
         <li><strong>Numerical Optimization</strong>: In ML, we typically minimize the <strong>Negative Log-Likelihood (NLL)</strong>. This aligns statistical estimation with standard optimization frameworks.</li>
         <li><strong>Sufficient Statistics</strong>: MLE often depends only on a few aggregate metrics of the data (like the sample mean or variance).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
+      <p class="mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
@@ -127,4 +127,5 @@ print(f"Sample Mean: {data.mean():.4f}")
     </div>
   `
 };
+
 

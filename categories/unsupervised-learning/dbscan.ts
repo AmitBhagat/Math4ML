@@ -19,7 +19,7 @@ export const dbscanSection: TopicSection = {
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: DBSCAN Clustering</div>
       <p>Given parameters $\epsilon$ (radius) and $MinPts$ (density threshold), DBSCAN classifies points into three categories based on their $\epsilon$-neighborhood $N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Core Point</strong>: $|N_{\epsilon}(p)| \ge MinPts$.</li>
         <li><strong>Border Point</strong>: $|N_{\epsilon}(p)| < MinPts$, but $p$ is reachable from a core point.</li>
         <li><strong>Noise Point</strong>: Neither of the above.</li>
@@ -149,4 +149,5 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     </div>
   `
 };
+
 

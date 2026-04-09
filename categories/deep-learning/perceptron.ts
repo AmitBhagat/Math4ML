@@ -26,7 +26,7 @@ export const perceptronSection: TopicSection = {
       <div class="math-block">
         $$\mathbf{w}_{t+1} = \mathbf{w}_t + \eta(y - \hat{y})\mathbf{x}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
+      <p class="mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
     </div>
     
     <div class="callout tip">
@@ -125,4 +125,5 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     </div>
   `
 };
+
 

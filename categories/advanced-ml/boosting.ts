@@ -26,7 +26,7 @@ export const boostingSection: TopicSection = {
       <div class="math-block">
         $$h_m = \arg\min_{h \in \mathcal{H}} \sum_{i=1}^n \left( -\left[ \frac{\partial \mathcal{L}(y_i, F_{m-1}(\mathbf{x}_i))}{\partial F_{m-1}(\mathbf{x}_i)} \right] - h(\mathbf{x}_i) \right)^2$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate (shrinkage). This process iteratively moves the ensemble toward the global minimum of the loss surface.</p>
+      <p class="mt-2">Where $\eta$ is the learning rate (shrinkage). This process iteratively moves the ensemble toward the global minimum of the loss surface.</p>
     </div>
     
     <div class="callout tip">
@@ -159,4 +159,5 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
     </div>
   `
 };
+
 

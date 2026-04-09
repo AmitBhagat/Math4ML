@@ -23,13 +23,13 @@ export const confusionMatrixSection: TopicSection = {
         $$\mathbf{C} = \begin{bmatrix} TN & FP \\ FN & TP \end{bmatrix}$$
       </div>
       <p>The four quadrants represent the possible outcomes of a binary test:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positive)</strong>: The model correctly predicted the positive class.</li>
         <li><strong>TN (True Negative)</strong>: The model correctly predicted the negative class.</li>
         <li><strong>FP (False Positive)</strong>: The model predicted positive for an actual negative (Type I Error).</li>
         <li><strong>FN (False Negative)</strong>: The model predicted negative for an actual positive (Type II Error).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
+      <p class="mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
     </div>
     
     <div class="callout tip">
@@ -156,4 +156,5 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     </div>
   `
 };
+
 

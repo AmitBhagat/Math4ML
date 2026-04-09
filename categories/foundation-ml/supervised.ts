@@ -23,12 +23,12 @@ export const supervisedLearningSection: TopicSection = {
         $$\hat{f} = \arg \min_{f \in \mathcal{H}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(\mathbf{x}_i))$$
       </div>
       <p>The paradigm is bifurcated into two distinct mathematical problems:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Regression</strong>: $\mathcal{Y}$ is a continuous space ($\mathbb{R}$). The objective is to estimate a numerical value based on continuous or categorical features.</li>
         <li><strong>Classification</strong>: $\mathcal{Y}$ is a discrete set of classes $\{C_1, \dots, C_k\}$. The objective is to determine the decision boundaries that separate these categories in high-dimensional space.</li>
         <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use **MSE**; for classification, we use **Cross-Entropy**.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
+      <p class="mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
@@ -96,5 +96,6 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     </div>
   `
 };
+
 
 

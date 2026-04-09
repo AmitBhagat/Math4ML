@@ -45,7 +45,7 @@ export const diffusionModelsSection: TopicSection = {
     <div class="premium-def-box">
       <div class="premium-def-title">Noise Addition Formula</div>
       <div class="math-block">$$q(x_t | x_{t-1}) = \mathcal{N}(x_t; \sqrt{1-\beta_t}x_{t-1}, \beta_t \mathbf{I})$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $\beta_t$ is the noise schedule that controls how much "static" we add at each step $t$.</p>
+      <p class="mt-2">Where $\beta_t$ is the noise schedule that controls how much "static" we add at each step $t$.</p>
     </div>
 
     <h2 id="reverse-process">The Reverse Process (Recovery)</h2>
@@ -137,4 +137,5 @@ print("\n[Result] The 'Temperature' of the data is dropping as we find structure
     </div>
   `
 };
+
 

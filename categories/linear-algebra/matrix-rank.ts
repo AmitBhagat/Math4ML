@@ -23,7 +23,7 @@ export const matrixRankSection: TopicSection = {
         $$\text{rank}(A) = \dim(\text{col}(A)) = \dim(\text{row}(A))$$
       </div>
       <p>Crucially, $\text{rank}(A) \le \min(m, n)$. A matrix is called **Full Rank** if its rank equals the smaller of its two dimensions. Key implications include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Invertibility</strong>: A square $n \times n$ matrix is invertible iff $\text{rank}(A) = n$.</li>
         <li><strong>Redundancy</strong>: If $\text{rank}(A) < n$, then there exist linearly dependent columns (i.e., redundant features).</li>
         <li><strong>Rank-Nullity Theorem</strong>: $\text{rank}(A) + \dim(\text{null}(A)) = n$.</li>
@@ -122,3 +122,4 @@ print(f"Matrix Rank: {rank}")
     </div>
   `
 };
+

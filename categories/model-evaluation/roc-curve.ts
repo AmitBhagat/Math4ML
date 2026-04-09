@@ -25,12 +25,12 @@ export const rocCurveSection: TopicSection = {
       </div>
       
       <p>The axes are defined by conditional probabilities:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>True Positive Rate (TPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=1)$. This measures the probability of detecting a positive instance correctly.</li>
         <li><strong>False Positive Rate (FPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=0)$. This measures the probability of a "False Alarm" in the negative class.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
+      <p class="mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
     </div>
     
     <div class="callout tip">
@@ -151,4 +151,5 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
     </div>
   `
 };
+
 

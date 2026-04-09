@@ -31,12 +31,12 @@ export const klDivergenceSection: TopicSection = {
         $$D_{KL}(P \parallel Q) = \sum_{x \in \mathcal{X}} P(x) \log \frac{P(x)}{Q(x)}$$
       </div>
       <p>This measure is governed by the following core mathematical constraints:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Gibbs' Inequality</strong>: $D_{KL}(P \parallel Q) \ge 0$. The information loss is never negative. It is exactly zero if and only if $P = Q$.</li>
         <li><strong>Non-Symmetry</strong>: $D_{KL}(P \parallel Q) \neq D_{KL}(Q \parallel P)$. Approximating a complex reality with a simple model is not the same as the reverse. Thus, KL is a **Divergence**, not a metric.</li>
         <li><strong>Relation to Loss</strong>: $D_{KL}(P \parallel Q) = H(P, Q) - H(P)$. It is the "pure" inaccuracy of the model, stripped of the data's inherent entropy.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we use KL divergence to force latent spaces to follow specific shapes (VAEs) and to transfer knowledge between models (Distillation).</p>
+      <p class="mt-2">In ML, we use KL divergence to force latent spaces to follow specific shapes (VAEs) and to transfer knowledge between models (Distillation).</p>
     </div>
     
     <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
@@ -117,4 +117,5 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
     </div>
   `
 };
+
 

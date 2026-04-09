@@ -26,7 +26,7 @@ export const stackingSection: TopicSection = {
       <div class="math-block">
         $$z_{i,m} = h_m^{(-i)}(\mathbf{x}_i)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $h_m^{(-i)}$ is the $m$-th model trained on a subset of the data that excludes sample $i$.</p>
+      <p class="mt-2">Where $h_m^{(-i)}$ is the $m$-th model trained on a subset of the data that excludes sample $i$.</p>
     </div>
     
     <div class="callout tip">
@@ -170,4 +170,5 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
     </div>
   `
 };
+
 

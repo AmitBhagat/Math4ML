@@ -24,12 +24,12 @@ export const momentumSection: TopicSection = {
         $$\theta_{t+1} = \theta_t - v_{t+1}$$
       </div>
       <p>This physical analogy provides the optimizer with two critical capabilities:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Friction ($\gamma$)</strong>: The momentum coefficient (typically 0.9) determines what percentage of the previous velocity is kept. it prevents the "Bolder" from rolling infinitely.</li>
         <li><strong>Oscillation Dampening</strong>: In directions where the gradient changes sign (jitter), the velocity terms cancel out. In consistent directions, the velocity builds up.</li>
         <li><strong>Ravine Navigation</strong>: Many loss functions have narrow "valleys" (high curvature in one dimension). Momentum allows the optimizer to focus on the long-term downward trend rather than bouncing between the valley walls.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
+      <p class="mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>
@@ -105,5 +105,6 @@ for i in range(11):
     </div>
   `
 };
+
 
 

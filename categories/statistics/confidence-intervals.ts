@@ -31,13 +31,13 @@ export const confidenceIntervalsSection: TopicSection = {
         $$P(L \le \theta \le U) = 1 - \alpha$$
       </div>
       <p>For estimating the population mean $\mu$ under the assumption of normality, the interval is constructed as:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Standard Formula</strong>: $CI = \bar{x} \pm z^* \left( \frac{\sigma}{\sqrt{n}} \right)$, where $\bar{x}$ is the sample mean.</li>
         <li><strong>Margin of Error</strong>: The term $z^* \frac{\sigma}{\sqrt{n}}$ represents the maximum expected distance between the point estimate and the true parameter.</li>
         <li><strong>Critical Value ($z^*$)</strong>: Determined by the level of confidence; for a 95% CI, $z^* \approx 1.96$ (from the standard normal distribution).</li>
         <li><strong>Sample Size Impact</strong>: The width of the interval is inversely proportional to $\sqrt{n}$. Tripling the confidence level requires a much larger sample to maintain the same precision.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
+      <p class="mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
     </div>
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
@@ -127,4 +127,5 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     </div>
   `
 };
+
 

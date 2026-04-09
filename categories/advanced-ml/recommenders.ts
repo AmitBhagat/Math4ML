@@ -26,7 +26,7 @@ export const recommendersSection: TopicSection = {
       <div class="math-block">
         $$J = \sum_{(u,i) \in \mathcal{K}} (r_{u,i} - \mathbf{p}_u \mathbf{q}_i^T)^2 + \lambda \left( \sum_{u} \|\mathbf{p}_u\|^2 + \sum_{i} \|\mathbf{q}_i\|^2 \right)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\lambda$ controls the bias-variance tradeoff (regularization). This captures the high-level "DNA" of user taste and item attributes.</p>
+      <p class="mt-2">Where $\lambda$ controls the bias-variance tradeoff (regularization). This captures the high-level "DNA" of user taste and item attributes.</p>
     </div>
     
     <div class="callout tip">
@@ -45,7 +45,7 @@ export const recommendersSection: TopicSection = {
     <div class="premium-def-box">
       <div class="premium-def-title">The Fundamental Approximation</div>
       <div class="math-block">$$R \approx U \cdot V^T$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $R$ is the User-Item rating matrix, $U$ contains User preferences, and $V$ contains Item characteristics in a low-dimensional "Latent Space."</p>
+      <p class="mt-2">Where $R$ is the User-Item rating matrix, $U$ contains User preferences, and $V$ contains Item characteristics in a low-dimensional "Latent Space."</p>
     </div>
 
     <h2 id="filtering-types">Two Ways to Match</h2>
@@ -132,4 +132,5 @@ print(f"\nUser4 Recommendation for 'The_Matrix' (interpolated): 1.8 stars (Low M
     </div>
   `
 };
+
 

@@ -42,7 +42,7 @@ export const gansSection: TopicSection = {
     <div class="premium-def-box">
       <div class="premium-def-title">The Value Function</div>
       <div class="math-block">$$\min_G \max_D V(D, G) = \mathbb{E}_{x \sim p_{data}}[\log D(x)] + \mathbb{E}_{z \sim p_z}[\log(1 - D(G(z)))]$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $D(x)$ is the probability that $x$ is real, and $G(z)$ is the forged image generated from random noise $z$.</p>
+      <p class="mt-2">Where $D(x)$ is the probability that $x$ is real, and $G(z)$ is the forged image generated from random noise $z$.</p>
     </div>
 
     <h2 id="components">The Dynamic Duo</h2>
@@ -134,4 +134,5 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
     </div>
   `
 };
+
 

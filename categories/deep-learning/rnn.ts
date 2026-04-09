@@ -26,7 +26,7 @@ export const rnnSection: TopicSection = {
       <div class="math-block">
         $$\mathbf{y}_t = \text{Softmax}(\mathbf{W}_{hy} \mathbf{h}_t + \mathbf{b}_y)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
+      <p class="mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
     </div>
     
     <div class="callout tip">
@@ -115,4 +115,5 @@ for i, x_t in enumerate(sequence):
     </div>
   `
 };
+
 

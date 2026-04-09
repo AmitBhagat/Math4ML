@@ -157,3 +157,4 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
   `
 };
 
+

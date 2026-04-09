@@ -34,7 +34,7 @@ export const dotProductSection: TopicSection = {
       <div class="math-block">
         $$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
+      <p class="mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
     </div>
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
@@ -111,4 +111,5 @@ print(f"Dot Product: {dot}")
     </div>
   `
 };
+
 

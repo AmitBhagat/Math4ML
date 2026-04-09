@@ -23,13 +23,13 @@ export const lrSchedulingSection: TopicSection = {
         $$\eta_t = f(t, \eta_{initial})$$
       </div>
       <p>Common scheduling paradigms used in state-of-the-art architectures include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Step/Exponential Decay</strong>: $\eta_{t+1} = \eta_t \cdot \gamma$. This creates a "Staircase" effect, allowing the model to stabilize and refine at discrete intervals.</li>
         <li><strong>Cosine Annealing</strong>: $\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + \cos(\frac{T_{cur}}{T_{max}}\pi))$. This provides a smooth, continuous transition that is highly effective for Deep Learning.</li>
         <li><strong>Warmup Phase</strong>: A linear increase in $\eta$ during the first $K$ steps to prevent gradient explosion caused by random weight initialization.</li>
         <li><strong>Cyclic Scheduling</strong>: Oscillating between a range of values to "restart" the search and prevent entrapment in sub-optimal basins.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
+      <p class="mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>
@@ -100,5 +100,6 @@ for e in [0, 25, 50, 75, 100]:
     </div>
   `
 };
+
 
 

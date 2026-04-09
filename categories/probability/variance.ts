@@ -31,13 +31,13 @@ export const varianceSection: TopicSection = {
         $$\text{Var}(X) = \mathbb{E}\left[(X - \mu)^2\right]$$
       </div>
       <p>This quantity provides the foundation for measuring uncertainty and dispersion in data series:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Computational Identity</strong>: $\text{Var}(X) = \mathbb{E}[X^2] - (\mathbb{E}[X])^2$. This is often easier to compute than the definition.</li>
         <li><strong>Scaling Property</strong>: $\text{Var}(aX + b) = a^2 \text{Var}(X)$. Shifts ($b$) do not affect dispersion; resizing ($a$) affects it quadratically.</li>
         <li><strong>Standard Deviation</strong>: $\sigma = \sqrt{\text{Var}(X)}$. This returns the measure to the same units as the original data.</li>
         <li><strong>Additivity</strong>: If $X$ and $Y$ are independent, $\text{Var}(X + Y) = \text{Var}(X) + \text{Var}(Y)$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In the **Bias-Variance Tradeoff**, variance represents the error stemming from a model's sensitivity to specific fluctuations in the training data.</p>
+      <p class="mt-2">In the **Bias-Variance Tradeoff**, variance represents the error stemming from a model's sensitivity to specific fluctuations in the training data.</p>
     </div>
     
     <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
@@ -128,4 +128,5 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
     </div>
   `
 };
+
 

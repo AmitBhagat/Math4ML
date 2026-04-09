@@ -24,12 +24,12 @@ export const whatIsMLSection: TopicSection = {
         $$\hat{h} = \arg \min_{h \in \mathcal{H}} \frac{1}{n} \sum_{i=1}^n L(y_i, h(\mathbf{x}_i))$$
       </div>
       <p>Where the learning process is defined by:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Task ($T$)</strong>: The problem being solved (e.g., Image Classification, Price Prediction).</li>
         <li><strong>Experience ($E$)</strong>: The training data $\mathcal{D} = \{(\mathbf{x}_1, y_1), \dots, (\mathbf{x}_n, y_n)\}$ provided to the system.</li>
         <li><strong>Performance Measure ($P$)</strong>: The **Loss Function** $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
+      <p class="mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
     </div>
     
     <div class="callout tip">
@@ -138,4 +138,5 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
     </div>
   `
 };
+
 

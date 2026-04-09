@@ -26,7 +26,7 @@ export const umapSection: TopicSection = {
       <div class="math-block">
         $$\text{CE}(P, Q) = \sum_{e} \left[ p_e \log\left(\frac{p_e}{q_e}\right) + (1-p_e) \log\left(\frac{1-p_e}{1-q_e}\right) \right]$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
+      <p class="mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
     </div>
     
     <div class="callout tip">
@@ -150,4 +150,5 @@ print(f"Status: Local and Global structure successfully preserved.")
     </div>
   `
 };
+
 

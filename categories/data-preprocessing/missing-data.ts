@@ -20,7 +20,7 @@ export const missingDataSection: TopicSection = {
       <div class="premium-def-title">Formalism: The Mechanisms of Missingness</div>
       <p>Missing data handling is governed by the relationship between the missingness indicator $M$ and the data distribution. We categorize missingness into three formal mechanisms (Rubin, 1976):</p>
       
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>MCAR (Missing Completely at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M)$. The absence of a value is independent of any data (e.g., a random hardware failure). Simple deletion is safe but reduces power.</li>
         <li><strong>MAR (Missing at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M \mid X_{obs})$. The missingness is systematic but can be fully explained by variables we have observed (e.g., younger people being less likely to respond to a survey).</li>
         <li><strong>MNAR (Missing Not at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis})$ depends on the missing values $X_{mis}$ themselves. This is a source of **Selection Bias** (e.g., people with extreme illness not appearing in a study).</li>
@@ -131,4 +131,5 @@ print(df)
     </div>
   `
 };
+
 

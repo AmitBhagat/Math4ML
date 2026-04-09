@@ -26,7 +26,7 @@ export const representationSection: TopicSection = {
       <div class="math-block">
         $$\max_{\theta} I(\mathbf{x}; f_\theta(\mathbf{x}))$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
+      <p class="mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
     </div>
     
     <div class="callout tip">
@@ -163,4 +163,5 @@ print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </div>
   `
 };
+
 

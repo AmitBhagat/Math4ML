@@ -26,7 +26,7 @@ export const ensembleIntroSection: TopicSection = {
       <div class="math-block">
         $$\text{Error}_{\text{ens}} = \overline{\text{Error}}_{\text{ind}} - \text{Ambiguity}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where Ambiguity measures the disagreement between models. This implies that the ensemble is always at least as accurate as the average of its members, provided they are diverse.</p>
+      <p class="mt-2">Where Ambiguity measures the disagreement between models. This implies that the ensemble is always at least as accurate as the average of its members, provided they are diverse.</p>
     </div>
     
     <div class="callout tip">
@@ -144,4 +144,5 @@ print(f"Council Consensus Accuracy: {score:.1%}")
     </div>
   `
 };
+
 

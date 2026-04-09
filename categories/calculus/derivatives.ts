@@ -31,12 +31,12 @@ export const derivativesSection: TopicSection = {
         $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
       </div>
       <p>A function is **Differentiable** at $x$ if this limit exists. The derivative provides an linear approximation of the function at a specific point, governed by several fundamental rules:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Power Rule</strong>: $\frac{d}{dx}x^n = nx^{n-1}$.</li>
         <li><strong>Linearity</strong>: $\frac{d}{dx}[af(x) + bg(x)] = af'(x) + bg'(x)$.</li>
         <li><strong>Product Rule</strong>: $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
+      <p class="mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
     </div>
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
@@ -113,4 +113,5 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </div>
   `
 };
+
 

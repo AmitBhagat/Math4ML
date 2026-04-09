@@ -22,7 +22,7 @@ export const knnSection: TopicSection = {
       <div class="math-block">
         $$\hat{f}(x) = \text{arg}\max_{c \in \mathcal{Y}} \sum_{i \in \mathcal{N}_k(x)} I(y_i = c)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
+      <p class="mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
     </div>
     
     <div class="callout tip">
@@ -163,4 +163,5 @@ print(f"Final Classification: {result[0]}")
     </div>
   `
 };
+
 

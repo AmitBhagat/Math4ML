@@ -26,7 +26,7 @@ export const transferLearningSection: TopicSection = {
       <div class="math-block">
         $$\hat{y}_T = f_T(\phi(\mathbf{x}_T; \theta_S); \theta_T)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
+      <p class="mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
     </div>
     
     <div class="callout tip">
@@ -156,4 +156,5 @@ print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </div>
   `
 };
+
 

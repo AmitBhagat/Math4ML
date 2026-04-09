@@ -26,7 +26,7 @@ export const tsneSection: TopicSection = {
       <div class="math-block">
         $$\mathcal{C} = KL(P \| Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
+      <p class="mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
     </div>
     
     <div class="callout tip">
@@ -156,4 +156,5 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     </div>
   `
 };
+
 

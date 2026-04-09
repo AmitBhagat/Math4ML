@@ -23,7 +23,7 @@ export const linearIndependenceSection: TopicSection = {
         $$\sum_{i=1}^k c_i \mathbf{v}_i = \mathbf{0}$$
       </div>
       <p>is satisfied **only** when $c_1 = c_2 = \dots = c_k = 0$. If there exists a non-trivial solution (where at least one $c_i \neq 0$), the set is **Linearly Dependent**.</p>
-      <p class="text-xs opacity-70 mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
+      <p class="mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
     </div>
     
     <div class="callout tip">
@@ -120,3 +120,4 @@ print(f"Is Independent? {is_independent}")
     </div>
   `
 };
+

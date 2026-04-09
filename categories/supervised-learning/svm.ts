@@ -23,7 +23,7 @@ export const svmSection: TopicSection = {
         $$\text{arg}\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^n \xi_i$$
       </div>
       <p>Subject to the constraints: $y_i(\mathbf{w}^T \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i$ and $\xi_i \ge 0$.</p>
-      <p class="text-xs opacity-70 mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
+      <p class="mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
     </div>
     
     <div class="callout tip">
@@ -150,4 +150,5 @@ print(f"Support Vector Coordinates: \n{sv}")
     </div>
   `
 };
+
 

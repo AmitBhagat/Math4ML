@@ -31,13 +31,13 @@ export const expectationSection: TopicSection = {
         $$\mathbb{E}[X] = \int_{\Omega} X(\omega) dP(\omega)$$
       </div>
       <p>In practical settings, this generalizes to discrete and continuous forms:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Discrete</strong>: $\mathbb{E}[X] = \sum_i x_i P(X = x_i)$.</li>
         <li><strong>Continuous</strong>: $\mathbb{E}[X] = \int_{-\infty}^\infty x f(x) dx$.</li>
         <li><strong>Law of the Unconscious Statistician</strong>: $\mathbb{E}[g(X)] = \int g(x) f(x) dx$.</li>
         <li><strong>Linearity</strong>: $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$. This property holds even if $X$ and $Y$ are dependent.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML training, the "Risk" we minimize is the expected value of the loss function over the data generating distribution.</p>
+      <p class="mt-2">In ML training, the "Risk" we minimize is the expected value of the loss function over the data generating distribution.</p>
     </div>
     
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
@@ -123,4 +123,5 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
     </div>
   `
 };
+
 

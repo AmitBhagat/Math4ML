@@ -23,12 +23,12 @@ export const matricesSection: TopicSection = {
         $$A = \begin{bmatrix} a_{1,1} & \dots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \dots & a_{m,n} \end{bmatrix}$$
       </div>
       <p>Key algebraic operations include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Matrix Addition</strong>: $(A + B)_{ij} = A_{ij} + B_{ij}$.</li>
         <li><strong>Scalar Scaling</strong>: $(c A)_{ij} = c A_{ij}$.</li>
         <li><strong>Transpose</strong>: $(A^\top)_{ij} = A_{ji}$ (Swapping rows and columns).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In the context of data, $A$ often represents $m$ observations each with $n$ features, or the synaptic weights connecting two layers in a neural network.</p>
+      <p class="mt-2">In the context of data, $A$ often represents $m$ observations each with $n$ features, or the synaptic weights connecting two layers in a neural network.</p>
     </div>
     
     <div class="callout tip">
@@ -129,3 +129,4 @@ print(f"Transpose:\n{A_t}")
     </div>
   `
 };
+

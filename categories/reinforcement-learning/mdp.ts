@@ -23,14 +23,14 @@ export const mdpSection: TopicSection = {
         $$P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \dots) = P(S_{t+1} | S_t, A_t)$$
       </div>
       <p>The components of the learning environment are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>State Space ($\mathcal{S}$)</strong>: The set of all possible situations the agent can be in.</li>
         <li><strong>Action Space ($\mathcal{A}$)</strong>: The set of all possible moves the agent can take.</li>
         <li><strong>Transition Probability ($\mathcal{P}$)</strong>: The probability $P(s' | s, a)$ of landing in state $s'$ after taking action $a$ in state $s$.</li>
         <li><strong>Reward Function ($\mathcal{R}$)</strong>: The immediate feedback $R(s, a)$ provided by the environment.</li>
         <li><strong>Discount Factor ($\gamma$)</strong>: A value in $[0, 1)$ that determines the present value of future rewards.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The agent's objective is to find a **Policy** $\pi(s)$ that maximizes the expected cumulative discounted Reward (the Return).</p>
+      <p class="mt-2">The agent's objective is to find a **Policy** $\pi(s)$ that maximizes the expected cumulative discounted Reward (the Return).</p>
     </div>
     
     <div class="callout tip">
@@ -106,4 +106,5 @@ print(f"Action taken. New State: {state}, Reward: {reward}")
     </div>
   `
 };
+
 

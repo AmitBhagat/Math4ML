@@ -23,12 +23,12 @@ export const sgdSection: TopicSection = {
         $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J_i(\theta_t)$$
       </div>
       <p>This approach introduces high-frequency noise but offers significant computational advantages:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Unbiased Estimation</strong>: $\mathbb{E}_i [\nabla J_i(\theta)] = \nabla J(\theta)$. On average, the stochastic step points in the same direction as the true batch gradient.</li>
         <li><strong>Exploration via Noise</strong>: The "jitter" in the optimization path helps the model escape high-loss regions and shallow plateaus where Batch GD might stall.</li>
         <li><strong>Mini-Batch Vectorization</strong>: In practice, we use a small subset $\mathcal{B}$ to compute the gradient $\frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla J_i(\theta)$, which balances hardware efficiency with gradient stability.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">SGD is the workhorse of Deep Learning, allowing for the training of billion-parameter models on datasets that cannot fit in system memory.</p>
+      <p class="mt-2">SGD is the workhorse of Deep Learning, allowing for the training of billion-parameter models on datasets that cannot fit in system memory.</p>
     </div>
     
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
@@ -112,5 +112,6 @@ for i in range(0, len(X), batch_size):
     </div>
   `
 };
+
 
 

@@ -23,7 +23,7 @@ export const kmeansSection: TopicSection = {
         $$\text{arg}\min_{\mathbf{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
       </div>
       <p>Where $\mu_i$ is the mean of points in $S_i$. The algorithm iteratively performs two steps:</p>
-      <ol class="text-xs opacity-80 mt-2 space-y-1">
+      <ol class="mt-2 space-y-1">
         <li><strong>Assignment</strong>: Assign each observation to the cluster with the nearest mean: $S_i^{(t)} = \{x_p : \|x_p - \mu_i^{(t)}\|^2 \le \|x_p - \mu_j^{(t)}\|^2 \forall j \}$.</li>
         <li><strong>Update</strong>: Calculate the new means (centroids) of the observations in the new clusters: $\mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$.</li>
       </ol>
@@ -148,4 +148,5 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </div>
   `
 };
+
 

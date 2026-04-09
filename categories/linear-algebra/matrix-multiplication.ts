@@ -26,7 +26,7 @@ export const matrixMultiplicationSection: TopicSection = {
       <div class="math-block">
         $$(f \circ g)(\mathbf{x}) = A(B\mathbf{x})$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
+      <p class="mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
     </div>
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
@@ -115,4 +115,5 @@ print(f"Product: {C}")
     </div>
   `
 };
+
 

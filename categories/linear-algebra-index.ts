@@ -95,3 +95,4 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
     pcaSection
   ]
 };
+

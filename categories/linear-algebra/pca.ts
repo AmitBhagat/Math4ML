@@ -23,7 +23,7 @@ export const pcaSection: TopicSection = {
         $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \|X\mathbf{w}\|^2 = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^\top \Sigma \mathbf{w}$$
       </div>
       <p>Where $\Sigma = \frac{1}{n} X^\top X$ is the covariance matrix. The solution to this optimization problem leads to several critical properties:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Spectral Theorem</strong>: The principal components are the eigenvectors of $\Sigma$.</li>
         <li><strong>Variance Capture</strong>: The eigenvalue $\lambda_i$ represents the variance captured by the $i$-th component.</li>
         <li><strong>Decoupling</strong>: The transformed features (scores) are linearly uncorrelated.</li>
@@ -148,3 +148,4 @@ print(f"Reduced Shape: {X_reduced.shape}")
     </div>
   `
 };
+

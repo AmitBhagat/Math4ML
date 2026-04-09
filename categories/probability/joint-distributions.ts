@@ -31,12 +31,12 @@ export const jointDistributionsSection: TopicSection = {
         $$F_{X,Y}(x, y) = P(X \le x, Y \le y)$$
       </div>
       <p>The joint behavior is expressed through two primary functional forms depending on the variable types:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Joint PMF</strong>: For discrete variables, $p(x, y) = P(X=x, Y=y)$, satisfying $\sum_x \sum_y p(x, y) = 1$.</li>
         <li><strong>Joint PDF</strong>: For continuous variables, $f(x, y)$ is the surface such that the volume under it over a region $A$ is $P((X, Y) \in A) = \iint_A f(x, y) dx dy$.</li>
         <li><strong>Marginalization</strong>: The distribution of a single variable $X$ is obtained by "summing out" the other variable: $f_X(x) = \int_{-\infty}^\infty f(x, y) dy$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
+      <p class="mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
     </div>
     
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
@@ -123,4 +123,5 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     </div>
   `
 };
+
 

@@ -43,7 +43,7 @@ export const randomForestSection: TopicSection = {
         $$\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^B T_b(x, \Theta_b)$$
       </div>
       <p>Where $\Theta_b$ represents the random parameters for the $b$-th tree, generated through:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Bootstrap Aggregating (Bagging)</strong>: Training each tree on a sample drawn with replacement.</li>
         <li><strong>Feature Selection</strong>: Choosing the best split from a random subset of $m \approx \sqrt{d}$ features.</li>
       </ul>
@@ -159,4 +159,5 @@ print(f"Confidence Score: {votes[1]:.1%}")
     </div>
   `
 };
+
 

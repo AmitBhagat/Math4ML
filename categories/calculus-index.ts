@@ -83,3 +83,4 @@ export const CALCULUS_DATA: CategoryData = {
     integralsSection
   ]
 };
+

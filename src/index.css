@@ -214,7 +214,7 @@
       0 10px 30px -5px rgba(0, 0, 0, 0.05);
   }
   .premium-def-title {
-    @apply font-mono text-[12px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-70;
+    @apply font-mono text-[13px] md:text-[14px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-80;
   }
 
   .premium-case-study {
@@ -267,7 +267,7 @@
     background: rgba(255, 255, 255, 0.03);
   }
   .def-title {
-    @apply font-mono text-[11px] text-purple-premium uppercase tracking-[0.3em] mb-4 opacity-80;
+    @apply font-mono text-[12px] md:text-[13px] text-purple-premium uppercase tracking-[0.3em] mb-4 opacity-90;
   }
 
   .example-box {
@@ -291,6 +291,23 @@
   .math-block {
     @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[17px] max-w-full;
     border-left: 3px solid var(--accent);
+  }
+
+  /* Remove backgrounds/borders when math is inside a definition or case study */
+  .premium-def-box .math-block,
+  .def-box .math-block,
+  .premium-def-box .premium-math-block,
+  .def-box .premium-math-block,
+  .premium-case-study .math-block,
+  .example-box .math-block {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: none !important;
+    overflow: visible;
   }
 
   /* Linking Rules */

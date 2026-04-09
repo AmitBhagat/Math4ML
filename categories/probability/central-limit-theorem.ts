@@ -31,12 +31,12 @@ export const centralLimitTheoremSection: TopicSection = {
         $$\text{The standardized sum } Z = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)$$
       </div>
       <p>This theorem provides three fundamental pillars for statistical modeling:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Distributional Independence</strong>: The result holds whether the underlying $X_i$ are Bernoulli, Poisson, or any other distribution (provided $\sigma^2 < \infty$).</li>
         <li><strong>Sample Mean Distribution</strong>: The sample mean $\bar{X}_n$ follows $\mathcal{N}(\mu, \sigma^2/n)$. The "Standard Error" decreases at a rate of $1/\sqrt{n}$.</li>
         <li><strong>Z-Score Standardization</strong>: The formula $\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}$ is used to calculate probabilities on the standard normal curve.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">CLT is the reason why **Squared Loss** (MSE) is the optimal objective under the assumption of aggregate, independent noise terms.</p>
+      <p class="mt-2">CLT is the reason why **Squared Loss** (MSE) is the optimal objective under the assumption of aggregate, independent noise terms.</p>
     </div>
     
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
@@ -120,4 +120,5 @@ plt.show()
     </div>
   `
 };
+
 

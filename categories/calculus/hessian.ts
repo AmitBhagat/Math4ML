@@ -31,7 +31,7 @@ export const hessianSection: TopicSection = {
         $$\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$
       </div>
       <p>The Hessian is the fundamental tool for "Second-Order" optimization and stability analysis:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Characterizing Extrema</strong>: If $\nabla f(\mathbf{x}) = \mathbf{0}$ and $\mathbf{H}(\mathbf{x})$ is positive definite, $\mathbf{x}$ is a local minimum. If $\mathbf{H}(\mathbf{x})$ is negative definite, it is a local maximum.</li>
         <li><strong>Taylor Approximation</strong>: The Hessian defines the parabolic (quadratic) shape of the function locally.</li>
         <li><strong>Conditioning</strong>: The ratio of max/min eigenvalues of $\mathbf{H}$ tells us if the "bowl" is perfectly circular or a narrow, stretched canyon (making gradient descent slow).</li>
@@ -149,3 +149,4 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     </div>
   `
 };
+

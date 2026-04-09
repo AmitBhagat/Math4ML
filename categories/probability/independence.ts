@@ -31,12 +31,12 @@ export const independenceSection: TopicSection = {
         $$P(A \cap B) = P(A) \cdot P(B)$$
       </div>
       <p>For random variables $X$ and $Y$, independence implies the factorization of their density or mass functions:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Equality of Conditionals</strong>: If $A$ and $B$ are independent, $P(A | B) = P(A)$ and $P(B | A) = P(B)$.</li>
         <li><strong>Mutual Independence</strong>: A set of events $\{A_i\}$ is independent if $P(\bigcap_{i \in S} A_i) = \prod_{i \in S} P(A_i)$ for every subset $S$.</li>
         <li><strong>Conditional Independence</strong>: $X \perp Y \mid Z$ if $P(X, Y | Z) = P(X | Z)P(Y | Z)$. This is the "Naive" assumption in probabilistic modeling.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
+      <p class="mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
@@ -125,4 +125,5 @@ print(f"P(A) * P(B): {check:.4f}")
     </div>
   `
 };
+
 

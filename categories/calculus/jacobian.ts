@@ -34,7 +34,7 @@ export const jacobianSection: TopicSection = {
         \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$
       </div>
       <p>The Jacobian plays three critical roles in advanced mathematical modeling:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Multivariate Chain Rule</strong>: To differentiate $\mathbf{f}(\mathbf{g}(\mathbf{x}))$, we multiply their Jacobians: $\mathbf{J}_{\mathbf{f} \circ \mathbf{g}} = \mathbf{J}_{\mathbf{f}} \cdot \mathbf{J}_{\mathbf{g}}$.</li>
         <li><strong>Local Linearization</strong>: Near $\mathbf{x}$, the change in output is predicted by $\Delta \mathbf{f} \approx \mathbf{J} \Delta \mathbf{x}$.</li>
         <li><strong>Volume Scaling</strong>: If $n=m$, $|\det(\mathbf{J})|$ measures how the transformation expands or shrinks space locally.</li>
@@ -129,4 +129,5 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </div>
   `
 };
+
 

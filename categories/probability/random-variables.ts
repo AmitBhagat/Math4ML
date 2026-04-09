@@ -31,12 +31,12 @@ export const randomVariablesSection: TopicSection = {
         $$X(\omega) = x, \quad \omega \in \Omega, x \in \mathbb{R}$$
       </div>
       <p>The behavior of an RV is described by its probability distribution:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Discrete RV</strong>: Maps to a countable set. Defined by a <strong>PMF</strong> $p(x) = P(X = x)$ where $\sum p(x_i) = 1$.</li>
         <li><strong>Continuous RV</strong>: Maps to an uncountable set (intervals). Defined by a <strong>PDF</strong> $f(x)$ such that $P(a \le X \le b) = \int_a^b f(x) dx$.</li>
         <li><strong>Cumulative Property</strong>: All RVs possess a <strong>CDF</strong> $F(x) = P(X \le x)$, which is non-decreasing and bounded between 0 and 1.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we treat features as realizations of underlying random variables $X_1, X_2, \dots, X_n$.</p>
+      <p class="mt-2">In ML, we treat features as realizations of underlying random variables $X_1, X_2, \dots, X_n$.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
@@ -119,4 +119,5 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
     </div>
   `
 };
+
 

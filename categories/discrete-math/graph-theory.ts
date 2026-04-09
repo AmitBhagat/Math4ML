@@ -21,7 +21,7 @@ export const graphTheorySection: TopicSection = {
       <p>A graph $G$ is an ordered pair $(V, E)$ consisting of a set of vertices $V$ and a set of edges $E$. In machine learning, graphs formalize both the structure of data (Relational Graphs) and the structure of computations (DAGs).</p>
       
       <p>The mathematical properties of $G$ are defined as:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Vertices ($V$)</strong>: Represent discrete entities or states in a system. The cardinality $|V|$ defines the order of the graph.</li>
         <li><strong>Edges ($E$)</strong>: Represent the relationships between vertices.
           <ul class="pl-4 mt-1 opacity-90">
@@ -33,7 +33,7 @@ export const graphTheorySection: TopicSection = {
 
       <p class="text-xs opacity-80 mt-2"><strong>Adjacency Matrix ($\mathbf{A}$)</strong>: A matrix where $A_{ij} = 1$ if there is an edge $(v_i, v_j)$ and $0$ otherwise. This matrix bridges graph theory with Linear Algebra, enabling spectral analysis and the matrix-form implementation of Graph Neural Networks.</p>
       
-      <p class="text-xs opacity-70 mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
+      <p class="mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
     </div>
     
     <div class="callout tip">
@@ -198,3 +198,4 @@ if adj_matrix[1, 2] == 1:
     </div>
   `
 };
+

@@ -177,3 +177,4 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
   `
 };
 
+

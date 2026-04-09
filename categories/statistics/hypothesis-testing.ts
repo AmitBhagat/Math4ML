@@ -31,13 +31,13 @@ export const hypothesisTestingSection: TopicSection = {
         $$H_0: \theta = \theta_0, \quad H_a: \theta \neq \theta_0$$
       </div>
       <p>The decision is governed by the following analytical components:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Test Statistic ($T_{obs}$)</strong>: A numerical value calculated from sample data (e.g., $Z$, $t$, or $\chi^2$) that measures the deviation from $H_0$.</li>
         <li><strong>p-value</strong>: $P(T \ge T_{obs} \mid H_0)$. The probability of observing results as extreme as yours if the Null Hypothesis were true.</li>
         <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is **Statistically Significant**, and $H_0$ is rejected.</li>
         <li><strong>Decision Errors</strong>: **Type I** (rejecting a true $H_0$) and **Type II** (failing to reject a false $H_0$).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
+      <p class="mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
     </div>
     
     <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
@@ -144,4 +144,5 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
     </div>
   `
 };
+
 

@@ -23,12 +23,12 @@ export const biasVarianceTradeoffSection: TopicSection = {
         $$\mathbb{E}_D \left[ (y - \hat{f}(x; D))^2 \right] = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \sigma^2$$
       </div>
       <p>The constituents of the generalization error are defined as follows:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to **Underfitting**.</li>
         <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to **Overfitting**.</li>
         <li><strong>Irreducible Error ($\sigma^2$)</strong>: The lower bound on error caused by inherent noise in the true underlying process $y = f(x) + \epsilon$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>
+      <p class="mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>
     </div>
     
     <h2 id="bias">Bias: The Stubborn Model</h2>
@@ -127,5 +127,6 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
     </div>
   `
 };
+
 
 

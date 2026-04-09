@@ -20,14 +20,14 @@ export const categoricalEncodingSection: TopicSection = {
       <div class="premium-def-title">Formalism: Qualitative to Quantitative Projection</div>
       <p>Categorical Encoding is the process of mapping a categorical variable $X$ with domain $\mathcal{C} = \{c_1, \dots, c_k\}$ into a numeric vector space. The two primary paradigms are defined by the structure of $\mathcal{C}$:</p>
       
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Ordinal Encoding</strong>: Used when $\mathcal{C}$ possesses a natural ordering $\preceq$. The mapping $f: \mathcal{C} \to \mathbb{Z}^+$ satisfies $c_i \preceq c_j \iff f(c_i) \le f(c_j)$. This preserves the "Magnitude" of the relationship (e.g., Cold < Warm < Hot).</li>
         <li><strong>One-Hot Encoding</strong>: Used for nominal data where no order exists. The mapping $\phi: \mathcal{C} \to \{0, 1\}^k$ projects each category onto a standard basis vector $\mathbf{e}_i$. This ensures all categories are **Equidistant** in the feature space: $\|\phi(c_i) - \phi(c_j)\|_2 = \sqrt{2}$ for all $i \neq j$.</li>
       </ul>
 
       <p class="text-xs opacity-80 mt-2"><strong>The Dummy Variable Trap</strong>: In models with an intercept term, the sum of all one-hot columns is always 1, creating a linear dependency: $\sum_{i=1}^k \mathbf{x}_i = \mathbf{1}$. This causes **Perfect Multicollinearity**, making the covariance matrix non-invertible. To prevent this, we typically drop one category ($k-1$ encoding).</p>
       
-      <p class="text-xs opacity-70 mt-2">Choose **One-Hot** to avoid false hierarchy in labels; choose **Ordinal** only when the numerical sequence reflects a semantic progression.</p>
+      <p class="mt-2">Choose **One-Hot** to avoid false hierarchy in labels; choose **Ordinal** only when the numerical sequence reflects a semantic progression.</p>
     </div>
     
     <div class="callout tip">
@@ -118,4 +118,5 @@ print(df_ohe)
     </div>
   `
 };
+
 

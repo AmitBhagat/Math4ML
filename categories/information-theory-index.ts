@@ -68,3 +68,4 @@ export const INFORMATION_THEORY_DATA: CategoryData = {
     klDivergenceSection
   ]
 };
+

@@ -24,7 +24,7 @@ export const activationsSection: TopicSection = {
         $$\text{Sigmoid: } \frac{1}{1 + e^{-z}}$$
         $$\text{Softmax: } \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
+      <p class="mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
     </div>
     
     <div class="callout tip">
@@ -117,4 +117,5 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     </div>
   `
 };
+
 

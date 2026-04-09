@@ -31,13 +31,13 @@ export const entropySection: TopicSection = {
         $$H(X) = -\sum_{x \in \mathcal{X}} P(x) \log_b P(x)$$
       </div>
       <p>This measurement is defined by the following mathematical axioms:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Self-Information</strong>: The "Surprise" of an individual outcome is $-\log P(x)$. Rare events have high surprise.</li>
         <li><strong>Units</strong>: If $b=2$, the unit is **Bits** (standard in CS). If $b=e$, the unit is **Nats** (standard in physics/continuous math).</li>
         <li><strong>Maximization</strong>: $H(X)$ is maximized when all outcomes are equally likely ($P(x) = 1/|\mathcal{X}|$), indicating total uncertainty.</li>
         <li><strong>Minimization</strong>: $H(X) = 0$ if and only if one outcome has probability 1. The result is perfectly predictable ("No news").</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
+      <p class="mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
@@ -121,4 +121,5 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     </div>
   `
 };
+
 

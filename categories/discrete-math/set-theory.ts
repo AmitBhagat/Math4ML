@@ -30,13 +30,13 @@ export const setTheorySection: TopicSection = {
       </div>
 
       <p>The structural properties of sets facilitate critical data operations:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Cardinality ($|S|$)</strong>: The measure of the number of elements in a set. In feature engineering, the cardinality of a categorical variable determines the dimensionality of the resulting One-Hot encoding.</li>
         <li><strong>Power Set ($\mathcal{P}(S)$)</strong>: The set of all subsets of $S$. This is the basis for exploring all possible combinations of features in attribute selection problems.</li>
         <li><strong>Inclusion ($\subseteq$)</strong>: A subset relationship where every element of the internal set is a member of the external set, defining the hierarchy of filtered data.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
+      <p class="mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
     </div>
     
     <div class="callout tip">
@@ -193,3 +193,4 @@ filtered_df = df[df['user_id'].isin(subset_list)]
     </div>
   `
 };
+

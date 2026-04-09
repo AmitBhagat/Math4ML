@@ -23,7 +23,7 @@ export const lossFunctionsSection: TopicSection = {
         $$J(\theta) = \frac{1}{n} \sum_{i=1}^n \mathcal{L}(f(\mathbf{x}_i; \theta), y_i)$$
       </div>
       <p>The choice of $\mathcal{L}$ is typically dictated by the output distribution of the data:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Gaussian (Regression)</strong>: $\mathcal{L} = (\hat{y} - y)^2$ (Mean Squared Error)</li>
         <li><strong>Bernoulli (Binary)</strong>: $\mathcal{L} = -(y \log \hat{y} + (1-y) \log (1-\hat{y}))$ (Log Loss)</li>
         <li><strong>Multinoulli (Multi-class)</strong>: $\mathcal{L} = -\sum y_k \log \hat{y}_k$ (Cross-Entropy)</li>
@@ -113,4 +113,5 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     </div>
   `
 };
+
 

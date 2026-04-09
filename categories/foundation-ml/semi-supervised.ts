@@ -23,12 +23,12 @@ export const semiSupervisedLearningSection: TopicSection = {
         $$J(f) = \sum_{i=1}^l L(y_i, f(\mathbf{x}_i)) + \lambda \cdot \Omega(f, \mathcal{U})$$
       </div>
       <p>The **Unsupervised Regularizer** $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Smoothness Assumption</strong>: If $\mathbf{x}_i$ and $\mathbf{x}_j$ are close in high-density regions, their outputs $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$ should be similar.</li>
         <li><strong>Low-Density Separation</strong>: The decision boundary should pass through areas where the marginal density $P(\mathbf{x})$ is low, effectively avoiding the "splitting" of natural clusters.</li>
         <li><strong>Manifold Assumption</strong>: Data points are assumed to lie on a low-dimensional manifold $\mathcal{M}$. SSL uses $\mathcal{U}$ to approximate $\mathcal{M}$ and ensures the model varies smoothly only along the manifold's surface.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">By leveraging the underlying geometry of $\mathcal{U}$, we reduce the sample complexity of $f$ significantly compared to pure supervised methods.</p>
+      <p class="mt-2">By leveraging the underlying geometry of $\mathcal{U}$, we reduce the sample complexity of $f$ significantly compared to pure supervised methods.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
@@ -90,5 +90,6 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     </div>
   `
 };
+
 
 

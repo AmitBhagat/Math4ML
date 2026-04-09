@@ -23,12 +23,12 @@ export const precisionSection: TopicSection = {
         $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1) = \frac{TP}{TP + FP}$$
       </div>
       <p>The components of the precision estimate are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positives)</strong>: Samples correctly identified as positive.</li>
         <li><strong>FP (False Positives)</strong>: Samples wrongly identified as positive (Type I Error).</li>
         <li><strong>Trade-off</strong>: Precision is often inversely related to **Recall**. Increasing the classification threshold (being "stricter") increases precision by reducing false alarms, but at the risk of missing genuine signals.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
+      <p class="mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
     </div>
     
     <div class="callout tip">
@@ -145,4 +145,5 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     </div>
   `
 };
+
 

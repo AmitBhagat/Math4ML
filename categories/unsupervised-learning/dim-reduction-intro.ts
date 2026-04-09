@@ -23,7 +23,7 @@ export const dimReductionIntroSection: TopicSection = {
         $$\mathbf{z}_i = f(\mathbf{x}_i) \in \mathbb{R}^k$$
       </div>
       <p>The choice of $f$ depends on what the algorithm prioritizes:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Linear (PCA)</strong>: Preserves maximum variance via orthogonal projection.</li>
         <li><strong>Manifold (t-SNE/UMAP)</strong>: Preserves the local/topological structure of the data.</li>
         <li><strong>Feature Selection</strong>: Prunes redundant or zero-variance dimensions from the set.</li>
@@ -151,4 +151,5 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     </div>
   `
 };
+
 

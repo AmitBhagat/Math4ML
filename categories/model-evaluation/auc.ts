@@ -29,12 +29,12 @@ export const aucSection: TopicSection = {
         $$\text{AUC} = \mathbb{P}(f(\mathbf{x}_+) > f(\mathbf{x}_-))$$
       </div>
 
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Separation Power</strong>: $\text{AUC} = 1.0$ implies a perfectly separated distribution where the lowest-scoring positive still ranks higher than the highest-scoring negative.</li>
         <li><strong>Random Baseline</strong>: $\text{AUC} = 0.5$ implies the distributions are overlapping and the model has no discriminative power (equivalent to a coin flip).</li>
         <li><strong>Invariance</strong>: AUC is invariant to the classification threshold and invariant to the prior class distribution (class skew).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
+      <p class="mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
     </div>
     
     <div class="callout tip">
@@ -157,4 +157,5 @@ print(f"Status: {auc*100:.1f}% probability of correct ranking.")
     </div>
   `
 };
+
 

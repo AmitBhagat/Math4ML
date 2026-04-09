@@ -26,14 +26,14 @@ export const bayesTheoremSection: TopicSection = {
       </div>
 
       <p>Where the components are characterized as follows:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Posterior ($P(\theta \mid \mathcal{D})$)</strong>: The probability that the hypothesis $\theta$ is true *after* considering data $\mathcal{D}$.</li>
         <li><strong>Likelihood ($P(\mathcal{D} \mid \theta)$)</strong>: The probability that the data $\mathcal{D}$ would have been observed given that $\theta$ is true.</li>
         <li><strong>Prior ($P(\theta)$)</strong>: The probability of $\theta$ before receiving any data, representing initial beliefs or domain knowledge.</li>
         <li><strong>Evidence ($P(\mathcal{D})$)</strong>: The marginal probability of the data, acting as a normalization constant: $P(\mathcal{D}) = \sum_{\theta'} P(\mathcal{D} \mid \theta') P(\theta')$.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Bayes' Theorem is the mathematical prerequisite for **Naive Bayes Classifiers**, **Bayesian Optimization**, and **Gaussian Processes**.</p>
+      <p class="mt-2">Bayes' Theorem is the mathematical prerequisite for **Naive Bayes Classifiers**, **Bayesian Optimization**, and **Gaussian Processes**.</p>
     </div>
 
     <div class="callout tip">
@@ -128,3 +128,4 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     </div>
   `
 };
+

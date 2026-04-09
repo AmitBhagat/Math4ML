@@ -26,7 +26,7 @@ export const gradientBoostingSection: TopicSection = {
       <div class="math-block">
         $$r_{im} = -\left[ \frac{\partial \mathcal{L}(y_i, F(x_i))}{\partial F(x_i)} \right]_{F(x)=F_{m-1}(x)}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
+      <p class="mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
     </div>
     
     <div class="callout tip">
@@ -168,4 +168,5 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
     </div>
   `
 };
+
 

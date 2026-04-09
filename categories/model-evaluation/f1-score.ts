@@ -23,14 +23,14 @@ export const f1ScoreSection: TopicSection = {
         $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
       </div>
       <p>The mathematical properties that make F1 superior to a simple average include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Sensitivity to Extremes</strong>: The harmonic mean is closer to the minimum of the two values. If either $P$ or $R$ drops to zero, the $F_1$ score drops to zero, correctly signaling a total failure of the model.</li>
         <li><strong>Robustness to Skew</strong>: In imbalanced datasets where one class dominates, F1 measures performance on the "Case of Interest" (the positive class) without being inflated by the "Easy" negative predictions.</li>
         <li><strong>Generalized Form ($F_\beta$)</strong>: The score can be weighted to emphasize one metric over the other using a $\beta$ parameter:
           $$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R}$$
         </li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
+      <p class="mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
     </div>
     
     <div class="callout tip">
@@ -149,4 +149,5 @@ print(f"F1 Final Score: {f1:.2f}")
     </div>
   `
 };
+
 

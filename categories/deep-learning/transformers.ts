@@ -26,7 +26,7 @@ export const transformersSection: TopicSection = {
       <div class="math-block">
         $$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O$$
       </div>
-      <p class="text-xs opacity-70 mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
+      <p class="mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
     </div>
     
     <div class="callout tip">
@@ -126,4 +126,5 @@ print(output.round(1))
     </div>
   `
 };
+
 

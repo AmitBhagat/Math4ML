@@ -28,12 +28,12 @@ export const featureScalingSection: TopicSection = {
       </div>
 
       <p>The mathematical necessity of scaling arises from the **Conditioning of the Optimizer**:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Distance Metrics</strong>: Algorithms like k-NN, SVM, and K-Means rely on Euclidean distances. Without scaling, the feature with the largest magnitude (e.g., Salary) will dominate the distance calculation, making the others statistically invisible.</li>
         <li><strong>Gradient Stability</strong>: Unscaled features create "Elongated" loss surfaces (contours with high eccentricity). This leads to an ill-conditioned **Hessian Matrix**, forcing Gradient Descent to oscillate at low learning rates. Scaling "Sphericalizes" the surface, ensuring stable, rapid convergence.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Use **Min-Max** when you have a bounded range and non-Gaussian data; use **Standardization** when your model assumes Gaussian distributions (e.g., Linear Regression, Neural Networks).</p>
+      <p class="mt-2">Use **Min-Max** when you have a bounded range and non-Gaussian data; use **Standardization** when your model assumes Gaussian distributions (e.g., Linear Regression, Neural Networks).</p>
     </div>
     
     <div class="callout tip">
@@ -138,4 +138,5 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
     </div>
   `
 };
+
 

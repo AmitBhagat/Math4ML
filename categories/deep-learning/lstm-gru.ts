@@ -29,7 +29,7 @@ export const lstmGruSection: TopicSection = {
         $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)$$
         $$h_t = o_t \odot \tanh(C_t)$$
       </div>
-      <p class="text-xs opacity-70 mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
+      <p class="mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
     </div>
     
     <div class="callout tip">
@@ -139,4 +139,5 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
     </div>
   `
 };
+
 

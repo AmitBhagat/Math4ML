@@ -31,12 +31,12 @@ export const gradientSection: TopicSection = {
         $$\nabla f(\mathbf{x}) = \left[ \frac{\partial f}{\partial x_1}, \frac{\partial f}{\partial x_2}, \dots, \frac{\partial f}{\partial x_n} \right]^\top$$
       </div>
       <p>The gradient possesses three properties that make it the engine of machine learning optimization:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Steepest Ascent</strong>: $\nabla f$ points in the direction of the maximum rate of increase of $f$ at $\mathbf{x}$.</li>
         <li><strong>Directional Derivative</strong>: The slope in any arbitrary direction $\mathbf{v}$ (unit vector) is given by $D_{\mathbf{v}}f = \nabla f \cdot \mathbf{v}$.</li>
         <li><strong>Geometry</strong>: The gradient vector is always orthogonal to the level set (contour line) of the function at that point.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
+      <p class="mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
     </div>
     
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
@@ -129,4 +129,5 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
     </div>
   `
 };
+
 

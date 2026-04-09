@@ -23,13 +23,13 @@ export const crossValidationSection: TopicSection = {
         $$\text{CV}(\hat{f}) = \frac{1}{k} \sum_{i=1}^k \mathcal{L}(\mathcal{D}_i, \hat{f}_{(-i)})$$
       </div>
       <p>The process follows a strict rotation protocol:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Training Phase</strong>: For each fold $i$, the model $\hat{f}_{(-i)}$ is trained on the union of all folds *except* $\mathcal{D}_i$.</li>
         <li><strong>Validation Phase</strong>: The trained model is evaluated on the held-out fold $\mathcal{D}_i$ to produce a local loss $\mathcal{L}_i$.</li>
         <li><strong>Model Selection</strong>: This technique is primarily used for hyperparameter tuning to ensure that chosen parameters generalize across the entire data distribution.</li>
         <li><strong>Variance vs. Bias</strong>: Increasing $k$ decreases the bias of the error estimate (as training sets look more like the full dataset) but increases the variance and computational cost.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Commonly, $k=5$ or $k=10$ provides a sufficient balance for most industrial ML applications.</p>
+      <p class="mt-2">Commonly, $k=5$ or $k=10$ provides a sufficient balance for most industrial ML applications.</p>
     </div>
     
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
@@ -106,5 +106,6 @@ print(f"Consistency (Std Dev): {scores.std():.3f}")
     </div>
   `
 };
+
 
 

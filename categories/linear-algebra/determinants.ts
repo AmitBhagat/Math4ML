@@ -23,7 +23,7 @@ export const determinantsSection: TopicSection = {
         $$\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}$$
       </div>
       <p>Where $S_n$ is the set of all permutations of $\{1, \dots, n\}$. Geometrically, $\det(A)$ represents the signed **Volume Scaling Factor** of the linear transformation. Essential takeaways include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Invertibility</strong>: $A$ is invertible $\iff \det(A) \neq 0$.</li>
         <li><strong>Composition</strong>: $\det(AB) = \det(A)\det(B)$.</li>
         <li><strong>Linear Dependence</strong>: $\det(A) = 0$ implies the rows/columns are linearly dependent.</li>
@@ -122,3 +122,4 @@ print(f"Determinant: {det:.2f}")
     </div>
   `
 };
+

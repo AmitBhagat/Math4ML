@@ -25,12 +25,12 @@ export const gradientDescentSection: TopicSection = {
       </div>
       
       <p>The components of the update are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>$\nabla_\theta J(\theta)$ (The Gradient)</strong>: The vector of partial derivatives $\left[ \frac{\partial J}{\partial \theta_1}, \dots, \frac{\partial J}{\partial \theta_d} \right]^\top$. It points in the direction of the steepest local increase.</li>
         <li><strong>$\eta$ (Learning Rate)</strong>: A positive scalar determining the step size. If $\eta$ is too large, the algorithm may overshoot the minimum; if too small, convergence becomes computationally prohibitive.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">For a **Convex** function, gradient descent is guaranteed to reach the global minimum. In deep learning (non-convex surfaces), the algorithm typically converges to a high-quality local minimum or a saddle point.</p>
+      <p class="mt-2">For a **Convex** function, gradient descent is guaranteed to reach the global minimum. In deep learning (non-convex surfaces), the algorithm typically converges to a high-quality local minimum or a saddle point.</p>
     </div>
     
     <div class="callout tip">
@@ -126,3 +126,4 @@ for i in range(10):
     </div>
   `
 };
+

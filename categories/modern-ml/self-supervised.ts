@@ -23,7 +23,7 @@ export const selfSupervisedSection: TopicSection = {
         $$\min_\theta \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathcal{G}(\mathbf{x})) ]$$
       </div>
       <p>Where $\tilde{\mathbf{x}}$ is a corrupted or partial version of $\mathbf{x}$. Common paradigms include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Auto-encoding</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with noise; $\mathcal{G}(\mathbf{x}) = \mathbf{x}$.</li>
         <li><strong>Masking</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with missing parts (e.g., in BERT); $\mathcal{G}(\mathbf{x})$ is the missing segment.</li>
         <li><strong>Instance Discrimination</strong>: Learning to distinguish $\mathbf{x}$ from other samples (Contrastive Learning).</li>
@@ -157,4 +157,5 @@ print("Views created. Model will now learn if these came from the SAME image.")
     </div>
   `
 };
+
 

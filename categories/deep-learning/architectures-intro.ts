@@ -23,7 +23,7 @@ export const architecturesIntroSection: TopicSection = {
         $$\mathbf{y} = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
       </div>
       <p>Common structural paradigms include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Feedforward (MLP)</strong>: Dense connectivity; assumes no specific topological relationship.</li>
         <li><strong>Convolutional (CNN)</strong>: Sparse connectivity and weight sharing; assumes **translation invariance** and local spatial correlation.</li>
         <li><strong>Recurrent (RNN)</strong>: Cyclic connectivity; assumes **temporal dependency** and sequential order.</li>
@@ -137,4 +137,5 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     </div>
   `
 };
+
 

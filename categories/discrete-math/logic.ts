@@ -21,7 +21,7 @@ export const logicSection: TopicSection = {
       <p>Mathematical logic is the formal study of valid reasoning through symbolic structures. In AI, it provides the deterministic engine for rule-based systems and formal verification.</p>
       
       <p>The hierarchy of logic includes two primary systems:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Propositional Logic</strong>: Concerned with atomic statements $P, Q$ that are either True ($1$) or False ($0$). Connectivity is defined by truth-functional operators: $\land$ (AND), $\lor$ (OR), and $\neg$ (NOT). The **Implication** operator $P \to Q$ (material conditional) is defined as $\neg P \lor Q$.</li>
         <li><strong>First-Order Logic (FOL)</strong>: Extends propositional logic by introducing **Quantifiers** and **Predicates** to describe properties of objects within a domain $\mathcal{D}$.
           <ul class="pl-4 mt-1 opacity-90">
@@ -33,7 +33,7 @@ export const logicSection: TopicSection = {
 
       <p class="text-xs opacity-80 mt-2"><strong>De Morgan's Laws</strong>: These laws define the duality between conjunction and disjunction, essential for simplifying complex code conditionals: $\neg(P \land Q) \equiv \neg P \lor \neg Q$ and $\neg(P \lor Q) \equiv \neg P \land \neg Q$.</p>
       
-      <p class="text-xs opacity-70 mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
+      <p class="mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
     </div>
     
     <div class="callout tip">
@@ -194,3 +194,4 @@ not_nyc = df[~(df['city'] == 'New York')]
     </div>
   `
 };
+

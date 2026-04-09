@@ -31,12 +31,12 @@ export const lawOfLargeNumbersSection: TopicSection = {
         $$\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$
       </div>
       <p>The convergence of this average to the theoretical mean is expressed as:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Weak Law (WLLN)</strong>: $\bar{X}_n \xrightarrow{P} \mu$. For any $\epsilon > 0$, $\lim_{n \to \infty} P(|\bar{X}_n - \mu| > \epsilon) = 0$. This implies convergence in probability.</li>
         <li><strong>Strong Law (SLLN)</strong>: $\bar{X}_n \xrightarrow{a.s.} \mu$. The probability that the limit of the sequence equals $\mu$ is 1. This implies almost sure convergence.</li>
         <li><strong>Implications for Data</strong>: As sample size increases, the influence of individual outliers and noise vanishes, revealing the stable properties of the underlying distribution.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, LLN justifies the use of finite training sets to estimate the loss over the entire population (Empirical Risk Minimization).</p>
+      <p class="mt-2">In ML, LLN justifies the use of finite training sets to estimate the loss over the entire population (Empirical Risk Minimization).</p>
     </div>
     
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
@@ -116,4 +116,5 @@ print(f"Final Average: {running_avg[-1]:.4f}")
     </div>
   `
 };
+
 

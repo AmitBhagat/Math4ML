@@ -25,13 +25,13 @@ export const dataPreprocessingIntroSection: TopicSection = {
       </div>
 
       <p>The pipeline $\Psi$ typically consists of three foundational operators:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Cleaning ($\psi_{clean}$)</strong>: Addresses stochastic noise and domain gaps (missing values). It ensures that every observation $\mathbf{x} \in \mathcal{X}_{raw}$ is projected onto a valid input space.</li>
         <li><strong>Scaling ($\psi_{scale}$)</strong>: Resolves feature incommensurability. It ensures that the loss function's gradients are well-conditioned, preventing features with large magnitudes from disproportionately influencing the model's weight updates.</li>
         <li><strong>Encoding ($\psi_{encode}$)</strong>: Projects qualitative symbols from discrete sets into numeric vector spaces (e.g., One-Hot vectors).</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Mathematically, preprocessing is an endeavor to maximize the **Signal-to-Noise Ratio (SNR)** of the input features, ensuring the subsequent learning algorithm focuses on meaningful underlying patterns rather than structural artifacts.</p>
+      <p class="mt-2">Mathematically, preprocessing is an endeavor to maximize the **Signal-to-Noise Ratio (SNR)** of the input features, ensuring the subsequent learning algorithm focuses on meaningful underlying patterns rather than structural artifacts.</p>
     </div>
     
     <div class="callout tip">
@@ -123,4 +123,5 @@ print(df[['Age', 'City', 'Salary_Scaled']])
     </div>
   `
 };
+
 

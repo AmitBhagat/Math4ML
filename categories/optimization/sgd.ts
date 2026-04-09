@@ -25,13 +25,13 @@ export const sgdSection: TopicSection = {
       </div>
       
       <p>The mathematical properties that distinguish SGD from Batch GD include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Unbiased Estimation</strong>: The stochastic gradient is an unbiased estimator of the true gradient, meaning $\mathbb{E}[\nabla f_{i_t}(\theta_t)] = \nabla J(\theta_t)$. On average, the algorithm moves in the correct direction.</li>
         <li><strong>Stochastic Noise</strong>: The variance in the gradient estimate introduces "jitter" into the optimization path. This noise acts as a natural regularizer, allowing the model to "jump" out of shallow local minima and find flatter, more generalizable minima.</li>
         <li><strong>Convergence</strong>: Convergence to a stationary point is guaranteed under the **Robbins-Monro conditions** (e.g., using a decaying learning rate).</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
+      <p class="mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
     </div>
     
     <div class="callout tip">
@@ -136,3 +136,4 @@ print(f"Final Weights: {w[0]:.4f}")
     </div>
   `
 };
+

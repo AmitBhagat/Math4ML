@@ -41,7 +41,7 @@ export const anomalyDetectionSection: TopicSection = {
       <div class="premium-def-title">Isolation Depth Multiplier</div>
       <p>The shorter the path length from the root of a random tree to a point, the more likely that point is an anomaly.</p>
       <div class="math-block">$$s(x, n) = 2^{-\frac{E(h(x))}{c(n)}}$$</div>
-      <p class="text-xs opacity-70 mt-2">Where $E(h(x))$ is the average path length and $c(n)$ is the average path length of unsuccessful search in BST.</p>
+      <p class="mt-2">Where $E(h(x))$ is the average path length and $c(n)$ is the average path length of unsuccessful search in BST.</p>
     </div>
 
     <h2 id="one-class-svm">One-Class SVM: The Frontier</h2>
@@ -124,4 +124,5 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     </div>
   `
 };
+
 

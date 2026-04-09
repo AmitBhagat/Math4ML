@@ -31,12 +31,12 @@ export const probabilityDistributionsSection: TopicSection = {
         $$F(x) = P(X \le x), \quad x \in \mathbb{R}$$
       </div>
       <p>The behavior is characterized by two fundamental functional forms:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Mass Function (PMF)</strong>: For discrete $X$, $p(x) = P(X = x)$, satisfying $\sum p(x_i) = 1$.</li>
         <li><strong>Density Function (PDF)</strong>: For continuous $X$, $f(x) = \frac{d}{dx}F(x)$, satisfying $\int_{-\infty}^\infty f(x) dx = 1$.</li>
         <li><strong>Normalization</strong>: Both forms ensure the total "volume" of probability is exactly 1, representing certainty that <em>some</em> outcome must occur.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
+      <p class="mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
     </div>
     
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
@@ -114,4 +114,5 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
     </div>
   `
 };
+
 

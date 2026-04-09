@@ -27,7 +27,7 @@ export const qLearningSection: TopicSection = {
         $$Q(s, a) \leftarrow Q(s, a) + \alpha \underbrace{[R + \gamma \max_{a'} Q(s', a') - Q(s, a)]}_{\text{TD Error}}$$
       </div>
       <p class="text-xs opacity-80 mt-2">Where:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TD Error</strong>: The difference between the "Updated Target" and the current estimate.</li>
         <li><strong>Learning Rate ($\alpha$)</strong>: How quickly the agent forgets old knowledge in favor of new experiences.</li>
         <li><strong>Exploration ($\epsilon$-greedy)</strong>: The agent occasionally takes random actions to discover better "Golden Paths" it hasn't seen yet.</li>
@@ -108,4 +108,5 @@ print(f"Learned Q-Values: {q_table}")
     </div>
   `
 };
+
 

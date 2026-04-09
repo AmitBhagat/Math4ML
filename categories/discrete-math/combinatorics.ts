@@ -29,12 +29,12 @@ export const combinatoricsSection: TopicSection = {
       </div>
 
       <p>Combinatorial analysis highlights two major challenges in AI:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>The Fundamental Counting Principle</strong>: If a sequence of choices has $n_1, n_2, \dots, n_k$ possibilities, the total configurations are $\prod n_i$. This explains why grid searching over 10 hyperparameters each with 10 values leads to 10 billion trials.</li>
         <li><strong>Combinatorial Explosion</strong>: As $n$ increases, the number of ways to arrange or select elements grows factorially or exponentially. The search space for feature selection grows at $2^n$, necessitating greedy or stochastic optimization rather than exhaustive search.</li>
       </ul>
       
-      <p class="text-xs opacity-70 mt-2">Combinatorics is the prerequisite for **Discrete Probability** and the analysis of **Algorithm Complexity**. </p>
+      <p class="mt-2">Combinatorics is the prerequisite for **Discrete Probability** and the analysis of **Algorithm Complexity**. </p>
     </div>
     
     <div class="callout tip">
@@ -209,3 +209,4 @@ combs = list(itertools.combinations(items, 2))
     </div>
   `
 };
+

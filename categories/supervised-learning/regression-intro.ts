@@ -160,3 +160,4 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
   `
 };
 
+

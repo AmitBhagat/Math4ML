@@ -31,11 +31,11 @@ export const vectorsSection: TopicSection = {
         $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
       </div>
       <p>Vectors are defined by two primary operations:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Addition</strong>: $\mathbf{u} + \mathbf{v} = [u_1+v_1, \dots, u_n+v_n]^T$ (Combining directions).</li>
         <li><strong>Scaling</strong>: $c\mathbf{v} = [cv_1, \dots, cv_n]^T$ (Altering magnitude while preserving or reversing direction).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
+      <p class="mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
     </div>
     
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
@@ -120,3 +120,4 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </div>
   `
 };
+

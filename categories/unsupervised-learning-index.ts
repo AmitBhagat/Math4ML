@@ -80,3 +80,4 @@ export const UNSUPERVISED_LEARNING_DATA: CategoryData = {
     anomalyDetectionSection
   ]
 };
+

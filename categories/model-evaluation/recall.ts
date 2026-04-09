@@ -23,12 +23,12 @@ export const recallSection: TopicSection = {
         $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1) = \frac{TP}{TP + FN}$$
       </div>
       <p>The components of the recall estimate are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>TP (True Positives)</strong>: Actual positive samples correctly identified as such.</li>
         <li><strong>FN (False Negatives)</strong>: Actual positive samples incorrectly labeled as negative (Type II Error).</li>
         <li><strong>Inclusion Property</strong>: Recall is independent of the number of **False Positives**. It strictly focuses on the "Inclusion" of all positive samples, even at the cost of capturing irrelevant noise (mislabeling negatives).</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
+      <p class="mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
     </div>
     
     <div class="callout tip">
@@ -149,4 +149,5 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     </div>
   `
 };
+
 

@@ -84,3 +84,4 @@ export const DEEP_LEARNING_DATA: CategoryData = {
     gansSection
   ]
 };
+

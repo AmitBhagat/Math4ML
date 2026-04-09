@@ -28,12 +28,12 @@ export const adamSection: TopicSection = {
         $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$$
       </div>
       <p>The final parameter update utilizes these corrected estimates:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Update Rule</strong>: $\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$. The step size is effectively normalized by the local volatility.</li>
         <li><strong>Robustness</strong>: $\beta_1$ (typically 0.9) acts as Momentum, while $\beta_2$ (typically 0.999) acts as an adaptive scaling factor (RMSProp).</li>
         <li><strong>Bias Correction</strong>: Crucial during the initial steps when $m_t$ and $v_t$ are heavily biased towards the origin.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
+      <p class="mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Olympic Athlete</h2>
@@ -115,5 +115,6 @@ for step in range(1, 101):
     </div>
   `
 };
+
 
 

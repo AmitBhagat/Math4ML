@@ -31,12 +31,12 @@ export const conditionalProbabilitySection: TopicSection = {
         $$P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{for } P(B) > 0$$
       </div>
       <p>This definition entails several critical mathematical properties:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Multiplication Rule</strong>: $P(A \cap B) = P(A | B)P(B)$. This allows for the sequential decomposition of joint events.</li>
         <li><strong>Law of Total Probability</strong>: $P(A) = \sum_i P(A | B_i)P(B_i)$ for a partition $\{B_i\}$ of the sample space.</li>
         <li><strong>Belief Revision</strong>: Conditioning serves as the mathematical engine for updating prior knowledge $P(A)$ with new evidence $B$.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Discriminative ML models (e.g., Logistic Regression) directly estimate the conditional distribution $P(y | \mathbf{x})$ to predict labels from features.</p>
+      <p class="mt-2">Discriminative ML models (e.g., Logistic Regression) directly estimate the conditional distribution $P(y | \mathbf{x})$ to predict labels from features.</p>
     </div>
     
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
@@ -122,4 +122,5 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     </div>
   `
 };
+
 

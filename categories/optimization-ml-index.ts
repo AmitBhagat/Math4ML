@@ -72,3 +72,4 @@ export const OPTIMIZATION_ML_DATA: CategoryData = {
     lrSchedulingSection
   ]
 };
+

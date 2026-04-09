@@ -31,7 +31,7 @@ export const partialDerivativesSection: TopicSection = {
         $$\frac{\partial f}{\partial x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_n)}{h}$$
       </div>
       <p>This operation measures the instantaneous rate of change of $f$ in the direction of the $i$-th coordinate axis. Key details include:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Independence</strong>: $\frac{\partial f}{\partial x_i}$ ignores interactions between $x_i$ and other variables during the computation.</li>
         <li><strong>Notation</strong>: Often written as $f_{x_i}$ or $\partial_{x_i} f$.</li>
         <li><strong>Geometry</strong>: It represents the slope of the tangent line to the curve formed by intersecting the surface with a plane parallel to the $x_i$-axis.</li>
@@ -121,4 +121,5 @@ print(f"Exact derivative (2x): {2*x_val}")
     </div>
   `
 };
+
 

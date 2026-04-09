@@ -23,12 +23,12 @@ export const gradientDescentSection: TopicSection = {
         $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J(\theta_t)$$
       </div>
       <p>This update mechanism is based on the following mathematical principles:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>The Gradient ($\nabla J$)</strong>: A vector pointing in the direction of steepest *ascent*. Subtracting it ensures we move toward the steepest *descent*.</li>
         <li><strong>The Step Size ($\eta$)</strong>: Controlled by the Learning Rate. High $\eta$ can lead to divergence (overshooting); low $\eta$ results in slow convergence or entrapment in local minima.</li>
         <li><strong>Convergence</strong>: For convex functions, GD is guaranteed to reach the global minimum given a sufficiently small $\eta$. For non-convex surfaces (DL), it finds a local minimum or stationary point.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
+      <p class="mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
     </div>
     
     <h2 id="batch">Batch Gradient Descent</h2>
@@ -111,5 +111,6 @@ for epoch in range(101):
     </div>
   `
 };
+
 
 

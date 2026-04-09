@@ -31,7 +31,7 @@ export const taylorSeriesSection: TopicSection = {
         $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n$$
       </div>
       <p>In Machine Learning, we rarely use the infinite series, instead relying on low-degree **Taylor Polynomials** for local optimization:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>First-Order (Linear)</strong>: $f(x) \approx f(a) + f'(a)(x-a)$. Used in Gradient Descent.</li>
         <li><strong>Second-Order (Quadratic)</strong>: $f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2$. Used in Newton's Method.</li>
         <li><strong>Remainder</strong>: The Taylor theorem ensures that the error $R_n(x)$ becomes negligible as $x$ approaches $a$.</li>
@@ -131,4 +131,5 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </div>
   `
 };
+
 

@@ -23,12 +23,12 @@ export const vectorNormsSection: TopicSection = {
         $$\|\mathbf{x}\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$$
       </div>
       <p>The three most critical variations in Machine Learning are:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>$L^1$ Norm</strong>: $\sum |x_i|$. Promotes sparsity (Lasso).</li>
         <li><strong>$L^2$ Norm</strong>: $\sqrt{\sum x_i^2}$. Promotes small, distributed weights (Ridge).</li>
         <li><strong>$L^\infty$ Norm</strong>: $\max_i |x_i|$. Measures the maximum deviation.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
+      <p class="mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
     </div>
     
     <div class="callout tip">
@@ -117,3 +117,4 @@ print(f"L2: {l2}, L1: {l1}")
     </div>
   `
 };
+

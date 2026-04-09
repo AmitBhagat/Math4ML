@@ -31,13 +31,13 @@ export const crossEntropySection: TopicSection = {
         $$H(P, Q) = -\sum_{x \in \mathcal{X}} P(x) \log Q(x)$$
       </div>
       <p>This measure is fundamental to supervised learning due to these mathematical properties:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Information Decomposition</strong>: $H(P, Q) = H(P) + D_{KL}(P \parallel Q)$. It measures the intrinsic entropy of the data plus the "extra surprise" caused by our model's inaccuracy.</li>
         <li><strong>Gibbs' Inequality</strong>: $H(P, Q) \ge H(P)$, with equality if and only if $P = Q$. This ensures that minimizing cross-entropy forces $Q$ to converge to $P$.</li>
         <li><strong>Binary Cross-Entropy (BCE)</strong>: For a binary label $y \in \{0, 1\}$, it simplifies to $-(y \log \hat{y} + (1-y) \log(1-\hat{y}))$.</li>
         <li><strong>Sensitivity</strong>: Unlike Mean Squared Error, cross-entropy produces very large gradients when the model predicts the wrong class with high confidence, pushing the model to correct itself aggressively.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Cross-entropy is the standard objective for training classifiers, as it directly minimizes the information gap between model predictions and reality.</p>
+      <p class="mt-2">Cross-entropy is the standard objective for training classifiers, as it directly minimizes the information gap between model predictions and reality.</p>
     </div>
     
     <h2 id="example-target" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prediction vs. Target</h2>
@@ -121,4 +121,5 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
     </div>
   `
 };
+
 

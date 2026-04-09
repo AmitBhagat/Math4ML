@@ -73,3 +73,4 @@ export const STATISTICS_DATA: CategoryData = {
     confidenceIntervalsSection
   ]
 };
+

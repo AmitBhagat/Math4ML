@@ -31,12 +31,12 @@ export const mapSection: TopicSection = {
         $$\hat{\theta}_{MAP} = \arg\max_{\theta} P(\theta | \mathbf{X}) = \arg\max_{\theta} \frac{P(\mathbf{X} | \theta) P(\theta)}{P(\mathbf{X})}$$
       </div>
       <p>Since the denominator $P(\mathbf{X})$ is independent of $\theta$, we optimize the product of Likelihood and Prior:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Penalized Log-Likelihood</strong>: In practice, we maximize $\ell_{MAP}(\theta) = \sum \log f(x_i | \theta) + \log \pi(\theta)$. The prior term acts as a "penalty" against improbable parameters.</li>
         <li><strong>Regularization Link</strong>: Setting a Gaussian prior $\pi(\theta) \sim \mathcal{N}(0, \sigma^2)$ is mathematically equivalent to adding an $L_2$ norm penalty ($Ridge$) to the loss function.</li>
         <li><strong>Data Dominance</strong>: As the sample size $n \to \infty$, the likelihood term dominates the prior, and the MAP estimate converges to the MLE estimate.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
+      <p class="mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
@@ -131,4 +131,5 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
     </div>
   `
 };
+
 

@@ -31,12 +31,12 @@ export const biasVarianceSection: TopicSection = {
         $$\text{Total Error} = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \text{Irreducible Noise}$$
       </div>
       <p>This identity reveals the core constraints of supervised learning:</p>
-      <ul class="text-xs opacity-80 mt-2 space-y-1">
+      <ul class="mt-2 space-y-1">
         <li><strong>Bias</strong> ($\mathbb{E}[\hat{f}] - f$): Error from the difference between the average prediction and the truth. High bias leads to <strong>Underfitting</strong>.</li>
         <li><strong>Variance</strong> ($\mathbb{E}[(\hat{f} - \mathbb{E}[\hat{f}])^2]$): Error from the consistency of the model's predictions across different datasets. High variance leads to <strong>Overfitting</strong>.</li>
         <li><strong>Irreducible Error</strong> ($\sigma^2$): The fundamental "floor" of error caused by noise in the data itself.</li>
       </ul>
-      <p class="text-xs opacity-70 mt-2">Optimal generalization occurs when the "Sweet Spot" is reached—minimizing the sum of both squared bias and variance via techniques like Regularization or Ensemble methods.</p>
+      <p class="mt-2">Optimal generalization occurs when the "Sweet Spot" is reached—minimizing the sum of both squared bias and variance via techniques like Regularization or Ensemble methods.</p>
     </div>
     
     <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
@@ -123,4 +123,5 @@ plt.show()
     </div>
   `
 };
+
 

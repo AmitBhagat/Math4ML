@@ -34,7 +34,7 @@ export const chainRuleSection: TopicSection = {
       <div class="math-block">
         $$\frac{dz}{dt} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}$$
       </div>
-      <p class="text-xs opacity-70 mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
+      <p class="mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
     </div>
     
     <div class="callout tip">
@@ -140,3 +140,4 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     </div>
   `
 };
+
