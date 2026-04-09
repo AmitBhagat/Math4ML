@@ -74,7 +74,7 @@ export const crossValidationSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dividing 500 samples into 5 Folds...\n[Iteration 1] Training folds 2,3,4,5 | Testing fold 1... Accuracy: 84.5%\n[Iteration 2] Training folds 1,3,4,5 | Testing fold 2... Accuracy: 88.2%\n[Iteration 3] Training folds 1,2,4,5 | Testing fold 3... Accuracy: 82.1%\n[Iteration 4] Training folds 1,2,3,5 | Testing fold 4... Accuracy: 85.5%\n[Iteration 5] Training folds 1,2,3,4 | Testing fold 5... Accuracy: 86.8%\n\n[Result] Mean Accuracy: 85.4% (+/- 2.1%)\n[Insight] The low standard deviation (2.1%) proves the model is robust and reliable.">
+    <python-code>
 from sklearn.model_selection import cross_val_score
 from sklearn.linear_model import LogisticRegression
 from sklearn.datasets import make_classification
@@ -93,9 +93,18 @@ print(f"Average Accuracy: {scores.mean():.1%}")
 print(f"Consistency (Std Dev): {scores.std():.3f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Cross-validation is the "Rotating Jury" for your model. It ensures that your model's performance is stable across different slices of reality, preventing you from being fooled by a lucky split.</p>
+    <ul>
+      <li><strong>Model Selection for Small Datasets</strong>: In fields like medical research or rare disease study, where you might only have 100 patient records, a single 80/20 split is dangerous. Leave-One-Out Cross-Validation (LOOCV) is used to ensure that every single rare sample is used for both training and testing, giving the most reliable estimate of the model's accuracy when every data point is precious.</li>
+      <li><strong>Hyperparameter Tuning (Grid Search CV)</strong>: When engineers use tools like Scikit-Learn's GridSearchCV to find the perfect learning rate or depth for a tree, they use cross-validation at every step. This ensures that the "Sweet Spot" they find isn't just a quirk of one specific training set, but a setting that is robust enough to perform well across the entire distribution of data.</li>
+    </ul>
+    <p>Teacher's Final Word: If your model only works on "Part A" of the data, it's not a model—it's a coincidence. Cross-validation is the bullshit detector that separates stable, industrial-grade intelligence from fragile scripts that shatter the moment they leave your laptop.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with perfect validation, if your data is "Bad," your model will be "Bad." Explore <strong><a href="#/machine-learning/foundation-ml/feature-engineering">Feature Engineering</a></strong>.
     </div>
   `
 };
+
 

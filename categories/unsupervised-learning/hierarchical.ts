@@ -120,7 +120,7 @@ export const hierarchicalSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Calculating initial Proximity Matrix...\n[Merge 1] Merging Point 0 & 1 (Distance: 0.1)\n[Merge 2] Merging Point 2 & 3 (Distance: 0.5)\n[Cutting] Applying forest cut at N=2 Clusters...\n[Result] Cluster Assignments: [A, A, B, B, A]\n[Analysis] Points 0, 1, and 4 successfully grouped despite the gap.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import AgglomerativeClustering
 
@@ -158,3 +158,4 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
     </div>
   `
 };
+

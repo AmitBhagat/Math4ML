@@ -92,7 +92,7 @@ export const gansSection: TopicSection = {
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: MNIST (Handwritten Digits)\n[Round 100] D_Loss: 0.1, G_Loss: 2.3 (Detective is winning)\n[Round 1000] D_Loss: 0.5, G_Loss: 0.8 (Forger is catching up)\n\n[Status] Equilibrium reached (Nash Equilibrium)\n[Output] Generated Digit #4 looks distinctly 'real'.\n[Insight] Generator has learned the 'Geometry of Four-ness'.">
+    <python-code runnable="false" static-output="[Action] Initializing Adversarial Duel...\n[Setup] Generator: 784-dim MLP | Discriminator: Binary Classifier\n[Epoch 1] G-Loss: 4.8 | D-Loss: 0.2 (Detective is dominating)\n[Epoch 50] G-Loss: 1.2 | D-Loss: 0.6 (Forger is learning trickery)\n[Epoch 200] Equilibrium reached (p=0.5)\n[Result] High-fidelity synthetic faces successfully generated.">
 import torch
 import torch.nn as nn
 
@@ -134,3 +134,4 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
     </div>
   `
 };
+

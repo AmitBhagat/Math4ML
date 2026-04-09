@@ -74,7 +74,7 @@ export const trainTestSplitSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset contains 1,000 samples and 10 features.\n[Action] Splitting data into 80/20 partitions...\n[Status] Training Set size: 800 samples\n[Status] Test Set size: 200 samples\n\n[Warning] The 200 Test samples are strictly HIDDEN from the training process.">
+    <python-code>
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import make_regression
 
@@ -95,9 +95,18 @@ print(f"Testing Pool (Ground Truth): {X_test.shape[0]} samples")
 print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Train-test splitting is the "Reality Check" of AI. It is the only way to prove that your model has actually learned a useful mapping instead of just cheating by memorizing the data.</p>
+    <ul>
+      <li><strong>Kaggle Competitions</strong>: In data science competitions, contestants are given a "Training Set" but the winner is decided by a hidden "Private Leaderboard" (the ultimate Test Set). This prevents people from winning by manually hardcoding answers for the data they can see, ensuring that only the models with the best <strong>Generalization</strong> rise to the top.</li>
+      <li><strong>Safety-Critical Model Deployment</strong>: Before a medical AI is allowed to diagnose patients, it is tested on a massive "Holdback" dataset of thousands of cases it has never seen. This split acts as a legal and ethical "Firewall," proving that the model's accuracy is a result of real diagnostic intelligence rather than just recognizing familiar patterns from its training hospital.</li>
+    </ul>
+    <p>Teacher's Final Word: Trust, but verify—with data the model has never touched. Train-test splitting is the boundary between a scientific discovery and a lucky guess. If you skip the split, you're not an engineer; you're just a gambler who doesn't know the house always wins.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when the model memorizes too much? Explore <strong><a href="#/machine-learning/foundation-ml/overfitting-underfitting">Overfitting and Underfitting</a></strong>.
     </div>
   `
 };
+
 

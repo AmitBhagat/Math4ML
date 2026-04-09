@@ -69,7 +69,7 @@ export const gradientDescentSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Epoch 0] Initial Loss: 14.22 | w: 0.00, b: 0.00\n[Epoch 25] Stepping Down... Loss: 4.85 | w: 1.42, b: 0.95\n[Epoch 50] Middle Slope... Loss: 0.82 | w: 2.75, b: 1.82\n[Epoch 100] At the Base! Loss: 0.01 | w: 2.99, b: 1.99\n[Result] Convergence Achieved. Global Minimum Found.">
+    <python-code>
 import numpy as np
 
 # 1. Generate Noisy Data: y = 3x + 2 + noise
@@ -98,9 +98,18 @@ for epoch in range(101):
         print(f"Epoch {epoch}: Loss={loss:.4f}, w={w:.2f}, b={b:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Gradient Descent is the "Compass" of AI. It tells the model which way to walk to find the absolute bottom of the error valley, providing a universal method for optimizing almost any differentiable mathematical model.</p>
+    <ul>
+      <li><strong>Logistic Regression for Fraud Detection</strong>: When a bank builds a model to flag fraudulent transactions, the goal is to find the perfect weight for variables like "Transaction Amount" and "Location." Gradient Descent minimizes the "Log-Loss" of the model, iteratively adjusting the weights until the boundary between "Normal" and "Fraud" is as accurate as mathematically possible.</li>
+      <li><strong>Neural Network Backpropagation</strong>: Every time a deep learning model (like ChatGPT or Midjourney) learns something new, it uses Gradient Descent. The "Gradient" is calculated via backpropagation, and the optimizer takes a tiny step downhill for millions of different weights simultaneously, allowing the network to slowly converge on the complex parameters required for intelligence.</li>
+    </ul>
+    <p>Teacher's Final Word: You don't need to see the whole world to find the bottom; you just need to feel the slope beneath your feet. Gradient Descent teaches us that even the most complex problems can be solved by a thousand small, smart, and consistent steps in the right direction.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we don't wait for everyone? What if we just start skiing based on what WE see? Explore <strong><a href="#/machine-learning/optimization-ml/sgd">Stochastic Gradient Descent (SGD)</a></strong>.
     </div>
   `
 };
+
 

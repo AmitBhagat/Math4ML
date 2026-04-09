@@ -84,7 +84,7 @@ export const transformersSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Action] Calculating Context for 3 Words...\n[Attention Scores] Compatibility Matrix Calculated.\n[Softmax] Row 0: Word 0 paying 92% attention to Word 2!\n[Result] Input meanings successfully 'blended' based on their context.\n[Parallel] All word relationships resolved in a single matrix multiplication.">
+    <python-code>
 import numpy as np
 
 def softmax(x):
@@ -126,3 +126,4 @@ print(output.round(1))
     </div>
   `
 };
+

@@ -108,10 +108,12 @@ plt.show()
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Central Limit Theorem is the "Bailout" of the AI world. It guarantees that even if your individual data points are weird, chaotic, and non-Gaussian, their **Aggregate Behavior** will follow a predictable, smooth Bell Curve.</p>
     <ul>
-      <li><strong>Standardization (Z-Score)</strong>: We shift data (\(x - \mu\)) and divide by StdDev because we assume the features follow the CLT-driven normal pattern.</li>
-      <li><strong>Confidence Intervals</strong>: Used in hypothesis testing to tell us if our model improvement is "statistically significant."</li>
+      <li><strong>The Physics of Mean Squared Error (MSE)</strong>: Have you ever wondered why we almost always use "Squared Error" as our loss function in regression? The CLT is the answer. It assumes that the total error in your model is the sum of many tiny, independent factors (sensor noise, human error, lighting changes). Because of the CLT, that total error **must** be normally distributed. Squaring that normal error turns out to be the mathematically optimal way to find the "Maximum Likelihood" of your model. Without the CLT, we wouldn't have a universal standard for what a "good" prediction looks like.</li>
+      <li><strong>A/B Testing Confidence (Proving the Lift is Real)</strong>: When a company like Amazon tests a new "Buy Now" button, they might see a 2% increase in sales. But is that increase "Real" or just a lucky blip? By using the CLT, they can calculate the **Confidence Interval** of that 2%. Because the average behavior of millions of users converges to a Normal distribution, they can mathematically prove that there is a 99.9% chance the 2% lift is a permanent shift, not just a random fluctuation. It is the math that turns "Guesses" into "Business Decisions."</li>
     </ul>
+    <p>Teacher's Final Word: The CLT is the universal gravity of probability. It pulls the chaotic fragments of the universe into an orderly Bell Curve. It tells us that while individual events are unpredictable, the **Crowd** is perfectly mathematical. Trust the crowd.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve mastered how to calculate probabilities forward. Now, how do we work <em>backwards</em> to find the cause of an event? Explore <strong><a href="#/mathematics/probability/bayes-theorem">Bayes' Theorem</a></strong>.

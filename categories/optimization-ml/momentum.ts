@@ -65,7 +65,7 @@ export const momentumSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Comparison] Running for 10 steps on a 1D parabolic surface...\n[Step 0] SGD Pos: 8.00 | Mom Pos: 8.50 (Initial drag)\n[Step 5] SGD Pos: 1.07 | Mom Pos: 0.22 (Momentum has built speed!)\n[Step 10] SGD Pos: 0.12 | Mom Pos: 0.00 (Momentum reached the target!)\n[Result] Momentum is 3.5x faster at reaching the 'Center' than vanilla SGD.">
+    <python-code>
 import numpy as np
 
 # 1. Surface: Simple Parabola (x^2)
@@ -92,9 +92,18 @@ for i in range(11):
         print(f"Step {i}: SGD={x_sgd:.2f}, Momentum={x_mom:.2f} (Vel={v:.2f})")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Momentum is the "Inertia" of AI. It helps the optimizer ignore the local "noise" of the data and focus on the major, long-term trends required to reach the mathematical truth.</p>
+    <ul>
+      <li><strong>Training Computer Vision Models (CNNs)</strong>: The loss landscape of an image recognition model is incredibly complex, filled with "Saddle Points"—flat regions where the gradient is almost zero. A standard optimizer might stop here, thinking it has reached the bottom. Momentum ensures the weights keep "Rolling" through these plateaus, giving the model enough inertia to find the deep, global valleys that lead to high accuracy.</li>
+      <li><strong>High-Speed Training on Noisy Gradients</strong>: When training on small mini-batches, the individual updates can be very jumpy and erratic. By using momentum, engineers "Smooth Out" these updates. It's like driving a car with good suspension; the momentum prevents the model from feeling every tiny bump in the data, allowing it to maintain a stable, high-speed path toward convergence.</li>
+    </ul>
+    <p>Teacher's Final Word: Physics isn't just for cars; it's the secret to keeping your model's learning on track. Momentum teaches us that if you want to reach the bottom of a complex mountain, you can't just look at where you are—you have to remember where you've been and use that speed to carry you through the difficult parts.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the boulder <strong>Brakes</strong> for every individual wheel? Explore the king of optimizers: <strong><a href="#/machine-learning/optimization-ml/adam">Adam Optimizer</a></strong>.
     </div>
   `
 };
+
 

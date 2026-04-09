@@ -103,12 +103,12 @@ print(f"Product: {C}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Matrix multiplication is the "Engine" of AI. It is the mathematical way of saying, "Take these results and process them even more."</p>
+    <p>Matrix multiplication is the "Engine" of AI. It is the mathematical way of saying, "Take these results and process them even more," allowing us to stack influence until we reach a decision.</p>
     <ul>
-      <li><strong>Neural Network Inference</strong>: Each "Layer" in a deep network is really just a massive matrix multiplication. It takes the pattern discovered in the previous layer and mixes it with its own weights to find an even deeper pattern.</li>
-      <li><strong>Attention Mechanisms (LLMs)</strong>: The brain of models like ChatGPT is built on multiplying "Query" and "Key" matrices. This multiplication decides exactly which words in a long sentence should "pay attention" to each other to understand context.</li>
+      <li><strong>Neural Network Forward Pass</strong>: Every single layer in a deep network is really just a massive matrix multiplication. It takes the input vector from the previous layer and multiplies it by a "Weight Matrix." This operation mixes the features together, intensifying the signal that matters and killing the noise that doesn't. Without this operation, modern AI simply wouldn't exist.</li>
+      <li><strong>3D Coordinate Transformations in AR/VR</strong>: When you move your head while wearing a VR headset, the computer must recalculate every pixel in the 3D world. It uses matrix multiplication to rotate, scale, and translate millions of points in space instantly, ensuring the virtual world moves in perfect sync with your real-world motion.</li>
     </ul>
-    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer.</p>
+    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Multiplication is the forward pass. But how do we work backwards? Explore <strong><a href="#/mathematics/linear-algebra/matrix-inverse">Matrix Inverse</a></strong>.

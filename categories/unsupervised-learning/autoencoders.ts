@@ -135,7 +135,7 @@ export const autoencodersSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input Layer: 784 pixels (Flattened 28x28 Image)\n[Action] Initializing bottleneck layer with 32 neurons (24.5x Squeeze)\n[Training] Epoch 50/50 - Reconstruction Loss (MSE): 0.0041\n[Result] Digit '7' reconstructed with 98.9% anatomical accuracy.\n[Discovery] The 32 summary-integers successfully captured 'Seven-ness'.">
+    <python-code runnable="false">
 import tensorflow as tf
 from tensorflow.keras import layers, models
 
@@ -176,3 +176,4 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
     </div>
   `
 };
+

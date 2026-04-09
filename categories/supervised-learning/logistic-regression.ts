@@ -128,7 +128,7 @@ export const logisticRegressionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Internal] Linear Score (z) for input: 2.12\n[Sigmoid] Squashing 2.12 into probability space...\n[Result] Probability of Churn: 89.1%\n[Decision] Predicted Class: 1 (Churn)\n[Insight] As visits per week DROPPED, the Sigmoid score CLIMBED.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LogisticRegression
 
@@ -162,3 +162,4 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     </div>
   `
 };
+

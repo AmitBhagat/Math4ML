@@ -109,10 +109,12 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Entropy is the "Surprise Meter" of the universe. It measures how much "new" information is contained in a message, or how much uncertainty we have about a random event.</p>
     <ul>
-      <li><strong>Decision Trees</strong>: Algorithms like ID3 use <strong>Information Gain</strong> (reduction in entropy) to decide which feature to split on.</li>
-      <li><strong>Model Confidence</strong>: We check the entropy of a Softmax output; if it's high, the model is "confused" between many classes.</li>
+      <li><strong>Decision Tree Splitting (Information Gain)</strong>: When a Decision Tree is trying to classify data, it uses entropy to find the most "Informative" question to ask. By calculating how much a split (e.g., "Is Salary > $50k?") reduces the total entropy of the dataset, the algorithm identifies the features that provide the most "Information Gain," allowing it to reach a correct prediction with the fewest possible questions.</li>
+      <li><strong>Lossless Data Compression (ZIP files)</strong>: Entropy defines the absolute mathematical limit of how much we can shrink a file. If a file has 1 bit of entropy per character, you can never compress it smaller than 1 bit per character without losing information. It sets the "Floor" for every compression algorithm in existence, from JPEG images to simple text files.</li>
     </ul>
+    <p>Teacher's Final Word: If you already know what's going to happen, there's no information there. Information is the measure of the unexpected. In AI, our job is to squeeze the chaos of the world through a model until only the predictable truths remain.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Entropy measures one distribution. But how do we measure the "Distance" between what our model predicts and the truth? Explore <strong><a href="#/mathematics/information-theory/cross-entropy">Cross-Entropy</a></strong>.

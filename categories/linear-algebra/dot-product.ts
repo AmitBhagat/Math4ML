@@ -99,12 +99,12 @@ print(f"Dot Product: {dot}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Think of the Dot Product as a "Similarity Radar." It tells you exactly how much two vectors are "pointing in the same direction."</p>
+    <p>Think of the Dot Product as a "Similarity Radar." It is the fundamental way computers measure the conceptual overlap between words, images, or even customer personalities.</p>
     <ul>
-      <li><strong>Semantic Search</strong>: When you search for "Healthy Recipes," Google converts your query and millions of web pages into vectors. It then calculates the Dot Product between them. A high dot product means the "Directions" align, signalling a perfect match.</li>
-      <li><strong>Cosine Similarity (RecSys)</strong>: E-commerce sites use the dot product to find "People like you." If your shopping-habit vector and another user's vector have a massive dot product, the system assumes you have the same taste and recommends their favorites to you.</li>
+      <li><strong>Content-Based Movie Recommendations</strong>: Netflix represents movies as vectors based on features like "Action Score," "Romance Score," and "Director Style." When you watch a film, the system calculates the dot product between that film's vector and every other movie in the library. A high dot product indicates that the "Directions" (the vibes) align perfectly, signaling a match you'll likely enjoy.</li>
+      <li><strong>Transformer Attention Mechanics (Large Language Models)</strong>: Every time you ask ChatGPT a question, it uses billions of dot products to decide which words to focus on. Each word creates a "Query" vector and a "Key" vector; the dot product between them calculates the "Attention Score." A high score essentially tells the model: "When looking at word A, you must pay heavy attention to word B." It is the mathematical engine of human-like context.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we use this simple calculation to measure the conceptual overlap between words, images, or even customer personalities. It is the fundamental way computers understand "Similarity."</p>
+    <p>Teacher's Final Word: In AI, the dot product is the universal gauge of alignment. Whether you're finding a girlfriend on a dating app or training a trillion-parameter LLM, you are essentially asking the math to find the vectors that are pointing in the same direction.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Dot product is affected by vector length. How do we measure that length individually? Explore <strong><a href="#/mathematics/linear-algebra/vector-norms">Vector Norms (L1, L2)</a></strong>.

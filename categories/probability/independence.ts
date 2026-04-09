@@ -113,10 +113,12 @@ print(f"P(A) * P(B): {check:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Independence is the ultimate "Simplifier." It allows us to break down a massive, overwhelming problem into tiny, manageable pieces that a computer can actually solve in a fraction of a second.</p>
     <ul>
-      <li><strong>Naive Bayes Classifier</strong>: Assumes that given the class label, all input features are <strong>Independently</strong> distributed. This turns a complex 100D problem into 100 simple 1D problems.</li>
-      <li><strong>Bag of Words</strong>: In NLP, early models assume that the probability of "Wait" appearing is independent of "Bus" appearing in the same sentence.</li>
+      <li><strong>The "Naive" assumption in Naive Bayes</strong>: If you are building a Spam Filter with 10,000 possible words, calculating the "Joint Probability" of every word combination is mathematically impossible (it would require more data than exists in the universe). Instead, we assume that every word appears **Independently**. This "Naive" lie turns a crushing 10,000D problem into 10,000 simple 1D problems, allowing your email app to sort your inbox instantly.</li>
+      <li><strong>Feature Disentanglement in Generative Models</strong>: When we train a model to "Imagine" a human face, we want the "Independence" of features. We want the "Hair Color" variable to be independent of the "Eye Shape" variable. If they are dependent (entangled), the model can't change one without accidentally warping the other. Total independence in the model's brain is what gives us the power to "edit" reality with precision.</li>
     </ul>
+    <p>Teacher's Final Word: Independence is the art of "Not Repeating Yourself." In ML, we crave independence because it means every feature is giving us a fresh piece of the truth, rather than just echoing what we already know. It’s what keeps our models lean and our computations fast.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What's the "Typical" outcome of these random events? Explore <strong><a href="#/mathematics/probability/expectation">Expectation (Expected Value)</a></strong>.

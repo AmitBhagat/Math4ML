@@ -117,7 +117,7 @@ export const pcaSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Scaling dataset for Mean=0, Std=1...\n[SVD] Calculating Principal Components...\n[Result] PC1 captures 95.2% of the variance (The Signal)\n[Result] PC2 captures 4.8% of the variance (The Shape)\n[Action] Projected high-dim data into 2D space.\n[Insight] Throwing away PC3 and PC4 results in ~0% loss of useful information.">
+    <python-code>
 import numpy as np
 from sklearn.decomposition import PCA
 from sklearn.preprocessing import StandardScaler
@@ -158,3 +158,4 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
     </div>
   `
 };
+

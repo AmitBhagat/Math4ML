@@ -119,7 +119,7 @@ export const baggingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Creating noisy dataset with 1,000 samples...\n[Member] Training Single Decision Tree (High Variance)...\n[Ensemble] Training Bagging Forest (50 Trees in Parallel)...\n\n[Result] Single Tree Accuracy: 81.5%\n[Result] Bagging Forest Accuracy: 92.2%\n\n[Insight] Bagging successfully 'Averaged Out' the errors made by individual trees.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import BaggingClassifier
 from sklearn.tree import DecisionTreeClassifier
@@ -161,3 +161,4 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
     </div>
   `
 };
+

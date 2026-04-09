@@ -99,7 +99,7 @@ export const lstmGruSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Start: Cell State=0.0 (Empty Journal)\n[Input] Found 'Water' -> Forget: 0.9, Input: 1.0\n[Scan] Middle: 5 years of 'Boring Rocks' -> Input Gate: 0.0\n[Result] Step 10: Cell State=0.89 (Water Discovery Survived!)\n[Insight] The gates successfully blocked the noise and preserved the signal.">
+    <python-code>
 import numpy as np
 
 # 1. State: C (Cell State - Long Term) and H (Hidden State - Short Term)
@@ -139,3 +139,4 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
     </div>
   `
 };
+

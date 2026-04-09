@@ -117,12 +117,12 @@ print(f"Transpose:\n{A_t}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, matrices are the "Industrial Spreadsheets" that organize and transform entire universes of data in a single operation.</p>
+    <p>In Machine Learning, matrices are the "Industrial Spreadsheets" that organize and transform entire universes of data in a single pulse. They are the storage blocks for everything an AI knows.</p>
     <ul>
-      <li><strong>Synaptic Weight Storage</strong>: In a Neural Network, every connection between layers has a specific "weight." We store these millions of weights in a matrix. As data passes through, the matrix decides which features to amplify and which to ignore.</li>
-      <li><strong>Covariance Analysis</strong>: Matrices are used to calculate "Covariance." This tells the algorithm if features like "Customer Age" and "Spending Power" move together, helping it discover hidden relationships in massive datasets.</li>
+      <li><strong>Computer Vision Convolutional Kernels</strong>: When an AI "looks" at an image, it uses small matrices called "Kernels" or "Filters." By sliding these matrices over the image matrix and performing specific operations, the model can detect edges, textures, or even more complex features like "curved lines" or "dog ears." The matrix is literally the model's eyes.</li>
+      <li><strong>User-Item Rating Matrices (Netflix/Amazon)</strong>: Recommendation engines organize the entire world into a giant matrix where rows are Users and columns are Products. The numbers inside are ratings. Since most people haven't seen most movies, the matrix is "Sparse" (mostly zeros). The AI's job is a massive matrix game: predicting the missing values to guess what you'd buy next.</li>
     </ul>
-    <p>Teacher's Final Word: Think of a Matrix as a **Batch Processor**. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
+    <p>Teacher's Final Word: Think of a Matrix as a **Batch Processor**. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" math to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, matrices are static. How do we make them interact? Explore <strong><a href="#/mathematics/linear-algebra/matrix-multiplication">Matrix Multiplication</a></strong>.

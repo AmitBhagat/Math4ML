@@ -119,7 +119,7 @@ export const precisionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Analyzing 10 predictions vs. Reality...\n[Status] Total 'YES' predictions: 4\n[Verification] Correct 'YES' (TP): 3\n[Verification] False Alarms (FP): 1\n[Result] Precision = 3/4 = 75.0%\n[Insight] If this model flags an email as Spam, it's correct 75% of the time.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import precision_score
 
@@ -145,3 +145,4 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
     </div>
   `
 };
+

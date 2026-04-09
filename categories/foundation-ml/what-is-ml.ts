@@ -70,7 +70,7 @@ export const whatIsMLSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Traditional] Executing Hardcoded Rule: 500sqft * $400/sqft = $200,000\n[ML] Training LinearRegression on 5,000 samples...\n[ML] Pattern Found: Base price + ($385 * sqft) + neighborhood multiplier.\n\n[Result] Manual Price: $200,000\n[Result] ML Predicted Price: $212,450.67\n[Insight] The ML model picked up on 'Premium' neighborhood stats that the manual rule missed!">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -138,3 +138,4 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
     </div>
   `
 };
+

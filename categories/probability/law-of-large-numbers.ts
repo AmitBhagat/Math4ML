@@ -104,10 +104,12 @@ print(f"Final Average: {running_avg[-1]:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Law of Large Numbers is the "Anchor" of Science. It is the mathematical guarantee that if you collect enough data, you will eventually wash away the luck and find the buried truth.</p>
     <ul>
-      <li><strong>Monte Carlo Simulation</strong>: We use LLN to approximate complex integrals by sampling thousands of points and averaging them.</li>
-      <li><strong>Batch Gradient Descent</strong>: Averaging the gradients over more samples gives us the "True Gradient" of the entire dataset.</li>
+      <li><strong>Monte Carlo Integration (Estimating the Impossible)</strong>: In complex AI like Reinforcement Learning, we often need to calculate "Expected Rewards" for millions of possible future scenarios. Calculating this by hand is impossible. Instead, we use the LLN and "Monte Carlo" sampling: we run 10,000 random simulations and average the results. The LLN guarantees that as we add more simulations, our "Average" will converge to the **True Mathematical Value**, allowing us to solve problems that have no closed-form solution.</li>
+      <li><strong>Empirical Risk Minimization (ERM)</strong>: This is the reason why "Test Sets" even work. In ML, we can't see the "True Error" of our model on every human on Earth (the population). Instead, we test it on a finite sample (the test set). The LLN is the bridge that tells us: "If your test set is large enough, your measured error is an accurate proxy for the real-world error." It’s what gives us the scientific right to claim that a model is "99% Accurate."</li>
     </ul>
+    <p>Teacher's Final Word: The LLN is the antidote to "Small Sample Paranoia." It’s the proof that individual blips or lucky streaks don't matter in the face of massive data. In AI, we don't bet on individuals; we bet on the crowd. Always play the long game.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> The average converges, but what does the <strong>Distribution</strong> of those averages look like? Explore <strong><a href="#/mathematics/probability/central-limit-theorem">The Central Limit Theorem (CLT)</a></strong>.

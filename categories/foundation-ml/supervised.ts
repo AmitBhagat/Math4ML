@@ -60,7 +60,7 @@ export const supervisedLearningSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Regression] Predicted House Price: $352,450\n[Classification] Predicted Email: Spam">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression, LogisticRegression
 
@@ -83,9 +83,18 @@ label_pred = clf_model.predict([[45, 9]])[0]
 print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Normal'}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Supervised learning is the "Tutored Student." It is the most common and powerful way to build AI because it allows the machine to verify its guesses against a ground-truth label provided by an expert.</p>
+    <ul>
+      <li><strong>Medical Image Disease Detection</strong>: Doctors provided thousands of X-rays labeled "Normal" or "Fracture." The supervised model learns to associate specific spatial patterns in the pixels with those labels, effectively becoming a tireless assistant that can flag potential breaks for human review in seconds.</li>
+      <li><strong>Google Translate</strong>: Machines are trained on millions of sentences that have already been translated by humans (the "Labels"). By seeing the English version and the Spanish version side-by-side, the model learns the complex, non-linear mapping between languages, allowing it to translate new sentences with high fidelity.</li>
+    </ul>
+    <p>Teacher's Final Word: Accuracy is easy when someone is holding the answer key. Supervised learning is the science of learning from others' expertise—it turns a massive library of historical human decisions into a real-time predictive engine.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have no labels? How can a machine find patterns on its own? Explore <strong><a href="#/machine-learning/foundation-ml/unsupervised">Unsupervised Learning</a></strong>.
     </div>
   `
 };
+
 

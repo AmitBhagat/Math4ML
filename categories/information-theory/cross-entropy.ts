@@ -109,10 +109,12 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Cross-Entropy is the "Mismatch Penalty." It measures the difference between what your model *thinks* the world looks like and what it *actually* looks like, providing a powerful signal for weight optimization.</p>
     <ul>
-      <li><strong>Classification Loss</strong>: Logistic Regression and Neural Networks use Cross-Entropy because it has a smooth gradient that is easy to optimize.</li>
-      <li><strong>Softmax Outputs</strong>: We apply cross-entropy to the output of Softmax layers to train multi-class classifiers.</li>
+      <li><strong>Multi-class Classification Loss</strong>: When training a model to recognize 1,000 different objects (like in ImageNet), we use cross-entropy as the objective function. It calculates the information gap between the model's wide-eyed probability distribution and the one "True" category label. Because the gradient of cross-entropy is steep when the model is "Confidently Wrong," it forces the model to correct its mistakes aggressively during training.</li>
+      <li><strong>Language Model Next-Word Prediction</strong>: Every time a model like GPT predicts the next word in a sentence, it is minimizing cross-entropy. By calculating the "Surprisal" of the actual next word compared to the model's prediction, researchers can "Align" the model's internal probability of language with the real-world statistical patterns of human text.</li>
     </ul>
+    <p>Teacher's Final Word: Learning is just the process of reducing your own surprise. The closer your internal model of the world (Q) is to the absolute ground truth (P), the lower your cross-entropy will be. In AI, perfection is found when the price of disbelief reaches its absolute minimum.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Cross-entropy is the total information cost. What if we just want to know the <strong>pure difference</strong> between two distributions? Explore <strong><a href="#/mathematics/information-theory/kl-divergence">KL Divergence</a></strong>.

@@ -93,7 +93,7 @@ export const bayesianNetworksSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Evidence] Broken Window found!\n[P(Burglar)] 0.84 (Suspicion is high)\n\n[New Evidence] Baseball found on floor!\n[P(Burglar)] 0.15 (Suspicion dropped)\n\n[Verdict] Event 'Baseball' successfully Explained Away the broken window.">
+    <python-code>
 import numpy as np
 
 # 1. Priors (Historical frequencies)
@@ -120,8 +120,17 @@ print(f"P(Burglar | Window): {suspicion_init:.2f}")
 print(f"P(Burglar | Window, Baseball): {suspicion_new:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Bayesian Networks are the "Map of Influence." They allow us to reason through complex webs of cause-and-effect, making them far more interpretable than "black-box" neural networks.</p>
+    <ul>
+      <li><strong>Root Cause Fault Diagnosis</strong>: Large data centers and manufacturing plants use Bayesian networks to find why a system failed. By modeling the causal web of sensors—heat, power consumption, and mechanical vibrations—the model can see a "Heat Spike" and calculate whether it was caused by a "Cooling Failure" or a "CPU Overload." It effectively reasons backward from the symptoms to the source.</li>
+      <li><strong>Medical Symptom Influence Mapping</strong>: Doctors use Bayesian networks to predict diseases based on a massive array of potential symptoms. Since different diseases (like the Flu and COVID-19) share many symptoms, the network uses the "Causal Strength" of each connection to decide which diagnosis is most probable given the specific combination of signs found in the patient.</li>
+    </ul>
+    <p>Teacher's Final Word: Logic is simple; the truth is a web. Bayesian networks are how we turn that messy web of human intuition and physical cause-and-effect into a cold, hard mathematical calculation. They don't just give you an answer; they show you the exact logic of how they got there.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the arrows follow a sequence in time? Explore <strong><a href="#/machine-learning/pgm/hmm">Hidden Markov Models (HMM)</a></strong>.
     </div>
   `
 };
+

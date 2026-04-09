@@ -110,12 +110,12 @@ print(f"Matrix Rank: {rank}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Rank is the "Reality Check" of your data. It tells you the **True Information Density**—the actual number of independent stories your data is telling once you strip away all the duplicates.</p>
+    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the **True Information Density** of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
     <ul>
-      <li><strong>Collaborative Filtering (RecSys)</strong>: Streaming services like Netflix use "Low-Rank Matrix Factorization." They assume that among 10,000 movies, there are only about 20 "Rank" dimensions (like Action, Romance, or Nostalgia) that actually explain everyone's taste.</li>
-      <li><strong>Multicollinearity Detection</strong>: If your feature matrix has a low rank relative to its width, your model will be unstable. We use rank to detect "copycat" features so we can prune them for a faster, more reliable model.</li>
+      <li><strong>Low-Rank Recommendation Systems</strong>: Services like Netflix treat user ratings as a giant matrix. By forcing the model to find a "Low-Rank" approximation of this matrix, we discover the core "Latent Factors" (like Preference for Sci-Fi or Hate for Musicals) that explain millions of ratings. This turns a sparse, messy grid into a lean, predictive engine.</li>
+      <li><strong>Identifying Degrees of Freedom</strong>: In physics-based ML or robotics, the rank of a "Jacobian Matrix" tells you the actual number of ways a robot arm can move. If the rank drops (due to a mechanical limit), the robot loses a "Degree of Freedom." By monitoring rank, we ensure the system always knows the limits of its own physical agency.</li>
     </ul>
-    <p>Teacher's Final Word: Rank is what separates a rich, diverse dataset from a loud but repetitive one. In AI, find the rank to find the truth.</p>
+    <p>Teacher's Final Word: Rank is what separates a rich, diverse dataset from a loud but repetitive one. No matter how many columns you have, the Rank is the ultimate truth of your data's variety. In the world of AI, high rank is intelligence; low rank is just noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Rank ensures our directions are unique. How do we find the "Distance" between those directions? Explore <strong><a href="#/mathematics/linear-algebra/orthogonality-projections">Orthogonality & Projections</a></strong>.

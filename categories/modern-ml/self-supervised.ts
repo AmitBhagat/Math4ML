@@ -117,7 +117,7 @@ export const selfSupervisedSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Raw Input: 'Street_View.jpg'\n[SSL Action] Creating View A: Crop(224) + Blur(0.5) + Grayscale\n[SSL Action] Creating View B: Flip() + ColorJitter(1.2) + Rotation(45)\n\n[Model Task] 'ConvNet, are these both the SAME image?'\n[Training] Matching representations of A and B while pushing away other images.\n[Status] Pre-training complete. Model now 'understands' urban architecture.">
+    <python-code runnable="false" static-output="[Action] Generating Pretext Viewpoints...\n[View A] RandomCrop(224) + ColorJitter (Slightly gray, cropped top-left)\n[View B] RandomCrop(224) + GaussianBlur (Blurry, cropped bottom-right)\n[Status] Calculating Cosine Similarity between Latent Signatures...\n[Result] Similarity: 0.942 (Model recognizes these as the same source image).\n[Insight] Feature invariance achieved across color and focus distortions.">
 import torchvision.transforms as T
 from PIL import Image
 
@@ -144,8 +144,17 @@ view_B = T.Compose([
 print("Views created. Model will now learn if these came from the SAME image.")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Self-Supervised Learning is the "Autodidact" of AI. It allows models to learn from the infinite supply of raw, unlabeled data by creating their own internal puzzles, building a core "General Intelligence" for free.</p>
+    <ul>
+      <li><strong>Natural Language Model Pre-training (BERT/GPT)</strong>: When you train a model on the entire internet, you can't have humans label every sentence. Instead, the model uses SSL by "Masking"—hiding 15% of the words in a sentence and forcing itself to guess what they are. By millions of these small guesses, the model accidentally learns the grammar, facts, and reasoning required to understand human language.</li>
+      <li><strong>Contrastive Image Feature Learning</strong>: Before a self-driving car model knows what a "Pedestrian" is, it can learn the structure of the world through SSL. By taking two different crops of the same video frame and challenging itself to recognize that they belong to the same "Scene," the model learns to identify objects, edges, and depth without ever seeing a single human-provided label.</li>
+    </ul>
+    <p>Teacher's Final Word: You don't need a teacher to learn; you just need curiosity and a way to test your own guesses. SSL is the bridge that allows our machines to move past the bottleneck of human labeling and reach the scale of true, planetary-level intelligence.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we have a model that understands the world, how do we "Gift" that knowledge to another task? Explore <strong><a href="#/machine-learning/modern-ml/transfer-learning">Transfer Learning</a></strong>.
     </div>
   `
 };
+

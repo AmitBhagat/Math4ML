@@ -93,7 +93,7 @@ export const missingDataSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset identified with NaN values in 'Bathrooms' and 'Color'.\n[Median] Filling 'Bathrooms' holes with the middle value...\n[Result] Missing bathroom replaced with: 2.5\n[Mode] Filling 'Color' holes with most frequent value...\n[Result] Missing color replaced with: 'White'\n[Status] Dataset finalized and ready for ML training.">
+    <python-code>
 import numpy as np
 import pandas as pd
 from sklearn.impute import SimpleImputer
@@ -118,8 +118,17 @@ print("Dataset after Repair (Imputation):")
 print(df)
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Missing data is the "Hole in the Map." Handling it correctly ensures that we maintain the integrity of our findings without discarding valuable information or introducing systematic bias.</p>
+    <ul>
+      <li><strong>Imputing Missing Medical Vitals</strong>: In emergency room datasets, some vitals (like blood oxygen levels) might not be recorded for every patient due to the urgency of care. Doctors and data scientists use multivariate imputation to "guess" these missing values based on the patient's heart rate, age, and temperature, allowing the model to predict the severity of the case even when the data is incomplete.</li>
+      <li><strong>Consumer Survey Completion Estimation</strong>: When users take marketing surveys, they often skip sensitive questions like "Annual Income." Companies use "Mean" or "Mode" imputation to fill these gaps across millions of surveys, ensuring that they can still build accurate customer segments without having to throw away every survey that has a single blank answer.</li>
+    </ul>
+    <p>Teacher's Final Word: Silence is a signal too. How you fill the gaps defines the integrity of your results. If you ignore the holes, you lose the signal; if you fill them blindly, you create a hallucination. The goal is to find the logical bridge that keeps your data alive while staying true to the underlying patterns.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if a data point is just wrong or totally weird? Explore <strong><a href="#/machine-learning/data-preprocessing/outliers">Outlier Detection</a></strong>.
     </div>
   `
 };
+

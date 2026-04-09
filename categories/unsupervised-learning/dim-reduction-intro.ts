@@ -114,7 +114,7 @@ export const dimReductionIntroSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Calculating Variance for 4 features...\n[Status] Feature 2 ('Constant_ID') has Variance: 0.0\n[Status] Feature 3 ('Random_Hiss') has Variance: 0.08\n[Action] Dropping Feature 2 (Zero Signal detected).\n[Result] Data reduced from 4D to 3D with ZERO loss of useful information.\n[Insight] Never carry a heavy suitcase full of constant values!">
+    <python-code>
 import numpy as np
 from sklearn.feature_selection import VarianceThreshold
 
@@ -151,3 +151,4 @@ print(f"Kept Features (Mask): {selector.get_support()}")
     </div>
   `
 };
+

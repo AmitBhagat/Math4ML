@@ -111,7 +111,7 @@ export const decisionTreesSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Growing a tree of depth 2...\n[Root] Top Split Feature: Salary > 100k\n[Importance] Salary: 1.0, Commute: 0.0 (Salary alone perfectly sorted this small dataset!)\n[Decision] For $120k salary: ACCEPT\n[Insight] The tree 'discovered' that salary was the only factor that mattered here.">
+    <python-code>
 from sklearn.tree import DecisionTreeClassifier
 import numpy as np
 
@@ -144,3 +144,4 @@ print(f"Feature Importances: {model.feature_importances_}")
     </div>
   `
 };
+

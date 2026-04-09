@@ -70,7 +70,7 @@ export const mdpSection: TopicSection = {
     
 
     <h2 id="implementation">Implementation Concept</h2>
-    <python-code static-output="[Environment] GridWorld Initialized (Size: 5x5)\n[Agent] Current State: (0, 0)\n[Action] Move Right -> New State: (0, 1), Reward: -1\n[Action] Move Down -> New State: (1, 1), Reward: -1\n[Insight] Every step costs -1; the agent must find the shortest path to the goal (+100).">
+    <python-code>
 import numpy as np
 
 class SimpleEnv:
@@ -106,3 +106,4 @@ print(f"Action taken. New State: {state}, Reward: {reward}")
     </div>
   `
 };
+

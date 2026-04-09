@@ -111,10 +111,12 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Expected Value is the "North Star" of Machine Learning. It represents the outcome we can count on when we play the long game over millions of data points.</p>
     <ul>
-      <li><strong>Cost Functions (Risk)</strong>: We minimize the <strong>Expected Loss</strong> (\(MSE\) or Cross-Entropy) because we want a model that is correct <em>on average</em>.</li>
-      <li><strong>Reinforcement Learning</strong>: An agent chooses actions that maximize the <strong>Expected Reward</strong> over time.</li>
+      <li><strong>Risk Analysis in FinTech (Loan Defaults)</strong>: When a bank uses AI to decide if you get a loan, it isn't just asking "Will this person pay?" It is calculating the **Expected Loss**. If there is a 5% chance of losing $100,000 and a 95% chance of making $5,000 in interest, the expected value is actually negative (-\$250). Despite the high probability of success, the "Expectation" tells the AI that this is a bad bet in the long run.</li>
+      <li><strong>Multi-Armed Bandits (Recommendation Engines)</strong>: Netflix or YouTube use "Expectation" to decide which video to show you next. The algorithm estimates the **Expected Reward** (likelihood you'll click) for several videos. It constantly balances "Exploitation" (showing you what has a high expected reward) and "Exploration" (trying a new video to update its expected reward). This ensures the model doesn't get stuck in a loop of showing you the same three things forever.</li>
     </ul>
+    <p>Teacher's Final Word: Expectation is your reality check. In AI, we don't care about the lucky one-off success; we care about the "Aggregate Truth." We build models to maximize the expected good and minimize the expected bad. It's the math of staying in business.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Knowing the average is helpful. But how much do individual results "stray" from that average? Explore <strong><a href="#/mathematics/probability/variance">Variance</a></strong>.

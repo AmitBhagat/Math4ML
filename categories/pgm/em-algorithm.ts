@@ -84,7 +84,7 @@ export const emAlgorithmSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Iteration 0: Mu1 = -0.50, Mu2 = 0.50\n[Scan] Iteration 5: Mu1 = -1.82, Mu2 = 1.91\n[Scan] Iteration 10: Mu1 = -1.98, Mu2 = 2.05\n\n[Status] Converged after 10 epochs.\n[Verdict] EM correctly separated the overlapping Normal distributions (Target: -2.0, 2.0).">
+    <python-code>
 import numpy as np
 
 # 1. Setup Overlapping Data (True means: -2 and 2)
@@ -113,9 +113,18 @@ for i in range(10):
 print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>The EM algorithm is the "Chicken-and-Egg Negotiator." It allows us to train complex models even when we are missing critical information about the data labels, making it the bedrock of unsupervised and semi-supervised learning.</p>
+    <ul>
+      <li><strong>Image Segmentation (Object vs. Background)</strong>: When you use a "Background Blur" feature on a video call, an EM-like process is at work. The model doesn't know which pixels are "You" and which are "The Wall." It starts with a guess, identifies the probable regions (E-Step), and then refines the color and edge boundaries of those regions (M-Step) until it has a clean separation between the person and the room.</li>
+      <li><strong>Latent Consumer Profile Analysis</strong>: Market researchers use EM to find "Hidden Types" of shoppers in a massive dataset of purchase history. They don't have labels for "Budget Conscious" or "Luxury Buyer." The algorithm iterates through the data, assigning consumers to probable profiles (Expectation) and then updating the characteristics of those profiles (Maximization) until the true market segments emerge from the noise.</li>
+    </ul>
+    <p>Teacher's Final Word: When you don't know the answer, start with a guess and keep refining it until the math stops arguing with you. EM teaches us that even if the truth is hidden, we can still reach it through the persistence of iterative logic.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
   `
 };
+
 

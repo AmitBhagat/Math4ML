@@ -67,7 +67,7 @@ export const sgdSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Batch 0] Sample Mean Squared Error: 28.52\n[Batch 20] Lunging Downward... Loss: 12.40\n[Batch 40] Recovering from Stumble... Loss: 4.10\n[Batch 60] Near the House! Loss: 0.25\n[Result] Weights Converged in 0.05s (Batch would have taken 2.5s).">
+    <python-code>
 import numpy as np
 
 # 1. Dataset: 1,000 observations
@@ -99,9 +99,18 @@ for i in range(0, len(X), batch_size):
         print(f"Step {i//batch_size}: Loss={loss:.4f}, w={w:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Stochastic Gradient Descent is the "Street-Smart" version of model training. It trades the absolute precision of looking at every data point for the speed and agility required to handle massive, real-world datasets.</p>
+    <ul>
+      <li><strong>Online Real-time Recommendations</strong>: When you click a video on TikTok or YouTube, the recommendation model doesn't wait for the end of the day to update. It uses a form of SGD to take a "Single Point" update based on your specific click, immediately surfacing more relevant content in your next scroll. This "Stochastic" speed is what makes modern feeds feel alive and responsive.</li>
+      <li><strong>Deep Learning on Big Data (Mini-batches)</strong>: When training massive models like GPT, the entire dataset (Terabytes of text) cannot possibly fit into a computer's RAM. Engineers use SGD with "Mini-batches"—taking small groups of 16 or 32 sentences at a time to calculate a rough gradient. This allowing the model to learn incrementally without crashing the system, which is the only reason large-scale AI is possible.</li>
+    </ul>
+    <p>Teacher's Final Word: Sometimes, being fast and messy is better than being slow and perfect. SGD teaches us that in the real world, the "Average" of a thousand fast, noisy guesses is often more powerful than a single, perfectly calculated plan that takes forever to execute.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the sailor a <strong>Sled</strong> so he can use his speed more effectively? Explore <strong><a href="#/machine-learning/optimization-ml/momentum">Momentum</a></strong>.
     </div>
   `
 };
+
 

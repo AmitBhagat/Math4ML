@@ -79,7 +79,7 @@ export const rnnSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Sequence] Step 0: Input 'Wait' -> Memory Strength: 0.12\n[Sequence] Step 1: Input 'For' -> Memory Strength: 0.45\n[Sequence] Step 2: Input 'It' -> Memory Strength: 0.82\n[Analysis] The Hidden State is evolving as new data 'updates' the existing context.\n[Result] Final Hidden Vector represents a 'compressed' history of the full sequence.">
+    <python-code>
 import numpy as np
 
 # 1. Weights: x->h and h->h (Memory)
@@ -115,3 +115,4 @@ for i, x_t in enumerate(sequence):
     </div>
   `
 };
+

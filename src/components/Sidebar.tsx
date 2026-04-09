@@ -168,7 +168,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                     {/* Animated Dropdown Content */}
                     <div className={cn(
                       "overflow-hidden transition-all duration-300 ease-in-out",
-                      isExpanded ? "max-h-[500px] opacity-100 mt-1 mb-2" : "max-h-0 opacity-0"
+                      isExpanded ? "max-h-[1000px] opacity-100 mt-1 mb-2" : "max-h-0 opacity-0"
                     )}>
                       <div className="pl-7 pr-2 flex flex-col gap-0.5 border-l border-border-premium ml-3.5 py-1">
                         {isLoading ? (

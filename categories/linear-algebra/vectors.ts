@@ -108,13 +108,12 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, vectors are the DNA of data—they are the way we encode real-world complexity into a geometric language that a computer can actually process.</p>
+    <p>Vectors are the "DNA of Data." In ML, we don't see objects; we see coordinates in a high-dimensional reality where every quality—from the price of a stock to the pixel color of a cat's ear—is mapped to a specific numeric direction.</p>
     <ul>
-      <li><strong>Computer Vision</strong>: Every image is treated as a massive vector where each number represents a pixel's brightness. By mapping an image to a single point in high-dimensional space, we can mathematically compare two photos to see how "close" they are, which is how Face ID identifies you.</li>
-      <li><strong>Natural Language (NLP)</strong>: Words are converted into "Embeddings"—vectors in a 300D space. This geometry allows the computer to calculate relationships; for example, if you move from "King" in the same direction and distance that separates "Man" and "Woman," you land on the "Queen" vector.</li>
-      <li><strong>Self-Driving Cars</strong>: LiDAR sensors see a "Cloud of Points," where each point is a 3D vector. The car navigates by performing vector addition and subtraction to calculate trajectories and avoid obstacles in real-time.</li>
+      <li><strong>Semantic Word Embeddings (NLP)</strong>: Modern AI doesn't read words; it reads "Embeddings." Every word is translated into a 300-dimension vector. This geometry allows the computer to find relationships through subtraction: if you take the vector for "King," subtract the vector for "Man," and add the vector for "Woman," the resulting point in space is mathematically closest to the vector for "Queen." It’s a geometric logic for human language.</li>
+      <li><strong>IoT Industrial Sensor Fusion</strong>: In a modern factory, a single "State Vector" can represent the entire health of a machine by combining temperature, vibration frequency, and power consumption into a single point. By tracking how this vector "moves" through time, engineers can detect an impending failure before it happens, simply by watching for the vector to drift into a "Danger Zone" in the coordinate space.</li>
     </ul>
-    <p>Ultimately, vectorization is the tactical process of turning messy reality into a neat coordinate system, allowing our models to use the raw geometry of space to discover patterns.</p>
+    <p>Teacher's Final Word: Vectorization is the tactical process of turning messy reality into a neat coordinate system. Once you can represent a complex problem as a point in space, you can use the raw, elegant geometry of the universe to find your solution.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, vectors are points. Where do these points "live"? Explore <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.

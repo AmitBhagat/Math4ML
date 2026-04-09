@@ -90,7 +90,7 @@ export const backpropagationSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Forward] Truth: 1.0, Machine Guess: 0.622\n[Error] Soup is 'Too Salty' by: 0.378\n[Backprop] Calculating dLoss/dWeight via Chain Rule...\n[Gradient] Responsibility (Blame) = -0.089\n[Update] Adjusting Weight: 0.5 -> 0.5089\n[Result] Next guess will be closer to the Truth.">
+    <python-code>
 import numpy as np
 
 # 1. Component Math
@@ -135,3 +135,4 @@ print(f"New Improved Weight: {w:.4f}")
     </div>
   `
 };
+

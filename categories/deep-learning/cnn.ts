@@ -77,7 +77,7 @@ export const cnnSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Sliding 3x3 Kernel across 10x10 Image...\n--- Input (A vertical line at index 5) ---\n[0 0 0 0 0 1 0 0 0 0] ...\n--- Output (Detected Edges) ---\nFound Vertical Boundary at Columns [4, 6]\n[Result] Kernel successfully 'excited' by the texture change.">
+    <python-code>
 import numpy as np
 
 # 1. Create a 10x10 Image with a vertical bar
@@ -119,3 +119,4 @@ print(f"Kernel Response: {output[3:7]}")
     </div>
   `
 };
+

@@ -105,12 +105,12 @@ print(f"L2: {l2}, L1: {l1}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Norms are the "Police Officers" of Machine Learning. They measure the total "Mass" of your weights to keep them from growing out of control.</p>
+    <p>Norms are the "Police Officers" of Machine Learning. They measure the total "Mass" of your weights to keep them from growing out of control, or quantify the distance between what you're seeing and what you expect.</p>
     <ul>
-      <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our error function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise.</li>
-      <li><strong>K-Nearest Neighbors (k-NN)</strong>: To classify an object, the k-NN algorithm calculates the L2 norm (straight-line distance) between that object and every other labeled point. The "Length" provided by the norm tells the AI exactly who the closest neighbors are.</li>
+      <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our loss function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise. L1 (Lasso) is particularly ruthless; it acts like a "Pruning Tool" that shrinks useless weights of irrelevant features to exactly zero, effectively deleting them from the model.</li>
+      <li><strong>Anomaly Detection in Server Logs</strong>: To find a hacker in millions of server requests, we represent each request as a vector (Time, Data Size, Frequency). We then calculate the <strong>Distance (Norm)</strong> of every new request from the "Normal" average vector. If the norm is massive, it means the request is a geometric outlier—a "weird" point in space that requires immediate attention.</li>
     </ul>
-    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional vector and boils it down to a single number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
+    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Vectors are building blocks. Let's arrange them into grids. Explore <strong><a href="#/mathematics/linear-algebra/matrices">Matrices</a></strong>.

@@ -118,7 +118,7 @@ export const boostingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Generating complex 'Moons' dataset (Non-linear boundaries)...\n[Baseline] Training 1-level Decision Stump...\n[Action] Training AdaBoost (Sequential correction of 50 stumps)...\n\n[Result] Single Stump Score: 56.4% (Basically guessing)\n[Result] AdaBoost Ensemble Score: 94.2% (The Expert learner)\n\n[Insight] By focusing on mistakes, we combined 50 'dumb' models into one 'genius'.">
+    <python-code>
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.datasets import make_moons
@@ -159,3 +159,4 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
     </div>
   `
 };
+

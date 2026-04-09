@@ -102,7 +102,7 @@ export const ensembleIntroSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Initializing Council: Logistic Regression, Tree, and SVM.\n[Action] Training members on parallel subsets of data...\n[Stat] Expert 1 (LR) Accuracy: 82%\n[Stat] Expert 2 (DT) Accuracy: 88%\n[Stat] Expert 3 (SVM) Accuracy: 85%\n[Result] Ensemble Voting Accuracy: 93%\n[Insight] The Collective out-performed its best individual member!">
+    <python-code>
 from sklearn.ensemble import VotingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.tree import DecisionTreeClassifier
@@ -144,3 +144,4 @@ print(f"Council Consensus Accuracy: {score:.1%}")
     </div>
   `
 };
+

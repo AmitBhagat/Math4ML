@@ -102,10 +102,12 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Probability Distribution is the "DNA" of your dataset. It defines the hidden rules that dictate how often events occur, allowing an AI to move from "Guessing" to "Predicting."</p>
     <ul>
-      <li><strong>Softmax Layer</strong>: The final output of a neural network is a probability distribution over classes.</li>
-      <li><strong>Gaussian Models</strong>: In anomaly detection, we model the "Normal" behavior and flag anything that falls too far into the tails.</li>
+      <li><strong>Zipf’s Law in NLP (LLMs)</strong>: Human language follow a very specific "Power Law" distribution. If you look at every book on Earth, the word "the" appears twice as often as the second most common word, and so on. Large Language Models like GPT-4 must master this distribution to understand which words are "surprising" (high information) and which are "filler." If the distribution was uniform, every word would be equally likely, and communication would be a chaotic soup of noise.</li>
+      <li><strong>Gaussian (Normal) Error Modeling</strong>: In almost every regression model, we assume that the "Noise" or the error in the data follows a Normal distribution. This "Bell Curve" assumption is what makes Mean Squared Error (MSE) the mathematically perfect goal for most optimizers. We are essentially betting that most errors will be small and centered around zero, with massive "Outlier" errors being extremely rare.</li>
     </ul>
+    <p>Teacher's Final Word: In ML, we don't just learn "numbers," we learn "Shapes." A model's job is to look at your messy data points and figure out which mathematical shape (Gaussian, Poisson, Bernoulli) created them. Once you find the shape, you've found the truth.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have two random variables that affect each other? Explore <strong><a href="#/mathematics/probability/joint-distributions">Joint Distributions</a></strong>.

@@ -110,12 +110,12 @@ print(f"Determinant: {det:.2f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Think of the Determinant as a "Dimension Watchdog." It monitors how much a transformation "stretches" or "squashes" your information universe.</p>
+    <p>Think of the Determinant as a "Dimension Watchdog." It monitors how much a transformation "stretches" or "squashes" your information universe, ensuring you aren't accidentally erasing your data.</p>
     <ul>
-      <li><strong>Change of Variables (Flow Models)</strong>: In generative models like "Normalizing Flows" (which create realistic data), the determinant of the Jacobian ensures that as we warp a simple distribution into a complex one, the total probability still sums to 1.</li>
-      <li><strong>Outlier & Anomaly Detection</strong>: The "Volume" of a dataset can be measured using the determinant of its covariance matrix. If a new data point falls way outside this volume, the determinant helps flag it as a potential fraud or error.</li>
+      <li><strong>Normalizing Multivariate Gaussians</strong>: In statistics and AI, a "Bell Curve" in multiple dimensions is defined by its covariance matrix. The determinant of this matrix tells us the "Volume" of the probability cloud. To make the probability sum to exactly 1.0, we divide by the square root of the determinant. It is the mathematical anchor of probability theory.</li>
+      <li><strong>Jacobian Transformations in Deep Learning</strong>: When we use "Normalizing Flows" or "Change of Variables" in a loss function, we need to know how much our model is warping the space. We multiply by the determinant of the <strong>Jacobian Matrix</strong> to "account for the stretch" so the math stays balanced. If we ignore the determinant, our model will literally lose track of where the data is located.</li>
     </ul>
-    <p>Teacher's Final Word: If the determinant is zero, your matrix has "erased" a dimension of data forever. In AI, preventing accidental "data erasure" is why we watch the determinant like a hawk.</p>
+    <p>Teacher's Final Word: If the determinant is zero, your matrix has "erased" a dimension of data forever. In AI, preventing accidental "data erasure" is why we watch the determinant like a hawk. It is the difference between a model that learns and a model that squashes everything into a meaningless pancake.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Determinants tell us if space is squashed. But how *much* space is left? Explore <strong><a href="#/mathematics/linear-algebra/matrix-rank">Matrix Rank</a></strong>.

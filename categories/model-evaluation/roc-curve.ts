@@ -122,7 +122,7 @@ export const rocCurveSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 10 probability scores against ground truth...\n[Action] Sweeping Threshold from 1.0 down to 0.0...\n[Threshold 0.82] TPR: 0.25 | FPR: 0.00 (Safe / Picky)\n[Threshold 0.45] TPR: 0.75 | FPR: 0.20 (Balanced)\n[Threshold 0.12] TPR: 1.00 | FPR: 1.00 (Aggressive / Messy)\n[Result] ROC points calculated for optimization.\n[Insight] The 'Sweet Spot' is where we find the max TPR for the min FPR.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import roc_curve
 
@@ -151,3 +151,4 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
     </div>
   `
 };
+

@@ -121,7 +121,7 @@ export const transferLearningSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Load] Downloading pre-trained ResNet-50 (25M parameters)...\n[Lock] Freezing 48 Convolutional Layers... (Features are safe)\n[Swap] Removing 1,000-class ImageNet Head.\n[Swap] Attaching new 2-class Head (Ants vs. Bees).\n\n[Status] Model is ready for 'Light' fine-tuning.\n[Stats] Total parameters: 25,557,090 | Trainable: 4,098">
+    <python-code runnable="false" static-output="[Action] Grafting New Task Head onto Pre-trained Base...\n[Base] ResNet-50 loaded (25.6M weights frozen)\n[Layer] fc.features -> in: 2048 | out: 1000 (Dropped)\n[Layer] fc.head -> in: 2048 | out: 2 (Grafted)\n[Result] Model ready for fine-tuning with only 4,096 trainable parameters.\n[Insight] Leveraging weights that already 'understand' 1,000 object categories.">
 import torch.nn as nn
 from torchvision import models
 
@@ -143,8 +143,17 @@ model.fc = nn.Linear(num_ftrs, 2)
 print(f"Features Frozen. New Head Output Classes: {model.fc.out_features}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Transfer Learning is the "Great Equalizer." It allows companies and researchers with small datasets to achieve world-class performance by standing on the shoulders of the massive models trained by tech giants.</p>
+    <ul>
+      <li><strong>Medical Tumor Diagnosis from X-rays</strong>: It's hard to find 10 million labeled X-rays of a rare cancer. Instead, doctors take a model that already knows how to see "Edges," "Textures," and "Shapes" from millions of dog and cat photos (ImageNet). By "Fine-tuning" just the last few layers on a small hospital dataset, the model can reach expert-level diagnostic accuracy in a fraction of the time.</li>
+      <li><strong>Specialized Customer Service Bots</strong>: Instead of training a language model from scratch, companies take a pre-trained "Foundation Model" (like GPT or Llama) and give it a small finishing school using their own legal and billing documentation. This "Gifts" the model a universal understanding of language while focusing its final output on the specific rules of the company.</li>
+    </ul>
+    <p>Teacher's Final Word: Wisdom is reusable. Don't start from scratch when you can start from the finish line of a billionaire's research lab. Transfer learning is the reason AI is moving so fast—we are building a collective brain, layer by layer, and then gifting the early layers to the next generation of problems.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What exactly is the model "Gifting"? It's the way it simplifies data. Explore <strong><a href="#/machine-learning/modern-ml/representation">Representation Learning</a></strong>.
     </div>
   `
 };
+

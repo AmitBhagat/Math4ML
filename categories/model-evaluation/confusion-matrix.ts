@@ -125,7 +125,7 @@ export const confusionMatrixSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Comparing 10 Predictions against Ground Truth...\n[Result] Confusion Matrix Grid:\n\n             Predicted: NO | Predicted: YES\nActual: NO  [[    5      ,      1      ],\nActual: YES  [    1      ,      3      ]]\n\n[Insight] Accuracy: 80.0%\n[Insight] 1 innocent email was marked as Spam (False Positive).\n[Insight] 1 Spam email was missed (False Negative).">
+    <python-code>
 import numpy as np
 from sklearn.metrics import confusion_matrix
 
@@ -156,3 +156,4 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
     </div>
   `
 };
+

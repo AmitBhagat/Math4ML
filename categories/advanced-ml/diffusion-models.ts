@@ -94,7 +94,7 @@ export const diffusionModelsSection: TopicSection = {
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: Gaussian Noise (Mean=0, Std=1)\n[Action] Running Reverse Diffusion Markov Chain (T=1000)...\n[Predict] U-Net predicting noise kernel at step t=800...\n[Update] Noise subtracted. Structural SNR increasing...\n\n[Status] Image Manifold reached at t=0.\n[Visual] Signal recovered from 100% entropy.">
+    <python-code runnable="false" static-output="[Scan] Latent Space: 64x64 Noise Pattern\n[Action] Initializing Reverse Diffusion (T=1000)\n[Step 999] High-entropy chaos detected.\n[Step 500] Structural blobs forming (\u03bc=0.02)\n[Step 1] Denoising complete.\n[Result] High-fidelity image recovered from pure static.">
 import torch
 import numpy as np
 
@@ -137,3 +137,4 @@ print("\n[Result] The 'Temperature' of the data is dropping as we find structure
     </div>
   `
 };
+

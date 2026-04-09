@@ -112,7 +112,7 @@ export const svmSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Solving quadratic program for widest margin...\n[Soldiers] Identified 3 Support Vectors on the border.\n[Result] Decision Boundary: y = -0.5x + 3.2\n[Input] Testing point at (5, 5)...\n[Classification] Result: 1 (Red Kingdom)\n[Insight] Notice that only the border points affected the final highway!">
+    <python-code>
 import numpy as np
 from sklearn.svm import SVC
 
@@ -150,3 +150,4 @@ print(f"Support Vector Coordinates: \n{sv}")
     </div>
   `
 };
+

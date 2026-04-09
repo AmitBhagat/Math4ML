@@ -116,11 +116,12 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Bayes' Theorem is the "Self-Correction Engine" of AI. It provides the mathematical proof that our beliefs should always be in a state of flux, updating every time a new piece of data hits the table.</p>
     <ul>
-      <li><strong>Naive Bayes Classifier</strong>: The most famous application of this theorem in supervised learning for text classification.</li>
-      <li><strong>A/B Testing</strong>: Bayesian methods help companies decide if a "Change" (Evidence) actually caused an "Improvement" (Cause).</li>
-      <li><strong>Kalman Filters</strong>: Predicting the trajectory of self-driving cars by combining sensor data (Evidence) with the previous physics state (Prior).</li>
+      <li><strong>Bayesian Neural Networks (BNNs)</strong>: Standard neural networks give you a single "Guess" (e.g., 90% sure this is a dog). BNNs use Bayes' Theorem to give you a **Distribution of Guesses**. Instead of one set of weights, they have a "Prior" belief about what the weights should be and update that "Posterior" as they see training data. This allows the AI to say: "I think this is a dog, but I've never seen a picture this blurry before, so I'm actually very uncertain." It prevents the model from being "Arrogantly Wrong."</li>
+      <li><strong>Self-Driving Car Localization (Kalman Filters)</strong>: A Tesla navigating a highway uses Bayes' Theorem every millisecond. It has a "Prior" (where it thought it was 10ms ago based on physics) and it receives "Evidence" (GPS and LIDAR data). The GPS might be slightly off due to a tunnel, and the LIDAR might be confused by rain. Bayes' Theorem allows the car to optimally **Blend** those two noisy inputs to calculate the most likely "Posterior" position. It is the math that keeps the car in its lane.</li>
     </ul>
+    <p>Teacher's Final Word: Bayes' Theorem is the logic of humbleness. It forces the machine to admit what it knew before and adjust it based on what it sees now. In a world of noise, it is the only way to arrive at the signal.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the <strong>Rigid Statistics</strong> of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.

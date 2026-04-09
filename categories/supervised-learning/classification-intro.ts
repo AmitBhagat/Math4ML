@@ -125,7 +125,7 @@ export const classificationIntroSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Learning to detect spam from 4 examples...\n[Input] New Email: 5 suspicious keywords, Rep-Score 8\n[Probabilities] Real: 89%, Spam: 11%\n[Decision] This email is REAL.\n[Insight] The high reputation score (8) 'outvoted' the suspicious keywords!">
+    <python-code>
 from sklearn.linear_model import LogisticRegression
 import numpy as np
 
@@ -159,3 +159,4 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     </div>
   `
 };
+

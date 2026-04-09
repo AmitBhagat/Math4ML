@@ -71,7 +71,7 @@ export const qLearningSection: TopicSection = {
     
 
     <h2 id="implementation">Implementation Concept</h2>
-    <python-code static-output="[Training] Running 1,000 episodes of Q-Learning...\n[Update] Episode 100: Found Goal! Propagating reward...\n[Update] Episode 500: Q-Table starting to converge.\n[Result] Optimal Policy Learned: [Right, Right, Down, Down]\n[Insight] The agent learned to take a longer path to avoid the -100 penalty trap!">
+    <python-code>
 import numpy as np
 
 # A tiny 1D world: [Start, Path, Path, Trap, Goal]
@@ -108,3 +108,4 @@ print(f"Learned Q-Values: {q_table}")
     </div>
   `
 };
+

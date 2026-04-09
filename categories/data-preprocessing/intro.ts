@@ -84,7 +84,7 @@ export const dataPreprocessingIntroSection: TopicSection = {
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Raw Input: {'Age': 25, 'City': 'NY', 'Salary': 50000}\n[Clean] Found 1 missing value in 'Age'. Imputing with Median...\n[Scale] Mapping Salary to [0, 1] range...\n[Encode] Mapping City 'NY' -> [1, 0, 0] (One-Hot Vector)\n\n[Status] Feature Vector: [25, 1, 0, 0, 0.45]\n[Insight] Data is now high-dimensional, normalized, and model-ready.">
+    <python-code>
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.impute import SimpleImputer
@@ -110,8 +110,17 @@ print("Refined Dataframe:")
 print(df[['Age', 'City', 'Salary_Scaled']])
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Data preprocessing is the "Janitorial Work" of AI. It turns raw, dirty facts into a high-fidelity fuel that the model's mathematical engine can actually burn without stalling.</p>
+    <ul>
+      <li><strong>Web Scraping for Sentiment Analysis</strong>: When you scrape millions of tweets to analyze public mood, the raw data is full of HTML tags, emojis, and weird characters. Preprocessing involves stripping away the technical noise and "Denoising" the text so that the model can focus purely on the sentiment of the words, rather than getting confused by a broken 'div' tag.</li>
+      <li><strong>IoT Sensor Industrial Streams</strong>: In a modern factory, thousands of sensors measure temperature and vibration every millisecond. These sensors often "Glitch" or drop out for a few seconds. Preprocessing is used to handle these "Outliers" and "Gaps" before the data reaches the predictive maintenance model, ensuring that a single faulty sensor doesn't trigger a false emergency shutdown.</li>
+    </ul>
+    <p>Teacher's Final Word: Shovel in garbage, get out garbage. The best model in the world is useless if the data is a mess. Preprocessing is the silent, gritty labor that separates the theoretical toy projects from the industrial-grade systems that actually work in the wild.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Numbers are clean, but are they on the same scale? Explore <strong><a href="#/machine-learning/data-preprocessing/scaling">Feature Scaling</a></strong>.
     </div>
   `
 };
+

@@ -122,7 +122,7 @@ export const ridgeRegressionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Model trying to learn with alpha=10.0 (Strong Lease)\n[Features] 1: Hours Studied, 2: Random Noisy Feature\n[Result] Weights: [2.5, 0.05]\n[Insight] Notice how the Noisy Feature was 'shrunk' to almost zero!\n[Stability] The model is now 40% more stable on new test data.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import Ridge
 
@@ -156,3 +156,4 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
     </div>
   `
 };
+

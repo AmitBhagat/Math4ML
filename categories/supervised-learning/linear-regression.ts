@@ -113,7 +113,7 @@ export const linearRegressionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Solving for the optimal line using OLS...\n[Model] Price = 200.0 * Sqft + 0.0\n[Prediction] Real Estate Estimate for 2000 sqft: $400,000\n[Verify] Manual Check: 200 * 2000 + 0 = 400,000. Spot on!">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -148,3 +148,4 @@ print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     </div>
   `
 };
+

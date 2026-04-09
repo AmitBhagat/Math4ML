@@ -82,7 +82,7 @@ export const lossFunctionsSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 3 test cases...\n[Regression] MSE (True 100, Pred 150): 2500.0\n[Classification] Cross-Entropy (Confident Wrong - 0.1): 2.30\n[Classification] Cross-Entropy (Hesitant Wrong - 0.4): 0.91\n[Insight] Notice how the penalty for a 0.1 guess is 2.5x higher than a 0.4 guess. Confidence kills models!">
+    <python-code>
 import numpy as np
 
 # 1. Mean Squared Error (Distance based)
@@ -113,3 +113,4 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     </div>
   `
 };
+

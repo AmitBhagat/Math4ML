@@ -102,7 +102,7 @@ export const naiveBayesSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Learning from 4 labeled emails...\n[Input] New Email: 'Win prize money'\n[Finding] 'Prize' is 100% correlated with Spam in this dataset.\n[Finding] 'Money' is 100% correlated with Spam in this dataset.\n[Result] Classification: Spam\n[Insight] Even with Laplace smoothing, the evidence for Spam was overwhelming.">
+    <python-code>
 from sklearn.naive_bayes import MultinomialNB
 from sklearn.feature_extraction.text import CountVectorizer
 import numpy as np
@@ -142,3 +142,4 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
     </div>
   `
 };
+

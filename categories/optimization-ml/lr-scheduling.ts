@@ -65,7 +65,7 @@ export const lrSchedulingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Schedule] Initial LR detected: 0.1\n[Stage 1] Step Decay: Dropping by factor 0.1 at Epoch 50.\n[Stage 2] Cosine: Smoothly curving toward 0.0.\n\nEpoch 0:   Step-LR=0.1000 | Cosine-LR=0.1000\nEpoch 25:  Step-LR=0.1000 | Cosine-LR=0.0854\nEpoch 50:  Step-LR=0.0100 | Cosine-LR=0.0500\nEpoch 75:  Step-LR=0.0100 | Cosine-LR=0.0146\nEpoch 100: Step-LR=0.0010 | Cosine-LR=0.0000\n\n[Verdict] Cosine Annealing leads to a smoother 'Flight Path' than Step Decay.">
+    <python-code runnable="false">
 import numpy as np
 
 # 1. Base Numbers
@@ -87,9 +87,18 @@ for e in [0, 25, 50, 75, 100]:
     print(f"Epoch {e:3}: Step={s_lr:.4f} | Cosine={c_lr:.4f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Learning Rate Scheduling is the "Braking System" of training. It allows us to explore the vast space of possibilities at high speed in the beginning, while ensuring we possess the precision to stop exactly at the optimal solution in the end.</p>
+    <ul>
+      <li><strong>Training Large Language Models (LLMs)</strong>: When training models like Llama or GPT, the initial gradients can be extremely unstable due to random weight initialization. Engineers use a "Warmup" schedule—starting with a tiny learning rate and gradually increasing it—to prevent the model from "exploding" (infinite loss) in the first 1,000 steps, before transitioning to a decay schedule for long-term refinement.</li>
+      <li><strong>Transfer Learning Fine-tuning</strong>: If you take a pre-trained model (like ResNet for images) and want to adapt it to a specific task (like identifying rare plants), you already have a "Smart" model. Use a very small, decaying learning rate schedule here. This ensures that you don't destroy the high-level features the model already knows while allowing it to carefully "Tweak" its weights for your specific data.</li>
+    </ul>
+    <p>Teacher's Final Word: If you never slow down, you'll never stop at the truth; you'll just zoom right past it. Learning rate scheduling is the difference between a model that merely "learns" and one that achieves state-of-the-art generalization by sticking the landing on the global minimum.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the iterative descent. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
   `
 };
+
 

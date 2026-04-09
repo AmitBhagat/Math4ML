@@ -110,10 +110,12 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Conditional Probability is the "Context Filter" of AI. It allows a model to refine its world-view by looking only at the slice of reality that matches the current evidence.</p>
     <ul>
-      <li><strong>Discriminative Models</strong>: Directly model the conditional probability \(P(y|X)\) (e.g., Logistic Regression).</li>
-      <li><strong>Precision & Recall</strong>: Metrics used to evaluate how reliable a model's "Positive" predictions actually are.</li>
+      <li><strong>Contextual Word Embeddings (LLMs)</strong>: In Natural Language Processing, the meaning of a word is almost entirely conditional. Consider the word "Bank." A transformer model calculates the probability of its meaning **Given** the surrounding words. If the context is "Water," the conditional probability of it meaning "River Side" is 99%. If the context is "Loan," the conditional probability of it meaning "Financial Institution" takes over. Without conditional probability, AI would be trapped in a world of literal, one-dimensional definitions.</li>
+      <li><strong>Dynamic Fraud Detection</strong>: Banks don't just ask "Is this transaction 0.1% or 99.9% Fraudulent?" They ask: "What is the probability of fraud **Given** that the user is currently in a foreign country and just spent $5,000?" This specific condition "Shrinks" the sample space from "All Customers" to "Travelers in high-risk zones," allowing the AI to spot anomalies that would be invisible in a general dataset.</li>
     </ul>
+    <p>Teacher's Final Word: The world is full of noise, but Conditional Probability acts like a spotlight. It tells the model to ignore the dark corners of the universe and focus only on the evidence at hand. Mastering the "Given" is the secret to mastering the context.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Sometimes, knowing B tells you <em>absolutely nothing</em> new about A. Explore <strong><a href="#/mathematics/probability/independence">Independence</a></strong>.

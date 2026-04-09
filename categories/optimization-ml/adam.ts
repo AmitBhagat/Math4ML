@@ -69,7 +69,7 @@ export const adamSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Step 1] Initializing Moments... m=0.15, v=0.02\n[Step 2] Bias Correction... Correcting for 'Cold Start' at t=1\n[Step 10] Calibration Complete... m=1.35, v=2.24\n[Result] Parameter 1 (Noisy) -> Scaled Down (Low update)\n[Result] Parameter 2 (Stable) -> Scaled Up (High update)\n[Insight] Every weight now has its own 'custom' learning rate.">
+    <python-code>
 import numpy as np
 
 # 1. State: m (mean) and v (variance)
@@ -102,9 +102,18 @@ for step in range(1, 101):
         print(f"  Step {step}: m_hat={m_hat:.3f}, v_hat={v_hat:.3f}, Step={weight_update:.6f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Adam is the "Default King" of optimizers. It provides a unique combination of speed, stability, and intelligence by automatically tuning the update process for every single parameter in a complex model.</p>
+    <ul>
+      <li><strong>Natural Language Processing (NLP)</strong>: In tasks like machine translation or text generation, some words (columns) appear millions of times, while others appear only once. Adam ensures that the weights for rare words are updated with sufficient "Kick," while the common words are updated with "Stability." This adaptivity is why Adam is the standard choice for almost all Transformer-based models.</li>
+      <li><strong>Generative Adversarial Networks (GANs)</strong>: GANs are notoriously difficult to train because they involve a constant "Arms Race" between a generator and a discriminator. If one gets too strong too fast, the system crashes. Adam's ability to track the variance and direction of gradients helps stabilize this delicate balance, making it much more likely to produce high-fidelity synthetic images without the training process diverging.</li>
+    </ul>
+    <p>Teacher's Final Word: Adam is the "Industrial Workhorse" for a reason—it does the thinking so you don't have to. While other optimizers might require hours of manual tuning, Adam usually just works, allowing you to focus on the architecture and data rather than babysitting the learning rate.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Even the best athlete needs to slow down as he nears the finish line. Explore <strong><a href="#/machine-learning/optimization-ml/lr-scheduling">Learning Rate Scheduling</a></strong>.
     </div>
   `
 };
+
 

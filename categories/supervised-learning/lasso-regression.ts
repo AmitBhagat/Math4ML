@@ -117,7 +117,7 @@ export const lassoRegressionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Model trying to learn with alpha=5.0 (Brutal Executioner)\n[Input] 1 Useful Feature, 4 Random Noisy Features\n[Result] Learned Weights: [8.5, 0.0, 0.0, 0.0, 0.0]\n[Discovery] Lasso killed all 4 junk features exactly!\n[Interpretation] Feature 0 is the only one 'worth' the L1 penalty.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import Lasso
 
@@ -153,3 +153,4 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     </div>
   `
 };
+

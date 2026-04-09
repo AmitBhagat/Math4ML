@@ -124,7 +124,7 @@ export const f1ScoreSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Reality: 4 Targets, Model: 5 Predictions\n[Component] Precision (Quality): 60.0% (3/5 were right)\n[Component] Recall (Thoroughness): 75.0% (3/4 found)\n[Action] Calculating Harmonic Mean (P*R)/(P+R) * 2...\n[Result] F1-Score: 66.7%\n[Insight] The F1 centers between P and R, leaning toward the lower value.">
+    <python-code>
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 # 1. Reality vs. Model Guesses
@@ -149,3 +149,4 @@ print(f"F1 Final Score: {f1:.2f}")
     </div>
   `
 };
+

@@ -133,7 +133,7 @@ export const gradientBoostingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Initializing with 'Dumb' model (Avg prob: 0.5)\n[Stages] Tree 1: Focus on easy samples. Tree 2: Focus on mistakes.\n[Stages] Tree 100: Precise fine-tuning reached!\n[Input] Testing case [9, 4]...\n[Result] Confidence Strategy: 99.8% POSITIVE\n[Insight] Notice how Boosting 'hones in' on the truth over multiple stages.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import GradientBoostingClassifier
 
@@ -168,3 +168,4 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
     </div>
   `
 };
+

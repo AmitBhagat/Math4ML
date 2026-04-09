@@ -123,7 +123,7 @@ export const recallSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Reality: 4 Actual Positive cases (Spam/Sick) identified.\n[Action] Running Model Inference...\n[Verify] Correctly Found (TP): 3\n[Verify] Dangerous Misses (FN): 1\n[Result] Recall (Sensitivity) = 3/4 = 75.0%\n[Insight] The model 'Caught' 75% of the truth, but let one target 'Escape'.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import recall_score
 
@@ -149,3 +149,4 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     </div>
   `
 };
+

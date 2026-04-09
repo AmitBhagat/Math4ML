@@ -82,7 +82,7 @@ export const hmmSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Sequence: [Umbrella, No Umbrella]\n[Path A] 'Rain' -> 'Sun' Prob: 0.1215\n[Path B] 'Rain' -> 'Rain' Prob: 0.0315\n\n[Viterbi] Winner: 'Rain' followed by 'Sun'\n[Verdict] It was likely raining when the guard had the umbrella, but cleared up by the second visit.">
+    <python-code>
 import numpy as np
 
 # 1. Probabilities
@@ -105,9 +105,18 @@ print(f"Path B [Rain -> Rain] Prob: {path_B:.4f}")
 print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Rain'}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Hidden Markov Models are the "Time-Traveler's Logic." They allow us to deduce the hidden truth from a sequence of visible clues, making them essential for understanding anything that unfolds over time.</p>
+    <ul>
+      <li><strong>Speech-to-Text Transcription</strong>: When you talk to Siri or Alexa, the "Hidden States" are the words you intended to say, and the "Observations" are the raw sound waves recorded by the microphone. The HMM calculates the most likely sequence of words that would have produced those exact sound frequencies, accounting for the grammatical transitions (the probability of one word following another).</li>
+      <li><strong>Bioinformatics Gene Profiling</strong>: Scientists use HMMs to find genes in a long string of DNA. The "Hidden States" are the functional roles of the DNA (e.g., protein-coding vs. non-coding), and the "Observations" are the sequence of bases (A, C, G, T). The model "decodes" the invisible biological map of the genome by analyzing the observed sequence structures.</li>
+    </ul>
+    <p>Teacher's Final Word: Just because you can't see the truth doesn't mean you can't calculate its shadow. HMMs teach us that a sequence of clues is just as good as a direct observation if you have the math to connect the dots across time.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we "Learn" these transition matrices if we don't know the states? Explore <strong><a href="#/machine-learning/pgm/em-algorithm">The EM Algorithm</a></strong>.
     </div>
   `
 };
+
 

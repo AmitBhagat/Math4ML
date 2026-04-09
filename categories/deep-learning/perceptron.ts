@@ -81,7 +81,7 @@ export const perceptronSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Iteration 0] Training on all 4 combinations...\n[Iteration 5] Model is starting to 'Get it'...\n[Iteration 10] Perfect Convergence!\n[Test] Input [1, 1] -> Predicted: 1 (Correct)\n[Test] Input [0, 1] -> Predicted: 0 (Correct)\n[Final] Learned Weights: [2.0, 1.0] | Bias: -2.5">
+    <python-code>
 import numpy as np
 
 # 1. Input (X) and Target (y) for AND Gate
@@ -125,3 +125,4 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     </div>
   `
 };
+

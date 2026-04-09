@@ -122,7 +122,7 @@ export const stackingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Initializing Base Models: Random Forest & Support Vector Machine.\n[Level 0] Base Model 1 (RF) Accuracy: 86.4%\n[Level 0] Base Model 2 (SVM) Accuracy: 84.1%\n[Action] Training Meta-Learner (Logistic Regression) on Out-Of-Fold predictions...\n\n[Result] Stacking Ensemble Accuracy: 92.5%\n[Insight] The Meta-Learner successfully combined RF and SVM to fix individual weaknesses.">
+    <python-code>
 from sklearn.ensemble import StackingClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.svm import SVC
@@ -170,3 +170,4 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
     </div>
   `
 };
+

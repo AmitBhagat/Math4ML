@@ -84,7 +84,7 @@ export const activationsSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Processing Raw Signals: [-2.0, 0.0, 2.0, 4.0]\n[ReLU] Negative signals cut to zero: [0, 0, 2, 4]\n[Sigmoid] Probability Projection: [0.12, 0.50, 0.88, 0.98]\n[Softmax] Competitive Distribution: [0.00, 0.02, 0.12, 0.86] (Sum: 1.0)\n[Insight] Softmax is 'confident' that the 4th signal is the winner.">
+    <python-code>
 import numpy as np
 
 # 1. Activation math
@@ -117,3 +117,4 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
     </div>
   `
 };
+

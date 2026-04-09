@@ -129,7 +129,7 @@ export const knnSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Query] New Movie (8 Action, 3 Romance)\n[Computation] Calculating distances to 4 neighbors...\n[Finding] Top 3 neighbors: ['Action', 'Action', 'Romance']\n[Result] Majority Vote: Action\n[Insight] KNN correctly identified the cluster despite 1 outlier neighbor!">
+    <python-code>
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 
@@ -163,3 +163,4 @@ print(f"Final Classification: {result[0]}")
     </div>
   `
 };
+

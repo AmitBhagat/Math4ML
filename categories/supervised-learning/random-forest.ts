@@ -125,7 +125,7 @@ export const randomForestSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Growing 100 unique trees with random data slices...\n[Consultation] Testing a new case with features [1, 0, 0]...\n[Voting] 87 trees voted POSITIVE, 13 trees voted NEGATIVE.\n[Final Verdict] Classification: POSITIVE (Confidence: 87.0%)\n[Insight] The forest's confidence score is literally the % of trees that agreed!">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 
@@ -159,3 +159,4 @@ print(f"Confidence Score: {votes[1]:.1%}")
     </div>
   `
 };
+

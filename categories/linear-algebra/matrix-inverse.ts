@@ -103,12 +103,12 @@ else:
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>The Inverse is your mathematical "Undo Button." It allows you to work backwards from an output to find the original input.</p>
+    <p>The Inverse is your mathematical "Undo Button." It allows you to work backwards from an output to find the hidden original input that caused it.</p>
     <ul>
-      <li><strong>Newton’s Method (Optimization)</strong>: When an AI is trying to find the absolute lowest point of an error curve, it uses the Inverse of the "Hessian" matrix to calculate the perfect step size, cutting down training time significantly.</li>
-      <li><strong>Image Deblurring</strong>: If an image is blurred by a known lens distortion, we can find the Inverse of that transformation to "un-blur" the photo and recover the original high-resolution details.</li>
+      <li><strong>The Normal Equation for Linear Regression</strong>: When we want the absolute best-fit line through a cloud of data points, we don't always have to use Gradient Descent. We can use the <strong>Normal Equation</strong> $(X^TX)^{-1}X^Ty$. By inverting the feature matrix, we solve for the model's weights in a single, surgical mathematical stroke, finding the global minimum instantly.</li>
+      <li><strong>Cryptographic Decoding</strong>: Many encryption schemes (like the Hill Cipher) treat a message as a vector and multiply it by a secret "Key Matrix." To read the message, the receiver must calculate the inverse of that key matrix to "un-scramble" the data and return it to its readable form. Without the inverse, the noise is permanent.</li>
     </ul>
-    <p>Teacher's Final Word: In real-world ML, we often avoid calculating the inverse directly because it’s computationally heavy. Instead, we use "Solver" algorithms that give us the same result with 10x more efficiency.</p>
+    <p>Teacher's Final Word: In real-world ML, we often avoid calculating the inverse of massive matrices directly because it’s computationally heavy (O(n³)). Instead, we use "Solvers" like LU decomposition that give us the same result with 10x more efficiency. But whether we calculate it or not, the theory of the inverse is what keeps the back-and-forth door of math open.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when a matrix *can't* be inverted? What is that number that decides? Explore <strong><a href="#/mathematics/linear-algebra/determinants">Determinants</a></strong>.

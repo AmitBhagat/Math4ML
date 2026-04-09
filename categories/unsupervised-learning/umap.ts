@@ -117,7 +117,7 @@ export const umapSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Constructing Fuzzy Simplicial Complex (n_neighbors=15)...\n[Action] Initializing Spectral Embedding for global stability...\n[Optimization] SGD Layout Refinement (1.2 seconds total)...\n[Result] 64D Digits dataset compressed to a 2D Topological Map.\n[Discovery] Found 10 distinct 'islands' representing digits 0-9.">
+    <python-code runnable="false">
 import umap
 from sklearn.datasets import load_digits
 
@@ -150,3 +150,4 @@ print(f"Status: Local and Global structure successfully preserved.")
     </div>
   `
 };
+

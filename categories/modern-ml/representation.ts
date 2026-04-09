@@ -123,7 +123,7 @@ export const representationSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input Layer: 784 neurons (28x28 Image)\n[Action] Forwarding through Hidden Layers...\n[Bottleneck] Reducing to Latent Dimension: 2\n\n[Output] Input Image ID #4521 -> Vector: [-1.24, 0.89]\n[Insight] This 2D vector is the 'Representation'. We can now plot 10,000 images on a simple 2D map to see which ones are 'friends'.">
+    <python-code runnable="false" static-output="[Action] Mapping Input through Encoder Bottleneck...\n[Layer 1] Flattening 28x28 (784 pixels) -> Tensor\n[Layer 2] Linear Compression (128 units)\n[Output] Final Latent Vector (2 dimensions): [-0.42, 1.89]\n[Result] High-dimensional image successfully mapped to a single coordinate.">
 import torch.nn as nn
 import torch
 
@@ -150,8 +150,17 @@ essence = model(img)
 print(f"Original Data: 784 bits -> Essence: {essence.detach().numpy()[0]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Representation Learning is the "Internal Translation" of AI. It turns the messy, high-dimensional reality of the world into a clean, geometric point in space, allowing models to compare meanings rather than just raw data bytes.</p>
+    <ul>
+      <li><strong>Reverse Image Search (Google Lens)</strong>: When you take a photo of a flower to identify it, Google doesn't compare the pixels of your photo to billions of others. Instead, it uses a pre-trained model to extract a "Representation Vector" (the essence of the flower). It then performs a high-speed search in "Latent Space" to find the closest neighbor. This turns a multi-petabyte search problem into a simple geometry problem.</li>
+      <li><strong>Recommendation System Embeddings</strong>: Netflix and Spotify don't just see you as a list of movies; they represent your taste as a multi-dimensional coordinate. By mapping you and every movie into the same "Taste Space," the system can find the "Next Best Watch" by simply looking at which movie vectors are sitting right next to your user vector in the dark.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't show the machine the pixels; show it the meaning. A good representation is worth a million raw bytes. Mastering the latent space is the difference between a model that merely memorizes data and one that truly understands the hidden mechanics of reality.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we force the model to find these good representations? By comparing similar things! Explore <strong><a href="#/machine-learning/modern-ml/contrastive">Contrastive Learning</a></strong>.
     </div>
   `
 };
+

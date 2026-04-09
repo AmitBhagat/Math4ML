@@ -116,7 +116,7 @@ export const contrastiveSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Scan] Input: Batch of 128 Image Pairs\n[Action] Extracting 512-dim features using ResNet-18...\n[Loss] Similarity(Twins) = 0.98 (High)\n[Loss] Similarity(Strangers) = 0.05 (Low)\n\n[Status] Gradient Step: Pulling twins closer, pushing strangers away.\n[Insight] The latent space is beginning to cluster 'Architecture' vs 'Nature'.">
+    <python-code runnable="false" static-output="[Action] Pre-calculating Similarity Metrics...\n[Pair A] Anchor (Cat_1) vs Positive (Cat_2) -> Sim: 0.985\n[Pair B] Anchor (Cat_1) vs Negative (Truck_1) -> Sim: -0.104\n[Result] High similarity cluster detected for positive pair.\n[Conclusion] Model successfully learned to ignore lighting and pose for Cat embeddings.">
 import torch
 import torch.nn.functional as F
 
@@ -139,8 +139,17 @@ print(f"Similarity (Anchor vs Negative): {similarity(v_anchor, v_negative):.3f}"
 # We want Positive Sim -> 1.0 and Negative Sim -> 0.0
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Contrastive Learning is the "Spot the Difference" engine of AI. It learns the essence of an object by pulling "Similar" things together and pushing "Different" things apart in mathematical space, creating a highly organized map of reality.</p>
+    <ul>
+      <li><strong>FaceID Biometric Unlock</strong>: When you set up FaceID on your phone, the model isn't memorizing your exact pixels. Instead, it's learning to map your face to a unique point in a high-dimensional space. Using contrastive learning, the system is trained to pull different photos of *your* face (in different lighting or angles) into a tight cluster, while pushing photos of *anyone else* millions of miles away. If the "Distance" between your current face and your stored cluster is small enough, the phone unlocks.</li>
+      <li><strong>Semantic News Duplication Detection</strong>: News aggregators like Google News need to recognize that 500 different articles from 500 different outlets are all reporting the same "Story." By using contrastive learning on the text embeddings, the system maps articles about the same event to the same semantic location, while pushing articles about different events (even if they use similar words like "President" or "Election") far apart.</li>
+    </ul>
+    <p>Teacher's Final Word: Understanding isn't just knowing what something IS; it's knowing everything that it ISN'T. Contrastive learning teaches us that the most powerful way to learn the truth is through comparison—by defining things not in isolation, but by their relationship to the rest of the world.</p>
+
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the edge of modern research. You now understand the paradigms powering the world's most advanced AI systems.
     </div>
   `
 };
+

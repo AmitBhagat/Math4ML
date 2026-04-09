@@ -126,7 +126,7 @@ export const polynomialRegressionSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Linear Model] Score: 0.81 (Underfit)\n[Polynomial Model] Score: 1.00 (Perfect Fit!)\n[Equation] Distance = 0.05 * (Speed ** 2)\n[Prediction] At 60mph, stopping distance is: 180.0 feet.\n[Insight] Degree=2 captured the physics of the quadratic curve.">
+    <python-code>
 import numpy as np
 from sklearn.preprocessing import PolynomialFeatures
 from sklearn.linear_model import LinearRegression
@@ -166,3 +166,4 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     </div>
   `
 };
+

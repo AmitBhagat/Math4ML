@@ -113,12 +113,12 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>In Machine Learning, a vector space is the "Arena" where all your data exists. It defines the playground and the rules that your algorithm must follow to stay logically consistent.</p>
+    <p>A vector space is the "Arena" where your data lives. It defines the playground and the rules that your algorithm must follow to stay logically consistent across billions of operations.</p>
     <ul>
-      <li><strong>Generative AI (Latent Spaces)</strong>: In models like Midjourney or Stable Diffusion, the AI doesn't store a library of images. Instead, it creates a "Latent Space"—a high-dimensional vector space where every coordinate is a unique potential image. Moving through this space is how the AI morphs one concept into another.</li>
-      <li><strong>Word Embeddings (NLP)</strong>: Every word we use is mapped to a vector space. Because the space follows specific rules (Axioms), it ensures that if you start at the vector for "Apple" and add "Technology," the result stays in the logical "Subspace" of electronics rather than fruit.</li>
+      <li><strong>Latent Space Semantic Search</strong>: In search engines like Pinterest, every image is mapped to a high-dimensional vector space. When you search for "Modern Kitchen," the system doesn't look for those exact words. Instead, it looks for the "Subspace" where images of kitchens reside. This ensures that even if two images are different (one is a sketch, one is a photo), they are "Neighbors" in the same vector space because they share a semantic identity.</li>
+      <li><strong>Noise Reduction via Subspace Projection</strong>: Real-world data is noisy (e.g., a recording with background static). We treat the "Clean Signal" as a low-dimensional subspace within a high-dimensional noisy space. By projecting the noisy data onto this "Signal Subspace," we mathematically strip away the dimensions that represent the noise, leaving only the "Essential Truth" of the recording.</li>
     </ul>
-    <p>Teacher's Final Word: Think of a vector space as the "Laws of Physics" for your data. By setting these rules, we ensure that no matter how much our algorithms mix, match, or scale the data, the results still make sense within our mathematical universe.</p>
+    <p>Teacher's Final Word: Think of a vector space as the "Laws of Physics" for your data. By working within these rules, we ensure that no matter how much our algorithms mix, match, or scale the data, the results never exit the boundaries of our mathematical universe.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.

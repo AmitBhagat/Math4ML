@@ -107,12 +107,12 @@ print(f"Dimension of the created space: {dim}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>A Basis is the "Minimalist Skeleton" of your dataset. It’s like the Primary Colors in an art class—you only need a few to build every other shade in the visible universe.</p>
+    <p>A Basis is the "Minimalist Skeleton" of your dataset. It’s like the Primary Colors in an art class—you only need a few to build every other shade in the visible universe, stripping away the noise of redundancy.</p>
     <ul>
-      <li><strong>Image Compression</strong>: When you save a photo as a JPEG, the computer finds a "Basis" of sine waves that can build the image. By using only the 100 most important "Basis Waves" instead of 1,000,000 raw pixels, we shrink the file by 90% almost invisibly.</li>
-      <li><strong>Matrix Factorization (RecSys)</strong>: Streaming services like Spotify find a small set of "Basis Genres" (like Calm, Upbeat, Acoustic). Your taste is just a linear combination of these few dimensions, making it possible to recommend music to millions of people without tracking every single song.</li>
+      <li><strong>Image Compression (Discrete Cosine Transform)</strong>: When you save a photo as a JPEG, the computer doesn't save every pixel. Instead, it finds a "Basis" of sine waves that can reconstruct the image. By representing the picture using only the most important "Basis Coefficients" instead of millions of raw raw bytes, we can shrink files by 90% without the human eye noticing.</li>
+      <li><strong>Topic Modeling (Latent Dirichlet Allocation)</strong>: In NLP, we can treat "Topics" as a basis for a document. Instead of seeing a news article as a list of 10,000 words, we see it as a linear combination of a few "Basis Topics" like [0.8 Politics, 0.1 local, 0.1 Sports]. This allows us to organize billions of articles by their "DNA" rather than their raw vocabulary.</li>
     </ul>
-    <p>Teacher's Final Word: Identifying the basis of your data lets you ignore the noisy distractions and focus on the few "Atom-level" directions that actually define the shape of your information.</p>
+    <p>Teacher's Final Word: Identifying the basis of your data lets you ignore the noisy distractions and focus on the few "Atom-level" directions that actually define the shape of your information. The dimension of your basis is the ultimate limit of how much you can simplify your world before you start losing the truth.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is defined. Now how do we measure the "Alignment" and "Overlap" between our vectors? Explore <strong><a href="#/mathematics/linear-algebra/dot-product">Dot Product</a></strong>.

@@ -133,7 +133,7 @@ export const aucSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Evaluating 10 probability pairs (Target vs. Background)...\n[Action] Computing Area Under ROC Curve (Trapezoidal Integration)...\n[Result] ROC-AUC Score: 0.9250\n[Grade] Excellent Separation Power!\n[Insight] There is a 92.5% chance that a random Positive sample will rank higher than a random Negative.">
+    <python-code>
 import numpy as np
 from sklearn.metrics import roc_auc_score
 
@@ -157,3 +157,4 @@ print(f"Status: {auc*100:.1f}% probability of correct ranking.")
     </div>
   `
 };
+

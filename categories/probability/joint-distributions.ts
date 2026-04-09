@@ -111,10 +111,12 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Joint Distribution is the "God's Eye View" of your data. It doesn't just look at variables in isolation; it captures the invisible threads that tie them together into a coherent reality.</p>
     <ul>
-      <li><strong>Generative Models</strong>: Models like GANs try to learn the "Joint Distribution" \(P(X, Y)\) to create new, realistic data points from scratch.</li>
-      <li><strong>Feature Selection</strong>: We check the joint distribution to see if two features are redundant.</li>
+      <li><strong>Realistic Image Synthesis (GANs & Diffusion)</strong>: When an AI generates a picture of a face, it isn't just picking a random color for each pixel. It is sampling from a massive **Joint Distribution** of millions of pixels. The probability of pixel (100, 100) being "Skin Tone" is extremely high **and** it is jointly linked to the probability that the neighboring pixel (101, 100) is also "Skin Tone." If the pixels weren't jointly distributed, the AI would just generate a screen of colorful static. Understanding the joint links is what creates structure out of chaos.</li>
+      <li><strong>Multi-Modal AI (CLIP / GPT-4V)</strong>: The most advanced AI models today work by finding a **Joint Embedding Space** between images and text. They don't just "see" a dog and "read" the word dog separately. They learn the joint probability that a specific pattern of pixels (an image) and a specific pattern of characters (text) represent the same concept. This joint understanding allows you to search for "A cat on a skateboard" and have the AI find the exact frames in a video that match that multi-variable query.</li>
     </ul>
+    <p>Teacher's Final Word: In the real world, nothing happens in a vacuum. High temperatures are linked to high ice cream sales; high training time is linked to low loss. Joint Distributions are the mathematical map of these relationships. If you only look at one variable at a time, you're missing the whole story.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we already <em>know</em> one variable? How does that change the probability of the other? Explore <strong><a href="#/mathematics/probability/conditional-probability">Conditional Probability</a></strong>.

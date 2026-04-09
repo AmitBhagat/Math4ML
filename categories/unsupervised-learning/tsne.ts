@@ -120,7 +120,7 @@ export const tsneSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: 2 High-Dim Cliques (100D space)\n[Action] Initializing t-SNE (Perplexity=30)...\n[Iter 250] Error: 1.45 (KL-Divergence dropping)\n[Iter 500] Error: 0.82 (Local huddles forming)\n[Result] 100D relationship preserved in 2D space.\n[Discovery] Cluster A and B are now perfectly separated on the map.">
+    <python-code>
 import numpy as np
 from sklearn.manifold import TSNE
 
@@ -156,3 +156,4 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     </div>
   `
 };
+

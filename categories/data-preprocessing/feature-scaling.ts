@@ -102,7 +102,7 @@ export const featureScalingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: Height (m) vs. Income ($)\n[Action] Initializing Scikit-Learn StandardScaler (Z-Score)...\n[Mapping] Row 1: [1.8m, $80k]  -> [ 0.9,  0.8]\n[Mapping] Row 2: [1.6m, $40k]  -> [-1.3, -1.1]\n[Status] Features are now centered at 0 with unit variance.\n[Insight] The model now sees 'Height' and 'Income' as equally influential voters.">
+    <python-code>
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 
@@ -125,8 +125,17 @@ print(f"\nFinal Means (should be 0): {np.mean(X_scaled, axis=0).round(1)}")
 print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Feature scaling is the "Equalizer" of data science. It ensures that every variable, from millions of dollars to tiny grams, has an equal say in the model's brain, preventing "Numerical Bullying" by the largest variables.</p>
+    <ul>
+      <li><strong>K-Means Customer Segment Weighting</strong>: Imagine grouping customers by "Age" (range 18-80) and "Annual Spend" (range $100-$50,000). Since K-Means uses Euclidean distance, a $1,000 difference in spend would look much "further" than a 50-year difference in age. Scaling both ensures that the model treats a difference in spending habits with the same importance as a difference in life stage, creating more meaningful marketing segments.</li>
+      <li><strong>Gradient Descent Acceleration</strong>: In models like Linear Regression or Neural Networks, feature scaling transforms the "Error Terrain" from a long, narrow valley into a circular, symmetric bowl. This allows the Gradient Descent algorithm to take large, stable steps toward the center instead of narrow, oscillating bounces, allowing the model to converge (finish training) up to 10x faster.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't let the "Big Numbers" bullying the "Small Truths." Scaling is the common language of data—it ensures that a model's intelligence is driven by the relationship between the facts, not just by who happened to have the largest units on their measuring tape.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Numbers are easy to scale, but what about text? Explore <strong><a href="#/machine-learning/data-preprocessing/encoding">Categorical Encoding</a></strong>.
     </div>
   `
 };
+

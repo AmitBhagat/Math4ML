@@ -78,7 +78,7 @@ export const reinforcementLearningSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Agent is learning the optimal path...\nOptimal Q-Table (State: Best Action):\nState 0: GO RIGHT\nState 1: GO RIGHT\nState 2: GO RIGHT\nFinal Reward Reached!">
+    <python-code>
 import numpy as np
 
 # A simple 1D Grid World: [S] - [ ] - [ ] - [Goal (+1 reward)]
@@ -108,9 +108,18 @@ for i in range(3):
     print(f"State {i}: Best Action is {action}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Reinforcement Learning is the "Trial-and-Error Loop." It is the most biological form of AI, learning which actions lead to a treat and which lead to a game-over through sheer persistence.</p>
+    <ul>
+      <li><strong>Strategy Game Champions (AlphaGo / OpenAI Five)</strong>: RL is the engine behind machines that can beat world champions. The models play millions of games against themselves, realizing through billions of trials that a specific strategic "State" is more valuable than another, even if it doesn't give an immediate reward. They learn to sacrifice the "Now" for a winning "Future."</li>
+      <li><strong>Industrial Robotic Arm Control</strong>: Factories use RL to train robots to pick up fragile items or assemble complex machinery. Instead of a human programmer writing every tiny joint movement (which would take years), the robot is given a reward when it successfully grabs a box. Through thousands of failures, it "discovers" the precise physics of movement required to be efficient and fast.</li>
+    </ul>
+    <p>Teacher's Final Word: Failure is just data in a loop. In reinforcement learning, we don't give the machine a map; we give it a destination and the permission to keep failing until the rewards start sticking. It turns raw experience into a masterclass in strategy.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Before we start training, we need to know how to measure our progress. Explore <strong><a href="#/machine-learning/foundation-ml/train-test-split">Training vs. Testing Data</a></strong>.
     </div>
   `
 };
+
 

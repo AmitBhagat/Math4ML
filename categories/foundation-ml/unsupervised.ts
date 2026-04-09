@@ -70,7 +70,7 @@ export const unsupervisedLearningSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Clustering] Groups found: [0 0 1 1]\n[PCA] 2D Data reduced to 1D: [2.8, -2.8]">
+    <python-code>
 import numpy as np
 from sklearn.cluster import KMeans
 from sklearn.decomposition import PCA
@@ -89,9 +89,18 @@ reduced_data = pca.transform([[2, 4]])
 print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Unsupervised learning is the "Solo Explorer." It finds structure in chaos without a teacher to tell it the right answer, making it the primary tool for true data discovery.</p>
+    <ul>
+      <li><strong>Genetics Sequence Clustering</strong>: Biologists use unsupervised clustering to group unknown DNA sequences. By letting the algorithm find the mathematical similarities between millions of raw genetic codes, scientists can discover new species and find common ancestors without needing a labeled database of every organism.</li>
+      <li><strong>Market Basket Analysis (Spotify Recommendations)</strong>: When Spotify suggests "Fans of this artist also like...", it's using unsupervised learning. It looks at millions of raw listening sessions and finds that 80% of people who listen to Artist A also listen to Artist B. No human labeled those artists as "similar"—the machine discovered the relationship just by looking at the raw distribution of data.</li>
+    </ul>
+    <p>Teacher's Final Word: Finding patterns in silence is the hardest—and most rewarding—kind of discovery. Unsupervised learning is where the "New" happens, turning a massive pile of random noise into a structured map of human behavior and natural phenomena.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have a little bit of help? Explore <strong><a href="#/machine-learning/foundation-ml/semi-supervised">Semi-Supervised Learning</a></strong>.
     </div>
   `
 };
+
 

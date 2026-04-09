@@ -71,7 +71,7 @@ export const evaluationMetricsSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Classification] Precision: 0.67, Recall: 1.00\n[Regression] MSE: 124.50, R-squared: 0.92\n[Note: The MSE is low relative to the range, suggesting a good fit]">
+    <python-code>
 from sklearn.metrics import precision_score, recall_score, mean_squared_error, r2_score
 import numpy as np
 
@@ -93,9 +93,18 @@ r2 = r2_score(y_true_reg, y_pred_reg)
 print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Evaluation metrics are the "Scorecards of Truth." Choosing the right one ensures that your model's mathematical success actually translates to real-world impact.</p>
+    <ul>
+      <li><strong>Cancer Detection (Recall is King)</strong>: In medical screening, the cost of a "False Negative" (missing a sick person) is a tragedy. Engineers optimize these models for <strong>Recall</strong>, meaning they are willing to tolerate a few "False Alarms" (Low Precision) if it ensures that every single person who needs treatment is correctly identified.</li>
+      <li><strong>Spam Detection (Precision is King)</strong>: In email filtering, the cost of a "False Positive" (putting an important business email in the spam box) is a major failure. Here, we optimize for <strong>Precision</strong>—we'd rather let a few spam messages slide through to the inbox (Low Recall) than risk burying a legitimate message that the user is waiting for.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't just look at the accuracy score; ask yourself if the score actually measures the pain of the mistake. By picking the right metric, you align the machine's cold logic with the messy reality of human priority.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You have completed the foundation. You possess the <strong>Intuition</strong> and <strong>Math</strong> to build real-world models. Explore <strong><a href="#/machine-learning/supervised-learning/basics">Supervised Machine Learning Algorithms</a></strong>.
     </div>
   `
 };
+
 

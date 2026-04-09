@@ -92,12 +92,12 @@ print(f"Singular values of A: {s}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>SVD is the "Swiss Army Knife" of data science. It allows you to take any messy, complex matrix and break it down into three simple, elegant steps: **Rotate, Stretch, Rotate.**</p>
+    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: **Rotate, Stretch, Rotate.**</p>
     <ul>
-      <li><strong>Latent Semantic Analysis (LSA)</strong>: SVD can read 1,000,000 documents and find the "Hidden Topics" inside. By decomposing the matrix, it discovers that words like "Piston" and "Spark" are physically linked to the same latent "Topic" (singular value), even if they never appear on the same page.</li>
-      <li><strong>Background Subtraction in Video</strong>: Security systems use SVD to separate "Static" background (low-rank singular values) from "Moving" intruders (high-rank noise). This is how the AI knows to ignore a stationary wall but follow a moving person.</li>
+      <li><strong>Concept Search (Latent Semantic Analysis)</strong>: Google and Bing don't just look for keywords; they look for "Concepts." SVD takes a giant matrix of billions of words and documents and finds the "Hidden Dimensions" (Topics). This allows the system to realize that a paper about "Quantum Computing" and a blog post about "Qubits" are semantically identical, even if they share zero identical words, because they align on the same singular value axis.</li>
+      <li><strong>Top-k Image Denoising</strong>: In scientific imaging or astrophotography, pictures are often buried under a haze of sensor "noise." Since the "Real Image" is a high-rank pattern and noise is random jitter, we use SVD to keep only the top-k singular values. This mathematically "kills" the noise while keeping the sharp edges of the galaxy or the cell, essentially distilling the signal from the static.</li>
     </ul>
-    <p>Teacher's Final Word: SVD is the ultimate "Noise Filter." It allows you to find the signal buried under a mountain of static, ensuring your model focuses only on the high-rank patterns that actually matter.</p>
+    <p>Teacher's Final Word: SVD is the "Swiss Army Knife" of math for a reason—it works on every matrix in existence. If you find the singular values, you've found the strength of every signal in your dataset. In the world of AI, if you aren't using SVD, you're probably just drowning in noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD is the math. Now, let's look at the ultimate application in data science. Explore <strong><a href="#/mathematics/linear-algebra/pca">Principal Component Analysis (PCA)</a></strong>.

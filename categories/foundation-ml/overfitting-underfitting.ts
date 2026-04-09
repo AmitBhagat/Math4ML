@@ -64,7 +64,7 @@ export const overfittingUnderfittingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Fitting models to a curved Sine-Wave dataset...\n[Underfit] Linear: Struggles to even touch the trend. (MSE: 0.45)\n[Overfit] Degree-15: Chases every single noise point. (MSE-Train: 0.01, MSE-Test: 12.5)\n[Balanced] Degree-3: Smoothly follows the curve. (MSE-Test: 0.08)\n\n[Insight] Complexity is a power tool. Use too little and you can't build. Use too much and you destroy the project.">
+    <python-code>
 import numpy as np
 from sklearn.pipeline import make_pipeline
 from sklearn.preprocessing import PolynomialFeatures
@@ -90,9 +90,18 @@ print(f"Overfit Prediction:  {overfit.predict([[3.14]])[0]:.2f}")
 print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Overfitting is "Memorizing the Test," while Underfitting is "Missing the Point." Achieving generalization is the only thing that matters in the real world.</p>
+    <ul>
+      <li><strong>Google Image Search</strong>: If a model overfitted on your specific photos of a "Golden Retriever," it might fail to recognize a "Golden Retriever" that is standing in the rain or facing the other way. By avoiding overfitting, Google ensures that the "Essence" of the dog is captured, allowing it to find relevant results across billions of diverse, never-before-seen images.</li>
+      <li><strong>Customer Support Chatbots</strong>: An underfitted chatbot might rely on simple keyword matching (like "If message contains 'Broken', say 'Sorry'"). This is too simple to understand the difference between "My screen is broken" and "I broke my record for fastest setup." A well-fit model understands the semantic meaning, providing accurate help without being fooled by the specific vocabulary used.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't be a parrot; be a thinker. In machine learning, the goal isn't to look back at the data you've already seen; it's to look forward at the data you haven't. If you memorize the noise, you lose the signal—and in the real world, the signal is the only thing that pays the bills.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> This trade-off between complexity and simplicity is the most famous conflict in ML. Explore <strong><a href="#/machine-learning/foundation-ml/bias-variance-tradeoff">Bias–Variance Tradeoff</a></strong>.
     </div>
   `
 };
+
 

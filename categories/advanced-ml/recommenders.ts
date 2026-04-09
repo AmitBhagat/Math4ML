@@ -94,7 +94,7 @@ export const recommendersSection: TopicSection = {
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: 100 users, 500 movies\n[Action] Calculating Cosine Similarity between Users...\n[Model] Matrix Factorization (N_Factors=20)...\n[Predict] Ranking top 5 unseen items for User #42...\n\n[Recommendation 1] Blade Runner (Match: 98%)\n[Recommendation 2] Dune (Match: 94%)\n[Recommendation 3] Alien (Match: 91%)\n\n[Insight] User #42 has high affinity for 'Dystopian Sci-Fi' latent factor.">
+    <python-code>
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -132,3 +132,4 @@ print(f"\nUser4 Recommendation for 'The_Matrix' (interpolated): 1.8 stars (Low M
     </div>
   `
 };
+

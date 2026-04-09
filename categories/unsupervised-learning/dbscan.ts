@@ -112,7 +112,7 @@ export const dbscanSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Parameters: Eps=1.5, MinPts=2\n[Status] Scanning 7 data points...\n[Found] Cluster 0: Dense triplet detected at (1,2)\n[Found] Cluster 1: Dense triplet detected at (10,10)\n[Noise] Point (5,5) marked as Outlier (-1)\n[Assignments] Result: [0, 0, 0, 1, 1, 1, -1]\n[Insight] DBSCAN successfully ignored the lone point without forcing it into a group.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import DBSCAN
 
@@ -149,3 +149,4 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     </div>
   `
 };
+

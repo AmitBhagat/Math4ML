@@ -104,7 +104,7 @@ export const architecturesIntroSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Dense Configuration] Input: 224x224 (50,176 pixels) -> 1 Output\n[Local Configuration] Filter Size: 3x3 (9 pixels)\n[Result] Dense Params: 50,176 vs. CNN Params: 9\n[Efficiency] CNN uses 99.98% fewer parameters for the same feature detection!\n[Insight] This is why you can't train a deep MLP on raw images.">
+    <python-code>
 import numpy as np
 
 # 1. Scenario: Feature detection on a 224x224 image
@@ -137,3 +137,4 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     </div>
   `
 };
+

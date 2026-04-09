@@ -70,7 +70,7 @@ export const scalingNormalizationSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Original] Income: $50,000, Age: 25\n[Min-Max] Income: 0.5, Age: 0.25 (Fair Fight!)\n[Standardized] Income: 1.2Z, Age: -0.4Z\n[Now the machine 'sees' both features with equal importance]">
+    <python-code>
 import numpy as np
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 
@@ -86,9 +86,18 @@ scaler_std = StandardScaler().fit_transform(X)
 print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Scaling is the "Numerical Equalizer." It ensuring that every feature—no matter how large or small its raw units—has a fair and equal chance to influence the model's final decision.</p>
+    <ul>
+      <li><strong>Multivariable House Pricing</strong>: Imagine a model predicting price based on "Number of Rooms" (range 1-5) and "Total Square Footage" (range 500-5000). Without scaling, the model might completely ignore the rooms because the square footage numbers are 1,000x larger. By scaling both to a range of 0-1, the model can "see" that adding a room is just as important as adding 200 square feet.</li>
+      <li><strong>Deep Learning Image Processing</strong>: Neural networks are notoriously sensitive to the scale of their inputs. Raw pixels usually range from 0 (black) to 255 (white). By scaling these down to a range of 0 to 1 (or -1 to 1), engineers ensure that the internal math (gradients) doesn't explode, allowing the network to converge on a solution significantly faster and with more stability.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't let the "Big Numbers" bully the "Small Truths." Scaling is the common language of data—it ensures that a model's intelligence is driven by the relationship between the facts, not just by who happened to have the largest units on their measuring tape.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You've prepped the data. The model has learned. Now, how do we know if it's actually any good? Explore <strong><a href="#/machine-learning/foundation-ml/evaluation-metrics">Model Evaluation Metrics</a></strong>.
     </div>
   `
 };
+
 

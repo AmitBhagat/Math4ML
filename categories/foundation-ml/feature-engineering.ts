@@ -70,7 +70,7 @@ export const featureEngineeringSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Original Data] Columns: ['Year_Built', 'Year_Sold', 'Color_of_Door']\n[Engineered] Dropped 'Color_of_Door' (Irrelevant)\n[Engineered] Created 'Age_at_Sale' (\n[Result] Predictor score improved by 40%!">
+    <python-code>
 import pandas as pd
 import numpy as np
 
@@ -93,9 +93,18 @@ print("Modified Dataset (Optimized for ML):")
 print(df[['Price', 'Age_at_Sale']])
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Feature Engineering is the "Art of Translation." It turns raw, messy facts into the specific signals that a machine can actually understand, making the learning process 10x faster and more accurate.</p>
+    <ul>
+      <li><strong>Time-Series Sales Prediction</strong>: To predict how many shirts a store will sell, simply giving the model the "Date" is not enough. Engineers create new features like "Day of the Week," "Is it a Holiday?", and "Days until Payday." These engineered insights allow the model to capture the weekly and seasonal cycles that are hidden in a raw calendar date.</li>
+      <li><strong>Sentiment Analysis in NLP</strong>: When analyzing customer reviews, engineers don't just feed in raw text. They extract features like "Word Count," "Number of Exclamation Marks," and "Presence of Negative Words." By pre-processing these features, they give the model a massive head start in "understanding" whether a customer is angry or delighted without having to learn all of linguistics from scratch.</li>
+    </ul>
+    <p>Teacher's Final Word: Shovel in garbage, get out garbage. The model is only as smart as the features you give it. Feature engineering is the difference between a model that merely memorizes history and one that truly understands the hidden mechanics of future behavior.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with perfect features, if they are on different scales (e.g. 1 km vs 1,000 mm), the machine will get confused. Explore <strong><a href="#/machine-learning/foundation-ml/scaling-normalization">Scaling and Normalization</a></strong>.
     </div>
   `
 };
+
 

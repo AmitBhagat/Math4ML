@@ -110,10 +110,10 @@ print(f"Is Independent? {is_independent}")
     <h2 id="applications">Applications in ML</h2>
     <p>Linear Independence is the ultimate measure of "Efficiency." It asks your data: "Are you actually telling me something new, or are you just a remix of what I already know?"</p>
     <ul>
-      <li><strong>Signal De-noising</strong>: When processing audio or sensor data, we look for independent signals. If two sensors give you the same data stream, they are dependent; one is just redundancy. We use linear independence to strip away the "copycats" and keep only the raw, unique signal.</li>
-      <li><strong>Feature Selection</strong>: In predictive modeling, having independent features is the key to stability. If your model uses both "Total Sales" and "Tax Paid" where tax is a fixed percentage, the features are dependent. This can cause the math to "explode" during training (Singular Matrix).</li>
+      <li><strong>Automated Feature Selection</strong>: In predictive modeling, we use linear independence to strip away the "copycats." If your dataset includes "Total Sales" and "Tax Paid" where tax is a fixed 10%, these features are linearly dependent. One adds exactly zero new information. By identifying and removing these dependent features, we reduce the computational load and prevent the model from getting "distracted" by redundant data.</li>
+      <li><strong>Detecting Multicollinearity in Regression</strong>: If you try to train a Linear Regression model on dependent features, the math literally explodes—the matrix becomes "Singular" and cannot be inverted. This is <strong>Multicollinearity</strong>. By ensuring our features are independent, we guarantee that the model has a stable, unique solution rather than a chaotic range of infinite possibilities.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages.</p>
+    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages. Independence isn't just a property; it's a requirement for stability.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.

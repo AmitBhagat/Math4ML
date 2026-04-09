@@ -87,7 +87,7 @@ export const anomalyDetectionSection: TopicSection = {
       </div>
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Input: 1000 normal transactions, 5 fraud attempts\n[Model] Initializing IsolationForest (n_estimators=100)\n[Fit] Learning the boundary of 'Normal' behavior...\n[Predict] Identifying anomalies...\n[Result] Detected 5 outliers with Anomaly Score > 0.65\n[Action] Flagging transactions #42, #108 for manual review.">
+    <python-code>
 import numpy as np
 from sklearn.ensemble import IsolationForest
 
@@ -124,3 +124,4 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     </div>
   `
 };
+

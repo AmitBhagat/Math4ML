@@ -80,7 +80,7 @@ export const mlpSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: XOR Logic Gate (Non-linear)\n[Action] Initializing MLP with (4, 4) hidden neurons...\n[Training] Epoch 1: Loss 0.72\n[Training] Epoch 500: Loss 0.04 (Convergence reached)\n[Test] Input [1, 1] -> Final Pred: 0 (Correct)\n[Test] Input [0, 1] -> Final Pred: 1 (Correct)\n[Insight] A simple line failed here; a hidden layer warped the space to find the truth.">
+    <python-code>
 import numpy as np
 from sklearn.neural_network import MLPClassifier
 
@@ -116,3 +116,4 @@ for i, test in enumerate(test_cases):
     </div>
   `
 };
+

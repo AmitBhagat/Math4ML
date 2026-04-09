@@ -114,7 +114,7 @@ export const typesOfMLSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Supervised] Input [1, 1] belongs to Class 'A'.\n[Unsupervised] Clustering 4 points into 2 groups...\n[Unsupervised] Labels assigned: [0, 0, 1, 1]\n\n[Insight] Notice how Supervised predicted a NAME, while Unsupervised just found a GROUP.">
+    <python-code>
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.cluster import KMeans
 import numpy as np
@@ -140,9 +140,18 @@ kmeans.fit(X_train)
 print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Not all problems are solved the same way. Choosing between Supervised, Unsupervised, or Reinforcement patterns is the first and most critical decision in building any AI system.</p>
+    <ul>
+      <li><strong>Predictive Policing (Supervised)</strong>: Large cities use supervised learning to allocate patrol cars. By feeding the model thousands of historical crime records (where the "Label" is the location and time of the crime), the machine learns to predict where the next incident is most likely to occur, allowing police to be proactive rather than reactive.</li>
+      <li><strong>E-commerce Customer Clusters (Unsupervised)</strong>: Retailers like Amazon or H&M use unsupervised learning to organize their customers. They don't tell the machine what a "Big Spender" or "Bargain Hunter" is. Instead, they give the machine raw purchase data, and the algorithm discovers these "Segments" on its own, spotting hidden buying groups that the marketing team never even considered.</li>
+    </ul>
+    <p>Teacher's Final Word: The paradigm you choose depends entirely on whether you have a labeled map of the past or just a sense of adventure for the future. Don't force a supervised solution on a problem where you lack labels; sometimes, letting the machine "Explore" is the fastest way to the truth.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's deep-dive into the most popular paradigm. Explore <strong><a href="#/machine-learning/foundation-ml/supervised">Supervised Learning</a></strong>.
     </div>
   `
 };
+
 

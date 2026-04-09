@@ -126,7 +126,7 @@ export const regressionIntroSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Training] Fitting linear model to 5 historical days...\n[Input] Forecasted Temperature: 22°C\n[Model] y = -10.0x + 500.0\n[Prediction] Predicted cups to sell: 280.00\n[Note] For every 1 degree colder, you sell 10 MORE cups.">
+    <python-code>
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
@@ -159,3 +159,4 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
     </div>
   `
 };
+

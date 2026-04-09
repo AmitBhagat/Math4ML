@@ -116,12 +116,12 @@ print(f"Eigenvectors:\n{vecs}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Eigenvectors are the "Hidden Axes" of your data. While the rest of the world rotates into chaos, these special directions stay perfectly aligned.</p>
+    <p>Eigenvectors are the "Hidden Axes" of your data. While the rest of the world rotates into chaos during a transformation, these special directions stay perfectly aligned, revealing the underlying structure of the system.</p>
     <ul>
-      <li><strong>Google PageRank</strong>: The reason Google became a giant is an eigenvalue problem. It treats the entire web as a matrix and finds the "Principal Eigenvector." The values in this vector tell the system exactly which websites are the most influential and deserve to be at the top of your search.</li>
-      <li><strong>Spectral Clustering</strong>: When data moves in complex "Swirls" that standard algorithms can't handle, we use eigenvalues to find the hidden gaps in the network. This allows the AI to successfully group data points even when they are physically tangled together.</li>
+      <li><strong>Principal Component Analysis (PCA)</strong>: In data science, we look for the eigenvectors of the <strong>Covariance Matrix</strong>. The eigenvector with the largest eigenvalue is the direction where your data is most "Spread Out." By focusing only on these top eigenvalues, we can squash a 10,000-dimension dataset into 2 dimensions while keeping 99% of the important information.</li>
+      <li><strong>Google PageRank</strong>: The reason Google became a giant is essentially a massive eigenvalue problem. It treats the entire web as a transition matrix and finds the <strong>Principal Eigenvector</strong>. The values in this vector tell the system exactly how "Important" or "Influential" each website is based on its connections, putting the best answers at the top of your search.</li>
     </ul>
-    <p>Teacher's Final Word: Finding the eigenpairs of your data is like finding its "Soul." It reveals the core directions where all the real action happens, allowing you to ignore the noisy wiggles and focus on the main signal.</p>
+    <p>Teacher's Final Word: Finding the eigenpairs of your data is like finding its "Soul." It reveals the core directions where all the real action happens. In the world of Big Data, if you aren't looking at the eigenvectors, you're just looking at the noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Some matrices have "Good Behavior" and always produce positive scaling factors. Explore <strong><a href="#/mathematics/linear-algebra/positive-definite">Positive Definite Matrices</a></strong>.

@@ -110,7 +110,7 @@ export const kmeansSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Scan] Dataset: 100 observations, 2 features\n[Iteration 0] Placing 3 random centroids...\n[Iteration 5] Inertia dropped from 152.4 to 42.1\n[Convergence] Centroids stabilized at: [[1,2], [10,2], [6,8]]\n[Note] New point at (5,5) assigned to Cluster #2.">
+    <python-code>
 import numpy as np
 from sklearn.cluster import KMeans
 
@@ -148,3 +148,4 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </div>
   `
 };
+

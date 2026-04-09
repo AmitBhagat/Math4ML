@@ -116,7 +116,7 @@ export const gmmSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[Action] Initializing 2 Gaussian Segments (EM Loop)...\n[Status] Calculating responsibilities for the 'Smell' clouds...\n[Converged] Mean A: (0.1, 0.1) | Mean B: (2.9, 2.9)\n[Test Point] (1.5, 1.5) -> Probability Map:\n- Coffee (Cloud 0): 72.1%\n- Cinnamon (Cloud 1): 27.9%\n[Insight] Unlike k-Means, we captured the uncertainty of the overlap.">
+    <python-code>
 import numpy as np
 from sklearn.mixture import GaussianMixture
 
@@ -156,3 +156,4 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     </div>
   `
 };
+

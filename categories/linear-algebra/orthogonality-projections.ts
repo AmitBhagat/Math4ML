@@ -97,12 +97,12 @@ print(f"Shadow of y on u: {proj_y_u}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Projections are the mathematical way to find the "Best Approximation." They allow us to filter out the noise that doesn't align with our chosen features.</p>
+    <p>Projections are the mathematical way to find the "Best Approximation." They allow us to filter out the noise that doesn't align with our chosen features, leaving only the "Truth" of the signal.</p>
     <ul>
-      <li><strong>Gram-Schmidt Preprocessing</strong>: When training models, highly correlated (parallel) features can cause the weights to "explode." We use projections to "orthogonalize" the features—stripping away their mutual overlap so the model sees 100% unique info from every input.</li>
-      <li><strong>SVM Margin Calculation</strong>: In Support Vector Machines, we need to find the "Gap" between two classes. The algorithm uses vertical projections to find the absolute closest distance from a data point to the decision boundary, ensuring we maximize the safety margin.</li>
+      <li><strong>Linear Subspace Denoising</strong>: Real-world data is often corrupted by "White Noise"—random values scattered in every direction. However, the "Clean Signal" (like a person's voice or a clear image) usually lies in a specific low-dimensional subspace. By <strong>Projecting</strong> the noisy data onto that clean signal basis, we mathematically "flatten" the noise while preserving the essential pattern of the data.</li>
+      <li><strong>Gram-Schmidt Orthogonalization in Simulation</strong>: In numerical optimization and climate modeling, we need vectors to stay 100% independent to prevent rounding errors from crashing the simulation. We use projections to "Orthogonalize" the vectors, stripping away any parallel overlap. This ensures that every step the model takes is in a fundamentally "New" direction, maintaining total numerical stability.</li>
     </ul>
-    <p>Teacher's Final Word: A projection is like casting a shadow to see the core shape of an object while ignoring the distracting glare. In AI, it's how we find the "Truth" hidden within a noisy spreadsheet.</p>
+    <p>Teacher's Final Word: A projection is like casting a shadow to see the core shape of an object while ignoring the distracting glare. In AI, it's how we find the "Truth" hidden within a noisy spreadsheet. Without the math of the projection, we'd be lost in the glare of the noise forever.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Projections give us "shadows." But what about the vectors that *never* move? Explore <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.

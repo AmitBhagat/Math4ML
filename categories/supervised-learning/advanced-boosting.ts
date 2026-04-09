@@ -137,7 +137,7 @@ export const advancedBoostingSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code runnable="false" static-output="[Library] Loading XGBoost (High-Performance Engine)...\n[Training] Iterating through 100 boosting rounds...\n[Accuracy] Logic Check: 100.0% (The model perfectly learned Rule: x0 + x1 > 1)\n[Input] Testing case [0.8, 0.5] -> Sum 1.3\n[Result] Prediction: 1 (Positive)\n[Benchmark] This model is 10x faster than standard GBDT on large datasets.">
+    <python-code runnable="false">
 import xgboost as xgb
 import numpy as np
 
@@ -173,3 +173,4 @@ print(f"Confidence Verdict: {prediction}")
     </div>
   `
 };
+

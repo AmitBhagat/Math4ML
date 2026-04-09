@@ -60,7 +60,7 @@ export const semiSupervisedLearningSection: TopicSection = {
     
 
     <h2 id="python">Implementation</h2>
-    <python-code static-output="[SSL] Labeling the mountain of unknown data...\nPredicted Class for unlabeled point [2, 1]: Class 1 (Red)">
+    <python-code>
 import numpy as np
 from sklearn.semi_supervised import LabelPropagation
 
@@ -77,9 +77,18 @@ print(f"[SSL] Final Labels: {y_pred}")
 print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Semi-supervised learning is the "Smart Detective" that uses a handful of certain truths to make sense of a massive pile of unknown evidence. It is the gold standard for when data is abundant but human experts are expensive.</p>
+    <ul>
+      <li><strong>Google Photos Face Labeling</strong>: When you open your photo app and label your "Dad" for the first time, you've provided a single label. The semi-supervised model then looks at 10,000 other photos in your library, clustering the ones that share the same high-fidelity facial features as your "Dad" label. It effectively labels your entire library for you using just one human-provided seed.</li>
+      <li><strong>Web Content Categorization</strong>: Internet companies have millions of new web pages every day. It's impossible for humans to label them all as "News," "Sports," or "Spam." By labeling only 1,000 pages manually, a semi-supervised model can look at the text structure and link patterns of the other 100 million pages, correctly categorizing the majority of the web based on that tiny seed of truth.</li>
+    </ul>
+    <p>Teacher's Final Word: A little bit of truth goes a long way in a sea of data. Semi-supervised learning teaches us that you don't need a map of every single street to find your way through a city; you just need to know where the main landmarks are and how the other streets connect to them.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if there are no labels at all, just a feedback loop? Explore <strong><a href="#/machine-learning/foundation-ml/reinforcement">Reinforcement Learning</a></strong>.
     </div>
   `
 };
+
 
