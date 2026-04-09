@@ -144,7 +144,7 @@ print(f"Reduced Shape: {X_reduced.shape}")
     <p>Teacher's Final Word: PCA is the difference between memorizing a thousand boring details and understanding the one main story. It’s the "Best Camera Angle" for your data, ensuring that every dimension you keep is actually contributing to the truth of your model.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict the future in <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
+      <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict change in <strong><a href="#/mathematics/calculus/derivatives">Calculus & Differentiation</a></strong>.
     </div>
   `
 };

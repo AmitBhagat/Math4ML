@@ -120,7 +120,7 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     <p>Teacher's Final Word: Anomaly Detection focuses on the loner. It's the art of defining the "fence" around a sheep herd so clearly that a wolf stands out simply because it is outside the boundary.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Finding strange points is one thing—what about the structure of the data itself? Explore <strong><a href="#/machine-learning/unsupervised-learning/dim-reduction-intro">Dimension Reduction</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the art of Discovery. Now, move into the frontier of complex modeling with <strong><a href="#/machine-learning/deep-learning/perceptron">Deep Learning & Neural Networks</a></strong>.
     </div>
   `
 };

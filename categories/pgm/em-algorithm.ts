@@ -122,7 +122,7 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     <p>Teacher's Final Word: When you don't know the answer, start with a guess and keep refining it until the math stops arguing with you. EM teaches us that even if the truth is hidden, we can still reach it through the persistence of iterative logic.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered structured probability. Now, let's learn how to process the raw data for these advanced models in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+      <strong>Next Step:</strong> You have mastered structured probability. Now, explore the high-speed engines that train these models in <strong><a href="#/machine-learning/optimization-ml/gradient-descent">Optimization in ML</a></strong>.
     </div>
   `
 };

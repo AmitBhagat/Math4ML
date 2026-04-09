@@ -104,7 +104,7 @@ print(f"Learned Q-Values: {q_table}")
     <p>Teacher's Final Word: You don't need a map if you have a scoreboard and the guts to keep failing until you win. Q-Learning is the science of delayed gratification—it teaches the machine that the hardest path today is often the one that leads to the biggest feast tomorrow.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> We've seen how models learn and make decisions. Now let's look at how we prepare the raw data for them in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+      <strong>Next Step:</strong> You’ve seen how agents make decisions. Now, explore how to model complex webs of influence in <strong><a href="#/machine-learning/pgm/bayesian-networks">Probabilistic Graphical Models</a></strong>.
     </div>
   `
 };

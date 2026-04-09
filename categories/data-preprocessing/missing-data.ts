@@ -60,9 +60,9 @@ export const missingDataSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hole in the Map</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Recovery Room</h2>
     
-      <h4>Scenario: Predicting House Prices with Missing Features</h4>
+      <h4>Scenario 1: The Hole in the Map</h4>
       <p>A house listing is missing its 'Number of Bathrooms' feature. We can't let the model crash, so we have to fill the hole.</p>
       
       <div class="algorithm-steps">
@@ -80,7 +80,41 @@ export const missingDataSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Winner:</strong> KNN found the "Most Probable Truth" by looking at context. The model can now proceed without crashing.</div>
+          <div><strong>Conclusion:</strong> KNN found the "Most Probable Truth" by looking at context. The model can now proceed without crashing.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Wearable Bio-Tracker</h4>
+      <p>A heart-rate monitor generates a time-series stream. Occasionally, the sensor loses contact with the skin, creating a "Gap."</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Wrong Move:</strong> Simple Deletion would break the time-series continuity, making it impossible to analyze heart rate variability over time.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Linear Interpolation:</strong> Since heart rates don't just "teleport" from 60 to 90, we draw a smooth line between the last known good pulse and the next one. This preserves the <strong>Causal Flow</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The model can now detect arrhythmia even if the hardware had a 5-second glitch, ensuring patient safety through "Signal Patching."</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: Customer Sentiment Surveys</h4>
+      <p>In a marketing survey, 40% of respondents skip the "Personal Income" field due to privacy concerns.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Bias Trap:</strong> If we delete these records, we likely lose our most private (and often wealthiest) customers, creating a massive <strong>Selection Bias</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Imputation by Proxy:</strong> We use "Zip Code" and "Education" as proxies. Using a KNN model, we group them with people of similar backgrounds to impute a "Probable Income."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> Data integrity is preserved. The company can market specifically to high-value segments that were previously "Invisible" due to missing labels.</div>
         </div>
       </div>
 
@@ -127,7 +161,7 @@ print(df)
     <p>Teacher's Final Word: Silence is a signal too. How you fill the gaps defines the integrity of your results. If you ignore the holes, you lose the signal; if you fill them blindly, you create a hallucination. The goal is to find the logical bridge that keeps your data alive while staying true to the underlying patterns.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> What if a data point is just wrong or totally weird? Explore <strong><a href="#/machine-learning/data-preprocessing/outliers">Outlier Detection</a></strong>.
+      <strong>Next Step:</strong> You’ve cleaned the map. Now, learn how to measure if your journey was successful in <strong><a href="#/machine-learning/model-evaluation/confusion-matrix">Model Evaluation</a></strong>.
     </div>
   `
 };

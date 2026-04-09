@@ -50,9 +50,9 @@ export const categoricalEncodingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Label Translator</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Label Translator</h2>
     
-      <h4>Scenario: Teaching a Model about Fruit</h4>
+      <h4>Scenario 1: Teaching a Model about Fruit</h4>
       <p>How do we represent 'Apple', 'Banana', and 'Cherry' without making the computer think one is "Greater" than the other? A computer sees integers as having magnitude (2 > 1).</p>
       
       <div class="algorithm-steps">
@@ -70,7 +70,41 @@ export const categoricalEncodingSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The model now treats all fruits as equally distant neighbors in a high-dimensional space. No fruit is "Greater" than another.</div>
+          <div><strong>Conclusion:</strong> The model now treats all fruits as equally distant neighbors in a high-dimensional space. No fruit is "Greater" than another.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Music Genome Project</h4>
+      <p>Building a recommender engine that categorizes 50+ music genres (Jazz, Pop, Metal, etc.).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Problem:</strong> If we use Label Encoding (Jazz=1, Pop=2, Metal=3), the model assumes "Pop" is closer to "Jazz" than "Metal" is, and that "Jazz + Pop = Metal." This creates a hallucinated social hierarchy.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>One-Hot Solution:</strong> We create 50 binary columns. Each genre is a separate dimension in a high-dimensional vector space. No genre is "greater" than another; they are all distinct and equidistant.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The recommender can now find pure clusters based on actual listening patterns, rather than being biased by arbitrary numerical order.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: Employee Performance Tracks</h4>
+      <p>Predicting promotion likelihood using performance ratings: "Needs Improvement", "Meets Expectations", "Exceeds Expectations".</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Logic:</strong> Unlike music genres, these categories have a <strong>Natural Order</strong>. "Exceeds" is objectively better than "Needs Improvement."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Ordinal Encoding:</strong> We map them to [1, 2, 3]. This preserves the <strong>Signal of Progression</strong>. The model understands the distance between "Needs Improvement" and "Meets" is a positive vector towards promotion.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> By using Ordinal Encoding instead of One-Hot, the model learns more efficiently because it doesn't have to "discover" the ranking—we've embedded it as a mathematical fact.</div>
         </div>
       </div>
 

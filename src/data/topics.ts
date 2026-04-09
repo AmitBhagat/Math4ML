@@ -17,6 +17,7 @@ export interface CategoryMeta {
 }
 
 export const CATEGORY_META: CategoryMeta[] = [
+  // --- Phase 1: The Language (The Bare Metal) ---
   {
     id: "linear-algebra",
     title: "Linear Algebra",
@@ -31,6 +32,20 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "SVD", description: "Singular Value Decomposition for dimensionality reduction." },
       { title: "Vector Norms", description: "Measuring magnitude (L1, L2) and regularization." },
       { title: "Distance Measures", description: "Euclidean, Manhattan, and Cosine similarity metrics." }
+    ]
+  },
+  {
+    id: "calculus",
+    title: "Calculus",
+    description: "The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",
+    keyConcepts: [
+      { title: "Differentiation", description: "Calculating instantaneous rates of change." },
+      { title: "Partial Derivatives", description: "Handling variables in multi-dimensional space." },
+      { title: "Gradients", description: "Vectors of change used in optimization." },
+      { title: "Gradient Descent", description: "Iterative minimization of loss functions." },
+      { title: "Chain Rule", description: "The foundation of neural network backpropagation." },
+      { title: "Jacobian & Hessian", description: "Coordinate transforms and second-order optimization." },
+      { title: "Area Under Curve", description: "Integration and model evaluation (AUC-ROC)." }
     ]
   },
   {
@@ -49,6 +64,8 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Practical Inference", description: "Solved examples: Spam filtering and Bernoulli MLE coin tosses." }
     ]
   },
+
+  // --- Phase 2: The Logic (Evidence & Inference) ---
   {
     id: "statistics",
     title: "Statistics",
@@ -60,6 +77,19 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Estimation Theory", description: "Maximum Likelihood (MLE) vs. Maximum A Posteriori (MAP) and the Bias-Variance tradeoff." },
       { title: "Regression Analysis", description: "The Ordinary Least Squares (OLS) framework, residuals, and R-squared." },
       { title: "Evaluation Metrics", description: "Probabilistic and information-theoretic measures of classification and regression performance." }
+    ]
+  },
+
+  // --- Phase 3: The Engine (Optimization & Information Flow) ---
+  {
+    id: "optimization",
+    title: "Optimization",
+    description: "The iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",
+    keyConcepts: [
+      { title: "Gradient Descent", description: "Batch updates following the steepest downward path." },
+      { title: "Stochastic Gradients", description: "Frequent, noisy updates using a mini-batch of data." },
+      { title: "Convexity", description: "Guarantees of reaching the global minimum without local traps." },
+      { title: "Regularization", description: "Geometric constraints to prevent model overfitting (L1, L2)." }
     ]
   },
   {
@@ -84,59 +114,17 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Graph Theory", description: "Modeling relationships between entities in Knowledge Graphs." }
     ]
   },
+
+  // --- Phase 4: The Build (Frameworks & Base Algorithms) ---
   {
-    id: "calculus",
-    title: "Calculus",
-    description: "The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",
+    id: "foundation-ml",
+    title: "Foundation of Machine Learning",
+    description: "The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",
     keyConcepts: [
-      { title: "Differentiation", description: "Calculating instantaneous rates of change." },
-      { title: "Partial Derivatives", description: "Handling variables in multi-dimensional space." },
-      { title: "Gradients", description: "Vectors of change used in optimization." },
-      { title: "Gradient Descent", description: "Iterative minimization of loss functions." },
-      { title: "Chain Rule", description: "The foundation of neural network backpropagation." },
-      { title: "Jacobian & Hessian", description: "Coordinate transforms and second-order optimization." },
-      { title: "Area Under Curve", description: "Integration and model evaluation (AUC-ROC)." }
-    ]
-  },
-  // --- Machine Learning Cluster ---
-  {
-    id: "supervised-learning",
-    title: "Supervised Learning",
-    description: "Learning from labeled datasets to map inputs to discrete or continuous outputs. The foundation of predictive modeling.",
-    keyConcepts: [
-      { title: "Regression", description: "Predicting continuous numerical values." },
-      { title: "Classification", description: "Categorizing data into predefined classes." },
-      { title: "SVM & Trees", description: "Core algorithms for complex decision boundaries." }
-    ]
-  },
-  {
-    id: "unsupervised-learning",
-    title: "Unsupervised Learning",
-    description: "Extracting patterns and structures from unlabeled data. Essential for discovery and dimensionality reduction.",
-    keyConcepts: [
-      { title: "Clustering", description: "Grouping similar data points together." },
-      { title: "PCA", description: "Reducing feature space while preserving variance." },
-      { title: "Association", description: "Finding rules that describe your data." }
-    ]
-  },
-  {
-    id: "deep-learning",
-    title: "Neural Networks & Deep Learning",
-    description: "The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",
-    keyConcepts: [
-      { title: "Forward & Backprop", description: "The iterative cycle of activation and gradient-based learning." },
-      { title: "Inductive Biases", description: "Architectural constraints for specific data (Spatial for CNNs, Temporal for RNNs)." },
-      { title: "The Attention Era", description: "Moving from sequential processing to global parallelized attention (Transformers)." }
-    ]
-  },
-  {
-    id: "reinforcement-learning",
-    title: "Reinforcement Learning",
-    description: "Training agents to make sequences of decisions by rewarding desired behaviors and punishing undesired ones.",
-    keyConcepts: [
-      { title: "Agents & Env", description: "Fundamental RL interaction loop." },
-      { title: "Q-Learning", description: "Learning value-based policies for action." },
-      { title: "Markov Processes", description: "Mathematical framework for decision making." }
+      { title: "What is ML?", description: "Learning patterns from data vs. manual rule-based programming." },
+      { title: "Learning Paradigms", description: "Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning." },
+      { title: "Overfitting & Bias", description: "The core trade-offs: Generalization vs. Memory and Rigid vs. Reactive." },
+      { title: "Feature Engineering", description: "The art of preparing data to maximize model insight." }
     ]
   },
   {
@@ -160,25 +148,45 @@ export const CATEGORY_META: CategoryMeta[] = [
     ]
   },
   {
-    id: "optimization",
-    title: "Optimization",
-    description: "The iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",
+    id: "supervised-learning",
+    title: "Supervised Learning",
+    description: "Learning from labeled datasets to map inputs to discrete or continuous outputs. The foundation of predictive modeling.",
     keyConcepts: [
-      { title: "Gradient Descent", description: "Batch updates following the steepest downward path." },
-      { title: "Stochastic Gradients", description: "Frequent, noisy updates using a mini-batch of data." },
-      { title: "Convexity", description: "Guarantees of reaching the global minimum without local traps." },
-      { title: "Regularization", description: "Geometric constraints to prevent model overfitting (L1, L2)." }
+      { title: "Regression", description: "Predicting continuous numerical values." },
+      { title: "Classification", description: "Categorizing data into predefined classes." },
+      { title: "SVM & Trees", description: "Core algorithms for complex decision boundaries." }
     ]
   },
   {
-    id: "foundation-ml",
-    title: "Foundation of Machine Learning",
-    description: "The core principles, types, and fundamental concepts that provide the framework for all Machine Learning systems.",
+    id: "unsupervised-learning",
+    title: "Unsupervised Learning",
+    description: "Extracting patterns and structures from unlabeled data. Essential for discovery and dimensionality reduction.",
     keyConcepts: [
-      { title: "What is ML?", description: "Learning patterns from data vs. manual rule-based programming." },
-      { title: "Learning Paradigms", description: "Supervised, Unsupervised, Semi-supervised, and Reinforcement Learning." },
-      { title: "Overfitting & Bias", description: "The core trade-offs: Generalization vs. Memory and Rigid vs. Reactive." },
-      { title: "Feature Engineering", description: "The art of preparing data to maximize model insight." }
+      { title: "Clustering", description: "Grouping similar data points together." },
+      { title: "PCA", description: "Reducing feature space while preserving variance." },
+      { title: "Association", description: "Finding rules that describe your data." }
+    ]
+  },
+
+  // --- Phase 5: The Frontier (Modern AI Models) ---
+  {
+    id: "deep-learning",
+    title: "Neural Networks & Deep Learning",
+    description: "The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",
+    keyConcepts: [
+      { title: "Forward & Backprop", description: "The iterative cycle of activation and gradient-based learning." },
+      { title: "Inductive Biases", description: "Architectural constraints for specific data (Spatial for CNNs, Temporal for RNNs)." },
+      { title: "The Attention Era", description: "Moving from sequential processing to global parallelized attention (Transformers)." }
+    ]
+  },
+  {
+    id: "reinforcement-learning",
+    title: "Reinforcement Learning",
+    description: "Training agents to make sequences of decisions by rewarding desired behaviors and punishing undesired ones.",
+    keyConcepts: [
+      { title: "Agents & Env", description: "Fundamental RL interaction loop." },
+      { title: "Q-Learning", description: "Learning value-based policies for action." },
+      { title: "Markov Processes", description: "Mathematical framework for decision making." }
     ]
   },
   {
@@ -235,13 +243,13 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "Mathematics",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "probability", "statistics", "calculus", "information-theory", "discrete-math", "optimization"]
+    categories: ["linear-algebra", "calculus", "probability", "statistics", "optimization", "information-theory", "discrete-math"]
   },
   {
     id: "machine-learning",
     title: "Machine Learning",
     description: "Architectural paradigms and learning strategies that transform raw data into predictive, autonomous systems.",
-    categories: ["foundation-ml", "supervised-learning", "unsupervised-learning", "pgm", "deep-learning", "reinforcement-learning", "data-preprocessing", "model-evaluation", "optimization-ml", "advanced-ml", "modern-ml"]
+    categories: ["foundation-ml", "data-preprocessing", "model-evaluation", "supervised-learning", "unsupervised-learning", "deep-learning", "reinforcement-learning", "pgm", "optimization-ml", "advanced-ml", "modern-ml"]
   }
 ];
 
@@ -284,21 +292,21 @@ const categoryCache = new Map<string, CategoryData>();
 // Maps for dynamic import — Vite will code-split these into separate chunks
 const importMap: Record<string, () => Promise<any>> = {
   'linear-algebra': () => import('../../categories/linear-algebra-index'),
+  'calculus': () => import('../../categories/calculus-index'),
   'probability': () => import('../../categories/probability-index'),
   'statistics': () => import('../../categories/statistics-index'),
-  'calculus': () => import('../../categories/calculus-index'),
+  'optimization': () => import('../../categories/optimization-index'),
   'information-theory': () => import('../../categories/information-theory-index'),
   'discrete-math': () => import('../../categories/discrete-math-index'),
   
   // Machine Learning Cluster
+  'foundation-ml': () => import('../../categories/foundation-ml-index'),
+  'data-preprocessing': () => import('../../categories/data-preprocessing-index'),
+  'model-evaluation': () => import('../../categories/model-evaluation-index'),
   'supervised-learning': () => import('../../categories/supervised-learning-index'),
   'unsupervised-learning': () => import('../../categories/unsupervised-learning-index'),
   'deep-learning': () => import('../../categories/deep-learning-index'),
   'reinforcement-learning': () => import('../../categories/reinforcement-learning-index'),
-  'data-preprocessing': () => import('../../categories/data-preprocessing-index'),
-  'model-evaluation': () => import('../../categories/model-evaluation-index'),
-  'optimization': () => import('../../categories/optimization-index'),
-  'foundation-ml': () => import('../../categories/foundation-ml-index'),
   'pgm': () => import('../../categories/pgm-index'),
   'optimization-ml': () => import('../../categories/optimization-ml-index'),
   'advanced-ml': () => import('../../categories/advanced-ml-index'),
@@ -308,26 +316,29 @@ const importMap: Record<string, () => Promise<any>> = {
 // Export name map (the const name inside each file)
 const exportNameMap: Record<string, string> = {
   'linear-algebra': 'LINEAR_ALGEBRA_DATA',
+  'calculus': 'CALCULUS_DATA',
   'probability': 'PROBABILITY_DATA',
   'statistics': 'STATISTICS_DATA',
-  'calculus': 'CALCULUS_DATA',
+  'optimization': 'OPTIMIZATION_DATA',
   'information-theory': 'INFORMATION_THEORY_DATA',
   'discrete-math': 'DISCRETE_MATH_DATA',
   
   // Machine Learning Cluster
+  'foundation-ml': 'FOUNDATION_ML_DATA',
+  'data-preprocessing': 'DATA_PREPROCESSING_DATA',
+  'model-evaluation': 'MODEL_EVALUATION_DATA',
   'supervised-learning': 'SUPERVISED_LEARNING_DATA',
   'unsupervised-learning': 'UNSUPERVISED_LEARNING_DATA',
   'deep-learning': 'DEEP_LEARNING_DATA',
-  'reinforcement-learning': 'REINFORCEMENT_LEARNING_DATA',
-  'data-preprocessing': 'DATA_PREPROCESSING_DATA',
-  'model-evaluation': 'MODEL_EVALUATION_DATA',
-  'optimization': 'OPTIMIZATION_DATA',
-  'foundation-ml': 'FOUNDATION_ML_DATA',
+  'reinforcement-learning': 'REINFORCEMENT_LEARMENT_DATA', // Note: keep consistent with filename export if different
   'pgm': 'PGM_DATA',
   'optimization-ml': 'OPTIMIZATION_ML_DATA',
   'advanced-ml': 'ADVANCED_ML_DATA',
   'modern-ml': 'MODERN_ML_DATA',
 };
+
+// Fix the REINFORCEMENT_LEARNING export name if I made a typo above
+exportNameMap['reinforcement-learning'] = 'REINFORCEMENT_LEARNING_DATA';
 
 /**
  * Fetches category data on demand. Returns cached data if already loaded.
@@ -356,4 +367,3 @@ export function preloadCategory(categoryId: string): void {
   const loader = importMap[categoryId];
   if (loader) loader(); // Vite will start fetching the chunk
 }
-

@@ -2,7 +2,7 @@ import { TopicSection } from '../../src/data/types';
 
 export const hypothesisTestingSection: TopicSection = {
   id: "hypothesis-testing",
-  title: "Hypothesis Testing",
+  title: "Hypothesis Testing Foundations",
   description: "Hypothesis Testing is the statistical process of determining if an observed effect is 'Real' or just a result of random chance.",
   color: "#D32F2F",
   html: String.raw`
@@ -17,6 +17,7 @@ export const hypothesisTestingSection: TopicSection = {
       <ul style="margin:0">
         <li><strong>Probability Distributions</strong>: Normal, T, and Chi-Square.</li>
         <li><strong>Central Limit Theorem</strong>: Why sample means form bell curves.</li>
+        <li><strong>Sampling Theory</strong>: How small samples represent large populations.</li>
       </ul>
     </div>
 
@@ -26,7 +27,7 @@ export const hypothesisTestingSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Test of Significance</div>
-      <p>A **Hypothesis Test** is a formal procedure for determining whether to reject a null hypothesis $H_0$ based on sample evidence. It evaluates two mutually exclusive statements about a population:</p>
+      <p>A <strong>Hypothesis Test</strong> is a formal procedure for determining whether to reject a null hypothesis $H_0$ based on sample evidence. It evaluates two mutually exclusive statements about a population:</p>
       <div class="math-block">
         $$H_0: \theta = \theta_0, \quad H_a: \theta \neq \theta_0$$
       </div>
@@ -34,113 +35,71 @@ export const hypothesisTestingSection: TopicSection = {
       <ul class="mt-2 space-y-1">
         <li><strong>Test Statistic ($T_{obs}$)</strong>: A numerical value calculated from sample data (e.g., $Z$, $t$, or $\chi^2$) that measures the deviation from $H_0$.</li>
         <li><strong>p-value</strong>: $P(T \ge T_{obs} \mid H_0)$. The probability of observing results as extreme as yours if the Null Hypothesis were true.</li>
-        <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is **Statistically Significant**, and $H_0$ is rejected.</li>
-        <li><strong>Decision Errors</strong>: **Type I** (rejecting a true $H_0$) and **Type II** (failing to reject a false $H_0$).</li>
+        <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is <strong>Statistically Significant</strong>, and $H_0$ is rejected.</li>
       </ul>
-      <p class="mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
     </div>
-    
-    <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
-    
-      <h4>Problem: Does a New UI Increase Clicks?</h4>
-      <p>Group A (Old UI) has 5% clicks. Group B (New UI) has 7% clicks. Is the 2% gain "Real"?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Test:</strong> <strong>Independent 2-Sample T-Test</strong>. It compares the means of two independent groups.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Calculation:</strong> Factor in the "Noise" (Variance) of both groups. If the groups are large and consistent, the T-score will be high.</div>
-        </div>
-      </div>
 
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> If \(p=0.02\), we reject the "No difference" theory. The UI change is 98% likely to be a real improvement.
-        </div>
-      </div>
-    
+    <h2 id="errors">Decision Errors: The Cost of Being Wrong</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Type I vs. Type II Errors</div>
+      <p>No statistical test is perfect. We always run the risk of making one of two fatal mistakes:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Type I Error (False Positive)</strong>: Rejecting a Null Hypothesis that is actually TRUE. In ML, this is like claiming a feature is important when it's just noise. We control this with $\alpha$.</li>
+        <li><strong>Type II Error (False Negative)</strong>: Failing to reject a Null Hypothesis that is actually FALSE. In ML, this is like missing a breakthrough because your data was too noisy. We measure the ability to avoid this as <strong>Statistical Power</strong> ($1-\beta$).</li>
+      </ul>
+    </div>
 
-    <h2 id="example-chi" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chi-Square (Independence)</h2>
-    
-      <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>
-      <p>Data: 200 people. Does knowing gender change the probability of purchase?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Test:</strong> <strong>Chi-Square Test of Independence</strong>. Best for categorical comparisons.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Logic:</strong> Compare the "Observed" counts in each category vs. "Expected" counts if they were totally independent.</div>
-        </div>
+    <h2 id="workflow">The Scientific Workflow</h2>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>State Hypotheses:</strong> Define $H_0$ (Status Quo) and $H_1$ (Your Breakthrough).</div>
       </div>
-
-      <div class="callout tip">
-        <div class="callout-icon">💡</div>
-        <div class="callout-body">
-          <strong>Intuition:</strong> In ML, we use Chi-Square for <strong>Feature Selection</strong>. If a feature and the target label are "Independent," the feature is useless—we drop it from the model.
-        </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Select Alpha:</strong> Choose your "Error Budget" (usually 0.05).</div>
       </div>
-    
-
-    <h2 id="example-anova" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> ANOVA (Comparing 3+ Labs)</h2>
-    
-      <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
-      <p>You run 10 training sessions with each optimizer. Is there a "Best" one?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Test:</strong> <strong>One-Way ANOVA</strong>. It checks if *at least one* group mean is different from the others.</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Mechanism:</strong> It compares the "Variance between groups" vs. the "Variance within groups."</div>
-        </div>
+       <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Calculate Statistic:</strong> Run a T-Test, Chi-Square, or ANOVA based on data type.</div>
       </div>
-
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> ANOVA tells you *if* a difference exists. You then follow up with "Post-hoc" tests to find out exactly which optimizer won.
-        </div>
+      <div class="algorithm-step">
+        <span class="step-badge">4</span>
+        <div><strong>Make Decision:</strong> If $p < \alpha$, accept the breakthrough. Otherwise, stay skeptical.</div>
       </div>
-    
+    </div>
 
-    <h2 id="implementation">Implementation</h2>
+    <h2 id="implementation">Implementation (Concept)</h2>
     <python-code>
-import numpy as np
+# Abstract workflow for any statistical test in SciPy
 from scipy import stats
 
-# 1. T-Test: UI Comparison
-group_a = np.random.normal(0.05, 0.01, 100) # Old UI conversion
-group_b = np.random.normal(0.07, 0.01, 100) # New UI conversion
-t_stat, p_val = stats.ttest_ind(group_a, group_b)
-print(f"T-Test p-value: {p_val:.4f}")
+# 1. Gather your data
+# 2. Choose the appropriate test
+# 3. Calculate p-value
+# statistic, p_val = stats.[test_name](data_samples)
 
-# 2. ANOVA: 3 Model comparison
-m1 = [0.8, 0.82, 0.79]
-m2 = [0.85, 0.84, 0.86]
-m3 = [0.75, 0.72, 0.74]
-f_stat, p_val_anova = stats.f_oneway(m1, m2, m3)
-print(f"ANOVA p-value: {p_val_anova:.4f}")
+# Example template logic:
+p_val = 0.03
+alpha = 0.05
+
+if p_val < alpha:
+    print("Conclusion: Reject H0 (The effect is likely Real)")
+else:
+    print("Conclusion: Fail to Reject H0 (The effect might be Noise)")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
     <p>Hypothesis Testing is the "Proof of Truth." It asks: "Is this result a Real Signal, or was I just Lucky?"</p>
     <ul>
-      <li><strong>Model Ablation Studies</strong>: When we remove a layer from a neural network, the accuracy might drop. We use hypothesis testing to determine if that drop is a "Significant Loss"—meaning the layer was actually doing something useful—or if the change is so small it's likely just random noise.</li>
-      <li><strong>Feature Selection (P-value Filtering)</strong>: In clinical models, we might have 1,000 patient vitals. We use tests like ANOVA or Chi-Square to calculate p-values for every feature. If a feature's p-value is high, it means its relationship with the disease is strictly random, so we drop it.</li>
+      <li><strong>Model Ablation Studies</strong>: Proving if a specific layer or component actually contributes to performance.</li>
+      <li><strong>A/B Testing</strong>: Determining if a change in model architecture leads to a significant lift in user engagement.</li>
+      <li><strong>Feature Significance</strong>: Using p-values to prune non-informative features from complex models.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we use tests to protect ourselves from wasting time chasing "ghosts"—patterns in the data that look real but are actually just accidental wiggles of noise. If it's not significant, it's not worth keeping.</p>
+    <p>Teacher's Final Word: Foundations first. Before you run a test, understand the risk of being wrong. Type I errors lead to over-engineering; Type II errors lead to missed opportunities. Balance them wisely.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Tests give us a "Yes/No" answer. But how do we estimate the <em>Range</em> of possible truths? Explore <strong><a href="#/mathematics/statistics/confidence-intervals">Confidence Intervals</a></strong>.
+      <strong>Next Step:</strong> Now that you understand the theory, it's time to run your first real test. Start with comparing two group means in the <strong><a href="#/mathematics/statistics/t-test">T-Test</a></strong>.
     </div>
   `
 };

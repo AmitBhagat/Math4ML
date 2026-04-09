@@ -194,7 +194,7 @@ if adj_matrix[1, 2] == 1:
     </python-code>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
+      <strong>Next Step:</strong> You've mastered the Mathematics curriculum! Now, it's time to put these tools to work in the <strong><a href="#/machine-learning/foundation-ml/what-is-ml">Foundations of Machine Learning</a></strong>.
     </div>
   `
 };

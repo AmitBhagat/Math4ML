@@ -125,7 +125,7 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
     <p>Teacher's Final Word: The trade-off between a perfect score and a stable model is the single most important decision you make. Regularization is how you build an AI that works in the real world, not just in your lab.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the <strong>Linear Algebra</strong>, <strong>Calculus</strong>, <strong>Probability</strong>, <strong>Statistics</strong>, <strong>Information Theory</strong>, and <strong>Optimization</strong> expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.
+      <strong>Next Step:</strong> You have mastered the engine of learning. Now, explore how we measure the data itself in <strong><a href="#/mathematics/information-theory/entropy">Information Theory</a></strong>.
     </div>
   `
 };

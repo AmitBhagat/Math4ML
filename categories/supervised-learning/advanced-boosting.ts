@@ -169,7 +169,7 @@ print(f"Confidence Verdict: {prediction}")
     <p>Teacher's Final Word: In the world of tabular data (SQL tables, Excels), these are the undisputed champions. If you are competing on Kaggle or building a high-stakes business model, these are the tools you want in your garage.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered the "Teachers" (Supervised). What happens when the machine has to learn on its own? Explore <strong><a href="#/machine-learning/unsupervised-learning/">Unsupervised Learning Paradigms</a></strong>.
+      <strong>Next Step:</strong> You have mastered the "Teachers" (Supervised). What happens when the machine has to learn on its own? Explore <strong><a href="#/machine-learning/unsupervised-learning/kmeans">Unsupervised Learning Paradigms</a></strong>.
     </div>
   `
 };

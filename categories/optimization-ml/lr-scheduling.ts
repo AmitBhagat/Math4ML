@@ -96,7 +96,7 @@ for e in [0, 25, 50, 75, 100]:
     <p>Teacher's Final Word: If you never slow down, you'll never stop at the truth; you'll just zoom right past it. Learning rate scheduling is the difference between a model that merely "learns" and one that achieves state-of-the-art generalization by sticking the landing on the global minimum.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered the iterative descent. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the iterative descent. Now, learn how to combine many models into a single "Strong Learner" in <strong><a href="#/machine-learning/advanced-ml/ensemble-intro">Advanced ML Topics</a></strong>.
     </div>
   `
 };

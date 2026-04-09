@@ -96,7 +96,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     <p>Teacher's Final Word: Integrals are the ultimate tool for "Global Understanding." They take the local rules of probability and scale them up to show us the big picture of a dataset or a model's behavior.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Integration measures accumulation. Now, find the 'best' possible values by exploring <strong><a href="#/mathematics/calculus/optimization">Optimization Theory</a></strong>.
+      <strong>Next Step:</strong> Integration measures accumulation. Now, explore the logic of uncertainty in <strong><a href="#/mathematics/probability/random-variables">Probability Theory</a></strong>.
     </div>
   `
 };

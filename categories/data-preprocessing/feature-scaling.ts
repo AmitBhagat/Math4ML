@@ -69,9 +69,9 @@ export const featureScalingSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fair Athlete</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Equalization Zone</h2>
     
-      <h4>Scenario: Comparing a Sprinter and a Weightlifter</h4>
+      <h4>Scenario 1: The Fair Athlete</h4>
       <p>How do you decide who is the "Best Athlete" when one measures performance in <strong>Seconds</strong> (10.0) and the other in <strong>Grams</strong> (200,000)?</p>
       
       <div class="algorithm-steps">
@@ -89,7 +89,41 @@ export const featureScalingSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The model now sees that the Sprinter's accomplishment is mathematically rarer and grants it higher weight.</div>
+          <div><strong>Conclusion:</strong> The model now sees that the Sprinter's accomplishment is mathematically rarer and grants it higher weight.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Real Estate Appraiser</h4>
+      <p>Predicting house prices using "Square Footage" (500 to 5,000) and "Distance to Subway" (0.1 to 2.0 miles).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Numerical Bullying:</strong> Without scaling, Gradient Descent sees a 1,000 sq ft difference as a "Cliff" and a 0.5-mile difference as a "Tiny Bump." The model ignores the subway.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Normalization:</strong> We scale both to [0, 1]. Now, a move from "Far" to "Close" to the subway has the same mathematical impact as a move from "Small" to "Large" house.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The model accurately learns that proximity to a subway is just as important as size, leading to a 15% increase in price prediction accuracy.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: The High-Frequency Trading Bot</h4>
+      <p>A bot analyzes millisecond price changes (tiny fractions) and trade volume (millions of shares).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Vanishing Gradients:</strong> Because price changes are so small ($1e^{-4}$), gradients used to update the model are nearly zero. The model "forgets" to learn from price.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Z-Score Standardization:</strong> We standardize volume and price returns. This brings both signals into the same "Loudness" range (typically -3 to +3).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The loss function becomes a symmetric bowl rather than a flat pancake. The bot converges on a winning strategy in minutes instead of days.</div>
         </div>
       </div>
 

@@ -3,6 +3,10 @@ import { mleSection } from './statistics/mle';
 import { mapSection } from './statistics/map';
 import { biasVarianceSection } from './statistics/bias-variance';
 import { hypothesisTestingSection } from './statistics/hypothesis-testing';
+import { tTestSection } from './statistics/t-test';
+import { chiSquareSection } from './statistics/chi-square-test';
+import { anovaSection } from './statistics/anova';
+import { abTestingSection } from './statistics/ab-testing';
 import { confidenceIntervalsSection } from './statistics/confidence-intervals';
 
 // =============================================================================
@@ -15,7 +19,9 @@ export const STATISTICS_DATA: CategoryData = {
   keyConcepts: [
     { title: "MLE & MAP", description: "Finding the 'best' parameters for a distribution using Likelihood and Priors." },
     { title: "Bias-Variance Tradeoff", description: "The fundamental struggle between underfitting (Simplicity) and overfitting (Wildness)." },
-    { title: "Hypothesis Testing", description: "Proving if an effect is real or just noise using T-Tests, Chi-Square, and ANOVA." },
+    { title: "Hypothesis Testing", description: "The framework for proving if an effect is real or just noise." },
+    { title: "T-Test, Chi-Square, & ANOVA", description: "Specialized tools for comparing means, categories, and multiple groups." },
+    { title: "A/B Testing", description: "The definitive framework for measuring causality and 'Lift' in the real world." },
     { title: "Confidence Intervals", description: "Measuring the precision of our estimates and the 'Margin of Error'." }
   ],
   introHtml: String.raw`
@@ -70,6 +76,10 @@ export const STATISTICS_DATA: CategoryData = {
     mapSection,
     biasVarianceSection,
     hypothesisTestingSection,
+    tTestSection,
+    chiSquareSection,
+    anovaSection,
+    abTestingSection,
     confidenceIntervalsSection
   ]
 };

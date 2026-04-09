@@ -153,7 +153,7 @@ print(f"Status: {auc*100:.1f}% probability of correct ranking.")
     </python-code>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered the metrics of prediction. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+      <strong>Next Step:</strong> you’ve mastered the metrics of truth. Now, apply them to the first major pillar of ML: <strong><a href="#/machine-learning/supervised-learning/regression-intro">Supervised Learning</a></strong>.
     </div>
   `
 };

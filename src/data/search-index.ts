@@ -275,10 +275,38 @@ export const SEARCH_INDEX: SearchableTopic[] = [
   },
   {
     id: "hypothesis-testing",
-    title: "Hypothesis Testing",
+    title: "Hypothesis Testing Foundations",
     category: "Statistics",
     path: "/mathematics/statistics/hypothesis-testing",
-    keywords: ["hypothesis", "p-value", "significance", "ttest", "anova", "chisquare"]
+    keywords: ["hypothesis", "p-value", "significance", "null hypothesis", "alternative", "type I error", "type II error"]
+  },
+  {
+    id: "t-test",
+    title: "T-Test",
+    category: "Statistics",
+    path: "/mathematics/statistics/t-test",
+    keywords: ["ttest", "mean comparison", "a/b testing", "gosset", "student t"]
+  },
+  {
+    id: "chi-square-test",
+    title: "Chi-Square Test",
+    category: "Statistics",
+    path: "/mathematics/statistics/chi-square-test",
+    keywords: ["chisquare", "independence", "categorical", "contingency", "feature selection"]
+  },
+  {
+    id: "anova",
+    title: "ANOVA",
+    category: "Statistics",
+    path: "/mathematics/statistics/anova",
+    keywords: ["anova", "analysis of variance", "f-test", "model selection", "optimizers"]
+  },
+  {
+    id: "ab-testing",
+    title: "A/B Testing",
+    category: "Statistics",
+    path: "/mathematics/statistics/ab-testing",
+    keywords: ["lift", "split test", "experimentation", "causality", "mde", "power"]
   },
   {
     id: "confidence-intervals",

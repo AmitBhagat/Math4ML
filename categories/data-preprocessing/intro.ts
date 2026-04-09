@@ -59,10 +59,10 @@ export const dataPreprocessingIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Diamond in the Rough</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Refinement Gallery</h2>
     
-      <h4>Scenario: Preparing a Customer Dataset for a Bank</h4>
-      <p>We have a list of 10,000 customers. Some are missing phone numbers, some have salaries in Yen while others are in Dollars.</p>
+      <h4>Scenario 1: The Diamond in the Rough</h4>
+      <p>Preparing a customer dataset for bank analysis. Dealing with missing phone numbers and mixed currency salaries (Yen vs. Dollars).</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -79,7 +79,41 @@ export const dataPreprocessingIntroSection: TopicSection = {
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Model:</strong> Now, when we feed this to a Logistic Regression, it finds the signal instantly because the noise has been scrubbed.</div>
+          <div><strong>Conclusion:</strong> When we feed this to a Logistic Regression, it finds the signal instantly because the noise has been scrubbed.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Smart City Nerve Center</h4>
+      <p>Management of 10,000 urban sensors tracking Traffic, Noise, and CO2 levels across a metropolitan area.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Time-Zone Sync:</strong> Sensors in different districts were reporting in UTC or Local Time. We align them to a single timeline to see the "Traffic Wave" move through the city.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Ghost Signal Removal:</strong> A sensor at a construction site was reporting the same high vibration for 48 hours. We flag it as "Stuck" and exclude it from the noise pollution dashboard.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> By aligning and cleaning the telemetry, the city can predict congestion 30 minutes before it happens, saving fuel and time.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: The Global Supply Chain</h4>
+      <p>A logistics company handles shipments from 50 countries with mixed measurement systems and currencies.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Unit Harmonization:</strong> Cargo weights arrived in 'Tons', 'Kilograms', and 'Pounds'. We normalize everything to Metric Tons so the ship's load-balancing model doesn't over-stack one side.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Denoising Labels:</strong> Product descriptions like "Electronics", "Elect.", and "Elec-01" are all mapped to a single "Power Goods" category using string similarity.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The refinery pipeline turns chaotic shipping logs into a high-fidelity inventory engine that optimizes warehouse space globally.</div>
         </div>
       </div>
 

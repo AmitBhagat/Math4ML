@@ -130,7 +130,7 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
     <p>Teacher's Final Word: Conflict is the fastest route to genius. By giving the machine an "Enemy" to defeat, GANs have transformed AI from a cold analyzer into a creative force capable of imagining things that have never existed before.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Adversarial duels are powerful, but what if you could un-scramble noise instead? Explore <strong><a href="#/machine-learning/advanced-ml/diffusion-models">Diffusion Models</a></strong>.
+      <strong>Next Step:</strong> You’ve seen how models imagine. Now, see how they <strong>Act</strong> and make sequences of decisions in <strong><a href="#/machine-learning/reinforcement-learning/mdp">Reinforcement Learning</a></strong>.
     </div>
   `
 };

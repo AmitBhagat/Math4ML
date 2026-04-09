@@ -124,7 +124,7 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     <p>Teacher's Final Word: Bayes' Theorem is the logic of humbleness. It forces the machine to admit what it knew before and adjust it based on what it sees now. In a world of noise, it is the only way to arrive at the signal.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the <strong>Rigid Statistics</strong> of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered how to calculate probabilities within models. Now, see how we apply this to the <strong>Rigid Statistics</strong> of Large Scale Data. Explore <strong><a href="#/mathematics/statistics/mle">Maximum Likelihood Estimation (MLE)</a></strong>.
     </div>
   `
 };

@@ -123,7 +123,7 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     <p>Teacher's Final Word: In Machine Learning, communicating uncertainty is a sign of wisdom. A confidence interval is the difference between a lucky guess and a reliable product that you can trust in the real world.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probability, & Statistics</strong>. You are now ready to dive into the <strong>Foundations of Information Theory</strong>. Explore <strong><a href="#/mathematics/information-theory/basics">Information Theory Basics</a></strong>.
+      <strong>Next Step:</strong> You’ve completed the core logic of Statistics. Now, learn how we use these tools to find the best possible models in <strong><a href="#/mathematics/optimization/gradient-descent">Optimization Theory</a></strong>.
     </div>
   `
 };

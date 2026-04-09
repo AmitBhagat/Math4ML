@@ -113,7 +113,7 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
     <p>Teacher's Final Word: KL isn't just a distance; it's a measure of regret. It tells you exactly how much truth you've sacrificed for the sake of simplicity. In the world of AI, the objective is to make our models so sophisticated that the information loss between our math and the real world reaches zero.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probabilty, Statistics, & Information Theory</strong>. Ready to move into <strong>Machine Learning Architectures</strong>? Explore <strong><a href="#/supervised/basics">Supervised Learning</a></strong>.
+      <strong>Next Step:</strong> You’ve completed the Phase 3 Engine. Now, explore the structural building blocks of data in <strong><a href="#/mathematics/discrete-math/set-theory">Discrete Mathematics</a></strong>.
     </div>
   `
 };
