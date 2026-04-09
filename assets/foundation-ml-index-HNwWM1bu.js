@@ -11,7 +11,7 @@ const e={id:"what-is-ml",title:"What is Machine Learning?",description:"Machine 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Experience-Task-Performance Triad</div>
-      <p>A computer program is said to **learn** from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a **Hypothesis Space** $\mathcal{H}$:</p>
+      <p>A computer program is said to <strong>learn</strong> from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a <strong>Hypothesis Space</strong> $\mathcal{H}$:</p>
       
       <div class="math-block">
         $$\hat{h} = \arg \min_{h \in \mathcal{H}} \frac{1}{n} \sum_{i=1}^n L(y_i, h(\mathbf{x}_i))$$
@@ -20,9 +20,9 @@ const e={id:"what-is-ml",title:"What is Machine Learning?",description:"Machine 
       <ul class="mt-2 space-y-1">
         <li><strong>Task ($T$)</strong>: The problem being solved (e.g., Image Classification, Price Prediction).</li>
         <li><strong>Experience ($E$)</strong>: The training data $\mathcal{D} = \{(\mathbf{x}_1, y_1), \dots, (\mathbf{x}_n, y_n)\}$ provided to the system.</li>
-        <li><strong>Performance Measure ($P$)</strong>: The **Loss Function** $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
+        <li><strong>Performance Measure ($P$)</strong>: The <strong>Loss Function</strong> $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
       </ul>
-      <p class="mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
+      <p class="mt-2">The goal of any learning algorithm is <strong>Empirical Risk Minimization (ERM)</strong>: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
     </div>
     
     <div class="callout tip">
@@ -161,7 +161,7 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like **Semi-Supervised Learning** utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
+      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like <strong>Semi-Supervised Learning</strong> utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
     </div>
     
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
@@ -296,9 +296,9 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
       <ul class="mt-2 space-y-1">
         <li><strong>Regression</strong>: $\mathcal{Y}$ is a continuous space ($\mathbb{R}$). The objective is to estimate a numerical value based on continuous or categorical features.</li>
         <li><strong>Classification</strong>: $\mathcal{Y}$ is a discrete set of classes $\{C_1, \dots, C_k\}$. The objective is to determine the decision boundaries that separate these categories in high-dimensional space.</li>
-        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use **MSE**; for classification, we use **Cross-Entropy**.</li>
+        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use <strong>MSE</strong>; for classification, we use <strong>Cross-Entropy</strong>.</li>
       </ul>
-      <p class="mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
+      <p class="mt-2">The ultimate success of supervised learning is measured by <strong>Generalization</strong>: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
@@ -377,7 +377,7 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Latent Structure and Representation Learning</div>
-      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of **Unsupervised Learning** is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
+      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of <strong>Unsupervised Learning</strong> is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
       
       <div class="space-y-4">
         <div>
@@ -397,7 +397,7 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of **Density Estimation** $P(\mathbf{x})$, **Intrinsic Dimensionality**, and **Manifold Fidelity**, rather than explicit label accuracy.</p>
+      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of <strong>Density Estimation</strong> $P(\mathbf{x})$, <strong>Intrinsic Dimensionality</strong>, and <strong>Manifold Fidelity</strong>, rather than explicit label accuracy.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>
@@ -476,7 +476,7 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
       <div class="math-block">
         $$J(f) = \sum_{i=1}^l L(y_i, f(\mathbf{x}_i)) + \lambda \cdot \Omega(f, \mathcal{U})$$
       </div>
-      <p>The **Unsupervised Regularizer** $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
+      <p>The <strong>Unsupervised Regularizer</strong> $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
       <ul class="mt-2 space-y-1">
         <li><strong>Smoothness Assumption</strong>: If $\mathbf{x}_i$ and $\mathbf{x}_j$ are close in high-density regions, their outputs $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$ should be similar.</li>
         <li><strong>Low-Density Separation</strong>: The decision boundary should pass through areas where the marginal density $P(\mathbf{x})$ is low, effectively avoiding the "splitting" of natural clusters.</li>
@@ -555,7 +555,7 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Markov Decision Process (MDP)</div>
-      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an **MDP** tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
+      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an <strong>MDP</strong> tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
       
       <div class="space-y-4">
         <div>
@@ -565,14 +565,14 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
 
         <div>
           <h4 class="text-sm font-bold text-green-premium">2. The Optimization Goal</h4>
-          <p class="text-xs mb-1">The objective is to find an optimal **Policy** $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
+          <p class="text-xs mb-1">The objective is to find an optimal <strong>Policy</strong> $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
           <div class="math-block">
             $$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$$
           </div>
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the **Bellman Equation**, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
+      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the <strong>Bellman Equation</strong>, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
     </div>
     
     <h2 id="exploitation">Exploration vs. Exploitation</h2>
@@ -689,7 +689,7 @@ for i in range(3):
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">To prevent **Data Leakage**, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
+      <p class="text-xs opacity-80 mt-2">To prevent <strong>Data Leakage</strong>, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
@@ -770,7 +770,7 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Generalization Gap</div>
-      <p>The performance of a model $h$ is defined by the difference between its **Empirical Risk** $\hat{R}(h)$ (training error) and its **Structural Risk** $R(h)$ (true error on unseen data):</p>
+      <p>The performance of a model $h$ is defined by the difference between its <strong>Empirical Risk</strong> $\hat{R}(h)$ (training error) and its <strong>Structural Risk</strong> $R(h)$ (true error on unseen data):</p>
       <div class="math-block">
         $$\text{Gap} = R(h) - \hat{R}(h)$$
       </div>
@@ -778,7 +778,7 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
       <ul class="mt-2 space-y-1">
         <li><strong>Underfitting (High Bias)</strong>: The hypothesis space $\mathcal{H}$ is too restrictive. Both training and test errors are high. The model fails to solve the "optimization" part of the problem.</li>
         <li><strong>Overfitting (High Variance)</strong>: The model has excessive capacity, allowing it to minimize $\hat{R}(h)$ by interpolating noise. This leads to a massive generalization gap where $R(h) \gg \hat{R}(h)$.</li>
-        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via **Regularization** ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
+        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via <strong>Regularization</strong> ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
       </ul>
       <p class="mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
     </div>
@@ -866,14 +866,14 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Bias-Variance Decomposition</div>
-      <p>The **Bias-Variance Tradeoff** is a mathematical derivation of the Expected Mean Squared Error (MSE) of an estimator $\hat{f}$ at a point $x$. The error decomposes into three distinct components:</p>
+      <p>The <strong>Bias-Variance Tradeoff</strong> is a mathematical derivation of the Expected Mean Squared Error (MSE) of an estimator $\hat{f}$ at a point $x$. The error decomposes into three distinct components:</p>
       <div class="math-block">
         $$\mathbb{E}_D \left[ (y - \hat{f}(x; D))^2 \right] = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \sigma^2$$
       </div>
       <p>The constituents of the generalization error are defined as follows:</p>
       <ul class="mt-2 space-y-1">
-        <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to **Underfitting**.</li>
-        <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to **Overfitting**.</li>
+        <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to <strong>Underfitting</strong>.</li>
+        <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to <strong>Overfitting</strong>.</li>
         <li><strong>Irreducible Error ($\sigma^2$)</strong>: The lower bound on error caused by inherent noise in the true underlying process $y = f(x) + \epsilon$.</li>
       </ul>
       <p class="mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>
@@ -986,7 +986,7 @@ print(f"Overfit Prediction: {overfit.predict(test_val)[0]:.2f}")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The K-Fold Partition</div>
-      <p>Given a dataset $\mathcal{D}$, **K-Fold Cross-Validation** partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
+      <p>Given a dataset $\mathcal{D}$, <strong>K-Fold Cross-Validation</strong> partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
       <div class="math-block">
         $$\text{CV}(\hat{f}) = \frac{1}{k} \sum_{i=1}^k \mathcal{L}(\mathcal{D}_i, \hat{f}_{(-i)})$$
       </div>
@@ -1281,7 +1281,7 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
       <div class="space-y-4">
         <div>
           <h4 class="text-sm font-bold text-green-premium">1. Classification Metrics (Discrete)</h4>
-          <p class="text-xs mb-1">Based on the **Confusion Matrix** (TP, TN, FP, FN):</p>
+          <p class="text-xs mb-1">Based on the <strong>Confusion Matrix</strong> (TP, TN, FP, FN):</p>
           <div class="math-block">
             $$\text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + FN}$$
             $$\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
@@ -1297,7 +1297,7 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
         </div>
       </div>
 
-      <p class="mt-2">Metrics like **Cross-Entropy** are used for training (optimization), while metrics like **Accuracy** or **AUC-ROC** are used for final validation and model comparison.</p>
+      <p class="mt-2">Metrics like <strong>Cross-Entropy</strong> are used for training (optimization), while metrics like <strong>Accuracy</strong> or <strong>AUC-ROC</strong> are used for final validation and model comparison.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>

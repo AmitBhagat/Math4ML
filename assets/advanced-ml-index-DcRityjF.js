@@ -15,7 +15,7 @@ const e={id:"ensemble-intro",title:"Ensemble Learning Theory",description:"The m
       <div class="math-block">
         $$H(\mathbf{x}) = \sum_{i=1}^m \alpha_i h_i(\mathbf{x}) \quad \text{or} \quad H(\mathbf{x}) = \text{argmax}_{c \in \mathcal{C}} \sum_{i=1}^m w_i \mathcal{I}(h_i(\mathbf{x}) = c)$$
       </div>
-      <p>The core theoretical justification lies in the **Ambiguity Decomposition**, which relates the ensemble error to the average error of individual models and their diversity (covariance):</p>
+      <p>The core theoretical justification lies in the <strong>Ambiguity Decomposition</strong>, which relates the ensemble error to the average error of individual models and their diversity (covariance):</p>
       <div class="math-block">
         $$\text{Error}_{\text{ens}} = \overline{\text{Error}}_{\text{ind}} - \text{Ambiguity}$$
       </div>
@@ -306,7 +306,7 @@ print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
       <div class="math-block">
         $$F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta \cdot h_m(\mathbf{x})$$
       </div>
-      <p>In **Gradient Boosting**, each $h_m$ is trained to approximate the negative gradient of the loss function $\mathcal{L}$ with respect to the previous prediction:</p>
+      <p>In <strong>Gradient Boosting</strong>, each $h_m$ is trained to approximate the negative gradient of the loss function $\mathcal{L}$ with respect to the previous prediction:</p>
       <div class="math-block">
         $$h_m = \arg\min_{h \in \mathcal{H}} \sum_{i=1}^n \left( -\left[ \frac{\partial \mathcal{L}(y_i, F_{m-1}(\mathbf{x}_i))}{\partial F_{m-1}(\mathbf{x}_i)} \right] - h(\mathbf{x}_i) \right)^2$$
       </div>
@@ -458,7 +458,7 @@ print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
       <div class="math-block">
         $$\hat{y} = H\left( h_1(\mathbf{x}), h_2(\mathbf{x}), \dots, h_M(\mathbf{x}) \right)$$
       </div>
-      <p>To prevent overfitting, the meta-features $\mathbf{z}_i$ for training $H$ must be generated using **Out-of-Fold (OOF)** predictions:</p>
+      <p>To prevent overfitting, the meta-features $\mathbf{z}_i$ for training $H$ must be generated using <strong>Out-of-Fold (OOF)</strong> predictions:</p>
       <div class="math-block">
         $$z_{i,m} = h_m^{(-i)}(\mathbf{x}_i)$$
       </div>
@@ -617,7 +617,7 @@ print(f"Stacking Ensemble Accuracy: {score:.1%}")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Latent Factor Decomposition</div>
-      <p>A recommender system seeks to fill the missing entries of a sparse user-item interaction matrix $\mathbf{R}$. The most common approach is **Matrix Factorization**, which decomposes $\mathbf{R}$ into user preferences $\mathbf{P}$ and item characteristics $\mathbf{Q}$ in a $k$-dimensional latent space:</p>
+      <p>A recommender system seeks to fill the missing entries of a sparse user-item interaction matrix $\mathbf{R}$. The most common approach is <strong>Matrix Factorization</strong>, which decomposes $\mathbf{R}$ into user preferences $\mathbf{P}$ and item characteristics $\mathbf{Q}$ in a $k$-dimensional latent space:</p>
       <div class="math-block">
         $$\hat{r}_{u,i} = \mathbf{p}_u \cdot \mathbf{q}_i^T = \sum_{f=1}^k p_{u,f} q_{i,f}$$
       </div>

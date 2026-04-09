@@ -10,18 +10,33 @@ const e={id:"gradient-descent-ml",title:"Gradient Descent (Batch)",description:"
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The First-Order Update Rule</div>
-      <p>Given a differentiable objective function $J(\theta)$, **Gradient Descent** iteratively updates the parameter vector $\theta$ by descending along the negative gradient of the function. For a learning rate $\eta > 0$ at step $t$:</p>
+      <div class="premium-def-title">Formalism: First-Order Taylor Approximation & The Descent Vector</div>
+      <p>Gradient Descent is "Greedy Minimization." It tells you the exact direction to walk to reduce your error as fast as possible in the next step.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are standing on a multivariable loss surface $J(\theta)$. At your current location, the <strong>Gradient</strong> $\nabla J(\theta)$ is a vector that points in the direction of the steepest <strong>Ascent</strong> (the fastest way up the mountain). Geometrically, if you want to reach the bottom of the valley, you must move in the exact opposite direction. The gradient is always orthogonal (perpendicular) to the <strong>Level Sets</strong> (contour lines) of the function, ensuring you are always taking the most direct path downward at any given moment.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the update rule using a <strong>First-Order Taylor Expansion</strong>. If we take a tiny step $\Delta \theta$, the change in our loss is approximately:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J(\theta_t)$$
+        $$J(\theta + \Delta \theta) \approx J(\theta) + \nabla J(\theta)^T \Delta \theta$$
       </div>
-      <p>This update mechanism is based on the following mathematical principles:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>The Gradient ($\nabla J$)</strong>: A vector pointing in the direction of steepest *ascent*. Subtracting it ensures we move toward the steepest *descent*.</li>
-        <li><strong>The Step Size ($\eta$)</strong>: Controlled by the Learning Rate. High $\eta$ can lead to divergence (overshooting); low $\eta$ results in slow convergence or entrapment in local minima.</li>
-        <li><strong>Convergence</strong>: For convex functions, GD is guaranteed to reach the global minimum given a sufficiently small $\eta$. For non-convex surfaces (DL), it finds a local minimum or stationary point.</li>
+      <p>To make the loss decrease, we need the term $\nabla J(\theta)^T \Delta \theta$ to be as negative as possible. The <strong>Cauchy-Schwarz Inequality</strong> proves that for a fixed step-size magnitude, this term is minimized when $\Delta \theta$ points in the exact opposite direction of the gradient:</p>
+      <div class="math-block">
+        $$\Delta \theta = -\eta \nabla J(\theta)$$
+      </div>
+      <p>This leads to the fundamental <strong>Gradient Descent Update Rule</strong>:</p>
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta \nabla J(\theta_t)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Gradient Descent is our <strong>Main Engine</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Vanilla Gradient Descent</strong>: Uses the entire dataset to calculate one gradient. It is perfectly stable but painfully slow and memory-intensive for modern data.</li>
+        <li><strong>The Learning Rate ($\eta$)</strong>: This is the most sensitive knob in AI. If $\eta$ is too high, you overstep the valley and "explode" up the other side. If it's too low, the model takes years to learn anything.</li>
       </ul>
-      <p class="mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Gradient Descent can get stuck in <strong>local minima</strong> or <strong>saddle points</strong>. In high-dimensional spaces, a point might look like a minimum in 9 dimensions but a maximum in the 10th. We use techniques like <strong>Momentum</strong> to "punch through" these deceptive flat areas.</p>
     </div>
     
     <h2 id="batch">Batch Gradient Descent</h2>
@@ -114,18 +129,30 @@ for epoch in range(101):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Stochastic Approximation</div>
-      <p>Given a training set of $N$ samples, the total loss is $J(\theta) = \frac{1}{N} \sum_{i=1}^N J_i(\theta)$. **Stochastic Gradient Descent (SGD)** approximates the gradient by evaluating only a single, randomly sampled index $i$ at each step:</p>
+      <div class="premium-def-title">Formalism: Unbiased Estimators & Stochastic Finite-Sums</div>
+      <p>SGD is "Fast Estimation." It replaces the perfect, slow truth with a fast, noisy guess that averages out to the truth over time.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a massive mountain range representing your loss function across 1 million data points. <strong>Batch Gradient Descent</strong> waits until it has surveyed every single pebble on every slope before taking one perfect step. <strong>Stochastic Gradient Descent (SGD)</strong> looks at just one pebble (or a small batch) and moves immediately. Geometrically, this transforms the smooth "water-flow" descent into a jittery, zig-zagging <strong>Random Walk</strong>. However, this noise is a feature—the "kinetic energy" from the jittering helps the model vibrate out of shallow local minima (traps) that would have permanently stuck a perfect algorithm.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Our objective is the average loss over $n$ samples: $J(\theta) = \frac{1}{n} \sum_{i=1}^n Q_i(\theta)$. The true gradient is the average of all individual gradients. In SGD, we sample a random index $i$ and use the gradient of that single point as an approximation:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J_i(\theta_t)$$
+        $$\theta_{t+1} = \theta_t - \eta \nabla Q_i(\theta_t)$$
       </div>
-      <p>This approach introduces high-frequency noise but offers significant computational advantages:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Unbiased Estimation</strong>: $\mathbb{E}_i [\nabla J_i(\theta)] = \nabla J(\theta)$. On average, the stochastic step points in the same direction as the true batch gradient.</li>
-        <li><strong>Exploration via Noise</strong>: The "jitter" in the optimization path helps the model escape high-loss regions and shallow plateaus where Batch GD might stall.</li>
-        <li><strong>Mini-Batch Vectorization</strong>: In practice, we use a small subset $\mathcal{B}$ to compute the gradient $\frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla J_i(\theta)$, which balances hardware efficiency with gradient stability.</li>
+      <p>The core mathematical justification is that the stochastic gradient is an <strong>Unbiased Estimator</strong> of the true gradient. In expectation, the "mean" direction is correct:</p>
+      <div class="math-block">
+        $$\mathbb{E}[\nabla Q_i(\theta)] = \frac{1}{n} \sum_{i=1}^n \nabla Q_i(\theta) = \nabla J(\theta)$$
+      </div>
+      <p>Even though any individual step might be "wrong," the net movement over many steps converges to the same destination as Batch GD, but millions of times faster.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we almost always use <strong>Mini-batch SGD</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Batch Size ($B$)</strong>: We average the gradient over a small group (e.g., 32 or 64 samples). This reduces the variance of the estimate while still being fast enough to fit in GPU memory.</li>
+        <li><strong>Online Stability</strong>: SGD is the only way to train on data streams that never stop (e.g., social media feeds), as it doesn't requires seeing the "end" of the data to start learning.</li>
       </ul>
-      <p class="mt-2">SGD is the workhorse of Deep Learning, allowing for the training of billion-parameter models on datasets that cannot fit in system memory.</p>
+      <p class="mt-4 italic text-sm">Gotcha: SGD requires a <strong>Decaying Learning Rate</strong>. If you don't slow down as you approach the minimum, the "jitter" will eventually prevent you from ever landing in the center, and you will just orbit the minimum forever.</p>
     </div>
     
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
@@ -207,7 +234,7 @@ for i in range(0, len(X), batch_size):
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the sailor a <strong>Sled</strong> so he can use his speed more effectively? Explore <strong><a href="#/machine-learning/optimization-ml/momentum">Momentum</a></strong>.
     </div>
-  `},i={id:"momentum-ml",title:"Momentum",description:"A method to accelerate gradient descent that uses the moving average of gradients to smooth out updates and navigate the loss surface more efficiently.",color:"#F44336",html:String.raw`
+  `},a={id:"momentum-ml",title:"Momentum",description:"A method to accelerate gradient descent that uses the moving average of gradients to smooth out updates and navigate the loss surface more efficiently.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>Momentum: The Heavy Boulder</h1>
@@ -219,19 +246,30 @@ for i in range(0, len(X), batch_size):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Velocity Accumulator</div>
-      <p>The **Momentum** method accelerates Gradient Descent by introducing a velocity vector $v$ that builds inertia based on the history of previous gradients. The update at step $t$ is defined as:</p>
+      <div class="premium-def-title">Formalism: The Velocity Accumulator & Geometric Series</div>
+      <p>Momentum is "Temporal Smoothing." It prevents the optimizer from getting caught in jittery oscillations by focusing on the long-term trend.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a <strong>Ravine</strong>—a loss surface that is very steep on the sides but has a long, flat floor. Standard Gradient Descent will bounce back and forth between the walls (high oscillation) while moving painfully slowly along the floor (low progress). <strong>Momentum</strong> introduces the concept of physical inertia. Geometrically, it acts as a <strong>Low-Pass Filter</strong>. It accumulates the consistent, downward signal along the floor of the ravine while the "chatter" against the walls cancels out over time. It transforms a jittery path into a smooth, high-speed glide toward the minimum.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We introduce a <strong>Velocity vector</strong> $v$ that tracks the history of gradients. At each step $t$, the velocity is updated by decaying the previous velocity by $\gamma$ and adding the new "impulse" of the current gradient:</p>
       <div class="math-block">
-        $$v_{t+1} = \gamma v_t + \eta \nabla_\theta J(\theta_t)$$
-        $$\theta_{t+1} = \theta_t - v_{t+1}$$
+        $$v_t = \gamma v_{t-1} + \eta \nabla J(\theta_t)$$
       </div>
-      <p>This physical analogy provides the optimizer with two critical capabilities:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Friction ($\gamma$)</strong>: The momentum coefficient (typically 0.9) determines what percentage of the previous velocity is kept. it prevents the "Bolder" from rolling infinitely.</li>
-        <li><strong>Oscillation Dampening</strong>: In directions where the gradient changes sign (jitter), the velocity terms cancel out. In consistent directions, the velocity builds up.</li>
-        <li><strong>Ravine Navigation</strong>: Many loss functions have narrow "valleys" (high curvature in one dimension). Momentum allows the optimizer to focus on the long-term downward trend rather than bouncing between the valley walls.</li>
+      <p>The parameters are then pushed by this velocity rather than just the instant gradient: $\theta_{t+1} = \theta_t - v_t$. If we expand this, we see that the update is actually a <strong>Weighted Moving Average</strong> (a geometric series) of all previous gradients:</p>
+      <div class="math-block">
+        $$v_t = \eta \sum_{k=0}^t \gamma^k \nabla J(\theta_{t-k})$$
+      </div>
+      <p>In a direction where the gradient is constant, the velocity builds up to a terminal speed of $\frac{\eta}{1-\gamma}$. If $\gamma = 0.9$, your steps become 10x more powerful in the right direction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Momentum is the <strong>Oscillation Eraser</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Smoothing out Mini-batches</strong>: SGD updates can be erratic because they only look at one batch. Momentum averages these erratic pulses into a stable "current."</li>
+        <li><strong>Punching through Saddle Points</strong>: If the gradient vanishes in a flat region (a saddle point), the accumulated velocity carries the model through the plateau, preventing it from getting stuck in "mediocre" land.</li>
       </ul>
-      <p class="mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
+      <p class="mt-4 italic text-sm">Gotcha: If your momentum $\gamma$ is too high, the optimizer will behave like a bowling ball on ice. It will build so much speed that it overshoots the minimum and orbits it in a massive loop, unable to stop.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>
@@ -305,7 +343,7 @@ for i in range(11):
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the boulder <strong>Brakes</strong> for every individual wheel? Explore the king of optimizers: <strong><a href="#/machine-learning/optimization-ml/adam">Adam Optimizer</a></strong>.
     </div>
-  `},a={id:"adam-ml",title:"Adam Optimizer",description:"A combination of RMSProp and Momentum into a single, robust algorithm that adaptive learning rates for every single parameter in a neural network.",color:"#F44336",html:String.raw`
+  `},i={id:"adam-ml",title:"Adam Optimizer",description:"A combination of RMSProp and Momentum into a single, robust algorithm that adaptive learning rates for every single parameter in a neural network.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>Adam: The Adaptive Athlete</h1>
@@ -317,23 +355,34 @@ for i in range(11):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Adaptive Moment Estimation</div>
-      <p>The **Adam** optimizer maintains exponentially moving averages of the gradient ($m_t$) and the squared gradient ($v_t$) to provide per-parameter adaptive updates. At each step $t$:</p>
+      <div class="premium-def-title">Formalism: Adaptive Moment Estimation & Bias Correction</div>
+      <p>Adam is "Smart Descent." Instead of a fixed step size, it calculates a custom, velocity-aware update for every single weight in your model.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a boulder rolling down a multidimensional cliff. Some dimensions are steep and chaotic (high variance), while others are long, flat plateaus (low variance). <strong>Adam</strong> is like a boulder equipped with a smart suspension system. It tracks its own <strong>Momentum</strong> ($m$) to smooth out the jitters in the steep parts, and it tracks the <strong>Volatility</strong> ($v$) of each dimension to ensure it doesn't overshoot narrow turns. Geometrically, Adam "squashes" the gradient space—it takes large steps in flat directions and cautious, tiny steps in volatile ones, making the descent much more efficient.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each step $t$, we calculate the gradient $g_t$. We then update two moving averages with decay rates $\beta_1$ (momentum) and $\beta_2$ (scaling):</p>
       <div class="math-block">
-        $$m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$$
-        $$v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$$
+        $$m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \quad (\text{The Mean})$$
+        $$v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \quad (\text{The Variance})$$
       </div>
-      <p>where $g_t$ is the current gradient. To account for initialization at zero, these moments are bias-corrected:</p>
+      <p>Because these values are initialized at zero, they are "biased" toward zero in the early steps. We fix this with <strong>Bias Correction</strong>:</p>
       <div class="math-block">
-        $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$$
+        $$\hat{m}_t = \frac{m_t}{1-\beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1-\beta_2^t}$$
       </div>
-      <p>The final parameter update utilizes these corrected estimates:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Update Rule</strong>: $\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$. The step size is effectively normalized by the local volatility.</li>
-        <li><strong>Robustness</strong>: $\beta_1$ (typically 0.9) acts as Momentum, while $\beta_2$ (typically 0.999) acts as an adaptive scaling factor (RMSProp).</li>
-        <li><strong>Bias Correction</strong>: Crucial during the initial steps when $m_t$ and $v_t$ are heavily biased towards the origin.</li>
+      <p>The final update rule combines these corrected moments:</p>
+      <div class="math-block">
+        $$\theta_t = \theta_{t-1} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Adam is the <strong>Industry Standard</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Per-Parameter Adaptivity</strong>: Unlike SGD, where one learning rate rules them all, Adam gives every neuron its own "Speed Limit." This is essential for training huge Transformers where feature scales vary wildly.</li>
+        <li><strong>Hyperparameter Robustness</strong>: The "Gotcha" with Adam is that while it works for almost everything with default settings, it sometimes fails to converge to the *absolute* best minimum compared to a perfectly tuned SGD.</li>
       </ul>
-      <p class="mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Adam's $\beta_2$ term is usually set to 0.999. If your gradients are extremely sparse or noisy, this can cause the "Second Moment" to become stale or explode. If your training gets unstable, checking your $\epsilon$ and $\beta_2$ is the first step.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Olympic Athlete</h2>
@@ -389,10 +438,10 @@ for step in range(1, 101):
     t += 1
     # a) Update moving averages
     m = beta1 * m + (1 - beta1) * grad
-    v = beta2 * v + (1 - beta2) * (grad**2)
+    v = beta2 * v + (1 - beta2) * (grad<strong>2)
     
     # b) Bias correction (Crucial for first few steps)
-    m_hat = m / (1 - beta1**t)
+    m_hat = m / (1 - beta1</strong>t)
     v_hat = v / (1 - beta2**t)
     
     # c) Final Update: Direction / sqrt(Volatility)
@@ -425,19 +474,30 @@ for step in range(1, 101):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Temporal Step Function</div>
-      <p>A **Learning Rate Schedule** is a function $f: t \to \eta_t$ that adjusts the optimizer's step size as a function of training progress $t$. This refinement is essential for navigating the multi-scale curvature of high-dimensional loss surfaces:</p>
+      <div class="premium-def-title">Formalism: Robbins-Monro Convergence & Temporal Step Decay</div>
+      <p>Scheduling is "Dynamic Precision." It is the science of knowing when to stop sprinting and start tiptoeing.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a skier approaching a narrow gate at the bottom of a massive valley. At the top, speed (High $\eta$) is your friend—it gets you through the flat plateaus and boring terrain quickly. But as you enter the final approach, that same speed becomes your enemy. If your momentum is too high, the "Curvature" of the valley will bounce you back and forth across the finish line, never letting you stop. Geometrically, Scheduling is the process of shrinking the <strong>Radius of the Update</strong> so that it fits inside the increasingly narrow basin of the minimum. It is the transition from "Exploration" to "Exploitation."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To guarantee that Stochastic Gradient Descent reaches the global minimum, the learning rates must satisfy the <strong>Robbins-Monro conditions</strong>:</p>
       <div class="math-block">
-        $$\eta_t = f(t, \eta_{initial})$$
+        $$\text{1. } \sum_{t=1}^\infty \eta_t = \infty \quad \text{2. } \sum_{t=1}^\infty \eta_t^2 < \infty$$
       </div>
-      <p>Common scheduling paradigms used in state-of-the-art architectures include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Step/Exponential Decay</strong>: $\eta_{t+1} = \eta_t \cdot \gamma$. This creates a "Staircase" effect, allowing the model to stabilize and refine at discrete intervals.</li>
-        <li><strong>Cosine Annealing</strong>: $\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + \cos(\frac{T_{cur}}{T_{max}}\pi))$. This provides a smooth, continuous transition that is highly effective for Deep Learning.</li>
-        <li><strong>Warmup Phase</strong>: A linear increase in $\eta$ during the first $K$ steps to prevent gradient explosion caused by random weight initialization.</li>
-        <li><strong>Cyclic Scheduling</strong>: Oscillating between a range of values to "restart" the search and prevent entrapment in sub-optimal basins.</li>
+      <p>Condition (1) ensures the model can actually cover enough distance to reach the goal from any starting point. Condition (2) ensures that the "Step Energy" eventually dissipates so the model doesn't vibrate forever due to random sampling noise. We implement this through decay functions:</p>
+      <div class="math-block">
+        $$\eta_t = \eta_0 \cdot \gamma^{\lfloor t/s \rfloor} \quad (\text{Step Decay})$$
+        $$\eta_t = \frac{\eta_0}{1 + kt} \quad (\text{Inverse Time Decay})$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, your schedule dictates your <strong>Stability</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Warmup</strong>: We often start with an *increasing* learning rate for the first few hundred steps. Why? Because random weights produce massive gradients that can "shatter" the model early on. Warmup lets the model find its footing before the real descent begins.</li>
+        <li><strong>Cosine Annealing</strong>: This is the gold standard for modern Deep Learning. It smoothly reduces the learning rate to near-zero, allowing the model to perform "surgery" on the weights at the end of training for maximum accuracy.</li>
       </ul>
-      <p class="mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
+      <p class="mt-4 italic text-sm">Gotcha: If you decay your learning rate too fast, you might get trapped in a mediocre local minimum (or a flat plateau) simply because you "Ran out of gas" to keep moving. If you decay too slow, you’ll never see a stable loss curve.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>
@@ -552,4 +612,4 @@ for e in [0, 25, 50, 75, 100]:
       </div>
 
     </div>
-  `,sections:[e,t,i,a,n]};export{o as OPTIMIZATION_ML_DATA};
+  `,sections:[e,t,a,i,n]};export{o as OPTIMIZATION_ML_DATA};

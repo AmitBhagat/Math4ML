@@ -10,16 +10,32 @@ const e={id:"kmeans",title:"k-Means Clustering",description:"A popular partition
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: K-Means Clustering</div>
-      <p>Given a set of observations $(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n)$, k-means clustering aims to partition the $n$ observations into $k \le n$ sets $\mathbf{S} = \{S_1, S_2, \dots, S_k\}$ so as to minimize the **Within-Cluster Sum of Squares (WCSS)**:</p>
+      <div class="premium-def-title">Formalism: Voronoi Partitioning & WCSS Minimization</div>
+      <p>K-Means is "Geometric Segregation." It seek to divide the world into $K$ disjoint territories based on proximity to a central anchor.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a scattered crowd of people in a vast plaza. You want to designate $K$ "Meeting Points" (Centroids) such that every person's walking distance to their nearest point is minimized. <strong>K-Means</strong> is the iterative dance of moving these points until they are perfectly centered within their respective "Tribes." Geometrically, this process carves the entire space into $K$ disjoint regions called <strong>Voronoi Cells</strong>. Every point inside a cell is mathematically closer to that cell's centroid than to any other. It is a "Hard" partitioning—there are no overlapping territories.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the quality of the clustering by the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, which measures the total "Tightness" or "Chaos" of the groups:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
+        $$J = \sum_{j=1}^K \sum_{\mathbf{x} \in S_j} \| \mathbf{x} - \mu_j \|^2$$
       </div>
-      <p>Where $\mu_i$ is the mean of points in $S_i$. The algorithm iteratively performs two steps:</p>
-      <ol class="mt-2 space-y-1">
-        <li><strong>Assignment</strong>: Assign each observation to the cluster with the nearest mean: $S_i^{(t)} = \{x_p : \|x_p - \mu_i^{(t)}\|^2 \le \|x_p - \mu_j^{(t)}\|^2 \forall j \}$.</li>
-        <li><strong>Update</strong>: Calculate the new means (centroids) of the observations in the new clusters: $\mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$.</li>
-      </ol>
+      <p>We minimize $J$ using <strong>Lloyd's Algorithm</strong>, an iterative refinement process:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Assignment Step</strong>: Fix the centroids $\mu_j$ and assign every point $\mathbf{x}_i$ to the closest one. This minimizes $J$ with respect to the cluster assignments.</li>
+        <li><strong>Update Step</strong>: Fix the assignments and move each centroid $\mu_j$ to the <strong>Mean Position</strong> of all points in its cluster:
+          $$\mu_j = \frac{1}{|S_j|} \sum_{\mathbf{x} \in S_j} \mathbf{x}$$
+        </li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, K-Means is the <strong>Speed King</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Spherical Assumption</strong>: K-Means assumes all clusters are roughly the same size and are shaped like perfect spheres. If your data is shaped like a line or a ring, K-Means will fail because its "Euclidean" brain can't understand non-spherical connectivity.</li>
+        <li><strong>Local Optima</strong>: Because the objective $J$ is non-convex, the algorithm is sensitive to the starting positions. A bad initial "guess" can lead to a terrible final clustering. This is why we almost always use <strong>K-Means++</strong> for smarter initialization.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: K-Means is blind to noise. It forces every single point—even the outliers—to belong to a cluster. One point accidentally placed on the moon will pull its centroid halfway to the stars.</p>
     </div>
     
     <div class="callout tip">
@@ -151,12 +167,30 @@ print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Hierarchical Clustering</div>
-      <p>Hierarchical clustering builds a nested hierarchy of clusters. In **Agglomerative** (bottom-up) clustering, we start with $n$ clusters and sequentially merge the closest pair $(A, B)$ by minimizing a linkage criterion $d(A, B)$. For **Ward's Method**, the merge cost is the increase in the total **Within-Cluster Sum of Squares**:</p>
-      <div class="math-block">
-        $$d_{Ward}(A, B) = \frac{|A||B|}{|A|+|B|} \|\mu_A - \mu_B\|^2$$
-      </div>
-      <p>The resulting tree structure is visualized as a **Dendrogram**, where the horizontal position represents the merge and the vertical axis represents the distance $d(A, B)$ at which the merge occurred.</p>
+      <div class="premium-def-title">Formalism: Agglomerative Linkage & Nested Partitions</div>
+      <p>Hierarchical Clustering is "Relational Ancestry." It is the process of building a tree of similarity where every point eventually finds its way to a common root.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as individual organisms in a high-dimensional room. At the start, everyone is a "Group of One." <strong>Hierarchical Clustering</strong> is the process where the most similar points find each other and "clump" together. These small clumps then search for the next most similar clumps, and so on, until the entire population is merged into a single "Master Cluster." Geometrically, this creates a <strong>Nested hierarchy</strong> of subspaces. Unlike K-Means, which gives you one flat layer of groups, this method gives you the entire "Evolutionary Tree" of how those groups formed.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We typically use the <strong>Agglomerative (Bottom-Up)</strong> approach. We start with $n$ clusters and iteratively merge the pair $(A, B)$ that is "Closest" according to a <strong>Linkage Criterion</strong>. The definition of "Close" changes the entire shape of the tree:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Single Linkage (Min)</strong>: $d(A,B) = \min_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y})$. Finds the "Bridge" between groups.</li>
+        <li><strong>Complete Linkage (Max)</strong>: $d(A,B) = \max_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y})$. Ensures compact, "safe" clusters.</li>
+        <li><strong>Ward's Method</strong>: Minimizes the increase in within-cluster variance. This is the "Gold Standard" for creating even, spherical clusters:
+          $$d_{Ward}(A, B) = \frac{|A||B|}{|A|+|B|} \|\mu_A - \mu_B\|^2_{2}$$
+        </li>
+      </ul>
+      <p>The result is a <strong>Dendrogram</strong>— a tree where the vertical axis represents the distance $d(A, B)$ at which each merge occurred.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Hierarchical Clustering is the <strong>Taxonomist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>No K Required</strong>: You don't need to guess how many clusters exist before you start. You decide where to "Cut" the tree after you see the whole family history.</li>
+        <li><strong>Computational Wall</strong>: Because we have to calculate the distance between *every* pair of points/clusters, the algorithm scales at $O(n^3)$ or $O(n^2 \log n)$. If you have a million points, your computer will likely catch fire before the tree is finished.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Once two clusters are merged, they can never be un-merged. One bad decision at the beginning of the algorithm (due to noise) will propagate all the way up the tree, potentially ruining the final hierarchy.</p>
     </div>
     
     <div class="callout tip">
@@ -302,14 +336,32 @@ print(f"[Family 1 has {np.sum(labels == 1)} members]")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: DBSCAN Clustering</div>
-      <p>Given parameters $\epsilon$ (radius) and $MinPts$ (density threshold), DBSCAN classifies points into three categories based on their $\epsilon$-neighborhood $N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Core Point</strong>: $|N_{\epsilon}(p)| \ge MinPts$.</li>
-        <li><strong>Border Point</strong>: $|N_{\epsilon}(p)| < MinPts$, but $p$ is reachable from a core point.</li>
-        <li><strong>Noise Point</strong>: Neither of the above.</li>
+      <div class="premium-def-title">Formalism: Density-Connectivity & The Epsilon Reach</div>
+      <p>DBSCAN is "Topological Clustering." It ignores global shapes and focuses exclusively on local density chains to define territory.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data as "High-Density Islands" in a sea of sparse noise. Traditional clustering (like K-Means) assumes these islands are perfectly circular blobs. <strong>DBSCAN</strong> recognizes that an island can be any shape—a winding river, a crescent moon, or two interlocking rings. Geometrically, a cluster is defined as a contiguous region where the "Point Density" exceeds a specific threshold. As long as you can "hop" from point to point within a fixed distance $\epsilon$ without leaving the crowd, you belong to the same cluster.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the neighborhood of a point $\mathbf{x}$ as the set of points within radius $\epsilon$:</p>
+      <div class="math-block">
+        $$N_\epsilon(\mathbf{x}) = \{ \mathbf{y} \in D \mid \|\mathbf{x} - \mathbf{y}\| \le \epsilon \}$$
+      </div>
+      <p>Using this neighborhood and a minimum point threshold ($MinPts$), we categorize every point into a hierarchy:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Core Point</strong>: A point where $|N_\epsilon(\mathbf{x})| \ge MinPts$. These are the "hearts" of the clusters.</li>
+        <li><strong>Density-Reachable</strong>: Point $\mathbf{y}$ is reachable from $\mathbf{x}$ if there is a chain of core points connecting them.</li>
+        <li><strong>Density-Connected</strong>: Points $\mathbf{p}$ and $\mathbf{q}$ are connected if they both share a common reachable core point.</li>
       </ul>
-      <p>Two points $p$ and $q$ are **Density-Connected** if there exists a point $o$ such that both $p$ and $q$ are density-reachable from $o$. A cluster is a maximal set of density-connected points.</p>
+      <p>A cluster is formally defined as the <strong>Maximal Set of Density-Connected Points</strong>. Any point that is not reachable from a core point is designated as <strong>Noise</strong> (or Outlier).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, DBSCAN is the <strong>Outlier-Aware Specialist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Shape Independence</strong>: It is one of the few algorithms that can find "Non-Convex" clusters (e.g., a circle inside a ring) because it only cares about local connectivity.</li>
+        <li><strong>Parameter Sensitivity</strong>: Choosing $\epsilon$ and $MinPts$ is tricky. If $\epsilon$ is too small, your clusters will shatter into noise. If it's too large, your entire dataset will merge into one giant "Super-Cluster."</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: DBSCAN struggles with clusters of varying densities. If one group is very "tight" and another is "loose," a single $\epsilon$ cannot capture both correctly. In those cases, you might need HDBSCAN.</p>
     </div>
     
     <div class="callout tip">
@@ -444,15 +496,32 @@ print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gaussian Mixture Model</div>
-      <p>A Gaussian Mixture Model represents the probability distribution of observations as a weighted sum of $K$ multivariate Gaussian densities:</p>
+      <div class="premium-def-title">Formalism: Mixture Densities & Latent Responsibilities</div>
+      <p>GMM is "Probabilistic Pluralism." It assumes that each cluster is a distinct "Probability Cloud" and that reality is a weighted sum of these clouds.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>While K-Means treats clusters as hard, rigid Voronoi cells, <strong>Gaussian Mixture Models (GMM)</strong> see them as "Soft Clouds" of probability. Geometrically, each cluster is a multidimensional bell curve (Gaussian) that has a center ($\mu$), a specific orientation, and a "stretch" or "spread" defined by its <strong>Covariance Matrix</strong> ($\Sigma$). Because these clouds are probabilistic, they can overlap. A point sitting in the middle of two clouds belongs to both, with different degrees of "Responsibility." It is the difference between drawing a hard border and mapping a diffuse fog.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The probability of observing a point $\mathbf{x}$ is defined as a weighted sum (mixture) of $K$ separate Gaussian distributions:</p>
       <div class="math-block">
-        $$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x} \mid \mu_k, \boldsymbol{\Sigma}_k)$$
+        $$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x} \mid \mu_k, \Sigma_k)$$
       </div>
-      <p>Where $\pi_k$ are the mixing coefficients satisfying $\sum_{k=1}^K \pi_k = 1$. The model is typically solved using the **Expectation-Maximization (EM)** algorithm, which iteratively calculates the **Responsibility** (posterior probability) $\gamma_{ik}$:</p>
-      <div class="math-block">
-        $$\gamma_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i \mid \mu_k, \boldsymbol{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}_i \mid \mu_j, \boldsymbol{\Sigma}_j)}$$
-      </div>
+      <p>We solve for the parameters using the <strong>Expectation-Maximization (EM)</strong> algorithm:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>E-Step (Expectation)</strong>: We calculate the <strong>Responsibility</strong> $\gamma_{nk}$—the probability that cluster $k$ was responsible for generating point $n$:
+          $$\gamma_{nk} = \frac{\pi_k \mathcal{N}(\mathbf{x}_n \mid \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(\mathbf{x}_n \mid \mu_j, \Sigma_j)}$$
+        </li>
+        <li><strong>M-Step (Maximization)</strong>: We update the means, covariances, and mixing weights by calculating the "weighted" average of the data, where the weights are those very responsibilities.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, GMM is the <strong>Flexible Modeler</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft Assignment</strong>: Unlike K-Means, you get a "membership vector" for every point. This is crucial for applications like speech or medical imaging where things are rarely 100% one type or another.</li>
+        <li><strong>Cluster Shape</strong>: By adjusting the covariance type (Spherical, Diagonal, or Full), GMM can find clusters that are stretched into long, thin ellipses at any angle—something K-Means is physically incapable of doing.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: GMM is very sensitive to initialization. If you start with your Gaussians in total chaos, the EM algorithm might get stuck in a "local optimum" where one cloud eats the entire dataset and another cloud collapses into a single point.</p>
     </div>
 
     <h2 id="soft">Soft Clustering: Membership Probability</h2>
@@ -593,17 +662,30 @@ print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Dimensionality Reduction</div>
-      <p>Dimensionality reduction is the transformation of data from a high-dimensional space $\mathbb{R}^d$ into a low-dimensional space $\mathbb{R}^k$ ($k < d$). Formally, we seek a mapping function $f: \mathbf{x} \to \mathbf{z}$ that preserves specific properties of the original data:</p>
+      <div class="premium-def-title">Formalism: Subspace Projection & Information Preservation</div>
+      <p>Dimensionality Reduction is "Mathematical Distillation." It is the process of extracting the meaningful signal from an ocean of redundant variables.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data as a swarm of bees in 3D space. While there are three dimensions (Length, Width, Height), the swarm might naturally form a thin, flat "pancake" shape. This indicates that most of the "Action" is happening on a 2D plane. <strong>Dimensionality Reduction</strong> is the geometric process of finding that plane and "Squashing" or <strong>Projecting</strong> the 1,000-dimensional world onto a $k$-dimensional surface. The goal is to rotate the camera until you find the angle that captures the object's silhouette with the least amount of distortion.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We represent our data as a matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$. We seek a transformation to a lower-dimensional matrix $\mathbf{Z} \in \mathbb{R}^{n \times k}$ (where $k < d$). This is typically done through a projection matrix $\mathbf{W}$:</p>
       <div class="math-block">
-        $$\mathbf{z}_i = f(\mathbf{x}_i) \in \mathbb{R}^k$$
+        $$\mathbf{Z} = \mathbf{X}\mathbf{W}$$
       </div>
-      <p>The choice of $f$ depends on what the algorithm prioritizes:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Linear (PCA)</strong>: Preserves maximum variance via orthogonal projection.</li>
-        <li><strong>Manifold (t-SNE/UMAP)</strong>: Preserves the local/topological structure of the data.</li>
-        <li><strong>Feature Selection</strong>: Prunes redundant or zero-variance dimensions from the set.</li>
+      <p>The "Optimal" $\mathbf{W}$ is found by minimizing the <strong>Reconstruction Error</strong>—the distance between the original points and their shadows on the new subspace:</p>
+      <div class="math-block">
+        $$\min_{\mathbf{W}} \|\mathbf{X} - \mathbf{Z}\mathbf{W}^T\|^2_F$$
+      </div>
+      <p>This path leads us to the <strong>Eigenvalue Decomposition</strong> of the covariance matrix. We choose the $k$ directions (eigenvectors) that have the highest "energy" (eigenvalues), effectively discarding the dimensions that contain only noise or redundant information.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Dimensionality Reduction is the <strong>Marie Kondo of Data</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Variance vs. Structure</strong>: Linear methods (like PCA) care about preserving the "spread" of the data. Non-linear methods (like t-SNE) care about preserving the "neighborhoods"—making sure points that were close in high-D stay close in 2D.</li>
+        <li><strong>The Curse of Dimensionality</strong>: As dimensions increase, the "volume" of space explodes so fast that your data points become incredibly sparse. Reducing dimensions is the only way to make many algorithms (like KNN or K-Means) work effectively again.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Dimensionality reduction is a "Lossy" process. You are intentionally throwing away information. If you reduce your data too much, you’ll lose the very patterns you were trying to find in the first place.</p>
     </div>
     
     <div class="callout tip">
@@ -737,23 +819,38 @@ print(f"Kept Features (Mask): {selector.get_support()}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Principal Component Analysis</div>
-      <p>PCA identifies the orthogonal axes (principal components) that maximize the variance of the projected data. For a centered data matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$, the first principal component $\mathbf{w}_1$ is defined as:</p>
+      <div class="premium-def-title">Formalism: Variance Maximization & Eigen-Decomposition</div>
+      <p>PCA is "Mathematical Rotation." It doesn't delete data; it reorients your entire coordinate system to prioritize the strongest signals.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as an elongated, tilted ellipsoidal cloud (like a rugby ball) in 3D. While the ball exists in three dimensions, most of its "character" or "Spread" is along its length. <strong>Principal Component Analysis (PCA)</strong> is the search for that primary axis—and the subsequent axes that are perpendicular (orthogonal) to it. Geometrically, PCA is a <strong>Rigid Rotation</strong> of the space. We rotate our camera until we find the angle where the data looks "widest," capturing the maximum possible variance on our 2D sensor.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Let our centered data be $\mathbf{X} \in \mathbb{R}^{n \times d}$. We want to find a unit vector $\mathbf{w}$ such that the variance of the data projected onto $\mathbf{w}$ is maximized:</p>
       <div class="math-block">
-        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \text{Var}(\mathbf{Xw}) = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}$$
+        $$\max_{\mathbf{w}} \text{Var}(\mathbf{X}\mathbf{w}) = \max_{\mathbf{w}} \mathbf{w}^T \left( \frac{1}{n}\mathbf{X}^T\mathbf{X} \right) \mathbf{w} \quad \text{s.t. } \mathbf{w}^T\mathbf{w} = 1$$
       </div>
-      <p>The solution is found via the **SVD** of $\mathbf{X}$ or the **Eigen-Decomposition** of the covariance matrix $\boldsymbol{\Sigma}$. The $k$-th principal component is the eigenvector corresponding to the $k$-th largest eigenvalue $\lambda_k$:</p>
+      <p>Solving this using Lagrange Multipliers leads to the <strong>Eigenvalue Equation</strong> of the Covariance Matrix $\mathbf{C}$:</p>
       <div class="math-block">
-        $$\boldsymbol{\Sigma} \mathbf{v}_k = \lambda_k \mathbf{v}_k$$
+        $$\mathbf{C}\mathbf{w} = \lambda \mathbf{w}$$
       </div>
+      <p>The Principal Components are the eigenvectors of $\mathbf{C}$. The amount of information (variance) captured by each component is exactly equal to its corresponding eigenvalue $\lambda$. We keep the $k$ components with the largest eigenvalues and discard the rest as "Noise."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, PCA is the <strong>Information Distiller</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Limitation</strong>: PCA only sees straight lines. If your data lives on a curved manifold (like a spiral), PCA will try to "squash" it flat, often losing the underlying structure. In those cases, you need non-linear methods like t-SNE or UMAP.</li>
+        <li><strong> orthogonality</strong>: Every principal component is 100% uncorrelated with the others. This makes PCA an excellent tool for "decorrelating" features before feeding them into a model like a Naive Bayes or Linear Regression.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Scaling is mandatory. If one feature (like "Annual Income") has a much larger numeric range than another (like "Age"), PCA will think Income is the only thing that matters, simply because its variance is numerically larger.</p>
     </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         Think of PCA as <strong>"Finding the Axis of Change"</strong> or the <strong>"Best Photograph Analogy."</strong> 
-        Imagine a **Rugby Ball** floating in space. It has 3 dimensions, but its most important feature is its "Length." PC1 is that long axis. If you only had one dimension to describe that ball, you’d pick the long axis because it captures 80% of the shape. 
-        Or think of it as taking a 2D picture of a 100D alien. <strong>PCA</strong> is the algorithm that calculates the <strong>Exact Orbital Position</strong> for your camera so that the 2D photo captures the most detail (the widest spread) of the alien's complex, many-dimensional body. It is about finding the **Perspective** that kills the redundant noise and keeps the pure signal.
+        Imagine a <strong>Rugby Ball</strong> floating in space. It has 3 dimensions, but its most important feature is its "Length." PC1 is that long axis. If you only had one dimension to describe that ball, you’d pick the long axis because it captures 80% of the shape. 
+        Or think of it as taking a 2D picture of a 100D alien. <strong>PCA</strong> is the algorithm that calculates the <strong>Exact Orbital Position</strong> for your camera so that the 2D photo captures the most detail (the widest spread) of the alien's complex, many-dimensional body. It is about finding the <strong>Perspective</strong> that kills the redundant noise and keeps the pure signal.
       </div>
     </div>
     
@@ -888,16 +985,33 @@ print(f"Total Info Retained: {np.sum(ratios):.2%}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: t-SNE</div>
-      <p>t-SNE converts high-dimensional Euclidean distances into conditional probabilities representing similarities. For point $x_j$ given $x_i$, the similarity is:</p>
+      <div class="premium-def-title">Formalism: Stochastic Neighbor Embedding & KL Divergence</div>
+      <p>t-SNE is "Topological Stewardship." It is the process of flattening high-dimensional manifolds while honoring the local "Friendships" between data points.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a tangled, complex knot (like a "Swiss Roll") in a 1,000-dimensional space. A linear projection (PCA) would simply "crush" this knot, merging unrelated points. <strong>t-SNE</strong> (t-Distributed Stochastic Neighbor Embedding) is a non-linear tool that focuses exclusively on <strong>Local Structure</strong>. Geometrically, it tries to "unroll" the manifold onto a 2D sheet so that points that were immediate neighbors in high-D remain neighbors in 2D. It is like taking a crumpled piece of paper and carefully smoothing it out on a table without tearing the fibers.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>t-SNE matches two probability distributions—one in the high-dimensional space and one in the 2D mapping:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>High-D Similarities ($P$)</strong>: For each pair $(i, j)$, we calculate the joint probability $p_{ij}$ that they are neighbors, modeled as a Gaussian distribution centered at $x_i$.</li>
+        <li><strong>Low-D Similarities ($Q$)</strong>: In the 2D space, we calculate the similarity $q_{ij}$ using a <strong>Student t-distribution</strong> (with 1 degree of freedom).
+          $$q_{ij} = \frac{(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2)^{-1}}{\sum_{k \ne l} (1 + \|\mathbf{y}_k - \mathbf{y}_l\|^2)^{-1}}$$
+          The heavy tails of the t-distribution solve the "Crowding Problem," allowing clusters to spread out so they don't all crush into the center of the map.
+        </li>
+      </ul>
+      <p>We optimize the 2D locations $\mathbf{y}$ by minimizing the <strong>Kullback-Leibler (KL) Divergence</strong> between the two distributions:</p>
       <div class="math-block">
-        $$p_{j|i} = \frac{\exp(-\|x_i - x_j\|^2 / 2\sigma_i^2)}{\sum_{k \ne i} \exp(-\|x_i - x_k\|^2 / 2\sigma_i^2)}$$
+        $$\mathcal{L} = \sum_{i \ne j} p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
       </div>
-      <p>In the low-dimensional space, t-SNE uses a Student's t-distribution to model similarities $q_{ij}$. The embedding is found by minimizing the **KL Divergence** via gradient descent:</p>
-      <div class="math-block">
-        $$\mathcal{C} = KL(P \| Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
-      </div>
-      <p class="mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, t-SNE is the <strong>Visualization Specialist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Local Focus</strong>: The algorithm is hyper-sensitive to "cliques." It captures clusters that are mathematically curved or nested, making them visible to the human eye for the first time.</li>
+        <li><strong>Stochastic Nature</strong>: Because it uses random initialization and non-convex optimization, the final map can look different every time you run it. It captures the "Neighborhoods," but the exact distance between two far-off clusters is meaningless.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: t-SNE is computationally expensive ($O(n^2)$) and effectively "destroys" the meaning of global distances. Once you project to 2D with t-SNE, you can see the clusters, but you can no longer measure how far apart the "extremes" of your data really are.</p>
     </div>
     
     <div class="callout tip">
@@ -1037,16 +1151,31 @@ print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: UMAP (Topological Reconstruction)</div>
-      <p>UMAP is founded on the assumption that data is uniformly distributed on a locally connected Riemannian manifold. It constructs a fuzzy simplicial complex representation of the data. For two points $x_i$ and $x_j$, the membership strength is:</p>
-      <div class="math-block">
-        $$p_{ij} = \exp\left(-\frac{d(x_i, x_j) - \rho_i}{\sigma_i}\right)$$
-      </div>
-      <p>Where $\rho_i$ is the distance to the nearest neighbor. The low-dimensional embedding is optimized by minimizing the **Fuzzy Set Cross-Entropy**:</p>
-      <div class="math-block">
-        $$\text{CE}(P, Q) = \sum_{e} \left[ p_e \log\left(\frac{p_e}{q_e}\right) + (1-p_e) \log\left(\frac{1-p_e}{1-q_e}\right) \right]$$
-      </div>
-      <p class="mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
+      <div class="premium-def-title">Formalism: Fuzzy Simplicial Sets & Cross-Entropy</div>
+      <p>UMAP is "Topological Reconstruction." It uses the math of manifolds to translate a high-dimensional universe into a 2D map without losing the soul of its shape.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points are scattered across a complex, multi-dimensional topography—like a crumpled mountain range in 1,000D. <strong>UMAP</strong> (Uniform Manifold Approximation and Projection) assumes that your data lives on a hidden, smooth surface (a manifold). Geometrically, it builds a "Mathematical Skeleton" of this surface called a <strong>Fuzzy Simplicial Set</strong>—a web of connections where every point is linked to its neighbors by "stretchy" edges. UMAP then seeks a low-dimensional layout that preserves the "Connectivity Map" of this skeleton as accurately as possible.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The algorithm iterates through two primary phases:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Phase 1: High-D Topology</strong>: For each point, we find its nearest neighbors and calculate a local connectivity weight $p_{ij}$. We use a "Local Connectivity" parameter ($\rho$) to ensure every point is connected to at least one neighbor, even in sparse regions.</li>
+        <li><strong>Phase 2: Low-D Optimization</strong>: We place the points in 2D and define their similarities $q_{ij}$. We then minimize the <strong>Fuzzy Set Cross-Entropy</strong> between the High-D and Low-D graphs:
+          <div class="math-block">
+            $$\mathcal{L} = \sum_{e} \left( p_{ij} \log \frac{p_{ij}}{q_{ij}} + (1 - p_{ij}) \log \frac{1 - p_{ij}}{1 - q_{ij}} \right)$$
+          </div>
+          The first term (the "Attraction") pulls together points that were close in high-D. The second term (the "Repulsion") pushes away points that were far apart.
+        </li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, UMAP is the <strong>Modern Standard</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Global vs. Local</strong>: Unlike t-SNE, which creates beautiful clusters but forgets where they are relative to each other, UMAP preserves both the "Neighborhoods" and the "Global Geography" of your data.</li>
+        <li><strong>Performance</strong>: UMAP is built on the math of the <strong>Nearest Neighbor Descent</strong> algorithm, making it drastically faster than t-SNE and capable of handling millions of points on a standard laptop.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: UMAP is non-linear and non-deterministic. While it is more stable than t-SNE, the exact orientation and placement of clusters can still shift between runs. It is a "Stochastic Approximation"—not a rigid solution like PCA.</p>
     </div>
     
     <div class="callout tip">
@@ -1180,16 +1309,30 @@ print(f"Status: Local and Global structure successfully preserved.")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Autoencoder Architecture</div>
-      <p>An autoencoder is a neural network trained to approximate the identity function, $g_{\phi}(f_{\theta}(\mathbf{x})) \approx \mathbf{x}$. It consists of two joint mappings:</p>
+      <div class="premium-def-title">Formalism: The Information Hourglass & Latent Embedding</div>
+      <p>Autoencoders are "Self-Supervised Compressors." They use the input as the target, forcing the machine to learn a high-fidelity summary of reality.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a sprawling, complex manifold (a surface) in high-dimensional space. An <strong>Autoencoder</strong> is a two-part machine designed to "Unfold" that manifold into a flat, simple sheet—the <strong>Latent Space</strong>—and then fold it back into its original shape. Geometrically, this is <strong>Non-Linear Dimensionality Reduction</strong>. By forcing the data through a narrow bottleneck, we strip away the noise and redundant pixels, leaving only the "skeleton" or the core geometric structure of the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The system is defined by two joint mappings, typically realized by Neural Networks:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Encoder ($f_\theta$)</strong>: Maps the input $\mathbf{x} \in \mathbb{R}^d$ to a lower-dimensional code $\mathbf{z} \in \mathbb{R}^k$ (where $k \ll d$).</li>
+        <li><strong>Decoder ($g_\phi$)</strong>: Maps the compressed code $\mathbf{z}$ back to a reconstruction $\hat{\mathbf{x}} \in \mathbb{R}^d$.</li>
+      </ul>
+      <p>The goal is to minimize the <strong>Reconstruction Error</strong>, ensuring that the "essence" of the data is preserved despite the extreme compression:</p>
       <div class="math-block">
-        $$\text{Encoder: } \mathbf{z} = f_{\theta}(\mathbf{x}) \in \mathbb{R}^k \mid k < d$$
-        $$\text{Decoder: } \mathbf{\hat{x}} = g_{\phi}(\mathbf{z}) \in \mathbb{R}^d$$
+        $$\mathcal{L}(\theta, \phi) = \frac{1}{n} \sum_{i=1}^n \| \mathbf{x}_i - g_\phi(f_\theta(\mathbf{x}_i)) \|^2$$
       </div>
-      <p>The objective is to minimize a loss function $\mathcal{L}$ that penalizes the reconstruction distance. For continuous data, we typically minimize the **Mean Squared Error (MSE)**:</p>
-      <div class="math-block">
-        $$\mathcal{L}(\theta, \phi) = \arg\min_{\theta, \phi} \frac{1}{n} \sum_{i=1}^n \|\mathbf{x}_i - g_{\phi}(f_{\theta}(\mathbf{x}_i))\|^2$$
-      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Autoencoders are the <strong>Feature Extractors</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>The Bottleneck Constraint</strong>: Without the bottleneck ($k < d$), the network would simply "memorize" the identity function. The restriction forces meaningful representation learning.</li>
+        <li><strong>Anomaly Detection</strong>: If an autoencoder is trained on "Normal" data and sees an "Anomaly," it will fail to reconstruct it (high loss). The reconstruction error itself is a powerful signal for finding outliers.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Standard Autoencoders can be too good at memorizing—learning a "lookup table" instead of a general pattern. To fix this, we often use <strong>Denoising Autoencoders</strong> (adding noise to the input) or <strong>VAEs</strong> (enforcing a probabilistic latent space).</p>
     </div>
     
     <div class="callout tip">
@@ -1337,7 +1480,7 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the patterns in unlabeled data. Now, let's learn how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>
-  `},d={id:"anomaly-detection",title:"Anomaly Detection",description:"Identifying outliers and strange patterns that deviate from the expected 'normal' behavior.",color:"#ff7b72",html:String.raw`
+  `},h={id:"anomaly-detection",title:"Anomaly Detection",description:"Identifying outliers and strange patterns that deviate from the expected 'normal' behavior.",color:"#ff7b72",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🕵️ Unsupervised · Outliers</div>
       <h1>Anomaly Detection: The Fraud Detective</h1>
@@ -1349,12 +1492,30 @@ print(f"Goal: Minimize ||X - Reconstruction(Squeeze(X))||^2")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Outlier Detection</div>
-      <p>Anomaly detection is the task of identifying data points $\{\mathbf{x}_i\}$ that do not conform to an expected pattern or "normal" distribution $P(\mathbf{x})$. Formally, for a threshold $\tau$, a point is an anomaly if its density score is sufficiently low:</p>
+      <div class="premium-def-title">Formalism: Probabilistic Density & The Low-Variance Void</div>
+      <p>Anomaly Detection is "Mathematical Ostracism." It is the process of identifying points that are so statistically unlikely they must be treated as errors or threats.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a dense, glowing "Continent" in a dark, high-dimensional space. Most points live in the crowded interior, surrounded by thousands of neighbors. <strong>Anomaly Detection</strong> is the search for the "Loners"—the dim points flickering far out in the void. Geometrically, we are looking for observations that fall into regions where the <strong>Probability Density</strong> is near zero. These points don't just deviate from the mean; they exist outside the manifolds that Define the "Normal" world.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>One of the most robust ways to model this is through <strong>Gaussian Density Estimation</strong>. We assume each feature $x_j$ follows a normal distribution $\mathcal{N}(\mu_j, \sigma_j^2)$. The joint probability of a data point $\mathbf{x}$ is calculated as the product of these individual feature densities:</p>
       <div class="math-block">
-        $$f(\mathbf{x}) < \tau$$
+        $$p(\mathbf{x}) = \prod_{j=1}^d \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2}\right)$$
       </div>
-      <p>Where $f(\mathbf{x})$ can be a likelihood $P(\mathbf{x} \mid \theta)$, a distance-based metric $1/d(\mathbf{x}, \text{nn}(\mathbf{x}))$, or a reconstruction error $\| \mathbf{x} - g(h(\mathbf{x})) \|^2$.</p>
+      <p>We then define an anomaly as any point whose total probability density falls below a critical sensitivity threshold $\epsilon$:</p>
+      <div class="math-block">
+        $$\text{Prediction} = \begin{cases} 1 (\text{Anomaly}) & \text{if } p(\mathbf{x}) < \epsilon \\ 0 (\text{Normal}) & \text{if } p(\mathbf{x}) \ge \epsilon \end{cases}$$
+      </div>
+      <p>For complex data, we use <strong>Isolation Forests</strong>, which measure "Path Length" $h(\mathbf{x})$ in a tree—anomalies are isolated faster (shorter paths) because they require fewer logical "cuts" to be separated from the rest of the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Anomaly Detection is the <strong>Immune System</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Choosing $\epsilon$</strong>: This is the dial for your "Paranoia." Set it too low, and you'll miss the subtle hackers. Set it too high, and you'll flag your best customers as fraudsters because they bought a nice gift.</li>
+        <li><strong>Feature Independence</strong>: Basic density estimation assumes features aren't correlated. If they are (e.g., "Amount" and "Category"), you must use a <strong>Multivariate Gaussian</strong> to account for the covariance between them.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Anomaly detection is notoriously difficult to evaluate because you usually don't have "labels" for the bad guys. You are often flying blind, relying purely on the math of "Strangeness."</p>
     </div>
     
     <div class="callout tip">
@@ -1454,7 +1615,7 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve mastered the art of Discovery. Now, move into the frontier of complex modeling with <strong><a href="#/machine-learning/deep-learning/perceptron">Deep Learning & Neural Networks</a></strong>.
     </div>
-  `},h={id:"unsupervised-learning",title:"Unsupervised Learning",description:"Extracting patterns, hidden tribes, and structural essence from data that has no labels.",keyConcepts:[{title:"Clustering Algorithms",description:"Finding the hidden tribes: k-Means, Hierarchical, DBSCAN, and GMM."},{title:"Dimension Reduction",description:"Squashing information: PCA, t-SNE, and UMAP."},{title:"Neural Manifolds",description:"Learning latent essentials: Autoencoders and Deep Embeddings."}],introHtml:String.raw`
+  `},d={id:"unsupervised-learning",title:"Unsupervised Learning",description:"Extracting patterns, hidden tribes, and structural essence from data that has no labels.",keyConcepts:[{title:"Clustering Algorithms",description:"Finding the hidden tribes: k-Means, Hierarchical, DBSCAN, and GMM."},{title:"Dimension Reduction",description:"Squashing information: PCA, t-SNE, and UMAP."},{title:"Neural Manifolds",description:"Learning latent essentials: Autoencoders and Deep Embeddings."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -1498,4 +1659,4 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
       </div>
 
     </div>
-  `,sections:[e,t,s,i,o,n,a,r,l,d]};export{h as UNSUPERVISED_LEARNING_DATA};
+  `,sections:[e,t,s,i,o,n,a,r,l,h]};export{d as UNSUPERVISED_LEARNING_DATA};

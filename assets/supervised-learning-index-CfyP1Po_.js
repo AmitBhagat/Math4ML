@@ -10,12 +10,29 @@ const e={id:"regression-intro",title:"Introduction to Regression",description:"R
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Regression Analysis</div>
-      <p>Regression is the process of estimating the relationship between a dependent variable $y \in \mathbb{R}$ and a feature vector $\mathbf{x} \in \mathbb{R}^d$. Formally, we seek to find a function $f$ that approximates the conditional expectation of $y$ given $\mathbf{x}$:</p>
+      <div class="premium-def-title">Formalism: The Residual Minimization Framework</div>
+      <p>Regression is "Trend Mining." It is the mathematical process of filtering out the noise to find the stable signal beneath.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a cloud of data points $(\mathbf{x}, y)$ floating in a high-dimensional space. Regression is the search for a <strong>Manifold</strong> (a line, a plane, or a complex surface) that stays as close to all points as possible. Geometrically, if you drop a vertical "leash" from every point to the surface, the optimal surface is the one that minimizes the total "pull" of all those leashes. It is the center of gravity for your observations.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the quality of our prediction $\hat{y} = f(\mathbf{x}, \mathbf{w})$ using the <strong>Residuals</strong> (the errors). The most common objective is to minimize the <strong>Sum of Squared Residuals (SSR)</strong>:</p>
       <div class="math-block">
-        $$f(\mathbf{x}) = \mathbb{E}[y \mid \mathbf{x}]$$
+        $$L(\mathbf{w}) = \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \mathbf{w}))^2$$
       </div>
-      <p>The observed response is typically modeled as $y = f(\mathbf{x}) + \varepsilon$, where $\varepsilon$ is an irreducible error term (noise) such that $\mathbb{E}[\varepsilon \mid \mathbf{x}] = 0$.</p>
+      <p>By squaring the errors, we ensure the loss is <strong>Convex</strong> (yielding a unique bottom) and we disproportionately penalize massive outliers. The "Learning" happens when we find the weight vector $\mathbf{w}$ that makes the gradient of this loss exactly zero:</p>
+      <div class="math-block">
+        $$\text{Find } \mathbf{w} \text{ such that: } \nabla_\mathbf{w} L = 0$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we model the relationship as:</p>
+      <div class="math-block">
+        $$y = f(\mathbf{x}) + \epsilon$$
+      </div>
+      <p>where $f(\mathbf{x})$ is the <strong>Structure</strong> (what we can learn) and $\epsilon$ is the <strong>Noise</strong> (irreducible error). Our mission is to build an $f$ that captures all the signal, without getting "fooled" by the noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Regression assumes that the future will look like the past. If the underlying data-generating process changes (a "Regime Shift"), your model becomes paperweight instantly. Regression is a mirror, not a crystal ball.</p>
     </div>
     
     <div class="callout tip">
@@ -162,15 +179,33 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Linear Regression</div>
-      <p>Linear regression models the relationship between a dependent variable $y \in \mathbb{R}$ and a feature vector $\mathbf{x} \in \mathbb{R}^d$. The relationship is assumed to be linear:</p>
+      <div class="premium-def-title">Formalism: The Normal Equation & Orthogonal Projection</div>
+      <p>Linear Regression is the "Mathematical Baseline." It assumes the world is a series of simple, additive influences.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a vector $\mathbf{y}$ containing your target values. Now imagine a multidimensional <strong>Feature Space</strong> spanned by your input variables $\mathbf{x}_1, \dots, \mathbf{x}_d$. Unless your data is perfectly consistent, $\mathbf{y}$ will not lie on this plane. <strong>Linear Regression</strong> is the process of finding the point in the feature plane that is <strong>closest</strong> to $\mathbf{y}$. Geometrically, this point is the <strong>Orthogonal Projection</strong> of $\mathbf{y}$ onto the column space of your data matrix $\mathbf{X}$. The "Error" is the perpendicular line connecting the two.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the <strong>Loss Function</strong> (Sum of Squared Errors):</p>
       <div class="math-block">
-        $$\hat{y} = \mathbf{w}^T \mathbf{x} + b$$
+        $$J(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 = (\mathbf{y} - \mathbf{X}\mathbf{w})^T(\mathbf{y} - \mathbf{X}\mathbf{w})$$
       </div>
-      <p>The optimal parameters $(\mathbf{w}^*, b^*)$ are found by minimizing the **Residual Sum of Squares (RSS)**:</p>
+      <p>Expanding this, we get a quadratic form. To find the minimum, we take the derivative with respect to the weight vector $\mathbf{w}$ and set it to zero:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}, b) = \sum_{i=1}^n (y_i - (\mathbf{w}^T \mathbf{x}_i + b))^2$$
+        $$\frac{\partial J}{\partial \mathbf{w}} = -2\mathbf{X}^T\mathbf{y} + 2\mathbf{X}^T\mathbf{X}\mathbf{w} = 0$$
       </div>
+      <p>Solving for $\mathbf{w}$, we arrive at the legendary <strong>Normal Equation</strong>:</p>
+      <div class="math-block">
+        $$\mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Linear Regression is our <strong>Gold Standard for Interpretability</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Coefficients as Influence</strong>: Each weight $w_i$ tells you exactly how much $y$ changes if you nudge $x_i$ by 1 unit. There is no mystery; the math is a glass box.</li>
+        <li><strong>Assumptions</strong>: For this to work best, we assume <strong>Homoscedasticity</strong> (noise is constant across features) and <strong>Independence</strong>. If features are highly correlated (<strong>Multicollinearity</strong>), the matrix $(\mathbf{X}^T\mathbf{X})$ becomes impossible to invert, and the model collapses.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Many practitioners jump straight to Gradient Descent. In reality, if your dataset is small enough to fit in memory, the <strong>Normal Equation</strong> is often faster and yields the exact mathematical truth with zero tuning.</p>
     </div>
     
     <div class="callout tip">
@@ -299,21 +334,40 @@ print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Sometimes, Linear Regression is <strong>too eager to please</strong>. If you give it a dataset with a little bit of noise, the model might frantically wiggle its weights to fit every single outlier. <strong>Ridge Regression (L2)</strong> is the mathematical penalty that keeps the model honest. It injects a sense of "Simplicity" by adding a surcharge for large weights. We aren't just minimizing error anymore; we are minimizing error <em>while staying lean</em>. It’s the difference between a model that memorizes the noise and one that actually understands the underlying signals.</p>
+    <p>Sometimes, Linear Regression is <strong>too eager to please</strong>. If you give it a dataset with a little bit of noise, the model might frantically wiggle its weights to fit every single outlier. <strong>Ridge Regression (L2)</strong> is the mathematical penalty that keeps the model honest. It injects a sense of "Simplicity" by adding a surcharge for large weights. We aren't just minimizing error anymore; we are minimizing error <em>while staying lean</em>. It’s the difference between a model that memorizes the noise and one that actually understands the underlying signals. In Machine Learning, this ensures that no single feature becomes a "Dictator" that ruins your predictions just because it had a lucky streak in your training data.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Ridge Regression (L2)</div>
-      <p>Ridge regression extends ordinary least squares by adding an $L_2$ regularization term to the objective function. This penalizes the squared magnitude of coefficients to control the $L_2$ norm of the weight vector $\|\mathbf{w}\|_2$:</p>
+      <div class="premium-def-title">Formalism: L2 Regularization & Diagonal Loading</div>
+      <p>Ridge Regression is "Structural Stability." It is the process of sacrificing a bit of training accuracy to gain a massive amount of real-world stability.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the elliptical contours of your standard Mean Squared Error loss. If you have two features that are highly correlated, the ellipse becomes a very long, narrow "cigar." Ordinary Least Squares might pick a point at the very tip of that cigar, resulting in massive, unstable weights. <strong>Ridge Regression</strong> adds a circular "Budget" region centered at the origin. Geometrically, Ridge finds the point where the loss ellipse touches the edge of this circle. This forces the weights to stay small and distributed, preventing the model from overreacting to individual noisy features.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We modify the standard loss by adding a penalty proportional to the square of the $L_2$ norm of the weight vector $\|\mathbf{w}\|_2^2$:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{w}} \left\{ \sum_{i=1}^n (y_i - \mathbf{w}^T \mathbf{x}_i)^2 + \lambda \sum_{j=1}^d w_j^2 \right\}$$
+        $$J(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 + \lambda \|\mathbf{w}\|^2$$
       </div>
-      <p>Where $\lambda \ge 0$ is the regularization parameter. The closed-form solution (assuming centered data) is:</p>
+      <p>To find the optimal weights, we take the derivative with respect to $\mathbf{w}$ and set it to zero:</p>
       <div class="math-block">
-        $$\hat{\mathbf{w}}_{ridge} = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}$$
+        $$\frac{\partial J}{\partial \mathbf{w}} = -2\mathbf{X}^T(\mathbf{y} - \mathbf{X}\mathbf{w}) + 2\lambda \mathbf{w} = 0$$
       </div>
+      <p>Rearranging the terms, we arrive at the <strong>Regularized Normal Equation</strong>:</p>
+      <div class="math-block">
+        $$\hat{\mathbf{w}} = (\mathbf{X}^T\mathbf{X} + \lambda \mathbf{I})^{-1}\mathbf{X}^T\mathbf{y}$$
+      </div>
+      <p>Adding $\lambda \mathbf{I}$ (the identity matrix) to the diagonal is called <strong>Diagonal Loading</strong>. It ensures that the matrix is always invertible, even if your features are perfectly redundant.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Ridge is your <strong>Insurance Policy</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Variance Reduction</strong>: By shrinking the weights, we drastically reduce the model's sensitivity to small wiggles in the training data (Noise).</li>
+        <li><strong>No Feature Death</strong>: Unlike Lasso, Ridge never sets a weight to *exactly* zero. It keeps everyone on the team but mutes the loud, distracting ones.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Choosing $\lambda$ (Lambda) is a balancing act. If $\lambda$ is too small, you're back to unstable OLS. If it's too large, the "springs" pull the weights so hard that the model can't even see the data, resulting in Underfitting.</p>
     </div>
-    
+
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -366,6 +420,7 @@ print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
           <span class="step-badge">4</span>
           <strong>Optimization:</strong> Solve for $w$ using the closed-form solution: $w = (X^T X + \lambda I)^{-1} X^T y$.
         </div>
+      </div>
     <h2 id="applications">Applications in ML</h2>
     <p>Ridge Regression is the "Elastic Anchor." It turns a frantic, noisy memorizer into a calm, stable generalizer by muffling irrelevant signals.</p>
     <ul>
@@ -452,12 +507,30 @@ print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Lasso Regression (L1)</div>
-      <p>The Least Absolute Shrinkage and Selection Operator (Lasso) adds an $L_1$ regularization term to the least squares objective. Unlike $L_2$, the $L_1$ penalty is non-differentiable at zero, which encourages coefficients to become exactly zero (sparsity):</p>
+      <div class="premium-def-title">Formalism: L1 Sparsity & The Corner Contact Phenomenon</div>
+      <p>Lasso is "Structural Selection." It is the process of building a model that is as simple as possible by explicitly deleting useless features.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the elliptical contours of your loss function in a 2D space. In Ridge Regression, we use a circular constraint. In <strong>Lasso Regression</strong>, we use a <strong>Diamond-shaped constraint</strong> (the $L_1$ ball) defined by $|w_1| + |w_2| \le c$. Geometrically, this diamond has sharp vertices located exactly on the axes ($w_1=0$ or $w_2=0$). When the loss ellipse expands, it is highly likely to hit one of these "corners" before it hits a flat edge. That moment of contact on the axis forces a weight to become <strong>exactly zero</strong>. Lasso doesn't just muffle noise; it performs absolute, mathematical feature selection.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The objective function adds a penalty based on the sum of absolute values of the weights:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{w}} \left\{ \frac{1}{2n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda \|\mathbf{w}\|_1 \right\}$$
+        $$J(\mathbf{w}) = \frac{1}{2n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda \sum_{j=1}^d |w_j|$$
       </div>
-      <p>Where $\|\mathbf{w}\|_1 = \sum_{j=1}^d |w_j|$ is the $L_1$ norm. This optimization problem has no closed-form solution and is typically solved using **Coordinate Descent**.</p>
+      <p>Because the absolute value function has a "kink" at zero, there is <strong>no closed-form solution</strong> (no simple matrix inverse). Instead, we use <strong>Coordinate Descent</strong>, optimizing one weight at a time. The solution for a single weight $w_j$ is the <strong>Soft-Thresholding Operator</strong>:</p>
+      <div class="math-block">
+        $$w_j = S_{\lambda}(\rho_j) = \text{sign}(\rho_j) \max(0, |\rho_j| - \lambda)$$
+      </div>
+      <p>Here, $\rho_j$ represents the "signal" of the $j$-th feature. If the signal is smaller than the threshold $\lambda$, the operator returns exactly zero. The feature is fired.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Lasso is your <strong>Complexity Crusher</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Automatic Sparsity</strong>: If you have 1,000 features and only 10 actually correlate with the target, Lasso will find those 10 and set the other 990 to zero.</li>
+        <li><strong>Interpretability</strong>: By deleting the "junk," Lasso leaves you with a model that a human can actually read and explain.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: If you have two highly correlated features, Lasso will pick one at random and kill the other. This "unstable selection" is why we sometimes use <strong>Elastic Net</strong> (a mix of L1 and L2) to get the best of both worlds.</p>
     </div>
     
     <div class="callout tip">
@@ -586,7 +659,7 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if a straight line isn't enough, even with regularization? Explore <strong><a href="#/machine-learning/supervised-learning/polynomial-regression">Polynomial Regression</a></strong>.
     </div>
-  `},o={id:"polynomial-regression",title:"Polynomial Regression",description:"Polynomial Regression models non-linear relationships by transforming features into cross-products and higher-order terms.",color:"#58a6ff",html:String.raw`
+  `},a={id:"polynomial-regression",title:"Polynomial Regression",description:"Polynomial Regression models non-linear relationships by transforming features into cross-products and higher-order terms.",color:"#58a6ff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Non-Linear</div>
       <h1>Polynomial Regression</h1>
@@ -598,15 +671,33 @@ print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Polynomial Regression</div>
-      <p>Polynomial regression is a special case of multiple linear regression where the features are $d$-th degree polynomials of the original input $x$. The hypothesis function is:</p>
+      <div class="premium-def-title">Formalism: Basis Expansion & The Vandermonde Transformation</div>
+      <p>Polynomial Regression is "Fake Linearity." We trick a linear model into following a curve by exploding the feature space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a curve on a 2D plot. A straight line (Linear Regression) can never touch more than two points on that curve perfectly. <strong>Polynomial Regression</strong> is the process of bending the ruler. Geometrically, we are performing a <strong>Basis Expansion</strong>. We take our 1D input $x$ and "lift" it into a higher-dimensional space inhabited by $[x, x^2, \dots, x^n]$. In this expanded space, the curvy data points actually align into a <strong>Flat Hyperplane</strong>. By finding the best "flat slice" in high dimensions and projecting it back to 2D, we get a curve that perfectly hugs the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The model is a weighted sum of powers of the input feature:</p>
       <div class="math-block">
-        $$\hat{y} = w_0 + w_1 x + w_2 x^2 + \dots + w_d x^d$$
+        $$\hat{y} = w_0 + w_1 x + w_2 x^2 + \dots + w_n x^n$$
       </div>
-      <p>This is formally a linear model because the weights $w_j$ are linear. The feature space is transformed via a **Basis Expansion** mapping $\phi(x) = [1, x, x^2, \dots, x^d]^T$, and the objective remains the minimization of the squared error:</p>
+      <p>We represent this more elegantly using the <strong>Vandermonde Matrix</strong> ($\Phi$), where each row is the power-series expansion of a data point:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}) = \sum_{i=1}^n (y_i - \mathbf{w}^T \phi(x_i))^2$$
+        $$\Phi_{ij} = x_i^{j-1}$$
       </div>
+      <p>Because the weights $\mathbf{w}$ still appear linearly in the equation, we can still use the <strong>Ordinary Least Squares</strong> solution to find the absolute best "bend":</p>
+      <div class="math-block">
+        $$\mathbf{w} = (\Phi^T \Phi)^{-1} \Phi^T \mathbf{y}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, with great power comes great <strong>Overfitting</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Degree Selection</strong>: Small degrees (1-2) are robust but "Stupid" (Bias). High degrees (10+) are "Hallucinogenic" (Variance)—they will twist and turn to hit every speck of noise, losing the overall trend.</li>
+        <li><strong>Multicollinearity</strong>: As you increase powers ($x, x^2, x^3 \dots$), the features become highly correlated. This makes the $\Phi^T \Phi$ matrix nearly impossible to invert, leading to numerical instability.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Polynomial regression is technically still <strong>Linear Regression</strong>. It is linear in the <em>parameters</em> ($w$), even though it is non-linear in the <em>features</em> ($x$). This is the first step toward the "Kernel Trick" used in SVMs.</p>
     </div>
     
     <div class="callout tip">
@@ -745,7 +836,7 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     <div class="linking-rule">
       <strong>Next Step:</strong> Enough with numbers. How do we build a model that can "Sort" things into buckets? Explore <strong><a href="#/machine-learning/supervised-learning/classification-intro">Introduction to Classification</a></strong>.
     </div>
-  `},a={id:"classification-intro",title:"Introduction to Classification",description:"Classification is the task of predicting a discrete category (a label) from input features.",color:"#58a6ff",html:String.raw`
+  `},o={id:"classification-intro",title:"Introduction to Classification",description:"Classification is the task of predicting a discrete category (a label) from input features.",color:"#58a6ff",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Core</div>
       <h1>Introduction to Classification</h1>
@@ -757,15 +848,29 @@ print(f"Prediction for 60mph: {pred[0]:.1f} feet")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Classification</div>
-      <p>Classification is the task of approximating a mapping function $f: \mathbf{x} \to y$ where $y \in \{1, 2, \dots, K\}$ is a discrete set of classes. Formally, for $K$ classes, the objective is to model the conditional probability distribution:</p>
+      <div class="premium-def-title">Formalism: Decision Manifolds & Probabilistic Commitment</div>
+      <p>Classification is "Territory Drafting." We partition the feature space into distinct regions, assigning every point to a specific "bucket."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a space filled with observations of different classes (e.g., Red points and Blue points). <strong>Classification</strong> is the mathematical search for the <strong>Decision Boundary</strong>—a manifold (line, curve, or plane) that separates these "territories." Geometrically, we are slicing the universe into regions. If a new point lands in the "Red Region," it is classified as Red. The goal is to maximize the separation between territories while minimizing "intruders" (points on the wrong side of the fence).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Ideally, we want a function $h(\mathbf{x})$ that minimizes the <strong>Misclassification Rate</strong> (Zero-One Loss):</p>
       <div class="math-block">
-        $$P(y = c \mid \mathbf{x}; \theta) = \frac{ \text{exp}(f_c(\mathbf{x}; \theta)) }{ \sum_{j=1}^K \text{exp}(f_j(\mathbf{x}; \theta)) }$$
+        $$L(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(h(\mathbf{x}_i, \mathbf{w}) \neq y_i)$$
       </div>
-      <p>The model parameters $\theta$ are typically optimized by minimizing the **Cross-Entropy Loss**, which measures the divergence between the true and predicted distributions:</p>
+      <p>However, Zero-One loss is non-differentiable and impossible to optimize directly with gradient descent. Instead, we model the <strong>Class Probabilities</strong> $P(y \mid \mathbf{x})$. For two classes, the decision boundary is the set of points where the model is perfectly undecided:</p>
       <div class="math-block">
-        $$\mathcal{L}(\theta) = -\sum_{i=1}^n \sum_{c=1}^K y_{ic} \log(\hat{y}_{ic})$$
+        $$\text{Boundary } S = \{ \mathbf{x} \in \mathbb{R}^d \mid P(y=C_1 \mid \mathbf{x}) = P(y=C_2 \mid \mathbf{x}) \}$$
       </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we optimize by maximizing the <strong>Likelihood</strong> of the observed classes:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft vs. Hard Labels</strong>: The model outputs a probability (Soft), but we commit to the Class with the highest probability (Hard).</li>
+        <li><strong>Commitment Formula</strong>: $\hat{y} = \text{arg}\max_k P(y=k \mid \mathbf{x})$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Classification assumes your buckets are <strong>Mutually Exclusive</strong>. If an object can belong to multiple categories at once (e.g., a movie being both 'Action' and 'Comedy'), you don't need classification—you need <strong>Multi-label Learning</strong>, which is a series of independent binary choices.</p>
     </div>
     
     <div class="callout tip">
@@ -909,22 +1014,37 @@ print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Logistic Regression</div>
-      <p>Logistic regression models the probability of a binary response variable using the **Logistic (Sigmoid) Function**. For a feature vector $\mathbf{x}$, the predicted probability $\hat{y}$ is:</p>
+      <div class="premium-def-title">Formalism: The Sigmoid Warp & Log-Likelihood</div>
+      <p>Logistic Regression is "Probabilistic Linearization." It turns a hard classification problem into a smooth, learnable probability curve.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a standard linear plane trying to predict a "Yes" or "No" outcome. A plane extends to infinity in both directions, which is useless for expressing confidence. <strong>Logistic Regression</strong> solves this by <strong>warping</strong> that infinite plane into an S-shaped manifold (the <strong>Sigmoid curve</strong>). Geometrically, it calculates the distance of a point from the <strong>Decision Boundary</strong> (the line where the model is 50% sure) and "squashes" that distance into a window between 0 and 1. The further you are from the fence, the more certain the model becomes.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with a linear score $z = \mathbf{w}^T \mathbf{x} + b$ (the <strong>Log-Odds</strong>). We then pass this through the <strong>Sigmoid Function</strong> to get a probability $p$:</p>
       <div class="math-block">
-        $$\hat{y} = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$$
+        $$P(y=1 \mid \mathbf{x}) = \sigma(z) = \frac{1}{1 + e^{-z}}$$
       </div>
-      <p>The model parameters are optimized by minimizing the **Binary Cross-Entropy (Log Loss)** objective:</p>
+      <p>To train the model, we maximize the likelihood of the observed data. In practice, we minimize the <strong>Binary Cross-Entropy (BCE)</strong>, also known as the Negative Log-Likelihood:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}, b) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]$$
+        $$J(\mathbf{w}) = -\frac{1}{n} \sum_{i=1}^n [y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i)]$$
       </div>
+      <p>Unlike Linear Regression, this objective has no closed-form matrix solution. We must use Gradient Descent to "walk" down the convex surface of the log-loss until we find the optimal weights.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Logistic Regression is the <strong>Single Neuron</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Uncertainty is a Feature</strong>: It doesn't just say "Class A"; it says "92% chance of Class A." This allows researchers to set custom thresholds based on risk.</li>
+        <li><strong>Linear Separability</strong>: It assumes that the two classes can be separated by a straight line or a plane. If your data is "swirled" together (like a Yin-Yang), simple Logistic Regression will fail unless you use kernels or poly-features.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Logistic Regression is very sensitive to <strong>Outliers</strong> that are far from the decision boundary but on the correct side; they can pull the boundary away from the cluster and ruin the model's calibration.</p>
     </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         Think of Logistic Regression as a <strong>"Commitment Curve"</strong> or a <strong>"Soft Switch."</strong> 
-        A linear model is like a long, straight pipe, but a Sigmoid is like an **S-Curve** that decides the fate of the data. 
+        A linear model is like a long, straight pipe, but a Sigmoid is like an <strong>S-Curve</strong> that decides the fate of the data. 
         As your input gets stronger, the model "Leans" harder toward 1.0; as it gets weaker, it "Commits" to 0.0. 
         The magic happens in the middle: the model stays honest about the uncertainty. 
         It's the foundation of all Neural Networks—a single "Neuron" in a massive AI like GPT is often just a sophisticated version of this same logistic switch.
@@ -1074,15 +1194,33 @@ print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Naive Bayes Classifier</div>
-      <p>Given a class variable $y$ and dependent feature vector $\mathbf{x} = (x_1, \dots, x_d)$, Bayes' Theorem states:</p>
+      <div class="premium-def-title">Formalism: The Decoupled Likelihood & MAP Estimate</div>
+      <p>Naive Bayes is "Probabilistic Atomicity." It assumes that each feature provides a clean, independent signal, making the math lightning-fast.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine each class in your data (e.g., Spam vs. Ham) as a distinct "Cloud of Probability." Classification is the search for the cloud that most likely produced your input point $\mathbf{x}$. Geometrically, Naive Bayes assumes these clouds are <strong>Axis-Aligned</strong>. It treats each feature's contribution as a separate 1D projection. Instead of calculating a complex, swirling multidimensional volume, we simply measure the "overlap" on each axis independently and multiply the results. It is the definitive "Divide and Conquer" approach to probability.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with <strong>Bayes' Theorem</strong>, which reverses the probability to find the Class $y$ given the Clues $\mathbf{x}$:</p>
       <div class="math-block">
-        $$P(y \mid x_1, \dots, x_d) = \frac{P(y) P(x_1, \dots, x_d \mid y)}{P(x_1, \dots, x_d)}$$
+        $$P(y \mid \mathbf{x}) = \frac{P(y) P(\mathbf{x} \mid y)}{P(\mathbf{x})}$$
       </div>
-      <p>Using the **Conditional Independence Assumption**, we simplify the likelihood to $P(\mathbf{x}|y) = \prod_{i=1}^d P(x_i|y)$, yielding the classification rule:</p>
+      <p>The "Naive" part is the <strong>Independence Assumption</strong>: we assume features $x_i$ and $x_j$ have zero correlation given the class. This allows us to explode the complex joint likelihood into a simple product of 1D probabilities:</p>
       <div class="math-block">
-        $$\hat{y} = \arg\max_{c \in \mathcal{Y}} P(y=c) \prod_{i=1}^d P(x_i \mid y=c)$$
+        $$P(\mathbf{x} \mid y) = P(x_1 \mid y) \cdot P(x_2 \mid y) \cdots P(x_d \mid y)$$
       </div>
+      <p>The final classification is the <strong>Maximum A Posteriori (MAP)</strong> estimate. Because computers hate multiplying tiny decimals (it leads to numerical "underflow"), we transform the product into a <strong>sum of logarithms</strong>:</p>
+      <div class="math-block">
+        $$\hat{y} = \text{arg}\max_k \left( \log P(y=k) + \sum_{j=1}^d \log P(x_j \mid y=k) \right)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Naive Bayes is the <strong>Street-Smart Baseline</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Independence Lie</strong>: The assumption is almost always false (e.g., the words "New" and "York" are highly correlated), but the model still works because it only needs the *correct class* to have the highest probability, not for the probability numbers to be perfectly accurate.</li>
+        <li><strong>Zero-Frequency Problem</strong>: If a feature never appeared with a class in training, the probability becomes 0, which kills the entire calculation. We solve this with <strong>Laplace Smoothing</strong> ($+1$ to all counts).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Naive Bayes is a "High Bias, Low Variance" model. It won't overfit easily, but it might be too "simple" to capture complex, non-linear dependencies between features.</p>
     </div>
 
     <h2 id="laplace">Laplace Smoothing: The Zero-Frequency Fix</h2>
@@ -1199,12 +1337,30 @@ print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: k-Nearest Neighbors</div>
-      <p>Given a query point $x$, a training set $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$, and a distance metric $d(x, x')$, the KNN classification rule is defined as:</p>
+      <div class="premium-def-title">Formalism: The Voronoi Partition & Instance-Based Voting</div>
+      <p>k-NN is "Peer Pressure Optimization." It assumes that the identity of a point is entirely determined by its immediate social circle.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your feature space is a map where every training point is an "Anchor" with a known identity. When a new, unknown point $\mathbf{x}$ is placed on the map, $k$-NN looks at the $k$ closest anchors. Geometrically, this divides the entire space into <strong>Voronoi Regions</strong>—zones of influence where a specific class or combination of classes dominates. It is a <strong>Non-parametric</strong> model, meaning it doesn't assume the data follows a line or a curve; it just follows the local density of the crowd.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>First, we define a distance metric $D$ to measure "similarity." The most common is the <strong>Euclidean Distance</strong> ($L_2$ norm):</p>
       <div class="math-block">
-        $$\hat{f}(x) = \text{arg}\max_{c \in \mathcal{Y}} \sum_{i \in \mathcal{N}_k(x)} I(y_i = c)$$
+        $$D(\mathbf{x}, \mathbf{x}_i) = \sqrt{\sum_{j=1}^d (x_j - x_{i,j})^2}$$
       </div>
-      <p class="mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
+      <p>The algorithm then identifies the $k$ indices $\{i_1, \dots, i_k\}$ that minimize this distance. The final prediction is a simple <strong>Majority Vote</strong> (the mode) among these neighbors:</p>
+      <div class="math-block">
+        $$\hat{y} = \text{mode}(\{y_{i_1}, y_{i_2}, \dots, y_{i_k}\})$$
+      </div>
+      <p>Because there is no "Training" phase (the data itself <em>is</em> the model), $k$-NN is known as a <strong>Lazy Learner</strong>. All the mathematical "work" is deferred until the moment you ask for a prediction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, $k$-NN is the <strong>Baseline of Simplicity</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Choosing $K$</strong>: Small $K$ (e.g., 1) is incredibly sensitive to noise (Outliers). Large $K$ smooths out the boundaries but can miss fine details (Bias). We always use an <strong>Odd Number</strong> to prevent "Deadlocked" votes.</li>
+        <li><strong>Scaling is Mandatory</strong>: Because $k$-NN relies on distance, if one feature (like "Salary" in the 100,000s) has a larger scale than another (like "Age" in the 10s), the distance calculation will be hijacked by the larger numbers. You <em>must</em> normalize your data before using $k$-NN.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: In high dimensions (e.g., 1,000s of features), $k$-NN breaks down due to the <strong>Curse of Dimensionality</strong>. In such a massive space, every point is "far away" from every other point, and the concept of a "nearest neighbor" becomes mathematically meaningless.</p>
     </div>
     
     <div class="callout tip">
@@ -1343,7 +1499,7 @@ print(f"Final Classification: {result[0]}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want a "Wide Moat" instead of just neighbors? Explore <strong><a href="#/machine-learning/supervised-learning/svm">Support Vector Machines (SVM)</a></strong>.
     </div>
-  `},d={id:"svm",title:"Support Vector Machines (SVM)",description:"A robust classification algorithm that finds the optimal hyperplane to maximize the margin between classes.",color:"#3F51B5",html:String.raw`
+  `},h={id:"svm",title:"Support Vector Machines (SVM)",description:"A robust classification algorithm that finds the optimal hyperplane to maximize the margin between classes.",color:"#3F51B5",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Geometry</div>
       <h1>Support Vector Machines (SVM): The Wide Moat</h1>
@@ -1355,13 +1511,29 @@ print(f"Final Classification: {result[0]}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Support Vector Machine</div>
-      <p>Given training vectors $\mathbf{x}_i \in \mathbb{R}^d$ and labels $y_i \in \{1, -1\}$, SVM finds the optimal hyperplane $(\mathbf{w}^*, b^*)$ that maximizes the margin. The optimization problem (Soft Margin) is defined as:</p>
+      <div class="premium-def-title">Formalism: The Maximal Margin & Dual Optimization</div>
+      <p>SVM is "Geometric Security." It doesn't just look for a line; it looks for the thickest possible "No-Man's Land" between classes.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have two clusters of data. Many lines could separate them. <strong>Support Vector Machines (SVM)</strong> seek the one unique line (or plane) that maximizes the <strong>Margin</strong>—the distance to the nearest points of either class. These critical edge points are called <strong>Support Vectors</strong>. Geometrically, we are building a "Security Buffer." If you move a point deep inside its own territory, the boundary doesn't move. It is only anchored by the most difficult, conflicting points on the border.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A hyperplane is defined as $\mathbf{w}^T \mathbf{x} + b = 0$. The goal is to maximize the margin $\frac{2}{\|\mathbf{w}\|}$, which is mathematically equivalent to minimizing the squared norm of the weights:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^n \xi_i$$
+        $$\text{arg}\min_{\mathbf{w}, b} \frac{1}{2} \|\mathbf{w}\|^2 \quad \text{subject to } y_i(\mathbf{w}^T \mathbf{x}_i + b) \ge 1$$
       </div>
-      <p>Subject to the constraints: $y_i(\mathbf{w}^T \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i$ and $\xi_i \ge 0$.</p>
-      <p class="mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
+      <p>For non-linear separation, we use the <strong>Kernel Trick</strong>. We map the points into a higher-dimensional space where they *are* linearly separable. In the dual form, this only requires replacing the dot product $\mathbf{x}_i \cdot \mathbf{x}_j$ with a Kernel function $K(\mathbf{x}_i, \mathbf{x}_j)$:</p>
+      <div class="math-block">
+        $$f(\mathbf{x}) = \sum \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + b$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, SVM is the <strong>Robust Architect</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft Margin (C)</strong>: In the real world, data is messy. Parameter $C$ determines the trade-off between having a wide highway and correctly classifying every single point. High $C$ = strictly correct; Low $C$ = wider margin but allows some "slack."</li>
+        <li><strong>RBF Kernel Magic</strong>: The Radial Basis Function (RBF) kernel effectively projects your data into an infinite-dimensional space, allowing the SVM to find incredibly complex, "swirly" boundaries that look like magic in 2D.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: SVM is computationally expensive on large datasets (it scales quadratically with the number of samples). If you have 1,000,000 rows, an SVM will eat your RAM for breakfast—you’re better off with a linear model or a tree ensemble.</p>
     </div>
     
     <div class="callout tip">
@@ -1486,7 +1658,7 @@ print(f"Support Vector Coordinates: \n{sv}")
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want a model that acts like a "Flowchart" instead of a river? Explore <strong><a href="#/machine-learning/supervised-learning/decision-trees">Decision Trees</a></strong>.
     </div>
-  `},h={id:"decision-trees",title:"Decision Trees",description:"A non-parametric classification and regression algorithm that builds a tree-like structure based on a series of feature-based splits.",color:"#4CAF50",html:String.raw`
+  `},d={id:"decision-trees",title:"Decision Trees",description:"A non-parametric classification and regression algorithm that builds a tree-like structure based on a series of feature-based splits.",color:"#4CAF50",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🤖 Supervised · Logic</div>
       <h1>Decision Trees: The Flowchart</h1>
@@ -1498,16 +1670,30 @@ print(f"Support Vector Coordinates: \n{sv}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Decision Tree</div>
-      <p>A decision tree represents a function $f: \mathcal{X} \to \mathcal{Y}$ that partitions the input space into $M$ disjoint regions $R_1, R_2, \dots, R_M$. The prediction is defined as:</p>
+      <div class="premium-def-title">Formalism: Recursive Partitioning & Information Gain</div>
+      <p>Decision Trees are "Logical Hierarchies." They turn a complex decision space into a series of simple, actionable steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points in a high-dimensional room. A <strong>Decision Tree</strong> is a series of "Slices" through that room that are always <strong>parallel to the axes</strong>. Geometrically, the tree partitions the entire feature space into a set of disjoint hyper-rectangles (boxes). Inside each box, the model predicts a single value or class. The goal of the algorithm is to position these slices so that the resulting boxes are as "Pure" as possible—meaning they contain mostly one type of data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each step, we look for a split $(j, t)$ consisting of a feature $j$ and a threshold $t$. We evaluate splits using an <strong>Impurity Measure</strong> $I(S)$. The two most common are:</p>
       <div class="math-block">
-        $$\hat{f}(x) = \sum_{m=1}^M c_m I(x \in R_m)$$
+        $$\text{Gini: } G(S) = 1 - \sum_{k=1}^K p_k^2 \quad \text{Entropy: } H(S) = -\sum_{k=1}^K p_k \log_2(p_k)$$
       </div>
-      <p>For classification, $c_m$ is the majority class in $R_m$. The regions are found by recursively minimizing the **Impurity Selection Criterion** (e.g., Gini):</p>
+      <p>The "Best Split" is the one that maximizes the <strong>Information Gain</strong>—the reduction in impurity after the slice is made:</p>
       <div class="math-block">
-        $$G = \sum_{k=1}^K p_{mk}(1 - p_{mk})$$
+        $$IG(S, j, t) = I(S) - \left( \frac{|S_{left}|}{|S|} I(S_{left}) + \frac{|S_{right}|}{|S|} I(S_{right}) \right)$$
       </div>
-      <p class="mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
+      <p>The algorithm recursively applies this rule, creating a deep hierarchy of logic until the regions are stable or a "Max Depth" limit is reached.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Decision Trees are the <strong>Interrogators</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Greedy Optimization</strong>: The tree makes the best possible split *now* without looking ahead to see if a different split would be better later. This makes it fast but sometimes suboptimal.</li>
+        <li><strong>High Variance (Overfitting)</strong>: Without limits, a tree will keep splitting until every point is in its own box. This "memorization" of noise is why we usually "Prune" trees or limit their height.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Because the slices are always axis-parallel, Decision Trees struggle with diagonal boundaries. To separate two groups divided by a 45-degree line, a tree has to create a "staircase" of many small horizontal and vertical steps.</p>
     </div>
     
     <div class="callout tip">
@@ -1655,16 +1841,32 @@ print(f"Feature Importances: {model.feature_importances_}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Random Forest</div>
-      <p>A Random Forest is an ensemble of $B$ decision trees $\{T_1, \dots, T_B\}$. For a given input $x$, the prediction is the aggregate of all individual tree predictions:</p>
-      <div class="math-block">
-        $$\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^B T_b(x, \Theta_b)$$
-      </div>
-      <p>Where $\Theta_b$ represents the random parameters for the $b$-th tree, generated through:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Bootstrap Aggregating (Bagging)</strong>: Training each tree on a sample drawn with replacement.</li>
-        <li><strong>Feature Selection</strong>: Choosing the best split from a random subset of $m \approx \sqrt{d}$ features.</li>
+      <div class="premium-def-title">Formalism: Bootstrap Aggregation & Feature Decorrelation</div>
+      <p>Random Forest is "Statistical Robustness." It is the process of averaging out individual errors to reveal a stable, underlying pattern.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a single Decision Tree as a jagged, unstable boundary. Because trees are "Greedy," they often over-focus on local noise in the data. A <strong>Random Forest</strong> is an ensemble of $B$ different trees. Geometrically, each tree creates its own axis-aligned partition of the space. By "Averaging" these partitions together, we smooth out the jagged cliffs of individual trees into a more stable, continuous decision surface. It is the mathematical equivalent of asking 100 people to draw a map and then using the consensus of their lines.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The Forest is built using two layers of randomness to ensure diversity:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Bagging (Bootstrapping)</strong>: We generate $B$ datasets $\{D_1, \dots, D_B\}$ by sampling $n$ items from the original data <em>with replacement</em>.</li>
+        <li><strong>Feature Randomness</strong>: At each node of every tree, we only allow the algorithm to choose from a random subset of $m$ features (typically $m = \sqrt{d}$).</li>
       </ul>
+      <p>The final prediction for a given input $\mathbf{x}$ is the <strong>Aggregate</strong> of all $B$ base learners $\{f_b(\mathbf{x})\}$:</p>
+      <div class="math-block">
+        $$\hat{y}_{Forest} = \text{mode}\{f_1(\mathbf{x}), f_2(\mathbf{x}), \dots, f_B(\mathbf{x})\} \quad \text{(Classification)}$$
+        $$\hat{y}_{Forest} = \frac{1}{B} \sum_{b=1}^B f_b(\mathbf{x}) \quad \text{(Regression)}$$
+      </div>
+      <p>As $B$ increases, the variance of the ensemble decreases while the bias remains stable. This is the <strong>Power of Averaging</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Random Forest is the <strong>Easy Button</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Out-of-Bag (OOB) Error</strong>: Because each tree only sees about 63% of the data, we can use the remaining 37% to validate the model <em>during training</em> without needing a separate test set.</li>
+        <li><strong>Feature Importance</strong>: We can calculate which variables are actually driving the decisions by measuring how much the forest's accuracy drops when we "scramble" a specific feature.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: While Random Forests are incredibly hard to overfit, they are "Black Boxes." You know the answer is right, but explaining exactly *why* 500 trees voted that way is much harder than explaining a single decision tree.</p>
     </div>
     
     <div class="callout tip">
@@ -1787,16 +1989,30 @@ print(f"Confidence Score: {votes[1]:.1%}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gradient Boosting</div>
-      <p>Gradient Boosting is an additive ensemble method that constructs a model $F_M(x)$ as a sum of $M$ weak learners $h_m(x)$. The final prediction is:</p>
+      <div class="premium-def-title">Formalism: Gradient Descent in Function Space</div>
+      <p>Gradient Boosting is "Iterative Correction." It is the process of building a complex model by stacking simple models that focus exclusively on what we got wrong.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to reach a target in a high-dimensional dark room. In Random Forest, you ask 100 people to guess where the target is and take the average. In <strong>Gradient Boosting</strong>, you take one step, look at how far you are from the target (the <strong>Residual</strong>), and then take another small step *specifically to close that gap*. Geometrically, each tree is a vector in <strong>Function Space</strong>. We are performing Gradient Descent, but instead of updating weights, we are adding entire functions (trees) to our model's "command chain." Each new tree is a piecewise correction that nudges the overall prediction closer to the truth.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We build our model $F(\mathbf{x})$ as a sum of weak learners $h_m(\mathbf{x})$. At each step $m$, we calculate the <strong>Pseudo-residuals</strong>—the direction we need to move to minimize our loss $L$:</p>
       <div class="math-block">
-        $$F_M(x) = \sum_{m=1}^M \nu \cdot \gamma_m h_m(x)$$
+        $$r_{im} = -\left[ \frac{\partial L(y_i, F(\mathbf{x}_i))}{\partial F(\mathbf{x}_i)} \right]_{F=F_{m-1}}$$
       </div>
-      <p>At each step $m$, the algorithm fits a new learner to the **pseudo-residuals**, which are the negative gradients of the loss function $\mathcal{L}(y, F(x))$:</p>
+      <p>We then train a new Decision Tree $h_m(\mathbf{x})$ to predict these residuals (not the actual labels!). The overall model is updated using a <strong>Learning Rate</strong> $\eta$ (Shrinkage) to prevent the correction from being too aggressive:</p>
       <div class="math-block">
-        $$r_{im} = -\left[ \frac{\partial \mathcal{L}(y_i, F(x_i))}{\partial F(x_i)} \right]_{F(x)=F_{m-1}(x)}$$
+        $$F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta \cdot h_m(\mathbf{x})$$
       </div>
-      <p class="mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
+      <p>By repeating this process $M$ times, we arrive at a final model that is the sum of many small, targeted strikes on error.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Gradient Boosting is the <strong>Surgical Perfectionist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Hard Pattern Extraction</strong>: Because it focuses on errors, Boosting is unparalleled at finding rare or difficult correlations that simpler models might miss.</li>
+        <li><strong>Sequential Penalty</strong>: Unlike Random Forests, Boosting cannot be parallelized easily because tree #100 *must* know what tree #99 did. It's slower to train but usually more accurate.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Boosting is a "Greedy" algorithm and can easily <strong>Overfit</strong> if you give it too many trees or if the trees are too deep. You must carefully balance the number of iterations ($M$) against the learning rate ($\eta$).</p>
     </div>
     
     <div class="callout tip">
@@ -1948,15 +2164,35 @@ print(f"Confidence (Class 1): {confidence[1]:.2%}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Regularized Gradient Boosting</div>
-      <p>Modern boosting frameworks (like XGBoost) optimize a regularized objective function that balances predictive power with model simplicity. At iteration $t$, the objective is:</p>
+      <div class="premium-def-title">Formalism: 2nd-Order Taylor Expansion & Hessian Optimization</div>
+      <p>Advanced Boosting is "Curvature-Aware Optimization." It doesn't just know where to move; it knows how fast the landscape is changing.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are navigating a foggy mountain. Basic Gradient Boosting only knows the local slope (the Gradient). <strong>Advanced Boosting</strong> (specifically XGBoost) uses the <strong>Curvature</strong> of the terrain (the Hessian). Geometrically, at every step, we build a <strong>local quadratic model</strong> of the loss surface. This is like having a GPS that doesn't just tell you "go down," but tells you the exact shape of the valley ahead. This allows the model to take much larger, more confident steps on flat ground and more precise, careful steps when the terrain is steep and complex.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To find the next tree $f_t$, we optimize the loss summed over all samples plus a <strong>Complexity regularization</strong> term $\Omega$:</p>
       <div class="math-block">
-        $$\mathcal{L}^{(t)} = \sum_{i=1}^n l(y_i, \hat{y}_i^{(t-1)} + f_t(\mathbf{x}_i)) + \Omega(f_t)$$
+        $$\text{Obj}^{(t)} = \sum_{i=1}^n L(y_i, \hat{y}_i^{(t-1)} + f_t(\mathbf{x}_i)) + \Omega(f_t)$$
       </div>
-      <p>Where $\Omega(f_t) = \gamma T + \frac{1}{2} \lambda \|\mathbf{w}\|^2$ is the **Complexity Penalty** ($T$ is the number of leaves). By using a second-order Taylor expansion, the algorithm finds the optimal leaf weight $w_j^*$ using the gradients $g_i$ and hessians $h_i$ of the loss:</p>
+      <p>Using a <strong>Second-Order Taylor Expansion</strong> at $F_{t-1}$, we express the objective in terms of gradients $g_i$ and Hessians $h_i$:</p>
       <div class="math-block">
-        $$w_j^* = -\frac{\sum_{i \in R_j} g_i}{\sum_{i \in R_j} h_i + \lambda}$$
+        $$\text{Obj}^{(t)} \approx \sum_{i=1}^n [g_i f_t(\mathbf{x}_i) + \frac{1}{2} h_i f_t^2(\mathbf{x}_i)] + \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2$$
       </div>
+      <p>Solving for the optimal weight $w_j^*$ of a leaf $j$, we arrive at the core scoring formula of XGBoost:</p>
+      <div class="math-block">
+        $$w_j^* = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}$$
+      </div>
+      <p>This formula is the "brain" of the engine—it tells the tree exactly how much credit to give each feature while penalizing complexity ($\lambda$).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, the "Big Three" libraries optimize different parts of the search:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>XGBoost</strong>: Focuses on the <strong>Split Search</strong>. It uses a "Sparsity-aware" algorithm to find the best split points even when your data is filled with missing values.</li>
+        <li><strong>LightGBM</strong>: Focuses on <strong>Data Reduction</strong>. It uses <strong>GOSS</strong> (Gradient-based One-Side Sampling) to ignore samples with small gradients, focusing only on the "hard" examples.</li>
+        <li><strong>CatBoost</strong>: Focuses on <strong>Categories</strong>. It uses <strong>Ordered Boosting</strong> to prevent target leakage, which is a common disaster when dealing with categorical text data.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: These models are "Parameters-Heavy." If you don't tune your <code>max_depth</code>, <code>learning_rate</code>, and <code>subsample</code>, you will end up with a model that is perfectly accurate on your laptop but completely useless in the real world.</p>
     </div>
     
     <div class="callout tip">
@@ -2148,4 +2384,4 @@ print(f"Confidence Verdict: {prediction}")
       </div>
 
     </div>
-  `,sections:[e,t,s,i,o,a,n,r,l,d,h,g,c,p]};export{m as SUPERVISED_LEARNING_DATA};
+  `,sections:[e,t,s,i,a,o,n,r,l,h,d,g,c,p]};export{m as SUPERVISED_LEARNING_DATA};

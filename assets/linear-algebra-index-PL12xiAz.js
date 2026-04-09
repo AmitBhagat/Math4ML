@@ -18,17 +18,30 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The $n$-tuplet</div>
-      <p>A vector $\mathbf{v} \in \mathbb{R}^n$ is an ordered sequence of $n$ real numbers. Geometrically, it represents a directed line segment from the origin to a point in $\mathbb{R}^n$:</p>
+      <div class="premium-def-title">Formalism: The $n$-tuplet & Geometric Magnitude</div>
+      <p>A vector $\mathbf{v} \in \mathbb{R}^n$ is an ordered sequence of $n$ real numbers. To understand its "essence," we define it through its length and direction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a point in $n$-dimensional space. The vector $\mathbf{v}$ is the arrow connecting the origin $\mathbf{0}$ to this point. Its "size" isn't just a single number; it's the result of the spatial relationships between all its components.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation of Length</h3>
+      <p>In 2D, we use the Pythagorean theorem: $c^2 = a^2 + b^2$. For a vector in $n$ dimensions, we generalize this logic. The magnitude (norm) $\|\mathbf{v}\|$ is derived by summing the "energy" of each component:</p>
       <div class="math-block">
-        $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+        $$\|\mathbf{v}\| = \sqrt{v_1^2 + v_2^2 + \dots + v_n^2}$$
       </div>
-      <p>Vectors are defined by two primary operations:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Addition</strong>: $\mathbf{u} + \mathbf{v} = [u_1+v_1, \dots, u_n+v_n]^T$ (Combining directions).</li>
-        <li><strong>Scaling</strong>: $c\mathbf{v} = [cv_1, \dots, cv_n]^T$ (Altering magnitude while preserving or reversing direction).</li>
+      <p>A vector with $\|\mathbf{v}\| = 1$ is called a <strong>Unit Vector</strong>, derived as $\hat{\mathbf{v}} = \frac{\mathbf{v}}{\|\mathbf{v}\|}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Operations</h3>
+      <p>Two fundamental rules govern vector algebra, allowing us to "navigate" data space:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Vector Addition</strong>: Geometrically, this is "tip-to-tail" placement. Algebraically:
+          $$\mathbf{u} + \mathbf{v} = \begin{bmatrix} u_1+v_1 \\ \vdots \\ u_n+v_n \end{bmatrix}$$
+        </li>
+        <li><strong>Scalar Multiplication</strong>: Stretching or compressing the vector without changing its line of span:
+          $$c\mathbf{v} = \begin{bmatrix} cv_1 \\ \vdots \\ cv_n \end{bmatrix}$$
+        </li>
       </ul>
-      <p class="mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
     
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
@@ -123,14 +136,28 @@ print(f"Sum: {add}, Scaled: {scaled}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Linear Axioms</div>
-      <p>A vector space $V$ over a field $\mathbb{F}$ (usually $\mathbb{R}$) is a set equipped with vector addition and scalar multiplication satisfying the following conditions for all $\mathbf{u}, \mathbf{v} \in V$ and $a, b \in \mathbb{F}$:</p>
+      <div class="premium-def-title">Formalism: The Linear Axioms & Closure</div>
+      <p>A Vector Space $V$ is a set that is "computationally stable." If you stay within its rules, you can't be pushed out of the universe.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Think of a vector space as a coordinate system that extends infinitely. A <strong>Subspace</strong> $W$ is a "flat" subset (like a line through the origin in 3D) that maintains the same physical laws as the parent space. For a subset to be a valid subspace, it must be "anchored" at the origin and behave consistently under stress (scaling and addition).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation of a Subspace</h3>
+      <p>To prove a set $W \subseteq V$ is a subspace, we check for <strong>Linear Closure</strong>. For any two vectors $\mathbf{u}, \mathbf{v} \in W$ and any scalar $c \in \mathbb{R}$, we must show:</p>
       <div class="math-block">
-        $$\text{1. Closure: } \mathbf{u} + \mathbf{v} \in V, \quad a\mathbf{u} \in V$$
-        $$\text{2. Identity: } \exists \mathbf{0} \in V \text{ s.t. } \mathbf{v} + \mathbf{0} = \mathbf{v}$$
-        $$\text{3. Distributivity: } a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$$
+        $$\text{1. Additive Closure: } \mathbf{u} + \mathbf{v} \in W$$
+        $$\text{2. Scalar Closure: } c\mathbf{u} \in W$$
       </div>
-      <p>Crucially, for $V$ to be a **Subspace** of $\mathbb{R}^n$, it must contain the origin $\mathbf{0}$, and any linear combination $\sum \alpha_i \mathbf{v}_i$ must reside within $V$.</p>
+      <p>If these hold, then every linear combination $\sum a_i \mathbf{v}_i$ is also in $W$. This derivation ensures that our transformations (like moving weights in a neural net) never result in an "undefined" state.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A collection of vectors $V$ is a Vector Space if it satisfies the 8 fundamental axioms, but for ML, the big three are:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Existence of Zero</strong>: $\exists \mathbf{0} \in V$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$. No zero, no subspace.</li>
+        <li><strong>Additive Inverse</strong>: $\forall \mathbf{v} \in V, \exists -\mathbf{v} \in V$ such that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$.</li>
+        <li><strong>Commutativity</strong>: $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: A set that skips the origin (like the line $y=x+1$) is NOT a subspace. Why? Because scaling any vector by zero gives $[0,0]$, which isn't on the line. You've just broken the laws of the universe.</p>
     </div>
     
     <div class="callout tip">
@@ -241,13 +268,26 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Trivial Solution Requirement</div>
-      <p>A set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\}$ is **Linearly Independent** if the vector equation:</p>
+      <div class="premium-def-title">Formalism: The Trivial Solution & The Null Space</div>
+      <p>Linear Independence is the measure of "Informational Innovation." It asks if a vector brings something new or is just a remix.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a set of vectors. If you can use some of them to reconstruct another (like mixing blue and yellow to get green), then that "green" vector is <strong>Linearly Dependent</strong>. Geometrically, this means the dependent vector lies within the <strong>Span</strong> (the shadow) of the others. Independent vectors are truly "new" directions in space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We test for independence by seeing if there is any way to combine the vectors to hit the origin $\mathbf{0}$ WITHOUT using all zeros. We set up the linear combination equation:</p>
       <div class="math-block">
-        $$\sum_{i=1}^k c_i \mathbf{v}_i = \mathbf{0}$$
+        $$c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \dots + c_k \mathbf{v}_k = \mathbf{0}$$
       </div>
-      <p>is satisfied **only** when $c_1 = c_2 = \dots = c_k = 0$. If there exists a non-trivial solution (where at least one $c_i \neq 0$), the set is **Linearly Dependent**.</p>
-      <p class="mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
+      <p>If the <strong>only</strong> way to satisfy this is the <strong>Trivial Solution</strong> ($c_1 = c_2 = \dots = c_k = 0$), the vectors are independent. If there's a "backdoor" solution (non-trivial), then at least one vector can be expressed as a combination of the others: $\mathbf{v}_k = -\frac{1}{c_k} \sum_{i=1}^{k-1} c_i \mathbf{v}_i$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A set is Linearly Independent if and only if:</p>
+      <div class="math-block">
+        $$\text{rank}(\mathbf{V}) = k$$
+      </div>
+      <p>where $\mathbf{V}$ is the matrix containing the vectors as columns. If rank is less than $k$, you have redundant dimensions.</p>
+      <p class="mt-4 italic text-sm">Gotcha: A set containing the Zero Vector is ALWAYS dependent. Why? Because you can set $c_{zero} = 1$ and all other $c_i = 0$, and the sum will still be zero. The origin adds no new direction.</p>
     </div>
     
     <div class="callout tip">
@@ -354,13 +394,26 @@ print(f"Is Independent? {is_independent}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Spanning Sets and Cardinality</div>
-      <p>A set of vectors $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is a **Basis** for a vector space $V$ if it satisfies two conditions:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Independence</strong>: No vector in $\mathcal{B}$ can be expressed as a linear combination of the others.</li>
-        <li><strong>Span</strong>: Every vector $\mathbf{v} \in V$ can be uniquely expressed as: $\mathbf{v} = \sum_{i=1}^n c_i \mathbf{b}_i$.</li>
+      <div class="premium-def-title">Formalism: Spanning Sets & Linear Coordinates</div>
+      <p>A Basis is the most efficient "Dictionary" for a space. It allows you to describe any vector without using a single redundant word.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Think of $V$ as a room. A <strong>Basis</strong> $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$ is a set of "directional arrows" that, when combined, can reach every corner of the room. To be a basis, the arrows must be <strong>Linearly Independent</strong> (no redundant directions) and they must <strong>Span</strong> the space (no dead zones).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation of Uniqueness</h3>
+      <p>If $\mathcal{B}$ is a basis, then every vector $\mathbf{v}$ has a <strong>unique</strong> set of coordinates. We prove this by contradiction. Suppose $\mathbf{v}$ had two different representations:</p>
+      <div class="math-block">
+        $$\mathbf{v} = \sum a_i \mathbf{b}_i \quad \text{and} \quad \mathbf{v} = \sum d_i \mathbf{b}_i$$
+      </div>
+      <p>Subtracting them gives: $\mathbf{0} = \sum (a_i - d_i) \mathbf{b}_i$. Since basis vectors are independent, the only way to get $\mathbf{0}$ is if every coefficient $(a_i - d_i) = 0$, meaning $a_i = d_i$. This uniqueness is what allows us to map high-dimensional data like images into a stable, numeric coordinate system.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Parameter</h3>
+      <p>The <strong>Dimension</strong> $\dim(V)$ is the number of vectors in its basis. It is the "Degree of Freedom" of the space.</p>
+      <ul class="mt-2 space-y-2">
+        <li>If you have $n+1$ vectors in an $n$-dimensional space, they <strong>must</strong> be dependent.</li>
+        <li>If you have $n-1$ vectors, they <strong>cannot</strong> span the space.</li>
       </ul>
-      <p>The **Dimension** $\dim(V)$ is defined as the cardinality $n$ of the basis. Any two bases for the same vector space must have the same number of elements.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Dimension is a property of the SPACE, not the vectors. $[1,0,0]$ and $[0,1,0]$ are 3D vectors, but they only span a 2D subspace. Context is everything.</p>
     </div>
     
     <div class="callout tip">
@@ -474,16 +527,32 @@ print(f"Dimension of the created space: {dim}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Inner Product</div>
-      <p>For two vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$, the **Dot Product** is a scalar value defined algebraically as the sum of the products of their components:</p>
+      <div class="premium-def-title">Formalism: The Inner Product & The Law of Cosines</div>
+      <p>The Dot Product is the bridge between raw numbers (coordinates) and physical reality (angles). We derive it by looking at the geometry of a triangle.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Consider two vectors $\mathbf{u}$ and $\mathbf{v}$ starting at the origin, with an angle $\theta$ between them. They form two sides of a triangle. The third side is the vector $\mathbf{w} = \mathbf{u} - \mathbf{v}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>From the Law of Cosines, we know the relationship between the lengths of the sides:</p>
       <div class="math-block">
-        $$\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^n u_i v_i = \mathbf{u}^\top \mathbf{v}$$
+        $$\|\mathbf{u} - \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\|\mathbf{u}\|\|\mathbf{v}\|\cos(\theta)$$
       </div>
-      <p>Geometrically, the dot product represents the product of the magnitudes and the cosine of the angle $\theta$ between them:</p>
+      <p>Using the property that $\|\mathbf{x}\|^2 = \mathbf{x} \cdot \mathbf{x}$, we expand the left side:</p>
       <div class="math-block">
-        $$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
+        $$(\mathbf{u} - \mathbf{v}) \cdot (\mathbf{u} - \mathbf{v}) = \mathbf{u} \cdot \mathbf{u} - 2(\mathbf{u} \cdot \mathbf{v}) + \mathbf{v} \cdot \mathbf{v}$$
       </div>
-      <p class="mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
+      <p>Equating both expressions and cancelling identical terms ($\|\mathbf{u}\|^2$ and $\|\mathbf{v}\|^2$), we find the definition of the Dot Product:</p>
+      <div class="math-block">
+        $$-2(\mathbf{u} \cdot \mathbf{v}) = -2\|\mathbf{u}\|\|\mathbf{v}\|\cos(\theta)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>The duality of the Dot Product allows us to calculate angles using only coordinates:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^n u_i v_i = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: If the dot product is 0, $\cos(\theta) = 0$, meaning the vectors are orthogonal (90°). If it's negative, they are pointing in "opposite" directions (> 90°).</p>
     </div>
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
@@ -570,18 +639,32 @@ print(f"Dot Product: {dot}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The $p$-norm Metric</div>
-      <p>A **Norm** $\|\cdot\|$ is a function that maps a vector to a non-negative scalar, satisfying the triangle inequality and absolute homogeneity. In $\mathbb{R}^n$, we define the family of $L^p$ norms as:</p>
+      <div class="premium-def-title">Formalism: The $L^p$ Space & Metrics</div>
+      <p>A Norm is a function that maps a vector to a "scale"—a single number that represents its magnitude. It is the core of regularization in AI.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>The "shape" of a norm is defined by its <strong>Unit Ball</strong>—the set of all vectors where $\|\mathbf{x}\| = 1$. For $L^2$, this is a circle; for $L^1$, it's a diamond. These shapes determine how our models "prefer" some weights over others.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To be a valid norm, a function $f(\mathbf{x})$ must satisfy three strict axioms. If it fails one, it's just a set of numbers, not a magnitude:</p>
+      <div class="math-block">
+        $$\text{1. Positivity: } f(\mathbf{x}) \ge 0; \quad f(\mathbf{x}) = 0 \iff \mathbf{x} = \mathbf{0}$$
+        $$\text{2. Uniform Scaling: } f(c\mathbf{x}) = |c|f(\mathbf{x})$$
+        $$\text{3. Triangle Ineq: } f(\mathbf{x} + \mathbf{y}) \le f(\mathbf{x}) + f(\mathbf{y})$$
+      </div>
+      <p>The general $L^p$ norm is derived as the $p$-th root of the sum of the $p$-th powers of the absolute components:</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
       <div class="math-block">
         $$\|\mathbf{x}\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$$
       </div>
-      <p>The three most critical variations in Machine Learning are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>$L^1$ Norm</strong>: $\sum |x_i|$. Promotes sparsity (Lasso).</li>
-        <li><strong>$L^2$ Norm</strong>: $\sqrt{\sum x_i^2}$. Promotes small, distributed weights (Ridge).</li>
-        <li><strong>$L^\infty$ Norm</strong>: $\max_i |x_i|$. Measures the maximum deviation.</li>
+      <p>Common cases in ML:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L1 (Manhattan)</strong>: $p=1$. Sum of absolute values. Forces "useless" features to 0.</li>
+        <li><strong>L2 (Euclidean)</strong>: $p=2$. Root sum of squares. Keeps weights distributed.</li>
+        <li><strong>L-infinity (Max)</strong>: $p \to \infty$. $\max(|x_i|)$. Sensitive only to the biggest outlier.</li>
       </ul>
-      <p class="mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Many "distance" functions in ML aren't true norms because they fail the triangle inequality. Always check the math before you assume your optimizer will behave.</p>
     </div>
     
     <div class="callout tip">
@@ -663,7 +746,7 @@ print(f"L2: {l2}, L1: {l1}")
       <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our loss function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise. L1 (Lasso) is particularly ruthless; it acts like a "Pruning Tool" that shrinks useless weights of irrelevant features to exactly zero, effectively deleting them from the model.</li>
       <li><strong>Anomaly Detection in Server Logs</strong>: To find a hacker in millions of server requests, we represent each request as a vector (Time, Data Size, Frequency). We then calculate the <strong>Distance (Norm)</strong> of every new request from the "Normal" average vector. If the norm is massive, it means the request is a geometric outlier—a "weird" point in space that requires immediate attention.</li>
     </ul>
-    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
+    <p>Teacher's Final Word: A Norm is a <strong>"Magnitude Meter."</strong> It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Vectors are building blocks. Let's arrange them into grids. Explore <strong><a href="#/mathematics/linear-algebra/matrices">Matrices</a></strong>.
@@ -680,18 +763,26 @@ print(f"L2: {l2}, L1: {l1}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Linear Operator</div>
-      <p>A matrix $A \in \mathbb{R}^{m \times n}$ is a rectangular array of $m \cdot n$ real numbers. It represents a linear map $f: \mathbb{R}^n \to \mathbb{R}^m$:</p>
+      <div class="premium-def-title">Formalism: The Column Space & Linear Action</div>
+      <p>A Matrix isn't just a static table of numbers; it is a <strong>Transformation Machine</strong>. It takes a vector and spits out a new one.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Think of the columns of a matrix $A$ as a set of basis vectors $\{\mathbf{a}_1, \dots, \mathbf{a}_n\}$. When we multiply this matrix by a vector $\mathbf{x}$, we are essentially choosing a path through the space using those column vectors as our directions. The output $A\mathbf{x}$ is a point in the <strong>Column Space</strong> of $A$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The standard row-column rule ($c_{ij} = \sum a_{ik}b_{kj}$) is just a shortcut. The "true" meaning of matrix-vector multiplication is a <strong>Weighted Sum of Columns</strong>. For a vector $\mathbf{x} = [x_1, \dots, x_n]^T$, the product $A\mathbf{x}$ is derived as:</p>
       <div class="math-block">
-        $$A = \begin{bmatrix} a_{1,1} & \dots & a_{1,n} \\ \vdots & \ddots & \vdots \\ a_{m,1} & \dots & a_{m,n} \end{bmatrix}$$
+        $$A\mathbf{x} = x_1 \begin{bmatrix} a_{1,1} \\ \vdots \\ a_{m,1} \end{bmatrix} + x_2 \begin{bmatrix} a_{1,2} \\ \vdots \\ a_{m,2} \end{bmatrix} + \dots + x_n \begin{bmatrix} a_{1,n} \\ \vdots \\ a_{m,n} \end{bmatrix}$$
       </div>
-      <p>Key algebraic operations include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Matrix Addition</strong>: $(A + B)_{ij} = A_{ij} + B_{ij}$.</li>
-        <li><strong>Scalar Scaling</strong>: $(c A)_{ij} = c A_{ij}$.</li>
-        <li><strong>Transpose</strong>: $(A^\top)_{ij} = A_{ji}$ (Swapping rows and columns).</li>
+      <p>This reveals that $A\mathbf{x}$ is just a <strong>Linear Combination</strong> of the columns of $A$. If the columns are dependent, you lose "reach" (rank), and the matrix becomes a bottleneck.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Rule</h3>
+      <p>For any $A \in \mathbb{R}^{m \times n}$ and $\mathbf{x} \in \mathbb{R}^n$:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Matrix Action</strong>: $A\mathbf{x} = \sum_{j=1}^n x_j \mathbf{a}_j$.</li>
+        <li><strong>Transformation</strong>: $A$ maps the $n$-dimensional input to an $m$-dimensional output.</li>
       </ul>
-      <p class="mt-2">In the context of data, $A$ often represents $m$ observations each with $n$ features, or the synaptic weights connecting two layers in a neural network.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Never multiply $A\mathbf{x}$ if the number of columns in $A$ doesn't match the dimensions of $\mathbf{x}$. It's like trying to fit a 3-pin plug into a 2-pin socket—the signal simply has nowhere to go.</p>
     </div>
     
     <div class="callout tip">
@@ -785,7 +876,7 @@ print(f"Transpose:\n{A_t}")
       <li><strong>Computer Vision Convolutional Kernels</strong>: When an AI "looks" at an image, it uses small matrices called "Kernels" or "Filters." By sliding these matrices over the image matrix and performing specific operations, the model can detect edges, textures, or even more complex features like "curved lines" or "dog ears." The matrix is literally the model's eyes.</li>
       <li><strong>User-Item Rating Matrices (Netflix/Amazon)</strong>: Recommendation engines organize the entire world into a giant matrix where rows are Users and columns are Products. The numbers inside are ratings. Since most people haven't seen most movies, the matrix is "Sparse" (mostly zeros). The AI's job is a massive matrix game: predicting the missing values to guess what you'd buy next.</li>
     </ul>
-    <p>Teacher's Final Word: Think of a Matrix as a **Batch Processor**. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" math to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
+    <p>Teacher's Final Word: Think of a Matrix as a <strong>Batch Processor</strong>. Instead of calculating one data point at a time, you pack everything into a matrix and perform a single transformation. It’s the shift from "Handcrafted" math to "Mass Production," allowing AI to process millions of inputs in an instant.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, matrices are static. How do we make them interact? Explore <strong><a href="#/mathematics/linear-algebra/matrix-multiplication">Matrix Multiplication</a></strong>.
@@ -802,16 +893,25 @@ print(f"Transpose:\n{A_t}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Composition Product</div>
-      <p>For two matrices $A \in \mathbb{R}^{m \times p}$ and $B \in \mathbb{R}^{p \times n}$, the product $C = AB \in \mathbb{R}^{m \times n}$ is defined by the entry-wise dot products:</p>
+      <div class="premium-def-title">Formalism: The Matrix Composition & Inner Dimensions</div>
+      <p>Matrix Multiplication is the "Relay Race" of mathematics. It chains transformations together so that the output of one becomes the fuel for the next.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Suppose you have two linear maps: $g: \mathbb{R}^n \to \mathbb{R}^p$ (represented by matrix $B$) and $f: \mathbb{R}^p \to \mathbb{R}^m$ (represented by matrix $A$). The <strong>composition</strong> $(f \circ g)$ is a single jump from $\mathbb{R}^n$ directly to $\mathbb{R}^m$. The matrix representing this combined leap is the product $AB$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To find the entry at $C_{ij}$, we look at the interaction between the $i$-th row of $A$ and the $j$-th column of $B$. This is because the $j$-th column of $B$ tells us where the $j$-th basis vector lands after the first map, and the rows of $A$ tell us how that new position is transformed by the second map. Algebraically, this is a sum of products:</p>
       <div class="math-block">
         $$c_{ij} = \sum_{k=1}^p a_{ik} b_{kj}$$
       </div>
-      <p>This operation is defined **only** when the number of columns in $A$ matches the number of rows in $B$. Geometrically, if $A$ represents mapping $f$ and $B$ represents mapping $g$, then $AB$ represents the composition:</p>
+      <p>Note the <strong>Inner Dimension Match</strong>: The number of columns in $A$ ($p$) must exactly equal the number of rows in $B$ ($p$). If they don't, the "relay baton" is dropped, and the composition is mathematically impossible.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Identity</h3>
+      <p>For any $\mathbf{x} \in \mathbb{R}^n$:</p>
       <div class="math-block">
-        $$(f \circ g)(\mathbf{x}) = A(B\mathbf{x})$$
+        $$(AB)\mathbf{x} = A(B\mathbf{x})$$
       </div>
-      <p class="mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
@@ -893,7 +993,7 @@ print(f"Product: {C}")
       <li><strong>Neural Network Forward Pass</strong>: Every single layer in a deep network is really just a massive matrix multiplication. It takes the input vector from the previous layer and multiplies it by a "Weight Matrix." This operation mixes the features together, intensifying the signal that matters and killing the noise that doesn't. Without this operation, modern AI simply wouldn't exist.</li>
       <li><strong>3D Coordinate Transformations in AR/VR</strong>: When you move your head while wearing a VR headset, the computer must recalculate every pixel in the 3D world. It uses matrix multiplication to rotate, scale, and translate millions of points in space instantly, ensuring the virtual world moves in perfect sync with your real-world motion.</li>
     </ul>
-    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
+    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about <strong>Composition</strong>. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Multiplication is the forward pass. But how do we work backwards? Explore <strong><a href="#/mathematics/linear-algebra/matrix-inverse">Matrix Inverse</a></strong>.
@@ -910,16 +1010,31 @@ print(f"Product: {C}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix Reciprocal</div>
-      <p>A square matrix $A \in \mathbb{R}^{n \times n}$ is **Invertible** if there exists a matrix $A^{-1}$ such that:</p>
+      <div class="premium-def-title">Formalism: The Matrix Reciprocal & Identity</div>
+      <p>The Matrix Inverse is the mathematical process of "Unwinding" a transformation. It finds the path back to the origin of the signal.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>If matrix $A$ maps Vector $\mathbf{x}$ to $\mathbf{y}$ by rotating and stretching the space, the <strong>Inverse</strong> $A^{-1}$ must be a transformation that rotates and stretches everything back to its exact starting position. This is only possible if $A$ hasn't "squashed" any information—i.e., it must preserve all dimensions of the space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>By definition, applying a transformation and then its inverse must be the same as doing nothing (the Identity transformation $I$):</p>
       <div class="math-block">
-        $$A A^{-1} = A^{-1} A = I$$
+        $$A A^{-1} = I \quad \text{and} \quad A^{-1} A = I$$
       </div>
-      <p>Where $I$ is the identity matrix. A matrix is invertible if and only if it is **Non-singular**, meaning its determinant is non-zero ($\det(A) \neq 0$). For a $2 \times 2$ matrix, the inverse is calculated as:</p>
+      <p>For a 2x2 matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, we find $A^{-1}$ by using the Adjugate matrix and dividing by the scale factor (the determinant):</p>
       <div class="math-block">
         $$A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
       </div>
-      <p class="mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
+      <p>If $ad-bc = 0$, you are trying to divide by zero, which is the mathematical way of saying: "You can't undo this—the information is gone."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A matrix $A$ is invertible if and only if:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Non-Zero Determinant</strong>: $\det(A) \neq 0$.</li>
+        <li><strong>Full Rank</strong>: All rows and columns are linearly independent.</li>
+        <li><strong>Trivial Null Space</strong>: The only solution to $A\mathbf{x} = \mathbf{0}$ is $\mathbf{x} = \mathbf{0}$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Inverting large matrices is "computationally expensive" ($O(n^3)$). In AI, we almost never calculate $A^{-1}$ directly. We use Solvers like $LU$ or $QR$ decomposition to find the result without doing the heavy lifting by hand.</p>
     </div>
     
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
@@ -1006,7 +1121,7 @@ else:
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when a matrix *can't* be inverted? What is that number that decides? Explore <strong><a href="#/mathematics/linear-algebra/determinants">Determinants</a></strong>.
     </div>
-  `},d={id:"determinants",title:"Determinants",description:"The Determinant is a single number that tells you how much a matrix 'stretches' or 'squashes' space.",color:"#FF9800",html:String.raw`
+  `},h={id:"determinants",title:"Determinants",description:"The Determinant is a single number that tells you how much a matrix 'stretches' or 'squashes' space.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Determinant</div>
       <h1>Determinants: The Scaling Factor</h1>
@@ -1018,17 +1133,30 @@ else:
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Leibniz Definition</div>
-      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, the determinant $\det(A)$ is a scalar value defined by the permutation sum:</p>
+      <div class="premium-def-title">Formalism: The Signed Volume Scaling Factor</div>
+      <p>The Determinant isn't just a number; it's the "Stretch Factor" of a matrix. It measures how much the volume of space changes after the transformation.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a unit "cube" defined by the standard basis vectors. After applying matrix $A$, this cube is warped into a <strong>Parallelepiped</strong> where the edges are the columns of $A$. The <strong>Determinant</strong> $\det(A)$ is the volume of this new shape. If the vectors are dependent, the shape is squashed flat, and the volume is zero.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>For a 2x2 matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, we derive the area of the parallelogram formed by $[a, c]$ and $[b, d]$. By calculating the area of the surrounding rectangle and subtracting the outer triangles, we arrive at the cross-multiplication rule:</p>
+      <div class="math-block">
+        $$\text{Area} = ad - bc$$
+      </div>
+      <p>In $n$-dimensions, we use the <strong>Leibniz Formula</strong>, which sums all possible ways to pick one element from each row and column, adjusted by the sign of the permutation ($\sigma$):</p>
       <div class="math-block">
         $$\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}$$
       </div>
-      <p>Where $S_n$ is the set of all permutations of $\{1, \dots, n\}$. Geometrically, $\det(A)$ represents the signed **Volume Scaling Factor** of the linear transformation. Essential takeaways include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Invertibility</strong>: $A$ is invertible $\iff \det(A) \neq 0$.</li>
-        <li><strong>Composition</strong>: $\det(AB) = \det(A)\det(B)$.</li>
-        <li><strong>Linear Dependence</strong>: $\det(A) = 0$ implies the rows/columns are linearly dependent.</li>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>The Determinant satisfies three critical properties that define its behavior:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Multiplicativity</strong>: $\det(AB) = \det(A)\det(B)$. Scale factors multiply.</li>
+        <li><strong>Inversion</strong>: $\det(A^{-1}) = 1/\det(A)$. "Unwinding" a 2x stretch requires a 0.5x squeeze.</li>
+        <li><strong>Singularity</strong>: If $\det(A) = 0$, the matrix is non-invertible. You have squashed space so hard you've deleted a dimension.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: A negative determinant means the transformation "flipped" space inside out (like a reflection). The absolute value is the volume change, but the sign tells you about the orientation.</p>
     </div>
     
     <div class="callout tip">
@@ -1121,7 +1249,7 @@ print(f"Determinant: {det:.2f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Determinants tell us if space is squashed. But how *much* space is left? Explore <strong><a href="#/mathematics/linear-algebra/matrix-rank">Matrix Rank</a></strong>.
     </div>
-  `},c={id:"matrix-rank",title:"Matrix Rank",description:"Rank measures the number of linearly independent rows or columns in a matrix. It tells you the true 'Information Density' of your data.",color:"#FF9800",html:String.raw`
+  `},d={id:"matrix-rank",title:"Matrix Rank",description:"Rank measures the number of linearly independent rows or columns in a matrix. It tells you the true 'Information Density' of your data.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Linear Algebra · Rank</div>
       <h1>Matrix Rank: Information Density</h1>
@@ -1133,17 +1261,26 @@ print(f"Determinant: {det:.2f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Dimension of the Span</div>
-      <p>The **Rank** of a matrix $A$, denoted $\text{rank}(A)$, is defined as the dimension of the vector space spanned by its columns (or rows). Formally:</p>
+      <div class="premium-def-title">Formalism: The Fundamental Theorem of Linear Algebra</div>
+      <p>Rank is the measure of "Informational Signal." It tells you how many dimensions of your input survived the transformation.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>When a matrix $A$ acts on a space, it maps every vector to its <strong>Column Space</strong> (the image). If the matrix is "Rank Deficient," it collapses some directions into nothingness. The set of all vectors that are squashed to zero is called the <strong>Kernel</strong> (or Null Space). The number of dimensions we lose is the <strong>Nullity</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We find the rank by performing Gaussian Elimination to reach Row Echelon Form. The number of <strong>Pivot Positions</strong> (non-zero rows) is the Rank. This derivation reveals a deep "Conservation of Dimension" law: every dimension of the input space $\mathbb{R}^n$ must either be preserved in the output or lost in the kernel. Mathematically, this is expressed as:</p>
       <div class="math-block">
-        $$\text{rank}(A) = \dim(\text{col}(A)) = \dim(\text{row}(A))$$
+        $$\text{Rank}(A) + \text{Nullity}(A) = n$$
       </div>
-      <p>Crucially, $\text{rank}(A) \le \min(m, n)$. A matrix is called **Full Rank** if its rank equals the smaller of its two dimensions. Key implications include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Invertibility</strong>: A square $n \times n$ matrix is invertible iff $\text{rank}(A) = n$.</li>
-        <li><strong>Redundancy</strong>: If $\text{rank}(A) < n$, then there exist linearly dependent columns (i.e., redundant features).</li>
-        <li><strong>Rank-Nullity Theorem</strong>: $\text{rank}(A) + \dim(\text{null}(A)) = n$.</li>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Rule</h3>
+      <p>Rank defines the fundamental limits of a matrix:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Full Rank</strong>: $\text{rank}(A) = \min(m, n)$. No redundant features.</li>
+        <li><strong>Rank Deficient</strong>: $\text{rank}(A) < \min(m, n)$. You have redundancy (copycats) in your data.</li>
+        <li><strong>Maximum Rank</strong>: A matrix can never have a rank higher than its smallest dimension.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: In real-world data, rank is rarely exactly zero due to noise. We use "Effective Rank" or SVD to find the "pivots" that are large enough to be signal and small enough to be noise.</p>
     </div>
     
     <div class="callout tip">
@@ -1226,7 +1363,7 @@ print(f"Matrix Rank: {rank}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the **True Information Density** of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
+    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the <strong>True Information Density</strong> of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
     <ul>
       <li><strong>Low-Rank Recommendation Systems</strong>: Services like Netflix treat user ratings as a giant matrix. By forcing the model to find a "Low-Rank" approximation of this matrix, we discover the core "Latent Factors" (like Preference for Sci-Fi or Hate for Musicals) that explain millions of ratings. This turns a sparse, messy grid into a lean, predictive engine.</li>
       <li><strong>Identifying Degrees of Freedom</strong>: In physics-based ML or robotics, the rank of a "Jacobian Matrix" tells you the actual number of ways a robot arm can move. If the rank drops (due to a mechanical limit), the robot loses a "Degree of Freedom." By monitoring rank, we ensure the system always knows the limits of its own physical agency.</li>
@@ -1236,7 +1373,7 @@ print(f"Matrix Rank: {rank}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Rank ensures our directions are unique. How do we find the "Distance" between those directions? Explore <strong><a href="#/mathematics/linear-algebra/orthogonality-projections">Orthogonality & Projections</a></strong>.
     </div>
-  `},h={id:"orthogonality-projections",title:"Orthogonality and Projections",description:"Orthogonality is the mathematical way of saying 'Zero Correlation.' Projections are how we find the closest distance between vectors and subspaces.",color:"#9C27B0",html:String.raw`
+  `},c={id:"orthogonality-projections",title:"Orthogonality and Projections",description:"Orthogonality is the mathematical way of saying 'Zero Correlation.' Projections are how we find the closest distance between vectors and subspaces.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Linear Algebra · Projections</div>
       <h1>Orthogonality & Projections</h1>
@@ -1248,18 +1385,33 @@ print(f"Matrix Rank: {rank}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Closest Vector Property</div>
-      <p>Two vectors $\mathbf{u}, \mathbf{v}$ are **Orthogonal** if their inner product is zero ($\mathbf{u} \cdot \mathbf{v} = 0$). The **Orthogonal Projection** of a vector $\mathbf{x}$ onto a subspace $W$ is the unique vector $\hat{\mathbf{x}} \in W$ such that $(\mathbf{x} - \hat{\mathbf{x}})$ is orthogonal to every vector in $W$.</p>
-      <p>Algebraically, the projection of $\mathbf{x}$ onto a non-zero vector $\mathbf{v}$ is:</p>
-      <div class="math-block">
-        $$\text{proj}_{\mathbf{v}} \mathbf{x} = \frac{\mathbf{x} \cdot \mathbf{v}}{\|\mathbf{v}\|^2} \mathbf{v}$$
-      </div>
-      <p>Properties of the projection include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Optimality</strong>: $\hat{\mathbf{x}}$ is the vector in $W$ that minimizes the distance $\|\mathbf{x} - \mathbf{v}\|$ for all $\mathbf{v} \in W$.</li>
-        <li><strong>Linearity</strong>: $\text{proj}_W (c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1\text{proj}_W \mathbf{x}_1 + c_2\text{proj}_W \mathbf{x}_2$.</li>
-        <li><strong>Residual</strong>: The vector $\mathbf{e} = \mathbf{x} - \hat{\mathbf{x}}$ represents the component of $\mathbf{x}$ orthogonal to $W$.</li>
+      <div class="premium-def-title">Formalism: The Shadow & Orthogonality</div>
+      <p>Projections are the mathematical way to find the "Best Approximation." We find the shadow of a vector onto a lower-dimensional subspace.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine we want to project a vector $\mathbf{y}$ onto a vector $\mathbf{u}$. The goal is to find a vector $\hat{\mathbf{y}}$ that is a "shadow" of $\mathbf{y}$ on the line spanned by $\mathbf{u}$. Two critical facts hold:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Direction</strong>: Since $\hat{\mathbf{y}}$ lies on the line spanned by $\mathbf{u}$, it must be a scalar multiple: $\hat{\mathbf{y}} = c\mathbf{u}$.</li>
+        <li><strong>Orthogonality</strong>: The error vector $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}$ must be perpendicular to $\mathbf{u}$.</li>
       </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Since the error vector $\mathbf{e}$ is orthogonal to $\mathbf{u}$, their dot product is zero:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot (\mathbf{y} - \hat{\mathbf{y}}) = 0$$
+        $$\mathbf{u} \cdot (\mathbf{y} - c\mathbf{u}) = 0$$
+      </div>
+      <p>Distributing the dot product and solving for $c$:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{y} - c(\mathbf{u} \cdot \mathbf{u}) = 0 \implies c = \frac{\mathbf{u} \cdot \mathbf{y}}{\mathbf{u} \cdot \mathbf{u}}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>Plugging $c$ back into our definition $\hat{\mathbf{y}} = c\mathbf{u}$ gives the orthogonal projection of $\mathbf{y}$ onto $\mathbf{u}$:</p>
+      <div class="math-block">
+        $$\hat{\mathbf{y}} = \left( \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \right) \mathbf{u}$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: This formula only works for 1D projections. For projecting onto a subspace spanned by matrix $X$, we use the <strong>Normal Equations</strong>: $\hat{\mathbf{y}} = X(X^T X)^{-1} X^T \mathbf{y}$.</p>
     </div>
     
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
@@ -1350,16 +1502,30 @@ print(f"Shadow of y on u: {proj_y_u}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The characteristic Equation</div>
-      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, a non-zero vector $\mathbf{v}$ is an **Eigenvector** and $\lambda$ is its corresponding **Eigenvalue** if:</p>
+      <div class="premium-def-title">Formalism: The Invariance Property & Characteristic Polynomial</div>
+      <p>Eigenvectors are the "Magic Axes" of a transformation. While every other vector rotates into chaos, these directions stay perfectly still.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>A linear transformation $A$ usually rotates and scales its input. An <strong>Eigenvector</strong> $\mathbf{v}$ is a special direction where the transformation acts as simple scalar multiplication. The vector stays on its span; it only grows or shrinks by factor $\lambda$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the "Eigen-Identity": $A\mathbf{v} = \lambda\mathbf{v}$. To solve for $\mathbf{v}$ and $\lambda$, we rearrange the equation into a homogeneous system:</p>
       <div class="math-block">
-        $$A \mathbf{v} = \lambda \mathbf{v}$$
+        $$A\mathbf{v} - \lambda\mathbf{v} = \mathbf{0}$$
+        $$(A - \lambda I)\mathbf{v} = \mathbf{0}$$
       </div>
-      <p>This relationship implies that $(A - \lambda I)\mathbf{v} = \mathbf{0}$. For a non-trivial solution to exist, the matrix $(A - \lambda I)$ must be non-invertible, leading to the **Characteristic Equation**:</p>
+      <p>For a non-zero (non-trivial) eigenvector $\mathbf{v}$ to exist, the matrix $(A - \lambda I)$ <strong>must be non-invertible</strong>. If it were invertible, we could just multiply by the inverse and get $\mathbf{v} = \mathbf{0}$, which is useless. A matrix is non-invertible only if its determinant is zero, leading us to the <strong>Characteristic Equation</strong>:</p>
       <div class="math-block">
         $$\det(A - \lambda I) = 0$$
       </div>
-      <p class="mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>The Eigenvalues are the roots of the characteristic polynomial. For each $\lambda$, we find the corresponding eigenvectors by finding the <strong>Null Space</strong> of $(A - \lambda I)$.</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Trace Property</strong>: $\sum \lambda_i = \text{tr}(A)$ (Sum of diagonal elements).</li>
+        <li><strong>Determinant Property</strong>: $\prod \lambda_i = \det(A)$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Some matrices have "Complex" eigenvalues, meaning they represent a pure rotation with no invariant real directions. In ML, we usually look for Symmetric matrices where the eigenvalues are guaranteed to be real.</p>
     </div>
     
     <div class="callout tip">
@@ -1471,18 +1637,27 @@ print(f"Eigenvectors:\n{vecs}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Quadratic Stability</div>
-      <p>A symmetric matrix $A \in \mathbb{R}^{n \times n}$ is **Positive Definite** if the quadratic form resulting from any non-zero vector $\mathbf{x}$ is strictly positive:</p>
+      <div class="premium-def-title">Formalism: The Quadratic Energy & Convexity</div>
+      <p>Positive Definite matrices are the "Bedrock" of optimization. They ensure that your mathematical surface has a clear bottom and no hidden traps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a function $f(\mathbf{x})$ that represents the "energy" or "loss" of a system. If the surface of this function looks like a perfect bowl (a paraboloid), then no matter where you start, Gravity (Gradient Descent) will pull you to a single, unique minimum. A <strong>Positive Definite (PD)</strong> matrix is the mathematical "Blueprint" of that bowl.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We test for this "bowl-like" behavior using a <strong>Quadratic Form</strong>. For a symmetric matrix $A$, we measure the "energy" $Q$ in any direction $\mathbf{x}$:</p>
       <div class="math-block">
-        $$\mathbf{x}^\top A \mathbf{x} > 0, \quad \forall \mathbf{x} \in \mathbb{R}^n \setminus \{\mathbf{0}\}$$
+        $$Q(\mathbf{x}) = \mathbf{x}^\top A \mathbf{x} = \sum_{i,j=1}^n A_{ij} x_i x_j$$
       </div>
-      <p>This definition implies several strictly equivalent properties that are easier to check in practice:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Eigenvalue Test</strong>: Each eigenvalue $\lambda_i$ of $A$ satisfies $\lambda_i > 0$.</li>
-        <li><strong>Determinant Test</strong>: Every leading principal minor (top-left sub-matrices) has a positive determinant.</li>
-        <li><strong>Factorization</strong>: $A$ can be decomposed as $L L^\top$ (Cholesky Factorization), where $L$ is lower triangular.</li>
+      <p>For a 2x2 matrix $\begin{bmatrix} a & b \\ b & c \end{bmatrix}$, this expands to $ax_1^2 + 2bx_1x_2 + cx_2^2$. If this energy is <strong>strictly positive</strong> for every possible non-zero direction, then the matrix is PD. This means the transformation doesn't just stretch space—it stretches it "outward" in every direction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A symmetric matrix $A$ is Positive Definite ($A \succ 0$) if and only if:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quadratic Condition</strong>: $\mathbf{x}^\top A \mathbf{x} > 0$ for all $\mathbf{x} \neq \mathbf{0}$.</li>
+        <li><strong>Eigenvalue Test</strong>: Every eigenvalue $\lambda_i > 0$.</li>
+        <li><strong>Cholesky Test</strong>: $A = LL^\top$ for some unique lower triangular matrix $L$.</li>
       </ul>
-      <p class="mt-2">If $\mathbf{x}^\top A \mathbf{x} \ge 0$, the matrix is **Positive Semi-Definite**, a condition crucial for valid Kernels and Covariance matrices.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Many "correlation" matrices in ML are only Positive SEMI-Definite ($\lambda \ge 0$), meaning the bowl has a flat bottom (a valley). This can cause your optimizer to wander aimlessly. Always check for that strict positive "tilt."</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
@@ -1568,18 +1743,26 @@ print(f"Is Matrix Positive Definite? {is_pd}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Universal Factorization</div>
-      <p>Any matrix $A \in \mathbb{R}^{m \times n}$ can be decomposed into three specialized matrices:</p>
+      <div class="premium-def-title">Formalism: The Universal Decomposition & Symmetry</div>
+      <p>SVD is the most powerful "unraveling" tool in your kit. It breaks <strong>any</strong> linear transformation into its core geometric steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Every transformation $A$ can be seen as a three-stage relay: First, a rotation in the input space ($V^T$), then a scaling along some key axes ($\Sigma$), and finally a rotation in the output space ($U$). Unlike Eigendecomposition, which requires a square matrix that doesn't "stretch" space too weirdly, SVD works for every matrix in existence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation via $A^\top A$</h3>
+      <p>To find the singular values, we capitalize on the fact that $A^\top A$ is always a symmetric, positive semi-definite matrix. Its eigenvalues $\lambda_i$ are always non-negative. We derive the components of $A = U\Sigma V^\top$ as follows:</p>
+      <div class="math-block">
+        $$A^\top A = (U\Sigma V^\top)^\top (U\Sigma V^\top) = V \Sigma^\top U^\top U \Sigma V^\top = V (\Sigma^\top \Sigma) V^\top$$
+      </div>
+      <p>This reveals that the <strong>Right Singular Vectors</strong> ($V$) are the eigenvectors of $A^\top A$, and the <strong>Singular Values</strong> ($\sigma_i$) are the square roots of the eigenvalues: $\sigma_i = \sqrt{\lambda_i}$. Similarly, the left singular vectors ($U$) are the eigenvectors of $AA^\top$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>For any $A \in \mathbb{R}^{m \times n}$, we have:</p>
       <div class="math-block">
         $$A = U \Sigma V^\top$$
       </div>
-      <p>where the components provide a structural breakdown of the transformation:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>$U \in \mathbb{R}^{m \times m}$</strong>: An orthogonal matrix whose columns (left-singular vectors) represent the geometry of the output space.</li>
-        <li><strong>$\Sigma \in \mathbb{R}^{m \times n}$</strong>: A diagonal matrix of singular values $\sigma_i$, representing the "strength" of the transformation along each axis.</li>
-        <li><strong>$V \in \mathbb{R}^{n \times n}$</strong>: An orthogonal matrix whose columns (right-singular vectors) represent the geometry of the input space.</li>
-      </ul>
-      <p class="mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
+      <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
@@ -1643,7 +1826,7 @@ print(f"Singular values of A: {s}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: **Rotate, Stretch, Rotate.**</p>
+    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: <strong>Rotate, Stretch, Rotate.</strong></p>
     <ul>
       <li><strong>Concept Search (Latent Semantic Analysis)</strong>: Google and Bing don't just look for keywords; they look for "Concepts." SVD takes a giant matrix of billions of words and documents and finds the "Hidden Dimensions" (Topics). This allows the system to realize that a paper about "Quantum Computing" and a blog post about "Qubits" are semantically identical, even if they share zero identical words, because they align on the same singular value axis.</li>
       <li><strong>Top-k Image Denoising</strong>: In scientific imaging or astrophotography, pictures are often buried under a haze of sensor "noise." Since the "Real Image" is a high-rank pattern and noise is random jitter, we use SVD to keep only the top-k singular values. This mathematically "kills" the noise while keeping the sharp edges of the galaxy or the cell, essentially distilling the signal from the static.</li>
@@ -1665,17 +1848,30 @@ print(f"Singular values of A: {s}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Variance Maximization Problem</div>
-      <p>Given a centered data matrix $X \in \mathbb{R}^{n \times d}$, PCA seeks an orthogonal projection onto a $k$-dimensional subspace that captures the maximum variance. The first principal component $\mathbf{w}_1$ is the unit vector that satisfies:</p>
+      <div class="premium-def-title">Formalism: The Lagrangian & Variance Maximization</div>
+      <p>PCA is the search for the "Most Informative Projection." It finds the axis where your data points are the most spread out, preserving the "Signal" while deleting the "Noise."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Given a centered data matrix $X$ (where the average of every feature is 0), we want to find a unit direction $\mathbf{w}$ such that when we project our data onto it, the variance of the resulting points is <strong>Maximum</strong>. Geometrically, we are looking for the longest axis of the data "cloud."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The variance of the projected data $X\mathbf{w}$ is given by the quadratic form $\mathbf{w}^\top \Sigma \mathbf{w}$, where $\Sigma = \frac{1}{n} X^\top X$ is the Covariance Matrix. We want to maximize this variance subject to the constraint that $\mathbf{w}$ is a unit vector ($\mathbf{w}^\top \mathbf{w} = 1$). We set up the <strong>Lagrangian</strong>:</p>
       <div class="math-block">
-        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \|X\mathbf{w}\|^2 = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^\top \Sigma \mathbf{w}$$
+        $$\mathcal{L}(\mathbf{w}, \lambda) = \mathbf{w}^\top \Sigma \mathbf{w} - \lambda (\mathbf{w}^\top \mathbf{w} - 1)$$
       </div>
-      <p>Where $\Sigma = \frac{1}{n} X^\top X$ is the covariance matrix. The solution to this optimization problem leads to several critical properties:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Spectral Theorem</strong>: The principal components are the eigenvectors of $\Sigma$.</li>
-        <li><strong>Variance Capture</strong>: The eigenvalue $\lambda_i$ represents the variance captured by the $i$-th component.</li>
-        <li><strong>Decoupling</strong>: The transformed features (scores) are linearly uncorrelated.</li>
+      <p>Taking the derivative with respect to $\mathbf{w}$ and setting it to zero:</p>
+      <div class="math-block">
+        $$\frac{\partial \mathcal{L}}{\partial \mathbf{w}} = 2\Sigma \mathbf{w} - 2\lambda \mathbf{w} = 0 \implies \Sigma \mathbf{w} = \lambda \mathbf{w}$$
+      </div>
+      <p>This reveals a profound truth: The directions of maximum variance are exactly the <strong>Eigenvectors</strong> of the covariance matrix, and the amount of variance captured is the <strong>Eigenvalue</strong> $\lambda$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>To reduce noise, we keep the top $k$ components:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Principal Components</strong>: The eigenvectors of $\Sigma$ sorted by $\lambda$.</li>
+        <li><strong>Explained Variance</strong>: $\frac{\lambda_i}{\sum \lambda_j}$ tells you the percentage of "truth" captured by that axis.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: PCA assumes the data is centered. If you forget to subtract the mean, your first "Principal Component" will just point from the origin to the center of your data cloud—a useless direction that tells you nothing about the internal structure.</p>
     </div>
     
     <div class="callout tip">
@@ -1840,4 +2036,4 @@ print(f"Reduced Shape: {X_reduced.shape}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,n,o,r,l,d,c,h,m,p,g,u]};export{v as LINEAR_ALGEBRA_DATA};
+  `,sections:[e,t,i,a,s,n,o,r,l,h,d,c,m,p,g,u]};export{v as LINEAR_ALGEBRA_DATA};

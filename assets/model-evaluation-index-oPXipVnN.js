@@ -10,19 +10,33 @@ const e={id:"confusion-matrix",title:"Confusion Matrix",description:"A summary o
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Error Distribution Matrix</div>
-      <p>A **Confusion Matrix** is a square matrix used to describe the performance of a classifier on a set of test data. For binary classification, it is defined as a $2 \times 2$ contingency table:</p>
+      <div class="premium-def-title">Formalism: The Error Distribution Matrix & Contingency Counts</div>
+      <p>The Confusion Matrix is the "Performance Morgue." It is the raw inventory of every success and failure your model has ever made.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a doctor screening 1,000 patients for a rare disease. Some are sick, some are healthy. You make a diagnosis for each one. Geometrically, the <strong>Confusion Matrix</strong> is a 2D grid that cross-references the <strong>Ground Truth</strong> (the actual state) with your <strong>Predictions</strong>. It is a map of your model's "Confusion." It shows you exactly where the model is confident and where it is hallucinating—swapping a "Sick" person for a "Healthy" one or vice versa. It is the only place where accuracy is stripped of its lies and the raw anatomy of error is exposed.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>For a binary classification task, we organize the counts into a $2 \times 2$ table where rows represent the Actual class and columns represent the Predicted class:</p>
       <div class="math-block">
         $$\mathbf{C} = \begin{bmatrix} TN & FP \\ FN & TP \end{bmatrix}$$
       </div>
-      <p>The four quadrants represent the possible outcomes of a binary test:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TP (True Positive)</strong>: The model correctly predicted the positive class.</li>
-        <li><strong>TN (True Negative)</strong>: The model correctly predicted the negative class.</li>
-        <li><strong>FP (False Positive)</strong>: The model predicted positive for an actual negative (Type I Error).</li>
-        <li><strong>FN (False Negative)</strong>: The model predicted negative for an actual positive (Type II Error).</li>
+      <p>The four fundamental quadrants are:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>True Positives (TP)</strong>: Correctly caught the "Positive" case. (The HIT).</li>
+        <li><strong>True Negatives (TN)</strong>: Correctly identified the "Negative" case. (The CORRECT REJECTION).</li>
+        <li><strong>False Positives (FP)</strong>: Predicted positive for a negative. (TYPE I ERROR - The False Alarm).</li>
+        <li><strong>False Negatives (FN)</strong>: Predicted negative for a positive. (TYPE II ERROR - The Dangerous Miss).</li>
       </ul>
-      <p class="mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
+      <p>This matrix is the "Raw Ore" from which all other metrics are mined. For example, <strong>Recall</strong> is defined as $TP / (TP + FN)$, measuring what percentage of the "Truth" we actually captured. <strong>Precision</strong> is $TP / (TP + FP)$, measuring how much of our "Guess" was actually true.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, the Confusion Matrix is the <strong>Audit Trail</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Diagonal Dominance</strong>: In a perfect model, the "Off-Diagonal" elements (FP and FN) are zero. The stronger the "Main Diagonal," the higher the accuracy.</li>
+        <li><strong>Error Bias</strong>: By looking at whether $FP > FN$ or vice versa, you can tell if your model is "Over-Cautious" (many misses) or "Over-Eager" (many false alarms).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Imbalanced Data. If your matrix has 1,000,000 TNs and only 5 TPs, your accuracy might be 99.99%, but your model is failing to find the needle in the haystack. Never look at accuracy without looking at these raw counts first.</p>
     </div>
     
     <div class="callout tip">
@@ -159,18 +173,30 @@ print(f"\nFinal Accuracy: {accuracy:.1%}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Positive Predictive Value (PPV)</div>
-      <p>In binary classification, **Precision** is defined as the probability that a sample belongs to the positive class given that the model predicted it as positive. It is a measure of the "Purity" of positive predictions:</p>
+      <div class="premium-def-title">Formalism: Positive Predictive Value (PPV) & Prediction Purity</div>
+      <p>Precision is the metric of "Credibility." It asks a simple, brutal question: Of all the times you yelled 'Positive!', how many times were you actually right?</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a prospector panning for gold in a rushing river. You scoop up a pan full of dirt, silt, and pebbles. <strong>Precision</strong> is the ratio of actual gold nuggets you found to the total amount of "stuff" in your pan. Geometrically, it is a <strong>Venn Diagram</strong> of Overlap: it measures the intersection of your predictions with the ground truth, but it scales that intersection by the size of your *Predicted Positive* circle. It ignores everything you correctly ignored (True Negatives) and only judges the quality of your *Actions*. It is the metric of purity—it tells you how much of your "Signal" is actually "Truth."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Precision is formally known as the <strong>Positive Predictive Value (PPV)</strong>. It is defined as the conditional probability that a sample is positive given that the model predicted it as positive:</p>
       <div class="math-block">
-        $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1) = \frac{TP}{TP + FP}$$
+        $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1)$$
       </div>
-      <p>The components of the precision estimate are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TP (True Positives)</strong>: Samples correctly identified as positive.</li>
-        <li><strong>FP (False Positives)</strong>: Samples wrongly identified as positive (Type I Error).</li>
-        <li><strong>Trade-off</strong>: Precision is often inversely related to **Recall**. Increasing the classification threshold (being "stricter") increases precision by reducing false alarms, but at the risk of missing genuine signals.</li>
+      <p>Using the tallies from the confusion matrix, we calculate it as:</p>
+      <div class="math-block">
+        $$\text{Precision} = \frac{TP}{TP + FP}$$
+      </div>
+      <p>A model with high precision is often described as <strong>Conservative</strong> or <strong>Callous</strong>. It only says "Yes" when it is extremely sure. By raising your classification threshold (being "stricter"), you essentially shrink your "Predicted Positive" circle, which reduces False Positives and boosts Precision—but it usually costs you in terms of Recall.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, Precision is the <strong>Commitment Test</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quality over Quantity</strong>: High precision guarantees that your "Positive" labels are trustworthy, even if you miss many positive instances.</li>
+        <li><strong>Cost of Error</strong>: Precision is the king of metrics when the cost of a "False Alarm" is high. If you're a judge deciding a sentence, you want precision to be $100\%$. You'd rather let a guilty person go than put an innocent one in jail.</li>
       </ul>
-      <p class="mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Precision Blindness. You can have $100\%$ precision by predicting "Positive" for only the single most obvious sample in the entire dataset and ignoring the other 9,999. In this case, your model is perfectly "Right" but functionally useless because it has no coverage.</p>
     </div>
     
     <div class="callout tip">
@@ -297,18 +323,30 @@ print(f"Credibility: 3 correct out of 4 positive guesses.")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Sensitivity / True Positive Rate (TPR)</div>
-      <p>In binary classification, **Recall** is defined as the probability that a sample is predicted as positive given that it truly belongs to the positive class. It is a measure of the model's "Completeness":</p>
+      <div class="premium-def-title">Formalism: Sensitivity / True Positive Rate (TPR) & Truth Inclusion</div>
+      <p>Recall is the metric of "Thoroughness." It doesn't care about your false alarms; it only cares about exactly how much of the truth you successfully retrieved.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a fisherman in a massive pond full of 1,000 fish. You want to catch every single one. <strong>Recall</strong> is the ratio of fish you actually caught in your net to the total number of fish that exist in the pond. Geometrically, it is a <strong>Venn Diagram</strong> of Inclusion: it measures the intersection of your predictions with the truth, but it scales that intersection by the size of the *Actual Positive* circle (the Truth). It ignores your "False Alarms" (False Positives) and focuses entirely on your "Misses" (False Negatives). It is the metric of quantity—it tells you how much of the reality you successfully accounted for.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Recall is formally known as <strong>Sensitivity</strong> or the <strong>True Positive Rate (TPR)</strong>. It is defined as the conditional probability that a sample is predicted as positive given that it truly belongs to the positive class:</p>
       <div class="math-block">
-        $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1) = \frac{TP}{TP + FN}$$
+        $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1)$$
       </div>
-      <p>The components of the recall estimate are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TP (True Positives)</strong>: Actual positive samples correctly identified as such.</li>
-        <li><strong>FN (False Negatives)</strong>: Actual positive samples incorrectly labeled as negative (Type II Error).</li>
-        <li><strong>Inclusion Property</strong>: Recall is independent of the number of **False Positives**. It strictly focuses on the "Inclusion" of all positive samples, even at the cost of capturing irrelevant noise (mislabeling negatives).</li>
+      <p>Using the tallies from the confusion matrix, we calculate it as:</p>
+      <div class="math-block">
+        $$\text{Recall} = \frac{TP}{TP + FN}$$
+      </div>
+      <p>A model with high recall is often described as <strong>Obsessive</strong> or <strong>Aggressive</strong>. It shouts "Yes!" at almost everything just to be absolutely sure it doesn't miss a single positive instance. By lowering your classification threshold (being "more inclusive"), you essentially expand your "Predicted Positive" circle, which reduces False Negatives and boosts Recall—but at the cost of your Precision.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, Recall is the <strong>Safety Check</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quantity over Quality</strong>: High recall guarantees that you've captured most of the "Truth," even if your predictions are messy and full of noise.</li>
+        <li><strong>Cost of Failure</strong>: Recall is the primary metric when the cost of a "Miss" (a False Negative) is catastrophic. If you're a doctor screening for a terminal disease, you want recall to be $100\%$. You'd rather have ten false alarms than let one person go home undiagnosed.</li>
       </ul>
-      <p class="mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Recall Triviality. You can achieve a perfect $100\%$ recall by simply predicting "Positive" for every single sample in the universe. In this case, your model is perfectly "Thorough" but functionally useless because it has no selectivity.</p>
     </div>
     
     <div class="callout tip">
@@ -440,19 +478,29 @@ print(f"Thoroughness: {recall*100:.0f}% of actual targets found.")
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Harmonic Mean Reconciliation</div>
-      <p>The **F1 Score** is a single-number measure of classification performance that reconciles the trade-off between Precision ($P$) and Recall ($R$). It is defined as the harmonic mean of the two:</p>
+      <p>The F1-Score is the "Balanced Diplomat." It is the metric that refuses to ignore a failure in either quality or quantity.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to build a bridge across a massive valley. You have two main cables: <strong>Precision</strong> (how correctly you place each bolt) and <strong>Recall</strong> (how much of the gap you actually span). If one cable is perfectly engineered but the other is missing, the bridge collapses. Geometrically, the <strong>F1-Score</strong> is the <strong>Harmonic Mean</strong> of these two cables. It is the "Anchor of Equilibrium." Unlike a regular average, which can be inflated by one strong value, the F1-Score is pulled down by the "Weakest Link." It is the metric of pure, balanced competence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The F1-Score is derived from Precision ($P$) and Recall ($R$). We use the harmonic mean because we are dealing with rates and ratios. The reciprocal of the F1-Score is the average of the reciprocals of $P$ and $R$:</p>
       <div class="math-block">
-        $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+        $$\frac{1}{F_1} = \frac{1}{2} \left( \frac{1}{P} + \frac{1}{R} \right)$$
       </div>
-      <p>The mathematical properties that make F1 superior to a simple average include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Sensitivity to Extremes</strong>: The harmonic mean is closer to the minimum of the two values. If either $P$ or $R$ drops to zero, the $F_1$ score drops to zero, correctly signaling a total failure of the model.</li>
-        <li><strong>Robustness to Skew</strong>: In imbalanced datasets where one class dominates, F1 measures performance on the "Case of Interest" (the positive class) without being inflated by the "Easy" negative predictions.</li>
-        <li><strong>Generalized Form ($F_\beta$)</strong>: The score can be weighted to emphasize one metric over the other using a $\beta$ parameter:
-          $$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R}$$
-        </li>
+      <p>Rearranging this gives us the familiar formula:</p>
+      <div class="math-block">
+        $$F_1 = 2 \cdot \frac{P \cdot R}{P + R}$$
+      </div>
+      <p>Why not use a simple average (Arithmetic Mean)? Because the Arithmetic Mean is too forgiving. If a model has $1.0$ Precision but $0.0$ Recall, the Arithmetic Mean is $0.5$ (passing grade). But a model that finds *zero* actual cases is useless. The Harmonic Mean correctly identifies this as a failure, yielding an F1-Score of $0$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, F1 is the <strong>Sanity Test</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Balance Requirement</strong>: To get a high F1-Score, you *must* have both high Precision and high Recall. You cannot "fake" a good score by excelling in only one area.</li>
+        <li><strong>Skew Robustness</strong>: For highly imbalanced datasets (e.g., detecting rare fraud), F1 ignores the "Easy" True Negatives and focuses entirely on how well the model handles the positive class.</li>
       </ul>
-      <p class="mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Precision-Recall Trade-off. You rarely get both for free. Increasing your threshold usually boosts Precision but kills Recall. F1 helps you find the "Nirvana" point where the two are most harmoniously balanced.</p>
     </div>
     
     <div class="callout tip">
@@ -581,20 +629,31 @@ print(f"F1 Final Score: {f1:.2f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Threshold Sweep Function</div>
-      <p>An **ROC Curve** represents the diagnostic ability of a binary classifier as its discrimination threshold is varied. Let $f(\mathbf{x})$ be the score assigned to an input $\mathbf{x}$. For a threshold $\tau$, the prediction is $\hat{y} = 1$ if $f(\mathbf{x}) \ge \tau$. The curve is the set of points defined by:</p>
-      
-      <div class="math-block">
-        $$\text{ROC} = \{ (FPR(\tau), TPR(\tau)) \mid \tau \in (-\infty, \infty) \}$$
-      </div>
-      
-      <p>The axes are defined by conditional probabilities:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>True Positive Rate (TPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=1)$. This measures the probability of detecting a positive instance correctly.</li>
-        <li><strong>False Positive Rate (FPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=0)$. This measures the probability of a "False Alarm" in the negative class.</li>
+      <div class="premium-def-title">Formalism: The Threshold Sweep Function & Operational Characteristic</div>
+      <p>The ROC Curve is the "Decision Map." It shows you every possible choice you could make and exactly what it will cost you in false alarms.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a lens-maker trying to find the perfect focus. As you turn the dial (the classification threshold), the image shifts. Some details become sharp (True Positives), but other parts become blurry and distorted (False Positives). Geometrically, the <strong>ROC Curve</strong> (Receiver Operating Characteristic) is the trace of this dial in a 2D space. It is a plot of <strong>Sensitivity</strong> (TPR) against <strong>1 - Specificity</strong> (FPR). It shows the evolution of your model's behavior as you move from "Extreme Over-Caution" to "Extreme Over-Aggression." It is the physical border of your model's competence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>For a classifier that returns a continuous score $f(x)$ (like a probability) and a chosen threshold $\tau$, we define two sliding functions:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>True Positive Rate ($\tau$)</strong>: $TPR(\tau) = P(f(x) \ge \tau \mid y=1)$. (What percentage of actual gold are we catching?)</li>
+        <li><strong>False Positive Rate ($\tau$)</strong>: $FPR(\tau) = P(f(x) \ge \tau \mid y=0)$. (What percentage of dirt are we mislabeling as gold?)</li>
       </ul>
-      
-      <p class="mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
+      <p>The ROC curve is the parametric set of points generated by sweeping $\tau$ from $1.0$ down to $0.0$:</p>
+      <div class="math-block">
+        $$\text{ROC} = \{ (FPR(\tau), TPR(\tau)) \mid \tau \in [0, 1] \}$$
+      </div>
+      <p>The "Ideal Point" is $(0, 1)$, representing perfect classification. The "Random Line" is the diagonal $y=x$, where every 1% gain in signal costs exactly 1% gain in noise. If your curve is below this line, your model is literally worse than a coin flip—it has a "Broken Compass."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, the ROC Curve is the <strong>Trade-off Frontier</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Convexity</strong>: A well-behaved classifier has a convex ROC curve that "Bows" toward the top-left corner. Any "dents" in the curve suggest the model is making contradictory decisions at those thresholds.</li>
+        <li><strong>The Knee</strong>: The "elbow" or "knee" of the curve is usually the optimal operating point—the threshold that provides the best bank for your buck (maximized TPR for minimized FPR).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Score Distributions. The shape of the ROC curve is determined entirely by the overlap of your model's score distributions for the two classes. If the "Sick" and "Healthy" distributions are tightly separated, the ROC curve will hug the top-left corner. If they overlap completely, you get a diagonal line.</p>
     </div>
     
     <div class="callout tip">
@@ -725,24 +784,30 @@ print(f"\nModel Capability: Distinguishing power across all settings.")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Ranking Probability (Wilcoxon-Mann-Whitney)</div>
-      <p>The **Area Under the Curve (AUC)** is the integral of the True Positive Rate (TPR) function with respect to the False Positive Rate (FPR). It represents the aggregate measure of performance across all possible classification thresholds:</p>
-      
+      <div class="premium-def-title">Formalism: The Ranking Integral & Separability Power</div>
+      <p>AUC (Area Under the Curve) is the "Grade of the Model." It measures a model's fundamental ability to separate truth from noise, regardless of the classification threshold.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a general in a war room, and you have to decide at what distance to fire at an incoming plane. If you set the threshold too low, you waste ammo on birds (<strong>False Positives</strong>). If you set it too high, the enemy plane hits you (<strong>False Negatives</strong>). Geometrically, the <strong>ROC Curve</strong> (Receiver Operating Characteristic) is the plot of this trade-off. The <strong>AUC</strong> is the total area under that curve. It represents the physical space of "Model Competence"—it is the only metric that tells you how well your model ranks the world, independent of where you decide to draw the line of action.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>AUC is defined as the integral of the True Positive Rate (TPR) with respect to the False Positive Rate (FPR):</p>
       <div class="math-block">
         $$\text{AUC} = \int_{0}^{1} TPR(FPR^{-1}(u)) \, du$$
       </div>
-      
-      <p>Beyond integration, AUC has a critical probabilistic interpretation. Let $f(\mathbf{x}_+)$ be the model's score for a random positive instance and $f(\mathbf{x}_-)$ the score for a random negative instance. Then:</p>
+      <p>Beyond the calculus, AUC has a beautiful probabilistic identity known as the <strong>Wilcoxon-Mann-Whitney Statistic</strong>. Let $f(x^+)$ be the model's confidence score for a random positive instance and $f(x^-)$ be the score for a random negative instance. Then:</p>
       <div class="math-block">
-        $$\text{AUC} = \mathbb{P}(f(\mathbf{x}_+) > f(\mathbf{x}_-))$$
+        $$\text{AUC} = P(f(x^+) > f(x^-))$$
       </div>
+      <p>This means if you pick one random "Sick" person and one random "Healthy" person, AUC is the probability that your model will correctly rank the sick person with a higher risk score than the healthy one. It is the measure of pure <strong>Ranking Accuracy</strong>.</p>
 
-      <ul class="mt-2 space-y-1">
-        <li><strong>Separation Power</strong>: $\text{AUC} = 1.0$ implies a perfectly separated distribution where the lowest-scoring positive still ranks higher than the highest-scoring negative.</li>
-        <li><strong>Random Baseline</strong>: $\text{AUC} = 0.5$ implies the distributions are overlapping and the model has no discriminative power (equivalent to a coin flip).</li>
-        <li><strong>Invariance</strong>: AUC is invariant to the classification threshold and invariant to the prior class distribution (class skew).</li>
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, AUC is the <strong>Integrity Check</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Threshold Invariance</strong>: Accuracy changes if you move the goalposts (the threshold). AUC does not. It evaluates the model across *all* possible goalposts at once.</li>
+        <li><strong>Class Invariance</strong>: If your data is 99.9% one class (e.g., fraud detection), a model can be 99.9% "accurate" by doing nothing. But its AUC will be $0.5$—telling you the model is actually useless.</li>
       </ul>
-      <p class="mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Calibration. A model can have a perfect AUC of 1.0 but be "Uncalibrated." It might rank every positive higher than every negative, but if its predicted probabilities are always $0.51$ and $0.49$, the model is technically correct but lacks the confidence for real-world decision making.</p>
     </div>
     
     <div class="callout tip">

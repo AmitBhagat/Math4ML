@@ -10,20 +10,33 @@ const t={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: First-Order Empirical Risk Minimization</div>
-      <p>Gradient Descent is an iterative optimization algorithm used to minimize a differentiable objective function $J(\theta)$ by updating parameters in the opposite direction of the gradient. The update rule at step $t$ is:</p>
-      
+      <div class="premium-def-title">Formalism: First-Order Taylor Approximation & The Descent Vector</div>
+      <p>Gradient Descent is "Greedy Minimization." It tells you the exact direction to walk to reduce your error as fast as possible in the next step.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are standing on a multivariable loss surface $J(\theta)$. At your current location, the <strong>Gradient</strong> $\nabla J(\theta)$ is a vector that points in the direction of the steepest <strong>Ascent</strong> (the fastest way up the mountain). Geometrically, if you want to reach the bottom of the valley, you must move in the exact opposite direction. The gradient is always orthogonal (perpendicular) to the <strong>Level Sets</strong> (contour lines) of the function, ensuring you are always taking the most direct path downward at any given moment.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the update rule using a <strong>First-Order Taylor Expansion</strong>. If we take a tiny step $\Delta \theta$, the change in our loss is approximately:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta \nabla_\theta J(\theta_t)$$
+        $$J(\theta + \Delta \theta) \approx J(\theta) + \nabla J(\theta)^T \Delta \theta$$
       </div>
-      
-      <p>The components of the update are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>$\nabla_\theta J(\theta)$ (The Gradient)</strong>: The vector of partial derivatives $\left[ \frac{\partial J}{\partial \theta_1}, \dots, \frac{\partial J}{\partial \theta_d} \right]^\top$. It points in the direction of the steepest local increase.</li>
-        <li><strong>$\eta$ (Learning Rate)</strong>: A positive scalar determining the step size. If $\eta$ is too large, the algorithm may overshoot the minimum; if too small, convergence becomes computationally prohibitive.</li>
+      <p>To make the loss decrease, we need the term $\nabla J(\theta)^T \Delta \theta$ to be as negative as possible. The <strong>Cauchy-Schwarz Inequality</strong> proves that for a fixed step-size magnitude, this term is minimized when $\Delta \theta$ points in the exact opposite direction of the gradient:</p>
+      <div class="math-block">
+        $$\Delta \theta = -\eta \nabla J(\theta)$$
+      </div>
+      <p>This leads to the fundamental <strong>Gradient Descent Update Rule</strong>:</p>
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta \nabla J(\theta_t)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Gradient Descent is our <strong>Main Engine</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Vanilla Gradient Descent</strong>: Uses the entire dataset to calculate one gradient. It is perfectly stable but painfully slow and memory-intensive for modern data.</li>
+        <li><strong>The Learning Rate ($\eta$)</strong>: This is the most sensitive knob in AI. If $\eta$ is too high, you overstep the valley and "explode" up the other side. If it's too low, the model takes years to learn anything.</li>
       </ul>
-      
-      <p class="mt-2">For a **Convex** function, gradient descent is guaranteed to reach the global minimum. In deep learning (non-convex surfaces), the algorithm typically converges to a high-quality local minimum or a saddle point.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Gradient Descent can get stuck in <strong>local minima</strong> or <strong>saddle points</strong>. In high-dimensional spaces, a point might look like a minimum in 9 dimensions but a maximum in the 10th. We use techniques like <strong>Momentum</strong> to "punch through" these deceptive flat areas.</p>
     </div>
     
     <div class="callout tip">
@@ -129,21 +142,30 @@ for i in range(10):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Stochastic Finite-Sum Optimization</div>
-      <p>Stochastic Gradient Descent (SGD) is a version of gradient descent where the gradient of the objective function $J(\theta) = \frac{1}{n} \sum_{i=1}^n f_i(\theta)$ is approximated using a single randomly selected sample $i_t$ at each iteration:</p>
-      
+      <div class="premium-def-title">Formalism: Unbiased Estimators & Stochastic Finite-Sums</div>
+      <p>SGD is "Fast Estimation." It replaces the perfect, slow truth with a fast, noisy guess that averages out to the truth over time.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a massive mountain range representing your loss function across 1 million data points. <strong>Batch Gradient Descent</strong> waits until it has surveyed every single pebble on every slope before taking one perfect step. <strong>Stochastic Gradient Descent (SGD)</strong> looks at just one pebble (or a small batch) and moves immediately. Geometrically, this transforms the smooth "water-flow" descent into a jittery, zig-zagging <strong>Random Walk</strong>. However, this noise is a feature—the "kinetic energy" from the jittering helps the model vibrate out of shallow local minima (traps) that would have permanently stuck a perfect algorithm.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Our objective is the average loss over $n$ samples: $J(\theta) = \frac{1}{n} \sum_{i=1}^n Q_i(\theta)$. The true gradient is the average of all individual gradients. In SGD, we sample a random index $i$ and use the gradient of that single point as an approximation:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta \nabla_\theta f_{i_t}(\theta_t)$$
+        $$\theta_{t+1} = \theta_t - \eta \nabla Q_i(\theta_t)$$
       </div>
-      
-      <p>The mathematical properties that distinguish SGD from Batch GD include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Unbiased Estimation</strong>: The stochastic gradient is an unbiased estimator of the true gradient, meaning $\mathbb{E}[\nabla f_{i_t}(\theta_t)] = \nabla J(\theta_t)$. On average, the algorithm moves in the correct direction.</li>
-        <li><strong>Stochastic Noise</strong>: The variance in the gradient estimate introduces "jitter" into the optimization path. This noise acts as a natural regularizer, allowing the model to "jump" out of shallow local minima and find flatter, more generalizable minima.</li>
-        <li><strong>Convergence</strong>: Convergence to a stationary point is guaranteed under the **Robbins-Monro conditions** (e.g., using a decaying learning rate).</li>
+      <p>The core mathematical justification is that the stochastic gradient is an <strong>Unbiased Estimator</strong> of the true gradient. In expectation, the "mean" direction is correct:</p>
+      <div class="math-block">
+        $$\mathbb{E}[\nabla Q_i(\theta)] = \frac{1}{n} \sum_{i=1}^n \nabla Q_i(\theta) = \nabla J(\theta)$$
+      </div>
+      <p>Even though any individual step might be "wrong," the net movement over many steps converges to the same destination as Batch GD, but millions of times faster.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we almost always use <strong>Mini-batch SGD</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Batch Size ($B$)</strong>: We average the gradient over a small group (e.g., 32 or 64 samples). This reduces the variance of the estimate while still being fast enough to fit in GPU memory.</li>
+        <li><strong>Online Stability</strong>: SGD is the only way to train on data streams that never stop (e.g., social media feeds), as it doesn't requires seeing the "end" of the data to start learning.</li>
       </ul>
-      
-      <p class="mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
+      <p class="mt-4 italic text-sm">Gotcha: SGD requires a <strong>Decaying Learning Rate</strong>. If you don't slow down as you approach the minimum, the "jitter" will eventually prevent you from ever landing in the center, and you will just orbit the minimum forever.</p>
     </div>
     
     <div class="callout tip">
@@ -258,21 +280,30 @@ print(f"Final Weights: {w[0]:.4f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Fundamental Theorem of Global Optimality</div>
-      <p>A convex optimization problem involves minimizing a convex objective function $f_0(\mathbf{x})$ subject to convex inequality constraints $f_i(\mathbf{x}) \le 0$ and linear equality constraints $\mathbf{Ax} = \mathbf{b}$.</p>
-      
-      <div class="math-block">
-        $$\text{minimize } f_0(\mathbf{x}) \text{ s.t. } f_i(\mathbf{x}) \le 0, \quad i=1,\dots,m$$
-      </div>
+      <div class="premium-def-title">Formalism: The Linear Interpolation & Positive Curvature</div>
+      <p>Convexity is the "Mathematical Guarantee." It ensures that your optimization engine isn't just "Lost in a Maze," but is sliding toward the absolute center of a bowl.</p>
 
-      <p>The core mathematical foundations include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Convex Set ($\mathcal{C}$)</strong>: A set where every line segment connecting two points in the set is entirely contained within the set: $\forall \mathbf{x}, \mathbf{y} \in \mathcal{C}, \forall \theta \in [0, 1] \implies (1-\theta)\mathbf{x} + \theta\mathbf{y} \in \mathcal{C}$.</li>
-        <li><strong>Convex Function</strong>: A function $f$ whose epigraph is a convex set, satisfying <strong>Jensen's Inequality</strong>: $f((1-\theta)\mathbf{x} + \theta\mathbf{y}) \le (1-\theta)f(\mathbf{x}) + \theta f(\mathbf{y})$.</li>
-        <li><strong>The Global Property</strong>: For a convex function on a convex domain, any **local minimum is also the global minimum**. This property ensures that first-order methods (like Gradient Descent) will never converge to a sub-optimal basin.</li>
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the graph of a function. A function is <strong>Convex</strong> if the area "above" the curve (the <strong>Epigraph</strong>) forms a convex set. In plain English: if you pick any two points on the curve and draw a straight line between them, the curve must always stay *below* that line. Geometrically, this means the surface never "wiggles" or "dips" back up once it starts going down. It is a one-way trip to the bottom. </p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The core definition relies on <strong>Jensen's Inequality</strong>. For any two points $\mathbf{x}, \mathbf{y}$ in the domain and any $\lambda \in [0, 1]$:</p>
+      <div class="math-block">
+        $$f(\lambda \mathbf{x} + (1-\lambda)\mathbf{y}) \le \lambda f(\mathbf{x}) + (1-\lambda)f(\mathbf{y})$$
+      </div>
+      <p>However, for a practitioner, the <strong>Second-Order Condition</strong> is the real proof. A twice-differentiable function is convex if and only if its <strong>Hessian Matrix</strong> (the matrix of second derivatives) is <strong>Positive Semi-Definite</strong> ($PSD$) for all $x$:</p>
+      <div class="math-block">
+        $$\nabla^2 f(\mathbf{x}) \succeq 0$$
+      </div>
+      <p>This is the literal proof of "Upward Curvature." If the floor of your loss landscape is always bending "up," you can never have a secret peak (local maxima) or a deceptive pit (local minima other than the global one).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Convexity is the boundary between <strong>Reliably Solved</strong> and <strong>Heuristically Trained</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Regression & SVMs</strong>: These are convex. If you have enough compute time, you will find the one true set of weights that minimizes your error. No "Luck" is required.</li>
+        <li><strong>Neural Networks</strong>: These are <strong>Non-Convex</strong>. Every time you train a model like GPT, you are navigating a nightmare landscape. You never find the "Best" solution; you just find one that is "Good enough to ship."</li>
       </ul>
-      
-      <p class="mt-2">Convexity is the gold standard for reliability in optimization, utilized extensively in Linear Regression, Logistic Regression, and Support Vector Machines.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Many people think that adding "more features" helps optimization. In reality, as you add dimensions, it is actually much <strong>harder</strong> to maintain convexity. Most modern ML lives in the non-convex wild west, relying on momentum and luck to find the bottom.</p>
     </div>
     
     <div class="callout tip">
@@ -376,20 +407,37 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Structural Risk Minimization (Complexity Penalty)</div>
-      <p>Regularization involves minimizing a modified objective function $\tilde{J}$ that incorporates a penalty term $\Omega(\theta)$ based on model complexity:</p>
-      
-      <div class="math-block">
-        $$\tilde{J}(\theta) = J(\theta) + \lambda \Omega(\theta)$$
-      </div>
-      
-      <p>Two primary paradigms dominate the field:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>L2 Regularization (Ridge)</strong>: $\Omega(\theta) = \frac{1}{2} \|\theta\|_2^2$. This adds a quadratic penalty that discourages high-magnitude weights, equivalent to assuming a Gaussian prior $P(\theta) \sim \mathcal{N}(0, \sigma^2)$. It results in **Weight Decay**.</li>
-        <li><strong>L1 Regularization (Lasso)</strong>: $\Omega(\theta) = \|\theta\|_1$. This adds an absolute magnitude penalty, equivalent to a Laplace prior. Because the L1 norm has a singular derivative at zero, it promotes **Sparsity**, effectively zeroing out irrelevant features.</li>
+      <div class="premium-def-title">Formalism: The MAP Dual-Perspective & Norm Geometry</div>
+      <p>Regularization is "Complexity Management." It is the mathematical process of forcing your model to justify every bit of complexity it uses.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the <strong>Loss Contours</strong> of your model (e.g., the rings of an MSE objective). The "Pure" solution wants to reach the absolute center of these rings. Now, imagine a <strong>Constraint Region</strong> centered at zero. </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L2 Geometry (The Sphere)</strong>: The constraint is a smooth ball. The loss rings will touch the ball at a point where the weights are small and distributed. </li>
+        <li><strong>L1 Geometry (The Diamond)</strong>: The constraint has "Sharp Corners" on the axes. Because of these corners, the loss rings are mathematically biased to "hit" the axis. Geometrically, this forces some weights to become exactly zero, creating <strong>Sparsity</strong>.</li>
       </ul>
-      
-      <p class="mt-2">The hyperparameter $\lambda$ (Lambda) determines the strength of the constraint. High $\lambda$ leads to **Underfitting** (too much bias); low $\lambda$ leads to **Overfitting** (too much variance).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Regularization is best understood through the <strong>MAP Perspective</strong>. We start by assuming a <strong>Prior Distribution</strong> for our weights $w$. If we assume weights are small and normally distributed (Gaussian prior):</p>
+      <div class="math-block">
+        $$P(w) \sim \mathcal{N}(0, \sigma^2) \implies \ln P(w) \propto -\frac{1}{2\sigma^2} \|w\|_2^2$$
+      </div>
+      <p>This gives us <strong>L2 Regularization (Weight Decay)</strong>. However, if we assume a Laplace prior (which is peaked sharply at zero):</p>
+      <div class="math-block">
+        $$P(w) \propto e^{-\frac{|w|}{b}} \implies \ln P(w) \propto -\lambda \|w\|_1$$
+      </div>
+      <p>This gives us <strong>L1 Regularization (Lasso)</strong>. The total regularized loss is simply the original loss plus this log-prior penalty:</p>
+      <div class="math-block">
+        $$J_{reg}(\theta) = J(\theta) + \lambda \Omega(\theta)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Choosing your norm is a <strong>Strategic Decision</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L2 for Stability</strong>: Use L2 when you have many correlated features and you want to keep them all, but keep them quiet. It prevents individual weights from "Exploding."</li>
+        <li><strong>L1 for Sparsity</strong>: Use L1 when you have 1,000 features but you suspect only 10 actually matter. It performs <strong>Feature Selection</strong> by literally deleting the noise.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Regularization is a "Bias-Variance" trade. By adding a penalty, you are intentionally adding <strong>Bias</strong> (making the model too simple) in exchange for a massive reduction in <strong>Variance</strong> (making the model more stable). If $\lambda$ is too high, your model will be "Stubborn" and fail to learn anything.</p>
     </div>
     
     <div class="callout tip">

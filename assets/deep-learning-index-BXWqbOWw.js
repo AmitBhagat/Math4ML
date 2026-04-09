@@ -10,16 +10,34 @@ const e={id:"perceptron",title:"The Perceptron",description:"The simplest form o
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Artificial Neuron</div>
-      <p>A Perceptron is a binary classifier that maps an input vector $\mathbf{x} \in \mathbb{R}^d$ to an output $f(\mathbf{x}) \in \{0, 1\}$. The output is calculated as:</p>
+      <div class="premium-def-title">Formalism: The Linear Hyperplane & Convergence Logic</div>
+      <p>The Perceptron is the "Elementary Judge." It is the atomic unit of a neural network, performing the simplest possible form of classification.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have a bowl of red and blue marbles on a table and you want to separate them with a single straight ruler. The <strong>Perceptron</strong> is that ruler. Geometrically, it is a <strong>Linear Hyperplane</strong>—a flat surface that cuts a high-dimensional space into two half-spaces. One side of the ruler is "Yes" (1) and the other is "No" (0). It is the mathematical absolute of binary logic. However, its fatal flaw is that it can only solve problems that are <strong>Linearly Separable</strong>. If the data is mixed like a marble cake, a single ruler can never separate it.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The Perceptron takes an input vector $\mathbf{x} \in \mathbb{R}^d$ and performs a weighted sum plus a "Level of Grumpiness" (Bias):</p>
       <div class="math-block">
-        $$f(\mathbf{x}) = \begin{cases} 1 & \text{if } \sum_{i=1}^d w_i x_i + b > 0 \\ 0 & \text{otherwise} \end{cases}$$
+        $$z = \mathbf{w}^T \mathbf{x} + b$$
       </div>
-      <p>The model learns by iteratively updating its weights $\mathbf{w}$ whenever the predicted $\hat{y}$ differs from the ground truth $y$:</p>
+      <p>It then passes this sum through a <strong>Heaviside Step Function</strong> to force a binary decision:</p>
+      <div class="math-block">
+        $$\hat{y} = \begin{cases} 1 & \text{if } z \geq 0 \\ 0 & \text{if } z < 0 \end{cases}$$
+      </div>
+      <p>The "Learning" happens through a simple recursive rule. If the prediction $\hat{y}$ is wrong ($y \neq \hat{y}$), we "Nudge" the weights in the direction of the error:</p>
       <div class="math-block">
         $$\mathbf{w}_{t+1} = \mathbf{w}_t + \eta(y - \hat{y})\mathbf{x}$$
       </div>
-      <p class="mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
+      <p>The <strong>Perceptron Convergence Theorem</strong> guarantees that if a solution exists (the data is separable), this algorithm *will* find it in a finite number of steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, the Perceptron is the <strong>Binary Building Block</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Bound</strong>: It can only model "OR", "AND", and "NOT" logic. It cannot model "XOR" because an OR gate where both inputs can't be true is not a straight-line problem.</li>
+        <li><strong>Hard Threshold</strong>: Unlike modern neurons that use smooth curves (Sigmoid/ReLU), the Perceptron is a "Hard Switch." This makes it impossible to use with Backpropagation because its derivative is zero almost everywhere.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Infinite Loops. If your data cannot be separated by a straight line, the Perceptron will cycle through its weights forever, never finding peace. This "Crisis of 1969" almost killed AI research for a decade.</p>
     </div>
     
     <div class="callout tip">
@@ -128,12 +146,28 @@ print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Feedforward Neural Network</div>
-      <p>A Multilayer Perceptron is a directed graph consisting of multiple layers of nodes. For an input vector $\mathbf{x}$, the activation $\mathbf{a}^{(l)}$ of layer $l$ is determined by the weights $\mathbf{W}^{(l)}$ and biases $\mathbf{b}^{(l)}$ of that layer:</p>
+      <div class="premium-def-title">Formalism: Compositional Warping & Hierarchical Logic</div>
+      <p>MLPs are "Manifold Benders." They take a space where data is messy and tangled, and recursively unfold it until the truth is obvious.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have two classes of data tangled together like spaghetti—perhaps one is a circle nested inside a ring. A single line can never separate them. A <strong>Multilayer Perceptron (MLP)</strong> is a stack of mathematical "Warps." Geometrically, every hidden layer performs a rigid rotation and stretch (Linear) followed by a "Bend" or "Fold" (Non-Linearity). Layer by layer, the spaghetti is straightened out. By the time the signal reaches the final layer, the space has been warped so thoroughly that a simple straight line is enough to separate the classes perfectly. It is the art of <strong>Recursive Simplification</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An MLP is defined as a sequence of nested transformations. For an $L$-layer network, the output is calculated through a forward-pass recursion:</p>
       <div class="math-block">
-        $$\mathbf{a}^{(l)} = \sigma\left( \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)} \right)$$
+        $$\mathbf{h}_0 = \mathbf{x} \in \mathbb{R}^d$$
+        $$\mathbf{h}_l = \sigma(\mathbf{W}_l \mathbf{h}_{l-1} + \mathbf{b}_l) \quad \text{for } l=1, \dots, L-1$$
+        $$\hat{\mathbf{y}} = \phi(\mathbf{W}_L \mathbf{h}_{L-1} + \mathbf{b}_L)$$
       </div>
-      <p>Where $\mathbf{a}^{(0)} = \mathbf{x}$ and $\sigma$ is a non-linear activation function. According to the **Universal Approximation Theorem**, a network with a single hidden layer and sufficient width can approximate any continuous function $f: \mathbb{R}^d \to \mathbb{R}^m$ to arbitrary precision.</p>
+      <p>Where $\mathbf{W}_l$ is the weight matrix, $\mathbf{b}_l$ is the bias vector, $\sigma$ is a hidden activation (ReLU/Tanh), and $\phi$ is the output activation (Softmax/Sigmoid). The <strong>Universal Approximation Theorem</strong> proves that such a structure, with even a single hidden layer and enough neurons, can approximate *any* continuous function $f: \mathbb{R}^d \to \mathbb{R}^m$. In plain English: the MLP is a "Mathematical Clay" that can take the shape of any logic, no matter how complex.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, MLPs are the <strong>Baseline Sages</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Dense Connectivity</strong>: Every neuron in layer $l$ talks to every neuron in $l+1$. This means the MLP is powerful but "Naive"—it has no built-in knowledge of spatial (CNN) or temporal (RNN) order. It treats all features as equal until proven otherwise.</li>
+        <li><strong>Hidden Representations</strong>: The hidden layers are "Internal Dialects." They represent the data in a way that is optimized for the final decision, often revealing hidden correlations that a human could never spot in the raw features.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Overfitting. Because an MLP is a universal function approximator, it's very good at "memorizing" individual data points instead of learning general rules. Without regularization (like Dropout), your MLP will become a master of your training set but a total failure in the real world.</p>
     </div>
     
     <div class="callout tip">
@@ -225,7 +259,7 @@ for i, test in enumerate(test_cases):
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the structure, but how do we "Train" the Jury? Explore the algorithm that powers all AI: <strong><a href="#/machine-learning/deep-learning/backpropagation">Backpropagation</a></strong>.
     </div>
-  `},i={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
+  `},a={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Learning</div>
       <h1>Backpropagation: The Blame Game</h1>
@@ -237,16 +271,33 @@ for i, test in enumerate(test_cases):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Gradient of the Chain Rule</div>
-      <p>Backpropagation computes the gradient of the loss function $\mathcal{L}$ with respect to the weights $\mathbf{W}$ of the network. For a weight $w_{ij}^{(l)}$ in layer $l$, the gradient is the product of the input $a_i^{(l-1)}$ and the local error term $\delta_j^{(l)}$:</p>
+      <div class="premium-def-title">Formalism: The Gradient Waterfall & Recursive Blame</div>
+      <p>Backpropagation is "Calculus in Reverse." It is a dynamic programming algorithm that efficiently propagates error signals from the output back to the input.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your Neural Network as a multi-layered waterfall. During the Forward Pass, data flows down from the source (the Input) to the pool at the bottom (the Output). If the output is "wrong," we have a "Loss." <strong>Backpropagation</strong> is the process of pouring "Error Water" from that bottom pool back up the waterfall. Geometrically, it’s the <strong>Chain Rule</strong> in action on a high-dimensional computational graph. It calculates the "Slope" of the terrain at every single junction (weight), telling each neuron exactly how much it contributed to the final mistake. It is the only way to navigate the multi-billion-parameter landscape of a deep model.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Let $\mathcal{L}$ be our loss function. For any layer $l$ with pre-activation $\mathbf{z}_l = \mathbf{W}_l \mathbf{h}_{l-1} + \mathbf{b}_l$ and output $\mathbf{h}_l = \sigma(\mathbf{z}_l)$, we compute the gradient recursively. We define the <strong>Error Signal</strong> $\delta_l$ as the partial derivative of the loss with respect to the pre-activation:</p>
       <div class="math-block">
-        $$\frac{\partial \mathcal{L}}{\partial w_{ij}^{(l)}} = \delta_j^{(l)} a_i^{(l-1)}$$
+        $$\delta_L = \nabla_{\mathbf{z}_L} \mathcal{L} \quad (\text{Output Layer Error})$$
       </div>
-      <p>The error signal $\delta^{(l)}$ is computed recursively, moving backward from the output layer $L$:</p>
+      <p>For all previous layers, we "pass the blame" backward:</p>
       <div class="math-block">
-        $$\delta^{(l)} = \left( (\mathbf{W}^{(l+1)})^T \delta^{(l+1)} \right) \odot \sigma'(\mathbf{z}^{(l)})$$
+        $$\delta_l = (\mathbf{W}_{l+1}^T \delta_{l+1}) \odot \sigma'(\mathbf{z}_l)$$
       </div>
-      <p class="mt-2">Where $\odot$ represents the Hadamard product (element-wise multiplication).</p>
+      <p>Once we have the error signal $\delta_l$, calculating the actual "Blame" for each weight is a simple outer product:</p>
+      <div class="math-block">
+        $$\frac{\partial \mathcal{L}}{\partial \mathbf{W}_l} = \delta_l \mathbf{h}_{l-1}^T, \quad \frac{\partial \mathcal{L}}{\partial \mathbf{b}_l} = \delta_l$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Backprop is the <strong>Efficiency Engine</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Complexity</strong>: Without the recursive trick of Backprop, calculating gradients would take $O(N^2)$ time. Backprop does it in $O(N)$, which is the only reason we can train models with billions of parameters.</li>
+        <li><strong>Automatic Differentiation</strong>: Modern frameworks like PyTorch and JAX don't make you write these formulas by hand. They build the "Computational Graph" automatically and run the Backprop pass for you with a single function call (`.backward()`).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Exploding Gradients. If the weights are too large, the error signal can grow exponentially as it travels back, causing the weights to jump to "Infinity" (NaN) and crashing your training.</p>
     </div>
     
     <div class="callout tip">
@@ -353,7 +404,7 @@ print(f"New Improved Weight: {w:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>
-  `},a={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
+  `},i={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
@@ -365,14 +416,30 @@ print(f"New Improved Weight: {w:.4f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Non-Linear Mappings</div>
-      <p>An activation function $\sigma(z)$ is applied element-wise to the weighted sum $z$ to introduce non-linearity. Without this, a multi-layer network collapses into a single linear transformation. Key formal signatures include:</p>
-      <div class="math-block">
-        $$\text{ReLU: } \max(0, z)$$
-        $$\text{Sigmoid: } \frac{1}{1 + e^{-z}}$$
-        $$\text{Softmax: } \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}}$$
-      </div>
-      <p class="mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
+      <div class="premium-def-title">Formalism: Non-Linear Warping & Gradient Preservation</div>
+      <p>Activation Functions are "Reality Benders." They break the rigidity of linear math, allowing the model to wrap its logic around complex, non-linear manifolds.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your Neural Network is a high-dimensional sheet of paper. Linear operations (matrix multiplications) can only fold or stretch that paper in straight lines. <strong>Activation Functions</strong> are what allow you to "Curl," "Twist," and "Warp" the paper. Geometrically, they introduce <strong>Non-Linearity</strong>, which is the only reason a network can learn complex boundaries like spirals or concentric circles. Without these "Bends," a 1,000-layer network would mathematically collapse into a single, boring Linear Regression. They transform a rigid calculator into a flexible, universal function approximator.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A neuron computes a weighted sum $a = \mathbf{w}^T \mathbf{x} + b$ (the pre-activation). The activation function $\sigma(a)$ is the "Gatekeeper" that transforms this signal. Each type has a specific mathematical specialty:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Sigmoid</strong>: $\sigma(a) = \frac{1}{1 + e^{-a}}$. Maps inputs to the range $(0, 1)$, acting as a "Probability Squeezer." </li>
+        <li><strong>ReLU (Rectified Linear Unit)</strong>: $f(a) = \max(0, a)$. The modern workhorse. It kills negative signals perfectly, but allows positive signals to flow without "Saturating" (shrinking the gradient).</li>
+        <li><strong>Softmax</strong>: Used at the very end to turn a vector of raw scores into a valid probability distribution where everything adds up to 1:
+          $$\text{Softmax}(a_i) = \frac{e^{a_i}}{\sum_{j=1}^K e^{a_j}}$$
+        </li>
+      </ul>
+      <p>The "Engine" of learning is the derivative $\sigma'(a)$. If this derivative is near zero (common in Sigmoid for large inputs), the network hits a <strong>Vanishing Gradient</strong> wall and stops learning entirely.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Activations are the <strong>Decision Gates</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Sparsity</strong>: ReLU creates "Sparse" networks where many neurons are exactly 0. This makes the model computationally efficient and helps it focus only on relevant features.</li>
+        <li><strong>Symmetry</strong>: Tanh is often preferred over Sigmoid in hidden layers because it is zero-centered, ensuring that the gradients don't all shift in the same direction during training.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Watch out for "Dead ReLU" Syndrome. If a neuron's weights get pushed so far that its input is always negative, it will always output 0, its gradient will always be 0, and it will effectively "Die"—never learning again.</p>
     </div>
     
     <div class="callout tip">
@@ -475,17 +542,32 @@ print(f"Softmax Distribution: {softmax(signals).round(3)}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Empirical Risk</div>
-      <p>A loss function $\mathcal{L}(\hat{y}, y)$ maps the distance between the prediction $\hat{y}$ and the ground truth $y$ to a non-negative real value. The optimization objective is to minimize the **Empirical Risk** (the Average Loss):</p>
-      <div class="math-block">
-        $$J(\theta) = \frac{1}{n} \sum_{i=1}^n \mathcal{L}(f(\mathbf{x}_i; \theta), y_i)$$
-      </div>
-      <p>The choice of $\mathcal{L}$ is typically dictated by the output distribution of the data:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Gaussian (Regression)</strong>: $\mathcal{L} = (\hat{y} - y)^2$ (Mean Squared Error)</li>
-        <li><strong>Bernoulli (Binary)</strong>: $\mathcal{L} = -(y \log \hat{y} + (1-y) \log (1-\hat{y}))$ (Log Loss)</li>
-        <li><strong>Multinoulli (Multi-class)</strong>: $\mathcal{L} = -\sum y_k \log \hat{y}_k$ (Cross-Entropy)</li>
+      <div class="premium-def-title">Formalism: Scalar Fields, Divergence & Empirical Risk</div>
+      <p>Loss Functions are "Moral Compasses." They define the topography of the error landscape, providing the signal that guides the model out of chaos.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your Neural Network's parameters are a set of coordinates in a vast, high-dimensional mountain range. The true data labels are the "Valley Floor" (Zero Error). A <strong>Loss Function</strong> $\mathcal{L}(\theta)$ is a scalar field that defines the altitude of every point in this range. Geometrically, optimization is the process of finding the deepest valley. The shape of this field is everything: if the loss surface is a smooth bowl, the model will find the truth quickly. If it's a flat, featureless plain or a jagged nightmare of pits, the model will stay lost forever.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>In Machine Learning, we choose a loss based on our assumptions about the noise in the data. This is typically derived from <strong>Maximum Likelihood Estimation (MLE)</strong>:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Mean Squared Error (MSE)</strong>: Assumes the error follows a Gaussian distribution. It measures the average squared Euclidean distance between the prediction $\hat{y}$ and the truth $y$:
+          $$\mathcal{L}_{MSE} = \frac{1}{n} \sum_{i=1}^n (\hat{y}_i - y_i)^2$$
+          The gradient $\nabla \mathcal{L}$ is linear, providing a steady "pull" toward the target.
+        </li>
+        <li><strong>Cross-Entropy (CE)</strong>: Assumes the data follows a Bernoulli or Multinomial distribution. It measures the KL-Divergence between the true distribution $P$ and the predicted distribution $Q$:
+          $$\mathcal{L}_{CE} = -\sum y_i \log(\hat{y}_i)$$
+          When used with the <strong>Softmax</strong> activation, the gradient $\frac{\partial \mathcal{L}}{\partial z}$ simplifies elegantly to $(\hat{y} - y)$, making it computationally perfect for learning categories.
+        </li>
       </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Loss is the <strong>Objective Truth</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Convexity</strong>: For simple models, we want a convex loss function (like MSE) to ensure there is only one global minimum. For deep models, the loss surface is never convex, but we still pick functions that provide "smooth" gradients.</li>
+        <li><strong>Robustness</strong>: Some losses (like MAE or Huber Loss) are designed to be "Robust"—meaning they don't freak out as much when they encounter outliers.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Confident Ignorance. If your model is 100% sure it's right but is actually wrong, the Cross-Entropy loss goes to <strong>Infinity</strong>. This can cause the gradients to "Explode" and ruin your entire training session in one step.</p>
     </div>
     
     <div class="callout tip">
@@ -581,18 +663,30 @@ print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Architectural Inductive Bias</div>
-      <p>A deep neural network architecture is a directed graph of layers $f_1, f_2, \dots, f_L$ that compose to form a non-linear mapping $\Phi: \mathcal{X} \to \mathcal{Y}$. The architecture encodes an **Inductive Bias**, making assumptions about the data structure:</p>
+      <div class="premium-def-title">Formalism: Compositional Gradients & Functional Hierarchy</div>
+      <p>Architectures are "Structural Hypotheses." They define the pathways through which information is distilled from raw pixels to abstract concepts.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data as a raw, uncut block of marble in 1,000D space. A Deep Learning <strong>Architecture</strong> is a sequence of "Math Chisels" (layers), each designed to chip away a specific type of redundancy. Geometrically, the architecture is a <strong>Composed Transformation</strong>. As data flows through the layers, the space is warped, folded, and squeezed. The goal is to transform a chaotic input space (where classes are tangled like spaghetti) into a "Latent Space" where the classes are distinct and easily separated by a single straight line.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A deep architecture is mathematically defined as a sequence of function compositions. If $f_l$ represents the operation of the $l$-th layer, the entire network is:</p>
       <div class="math-block">
-        $$\mathbf{y} = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
+        $$F(\mathbf{x}) = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
       </div>
-      <p>Common structural paradigms include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Feedforward (MLP)</strong>: Dense connectivity; assumes no specific topological relationship.</li>
-        <li><strong>Convolutional (CNN)</strong>: Sparse connectivity and weight sharing; assumes **translation invariance** and local spatial correlation.</li>
-        <li><strong>Recurrent (RNN)</strong>: Cyclic connectivity; assumes **temporal dependency** and sequential order.</li>
-        <li><strong>Attention (Transformer)</strong>: Dynamic weighting; assumes **relational importance** regardless of distance.</li>
+      <p>Each layer $f_l(\mathbf{h})$ typically consists of a linear transformation followed by a non-linearity:</p>
+      <div class="math-block">
+        $$f_l(\mathbf{h}) = \sigma(\mathbf{W}_l \mathbf{h} + \mathbf{b}_l)$$
+      </div>
+      <p>The power of "Deep" architectures comes from the <strong>Universal Approximation Theorem</strong>, which states that such a composition can represent *any* continuous function. However, the exact structure of $\mathbf{W}$ (whether it is dense, sparse, or recurrent) defines the model's <strong>Inductive Bias</strong>—the assumptions we make about the data's geometry (e.g., spatial symmetry in images or temporal order in text).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Architectures are the <strong>Network Blueprints</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Depth vs. Width</strong>: Adding layers (depth) allows the network to learn "Features of Features," which is exponentially more efficient than simply adding more neurons to a single layer (width).</li>
+        <li><strong>Symmetry & Invariance</strong>: Specialized architectures like CNNs use <strong>Weight Sharing</strong> to ensure that if the model detects an "Eye" in the top-left corner, it can also detect it in the bottom-right without needing to learn it twice.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Architecture is a double-edged sword. If you pick the wrong structure (e.g., using a non-recurrent network for speech), the model will struggle to see the obvious patterns, no matter how much data you throw at it.</p>
     </div>
     
     <div class="callout tip">
@@ -711,15 +805,31 @@ print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Convolution Operation</div>
-      <p>A CNN layer computes the dot product between a local region of the input $I$ and a learnable kernel (filter) $K$. For a 2D input, the convolution at $(i, j)$ is:</p>
+      <div class="premium-def-title">Formalism: Locality, Weight Sharing & Spatial Convolutions</div>
+      <p>CNNs are "Spatial Taxonomists." They assume that the world is composed of local, repeating patterns that are invariant to their specific location.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are looking at a giant mosaic through a small, square magnifying glass. You don't see the whole picture at once; you scan it, looking for specific shapes—an edge here, a curve there. A <strong>Convolutional Neural Network (CNN)</strong> is a stack of these digital magnifying glasses (Filters). Geometrically, it treats an image as a 3D volume (Height, Width, Depth). Unlike a standard network that "looks everywhere at once," a CNN assumes <strong>Locality</strong> (nearby pixels are related) and <strong>Translation Invariance</strong> (a cat in the corner is still a cat). It ignores the "Where" to master the "What."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The core operation is the <strong>Convolution (Cross-Correlation)</strong>. For an input image $I$ and a learnable kernel (filter) $K$, the output feature map $S$ at position $(i, j)$ is computed as the sum of element-wise products:</p>
       <div class="math-block">
-        $$(I * K)(i, j) = \sum_{m} \sum_{n} I(i+m, j+n) K(m, n)$$
+        $$S(i, j) = (I * K)(i, j) = \sum_{m} \sum_{n} I(i+m, j+n) K(m, n)$$
       </div>
-      <p>This is followed by a non-linear activation and a **Pooling** step, which provides **Translation Invariance** by mapping a local region to its maximum or average value:</p>
-      <div class="math-block">
-        $$y_{p,q} = \max_{i,j \in \mathcal{R}_{p,q}} \{ a_{i,j} \}$$
-      </div>
+      <p>Key architectural properties include:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Weight Sharing</strong>: The same filter $K$ is reused across the entire image. This reduces the number of parameters from billions to thousands, making it possible to train on high-res photos.</li>
+        <li><strong>Stride & Padding</strong>: Stride defines how many pixels the filter "jumps" during each step. Padding adds a border to the image to ensure the filters can reach the very edges.</li>
+        <li><strong>Pooling</strong>: We downsample the map, usually with <strong>Max Pooling</strong>, which keeps only the strongest signal in a region: $y = \max \{x_1, x_2, x_3, x_4\}$.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, CNNs are the <strong>Visual Archetypists</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Feature Hierarchy</strong>: Early layers detect simple edges; middle layers combine them into shapes (noses, eyes); deep layers combine those shapes into objects (faces, cars).</li>
+        <li><strong>Computational Efficiency</strong>: By using local filters rather than fully-connected weights, CNNs avoid the "Curse of Dimensionality" that would otherwise incinerate your GPU when processing video.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Receptive Field. A neuron in the first layer only "sees" a 3x3 patch. To see a whole mountain, you need multiple layers so that the "vision" of the deeper neurons grows to cover the entire image.</p>
     </div>
     
     <div class="callout tip">
@@ -823,16 +933,30 @@ print(f"Kernel Response: {output[3:7]}")
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Sequential State Updates</div>
-      <p>An RNN is a dynamic system that computes a hidden state $\mathbf{h}_t$ by combining the current input $\mathbf{x}_t$ with the previous state $\mathbf{h}_{t-1}$. The update rule is typically defined as:</p>
+      <div class="premium-def-title">Formalism: Temporal Recursion & Unrolled Manifods</div>
+      <p>RNNs are "Sequential Processors." They treat data as a causal stream where the meaning of the present is defined by the context of the past.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data is not a photo, but a movie. A standard network only sees one frame at a time and forgets it immediately. A <strong>Recurrent Neural Network (RNN)</strong> is a cell that loops back on itself. Geometrically, it is a <strong>Cycle</strong> in the computational graph. When we "Unroll" this cycle over a sequence of length $T$, it becomes a very deep feedforward network with $T$ layers, all sharing the exact same weight matrices. It maintains a <strong>Hidden State</strong> ($\mathbf{h}_t$)—a dynamic vector that acts as a "Internal Summary" or "Latent Memory" of everything the network has seen up to that second.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each time step $t$, the RNN cell updates its internal state by combining the current input $\mathbf{x}_t$ with the previous state $\mathbf{h}_{t-1}$:</p>
       <div class="math-block">
         $$\mathbf{h}_t = \sigma( \mathbf{W}_{hh} \mathbf{h}_{t-1} + \mathbf{W}_{xh} \mathbf{x}_t + \mathbf{b}_h )$$
       </div>
-      <p>The final output $\mathbf{y}_t$ is then projected from this hidden state:</p>
+      <p>The output is then projected from this shared memory:</p>
       <div class="math-block">
         $$\mathbf{y}_t = \text{Softmax}(\mathbf{W}_{hy} \mathbf{h}_t + \mathbf{b}_y)$$
       </div>
-      <p class="mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
+      <p>Training this monster requires <strong>Backpropagation Through Time (BPTT)</strong>. Because we apply the same matrix $\mathbf{W}_{hh}$ over and over, the gradient $\nabla \mathcal{L}$ involves a product of $T$ Jacobians. This leads to the <strong>Vanishing Gradient Problem</strong>: if the weights are small, the gradient shrinks to zero, and the model forgets the beginning of the sequence. If they are large, the gradient explodes, crashing the training.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, RNNs are the <strong>Chronological Decipherers</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Variable Length</strong>: Unlike CNNs or MLPs, RNNs can process sequences of any length (sentences of 5 words or 500 words) because they use the same "Logic Loop" for every step.</li>
+        <li><strong>Temporal Inductive Bias</strong>: It assumes that the "Next" event is directly influenced by the "Previous" event, making it the perfect tool for language, audio, and time-series data.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Sequential Dependencies. Because $\mathbf{h}_t$ depends on $\mathbf{h}_{t-1}$, you cannot compute step 10 until step 9 is finished. This makes RNNs slow to train on modern parallel hardware (GPUs) compared to Transformers.</p>
     </div>
     
     <div class="callout tip">
@@ -931,19 +1055,30 @@ for i, x_t in enumerate(sequence):
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gated Memory (LSTM)</div>
-      <p>An LSTM cell maintains a cell state $C_t$ (long-term memory) and a hidden state $h_t$ (short-term memory). The flow is regulated by three sigmoidal gates:</p>
-      <div class="math-block">
-        $$\text{Forget Gate: } f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
-        $$\text{Input Gate: } i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
-        $$\text{Output Gate: } o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
-      </div>
-      <p>The internal cell state is updated by forgetting old news and adding new, filtered news:</p>
-      <div class="math-block">
-        $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)$$
-        $$h_t = o_t \odot \tanh(C_t)$$
-      </div>
-      <p class="mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
+      <div class="premium-def-title">Formalism: Gated Recurrence & The Constant Error Carousel</div>
+      <p>LSTMs are "Memory Stewards." They maintain a protected highway for information to travel through time without being corrupted by the "Noise" of intermediate layers.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Standard RNNs suffer from "Short-Term Memory"—the gradients vanish so quickly that by the time you reach the end of a sentence, the model has forgotten the beginning. <strong>LSTMs</strong> (Long Short-Term Memory) solve this by introducing a <strong>Cell State</strong> ($C_t$)—a linear "Information Highway" that runs through the entire sequence. Geometrically, this highway is protected by <strong>Gates</strong> (Valves) that use sigmoid functions to decide exactly how much information to Add (Input), Remove (Forget), or Share (Output). It is a mechanism for controlled, additive updates that allow the gradient to "skip" over a thousand steps and reach the past intact.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An LSTM cell at time $t$ uses a vector of "Gates" to control the flow of the hidden state $h_t$ and cell state $C_t$. Each gate is a learnable neural network layer outputting values in $(0, 1)$:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Forget Gate ($f_t$)</strong>: $\sigma(\mathbf{W}_f \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_f)$. Decides which parts of the old memory $C_{t-1}$ are "Old News" to be deleted.</li>
+        <li><strong>Input Gate ($i_t$)</strong>: $\sigma(\mathbf{W}_i \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_i)$. Decides which parts of the new "candidate" memory $\tilde{C}_t$ are "Breaking News" worth saving.</li>
+        <li><strong>Cell Update</strong>: The long-term highway is updated by combining the gated past and the gated present:
+          $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(\mathbf{W}_C \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_C)$$
+        </li>
+        <li><strong>Output Gate ($o_t$)</strong>: $\sigma(\mathbf{W}_o \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_o)$. Filters the cell state to produce the final "Visible" hidden state: $\mathbf{h}_t = o_t \odot \tanh(C_t)$.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, LSTMs are the <strong>Sequential Archivists</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Gradient Bypass</strong>: Because the cell state update is <strong>Additive</strong> ($+$) rather than multiplicative ($\times$), the gradient can flow backward through the highway with minimal decay, solving the vanishing gradient problem.</li>
+        <li><strong>GRU (Gated Recurrent Unit)</strong>: A streamlined version of the LSTM that merges the forget and input gates into a single "Update Gate." It is faster to train and often performs just as well on smaller datasets.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Sequential Bottleneck. LSTMs must process data one step at a time. This makes them much slower than Transformers, which can look at the whole sequence simultaneously using parallel "Attention" hardware.</p>
     </div>
     
     <div class="callout tip">
@@ -1063,16 +1198,32 @@ print("\n[The important discovery from Step 0 is still in the journal at Step 9!
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Scaled Dot-Product Attention</div>
-      <p>The Transformer maps a sequence of input representations $(\mathbf{x}_1, \dots, \mathbf{x}_n)$ to a sequence of continuous representations $\mathbf{z}$. The core operation is **Self-Attention**, which computes a weighted sum of values $\mathbf{V}$ based on the similarity between queries $\mathbf{Q}$ and keys $\mathbf{K}$:</p>
+      <div class="premium-def-title">Formalism: Scaled Dot-Product Attention & Relational Dynamics</div>
+      <p>Transformers are "Relationship Machines." They discard the rigidity of time and treat data as a single, massive web of global dependencies.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a crowded gala where every guest is an input token (word). In an RNN, guest 1 talks to guest 2, who then talks to guest 3. By the end, the message is a mess. In a <strong>Transformer</strong>, every guest has a metaphorical "Spotlight." Simultaneously, every guest shines their light on every other guest in the room. Geometrically, this is an <strong>All-to-All Interaction</strong>. The Transformer treats a sequence not as a timeline, but as a <strong>Relational Graph</strong>, where distance doesn't matter. A word at the beginning of a book can "Pay Attention" to a word at the very end as easily as the word right next to it.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The core engine is <strong>Scaled Dot-Product Attention</strong>. For each input token, we transform it into three distinct roles:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Query ($Q$)</strong>: "What information am I looking for?"</li>
+        <li><strong>Key ($K$)</strong>: "What information do I have to offer?"</li>
+        <li><strong>Value ($V$)</strong>: "The actual content I carry."</li>
+      </ul>
+      <p>The relationship between any two tokens is the dot product of their Query and Key. We scale this by the square root of the dimension $\sqrt{d_k}$ to stop the math from "Exploding" and apply a softmax to turn these scores into a weighted distribution:</p>
       <div class="math-block">
-        $$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}$$
+        $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
       </div>
-      <p>To capture information from different representation subspaces, the model uses **Multi-Head Attention**:</p>
-      <div class="math-block">
-        $$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O$$
-      </div>
-      <p class="mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
+      <p>To capture complex nuance (like seeing both the grammar and the sentiment of a sentence), we use <strong>Multi-Head Attention</strong>, which runs several of these "Spotlights" in parallel and concatenates the results.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Transformers are the <strong>Parallel Visionaries</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Parallelization</strong>: Because there is no "Looping" (Recurrence), we can calculate the entire sequence's attention in one massive matrix operation. This is why we can train them on the entire internet.</li>
+        <li><strong>Permutation Invariance</strong>: On their own, Transformers don't know the order of words. We have to inject "Position Encodings" (coordinates in time) so the model knows that "Dog bites Man" is different from "Man bites Dog."</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Quadratic Complexity. Because every word looks at every other word, the cost grows as $O(N^2)$. If you double the length of your text, your computer has to do four times the work. This is the "Context Window" wall that limits how much an AI can read at once.</p>
     </div>
     
     <div class="callout tip">
@@ -1182,12 +1333,31 @@ print(output.round(1))
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Adversarial Minimax Game</div>
-      <p>A GAN consists of a Generator $G$ and a Discriminator $D$. $G$ maps a latent noise vector $\mathbf{z}$ to the data space, while $D$ estimates the probability that a sample came from the real data distribution rather than $G$. The training is a zero-sum game with the value function:</p>
+      <div class="premium-def-title">Formalism: The Minimax Game & Manifold Forgery</div>
+      <p>GANs are "Adversarial Learners." They use the friction between two opposing forces to discover the underlying distribution of complex data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a room with an art counterfeiter (the <strong>Generator</strong>) and a detective (the <strong>Discriminator</strong>). The counterfeiter has never seen a real masterpiece; they only hear the detective's feedback ("This is fake because the brushstrokes are too thick"). Geometrically, this is a <strong>Minimax Game</strong> played on the probability manifold of the data. The Generator tries to map a simple noise distribution (like a 100D Gaussian) into the highly complex, high-dimensional manifold of "Real Images." Simultaneously, the Discriminator tries to find the optimal decision boundary—the hyperplane—that separates the true data distribution from the generated one. It is "Learning via Friction."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the training as a zero-sum game between the Discriminator $D$ and the Generator $G$ using the following <strong>Value Function</strong> (Binary Cross-Entropy):</p>
       <div class="math-block">
-        $$\min_G \max_D \mathcal{V}(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{data}}[\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}}[\log(1 - D(G(\mathbf{z})))]$$
+        $$\min_G \max_D V(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{data}(\mathbf{x})} [\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}(\mathbf{z})} [\log(1 - D(G(\mathbf{z})))]$$
       </div>
-      <p>At equilibrium, $G$ produces a distribution $p_g = p_{data}$, and $D(\mathbf{x}) = 1/2$ everywhere, meaning the discriminator can no longer distinguish real from fake.</p>
+      <p>The logic is a two-step "Duel":</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Step 1: The Detective</strong>: $D$ tries to maximize $V$. It learns to output 1 for real data $\mathbf{x}$ and 0 for forgeries $G(\mathbf{z})$.</li>
+        <li><strong>Step 2: The Forger</strong>: $G$ tries to minimize the second term. It "wins" if it can force the Discriminator to output $D(G(\mathbf{z})) = 1$.</li>
+      </ul>
+      <p>At the <strong>Nash Equilibrium</strong>, the Generator has captured the data distribution so perfectly that $p_g = p_{data}$. At this point, the Discriminator is forced to guess, with $D(\mathbf{x}) = 0.5$ for every input.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, GANs are the <strong>Creative Engines</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Implicit Density</strong>: Unlike other models, GANs never actually "see" the raw data distribution. They only see the *gradient* of the Discriminator. They learn to sample from a distribution rather than modeling it explicitly.</li>
+        <li><strong>Training Instability</strong>: GANs are notoriously hard to train. If the Discriminator becomes too "smart" too early, it will always output 0 for fakes, leaving the Generator with zero gradient and no way to learn. This leads to the infamous "Vanishing Gradient" on the Generator's side.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Mode Collapse. This happens when the Generator finds a single "Safe" image that always fools the Discriminator and stops trying to be diverse. You end up with a model that can only generate one specific face over and over again.</p>
     </div>
     
     <div class="callout tip">
@@ -1343,4 +1513,4 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,o,n,r,l,h,d]};export{c as DEEP_LEARNING_DATA};
+  `,sections:[e,t,a,i,s,o,n,r,l,h,d]};export{c as DEEP_LEARNING_DATA};
