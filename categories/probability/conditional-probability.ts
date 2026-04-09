@@ -21,24 +21,25 @@ export const conditionalProbabilitySection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Normally, your perspective covers the entire universe. But once I tell you "Condition B is true," your world shrinks. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition.</p>
+    <p>Normally, your perspective covers the entire universe of possibilities. But once I tell you "Condition B is true," your world shrinks instantly. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition. In Machine Learning, this is the "Secret Sauce." When we ask a model, "Is this a cat?", we are really asking for the probability of 'Cat' <strong>given</strong> the features we see. We are filtering out every other possible object and looking only at the slice of reality that matches the image pixels.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Restricted Sample Space</div>
+      <p>For two events $A$ and $B$ in a probability space, the **Conditional Probability** of $A$ given $B$ is defined as the probability that $A$ occurs, restricted to the subset of the sample space where $B$ has already occurred:</p>
+      <div class="math-block">
+        $$P(A | B) = \frac{P(A \cap B)}{P(B)}, \quad \text{for } P(B) > 0$$
+      </div>
+      <p>This definition entails several critical mathematical properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Multiplication Rule</strong>: $P(A \cap B) = P(A | B)P(B)$. This allows for the sequential decomposition of joint events.</li>
+        <li><strong>Law of Total Probability</strong>: $P(A) = \sum_i P(A | B_i)P(B_i)$ for a partition $\{B_i\}$ of the sample space.</li>
+        <li><strong>Belief Revision</strong>: Conditioning serves as the mathematical engine for updating prior knowledge $P(A)$ with new evidence $B$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Discriminative ML models (e.g., Logistic Regression) directly estimate the conditional distribution $P(y | \mathbf{x})$ to predict labels from features.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Conditional Probability as a <strong>"Filter."</strong> 
-        Imagine a pool of 1,000 customers. You want to know if someone will buy. 
-        Once I tell you "They put an item in the cart" (Condition B), you <strong>filter out</strong> everyone who didn't. 
-        Your universe is now smaller, and the likelihood of a purchase is much higher. 
-        In ML, we use this "filter" to calculate the odds of a class given the input features.
-      </div>
-    </div>
-
-    <visualizer topic="ConditionalProbability" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <div class="math-block">$$P(A|B) = \frac{P(A \cap B)}{P(B)}, \text{ where } P(B) > 0$$</div>
-    <p>This says the "New Probability" is the ratio of people who did <strong>both</strong> to people who did <strong>at least B</strong>.</p>
 
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
     
@@ -121,3 +122,4 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
     </div>
   `
 };
+

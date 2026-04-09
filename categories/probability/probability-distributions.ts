@@ -21,25 +21,25 @@ export const probabilityDistributionsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Random Variable says: <em>"The weather could be 60, 70, or 80 degrees."</em> A Distribution says: <em>"It is 10% likely to be 60, 80% likely to be 70, and 10% likely to be 80."</em> Distributions allow us to model <strong>Uncertainty</strong>. Instead of saying "The house price will be exactly $500k," we say "Prices follow a distribution centered at $500k."</p>
+    <p>A Random Variable is just a placeholder, like a "Potential Weather" or "Future Stock Price." But a <strong>Probability Distribution</strong> is the actual personality or "DNA" of that variable. It doesn't just list what could happen; it tells you exactly how the universe is "loaded." Distributions allow us to quantify <strong>Uncertainty</strong> so we can stop guessing. Instead of a single point-prediction like "This house will sell for $500k," a distribution gives us a full spectrum of likelihood. In ML, every model we train is essentially trying to find the "Shape" that best fits the scattered dots of our training data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Probability Laws</div>
+      <p>A **Probability Distribution** is a mathematical descriptor that provides the likelihood of every possible value of a random variable $X$. It is defined either by its discrete or continuous nature:</p>
+      <div class="math-block">
+        $$F(x) = P(X \le x), \quad x \in \mathbb{R}$$
+      </div>
+      <p>The behavior is characterized by two fundamental functional forms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Mass Function (PMF)</strong>: For discrete $X$, $p(x) = P(X = x)$, satisfying $\sum p(x_i) = 1$.</li>
+        <li><strong>Density Function (PDF)</strong>: For continuous $X$, $f(x) = \frac{d}{dx}F(x)$, satisfying $\int_{-\infty}^\infty f(x) dx = 1$.</li>
+        <li><strong>Normalization</strong>: Both forms ensure the total "volume" of probability is exactly 1, representing certainty that <em>some</em> outcome must occur.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Probability Distribution as a <strong>Heat Map</strong>. 
-        Where the map is "hot" (high probability), outcomes are common. 
-        Where the map is "cold," outcomes are rare. 
-        In ML, we want to find the parameters of this map that best explain the data we've already seen.
-      </div>
-    </div>
-
-    <visualizer topic="Distributions" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <ul>
-      <li><strong>Probability Mass Function (PMF)</strong>: For Discrete RVs, \(P(X=x)\). The sum of all probabilities must be 1.</li>
-      <li><strong>Probability Density Function (PDF)</strong>: For Continuous RVs, \(f(x)\). The total area under the curve must be 1.</li>
-    </ul>
 
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
     
@@ -114,3 +114,4 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
     </div>
   `
 };
+

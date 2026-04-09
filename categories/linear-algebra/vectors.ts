@@ -21,22 +21,24 @@ export const vectorsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Why do we care about vectors? Because they allow us to treat <strong>features</strong> as <strong>directions</strong>. If you are predicting house prices, the number of bedrooms is one axis and the square footage is another. A single house then becomes a "location" in this feature space.</p>
+    <p>Why do we care about vectors? Because they allow us to treat <strong>Qualities</strong> as <strong>Quantities</strong>. In the real world, things are messy—a house has an age, a size, and a location. In math, we treat each of these as a unique <strong>Direction</strong> in space. A single vector is just a point in that multidimensional space, representing one specific "version" of reality. This allows us to calculate the "distance" between house prices or find the "direction" that leads to the highest profit. It is the language that turns our fuzzy observations into a concrete coordinate system that a computer can actually navigate.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The $n$-tuplet</div>
+      <p>A vector $\mathbf{v} \in \mathbb{R}^n$ is an ordered sequence of $n$ real numbers. Geometrically, it represents a directed line segment from the origin to a point in $\mathbb{R}^n$:</p>
+      <div class="math-block">
+        $$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$
+      </div>
+      <p>Vectors are defined by two primary operations:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Addition</strong>: $\mathbf{u} + \mathbf{v} = [u_1+v_1, \dots, u_n+v_n]^T$ (Combining directions).</li>
+        <li><strong>Scaling</strong>: $c\mathbf{v} = [cv_1, \dots, cv_n]^T$ (Altering magnitude while preserving or reversing direction).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a vector as a <strong>Recipe</strong>. The numbers inside tell you exactly how much of each "ingredient" (direction) to mix to reach your destination. If you change one number, you change the entire flavor (data point).
-      </div>
-    </div>
-
-    <visualizer topic="Vectors" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>A vector \(\mathbf{v}\) in \(\mathbb{R}^n\) is an ordered list of \(n\) real numbers:</p>
-    <div class="math-block">$$\mathbf{v} = \begin{bmatrix} v_1 \\ v_2 \\ \vdots \\ v_n \end{bmatrix}$$</div>
-    <p><strong>Vector Addition:</strong> We add vectors component-wise: \(\mathbf{a} + \mathbf{b} = [a_1+b_1, a_2+b_2]^T\).</p>
-    <p><strong>Scalar Multiplication:</strong> Scaling a vector grows or shrinks it: \(c\mathbf{v} = [cv_1, cv_2]^T\).</p>
 
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     
@@ -119,3 +121,4 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </div>
   `
 };
+

@@ -9,14 +9,41 @@ export const setTheorySection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
-      <p>In the context of data science and AI, Set Theory is the foundation for how we manipulate datasets, join tables, and filter information. Think of each <strong>set</strong> as a collection of unique data points.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In the digital world, data never arrives as a single, clean block; it is scattered across different tables, logs, and databases. <strong>Set Theory</strong> is the foundation of how we manipulate these fragments, providing the mathematical logic for joining, filtering, and deduplicating information. Think of each <strong>set</strong> as a "Box of Unique Items" where duplicates are forbidden and boundaries are absolute. In Data Science, set theory isn't just a theoretical curiosity—it is the direct parent of SQL Joins and Pandas filtering. Understanding how sets overlap, merge, and differ is the key to transforming raw, chaotic data into a structured signal that an ML model can actually understand. It is the tactical framework for "Data Wrangling."</p>
 
-      <div class="callout tip">
-        <div class="callout-icon">💡</div>
-        <div class="callout-body">
-          <strong>Core Theory:</strong> A <strong>Set</strong> is a <strong>"Box of Unique Items."</strong> In Python, this is exactly what the <code>set()</code> object does—it forces everything inside to be unique. If you try to add a duplicate, the set just ignores it. This is the bedrock of <strong>Data Deduplication</strong>.
-        </div>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Axiomatic Collections & Inclusion</div>
+      <p>Set theory is the branch of mathematical logic that studies collections of objects. In machine learning, sets define the sample spaces, hypothesis classes, and feature domains.</p>
+      
+      <p>Given sets $A$ and $B$, the fundamental operators are defined as:</p>
+      <div class="math-block">
+        \begin{aligned}
+        \text{Union:} \quad & A \cup B = \{x \mid x \in A \lor x \in B\} \\
+        \text{Intersection:} \quad & A \cap B = \{x \mid x \in A \land x \in B\} \\
+        \text{Difference:} \quad & A \setminus B = \{x \mid x \in A \land x \notin B\}
+        \end{aligned}
       </div>
+
+      <p>The structural properties of sets facilitate critical data operations:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Cardinality ($|S|$)</strong>: The measure of the number of elements in a set. In feature engineering, the cardinality of a categorical variable determines the dimensionality of the resulting One-Hot encoding.</li>
+        <li><strong>Power Set ($\mathcal{P}(S)$)</strong>: The set of all subsets of $S$. This is the basis for exploring all possible combinations of features in attribute selection problems.</li>
+        <li><strong>Inclusion ($\subseteq$)</strong>: A subset relationship where every element of the internal set is a member of the external set, defining the hierarchy of filtered data.</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">Set theory is the direct mathematical prerequisite for **Probability** (Kolmogorov's axioms) and **SQL/Pandas** relational algebra.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Set Theory as <strong>"The Digital Library Catalog"</strong> or <strong>"The Sorting Room."</strong> 
+        Imagine you have two boxes of Legos. A <strong>Union</strong> is pouring them both into a single pile, but tossing out any exact duplicates. An <strong>Intersection</strong> is finding only the specific bricks that appear in both boxes. 
+        In Python, this is exactly what the <code>set()</code> object does. It translates raw lists into distinct collections where the math of "AND," "OR," and "NOT" can be applied with perfect precision. It is the bedrock of <strong>Data Integrity</strong>: ensuring that every vote or feature you count is a unique, valid piece of the truth.
+      </div>
+    </div>
     </div>
 
     <h2 id="subsets">1. Subsets ($\subseteq$)</h2>

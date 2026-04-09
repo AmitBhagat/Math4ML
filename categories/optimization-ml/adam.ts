@@ -12,33 +12,31 @@ export const adamSection: TopicSection = {
       <p>Why use the <strong>Same Learning Rate</strong> for every single neuron in your brain? Some neurons learn fast, others slow. <strong>Adam (Adaptive Moment Estimation)</strong> is the "King" of optimizers. It combines the <strong>Memory of Momentum</strong> with the <strong>Adaptivity of RMSProp</strong>. It gives every weight its own, custom learning rate that changes over time.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Adaptive Moments</h2>
-    <p>Adam tracks two moving averages:</p>
-    <ul>
-      <li><strong>1st Moment (\(m_t\)):</strong> The <strong>Mean</strong> of the gradients (The <strong>Direction</strong>, like Momentum).</li>
-      <li><strong>2nd Moment (\(v_t\)):</strong> The <strong>Uncentered Variance</strong> of the gradients (The <strong>Volatility</strong>, like RMSProp).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In a standard neural network with millions of parameters, why would you use the same learning rate for every single neuron? Some weights are dealing with sparse data and only see a signal once in a blue moon, while others are bombarded with constant, noisy updates. <strong>Adam (Adaptive Moment Estimation)</strong> is the "King" of optimizers because it treats every parameter as an individual. It combines the <strong>Memory of Momentum</strong> (the 1st moment) with the <strong>Adaptivity of RMSProp</strong> (the 2nd moment). It essentially gives every weight its own, custom-tuned learning rate that changes dynamically over time. It is the tactical decision to trust the specific context of each parameter rather than forcing a one-size-fits-all strategy on the entire model.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Adaptive Moment Estimation</div>
+      <p>The **Adam** optimizer maintains exponentially moving averages of the gradient ($m_t$) and the squared gradient ($v_t$) to provide per-parameter adaptive updates. At each step $t$:</p>
+      <div class="math-block">
+        $$m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$$
+        $$v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$$
+      </div>
+      <p>where $g_t$ is the current gradient. To account for initialization at zero, these moments are bias-corrected:</p>
+      <div class="math-block">
+        $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$$
+      </div>
+      <p>The final parameter update utilizes these corrected estimates:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Update Rule</strong>: $\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$. The step size is effectively normalized by the local volatility.</li>
+        <li><strong>Robustness</strong>: $\beta_1$ (typically 0.9) acts as Momentum, while $\beta_2$ (typically 0.999) acts as an adaptive scaling factor (RMSProp).</li>
+        <li><strong>Bias Correction</strong>: Crucial during the initial steps when $m_t$ and $v_t$ are heavily biased towards the origin.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Dampening the Noisy Ones."</strong> 
-        If a weight is <strong>Bouncing</strong> around wildly, the 2nd moment (\(v_t\)) will be <strong>High</strong>. Adam divides the update by \(\sqrt{v_t}\), effectively <strong>Slowing Down</strong> the noisy weight. 
-        If a weight is <strong>Steadily</strong> moving in one direction, Adam <strong>Speeds It Up</strong>. 
-      </div>
-    </div>
-
-    <h2 id="math">The Adam Algorithm</h2>
-    <div class="math-block">$$m_t = \beta_1 m_{t-1} + (1 - \beta_1) \nabla \mathcal{L}$$</div>
-    <div class="math-block">$$v_t = \beta_2 v_{t-1} + (1 - \beta_2) (\nabla \mathcal{L})^2$$</div>
-    <div class="math-block">$$\hat{\theta} \gets \theta - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$</div>
-    <ul>
-      <li><strong>\(\beta_1\):</strong> Usually 0.9. Controlling the direction.</li>
-      <li><strong>\(\beta_2\):</strong> Usually 0.999. Controlling the speed adaptivity.</li>
-    </ul>
-
-    <h2 id="bias">Bias Correction</h2>
-    <p><strong>The Gotcha:</strong> At the very start (Time step 0), the moving averages are 0. This makes the initial steps <strong>Artificially Low</strong>. Adam uses a <strong>Bias Correction</strong> factor to scale the first few steps up, ensuring a strong start.</p>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Olympic Athlete</h2>
     
@@ -111,3 +109,4 @@ for step in range(1, 101):
     </div>
   `
 };
+

@@ -21,23 +21,25 @@ export const mleSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Probability allows us to predict data if we know the parameters. <strong>Likelihood</strong> works in reverse—we have the data, and we want to find the <strong>Parameters</strong>. <strong>MLE</strong> is the method of picking the parameter \(\theta\) that makes the observed data as "unsurprising" as possible.</p>
+    <p>Probability allows us to predict data if we know the parameters—the "Rules" of the world. <strong>Maximum Likelihood Estimation (MLE)</strong> works in reverse: we have the data, and we want to find the parameters. MLE is the method of picking the setting that makes the observed data as "unsurprising" as possible. If the data we see is very likely under setting A but nearly impossible under setting B, MLE tells us to bet on A. In Machine Learning, this is the fundamental way we "train": we hunt for the weights that make our training labels the most probable outcome of our model's logic. It is the tactical decision to trust the data completely, finding the "Ideal Knob Setting" that explains exactly what we have seen.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Likelihood Maxima</div>
+      <p>Given an observed dataset $\mathbf{X} = \{x_1, \dots, x_n\}$ assumed to be i.i.d. samples from a distribution $f(x|\theta)$, the **Likelihood Function** $L(\theta)$ represents the probability density of the entire data as a function of the parameter $\theta$:</p>
+      <div class="math-block">
+        $$L(\theta) = \prod_{i=1}^n f(x_i | \theta)$$
+      </div>
+      <p>The **Maximum Likelihood Estimate** is the parameter value that produces the highest likelihood for the observed evidence:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Log-Transformation</strong>: Maximizing $L(\theta)$ is equivalent to maximizing the <strong>Log-Likelihood</strong> $\ell(\theta) = \sum \log f(x_i | \theta)$, which simplifies products into sums.</li>
+        <li><strong>Numerical Optimization</strong>: In ML, we typically minimize the <strong>Negative Log-Likelihood (NLL)</strong>. This aligns statistical estimation with standard optimization frameworks.</li>
+        <li><strong>Sufficient Statistics</strong>: MLE often depends only on a few aggregate metrics of the data (like the sample mean or variance).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of MLE as <strong>"Reverse Engineering."</strong> 
-        Imagine you find a machine that occasionally spits out Red or Blue balls. You see it spit out [Red, Red, Blue, Red]. 
-        MLE asks: <em>"What is the most likely setting for the 'Red knob' on this machine?"</em> 
-        If the knob is at 75%, this sequence is very likely. If the knob is at 10%, this sequence is a miracle. We pick 75%.
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For i.i.d data \(x_1, \dots, x_n\), the likelihood is the product of individual probabilities:</p>
-    <div class="math-block">$$L(\theta) = \prod_{i=1}^n P(x_i | \theta)$$</div>
-    <p>We usually maximize the <strong>Log-Likelihood</strong> (\(\ell(\theta)\)) because it’s mathematically easier (it turns products into sums):</p>
-    <div class="math-block">$$\ell(\theta) = \sum_{i=1}^n \log P(x_i | \theta)$$</div>
 
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
     
@@ -125,3 +127,4 @@ print(f"Sample Mean: {data.mean():.4f}")
     </div>
   `
 };
+

@@ -12,21 +12,35 @@ export const f1ScoreSection: TopicSection = {
       <p>Precision and Recall are like a <strong>Sports Car</strong> and a <strong>Tank</strong>. You want speed (Precision), but you also want durability (Recall). How do you compare them? You can't just take a simple average! <strong>F1 Score</strong> is the <strong>Harmonic Mean</strong> that forces both values to be high for the score to look good.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Harmonic Mean</h2>
-    <p>A standard average (Arithmetic Mean) is "Fair." If one value is 100 and the other is 0, the average is 50. In ML, that's <strong>Disastrous</strong>. A model with 0 recall is useless. We use the <strong>Harmonic Mean</strong> because it is sensitive to low values. If <strong>Either</strong> Precision or Recall is low, the F1 Score will be <strong>Dragged Down</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Precision and Recall are like two warring countries in a diplomatic negotiation. Precision wants to be perfectly right (Quality), while Recall wants to be perfectly thorough (Quantity). A simple average of the two is "Fair," but in machine learning, fairness can be disastrous—a model with zero recall is useless, even if it has 100% precision. The <strong>F1 Score</strong> is the <strong>Harmonic Mean</strong> that forces both values to be high for the score to look good. If either metric fails, the F1 score collapses. It is the tactical decision to prioritize balance over extremes, providing a single "Truth" metric that is especially critical when dealing with imbalanced datasets where accuracy is a lie.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Harmonic Mean Reconciliation</div>
+      <p>The **F1 Score** is a single-number measure of classification performance that reconciles the trade-off between Precision ($P$) and Recall ($R$). It is defined as the harmonic mean of the two:</p>
+      <div class="math-block">
+        $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+      </div>
+      <p>The mathematical properties that make F1 superior to a simple average include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Sensitivity to Extremes</strong>: The harmonic mean is closer to the minimum of the two values. If either $P$ or $R$ drops to zero, the $F_1$ score drops to zero, correctly signaling a total failure of the model.</li>
+        <li><strong>Robustness to Skew</strong>: In imbalanced datasets where one class dominates, F1 measures performance on the "Case of Interest" (the positive class) without being inflated by the "Easy" negative predictions.</li>
+        <li><strong>Generalized Form ($F_\beta$)</strong>: The score can be weighted to emphasize one metric over the other using a $\beta$ parameter:
+          $$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R}$$
+        </li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Weakest Link"</strong> metric. 
-        It forces your model to be <strong>All-Rounder</strong>. 
-        You can't "Cheat" the F1 Score by having infinite recall and terrible precision (catching everyone by arresting the whole city). 
-        The F1 Score will only be 1.0 if <strong>Both</strong> metrics are 1.0.
+        Think of the F1 Score as <strong>"The Balanced Diplomat"</strong> or <strong>"The Weakest Link"</strong> metric. 
+        Imagine hiring a developer. You need someone who is a great coder (Precision) AND a great communicator (Recall). Candidate A is a coding genius but can't talk to humans (F1 = 0). Candidate B is a social butterfly who can't write code (F1 = 0). 
+        The F1 Score only "Signs" the deal (reaches 1.0) if both skills are high. It punishes the extremes and rewards the all-rounder. <strong>Accuracy is what you tell your boss; F1 is what you tell your lead engineer.</strong>
       </div>
     </div>
-
-    <h2 id="math">The F1 Formula</h2>
-    <div class="math-block">$$F_1 = 2 \cdot \frac{Precision \cdot Recall}{Precision + Recall}$$</div>
 
     <h2 id="avg">Arithmetic vs. Harmonic</h2>
     <p>Imagine a model with Precision = 1.0 and Recall = 0.0.</p>

@@ -21,28 +21,24 @@ export const hessianSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Gradient (\(\nabla f\)) tells you which way to walk to reduce the loss. But it doesn't tell you how <strong>fast</strong> the slope is changing. Are you on a sharp peak? A flat valley? A <strong>Hessian</strong> tells the optimizer: <em>"Slow down, the ground is curving upwards!"</em> or <em>"Speed up, the slope is constant."</em> This is the difference between simple Gradient Descent and advanced "Second-Order" methods.</p>
+    <p>A Gradient tells you which way to walk to reduce the loss—but it doesn't tell you how <strong>fast</strong> the ground is changing under your feet. The <strong>Hessian Matrix</strong> is the "Grid of Curvatures" that measures the second-order sensitivity of your function. It tells you if you are walking into a sharp, narrow crevice or a broad, flat valley. In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix of Curvature</div>
+      <p>For a twice-differentiable scalar function $f: \mathbb{R}^n \to \mathbb{R}$, the **Hessian Matrix** $\mathbf{H}$ (or $\nabla^2 f$) is a square matrix containing all second-order partial derivatives. It quantifies how the gradient of the function changes as you move:</p>
+      <div class="math-block">
+        $$\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$
+      </div>
+      <p>The Hessian is the fundamental tool for "Second-Order" optimization and stability analysis:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Characterizing Extrema</strong>: If $\nabla f(\mathbf{x}) = \mathbf{0}$ and $\mathbf{H}(\mathbf{x})$ is positive definite, $\mathbf{x}$ is a local minimum. If $\mathbf{H}(\mathbf{x})$ is negative definite, it is a local maximum.</li>
+        <li><strong>Taylor Approximation</strong>: The Hessian defines the parabolic (quadratic) shape of the function locally.</li>
+        <li><strong>Conditioning</strong>: The ratio of max/min eigenvalues of $\mathbf{H}$ tells us if the "bowl" is perfectly circular or a narrow, stretched canyon (making gradient descent slow).</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Hessian as <strong>The Road Condition</strong>. 
-        The Gradient is your <strong>Steering Wheel</strong>. 
-        The Hessian is how much you need to <strong>Brake or Accelerate</strong> because the road is curving. 
-        If you are at the bottom of a bowl, the Hessian is "Positive Definite" (all curvas are up). 
-        If you are at the top of a hill, it's "Negative Definite" (all curvas are down). 
-        If it's a saddle, you're at a "Switchback."
-      </div>
-    </div>
-
-    <visualizer topic="JacobianHessian" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(f(x, y, \dots, z)\), the Hessian \(\mathbf{H}\) is defined by the cross-derivatives:</p>
-    <div class="math-block">$$ \mathbf{H} = \begin{bmatrix} 
-    \frac{\partial^2 f}{\partial x_1^2} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
-    \vdots & \ddots & \vdots \\
-    \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n^2} \end{bmatrix} $$</div>
     <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
 
     <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Curvature at a Point</h2>

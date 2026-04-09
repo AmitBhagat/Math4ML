@@ -12,19 +12,27 @@ export const basisDimensionSection: TopicSection = {
       <p>A <strong>Basis</strong> is the "Minimalist Skeleton" of a vector space. It’s the smallest set of independent vectors that let you reach <strong>every</strong> point in the space. The <strong>Dimension</strong> is just the total number of vectors in that basis.</p>
     </div>
 
-    <h2 id="basis">1. The Basis Concept</h2>
-    <p>A set of vectors \(\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}\) is a <strong>Basis</strong> for a space \(V\) if:</p>
-    <ul>
-      <li>They are <strong>Linearly Independent</strong> (No redundancy).</li>
-      <li>They <strong>Span</strong> the entire space (Every vector in \(V\) is a combination of \(\mathcal{B}\)).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A <strong>Basis</strong> is the "Minimalist Skeleton" of a vector space. It is the absolute smallest set of independent vectors that allows you to reach <strong>every single point</strong> in that space. If you have too few, you can't reach certain areas (the space is incomplete); if you have too many, you have redundancy. The <strong>Dimension</strong> is just the head-count of that minimal team. In Machine Learning, identifying the basis of your data allows you to strip away a thousand "noisy" features and compress them into the few core directions that actually matter.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Spanning Sets and Cardinality</div>
+      <p>A set of vectors $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is a **Basis** for a vector space $V$ if it satisfies two conditions:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Independence</strong>: No vector in $\mathcal{B}$ can be expressed as a linear combination of the others.</li>
+        <li><strong>Span</strong>: Every vector $\mathbf{v} \in V$ can be uniquely expressed as: $\mathbf{v} = \sum_{i=1}^n c_i \mathbf{b}_i$.</li>
+      </ul>
+      <p>The **Dimension** $\dim(V)$ is defined as the cardinality $n$ of the basis. Any two bases for the same vector space must have the same number of elements.</p>
+    </div>
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         Think of a <strong>Basis</strong> like the <strong>Primary Colors</strong> in painting. 
-        You only need Red, Blue, and Yellow to create every other color in existence. 
-        Adding a "Light Red" wouldn't help—it’s not independent! A basis is the <strong>absolute minimum</strong> you need to reach every color (data point).
+        You only need Red, Blue, and Yellow to create every other shade in the visible universe. 
+        Adding a "Light Indigo" doesn't help—it is just a combination of the others, not independent! 
+        A basis is the <strong>Atomic Level</strong> of your data. The Dimension tells you how many "Primary Colors" you actually need to perfectly represent your dataset without any waste.
       </div>
     </div>
 

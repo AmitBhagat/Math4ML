@@ -12,15 +12,28 @@ export const dbscanSection: TopicSection = {
       <p>k-Means assumes your data is in nice, round balls. But real data is <strong>Messy</strong>. It can be shaped like a <strong>Crescent Moon</strong>, a <strong>Spiral</strong>, or have <strong>Random Noise</strong>. <strong>DBSCAN</strong> (Density-Based Spatial Clustering) is the only algorithm that can find "The Crowd" in a chaotic room.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Reachability & Density</h2>
-    <p>DBSCAN defines a cluster as a <strong>High-Density Region</strong>. If you have enough points packed into a small space, you have a cluster. If a point is by itself in a "Silent" region, it is called <strong>Noise</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>k-Means assumes your data is in nice, round balls, but real-world data is <strong>Messy</strong>. It can be shaped like a <strong>Crescent Moon</strong>, a <strong>Spiral</strong>, or have random noise scattered everywhere. <strong>DBSCAN</strong> (Density-Based Spatial Clustering) is the only algorithm with the courage to say: "I'm not going to force every point into a group." It defines a cluster as a <strong>High-Density Region</strong> in space. If points are packed tightly together, they form a "Crowd." If a point is sitting by itself in a "Silent" region, it is correctly identified as <strong>Noise</strong>. It is the king of finding clusters of arbitrary shapes and filtering out the junk.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: DBSCAN Clustering</div>
+      <p>Given parameters $\epsilon$ (radius) and $MinPts$ (density threshold), DBSCAN classifies points into three categories based on their $\epsilon$-neighborhood $N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Core Point</strong>: $|N_{\epsilon}(p)| \ge MinPts$.</li>
+        <li><strong>Border Point</strong>: $|N_{\epsilon}(p)| < MinPts$, but $p$ is reachable from a core point.</li>
+        <li><strong>Noise Point</strong>: Neither of the above.</li>
+      </ul>
+      <p>Two points $p$ and $q$ are **Density-Connected** if there exists a point $o$ such that both $p$ and $q$ are density-reachable from $o$. A cluster is a maximal set of density-connected points.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Finding the Crowd."</strong> 
-        It's not about how many groups you want; it's about <strong>how many people are standing close together</strong>. 
-        If 5 people are within 1 meter of each other, that's a <strong>Core Group</strong>. Anyone standing on the edge of that group is a <strong>Border Member</strong>. Anyone 10 meters away is <strong>Noise</strong>. 
+        Think of DBSCAN as <strong>"Finding the Crowd at a Party"</strong> or the <strong>"Nightclub Analogy."</strong> 
+        Imagine a nightclub at 2 AM. k-Means would try to group everyone into 3 circles, even the lonely person standing by the exit. 
+        <strong>DBSCAN</strong> looks for the <strong>Dense Dancefloor</strong> (the Cluster). It doesn't care if the dancefloor is circular or a <strong>Long, Curved conga line</strong> leading to the bar. As long as people are standing shoulder-to-shoulder (within radius \(\epsilon\)), they are part of the "Vibe." 
+        The lonely person in the corner is labeled as <strong>Noise</strong> and ignored. It is a "Chain-Reaction" algorithm—once it finds a dense core, it follows the connectivity until the party stops.
       </div>
     </div>
 

@@ -12,24 +12,31 @@ export const cnnSection: TopicSection = {
       <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every pixel to every neuron. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use <strong>Filters</strong> to scan the image for <strong>Edges, Shapes, and Textures</strong>, ignoring the noise and focusing on the <strong>Content</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Convolution Operation</h2>
-    <p>A Convolution is a <strong>Mathematical Sliding Window</strong>. Instead of looking at the whole image at once, the model takes a small square (e.g., $3 \times 3$) and slides it across the pixels. It calculates the dot product between the <strong>Filter (Kernel)</strong> and the image patches.</p>
-    <div class="math-block">$$(I * K)(i, j) = \sum_m \sum_n I(i+m, j+n) K(m, n)$$</div>
-    <ul>
-      <li><strong>Small Wires:</strong> Because the filter is small, we only need to learn 9 parameters for a $3 \times 3$ patch. This is <strong>Sparse Connectivity</strong>.</li>
-      <li><strong>Parameter Sharing:</strong> We use the <strong>same 9 numbers</strong> for the whole image. This is <strong>Efficient Learning</strong>.</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you recognize a <strong>Face</strong> in a 1,000,000-pixel image? An MLP would go insane trying to connect every single pixel to every single neuron—it’s too much noise. <strong>Convolutional Neural Networks (CNN)</strong> are the biological "Seeing" machines. They use <strong>Filters</strong> to scan the image for <strong>Edges, Shapes, and Textures</strong>, focusing on local patterns rather than global data. By sliding these mathematical windows across the pixels, the network learns to pay attention only to the "Content" while ignoring irrelevant details. This is the secret to <strong>Computer Vision</strong>: recognizing a cat whether it’s in the top-left or the bottom-right corner of the frame.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Convolution Operation</div>
+      <p>A CNN layer computes the dot product between a local region of the input $I$ and a learnable kernel (filter) $K$. For a 2D input, the convolution at $(i, j)$ is:</p>
+      <div class="math-block">
+        $$(I * K)(i, j) = \sum_{m} \sum_{n} I(i+m, j+n) K(m, n)$$
+      </div>
+      <p>This is followed by a non-linear activation and a **Pooling** step, which provides **Translation Invariance** by mapping a local region to its maximum or average value:</p>
+      <div class="math-block">
+        $$y_{p,q} = \max_{i,j \in \mathcal{R}_{p,q}} \{ a_{i,j} \}$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Finding the Signature."</strong> 
-        The first layer has filters for <strong>Vertical Edges</strong>. 
-        If a filter "Hits" a vertical line, the output is high. 
-        It doesn't matter <strong>where</strong> in the image the edge is; the filter will find it.
+        Think of a CNN as a <strong>"Sweeping Flashlight"</strong> or <strong>"Finding the Signature."</strong> 
+        Imagine you are in a dark museum with a narrow 3x3 beam. You scan the room systematically. You don't see the whole statue at once; you see <strong>Features</strong>. Your brain notices a curved edge (a shoulder), then a vertical line (a leg), then a specific texture (stone). 
+        The <strong>Filters</strong> in a CNN are these beams. They don’t care *where* in the image the feature is; they just scream "Vertical Line!" whenever they cross one. CNNs are built on <strong>Translation Invariance</strong>—the assumption that a signature pattern is meaningful regardless of its specific coordinates.
       </div>
     </div>
-
+    
     <h2 id="pooling">Pooling: Reducing the Resolution</h2>
     <p>After we find the edges, we don't need the exact pixel locations anymore. We just need to know "Was there an edge in this general area?" 
     <strong>Max Pooling</strong> takes the <strong>Largest Value</strong> from a region. This makes the model robust to <strong>Small Shifts</strong> in the image (Translation Invariance).</p>

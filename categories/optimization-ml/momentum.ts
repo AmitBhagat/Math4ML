@@ -12,27 +12,27 @@ export const momentumSection: TopicSection = {
       <p>If SGD is a <strong>Drunken Sailor</strong>, <strong>Momentum</strong> is that sailor in a <strong>Heavy Lead Sled</strong>. Once he starts moving down the mountain, he builds up <strong>Speed</strong> and is harder to stop. If he hits a small bump or a "Saddle Point," he just <strong>Rides Over It</strong> because he has momentum. He's faster and more direct.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Moving Average</h2>
-    <p>Momentum maintains a <strong>Velocity (\(v\))</strong>. At every step, we update the velocity using the current gradient <strong>plus</strong> a fraction \(\gamma\) of the previous velocity. This is an <strong>Exponentially Weighted Moving Average</strong>.</p>
-    <div class="math-block">$$v_t = \gamma v_{t-1} + \eta \nabla \mathcal{L}(\theta_t)$$</div>
-    <div class="math-block">$$\theta_{t+1} = \theta_t - v_t$$</div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Standard SGD is like a hiker constantly changing direction based on the very last rock he stepped on—it’s twitchy, inconsistent, and slow. <strong>Momentum</strong> is the decision to give that hiker a <strong>Heavy Lead Sled</strong>. Once it starts moving down the mountain, it builds up velocity and becomes harder to stop. If the hiker hits a small bump or a "Saddle Point," the sled’s momentum simply carries him over it. Mathematically, this is an <strong>Exponentially Weighted Moving Average</strong> of previous steps. It acts as a "Memory for Direction," ensuring that the consistent, downward force of gravity accumulates while the random, left-to-right "noise" of stochasticity cancels itself out. It is the tactical decision to trust the trend over the snapshot, allowing the model to glide through the long, flat ravines of a loss surface that would trap a standard walker.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Velocity Accumulator</div>
+      <p>The **Momentum** method accelerates Gradient Descent by introducing a velocity vector $v$ that builds inertia based on the history of previous gradients. The update at step $t$ is defined as:</p>
+      <div class="math-block">
+        $$v_{t+1} = \gamma v_t + \eta \nabla_\theta J(\theta_t)$$
+        $$\theta_{t+1} = \theta_t - v_{t+1}$$
+      </div>
+      <p>This physical analogy provides the optimizer with two critical capabilities:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Friction ($\gamma$)</strong>: The momentum coefficient (typically 0.9) determines what percentage of the previous velocity is kept. it prevents the "Bolder" from rolling infinitely.</li>
+        <li><strong>Oscillation Dampening</strong>: In directions where the gradient changes sign (jitter), the velocity terms cancel out. In consistent directions, the velocity builds up.</li>
+        <li><strong>Ravine Navigation</strong>: Many loss functions have narrow "valleys" (high curvature in one dimension). Momentum allows the optimizer to focus on the long-term downward trend rather than bouncing between the valley walls.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Memory for Direction."</strong> 
-        The "Noise" in SGD makes the sailor zigzag left and right. 
-        If he zig-zags, the <strong>Left and Right</strong> cancel each other out over time, but the <strong>Forward</strong> direction (downhill) keeps <strong>Adding Up</strong>. 
-        Momentum "Accumulates" the downhill force while "Canceling" the noise. 
-      </div>
-    </div>
-
-    <h2 id="physics">The Physics of Optimization</h2>
-    <p>We call \(\gamma\) (usually 0.9) the <strong>Momentum Coefficient</strong>. 
-    Mathematically, it represents <strong>Friction</strong>. Without it, the "Boulder" would roll forever and never stop at the bottom. With it, the boulder eventually <strong>settles</strong> at the minimum of the valley.</p>
-
-    <h2 id="saddle">Dampening the Oscillations</h2>
-    <p><strong>The Gotcha:</strong> High-dimensional regions often have "Ravines"—long valleys that are very <strong>Steep at the sides</strong> but <strong>Flat in the middle</strong>. Standard GD will <strong>Bounce</strong> between the walls of the ravine without moving forward. <strong>Momentum</strong> smoothes these bounces, allowing the model to <strong>Glide</strong> down the center of the ravine.</p>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>
     
@@ -99,3 +99,4 @@ for i in range(11):
     </div>
   `
 };
+

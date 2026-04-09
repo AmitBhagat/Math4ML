@@ -12,24 +12,35 @@ export const recallSection: TopicSection = {
       <p>If you are testing for a <strong>Deadly Disease</strong>, you don't care if you annoy a few healthy people (FP). You care about finding <strong>Every Single Sick Person</strong>. <strong>Recall</strong> (also called Sensitivity) is the metric that asks: "Of all the actual positives that exist in reality, how many did you <strong>Manage to Find</strong>?"</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Denominator of Reality</h2>
-    <p>While <strong>Precision</strong> looks at your guesses, <strong>Recall</strong> looks at <strong>Reality</strong>. It doesn't care about your false alarms (FP). It only cares about the positive cases you <strong>Missed (FN)</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Recall (also known as Sensitivity) is the metric of <strong>Thoroughness</strong>. While Precision asks if your guesses are correct, <strong>Recall</strong> looks at reality and asks: "Of all the actual positives that exist in the world, how many did you manage to find?" If you are building a model to detect a deadly disease, you don't care about annoying a few healthy people (False Positives)—you care about catching every single sick person (True Positives). A model with high recall is "Aggressive"; it’s a dragnet that refuses to let anything escape, even if it catches some junk in the process. It is the tactical decision to prioritize the "Quantity" of your hits over the purity of your results. High recall is your primary defense against <strong>False Negatives</strong>, which in many fields are much more dangerous than false alarms.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Sensitivity / True Positive Rate (TPR)</div>
+      <p>In binary classification, **Recall** is defined as the probability that a sample is predicted as positive given that it truly belongs to the positive class. It is a measure of the model's "Completeness":</p>
+      <div class="math-block">
+        $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1) = \frac{TP}{TP + FN}$$
+      </div>
+      <p>The components of the recall estimate are:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>TP (True Positives)</strong>: Actual positive samples correctly identified as such.</li>
+        <li><strong>FN (False Negatives)</strong>: Actual positive samples incorrectly labeled as negative (Type II Error).</li>
+        <li><strong>Inclusion Property</strong>: Recall is independent of the number of **False Positives**. It strictly focuses on the "Inclusion" of all positive samples, even at the cost of capturing irrelevant noise (mislabeling negatives).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Thoroughness Score."</strong> 
-        If there are 100 criminals in the city, and you catch all 100, your recall is 1.0 (even if you accidentally arrested 50 innocent people along with them). 
-        Recall is about <strong>Not leaving anyone behind</strong>.
+        Think of Recall as <strong>"The Thoroughness Score"</strong> or <strong>"The Giant Net."</strong> 
+        Imagine you dropped your <strong>Contact Lens</strong> in a swimming pool full of <strong>Plastic Toys</strong>. 
+        If you only grab something when you are 100% sure it’s the lens, you might leave the lens behind (Low Recall). 
+        If you use a <strong>Giant Net</strong> and scoop up every single item in the pool, you definitely found the lens, but you also caught 50 toys. 
+        The Giant Net has 100% <strong>Recall</strong>. You didn't "Miss" the target (Zero False Negatives). This is what matters in life-or-death situations where missing a tumor or a fraudster is a catastrophic failure.
       </div>
     </div>
-
-    <h2 id="math">The Recall Formula</h2>
-    <div class="math-block">$$Recall = \frac{TP}{TP + FN}$$</div>
-    <ul>
-      <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FN:</strong> <strong>Total Actual Positives</strong> (Everything that is 'Yes' in reality).</li>
-    </ul>
 
     <h2 id="use-case">When Recall is King</h2>
     <p>Recall is the most important metric when the <strong>Cost of a False Negative is HIGH</strong>.</p>

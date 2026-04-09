@@ -12,16 +12,31 @@ export const architecturesIntroSection: TopicSection = {
       <p>A "Body" for every "Brain." <strong>Deep Learning</strong> isn't just one giant network; it's a toolbox of <strong>Architectures</strong> designed for different data types. Just as a <strong>Fish</strong> needs fins and a <strong>Bird</strong> needs wings, an <strong>Image Model</strong> needs layers that "See," and a <strong>Speech Model</strong> needs layers that "Listen."</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Design Principles</h2>
-    <p>Architectural design is about <strong>Efficiency</strong>. In a fully-connected MLP, every neuron listens to everyone else. This is <strong>Too Much Information</strong> for an image with 1,000,000 pixels. We design architectures to <strong>Focus</strong> the network's attention on what matters.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A "Body" for every "Brain"—that is the core philosophy of <strong>Deep Learning Architectures</strong>. Deep Learning isn't just one giant, generic network; it's a toolbox of specialized structural patterns designed for specific data types. Just as a fish needs fins to navigate water and a bird needs wings for air, an <strong>Image Model</strong> needs layers that can "See" spatial patterns, and a <strong>Speech Model</strong> needs layers that can "Listen" to sequences over time. Architectural design is about <strong>Efficiency and Focus</strong>; it's the art of "Hardwiring" our assumptions (Inductive Bias) into the network so it doesn't drown in the noise of raw, high-dimensional data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Architectural Inductive Bias</div>
+      <p>A deep neural network architecture is a directed graph of layers $f_1, f_2, \dots, f_L$ that compose to form a non-linear mapping $\Phi: \mathcal{X} \to \mathcal{Y}$. The architecture encodes an **Inductive Bias**, making assumptions about the data structure:</p>
+      <div class="math-block">
+        $$\mathbf{y} = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
+      </div>
+      <p>Common structural paradigms include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Feedforward (MLP)</strong>: Dense connectivity; assumes no specific topological relationship.</li>
+        <li><strong>Convolutional (CNN)</strong>: Sparse connectivity and weight sharing; assumes **translation invariance** and local spatial correlation.</li>
+        <li><strong>Recurrent (RNN)</strong>: Cyclic connectivity; assumes **temporal dependency** and sequential order.</li>
+        <li><strong>Attention (Transformer)</strong>: Dynamic weighting; assumes **relational importance** regardless of distance.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Optimizing the Wiring."</strong> 
-        If you want to understand a <strong>Sentence</strong>, you need wires that carry meaning through <strong>Time</strong>. (RNN). 
-        If you want to recognize a <strong>Face</strong>, you need wires that look at <strong>Space</strong>. (CNN). 
-        The architecture is the <strong>Hardcoded Strategy</strong> for solving a specific domain.
+        Think of Deep Learning Architecture as <strong>"Optimizing the Wiring of a Factory"</strong> or the <strong>"Blueprint of Intelligence."</strong> 
+        If you want to understand a <strong>Sentence</strong>, you need wires that carry meaning through <strong>Time</strong> (RNN/LSTM). If you want to recognize a <strong>Face</strong>, you need wires that specialize in <strong>Space</strong> and local textures (CNN). 
+        A generic Fully-Connected network is like a factory where every single worker talks to every other worker simultaneously—it’s pure chaos for a 4K video. Specialized architectures like <strong>Transformers</strong> or <strong>CNNs</strong> create an <strong>Assembly Line</strong> or a <strong>Spotlight</strong>, forcing the neurons to pay attention only to the information that actually matters for the task at hand.
       </div>
     </div>
 

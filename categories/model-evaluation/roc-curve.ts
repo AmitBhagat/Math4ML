@@ -12,20 +12,35 @@ export const rocCurveSection: TopicSection = {
       <p>A classifier doesn't just say "Yes" or "No." It gives a <strong>Probability</strong> (e.g., 0.72). You choose where to draw the line. <strong>ROC (Receiver Operating Characteristic)</strong> curves show us the <strong>Trade-off</strong> between capturing more positives and crying wolf more often as we slide that line from 0 to 1.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: TPR vs. FPR</h2>
-    <p>The ROC curve plots two things against each other:</p>
-    <ul>
-      <li><strong>Y-Axis: True Positive Rate (Recall/Sensitivity):</strong> How many of the <strong>Actual Positives</strong> did we catch?</li>
-      <li><strong>X-Axis: False Positive Rate (1 - Specificity):</strong> How many of the <strong>Actual Negatives</strong> did we accidentally call positive?</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A classifier doesn’t just output a "Yes" or "No"—it outputs a <strong>Probability</strong> (e.g., 0.72). You, the engineer, must choose where to draw the line: do you flag everything above 0.5, or do you wait until you are 90% sure? the <strong>ROC (Receiver Operating Characteristic) Curve</strong> is a visual map of how that choice affects your performance. It plots your ability to find the truth (True Positive Rate) against your tendency to cry wolf (False Positive Rate) as you slide your "line in the sand" from 0 to 1. The ROC curve allows you to see the <strong>Global Profile</strong> of your model’s capability before you ever pick a side. It is the tactical decision to understand the full range of your model’s potential rather than just looking at a single, static snapshot of accuracy.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Threshold Sweep Function</div>
+      <p>An **ROC Curve** represents the diagnostic ability of a binary classifier as its discrimination threshold is varied. Let $f(\mathbf{x})$ be the score assigned to an input $\mathbf{x}$. For a threshold $\tau$, the prediction is $\hat{y} = 1$ if $f(\mathbf{x}) \ge \tau$. The curve is the set of points defined by:</p>
+      
+      <div class="math-block">
+        $$\text{ROC} = \{ (FPR(\tau), TPR(\tau)) \mid \tau \in (-\infty, \infty) \}$$
+      </div>
+      
+      <p>The axes are defined by conditional probabilities:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>True Positive Rate (TPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=1)$. This measures the probability of detecting a positive instance correctly.</li>
+        <li><strong>False Positive Rate (FPR)</strong>: $\mathbb{P}(f(\mathbf{X}) \ge \tau \mid Y=0)$. This measures the probability of a "False Alarm" in the negative class.</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">The curve illustrates the fundamental **information-theoretic trade-off**: to capture more signal (higher TPR), one must generally accept more noise (higher FPR). A perfect classifier creates a curve that passes through the "Ideal Point" $(0, 1)$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Trade-off Map."</strong> 
-        Every point on the curve represents a different <strong>Threshold</strong> (e.g., "Only flag if probability > 0.3" vs. "Only flag if > 0.9"). 
-        If you are <strong>Lenient</strong> (Low Threshold), you get 100% Recall but also 100% False Positives. 
-        If you are <strong>Strict</strong> (High Threshold), you get 0% Recall but also 0% False Positives.
+        Think of the ROC Curve as <strong>"The Sensitivity Slider"</strong> or <strong>"The Metal Detector Knob."</strong> 
+        Imagine a security guard at a stadium with a knob that controls the metal detector’s sensitivity. 
+        If he turns it to <strong>Max Sensitivity</strong> (Low Threshold), he catches every weapon (100% TPR) but also annoys every passenger with a belt buckle (100% FPR). 
+        If he turns it to <strong>Min Sensitivity</strong> (High Threshold), he annoys no one but misses almost every threat. 
+        The ROC Curve is the chart of every possible knob setting. The "Sweet Spot" is the "Knee" of the curve—the setting that catches 98% of the threats with only 2% annoyance.
       </div>
     </div>
 

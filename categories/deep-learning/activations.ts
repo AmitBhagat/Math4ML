@@ -12,15 +12,28 @@ export const activationsSection: TopicSection = {
       <p>Without an <strong>Activation Function</strong>, a neural network is just a giant linear formula. It can't learn curves, it can't learn logic, and it can't learn reality. Activations are the <strong>Non-Linear Magic</strong> that allow the model to "Squash" and "Shape" the raw data into useful information.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Why Non-Linearity?</h2>
-    <p>A linear function + a linear function = a linear function. No matter how many layers you stack, without activations, your network is just <strong>One Straight Line</strong>. Activation functions "Bend" the space, allowing the network to wrap its decision boundary around complex, non-linear data.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Without an <strong>Activation Function</strong>, a neural network is nothing more than a giant linear formula—a series of straight lines that can never model the complex, curvy reality of the world. Activations are the "Magic Gates" that decide which signals are important enough to be passed on to the next layer. They introduce <strong>Non-Linearity</strong>, allowing the model to "Squash" and "Shape" raw data into meaningful patterns. It’s the difference between a rigid spreadsheet and an emotional filter that knows when to fire up and when to stay quiet. By selectively activating neurons, we transform a simple calculator into a high-dimensional pattern-matching engine.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Non-Linear Mappings</div>
+      <p>An activation function $\sigma(z)$ is applied element-wise to the weighted sum $z$ to introduce non-linearity. Without this, a multi-layer network collapses into a single linear transformation. Key formal signatures include:</p>
+      <div class="math-block">
+        $$\text{ReLU: } \max(0, z)$$
+        $$\text{Sigmoid: } \frac{1}{1 + e^{-z}}$$
+        $$\text{Softmax: } \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Filter for Significance."</strong> 
-        The raw input might be a <strong>Massive Wave</strong> of noise. 
-        Activations say: "I only care if the signal is <strong>positive</strong>" (ReLU) or "I'll squash all values between <strong>0 and 1</strong>" (Sigmoid). It's a way to normalize and selectively pass on meaning.
+        Think of Activation Functions as <strong>"The Gatekeeper of Significance"</strong> or the <strong>"CEO's Emotional Filter."</strong> 
+        Imagine a team of analysts sending reports to a CEO. The CEO doesn't want thousands of raw numbers; they want a <strong>Signal</strong>. 
+        <strong>ReLU</strong> is the "Efficiency Gate": if the news is bad (negative), the CEO doesn't even want to hear it—it gets cut to zero. <strong>Sigmoid</strong> is the "Risk Gate": it squashes massive numbers into a simple 0% to 100% probability range. 
+        Without these squeezers, the numbers would explode out of control. Activations provide the <strong>Non-Linear Bending</strong> that allows a network to "Wrap" its logic around complicated data like spirals, images, or human language.
       </div>
     </div>
 

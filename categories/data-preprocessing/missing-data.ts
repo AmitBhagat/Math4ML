@@ -12,26 +12,33 @@ export const missingDataSection: TopicSection = {
       <p>Real-world datasets are <strong>Dirty</strong>. Sensors fail, people skip survey questions, and database entries get corrupted. Most ML algorithms will crash or fail if they see a <code>NaN</code> (Not a Number). <strong>Handling Missing Data</strong> is the art of repairing the holes in your dataset without introducing "Lies" or "Bias."</p>
     </div>
 
-    <h2 id="types">The 3 Types of Missingness</h2>
-    <p>Not all missing data is created equal. Understanding <strong>Why</strong> it's missing is critical:</p>
-    <ul>
-      <li><strong>MCAR (Missing Completely at Random):</strong> Pure bad luck. (e.g., A sample tube fell and broke).</li>
-      <li><strong>MAR (Missing at Random):</strong> The missingness depends on other observed data. (e.g., Men are less likely to report their weight).</li>
-      <li><strong>MNAR (Missing Not at Random):</strong> The value itself is the reason it's missing. (e.g., People with very high debt refuse to list it).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Real-world data is never perfect. It’s "noisy," fragmented, and full of literal holes. Imagine trying to navigate a city with a map that has several squares cut out of it—if you just ignore the missing parts, you might drive into a river. <strong>Handling Missing Data</strong> (or Imputation) is the art of intelligently repairing those holes without introducing "Lies" into your dataset. Most machine learning algorithms will simply crash if they encounter a <code>NaN</code> (Not a Number), so we have to decide: do we cut out the damaged parts entirely, or do we use the surrounding context to guess what should have been there? It is the difference between performing surgery on a record and simply throwing it in the trash.</p>
 
-    <h2 id="deletion">Deletion Strategies</h2>
-    <p><strong>Listwise Deletion:</strong> Throw away the <strong>entire row</strong>. 
-    <strong>Pros:</strong> Fast and simple. 
-    <strong>Cons:</strong> You might lose 50% of your data if every row has at least one missing feature! <strong>Dangerous</strong> if the missingness isn't random.</p>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Mechanisms of Missingness</div>
+      <p>Missing data handling is governed by the relationship between the missingness indicator $M$ and the data distribution. We categorize missingness into three formal mechanisms (Rubin, 1976):</p>
+      
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>MCAR (Missing Completely at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M)$. The absence of a value is independent of any data (e.g., a random hardware failure). Simple deletion is safe but reduces power.</li>
+        <li><strong>MAR (Missing at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M \mid X_{obs})$. The missingness is systematic but can be fully explained by variables we have observed (e.g., younger people being less likely to respond to a survey).</li>
+        <li><strong>MNAR (Missing Not at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis})$ depends on the missing values $X_{mis}$ themselves. This is a source of **Selection Bias** (e.g., people with extreme illness not appearing in a study).</li>
+      </ul>
 
-    <h2 id="imputation">Imputation: Filling the Gaps</h2>
-    <p>Instead of throwing it away, we <strong>Guess</strong> the value:</p>
-    <ul>
-      <li><strong>Mean/Median Imputation:</strong> Replace missing values with the average of the column. (Reduces variance, "blurs" the data).</li>
-      <li><strong>Mode Imputation:</strong> Best for Categorical data (Red, Blue, Green).</li>
-      <li><strong>KNN Imputation:</strong> Look at the 5 "Nearest Neighbors" and see what their value for that feature was. (The smartest guess).</li>
-    </ul>
+      <p class="text-xs opacity-80 mt-2"><strong>Correction via Imputation</strong>: Imputation is the estimation of $X_{mis}$ using the conditional distribution $P(X_{mis} \mid X_{obs})$. While simple mean imputation preserves the first moment ($\mu$), it shrinks the variance and distorts the underlying probability density. Iterative methods like **MICE** (Chained Equations) are preferred for preserving multivariate relationships.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of handling missing data as <strong>"Filling the Silhouette"</strong> or <strong>"The Fortune Teller’s Task."</strong> 
+        Imagine a crime scene with ten witnesses, but one is missing. 
+        <strong>Deletion</strong> is like closing the case because you don't have all the info—simple, but you lose everything the other nine know. 
+        <strong>Imputation</strong> is like asking the other witnesses what they saw to reconstruct the tenth person's account. 
+        You use the <strong>Mean</strong> (the average of what others saw) or <strong>KNN</strong> (asking the people standing right next to the missing witness) to fill the gap. The goal is <strong>Signal Preservation</strong>: keeping the data alive while ensuring the "Patch" you apply doesn't distort the truth.
+      </div>
+    </div>
 
     <div class="callout tip">
       <div class="callout-icon">💡</div>

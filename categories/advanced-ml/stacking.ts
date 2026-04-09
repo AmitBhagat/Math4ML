@@ -12,15 +12,30 @@ export const stackingSection: TopicSection = {
       <p>How do you know whether to trust an <strong>SVM</strong> or a <strong>Random Forest</strong> for a specific data point? You don't just vote (Bagging). You train <strong>Another Model</strong> to learn! <strong>Stacking</strong> uses a "Meta-Learner" that looks at the guesses of other models and learns their <strong>Strengths and Weaknesses</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Meta-Learning</h2>
-    <p>Stacking is about <strong>Higher-Order Integration</strong>. Instead of using simple rules like "Average the scores," we treat the <strong>Outputs</strong> of our base models as <strong>Features</strong> for our final model.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you know whether to trust an <strong>SVM</strong> or a <strong>Random Forest</strong> for a specific data point? You don't just vote (Bagging) or weight them based on history (Boosting). You train <strong>Another Model</strong> to learn who to trust! <strong>Stacking</strong> (Stacked Generalization) uses a "Meta-Learner" that looks at the guesses of other models and learns their individual strengths and weaknesses in different contexts. It is the ultimate higher-order integration, treating the outputs of sub-models as features for a final decision. By learning the "Error Profile" of its members, a stacked ensemble can often outperform the best individual model by effectively blending their specific expertises.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Meta-Learning Aggregation</div>
+      <p>Stacking is a two-level ensemble architecture. Given a set of base learners $\{h_1, \dots, h_M\}$, we construct a meta-dataset where the features are the predictions of these models. The final output is determined by a meta-learner $H$:</p>
+      <div class="math-block">
+        $$\hat{y} = H\left( h_1(\mathbf{x}), h_2(\mathbf{x}), \dots, h_M(\mathbf{x}) \right)$$
+      </div>
+      <p>To prevent overfitting, the meta-features $\mathbf{z}_i$ for training $H$ must be generated using **Out-of-Fold (OOF)** predictions:</p>
+      <div class="math-block">
+        $$z_{i,m} = h_m^{(-i)}(\mathbf{x}_i)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $h_m^{(-i)}$ is the $m$-th model trained on a subset of the data that excludes sample $i$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Learning who to trust."</strong> 
-        The Meta-Learner says: "I've noticed that whenever the SVM says 'Spam', it's usually wrong, but when the Random Forest says 'Spam', it's 99% right. So, I will listen to the Forest." 
-        It learns the <strong>Error Profile</strong> of every sub-model.
+        Think of Stacking as <strong>"The CEO of a Tech Giant"</strong> or <strong>"The Orchestra Conductor."</strong> 
+        Imagine a CEO (the Meta-Learner) in a board meeting. They have three experts: a Statistician, a Marketer, and a Technician. Each expert gives their recommendation. 
+        The CEO doesn't just "Average" their advice. Through years of experience (Meta-Training), the CEO knows that the Statistician is 99% right about the budget but 50/50 on customer emotions. 
+        <strong>Stacking</strong> is that process of learning who is full of it and who knows their stuff. It doesn’t play an instrument; it signals <strong>which musician</strong> should lead the melody at any given moment. It is the math of finding a sound greater than the sum of its parts.
       </div>
     </div>
 

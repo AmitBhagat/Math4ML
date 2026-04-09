@@ -9,9 +9,10 @@ import { cnnSection } from './deep-learning/cnn';
 import { rnnSection } from './deep-learning/rnn';
 import { lstmGruSection } from './deep-learning/lstm-gru';
 import { transformersSection } from './deep-learning/transformers';
+import { gansSection } from './deep-learning/gans';
 
 // =============================================================================
-// NEURAL NETWORKS & DEEP LEARNING (The 10-Topic Advanced Curriculum)
+// NEURAL NETWORKS & DEEP LEARNING (The 11-Topic Advanced Curriculum)
 // =============================================================================
 export const DEEP_LEARNING_DATA: CategoryData = {
   id: "deep-learning",
@@ -41,7 +42,7 @@ export const DEEP_LEARNING_DATA: CategoryData = {
       <!-- What to Expect -->
       <div class="space-y-10 pb-12">
         <p class="text-lg text-text-premium font-normal leading-relaxed">
-          This 10-topic curriculum starts at the atomic level of a single Perceptron and scales up to the massive, parallelized attention mechanisms that power modern Large Language Models. 
+          This 11-topic curriculum starts at the atomic level of a single Perceptron and scales up to the massive, parallelized attention mechanisms that power modern Large Language Models. 
         </p>
 
         <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
@@ -79,6 +80,7 @@ export const DEEP_LEARNING_DATA: CategoryData = {
     cnnSection,
     rnnSection,
     lstmGruSection,
-    transformersSection
+    transformersSection,
+    gansSection
   ]
 };

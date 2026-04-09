@@ -21,24 +21,33 @@ export const chainRuleSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In Machine Learning, we don't just have one function mapping input to output. We have a <strong>Chain</strong> of functions: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\to\) Error. To train the network, we need to know: <em>"How much does that deep weight \(w\) affect the Final Error?"</em> The Chain Rule says we can just multiply the slopes of every connection along the path to find the answer.</p>
+    <p>In modern AI, we don't just have one function—we have a <strong>Chain</strong> of hundreds of layers: Input \(\to\) Layer 1 \(\to\) Layer 2 \(\dots \to\) Error. To train the model, we need to know: <em>"How much does that deep weight \(w\) in Layer 1 affect the Final Error?"</em> The <strong>Chain Rule</strong> is the mathematical "Telephone Wire" that carries this sensitivity information all the way back from the error to the initial weights. It says that the global sensitivity is simply the product of every local sensitivity along the path. Without this rule, training deep neural networks would be mathematically impossible.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Calculus of Connectivity</div>
+      <p>The **Chain Rule** provides a mechanism to differentiate composite functions. If $y = f(u)$ and $u = g(x)$, then the change in $y$ relative to $x$ is the product of intermediate rates:</p>
+      <div class="math-block">
+        $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+      </div>
+      <p>For multivariable systems (the foundation of Backpropagation), if $z = f(x_1, \dots, x_n)$ where each $x_i$ is a function of $t$, the total derivative is:</p>
+      <div class="math-block">
+        $$\frac{dz}{dt} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of the Chain Rule as <strong>Passing a Secret</strong>. 
-        If Person A whispers to B, and B whispers to C, and C screams at D—how does A's whisper affect D's scream? 
-        The Chain Rule multiplies the "loudness" (slope) of every person in the chain. 
-        In ML, this is why we can train 100-layer "Deep" networks: we just keep multiplying the local gradients backwards!
+        Think of the Chain Rule as <strong>"Passing a Secret"</strong> or a <strong>"Cascade of Influence."</strong> 
+        If Person A whispers to B, and B whispers to C, and C screams at D—how does A's original whisper affect D's final scream? 
+        The Chain Rule multiplies the "Loudness" (slope) of every single person in that chain to find the final impact. 
+        In Deep Learning, this is the core logic behind <strong>Backpropagation</strong>: we calculate the error at the end, and then "Chain" those gradients backwards to tell every single neuron in the network exactly how it needs to change to make the model smarter.
       </div>
     </div>
 
     <visualizer topic="ChainRule" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>If \(z = f(y)\) and \(y = g(x)\), then the derivative of the "composed" function \(z = f(g(x))\) with respect to \(x\) is:</p>
-    <div class="math-block">$$\frac{dz}{dx} = \frac{dz}{dy} \cdot \frac{dy}{dx}$$</div>
-    <p>For multivariable functions, you sum the paths: \(\frac{\partial f}{\partial t} = \sum_{i} \frac{\partial f}{\partial x_i} \cdot \frac{\partial x_i}{\partial t}\).</p>
 
     <h2 id="example-composite" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Composite Functions</h2>
     

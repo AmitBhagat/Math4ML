@@ -12,17 +12,25 @@ export const mlpSection: TopicSection = {
       <p>If a single Perceptron is a lone loan officer, an <strong>MLP</strong> is the <strong>Entire Bank Headquarters</strong>. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions. This is the <strong>Universal Function Approximator</strong> that solves the XOR crisis and everything beyond.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Deep Stack</h2>
-    <p>An MLP is a <strong>Feedforward</strong> network. It is composed of an <strong>Input Layer</strong>, one or more <strong>Hidden Layers</strong>, and an <strong>Output Layer</strong>. Every neuron in one layer is connected to every neuron in the next. This is a <strong>Fully Connected (Dense) Layer</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If a single Perceptron is a lone loan officer, a <strong>Multilayer Perceptron (MLP)</strong> is the <strong>Entire Bank Headquarters</strong>. By stacking "Hidden Layers" between the input and output, we can learn arbitrarily complex functions that would baffle a single neuron. This is the <strong>Universal Function Approximator</strong>—the catalyst that solved the XOR crisis and paved the way for modern AI. Each layer in an MLP acts as a filter, taking the raw, messy features from the previous layer and transforming them into more abstract, meaningful concepts until the final layer only has to make a simple, clean decision.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Feedforward Neural Network</div>
+      <p>A Multilayer Perceptron is a directed graph consisting of multiple layers of nodes. For an input vector $\mathbf{x}$, the activation $\mathbf{a}^{(l)}$ of layer $l$ is determined by the weights $\mathbf{W}^{(l)}$ and biases $\mathbf{b}^{(l)}$ of that layer:</p>
+      <div class="math-block">
+        $$\mathbf{a}^{(l)} = \sigma\left( \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)} \right)$$
+      </div>
+      <p>Where $\mathbf{a}^{(0)} = \mathbf{x}$ and $\sigma$ is a non-linear activation function. According to the **Universal Approximation Theorem**, a network with a single hidden layer and sufficient width can approximate any continuous function $f: \mathbb{R}^d \to \mathbb{R}^m$ to arbitrary precision.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Hierarchical Filtering."</strong> 
-        The first layer might look for small edges. 
-        The second layer might combine those edges into shapes (circles, squares). 
-        The third layer might combine shapes into objects (faces, cars). 
-        Each layer <strong>transforms</strong> the raw input into a more <strong>meaningful representation</strong>.
+        Think of an MLP as <strong>"Hierarchical Filtering"</strong> or the <strong>"Multi-Tiered Jury."</strong> 
+        Imagine you are trying to recognize a face. The first layer of neurons might only see simple edges. The second layer combines those edges into shapes like circles (eyes) or lines (mouths). The third layer combines shapes into recognized objects (a face). 
+        Each level adds a <strong>Layer of Abstraction</strong>. Instead of drawing one straight line (Perceptron), the MLP effectively "warps" and bends the entire space, allowing it to wrap around complex patterns like spirals or circles. It is the machine’s way of saying: "Don’t give me the answer yet; let’s look at this from a few different <strong>perspectives</strong> first."
       </div>
     </div>
 

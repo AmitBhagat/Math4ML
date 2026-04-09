@@ -12,26 +12,34 @@ export const confusionMatrixSection: TopicSection = {
       <p>Accuracy is a dangerous metric. If you are testing for a <strong>Rare Disease</strong> that affects 1% of the population, a model that simply says "Healthy" to everyone is <strong>99% Accurate</strong>—but it's a <strong>Total Failure</strong>. The <strong>Confusion Matrix</strong> is the "Truth Table" that exposes exactly where your model is being fooled.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The 4 Quadrants</h2>
-    <p>A Confusion Matrix is a \(2 \times 2\) grid (for binary classification) that compares <strong>Reality</strong> (Rows) vs. <strong>Perception</strong> (Columns).</p>
-    <div class="math-block">
-      $$\begin{array}{|c|c|c|}
-      \hline
-      & \text{Predicted: YES} & \text{Predicted: NO} \\
-      \hline
-      \text{Actual: YES} & \text{True Positive (TP)} & \text{False Negative (FN)} \\
-      \hline
-      \text{Actual: NO} & \text{False Positive (FP)} & \text{True Negative (TN)} \\
-      \hline
-      \end{array}$$
-    </div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In machine learning, Accuracy is a seductive but dangerous metric. If you are testing for a rare disease that only affects 1% of the population, a model that simply says "Healthy" to everyone will be 99% accurate—yet it is a total, potentially fatal failure. The <strong>Confusion Matrix</strong> is the "Truth Table" that exposes the nuance of our errors. It doesn't just ask if the model was wrong; it asks <strong>Exactly How</strong> it was wrong. Did it cry wolf (a False Positive) or did it sleep through the attack (a False Negative)? Every classification problem requires a tactical decision about which type of mistake is more acceptable. The confusion matrix provides the raw, unvarnished inventory of these mistakes, allowing us to choose our poison wisely.</p>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Error Distribution Matrix</div>
+      <p>A **Confusion Matrix** is a square matrix used to describe the performance of a classifier on a set of test data. For binary classification, it is defined as a $2 \times 2$ contingency table:</p>
+      <div class="math-block">
+        $$\mathbf{C} = \begin{bmatrix} TN & FP \\ FN & TP \end{bmatrix}$$
+      </div>
+      <p>The four quadrants represent the possible outcomes of a binary test:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>TP (True Positive)</strong>: The model correctly predicted the positive class.</li>
+        <li><strong>TN (True Negative)</strong>: The model correctly predicted the negative class.</li>
+        <li><strong>FP (False Positive)</strong>: The model predicted positive for an actual negative (Type I Error).</li>
+        <li><strong>FN (False Negative)</strong>: The model predicted negative for an actual positive (Type II Error).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The **Main Diagonal** (top-left to bottom-right) represents correct predictions, while the off-diagonal elements indicate where the model is "Confused." This matrix is the raw material from which Precision, Recall, and the F1-Score are derived.</p>
+    </div>
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Story of Your Mistakes."</strong> 
-        It's not just that you were <strong>Wrong</strong>; it's <strong>HOW</strong> you were wrong. 
-        Did you cry wolf when there was no wolf? (FP). Or did you sleep while the wolf attacked? (FN). Real-world problems often care <strong>Much More</strong> about one type of mistake than the other.
+        Think of the Confusion Matrix as <strong>"The Story of Your Mistakes"</strong> or <strong>"The Security Guard."</strong> 
+        Imagine a guard at an airport. A <strong>True Positive</strong> is stopping a terrorist (Success). A <strong>True Negative</strong> is letting a grandma through (Success). 
+        A <strong>False Positive</strong> is stopping the innocent grandma for a 4-hour search—annoying, but safe. 
+        A <strong>False Negative</strong> is letting a terrorist onboard—catastrophic. 
+        The Confusion Matrix is the boss’s report card that tells them exactly how many grandmas were annoyed versus how many terrorists were missed. It’s the difference between being <strong>Over-Cautious</strong> and <strong>Over-Trusting</strong>.
       </div>
     </div>
 

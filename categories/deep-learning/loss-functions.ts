@@ -12,16 +12,30 @@ export const lossFunctionsSection: TopicSection = {
       <p>How do we tell a machine it is failing? We need a single number that represents the <strong>Magnitude of its Error</strong>. <strong>Loss Functions</strong> (or Cost Functions) are the mathematical judges that penalize wrong predictions. The goal of all Gradient Descent is to find the bottom of this "Loss Valley."</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Error Surface</h2>
-    <p>Loss functions define a <strong>Higher-Dimensional Surface</strong>. If your parameters are perfect, you are at the <strong>Global Minimum</strong> (Zero Loss). If you are wrong, the loss value is high. Gradient Descent "Rolls" the ball down the slope of this surface to reach the bottom.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do we tell a machine it is failing? We need a single number that captures the <strong>Magnitude of its Mistakes</strong>. <strong>Loss Functions</strong> (or Cost Functions) are the mathematical judges that penalize wrong predictions. They define the "Error Surface"—a high-dimensional valley where the bottom represents perfect truth. The goal of all Gradient Descent is to find the quickest path to that global minimum. By choosing the right loss function, you are effectively telling the machine <strong>what matters</strong>: whether it should be obsessed with outliers, or whether it should prioritize confident class labels above all else.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Empirical Risk</div>
+      <p>A loss function $\mathcal{L}(\hat{y}, y)$ maps the distance between the prediction $\hat{y}$ and the ground truth $y$ to a non-negative real value. The optimization objective is to minimize the **Empirical Risk** (the Average Loss):</p>
+      <div class="math-block">
+        $$J(\theta) = \frac{1}{n} \sum_{i=1}^n \mathcal{L}(f(\mathbf{x}_i; \theta), y_i)$$
+      </div>
+      <p>The choice of $\mathcal{L}$ is typically dictated by the output distribution of the data:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Gaussian (Regression)</strong>: $\mathcal{L} = (\hat{y} - y)^2$ (Mean Squared Error)</li>
+        <li><strong>Bernoulli (Binary)</strong>: $\mathcal{L} = -(y \log \hat{y} + (1-y) \log (1-\hat{y}))$ (Log Loss)</li>
+        <li><strong>Multinoulli (Multi-class)</strong>: $\mathcal{L} = -\sum y_k \log \hat{y}_k$ (Cross-Entropy)</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Price of Failure."</strong> 
-        Different problems have <strong>different penalties</strong>. 
-        If you miss a <strong>House Price</strong> by $1,000, that's okay. 
-        If you are <strong>100% Confident</strong> that a Dog is a Cat, the penalty should be massive. The type of loss tells the machine <strong>what matters</strong>.
+        Think of a Loss Function as <strong>"The Price of Failure"</strong> or <strong>"The Personal Trainer’s Rulebook."</strong> 
+        Different problems have different penalties. If you are predicting house prices (Regression), and you miss by $1,000, <strong>MSE</strong> might say: "That's 10 pushups." But if you miss by $50,000, it screams: "That's 2,500 pushups!" Squaring the error ensures that big mistakes are punished exponentially harder than small ones. 
+        In Classification, however, the target is <strong>Confidence</strong>. If you are 99% confident that a dog is a cat, <strong>Cross-Entropy</strong> will hit the "Delete" button on your weights—punishing "Confident Ignorance" with massive gradients. The loss function is the compass that guides the machine's evolution.
       </div>
     </div>
 

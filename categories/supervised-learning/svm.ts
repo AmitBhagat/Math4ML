@@ -12,16 +12,27 @@ export const svmSection: TopicSection = {
       <p><strong>Support Vector Machines (SVM)</strong> is perhaps the most Elegant and Mathematically beautiful classification algorithm. It doesn't just want a "Decision Boundary" (a line). It wants the <strong>Widest Possible Road</strong> (The Margin) between two classes. It's the most robust way to draw a line in the sand.</p>
     </div>
 
-    <h2 id="theory">The "Max-Margin" Hyperplane</h2>
-    <p>A standard classifier just wants a line that separates the dots. But there are <strong>infinite</strong> lines that can do that. SVM says: "I want the unique line that is <strong>as far as possible</strong> from the nearest dots of both classes." This is called the <strong>Optimal Hyperplane</strong>.</p>
-    <div class="math-block">$$y = w \cdot x + b = 0$$</div>
-    <p>The goal is to maximize the margin $M = \frac{2}{\|w\|}$, which is equivalent to <strong>minimizing</strong> \(\frac{1}{2} \|w\|^2\).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Support Vector Machines (SVM)</strong> is perhaps the most elegant and mathematically beautiful classification algorithm. While other models just want a line that separates the dots, SVM wants the <strong>Widest Possible Road</strong> (The Margin) between two classes. It is the search for the most robust "Decision Boundary" possible. It doesn't care about the safe points deep inside territory; it only cares about the <strong>Support Vectors</strong>—the critical edge cases that lie right on the border. It is the ultimate implementation of the "Safety Buffer" philosophy in machine learning.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Support Vector Machine</div>
+      <p>Given training vectors $\mathbf{x}_i \in \mathbb{R}^d$ and labels $y_i \in \{1, -1\}$, SVM finds the optimal hyperplane $(\mathbf{w}^*, b^*)$ that maximizes the margin. The optimization problem (Soft Margin) is defined as:</p>
+      <div class="math-block">
+        $$\text{arg}\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^n \xi_i$$
+      </div>
+      <p>Subject to the constraints: $y_i(\mathbf{w}^T \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i$ and $\xi_i \ge 0$.</p>
+      <p class="text-xs opacity-70 mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Building a Super-Highway."</strong> 
-        It's not just a narrow painted line. It's a <strong>multi-lane road</strong>. The highway has to be as wide as possible without hitting any "House" (a data point) on either side. SVM is the <strong>Civic Engineer</strong> who finds the perfect path for that highway.
+        Think of SVM as <strong>"Drawing a Line in the Sand with a Wide Moat"</strong> or <strong>"Building a Super-Highway."</strong> 
+        It's not just a narrow painted line; it's a multi-lane highway. The highway has to be as wide as possible without hitting any "House" (a data point) on either side. 
+        Only the houses exactly on the edge of the road (the Support Vectors) matter. If someone builds a house five miles back, the highway doesn't shift. 
+        SVM is the <strong>Civic Engineer</strong> of AI, finding the unique path that maximizes the distance from danger on both sides. Even when categories are mixed like a swirl, SVM can "Fold Space" (The Kernel Trick) to find a clean, straight separation in higher dimensions.
       </div>
     </div>
 

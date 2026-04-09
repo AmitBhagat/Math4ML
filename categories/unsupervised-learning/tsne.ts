@@ -12,19 +12,31 @@ export const tsneSection: TopicSection = {
       <p>PCA looks for <strong>Global Variance</strong>—the big picture. <strong>t-SNE</strong> looks for <strong>Local Neighborhoods</strong>. It's the standard tool for "Sanity Checking" your high-dimensional data. If your data points are related (like handwritten '7's), t-SNE will huddle them together in a <strong>2D Map</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Probability Densities</h2>
-    <p>t-SNE converts <strong>Distances</strong> into <strong>Probabilities</strong>. In the high-dimensional space, it calculates the probability that point $i$ would pick point $j$ as its neighbor. Then, it tries to find a 2D layout that <strong>mimics these probabilities</strong> as closely as possible.</p>
-    <div class="math-block">$$p_{ij} = \frac{\exp(-\|x_i - x_j\|^2 / 2\sigma_i^2)}{\sum_{k \neq l} \exp(-\|x_k - x_l\|^2 / 2\sigma_k^2)}$$</div>
-    <p>We minimize the <strong>KL Divergence</strong> between the high-D probabilities ($P$) and the low-D probabilities ($Q$).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>PCA looks for <strong>Global Variance</strong>—the "Big Picture" skeleton of the data. <strong>t-SNE</strong> (t-Distributed Stochastic Neighbor Embedding), however, is obsessed with <strong>Local Neighborhoods</strong>. It is the gold standard for "Sanity Checking" high-dimensional data by squashing it into a 2D map. If points were close neighbors in the original 100D space, t-SNE will fight to keep them huddling together in 2D. It doesn't care about the total distance between far-off points; it only cares that your closest friends stay beside you on the map. It is a "Social Mapmaker" that unrolls complex, curved datasets that simple linear tools would just flatten.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: t-SNE</div>
+      <p>t-SNE converts high-dimensional Euclidean distances into conditional probabilities representing similarities. For point $x_j$ given $x_i$, the similarity is:</p>
+      <div class="math-block">
+        $$p_{j|i} = \frac{\exp(-\|x_i - x_j\|^2 / 2\sigma_i^2)}{\sum_{k \ne i} \exp(-\|x_i - x_k\|^2 / 2\sigma_i^2)}$$
+      </div>
+      <p>In the low-dimensional space, t-SNE uses a Student's t-distribution to model similarities $q_{ij}$. The embedding is found by minimizing the **KL Divergence** via gradient descent:</p>
+      <div class="math-block">
+        $$\mathcal{C} = KL(P \| Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Optimizing Friendships."</strong> 
-        Imagine 1,000 people are friends in a 1,000D world. 
-        You want to put them all in a <strong>Small Room (2D)</strong>. 
-        t-SNE says: "If Person A and B were best friends in the 1,000D world, I'll do whatever it takes to keep them <strong>side-by-side</strong> in the room." 
-        It prioritizes <strong>Local Closeness</strong> over overall distance. 
+        Think of t-SNE as <strong>"Optimizing Friendships in a Small Room"</strong> or the <strong>"Social Mapmaker Analogy."</strong> 
+        Imagine you have 1,000 people who are friends in a massive 1,000-dimensional world. You want to put them all in a small 2D room (the screen). 
+        <strong>t-SNE</strong> says: "If Person A and B were best friends in that 1,000D world, I will do whatever it takes to keep them <strong>side-by-side</strong> in this room." 
+        It ignores global factors like height or wealth and focuses purely on <strong>Local Closeness</strong>. The result is a chart where "Cliques" (Handwritten '7's, similar DNA, or related words) are clustered perfectly. 
+        But remember: the distance between the "Jocks" corner and the "Geeks" corner means <strong>nothing</strong>. In t-SNE, only the huddle matters.
       </div>
     </div>
 

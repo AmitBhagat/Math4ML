@@ -21,38 +21,26 @@ export const hypothesisTestingSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the assumption that "Nothing happened, it's just noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (the data) is so overwhelming that it's highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your results if the "Nothing happened" assumption were true.</p>
+    <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the annoying, skeptical assumption that "Nothing happened, it's just random noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (our data) is so overwhelming that it is highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your specific results if the "Nothing happened" assumption were true. If that probability is tiny (usually less than 5%), we decide that the "Noise" explanation is just too implausible. In Machine Learning, this is the tactical way we prove that our model's improvement is a <strong>Real Signal</strong>, protecting us from wasting time chasing ghosts and accidental patterns in the data that aren't actually there.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Test of Significance</div>
+      <p>A **Hypothesis Test** is a formal procedure for determining whether to reject a null hypothesis $H_0$ based on sample evidence. It evaluates two mutually exclusive statements about a population:</p>
+      <div class="math-block">
+        $$H_0: \theta = \theta_0, \quad H_a: \theta \neq \theta_0$$
+      </div>
+      <p>The decision is governed by the following analytical components:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Test Statistic ($T_{obs}$)</strong>: A numerical value calculated from sample data (e.g., $Z$, $t$, or $\chi^2$) that measures the deviation from $H_0$.</li>
+        <li><strong>p-value</strong>: $P(T \ge T_{obs} \mid H_0)$. The probability of observing results as extreme as yours if the Null Hypothesis were true.</li>
+        <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is **Statistically Significant**, and $H_0$ is rejected.</li>
+        <li><strong>Decision Errors</strong>: **Type I** (rejecting a true $H_0$) and **Type II** (failing to reject a false $H_0$).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Hypothesis Testing as a <strong>"Trial in Court."</strong> 
-        The Model is <strong>"Innocent"</strong> of having any real effect until proven guilty. 
-        The <strong>Evidence</strong> is your Test Data. 
-        The <strong>P-Value</strong> is the "Reasonable Doubt." 
-        If the doubt is less than 5% (\(\alpha = 0.05\)), we "Convict" the Null and declare the effect <strong>Statistically Significant</strong>.
-      </div>
-    </div>
-
-    <h2 id="process">The 4-Step Process</h2>
-    <div class="algorithm-steps">
-      <div class="algorithm-step">
-        <span class="step-badge">1</span>
-        <div><strong>State Hypotheses:</strong> \(H_0\) (No effect) vs. \(H_1\) (There is an effect).</div>
-      </div>
-      <div class="algorithm-step">
-        <span class="step-badge">2</span>
-        <div><strong>Choose Alpha (\(\alpha\)):</strong> Usually 0.05. This is your "Threshold for Surprise."</div>
-      </div>
-      <div class="algorithm-step">
-        <span class="step-badge">3</span>
-        <div><strong>Calculate Test Statistic:</strong> Compute a score (Z, T, or \(\chi^2\)) based on your data.</div>
-      </div>
-      <div class="algorithm-step">
-        <span class="step-badge">4</span>
-        <div><strong>Compare P-Value:</strong> If \(p < \alpha\), Reject \(H_0\).</div>
-      </div>
-    </div>
 
     <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
     
@@ -156,3 +144,4 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
     </div>
   `
 };
+

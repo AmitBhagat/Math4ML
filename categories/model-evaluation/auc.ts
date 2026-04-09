@@ -12,16 +12,39 @@ export const aucSection: TopicSection = {
       <p>If the ROC curve is a picture of the model's potential, <strong>AUC</strong> is its Final Grade. It is a single number between <strong>0 and 1</strong>. It tells us: <strong>How good is this model at telling two things apart?</strong> A score of 0.8 means the model is "Pretty Good," while 0.5 means it's just flipping a coin.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Ranking Probability</h2>
-    <p>The <strong>AUC (Area Under the ROC Curve)</strong> has a beautiful probabilistic meaning. If you pick one <strong>Random Positive</strong> sample and one <strong>Random Negative</strong> sample, AUC is the probability that your model will give the Positive sample a <strong>Higher Score</strong> than the Negative one.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If the ROC curve is a visual representation of your model's potential, <strong>AUC (Area Under the Curve)</strong> is its final grade. It is a single scalar value between 0 and 1 that measures the entire two-dimensional area underneath the ROC curve. More importantly, AUC has a beautiful probabilistic meaning: if you pick one random positive sample and one random negative sample, AUC is the probability that your model will give the positive sample a higher score than the negative one. It is the tactical metric of <strong>Separation Power</strong>. Unlike accuracy, AUC doesn’t care about your classification threshold or how imbalanced your dataset is; it only cares about whether your model is fundamentally good at the "Ranking" game—placing the truth above the noise.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Ranking Probability (Wilcoxon-Mann-Whitney)</div>
+      <p>The **Area Under the Curve (AUC)** is the integral of the True Positive Rate (TPR) function with respect to the False Positive Rate (FPR). It represents the aggregate measure of performance across all possible classification thresholds:</p>
+      
+      <div class="math-block">
+        $$\text{AUC} = \int_{0}^{1} TPR(FPR^{-1}(u)) \, du$$
+      </div>
+      
+      <p>Beyond integration, AUC has a critical probabilistic interpretation. Let $f(\mathbf{x}_+)$ be the model's score for a random positive instance and $f(\mathbf{x}_-)$ the score for a random negative instance. Then:</p>
+      <div class="math-block">
+        $$\text{AUC} = \mathbb{P}(f(\mathbf{x}_+) > f(\mathbf{x}_-))$$
+      </div>
+
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Separation Power</strong>: $\text{AUC} = 1.0$ implies a perfectly separated distribution where the lowest-scoring positive still ranks higher than the highest-scoring negative.</li>
+        <li><strong>Random Baseline</strong>: $\text{AUC} = 0.5$ implies the distributions are overlapping and the model has no discriminative power (equivalent to a coin flip).</li>
+        <li><strong>Invariance</strong>: AUC is invariant to the classification threshold and invariant to the prior class distribution (class skew).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Separation Power."</strong> 
-        It doesn't care about the threshold. It asks: "Are the 'Yes' people actually getting higher numbers than the 'No' people?" 
-        If they are perfectly separated, AUC is <strong>1.0</strong>. 
-        If they are completely mixed up, AUC is <strong>0.5</strong>.
+        Think of AUC as <strong>"The Grade of the Model"</strong> or <strong>"The Blind Comparison."</strong> 
+        Imagine you have two groups: <strong>Chemists</strong> and <strong>Artists</strong>. You give them a chemistry test. 
+        If you pick one random Chemist and one random Artist, what is the chance the Chemist scored higher? 
+        If the test is just random garbage, it's 50/50 (AUC = 0.5). If the Chemists always score higher, the test is perfect at telling them apart (AUC = 1.0). 
+        <strong>AUC is that percentage.</strong> It describes how well your model separates the two groups, regardless of how many artists are in the room. It is the "All-Weather" grade of your model’s intelligence.
       </div>
     </div>
 

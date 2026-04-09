@@ -12,18 +12,29 @@ export const ensembleIntroSection: TopicSection = {
       <p>Why use one model when you can use 1,000? <strong>Ensemble Learning</strong> is based on one powerful truth: <strong>The collective opinion of a diverse group is often more accurate than any single expert.</strong> By combining models that make different kinds of mistakes, we can "Average out" the errors and find the signal in the noise.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Error Decomposition</h2>
-    <p>Total error can be broken down into <strong>Bias</strong>, <strong>Variance</strong>, and <strong>Irreducible Noise</strong>. Ensemble methods focus on reducing one of these two:</p>
-    <ul>
-      <li><strong>Bagging:</strong> Reduces <strong>Variance</strong>. (Stop the model from being "Jumpy").</li>
-      <li><strong>Boosting:</strong> Reduces <strong>Bias</strong>. (Stop the model from being "Stupid").</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Why use one model when you can use 1,000? <strong>Ensemble Learning</strong> is based on one powerful truth: the collective opinion of a diverse group is often more accurate than any single expert. In machine learning, every algorithm has a "Blind Spot"—a specific kind of data it struggles with. By combining models that make different kinds of mistakes, we can "Average out" the individual errors and isolate the pure signal. It is the tactical decision to trade simplicity for robustness, ensuring that your final prediction isn't derailed by a single faulty perspective. It is the "Wisdom of the Crowd" translated into pure mathematics.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Multi-Hypothesis Aggregate</div>
+      <p>An ensemble model $H(\mathbf{x})$ is a composite function that aggregates the predictions of $m$ base learners $\{h_1, \dots, h_m\}$. The aggregation typically takes the form of a linear combination or a vote:</p>
+      <div class="math-block">
+        $$H(\mathbf{x}) = \sum_{i=1}^m \alpha_i h_i(\mathbf{x}) \quad \text{or} \quad H(\mathbf{x}) = \text{argmax}_{c \in \mathcal{C}} \sum_{i=1}^m w_i \mathcal{I}(h_i(\mathbf{x}) = c)$$
+      </div>
+      <p>The core theoretical justification lies in the **Ambiguity Decomposition**, which relates the ensemble error to the average error of individual models and their diversity (covariance):</p>
+      <div class="math-block">
+        $$\text{Error}_{\text{ens}} = \overline{\text{Error}}_{\text{ind}} - \text{Ambiguity}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where Ambiguity measures the disagreement between models. This implies that the ensemble is always at least as accurate as the average of its members, provided they are diverse.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Correction through Collaboration."</strong> 
-        If Model A thinks a 'Dog' is a 'Cat', but Model B, C, and D all think it's a 'Dog', the majority wins. The ensemble effectively <strong>Filters</strong> individual mistakes.
+        Think of Ensemble Learning as <strong>"The Wisdom of the Council"</strong> or <strong>"Correction through Collaboration."</strong> 
+        Imagine a King who must decide whether to go to war. He doesn't trust just one advisor, so he summons three: an Economist, a General, and a Historian. Each advisor sees the world through a different lens (Feature Space). 
+        The General might be too aggressive, the Economist too cautious. But by taking a <strong>Majority Vote</strong>, the King filters out their individual biases. If Model A thinks a dog is a cat, but Models B, C, and D all agree it’s a dog, the council wins. The ensemble effectively turns a group of "Weak Learners" into a single, high-performance "Strong Learner."
       </div>
     </div>
 

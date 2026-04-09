@@ -12,17 +12,26 @@ export const contrastiveSection: TopicSection = {
       <p>How do you learn what a "Face" is if you don't have labels? You learn by <strong>Comparison</strong>. If I show you two photos of the same person, you know they should look similar in your head. If I show you a person and a car, you know they should look different. <strong>Contrastive Learning</strong> is the art of <strong>Pulling Friends Close</strong> and <strong>Pushing Enemies Away</strong> in latent space.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Contrastive Divergence</h2>
-    <p>We want to learn an embedding function \(f_{\theta}\) such that the distance between similar items (\(x, x^+\)) is minimized, and the distance between different items (\(x, x^-\)) is maximized.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you learn what a "Face" is if no one ever gives you a label? You learn by <strong>Comparison</strong>. If I show you two photos of the same person, you know they should look similar in your head. If I show you a person and a car, you know they should look fundamentally different. <strong>Contrastive Learning</strong> is the art of teaching a model to recognize these relative differences. By "Pulling Friends Close"—minimizing the distance between similar data points in latent space—and "Pushing Enemies Away"—maximizing the distance from dissimilar ones—the model learns the deep features of the data without ever needing a single human-provided tag. It is the math of finding patterns through comparison rather than instruction.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The InfoNCE Objective</div>
+      <p>Contrastive learning aims to learn an encoder $f_\theta$ that maps inputs to a latent space where similar samples are close. Given a positive pair $(\mathbf{z}_i, \mathbf{z}_j)$, the **InfoNCE** (Information Noise-Contrastive Estimation) loss is defined as:</p>
+      <div class="math-block">
+        $$\mathcal{L}_{i,j} = -\log \frac{\exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_k) / \tau)}$$
+      </div>
+      <p>Where $\text{sim}(\mathbf{u}, \mathbf{v})$ is the cosine similarity and $\tau$ is a temperature hyperparameter. The model must correctly identify the "positive" sample $j$ among a set of $2N-1$ "negative" distractors.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Social Distancing in Vector Space."</strong> 
-        The "Loss Function" acts like a spring. 
-        It <strong>Pulls</strong> similar ideas together until they overlap. 
-        It <strong>Pushes</strong> dissimilar ideas apart until they never touch. 
-        Because it only cares about <strong>Relative</strong> distances, it doesn't need to know the 'Categories'. 
+        Think of Contrastive Learning as <strong>"Social Distancing in Vector Space"</strong> or <strong>"The Twin Study."</strong> 
+        Imagine you are in a crowded dark room with 100 sets of identical twins (200 people total). You don't know anyone's name. Your only goal is to organize them. 
+        When you find two people who look the same (the <strong>Positive Pair</strong>), you make them sit at the same table (you "Pull" them together). If two people look different (the <strong>Negative Pair</strong>), you force them to opposite ends of the room. 
+        By the end of the night, if every twin does this, the room will be perfectly clustered by facial structure. You didn't need a name tag (a Label) to do it; you just needed to know who was a "mismatch."
       </div>
     </div>
 

@@ -12,25 +12,32 @@ export const categoricalEncodingSection: TopicSection = {
       <p>Computers don't know what "London," "Berlin," or "Paris" mean. They only know <strong>Numbers</strong>. To teach them about categories, we have to translate words into a mathematical language that doesn't imply a false order or weight. <strong>Categorical Encoding</strong> is that translator.</p>
     </div>
 
-    <h2 id="label">Label Encoding</h2>
-    <p>Label Encoding maps each category to a unique integer (e.g., Red=0, Green=1, Blue=2). 
-    <strong>The Gotcha:</strong> This implies an <strong>Order</strong>. If you use this for colors, the model might think <code>Blue > Green > Red</code>. Use this <strong>only</strong> for ordinal data (e.g., Cold=0, Warm=1, Hot=2).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you explain the difference between an Apple and a Banana to a calculator? Computers are high-speed counting machines; they don’t understand "meaning," only <strong>Magnitude</strong> and <strong>Distance</strong>. If you simply assign numbers like Apple=1 and Banana=2, the computer might assume that a Banana is "greater" than an Apple, or that two Apples equal one Banana. <strong>Categorical Encoding</strong> is the art of translating human labels into a numerical format that preserves the logic of the data without introducing these mathematical lies. It is the "Universal Translator" that allows our models to process the rich, qualitative variety of the real world.</p>
 
-    <h2 id="onehot">One-Hot Encoding</h2>
-    <p>Instead of one column with integers, we create a <strong>Binary Column</strong> for every category. 
-    "Is it Red?" (1 or 0), "Is it Blue?" (1 or 0). Only one column can be "Hot" (1) at a time. This treats all categories as <strong>Equidistant</strong> and independent.</p>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Qualitative to Quantitative Projection</div>
+      <p>Categorical Encoding is the process of mapping a categorical variable $X$ with domain $\mathcal{C} = \{c_1, \dots, c_k\}$ into a numeric vector space. The two primary paradigms are defined by the structure of $\mathcal{C}$:</p>
+      
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Ordinal Encoding</strong>: Used when $\mathcal{C}$ possesses a natural ordering $\preceq$. The mapping $f: \mathcal{C} \to \mathbb{Z}^+$ satisfies $c_i \preceq c_j \iff f(c_i) \le f(c_j)$. This preserves the "Magnitude" of the relationship (e.g., Cold < Warm < Hot).</li>
+        <li><strong>One-Hot Encoding</strong>: Used for nominal data where no order exists. The mapping $\phi: \mathcal{C} \to \{0, 1\}^k$ projects each category onto a standard basis vector $\mathbf{e}_i$. This ensures all categories are **Equidistant** in the feature space: $\|\phi(c_i) - \phi(c_j)\|_2 = \sqrt{2}$ for all $i \neq j$.</li>
+      </ul>
 
+      <p class="text-xs opacity-80 mt-2"><strong>The Dummy Variable Trap</strong>: In models with an intercept term, the sum of all one-hot columns is always 1, creating a linear dependency: $\sum_{i=1}^k \mathbf{x}_i = \mathbf{1}$. This causes **Perfect Multicollinearity**, making the covariance matrix non-invertible. To prevent this, we typically drop one category ($k-1$ encoding).</p>
+      
+      <p class="text-xs opacity-70 mt-2">Choose **One-Hot** to avoid false hierarchy in labels; choose **Ordinal** only when the numerical sequence reflects a semantic progression.</p>
+    </div>
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        One-Hot Encoding is like <strong>"Voting Panels."</strong> 
-        Instead of a single dial, you have a row of buttons. If you press the "Berlin" button, all other buttons pop up. It's the safest way to encode nominal data without introducing bias.
+        Think of Categorical Encoding as <strong>"The Digital Library Catalog"</strong> or <strong>"The Voting Panel."</strong> 
+        Imagine a library. <strong>Label Encoding</strong> is like giving each genre a number (History=1, Fiction=2). This is fine for a list, but a computer might think History + Fiction = Sci-Fi. 
+        <strong>One-Hot Encoding</strong> is like giving each genre its own <strong>Shelf</strong>. A book can only be on one shelf at a time. By using binary "buttons" (1 if it's there, 0 if not), we ensure the computer treats all categories as <strong>Equidistant Neighbors</strong> with no inherent hierarchy. It’s about giving every category its own unique coordinate in space.
       </div>
     </div>
-
-    <h2 id="trap">The Dummy Variable Trap</h2>
-    <p>If you have 3 categories (Red, Blue, Green) and you create 3 columns, you have <strong>Redundant Information</strong>. If you know it's not Red and not Blue, then it <strong>must</strong> be Green. 
-    Mathematically, this causes <strong>Multicollinearity</strong>. To fix it, we always drop one column ($n-1$ encoding).</p>
 
     <h2 id="analogy">The "Library Catalog" Analogy</h2>
     <div class="callout success">

@@ -12,16 +12,29 @@ export const polynomialRegressionSection: TopicSection = {
       <p>Sometimes, a straight line is just too <strong>dumb</strong>. If you're predicting the growth of a virus or the trajectory of a ball, the relationship is a <strong>Curve</strong>. <strong>Polynomial Regression</strong> is the trick we use to make a linear tool fit a non-linear world.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Transformation of Basis</h2>
-    <p>Wait, if it has curves (\(x^2, x^3\)), is it still "Linear"? <strong>Yes!</strong> It's linear in the <strong>weights</strong> (\(w\)). We just "Expand" our features. Instead of just having \(x\), we create new features: \(x^2\), \(x^3\), and so on.</p>
-    <div class="math-block">$$y = w_0 + w_1 x + w_2 x^2 + w_3 x^3 + \epsilon$$</div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Sometimes, a straight line is just too <strong>dumb</strong> to capture the reality of the world. If you are predicting the trajectory of a ball, the growth of a virus, or the complex curves of a stock market trend, the relationship isn't a line—it's a <strong>Curve</strong>. <strong>Polynomial Regression</strong> is the mathematical trick we use to make a linear tool fit a non-linear world. We don't change the algorithm; we just "Expand" the features. By treating \(x^2\) and \(x^3\) as entirely new dimensions, we allow a simple linear model to "Bend" and follow the bumps of the data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Polynomial Regression</div>
+      <p>Polynomial regression is a special case of multiple linear regression where the features are $d$-th degree polynomials of the original input $x$. The hypothesis function is:</p>
+      <div class="math-block">
+        $$\hat{y} = w_0 + w_1 x + w_2 x^2 + \dots + w_d x^d$$
+      </div>
+      <p>This is formally a linear model because the weights $w_j$ are linear. The feature space is transformed via a **Basis Expansion** mapping $\phi(x) = [1, x, x^2, \dots, x^d]^T$, and the objective remains the minimization of the squared error:</p>
+      <div class="math-block">
+        $$\mathcal{L}(\mathbf{w}) = \sum_{i=1}^n (y_i - \mathbf{w}^T \phi(x_i))^2$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Data Hallucination."</strong> 
-        The machine only knows how to draw straight lines. So, we "Trick" it. 
-        We take our flat data and <strong>bend it into 3D space</strong>. In that higher-dimensional space, the relationship looks like a straight line again. When we "Project" it back to our 1D world, it looks like a <strong>Beautiful Curve</strong>.
+        Think of Polynomial Regression as the <strong>"Flexible Tape Measure"</strong> or the <strong>"Bent Ruler."</strong> 
+        Imagine you are trying to measure a bumpy hill. <strong>Linear Regression</strong> is like using a rigid wooden ruler—it misses the valleys and peaks entirely. 
+        <strong>Polynomial Regression</strong> is like using a flexible plastic ruler that you can bend to fit the landscape. 
+        But beware: if that ruler is <strong>too flexible (Too high degree)</strong>, you can fold it in half to touch every tiny speck of dirt on the hill. In ML, we call this "Overfitting"—the model stops learning the path and starts memorizing the dust (the noise).
       </div>
     </div>
 

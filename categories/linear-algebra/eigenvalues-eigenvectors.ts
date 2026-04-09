@@ -13,15 +13,29 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Normally, when you multiply a vector by a matrix, it gets rotated and stretched into chaos. But for every matrix, there are a few "Special directions" that stay perfectly still. If you know these directions, you can simplify the entire matrix into a set of simple stretches. This is how we find <strong>Principal Components</strong> in data.</p>
+    <p>Normally, when you multiply a vector by a matrix, the vector gets rotated and stretched into a brand-new direction—absolute chaos. But for every matrix, there are a few "Special Directions" that are immune to rotation. They stay perfectly aligned with their original path; they only grow or shrink. These are the <strong>Eigenvectors</strong>. The <strong>Eigenvalue</strong> (\(\lambda\)) is just the scale factor of that growth. If you find these magic axes, you can simplify even the most complex matrix into a set of simple stretches. This is how we find the "Soul" or the "Main Signal" of our data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The characteristic Equation</div>
+      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, a non-zero vector $\mathbf{v}$ is an **Eigenvector** and $\lambda$ is its corresponding **Eigenvalue** if:</p>
+      <div class="math-block">
+        $$A \mathbf{v} = \lambda \mathbf{v}$$
+      </div>
+      <p>This relationship implies that $(A - \lambda I)\mathbf{v} = \mathbf{0}$. For a non-trivial solution to exist, the matrix $(A - \lambda I)$ must be non-invertible, leading to the **Characteristic Equation**:</p>
+      <div class="math-block">
+        $$\det(A - \lambda I) = 0$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of Eigenvectors like the <strong>Axes of Rotation</strong>. 
-        If you spin a globe, every point moves—except for the North and South Poles. 
-        The "Line through the Poles" is the <strong>Eigenvector</strong>. 
-        It stays in place while everything else transforms around it.
+        Think of Eigenvectors like the <strong>Axes of Rotation</strong> or the <strong>Anchor Points</strong> of a transformation. 
+        If you spin a globe, every city on the surface moves to a new location—except for the North and South Poles. 
+        The line through those poles is the <strong>Eigenvector</strong>; it stays perfectly in place while the rest of the world transforms around it. 
+        In Machine Learning, we use these eigenvectors to find <strong>Principal Components</strong>—the few "Main Directions" where your data is most spread out, allowing us to ignore the less important wiggles.
       </div>
     </div>
 

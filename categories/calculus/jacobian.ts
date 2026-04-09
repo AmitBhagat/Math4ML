@@ -21,26 +21,27 @@ export const jacobianSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A simple derivative (\(df/dx\)) is for one input and one output. A Gradient (\(\nabla f\)) is for many inputs and one output. But in Deep Learning, every layer takes a vector and spits out a <strong>new vector</strong>. To track the sensitivity of this transformation, we need a grid where every row is the gradient of a different output.</p>
+    <p>A simple derivative is for one input and one output. A Gradient is for many inputs and one output. But in Deep Learning, every layer takes a vector and transforms it into a <strong>new vector</strong>. To track this complex interaction, we need the <strong>Jacobian Matrix</strong>—a complete grid where every row is the gradient of a different output neuron. It tells us exactly how every single input in a layer influences every single output in the next. Without this map, we wouldn't be able to "link" the chain of sensitivities together to train deep neural networks.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix of Sensitivities</div>
+      <p>For a vector-valued function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$, the **Jacobian Matrix** $\mathbf{J}$ (or $\mathbf{Df}$) is the matrix of all first-order partial derivatives. It represents the best linear approximation of the function at a point $\mathbf{x}$:</p>
+      <div class="math-block">
+        $$\mathbf{J} = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} = \begin{bmatrix} 
+        \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$
+      </div>
+      <p>The Jacobian plays three critical roles in advanced mathematical modeling:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Multivariate Chain Rule</strong>: To differentiate $\mathbf{f}(\mathbf{g}(\mathbf{x}))$, we multiply their Jacobians: $\mathbf{J}_{\mathbf{f} \circ \mathbf{g}} = \mathbf{J}_{\mathbf{f}} \cdot \mathbf{J}_{\mathbf{g}}$.</li>
+        <li><strong>Local Linearization</strong>: Near $\mathbf{x}$, the change in output is predicted by $\Delta \mathbf{f} \approx \mathbf{J} \Delta \mathbf{x}$.</li>
+        <li><strong>Volume Scaling</strong>: If $n=m$, $|\det(\mathbf{J})|$ measures how the transformation expands or shrinks space locally.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Jacobian as a <strong>"Responsibility Matrix."</strong> 
-        The row tells you: <em>"How much does Output #1 care about Input #1, #2, #3?"</em> 
-        The column tells you: <em>"How much does Input #1 affect Output #1, #2, #3?"</em> 
-        Without this grid, we couldn't pass gradients through complex "Vector Layers" like Softmax or fully connected layers.
-      </div>
-    </div>
-
-    <visualizer topic="JacobianHessian" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(\mathbf{f}(\mathbf{x}) = [f_1, f_2, \dots, f_m]^T\) of input \(\mathbf{x} = [x_1, x_2, \dots, x_n]^T\), the Jacobian is:</p>
-    <div class="math-block">$$ \mathbf{J} = \begin{bmatrix} 
-    \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
-    \vdots & \ddots & \vdots \\
-    \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix} $$</div>
 
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
@@ -128,3 +129,4 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </div>
   `
 };
+

@@ -21,24 +21,25 @@ export const crossEntropySection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Entropy tells you how much information is in the truth. <strong>Cross-Entropy</strong> tells you how many bits of information you *think* are there because of your model. If your model is wrong, you pay a "penalty" in extra bits. By minimizing this penalty, you force the model's "beliefs" to align with reality.</p>
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Cross-Entropy as <strong>"The Wrong Map Penalty."</strong> 
-        The terrain is \(P\) (reality), but you're using map \(Q\) (your model). 
-        If your map says "Go Left" but the terrain says "Go Right," you pay a price in wasted time (Entropy). 
-        Cross-Entropy is the total cost of using your map. Training a model is just <strong>drawing a better map.</strong>
+    <p>Entropy tells you how much information is in the truth, but <strong>Cross-Entropy</strong> (\(H(P, Q)\)) measures the cost of your disbelief. It tells you how many bits of information you *think* are required to describe a system because you are using a flawed model. In machine learning, we treat the ground truth as the target distribution (\(P\)) and our model's prediction as the guess (\(Q\)). If your model is perfectly aligned with reality, the cross-entropy equals the entropy of the data. However, if your model is wrong, you pay a "penalty" in extra bits. By minimizing cross-entropy, we are essentially forcing the model's internal map of the world to perfectly overlap with the actual terrain of the data. It is the tactical way we punish a model for being "Confidently Wrong."</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Penalty of Flawed Models</div>
+      <p>The **Cross-Entropy** $H(P, Q)$ between a true distribution $P$ and an estimated distribution $Q$ is the expected number of bits required to identify an event from $P$ when using a coding scheme optimized for $Q$:</p>
+      <div class="math-block">
+        $$H(P, Q) = -\sum_{x \in \mathcal{X}} P(x) \log Q(x)$$
       </div>
+      <p>This measure is fundamental to supervised learning due to these mathematical properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Information Decomposition</strong>: $H(P, Q) = H(P) + D_{KL}(P \parallel Q)$. It measures the intrinsic entropy of the data plus the "extra surprise" caused by our model's inaccuracy.</li>
+        <li><strong>Gibbs' Inequality</strong>: $H(P, Q) \ge H(P)$, with equality if and only if $P = Q$. This ensures that minimizing cross-entropy forces $Q$ to converge to $P$.</li>
+        <li><strong>Binary Cross-Entropy (BCE)</strong>: For a binary label $y \in \{0, 1\}$, it simplifies to $-(y \log \hat{y} + (1-y) \log(1-\hat{y}))$.</li>
+        <li><strong>Sensitivity</strong>: Unlike Mean Squared Error, cross-entropy produces very large gradients when the model predicts the wrong class with high confidence, pushing the model to correct itself aggressively.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Cross-entropy is the standard objective for training classifiers, as it directly minimizes the information gap between model predictions and reality.</p>
     </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a true distribution \(P\) and predicted distribution \(Q\):</p>
-    <div class="math-block">$$H(P, Q) = -\sum_{i} P(x_i) \log Q(x_i)$$</div>
-    <p>In binary classification (Cat vs. Not Cat), this simplifies to the famous Binary Cross-Entropy (BCE) loss:</p>
-    <div class="math-block">$$L = -[y \log(\hat{y}) + (1-y) \log(1-\hat{y})]$$</div>
-
+    
     <h2 id="example-target" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prediction vs. Target</h2>
     
       <h4>Problem: Measuring the Gap</h4>
@@ -118,3 +119,4 @@ print(f"Cross-Entropy Loss: {cross_entropy(target, guess):.4f}")
     </div>
   `
 };
+

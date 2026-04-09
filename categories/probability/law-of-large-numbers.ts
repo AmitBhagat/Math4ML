@@ -21,25 +21,25 @@ export const lawOfLargeNumbersSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>If you flip a coin 5 times, you might get 4 heads (80%). This is just "luck." But if you flip a coin 5,000,000 times, you will almost certainly have extremely close to 50% heads. The <strong>LLN</strong> says that individual "luck" (Variability) gets washed away as the sample size grows. This is why we can trust our model's performance on a large test set.</p>
+    <p>If you flip a coin 5 times, you might get 4 heads (80%). This isn't science—it's just a "blip" of luck. But if you flip that coin 5,000,000 times, you will almost certainly land on exactly 50% heads. The <strong>Law of Large Numbers (LLN)</strong> is the "Anchor" that stops the world from being pure chaos. It guarantees that as you collect more data, the individual noise and "lucky streaks" get washed away, leaving only the <strong>Cold, Hard Truth</strong> of the underlying average. In Machine Learning, this is why we can trust our model's performance on a large test set; it ensures that our measured error eventually represents the <strong>True Global Error</strong>.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Convergence of Averages</div>
+      <p>The **Law of Large Numbers** governs the behavior of the sample mean as the number of independent trials increases. Let $X_1, X_2, \dots, X_n$ be i.i.d. random variables with finite mean $\mu = \mathbb{E}[X_i]$ and sample mean $\bar{X}_n$. The theorem exists in two primary strengths:</p>
+      <div class="math-block">
+        $$\bar{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$
+      </div>
+      <p>The convergence of this average to the theoretical mean is expressed as:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Weak Law (WLLN)</strong>: $\bar{X}_n \xrightarrow{P} \mu$. For any $\epsilon > 0$, $\lim_{n \to \infty} P(|\bar{X}_n - \mu| > \epsilon) = 0$. This implies convergence in probability.</li>
+        <li><strong>Strong Law (SLLN)</strong>: $\bar{X}_n \xrightarrow{a.s.} \mu$. The probability that the limit of the sequence equals $\mu$ is 1. This implies almost sure convergence.</li>
+        <li><strong>Implications for Data</strong>: As sample size increases, the influence of individual outliers and noise vanishes, revealing the stable properties of the underlying distribution.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, LLN justifies the use of finite training sets to estimate the loss over the entire population (Empirical Risk Minimization).</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of LLN as <strong>"The Truth Coming to Light."</strong> 
-        In the short term, anyone can look like a genius (High Accuracy). 
-        But in the long term, your <strong>True Average Skill</strong> will be revealed. 
-        In ML, we use this to justify that our "Sample Average Loss" on the training set eventually represents the <strong>True Error</strong> of the model on the data distribution.
-      </div>
-    </div>
-
-    <visualizer topic="ExpectationVariance" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>Let \(X_1, X_2, \dots, X_n\) be independent identically distributed (i.i.d) random variables with mean \(\mu\). The Sample Mean \(\overline{X}_n\) is defined as:</p>
-    <div class="math-block">$$\overline{X}_n = \frac{1}{n} \sum_{i=1}^n X_i$$</div>
-    <p>The <strong>Strong LLN</strong> states:</p>
-    <div class="math-block">$$\overline{X}_n \xrightarrow{a.s.} \mu \text{ as } n \to \infty$$</div>
 
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
     
@@ -116,3 +116,4 @@ print(f"Final Average: {running_avg[-1]:.4f}")
     </div>
   `
 };
+

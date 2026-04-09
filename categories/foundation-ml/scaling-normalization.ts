@@ -12,26 +12,36 @@ export const scalingNormalizationSection: TopicSection = {
       <p>Imagine your machine is comparing <strong>Weight (in grams)</strong> to <strong>Height (in kilometers)</strong>. A human sees that 1,000g is smaller than 1km, but the machine just sees <strong>1,000</strong> vs. <strong>1</strong>. It will "Think" that weight is 1,000x more important than height. <strong>Feature Scaling</strong> is the art of making every feature speak the same <strong>Numerical Language</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Magnitude vs. Importance</h2>
-    <p>Algorithms like <strong>Gradient Descent</strong> and <strong>K-Nearest Neighbors</strong> use "Distance" to calculate their updates. If one feature is on a much larger scale than another, the "Gradient" in that direction will be massive, while the other is tiny. This makes the optimization loop slow, unstable, or completely wrong.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Algorithms like <strong>Gradient Descent</strong> and <strong>K-Nearest Neighbors</strong> use "Distance" to calculate their updates. If one feature is on a much larger scale than another (e.g., House Price $1M vs. Bedrooms 3), the gradient in the expensive direction will be massive, while the other is tiny. This makes the optimization loop slow, unstable, or completely wrong. <strong>Feature Scaling</strong> is the "Exchange Rate" of data—it converts every feature into a common numerical language so they can have a fair fight for the model's attention. Without scaling, your model is numerically blind to the smaller numbers, potentially missing the most important signals in your data.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Numerical Common Language</div>
+      <p>Feature Scaling is the transformation of individual variables to a standard range or distribution. This is mathematically necessary for algorithms sensitive to the magnitude of values:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Standardization (Z-Score)</h4>
+          <p class="text-xs mb-1">Maps the feature to a distribution with mean $\mu = 0$ and standard deviation $\sigma = 1$:</p>
+          <div class="math-block">
+            $$z = \frac{x - \mu}{\sigma}$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Normalization (Min-Max)</h4>
+          <p class="text-xs mb-1">Rescales the range of the feature to $[0, 1]$:</p>
+          <div class="math-block">
+            $$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">The algebraic goal is to improve the <strong>Condition Number</strong> of the optimization surface. In Gradient Descent, scaling prevents "elongated" loss contours, allowing for larger learning rates and significantly faster convergence.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"The Big Fish"</strong>. 
-        If you have a feature like "House Price" (Millions) and another like "Number of Bedrooms" (1 to 5), the Millions will "Drown Out" the Bedrooms. To the machine, the 2nd bedroom is invisible because it's just a tiny "1" compared to a million. Scaling gives every feature a <strong>Fair Fight</strong>.
-      </div>
-    </div>
-
-    <h2 id="standardization">Standardization (Z-Score)</h2>
-    <p>This transforms your data to have a <strong>Mean of 0</strong> and a <strong>Standard Deviation of 1</strong> (Standard Normal Distribution).</p>
-    <div class="math-block">$$x' = \frac{x - \mu}{\sigma}$$</div>
-    <p><strong>Note:</strong> Most algorithms (like SVMs and Neural Nets) prefer this because it handles "Outliers" more gracefully than Min-Max.</p>
-
-    <h2 id="normalization">Normalization (Min-Max)</h2>
-    <p>This "Squeezes" all your data into a fixed range, usually <strong>[0, 1]</strong>.</p>
-    <div class="math-block">$$x' = \frac{x - x_{min}}{x_{max} - x_{min}}$$</div>
-    <p><strong>Note:</strong> This is great when you <strong>know</strong> the boundaries of your data and there are no extreme outliers that would "Squash" all the other points into a tiny pile at the bottom.</p>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Currency Exchange</h2>
     
@@ -83,3 +93,4 @@ print(f"\nStandardized (Mean 0, Std 1):\n{scaler_std}")
     </div>
   `
 };
+

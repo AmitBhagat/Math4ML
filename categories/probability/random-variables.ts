@@ -21,24 +21,25 @@ export const randomVariablesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Math doesn't like "Heads" or "Tails." It likes 0s and 1s. A Random Variable is the "Translator" that takes an outcome from the messy real world and turns it into a number we can actually perform math on. Without them, we couldn't calculate averages, variances, or train any model.</p>
+    <p>Math doesn't like abstract concepts like "Red," "Cold," or "Spam." It likes numbers. A <strong>Random Variable</strong> is the "Translator" or "Sensor" that takes an outcome from the messy, fuzzy real world and turns it into a hard real number we can actually perform calculus on. Without this mapping, we couldn't calculate averages, track variances, or feed data into a neural network. It is the fundamental bridge that allows us to turn <strong>Observations</strong> into <strong>Quantities</strong>. Every feature in your ML dataset—whether it's house square footage or pixel brightness—is a realization of a Random Variable.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Numerical Mapping</div>
+      <p>Given a probability space $(\Omega, \mathcal{F}, P)$, a **Random Variable** $X$ is a measurable function $X: \Omega \to \mathbb{R}$ that assigns a real number to each outcome in the sample space. Random variables are categorized by the nature of their range:</p>
+      <div class="math-block">
+        $$X(\omega) = x, \quad \omega \in \Omega, x \in \mathbb{R}$$
+      </div>
+      <p>The behavior of an RV is described by its probability distribution:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Discrete RV</strong>: Maps to a countable set. Defined by a <strong>PMF</strong> $p(x) = P(X = x)$ where $\sum p(x_i) = 1$.</li>
+        <li><strong>Continuous RV</strong>: Maps to an uncountable set (intervals). Defined by a <strong>PDF</strong> $f(x)$ such that $P(a \le X \le b) = \int_a^b f(x) dx$.</li>
+        <li><strong>Cumulative Property</strong>: All RVs possess a <strong>CDF</strong> $F(x) = P(X \le x)$, which is non-decreasing and bounded between 0 and 1.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we treat features as realizations of underlying random variables $X_1, X_2, \dots, X_n$.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Random Variable as a <strong>Scorecard</strong>. 
-        The experiment happens behind a curtain (e.g., a customer buys a product). 
-        The Random Variable is the number on the scorecard (e.g., the price they paid). 
-        Different customers (outcomes) result in different scores.
-      </div>
-    </div>
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>A Random Variable \(X\) is a function \(X: S \to \mathbb{R}\) that maps every element in the sample space \(S\) to a real number. We categorize them into two types:</p>
-    <ul>
-      <li><strong>Discrete:</strong> Outcomes you can count (e.g., number of clicks, dice rolls).</li>
-      <li><strong>Continuous:</strong> Outcomes you can measure (e.g., height, time, temperature).</li>
-    </ul>
 
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
     
@@ -118,3 +119,4 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
     </div>
   `
 };
+

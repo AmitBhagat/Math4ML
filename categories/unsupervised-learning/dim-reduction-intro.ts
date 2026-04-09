@@ -12,15 +12,30 @@ export const dimReductionIntroSection: TopicSection = {
       <p>Modern datasets have <strong>Thousands</strong> of features. But many of them are <strong>Redundant</strong>. If you know a person's Height and Weight, you can guess their T-shirt size. You don't need all three. <strong>Dimensionality Reduction</strong> is the art of simplifying the data without losing the <strong>Soul</strong> of the information.</p>
     </div>
 
-    <h2 id="curse">The Curse of Dimensionality</h2>
-    <p>In 2D or 3D, our intuition works. In 1,000D, <strong>everything is far away</strong> from everything else. The volume of the space grows exponentially faster than the number of data points. This makes models slow, unstable, and prone to overfitting. We need to <strong>Reduce</strong> the dimensions to make the data "Learnable" again.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Modern datasets often have thousands of features, but most of them are <strong>Redundant</strong>. If you know a person's Height and Weight, you can probably guess their T-shirt size—the third piece of info doesn't add much "New" value. <strong>Dimensionality Reduction</strong> is the art of simplifying data without losing its "Soul." In 2D or 3D, our human brains work well; in 1,000D, we are blind. By "Squashing" the data down to its most informative axes, we make it "Learnable" again, allowing our models to run faster, stay stable, and ignore the meaningless noise that clutters high-dimensional space.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Dimensionality Reduction</div>
+      <p>Dimensionality reduction is the transformation of data from a high-dimensional space $\mathbb{R}^d$ into a low-dimensional space $\mathbb{R}^k$ ($k < d$). Formally, we seek a mapping function $f: \mathbf{x} \to \mathbf{z}$ that preserves specific properties of the original data:</p>
+      <div class="math-block">
+        $$\mathbf{z}_i = f(\mathbf{x}_i) \in \mathbb{R}^k$$
+      </div>
+      <p>The choice of $f$ depends on what the algorithm prioritizes:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Linear (PCA)</strong>: Preserves maximum variance via orthogonal projection.</li>
+        <li><strong>Manifold (t-SNE/UMAP)</strong>: Preserves the local/topological structure of the data.</li>
+        <li><strong>Feature Selection</strong>: Prunes redundant or zero-variance dimensions from the set.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Busy Signal."</strong> 
-        Imagine 1,000 people talking at you at the same time. That's 1,000 dimensions. It's just <strong>Noise</strong>. 
-        If you find the 3 loudest, most informative people and only listen to them, you can actually <strong>understand the message</strong>. That is Dimensionality Reduction. 
+        Think of Dimensionality Reduction as <strong>"Finding the Shadow Puppet"</strong> or <strong>"The Busy Signal."</strong> 
+        Imagine a complex 3D statue of a dragon. You want to describe it using only a 2D shadow on the wall. If you take a photo from the top-down, you just get a flat blob—you lost the "Essence" of the dragon. But if you rotate the statue to the <strong>Best Angle</strong>, you can see the head, wings, and tail clearly in 2D. 
+        ML is just a giant search for that "Best Side." We are listening to 1,000 people talking at once (1,000 dimensions) and finding the 3 loudest, most informative voices to listen to. It’s about <strong>Information Compression</strong>: keeping the signal and killing the noise.
       </div>
     </div>
 

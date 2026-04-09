@@ -12,23 +12,33 @@ export const perceptronSection: TopicSection = {
       <p>Invented in 1958 by Frank Rosenblatt, the <strong>Perceptron</strong> is the biological inspiration that started it all. It is the absolute simplest "unit" of intelligence. It takes multiple inputs, weights them by importance, and makes a <strong>Yes/No</strong> decision based on a threshold.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Decision Function</h2>
-    <p>A Perceptron takes a vector of inputs $\mathbf{x}$ and applies a linear transformation followed by a <strong>Step Function</strong> (Heaviside). If the sum exceeds zero, it outputs 1; otherwise, 0.</p>
-    <div class="math-block">$$\hat{y} = \begin{cases} 1 & \text{if } \sum_{i=1}^n w_i x_i + b > 0 \\ 0 & \text{otherwise} \end{cases}$$</div>
-    <ul>
-      <li><strong>\(w_i\):</strong> Weights (The "Importance" of each feature).</li>
-      <li><strong>\(b\):</strong> Bias (The "Innate Tendency" or threshold of the neuron).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Invented in 1958, the <strong>Perceptron</strong> is the absolute simplest biological unit of machine intelligence. It is the "First Neuron"—the ancestor of every deep learning model in existence. It works by taking multiple inputs, weighting them by importance, and making a single, binary <strong>Yes/No</strong> decision. Mathematically, it is a <strong>Linear Knife</strong>; it tries to draw a perfectly straight line through your data to separate one group from another. While simple, it represents the foundational shift from static "Expert Systems" to machines that can <strong>Learn</strong> their own rules through trial and error.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Artificial Neuron</div>
+      <p>A Perceptron is a binary classifier that maps an input vector $\mathbf{x} \in \mathbb{R}^d$ to an output $f(\mathbf{x}) \in \{0, 1\}$. The output is calculated as:</p>
+      <div class="math-block">
+        $$f(\mathbf{x}) = \begin{cases} 1 & \text{if } \sum_{i=1}^d w_i x_i + b > 0 \\ 0 & \text{otherwise} \end{cases}$$
+      </div>
+      <p>The model learns by iteratively updating its weights $\mathbf{w}$ whenever the predicted $\hat{y}$ differs from the ground truth $y$:</p>
+      <div class="math-block">
+        $$\mathbf{w}_{t+1} = \mathbf{w}_t + \eta(y - \hat{y})\mathbf{x}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Geometric Decision Making."</strong> 
-        The weights and bias define a <strong>Hyperplane</strong> (a straight line in 2D). 
-        The Perceptron simply asks: "Is this data point on the <strong>Left</strong> or the <strong>Right</strong> side of the line?" 
+        Think of the Perceptron as <strong>"The Grumpy Loan Officer"</strong> or a <strong>"Binary Digital Switch."</strong> 
+        Imagine a single officer at a bank. They look at your Salary and your Credit Score. They multiply each by a "Weight" (Importance) and add them up. Then they compare that sum to their own internal "Grumpiness" (the Bias). 
+        If the total is above zero, they shout <strong>"Approved!"</strong>—if not, you're out. 
+        When they make a mistake (denying a millionaire), they get yelled at and <strong>Nudge</strong> their weights so they don't repeat the error. It’s the original "A-ha!" moment for AI—it’s not about finding a complex solution; it’s about making a simple decision and <strong>adjusting based on failure</strong>.
       </div>
     </div>
-
+    
     <h2 id="math">The Learning Rule</h2>
     <p>How does a Perceptron learn? It uses a simple update rule based on the <strong>Error</strong> (Target - Prediction):</p>
     <div class="math-block">$$w_i \gets w_i + \eta(y - \hat{y})x_i$$</div>

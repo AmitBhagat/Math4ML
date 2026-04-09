@@ -12,16 +12,37 @@ export const evaluationMetricsSection: TopicSection = {
       <p>Accuracy is a <strong>Lie</strong>. If 99% of your emails are "Not Spam," and your model just guesses "Not Spam" every single time, it is 99% accurate—but it is <strong>Useless</strong>. <strong>Evaluation Metrics</strong> are the "Scorecards" that tell the real story of how your model behaves.</p>
     </div>
 
-    <h2 id="matrix">The Confusion Matrix</h2>
-    <p>A table showing the 4 types of predictions:</p>
-    <ul>
-      <li><strong>True Positive (TP)</strong>: Correctly guessed "Yes."</li>
-      <li><strong>True Negative (TN)</strong>: Correctly guessed "No."</li>
-      <li><strong>False Positive (FP)</strong>: Wrongly guessed "Yes" (Type I Error).</li>
-      <li><strong>False Negative (FN)</strong>: Wrongly guessed "No" (Type II Error).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In machine learning, your choice of metric is your <strong>Definition of Success</strong>. A model that is 99% accurate can still be a complete failure if that 1% error occurs on life-critical data (like a medical diagnosis). We use specialized metrics to look past simple "Correct vs. Incorrect" ratios. <strong>Precision</strong> tells us if we can trust a positive result; <strong>Recall</strong> tells us if we missed anyone important. By choosing the right metric, we align the model's mathematical optimization with the real-world consequences of its mistakes. It is the tactical way we ensure our machines solve the right problem, not just the easiest one.</p>
 
-    <h2 id="classification">Precision, Recall, F1-Score</h2>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Scoring Mechanics</div>
+      <p>Model evaluation is the process of quantifying the proximity of a predicted distribution $\hat{\mathcal{P}}$ to the true empirical distribution $\mathcal{P}$. The metrics are categorized by the nature of the target variable $y$:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Classification Metrics (Discrete)</h4>
+          <p class="text-xs mb-1">Based on the **Confusion Matrix** (TP, TN, FP, FN):</p>
+          <div class="math-block">
+            $$\text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + FN}$$
+            $$\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Regression Metrics (Continuous)</h4>
+          <p class="text-xs mb-1">Measuring the magnitude of residual errors $e_i = y_i - \hat{y}_i$:</p>
+          <div class="math-block">
+            $$\text{MSE} = \frac{1}{n} \sum_{i=1}^n (y_i - \hat{y}_i)^2 \quad R^2 = 1 - \frac{\sum (y_i - \hat{y}_i)^2}{\sum (y_i - \bar{y})^2}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-70 mt-2">Metrics like **Cross-Entropy** are used for training (optimization), while metrics like **Accuracy** or **AUC-ROC** are used for final validation and model comparison.</p>
+    </div>
+    
+    <div class="callout tip">
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>
     
       <h4>Scenario: Catching Dinner in a Lake</h4>
@@ -78,3 +99,4 @@ print(f"[Regression] MSE: {mse:.2f}, R-squared: {r2:.2f}")
     </div>
   `
 };
+

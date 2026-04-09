@@ -12,15 +12,27 @@ export const baggingSection: TopicSection = {
       <p>How do you stop a model from being "Over-Sensitive"? You let it be part of a <strong>Democratic Election</strong>. <strong>Bagging</strong> (Bootstrap Aggregating) creates many versions of the same model, each trained on a slightly different "Slice" of the world. By <strong>Voting (Parallel processing)</strong>, the errors of any single model are canceled out by the others.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Variance Reduction</h2>
-    <p>Variance is the error caused by a model being too sensitive to <strong>Small Fluctuations</strong> in the training data. If you change 3 points in your dataset and your model's predictions change completely, you have high variance. Bagging averages these fluctuations away.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you stop a model from being "Over-Sensitive"? You let it be part of a <strong>Democratic Election</strong>. <strong>Bagging</strong> (Bootstrap Aggregating) is a parallel strategy that creates many versions of the same model, each trained on a slightly different "Slice" of the world. By having these models vote on the final answer, the unique errors and hallucinations of any single model are canceled out by the others. It is the ultimate "Variance Killer," ensuring that your final prediction is stable and robust rather than jumping around every time a few data points change. It is the tactical decision to trust the <strong>Collective Consensus</strong> over a single, volatile expert.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Ensemble Aggregation</div>
+      <p>Bagging reduces variance by averaging $m$ independent models. Given a dataset $\mathcal{D}$ of size $n$, we generate $m$ bootstrap samples $\{\mathcal{D}_1, \dots, \mathcal{D}_m\}$ by sampling $n$ points with replacement. The bagged predictor $\hat{f}_{bag}$ is defined as:</p>
+      <div class="math-block">
+        $$\text{Regression: } \hat{f}_{bag}(\mathbf{x}) = \frac{1}{m} \sum_{i=1}^m \hat{f}_i(\mathbf{x})$$
+        $$\text{Classification: } \hat{f}_{bag}(\mathbf{x}) = \text{mode}\{ \hat{f}_1(\mathbf{x}), \dots, \hat{f}_m(\mathbf{x}) \}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $\hat{f}_i$ is the model trained on the $i$-th bootstrap sample. This process reduces the expected error by decreasing the variance component without significantly increasing bias.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Taking Multiple Looks."</strong> 
-        If you look at a crime scene once, you might miss a clue. 
-        If 100 detectives look at the scene from different angles, and we combine their reports, the final summary will be <strong>much more stable</strong>. 
+        Think of Bagging as <strong>"Taking Multiple Independent Looks"</strong> or <strong>"The Democratic Jury."</strong> 
+        Imagine a complex crime scene. If only <strong>one detective</strong> looks at the evidence, their conclusion might be biased by their own history. 
+        <strong>Bagging</strong> is like sending in 100 independent detectives. Through <strong>Bootstrapping</strong>, each detective studies a slightly different folder of evidence (sampling with replacement). They then go into separate, soundproof rooms to deliberate. 
+        When they all <strong>Vote (Aggregating)</strong>, the result is much more stable. The "Crazy" theories of one or two detectives are drowned out by the stable, shared evidence found by the majority. It is the math of finding stability through parallel diversity.
       </div>
     </div>
 

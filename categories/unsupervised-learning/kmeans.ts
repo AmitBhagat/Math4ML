@@ -12,19 +12,31 @@ export const kmeansSection: TopicSection = {
       <p>Imagine you have a giant pile of unlabeled data points. You know there are groups inside, but you don't know where. <strong>k-Means</strong> is the simplest way to find these "hidden tribes" by placing <strong>Magnetic Centers</strong> (Centroids) into the pile and letting them pull in the closest points.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Objective Function</h2>
-    <p>k-Means is a <strong>Centroid-Based</strong> algorithm. Its goal is to minimize the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, also known as <strong>Inertia</strong>. We want the points inside each cluster to be as "tight" as possible around their center.</p>
-    <div class="math-block">$$WCSS = \sum_{j=1}^K \sum_{x \in C_j} \|x - \mu_j\|^2$$</div>
-    <ul>
-      <li><strong>\(K\):</strong> The number of clusters (chosen by the user).</li>
-      <li><strong>\(\mu_j\):</strong> The mean (centroid) of cluster \(j\).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Imagine you have a giant pile of unlabeled data—no categories, no right answers, just a cloud of points. You suspect there are "Hidden Tribes" within this chaos, but you don't know where they live. <strong>k-Means</strong> is the ultimate tool for finding these groups by placing <strong>Magnetic Centers</strong> (Centroids) into the pile and letting them pull in the closest points. It is a "Self-Organizing" algorithm that uses simple geometry to find order. By minimizing the "Chaos" (Variance) within each group, it forces the data to reveal its natural structure without any human guidance.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: K-Means Clustering</div>
+      <p>Given a set of observations $(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n)$, k-means clustering aims to partition the $n$ observations into $k \le n$ sets $\mathbf{S} = \{S_1, S_2, \dots, S_k\}$ so as to minimize the **Within-Cluster Sum of Squares (WCSS)**:</p>
+      <div class="math-block">
+        $$\text{arg}\min_{\mathbf{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
+      </div>
+      <p>Where $\mu_i$ is the mean of points in $S_i$. The algorithm iteratively performs two steps:</p>
+      <ol class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Assignment</strong>: Assign each observation to the cluster with the nearest mean: $S_i^{(t)} = \{x_p : \|x_p - \mu_i^{(t)}\|^2 \le \|x_p - \mu_j^{(t)}\|^2 \forall j \}$.</li>
+        <li><strong>Update</strong>: Calculate the new means (centroids) of the observations in the new clusters: $\mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$.</li>
+      </ol>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Finding the Center of Gravity."</strong> 
-        The algorithm doesn't know where the clusters are at first. It just makes a <strong>Guess</strong>, calculates the average location of everyone who "joined" that guess, and then <strong>Moves</strong> the center to that average. It repeats this until the centers stop moving.
+        Think of k-Means as <strong>"Finding the Center of Gravity"</strong> or <strong>"The Proctor in a Test Room."</strong> 
+        Imagine a gym full of 100 students and 3 Proctors standing in random corners. The proctors shout: "Everyone, run to the proctor closest to you!" (Assignment). Once the groups are formed, each proctor walks to the <strong>Exact Average Location</strong> of their group (Update). 
+        The students see the proctors have moved and swap groups if a different proctor is now closer. 
+        This "Dance of the Centroids" continues until everyone is perfectly grouped around their leader. 
+        k-Means is the machine's way of saying: "Even if nobody labeled this data, these points belong together because they look at the world from the same <strong>Center</strong>."
       </div>
     </div>
 

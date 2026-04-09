@@ -12,14 +12,32 @@ export const whatIsMLSection: TopicSection = {
       <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." Instead of telling a computer exactly how to solve a problem, we give it a massive amount of data and let it figure out the patterns for itself.</p>
     </div>
 
-    <h2 id="theory">Core Theory: Rules vs. Patterns</h2>
-    <p>In traditional software engineering, a human writes <strong>Rules</strong> (Logic) and provides <strong>Data</strong> to get an <strong>Answer</strong>. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Answers</strong> (Labels), and the computer produces the <strong>Rules</strong> (The Model).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>At its simplest, <strong>Machine Learning (ML)</strong> is the shift from "Giving Rules" to "Showing Examples." In traditional software engineering, a human writes the logic (If/Then statements) and provides data to get an answer. In Machine Learning, we provide the <strong>Data</strong> and the <strong>Final Answers</strong> (the labels), and the computer's job is to figure out the <strong>Rules</strong> that link them together. It is about automating the discovery of patterns that are too complex, too high-dimensional, or too subtle for a human brain to hardcode. Rules are no longer written; they are <strong>discovered</strong> through the lens of pure mathematics.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Experience-Task-Performance Triad</div>
+      <p>A computer program is said to **learn** from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a **Hypothesis Space** $\mathcal{H}$:</p>
+      
+      <div class="math-block">
+        $$\hat{h} = \arg \min_{h \in \mathcal{H}} \frac{1}{n} \sum_{i=1}^n L(y_i, h(\mathbf{x}_i))$$
+      </div>
+      <p>Where the learning process is defined by:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Task ($T$)</strong>: The problem being solved (e.g., Image Classification, Price Prediction).</li>
+        <li><strong>Experience ($E$)</strong>: The training data $\mathcal{D} = \{(\mathbf{x}_1, y_1), \dots, (\mathbf{x}_n, y_n)\}$ provided to the system.</li>
+        <li><strong>Performance Measure ($P$)</strong>: The **Loss Function** $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Traditional coding is like writing a very rigid cookbook. 
-        Machine Learning is like taking a world-class chef to a 100-course dinner and asking them to <strong>guess the ingredients</strong> just by tasting the food. We don't tell them how to cook; we show them the finished product and let their "palate" (the algorithm) figure out the recipe.
+        Think of traditional coding as writing a <strong>Rigid Cookbook</strong>. If a step is missing, the chef fails. 
+        <strong>Machine Learning</strong> is like taking a <strong>World-Class Chef</strong> to a 100-course dinner and asking them to <strong>Guess the Ingredients</strong> just by tasting the finished food. 
+        We don't tell them how to cook; we show them the final product and let their "Palate" (the algorithm) figure out the hidden recipe. This is how we solve problems like <strong>Face Recognition</strong> or <strong>Spam Detection</strong>—tasks where a human knows the answer instinctively but couldn't possibly write down every "If" statement required to explain it to a machine.
       </div>
     </div>
 

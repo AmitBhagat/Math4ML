@@ -12,13 +12,21 @@ export const gmmSection: TopicSection = {
       <p>k-Means is "Hard"—every point belongs 100% to one cluster or 0% to another. <strong>Gaussian Mixture Models (GMM)</strong> are "Soft." They don't just find centers; they find <strong>Overlapping Distribution Clouds</strong>. A point can be 70% Cluster A and 30% Cluster B. It's a more realistic way to model the <strong>Uncertainty</strong> of data.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Probability Density</h2>
-    <p>GMM assumes that the data is generated from a mixture of <strong>Normal (Gaussian) Distributions</strong>. For every point $x$, we calculate the probability that it belongs to each of the $K$ Gaussians:</p>
-    <div class="math-block">$$P(x) = \sum_{k=1}^K \pi_k \mathcal{N}(x \mid \mu_k, \Sigma_k)$$</div>
-    <ul>
-      <li><strong>\(\pi_k\):</strong> The "Weight" of the $k$-th Gaussian.</li>
-      <li><strong>\(\mu_k, \Sigma_k\):</strong> The mean and covariance of the $k$-th Gaussian.</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>k-Means is a "Hard" algorithm—every point belongs 100% to one cluster or 0% to another. But the real world is rarely that black and white. <strong>Gaussian Mixture Models (GMM)</strong> represent a "Soft" approach to clustering. Instead of just finding centers, GMM finds <strong>Overlapping Distribution Clouds</strong>. It assumes that every group in your data is a natural "Mist" of probability. A single data point can be 70% Cluster A and 30% Cluster B. This probabilistic approach is far more realistic for modeling the <strong>Uncertainty</strong> and overlapping boundaries of real-world phenomena.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Gaussian Mixture Model</div>
+      <p>A Gaussian Mixture Model represents the probability distribution of observations as a weighted sum of $K$ multivariate Gaussian densities:</p>
+      <div class="math-block">
+        $$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x} \mid \mu_k, \boldsymbol{\Sigma}_k)$$
+      </div>
+      <p>Where $\pi_k$ are the mixing coefficients satisfying $\sum_{k=1}^K \pi_k = 1$. The model is typically solved using the **Expectation-Maximization (EM)** algorithm, which iteratively calculates the **Responsibility** (posterior probability) $\gamma_{ik}$:</p>
+      <div class="math-block">
+        $$\gamma_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i \mid \mu_k, \boldsymbol{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}_i \mid \mu_j, \boldsymbol{\Sigma}_j)}$$
+      </div>
+    </div>
 
     <h2 id="soft">Soft Clustering: Membership Probability</h2>
     <p>Unlike k-Means, which just says "Cluster 1," GMM gives you the <strong>Posterior Probability</strong> (Responsibilities). This is incredibly useful for finding points that live on the <strong>Edge</strong> of two groups.</p>

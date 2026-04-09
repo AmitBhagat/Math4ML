@@ -13,14 +13,30 @@ export const matrixRankSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>You might have a spreadsheet with 100 columns (features), but if 80 of them are just combinations of others, your <strong>Matrix Rank</strong> is only 20. Rank is the "Reality Check" that tells you how much unique information you actually have before you start training a model.</p>
+    <p>You might have a dataset with 100 features (columns), but if 80 of them are just duplicates or simple combinations of others, your <strong>Matrix Rank</strong> is only 20. Rank is the "Reality Check" of Linear Algebra. It tells you the <strong>True Information Density</strong> of your data—the actual number of dimensions you are working with once you strip away all the fluff and redundancy. In Machine Learning, high rank means you have a diverse set of independent sensors, while low rank means your model is essentially listening to the same gossip repeated multiple times.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Dimension of the Span</div>
+      <p>The **Rank** of a matrix $A$, denoted $\text{rank}(A)$, is defined as the dimension of the vector space spanned by its columns (or rows). Formally:</p>
+      <div class="math-block">
+        $$\text{rank}(A) = \dim(\text{col}(A)) = \dim(\text{row}(A))$$
+      </div>
+      <p>Crucially, $\text{rank}(A) \le \min(m, n)$. A matrix is called **Full Rank** if its rank equals the smaller of its two dimensions. Key implications include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Invertibility</strong>: A square $n \times n$ matrix is invertible iff $\text{rank}(A) = n$.</li>
+        <li><strong>Redundancy</strong>: If $\text{rank}(A) < n$, then there exist linearly dependent columns (i.e., redundant features).</li>
+        <li><strong>Rank-Nullity Theorem</strong>: $\text{rank}(A) + \dim(\text{null}(A)) = n$.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of Matrix Rank as <strong>Unique Witnesses</strong> in a courtroom. 
-        If 5 people testify but 4 of them are just repeating exactly what the first person said, you only have <strong>Rank 1</strong> evidence. 
-        In ML, high rank means diverse, "independent" features. Low rank means "noisy" or redundant data.
+        Think of Matrix Rank as <strong>"Unique Witnesses"</strong> in a courtroom. 
+        If five people testify but four of them are just repeating exactly what the first person said, you only have <strong>Rank 1</strong> evidence. 
+        No matter how many spreadsheets you fill, the Rank tells you how many <strong>Independent Stories</strong> your data is actually telling. 
+        In AI, we use this to compress data (SVD) by throwing away the "Copycats" and keeping only the high-rank signals.
       </div>
     </div>
 

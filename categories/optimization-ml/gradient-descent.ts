@@ -12,29 +12,26 @@ export const gradientDescentSection: TopicSection = {
       <p>Imagine you are a <strong>Skier</strong> at the top of a foggy mountain. You want to reach the <strong>Ski Resort</strong> at the bottom (The Minimum Loss), but you can't see more than 2 feet ahead. What do you do? You feel the slope with your feet and take a step in the <strong>Steepest Downward Direction</strong>. Repeat this 1,000 times, and you'll reach the base.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Gradient</h2>
-    <p>The <strong>Gradient (\(\nabla \mathcal{L}\))</strong> is a vector of partial derivatives. It points in the direction of the <strong>Greatest Increase</strong> of the Loss function. To minimize the loss, we move in the <strong>Opposite Direction</strong> (\(-\nabla \mathcal{L}\)).</p>
-    <div class="math-block">$$\nabla \mathcal{L}(\theta) = \begin{bmatrix} \frac{\partial \mathcal{L}}{\partial \theta_1} \\ \vdots \\ \frac{\partial \mathcal{L}}{\partial \theta_n} \end{bmatrix}$$</div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Optimization is the heartbeat of machine learning, and <strong>Gradient Descent</strong> is its most fundamental engine. Imagine you are a <strong>Skier</strong> at the peak of a high-dimensional mountain, trapped in a thick fog. You want to reach the <strong>Ski Resort</strong> at the base—the point of minimum loss—but you can’t see more than two feet in front of you. What do you do? You feel the slope with your boots and take a careful step in the <strong>Steepest Downward Direction</strong>. The <strong>Gradient (\(\nabla \mathcal{L}\))</strong> is that invisible slope; it is a vector of partial derivatives that points toward the greatest increase of the loss. By moving in the exact opposite direction, you are guaranteed to move downhill. It is the tactical decision to trade global vision for local precision, trusting that a thousand small, smart steps will lead you to the valley of success.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The First-Order Update Rule</div>
+      <p>Given a differentiable objective function $J(\theta)$, **Gradient Descent** iteratively updates the parameter vector $\theta$ by descending along the negative gradient of the function. For a learning rate $\eta > 0$ at step $t$:</p>
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J(\theta_t)$$
+      </div>
+      <p>This update mechanism is based on the following mathematical principles:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>The Gradient ($\nabla J$)</strong>: A vector pointing in the direction of steepest *ascent*. Subtracting it ensures we move toward the steepest *descent*.</li>
+        <li><strong>The Step Size ($\eta$)</strong>: Controlled by the Learning Rate. High $\eta$ can lead to divergence (overshooting); low $\eta$ results in slow convergence or entrapment in local minima.</li>
+        <li><strong>Convergence</strong>: For convex functions, GD is guaranteed to reach the global minimum given a sufficiently small $\eta$. For non-convex surfaces (DL), it finds a local minimum or stationary point.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Listening to the Ground."</strong> 
-        The gradient tells you two things: 
-        1. <strong>Direction:</strong> Which way is "Down"? 
-        2. <strong>Magnitude:</strong> How "Steep" is the slope? 
-        If the mountain is flat, the gradient is zero, and you have reached your destination.
-      </div>
-    </div>
-
-    <h2 id="math">The Update Rule</h2>
-    <p>At every iteration, we update our parameters \(\theta\) using the following formula:</p>
-    <div class="math-block">$$\theta_{new} = \theta_{old} - \alpha \nabla \mathcal{L}(\theta_{old})$$</div>
-    <ul>
-      <li><strong>\(\alpha\):</strong> The <strong>Learning Rate</strong> (Step size). </li>
-      <li>If \(\alpha\) is <strong>Too Large</strong>, you'll "Overshoot" the resort and fly off the mountain.</li>
-      <li>If \(\alpha\) is <strong>Too Small</strong>, you'll take 100 years to reach the base.</li>
-    </ul>
 
     <h2 id="batch">Batch Gradient Descent</h2>
     <p>In <strong>Batch GD</strong>, we use <strong>Every Single Data Point</strong> in the dataset to calculate the gradient before taking one step. 
@@ -108,3 +105,4 @@ for epoch in range(101):
     </div>
   `
 };
+

@@ -13,14 +13,30 @@ export const pcaSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In Machine Learning, "More Features" is not always better. Features can be redundant (High-Correlation) or noisy. PCA finds the <strong>Principal Components</strong>—the directions in which the data is most spread out. By projecting data onto these components, we can keep the "Signal" while deleting the "Noise."</p>
+    <p>In Machine Learning, "More Features" is often a curse. Features can be redundant, highly correlated, or just plain noisy. <strong>Principal Component Analysis (PCA)</strong> is the ultimate tool for finding the "Signal" within that noise. It mathematically rotates your data to find the <strong>Principal Components</strong>—the few directions where your data points are most spread out. By projecting your complex dataset onto these components, you can keep the "Soul" of your data while deleting the irrelevant jitter. It's the difference between memorizing a thousand details and understanding the one main story.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Variance Maximization Problem</div>
+      <p>Given a centered data matrix $X \in \mathbb{R}^{n \times d}$, PCA seeks an orthogonal projection onto a $k$-dimensional subspace that captures the maximum variance. The first principal component $\mathbf{w}_1$ is the unit vector that satisfies:</p>
+      <div class="math-block">
+        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \|X\mathbf{w}\|^2 = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^\top \Sigma \mathbf{w}$$
+      </div>
+      <p>Where $\Sigma = \frac{1}{n} X^\top X$ is the covariance matrix. The solution to this optimization problem leads to several critical properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Spectral Theorem</strong>: The principal components are the eigenvectors of $\Sigma$.</li>
+        <li><strong>Variance Capture</strong>: The eigenvalue $\lambda_i$ represents the variance captured by the $i$-th component.</li>
+        <li><strong>Decoupling</strong>: The transformed features (scores) are linearly uncorrelated.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of PCA as <strong>Finding the Best Camera Angle</strong>. 
-        Imagine a clear 3D statue of a horse. If you take a picture from the front, you might just see a circle. But if you take it from the side (the direction of maximum spread), you capture the whole horse in 2D. 
-        PCA calculates that perfect "Side View" automatically.
+        Think of PCA as <strong>"Finding the Best Camera Angle."</strong> 
+        Imagine a clear 3D statue of a horse. If you take a picture from the front, you might just see a vague circle. But if you take it from the side (the direction of maximum spread), you capture the whole essence of the horse in 2D. 
+        PCA calculates that perfect <strong>"Side View"</strong> automatically for your data. 
+        In AI, we use this to plot 500-dimensional data on a 2D screen or to speed up training by throwing away features that don't actually vary much.
       </div>
     </div>
 

@@ -21,23 +21,24 @@ export const taylorSeriesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating a 100-layer neural network's exact output at every possible point is impossible. But if we are currently at weights \(\mathbf{w}_0\), we only need to know what the loss surface looks like <strong>nearby</strong>. A "First-order" Taylor expansion is just a <strong>Tangent Line</strong>. A "Second-order" expansion is a <strong>Parabola</strong>. These approximations are the foundation of almost all numerical solvers.</p>
+    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola. These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Polynomial Approximation</div>
+      <p>If a function $f(x)$ is infinitely differentiable at a point $a$, its **Taylor Series** is the power series:</p>
+      <div class="math-block">
+        $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n$$
+      </div>
+      <p>In Machine Learning, we rarely use the infinite series, instead relying on low-degree **Taylor Polynomials** for local optimization:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>First-Order (Linear)</strong>: $f(x) \approx f(a) + f'(a)(x-a)$. Used in Gradient Descent.</li>
+        <li><strong>Second-Order (Quadratic)</strong>: $f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2$. Used in Newton's Method.</li>
+        <li><strong>Remainder</strong>: The Taylor theorem ensures that the error $R_n(x)$ becomes negligible as $x$ approaches $a$.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Taylor Series as <strong>"Drawing a Map from Memory."</strong> 
-        If you are at point A, you know the height (Value), the slope (1st Derivative), and how the ground is curving (2nd Derivative). 
-        By combining these, you can guess what point B looks like without actually going there. 
-        The more derivatives you use (\(n\)-th degree), the more <strong>accurate</strong> your map becomes.
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The \(n\)-th order Taylor polynomial of \(f(x)\) around a center point \(a\) is:</p>
-    <div class="math-block">$$P_n(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \dots + \frac{f^{(n)}(a)}{n!}(x-a)^n$$</div>
-    <p><strong>First Order (Linear):</strong> \(f(x) \approx f(a) + f'(a)(x-a)\).</p>
-    <p><strong>Second Order (Quadratic):</strong> \(f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2\).</p>
 
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
@@ -130,3 +131,4 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </div>
   `
 };
+

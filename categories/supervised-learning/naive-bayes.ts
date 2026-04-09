@@ -12,47 +12,35 @@ export const naiveBayesSection: TopicSection = {
       <p><strong>Naive Bayes</strong> is one of the most efficient and surprisingly effective classifiers in Machine Learning. It doesn't look for geometric boundaries; it calculates the <strong>Probability</strong> of a class given a set of clues. It is "Naive" because it assumes every clue is independent of the others—a simplify-to-win strategy.</p>
     </div>
 
-    <h2 id="theory">The Foundation: Bayes' Theorem</h2>
-    <p>At its heart, Naive Bayes uses the most famous formula in probability to update our belief about a class based on new evidence:</p>
-    <div class="math-block">$$P(C|x) = \frac{P(x|C) \cdot P(C)}{P(x)}$$</div>
-    <ul>
-      <li><strong>\(P(C|x)\) (Posterior):</strong> Probability of Class $C$ given feature $x$. (Goal)</li>
-      <li><strong>\(P(x|C)\) (Likelihood):</strong> Probability of feature $x$ appearing in Class $C$. (Learned from data)</li>
-      <li><strong>\(P(C)\) (Prior):</strong> General probability of Class $C$. (Common sense / Statistics)</li>
-      <li><strong>\(P(x)\) (Evidence):</strong> Total probability of feature $x$. (Normalizer)</li>
-    </ul>
-
-    <h2 id="naive">Why "Naive"? The Independence Assumption</h2>
-    <p>In the real world, features often correlate (e.g., if you see "Rain," you're likely to see "Clouds"). Naive Bayes <strong>ignores</strong> this. It assumes every feature is <strong>Independent</strong>. This is a massive mathematical shortcut that makes the calculation incredibly fast.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Naive Bayes</strong> is the ultimate implementation of "Probability-Based Common Sense." Unlike models that look for geometric boundaries, Naive Bayes calculates the <strong>Probability</strong> of a class based on a set of clues. It is "Naive" because it assumes every clue is independent of the others—a simplify-to-win strategy that allows the machine to work 1,000x faster than its competitors. It doesn't care if features relate to each other; it only cares about the signal each one provides individually. It is the gold standard for text classification because it can process trillions of words without breaking a sweat.</p>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Logic says we should look at how features interact. But Naive Bayes says: "I don't care about the drama between features. I'm just going to <strong>multiply</strong> all their individual probabilities and see what's left." 
-        Even though this assumption is technically "Wrong," the resulting classifier is often <strong>95% as good</strong> as complex models but 1,000x faster.
+        Think of Naive Bayes as <strong>"Sherlock Holmes solving a case"</strong> or <strong>"The Fast-Thinking Detective."</strong> 
+        Sherlock has three clues: [Mud on boots, smell of tobacco, left-handedness]. 
+        Logic says we should look at how these clues interact, but Naive Bayes says: "I don't have time for that drama. I'm just going to <strong>multiply</strong> the individual chances of each clue appearing in a criminal vs. a regular person." 
+        Even though this assumption is technically "Wrong," it captures the <strong>Signal</strong> so well that it's the primary engine behind your email spam filters. It is the "Probabilistic Sleuth" that finds the killer (the class) by weighing every piece of evidence independently.
       </div>
     </div>
 
-    <h2 id="formula">The Formal Definition</h2>
-    <p>Because we assume independence, the Likelihood \(P(x|C)\) becomes the product of individual feature likelihoods:</p>
-    <div class="math-block">$$P(C | x_1, \dots, x_n) \propto P(C) \prod_{i=1}^n P(x_i | C)$$</div>
-    <p>To predict, we simply pick the Class $C$ that results in the <strong>Maximum A Posteriori (MAP)</strong> value.</p>
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Naive Bayes Classifier</div>
+      <p>Given a class variable $y$ and dependent feature vector $\mathbf{x} = (x_1, \dots, x_d)$, Bayes' Theorem states:</p>
+      <div class="math-block">
+        $$P(y \mid x_1, \dots, x_d) = \frac{P(y) P(x_1, \dots, x_d \mid y)}{P(x_1, \dots, x_d)}$$
+      </div>
+      <p>Using the **Conditional Independence Assumption**, we simplify the likelihood to $P(\mathbf{x}|y) = \prod_{i=1}^d P(x_i|y)$, yielding the classification rule:</p>
+      <div class="math-block">
+        $$\hat{y} = \arg\max_{c \in \mathcal{Y}} P(y=c) \prod_{i=1}^d P(x_i \mid y=c)$$
+      </div>
+    </div>
 
     <h2 id="laplace">Laplace Smoothing: The Zero-Frequency Fix</h2>
     <p><strong>The Gotcha:</strong> If you see a word in a test email that <strong>never</strong> appeared in your training set for "Spam," the probability becomes <strong>0</strong>. Since everything is multiplied, the whole class probability becomes 0! 
     <strong>The Fix:</strong> We add 1 to every count (Laplace Smoothing) so that nothing is ever truly impossible.</p>
-
-    <h2 id="analogy">The "Sherlock Holmes" Analogy</h2>
-    <div class="callout success">
-      <div class="callout-icon">✓</div>
-      <div class="callout-body">
-        <strong>Analogy:</strong> Imagine <strong>Sherlock Holmes solving a crime</strong>. 
-        He has three clues: [Mud on shoes, Smell of tobacco, Left-handedness]. 
-        <strong>Naive Bayes</strong> assumes these clues happened completely separately. 
-        It asks: "Out of 100 criminals, how many have mud? How many smoke tobacco? How many are lefties?" 
-        Then it <strong>multiplies</strong> those chances together to see if the suspect is "Guilty" or "Innocent." It ignores the fact that a leftie smoker might be more likely to have mud. It's <strong>Simple, Fast, and often gets the Killer.</strong>
-      </div>
-    </div>
 
     <h2 id="algorithm">The Naive Bayes Algorithm</h2>
     

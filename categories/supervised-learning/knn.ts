@@ -12,16 +12,26 @@ export const knnSection: TopicSection = {
       <p><strong>k-Nearest Neighbors (KNN)</strong> is the "Copycat" of Machine Learning. It doesn't build a model or learn any weights; it just <strong>remembers</strong> the training data. When a new point arrives, it looks at its closest neighbors to see what they are. It's the ultimate implementation of the saying: "Show me who your friends are, and I'll tell you who you are."</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Distance Metric</h2>
-    <p>KNN is a <strong>Non-Parametric</strong> algorithm. It assumes that similar things live close together in a high-dimensional space. To classify a new point $X_{new}$, it finds the $k$ points $X_1, \dots, X_k$ that are "nearest" to it. The most common class among those neighbors wins the vote.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>k-Nearest Neighbors (KNN)</strong> is the "Copycat" or the "Social Learner" of Machine Learning. It doesn't bother building a complex mathematical model or learning magic weights; it simply <strong>remembers</strong> every piece of data you've ever shown it. When a new situation arises, it asks: <em>"Who are my closest peers, and what did they do?"</em> It is the ultimate implementation of the saying: "Show me who your friends are, and I'll tell you who you are." It relies on the fundamental assumption that similar things live close together in the feature world.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: k-Nearest Neighbors</div>
+      <p>Given a query point $x$, a training set $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$, and a distance metric $d(x, x')$, the KNN classification rule is defined as:</p>
+      <div class="math-block">
+        $$\hat{f}(x) = \text{arg}\max_{c \in \mathcal{Y}} \sum_{i \in \mathcal{N}_k(x)} I(y_i = c)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Voting by Proximity."</strong> 
-        It's like moving to a new city and trying to figure out which political party to join. 
-        You don't read the manifesto (Parameters); you just ask the <strong>3 nearest neighbors</strong> whom they voted for. If 2 voted for Party A, you join Party A. 
-        <strong>KNN</strong> is purely local—it only cares about what's physically around it.
+        Think of KNN as <strong>"Voting by Proximity"</strong> or the <strong>"Social Bubble."</strong> 
+        Imagine you move to a new town and want to know which political party to support. 
+        You don't read the party manifestos (Parameters); you just walk over to your <strong>3 nearest neighbors</strong> and ask whom they voted for. If two say "Party A," you join Party A. 
+        In ML, KNN is a "Lazy Learner"—it does zero work until you ask for a prediction. While it's simple and intuitive, it can get overwhelmed if your "Town" (the feature space) has 1,000 dimensions where every neighbor feels a million miles away.
       </div>
     </div>
 

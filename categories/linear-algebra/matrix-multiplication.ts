@@ -13,22 +13,23 @@ export const matrixMultiplicationSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. Matrix multiplication (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. This allows us to collapse multiple complex steps into a single matrix.</p>
+    <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Composition Product</div>
+      <p>For two matrices $A \in \mathbb{R}^{m \times p}$ and $B \in \mathbb{R}^{p \times n}$, the product $C = AB \in \mathbb{R}^{m \times n}$ is defined by the entry-wise dot products:</p>
+      <div class="math-block">
+        $$c_{ij} = \sum_{k=1}^p a_{ik} b_{kj}$$
+      </div>
+      <p>This operation is defined **only** when the number of columns in $A$ matches the number of rows in $B$. Geometrically, if $A$ represents mapping $f$ and $B$ represents mapping $g$, then $AB$ represents the composition:</p>
+      <div class="math-block">
+        $$(f \circ g)(\mathbf{x}) = A(B\mathbf{x})$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Matrix Multiplication as a <strong>Relay Race</strong>. 
-        Matrix B runs the first leg (processes the input), then hands the baton to Matrix A (processes B's output). 
-        The product \(AB\) is the <strong>entire race</strong> condensed into one motion. 
-        In ML, this is how a model goes from "Raw Image Pixels" to "Cat or Dog."
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For \(C = AB\), the element \(c_{ij}\) is the <strong>dot product</strong> of the \(i\)-th row of A and the \(j\)-th column of B:</p>
-    <div class="math-block">$$c_{ij} = \sum_{k=1}^{n} a_{ik}b_{kj}$$</div>
-    <p><strong>Crucial Rule:</strong> The number of <strong>columns</strong> in A must match the number of <strong>rows</strong> in B.</p>
 
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     
@@ -115,3 +116,4 @@ print(f"Product: {C}")
     </div>
   `
 };
+

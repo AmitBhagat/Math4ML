@@ -12,16 +12,36 @@ export const unsupervisedLearningSection: TopicSection = {
       <p><strong>Unsupervised Learning</strong> is the machine equivalent of learning by observation. There are no "Teachers" and no "Answers." The machine looks for the <strong>Underlying Structure</strong> of the data. It's about finding out how things are related before we even know what they are.</p>
     </div>
 
-    <h2 id="theory">Theoretical Concepts: Structure over Labels</h2>
-    <p>In Unsupervised Learning, the input is just \(X\). There is no \(Y\) to predict. The machine's objective is to model the <strong>Probability Density</strong> (\(P(X)\)) or the <strong>Geometric Topology</strong> of the data.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Unsupervised Learning is the machine equivalent of learning by observation. Imagine walking into a party where you don't know anyone. You don't have their name tags (Labels), but after 30 minutes, you notice that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their patterns and behavior. In machine learning, we look for the <strong>Underlying Structure</strong> of the data without any "Teachers" or "Answers." It is about discovering the hidden groups, dimensions, and rules that govern a dataset before we even know what they are. It is the tactical way we find the "Signal" when there are no labels to point the way.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Latent Structure and Representation Learning</div>
+      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of **Unsupervised Learning** is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Clustering (Partitioning)</h4>
+          <p class="text-xs mb-1">Grouping data into a set of clusters $\mathcal{C}$ such that similarity is maximized within groups and minimized between groups:</p>
+          <div class="math-block">
+            $$\arg \min_{\mathcal{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Dimensionality Reduction</h4>
+          <p class="text-xs mb-1">Identifying a lower-dimensional subspace $\mathcal{Z} \subset \mathcal{X}$ that retains maximal information (variance) about the original data:</p>
+          <div class="math-block">
+            $$\mathbf{z} = \mathbf{x} \mathbf{W} \quad \text{s.t.} \quad \text{Tr}(\mathbf{W}^\top \text{Cov}(\mathbf{X}) \mathbf{W}) \text{ is maximized.}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of **Density Estimation** $P(\mathbf{x})$, **Intrinsic Dimensionality**, and **Manifold Fidelity**, rather than explicit label accuracy.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as a <strong>Secret Society</strong>. 
-        You walk into a party where you don't know anyone. You don't have their name tags (Labels). But after 30 minutes, you see that some people are wearing suits and talking in the corner, while another group is laughing by the snacks. You've <strong>clustered</strong> them just by looking at their behavior.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>
     
@@ -76,3 +96,4 @@ print(f"[PCA] Data [2, 4] reduced to 1D: {reduced_data[0]}")
     </div>
   `
 };
+

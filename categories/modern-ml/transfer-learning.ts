@@ -12,15 +12,30 @@ export const transferLearningSection: TopicSection = {
       <p>Why start from scratch? In the old days, every model was born "Stupid" and had to learn the alphabet. <strong>Transfer Learning</strong> allows a model to be born with <strong>10 years of experience</strong> from another field. It's the secret sauce behind modern Large Language Models and medical AI.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Hierarchical Knowledge</h2>
-    <p>Neural networks learn <strong>Hierarchical Features</strong>. The first layers see <strong>Edges</strong>, the middle layers see <strong>Shapes</strong>, and only the final layers see <strong>Specific Objects</strong>. Transfer Learning keeps the "Edges" and "Shapes" knowledge and only replaces the "Specific Object" part.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Why start from scratch? In the traditional machine learning paradigm, every model was born "blind" and had to learn the basic alphabet of data from zero. <strong>Transfer Learning</strong> changes the game by allowing a model to be born with 10 years of "experience" gifted from a related field. It is based on the fact that neural networks learn <strong>Hierarchical Features</strong>: the first layers learn simple things like edges and textures, which are universal across almost all data. By keeping these "low-level" brains and only training the final layers for a specific task—like identifying a rare disease on an MRI—we can achieve state-of-the-art results with tiny datasets. It is the tactical decision to stand on the shoulders of giants rather than trying to reinvent the wheel.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Cross-Domain Knowledge Transfer</div>
+      <p>Transfer learning leverages knowledge from a source domain $\mathcal{D}_S$ and task $\mathcal{T}_S$ to improve performance on a target domain $\mathcal{D}_T$ and task $\mathcal{T}_T$. Formally, we aim to learn a target function $f_T(\mathbf{x})$ such that:</p>
+      <div class="math-block">
+        $$\mathcal{T}_T = \{ \mathcal{Y}_T, P(Y_T | X_T) \}$$
+      </div>
+      <p>This is achieved by either **Pre-training** the weights $\theta_S$ on $\mathcal{D}_S$ and then **Fine-tuning** them on $\mathcal{D}_T$, or by using the source model as a fixed **Feature Extractor** $\phi(\cdot)$:</p>
+      <div class="math-block">
+        $$\hat{y}_T = f_T(\phi(\mathbf{x}_T; \theta_S); \theta_T)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Academic Credit."</strong> 
-        If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry. You <strong>Transfer</strong> your understanding of math and logic. 
-        In ML, a model that saw 100 million generic internet photos already knows what <strong>Shadows</strong> and <strong>Textures</strong> look like. We just teach it to use that knowledge for <strong>MRI Scans</strong>.
+        Think of Transfer Learning as <strong>"Academic Credit"</strong> or <strong>"The Kung Fu Master."</strong> 
+        If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry—you <strong>Transfer</strong> your understanding of logic and numbers. 
+        Imagine a **Kung Fu Master** who has spent 30 years mastering body mechanics, reflexes, and balance. One day, he decides to learn <strong>Tennis</strong>. He doesn't start like a toddler; he already has the footwork and discipline. He only needs to learn the racket grip and the rules of the court. 
+        In ML, the 30 years of Kung Fu is the <strong>Pre-training</strong> (on a massive dataset like ImageNet), and the tennis lessons are the <strong>Fine-tuning</strong> (on your specific, small dataset).
       </div>
     </div>
 

@@ -13,22 +13,25 @@ export const positiveDefiniteSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In Optimization (Gradient Descent), we want to reach the minimum of a "loss surface." If the Hessian matrix (\(H\)) at a point is <strong>Positive Definite</strong>, it means the surface is locally curved like a bowl. No matter which way you move, you'll eventually "roll back down" to the center. This is the definition of <strong>Convexity</strong>.</p>
+    <p>In Machine Learning, we are constantly hunting for the "Bottom of the Bowl"—the minimum loss point. A <strong>Positive Definite (PD)</strong> matrix is the mathematical guarantee that the surface you are walking on is actually a stable bowl and not a trap. It ensures that no matter which way you move, the curvature of the "loss surface" is always pointing back up toward a stable center. This property is known as <strong>Convexity</strong>, and it is the single most important factor in whether your model can actually finish its training or if it will wander forever in a "flat" or "volatile" nightmare.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Quadratic Stability</div>
+      <p>A symmetric matrix $A \in \mathbb{R}^{n \times n}$ is **Positive Definite** if the quadratic form resulting from any non-zero vector $\mathbf{x}$ is strictly positive:</p>
+      <div class="math-block">
+        $$\mathbf{x}^\top A \mathbf{x} > 0, \quad \forall \mathbf{x} \in \mathbb{R}^n \setminus \{\mathbf{0}\}$$
+      </div>
+      <p>This definition implies several strictly equivalent properties that are easier to check in practice:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Eigenvalue Test</strong>: Each eigenvalue $\lambda_i$ of $A$ satisfies $\lambda_i > 0$.</li>
+        <li><strong>Determinant Test</strong>: Every leading principal minor (top-left sub-matrices) has a positive determinant.</li>
+        <li><strong>Factorization</strong>: $A$ can be decomposed as $L L^\top$ (Cholesky Factorization), where $L$ is lower triangular.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">If $\mathbf{x}^\top A \mathbf{x} \ge 0$, the matrix is **Positive Semi-Definite**, a condition crucial for valid Kernels and Covariance matrices.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Positive Definite matrix like a <strong>Trampoline</strong>. 
-        No matter where you step on it (\(\mathbf{x}\)), the surface pushes back "Up" toward you (\(\mathbf{x}^T A \mathbf{x} > 0\)). 
-        If the matrix were <strong>Indefinite</strong>, it would be like a <strong>Saddle</strong>—it pushes up in one direction but collapses under you in another. 
-        Stability is everything in ML.
-      </div>
-    </div>
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>A symmetric matrix \(A\) is <strong>Positive Definite</strong> if for any non-zero vector \(\mathbf{x}\):</p>
-    <div class="math-block">$$\mathbf{x}^T A \mathbf{x} > 0$$</div>
-    <p><strong>Shortcut:</strong> All eigenvalues \(\lambda_i\) must be \(> 0\).</p>
 
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
     
@@ -102,3 +105,4 @@ print(f"Is Matrix Positive Definite? {is_pd}")
     </div>
   `
 };
+

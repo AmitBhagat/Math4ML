@@ -12,16 +12,30 @@ export const decisionTreesSection: TopicSection = {
       <p>A <strong>Decision Tree</strong> is the most intuitive and human-like classification algorithm. It doesn't use math like lines or moats. It just asks a <strong>series of questions</strong>. If you want a model that can explain <strong>Exactly Why</strong> an email was marked as Spam, it's the 1st choice.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The "Best Split"</h2>
-    <p>A Decision Tree works by <strong>Partitioning</strong> the feature space into buckets. At each step (Node), it picks the feature that "Splits" the data into the <strong>Purest Possible Piles</strong>. The more pure the piles, the easier it is to make a final decision.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A <strong>Decision Tree</strong> is the most intuitive and human-like classification algorithm in the AI toolkit. It doesn't rely on complex math equations or geometric hyperplanes; instead, it uses the power of <strong>Logical Selection</strong>. It models decisions as a series of simple, branching questions. At each step, the tree looks for the one specific attribute that "Splits" the data into the purest possible piles. It is the ultimate implementation of the "Scientific Method" inside a machine—constantly testing hypotheses to reduce the chaos (Entropy) of the world into a single, understandable answer.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Decision Tree</div>
+      <p>A decision tree represents a function $f: \mathcal{X} \to \mathcal{Y}$ that partitions the input space into $M$ disjoint regions $R_1, R_2, \dots, R_M$. The prediction is defined as:</p>
+      <div class="math-block">
+        $$\hat{f}(x) = \sum_{m=1}^M c_m I(x \in R_m)$$
+      </div>
+      <p>For classification, $c_m$ is the majority class in $R_m$. The regions are found by recursively minimizing the **Impurity Selection Criterion** (e.g., Gini):</p>
+      <div class="math-block">
+        $$G = \sum_{k=1}^K p_{mk}(1 - p_{mk})$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Sorting Laundry."</strong> 
-        You have a huge pile of white socks and black shirts. 
-        Your 1st question: "Is it a sock or a shirt?" 
-        If you get this right, you've solved 90% of the problem. That's a <strong>Deep Information Gain</strong> because your piles are now mostly "Pure."
+        Think of a Decision Tree as a <strong>"Master of 20 Questions"</strong> or the <strong>"Flowchart of Wisdom."</strong> 
+        Imagine you're trying to identify an animal. Instead of asking random questions, you ask the <strong>Smartest 1st Question</strong>: "Is it a Mammal?" By asking that one question, you've cut the entire world in half. 
+        In ML, the tree seeks out the <strong>Information Gain</strong>—the specific question that reduces "Chaos" the most aggressively. 
+        Whether it's "Is the salary > $100k?" or "Does the email contain 'Win'?", the tree is building a mental map that anyone can read. It is the "Transparent Box" of machine learning, allowing us to see exactly why a computer decided to say "Yes."
       </div>
     </div>
 

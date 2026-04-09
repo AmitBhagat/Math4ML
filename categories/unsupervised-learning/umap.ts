@@ -12,16 +12,29 @@ export const umapSection: TopicSection = {
       <p>If t-SNE is the current standard, <strong>UMAP</strong> is the <strong>Challenger</strong>. It is faster, more mathematically grounded in <strong>Topology</strong>, and it does a better job of preserving the <strong>Global Structure</strong> of your data. It's the modern way to reduce large-scale high-dimensional data.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Simplicial Complexes</h2>
-    <p>UMAP is built on <strong>Topological Data Analysis (TDA)</strong>. It assumes the data points are samples from a <strong>Manifold</strong> (a smooth surface) that is <strong>Locally Connected</strong>. It builds a "Fuzzy Simplicial Complex" (a complex graph-like structure) of your data.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If t-SNE is the current standard for visualization, <strong>UMAP</strong> (Uniform Manifold Approximation and Projection) is the modern challenger that is quickly taking the crown. It is faster, more mathematically rigorous, and handles global structure far better than its predecessors. While t-SNE is obsessed with only your closest neighbors, UMAP looks at the <strong>Global Topology</strong>—the overall "Shape" of the data universe. It assumes your data lives on a smooth, hidden surface (a manifold) and builds a mathematical bridge to represent that surface in 2D. This makes it the definitive choice for large-scale datasets with millions of points.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: UMAP (Topological Reconstruction)</div>
+      <p>UMAP is founded on the assumption that data is uniformly distributed on a locally connected Riemannian manifold. It constructs a fuzzy simplicial complex representation of the data. For two points $x_i$ and $x_j$, the membership strength is:</p>
+      <div class="math-block">
+        $$p_{ij} = \exp\left(-\frac{d(x_i, x_j) - \rho_i}{\sigma_i}\right)$$
+      </div>
+      <p>Where $\rho_i$ is the distance to the nearest neighbor. The low-dimensional embedding is optimized by minimizing the **Fuzzy Set Cross-Entropy**:</p>
+      <div class="math-block">
+        $$\text{CE}(P, Q) = \sum_{e} \left[ p_e \log\left(\frac{p_e}{q_e}\right) + (1-p_e) \log\left(\frac{1-p_e}{1-q_e}\right) \right]$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Connecting the Dots."</strong> 
-        Imagine your data points are <strong>Stars in a Galaxy</strong>. 
-        <strong>Topology</strong> isn't about exactly where the stars are; it's about the <strong>Patterns they form</strong> (Constellations). 
-        UMAP builds a mathematical constellation (the Complex) and then tries to <strong>Flatten it</strong> onto a 2D piece of paper while keeping the "Geometric Essence" intact. 
+        Think of UMAP as <strong>"Connecting the Dots in a Constellation"</strong> or the <strong>"Stretchy Net Analogy."</strong> 
+        Imagine your data points are high-dimensional stars in a galaxy. <strong>Topology</strong> isn't about exactly where each star is; it's about the <strong>Patterns they form</strong> (Constellations). 
+        UMAP is like laying a <strong>Stretchy, Elastic Net</strong> over a crumpled ball of wool (your data). It hooks onto the tight knots (local clusters) but also keeps the tension between the knots (global relationships). When you pull that net flat onto a 2D table, the clusters stay intact, but their relative positions to each other remain meaningful. It is "Information Preservation" at its most sophisticated—fast, efficient, and mathematically beautiful.
       </div>
     </div>
 

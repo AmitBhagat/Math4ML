@@ -12,28 +12,32 @@ export const vectorNormsSection: TopicSection = {
       <p>A <strong>Norm</strong> is a mathematical function that assigns a strictly positive "length" to a vector. In Machine Learning, we use norms to prevent models from "overfitting" by penalizing large weights.</p>
     </div>
 
-    <h2 id="definition">1. Definition of a Norm</h2>
-    <p>A function \(\|\mathbf{x}\|\) is a norm if it satisfies these properties:</p>
-    <ul>
-      <li><strong>Non-negativity</strong>: \(\|\mathbf{x}\| \ge 0\).</li>
-      <li><strong>Triangle Inequality</strong>: \(\|\mathbf{x} + \mathbf{y}\| \le \|\mathbf{x}\| + \|\mathbf{y}\|\).</li>
-      <li><strong>Scaling</strong>: \(\|c\mathbf{x}\| = |c| \cdot \|\mathbf{x}\|\).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A single number in a vector doesn't tell you much—but its <strong>Norm</strong> tells you its total "Weight" or "Magnitude." In Machine Learning, we don't just care about the direction of our weights; we care about their size. If weights become too large, the model becomes hypersensitive to noise (overfitting). <strong>Vector Norms</strong> allow us to quantify this "Mass" and penalize it. Each norm tells a different story: some care about the absolute total mass (L1), while others care about the straight-line distance (L2). Choosing the right norm is the difference between a model that is "Sparse and Selective" vs. "Small and Stable."</p>
 
-    <h2 id="l2">2. L₂ Norm (Euclidean)</h2>
-    <p>The most common norm. It is the "as the crow flies" distance from the origin.</p>
-    <div class="math-block">$$\|\mathbf{x}\|_2 = \sqrt{x_1^2 + x_2^2 + \dots + x_n^2}$$</div>
-
-    <h2 id="l1">3. L₁ Norm (Manhattan)</h2>
-    <p>The "taxicab" distance. It is the sum of the absolute values of the components.</p>
-    <div class="math-block">$$\|\mathbf{x}\|_1 = |x_1| + |x_2| + \dots + |x_n|$$</div>
-
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The $p$-norm Metric</div>
+      <p>A **Norm** $\|\cdot\|$ is a function that maps a vector to a non-negative scalar, satisfying the triangle inequality and absolute homogeneity. In $\mathbb{R}^n$, we define the family of $L^p$ norms as:</p>
+      <div class="math-block">
+        $$\|\mathbf{x}\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$$
+      </div>
+      <p>The three most critical variations in Machine Learning are:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>$L^1$ Norm</strong>: $\sum |x_i|$. Promotes sparsity (Lasso).</li>
+        <li><strong>$L^2$ Norm</strong>: $\sqrt{\sum x_i^2}$. Promotes small, distributed weights (Ridge).</li>
+        <li><strong>$L^\infty$ Norm</strong>: $\max_i |x_i|$. Measures the maximum deviation.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
+    </div>
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of <strong>L₂</strong> as a straight line across a field. 
-        Think of <strong>L₁</strong> as walking through a city grid—you can't cut corners; you have to follow the streets. 
-        In ML, <strong>L₁</strong> is used when you want a model to be "sparse" (selective), while <strong>L₂</strong> is used to keep weights small and stable.
+        Think of norms as <strong>"Travel Rules."</strong> 
+        <strong>L2 Norm</strong> is the "As the Crow Flies" distance—it's the shortest straight path. 
+        <strong>L1 Norm</strong> is the "Taxicab" distance—it's walking through a city grid where you can't cut corners; you must take every street. 
+        In AI, we use L1 to act like a <strong>"Liar Detector"</strong> for noise, forcing useless weights to exactly zero, and L2 to act like a <strong>"Stabilizer"</strong> that keeps our model's predictions from exploding into wild numbers.
       </div>
     </div>
 

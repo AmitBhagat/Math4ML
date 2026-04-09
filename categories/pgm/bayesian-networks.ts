@@ -12,24 +12,27 @@ export const bayesianNetworksSection: TopicSection = {
       <p>Probabilities are rarely isolated. If it's raining, your grass is likely wet. If your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these <strong>Causal Relationships</strong>. By using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows through a complex system of uncertainty.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The DAG Structure</h2>
-    <p>A Bayesian Network consists of <strong>Nodes</strong> (Random Variables) and <strong>Edges</strong> (Direct Influence). The graph must be <strong>Acyclic</strong> (no loops), because a variable cannot be its own cause.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Probabilities are rarely isolated. If it is raining, your grass is likely wet; if your grass is wet, you might slip. <strong>Bayesian Networks</strong> are the map of these causal ripples—the "Web of Influence" that defines complex systems of uncertainty. Using <strong>Directed Acyclic Graphs (DAGs)</strong>, we can model how information flows from one cause to an effect, allowing us to reason about the unseen. It’s a "Glass Box" approach to AI: unlike a black-box neural network, you can trace exactly why the model has reached a conclusion by looking at the logical connections between variables.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Directed Probabilistic Factorization</div>
+      <p>A **Bayesian Network** $\mathcal{B}$ represents a joint probability distribution over a set of random variables $\mathcal{X} = \{X_1, \dots, X_n\}$ through a graph structure and a set of local parameters:</p>
+      <div class="math-block">
+        $$\mathcal{B} = \langle G, P \rangle$$
+      </div>
+      <p>where $G$ is a Directed Acyclic Graph (DAG) and $P$ is a set of Conditional Probability Distributions (CPDs). The structure satisfies the following properties:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Factorization</strong>: $P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Pa}_G(X_i))$. The joint distribution is the product of the probability of each node given its parents.</li>
+        <li><strong>Local Markov Property</strong>: Every variable $X_i$ is conditionally independent of its non-descendants given its parents $\text{Pa}_G(X_i)$.</li>
+        <li><strong>D-Separation</strong>: A graphical criterion used to identify global independence relations ($X \perp Y \mid Z$) without explicitly computing the probability tables.</li>
+        <li><strong>CPDs</strong>: For discrete variables, these are Conditional Probability Tables (CPTs); for continuous variables, these are functional mappings (e.g., Linear Gaussians).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Bayesian Networks allow for efficient **Inference** (updating beliefs based on evidence) and **Learning** (discovering the graph structure and parameters from data).</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"The Storyboard."</strong> 
-        Each node is an event. The arrows tell the story of <strong>Who Influences Whom</strong>. 
-        If there is no arrow between two nodes, it doesn't mean they aren't related—it just means they only talk to each other through <strong>intermediaries</strong>.
-      </div>
-    </div>
-
-    <h2 id="independence">Local Markov Property</h2>
-    <p>The "Magic" of Bayesian Networks is the <strong>Conditional Independence</strong> assumption. It states that a node is independent of its ancestors <strong>given its parents</strong>. This allows us to represent a massive joint probability table using just a few small <strong>Conditional Probability Tables (CPTs)</strong>.</p>
-
-    <h2 id="math">Joint Probability Factorization</h2>
-    <p>Because of the graph structure, the total probability of the entire system can be decomposed into a simple product:</p>
-    <div class="math-block">$$P(x_1, \dots, x_n) = \prod_{i=1}^n P(x_i \mid Parents(x_i))$$</div>
     <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
 
     <h2 id="inference">Inference: Predicting the Unseen</h2>

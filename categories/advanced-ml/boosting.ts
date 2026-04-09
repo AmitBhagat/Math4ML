@@ -12,15 +12,30 @@ export const boostingSection: TopicSection = {
       <p>If Bagging is a democratic election (Parallel), <strong>Boosting</strong> is a <strong>Intense Tutoring Session</strong> (Sequential). We don't train all models at once. Instead, we train one, look at its <strong>Mistakes</strong>, and then train the next model to <strong>Specifically Fix those Mistakes</strong>. We turn a "Weak Learner" into an "Unstoppable Expert."</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Bias Reduction</h2>
-    <p>Bias is the error caused by a model being too <strong>Simple</strong>. If your model thinks 2+2=5, it is biased. Boosting forces the model to <strong>Get Smarter</strong> by iteratively pointing out where it was stupid.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If Bagging is a democratic election (Parallel), <strong>Boosting</strong> is a <strong>Relentless Tutoring Session</strong> (Sequential). We don't train all models at once; instead, we train one, look at its <strong>Mistakes</strong>, and then train the next model to specifically fix those errors. Boosting is a "Bias Killer"—it forces a simple, "stupid" model to get smarter by iteratively pointing out where it failed. By the end of the process, you have a sequence of experts who have learned to cover for each other's weaknesses. It is the math of turning a collection of "Weak Learners" into a single, unstoppable "Expert" through sheer persistence.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Sequential Residual Learning</div>
+      <p>Boosting is an additive ensemble method that combines $M$ weak learners $h_m(\mathbf{x})$. The final predictor $F_M(\mathbf{x})$ is built stagewise:</p>
+      <div class="math-block">
+        $$F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta \cdot h_m(\mathbf{x})$$
+      </div>
+      <p>In **Gradient Boosting**, each $h_m$ is trained to approximate the negative gradient of the loss function $\mathcal{L}$ with respect to the previous prediction:</p>
+      <div class="math-block">
+        $$h_m = \arg\min_{h \in \mathcal{H}} \sum_{i=1}^n \left( -\left[ \frac{\partial \mathcal{L}(y_i, F_{m-1}(\mathbf{x}_i))}{\partial F_{m-1}(\mathbf{x}_i)} \right] - h(\mathbf{x}_i) \right)^2$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $\eta$ is the learning rate (shrinkage). This process iteratively moves the ensemble toward the global minimum of the loss surface.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Adaptive Learning."</strong> 
-        In school, you don't spend time studying what you already know. You focus on the <strong>Hard Problems</strong>. 
-        Boosting does the same. It "Gives more weight" to the <strong>Difficult Samples</strong> so the next model is forced to solve them.
+        Think of Boosting as <strong>"Adaptive Learning"</strong> or <strong>"The Hardcore Tutor."</strong> 
+        In school, you don't spend time studying what you already know. You focus 100% of your energy on the <strong>Hard Problems</strong> that you consistently get wrong. 
+        Boosting does the same. Every time a new model is trained, it "Gives more weight" to the samples that the previous model misclassified. 
+        It’s like hiring a baseline tutor to teach you math, realizing you still fail at calculus, and then hiring a <strong>Calculus Specialist</strong> whose only job is to fix that specific gap. By the time you take the exam, you have a committee of tutors who have collectively mastered the hardest parts of the syllabus. Boosting is a grinder that iterates until the error is pulverized.
       </div>
     </div>
 

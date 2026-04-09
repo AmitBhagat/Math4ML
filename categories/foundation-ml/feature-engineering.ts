@@ -12,18 +12,36 @@ export const featureEngineeringSection: TopicSection = {
       <p>There is a famous saying: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm (like a Deep Neural Network) will fail if you give it "Bad" data. <strong>Feature Engineering</strong> is the act of turning raw, noisy numbers into meaningful <strong>Insights</strong> that the machine can easily understand.</p>
     </div>
 
-    <h2 id="theory">The Mechanics of Representation</h2>
-    <p>A machine sees data as a <strong>Vector Space</strong>. Your job is to transform the data so that the "Distance" between points actually means something. Feature Engineering isn't about math; it's about <strong>Representing the World</strong> in a way that points the way toward the Answer.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>There is a famous saying in machine learning: <strong>"Garbage In, Garbage Out."</strong> Even the most powerful algorithm in the world—like a massive Deep Neural Network—will fail if you feed it raw, noisy, or irrelevant data. <strong>Feature Engineering</strong> is the act of using your domain knowledge to transform raw numbers into meaningful <strong>Insights</strong> that the machine can actually digest. It is the "Art" of data science; it’s about figuring out which characteristics (features) truly matter for the problem you are trying to solve. When you engineer a feature, you are effectively pointing the way toward the answer, making the learning process 10x easier for the model. Model performance is often 90% data quality and only 10% mathematical complexity.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Data Transformation Mapping</div>
+      <p>Feature Engineering is the process of defining a mapping $\Phi: \mathcal{X}_{raw} \to \mathcal{X}_{feat}$ that transforms raw data into a numerical representation optimized for a learning objective. This process is governed by three primary operations:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Feature Construction</h4>
+          <p class="text-xs mb-1">Applying non-linear transformations or domain-specific logic to raw variables to expose latent relationships (e.g., $x_3 = x_1 / x_2$):</p>
+          <div class="math-block">
+            $$\Phi(x) = [\phi_1(x), \phi_2(x), \dots, \phi_d(x)]^\top$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Feature Selection</h4>
+          <p class="text-xs mb-1">Identifying a subset of features $\mathcal{S} \subset \{1, \dots, D\}$ that maximizes the mutual information $I(X_\mathcal{S}; Y)$ while minimizing redundancy:</p>
+          <div class="math-block">
+            $$\arg \max_{\mathcal{S}} I(X_{\mathcal{S}}; Y)$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">Mathematically, good feature engineering reduces the <strong>VC-Dimension</strong> required for the model to achieve a low generalization error. By embedding domain knowledge into the features, we reduce the amount of data needed for the model to "converge" on the true underlying pattern.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Cooking Prep."</strong> 
-        The machine is the <strong>Stove</strong>. The data is the <strong>Raw Ingredients</strong>. 
-        If you throw a whole, unpeeled potato into the stove, the result is "Garbage." 
-        If you peel it, chop it, and season it, you get a <strong>Gourmet Dish</strong>. Feature Engineering is the <strong>Chopping and Seasoning</strong> that happens before the cooking begins.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Gourmet Dish Prep</h2>
     
@@ -82,3 +100,4 @@ print(df[['Price', 'Age_at_Sale']])
     </div>
   `
 };
+

@@ -9,7 +9,38 @@ export const graphTheorySection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
-      <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like rows and columns, many real-world problems—like social networks and molecule structures—are better represented as a web of connected points.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like flat rows and columns, many real-world problems—like social networks, protein structures, and global logistics—are better represented as a web of connected points. Graph theory gives us the language to describe these "Connections" as first-class citizens. By treating the lines between data points as being just as important as the data points themselves, we can model complex systems like causality, influence, and the spread of information. It is the mathematical framework for <strong>Connectivity</strong>, allowing our models to "see" the structure of the world rather than just a list of numbers.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Relational Structures & Network Topology</div>
+      <p>A graph $G$ is an ordered pair $(V, E)$ consisting of a set of vertices $V$ and a set of edges $E$. In machine learning, graphs formalize both the structure of data (Relational Graphs) and the structure of computations (DAGs).</p>
+      
+      <p>The mathematical properties of $G$ are defined as:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Vertices ($V$)</strong>: Represent discrete entities or states in a system. The cardinality $|V|$ defines the order of the graph.</li>
+        <li><strong>Edges ($E$)</strong>: Represent the relationships between vertices.
+          <ul class="pl-4 mt-1 opacity-90">
+            <li><strong>Directed</strong>: Relationships possess a relative orientation (e.g., $u \to v$ in causal models).</li>
+            <li><strong>Weighted</strong>: Every edge is associated with a scalar $w \in \mathbb{R}$, representing proximity, cost, or probability.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="text-xs opacity-80 mt-2"><strong>Adjacency Matrix ($\mathbf{A}$)</strong>: A matrix where $A_{ij} = 1$ if there is an edge $(v_i, v_j)$ and $0$ otherwise. This matrix bridges graph theory with Linear Algebra, enabling spectral analysis and the matrix-form implementation of Graph Neural Networks.</p>
+      
+      <p class="text-xs opacity-70 mt-2">Graph theory is the core foundation for **Dependency Parsing**, **Knowledge Graphs**, and **Markov Random Fields**.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Graph Theory as <strong>"The Web of Influence"</strong> or <strong>"The Science of Relationships."</strong> 
+        In a standard database, you have isolated records. In a <strong>Knowledge Graph</strong>, you focus on the lines <em>between</em> the records. This is how Google understands that "Paris" isn't just a word, it is the "Capital Of" "France." 
+        Whether you are predicting a user's next purchase or finding the fastest route for a delivery truck, you are traversing a graph. <strong>Graph Neural Networks (GNNs)</strong> take this even further, allowing nodes to "talk" to their neighbors to learn about their environment. It is the ultimate tool for modeling a world that is fundamentally interconnected.
+      </div>
+    </div>
     </div>
 
     <h2 id="components">1. The Core Components</h2>

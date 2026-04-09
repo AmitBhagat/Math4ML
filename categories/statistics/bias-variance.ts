@@ -21,25 +21,25 @@ export const biasVarianceSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>If you build a model that is too simple (a straight line for a curvy road), you have <strong>High Bias</strong>—you are consistently wrong in a predictable way. If you build a model that is too complex (a line that touches every single data point), you have <strong>High Variance</strong>—you are reacting to noise, and your predictions will be wild on new data.</p>
+    <p>The <strong>Bias-Variance Tradeoff</strong> is the fundamental struggle between model simplicity and complexity; it is the mathematical boundary between learning the general truth and memorizing accidental wiggles. If your model is too simple (High Bias), you are consistently wrong because your "opinions" are too rigid to see the data’s complexity. If your model is too complex (High Variance), you are essentially "hallucinating" patterns in the random noise, creating a story so detailed it won’t apply to anything else. Finding the "Sweet Spot" between these two extremes is the defining challenge of every machine learning project. It is the tactical decision to trade precision on the training set for the ability to generalize to the real, unseen world.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Error Decomposition</div>
+      <p>For a predictive model $\hat{f}(x)$ estimating a target $y = f(x) + \epsilon$ (where $\text{Var}(\epsilon) = \sigma^2$), the **Expected Test Error** at a point $x$ can be decomposed into three mathematically distinct quantities:</p>
+      <div class="math-block">
+        $$\text{Total Error} = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \text{Irreducible Noise}$$
+      </div>
+      <p>This identity reveals the core constraints of supervised learning:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Bias</strong> ($\mathbb{E}[\hat{f}] - f$): Error from the difference between the average prediction and the truth. High bias leads to <strong>Underfitting</strong>.</li>
+        <li><strong>Variance</strong> ($\mathbb{E}[(\hat{f} - \mathbb{E}[\hat{f}])^2]$): Error from the consistency of the model's predictions across different datasets. High variance leads to <strong>Overfitting</strong>.</li>
+        <li><strong>Irreducible Error</strong> ($\sigma^2$): The fundamental "floor" of error caused by noise in the data itself.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Optimal generalization occurs when the "Sweet Spot" is reached—minimizing the sum of both squared bias and variance via techniques like Regularization or Ensemble methods.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the tradeoff as <strong>"The Storyteller's Dilemma."</strong> 
-        A <strong>High Bias</strong> storyteller summarizes too much ("The hero won"). You miss the details. 
-        A <strong>High Variance</strong> storyteller tells you every blade of grass the hero walked on. You can't see the Plot. 
-        A <strong>Perfect Model</strong> tells you exactly the "General Lessons" (The Plot) without the noise.
-      </div>
-    </div>
-
-    <h2 id="derivation">Mathematical Decomposition</h2>
-    <p>Total Expected Error = \(\text{Bias}^2 + \text{Variance} + \sigma_{noise}^2\).</p>
-    <ul>
-      <li><strong>Bias:</strong> Error from erroneous assumptions (\(\mathbb{E}[\hat{f}] - f\)).</li>
-      <li><strong>Variance:</strong> Sensitivity to small fluctuations in the training set.</li>
-      <li><strong>Irreducible Error:</strong> Fundamental noise in the data (\(\sigma^2\)).</li>
-    </ul>
 
     <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
     
@@ -124,3 +124,4 @@ plt.show()
     </div>
   `
 };
+

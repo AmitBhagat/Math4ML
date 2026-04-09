@@ -21,22 +21,26 @@ export const entropySection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you live in a desert where it never rains. If someone says, <em>"It's sunny today,"</em> you have learned <strong>Zero Information</strong>. You already knew that. But if they say, <em>"It's snowing,"</em> you have received a massive amount of information. <strong>Entropy</strong> is the weighted average of this "Surprise" across all possible outcomes.</p>
+    <p><strong>Entropy</strong> (\(H\)) is the mathematical unit of <strong>Uncertainty</strong>. In the natural world, information is essentially "Surprise." If I tell you it’s sunny in the middle of a desert, I have given you zero information because you already knew that—the outcome had no surprise. But if I tell you it’s snowing in that same desert, the information content is massive because the event is so rare and unexpected. Entropy is the weighted average of this surprise across every possible outcome of a system. It defines the fundamental limit of how much we can compress data; it is the tactical measurement of how much "News" a random variable actually contains. In machine learning, our goal is often to move from a state of high entropy (guessing randomly) to a state of low entropy (confident, accurate predictions).</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Shannon Information Content</div>
+      <p>The **Shannon Entropy** $H(X)$ of a discrete random variable $X$ with set of possible outcomes $\mathcal{X}$ and probability mass function $P(x)$ is the expected value of the self-information:</p>
+      <div class="math-block">
+        $$H(X) = -\sum_{x \in \mathcal{X}} P(x) \log_b P(x)$$
+      </div>
+      <p>This measurement is defined by the following mathematical axioms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Self-Information</strong>: The "Surprise" of an individual outcome is $-\log P(x)$. Rare events have high surprise.</li>
+        <li><strong>Units</strong>: If $b=2$, the unit is **Bits** (standard in CS). If $b=e$, the unit is **Nats** (standard in physics/continuous math).</li>
+        <li><strong>Maximization</strong>: $H(X)$ is maximized when all outcomes are equally likely ($P(x) = 1/|\mathcal{X}|$), indicating total uncertainty.</li>
+        <li><strong>Minimization</strong>: $H(X) = 0$ if and only if one outcome has probability 1. The result is perfectly predictable ("No news").</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Entropy as <strong>"How many Yes/No questions do I need to ask?"</strong> 
-        If a variable has high entropy, it is unpredictable, and you need many questions to figure it out. 
-        If it has low entropy, it's a "sure thing." 
-        In ML, we want our models to move from high-entropy (guessing) to low-entropy (confident predictions).
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(P(x_i)\), Entropy is:</p>
-    <div class="math-block">$$H(X) = -\sum_{i} P(x_i) \log_2 P(x_i)$$</div>
-    <p>The unit is <strong>Bits</strong> if using base-2, or <strong>Nats</strong> if using natural log (\(e\)).</p>
 
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
     
@@ -117,3 +121,4 @@ print(f"Biased Coin Entropy: {calculate_entropy(biased_coin):.2f} bits")
     </div>
   `
 };
+

@@ -21,59 +21,25 @@ export const integralsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In ML, we often deal with <strong>Probability Density Functions (PDFs)</strong>. A PDF $f(x)$ tells us the relative likelihood of a continuous random variable. However, the probability of a single exact point (e.g., "What is the probability a person is exactly 175.0000... cm tall?") is zero.</p>
+    <p>If derivatives are the "Speedometer" (measuring instant change), then <strong>Integrals</strong> are the "Odometer" (measuring total distance traveled). In Machine Learning, we often know the local rules or probabilities, and we need to find the <strong>Total Result</strong>. Whether it's calculating the total probability of an event or finding the expected value across a continuous range, integrals allow us to sum up an infinite number of tiny, infinitesimal slices to reconstruct a whole reality. It is the mathematical bridge between local slope and global accumulation.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Limit of Accumulation</div>
+      <p>For a continuous function $f(x)$, the **Definite Integral** over the interval $[a, b]$ is defined as the signed area between the $x$-axis and the graph, calculated as the limit of Riemann sums:</p>
+      <div class="math-block">
+        $$\int_a^b f(x) dx = \lim_{\Delta x \to 0} \sum_{i} f(x_i^*) \Delta x_i$$
+      </div>
+      <p>The relationship between integration and differentiation is codified by the **Fundamental Theorem of Calculus**:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Antidifferentiation</strong>: If $F(x) = \int f(x) dx$, then $F'(x) = f(x)$.</li>
+        <li><strong>Definite Integral Calculation</strong>: $\int_a^b f(x) dx = F(b) - F(a)$.</li>
+        <li><strong>ML Utility</strong>: In probability theory, the area under a density function $p(x)$ determines the cumulative mass: $P(X \le k) = \int_{-\infty}^k p(x) dx$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Integrals enable the transition from discrete sets to continuous distributions, a requirement for high-fidelity modeling in Statistics and Bayesian Inference.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">🏗️</div>
-      <div class="callout-body">
-        We use <strong>Integration</strong> to find the probability over a range (e.g., "between 170 and 180 cm").
-        <ul>
-          <li><strong>Indefinite Integral</strong>: Finds the "Antiderivative"—the general form of the accumulation function.</li>
-          <li><strong>Definite Integral</strong>: Calculates the actual "Net Area" between two specific points.</li>
-          <li><strong>Visualizing the Area Under the Curve:</strong></li>
-        </ul>
-      </div>
-    </div>
-
-    <visualizer topic="AreaUnderCurve" />
-
-    <h2 id="derivation">Formal Definition</h2>
-
-    <h3>1. The Indefinite Integral</h3>
-    <p>If $F'(x) = f(x)$, then:</p>
-    <div class="math-block">$$\int f(x) \, dx = F(x) + C$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> The <strong>Indefinite Integral</strong> is like a "Reverse Engineering" process. If you know how fast a car is accelerating at every moment (the derivative), the integral helps you reconstruct its position. In ML, if we have the gradient of a loss function, the integral helps us understand the global "shape" of the loss surface.
-      </div>
-    </div>
-    <p>where $C$ is the constant of integration (representing the fact that shifting a graph vertically doesn't change its slope).</p>
-
-    <h3>2. The Definite Integral (Fundamental Theorem of Calculus)</h3>
-    <p>To find the area under $f(x)$ from $a$ to $b$:</p>
-    <div class="math-block">$$\int_{a}^{b} f(x) \, dx = F(b) - F(a)$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> This is the <strong>Fundamental Theorem of Calculus</strong>. It bridges the gap between slopes and areas. By simply subtracting the values of the antiderivative at two points, we can find the total area (accumulation) without having to sum up infinite infinitesimal rectangles manually.
-      </div>
-    </div>
-
-    <h3>3. Integration in Probability</h3>
-    <p>For a continuous random variable $X$ to be a valid probability distribution, the total area under its PDF must be 1:</p>
-    <div class="math-block">$$\int_{-\infty}^{\infty} f(x) \, dx = 1$$</div>
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        <strong>Core Theory:</strong> In probability, <strong>Integration = Normalization</strong>. We integrate over all possible outcomes to ensure the total probability space captures everything. If the area isn't exactly 1, your model isn't a valid probability distribution.
-      </div>
-    </div>
-    <p>The probability that $X$ falls between $a$ and $b$ is:</p>
-    <div class="math-block">$$P(a \leq X \leq b) = \int_{a}^{b} f(x) \, dx$$</div>
 
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
     
@@ -136,3 +102,4 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     </div>
   `
 };
+

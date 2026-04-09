@@ -21,22 +21,25 @@ export const mapSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>MLE asks: <em>"What parameters fit the data best?"</em> MAP asks: <em>"What parameters fit the data best <strong>AND</strong> make sense based on what I already know?"</em> If your dataset is tiny, MLE can be easily fooled by noise. MAP adds a "Brake" to the process, preventing the model from becoming too overconfident about extreme values.</p>
+    <p>MLE asks: <em>"What parameters fit the current data best?"</em> <strong>Maximum a Posteriori (MAP)</strong> asks: <em>"What parameters fit the data best AND make sense based on everything else I already know?"</em> If your dataset is tiny—say, three coin flips—MLE can be easily fooled by a short streak of noise. MAP provides the mathematical "Brake" to this process, allowing us to incorporate <strong>Prior Knowledge</strong> to keep our estimates grounded. In Machine Learning, this is the foundation for <strong>Regularization</strong>: we assume from the start that our model's weights shouldn't be massive or wild, which stops the model from overfitting to every tiny jitter in the training set. It is the tactical decision to balance the cold facts against the wisdom of experience.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Posterior Maxima</div>
+      <p>The **Maximum a Posteriori (MAP)** estimate is the mode of the posterior distribution, combining the evidence from the data with a prior distribution that encodes our existing beliefs or constraints on the parameter space:</p>
+      <div class="math-block">
+        $$\hat{\theta}_{MAP} = \arg\max_{\theta} P(\theta | \mathbf{X}) = \arg\max_{\theta} \frac{P(\mathbf{X} | \theta) P(\theta)}{P(\mathbf{X})}$$
+      </div>
+      <p>Since the denominator $P(\mathbf{X})$ is independent of $\theta$, we optimize the product of Likelihood and Prior:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Penalized Log-Likelihood</strong>: In practice, we maximize $\ell_{MAP}(\theta) = \sum \log f(x_i | \theta) + \log \pi(\theta)$. The prior term acts as a "penalty" against improbable parameters.</li>
+        <li><strong>Regularization Link</strong>: Setting a Gaussian prior $\pi(\theta) \sim \mathcal{N}(0, \sigma^2)$ is mathematically equivalent to adding an $L_2$ norm penalty ($Ridge$) to the loss function.</li>
+        <li><strong>Data Dominance</strong>: As the sample size $n \to \infty$, the likelihood term dominates the prior, and the MAP estimate converges to the MLE estimate.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of MAP as <strong>"Expert Advice."</strong> 
-        MLE is like an apprentice who only looks at the first 3 trials. If they see 3 heads, they scream "The coin is 100% rigged!" 
-        MAP is like the Expert who says: <em>"I hear you, but my 20 years of experience (the Prior) tells me most coins are 50/50. I'll bet it's actually 60/40."</em> 
-        MAP balances the data with your past knowledge.
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>From Bayes' Theorem: \(P(\theta | X) \propto P(X | \theta) \cdot P(\theta)\). We maximize the log of this product:</p>
-    <div class="math-block">$$\hat{\theta}_{MAP} = \arg\max_{\theta} \left[ \log L(\theta) + \log P(\theta) \right]$$</div>
-    <p>Notice how MAP is just <strong>MLE + a Prior Penalty</strong> (\(\log P(\theta)\)).</p>
 
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
     
@@ -128,3 +131,4 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
     </div>
   `
 };
+

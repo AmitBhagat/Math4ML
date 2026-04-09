@@ -32,15 +32,29 @@ export const randomForestSection: TopicSection = {
       </div>
     
 
-    <h2 id="theory">Theoretical Core: Ensemble Variance</h2>
-    <p>Why does this work? Mathematically, if you have $B$ independent trees with a certain variance, the <strong>Average of those trees</strong> has a variance that is roughly <strong>$1/B$</strong> of the original. By "Averaging" the trees, we <strong>kill the noise</strong> and keep the <strong>signal</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A single Decision Tree is prone to <strong>Overfitting</strong>—it’s like a student who memorizes every past exam question but fails to understand the actual subject. <strong>Random Forest</strong> fixes this by building hundreds of <strong>Different, Independent Trees</strong> and having them vote on the final answer. By giving every tree a different slice of the data and a different subset of features, we ensure that the model doesn't get tricked by outliers. It is the gold standard for "Robustness" because the individual mistakes of one tree are drowned out by the collective intelligence of the crowd.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Random Forest</div>
+      <p>A Random Forest is an ensemble of $B$ decision trees $\{T_1, \dots, T_B\}$. For a given input $x$, the prediction is the aggregate of all individual tree predictions:</p>
+      <div class="math-block">
+        $$\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^B T_b(x, \Theta_b)$$
+      </div>
+      <p>Where $\Theta_b$ represents the random parameters for the $b$-th tree, generated through:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Bootstrap Aggregating (Bagging)</strong>: Training each tree on a sample drawn with replacement.</li>
+        <li><strong>Feature Selection</strong>: Choosing the best split from a random subset of $m \approx \sqrt{d}$ features.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Guess the Jellybeans Contest."</strong> 
-        One person might guess 500 (Way too low). Another might guess 5,000 (Way too high). 
-        But if you take the <strong>Average of 1,000 guesses</strong>, you'll almost always be within 5% of the true answer. <strong>Random Forest</strong> is that average.
+        Think of a Random Forest as a <strong>"Jury Trial"</strong> or the <strong>"Wisdom of Crowds."</strong> 
+        Imagine you’re trying to guess how many jellybeans are in a jar. One person might guess 100 (Way off), and another might guess 10,000 (Also way off). But if you take the <strong>Average of 1,000 guesses</strong>, you will almost always be within 5% of the truth. 
+        In ML, the Forest provides that "Average Verdict." Each juror (Tree) sees a slightly different part of the evidence. When they <strong>Aggregate</strong> their votes, the personal bias of one juror disappears into the <strong>Group Consensus</strong>. It's why Random Forests are nearly impossible to break with messy, real-world data.
       </div>
     </div>
 

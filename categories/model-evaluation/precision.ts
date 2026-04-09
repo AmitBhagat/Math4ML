@@ -12,25 +12,33 @@ export const precisionSection: TopicSection = {
       <p>If your model shouts <strong>"SPAM!"</strong> for every email, it's very effective at finding spam—but it also ruins your inbox. <strong>Precision</strong> is the metric that asks: "Of all the times you yelled 'Positive', how many were <strong>Actually</strong> positive?" It's the measure of your <strong>Credibility</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Denominator of Guesses</h2>
-    <p>Precision focuses <strong>Only</strong> on your positive predictions. It ignores the things you correctly ignored (TN). It only cares about the times you took <strong>Action</strong> and whether that action was <strong>Right</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Precision is the metric of <strong>Credibility</strong>. It asks a simple, brutal question: "Of all the times you yelled 'Positive!', how many were actually right?" If your spam filter marks an email as junk, <strong>Precision</strong> measures how much you can trust that decision. If your model is a "False Prophet"—constantly sounding the alarm when nothing is wrong—its precision will be miserably low. Precision ignores what you correctly ignored (True Negatives) and only focuses on the quality of your <strong>Actions</strong>. It is the tactical choice to prioritize the "Quality" of your hits over the "Quantity." High precision usually means your model is conservative, preferring to stay quiet rather than making a mistake.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Positive Predictive Value (PPV)</div>
+      <p>In binary classification, **Precision** is defined as the probability that a sample belongs to the positive class given that the model predicted it as positive. It is a measure of the "Purity" of positive predictions:</p>
+      <div class="math-block">
+        $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1) = \frac{TP}{TP + FP}$$
+      </div>
+      <p>The components of the precision estimate are:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>TP (True Positives)</strong>: Samples correctly identified as positive.</li>
+        <li><strong>FP (False Positives)</strong>: Samples wrongly identified as positive (Type I Error).</li>
+        <li><strong>Trade-off</strong>: Precision is often inversely related to **Recall**. Increasing the classification threshold (being "stricter") increases precision by reducing false alarms, but at the risk of missing genuine signals.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Reliability Score."</strong> 
-        If you say "Buy this Stock!", and it goes up, your precision is high. 
-        If you say "Buy this Stock!", and it crashes, your precision is low. 
-        Precision is about <strong>Not being a False Prophet</strong>.
+        Think of Precision as <strong>"The Reliability Score"</strong> or <strong>"The Honest Mailroom Clerk."</strong> 
+        Imagine a clerk sorting mail. If he pulls out an envelope and yells "Urgent!", and it turns out to be a random coupon (a False Positive), his credibility drops. If he only yells "Urgent!" when there is a time-sensitive check inside, his precision is elite. 
+        Precision is about <strong>Not being a False Prophet</strong>. It is perfect for situations where the cost of a mistake—like sending an innocent person to jail or blocking a harmless video—is devastatingly high.
       </div>
     </div>
-
-    <h2 id="math">The Precision Formula</h2>
-    <div class="math-block">$$Precision = \frac{TP}{TP + FP}$$</div>
-    <ul>
-      <li><strong>TP:</strong> True Positives (Correct 'Yes').</li>
-      <li><strong>TP + FP:</strong> <strong>Total Predicted Positives</strong> (Everything you called 'Yes').</li>
-    </ul>
 
     <h2 id="use-case">When Precision is King</h2>
     <p>Precision is the most important metric when the <strong>Cost of a False Positive is HIGH</strong>.</p>

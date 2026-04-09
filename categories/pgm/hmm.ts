@@ -12,32 +12,27 @@ export const hmmSection: TopicSection = {
       <p>Imagine you are a <strong>Prisoner in a Basement</strong>. You cannot see the weather (Rain or Sun). But every day, you see your <strong>Guard</strong> come in with or without an <strong>Umbrella</strong>. <strong>Hidden Markov Models</strong> are the math for guessing the "Hidden" weather based on the "Observable" guard. It's the standard tool for Speech Recognition and DNA Sequencing.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent vs. Observed</h2>
-    <p>An HMM has two layers:</p>
-    <ul>
-      <li><strong>Hidden States (\(Z\)):</strong> The internal variables we care about but cannot see (e.g., Weather, Part-of-Speech).</li>
-      <li><strong>Observations (\(X\)):</strong> The evidence we can measure (e.g., Umbrella, Words).</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A <strong>Hidden Markov Model (HMM)</strong> is the Sherlock Holmes of time-series data. It is designed for situations where you can see the "Symptoms" but not the "Reality" that caused them. Imagine you are a prisoner in a windowless basement; you can't see the weather (the Hidden State), but you see your guard walk in every day with or without an umbrella (the Observation). By modeling the transition between hidden states (is it likely to be sunny tomorrow if it rained today?) and the emission of observations (how likely is an umbrella if it’s raining?), HMMs allow us to deduce the hidden truth. It is the gold standard for Speech Recognition, DNA sequencing, and any domain where we must infer an invisible process from visible clues.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Latent Sequence Model</div>
+      <p>A **Hidden Markov Model (HMM)** is defined by a 5-tuple $\lambda = (S, V, A, B, \pi)$ representing a system where the state sequence $\{q_1, q_2, \dots, q_T\}$ is unobservable (latent) and must be inferred from a sequence of observations $\{O_1, O_2, \dots, O_T\}$:</p>
+      <div class="math-block">
+        $$P(\mathbf{O}, \mathbf{q} \mid \lambda) = \pi_{q_1} b_{q_1}(O_1) \prod_{t=2}^T a_{q_{t-1}q_t} b_{q_t}(O_t)$$
+      </div>
+      <p>The model’s behavior is strictly governed by three fundamental parameter sets:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Transition Matrix ($A$)</strong>: $a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)$. Encodes the dynamics of the hidden reality over time.</li>
+        <li><strong>Emission Matrix ($B$)</strong>: $b_j(k) = P(O_t = v_k \mid q_t = S_j)$. Encodes the probability of producing a specific observation from a specific hidden state.</li>
+        <li><strong>Initial Distribution ($\pi$)</strong>: $\pi_i = P(q_1 = S_i)$. The starting probability vector for the hidden states.</li>
+        <li><strong>Markov Property</strong>: The next state $q_{t+1}$ depends only on the current state $q_t$, not on the entire history.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Connecting the Dots in Time."</strong> 
-        The hidden states (\(Z_t\)) are the <strong>Reality</strong>. The observations (\(X_t\)) are the <strong>Symptoms</strong>. 
-        Because the reality changes over time, we use a <strong>Markov Chain</strong> to model the transitions.
-      </div>
-    </div>
-
-    <h2 id="markov">The Markov Property: No Memory</h2>
-    <p>HMMs assume the <strong>1st-Order Markov Property</strong>. This means the probability of tomorrow's weather only depends on <strong>Today</strong>. It doesn't care what happened a month ago. This makes the math incredibly efficient.</p>
-    <div class="math-block">$$P(Z_t \mid Z_{t-1}, Z_{t-2}, \dots, Z_1) = P(Z_t \mid Z_{t-1})$$</div>
-
-    <h2 id="math">Transition & Emission Matrices</h2>
-    <p>We describe the model with two matrices:</p>
-    <ul>
-      <li><strong>Transition Matrix (A):</strong> $P(Rain \mid Sun)$. How likely is the weather to change?</li>
-      <li><strong>Emission Matrix (B):</strong> $P(Umbrella \mid Rain)$. How likely is the guard to bring an umbrella if it's raining?</li>
-    </ul>
 
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
     
@@ -117,3 +112,4 @@ print(f"Most Likely Sequence: {'Rain -> Sun' if path_A > path_B else 'Rain -> Ra
     </div>
   `
 };
+

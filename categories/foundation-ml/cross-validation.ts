@@ -12,16 +12,27 @@ export const crossValidationSection: TopicSection = {
       <p>If you split your data once (80/20), you're at the mercy of luck. What if that 20% "Test Set" happens to be the easiest data points? <strong>Cross-Validation</strong> is the standard way to ensure your model's performance isn't just a fluke. We rotate the data so every single piece gets to be the "Test Set" at some point.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Variance of Estimates</h2>
-    <p>A single Train/Test split gives you a single "Snapshot" of accuracy. But accuracy can vary depending on <strong>Which</strong> points are in the test set. Cross-Validation gives you an <strong>Average Accuracy</strong> and a <strong>Standard Deviation</strong>, telling you how much you can actually trust the model's performance.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If you split your data once into a simple train-test set (like the classic 80/20 split), your model's perceived performance is at the mercy of luck. What if that 20% "Test Set" happens to contain the easiest data points? You’d think your model is a genius, only for it to fail miserably in production. <strong>Cross-Validation</strong> is the "Rotating Jury" that ensures your model’s success isn't just a fluke. By rotating the data through multiple rounds—where every single piece of information gets a chance to be the "Judge" (the test set)—we get a much more honest and stable estimate of the model's true skill. It is the tactical decision to trade computation time for certainty.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The K-Fold Partition</div>
+      <p>Given a dataset $\mathcal{D}$, **K-Fold Cross-Validation** partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
+      <div class="math-block">
+        $$\text{CV}(\hat{f}) = \frac{1}{k} \sum_{i=1}^k \mathcal{L}(\mathcal{D}_i, \hat{f}_{(-i)})$$
+      </div>
+      <p>The process follows a strict rotation protocol:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Training Phase</strong>: For each fold $i$, the model $\hat{f}_{(-i)}$ is trained on the union of all folds *except* $\mathcal{D}_i$.</li>
+        <li><strong>Validation Phase</strong>: The trained model is evaluated on the held-out fold $\mathcal{D}_i$ to produce a local loss $\mathcal{L}_i$.</li>
+        <li><strong>Model Selection</strong>: This technique is primarily used for hyperparameter tuning to ensure that chosen parameters generalize across the entire data distribution.</li>
+        <li><strong>Variance vs. Bias</strong>: Increasing $k$ decreases the bias of the error estimate (as training sets look more like the full dataset) but increases the variance and computational cost.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Commonly, $k=5$ or $k=10$ provides a sufficient balance for most industrial ML applications.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Musical Chairs for Data."</strong> 
-        We have 5 chairs (Blocks of data). In every round, 4 chairs are for the "Training" and 1 chair is for the "Test." We repeat the game 5 times, rotating the test chair each time. By the end, every piece of data has had a turn to judge the model.
-      </div>
-    </div>
 
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
     <p>The most common form is <strong>K-Fold</strong>. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
@@ -89,3 +100,4 @@ print(f"Consistency (Std Dev): {scores.std():.3f}")
     </div>
   `
 };
+

@@ -12,19 +12,26 @@ export const overfittingUnderfittingSection: TopicSection = {
       <p>A perfect Machine Learning model is like <strong>Goldilocks</strong>: not too complex, not too simple. <strong>Overfitting</strong> is when the model tries too hard (Memorization). <strong>Underfitting</strong> is when it doesn't try hard enough (Ignorance).</p>
     </div>
 
-    <h2 id="theory">The Mechanics of Complexity</h2>
-    <p>Every model has a <strong>Capacity</strong> (how many patterns it can fit). High capacity leads to <strong>Overfitting</strong>. Low capacity leads to <strong>Underfitting</strong>. The goal is to find the <strong>Sweet Spot</strong> where the model captures the "Truth" but ignores the "Noise."</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A perfect Machine Learning model is like the "Goldilocks" of data—it is not too complex, and not too simple. <strong>Underfitting</strong> occurs when your model is too "Lazy" or simple to capture the underlying trend; it’s like trying to describe a complex portrait using only a single straight line. <strong>Overfitting</strong> occurs when your model is too "Obsessive"; it memorizes every tiny, random jitter in your training data, effectively mistaking the noise for the signal. The goal of every machine learning engineer is <strong>Generalization</strong>: building a model that understands the fundamental truth of the data so well that it can perform just as accurately on information it has never seen before as it does on its training set.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Generalization Gap</div>
+      <p>The performance of a model $h$ is defined by the difference between its **Empirical Risk** $\hat{R}(h)$ (training error) and its **Structural Risk** $R(h)$ (true error on unseen data):</p>
+      <div class="math-block">
+        $$\text{Gap} = R(h) - \hat{R}(h)$$
+      </div>
+      <p>The learning process is governed by two critical failure states:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Underfitting (High Bias)</strong>: The hypothesis space $\mathcal{H}$ is too restrictive. Both training and test errors are high. The model fails to solve the "optimization" part of the problem.</li>
+        <li><strong>Overfitting (High Variance)</strong>: The model has excessive capacity, allowing it to minimize $\hat{R}(h)$ by interpolating noise. This leads to a massive generalization gap where $R(h) \gg \hat{R}(h)$.</li>
+        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via **Regularization** ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Connecting the Dots."</strong> 
-        If you have 10 data points that roughly form a line: 
-        <strong>Underfitting</strong> is drawing a straight line that misses most dots. 
-        <strong>Overfitting</strong> is drawing a jagged, crazy zig-zag that touches every single dot perfectly. 
-        The <strong>Truth</strong> is a slightly wobbly line that catches the general trend.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
     
@@ -90,3 +97,4 @@ print(f"Balanced Prediction: {balanced.predict([[3.14]])[0]:.2f}")
     </div>
   `
 };
+

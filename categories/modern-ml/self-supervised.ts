@@ -12,15 +12,30 @@ export const selfSupervisedSection: TopicSection = {
       <p>Supervised learning is <strong>Expensive</strong>. It requires humans to label millions of images. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. It looks at the world and creates its own puzzles to solve. By solving these "Pretext Tasks," it learns the <strong>Structure of Reality</strong> for free.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Pretext Tasks</h2>
-    <p>In SSL, we hide a part of the data and ask the model to <strong>Predict the Missing Part</strong>. This "Fake" objective is called a <strong>Pretext Task</strong>. The goal isn't to be good at the puzzle—it's to learn the <strong>Representations</strong> required to solve it.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Supervised learning is <strong>Expensive</strong>. It requires an army of humans to label millions of images, which is slow and prone to error. <strong>Self-Supervised Learning (SSL)</strong> is the "Self-Taught" version of AI. Instead of waiting for a teacher to provide answers, the model looks at the world and creates its own puzzles—or "Pretext Tasks"—to solve. By trying to predict a hidden part of an image or the next word in a sentence, the model is forced to learn the underlying <strong>Structure of Reality</strong> for free. It is the tactical decision to leverage the infinite supply of unlabeled data to build a core "General Intelligence" before ever being asked to perform a specific task.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Pretext Task</div>
+      <p>In self-supervised learning, labels $y$ are automatically generated from the data $\mathbf{x}$ using a function $\mathcal{G}(\mathbf{x})$. The objective is to learn a representation $f_\theta(\mathbf{x})$ by solving a surrogate task:</p>
+      <div class="math-block">
+        $$\min_\theta \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathcal{G}(\mathbf{x})) ]$$
+      </div>
+      <p>Where $\tilde{\mathbf{x}}$ is a corrupted or partial version of $\mathbf{x}$. Common paradigms include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Auto-encoding</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with noise; $\mathcal{G}(\mathbf{x}) = \mathbf{x}$.</li>
+        <li><strong>Masking</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with missing parts (e.g., in BERT); $\mathcal{G}(\mathbf{x})$ is the missing segment.</li>
+        <li><strong>Instance Discrimination</strong>: Learning to distinguish $\mathbf{x}$ from other samples (Contrastive Learning).</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Learning to Read by Context."</strong> 
-        If I give you a sentence with a missing [MASK] word, you use the surrounding words to guess it. 
-        To guess correctly, you must understand <strong>Grammar, Logic, and Facts</strong>. You learned English without me giving you a dictionary of "Word Categories." 
+        Think of Self-Supervised Learning as <strong>"Learning to Read by Context"</strong> or <strong>"The Master Jigsaw Solver."</strong> 
+        Imagine a child playing with 1,000 blank jigsaw puzzles. No one tells them "This is a dog" or "This is a tree." But to make the pieces fit, the child <strong>accidentally</strong> learns that edges match edges and colors flow into each other. By the time they finish, they don't know the <strong>Names</strong> of things, but they <strong>Understand Concepts</strong> like eyes, wheels, and grass perfectly. 
+        In SSL, we "break" the data (scramble it, hide parts, or rotate it) and tell the model to "Fix it." In the process of fixing the puzzle, the model develops a deep, intuitive understanding of what the data represents.
       </div>
     </div>
 

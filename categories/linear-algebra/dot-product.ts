@@ -21,22 +21,23 @@ export const dotProductSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>At its core, the Dot Product answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em></p>
+    <p>At its core, the <strong>Dot Product</strong> answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em> It is the fundamental measure of <strong>Similarity</strong>. If two vectors are perfectly aligned, the dot product is maximized. If they have nothing in common (orthogonal), it is zero. This simple operation allows us to transform high-dimensional data into a single "compatibility score." In modern AI, when you hear about "Attention" or "Similarity Search," you are essentially hearing about billions of dot products happening simultaneously as the model looks for the most relevant information.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Inner Product</div>
+      <p>For two vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$, the **Dot Product** is a scalar value defined algebraically as the sum of the products of their components:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^n u_i v_i = \mathbf{u}^\top \mathbf{v}$$
+      </div>
+      <p>Geometrically, the dot product represents the product of the magnitudes and the cosine of the angle $\theta$ between them:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Dot Product as a <strong>"Compatibility Score."</strong> If two vectors are perfectly aligned, the score is high. If they are perpendicular (orthogonal), they have <em>zero</em> in common. If they point in opposite directions, the score is negative.
-      </div>
-    </div>
-
-    <visualizer topic="DotProduct" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For two vectors \(\mathbf{a}\) and \(\mathbf{b}\):</p>
-    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \sum_{i=1}^{n} a_i b_i = a_1b_1 + a_2b_2 + \dots + a_nb_n$$</div>
-    <p>Alternatively, using the angle \(\theta\) between them:</p>
-    <div class="math-block">$$\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos(\theta)$$</div>
 
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
     
@@ -110,3 +111,4 @@ print(f"Dot Product: {dot}")
     </div>
   `
 };
+

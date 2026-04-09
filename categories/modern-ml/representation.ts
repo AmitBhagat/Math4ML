@@ -12,15 +12,29 @@ export const representationSection: TopicSection = {
       <p>A 4K image has 8 million pixels. That is <strong>Too Much Information</strong>. To understand the image, you don't need the exact color of every pixel; you need the <strong>Identity</strong> of the object. <strong>Representation Learning</strong> (Feature Learning) is the process of compressing raw data into a set of <strong>Meaningful Numbers</strong> (Vectors) that capture the "Soul" of the information.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent Space</h2>
-    <p>A <strong>Representation</strong> is just a point in a "Latent Space." If you take a picture of a <strong>Dog</strong> and a picture of a <strong>Wolf</strong>, their pixel values might be totally different. But in the model's <strong>Latent Space</strong>, they will be very close to each other. Representation learning is about finding the <strong>Mapping</strong> (\(f: X \to Z\)) that honors the semantic truth.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>A single 4K image contains over 8 million pixels. For a computer, that is <strong>Too Much Information</strong> to process effectively. To truly understand data, you don't need the exact color of every microscopic pixel; you need the <strong>Identity</strong> and <strong>Context</strong> of the objects within it. <strong>Representation Learning</strong> is the process of compressing high-dimensional raw data into a set of meaningful, low-dimensional numbers—vectors—that capture the "Soul" of the information. It is the art of finding a mapping that honors the semantic truth of the data, ensuring that a "Dog" and a "Wolf" are mapped to nearby coordinates in a "Latent Space," even if their raw pixel values are completely different. It is the tactical decision to trade precision for meaning.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Latent Mapping</div>
+      <p>Representation learning aims to find a function $f_\theta: \mathcal{X} \to \mathbb{R}^d$ that maps high-dimensional input $\mathbf{x}$ to a lower-dimensional latent vector $\mathbf{z}$ while preserving task-relevant information. A principal objective is **Disentanglement**, where factors of variation are separated:</p>
+      <div class="math-block">
+        $$\mathbf{z} = f_\theta(\mathbf{x}), \quad \text{where } \mathbf{x} \approx g_\phi(\mathbf{z})$$
+      </div>
+      <p>A robust representation satisfies **The Manifold Hypothesis**, assuming that data lies on a low-dimensional topological manifold $\mathcal{M}$. The learning objective often involves minimizing reproduction error or maximizing mutual information:</p>
+      <div class="math-block">
+        $$\max_{\theta} I(\mathbf{x}; f_\theta(\mathbf{x}))$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Lossy but Smart Compression."</strong> 
-        If I tell you to describe your best friend, you don't list 10,000 skin cells. You say "Tall, blue eyes, wears a hat." 
-        Those 3 attributes are the <strong>Representations</strong>. They are much easier to work with than the raw 10,000-cell data, and they contain <strong>99% of the important information</strong>.
+        Think of Representation Learning as <strong>"The Police Sketch Artist"</strong> or <strong>"Lossy but Smart Compression."</strong> 
+        Imagine a witness describing a criminal to a sketch artist. The witness has the raw video in their head (the Raw Data). The artist doesn't draw every skin cell; he asks: "Round eyes? Pointy nose? Short hair?" 
+        Those specific words are the <strong>Representations</strong>. They are a low-dimensional summary that contains 99% of the important information. In machine learning, we use a <strong>Bottleneck</strong> to force the data through a narrow bridge, stripping away the noise (like the color of a plate) and keeping only the signal (the identity of the food).
       </div>
     </div>
 

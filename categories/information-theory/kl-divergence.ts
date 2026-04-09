@@ -21,25 +21,25 @@ export const klDivergenceSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Cross-Entropy is the <strong>Total Cost</strong> of using a model. But some of that cost is fixed (the Entropy of the truth itself). <strong>KL Divergence</strong> is the <strong>Extra Cost</strong>—the pure inefficiency of your model. If KL \(= 0\), your model is a perfect copy of the truth. If KL is high, your model is a poor approximation.</p>
+    <p>Cross-Entropy tells you the <strong>Total Cost</strong> of using a model to describe reality, but not all of that cost is your model’s fault. Some of it is just the inherent chaos (Entropy) of the data itself. <strong>KL Divergence</strong> (\(D_{KL}(P || Q)\)) is the <strong>Extra Cost</strong>—the pure, unadulterated inefficiency of your approximation. It acts as the mathematical compass that measures the "Information Loss" or the gap between your model's beliefs (\(Q\)) and the ground truth (\(P\)). If KL is zero, your model is a perfect clone of reality. If KL is high, your model is a poor surrogate. Critically, KL is <strong>Asymmetric</strong>; being surprised that a rare event is common is fundamentally different from being surprised that a common event is rare. It is the tactical measurement of how much "Inefficiency Tax" you pay for using a simplified model.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Relative Entropy & Distributional Divergence</div>
+      <p>The **KL Divergence** $D_{KL}(P \parallel Q)$ measures the relative entropy of distribution $P$ with respect to $Q$. It quantifies how one probability distribution is different from a second, reference distribution:</p>
+      <div class="math-block">
+        $$D_{KL}(P \parallel Q) = \sum_{x \in \mathcal{X}} P(x) \log \frac{P(x)}{Q(x)}$$
+      </div>
+      <p>This measure is governed by the following core mathematical constraints:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Gibbs' Inequality</strong>: $D_{KL}(P \parallel Q) \ge 0$. The information loss is never negative. It is exactly zero if and only if $P = Q$.</li>
+        <li><strong>Non-Symmetry</strong>: $D_{KL}(P \parallel Q) \neq D_{KL}(Q \parallel P)$. Approximating a complex reality with a simple model is not the same as the reverse. Thus, KL is a **Divergence**, not a metric.</li>
+        <li><strong>Relation to Loss</strong>: $D_{KL}(P \parallel Q) = H(P, Q) - H(P)$. It is the "pure" inaccuracy of the model, stripped of the data's inherent entropy.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we use KL divergence to force latent spaces to follow specific shapes (VAEs) and to transfer knowledge between models (Distillation).</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of KL Divergence as <strong>"The Surprise Penalty."</strong> 
-        You expect results to follow pattern \(Q\), but they actually follow \(P\). 
-        KL Divergence is the measure of how <strong>surprised</strong> you are on average. 
-        Note that it is <strong>Asymmetric</strong>: \(D_{KL}(P || Q) \neq D_{KL}(Q || P)\). 
-        Being surprised that a rare event is common is not the same as being surprised that a common event is rare!
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>KL Divergence is defined as the difference between Cross-Entropy and Entropy:</p>
-    <div class="math-block">$$D_{KL}(P || Q) = H(P, Q) - H(P)$$</div>
-    <p>Explicitly:</p>
-    <div class="math-block">$$D_{KL}(P || Q) = \sum_{i} P(x_i) \log \frac{P(x_i)}{Q(x_i)}$$</div>
-    <p><strong>Note:</strong> KL Divergence is always \(\ge 0\). (Gibbs' Inequality).</p>
 
     <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
     
@@ -118,3 +118,4 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
     </div>
   `
 };
+

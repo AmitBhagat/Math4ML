@@ -12,16 +12,26 @@ export const semiSupervisedLearningSection: TopicSection = {
       <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground. In the real world, most data is unlabeled and "Messy." Labeling is expensive. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to find the value in a mountain of <strong>Unlabeled Dust</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Smoothing and Manifolds</h2>
-    <p>SSL relies on the <strong>Continuity Assumption</strong>: If two points \(x_1\) and \(x_2\) are close in space, they should probably have the same label. If we label 10 points, the machine "Spreads" those labels to nearby neighbors in the unlabeled set.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Semi-Supervised Learning (SSL)</strong> is the pragmatic middle ground between having a perfect teacher and being completely lost in the dark. In the real world, labeling data is expensive and time-consuming (a human has to sit down and do it). However, unlabeled data is cheap and abundant—think of billions of photos on the internet. SSL is about using a small handful of <strong>Labeled Diamonds</strong> to reveal the hidden value in a mountain of <strong>Unlabeled Dust</strong>. It assumes that if two points are close together in space, they probably share the same label. By spreading the "seeds" of known knowledge to nearby neighbors, we can train powerful models with only a fraction of the manual effort required for pure supervised learning.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Hybrid Risk Objective</div>
+      <p>Semi-supervised learning involves a training set $\mathcal{D}$ composed of a small labeled subset $\mathcal{L} = \{(\mathbf{x}_i, y_i)\}_{i=1}^l$ and a large unlabeled subset $\mathcal{U} = \{\mathbf{x}_i\}_{i=l+1}^{l+u}$. The objective is to minimize a loss function $J(f)$ that incorporates both supervised and structural components:</p>
+      <div class="math-block">
+        $$J(f) = \sum_{i=1}^l L(y_i, f(\mathbf{x}_i)) + \lambda \cdot \Omega(f, \mathcal{U})$$
+      </div>
+      <p>The **Unsupervised Regularizer** $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Smoothness Assumption</strong>: If $\mathbf{x}_i$ and $\mathbf{x}_j$ are close in high-density regions, their outputs $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$ should be similar.</li>
+        <li><strong>Low-Density Separation</strong>: The decision boundary should pass through areas where the marginal density $P(\mathbf{x})$ is low, effectively avoiding the "splitting" of natural clusters.</li>
+        <li><strong>Manifold Assumption</strong>: Data points are assumed to lie on a low-dimensional manifold $\mathcal{M}$. SSL uses $\mathcal{U}$ to approximate $\mathcal{M}$ and ensures the model varies smoothly only along the manifold's surface.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">By leveraging the underlying geometry of $\mathcal{U}$, we reduce the sample complexity of $f$ significantly compared to pure supervised methods.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Infection of Knowledge."</strong> 
-        You have 1,000 photos of cats and dogs. You only label 10. The machine looks at the 990 unlabeled photos. It notices that "Photo 11" looks almost exactly like "Labeled Dog 1." It decides to <strong>re-label</strong> Photo 11 as a dog. Now it has 11 dogs to help find more.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
     
@@ -74,3 +84,4 @@ print(f"Predicted Class for point [2, 1]: Class {y_pred[4]}")
     </div>
   `
 };
+

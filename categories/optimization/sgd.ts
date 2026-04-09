@@ -12,33 +12,36 @@ export const sgdSection: TopicSection = {
       <p><strong>Stochastic Gradient Descent (SGD)</strong> is the engine of Deep Learning. While Batch Gradient Descent waits to see all 1 million data points before taking a single step, SGD takes a step after seeing just one (or a few). It is <strong>Fast</strong>, <strong>Noisy</strong>, and surprisingly effective at avoiding local traps.</p>
     </div>
 
-    <h2 id="prerequisites">Foundational Requirements</h2>
-    <div class="def-box">
-      <ul style="margin:0">
-        <li><strong>Gradient Descent</strong>: Understanding \(\nabla f\).</li>
-        <li><strong>Stochasticity</strong>: The element of random chance.</li>
-      </ul>
-    </div>
-
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating the gradient of 1 billion samples takes a lot of time. <strong>SGD</strong> replaces wait with "Noise." Instead of the perfect "True Gradient," we use a "Noisy Estimate" from a single random data point. The estimate is wrong in the short term, but on average, it points exactly the same way as the true gradient. It’s like traveling by <strong>Drunkard's Walk</strong>—you stumble, but you still end up at the bottom of the hill.</p>
+    <p>Calculating the perfect gradient for 1 billion data samples takes a massive amount of time. <strong>Stochastic Gradient Descent (SGD)</strong> replaces that long wait with "Noisy Speed." Instead of calculating the "True Gradient" for the whole city, we calculate a "Noisy Estimate" using just one random person (data point). This estimate is "wrong" in the short term, but on average, it points exactly the same way as the true gradient. It’s the difference between waiting for a full committee vote before taking a step and just asking the person nearest to you. It turns out that moving <strong>constantly</strong> is much better than moving <strong>perfectly</strong>. It is the tactical engine of modern deep learning, allowing us to navigate vast datasets with incredible speed.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Stochastic Finite-Sum Optimization</div>
+      <p>Stochastic Gradient Descent (SGD) is a version of gradient descent where the gradient of the objective function $J(\theta) = \frac{1}{n} \sum_{i=1}^n f_i(\theta)$ is approximated using a single randomly selected sample $i_t$ at each iteration:</p>
+      
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta \nabla_\theta f_{i_t}(\theta_t)$$
+      </div>
+      
+      <p>The mathematical properties that distinguish SGD from Batch GD include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Unbiased Estimation</strong>: The stochastic gradient is an unbiased estimator of the true gradient, meaning $\mathbb{E}[\nabla f_{i_t}(\theta_t)] = \nabla J(\theta_t)$. On average, the algorithm moves in the correct direction.</li>
+        <li><strong>Stochastic Noise</strong>: The variance in the gradient estimate introduces "jitter" into the optimization path. This noise acts as a natural regularizer, allowing the model to "jump" out of shallow local minima and find flatter, more generalizable minima.</li>
+        <li><strong>Convergence</strong>: Convergence to a stationary point is guaranteed under the **Robbins-Monro conditions** (e.g., using a decaying learning rate).</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of SGD as <strong>"Finding the Restaurant by Asking One Person."</strong> 
-        Batch Gradient Descent is like asking everyone in the city and taking the average direction. It's accurate, but it takes forever. 
-        SGD is like asking the first person you see and walking that way. They might be wrong, but you're moving <strong>Right Now</strong>. If you ask someone new every 10 meters, eventually you'll reach the restaurant.
+        Think of SGD as <strong>"The Noisy Hustle"</strong> or <strong>"Traveling by Drunkard's Walk."</strong> 
+        If you are a drunkard trying to reach the bottom of a hill, you might stumble left and right, but since the "Slope" is pulling you down, every misstep eventually averages out toward the goal. 
+        In Machine Learning, this "Noise" is actually a feature, not a bug—the random stumbles help the model "jump out" of shallow traps (local minima) that would catch a "perfect" but rigid Batch Gradient Descent. It is the reason why we can train massive models like <strong>LLMs</strong> on trillions of tokens without waiting for eternity. It is the "Dynamic Agility" of the optimization world.
       </div>
     </div>
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>The update rule for a single data point \(x_i\):</p>
-    <div class="math-block">$$\theta_{new} = \theta_{old} - \eta \nabla J(\theta; x_i, y_i)$$</div>
-    <ul>
-      <li><strong>\(\nabla J(\theta; x_i, y_i)\)</strong>: The gradient calculated on only ONE sample.</li>
-      <li><strong>Noise Benefit</strong>: Because SGD is noisy, it can "jump out" of small, shallow local minima that would trap the smooth Batch Gradient Descent.</li>
-    </ul>
 
     <h2 id="example-noise" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Noisy Gradient</h2>
     

@@ -12,20 +12,26 @@ export const emAlgorithmSection: TopicSection = {
       <p>How do you find the <strong>Average Height</strong> of two different species if you don't know <strong>Which Height belongs to Which Species</strong>? You can't find the average without the species, and you can't find the species without the average. This is the "Chicken and Egg" problem of Latent Variables. <strong>Expectation-Maximization (EM)</strong> is the algorithm that guesses its way to the truth.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Latent Variables</h2>
-    <p>In many real-world problems, we have <strong>Latent Variables (Z)</strong>—things that exist but aren't in our dataset. If we knew \(Z\), the problem would be simple. If we don't, we have to <strong>Iterate</strong>. EM is the engine that powers Gaussian Mixture Models (GMM) and Hidden Markov Model (HMM) training.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you find the average height of two different species if you don't know which height measurement belongs to which species? You can't find the average without knowing the group, and you can't find the group without knowing the average. This is the <strong>"Chicken and Egg" problem</strong> of Latent Variables (unseen factors). The <strong>Expectation-Maximization (EM)</strong> algorithm is the iterative engine that solves this by "Soft Guessing." It alternates between filling in the missing labels (Expectation) and optimizing the parameters based on those guesses (Maximization). It is the foundational algorithm for clustering and training complex probabilistic models where the ground truth is hidden from view.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Iterative Maximum Likelihood with Latent Variables</div>
+      <p>The **EM Algorithm** is a strategy for maximum likelihood estimation in models with latent variables $\mathbf{Z}$. It iteratively improves a lower bound on the log-likelihood $\ell(\theta) = \log P(\mathbf{X} \mid \theta)$ through two coordinate-ascent steps:</p>
+      <div class="math-block">
+        $$Q(\theta \mid \theta^{(t)}) = \mathbb{E}_{\mathbf{Z} \mid \mathbf{X}, \theta^{(t)}} [ \log P(\mathbf{X}, \mathbf{Z} \mid \theta) ]$$
+      </div>
+      <p>The optimization process follows this rigorous cycle:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>E-Step (Expectation)</strong>: Calculate the posterior probability $P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)})$ of the hidden variables given the observed data and current parameters.</li>
+        <li><strong>M-Step (Maximization)</strong>: Find $\theta^{(t+1)} = \arg \max_\theta Q(\theta \mid \theta^{(t)})$. Update parameters to maximize the expected log-likelihood.</li>
+        <li><strong>Jensen's Inequality</strong>: EM guarantees that the likelihood $P(\mathbf{X} \mid \theta)$ is non-decreasing at each step by optimizing the Evidence Lower Bound (ELBO).</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Soft Guessing."</strong> 
-        The algorithm doesn't say "Point A *definitely* belongs to Species 1." It says "Point A belongs to Species 1 with <strong>70% probability</strong>." This "Soft" assignment is what allows the algorithm to converge smoothly.
-      </div>
-    </div>
-
-    <h2 id="math">Jensen's Inequality & Lower Bound</h2>
-    <p>Mathematically, we want to maximize the <strong>Log-Likelihood</strong> \(\ell(\theta) = \sum \log P(x \mid \theta)\). But the log of a sum is hard to optimize. EM works by maximizing a <strong>Lower Bound</strong> (The ELBO) on the likelihood. According to <strong>Jensen's Inequality</strong>, the average of the logs is less than or equal to the log of the averages.</p>
-    <div class="math-block">$$\log \sum_z P(x, z \mid \theta) \ge \sum_z Q(z) \log \frac{P(x, z \mid \theta)}{Q(z)}$$</div>
 
     <h2 id="steps">The 2 Big Steps: E and M</h2>
     
@@ -114,3 +120,4 @@ print(f"Final Estimation -> Soprano Mean: {mu1:.2f}, Bass Mean: {mu2:.2f}")
     </div>
   `
 };
+

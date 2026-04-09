@@ -21,27 +21,25 @@ export const derivativesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculus is the "Language of Sensitivity." It answers the question: <em>"If I nudge this variable by a hair, how much does the result move?"</em> If you are standing on a hill, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. ML models always want to move "downhill" to find the minimum error.</p>
+    <p>Calculus is the "Language of Sensitivity." It answers the core question of Machine Learning: <em>"If I nudge this specific variable by a hair, how much does the final result move?"</em> If you are standing on a landscape of data, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. By calculating these slopes for every single weight in a neural network, we gain a clear map of how to move. It is the fundamental difference between blind guessing and having a scientific plan to reduce error.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Instantaneous Rate</div>
+      <p>For a continuous function $f(x)$, the derivative $f'(x)$ (also denoted $\frac{df}{dx}$) represents the limit of the average rate of change as the interval $\Delta x$ shrinks to zero:</p>
+      <div class="math-block">
+        $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
+      </div>
+      <p>A function is **Differentiable** at $x$ if this limit exists. The derivative provides an linear approximation of the function at a specific point, governed by several fundamental rules:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Power Rule</strong>: $\frac{d}{dx}x^n = nx^{n-1}$.</li>
+        <li><strong>Linearity</strong>: $\frac{d}{dx}[af(x) + bg(x)] = af'(x) + bg'(x)$.</li>
+        <li><strong>Product Rule</strong>: $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Derivative as an <strong>Instantaneous Speedometer</strong>. 
-        If you're driving, the speedometer doesn't tell you where you've been; it tells you exactly how fast you're changing your position <em>right now</em>. 
-        In ML, the derivative tells the model how fast the error is changing with respect to its weights <em>at this exact moment</em>.
-      </div>
-    </div>
-
-    <visualizer topic="Differentiation" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The derivative \(f'(x)\) is defined as the limit of the average slope as the "nudge" \(h\) goes to zero:</p>
-    <div class="math-block">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
-    <p><strong>Common Rules:</strong></p>
-    <ul>
-      <li><strong>Power Rule:</strong> \(\frac{d}{dx}x^n = nx^{n-1}\).</li>
-      <li><strong>Constant Rule:</strong> \(\frac{d}{dx}C = 0\).</li>
-    </ul>
 
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     
@@ -115,3 +113,4 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </div>
   `
 };
+

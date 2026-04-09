@@ -12,21 +12,30 @@ export const transformersSection: TopicSection = {
       <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern AI possible. They threw away the "Recurrence" (Memory) and replaced it with <strong>Attention</strong>—the ability for every word in a sentence to "Look At" every other word simultaneously. It is the <strong>Parallelization</strong> of intelligence.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Query, Key, and Value</h2>
-    <p>Transformers treat information like a <strong>Search Engine (Database Retrieve)</strong>. Each word creates three vectors:</p>
-    <ul>
-      <li><strong>Query (Q):</strong> What am I looking for? ("I am a subject, I need a verb.")</li>
-      <li><strong>Key (K):</strong> What do I offer? ("I am a past-tense verb.")</li>
-      <li><strong>Value (V):</strong> What is my actual meaning? ("The action of 'running'.")</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Why read a book word-by-word if you can read the <strong>Whole Page</strong> at once? <strong>Transformers</strong> are the breakthrough that made ChatGPT and modern LLMs possible. They threw away the "Recurrence" (the step-by-step memory) and replaced it with <strong>Attention</strong>—the ability for every token in a sequence to "Look At" every other token simultaneously. This is the <strong>Parallelization</strong> of intelligence. Instead of a goldfish trying to remember 10 seconds ago, a Transformer is like a global spotlight that can instantly see the relationship between a word at the beginning of a document and a word at the very end. It treats data not as a ticking clock, but as a single, massive web of connections.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Scaled Dot-Product Attention</div>
+      <p>The Transformer maps a sequence of input representations $(\mathbf{x}_1, \dots, \mathbf{x}_n)$ to a sequence of continuous representations $\mathbf{z}$. The core operation is **Self-Attention**, which computes a weighted sum of values $\mathbf{V}$ based on the similarity between queries $\mathbf{Q}$ and keys $\mathbf{K}$:</p>
+      <div class="math-block">
+        $$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}$$
+      </div>
+      <p>To capture information from different representation subspaces, the model uses **Multi-Head Attention**:</p>
+      <div class="math-block">
+        $$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Finding the Context."</strong> 
-        In the sentence "The <strong>Bank</strong> was closed," the word "Bank" looks at "Closed" and knows it's a <strong>Financial Institution</strong>. 
-        In "The <strong>Bank</strong> of the river," "Bank" looks at "River" and knows it's <strong>Geography</strong>. 
-        Attention is the <strong>Exact Mathematical Calculation</strong> of that relationship.
+        Think of a Transformer as <strong>"The Stage Spotlight"</strong> or <strong>"Finding the Context in a Crowd."</strong> 
+        Imagine a 20-actor play on a pitch-black stage. In the old way (RNN), a single spotlight moves from Actor 1 to Actor 2, and so on. By the time it reaches the end, the earlier lines are forgotten. 
+        In a <strong>Transformer</strong>, <strong>Every Actor</strong> has their own high-powered spotlight. At the same instant, they shine them on the colleagues they need to understand. Actor 1 (The Subject) shines their light and sees Actor 12 (The Verb) holding a "Key" that perfectly matches their "Query." 
+        The whole stage is lit up in a <strong>Global Search</strong> that resolves context instantly. It is the math of "Paying Attention" to what actually matters, regardless of distance.
       </div>
     </div>
 

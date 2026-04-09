@@ -12,15 +12,25 @@ export const lassoRegressionSection: TopicSection = {
       <p>While Ridge minimizes every weight slightly, <strong>Lasso (L1)</strong> is more aggressive. It doesn't just "Muffle" noisy features; it <strong>Kills</strong> them. Lasso is your best friend when you have 100 features but suspect only 5 actually matter.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The L1 Absolute Penalty</h2>
-    <p>Lasso stands for <strong>Least Absolute Shrinkage and Selection Operator</strong>. It adds the <strong>Absolute Value</strong> of weights as a penalty. Unlike the square in Ridge, the absolute value has a "Sharp Edge" at zero, which forces many weights to become <strong>exactly 0.0</strong>.</p>
-    <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum |w_j|$$</div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>While Ridge regression "Muffles" your noisy features, <strong>Lasso (L1)</strong> is a much more aggressive auditor. It doesn't just lower the volume on useless variables; it <strong>kills them entirely</strong>. Lasso is your best friend when you have 1,000 features but suspect that only 5 of them actually matter. By adding a penalty based on the <strong>Absolute Value</strong> of the weights, Lasso forces the model to be extremely picky. Any feature that isn't strongly contributing to the prediction gets its weight set to <strong>exactly zero</strong>, leaving you with a lean, interpretable "Best-Hits" list of variables.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Lasso Regression (L1)</div>
+      <p>The Least Absolute Shrinkage and Selection Operator (Lasso) adds an $L_1$ regularization term to the least squares objective. Unlike $L_2$, the $L_1$ penalty is non-differentiable at zero, which encourages coefficients to become exactly zero (sparsity):</p>
+      <div class="math-block">
+        $$\text{arg}\min_{\mathbf{w}} \left\{ \frac{1}{2n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda \|\mathbf{w}\|_1 \right\}$$
+      </div>
+      <p>Where $\|\mathbf{w}\|_1 = \sum_{j=1}^d |w_j|$ is the $L_1$ norm. This optimization problem has no closed-form solution and is typically solved using **Coordinate Descent**.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Geometric Constraints."</strong> 
-        Ridge is a <strong>Sphere</strong> (it lets you move in any direction smoothly). Lasso is a <strong>Diamond</strong> (it has corners). When you try to find the "Best Fit" inside a diamond, the math naturally pushes you toward the <strong>Corners (Axes)</strong>, where one feature is 1 and the other is 0.
+        Think of Lasso Regression as the <strong>"Brutal Executive Auditor"</strong> or the <strong>"Zero-Tolerance Casting Director."</strong> 
+        Imagine you are casting a movie with a tiny budget. <strong>Ridge Regression</strong> keeps every actor around but pays them only a dollar, giving them no lines. <strong>Lasso</strong> walks through the room and says: "If you aren't essential to the main plot, you are <strong>Fired</strong>. Hand in your script." 
+        Geometrically, because the L1 penalty is a <strong>Diamond</strong> with sharp corners on the axes, the math naturally pushes the "losers" exactly into those corners (zero). It's the ultimate tool for <strong>Automatic Feature Selection</strong>.
       </div>
     </div>
 

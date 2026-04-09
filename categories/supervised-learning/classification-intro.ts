@@ -12,14 +12,29 @@ export const classificationIntroSection: TopicSection = {
       <p>If Regression answers "How Much?", <strong>Classification</strong> answers "What is it?". Whether it's telling a Cat from a Dog or identifying Fraudent credit card transactions, Classification is the art of <strong>Drawing Boundaries</strong> in data space.</p>
     </div>
 
-    <h2 id="theory">The Mechanics: Mapping to Discrete Buckets</h2>
-    <p>In Classification, your output \(Y\) is a <strong>Category</strong>. For a machine, we usually encode these as integers (0, 1, 2...). Our model doesn't just guess a number; it calculates the <strong>Probability</strong> that an input belongs to each bucket.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If Regression answers the question "How Much?", <strong>Classification</strong> answers the definitive "What is it?". Whether it’s distinguishing a malignant tumor from a benign one or identifying a fraudulent credit card transaction, Classification is the art of <strong>Drawing Boundaries</strong> in a chaotic world of data. We aren't just predicting a number; we are assigning a fundamental identity. It is the process of turning continuous, messy signals into discrete, actionable buckets. In Machine Learning, this is the first step toward building a machine that can actually "See" and "Categorize" the universe just like a human brain does.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Classification</div>
+      <p>Classification is the task of approximating a mapping function $f: \mathbf{x} \to y$ where $y \in \{1, 2, \dots, K\}$ is a discrete set of classes. Formally, for $K$ classes, the objective is to model the conditional probability distribution:</p>
+      <div class="math-block">
+        $$P(y = c \mid \mathbf{x}; \theta) = \frac{ \text{exp}(f_c(\mathbf{x}; \theta)) }{ \sum_{j=1}^K \text{exp}(f_j(\mathbf{x}; \theta)) }$$
+      </div>
+      <p>The model parameters $\theta$ are typically optimized by minimizing the **Cross-Entropy Loss**, which measures the divergence between the true and predicted distributions:</p>
+      <div class="math-block">
+        $$\mathcal{L}(\theta) = -\sum_{i=1}^n \sum_{c=1}^K y_{ic} \log(\hat{y}_{ic})$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Drawing a Line in the Sand."</strong> 
-        Classification is like an <strong>Apple Sorter</strong>. You see a fruit. You check its weight and color. Is it a "Fuji" or a "Granny Smith"? Unlike regression, there is no "in-between." You have to commit to <strong>one bucket</strong>.
+        Think of Classification as the <strong>"Sorting Hat"</strong> or the <strong>"Ultimate Apple Sorter."</strong> 
+        Imagine a conveyor belt of fruit. You check the weight, the color, and the texture. You have to decide: is this a Fuji or a Granny Smith? There is no "in-between" score. You must commit to <strong>one bucket</strong>. 
+        The machine finds the <strong>Decision Boundary</strong>—the invisible fence in space that separates the Apples from the Oranges. If a new fruit lands on the left side of the fence, the model bets its life that it's an Apple. 
+        It's about <strong>Commitment</strong>: turning mathematical uncertainty into a hard, "Yes" or "No" verdict.
       </div>
     </div>
 

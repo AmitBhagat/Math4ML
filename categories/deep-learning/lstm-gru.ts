@@ -12,18 +12,34 @@ export const lstmGruSection: TopicSection = {
       <p>How do we give a Goldfish a memory that lasts longer than 5 seconds? We give it a <strong>Hardcover Diary</strong>. <strong>Long Short-Term Memory (LSTM)</strong> and <strong>Gated Recurrent Units (GRU)</strong> are the evolution of the RNN. They use <strong>Gates</strong> to decide which information is worth keeping for 100 pages and which should be forgotten immediately.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Constant Cell State</h2>
-    <p>A simple RNN is one big mess of gradients. LSTM introduces a <strong>Cell State (\(C_t\))</strong> that acts as a <strong>Conveyor Belt</strong> through time. Information can flow across it with <strong>Zero Change</strong> if the gates allow it. This is how we remember the beginning of a paragraph at the end of a book.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you give a machine a memory that lasts longer than a few seconds? You can't just keep piling up gradients; they will eventually explode or vanish. The solution is <strong>Long Short-Term Memory (LSTM)</strong> or its streamlined sibling, the <strong>Gated Recurrent Unit (GRU)</strong>. These architectures introduce a "Cell State"—a constant conveyor belt through time that carries important information without distortion. By using mathematical <strong>Gates</strong>, the network can selectively choose what to remember for long periods and what to forget immediately. This allows the model to understand complex dependencies in long documents, videos, or financial time series where the "Beginning" of the sequence determines the meaning of the "End."</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Gated Memory (LSTM)</div>
+      <p>An LSTM cell maintains a cell state $C_t$ (long-term memory) and a hidden state $h_t$ (short-term memory). The flow is regulated by three sigmoidal gates:</p>
+      <div class="math-block">
+        $$\text{Forget Gate: } f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
+        $$\text{Input Gate: } i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
+        $$\text{Output Gate: } o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
+      </div>
+      <p>The internal cell state is updated by forgetting old news and adding new, filtered news:</p>
+      <div class="math-block">
+        $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)$$
+        $$h_t = o_t \odot \tanh(C_t)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Selective Writing."</strong> 
-        The cell state is the <strong>Permanent Ink</strong>. 
-        The gates are <strong>Electronic Checkpoints</strong>. 
-        Checkpoint 1 (Forget Gate) decides what to <strong>Erase</strong>. 
-        Checkpoint 2 (Input Gate) decides what to <strong>Add</strong>. 
-        Checkpoint 3 (Output Gate) decides what to <strong>Read</strong>. 
+        Think of an LSTM as <strong>"Selective Memory"</strong> or <strong>"The Lab Journal on a Mars Mission."</strong> 
+        Imagine you are a scientist with a single notebook (the Cell State) and limited ink. You have to be ruthless. 
+        The <strong>Forget Gate</strong> is your eraser: it scrubs out old, irrelevant news like "the weather was cloudy 5 years ago." 
+        The <strong>Input Gate</strong> is your pen: it identifies "Breaking News" (like finding liquid water) and writes it into the permanent ink section. 
+        And the <strong>Output Gate</strong> is your report: it filters your internal notes to tell the world only the most significant discoveries. Because the "Permanent" section is protected, a discovery made on page 1 can survive perfectly until page 1,000.
       </div>
     </div>
 

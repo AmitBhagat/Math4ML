@@ -12,26 +12,31 @@ export const pcaSection: TopicSection = {
       <p><strong>PCA</strong> is the most widely used Dimensionality Reduction algorithm. It doesn't delete features; it <strong>Squashes</strong> them into a new set of orthogonal axes that maximize the <strong>Variance</strong>. It's the ultimate "Signal vs. Noise" filter for your data.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Covariance & Eigen-decomposition</h2>
-    <p>PCA treats the data as a <strong>Cloud</strong>. It calculates the <strong>Covariance Matrix</strong> \(\Sigma\) to see how the features "Move Together." Then, it finds the <strong>Eigenvectors</strong> of that matrix.</p>
-    <div class="math-block">$$\Sigma \mathbf{v}_i = \lambda_i \mathbf{v}_i$$</div>
-    <ul>
-      <li><strong>Eigenvectors (\(\mathbf{v}_i\)):</strong> The directions (Principal Components) of the cloud.</li>
-      <li><strong>Eigenvalues (\(\lambda_i\)):</strong> The <strong>Strength</strong> (Variance) of each direction.</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>PCA</strong> is the most widely used Dimensionality Reduction algorithm because of its mathematical elegance. It doesn't simply delete features; it <strong>Squashes</strong> them into a new set of dimensions that maximize the <strong>Variance</strong>. Variance is just another word for "Information." PCA finds the directions where the data is most spread out and preserves those, while discarding the "Thin" directions where nothing much happens. It is the ultimate "Signal vs. Noise" filter, allowing you to find the skeleton of your data hidden within a high-dimensional cloud of features.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Principal Component Analysis</div>
+      <p>PCA identifies the orthogonal axes (principal components) that maximize the variance of the projected data. For a centered data matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$, the first principal component $\mathbf{w}_1$ is defined as:</p>
+      <div class="math-block">
+        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \text{Var}(\mathbf{Xw}) = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}$$
+      </div>
+      <p>The solution is found via the **SVD** of $\mathbf{X}$ or the **Eigen-Decomposition** of the covariance matrix $\boldsymbol{\Sigma}$. The $k$-th principal component is the eigenvector corresponding to the $k$-th largest eigenvalue $\lambda_k$:</p>
+      <div class="math-block">
+        $$\boldsymbol{\Sigma} \mathbf{v}_k = \lambda_k \mathbf{v}_k$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Finding the Axis of Change."</strong> 
-        Imagine a <strong>Rugby Ball</strong> floating in the air. 
-        It has 3 dimensions (Length, Width, Height). 
-        The <strong>1st Principal Component (PC1)</strong> is the <strong>Long Axis</strong>. 
-        The <strong>2nd Principal Component (PC2)</strong> is the <strong>Width</strong>. 
-        If you only have 1 dimension, you choose the <strong>Long Axis</strong> because it captures 80% of the ball's shape. 
+        Think of PCA as <strong>"Finding the Axis of Change"</strong> or the <strong>"Best Photograph Analogy."</strong> 
+        Imagine a **Rugby Ball** floating in space. It has 3 dimensions, but its most important feature is its "Length." PC1 is that long axis. If you only had one dimension to describe that ball, you’d pick the long axis because it captures 80% of the shape. 
+        Or think of it as taking a 2D picture of a 100D alien. <strong>PCA</strong> is the algorithm that calculates the <strong>Exact Orbital Position</strong> for your camera so that the 2D photo captures the most detail (the widest spread) of the alien's complex, many-dimensional body. It is about finding the **Perspective** that kills the redundant noise and keeps the pure signal.
       </div>
     </div>
-
+    
     <h2 id="variance">The "First" Component: Maximum Variance</h2>
     <p>Variance is <strong>Information</strong>. If a feature has zero variance (all points are the same), it tells you nothing. PCA finds the direction where the data is <strong>most spread out</strong>. PC1 is the strongest signal, PC2 is the second strongest, and so on.</p>
 

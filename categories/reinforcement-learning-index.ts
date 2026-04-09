@@ -1,83 +1,64 @@
 import { CategoryData } from "../src/data/types";
+import { mdpSection } from "./reinforcement-learning/mdp";
+import { qLearningSection } from "./reinforcement-learning/q-learning";
 
 export const REINFORCEMENT_LEARNING_DATA: CategoryData = {
   id: "reinforcement-learning",
   title: "Reinforcement Learning",
   description: "Training agents to make sequences of decisions by rewarding desired behaviors and punishing undesired ones.",
   keyConcepts: [
-    { title: "Agent/Env", description: "The interface between learning mechanism and world." },
-    { title: "Q-Learning", description: "Learning value-based policies for action mapping." }
+    { title: "MDP Foundations", description: "The mathematical 5-tuple defining the learning environment." },
+    { title: "Value-based Logic", description: "Bellman updates and Q-Learning for long-term optimization." }
   ],
+  introHtml: String.raw`
+    <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
+      
+      <!-- Intro Section -->
+      <div class="space-y-8">
+        <h2 class="text-4xl md:text-5xl font-headline font-semibold text-text-premium leading-tight">
+          Reinforcement Learning: <span class="text-accent italic">The Science of Decisions</span>
+        </h2>
+        
+        <p class="text-lg md:text-xl text-text-premium font-normal leading-relaxed opacity-90">
+          In Reinforcement Learning, we don't just "predict"; we "act." It is the study of how an autonomous agent can learn to achieve goals in a complex world through trial, error, and delayed gratification.
+        </p>
+      </div>
+
+      <hr class="border-border-premium/50" />
+
+      <!-- What to Expect -->
+      <div class="space-y-10 pb-12">
+        <p class="text-lg text-text-premium font-normal leading-relaxed">
+          This category covers the core engines of decision science—from the mathematical blueprints of Markov Decision Processes to the value-based algorithms that allow machines to solve mazes and master complex games.
+        </p>
+
+        <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
+          <div class="absolute -top-4 -left-4 w-12 h-12 bg-accent/10 rounded-xl flex items-center justify-center text-accent text-4xl font-serif">"</div>
+          <p class="text-xl md:text-2xl text-text-premium italic leading-relaxed font-light">
+            "Reinforcement learning is the closest thing we have to how humans and animals actually learn... through the consequences of their actions."
+          </p>
+          <div class="mt-6 flex items-center gap-4">
+            <div class="w-8 h-[1px] bg-accent/30"></div>
+            <span class="text-xs font-bold uppercase tracking-widest text-accent/60">— RL Maxim</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer CTA -->
+      <div class="pt-12 text-center border-t border-border-premium/50">
+        <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Start the exploration loop.</p>
+        <a 
+          href="/#/machine-learning/reinforcement-learning/fundamentals" 
+          class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
+        >
+          Begin with MDP Fundamentals
+        </a>
+      </div>
+
+    </div>
+  `,
   sections: [
-    {
-      id: "fundamentals",
-      title: "RL Fundamentals",
-      description: "The mathematical framework of Markov Decision Processes (MDPs) and the Agent-Environment interface.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">🎮 ML · Reinforcement</div>
-          <h1>RL Fundamentals</h1>
-          <p>Reinforcement Learning is about <strong>Decision Making</strong>. Instead of being told what the right answer is, an Agent must explore the world and learn from the rewards it receives.</p>
-        </div>
-
-        <h2 id="interface">1. The Agent-Environment Loop</h2>
-        <p>This is the heartbeat of RL: at each step, the Agent sees a <strong>State</strong> ($S_t$), takes an <strong>Action</strong> ($A_t$), and receives a <strong>Reward</strong> ($R_{t+1}$) and a new state ($S_{t+1}$).</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> This entire process is formalized as a <strong>Markov Decision Process (MDP)</strong>. The key assumption is the <strong>Markov Property</strong>:
-            <div class="math-block">$$P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \dots) = P(S_{t+1} | S_t, A_t)$$</div>
-            In plain English: "The future depends only on the present." Everything you need to know to make the best decision now is contained in your current state.
-          </div>
-        </div>
-
-        <h2 id="policy">2. Policies and Value Functions</h2>
-        <ul>
-          <li><strong>Policy ($\pi$):</strong> The agent's strategy—a mapping from states to actions.</li>
-          <li><strong>Reward ($G_t$):</strong> The total discounted return the agent expects to receive: $G_t = R_{t+1} + \gamma R_{t+2} + \gamma^2 R_{t+3} + \dots$</li>
-        </ul>
-
-        <div class="linking-rule">
-          <strong>Next Step:</strong> Now that we have the framework, how does the agent actually calculate the best move? Explore the mathematics of <strong><a href="#/machine-learning/reinforcement-learning/value-iteration">Q-Learning</a></strong>.
-        </div>
-      `,
-      tags: ["MDP", "Policies", "Rewards"],
-      color: "#3fb950"
-    },
-    {
-      id: "value-iteration",
-      title: "Value-based Logic",
-      description: "Introduction to Q-Learning and the Bellman Equation for optimal decision making.",
-      html: String.raw`
-        <div class="premium-hero">
-          <div class="premium-hero-badge">📈 ML · Reinforcement</div>
-          <h1>Value-based Logic</h1>
-          <p>The goal of the agent is to find the <strong>Optimal Policy</strong>. To do this, it needs to solve for the value of being in a certain state and taking a certain action. This is the "Q" in Q-Learning.</p>
-        </div>
-
-        <h2 id="bellman">1. The Bellman Equation</h2>
-        <p>How do we know the value of a state? It's the reward we get right now plus the value of the <em>best possible</em> state we can reach next.</p>
-
-        <div class="callout tip">
-          <div class="callout-icon">💡</div>
-          <div class="callout-body">
-            <strong>Core Theory:</strong> The <strong>Bellman Optimality Equation</strong> is the cornerstone of RL. It recursively defines the optimal Q-Value $Q^*(s, a)$:
-            <div class="math-block">$$Q^*(s, a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s', a') | s, a]$$</div>
-            This equation tells us that the value of our current choice is the immediate reward plus the discounted reward of the future, assuming we behave perfectly from then on.
-          </div>
-        </div>
-
-        <h2 id="qlearning">2. Q-Learning Algorithm</h2>
-        <p>In practice, the agent doesn't know the world's probabilities. It uses <strong>Temporal Difference (TD)</strong> learning to update its Q-Table every time it takes a step:</p>
-        <div class="math-block">$$Q(s, a) \leftarrow Q(s, a) + \alpha [R + \gamma \max_{a'} Q(s', a') - Q(s, a)]$$</div>
-
-        <div class="linking-rule">
-          <strong>Next Step:</strong> We've seen how models learn and make decisions. Now let's look at how we prepare the raw data for them in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
-        </div>
-      `,
-      tags: ["Q-Learning", "Bellman", "Temporal Difference"],
-      color: "#3fb950"
-    }
+    mdpSection,
+    qLearningSection
   ]
 };

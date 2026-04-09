@@ -12,15 +12,30 @@ export const logisticRegressionSection: TopicSection = {
       <p>Wait—if it's classification, why is it called <strong>"Regression"</strong>? Because we start by predicting a continuous number (the log-odds) and then <strong>"Squash"</strong> it into a probability between 0 and 1. It is the gold standard for <strong>Binary Decisions</strong>.</p>
     </div>
 
-    <h2 id="theory">The Sigmoid: The Probability Filter</h2>
-    <p>In Linear Regression, your output can be anything (-\(\infty\) to \(\infty\)). That doesn't work for probability. To fix this, we pass the linear output \(z = wx + b\) through the <strong>Sigmoid Function</strong>:</p>
-    <div class="math-block">$$\sigma(z) = \frac{1}{1 + e^{-z}}$$</div>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Linear Regression tries to fit a path through points, but what if the answer isn't a "number"? What if the answer is a <strong>Binary Choice</strong> (Yes/No, Spam/Ham, Healthy/Sick)? <strong>Logistic Regression</strong> is for exactly these moments. We start with a linear prediction, but then we "Squash" it through a mathematical filter—the <strong>Sigmoid</strong>. This forces the infinite range of numbers into a tight 0-to-1 probability window. It is the gold standard for decisions because it doesn't just give you an answer; it tells you exactly how <em>certain</em> it is about that choice.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Logistic Regression</div>
+      <p>Logistic regression models the probability of a binary response variable using the **Logistic (Sigmoid) Function**. For a feature vector $\mathbf{x}$, the predicted probability $\hat{y}$ is:</p>
+      <div class="math-block">
+        $$\hat{y} = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$$
+      </div>
+      <p>The model parameters are optimized by minimizing the **Binary Cross-Entropy (Log Loss)** objective:</p>
+      <div class="math-block">
+        $$\mathcal{L}(\mathbf{w}, b) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Commitment."</strong> 
-        The linear part \(z\) is very "Wobbly"—it moves up and down. The Sigmoid is the <strong>S-Curve</strong> that says: "Anything above 0, I'm leaning toward 1 (Yes). Anything below 0, I'm leaning toward 0 (No)." It's the <strong>Soft Fence</strong>.
+        Think of Logistic Regression as a <strong>"Commitment Curve"</strong> or a <strong>"Soft Switch."</strong> 
+        A linear model is like a long, straight pipe, but a Sigmoid is like an **S-Curve** that decides the fate of the data. 
+        As your input gets stronger, the model "Leans" harder toward 1.0; as it gets weaker, it "Commits" to 0.0. 
+        The magic happens in the middle: the model stays honest about the uncertainty. 
+        It's the foundation of all Neural Networks—a single "Neuron" in a massive AI like GPT is often just a sophisticated version of this same logistic switch.
       </div>
     </div>
 

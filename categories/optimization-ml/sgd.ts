@@ -12,23 +12,26 @@ export const sgdSection: TopicSection = {
       <p>If Batch GD is a <strong>Skier</strong> waiting for 100 people before taking a step, <strong>Stochastic Gradient Descent (SGD)</strong> is a <strong>Drunken Sailor</strong>. He just takes a look at <strong>One Data Point</strong> (or a small Mini-Batch) and runs in that direction. He's noisy, he's fast, and he's <strong>The reason modern AI works</strong> on 1-Terabyte datasets.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Variance & Speed</h2>
-    <p>In <strong>SGD</strong>, we use a single randomly chosen sample \(x_i\) to estimate the gradient. In <strong>Mini-Batch GD</strong>, we use a small subset (e.g., 32 or 64). The estimate is "Noisy" (High Variance), but we take 1,000 steps in the time Batch GD takes one.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>If Batch Gradient Descent is a cautious skier waiting for 1,000 people to report back on the slope before taking a single step, <strong>Stochastic Gradient Descent (SGD)</strong> is a reckless speed demon. Instead of looking at the whole mountain, SGD looks at just <strong>One Data Point</strong> (or a small Mini-Batch) and immediately lunges in that direction. Because it doesn't wait for a consensus, it moves thousands of times faster. Yes, its path is noisy and it "stumbles" constantly—looking more like a confused bee than a skier—but that noise is actually a <strong>Secret Weapon</strong>. The random jolts Allow the model to "jump" out of shallow pits (local minima) that would trap a perfect, cautious optimizer. It is the tactical decision to trade precision for speed and exploration, which is the only way to train modern AI on massive, terabyte-scale datasets.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Stochastic Approximation</div>
+      <p>Given a training set of $N$ samples, the total loss is $J(\theta) = \frac{1}{N} \sum_{i=1}^N J_i(\theta)$. **Stochastic Gradient Descent (SGD)** approximates the gradient by evaluating only a single, randomly sampled index $i$ at each step:</p>
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J_i(\theta_t)$$
+      </div>
+      <p>This approach introduces high-frequency noise but offers significant computational advantages:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Unbiased Estimation</strong>: $\mathbb{E}_i [\nabla J_i(\theta)] = \nabla J(\theta)$. On average, the stochastic step points in the same direction as the true batch gradient.</li>
+        <li><strong>Exploration via Noise</strong>: The "jitter" in the optimization path helps the model escape high-loss regions and shallow plateaus where Batch GD might stall.</li>
+        <li><strong>Mini-Batch Vectorization</strong>: In practice, we use a small subset $\mathcal{B}$ to compute the gradient $\frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla J_i(\theta)$, which balances hardware efficiency with gradient stability.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">SGD is the workhorse of Deep Learning, allowing for the training of billion-parameter models on datasets that cannot fit in system memory.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Exploration over Precision."</strong> 
-        The "Noise" in SGD is a <strong>Secret Weapon</strong>. 
-        It allows the model to "Jump" out of <strong>Local Minima</strong> (shallow pits) that would trap a "Perfect" skier. 
-        It wanders around the mountain until it finds a <strong>Deeper Valley</strong>. 
-      </div>
-    </div>
-
-    <h2 id="math">The Mini-Batch Update</h2>
-    <p>For a mini-batch \(\mathcal{B}\), the update rule is:</p>
-    <div class="math-block">$$\theta \gets \theta - \alpha \frac{1}{|\mathcal{B}|} \sum_{i \in \mathcal{B}} \nabla \mathcal{L}_i(\theta)$$</div>
-    <p><strong>The Speed:</strong> Because we process data in chunks, we can use <strong>GPUs</strong> to calculate the gradients in parallel, making it 10,000x faster than sequential CPU loops.</p>
 
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
     <p>Batch GD follows a <strong>Smooth Straight Line</strong>. SGD looks like a <strong>Confused Bee</strong>. It jiggles left and right, but the <strong>Average Direction</strong> is still down the mountain. As we get closer to the bottom, the noise makes it bounce around the minimum. This is why we <strong>Slow Down</strong> (Schedule) the learning rate at the end.</p>
@@ -103,3 +106,4 @@ for i in range(0, len(X), batch_size):
     </div>
   `
 };
+

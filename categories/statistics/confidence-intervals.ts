@@ -21,25 +21,26 @@ export const confidenceIntervalsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A single number is extremely fragile—it can be easily swayed by one outlier in your data. <strong>Confidence Intervals</strong> quantify the <strong>Precision</strong> of your work. A 95% Confidence Interval doesn't mean "The truth is 95% likely to be inside." It means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em></p>
+    <p>A single number is extremely fragile—it can be easily swayed by a single outlier or a tiny quirk in your dataset. <strong>Confidence Intervals</strong> provide the <strong>Precision</strong> that a single average lacks. instead of shouting a single value, you are providing a mathematical "Safety Net" that admits to uncertainty. A 95% Confidence Interval means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em> In Machine Learning, this is the difference between a lucky guess and a reliable product. It tells you if your model's accuracy is a rock-solid foundation you can build on, or a moving target that you happened to hit once by sheer chance. It is the tactical way we communicate <strong>Trust</strong> in our findings.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Interval Estimation</div>
+      <p>A **Confidence Interval (CI)** for a population parameter $\theta$ is an interval $[L, U]$ computed from sample data, associated with a confidence level $1 - \alpha$ (commonly 0.95 or 0.99):</p>
+      <div class="math-block">
+        $$P(L \le \theta \le U) = 1 - \alpha$$
+      </div>
+      <p>For estimating the population mean $\mu$ under the assumption of normality, the interval is constructed as:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Standard Formula</strong>: $CI = \bar{x} \pm z^* \left( \frac{\sigma}{\sqrt{n}} \right)$, where $\bar{x}$ is the sample mean.</li>
+        <li><strong>Margin of Error</strong>: The term $z^* \frac{\sigma}{\sqrt{n}}$ represents the maximum expected distance between the point estimate and the true parameter.</li>
+        <li><strong>Critical Value ($z^*$)</strong>: Determined by the level of confidence; for a 95% CI, $z^* \approx 1.96$ (from the standard normal distribution).</li>
+        <li><strong>Sample Size Impact</strong>: The width of the interval is inversely proportional to $\sqrt{n}$. Tripling the confidence level requires a much larger sample to maintain the same precision.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Confidence Interval as <strong>"Honesty in Data."</strong> 
-        If you predict a house price is $500k, but your interval is [$300k, $700k], your model is saying: <em>"I'm guessing, but don't bet your life on it."</em> 
-        If the interval is [$495k, $505k], your model is highly confident. 
-        In ML, we want these intervals to be as <strong>Narrow</strong> as possible.
-      </div>
-    </div>
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>A typical Confidence Interval is: \(\text{Point Estimate} \pm \text{Margin of Error}\).</p>
-    <div class="math-block">$$\text{CI} = \overline{X} \pm Z^* \left( \frac{\sigma}{\sqrt{n}} \right)$$</div>
-    <ul>
-      <li><strong>\(Z^*\)</strong>: Critical value (usually 1.96 for 95%).</li>
-      <li><strong>Standard Error</strong>: \(\frac{\sigma}{\sqrt{n}}\). Notice how larger samples (\(n\)) make the interval smaller/narrower!</li>
-    </ul>
 
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
     
@@ -126,3 +127,4 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     </div>
   `
 };
+

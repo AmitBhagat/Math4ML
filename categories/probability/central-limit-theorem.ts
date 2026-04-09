@@ -21,24 +21,25 @@ export const centralLimitTheoremSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Individual random variables can be messy—some are Bernoulli (0 or 1), some are Uniform (flat), some are absolute chaos. But the <strong>CLT</strong> says that when you combine many small independent factors, their collective behavior is predictable. The "Chaos" cancels out, and a smooth Bell Curve emerges from the noise.</p>
+    <p>Individual random variables are usually pure chaos—some are Bernoulli (0 or 1), some are Uniform (flat), and some are just absolute noise. But the <strong>CLT</strong> is the "Master Law" that restores order. It states that when you combine enough small, independent factors, their collective behavior stops being chaotic and starts being perfectly predictable. The "Chaos" cancels itself out, and a smooth, symmetrical Bell Curve emerges. In Machine Learning, this is our saving grace: it allows us to assume that our total prediction error will be Gaussian, no matter how weird the individual data points are.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Universal Convergence</div>
+      <p>The **Central Limit Theorem (CLT)** states that given a sufficiently large sample size $n$ from a population with a finite variance, the distribution of the sample mean will be approximately normal, regardless of the population's distribution. Let $X_1, \dots, X_n$ be i.i.d. random variables with $\mathbb{E}[X_i] = \mu$ and $\text{Var}(X_i) = \sigma^2$. As $n \to \infty$:</p>
+      <div class="math-block">
+        $$\text{The standardized sum } Z = \frac{\sum_{i=1}^n X_i - n\mu}{\sigma \sqrt{n}} \xrightarrow{d} \mathcal{N}(0, 1)$$
+      </div>
+      <p>This theorem provides three fundamental pillars for statistical modeling:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Distributional Independence</strong>: The result holds whether the underlying $X_i$ are Bernoulli, Poisson, or any other distribution (provided $\sigma^2 < \infty$).</li>
+        <li><strong>Sample Mean Distribution</strong>: The sample mean $\bar{X}_n$ follows $\mathcal{N}(\mu, \sigma^2/n)$. The "Standard Error" decreases at a rate of $1/\sqrt{n}$.</li>
+        <li><strong>Z-Score Standardization</strong>: The formula $\frac{\bar{X} - \mu}{\sigma/\sqrt{n}}$ is used to calculate probabilities on the standard normal curve.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">CLT is the reason why **Squared Loss** (MSE) is the optimal objective under the assumption of aggregate, independent noise terms.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the CLT as <strong>"The Crowd's Wisdom."</strong> 
-        If you ask one person to guess the price of a jar of jellybeans, they might be wildly wrong. 
-        But if you ask 10,000 people and take their <strong>Average</strong>, that average won't just be accurate—it will also follow a beautiful, symmetrical Normal Distribution. 
-        In ML, this is why we can assume that our model's cumulative error is Gaussian.
-      </div>
-    </div>
-
-    <visualizer topic="CentralLimitTheorem" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>Let \(X_1, X_2, \dots, X_n\) be independent random variables with mean \(\mu\) and variance \(\sigma^2\). As \(n\) becomes large, the distribution of their mean \(\overline{X}_n\) converges to:</p>
-    <div class="math-block">$$\overline{X}_n \sim \mathcal{N}\left(\mu, \frac{\sigma^2}{n}\right)$$</div>
-    <p>The <strong>Z-score</strong> of the sample mean is: \(Z = \frac{\overline{X}_n - \mu}{\sigma/\sqrt{n}}\).</p>
 
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
     
@@ -119,3 +120,4 @@ plt.show()
     </div>
   `
 };
+

@@ -12,18 +12,26 @@ export const supervisedLearningSection: TopicSection = {
       <p><strong>Supervised Learning</strong> is the machine equivalent of learning with a tutor. Every data point you feed the model comes with the <strong>"Right Answer"</strong> (the Label). The goal is for the model to learn a general mapping so it can guess the answers for data it has never seen before.</p>
     </div>
 
-    <h2 id="theory">The Mechanics: Mapping Inputs to Outputs</h2>
-    <p>In Supervised Learning, we have an input vector \(X\) and a known target \(Y\). We want to find a function \(f\) such that:</p>
-    <div class="math-block">$$Y = f(X) + \epsilon$$</div>
-    <p>Where \(\epsilon\) is the noise we can't explain. The "Learning" happens as we minimize the difference between the model's prediction (\(\hat{Y}\)) and the actual truth (\(Y\)).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Supervised Learning is the process of learning by example. Imagine a student practicing with flashcards where the answer is written on the back. The objective isn't just to memorize those specific cards, but to understand the underlying patterns so that when a <strong>new</strong> card appears, the student can predict the correct answer with high confidence. In machine learning, we act as the "Supervisor," providing the ground truth for every sample. By repeatedly comparing its guesses to these truths and calculating a "Loss," the model gradually shifts its internal logic to align with reality. It is the tactical way we build everything from spam filters to autonomous driving systems.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Inductive Mapping from Labeled Samples</div>
+      <p>Given a training set of $N$ observations $\mathcal{D} = \{(\mathbf{x}_i, y_i)\}_{i=1}^N$, where $\mathbf{x} \in \mathcal{X}$ is the feature vector and $y \in \mathcal{Y}$ is the label, the goal is to find a hypothesis $\hat{f} \in \mathcal{H}$ that minimizes the empirical risk:</p>
+      <div class="math-block">
+        $$\hat{f} = \arg \min_{f \in \mathcal{H}} \frac{1}{N} \sum_{i=1}^N L(y_i, f(\mathbf{x}_i))$$
+      </div>
+      <p>The paradigm is bifurcated into two distinct mathematical problems:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Regression</strong>: $\mathcal{Y}$ is a continuous space ($\mathbb{R}$). The objective is to estimate a numerical value based on continuous or categorical features.</li>
+        <li><strong>Classification</strong>: $\mathcal{Y}$ is a discrete set of classes $\{C_1, \dots, C_k\}$. The objective is to determine the decision boundaries that separate these categories in high-dimensional space.</li>
+        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use **MSE**; for classification, we use **Cross-Entropy**.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as a <strong>"Flashcard Simulator."</strong> 
-        The machine sees a picture (Input), guesses "Cow" (Output), looks at the back of the card (Label), sees it says "Dog," and slightly tweaks its internal neural weights to be more "Dog-like" next time. Done 10,000 times, it builds a robust mapping.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
     
@@ -82,3 +90,4 @@ print(f"[Classification] Predicted Email: {'Spam' if label_pred == 1 else 'Norma
     </div>
   `
 };
+

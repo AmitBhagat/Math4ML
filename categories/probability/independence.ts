@@ -21,23 +21,25 @@ export const independenceSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>If you tell me "It is raining," my probability of "Someone buying an umbrella" increases. These events are <strong>Dependent</strong>. But if you tell me "My coin land on Heads," does that affect the probability of "It raining"? No. Those events are <strong>Independent</strong>. Understanding independence allows us to simplify complex joint probabilities into simple products.</p>
+    <p>If you tell me "It is raining," my probability of "Someone buying an umbrella" increases significantly. These events are <strong>Dependent</strong>. But if you tell me "My coin landed on Heads," does that affect the probability of "It raining"? No. Those events are <strong>Independent</strong>. Independence is the mathematical way of saying two things have zero overlap in their underlying causes. Understanding independence allows us to simplify the massive, messy joint probabilities of the real world into simple, bite-sized products. In Machine Learning, we often *force* independence through assumptions (like Naive Bayes) just so our computers don't crash trying to handle every possible cross-correlation.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Factorization of Probability</div>
+      <p>Two events $A$ and $B$ are **Independent** if the occurrence of one does not alter the probability of the other. Formally, this is defined by the product rule of their joint probability:</p>
+      <div class="math-block">
+        $$P(A \cap B) = P(A) \cdot P(B)$$
+      </div>
+      <p>For random variables $X$ and $Y$, independence implies the factorization of their density or mass functions:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Equality of Conditionals</strong>: If $A$ and $B$ are independent, $P(A | B) = P(A)$ and $P(B | A) = P(B)$.</li>
+        <li><strong>Mutual Independence</strong>: A set of events $\{A_i\}$ is independent if $P(\bigcap_{i \in S} A_i) = \prod_{i \in S} P(A_i)$ for every subset $S$.</li>
+        <li><strong>Conditional Independence</strong>: $X \perp Y \mid Z$ if $P(X, Y | Z) = P(X | Z)P(Y | Z)$. This is the "Naive" assumption in probabilistic modeling.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Independence as <strong>"Emotional Distance."</strong> 
-        If two variables are independent, they don't care about each other. 
-        They don't share any secrets. 
-        In ML, we love independence because it lets us calculate massive joint probabilities by just <strong>multiplying</strong> them (\(P(A) \times P(B) \times P(C)\)).
-      </div>
-    </div>
-
-    <visualizer topic="Independence" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <div class="math-block">$$P(A \cap B) = P(A) \cdot P(B)$$</div>
-    <p>...which also implies that the conditional probability doesn't move: \(P(A|B) = P(A)\).</p>
 
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
     
@@ -123,3 +125,4 @@ print(f"P(A) * P(B): {check:.4f}")
     </div>
   `
 };
+

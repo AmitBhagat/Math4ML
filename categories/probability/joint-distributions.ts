@@ -21,25 +21,25 @@ export const jointDistributionsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A single distribution for "Heads/Tails" is simple. But what if you are modeling "House Price" <strong>and</strong> "Number of Bedrooms"? They aren't independent—high bedrooms usually mean high price. <strong>Joint Distributions</strong> allow us to track this relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset.</p>
+    <p>A single distribution for "House Price" or "Number of Bedrooms" is helpful, but in the real world, these things don't live in isolation. They are linked. High bedrooms usually lead to a high price—they interact. <strong>Joint Distributions</strong> allow us to track this multi-dimensional relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset. We can see not just the individual traits, but the underlying <strong>Coupling</strong> between variables. In AI, this is the difference between looking at individual pixel colors and seeing an actual object formed by those pixels moving together.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Multi-Dimensional PDF</div>
+      <p>For two random variables $X$ and $Y$, the **Joint Distribution** specifies the probability that $X$ and $Y$ fall within any specified range or set of values simultaneously. It is defined by the Joint Cumulative Distribution Function:</p>
+      <div class="math-block">
+        $$F_{X,Y}(x, y) = P(X \le x, Y \le y)$$
+      </div>
+      <p>The joint behavior is expressed through two primary functional forms depending on the variable types:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Joint PMF</strong>: For discrete variables, $p(x, y) = P(X=x, Y=y)$, satisfying $\sum_x \sum_y p(x, y) = 1$.</li>
+        <li><strong>Joint PDF</strong>: For continuous variables, $f(x, y)$ is the surface such that the volume under it over a region $A$ is $P((X, Y) \in A) = \iint_A f(x, y) dx dy$.</li>
+        <li><strong>Marginalization</strong>: The distribution of a single variable $X$ is obtained by "summing out" the other variable: $f_X(x) = \int_{-\infty}^\infty f(x, y) dy$.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Joint Distribution like a <strong>2D Histogram</strong>. 
-        Instead of just one axis of data, you have two. 
-        The "peaks" on this map tell you which combinations of (X, Y) are most common. 
-        In ML, we use this to find out if features are correlated or if they are "moving" together in predictable ways.
-      </div>
-    </div>
-
-    <visualizer topic="JointDistributions" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <ul>
-      <li><strong>Joint Probability Mass Function (PMF):</strong> \(P(X=x, Y=y)\). The sum over all x and y must be 1.</li>
-      <li><strong>Marginal Distribution:</strong> To find the probability of just one variable, you "sum out" (marginalize) the others: \(P(X=x) = \sum_{y} P(x, y)\).</li>
-    </ul>
 
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     
@@ -123,3 +123,4 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     </div>
   `
 };
+

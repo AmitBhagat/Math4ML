@@ -21,27 +21,25 @@ export const criticalPointsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>When you are hiking, you are at a "Critical Point" if the ground at your feet is perfectly flat. This could mean you are at the <strong>Top of a Peak</strong> (Maximize Reward), the <strong>Bottom of a Valley</strong> (Minimize Loss), or on a <strong>Saddle Point</strong> (Flat from one side, steep from another). To build a model that actually works, we need to distinguish between these cases.</p>
+    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>. We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Stationary Conditions</div>
+      <p>For a differentiable function $f: \mathbb{R}^n \to \mathbb{R}$, a point $\mathbf{x}^*$ in the domain is a **Critical Point** (or stationary point) if the gradient is zero:</p>
+      <div class="math-block">
+        $$\nabla f(\mathbf{x}^*) = \mathbf{0}$$
+      </div>
+      <p>To determine the nature of a critical point, we utilize the **Second Derivative Test** based on the eigenvalues ($\lambda_i$) of the Hessian matrix $\mathbf{H}$ at $\mathbf{x}^*$:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Local Minimum</strong>: $\mathbf{H}$ is positive definite ($\lambda_i > 0$ for all $i$). Geometrically, all directions lead uphill.</li>
+        <li><strong>Local Maximum</strong>: $\mathbf{H}$ is negative definite ($\lambda_i < 0$ for all $i$). Geometrically, all directions lead downhill.</li>
+        <li><strong>Saddle Point</strong>: $\mathbf{H}$ is indefinite (both positive and negative eigenvalues exist). The point is a minimum in one direction and a maximum in another.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Critical Point like <strong>The End of a Path</strong>. 
-        If you arrive at a flat spot and the ground curves up in all directions, you've found a <strong>Minimum</strong> (Success!). 
-        If it curves down everyone, you've found a <strong>Maximum</strong> (Reverse success!). 
-        In Deep Learning, we often find <strong>Saddle Points</strong>—frustrating flat areas that trap our models and slow down training.
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>We find critical points by solving the equation:</p>
-    <div class="math-block">$$\nabla f(\mathbf{x}) = \mathbf{0}$$</div>
-    <p>To classify the point, we examine the <strong>Eigenvalues</strong> of the Hessian matrix \(\mathbf{H}\):</p>
-    <ul>
-      <li><strong>All \(\lambda > 0\):</strong> (PD) -> <strong>Local Minimum</strong>.</li>
-      <li><strong>All \(\lambda < 0\):</strong> (ND) -> <strong>Local Maximum</strong>.</li>
-      <li><strong>Mixed \(\lambda\):</strong> -> <strong>Saddle Point</strong>.</li>
-    </ul>
 
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     
@@ -127,3 +125,4 @@ print(f"Value at Min: {res.fun}")
     </div>
   `
 };
+

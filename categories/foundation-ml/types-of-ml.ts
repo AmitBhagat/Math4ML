@@ -12,6 +12,36 @@ export const typesOfMLSection: TopicSection = {
       <p>Not all learning is equal. How a machine learns depends entirely on the <strong>Feedback</strong> it receives. Do we have the correct answers labeled? Do we have no answers at all? Or do we reward the machine for good behavior? These categories define the "Flavors" of ML.</p>
     </div>
 
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How does intelligence actually grow? In the natural world, we learn in three distinct ways: by being taught, by observing patterns on our own, or by trial and error. Machine Learning mirrors these biological strategies. If we provide the machine with a "Teacher" (labeled data), it learns to map inputs to outputs. If we let it "Explore" (unlabeled data), it finds hidden structures we might have missed. And if we treat it like a "Player" in a game (rewards and penalties), it develops a strategy for survival. Choosing the right learning paradigm is the first and most critical decision in building any AI system—it defines the <strong>Feedback Loop</strong> that will shape the model's brain.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Four Supervisory Signals</div>
+      <p>Machine learning is categorized by the nature of the training signal and the operational goal of the system. The paradigms are defined by their mapping objectives and data requirements:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Supervised (Predictive)</h4>
+          <p class="text-xs mb-1">Learning a mapping $f: \mathcal{X} \to \mathcal{Y}$ from labeled examples to minimize expected risk. Primarily used for classification and regression.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Unsupervised (Descriptive)</h4>
+          <p class="text-xs mb-1">Discovering latent structure, density $P(\mathbf{x})$, or dimensionality reduction from context-free data. Primarily used for clustering and anomaly detection.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">3. Reinforcement (Prescriptive)</h4>
+          <p class="text-xs mb-1">Optimizing a policy $\pi(a \mid s)$ to maximize cumulative discounted rewards in a dynamic environment (MDP). Primarily used for robotics and gaming.</p>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like **Semi-Supervised Learning** utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
+    </div>
+    
+    <div class="callout tip">
+
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
     <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input <span class="text-green-premium font-bold">Case Study:</span> comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
     
@@ -117,3 +147,4 @@ print(f"[Unsupervised] Group markers for data points: {kmeans.labels_}")
     </div>
   `
 };
+

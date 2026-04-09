@@ -12,17 +12,33 @@ export const reinforcementLearningSection: TopicSection = {
       <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" type of Machine Learning. There is no training data. The machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do this, I'll give you a cookie. If you do that, you'll fall into a pit." The agent learns to survive by <strong>Trial and Error</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: States, Actions, Rewards</h2>
-    <p>RL is modeled as a <strong>Markov Decision Process (MDP)</strong>. At each time step \(t\), the agent is in a <strong>State</strong> (\(S_t\)). It takes an <strong>Action</strong> (\(A_t\)) and receives a <strong>Reward</strong> (\(R_{t+1}\)) while moving to a new <strong>State</strong> (\(S_{t+1}\)).</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p><strong>Reinforcement Learning (RL)</strong> is the most "Human" way a machine can learn. Unlike supervised learning, there is no expert to show the machine the right answer. Instead, the machine (the <strong>Agent</strong>) is dropped into an environment and told: "Good luck. If you do something good, I'll give you a reward. If you do something bad, you’ll be penalized." The agent learns purely through <strong>Trial and Error</strong>, building a strategy for survival by interacting with the world. It is the tactical decision to learn through experience rather than instruction. In RL, we aren't predicting a label; we are discovering a <strong>Policy</strong>—a sequence of decisions that maximizes long-term success.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Markov Decision Process (MDP)</div>
+      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an **MDP** tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. The State-Action Space</h4>
+          <p class="text-xs mb-1">The agent perceives a state $s \in \mathcal{S}$ and executes an action $a \in \mathcal{A}$. The environment transitions to a new state $s'$ with probability $P(s' \mid s, a)$ and provides a reward $r$.</p>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. The Optimization Goal</h4>
+          <p class="text-xs mb-1">The objective is to find an optimal **Policy** $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
+          <div class="math-block">
+            $$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the **Bellman Equation**, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Learning to Ride a Bike."</strong> 
-        You don't have a labeled dataset of "Sitting on a bike." You have to <strong>Try</strong>. 
-        You tilt too far left (Action) and fall (Penalty). You tilt slightly right (Action) and stay upright (Reward). The "Policy" your brain builds is just a mapping of how to move your body to stay balanced.
-      </div>
-    </div>
 
     <h2 id="exploitation">Exploration vs. Exploitation</h2>
     <p>This is the fundamental struggle of RL. Should the agent try a new, unknown action to find a potentially bigger reward (<strong>Exploration</strong>), or should it stick with the best action it has found so far (<strong>Exploitation</strong>)?</p>
@@ -99,3 +115,4 @@ for i in range(3):
     </div>
   `
 };
+

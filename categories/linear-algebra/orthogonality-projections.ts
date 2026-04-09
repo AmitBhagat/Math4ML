@@ -13,23 +13,25 @@ export const orthogonalityProjectionsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In Machine Learning, we often have high-dimensional data that we want to simplify. <strong>Orthogonal Projections</strong> allow us to "condense" a vector into a smaller subspace while keeping as much of the original information as possible. It’s like looking at a 3D shadow on a 2D wall—you lose depth, but you keep the shape.</p>
+    <p>In Machine Learning, we often have massive, high-dimensional data that we want to simplify without losing the core signal. <strong>Orthogonal Projections</strong> are the mathematical way to find that "Best Approximation." By projecting a complex vector onto a simpler subspace, we effectively "filter out" the noise that doesn't align with our chosen features. The key is <strong>Orthogonality</strong>—the idea that the difference between our original data and our prediction should be 100% independent of the features we used. It’s how we ensure our models aren't "hallucinating" patterns that aren't really there.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Closest Vector Property</div>
+      <p>Two vectors $\mathbf{u}, \mathbf{v}$ are **Orthogonal** if their inner product is zero ($\mathbf{u} \cdot \mathbf{v} = 0$). The **Orthogonal Projection** of a vector $\mathbf{x}$ onto a subspace $W$ is the unique vector $\hat{\mathbf{x}} \in W$ such that $(\mathbf{x} - \hat{\mathbf{x}})$ is orthogonal to every vector in $W$.</p>
+      <p>Algebraically, the projection of $\mathbf{x}$ onto a non-zero vector $\mathbf{v}$ is:</p>
+      <div class="math-block">
+        $$\text{proj}_{\mathbf{v}} \mathbf{x} = \frac{\mathbf{x} \cdot \mathbf{v}}{\|\mathbf{v}\|^2} \mathbf{v}$$
+      </div>
+      <p>Properties of the projection include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Optimality</strong>: $\hat{\mathbf{x}}$ is the vector in $W$ that minimizes the distance $\|\mathbf{x} - \mathbf{v}\|$ for all $\mathbf{v} \in W$.</li>
+        <li><strong>Linearity</strong>: $\text{proj}_W (c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1\text{proj}_W \mathbf{x}_1 + c_2\text{proj}_W \mathbf{x}_2$.</li>
+        <li><strong>Residual</strong>: The vector $\mathbf{e} = \mathbf{x} - \hat{\mathbf{x}}$ represents the component of $\mathbf{x}$ orthogonal to $W$.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Projection as a <strong>"Best Approximation."</strong> 
-        If you are on a stage and a spotlight shines on you, your <strong>shadow</strong> on the floor is the "closest point" to you that exists on that floor. 
-        In ML, we use this to find the "closest" prediction to our real labels.
-      </div>
-    </div>
-
-    <visualizer topic="Projections" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The projection of vector \(\mathbf{y}\) onto vector \(\mathbf{u}\) is:</p>
-    <div class="math-block">$$\text{proj}_{\mathbf{u}}(\mathbf{y}) = \hat{\mathbf{y}} = \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \mathbf{u}$$</div>
-    <p>The <strong>Error Vector</strong> (\(\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}\)) is always <strong>Orthogonal</strong> to \(\mathbf{u}\).</p>
 
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     
@@ -108,3 +110,4 @@ print(f"Shadow of y on u: {proj_y_u}")
     </div>
   `
 };
+

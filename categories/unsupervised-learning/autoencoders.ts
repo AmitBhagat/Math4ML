@@ -12,23 +12,33 @@ export const autoencodersSection: TopicSection = {
       <p>Traditional dimensionality reduction (like PCA) is <strong>Linear</strong>. But the world is <strong>Non-Linear</strong>. <strong>Autoencoders</strong> are neural networks designed to "bottleneck" information. They squeeze data into a tiny <strong>Latent Space</strong> and then try to <strong>reconstruct</strong> it perfectly. If they can rebuild the data from the bottleneck, they've successfully "learned" the essence of the information.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Encoder & Decoder</h2>
-    <p>An Autoencoder is a <strong>Symmetric</strong> neural network with two halves:</p>
-    <ul>
-      <li><strong>Encoder:</strong> A series of layers that progressively <strong>shrink</strong> the input data into a lower-dimensional vector.</li>
-      <li><strong>Decoder:</strong> A series of layers that progressively <strong>expand</strong> that vector back into the original input shape.</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Traditional dimensionality reduction like PCA is linear, but the data we find in the real world is messy and non-linear. <strong>Autoencoders</strong> are neural networks designed to solve this by creating an "Information Hourglass." They force the data through a tiny <strong>Bottleneck</strong> (the Latent Space) and then try to reconstruct it perfectly on the other side. If the network can rebuild the original image or text from that tiny summary, it has successfully "Learned" the absolute essence of the information. It is a self-supervised process where the only teacher is the <strong>Reconstruction Error</strong>—forcing the machine to find the most efficient compression possible.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Autoencoder Architecture</div>
+      <p>An autoencoder is a neural network trained to approximate the identity function, $g_{\phi}(f_{\theta}(\mathbf{x})) \approx \mathbf{x}$. It consists of two joint mappings:</p>
+      <div class="math-block">
+        $$\text{Encoder: } \mathbf{z} = f_{\theta}(\mathbf{x}) \in \mathbb{R}^k \mid k < d$$
+        $$\text{Decoder: } \mathbf{\hat{x}} = g_{\phi}(\mathbf{z}) \in \mathbb{R}^d$$
+      </div>
+      <p>The objective is to minimize a loss function $\mathcal{L}$ that penalizes the reconstruction distance. For continuous data, we typically minimize the **Mean Squared Error (MSE)**:</p>
+      <div class="math-block">
+        $$\mathcal{L}(\theta, \phi) = \arg\min_{\theta, \phi} \frac{1}{n} \sum_{i=1}^n \|\mathbf{x}_i - g_{\phi}(f_{\theta}(\mathbf{x}_i))\|^2$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Learning to Summarize."</strong> 
-        The Encoder is like a <strong>Professional Notes-Taker</strong> who is forced to summarize a whole book into a <strong>Single Page</strong>. 
-        The Decoder is like a <strong>Professor</strong> who has to recreate the whole book from that one page. 
-        If the Professor's book is nearly identical to the original, the Notes-Taker has captured the <strong>True Essence</strong> of the story. 
+        Think of an Autoencoder as <strong>"Learning to Summarize a Novel"</strong> or the <strong>"Xerox of the Soul."</strong> 
+        Imagine you have a 1,000-page book. The <strong>Encoder</strong> is a brilliant student who is forced to summarize that entire book into just <strong>one page</strong> of notes (The Bottleneck). The <strong>Decoder</strong> is a professor who has to reconstruct the entire 1,000-page book using only that one page. 
+        If the reconstructed book is nearly identical to the original, the student has captured the <strong>True Essence</strong> of the story. 
+        It is the "Swiss Army Knife" of unsupervised learning: use it to denoise grainy photos, find anomalies in bank transactions, or even generate entirely new data that mimics the "Soul" of the original training set.
       </div>
     </div>
-
+    
     <h2 id="bottleneck">The Bottleneck: Latent Space</h2>
     <p>The <strong>Bottleneck</strong> (middle layer) is the most important part. Its size is the number of <strong>Latent Dimensions</strong>. If the input is 10,000 pixels (an image) and the bottleneck is 32, the network is forced to find the <strong>32 most important features</strong> (like hair color, eye shape, smile) to describe the face.</p>
 

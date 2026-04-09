@@ -9,7 +9,37 @@ export const logicSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Discrete Math · Logic</div>
       <h1>Mathematical Logic in AI</h1>
-      <p>In the field of AI, <strong>Logic</strong> is the framework that allows a machine to "reason." While modern Machine Learning is often probabilistic, Logic is the backbone of <strong>Symbolic AI</strong>, expert systems, and the "planning" modules used in robotics.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In the field of AI, <strong>Logic</strong> is the mathematical framework that allows a machine to "reason" with absolute certainty. While modern Machine Learning is often probabilistic and "fuzzy," logic is the backbone of symbolic AI, expert systems, and the high-level planning modules used in robotics. It is the tactical way we formalize human knowledge into a series of "If-Then" rules that a computer can execute without error. Understanding logic is the key to building systems that don't just guess patterns, but actually follow a rigorous chain of thought. It is the original language of Artificial Intelligence, providing the "Sanity Check" for complex decision-making processes.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Symbolic Inference & Predicate Calculus</div>
+      <p>Mathematical logic is the formal study of valid reasoning through symbolic structures. In AI, it provides the deterministic engine for rule-based systems and formal verification.</p>
+      
+      <p>The hierarchy of logic includes two primary systems:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Propositional Logic</strong>: Concerned with atomic statements $P, Q$ that are either True ($1$) or False ($0$). Connectivity is defined by truth-functional operators: $\land$ (AND), $\lor$ (OR), and $\neg$ (NOT). The **Implication** operator $P \to Q$ (material conditional) is defined as $\neg P \lor Q$.</li>
+        <li><strong>First-Order Logic (FOL)</strong>: Extends propositional logic by introducing **Quantifiers** and **Predicates** to describe properties of objects within a domain $\mathcal{D}$.
+          <ul class="pl-4 mt-1 opacity-90">
+            <li><strong>Universal ($\forall x \in \mathcal{D}$)</strong>: The property holds for the entire domain.</li>
+            <li><strong>Existential ($\exists x \in \mathcal{D}$)</strong>: There exists at least one element satisfying the predicate.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <p class="text-xs opacity-80 mt-2"><strong>De Morgan's Laws</strong>: These laws define the duality between conjunction and disjunction, essential for simplifying complex code conditionals: $\neg(P \land Q) \equiv \neg P \lor \neg Q$ and $\neg(P \lor Q) \equiv \neg P \land \neg Q$.</p>
+      
+      <p class="text-xs opacity-70 mt-2">Logic is the foundation of **Boolean Algebra** in hardware design and the "Hard" constraints in AI planning and optimization.</p>
+    </div>
+    
+    <div class="callout tip">
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        Think of Mathematical Logic as <strong>"The Legal Contract"</strong> or <strong>"The Light Switch Circuit."</strong> 
+        Propositional Logic is the simplest form—everything is either <strong>True (ON)</strong> or <strong>False (OFF)</strong>. First-Order Logic is more like a sophisticated "Object-Oriented" language that can describe not just states, but the properties and relationships of every entity in your system. Whether you are building a medical diagnosis system or a complex SQL query, you are essentially writing a logical proof that the computer must satisfy. It is the science of making sure your "If" statements actually cover every possible "Then."
+      </div>
+    </div>
     </div>
 
     <h2 id="propositional">1. Propositional Logic</h2>

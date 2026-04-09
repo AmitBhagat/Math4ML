@@ -13,15 +13,30 @@ export const determinantsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine a unit square on a grid (area = 1). When you multiply it by a matrix, it might stretch into a larger rectangle or rotate into a diamond. The <strong>Determinant</strong> is the area of that new shape. If \(\det = 2\), the space doubled; if \(\det = 0\), the space was squashed into a flat line.</p>
+    <p>Imagine a unit square on a grid (area = 1). When you multiply it by a matrix, that square might stretch into a giant rectangle, tilt into a diamond, or get squashed into a tiny sliver. The <strong>Determinant</strong> is a single number that tells you exactly how much that "Volume" changed. If the determinant is 2, the space doubled in size; if it is 0.5, it shrank by half. More importantly, if it is <strong>Zero</strong>, it means the matrix is non-invertible—it has "deleted" a dimension of your data, like turning a 3D sphere into a flat 2D pancake. You can't undo that kind of damage!</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Leibniz Definition</div>
+      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, the determinant $\det(A)$ is a scalar value defined by the permutation sum:</p>
+      <div class="math-block">
+        $$\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}$$
+      </div>
+      <p>Where $S_n$ is the set of all permutations of $\{1, \dots, n\}$. Geometrically, $\det(A)$ represents the signed **Volume Scaling Factor** of the linear transformation. Essential takeaways include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Invertibility</strong>: $A$ is invertible $\iff \det(A) \neq 0$.</li>
+        <li><strong>Composition</strong>: $\det(AB) = \det(A)\det(B)$.</li>
+        <li><strong>Linear Dependence</strong>: $\det(A) = 0$ implies the rows/columns are linearly dependent.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of the Determinant as a <strong>"Dimension Watchdog."</strong> 
-        If the determinant is zero, your matrix has "deleted" a dimension. 
-        It’s like turning a 3D sphere into a 2D pancake—you can't go back! 
-        That’s why matrices with zero determinant have no inverse (Singular Matrices).
+        Think of the Determinant as a <strong>"Scale Factor"</strong> or a <strong>"Dimension Watchdog."</strong> 
+        It measures the "Stretching Power" of a matrix. 
+        If \(\det = 0\), your transformation is destructive—you're losing information because you're squashing multiple points into the same spot. 
+        In Machine Learning, we monitor determinants (like in the Jacobian) to ensure our transformations aren't accidentally "erasing" the very features we are trying to learn.
       </div>
     </div>
 

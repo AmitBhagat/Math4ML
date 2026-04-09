@@ -12,30 +12,27 @@ export const lrSchedulingSection: TopicSection = {
       <p>Why sprint at the finish line? In the beginning, you want <strong>Big Steps</strong> to explore the mountain. But as you get closer to the <strong>Resort (The Minimum)</strong>, those big steps become <strong>Dangerous</strong>. You'll keep "Overshooting" the door and bouncing between the walls of the valley. <strong>Learning Rate Scheduling</strong> is the art of slowing down so you can <strong>Land Softly</strong> on the truth.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Annealing</h2>
-    <p>Annealing is a concept from <strong>Metallurgy</strong>. If you want a metal to be perfect, you <strong>Heat it up</strong> (High LR) so the atoms can move freely, and then <strong>Cool it down</strong> (Low LR) very slowly so they settle into the <strong>Lowest Energy State</strong>. If you cool it too fast, it becomes <strong>Brittle (Suboptimal)</strong>.</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>In the beginning of training, you want to sprint—taking <strong>Big Steps</strong> to explore the mountainous loss landscape and move away from random initialization as quickly as possible. But as you get closer to the <strong>Global Minimum</strong>, those big steps become reckless. If you don't slow down, you'll "Overshoot" the target and bounce frantically between the walls of the valley, never quite landing in the center. <strong>Learning Rate Scheduling</strong> (or Annealing) is the tactical decision to systematically reduce your step size as training progresses. It is the difference between a high-speed cruise across the country and a precision landing on a narrow runway. Start wide to find the right neighborhood; end narrow to find the specific house. Without a good schedule, even the most powerful optimizer will circle the truth forever, unable to ever truly arrive.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Temporal Step Function</div>
+      <p>A **Learning Rate Schedule** is a function $f: t \to \eta_t$ that adjusts the optimizer's step size as a function of training progress $t$. This refinement is essential for navigating the multi-scale curvature of high-dimensional loss surfaces:</p>
+      <div class="math-block">
+        $$\eta_t = f(t, \eta_{initial})$$
+      </div>
+      <p>Common scheduling paradigms used in state-of-the-art architectures include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Step/Exponential Decay</strong>: $\eta_{t+1} = \eta_t \cdot \gamma$. This creates a "Staircase" effect, allowing the model to stabilize and refine at discrete intervals.</li>
+        <li><strong>Cosine Annealing</strong>: $\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + \cos(\frac{T_{cur}}{T_{max}}\pi))$. This provides a smooth, continuous transition that is highly effective for Deep Learning.</li>
+        <li><strong>Warmup Phase</strong>: A linear increase in $\eta$ during the first $K$ steps to prevent gradient explosion caused by random weight initialization.</li>
+        <li><strong>Cyclic Scheduling</strong>: Oscillating between a range of values to "restart" the search and prevent entrapment in sub-optimal basins.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Narrowing the Focus."</strong> 
-        Start <strong>Wide</strong> to find the right <strong>Neighborhood</strong>. 
-        End <strong>Narrow</strong> to find the <strong>Specific House</strong>. 
-        If you never slow down, you'll just <strong>Circle the house</strong> forever, never going in. 
-      </div>
-    </div>
-
-    <h2 id="decay">Step Decay</h2>
-    <p><strong>The Strategy:</strong> Reduce the learning rate by a fixed factor \(\gamma\) every \(N\) epochs. (e.g., Divide by 10 every 30 epochs). 
-    <strong>The Visual:</strong> It looks like a <strong>Staircase</strong>. The model learns in bursts, then stabilizes, then bursts again.</p>
-
-    <h2 id="cosine">Cosine Annealing</h2>
-    <p><strong>The Strategy:</strong> Use a <strong>Cosine Wave</strong> to smoothly reduce the learning rate from the initial value to <strong>Zero</strong>. 
-    <strong>Why use it?</strong> It is <strong>Continuous</strong> and requires fewer "Step" hyper-parameters. It's often the <strong>State-of-the-art</strong> choice for training Vision Transformers and LLMs.</p>
-
-    <h2 id="warmup">Learning Rate Warmup</h2>
-    <p><strong>The Gotcha:</strong> At the very first iteration, the model is <strong>Randomly Initialized</strong>. If the learning rate is too high, the gradients will be <strong>Explosive</strong> and destroy the model's structure. 
-    <strong>Warmup</strong> starts with a <strong>Tiny</strong> learning rate and increases it linearly for 1,000 steps before the real training begins.</p>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>
     
@@ -97,3 +94,4 @@ for e in [0, 25, 50, 75, 100]:
     </div>
   `
 };
+

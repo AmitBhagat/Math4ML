@@ -12,18 +12,30 @@ export const ridgeRegressionSection: TopicSection = {
       <p>Sometimes, Linear Regression is <strong>too eager to please</strong>. If you have noise in your data, the model might try to follow it so closely that it overfits. <strong>Ridge Regression</strong> is like putting a "Leash" on the model's weights to keep them under control.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The L2 Penalty</h2>
-    <p>In standard OLS, we just minimize the error. In Ridge, we minimize the error <strong>PLUS</strong> a penalty for how large our weights are. We want the model to be accurate, but we also want the weights (\(w\)) to be small.</p>
-    <div class="math-block">$$Loss = \sum (y_i - \hat{y}_i)^2 + \lambda \sum w_j^2$$</div>
-    <ul>
-      <li><strong>\(\lambda\) (Lambda):</strong> The "Strength" of the leash. If \(\lambda = 0\), it's just OLS. If \(\lambda\) is huge, all weights become almost zero.</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Sometimes, Linear Regression is <strong>too eager to please</strong>. If you give it a dataset with a little bit of noise, the model might frantically wiggle its weights to fit every single outlier. <strong>Ridge Regression (L2)</strong> is the mathematical penalty that keeps the model honest. It injects a sense of "Simplicity" by adding a surcharge for large weights. We aren't just minimizing error anymore; we are minimizing error <em>while staying lean</em>. It’s the difference between a model that memorizes the noise and one that actually understands the underlying signals.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Ridge Regression (L2)</div>
+      <p>Ridge regression extends ordinary least squares by adding an $L_2$ regularization term to the objective function. This penalizes the squared magnitude of coefficients to control the $L_2$ norm of the weight vector $\|\mathbf{w}\|_2$:</p>
+      <div class="math-block">
+        $$\text{arg}\min_{\mathbf{w}} \left\{ \sum_{i=1}^n (y_i - \mathbf{w}^T \mathbf{x}_i)^2 + \lambda \sum_{j=1}^d w_j^2 \right\}$$
+      </div>
+      <p>Where $\lambda \ge 0$ is the regularization parameter. The closed-form solution (assuming centered data) is:</p>
+      <div class="math-block">
+        $$\hat{\mathbf{w}}_{ridge} = (\mathbf{X}^T \mathbf{X} + \lambda \mathbf{I})^{-1} \mathbf{X}^T \mathbf{y}$$
+      </div>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"The Shrinkage Effect."</strong> 
-        Ridge doesn't delete features; it just <strong>muffles</strong> them. It says: "You can use this feature, but don't rely too much on it." It forces the model to spread its "trust" across all features rather than betting everything on one.
+        Think of Ridge Regression as <strong>"Tent Pole Stabilization"</strong> or the <strong>"Elastic Anchor."</strong> 
+        Imagine your regression line is a tent pole trying to stay upright in a storm (Noisy data). 
+        A standard model lets the pole lean wherever the wind blows, potentially collapsing. 
+        Ridge attaches <strong>Elastic Cords</strong> from the pole to the ground (Weight 0). The pole can still move if the wind is truly strong (Real Data), but it won't wiggle for every tiny breeze (Noise). 
+        It doesn't kill the features entirely; it just <strong>muffles</strong> them, forcing the model to spread its trust across the entire dataset rather than betting everything on one potentially noisy variable.
       </div>
     </div>
 

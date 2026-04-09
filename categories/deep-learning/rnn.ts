@@ -12,24 +12,32 @@ export const rnnSection: TopicSection = {
       <p>How do you understand a <strong>Sentence</strong>? You don't just look at each word in isolation. You need to remember the <strong>Context</strong> of the previous words. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They have a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: The Hidden State</h2>
-    <p>An RNN has a <strong>Hidden State (\(h_t\))</strong> that acts as its memory. At each time step \(t\), the network takes two inputs: the <strong>Current Data (\(x_t\))</strong> and the <strong>Previous Memory (\(h_{t-1}\))</strong>.</p>
-    <div class="math-block">$$h_t = \sigma(W_{hh}h_{t-1} + W_{xh}x_t + b_h)$$</div>
-    <ul>
-      <li><strong>Weight \(W_{hh}\):</strong> The network's "Memory Strength." How much of the past does it want to keep?</li>
-      <li><strong>Weight \(W_{xh}\):</strong> The network's "Perception Strength." How much does it care about the new word?</li>
-    </ul>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>How do you understand a <strong>Sentence</strong>? You don't just look at each word in isolation; you need to remember the <strong>Context</strong> of the words that came before. <strong>Recurrent Neural Networks (RNN)</strong> are the biological "Memory" machines. They introduce a <strong>Looping Connection</strong> that allows information to flow from the <strong>Past</strong> into the <strong>Present</strong>. At every time step, the network takes a new input and combines it with its existing "Hidden State" (its internal memory bank). This allows the model to process sequences of data—like speech, text, or stock prices—where the <strong>Order</strong> of events is just as important as the events themselves.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Sequential State Updates</div>
+      <p>An RNN is a dynamic system that computes a hidden state $\mathbf{h}_t$ by combining the current input $\mathbf{x}_t$ with the previous state $\mathbf{h}_{t-1}$. The update rule is typically defined as:</p>
+      <div class="math-block">
+        $$\mathbf{h}_t = \sigma( \mathbf{W}_{hh} \mathbf{h}_{t-1} + \mathbf{W}_{xh} \mathbf{x}_t + \mathbf{b}_h )$$
+      </div>
+      <p>The final output $\mathbf{y}_t$ is then projected from this hidden state:</p>
+      <div class="math-block">
+        $$\mathbf{y}_t = \text{Softmax}(\mathbf{W}_{hy} \mathbf{h}_t + \mathbf{b}_y)$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of it as <strong>"Updating your Story."</strong> 
-        The hidden state is the <strong>Current Version of the Story</strong>. 
-        When a new word comes in, you update your story based on that word and your previous memory. 
-        The story keeps <strong>evolving</strong> as the sequence progresses.
+        Think of an RNN as <strong>"The Goldfish with a Notebook"</strong> or <strong>"Updating your Story."</strong> 
+        Imagine you have a 10-second memory. To understand a "Who-Done-It" mystery novel, you need a system to carry context. Every time you read a page (new input), you look at your notebook (the Hidden State) to see what happened on the previous page. You then <strong>Update</strong> the notebook with the new information and pass it to your future self. 
+        Your internal "Story" keeps <strong>Evolving</strong> as you move through the sequence. The hidden state is the "Soul" of the RNN—it represents a compressed history of everything the network has seen so far.
       </div>
     </div>
-
+    
     <h2 id="bptt">BPTT: Backpropagation Through Time</h2>
     <p>How do we train an RNN? We "Unroll" it! 
     Imagine a network with 100 time steps as one giant 100-layer MLP where every layer <strong>Shares the Same Weights</strong>. This is <strong>Backpropagation Through Time (BPTT)</strong>. 

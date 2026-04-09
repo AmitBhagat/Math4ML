@@ -12,38 +12,41 @@ export const bayesTheoremSection: TopicSection = {
       <p><strong>Bayes' Theorem</strong> (\(P(A|B)\)) is a mathematical formula used to determine the probability of an event based on prior knowledge of conditions that might be related to the event. In Machine Learning, it's the core of everything from <strong>Naive Bayes Classifiers</strong> to <strong>Bayesian Neural Networks</strong>.</p>
     </div>
 
-    <h2 id="prerequisites">Foundational Requirements</h2>
-    <div class="def-box">
-      <ul style="margin:0">
-        <li><strong>Conditional Probability</strong>: Understanding \(P(A|B)\).</li>
-        <li><strong>Joint Probability</strong>: Understanding \(P(A \cap B)\).</li>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy, like guessing if it will rain given a dark cloud. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief. It is the mathematical engine of "Self-Correction"—it tells us exactly how much to update our worldview when new facts hit the table. Without it, machines couldn't learn from experience; they would just be static calculators.</p>
+    
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Bayesian Inference & Posterior Update</div>
+      <p>Bayes' Theorem provides a rigorous method for updating the probability of a hypothesis $\theta$ relative to observed data $\mathcal{D}$. It is the foundation of structural and parameter uncertainty in machine learning.</p>
+      
+      <p>The posterior probability is given by the relationship:</p>
+      <div class="math-block">
+        $$P(\theta \mid \mathcal{D}) = \frac{P(\mathcal{D} \mid \theta) P(\theta)}{P(\mathcal{D})}$$
+      </div>
+
+      <p>Where the components are characterized as follows:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Posterior ($P(\theta \mid \mathcal{D})$)</strong>: The probability that the hypothesis $\theta$ is true *after* considering data $\mathcal{D}$.</li>
+        <li><strong>Likelihood ($P(\mathcal{D} \mid \theta)$)</strong>: The probability that the data $\mathcal{D}$ would have been observed given that $\theta$ is true.</li>
+        <li><strong>Prior ($P(\theta)$)</strong>: The probability of $\theta$ before receiving any data, representing initial beliefs or domain knowledge.</li>
+        <li><strong>Evidence ($P(\mathcal{D})$)</strong>: The marginal probability of the data, acting as a normalization constant: $P(\mathcal{D}) = \sum_{\theta'} P(\mathcal{D} \mid \theta') P(\theta')$.</li>
       </ul>
+      
+      <p class="text-xs opacity-70 mt-2">Bayes' Theorem is the mathematical prerequisite for **Naive Bayes Classifiers**, **Bayesian Optimization**, and **Gaussian Processes**.</p>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief.</p>
-    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of Bayes' Theorem as a <strong>"Learning Machine."</strong> 
-        You start with a guess (the Prior). 
-        You see some evidence (the Data). 
+        Think of Bayes' Theorem as a <strong>"Scientific Tuning Machine"</strong> or a <strong>"Bullshit Detector."</strong> 
+        You start with a guess (the Prior: "I think this email might be spam"). 
+        You see some evidence (the Data: "It contains the word 'FREE' in all caps"). 
         Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
-        It is the fundamental rule for how a machine "Learns" from experience.
+        It is the fundamental rule for how a machine "Learns" from experience. 
+        It forces the model to balance its existing knowledge with the cold, hard facts of the new data, preventing it from jumping to conclusions too quickly or ignoring new evidence entirely.
       </div>
     </div>
-
-    <visualizer topic="BayesTheorem" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <div class="math-block">$$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$</div>
-    <ul>
-      <li><strong>\(P(A|B)\)</strong>: Posterior (Belief after seeing data).</li>
-      <li><strong>\(P(B|A)\)</strong>: Likelihood (How well the data fits the cause).</li>
-      <li><strong>\(P(A)\)</strong>: Prior (Initial belief).</li>
-      <li><strong>\(P(B)\)</strong>: Evidence (Normalization constant).</li>
-    </ul>
 
     <h2 id="example-spam" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter (Prior/Posterior)</h2>
     

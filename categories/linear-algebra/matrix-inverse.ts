@@ -13,23 +13,23 @@ export const matrixInverseSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>In algebra, if you multiply by 5, you undo it by dividing by 5. In Linear Algebra, the <strong>Inverse</strong> is that "division." We don't have a division sign for matrices, so we multiply by the Inverse to cancel out a transformation.</p>
+    <p>In standard algebra, if you multiply by 5, you undo it by dividing by 5. In Linear Algebra, the <strong>Inverse</strong> is that numerical "Undo" button. We don't have a division sign for matrices, so we multiply by the Inverse to cancel out a transformation and return to the starting point. It is the mathematical bridge that allows us to find the original <strong>Input</strong> when we only know the <strong>Output</strong>. However, beware: not every transformation can be undone. If a matrix squashes your 3D world into a 2D sheet, that information is lost forever, and the matrix is said to be "Singular."</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix Reciprocal</div>
+      <p>A square matrix $A \in \mathbb{R}^{n \times n}$ is **Invertible** if there exists a matrix $A^{-1}$ such that:</p>
+      <div class="math-block">
+        $$A A^{-1} = A^{-1} A = I$$
+      </div>
+      <p>Where $I$ is the identity matrix. A matrix is invertible if and only if it is **Non-singular**, meaning its determinant is non-zero ($\det(A) \neq 0$). For a $2 \times 2$ matrix, the inverse is calculated as:</p>
+      <div class="math-block">
+        $$A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
+      </div>
+      <p class="text-xs opacity-70 mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a Matrix Inverse as <strong>Unraveling a Knot</strong>. 
-        Matrix A tied the knot (mixed the data). 
-        The Inverse \(A^{-1}\) is the precise set of movements needed to untie it. 
-        But beware: not every knot can be untied—if the matrix squashed the data into 0, that info is gone forever!
-      </div>
-    </div>
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>The matrix \(A^{-1}\) is defined by the property:</p>
-    <div class="math-block">$$AA^{-1} = A^{-1}A = I$$</div>
-    <p>where \(I\) is the <strong>Identity Matrix</strong> (the "1" of matrices). For a 2x2 matrix, the formula is:</p>
-    <div class="math-block">$$A^{-1} = \frac{1}{\det(A)} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$</div>
 
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
     
@@ -115,3 +115,4 @@ else:
     </div>
   `
 };
+

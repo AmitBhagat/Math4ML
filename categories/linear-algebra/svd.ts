@@ -13,29 +13,25 @@ export const singularValueDecompositionSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Every linear transformation can be broken down into three simple steps: Rotate, Stretch, Rotate. SVD allows us to take a "chaos" matrix and find the core directions that contain all the information. In Machine Learning, this helps us find the "structure" in noisy data.</p>
+    <p>Every linear transformation—no matter how messy or complex—can be broken down into three simple, elegant steps: <strong>Rotate, Stretch, Rotate</strong>. This is the power of <strong>Singular Value Decomposition (SVD)</strong>. Unlike Eigen-decomposition, SVD works for every matrix in existence, whether it is square, rectangular, or full of noise. It allows us to mathematically "unravel" any matrix to find the core directions that contain the most information. In Machine Learning, SVD is the engine that finds the hidden structure in our data, telling us which features are actually "Loud" and which are just background static.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Universal Factorization</div>
+      <p>Any matrix $A \in \mathbb{R}^{m \times n}$ can be decomposed into three specialized matrices:</p>
+      <div class="math-block">
+        $$A = U \Sigma V^\top$$
+      </div>
+      <p>where the components provide a structural breakdown of the transformation:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>$U \in \mathbb{R}^{m \times m}$</strong>: An orthogonal matrix whose columns (left-singular vectors) represent the geometry of the output space.</li>
+        <li><strong>$\Sigma \in \mathbb{R}^{m \times n}$</strong>: A diagonal matrix of singular values $\sigma_i$, representing the "strength" of the transformation along each axis.</li>
+        <li><strong>$V \in \mathbb{R}^{n \times n}$</strong>: An orthogonal matrix whose columns (right-singular vectors) represent the geometry of the input space.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of a lump of <strong>Pizza Dough</strong>. 
-        SVD says you can turn it into any final pizza in 3 steps: 
-        1. <strong>Rotate</strong> the dough to find the best axis, 
-        2. <strong>Stretch</strong> it into a circle (Scaling), 
-        3. <strong>Rotate</strong> it again to align it with the box.
-        Even the messiest matrix is just a sequence of these 3 clean movements.
-      </div>
-    </div>
-
-    <visualizer topic="SVD" />
-
-    <h2 id="formula">2. The SVD Formula</h2>
-    <div class="math-block">$$A = U \Sigma V^T$$</div>
-    <ul>
-      <li><strong>U:</strong> Left Singular Vectors (Rotates into the output space).</li>
-      <li><strong>Σ:</strong> Singular Values (The scaling factors, in descending order).</li>
-      <li><strong>Vᵀ:</strong> Right Singular Vectors (Rotates the input space).</li>
-    </ul>
 
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     
@@ -109,3 +105,4 @@ print(f"Singular values of A: {s}")
     </div>
   `
 };
+

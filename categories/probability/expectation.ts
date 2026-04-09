@@ -21,24 +21,26 @@ export const expectationSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Probability Distribution says: <em>"Anything could happen."</em> Expectation says: <em>"On average, this is what will happen."</em> It is the <strong>Balance Point</strong> of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In ML, every prediction is essentially an "Expected Value" calculated from the data.</p>
+    <p>A Probability Distribution tells you what *could* happen, but the Expectation tells you what *will* happen if you play the long game. It is the "Balance Point" of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In Machine Learning, we don't care about a single "lucky" training batch; we care about the <strong>Aggregate Truth</strong>. We build models that minimize <strong>Expected Loss</strong> because we want the model to be correct across the entire lifetime of its deployment, not just once.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Weighted Average</div>
+      <p>The **Expected Value** (or first moment) of a random variable $X$ represents the long-run average value of repetitions of the experiment. It is calculated by weighing each possible outcome by its probability:</p>
+      <div class="math-block">
+        $$\mathbb{E}[X] = \int_{\Omega} X(\omega) dP(\omega)$$
+      </div>
+      <p>In practical settings, this generalizes to discrete and continuous forms:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Discrete</strong>: $\mathbb{E}[X] = \sum_i x_i P(X = x_i)$.</li>
+        <li><strong>Continuous</strong>: $\mathbb{E}[X] = \int_{-\infty}^\infty x f(x) dx$.</li>
+        <li><strong>Law of the Unconscious Statistician</strong>: $\mathbb{E}[g(X)] = \int g(x) f(x) dx$.</li>
+        <li><strong>Linearity</strong>: $\mathbb{E}[aX + bY] = a\mathbb{E}[X] + b\mathbb{E}[Y]$. This property holds even if $X$ and $Y$ are dependent.</li>
+      </ul>
+      <p class="text-xs opacity-70 mt-2">In ML training, the "Risk" we minimize is the expected value of the loss function over the data generating distribution.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Expected Value as a <strong>"Fair Bet."</strong> 
-        If you play a game 1,000 times, you'll sometimes win big and sometimes lose. 
-        Your <strong>Expectation</strong> is the number that tells you if, in the long run, you'll walk away with more money than you started with. 
-        In ML, we don't care about a single "lucky" training batch; we care about the <strong>Expected Performance</strong> across all future data.
-      </div>
-    </div>
-
-    <visualizer topic="ExpectationVariance" />
-
-    <h2 id="derivation">Mathematical Definition</h2>
-    <p>For a discrete random variable \(X\) with values \(x_i\) and probabilities \(p_i\):</p>
-    <div class="math-block">$$\mathbb{E}[X] = \sum_{i} x_i P(X = x_i)$$</div>
-    <p><strong>Linearity:</strong> \(\mathbb{E}[aX + b] = a\mathbb{E}[X] + b\). The average of a sum is the sum of the averages!</p>
 
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     
@@ -121,3 +123,4 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
     </div>
   `
 };
+

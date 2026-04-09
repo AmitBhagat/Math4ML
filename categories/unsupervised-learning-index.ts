@@ -8,6 +8,7 @@ import { pcaSection } from './unsupervised-learning/pca';
 import { tsneSection } from './unsupervised-learning/tsne';
 import { umapSection } from './unsupervised-learning/umap';
 import { autoencodersSection } from './unsupervised-learning/autoencoders';
+import { anomalyDetectionSection } from './unsupervised-learning/anomaly-detection';
 
 // =============================================================================
 // UNSUPERVISED LEARNING (The 9-Topic Advanced Curriculum)
@@ -37,10 +38,8 @@ export const UNSUPERVISED_LEARNING_DATA: CategoryData = {
 
       <hr class="border-border-premium/50" />
 
-      <!-- What to Expect -->
-      <div class="space-y-10 pb-12">
         <p class="text-lg text-text-premium font-normal leading-relaxed">
-          This comprehensive curriculum is broken into <strong>9 high-fidelity topics</strong>, starting with simple geometric partitioning (k-Means) and ending with complex neural architectures (Autoencoders). 
+          This comprehensive curriculum is broken into <strong>10 high-fidelity topics</strong>, starting with simple geometric partitioning (k-Means) and ending with complex neural architectures (Autoencoders). 
         </p>
 
         <div class="relative p-10 bg-bg-tertiary border border-border-premium rounded-2xl my-12">
@@ -77,6 +76,7 @@ export const UNSUPERVISED_LEARNING_DATA: CategoryData = {
     pcaSection,
     tsneSection,
     umapSection,
-    autoencodersSection
+    autoencodersSection,
+    anomalyDetectionSection
   ]
 };

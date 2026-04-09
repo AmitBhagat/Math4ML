@@ -21,24 +21,24 @@ export const partialDerivativesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you are standing on a mountain (the Loss Surface). To optimize your model, you need to know: <em>"If I step strictly North (towards Weight A), does it go up? If I step strictly East (towards Weight B), does it go down?"</em> A partial derivative is that <strong>directional "step"</strong> along a single axis.</p>
+    <p>Imagine you are standing on a massive 3D mountain range (the <strong>Loss Surface</strong>). To improve your model, you need to know: <em>"If I step strictly North (nudging Weight A), does it go up? If I step strictly East (nudging Weight B), does it go down?"</em> A <strong>Partial Derivative</strong> is exactly that—it isolates the influence of a single variable while freezing every other part of the universe. In Machine Learning, where models have millions of weights, these allow us to diagnose exactly which specific parameter is causing the most trouble without getting overwhelmed by the sheer complexity of the whole system.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Variable-wise Sensitivity</div>
+      <p>For a multivariable function $f(x_1, x_2, \dots, x_n)$, the partial derivative $\frac{\partial f}{\partial x_i}$ is defined as the traditional derivative taken with respect to $x_i$ while treating all other variables $x_j$ (where $j \neq i$) as constant parameters:</p>
+      <div class="math-block">
+        $$\frac{\partial f}{\partial x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_n)}{h}$$
+      </div>
+      <p>This operation measures the instantaneous rate of change of $f$ in the direction of the $i$-th coordinate axis. Key details include:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>Independence</strong>: $\frac{\partial f}{\partial x_i}$ ignores interactions between $x_i$ and other variables during the computation.</li>
+        <li><strong>Notation</strong>: Often written as $f_{x_i}$ or $\partial_{x_i} f$.</li>
+        <li><strong>Geometry</strong>: It represents the slope of the tangent line to the curve formed by intersecting the surface with a plane parallel to the $x_i$-axis.</li>
+      </ul>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Partial Derivatives as <strong>Selective Vision</strong>. 
-        If you have a function with 10 variables, the partial derivative w.r.t \(x_1\) "blurs out" everyone else. 
-        It treats \(x_2, x_3, \dots\) as if they were fixed constant numbers like 5 or 10. 
-        This is how a neural network isolates exactly which of its millions of weights is causing the most error.
-      </div>
-    </div>
-
-    <visualizer topic="PartialDerivatives" />
-
-    <h2 id="derivation">Formal Definition</h2>
-    <p>For a function \(f(x, y)\), the partial derivative with respect to \(x\) is defined by the limit where <strong>only \(x\)</strong> receives a nudge:</p>
-    <div class="math-block">$$\frac{\partial f}{\partial x} = \lim_{h \to 0} \frac{f(x+h, y) - f(x, y)}{h}$$</div>
-    <p>Notice that \(y\) stays exactly the same in both parts of the fraction.</p>
 
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     
@@ -121,3 +121,4 @@ print(f"Exact derivative (2x): {2*x_val}")
     </div>
   `
 };
+

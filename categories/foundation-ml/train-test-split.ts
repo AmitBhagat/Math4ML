@@ -12,16 +12,36 @@ export const trainTestSplitSection: TopicSection = {
       <p>The <strong>Golden Rule</strong> of Machine Learning is: <strong>Never test your model on the same data you used to train it.</strong> If you do, you aren't measuring "Learning"—you're measuring "Memory." We need to know how the model performs on data it has <strong>never seen before</strong>.</p>
     </div>
 
-    <h2 id="theory">Theoretical Core: Generalization</h2>
-    <p>The point of ML isn't to get 100% accuracy on the data you have. It's to <strong>Generalize</strong> to the data you <em>don't</em> have. If a model performs well on the Training set but poorly on the Test set, it has failed to learn the "Underlying Rule" and has instead just "Memorized the Noise."</p>
+    <h2 id="theory">Intuition & Motivation</h2>
+    <p>The <strong>Golden Rule</strong> of Machine Learning is simple: never test your model on the same data you used to train it. If you do, you aren't measuring "Learning"—you're measuring "Memory." The whole point of AI is <strong>Generalization</strong>: the ability to take a learned principle and apply it to a situation the model has never encountered before. If a model performs perfectly on the training set but fails on the test set, it hasn't actually learned anything useful; it has just memorized the noise of its environment. To build something that works in the real world, you must maintain a strict "Firewall" between what the model sees to learn and what it sees to be judged.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Data Partitioning Protocol</div>
+      <p>Data partitioning is the process of dividing a dataset $\mathcal{D}$ into mutually exclusive subsets to provide an unbiased estimate of the generalization error. The standard split involves three distinct roles:</p>
+      
+      <div class="space-y-4">
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">1. Training Set ($D_{train}$)</h4>
+          <p class="text-xs mb-1">Used to minimize the objective function and fit model parameters $\theta$:</p>
+          <div class="math-block">
+            $$\hat{\theta} = \arg \min_\theta \sum_{(x,y) \in D_{train}} L(y, f(x; \theta))$$
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-sm font-bold text-green-premium">2. Test Set ($D_{test}$)</h4>
+          <p class="text-xs mb-1">The "Hold-out" set, strictly forbidden during training, used to calculate the final out-of-sample error:</p>
+          <div class="math-block">
+            $$\text{Error}_{\text{test}} = \frac{1}{|D_{test}|} \sum_{(x,y) \in D_{test}} L(y, f(x; \hat{\theta}))$$
+          </div>
+        </div>
+      </div>
+
+      <p class="text-xs opacity-80 mt-2">To prevent **Data Leakage**, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
+    </div>
     
     <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of it as <strong>"Exam Day."</strong> 
-        If a teacher gives the students the <strong>Exact Questions</strong> that will be on the final exam as "Homework" (Training Data), every student will get a 100%. But they didn't learn Math; they just memorized the answers. A real test uses <strong>New Questions</strong> to see if the students truly understand the subject.
-      </div>
-    </div>
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
     
@@ -82,3 +102,4 @@ print(f"\nExample Input Features from Test set:\n{X_test[0:1]}")
     </div>
   `
 };
+

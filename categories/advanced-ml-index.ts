@@ -3,6 +3,8 @@ import { ensembleIntroSection } from './advanced-ml/ensemble-intro';
 import { baggingSection } from './advanced-ml/bagging';
 import { boostingSection } from './advanced-ml/boosting';
 import { stackingSection } from './advanced-ml/stacking';
+import { recommendersSection } from './advanced-ml/recommenders';
+import { diffusionModelsSection } from './advanced-ml/diffusion-models';
 
 // =============================================================================
 // ADVANCED MACHINE LEARNING (The Power of Ensembles)
@@ -10,11 +12,11 @@ import { stackingSection } from './advanced-ml/stacking';
 export const ADVANCED_ML_DATA: CategoryData = {
   id: "advanced-ml",
   title: "Advanced ML Topics",
-  description: "Beyond individual algorithms—exploring the synergy of multiple models through Bagging, Boosting, and Stacking.",
+  description: "Beyond individual algorithms—from the synergy of Ensemble methods to the generative power of Recommenders and Diffusion models.",
   keyConcepts: [
-    { title: "Bias-Variance Control", description: "Systematically reducing error by targeting different components of model failure." },
-    { title: "Parallel vs. Sequential", description: "Independent voting (Bagging) vs. Iterative correction (Boosting)." },
-    { title: "Meta-Learning", description: "Training models to intelligently combine the opinions of other models (Stacking)." }
+    { title: "Ensemble Synergy", description: "Reducing error by combining models through Bagging, Boosting, and Stacking." },
+    { title: "Taste & Preferences", description: "Mapping latent desire through Collaborative Filtering and Matrix Factorization." },
+    { title: "Generative Diffusion", description: "Creating high-fidelity data by iteratively un-scrambling chaos from pure noise." }
   ],
   introHtml: String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
@@ -67,6 +69,8 @@ export const ADVANCED_ML_DATA: CategoryData = {
     ensembleIntroSection,
     baggingSection,
     boostingSection,
-    stackingSection
+    stackingSection,
+    recommendersSection,
+    diffusionModelsSection
   ]
 };

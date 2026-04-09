@@ -12,33 +12,36 @@ export const regularizationSection: TopicSection = {
       <p><strong>Regularization</strong> is a "Penalty" for being too complex. in most Machine Learning models, weights can grow wildly large as the model tries to memorize every outlier in your training set. <strong>L1 and L2 Regularization</strong> are the mathematical "Brakes" that keep the model honest and its weights small.</p>
     </div>
 
-    <h2 id="prerequisites">Foundational Requirements</h2>
-    <div class="def-box">
-      <ul style="margin:0">
-        <li><strong>Vector Norms</strong>: Understanding L1 and L2 norms.</li>
-        <li><strong>MAP Estimation</strong>: The Bayesian origin of regularization.</li>
-      </ul>
-    </div>
-
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A machine that is "Too Smart" will often overfit. It will find tiny, meaningless patterns that only exist in your training set (Noise). <strong>Regularization</strong> works by saying: <em>"I want you to minimize the errors, BUT I will penalize you for using large weights."</em> This forces the model to only use the weights that are <strong>Absolutely Necessary</strong> to explain the data.</p>
+    <p>A machine that is "Too Smart" will often overfit—it begins to memorize tiny, meaningless patterns that only exist in your specific dataset (Noise). <strong>Regularization</strong> is the mathematical "Surcharge" for complexity. It works by saying: <em>"I want you to minimize the errors, BUT I will penalize you for using large, aggressive weights."</em> This forces the model to only use the features that are <strong>Absolutely Necessary</strong> to explain the data. It is the tactical decision to trade a perfect score on your training data for a high score on the real world. It is the fundamental difference between a student who has understood the "Story" vs. one who has just memorized the page numbers.</p>
+
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: Structural Risk Minimization (Complexity Penalty)</div>
+      <p>Regularization involves minimizing a modified objective function $\tilde{J}$ that incorporates a penalty term $\Omega(\theta)$ based on model complexity:</p>
+      
+      <div class="math-block">
+        $$\tilde{J}(\theta) = J(\theta) + \lambda \Omega(\theta)$$
+      </div>
+      
+      <p>Two primary paradigms dominate the field:</p>
+      <ul class="text-xs opacity-80 mt-2 space-y-1">
+        <li><strong>L2 Regularization (Ridge)</strong>: $\Omega(\theta) = \frac{1}{2} \|\theta\|_2^2$. This adds a quadratic penalty that discourages high-magnitude weights, equivalent to assuming a Gaussian prior $P(\theta) \sim \mathcal{N}(0, \sigma^2)$. It results in **Weight Decay**.</li>
+        <li><strong>L1 Regularization (Lasso)</strong>: $\Omega(\theta) = \|\theta\|_1$. This adds an absolute magnitude penalty, equivalent to a Laplace prior. Because the L1 norm has a singular derivative at zero, it promotes **Sparsity**, effectively zeroing out irrelevant features.</li>
+      </ul>
+      
+      <p class="text-xs opacity-70 mt-2">The hyperparameter $\lambda$ (Lambda) determines the strength of the constraint. High $\lambda$ leads to **Underfitting** (too much bias); low $\lambda$ leads to **Overfitting** (too much variance).</p>
+    </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of Regularization as <strong>"Anchor Points."</strong> 
-        Without it, your model can sail anywhere to fit the data. 
-        With it, the model is anchored to the origin (Zero). 
-        You only allow it to sail away from the anchor if the <strong>data is strong enough</strong> to pull it there. It keeps the model "Simple" and prevents it from overcomplicating things.
+        Think of Regularization as <strong>"The Mechanical Brake"</strong> or a <strong>"Simplicity Tax."</strong> 
+        Without it, your model is like a ship that can sail anywhere to fit the data points. With it, the model is physically anchored to the origin (Zero). 
+        You only allow the model to move away from the anchor if the <strong>data is loud enough</strong> to justify the extra tax. 
+        <strong>L1 (Lasso)</strong> is a harsh tax that completely deletes useless features (Sparsity), while <strong>L2 (Ridge)</strong> is a gentler stabilizer that keeps all weights tiny and evenly distributed. It turns your model from a frantic memorizer into a calm generalizer.
       </div>
     </div>
-
-    <h2 id="derivation">L1 (Lasso) vs. L2 (Ridge)</h2>
-    <p>Loss = Error + \(\lambda \times\) Constraint.</p>
-    <ul>
-      <li><strong>L1 (Lasso):</strong> Constraint is \(\sum |w_i|\). It encourages <strong>Sparsity</strong> (making most weights exactly zero).</li>
-      <li><strong>L2 (Ridge):</strong> Constraint is \(\sum w_i^2\). It encourages <strong>Small Weights</strong> (distributing the influence across many features).</li>
-    </ul>
 
     <h2 id="example-diamond" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The L1 Diamond (Sparsity)</h2>
     
