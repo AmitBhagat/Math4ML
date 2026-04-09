@@ -39,8 +39,6 @@ export const gradientSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Optimization via **Gradient Descent** involves iteratively updating parameters in the direction of $-\nabla f$ to find the local minimum of a loss function.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
     
       <h4>Problem: Finding the Steering Direction</h4>
@@ -119,10 +117,12 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Gradient is the "Compass of Optimization." It combines all your individual partial slopes into a single, powerful arrow that points exactly "Uphill."</p>
     <ul>
-      <li><strong>Gradient Descent</strong>: The backbone of training every modern AI. We follow the negative gradient to lower the error.</li>
-      <li><strong>Hyperparameter Optimization</strong>: Finding the best learning rate or architecture size by treating them as axes.</li>
+      <li><strong>Stochastic Gradient Descent (SGD)</strong>: In massive datasets, calculating the gradient for all 1,000,000 rows at once is too slow. Instead, we calculate an "Approximate Gradient" using just a tiny random batch. This "Noisy Compass" is the secret to how AI trains on the entire internet in a reasonable amount of time.</li>
+      <li><strong>Adversarial Attacks</strong>: Hackers can use the gradient of an image-recognition AI to find its "Most Sensitive Pixels." By subtly changing pixels in the direction of the gradient, they can trick an AI into seeing a "Toaster" instead of a "Stop Sign," while the image still looks perfect to human eyes.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, we simply look where the gradient is pointing and run the other way to find the valley of minimum error. It is the most fundamental tool in the entire machine learning toolkit.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Optimization often requires calculating how deeply nested layers affect the error. This is the <strong><ctrl42> <a href="#/mathematics/calculus/chain-rule">Chain Rule</a></strong>.

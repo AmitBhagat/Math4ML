@@ -42,7 +42,6 @@ export const evaluationMetricsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Metrics like **Cross-Entropy** are used for training (optimization), while metrics like **Accuracy** or **AUC-ROC** are used for final validation and model comparison.</p>
     </div>
     
-    <div class="callout tip">
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>
     
       <h4>Scenario: Catching Dinner in a Lake</h4>

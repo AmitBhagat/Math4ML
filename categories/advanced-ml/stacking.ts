@@ -157,6 +157,14 @@ score = stack.score(X_test, y_test)
 print(f"Stacking Ensemble Accuracy: {score:.1%}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Stacking is the "Meta-Manager" that learns who to trust among a group of experts. It doesn't just average opinions; it learns the mathematical context of when an expert is likely to be right.</p>
+    <ul>
+      <li><strong>Real Estate Value Aggregation</strong>: Large platforms like Zillow use Stacking to predict home prices. They have a "Base Model" that looks at historical sales, another that looks at current local economic trends, and a third that analyzes high-res photos of the kitchen. A Meta-Learner then learns: "In urban areas, trust the photos more; in rural areas, trust the historical sales."</li>
+      <li><strong>Multi-model Weather Forecasting</strong>: Meteorologists use different physics models to predict rainfall. One might be great at cold fronts, another at tropical storms. Stacking is used to combine these models, where the Meta-Learner knows exactly which specialized model to listen to based on the current atmospheric conditions.</li>
+    </ul>
+    <p>Teacher's Final Word: Don't just vote; learn who the winners are. Stacking is the smartest way to ensemble because it doesn't assume all experts are equal—it assumes that every expert has a "season" where they are king, and it learns to find that season.</p>
+
     <div class="linking-rule">
       <strong>Congratulations!</strong> You have reached the pinnacle of ensemble theory. Now, let's learn how to prep and "Clean" your raw datasets for these complex systems in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>

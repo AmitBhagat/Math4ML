@@ -31,8 +31,6 @@ export const overfittingUnderfittingSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Three History Students</h2>
     
       <h4>Scenario: Studying for a 1,000-page History Exam using only 5 Practice Questions</h4>

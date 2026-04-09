@@ -39,8 +39,6 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, LLN justifies the use of finite training sets to estimate the loss over the entire population (Empirical Risk Minimization).</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
     
       <h4>Problem: Tracking Profit over Time</h4>

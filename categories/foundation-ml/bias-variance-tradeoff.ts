@@ -31,8 +31,6 @@ export const biasVarianceTradeoffSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="bias">Bias: The Stubborn Model</h2>
     <p><strong>Bias</strong> is the error from <strong>Incorrect Assumptions</strong>. A high-bias model is too simple. It thinks the world is a straight line when it's actually a curve. It "Ignores" the data because its brain isn't powerful enough to see the complexity.</p>
     

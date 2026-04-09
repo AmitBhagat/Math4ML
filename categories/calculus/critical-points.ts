@@ -39,8 +39,6 @@ export const criticalPointsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     
       <h4>Problem: Finding the Bottom of \(f(x, y) = x^2 + y^2 - 4x\)</h4>
@@ -115,10 +113,12 @@ print(f"Value at Min: {res.fun}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Critical Point is any location where the ground beneath your feet is perfectly flat. In ML, training is a search for the best "Bottom" point.</p>
     <ul>
-      <li><strong>Cost Function Optimization</strong>: Everything in ML is about finding the weights that reach the lowest critical point.</li>
-      <li><strong>Convergence Analysis</strong>: Understanding why models stop improving—often because they are trapped at a saddle point or a local minimum.</li>
+      <li><strong>Global vs. Local Minima</strong>: In Deep Learning, the "Error Surface" is a jagged mountain range with billions of pits (local minima). The quest of training is to find the deepest pit possible to minimize error. While we rarely find the *perfect* Global Minimum, we use techniques like "Momentum" to skip over shallow pits and find a good enough spot to stop.</li>
+      <li><strong>The Saddle Point Problem</strong>: In high-dimensional models (like LLMs), most critical points aren't actually peaks or pits—they are "Saddle Points" (flat in one direction, sloped in another). Modern optimizers like Adam are designed to "Vibrate" and escape these traps so the model can keep learning.</li>
     </ul>
+    <p>Teacher's Final Word: Finding the right critical point is the art of AI. If you stop too early, your model is underdeveloped; if you get trapped on a peak, your model is broken. We want the deepest valley we can find.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve mastered the mechanics of optimization. Now, see how we deal with <strong>Uncertainty</strong> and <strong>Data Distributions</strong>. Explore <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.

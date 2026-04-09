@@ -37,8 +37,6 @@ export const dotProductSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
     
       <h4>Problem: Comparing Sentiments</h4>
@@ -101,10 +99,12 @@ print(f"Dot Product: {dot}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Think of the Dot Product as a "Similarity Radar." It tells you exactly how much two vectors are "pointing in the same direction."</p>
     <ul>
-      <li><strong>Attention Mechanisms</strong>: Transformers (like ChatGPT) use dot products to decide which words are relevant to the ones it just read.</li>
-      <li><strong>Linear Regression</strong>: Your prediction \(\hat{y} = \mathbf{w} \cdot \mathbf{x}\) is just a dot product of weights and features.</li>
+      <li><strong>Semantic Search</strong>: When you search for "Healthy Recipes," Google converts your query and millions of web pages into vectors. It then calculates the Dot Product between them. A high dot product means the "Directions" align, signalling a perfect match.</li>
+      <li><strong>Cosine Similarity (RecSys)</strong>: E-commerce sites use the dot product to find "People like you." If your shopping-habit vector and another user's vector have a massive dot product, the system assumes you have the same taste and recommends their favorites to you.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, we use this simple calculation to measure the conceptual overlap between words, images, or even customer personalities. It is the fundamental way computers understand "Similarity."</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Dot product is affected by vector length. How do we measure that length individually? Explore <strong><a href="#/mathematics/linear-algebra/vector-norms">Vector Norms (L1, L2)</a></strong>.

@@ -100,6 +100,14 @@ print(f"BCE Penalty (0.1 prob): {bce_loss(1, 0.1):.3f}")
 print(f"BCE Penalty (0.9 prob): {bce_loss(1, 0.9):.3f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Loss functions are the "Moral Compass" of AI. They tell the machine exactly how much its failures cost, guiding it toward the "bottom of the valley" where truth lives.</p>
+    <ul>
+      <li><strong>Real Estate Price Estimation (MSE)</strong>: When a website predicts your home's value, it uses Mean Squared Error. If the model misses by $10,000, it's a small penalty. But if it misses by $200,000, the "Squared" part of MSE hits the model with a massive penalty, forcing it to obsess over accuracy for high-value properties and ignore tiny fluctuations in low-value ones.</li>
+      <li><strong>Spam Filter Reliability (Cross-Entropy)</strong>: In classification, we care about confidence. If a model is 99% sure an email is safe, but it's actually a phishing scam, Cross-Entropy punishes that "Confident Ignorance" exponentially. It acts as a strict judge that ensures your spam filter is not only correct but holds a high degree of certainty before letting an email through.</li>
+    </ul>
+    <p>Teacher's Final Word: The judge you pick determines the athlete you get. Choose MSE when you want to minimize the distance to a target; choose Cross-Entropy when you want your model to learn the difference between being "maybe" right and "certainly" right.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the components. Now how do we arrange them into powerful configurations? Explore <strong><a href="#/machine-learning/deep-learning/architectures-intro">Deep Learning Architectures</a></strong>.
     </div>

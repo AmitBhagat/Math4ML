@@ -38,8 +38,6 @@ export const taylorSeriesSection: TopicSection = {
       </ul>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>
@@ -121,10 +119,12 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Taylor Series is the "Ultimate Simplifier." It allows us to take a complex, "bumpy" loss function and mimic it using simpler pieces like lines and parabolas.</p>
     <ul>
-      <li><strong>Optimization</strong>: All second-order optimizers assume the loss function can be represented by a local quadratic Taylor expansion.</li>
-      <li><strong>Model Interpretation</strong>: Local Surrogate models (LIME) use first-order Taylor expansions to explain why a black-box model made a prediction.</li>
+      <li><strong>Fast Kernel Approximations (RFF)</strong>: Training on millions of data points with complex math is too slow. We use Taylor Series to approximate these complex functions with simple polynomials. This allows "Support Vector Machines" (SVMs) to scale to massive datasets without crashing your computer.</li>
+      <li><strong>Trust-Region Optimization</strong>: In safety-critical AI, we don't just follow the gradient blindly. We create a Taylor expansion and define a "Trust Region"—a safe zone where our approximation is guaranteed to be accurate. The model only moves within this zone to avoid disastrous, unpredictable jumps in logic.</li>
     </ul>
+    <p>Teacher's Final Word: Even if we don't know the "Whole Universe" of the loss function, the Taylor expansion gives us a reliable **Local Map** to decide our next step. It's how we navigate the unknown with scientific precision.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Approximations help us find the "Low points" on a curve. But how do we identify them exactly? Explore <strong><a href="#/mathematics/calculus/critical-points">Critical Points</a></strong>.

@@ -29,8 +29,6 @@ export const matrixInverseSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
     
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
@@ -105,10 +103,12 @@ else:
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Inverse is your mathematical "Undo Button." It allows you to work backwards from an output to find the original input.</p>
     <ul>
-      <li><strong>Linear Regression (Normal Equation)</strong>: \(\beta = (X^T X)^{-1} X^T y\) relies on inverting the feature correlation matrix.</li>
-      <li><strong>Optimization</strong>: Newton’s Method uses the inverse of the Hessian to find the local minimum faster.</li>
+      <li><strong>Newton’s Method (Optimization)</strong>: When an AI is trying to find the absolute lowest point of an error curve, it uses the Inverse of the "Hessian" matrix to calculate the perfect step size, cutting down training time significantly.</li>
+      <li><strong>Image Deblurring</strong>: If an image is blurred by a known lens distortion, we can find the Inverse of that transformation to "un-blur" the photo and recover the original high-resolution details.</li>
     </ul>
+    <p>Teacher's Final Word: In real-world ML, we often avoid calculating the inverse directly because it’s computationally heavy. Instead, we use "Solver" algorithms that give us the same result with 10x more efficiency.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What happens when a matrix *can't* be inverted? What is that number that decides? Explore <strong><a href="#/mathematics/linear-algebra/determinants">Determinants</a></strong>.

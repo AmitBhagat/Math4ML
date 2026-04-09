@@ -111,6 +111,14 @@ print(f"Normal points detected as normal: {list(y_pred_train).count(1)} / 200")
 print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Anomaly Detection is the "Immune System" of AI. It doesn't need to know every possible threat; it just needs to know what "Normal" looks like so anything strange can be flagged.</p>
+    <ul>
+      <li><strong>Credit Card Fraud Prevention</strong>: Banks use anomaly detection to spot the "Loner" transaction. If your typical spending is small and local, a $5,000 purchase in a foreign country stands out as mathematically isolated and triggers an instant alert.</li>
+      <li><strong>Industrial Equipment Maintenance</strong>: In factories, sensors track heat and vibration. An anomaly detector learns the "Manifold of Normalcy" for a healthy machine. When a bearing starts to fail, the sensor data wanders off into empty regions of space, flagging the problem before the machine actually breaks.</li>
+    </ul>
+    <p>Teacher's Final Word: Anomaly Detection focuses on the loner. It's the art of defining the "fence" around a sheep herd so clearly that a wolf stands out simply because it is outside the boundary.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Finding strange points is one thing—what about the structure of the data itself? Explore <strong><a href="#/machine-learning/unsupervised-learning/dim-reduction-intro">Dimension Reduction</a></strong>.
     </div>

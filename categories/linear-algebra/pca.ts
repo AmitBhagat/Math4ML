@@ -136,11 +136,12 @@ print(f"Reduced Shape: {X_reduced.shape}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>PCA is like "Finding the Best Camera Angle." It identifies the directions of maximum spread in your data so you can capture its essence without the weight of unnecessary details.</p>
     <ul>
-      <li><strong>Visualization</strong>: Plotting 100-dimensional genomics data in 2D to find clusters of diseases.</li>
-      <li><strong>Preprocessing</strong>: Speeding up training by removing "Heigh-Correlation" features.</li>
-      <li><strong>Face Recognition (Eigenfaces)</strong>: Representing human faces as a combination of a few thousand "Template" eigenvectors.</li>
+      <li><strong>Genomics Visualization</strong>: Scientists often work with 10,000 genes per patient. PCA projects that massive data onto a 2D plot. Suddenly, patients with similar diseases "Cluster" together on the screen, revealing patterns that were invisible in the raw numbers.</li>
+      <li><strong>Real-time Face Detection</strong>: Your phone doesn't look at every single pixel. It uses PCA to find the 50 most important "Eigenfaces"—the primary directions of variation in human features. By looking only at these 50 values, the AI can recognize you in milliseconds.</li>
     </ul>
+    <p>Teacher's Final Word: PCA is the ultimate "Noise Cancellation" for your data. It separates the "Soul" of the story from the irrelevant details, allowing your models to run faster and see clearer.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict the future in <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.

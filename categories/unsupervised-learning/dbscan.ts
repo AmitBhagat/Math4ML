@@ -57,13 +57,6 @@ export const dbscanSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Border Labeling:</strong> If a point reaches a Core point but isn't one itself, label it as a <strong>Border Point</strong>.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Outlier Removal:</strong> Any point that cannot reach a Core Point is labeled as <strong>Noise</strong>.
-        </div>
-      </div>
-    
-
     <h2 id="epsilon">Parameters: Epsilon (\(\epsilon\)) and MinPts</h2>
     <p><strong>Epsilon (\(\epsilon\)):</strong> The maximum distance between two points to be considered neighbors. 
     <strong>MinPts:</strong> The minimum number of points required to form a cluster.</p>
@@ -142,6 +135,14 @@ for i, coord in enumerate(X):
 
 print(f"\nTotal Outliers found: {np.sum(labels == -1)}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>DBSCAN has the courage to say: "This point doesn't belong to any group." It is the king of finding "The Crowd" while filtering out the junk.</p>
+    <ul>
+      <li><strong>Identifying Criminal Hotspots</strong>: Police departments use DBSCAN to find areas with high densities of crime reports. Because DBSCAN can follow arbitrary shapes, it can identify a "hot" street or a curved park area while ignoring random isolated incidents that don't belong to a pattern.</li>
+      <li><strong>Satellite Image Feature Extraction</strong>: When analyzing the surfaces of other planets, scientists use DBSCAN to identify "Crowds" of craters or rocks. The algorithm is perfect for this because it handles the irregular shapes of natural features and effectively ignores the sensor noise.</li>
+    </ul>
+    <p>Teacher's Final Word: DBSCAN is the only algorithm that finds the "Vibe" of a cluster regardless of its shape. As long as points are standing shoulder-to-shoulder, they are part of the crowd. It is your best tool for messy, real-world spatial data.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want "Soft" assignments where a point can be 80% Cluster A and 20% Cluster B? Explore <strong><a href="#/machine-learning/unsupervised-learning/gmm">Gaussian Mixture Models (GMM)</a></strong>.

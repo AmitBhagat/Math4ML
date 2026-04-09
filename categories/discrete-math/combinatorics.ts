@@ -9,6 +9,9 @@ export const combinatoricsSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🔢 Discrete Math · Counting</div>
       <h1>Combinatorics: The Art of Counting</h1>
+      <p>Combinatorics is the art of counting—determining the scale of a problem and the complexity of its search space for AI and Machine Learning.</p>
+    </div>
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>In computer science and algorithm analysis, <strong>Combinatorics</strong> is the art of counting—not just simple counting, but determining the sheer scale of a problem before you even start coding. In the AI/ML world, this is how we understand the "Search Space" and the complexity of our models. If you have 10 features and you want to test every possible subset, combinatorics tells you exactly how many trials you need to run. It is the mathematical warning system that prevents us from attempting "Brute Force" solutions on problems that would take until the heat death of the universe to solve. It is the tactical assessment of <strong>Possibility</strong>.</p>
 

@@ -113,6 +113,14 @@ print(f"\n--- Output Values (Context-aware embeddings) ---")
 print(output.round(1))
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Transformers are the "Global Spotlights" that read the entire page at once. By replacing sequential memory with parallel attention, they make real-time reasoning possible at a massive scale.</p>
+    <ul>
+      <li><strong>Large Language Models (ChatGPT, Claude)</strong>: Transformers are the engine behind the current AI revolution. Because they can "Pay Attention" to 1,000+ words simultaneously, they can understand complex irony, follow long instructions, and write code—instantly seeing how a variable at the start of a file relates to a function at the end.</li>
+      <li><strong>Protein Folding and Drug Discovery</strong>: In biology, the "Shape" of a protein determines its function. Transformers are used to see the relationship between distant atoms in a long amino acid sequence. This "Global Context" allows AI to predict how a molecule will fold in 3D space, accelerating the discovery of new medicines by decades.</li>
+    </ul>
+    <p>Teacher's Final Word: Parallel vision beats sequential memory every single time. Transformers turned AI from a goldfish in a bowl into a researcher with a spotlight, capable of finding the needle of context in a haystack of data.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the architectures of the mind. Now, let's learn how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>

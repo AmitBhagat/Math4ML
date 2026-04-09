@@ -40,8 +40,6 @@ export const expectationSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML training, the "Risk" we minimize is the expected value of the loss function over the data generating distribution.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     
       <h4>Problem: Evaluating a Lottery</h4>

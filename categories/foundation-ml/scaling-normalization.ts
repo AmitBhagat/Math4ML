@@ -41,8 +41,6 @@ export const scalingNormalizationSection: TopicSection = {
       <p class="text-xs opacity-80 mt-2">The algebraic goal is to improve the <strong>Condition Number</strong> of the optimization surface. In Gradient Descent, scaling prevents "elongated" loss contours, allowing for larger learning rates and significantly faster convergence.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Multi-Currency Exchange</h2>
     
       <h4>Scenario: Who is Richer?</h4>

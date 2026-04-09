@@ -39,8 +39,6 @@ export const mleSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Almost all supervised learning losses (e.g., MSE, Cross-Entropy) are derived by taking the MLE of specific noise distributions.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
     
       <h4>Problem: Finding the "True" Chance of Heads</h4>
@@ -117,10 +115,12 @@ print(f"Sample Mean: {data.mean():.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>MLE is the fundamental way we "Train" models. It asks: "Given this data, what is the Ideal Knob Setting for my model?"</p>
     <ul>
-      <li><strong>Logistic Regression</strong>: MLE is used to find the coefficients that maximize the probability of the observed classes.</li>
-      <li><strong>Neural Networks</strong>: Training a network is essentially performing MLE on the weights to minimize Cross-Entropy.</li>
+      <li><strong>Logistic Regression</strong>: This classifier doesn't just guess "Yes or No." It uses MLE to find the weights that make the observed classes in your dataset the most probable outcome. It's the engine that finds the parameters which explain your data with the highest mathematical confidence.</li>
+      <li><strong>Mean Squared Error (MSE) Derivation</strong>: Most people think MSE is an arbitrary choice, but it's actually the result of performing MLE on a "Normal" (Gaussian) noise distribution. When you minimize the squared error, you are mathematically finding the most likely average for your data points.</li>
     </ul>
+    <p>Teacher's Final Word: MLE is the tactical decision to trust the data completely and find the parameters that make the reality we see as unsurprising as possible. It is the bedrock of almost every learning algorithm.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we already have a <em>hunch</em> about the parameters before seeing data? Explore <strong><a href="#/mathematics/statistics/map">Maximum a Posteriori (MAP)</a></strong>.

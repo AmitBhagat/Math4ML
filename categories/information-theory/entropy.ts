@@ -40,8 +40,6 @@ export const entropySection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
     
       <h4>Problem: Comparing Uncertainty Levels</h4>

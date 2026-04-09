@@ -40,8 +40,6 @@ export const varianceSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In the **Bias-Variance Tradeoff**, variance represents the error stemming from a model's sensitivity to specific fluctuations in the training data.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
     
       <h4>Problem: Comparing Two Stocks</h4>

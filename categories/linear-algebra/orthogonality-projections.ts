@@ -31,8 +31,6 @@ export const orthogonalityProjectionsSection: TopicSection = {
       </ul>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     
       <h4>Problem: Shadow of [3, 4] on X-axis</h4>
@@ -99,11 +97,12 @@ print(f"Shadow of y on u: {proj_y_u}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Projections are the mathematical way to find the "Best Approximation." They allow us to filter out the noise that doesn't align with our chosen features.</p>
     <ul>
-      <li><strong>Linear Regression</strong>: The core solver (Normal Equation) is a sequence of projections.</li>
-      <li><strong>Gram-Schmidt Process</strong>: Turning any set of vectors into an <strong>Orthogonal Basis</strong> for training stability.</li>
-      <li><strong>Support Vector Machines (SVMs)</strong>: Finding the perpendicular distance from a sample to the decision boundary.</li>
+      <li><strong>Gram-Schmidt Preprocessing</strong>: When training models, highly correlated (parallel) features can cause the weights to "explode." We use projections to "orthogonalize" the features—stripping away their mutual overlap so the model sees 100% unique info from every input.</li>
+      <li><strong>SVM Margin Calculation</strong>: In Support Vector Machines, we need to find the "Gap" between two classes. The algorithm uses vertical projections to find the absolute closest distance from a data point to the decision boundary, ensuring we maximize the safety margin.</li>
     </ul>
+    <p>Teacher's Final Word: A projection is like casting a shadow to see the core shape of an object while ignoring the distracting glare. In AI, it's how we find the "Truth" hidden within a noisy spreadsheet.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Projections give us "shadows." But what about the vectors that *never* move? Explore <strong><a href="#/mathematics/linear-algebra/eigenvalues-eigenvectors">Eigenvalues & Eigenvectors</a></strong>.

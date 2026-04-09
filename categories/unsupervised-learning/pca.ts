@@ -145,6 +145,14 @@ print(f"Contribution of PC2: {ratios[1]:.2%}")
 print(f"Total Info Retained: {np.sum(ratios):.2%}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>PCA is the "Signal vs. Noise" filter. It doesn't just cut features; it squashes them into a new perspective that maximizes the capture of information (variance).</p>
+    <ul>
+      <li><strong>Facial Recognition (Eigenfaces)</strong>: Before deep learning, engineers used PCA to represent human faces. By finding the "Principal Components" of face images, they could represent a high-res photo using just a few numbers (Eigenfaces), allowing computers to compare faces 1,000x faster by ignoring pixel-noise.</li>
+      <li><strong>Genetic Population Mapping</strong>: In DNA research, individual variations are often drowned out by massive amounts of biological noise. Researchers use PCA to find the "Main Signal" of genetic variation, allowing them to see the true structure of an ethnic population on a simple 2D map.</li>
+    </ul>
+    <p>Teacher's Final Word: PCA is the most mathematically elegant way to find the skeleton of your data hidden within a high-dimensional cloud. It is your first and best defense against the "Curse of Dimensionality."</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> PCA captures "Global" variance. But what if we want to visualize "Local" clusters of points? Explore <strong><a href="#/machine-learning/unsupervised-learning/tsne">t-SNE Visualization</a></strong>.
     </div>

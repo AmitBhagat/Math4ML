@@ -124,10 +124,12 @@ print(f"Final Weights: {w[0]:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>SGD is the "Noisy Hustle." It replaces a long, slow wait for the "Perfect Map" with a fast, jittery "Estimate" that actually helps you train faster.</p>
     <ul>
-      <li><strong>Online Learning</strong>: Updating models in real-time as individual users interact with a website.</li>
-      <li><strong>Large-scale Deep Learning</strong>: Training models like GPT on trillions of tokens—literally impossible without SGD.</li>
+      <li><strong>Large-scale Deep Learning</strong>: Training models like GPT-4 on trillions of tokens is literally impossible with standard Gradient Descent—it would take years to calculate a single step. SGD allows us to start moving after seeing just a tiny fraction of the data, speeding up the process by millions.</li>
+      <li><strong>Online Learning (Continuous Streams)</strong>: For apps like TikTok or Netflix, the data never stops coming. SGD allows the recommendation engine to update its "knobs" in real-time as you click on a video, rather than waiting for the end of the day to process every user at once.</li>
     </ul>
+    <p>Teacher's Final Word: Moving constantly is much better than moving perfectly. The "jitter" in SGD is actually a feature—it helps the model jump out of shallow traps that would catch a "perfect" but rigid algorithm. It is the engine of the AI revolution.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Does the descent always land on the global minimum? How can we be sure? Explore <strong><a href="#/mathematics/optimization/convex-optimization">Convex Optimization</a></strong>.

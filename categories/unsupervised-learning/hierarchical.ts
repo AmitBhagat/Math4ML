@@ -145,6 +145,14 @@ print(f"\n[Family 0 has {np.sum(labels == 0)} members]")
 print(f"[Family 1 has {np.sum(labels == 1)} members]")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Hierarchical Clustering is the "DNA Family Tree." It doesn't just categorize; it asks "How closely related are you to every other point in the universe?".</p>
+    <ul>
+      <li><strong>Biological Phylogenetics</strong>: Biologists use hierarchical clustering to build "Trees of Life." By comparing DNA sequences, the algorithm creates a dendrogram that shows exactly which species are "Twins" and which are "Distant Cousins," revealing the evolutionary ancestry of an entire ecosystem.</li>
+      <li><strong>Document Organization</strong>: News platforms like Google News use hierarchical clustering to group articles. It might first group all "Sports" articles, then split those into "Football" and "Basketball," allowing users to navigate from broad categories down to specific match reports.</li>
+    </ul>
+    <p>Teacher's Final Word: The dendrogram is the height-map of similarity—it tells you exactly when two groups felt similar enough to merge. It’s the difference between seeing a crowd and seeing the history of how that crowd formed.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if your data is "Messy" and shaped like a Crescent Moon? k-Means and Ward's will fail. Explore <strong><a href="#/machine-learning/unsupervised-learning/dbscan">DBSCAN Analysis</a></strong>.
     </div>

@@ -39,8 +39,6 @@ export const mapSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">MAP is the Bayesian bridge that prevents models from "hallucinating" patterns in small, noisy datasets by anchoring them to reasonable priors.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
     
       <h4>Problem: Damping the Noise</h4>
@@ -121,10 +119,12 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>MAP is the "Smarter Sibling" of MLE. While MLE only cares about the current data, MAP allows you to bring your own Prior Wisdom to the table.</p>
     <ul>
-      <li><strong>L2 Regularization (Weight Decay)</strong>: Using a Gaussian prior to keep weights small and controllable.</li>
-      <li><strong>L1 Regularization (Lasso)</strong>: Using a Laplace prior to force most weights to be exactly zero (Sparse feature selection).</li>
+      <li><strong>Ridge Regression (L2 Penalty)</strong>: When we tell a model "Don't let the weights get too big," we are actually using MAP with a Gaussian prior. This "Prior Belief" that weights should be near zero prevents the model from overfitting to and keeps the math stable.</li>
+      <li><strong>Lasso Regression (Sparse Models)</strong>: If we use a different prior (Laplace), we are essentially telling the AI: "Most features are likely useless, so pick only the best ones." This forces many weights to become exactly zero, giving us a simplified, "Sparse" model.</li>
     </ul>
+    <p>Teacher's Final Word: MAP is the mathematical bridge that prevents models from "hallucinating" patterns in small datasets. By anchoring your AI to reasonable real-world assumptions, you ensure it stays grounded and reliable.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Models can fail by being too rigid or too wild. How do we find the "Sweet Spot" between the two? Explore <strong><a href="#/mathematics/statistics/bias-variance">The Bias-Variance Tradeoff</a></strong>.

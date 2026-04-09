@@ -122,6 +122,14 @@ w -= lr * gradient
 print(f"New Improved Weight: {w:.4f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Backpropagation is the "Recursive Blame" mechanism that allows every dial in a multi-billion parameter machine to self-correct. It turns failure into precise improvement.</p>
+    <ul>
+      <li><strong>Search Engine Result Tuning</strong>: When you click on the 3rd result in a search instead of the 1st, the engine uses that signal as "Feedback." Backpropagation travels down through the thousands of ranking rules, reducing the weights of the rules that suggested the 1st result and boosting the ones that found the 3rd. It is how Google and Bing learn your intent.</li>
+      <li><strong>Voice Command Precision (Siri/Alexa)</strong>: Every time an AI assistant mishears you and you correct it ("No, I said play Jazz"), the model calculates the error between what it heard and what you wanted. Backpropagation is the process that "Blames" the specific audio filters that failed, allowing the model to recognize your specific accent or background noise better over time.</li>
+    </ul>
+    <p>Teacher's Final Word: Backprop is the most important "conversation" in AI. It walks backward from the mistake to the source, asking every neuron: "How much did you contribute to this disaster?" and then turning its dial in the opposite direction. It is the engine of all modern learning.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>

@@ -126,6 +126,14 @@ for t, x_t in enumerate(events):
 print("\n[The important discovery from Step 0 is still in the journal at Step 9!]")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>LSTMs are the "Gated Diaries" of AI. They solve the memory loss of standard RNNs by using a "Cell State" that protects important news while erasing irrelevant details.</p>
+    <ul>
+      <li><strong>Long-form Document Summarization</strong>: Standard RNNs forget the first chapter by the time they reach the last. LSTMs use the "Forget Gate" and "Input Gate" to carry the core plot points across hundreds of pages, allowing the model to summarize a 50-page legal contract or a full-length book without losing the context of the introduction.</li>
+      <li><strong>Predictive Text Keyboards</strong>: When your phone suggests the next word in your text message, it's likely using an LSTM or GRU. It "remembers" the subject you started with (e.g., "The Meeting...") so that even 10 words later, it suggests verbs that are grammatically consistent with that initial subject.</li>
+    </ul>
+    <p>Teacher's Final Word: Gates are the traffic controllers of history. By being ruthless about what to forget, LSTMs allow the machine to maintain a "Long-Term" perspective that turns a stream of data into a meaningful story.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Even with a diary, the goldfish still has to read it one page at a time. What if we read the whole book at once? Explore <strong><a href="#/machine-learning/deep-learning/transformers">The Transformer Revolution</a></strong>.
     </div>

@@ -104,6 +104,14 @@ print(f"Sigmoid Probabilities: {sigmoid(signals).round(3)}")
 print(f"Softmax Distribution: {softmax(signals).round(3)}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Activations are the "Emotional Gatekeepers." They are the non-linear magic that allows a network to "bend" its logic to fit the complex reality of the world.</p>
+    <ul>
+      <li><strong>Medical Risk Probability (Sigmoid)</strong>: When a model predicts whether a patient has a condition, it uses Sigmoid in the final layer. It squashes the raw signals into a 0% to 100% "Risk Score." This allows doctors to set a threshold—for example, if the risk is >80%, trigger an immediate alert.</li>
+      <li><strong>Efficient Face Detection (ReLU)</strong>: Modern face-detection systems in your phone use thousands of ReLU activations. Because ReLU is "Off" for negative signals, it allows the model to ignore 90% of the background noise in a photo and focus all its "energy" on the features that actually look like a human face.</li>
+    </ul>
+    <p>Teacher's Final Word: Without bending, you're just a rigid calculator. Activation functions give the machine the "flexibility" to learn curves, patterns, and categories that a straight line could never see.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> We filtered the signals. Now how do we measure how "Wrong" the signals are? Explore <strong><a href="#/machine-learning/deep-learning/loss-functions">Loss Functions</a></strong>.
     </div>

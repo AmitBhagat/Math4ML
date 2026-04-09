@@ -41,8 +41,6 @@ export const featureEngineeringSection: TopicSection = {
       <p class="text-xs opacity-80 mt-2">Mathematically, good feature engineering reduces the <strong>VC-Dimension</strong> required for the model to achieve a low generalization error. By embedding domain knowledge into the features, we reduce the amount of data needed for the model to "converge" on the true underlying pattern.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Gourmet Dish Prep</h2>
     
       <h4>Scenario: Prepping the Perfect Salad</h4>

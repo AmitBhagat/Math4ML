@@ -31,8 +31,6 @@ export const emAlgorithmSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="steps">The 2 Big Steps: E and M</h2>
     
       <h4>How to solve the unsolvable:</h4>

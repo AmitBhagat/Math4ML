@@ -89,11 +89,7 @@ export const randomForestSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Independence:</strong> Ensure each tree is grown independently of the others.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Aggregating:</strong> For a new point, total the votes from all $B$ trees and pick the winner.
-        </div>
-      </div>
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Medical Jury</h2>
     
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Medical Jury</h2>
@@ -149,6 +145,14 @@ votes = model.predict_proba(new_case)[0]
 print(f"Forest Verdict: {'Positive' if prediction == 1 else 'Negative'}")
 print(f"Confidence Score: {votes[1]:.1%}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Random Forest is the "Wisdom of Crowds." It turns a single, biased decision-maker into a diverse jury of 100 specialists, ensuring the final verdict is robust and stable.</p>
+    <ul>
+      <li><strong>Credit Card Fraud Detection</strong>: Banks use Random Forests to decide if a transaction is fraudulent. Instead of trusting one biased set of rules, the "Forest" combines hundreds of trees—some looking at amount, others at location, others at timing. The majority vote ensures legitimate users aren't blocked by one weird purchase.</li>
+      <li><strong>Remote Sensing (Land Cover Mapping)</strong>: Scientists use satellite data to map the earth's surface (forest vs. urban). A Random Forest can handle thousands of subtle light frequencies from the satellite, using its aggregate intelligence to accurately label every pixel on the map.</li>
+    </ul>
+    <p>Teacher's Final Word: Random Forest is nearly impossible to break with messy, real-world data. It's the "Old Reliable" of machine learning—if you don't know which model to pick, start here.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we build trees sequentially to learn from each other's mistakes? Explore <strong><a href="#/machine-learning/supervised-learning/gradient-boosting">Gradient Boosting</a></strong>.

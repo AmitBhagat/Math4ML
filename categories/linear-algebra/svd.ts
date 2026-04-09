@@ -31,8 +31,6 @@ export const singularValueDecompositionSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     
       <h4>Problem: Reconstructing A = [[1, 0], [0, 2]]</h4>
@@ -94,11 +92,12 @@ print(f"Singular values of A: {s}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>SVD is the "Swiss Army Knife" of data science. It allows you to take any messy, complex matrix and break it down into three simple, elegant steps: **Rotate, Stretch, Rotate.**</p>
     <ul>
-      <li><strong>Principal Component Analysis (PCA)</strong>: Most robust PCA implementations use SVD internally.</li>
-      <li><strong>Topic Modeling (LSA)</strong>: SVD finds hidden topics in massive text corpora.</li>
-      <li><strong>Low-Rank Recommendation</strong>: Predicting missing ratings by assuming the "Value" matrix is low-rank.</li>
+      <li><strong>Latent Semantic Analysis (LSA)</strong>: SVD can read 1,000,000 documents and find the "Hidden Topics" inside. By decomposing the matrix, it discovers that words like "Piston" and "Spark" are physically linked to the same latent "Topic" (singular value), even if they never appear on the same page.</li>
+      <li><strong>Background Subtraction in Video</strong>: Security systems use SVD to separate "Static" background (low-rank singular values) from "Moving" intruders (high-rank noise). This is how the AI knows to ignore a stationary wall but follow a moving person.</li>
     </ul>
+    <p>Teacher's Final Word: SVD is the ultimate "Noise Filter." It allows you to find the signal buried under a mountain of static, ensuring your model focuses only on the high-rank patterns that actually matter.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> SVD is the math. Now, let's look at the ultimate application in data science. Explore <strong><a href="#/mathematics/linear-algebra/pca">Principal Component Analysis (PCA)</a></strong>.

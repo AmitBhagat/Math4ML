@@ -102,12 +102,7 @@ export const advancedBoostingSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Regularized Pruning:</strong> Penalize leaf weights ($L1/L2$) to ensure the trees don't become too complex.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Ensemble Summation:</strong> Combine thousands of trees into a single, high-dimensional decision engine.
-        </div>
       </div>
-    
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The F1 Pit Crew</h2>
     
@@ -164,6 +159,14 @@ new_test = np.array([[0.8, 0.5, 0.1, 0.2, 0.4]])
 prediction = model.predict(new_test)[0]
 print(f"Confidence Verdict: {prediction}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Advanced Boosting engines are the "Formula 1" Pit Crew of AI. They take the core concept of boosting and add elite engineering for blazing speed and precision.</p>
+    <ul>
+      <li><strong>High-Frequency Trading</strong>: Financial firms use LightGBM or XGBoost to make split-second decisions on stock trades. These models are engineered for extreme speed, allowing them to process millions of market signals and output a "Buy" or "Sell" signal in microseconds.</li>
+      <li><strong>Customer Churn Prediction</strong>: Large companies like Netflix use CatBoost to predict which users might cancel their subscription. It handles "Categorical" data (like favorite genres) without needing manual conversion, allowing the model to find complex "Boredom Patterns."</li>
+    </ul>
+    <p>Teacher's Final Word: In the world of tabular data (SQL tables, Excels), these are the undisputed champions. If you are competing on Kaggle or building a high-stakes business model, these are the tools you want in your garage.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have mastered the "Teachers" (Supervised). What happens when the machine has to learn on its own? Explore <strong><a href="#/machine-learning/unsupervised-learning/">Unsupervised Learning Paradigms</a></strong>.

@@ -65,9 +65,6 @@ export const classificationIntroSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="objective">The Goal: Decision Boundaries</h2>
-    <p>The core objective of any classification algorithm is to find the <strong>Decision Boundary</strong>. This is the "Fence" that separates classes. If a new data point lands on the left side of the fence, it's a cat. Right side? A dog. The "Better" the algorithm, the more <strong>robust and accurate</strong> that fence is.</p>
-
     <h2 id="algorithm">The Classification Algorithm</h2>
     
       <h4>The Sorting Process</h4>
@@ -148,6 +145,14 @@ prediction = model.predict(new_mail)[0]
 print(f"Probabilities: {probs}")
 print(f"Final Class: {'Spam' if prediction == 1 else 'Real'}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Classification is the art of "Drawing Boundaries." If regression answers "How Much?", classification answers "What is it?"—turning messy signals into hard, actionable buckets.</p>
+    <ul>
+      <li><strong>Medical Diagnosis</strong>: In hospitals, we use classification to determine if a patient has a specific disease based on their symptoms and scans. It's not about a continuous score; it's a "Yes" or "No" decision that determines the next life-saving step.</li>
+      <li><strong>Content Moderation</strong>: Platforms like YouTube or Instagram use classification to auto-detect "Violative Content." The model draws a boundary between acceptable speech and harmful content, ensuring millions of posts are sorted in milliseconds without a human needing to see every single one.</li>
+    </ul>
+    <p>Teacher's Final Word: Classification is how we build machines that can actually "See" and "Categorize" the universe. It is the first step toward creating an AI that understands the fundamental identity of the things it encounters.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What's the most common tool for building this "Fence"? Explore <strong><a href="#/machine-learning/supervised-learning/logistic-regression">Logistic Regression</a></strong>.

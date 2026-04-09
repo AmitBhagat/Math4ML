@@ -38,8 +38,6 @@ export const reinforcementLearningSection: TopicSection = {
       <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the **Bellman Equation**, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="exploitation">Exploration vs. Exploitation</h2>
     <p>This is the fundamental struggle of RL. Should the agent try a new, unknown action to find a potentially bigger reward (<strong>Exploration</strong>), or should it stick with the best action it has found so far (<strong>Exploitation</strong>)?</p>
     

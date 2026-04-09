@@ -38,8 +38,6 @@ export const partialDerivativesSection: TopicSection = {
       </ul>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     
       <h4>Problem: Finding Slopes on \(f(x, y) = x^2 + y^2\)</h4>
@@ -111,10 +109,12 @@ print(f"Exact derivative (2x): {2*x_val}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Partial Derivative is "Specialized Sensitivity." It isolates the influence of a single variable while freezing the rest of the universe.</p>
     <ul>
-      <li><strong>Building Gradient Vectors</strong>: All partial derivatives are stacked to create the "Gradient compass."</li>
-      <li><strong>Weight Isolation</strong>: Calculating how one specific weight in a layer contributes to the total error.</li>
+      <li><strong>Backpropagation in Individual Weights</strong>: When training a massive model, we use partial derivatives to find the "Responsible Weight." It tells the AI exactly how much a tiny nudge to Weight #59,302 affects the final decision, allowing for pinpoint corrections.</li>
+      <li><strong>Feature Importance (Sensitivity Analysis)</strong>: In models like house price predictors, partial derivatives allow us to calculate exactly which feature is most vital. By checking the partial derivative for "Square Footage," the model can tell if it's more important than "Year Built."</li>
     </ul>
+    <p>Teacher's Final Word: In ML, we often have thousands of variables at once. Partial derivatives allow us to diagnose exactly which specific parameter is helping (or hurting) our predictions without getting lost in the noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, partial derivatives tell us slopes along axes. How do we combine them to find the true "upward" direction? Explore <strong><a href="#/mathematics/calculus/gradient">The Gradient</a></strong>.

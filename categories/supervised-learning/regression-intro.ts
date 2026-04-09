@@ -59,10 +59,6 @@ export const regressionIntroSection: TopicSection = {
       </div>
     
 
-    <h2 id="math">The Objective: Error Minimization</h2>
-    <p>How do we know if our line is "Good"? We measure the <strong>Residuals</strong> (the distance between our predicted line and the actual data points). We want to find the line where the <strong>Sum of Squared Errors (SSE)</strong> is as small as possible.</p>
-    <div class="math-block">$$Loss = \sum_{i=1}^n (y_i - \hat{y}_i)^2$$</div>
-
     <h2 id="types">Flavors of Regression</h2>
     <ul>
       <li><strong>Linear:</strong> A straight line. Simple but rigid.</li>
@@ -149,6 +145,14 @@ cups_pred = model.predict(new_temp)
 print(f"Predicted cups sold at 22°C: {cups_pred[0]:.2f}")
 print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Regression answers the question "How Much?". While classification sorts things into buckets, regression deals with the infinite, continuous spectrum of physical reality.</p>
+    <ul>
+      <li><strong>Real Estate Valuation</strong>: Companies like Zillow use regression to estimate the price of your home. They take features like square footage, neighborhood safety, and house age to output a single, continuous dollar amount that reflects the market reality.</li>
+      <li><strong>Demand Forecasting</strong>: Global retailers like Amazon use regression to predict exactly how many units of a product will sell in the next week. This allows them to manage inventory perfectly, ensuring they never run out of stock while minimizing wasted shelf space.</li>
+    </ul>
+    <p>Teacher's Final Word: Regression is the art of finding the "Directional Truth." It turns messy historical observations into a clear, mathematical path that can forecast the future with high precision.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's start with the classic. Explore <strong><a href="#/machine-learning/supervised-learning/linear-regression">Linear Regression</a></strong>.

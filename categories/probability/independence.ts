@@ -39,8 +39,6 @@ export const independenceSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
     
       <h4>Problem: Successive Binary Trials</h4>

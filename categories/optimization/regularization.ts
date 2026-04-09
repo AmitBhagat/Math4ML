@@ -117,11 +117,12 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Regularization is the "Simplicity Tax." It ensures your model stays honest and focuses only on the most important patterns.</p>
     <ul>
-      <li><strong>Weight Decay</strong>: In Deep Learning, we add L2 regularization to keep weights small and controllable.</li>
-      <li><strong>Elastic Net</strong>: Combining both L1 and L2 to get the benefits of sparsity and stability.</li>
-      <li><strong>SVM (Support Vector Machines)</strong>: Regularization is a fundamental part of the "Soft Margin" calculation.</li>
+      <li><strong>Weight Decay in Neural Networks</strong>: L2 regularization is the most common technique used to prevent "Exploding Weights." By adding a penalty for large values, we ensure that no single neuron becomes a "dictator," forcing the model to share knowledge across all its connections.</li>
+      <li><strong>Feature Selection in Genomics</strong>: When analyzing DNA data with thousands of genes but few samples, L1 Regularization (Lasso) is used to find "Signature Genes." It forces irrelevant weights to become exactly zero, leaving behind only the handful of markers that truly matter.</li>
     </ul>
+    <p>Teacher's Final Word: The trade-off between a perfect score and a stable model is the single most important decision you make. Regularization is how you build an AI that works in the real world, not just in your lab.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the <strong>Linear Algebra</strong>, <strong>Calculus</strong>, <strong>Probability</strong>, <strong>Statistics</strong>, <strong>Information Theory</strong>, and <strong>Optimization</strong> expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.

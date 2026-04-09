@@ -39,11 +39,6 @@ export const logisticRegressionSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="loss">Log-Loss: The Penalty for Being Wrong</h2>
-    <p>In classification, we don't use MSE. Because the Sigmoid is non-linear, MSE would lead to a "Bumpy" loss surface. Instead, we use <strong>Binary Cross-Entropy (Log Loss)</strong>:</p>
-    <div class="math-block">$$Loss = -\frac{1}{n} \sum [y \log(\hat{y}) + (1-y) \log(1-\hat{y})]$$</div>
-    <p><strong>Note:</strong> This loss function is <strong>BRUTAL</strong>. If the model is 99.9% confident that a picture is a Cat, but it's actually a Dog, the penalty is nearly <strong>Infinite</strong>. It forces the model to be honest about its uncertainty.</p>
-
     <h2 id="decision">The Decision Threshold</h2>
     
       <h4>Scenario: Email Filter</h4>
@@ -153,6 +148,14 @@ print(f"Prob. of Staying: {prob[0]:.2%}")
 print(f"Prob. of Churning: {prob[1]:.2%}")
 print(f"Final Decision: {'Churn' if prob[1] > 0.5 else 'Stay'}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Logistic Regression is the "Commitment Curve." It starts with a linear score and then "Squashes" it into a tight probability window so you can make a definitive choice.</p>
+    <ul>
+      <li><strong>Credit Scoring</strong>: Banks use logistic regression to decide if you get a loan. They take your income and debt, pass it through the Sigmoid, and get a probability of default. If that probability is higher than their "Risk Fence," you are denied.</li>
+      <li><strong>Ad Click Prediction</strong>: Every time you see an ad on Google, a logistic regression model has already calculated the probability that you will click it. This "Soft Switch" helps companies decide which ads are worth showing you in under 100 milliseconds.</li>
+    </ul>
+    <p>Teacher's Final Word: Logistic Regression is the gold standard for decisions because it doesn't just give you a "Yes" or "No"—it tells you exactly how certain it is about that choice. It's the simplest "Switch" in the world of AI.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we use Probability in a more "Natural" way? Explore <strong><a href="#/machine-learning/supervised-learning/naive-bayes">Naive Bayes Classification</a></strong>.

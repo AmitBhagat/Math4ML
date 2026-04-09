@@ -39,8 +39,6 @@ export const jointDistributionsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     
       <h4>Problem: Tracking Clicks and Purchases</h4>

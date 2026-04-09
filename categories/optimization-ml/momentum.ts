@@ -32,8 +32,6 @@ export const momentumSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>
     
       <h4>Scenario: Pushing a Boulder through a Narrow Ravine</h4>

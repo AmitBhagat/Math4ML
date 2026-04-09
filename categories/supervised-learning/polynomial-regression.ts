@@ -90,11 +90,7 @@ export const polynomialRegressionSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Linear Mapping:</strong> Use standard Ordinary Least Squares (OLS) to find the coefficients $w$ for these new features.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Projection:</strong> The resulting "Straight line" in the expanded space appears as a curve when plotted against the original $x$.
-        </div>
-      </div>
+    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bent Ruler</h2>
     
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bent Ruler</h2>
@@ -156,6 +152,14 @@ X_new = poly.transform([[60]])
 pred = poly_model.predict(X_new)
 print(f"Prediction for 60mph: {pred[0]:.1f} feet")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Polynomial Regression is the "Flexible Ruler." It is the trick we use to make a simple linear tool fit the complex, curved reality of the physical world.</p>
+    <ul>
+      <li><strong>Robotic Trajectory Tracking</strong>: In robotics, a moving arm or a flying projectile doesn't follow a straight line—it follows a curve. Polynomial regression allows the AI to predict the landing spot by fitting a parabola to its motion data.</li>
+      <li><strong>Economic Seasonality Modeling</strong>: Businesses don't grow in straight lines; they have "Cycles." Polynomial features allow a model to capture these bends, helping companies predict when their sales will peak or crash during the year.</li>
+    </ul>
+    <p>Teacher's Final Word: Sometimes a straight line is just too "Dumb." Use a bendy ruler to capture the hills and valleys of the real world, but be careful not to make it so flexible that it starts memorizing the dust.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Enough with numbers. How do we build a model that can "Sort" things into buckets? Explore <strong><a href="#/machine-learning/supervised-learning/classification-intro">Introduction to Classification</a></strong>.

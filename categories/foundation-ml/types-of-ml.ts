@@ -40,8 +40,6 @@ export const typesOfMLSection: TopicSection = {
       <p class="text-xs opacity-80 mt-2">Hybrid paradigms like **Semi-Supervised Learning** utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="supervised">Supervised Learning: The Teacher</h2>
     <p>A <strong>Supervised</strong> model is trained on "Labeled Data." Every input <span class="text-green-premium font-bold">Case Study:</span> comes with a corresponding target answer. The model learns to map inputs to outputs by correcting its mistakes.</p>
     

@@ -60,13 +60,6 @@ export const kmeansSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Iterate:</strong> Repeat the Assignment and Update steps.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Convergence:</strong> Stop once the centroids no longer move or a maximum iteration limit is hit.
-        </div>
-      </div>
-    
-
     <h2 id="elbow">Selecting 'k': The Elbow Method</h2>
     <p>How do you know if there are 3 clusters or 10? If you increase \(K\), your error (WCSS) will <strong>always</strong> go down. The goal is to find the "Elbow"—the point where adding more clusters doesn't give you a significantly better fit. It's the point of <strong>Diminishing Returns</strong>.</p>
 
@@ -141,6 +134,14 @@ print(f"Centroids: \n{centers.round(1)}")
 new_point = np.array([[5, 5]])
 print(f"Point (5,5) belongs to Cluster: {kmeans.predict(new_point)[0]}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>K-Means is the simplest way to find "Hidden Tribes" in a cloud of data. It uses the "Gravity" of the points themselves to discover order without any human labels.</p>
+    <ul>
+      <li><strong>Customer Persona Segmentation</strong>: E-commerce giants like Amazon use K-Means to group millions of shoppers into distinct "Personas." By clustering users based on spending habits and browsing history, they can identify the "Budget Students" vs. the "Luxury Travelers" automatically.</li>
+      <li><strong>Image Compression (Vector Quantization)</strong>: K-Means handles photo shrinking by finding the few most dominant colors in an image. It replaces every pixel with the nearest dominant color center, allowing you to store a rich photo using only a tiny fraction of the original disk space.</li>
+    </ul>
+    <p>Teacher's Final Word: K-Means is the ultimate self-organizing tool. Even if nobody labeled your data, these points belong together because they look at the world from the same center of gravity. It is the gold standard for finding "Round Blobs" of similarity.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if clusters are "Nested" like a family tree? Explore <strong><a href="#/machine-learning/unsupervised-learning/hierarchical">Hierarchical Clustering</a></strong>.

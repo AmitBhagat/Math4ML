@@ -125,6 +125,14 @@ print("ML Price:     $" + f"{model.predict(test_size)[0]:,.2f}")
       </div>
     </div>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Machine Learning is the pivot from "Rules" to "Examples." Instead of telling a computer exactly how to solve a problem, we provide the data and let the algorithm discover the hidden recipe for itself.</p>
+    <ul>
+      <li><strong>Email Spam Filtering</strong>: Early spam filters used manual rules (like "If subject contains 'Winner', mark as spam"). Today, ML models look at millions of emails, noticing subtle patterns in sender reputation and word usage that no human could ever hardcode. The computer "learns" what junk looks like by seeing enough of it.</li>
+      <li><strong>Financial Credit Scoring</strong>: When you apply for a loan, an ML model predicts your reliability. It doesn't just look at your bank balance; it analyzes thousands of data points—from spending frequency to bill payment history—finding the hidden relationships that determine "Creditworthiness" across a massive population.</li>
+    </ul>
+    <p>Teacher's Final Word: If you can't write a rule for it, but you have 10,000 examples of it, use Machine Learning. It's the only way to solve problems that are governed by complexity and human intuition rather than fixed logic.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Not all learning is the same. How does the machine actually "learn"? Explore <strong><a href="#/machine-learning/foundation-ml/types-of-ml">Types of Machine Learning</a></strong>.
     </div>

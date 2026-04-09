@@ -39,8 +39,6 @@ export const randomVariablesSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, we treat features as realizations of underlying random variables $X_1, X_2, \dots, X_n$.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
     
       <h4>Problem: Mapping Binary Outcomes</h4>

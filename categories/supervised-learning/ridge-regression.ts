@@ -80,11 +80,13 @@ export const ridgeRegressionSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Optimization:</strong> Solve for $w$ using the closed-form solution: $w = (X^T X + \lambda I)^{-1} X^T y$.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Shrinkage:</strong> Observe that weights are pulled toward zero, effectively stabilizing the model against collinearity.
-        </div>
-      </div>
+    <h2 id="applications">Applications in ML</h2>
+    <p>Ridge Regression is the "Elastic Anchor." It turns a frantic, noisy memorizer into a calm, stable generalizer by muffling irrelevant signals.</p>
+    <ul>
+      <li><strong>Economic Forecasting</strong>: When predicting GDP or inflation, you often have 1,000 related features that overlap. Ridge acts as a "Stabilizer," ensuring that no single noisy feature dominates the model and causes it to explode.</li>
+      <li><strong>Digital Image De-noising</strong>: In digital photography, Ridge regression is used to smooth out grainy images. It applies a mathematical penalty to "Extreme" pixel values, forcing the model to favor smoother transitions and creating a cleaner final picture.</li>
+    </ul>
+    <p>Teacher's Final Word: The trade-off between a perfect training score and a stable real-world model is the most important decision you make. Ridge is how you ensure your AI doesn't wiggle for every tiny breeze of noise.</p>
     
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Stable Tent Pole</h2>
@@ -140,6 +142,14 @@ print(f"Hours Studied Weight: {w_hours:.2f}")
 print(f"Random Noise Weight: {w_noise:.2f} (Squeezed!)")
 print(f"Prediction for 12 hours: {ridge_model.predict([[12, 10]])[0]:.1f}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Ridge Regression is the "Elastic Anchor." It turns a single, biased decision-maker into a diverse jury of 100 specialists, ensuring the final verdict is robust and stable.</p>
+    <ul>
+      <li><strong>Economic Forecasting</strong>: When predicting GDP or inflation, you often have 1,000 related features that overlap. Ridge acts as a "Stabilizer," ensuring that no single noisy feature dominates the model and causes it to explode.</li>
+      <li><strong>Digital Image De-noising</strong>: In digital photography, Ridge regression is used to smooth out grainy images. It applies a mathematical penalty to "Extreme" pixel values, forcing the model to favor smoother transitions and creating a cleaner final picture.</li>
+    </ul>
+    <p>Teacher's Final Word: The trade-off between a perfect training score and a stable real-world model is the most important decision you make. Ridge is how you ensure your AI doesn't wiggle for every tiny breeze of noise.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want to actually "Delete" useless features instead of just muffling them? Explore <strong><a href="#/machine-learning/supervised-learning/lasso-regression">Lasso Regression</a></strong>.

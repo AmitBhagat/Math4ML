@@ -39,8 +39,6 @@ export const probabilityDistributionsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
     
       <h4>Problem: Tracking a 1-Trial Experiment</h4>

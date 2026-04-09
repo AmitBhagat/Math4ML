@@ -105,11 +105,12 @@ print(f"L2: {l2}, L1: {l1}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Norms are the "Police Officers" of Machine Learning. They measure the total "Mass" of your weights to keep them from growing out of control.</p>
     <ul>
-      <li><strong>Lasso (L1)</strong>: Feature selection (makes unimportant weights zero).</li>
-      <li><strong>Ridge (L2)</strong>: Stability (prevents weights from exploding).</li>
-      <li><strong>Mean Squared Error (MSE)</strong>: Based on the L₂ norm of the errors.</li>
+      <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our error function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise.</li>
+      <li><strong>K-Nearest Neighbors (k-NN)</strong>: To classify an object, the k-NN algorithm calculates the L2 norm (straight-line distance) between that object and every other labeled point. The "Length" provided by the norm tells the AI exactly who the closest neighbors are.</li>
     </ul>
+    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional vector and boils it down to a single number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Vectors are building blocks. Let's arrange them into grids. Explore <strong><a href="#/mathematics/linear-algebra/matrices">Matrices</a></strong>.

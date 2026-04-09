@@ -116,11 +116,12 @@ print(f"Eigenvectors:\n{vecs}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Eigenvectors are the "Hidden Axes" of your data. While the rest of the world rotates into chaos, these special directions stay perfectly aligned.</p>
     <ul>
-      <li><strong>Principal Component Analysis (PCA)</strong>: Finding the eigenvectors of the data's covariance matrix to reduce dimensions.</li>
-      <li><strong>Google PageRank</strong>: Your search results are ranked based on the leading eigenvector of a massive "Web matrix."</li>
-      <li><strong>Spectral Clustering</strong>: Using eigenvalues to find groups (clusters) in complex data networks.</li>
+      <li><strong>Google PageRank</strong>: The reason Google became a giant is an eigenvalue problem. It treats the entire web as a matrix and finds the "Principal Eigenvector." The values in this vector tell the system exactly which websites are the most influential and deserve to be at the top of your search.</li>
+      <li><strong>Spectral Clustering</strong>: When data moves in complex "Swirls" that standard algorithms can't handle, we use eigenvalues to find the hidden gaps in the network. This allows the AI to successfully group data points even when they are physically tangled together.</li>
     </ul>
+    <p>Teacher's Final Word: Finding the eigenpairs of your data is like finding its "Soul." It reveals the core directions where all the real action happens, allowing you to ignore the noisy wiggles and focus on the main signal.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Some matrices have "Good Behavior" and always produce positive scaling factors. Explore <strong><a href="#/mathematics/linear-algebra/positive-definite">Positive Definite Matrices</a></strong>.

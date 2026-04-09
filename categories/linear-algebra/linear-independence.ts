@@ -108,10 +108,12 @@ print(f"Is Independent? {is_independent}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Linear Independence is the ultimate measure of "Efficiency." It asks your data: "Are you actually telling me something new, or are you just a remix of what I already know?"</p>
     <ul>
-      <li><strong>Multicollinearity</strong>: In Linear Regression, independent features ensure your weights are stable and interpretable.</li>
-      <li><strong>Dimensionality Reduction</strong>: Identifying dependent vectors helps us "compress" our data without losing any real info.</li>
+      <li><strong>Signal De-noising</strong>: When processing audio or sensor data, we look for independent signals. If two sensors give you the same data stream, they are dependent; one is just redundancy. We use linear independence to strip away the "copycats" and keep only the raw, unique signal.</li>
+      <li><strong>Feature Selection</strong>: In predictive modeling, having independent features is the key to stability. If your model uses both "Total Sales" and "Tax Paid" where tax is a fixed percentage, the features are dependent. This can cause the math to "explode" during training (Singular Matrix).</li>
     </ul>
+    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.

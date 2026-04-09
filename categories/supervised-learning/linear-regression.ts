@@ -43,14 +43,6 @@ export const linearRegressionSection: TopicSection = {
     <p>How do we find the "Best" \(w\) and \(b\)? We minimize the <strong>Mean Squared Error (MSE)</strong>. In simple cases, there is a <strong>Closed-Form Solution</strong> (The Normal Equation) that gives us the answer instantly without needing Gradient Descent:</p>
     <div class="math-block">$$w = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2}$$</div>
 
-    <h2 id="assumptions">The "Linear" Assumptions</h2>
-    <p>Linear Regression is powerful but <strong>fragile</strong>. It assumes:</p>
-    <ul>
-      <li><strong>Linearity:</strong> The relationship is actually a line (not a curve).</li>
-      <li><strong>Independence:</strong> Observations don't influence each other.</li>
-      <li><strong>Homoscedasticity:</strong> The "Noise" is constant across all data.</li>
-    </ul>
-
     <h2 id="analogy">The "Perfect String" Analogy</h2>
     <div class="callout success">
       <div class="callout-icon">✓</div>
@@ -142,6 +134,14 @@ print("Learned Weight (Price per Sqft): $" + f"{w:.2f}")
 print("Learned Bias (Base Price): $" + f"{b:.2f}")
 print("Estimate for 2000 sqft house: $" + f"{prediction[0]:,.0f}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Linear Regression is the "Search for the Perfect String." It is the simplest and most transparent way to turn history into a categorical forecast.</p>
+    <ul>
+      <li><strong>House Price Estimation</strong>: This is the classic use case. We take a house's square footage, factor in its age, and find the "Price per Square Foot" (the weight). This allows us to draw a line that predicts the value of any house with simple, explainable math.</li>
+      <li><strong>CPU Performance Prediction</strong>: Hardware engineers use linear regression to predict how much power a chip will consume based on its clock speed. By fitting a line to previous test data, they can ensure new designs don't overheat before they are even built.</li>
+    </ul>
+    <p>Teacher's Final Word: Linear Regression is the king of transparent AI. Unlike deep learning "black boxes," you can always explain exactly why the model made its choice. "The price is $X because the slope is $Y."</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if our line is too sensitive to noise? Explore <strong><a href="#/machine-learning/supervised-learning/ridge-regression">Ridge Regression</a></strong>.

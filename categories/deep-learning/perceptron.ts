@@ -112,6 +112,14 @@ print(f"Final Bias: {b}")
 print(f"Test [1, 1]: {1 if np.dot(w, [1,1])+b > 0 else 0}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>The Perceptron is the "Digital Switch" that proved machines can learn rules through failure. It is the absolute simplest biological unit of machine intelligence.</p>
+    <ul>
+      <li><strong>Email Routing (Binary Priority)</strong>: While simple, a Perceptron can be used to quickly sort emails into "Urgent" vs. "Normal" based on a few keywords. If (Urgent_Words * Weight > Threshold), it triggers an alert. It is the fastest possible way to make a binary decision in a high-speed data stream.</li>
+      <li><strong>Circuit Logic Modeling</strong>: Engineers use Perceptrons to model hardware behavior. Since a Perceptron can mimic AND and OR gates perfectly, it can act as a "Software Twin" for simple electronic circuits, helping in the early stages of chip design and testing.</li>
+    </ul>
+    <p>Teacher's Final Word: The Perceptron is the "ancestor" of every brain in AI. It taught us that complex behavior doesn't need complex math—it just needs a simple decision that knows how to nudge itself when it's wrong.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> One officer isn't enough for complex decisions. What if we have a whole committee? Explore <strong><a href="#/machine-learning/deep-learning/mlp">Multilayer Perceptron (MLP)</a></strong>.
     </div>

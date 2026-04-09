@@ -32,8 +32,6 @@ export const lrSchedulingSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>
     
       <h4>Scenario: Landing a Plane on a High-Altitude Runway</h4>

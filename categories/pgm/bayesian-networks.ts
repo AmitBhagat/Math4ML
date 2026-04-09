@@ -33,7 +33,11 @@ export const bayesianNetworksSection: TopicSection = {
     </div>
     
     <div class="callout tip">
-    <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <p>This is the <strong>Chain Rule</strong> for Bayesian Networks. It turns an exponential problem into a manageable one.</p>
+      </div>
+    </div>
 
     <h2 id="inference">Inference: Predicting the Unseen</h2>
     

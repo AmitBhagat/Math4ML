@@ -36,8 +36,6 @@ export const adamSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Olympic Athlete</h2>
     
       <h4>Scenario: Running on Mixed Terrain (Sand, Ice, and Track)</h4>

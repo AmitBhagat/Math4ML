@@ -69,14 +69,6 @@ export const naiveBayesSection: TopicSection = {
       </div>
     
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Sleuth's Email Filter</h2>
-    <p>Imagine Sherlock Holmes is classifying an email as <strong>Spam</strong> or <strong>Ham</strong> based on three words: "Prize", "Money", and "Meeting".</p>
-    <ul>
-      <li><strong>The Clues:</strong> "Prize" appears in 80% of Spam but only 1% of Ham. "Meeting" appears in 50% of Ham but only 2% of Spam.</li>
-      <li><strong>The Detection:</strong> An email arrives with "Prize" and "Meeting". </li>
-      <li><strong>The Bayes Calculation:</strong> Even though "Meeting" sounds safe, the 80% weight of "Prize" combined with the rare overlap makes the <strong>Spam</strong> probability win out.</li>
-    </ul>
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Bayesian Sleuth</h2>
     
       <h4>Scenario: Is this suspect 'Guilty' or 'Innocent'?</h4>
@@ -136,6 +128,14 @@ prediction = model.predict(test_X)[0]
 print(f"Probabilities [Ham, Spam]: {prob}")
 print(f"Prediction: {'Spam' if prediction == 1 else 'Ham'}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Naive Bayes is the "Fast-Thinking Detective." It calculates the probability of a class based on a set of clues, working 1,000x faster than most algorithms.</p>
+    <ul>
+      <li><strong>Email Spam Filtering</strong>: This is the most famous application. Naive Bayes looks at the probability of words like "Free," "Winner," and "Urgent" appearing in spam vs. real emails. Even though it assumes words are independent, it powers billions of inbox filters every day.</li>
+      <li><strong>Customer Sentiment Analysis</strong>: Companies use Naive Bayes to quickly scan millions of product reviews. By multiplying the chances of positive words ("Great", "Happy") vs. negative ones ("Bad", "Broke"), it can judge the "mood" of your customers in real-time.</li>
+    </ul>
+    <p>Teacher's Final Word: Naive Bayes is a "Simplify-to-Win" strategy. It doesn't care if features relate to each other; it only cares about the signal each one provides individually. It's the gold standard for when you need to process massive amounts of text fast.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we look at physical "Closeness" instead of probability? Explore <strong><a href="#/machine-learning/supervised-learning/knn">k-Nearest Neighbors (KNN)</a></strong>.

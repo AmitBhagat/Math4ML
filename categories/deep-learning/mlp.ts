@@ -103,6 +103,14 @@ for i, test in enumerate(test_cases):
     print(f"Input {test} -> Result {preds[i]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>The MLP is the "Universal Function Approximator" that turns raw data into tiered abstractions, allowing machines to solve problems that are impossible for linear models.</p>
+    <ul>
+      <li><strong>Handwriting Recognition (MNIST)</strong>: MLPs were the first "Brains" to accurately read numbers written by humans. By passing the raw pixels through a hidden layer, the model learns to identify "curves" and "loops" (like the circle in an '8' or the hook in a '9') and uses those abstractions to make a final guess.</li>
+      <li><strong>Customer Behavior Prediction (Churn)</strong>: Many companies use MLPs to predict if a customer will leave. Instead of just looking at "Price," the MLP combines Age, Usage, and Support Calls in multiple hidden layers to find the "hidden frustration" patterns that lead to a cancellation.</li>
+    </ul>
+    <p>Teacher's Final Word: Each hidden layer in an MLP is a filter that cleans up the mess from the one before it. It moves from raw features to abstract concepts, eventually making the decision look easy. It's the ultimate "Feature Factory."</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the structure, but how do we "Train" the Jury? Explore the algorithm that powers all AI: <strong><a href="#/machine-learning/deep-learning/backpropagation">Backpropagation</a></strong>.
     </div>

@@ -148,6 +148,14 @@ print(f"Single Tree Score: {single_tree.score(X_test, y_test):.1%}")
 print(f"Bagging Score: {bagging_model.score(X_test, y_test):.1%}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Bagging is the "Parallel Democracy" that reduces variance by letting everyone vote on their own version of the truth. It turns a jumpy, sensitive expert into a stable, reliable council.</p>
+    <ul>
+      <li><strong>Medical Diagnosis Consensus</strong>: When diagnosing a rare disease from an MRI, a single model might get "distracted" by a bit of image noise. By using Bagging, hospitals use a council of models that have each seen a different subset of historical patients. This ensures that the final "Cancer" vs. "Normal" diagnosis is stable and doesn't change wildly just because one pixel was slightly brighter than usual.</li>
+      <li><strong>Predictive Customer Churn</strong>: Telecom companies use Bagging to predict which customers are about to cancel their subscription. Because customer behavior is very "noisy" (people leave for random reasons), Bagging ensures that the model only flags a customer if their behavior consistently matches the "Churn" pattern across dozens of independent bootstrap samples.</li>
+    </ul>
+    <p>Teacher's Final Word: Stability is the antidote to noise. If your model is a "nervous wreck" that changes its mind every time you add a few new rows of data, put it in a bag. Let the democracy of parallel voting find the stable middle ground.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting works for stability. But what if we want to learn from our mistakes sequentially? Explore <strong><a href="#/machine-learning/advanced-ml/boosting">Boosting</a></strong>.
     </div>

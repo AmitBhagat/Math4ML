@@ -143,6 +143,14 @@ print(f"Clique A Mean (2D): {np.mean(X_2d[:50], axis=0).round(2)}")
 print(f"Clique B Mean (2D): {np.mean(X_2d[50:], axis=0).round(2)}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>t-SNE is like "Optimizing Friendships in a Small Room." It ignores global factors and focuses purely on local closeness to find hidden cliques in your data.</p>
+    <ul>
+      <li><strong>Visualizing Neural Network Hidden Layers</strong>: AI engineers use t-SNE to "see" inside deep models. By taking high-dimensional data from the middle of an Image Classifier and squashing it into 2D, they can visually check if the model is correctly grouping "Dogs" vs. "Cats" in its imagination.</li>
+      <li><strong>Genetic Disease Cluster Identification</strong>: t-SNE is used in bioinformatics to map similarities between thousands of patients. It can visually pull apart groups of people with similar medical conditions into "Islands," allowing doctors to see which patients react similarly to a specific treatment.</li>
+    </ul>
+    <p>Teacher's Final Word: Remember, in t-SNE, the "distances" between far-away islands are meaningless. Only the "huddles" are real. Use it as your primary tool for sanity-checking high-dimensional clusters.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> t-SNE is great for visualization, but it's slow. What if we want speed AND global structure? Explore <strong><a href="#/machine-learning/unsupervised-learning/umap">UMAP Analysis</a></strong>.
     </div>

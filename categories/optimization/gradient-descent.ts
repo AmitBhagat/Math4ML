@@ -114,10 +114,12 @@ for i in range(10):
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Gradient Descent is the "Algorithm of Learning." It is the reason we can turn a random collection of numbers into a "Brain" that improves over time.</p>
     <ul>
-      <li><strong>Linear Regression</strong>: Fitting the "Best Fit Line" by minimizing the sum of rounded errors.</li>
-      <li><strong>Neural Network Training</strong>: Backpropagation is just a clever way to calculate the massive gradient for millions of weights so we can run Gradient Descent on them.</li>
+      <li><strong>Training Deep Neural Networks</strong>: Every single modern AI, from ChatGPT to autonomous cars, is trained using Gradient Descent. It is the core motor that iteratively fixes the model's mistakes until the error is at its absolute lowest point.</li>
+      <li><strong>Feature Transformation (Embedding Tuning)</strong>: When we represent words as vectors, we use Gradient Descent to "Nudge" those vectors closer together if the words are similar. This allows the AI to learn that "King" and "Queen" are related by walking them down the loss surface until they align.</li>
     </ul>
+    <p>Teacher's Final Word: Gradient Descent is the fundamental difference between a model that stares blindly at data and one that actively improves. Every step is a small, calculated correction towards the truth.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have 1 billion data points? We can't wait to calculate the gradient for all of them! Explore <strong><a href="#/mathematics/optimization/sgd">Stochastic Gradient Descent (SGD)</a></strong>.

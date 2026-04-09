@@ -40,8 +40,6 @@ export const confidenceIntervalsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
     
       <h4>Problem: Finding the Range of Accuracy</h4>
@@ -117,10 +115,12 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Confidence Interval is a "Safety Net." Instead of giving a single fragile number, it gives a range that tells you how much you should **Trust** your model's predictions.</p>
     <ul>
-      <li><strong>A/B Testing</strong>: We only implement a change if the 95% confidence interval of the "Lift" doesn't overlap with Zero.</li>
-      <li><strong>Feature Importance</strong>: Calculating confidence intervals for coefficients helps us ignore features that are inconsistent.</li>
+      <li><strong>A/B Testing (Lift Analysis)</strong>: When we change a website's layout, we don't just calculate the mean increase in sales. We calculate a 95% Confidence Interval for that "Lift." If the interval doesn't cross Zero, we can say with mathematical certainty that the change actually helped and wasn't just a fluke.</li>
+      <li><strong>Model Benchmarking (Bootstrap CI)</strong>: In academic papers, we don't just say "My Model is 92% accurate." We use Bootstrapping to create 1,000 virtual test sets and find the range where the model's accuracy actually lives. This tells other scientists how robust your model is to variations in the data.</li>
     </ul>
+    <p>Teacher's Final Word: In Machine Learning, communicating uncertainty is a sign of wisdom. A confidence interval is the difference between a lucky guess and a reliable product that you can trust in the real world.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probability, & Statistics</strong>. You are now ready to dive into the <strong>Foundations of Information Theory</strong>. Explore <strong><a href="#/mathematics/information-theory/basics">Information Theory Basics</a></strong>.

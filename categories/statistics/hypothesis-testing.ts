@@ -40,8 +40,6 @@ export const hypothesisTestingSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML experimentation, we use these tests to ensure that accuracy gains aren't just sampling artifacts (A/B testing) and to prune non-significant features.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-ttest" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> T-Test (A/B Testing)</h2>
     
       <h4>Problem: Does a New UI Increase Clicks?</h4>
@@ -134,10 +132,12 @@ print(f"ANOVA p-value: {p_val_anova:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Hypothesis Testing is the "Proof of Truth." It asks: "Is this result a Real Signal, or was I just Lucky?"</p>
     <ul>
-      <li><strong>Model Comparison</strong>: Proving that your "New Architecture" is significantly better than the baseline.</li>
-      <li><strong>Data Quality</strong>: Checking if the "Validation Set" distribution is significantly different from the "Training Set" (Data Drift).</li>
+      <li><strong>Model Ablation Studies</strong>: When we remove a layer from a neural network, the accuracy might drop. We use hypothesis testing to determine if that drop is a "Significant Loss"—meaning the layer was actually doing something useful—or if the change is so small it's likely just random noise.</li>
+      <li><strong>Feature Selection (P-value Filtering)</strong>: In clinical models, we might have 1,000 patient vitals. We use tests like ANOVA or Chi-Square to calculate p-values for every feature. If a feature's p-value is high, it means its relationship with the disease is strictly random, so we drop it.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, we use tests to protect ourselves from wasting time chasing "ghosts"—patterns in the data that look real but are actually just accidental wiggles of noise. If it's not significant, it's not worth keeping.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Tests give us a "Yes/No" answer. But how do we estimate the <em>Range</em> of possible truths? Explore <strong><a href="#/mathematics/statistics/confidence-intervals">Confidence Intervals</a></strong>.

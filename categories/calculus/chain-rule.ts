@@ -128,10 +128,12 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>The Chain Rule is the "Telephone Wire" of AI. It passes a message of error from the very end of the model all the way back to the beginning.</p>
     <ul>
-      <li><strong>Backpropagation</strong>: Calculating gradients through 50+ layers of weights.</li>
-      <li><strong>Optimization</strong>: Ensuring that updates to early layers move in sync with the error at the end.</li>
+      <li><strong>Backpropagation</strong>: This is how we train deep networks with 100+ layers. The Chain Rule allows the error at the final output to "trickle down." It multiplies the small impacts of every neuron along the way to tell the very first layer how it needs to change to reduce the overall error.</li>
+      <li><strong>Automatic Differentiation (Autograd)</strong>: Modern libraries like PyTorch or TensorFlow don't actually know the "math formula" for your complex model. Instead, they use the Chain Rule to break your code into tiny, simple operations and multiply their derivatives together to find the overall gradient automatically.</li>
     </ul>
+    <p>Teacher's Final Word: By multiplying the "Loudness" of every step in the chain, the Chain Rule ensures that even the deepest, most hidden neuron gets the memo on how to improve. Without it, modern Deep Learning wouldn't exist.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we have multiple inputs <em>and</em> multiple outputs? How do we track <strong>all</strong> the sensitivities? Explore <strong><a href="#/mathematics/calculus/jacobian">The Jacobian Matrix</a></strong>.

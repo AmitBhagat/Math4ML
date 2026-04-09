@@ -9,6 +9,9 @@ export const setTheorySection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">📦 Discrete Math · Sets</div>
       <h1>Set Theory in Data Science</h1>
+      <p>Set theory is the branch of mathematical logic that studies collections of objects. In machine learning, sets define the sample spaces, hypothesis classes, and feature domains.</p>
+    </div>
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>In the digital world, data never arrives as a single, clean block; it is scattered across different tables, logs, and databases. <strong>Set Theory</strong> is the foundation of how we manipulate these fragments, providing the mathematical logic for joining, filtering, and deduplicating information. Think of each <strong>set</strong> as a "Box of Unique Items" where duplicates are forbidden and boundaries are absolute. In Data Science, set theory isn't just a theoretical curiosity—it is the direct parent of SQL Joins and Pandas filtering. Understanding how sets overlap, merge, and differ is the key to transforming raw, chaotic data into a structured signal that an ML model can actually understand. It is the tactical framework for "Data Wrangling."</p>
 

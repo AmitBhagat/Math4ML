@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { motion } from "framer-motion";
 import { useParams, Link, useNavigate } from "react-router-dom";
 // @ts-expect-error - Contribution types missing
 import renderMathInElement from 'katex/dist/contrib/auto-render';
@@ -202,7 +203,11 @@ export const ProblemPage = () => {
   }
 
   return (
-    <div 
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: -20 }}
+      transition={{ duration: 0.4, ease: "easeOut" }}
       className="w-full"
       style={{
         '--category-primary': getCategoryTheme(categoryId || '').primary,
@@ -240,6 +245,6 @@ export const ProblemPage = () => {
         )}
       </div>
 
-    </div>
+    </motion.div>
   );
 };

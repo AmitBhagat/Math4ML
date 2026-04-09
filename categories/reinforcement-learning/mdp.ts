@@ -93,6 +93,14 @@ state, reward, done = env.step(1)
 print(f"Action taken. New State: {state}, Reward: {reward}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>The Markov Decision Process is the "Blueprint of Choice." It is a mathematical way to map every current situation and possible action to a future reward, allowing an agent to plan for the long term.</p>
+    <ul>
+      <li><strong>Supply Chain Inventory Optimization</strong>: Global retailers use MDPs to decide exactly how much stock to order. The "State" is the current inventory and warehouses; the "Action" is the order quantity; and the "Probability" accounts for the uncertain future customer demand. By solving the MDP, the company minimizes the cost of overstacking while ensuring they never run out of a popular item.</li>
+      <li><strong>Smart Building HVAC Control</strong>: To reduce energy bills, smart thermostats use MDPs to control heating and cooling. The system looks at the current room temperature and the weather forecast (the state) and decides whether to blast the AC now or let the building cool naturally (the action). The MDP ensures the building stays comfortable while using the least amount of electricity possible.</li>
+    </ul>
+    <p>Teacher's Final Word: Life is a series of state transitions. MDPs give us the mathematical roadmap to navigate them profitably. They teach the machine that it doesn't matter how you got here—what matters is where you are now and where you want to go next.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Now that we have the framework, how does the agent actually calculate the best move? Explore the mathematics of <strong><a href="#/machine-learning/reinforcement-learning/value-iteration">Q-Learning</a></strong>.
     </div>

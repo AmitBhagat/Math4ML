@@ -113,10 +113,12 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>In Machine Learning, a vector space is the "Arena" where all your data exists. It defines the playground and the rules that your algorithm must follow to stay logically consistent.</p>
     <ul>
-      <li><strong>Principal Component Analysis (PCA)</strong>: PCA find the best Lower-dimensional <strong>Subspace</strong> to represent your data.</li>
-      <li><strong>Subspace Learning</strong>: Many domain adaptation techniques assume that different datasets live on the same "Manifold" (Subspace).</li>
+      <li><strong>Generative AI (Latent Spaces)</strong>: In models like Midjourney or Stable Diffusion, the AI doesn't store a library of images. Instead, it creates a "Latent Space"—a high-dimensional vector space where every coordinate is a unique potential image. Moving through this space is how the AI morphs one concept into another.</li>
+      <li><strong>Word Embeddings (NLP)</strong>: Every word we use is mapped to a vector space. Because the space follows specific rules (Axioms), it ensures that if you start at the vector for "Apple" and add "Technology," the result stays in the logical "Subspace" of electronics rather than fruit.</li>
     </ul>
+    <p>Teacher's Final Word: Think of a vector space as the "Laws of Physics" for your data. By setting these rules, we ensure that no matter how much our algorithms mix, match, or scale the data, the results still make sense within our mathematical universe.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.

@@ -110,10 +110,12 @@ print(f"Determinant: {det:.2f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Think of the Determinant as a "Dimension Watchdog." It monitors how much a transformation "stretches" or "squashes" your information universe.</p>
     <ul>
-      <li><strong>Jacobians</strong>: Calculating change in coordinate systems when training Variational Autoencoders (VAEs).</li>
-      <li><strong>Probability Distributions</strong>: The "Normalization Constant" in Multivariate Normal distributions involves \(\det(\Sigma)\).</li>
+      <li><strong>Change of Variables (Flow Models)</strong>: In generative models like "Normalizing Flows" (which create realistic data), the determinant of the Jacobian ensures that as we warp a simple distribution into a complex one, the total probability still sums to 1.</li>
+      <li><strong>Outlier & Anomaly Detection</strong>: The "Volume" of a dataset can be measured using the determinant of its covariance matrix. If a new data point falls way outside this volume, the determinant helps flag it as a potential fraud or error.</li>
     </ul>
+    <p>Teacher's Final Word: If the determinant is zero, your matrix has "erased" a dimension of data forever. In AI, preventing accidental "data erasure" is why we watch the determinant like a hawk.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Determinants tell us if space is squashed. But how *much* space is left? Explore <strong><a href="#/mathematics/linear-algebra/matrix-rank">Matrix Rank</a></strong>.

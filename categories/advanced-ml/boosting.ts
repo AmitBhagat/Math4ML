@@ -146,6 +146,14 @@ print(f"Single Stump Score: {weak_stump.score(X_test, y_test):.1%}")
 print(f"AdaBoost Score: {boosting_model.score(X_test, y_test):.1%}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Boosting is the "Sequential Apprenticeship" where each model learns specifically from the failures of the one before it. It is the ultimate "Grinder" algorithm for high-stakes accuracy.</p>
+    <ul>
+      <li><strong>Web Search Ranking</strong>: When you search for "Best hidden restaurants in Rome," Google or Bing use Gradient Boosting (often through modules like LambdaMART) to rank results. The first model might get the "Rome" part right but fail on the "Hidden" part. The next model in the boost sequence specifically learns to fix that "Hidden" ranking error, ensuring the most relevant results climb to the top.</li>
+      <li><strong>High-Frequency Trading</strong>: Quant hedge funds use Boosting (XGBoost/LightGBM) to react to tiny market signals. Because the data has very low signal-to-noise ratio, the sequential nature of Boosting allows the model to ignore obvious market moves and focus all its "energy" on the rare, hard-to-spot patterns that lead to a profit.</li>
+    </ul>
+    <p>Teacher's Final Word: Failure is the best teacher, if you have a model that listens. Boosting doesn't just average opinions; it builds a specialized hierarchy where every new recruit is hired specifically to solve the problems that baffled the rest of the team.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Voting (Bagging) and Tutoring (Boosting) are great. But what if we train a model how to combine other models? Explore <strong><a href="#/machine-learning/advanced-ml/stacking">Stacking</a></strong>.
     </div>

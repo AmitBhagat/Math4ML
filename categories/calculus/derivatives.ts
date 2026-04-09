@@ -39,8 +39,6 @@ export const derivativesSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     
       <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
@@ -103,10 +101,12 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Calculus is the "Language of Sensitivity." It answers the core question: "If I nudge this variable by a hair, how much does the final error move?"</p>
     <ul>
-      <li><strong>Activation Functions</strong>: We calculate derivatives of sigmoid or ReLU to update network weights.</li>
-      <li><strong>Optimizer Steps</strong>: Calculating how small parameter changes reduce total error.</li>
+      <li><strong>Learning Rates</strong>: A derivative tells us the slope, but the "Learning Rate" decides how big a step we take down it. If the derivative is huge (steep hill), the AI knows it's far from the goal and needs to move decisively rather than crawl.</li>
+      <li><strong>Gradient Clipping</strong>: Sometimes a derivative becomes massive (an "Exploding Gradient"). We use the derivative's value like a fuse—if it gets too high, we "clip" it to prevent the model from making a wild, unstable jump that ruins the training.</li>
     </ul>
+    <p>Teacher's Final Word: In AI, derivatives are the compass that tells the model exactly which way to turn to reach the valley of minimum error. Without them, we're just guessing in the dark.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Single variables are rare in ML. How do we find slopes on multidimensional planes? Explore <strong><a href="#/mathematics/calculus/partial-derivatives">Partial Derivatives</a></strong>.

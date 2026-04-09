@@ -95,6 +95,14 @@ for episode in range(100):
 print(f"Learned Q-Values: {q_table}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Q-Learning is the "Scoreboard of Experience." It allows an agent to learn the long-term value of its actions through pure trial and error, without needing a pre-defined map of the world.</p>
+    <ul>
+      <li><strong>Autonomous Game AI (Atari/Go)</strong>: Q-Learning (and its deep variant, DQN) is how machines learned to beat humans at video games. The model plays millions of games, realizing that a specific move (like sacrificing a piece in Go) might have a zero immediate reward but a massive "Q-Value" because it leads to a winning board position 50 moves later.</li>
+      <li><strong>Real-time Ad Auction Bidding</strong>: Websites use Q-Learning to decide how much to bid for an ad slot. The "State" is the user's history; the "Action" is the bid amount. The agent learns over thousands of auctions which bidding strategies lead to a successful "Conversion" (the final sale), optimizing the budget by focusing on high-value user paths.</li>
+    </ul>
+    <p>Teacher's Final Word: You don't need a map if you have a scoreboard and the guts to keep failing until you win. Q-Learning is the science of delayed gratification—it teaches the machine that the hardest path today is often the one that leads to the biggest feast tomorrow.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> We've seen how models learn and make decisions. Now let's look at how we prepare the raw data for them in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
     </div>

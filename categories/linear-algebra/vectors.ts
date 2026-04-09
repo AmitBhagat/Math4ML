@@ -38,8 +38,6 @@ export const vectorsSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, these operations allow us to mix features and traverse the loss landscape during optimization.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     
       <h4>Problem: Real Estate Vectorization</h4>
@@ -110,15 +108,16 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>In Machine Learning, vectors are the DNA of data—they are the way we encode real-world complexity into a geometric language that a computer can actually process.</p>
     <ul>
-      <li><strong>Input Layers</strong>: Every row in your CSV is a vector fed into a model.</li>
-      <li><strong>Word Embeddings</strong>: In NLP, words like "King" and "Queen" are vectors in a 1000D space.</li>
-      <li><strong>Image Pixels</strong>: A 28x28 grayscale image is a 784-dimensional vector.</li>
+      <li><strong>Computer Vision</strong>: Every image is treated as a massive vector where each number represents a pixel's brightness. By mapping an image to a single point in high-dimensional space, we can mathematically compare two photos to see how "close" they are, which is how Face ID identifies you.</li>
+      <li><strong>Natural Language (NLP)</strong>: Words are converted into "Embeddings"—vectors in a 300D space. This geometry allows the computer to calculate relationships; for example, if you move from "King" in the same direction and distance that separates "Man" and "Woman," you land on the "Queen" vector.</li>
+      <li><strong>Self-Driving Cars</strong>: LiDAR sensors see a "Cloud of Points," where each point is a 3D vector. The car navigates by performing vector addition and subtraction to calculate trajectories and avoid obstacles in real-time.</li>
     </ul>
+    <p>Ultimately, vectorization is the tactical process of turning messy reality into a neat coordinate system, allowing our models to use the raw geometry of space to discover patterns.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Individually, vectors are points. Where do these points "live"? Explore <strong><a href="#/mathematics/linear-algebra/vector-spaces">Vector Spaces</a></strong>.
     </div>
   `
 };
-

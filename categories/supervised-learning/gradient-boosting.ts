@@ -98,12 +98,7 @@ export const gradientBoostingSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Shrink and Update:</strong> Add a small fraction (Learning Rate) of the new tree's guess to the existing model.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Repeat:</strong> Continue until the mistakes are tiny or you reach the tree limit.
-        </div>
       </div>
-    
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Relentless Golf Coach</h2>
     
@@ -159,6 +154,14 @@ confidence = model.predict_proba(new_case)[0]
 print(f"Final Decision: {'Positive' if prediction == 1 else 'Negative'}")
 print(f"Confidence (Class 1): {confidence[1]:.2%}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Gradient Boosting is like "Playing a Multi-Stage Game of Golf." It layers small, targeted corrections to reach the truth with surgical precision.</p>
+    <ul>
+      <li><strong>Insurance Premium Pricing</strong>: Insurance companies use Gradient Boosting to predict the risk of a claim. Because it learns sequentially, it can find "Hard Patterns"—like a driver who has a safe record but a very specific combination of car model and neighborhood that indicates high risk.</li>
+      <li><strong>Web Search Ranking</strong>: The order of results on search engines like Bing or Google is often determined by a Gradient Boosted model. It layers thousands of "Weak" rules (like keyword density, page speed, and backlinks) to create a single, incredibly precise "Relevance Score."</li>
+    </ul>
+    <p>Teacher's Final Word: Boosting is a relentless student that never stops fixing its mistakes. It is slower to train than a Random Forest, but it is often much more powerful because every tree is a targeted strike on error.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we take this to the Extremes? Explore <strong><a href="#/machine-learning/supervised-learning/advanced-boosting">XGBoost, LightGBM, and CatBoost</a></strong>.

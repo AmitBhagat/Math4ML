@@ -32,8 +32,6 @@ export const hmmSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>
     
       <h4>Scenario: What is the most likely sequence?</h4>

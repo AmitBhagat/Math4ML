@@ -31,8 +31,6 @@ export const sgdSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">SGD is the workhorse of Deep Learning, allowing for the training of billion-parameter models on datasets that cannot fit in system memory.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="convergence">Convergence: The Jiggly Path</h2>
     <p>Batch GD follows a <strong>Smooth Straight Line</strong>. SGD looks like a <strong>Confused Bee</strong>. It jiggles left and right, but the <strong>Average Direction</strong> is still down the mountain. As we get closer to the bottom, the noise makes it bounce around the minimum. This is why we <strong>Slow Down</strong> (Schedule) the learning rate at the end.</p>
 

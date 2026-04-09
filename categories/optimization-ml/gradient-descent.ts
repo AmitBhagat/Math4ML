@@ -31,8 +31,6 @@ export const gradientDescentSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="batch">Batch Gradient Descent</h2>
     <p>In <strong>Batch GD</strong>, we use <strong>Every Single Data Point</strong> in the dataset to calculate the gradient before taking one step. 
     <strong>The Upside:</strong> The descent is very smooth and stable. 

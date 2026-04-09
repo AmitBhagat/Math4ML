@@ -32,8 +32,6 @@ export const crossValidationSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Commonly, $k=5$ or $k=10$ provides a sufficient balance for most industrial ML applications.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="k-fold">K-Fold Cross-Validation</h2>
     <p>The most common form is <strong>K-Fold</strong>. We split the data into \(K\) "Folds" (usually 5 or 10).</p>
     <ul>

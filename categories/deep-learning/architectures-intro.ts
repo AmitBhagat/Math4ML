@@ -124,6 +124,14 @@ print(f"CNN (Local) Weight Count: {kernel_size}")
 print(f"CNN Reduction: {(1 - (kernel_size/input_pixels))*100:.2f}%")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Architectures are the "Skeletons of Intelligence." By picking the right structure, we ensure the brain fits the specific data type we are trying to master.</p>
+    <ul>
+      <li><strong>Medical Diagnostic Imaging (CNNs)</strong>: When a doctor looks at an X-ray, they look for local patterns (fractures, tumors). CNNs are engineered for this exact task—they ignore distant, unrelated pixels and focus on the spatial relationships in a small area, making them the gold standard for cancer detection and radiology.</li>
+      <li><strong>Global Language Translation (Transformers)</strong>: In a long sentence, the first word might be related to the last one. Transformers use "Attention" architectures to see the whole sentence at once, making them capable of translating complex documents or powering ChatGPT by understanding the global context of human language.</li>
+    </ul>
+    <p>Teacher's Final Word: Modeling is about picking the right tool for the job. Don't build a car when you need a submarine. Choose the architecture that shares the same "intuition" as your data, and the machine will learn twice as fast with half the effort.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's look at the assembly line for images. Explore <strong><a href="#/machine-learning/deep-learning/cnn">Convolutional Neural Networks (CNN)</a></strong>.
     </div>

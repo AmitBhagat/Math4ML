@@ -35,14 +35,6 @@ export const knnSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="metrics">Common Distances: Euclidean, Manhattan, Minkowski</h2>
-    <p>How do we define "Near"? The way we measure distance completely changes the model's behavior.</p>
-    <ul>
-      <li><strong>Euclidean Distance (\(L_2\)):</strong> The "Straight-line" distance. \(d(p, q) = \sqrt{\sum (p_i - q_i)^2}\). Best for physical spaces.</li>
-      <li><strong>Manhattan Distance (\(L_1\)):</strong> The "City-block" distance. \(d(p, q) = \sum |p_i - q_i|\). Best when the path is restricted (like city streets).</li>
-      <li><strong>Minkowski Distance:</strong> The generalized form that lets you tune the behavior with a parameter $p$.</li>
-    </ul>
-
     <h2 id="k-selection">Selecting 'k': Underfitting vs. Overfitting</h2>
     
       <h4>The Goldilocks Problem for K</h4>
@@ -157,6 +149,14 @@ distances, indices = model.kneighbors(new_movie)
 print(f"Closest Movie Types: {y[indices][0]}")
 print(f"Final Classification: {result[0]}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>KNN is the "Social Learner." It doesn't bother building a complex mathematical model; it simply remembers everything you've ever shown it.</p>
+    <ul>
+      <li><strong>Recommendation Systems</strong>: When you finish a movie on Netflix and it suggests "Similar Titles," it's often using a version of KNN. It looks at the features (genre, actors, duration) and finds the 5 movies that live closest to the one you just watched in that space.</li>
+      <li><strong>Handwriting Recognition</strong>: In digital mail sorting, KNN can identify a zip code digit by comparing the shape of the handwritten ink to thousands of known examples. If the new "7" looks most like 5 other "7s" in the database, the model votes "7."</li>
+    </ul>
+    <p>Teacher's Final Word: KNN relies on the simple assumption that "Birds of a feather flock together." If you know who someone's closest neighbors are, you can guess exactly who they are without needing a single weight or parameter.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want a "Wide Moat" instead of just neighbors? Explore <strong><a href="#/machine-learning/supervised-learning/svm">Support Vector Machines (SVM)</a></strong>.

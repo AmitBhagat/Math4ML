@@ -78,33 +78,6 @@ export const decisionTreesSection: TopicSection = {
       </div>
     </div>
 
-    <h2 id="algorithm">The Decision Tree Algorithm</h2>
-    
-      <h4>The Flowchart Logic</h4>
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <strong>Select Feature:</strong> Calculate the Information Gain (Entropy reduction) for all features.
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <strong>Branching:</strong> Split the data based on the feature that provides the <strong>Maximum Order</strong> (Purest subsets).
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">3</span>
-          <strong>Recursion:</strong> Repeat the process for each "Child Node" using the remaining features.
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">4</span>
-          <strong>Stopping:</strong> Stop growing if a node is pure, the 'max_depth' is reached, or the improvement is too small.
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Leaf Assignment:</strong> Each final node (leaf) represents the majority class of the data that landed there.
-        </div>
-      </div>
-    
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Job Offer Flowchart</h2>
     
       <h4>Scenario: Should I Accept this Job?</h4>
@@ -157,6 +130,14 @@ prediction = model.predict(new_job)[0]
 print(f"Decision: {'Accept' if prediction == 1 else 'Reject'}")
 print(f"Feature Importances: {model.feature_importances_}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>A Decision Tree is the "Master of 20 Questions." It is the most intuitive and human-like algorithm, offering perfect transparency for every choice it makes.</p>
+    <ul>
+      <li><strong>Loan Approval Systems</strong>: Banks use decision trees to automate lending because every step is auditable. The model can output exactly why a loan was rejected (e.g., "Salary was high, but Credit Score was too low"), making it easy to explain to customers.</li>
+      <li><strong>Medical Triage</strong>: In emergency rooms, decision trees help nurses quickly sort patients. By asking a series of hard "If-Then" questions (e.g., "Is there chest pain?", "Is the heart rate above 100?"), the model provides a reliable, repeatable path to a diagnosis.</li>
+    </ul>
+    <p>Teacher's Final Word: Decision Trees are the "Transparent Box" of machine learning. They allow us to see exactly how a computer arrived at its conclusion, turning a mathematical prediction into a logical conversation.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we use a whole "Grave of Trees"? Explore <strong><a href="#/machine-learning/supervised-learning/random-forest">Random Forest Classification</a></strong>.

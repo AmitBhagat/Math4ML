@@ -41,8 +41,6 @@ export const jacobianSection: TopicSection = {
       </ul>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>
@@ -119,10 +117,12 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Jacobian is a "Sensitivity Grid." It tracks exactly how every single neuron in one layer affects every single neuron in the next.</p>
     <ul>
-      <li><strong>Backpropagation through Vector Layers</strong>: Passing gradients through Softmax or batch normalization layers.</li>
-      <li><strong>Automatic Differentiation</strong>: Libraries like PyTorch build these Jacobians internally to solve the network.</li>
+      <li><strong>Backpropagation in Vector Layers</strong>: In layers like Softmax or Batch Norm, it's not just one input affecting one output. The Jacobian is the matrix that tracks the multi-node connectivity, allowing the error to flow perfectly through these complex layers.</li>
+      <li><strong>Generative Models (Latent Space Warping)</strong>: In models like Variational Autoencoders (VAEs), the Jacobian measures how the AI's "Latent Space" is being stretched to create an image. This ensures that the generated images are diverse and don't all collapse into the same pattern.</li>
     </ul>
+    <p>Teacher's Final Word: While a simple derivative tracks one-to-one changes, the Jacobian tracks **all possible interactions**. It’s the master map that tells the model exactly how every single parameter contributes to the final complex behavior of the network.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Jacobians tell us about "first-order" velocity. What about the "Acceleration" or the curvature of the loss? Explore <strong><a href="#/mathematics/calculus/hessian">The Hessian Matrix</a></strong>.

@@ -77,12 +77,7 @@ export const svmSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Identify Support Vectors:</strong> Find the critical points that are exactly on the edge of the road. All other points are ignored.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Inference:</strong> For a new point, check which side of the "Road Center" it falls on.
-        </div>
       </div>
-    
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Wide Moat</h2>
     
@@ -141,6 +136,14 @@ print(f"Number of Support Vectors: {len(sv)}")
 print(f"Decision for point at (5,4): {'Red' if prediction == 1 else 'Blue'}")
 print(f"Support Vector Coordinates: \n{sv}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>SVM is the "Architect of the Wide Moat." It is the most robust way to draw a line in the sand, focusing only on the most critical edge cases.</p>
+    <ul>
+      <li><strong>Handwriting Recognition</strong>: Before deep learning, SVMs were the champions of recognizing handwritten digits. They find the "Widest Margin" between the thousands of ways humans write "2" vs. "5," creating a robust geometric boundary.</li>
+      <li><strong>Bioinformatic Sequence Classification</strong>: Scientists use SVMs to classify protein sequences. Using the "Kernel Trick," the model projects these sequences into a higher space where it can draw a flat plane to separate healthy cells from diseased ones.</li>
+    </ul>
+    <p>Teacher's Final Word: SVM only cares about the Support Vectors—the soldiers standing right on the edge of the water. It is the ultimate "Safety First" algorithm, ensuring your model isn't swayed by points deep inside safe territory.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we want a model that acts like a "Flowchart" instead of a river? Explore <strong><a href="#/machine-learning/supervised-learning/decision-trees">Decision Trees</a></strong>.

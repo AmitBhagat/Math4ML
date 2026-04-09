@@ -102,6 +102,14 @@ for i, x_t in enumerate(sequence):
     print(f"Step {i}: Input Signal {x_t:4.1f} | Memory Strength {magnitude:.4f}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>RNNs are the "Temporal Memory" of AI. They don't just see the world in snapshots; they see the "History" of the data, allowing information to flow from the past into the present.</p>
+    <ul>
+      <li><strong>Stock Market Trend Prediction</strong>: Financial analysts use RNNs to predict tomorrow's stock price. Because the model has a loopy connection, it remembers the price "momentum" from the last 10 days, allowing it to see a "Dip" as a buying opportunity rather than just a random number.</li>
+      <li><strong>Real-time Live Captions</strong>: When you watch a video with live closed captioning, an RNN is processing the audio stream word-by-word. It uses the "Hidden State" to remember the subject of the sentence, ensuring that it translates "He" or "She" correctly based on the context introduced 5 seconds earlier.</li>
+    </ul>
+    <p>Teacher's Final Word: It's the Goldberg machine of data—every step passes a note to the next. While they struggle with long stories, for short-term temporal patterns, RNNs are the foundation of everything that moves through time.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> How do we give the goldfish a "Long-Term" memory? Explore <strong><a href="#/machine-learning/deep-learning/lstm-gru">LSTM and GRU Architectures</a></strong>.
     </div>

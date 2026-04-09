@@ -113,11 +113,12 @@ print(f"Optimal x: {x.value:.4f}, Optimal y: {y.value:.4f}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Convexity is the "Global Insurance Policy" of AI. It turns the chaotic search for weights into a simple "slide to the center of a bowl."</p>
     <ul>
-      <li><strong>Linear Regression/OLS</strong>: The solution is a convex quadratic form.</li>
-      <li><strong>Logan Elastic Net / Lasso</strong>: Regularized regression uses convex penalties.</li>
-      <li><strong>Constrained Optimization</strong>: Optimization with boundaries (e.g. Budget constraints).</li>
+      <li><strong>Support Vector Machines (Hard Margin)</strong>: Finding the "Best Margin" that separates two groups of data is a convex problem. This means no matter how many points you have, there is one mathematically "Perfect" answer, and any algorithm will find it without getting trapped in local pits.</li>
+      <li><strong>Lasso & Ridge Regression</strong>: When we add penalties to a model to stop it from over-learning, we use convex functions. This ensures the "Simplified" model is just as easy to solve as the original, making it the industry standard for robust, guaranteed predictions.</li>
     </ul>
+    <p>Teacher's Final Word: While Deep Learning isn't convex, we use convex pieces as the reliable foundations for almost every professional data science product. It is the gold standard for when you need a model to work every single time without fail.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the global minimum is "too good"? What if the model simply memorizes the data? Explore <strong><a href="#/mathematics/optimization/regularization">Regularization (L1 & L2)</a></strong>.

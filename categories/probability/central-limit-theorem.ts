@@ -39,8 +39,6 @@ export const centralLimitTheoremSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">CLT is the reason why **Squared Loss** (MSE) is the optimal objective under the assumption of aggregate, independent noise terms.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
     
       <h4>Problem: Turning Flat space into a Bell Curve</h4>

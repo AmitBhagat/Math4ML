@@ -110,10 +110,12 @@ print(f"Matrix Rank: {rank}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Rank is the "Reality Check" of your data. It tells you the **True Information Density**—the actual number of independent stories your data is telling once you strip away all the duplicates.</p>
     <ul>
-      <li><strong>Low-Rank Approximation</strong>: In recommendation systems, we approximate a massive "User-Item" matrix with a low-rank version to find hidden "topics."</li>
-      <li><strong>Multicollinearity</strong>: Rank helps identify redundant features that could make a regression model unstable.</li>
+      <li><strong>Collaborative Filtering (RecSys)</strong>: Streaming services like Netflix use "Low-Rank Matrix Factorization." They assume that among 10,000 movies, there are only about 20 "Rank" dimensions (like Action, Romance, or Nostalgia) that actually explain everyone's taste.</li>
+      <li><strong>Multicollinearity Detection</strong>: If your feature matrix has a low rank relative to its width, your model will be unstable. We use rank to detect "copycat" features so we can prune them for a faster, more reliable model.</li>
     </ul>
+    <p>Teacher's Final Word: Rank is what separates a rich, diverse dataset from a loud but repetitive one. In AI, find the rank to find the truth.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Rank ensures our directions are unique. How do we find the "Distance" between those directions? Explore <strong><a href="#/mathematics/linear-algebra/orthogonality-projections">Orthogonality & Projections</a></strong>.

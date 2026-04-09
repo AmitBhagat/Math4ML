@@ -39,7 +39,11 @@ export const hessianSection: TopicSection = {
     </div>
     
     <div class="callout tip">
-    <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
+      <div class="callout-icon">💡</div>
+      <div class="callout-body">
+        <p>For smooth functions, the matrix is symmetric (\(\frac{\partial^2 f}{\partial x \partial y} = \frac{\partial^2 f}{\partial y \partial x}\)).</p>
+      </div>
+    </div>
 
     <h2 id="example-hessian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Curvature at a Point</h2>
     
@@ -133,10 +137,12 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>If the Gradient is "Velocity" (which way am I moving?), the Hessian is "Acceleration" (how is the road bending?). It tells you if you are in a stable valley, a volatile sharp peak, or a tricky saddle point.</p>
     <ul>
-      <li><strong>Second-Order Optimizers (L-BFGS)</strong>: Approximating the Hessian to find the local minimum much faster than simple Adam/SGD.</li>
-      <li><strong>Second-Order Regularization</strong>: Penalizing curvature to ensure the model surface is smooth.</li>
+      <li><strong>Newton’s Method Optimization</strong>: Standard Gradient Descent is like walking blindly downhill. Newton's Method uses the Hessian to see the *curvature* of the mountain. It allows the AI to take a massive, confident step if the ground is flat and a small, cautious step if the ground is sharply curved.</li>
+      <li><strong>Model Pruning (OBD)</strong>: In "Optimal Brain Damage," we use the Hessian to determine which weights in a neural network are the least important. If the second-order sensitivity is near zero, it means removing that weight won't affect the model's accuracy, allowing us to shrink the AI for mobile phones.</li>
     </ul>
+    <p>Teacher's Final Word: In real ML, we rarely calculate the full Hessian because it's too big—we use clever "second-order approximations" instead to get most of the benefits without the massive computational cost.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Sometimes a function is too complex to solve exactly. How do we approximate it with a simpler "Flat" or "Parabolic" version? Explore <strong><a href="#/mathematics/calculus/taylor-series">Taylor Series Approximation</a></strong>.

@@ -39,8 +39,6 @@ export const conditionalProbabilitySection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Discriminative ML models (e.g., Logistic Regression) directly estimate the conditional distribution $P(y | \mathbf{x})$ to predict labels from features.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
     
       <h4>Problem: Narrowing Down Outcomes</h4>

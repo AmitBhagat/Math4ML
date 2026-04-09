@@ -106,6 +106,14 @@ print(f"Original Row snippet: {img[5, 4:9]}")
 print(f"Kernel Response: {output[3:7]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>CNNs are the "Visual Cortex" of AI. They are engineered to see the world without being fooled by the specific location of an object, focusing entirely on the "essence" of the pattern.</p>
+    <ul>
+      <li><strong>Level 5 Autonomous Driving</strong>: Self-driving cars use CNNs to identify stop signs, pedestrians, and cyclists. Because the filters scan for "Edges" and "Shapes," the car can recognize a stop sign whether it's directly in front of the lens or far off to the side, maintaining high-fidelity safety even in messy urban environments.</li>
+      <li><strong>Facial Recognition Unlocking</strong>: When you unlock your phone with your face, a CNN is scanning for the "Signature" of your features. It doesn't care if you're holding the phone at a slight angle or if the lighting is different—it focuses on the spatial relationship between your eyes, nose, and mouth to verify your identity in milliseconds.</li>
+    </ul>
+    <p>Teacher's Final Word: Computer Vision is not about looking at pixels; it's about looking through them to find the patterns. CNNs are the reason machines can now "see" the world with the same spatial intelligence as a human.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> What if our data is a 1D sequence of events in time? Explore <strong><a href="#/machine-learning/deep-learning/rnn">Recurrent Neural Networks (RNN)</a></strong>.
     </div>

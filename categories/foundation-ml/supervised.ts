@@ -31,8 +31,6 @@ export const supervisedLearningSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>
     
       <h4>Scenario: Training a Medical Assistant</h4>

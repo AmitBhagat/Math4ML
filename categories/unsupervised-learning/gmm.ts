@@ -143,6 +143,14 @@ for i, p in enumerate(probs):
 print(f"\nFinal Verdict: Most likely Cluster {gmm.predict(test_point)[0]}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>GMM is the "Soft Guessing Game." It doesn't just draw a hard line; it finds overlapping fog clouds of probability, which is the only realistic way to model real-world uncertainty.</p>
+    <ul>
+      <li><strong>Automated Speech Recognition</strong>: Voice assistants use GMMs to model the "distribution" of your distinct vocal frequencies. Because GMMs handle overlapping clouds, they can distinguish your voice from a TV in the background by modeling the unique "mist" of your speech patterns.</li>
+      <li><strong>Tissue Classification in Medical Imaging</strong>: In CT scans, a pixel might fall on the edge between two organs. GMMs allow doctors to calculate the probability of a pixel belonging to "Liver" vs "Stomach," providing a "Soft" map that accounts for the blurred boundaries of the body.</li>
+    </ul>
+    <p>Teacher's Final Word: Unlike k-Means, which just says "Cluster 1," GMM gives you the confidence of the assignment. It's the difference between guessing and knowing exactly how much you are guessing.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Clustering is about grouping. But what if we have too many dimensions (features)? Explore <strong><a href="#/machine-learning/unsupervised-learning/dim-reduction-intro">Introduction to Dimensionality Reduction</a></strong>.
     </div>

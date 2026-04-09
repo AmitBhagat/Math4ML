@@ -9,6 +9,9 @@ export const logicSection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Discrete Math · Logic</div>
       <h1>Mathematical Logic in AI</h1>
+      <p>In the field of AI, Logic is the mathematical framework that allows a machine to "reason" with absolute certainty.</p>
+    </div>
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>In the field of AI, <strong>Logic</strong> is the mathematical framework that allows a machine to "reason" with absolute certainty. While modern Machine Learning is often probabilistic and "fuzzy," logic is the backbone of symbolic AI, expert systems, and the high-level planning modules used in robotics. It is the tactical way we formalize human knowledge into a series of "If-Then" rules that a computer can execute without error. Understanding logic is the key to building systems that don't just guess patterns, but actually follow a rigorous chain of thought. It is the original language of Artificial Intelligence, providing the "Sanity Check" for complex decision-making processes.</p>
 

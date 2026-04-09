@@ -39,8 +39,6 @@ export const klDivergenceSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">In ML, we use KL divergence to force latent spaces to follow specific shapes (VAEs) and to transfer knowledge between models (Distillation).</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
     
       <h4>Problem: Comparing Two Global Shapes</h4>

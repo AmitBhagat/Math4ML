@@ -29,8 +29,6 @@ export const matrixMultiplicationSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     
       <h4>Problem: Finding the Combined Rule</h4>
@@ -105,11 +103,12 @@ print(f"Product: {C}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>Matrix multiplication is the "Engine" of AI. It is the mathematical way of saying, "Take these results and process them even more."</p>
     <ul>
-      <li><strong>Neural Networks</strong>: Each layer \(y = \sigma(Wx + b)\) is a massive matrix multiplication (\(W \times x\)).</li>
-      <li><strong>Attention Mechanisms</strong>: Query, Key, and Value interactions in LLMs.</li>
-      <li><strong>Linear Transforms</strong>: Rotating, scaling, and shearing image data for augmentation.</li>
+      <li><strong>Neural Network Inference</strong>: Each "Layer" in a deep network is really just a massive matrix multiplication. It takes the pattern discovered in the previous layer and mixes it with its own weights to find an even deeper pattern.</li>
+      <li><strong>Attention Mechanisms (LLMs)</strong>: The brain of models like ChatGPT is built on multiplying "Query" and "Key" matrices. This multiplication decides exactly which words in a long sentence should "pay attention" to each other to understand context.</li>
     </ul>
+    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Multiplication is the forward pass. But how do we work backwards? Explore <strong><a href="#/mathematics/linear-algebra/matrix-inverse">Matrix Inverse</a></strong>.

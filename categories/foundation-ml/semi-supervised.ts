@@ -31,8 +31,6 @@ export const semiSupervisedLearningSection: TopicSection = {
       <p class="text-xs opacity-70 mt-2">By leveraging the underlying geometry of $\mathcal{U}$, we reduce the sample complexity of $f$ significantly compared to pure supervised methods.</p>
     </div>
     
-    <div class="callout tip">
-
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Tiny City Map</h2>
     
       <h4>Scenario: Navigating a 1,000-Square-Mile City</h4>

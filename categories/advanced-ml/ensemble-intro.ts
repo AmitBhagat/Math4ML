@@ -131,6 +131,14 @@ score = ensemble.score(X_test, y_test)
 print(f"Council Consensus Accuracy: {score:.1%}")
     </python-code>
 
+    <h2 id="applications">Applications in ML</h2>
+    <p>Ensemble Learning is the "Wisdom of the Council." By combining models that make different kinds of mistakes, we ensure that no single model's blind spot can derail the final decision.</p>
+    <ul>
+      <li><strong>Fraud Detection Systems</strong>: Banks use ensembles to spot suspicious credit card transactions. A simple model might look for "High Purchase Amount," and another might look for "Strange Location." By combining these (and 100 other) weak signals into a council, the ensemble can identify complex fraud patterns that any single model would miss.</li>
+      <li><strong>Winning Kaggle Competitions</strong>: In the world of competitive data science, the "Meta-Review" is king. Almost every winning solution for tabular data challenges uses some form of ensemble (like combining XGBoost, CatBoost, and LightGBM). It is the proven way to squeeze every last drop of predictive accuracy out of a dataset.</li>
+    </ul>
+    <p>Teacher's Final Word: Collective intelligence is more than the sum of its parts. Individual models are experts in their own narrow lanes, but an ensemble is a generalist that knows where each expert fails and how to find the signal in their disagreement.</p>
+
     <div class="linking-rule">
       <strong>Next Step:</strong> Let's see how many people voting in parallel can reduce variance. Explore <strong><a href="#/machine-learning/advanced-ml/bagging">Bagging</a></strong>.
     </div>

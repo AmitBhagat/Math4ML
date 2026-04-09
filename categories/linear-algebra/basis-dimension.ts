@@ -107,11 +107,12 @@ print(f"Dimension of the created space: {dim}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
+    <p>A Basis is the "Minimalist Skeleton" of your dataset. It’s like the Primary Colors in an art class—you only need a few to build every other shade in the visible universe.</p>
     <ul>
-      <li><strong>Autoencoders</strong>: Try to find a "compressed basis" (Bottleneck layer) that still contains enough information.</li>
-      <li><strong>Fourier Transforms</strong>: Decompose signals into a basis of Sine and Cosine waves.</li>
-      <li><strong>Compression</strong>: If you have 100 features but the dimension of their span is only 20, you can safely remove 80% of your data.</li>
+      <li><strong>Image Compression</strong>: When you save a photo as a JPEG, the computer finds a "Basis" of sine waves that can build the image. By using only the 100 most important "Basis Waves" instead of 1,000,000 raw pixels, we shrink the file by 90% almost invisibly.</li>
+      <li><strong>Matrix Factorization (RecSys)</strong>: Streaming services like Spotify find a small set of "Basis Genres" (like Calm, Upbeat, Acoustic). Your taste is just a linear combination of these few dimensions, making it possible to recommend music to millions of people without tracking every single song.</li>
     </ul>
+    <p>Teacher's Final Word: Identifying the basis of your data lets you ignore the noisy distractions and focus on the few "Atom-level" directions that actually define the shape of your information.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is defined. Now how do we measure the "Alignment" and "Overlap" between our vectors? Explore <strong><a href="#/mathematics/linear-algebra/dot-product">Dot Product</a></strong>.

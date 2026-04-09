@@ -82,12 +82,7 @@ export const lassoRegressionSection: TopicSection = {
           <span class="step-badge">4</span>
           <strong>Iterate:</strong> Cycle through all features until the weights converge.
         </div>
-        <div class="algorithm-step">
-          <span class="step-badge">5</span>
-          <strong>Feature Selection:</strong> Review the final model to see which features were "Executed" (killed) by the Lasso.
-        </div>
       </div>
-    
 
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Brutal Casting Director</h2>
     
@@ -144,6 +139,14 @@ weights = lasso_model.coef_
 print(f"Feature Weights: {weights}")
 print(f"Number of Useless Features Killed (w=0): {np.sum(weights == 0)}")
     </python-code>
+
+    <h2 id="applications">Applications in ML</h2>
+    <p>Lasso is the "Brutal Executive Auditor." While Ridge regression "muffles" the noise, Lasso kills it entirely—forcing irrelevant features to exactly zero.</p>
+    <ul>
+      <li><strong>Gene Expression Analysis</strong>: In genomics, we often have 20,000 genes but only 100 samples. Lasso is used to find "Signature Genes"—it executes (kills) the weights of irrelevant markers, leaving behind only the 10-20 genes that truly matter for a specific disease.</li>
+      <li><strong>Compressive Sensing</strong>: In satellite imagery and signal processing, Lasso helps reconstruct high-quality signals from very few measurements. It assumes the underlying truth is "Sparse" (mostly zeroes) and uses the L1 penalty to find the simplest, cleanest explanation for the data.</li>
+    </ul>
+    <p>Teacher's Final Word: Lasso is your best friend when you have a mountain of features but suspect only a few actually matter. It is the ultimate tool for automatic feature selection and building models that a human can actually understand.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> What if a straight line isn't enough, even with regularization? Explore <strong><a href="#/machine-learning/supervised-learning/polynomial-regression">Polynomial Regression</a></strong>.

@@ -9,6 +9,9 @@ export const graphTheorySection: TopicSection = {
     <div class="premium-hero">
       <div class="premium-hero-badge">🕸️ Discrete Math · Graphs</div>
       <h1>Graph Theory: The Science of Relationships</h1>
+      <p>Graph theory is the study of relationships and connections. It provides the mathematical framework for Knowledge Graphs and GNNs.</p>
+    </div>
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>In AI and Data Science, <strong>Graph Theory</strong> is the study of relationships. While standard datasets look like flat rows and columns, many real-world problems—like social networks, protein structures, and global logistics—are better represented as a web of connected points. Graph theory gives us the language to describe these "Connections" as first-class citizens. By treating the lines between data points as being just as important as the data points themselves, we can model complex systems like causality, influence, and the spread of information. It is the mathematical framework for <strong>Connectivity</strong>, allowing our models to "see" the structure of the world rather than just a list of numbers.</p>
 
