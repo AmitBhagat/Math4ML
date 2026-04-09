@@ -207,7 +207,7 @@ for i in range(0, len(X), batch_size):
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the sailor a <strong>Sled</strong> so he can use his speed more effectively? Explore <strong><a href="#/machine-learning/optimization-ml/momentum">Momentum</a></strong>.
     </div>
-  `},a={id:"momentum-ml",title:"Momentum",description:"A method to accelerate gradient descent that uses the moving average of gradients to smooth out updates and navigate the loss surface more efficiently.",color:"#F44336",html:String.raw`
+  `},i={id:"momentum-ml",title:"Momentum",description:"A method to accelerate gradient descent that uses the moving average of gradients to smooth out updates and navigate the loss surface more efficiently.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>Momentum: The Heavy Boulder</h1>
@@ -305,7 +305,7 @@ for i in range(11):
     <div class="linking-rule">
       <strong>Next Step:</strong> What if we give the boulder <strong>Brakes</strong> for every individual wheel? Explore the king of optimizers: <strong><a href="#/machine-learning/optimization-ml/adam">Adam Optimizer</a></strong>.
     </div>
-  `},i={id:"adam-ml",title:"Adam Optimizer",description:"A combination of RMSProp and Momentum into a single, robust algorithm that adaptive learning rates for every single parameter in a neural network.",color:"#F44336",html:String.raw`
+  `},a={id:"adam-ml",title:"Adam Optimizer",description:"A combination of RMSProp and Momentum into a single, robust algorithm that adaptive learning rates for every single parameter in a neural network.",color:"#F44336",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">⚡ Optimization · ML</div>
       <h1>Adam: The Adaptive Athlete</h1>
@@ -504,7 +504,7 @@ for e in [0, 25, 50, 75, 100]:
     <p>Teacher's Final Word: If you never slow down, you'll never stop at the truth; you'll just zoom right past it. Learning rate scheduling is the difference between a model that merely "learns" and one that achieves state-of-the-art generalization by sticking the landing on the global minimum.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered the iterative descent. Now, let's look at how to prep and "Clean" your raw datasets in <strong><a href="#/machine-learning/data-preprocessing">Data Preprocessing</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the iterative descent. Now, learn how to combine many models into a single "Strong Learner" in <strong><a href="#/machine-learning/advanced-ml/ensemble-intro">Advanced ML Topics</a></strong>.
     </div>
   `},o={id:"optimization-ml",title:"Optimization in ML",description:"The mechanical iterative engines that minimize model error on massive datasets—from basic Gradient Descent to the adaptive Adam optimizer.",keyConcepts:[{title:"Iterative Descent",description:"Navigating the high-dimensional loss surface using the negative gradient."},{title:"Adaptive Learning",description:"Individual step sizes for every parameter based on volatility and direction."},{title:"Convergence Stability",description:"Using momentum and scheduling to prevent oscillations and overshooting."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
@@ -552,4 +552,4 @@ for e in [0, 25, 50, 75, 100]:
       </div>
 
     </div>
-  `,sections:[e,t,a,i,n]};export{o as OPTIMIZATION_ML_DATA};
+  `,sections:[e,t,i,a,n]};export{o as OPTIMIZATION_ML_DATA};

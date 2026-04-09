@@ -52,10 +52,10 @@ const e={id:"intro",title:"Introduction to Preprocessing",description:"The essen
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Diamond in the Rough</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Refinement Gallery</h2>
     
-      <h4>Scenario: Preparing a Customer Dataset for a Bank</h4>
-      <p>We have a list of 10,000 customers. Some are missing phone numbers, some have salaries in Yen while others are in Dollars.</p>
+      <h4>Scenario 1: The Diamond in the Rough</h4>
+      <p>Preparing a customer dataset for bank analysis. Dealing with missing phone numbers and mixed currency salaries (Yen vs. Dollars).</p>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
@@ -72,7 +72,41 @@ const e={id:"intro",title:"Introduction to Preprocessing",description:"The essen
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Model:</strong> Now, when we feed this to a Logistic Regression, it finds the signal instantly because the noise has been scrubbed.</div>
+          <div><strong>Conclusion:</strong> When we feed this to a Logistic Regression, it finds the signal instantly because the noise has been scrubbed.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Smart City Nerve Center</h4>
+      <p>Management of 10,000 urban sensors tracking Traffic, Noise, and CO2 levels across a metropolitan area.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Time-Zone Sync:</strong> Sensors in different districts were reporting in UTC or Local Time. We align them to a single timeline to see the "Traffic Wave" move through the city.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Ghost Signal Removal:</strong> A sensor at a construction site was reporting the same high vibration for 48 hours. We flag it as "Stuck" and exclude it from the noise pollution dashboard.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> By aligning and cleaning the telemetry, the city can predict congestion 30 minutes before it happens, saving fuel and time.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: The Global Supply Chain</h4>
+      <p>A logistics company handles shipments from 50 countries with mixed measurement systems and currencies.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Unit Harmonization:</strong> Cargo weights arrived in 'Tons', 'Kilograms', and 'Pounds'. We normalize everything to Metric Tons so the ship's load-balancing model doesn't over-stack one side.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Denoising Labels:</strong> Product descriptions like "Electronics", "Elect.", and "Elec-01" are all mapped to a single "Power Goods" category using string similarity.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The refinery pipeline turns chaotic shipping logs into a high-fidelity inventory engine that optimizes warehouse space globally.</div>
         </div>
       </div>
 
@@ -178,9 +212,9 @@ print(df[['Age', 'City', 'Salary_Scaled']])
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fair Athlete</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Equalization Zone</h2>
     
-      <h4>Scenario: Comparing a Sprinter and a Weightlifter</h4>
+      <h4>Scenario 1: The Fair Athlete</h4>
       <p>How do you decide who is the "Best Athlete" when one measures performance in <strong>Seconds</strong> (10.0) and the other in <strong>Grams</strong> (200,000)?</p>
       
       <div class="algorithm-steps">
@@ -198,7 +232,41 @@ print(df[['Age', 'City', 'Salary_Scaled']])
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The model now sees that the Sprinter's accomplishment is mathematically rarer and grants it higher weight.</div>
+          <div><strong>Conclusion:</strong> The model now sees that the Sprinter's accomplishment is mathematically rarer and grants it higher weight.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Real Estate Appraiser</h4>
+      <p>Predicting house prices using "Square Footage" (500 to 5,000) and "Distance to Subway" (0.1 to 2.0 miles).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Numerical Bullying:</strong> Without scaling, Gradient Descent sees a 1,000 sq ft difference as a "Cliff" and a 0.5-mile difference as a "Tiny Bump." The model ignores the subway.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Normalization:</strong> We scale both to [0, 1]. Now, a move from "Far" to "Close" to the subway has the same mathematical impact as a move from "Small" to "Large" house.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The model accurately learns that proximity to a subway is just as important as size, leading to a 15% increase in price prediction accuracy.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: The High-Frequency Trading Bot</h4>
+      <p>A bot analyzes millisecond price changes (tiny fractions) and trade volume (millions of shares).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>Vanishing Gradients:</strong> Because price changes are so small ($1e^{-4}$), gradients used to update the model are nearly zero. The model "forgets" to learn from price.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Z-Score Standardization:</strong> We standardize volume and price returns. This brings both signals into the same "Loudness" range (typically -3 to +3).</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The loss function becomes a symmetric bowl rather than a flat pancake. The bot converges on a winning strategy in minutes instead of days.</div>
         </div>
       </div>
 
@@ -290,9 +358,9 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Label Translator</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Label Translator</h2>
     
-      <h4>Scenario: Teaching a Model about Fruit</h4>
+      <h4>Scenario 1: Teaching a Model about Fruit</h4>
       <p>How do we represent 'Apple', 'Banana', and 'Cherry' without making the computer think one is "Greater" than the other? A computer sees integers as having magnitude (2 > 1).</p>
       
       <div class="algorithm-steps">
@@ -310,7 +378,41 @@ print(f"Final Std Devs (should be 1): {np.std(X_scaled, axis=0).round(1)}")
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Result:</strong> The model now treats all fruits as equally distant neighbors in a high-dimensional space. No fruit is "Greater" than another.</div>
+          <div><strong>Conclusion:</strong> The model now treats all fruits as equally distant neighbors in a high-dimensional space. No fruit is "Greater" than another.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Music Genome Project</h4>
+      <p>Building a recommender engine that categorizes 50+ music genres (Jazz, Pop, Metal, etc.).</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Problem:</strong> If we use Label Encoding (Jazz=1, Pop=2, Metal=3), the model assumes "Pop" is closer to "Jazz" than "Metal" is, and that "Jazz + Pop = Metal." This creates a hallucinated social hierarchy.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>One-Hot Solution:</strong> We create 50 binary columns. Each genre is a separate dimension in a high-dimensional vector space. No genre is "greater" than another; they are all distinct and equidistant.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The recommender can now find pure clusters based on actual listening patterns, rather than being biased by arbitrary numerical order.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: Employee Performance Tracks</h4>
+      <p>Predicting promotion likelihood using performance ratings: "Needs Improvement", "Meets Expectations", "Exceeds Expectations".</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Logic:</strong> Unlike music genres, these categories have a <strong>Natural Order</strong>. "Exceeds" is objectively better than "Needs Improvement."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Ordinal Encoding:</strong> We map them to [1, 2, 3]. This preserves the <strong>Signal of Progression</strong>. The model understands the distance between "Needs Improvement" and "Meets" is a positive vector towards promotion.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> By using Ordinal Encoding instead of One-Hot, the model learns more efficiently because it doesn't have to "discover" the ranking—we've embedded it as a mathematical fact.</div>
         </div>
       </div>
 
@@ -356,7 +458,7 @@ print(df_ohe)
     <div class="linking-rule">
       <strong>Next Step:</strong> What if the data is just missing? Explore the art of <strong><a href="#/machine-learning/data-preprocessing/missing-data">Handling Missing Data</a></strong>.
     </div>
-  `},i={id:"missing-data",title:"Handling Missing Data",description:"Techniques for identifying and imputing missing values to prevent bias and maintain data integrity.",color:"#ff7b72",html:String.raw`
+  `},s={id:"missing-data",title:"Handling Missing Data",description:"Techniques for identifying and imputing missing values to prevent bias and maintain data integrity.",color:"#ff7b72",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🚫 ML · Preprocessing</div>
       <h1>Handling Missing Data: The Hole in the Map</h1>
@@ -411,9 +513,9 @@ print(df_ohe)
       </div>
     </div>
 
-    <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Hole in the Map</h2>
+    <h2 id="examples" class="mb-8"><span class="text-green-premium font-bold">Case Studies:</span> The Recovery Room</h2>
     
-      <h4>Scenario: Predicting House Prices with Missing Features</h4>
+      <h4>Scenario 1: The Hole in the Map</h4>
       <p>A house listing is missing its 'Number of Bathrooms' feature. We can't let the model crash, so we have to fill the hole.</p>
       
       <div class="algorithm-steps">
@@ -431,7 +533,41 @@ print(df_ohe)
         </div>
         <div class="algorithm-step">
           <span class="step-badge">4</span>
-          <div><strong>The Winner:</strong> KNN found the "Most Probable Truth" by looking at context. The model can now proceed without crashing.</div>
+          <div><strong>Conclusion:</strong> KNN found the "Most Probable Truth" by looking at context. The model can now proceed without crashing.</div>
+        </div>
+      </div>
+
+      <h4>Scenario 2: The Wearable Bio-Tracker</h4>
+      <p>A heart-rate monitor generates a time-series stream. Occasionally, the sensor loses contact with the skin, creating a "Gap."</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Wrong Move:</strong> Simple Deletion would break the time-series continuity, making it impossible to analyze heart rate variability over time.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Linear Interpolation:</strong> Since heart rates don't just "teleport" from 60 to 90, we draw a smooth line between the last known good pulse and the next one. This preserves the <strong>Causal Flow</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> The model can now detect arrhythmia even if the hardware had a 5-second glitch, ensuring patient safety through "Signal Patching."</div>
+        </div>
+      </div>
+
+      <h4>Scenario 3: Customer Sentiment Surveys</h4>
+      <p>In a marketing survey, 40% of respondents skip the "Personal Income" field due to privacy concerns.</p>
+      <div class="algorithm-steps">
+        <div class="algorithm-step">
+          <span class="step-badge">1</span>
+          <div><strong>The Bias Trap:</strong> If we delete these records, we likely lose our most private (and often wealthiest) customers, creating a massive <strong>Selection Bias</strong>.</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">2</span>
+          <div><strong>Imputation by Proxy:</strong> We use "Zip Code" and "Education" as proxies. Using a KNN model, we group them with people of similar backgrounds to impute a "Probable Income."</div>
+        </div>
+        <div class="algorithm-step">
+          <span class="step-badge">3</span>
+          <div><strong>Conclusion:</strong> Data integrity is preserved. The company can market specifically to high-value segments that were previously "Invisible" due to missing labels.</div>
         </div>
       </div>
 
@@ -478,9 +614,9 @@ print(df)
     <p>Teacher's Final Word: Silence is a signal too. How you fill the gaps defines the integrity of your results. If you ignore the holes, you lose the signal; if you fill them blindly, you create a hallucination. The goal is to find the logical bridge that keeps your data alive while staying true to the underlying patterns.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> What if a data point is just wrong or totally weird? Explore <strong><a href="#/machine-learning/data-preprocessing/outliers">Outlier Detection</a></strong>.
+      <strong>Next Step:</strong> You’ve cleaned the map. Now, learn how to measure if your journey was successful in <strong><a href="#/machine-learning/model-evaluation/confusion-matrix">Model Evaluation</a></strong>.
     </div>
-  `},s={id:"data-preprocessing",title:"Data Preprocessing",description:"The fine art of data cleaning and transformation required to turn raw noise into high-fidelity mathematical signals.",keyConcepts:[{title:"Standardization",description:"Leveling the playing field for features of different magnitudes."},{title:"Vectorization",description:"Translating human labels and text into a language machines can process."},{title:"Signal Recovery",description:"Identifying and repairing holes in the data to maintain integrity."}],introHtml:String.raw`
+  `},i={id:"data-preprocessing",title:"Data Preprocessing",description:"The fine art of data cleaning and transformation required to turn raw noise into high-fidelity mathematical signals.",keyConcepts:[{title:"Standardization",description:"Leveling the playing field for features of different magnitudes."},{title:"Vectorization",description:"Translating human labels and text into a language machines can process."},{title:"Signal Recovery",description:"Identifying and repairing holes in the data to maintain integrity."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
       
       <!-- Intro Section -->
@@ -526,4 +662,4 @@ print(df)
       </div>
 
     </div>
-  `,sections:[e,t,a,i]};export{s as DATA_PREPROCESSING_DATA};
+  `,sections:[e,t,a,s]};export{i as DATA_PREPROCESSING_DATA};

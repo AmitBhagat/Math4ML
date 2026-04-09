@@ -225,7 +225,7 @@ for i, test in enumerate(test_cases):
     <div class="linking-rule">
       <strong>Next Step:</strong> We built the structure, but how do we "Train" the Jury? Explore the algorithm that powers all AI: <strong><a href="#/machine-learning/deep-learning/backpropagation">Backpropagation</a></strong>.
     </div>
-  `},a={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
+  `},i={id:"backpropagation",title:"Backpropagation",description:"The primary algorithm for training neural networks, calculating the gradient of the loss function with respect to every weight and bias.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Learning</div>
       <h1>Backpropagation: The Blame Game</h1>
@@ -353,7 +353,7 @@ print(f"New Improved Weight: {w:.4f}")
     <div class="linking-rule">
       <strong>Next Step:</strong> We know how to learn. But how do we add the "Magic" non-linearity? Explore <strong><a href="#/machine-learning/deep-learning/activations">Activation Functions</a></strong>.
     </div>
-  `},i={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
+  `},a={id:"activations",title:"Activation Functions",description:"The mathematical 'gatekeepers' of a neural network that decide which signals are important enough to be passed on to the next layer.",color:"#e3b341",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">🧠 Deep Learning · Components</div>
       <h1>Activation Functions: The Emotional Filter</h1>
@@ -1295,7 +1295,7 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
     <p>Teacher's Final Word: Conflict is the fastest route to genius. By giving the machine an "Enemy" to defeat, GANs have transformed AI from a cold analyzer into a creative force capable of imagining things that have never existed before.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Adversarial duels are powerful, but what if you could un-scramble noise instead? Explore <strong><a href="#/machine-learning/advanced-ml/diffusion-models">Diffusion Models</a></strong>.
+      <strong>Next Step:</strong> You’ve seen how models imagine. Now, see how they <strong>Act</strong> and make sequences of decisions in <strong><a href="#/machine-learning/reinforcement-learning/mdp">Reinforcement Learning</a></strong>.
     </div>
   `},c={id:"deep-learning",title:"Neural Networks & Deep Learning",description:"The mathematical engines of modern AI—from the singular Perceptron to the multi-head Attention mechanisms of Large Language Models.",keyConcepts:[{title:"Universal Approximation",description:"The power of layers and non-linearity to model any continuous function."},{title:"Backpropagation",description:"Iterative optimization via the systematic application of the Chain Rule."},{title:"Inductive Biases",description:"Architectural constraints for Space (CNN), Time (RNN), and Relationships (Attention)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">
@@ -1343,4 +1343,4 @@ print("Goal: Discriminate(Real) -> 1.0, Discriminate(Generate(Noise)) -> 0.0")
       </div>
 
     </div>
-  `,sections:[e,t,a,i,s,o,n,r,l,h,d]};export{c as DEEP_LEARNING_DATA};
+  `,sections:[e,t,i,a,s,o,n,r,l,h,d]};export{c as DEEP_LEARNING_DATA};

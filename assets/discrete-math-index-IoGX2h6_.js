@@ -762,7 +762,7 @@ if adj_matrix[1, 2] == 1:
     </python-code>
 
     <div class="linking-rule">
-      <strong>Final Step:</strong> You've mastered the Mathematics curriculum! You've explored vectors, probability, and the discrete structures of logic. Now, it's time to put these tools to work in <strong><a href="#/machine-learning">Machine Learning</a></strong>.
+      <strong>Next Step:</strong> You've mastered the Mathematics curriculum! Now, it's time to put these tools to work in the <strong><a href="#/machine-learning/foundation-ml/what-is-ml">Foundations of Machine Learning</a></strong>.
     </div>
   `},o={id:"discrete-math",title:"Discrete Mathematics",description:"The study of discrete mathematical structures that form the foundation of computer science, algorithms, and symbolic AI.",keyConcepts:[{title:"Set Theory",description:"Collections of unique data points and their operations (Union, Intersection)."},{title:"Mathematical Logic",description:"Propositional and First-Order logic for automated reasoning."},{title:"Combinatorics",description:"Permutations, Combinations, and the Fundamental Counting Principle."},{title:"Graph Theory",description:"Nodes and Edges representing entities and their relationships."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

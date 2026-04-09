@@ -2100,7 +2100,7 @@ print(f"Confidence Verdict: {prediction}")
     <p>Teacher's Final Word: In the world of tabular data (SQL tables, Excels), these are the undisputed champions. If you are competing on Kaggle or building a high-stakes business model, these are the tools you want in your garage.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have mastered the "Teachers" (Supervised). What happens when the machine has to learn on its own? Explore <strong><a href="#/machine-learning/unsupervised-learning/">Unsupervised Learning Paradigms</a></strong>.
+      <strong>Next Step:</strong> You have mastered the "Teachers" (Supervised). What happens when the machine has to learn on its own? Explore <strong><a href="#/machine-learning/unsupervised-learning/kmeans">Unsupervised Learning Paradigms</a></strong>.
     </div>
   `},m={id:"supervised-learning",title:"Supervised Learning",description:"Learn how machines use labeled data to predict continuous values and classify objects into discrete categories.",keyConcepts:[{title:"Regression Analysis",description:"Predicting continuous numbers: Linear, Ridge, Lasso, and Polynomial."},{title:"Classification Theory",description:"Sorting into groups: Logistic, Naive Bayes, KNN, and SVM."},{title:"Tree & Ensemble",description:"Combined wisdom: Decision Trees, Random Forests, and Gradient Boosting."},{title:"State-of-the-Art",description:"The heavyweight trio: XGBoost, LightGBM, and CatBoost."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

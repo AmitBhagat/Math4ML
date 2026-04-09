@@ -334,7 +334,7 @@ print(f"Asymmetry check: {calculate_kl(q, p):.4f}")
     <p>Teacher's Final Word: KL isn't just a distance; it's a measure of regret. It tells you exactly how much truth you've sacrificed for the sake of simplicity. In the world of AI, the objective is to make our models so sophisticated that the information loss between our math and the real world reaches zero.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You’ve completed the core mathematics sequence of <strong>Linear Algebra, Calculus, Probabilty, Statistics, & Information Theory</strong>. Ready to move into <strong>Machine Learning Architectures</strong>? Explore <strong><a href="#/supervised/basics">Supervised Learning</a></strong>.
+      <strong>Next Step:</strong> You’ve completed the Phase 3 Engine. Now, explore the structural building blocks of data in <strong><a href="#/mathematics/discrete-math/set-theory">Discrete Mathematics</a></strong>.
     </div>
   `},s={id:"information-theory",title:"Information Theory",description:"Information Theory provides the mathematical foundation for quantifying uncertainty, measuring information flow, and designing optimal loss functions for Machine Learning models.",keyConcepts:[{title:"Entropy",description:"The fundamental measure of uncertainty or 'average surprise' in a system."},{title:"Cross-Entropy",description:"Measuring the distance between target and predicted distributions; the standard ML loss."},{title:"KL Divergence",description:"Information Loss: quantifying the structural gap between two probability models."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

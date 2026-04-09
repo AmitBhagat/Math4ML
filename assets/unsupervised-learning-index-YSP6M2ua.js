@@ -1452,7 +1452,7 @@ print(f"Anomalies successfully isolated: {list(y_pred_outliers).count(-1)} / 5")
     <p>Teacher's Final Word: Anomaly Detection focuses on the loner. It's the art of defining the "fence" around a sheep herd so clearly that a wolf stands out simply because it is outside the boundary.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Finding strange points is one thing—what about the structure of the data itself? Explore <strong><a href="#/machine-learning/unsupervised-learning/dim-reduction-intro">Dimension Reduction</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the art of Discovery. Now, move into the frontier of complex modeling with <strong><a href="#/machine-learning/deep-learning/perceptron">Deep Learning & Neural Networks</a></strong>.
     </div>
   `},h={id:"unsupervised-learning",title:"Unsupervised Learning",description:"Extracting patterns, hidden tribes, and structural essence from data that has no labels.",keyConcepts:[{title:"Clustering Algorithms",description:"Finding the hidden tribes: k-Means, Hierarchical, DBSCAN, and GMM."},{title:"Dimension Reduction",description:"Squashing information: PCA, t-SNE, and UMAP."},{title:"Neural Manifolds",description:"Learning latent essentials: Autoencoders and Deep Embeddings."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

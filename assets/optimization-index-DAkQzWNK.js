@@ -484,7 +484,7 @@ print(f"L1 result: {l1_update(w, grad, 0.1, lmbda):.4f}")
     <p>Teacher's Final Word: The trade-off between a perfect score and a stable model is the single most important decision you make. Regularization is how you build an AI that works in the real world, not just in your lab.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You have completed the core mathematics foundation. You possess the <strong>Linear Algebra</strong>, <strong>Calculus</strong>, <strong>Probability</strong>, <strong>Statistics</strong>, <strong>Information Theory</strong>, and <strong>Optimization</strong> expertise to master any algorithm. Explore <strong><a href="#/supervised/basics">Supervised Machine Learning</a></strong>.
+      <strong>Next Step:</strong> You have mastered the engine of learning. Now, explore how we measure the data itself in <strong><a href="#/mathematics/information-theory/entropy">Information Theory</a></strong>.
     </div>
   `},s={id:"optimization",title:"Optimization",description:"Optimization is the iterative process of finding the optimal parameters for a model by minimizing a loss function on a multi-dimensional surface.",keyConcepts:[{title:"Gradient Descent",description:"Batch updates following the steepest downward path."},{title:"Stochastic Gradients",description:"Frequent, noisy updates using a mini-batch of data."},{title:"Convexity",description:"Guarantees of reaching the global minimum without local traps."},{title:"Regularization",description:"Geometric constraints to prevent model overfitting (L1, L2)."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

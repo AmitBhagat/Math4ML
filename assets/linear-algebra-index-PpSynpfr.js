@@ -1792,7 +1792,7 @@ print(f"Reduced Shape: {X_reduced.shape}")
     <p>Teacher's Final Word: PCA is the difference between memorizing a thousand boring details and understanding the one main story. It’s the "Best Camera Angle" for your data, ensuring that every dimension you keep is actually contributing to the truth of your model.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict the future in <strong><a href="#/mathematics/statistics/basics">Probability & Statistics</a></strong>.
+      <strong>Next Step:</strong> You've mastered the building blocks of data models. Now, let's explore how we use these models to predict change in <strong><a href="#/mathematics/calculus/derivatives">Calculus & Differentiation</a></strong>.
     </div>
   `},v={id:"linear-algebra",title:"Linear Algebra",description:"Linear Algebra is the language of Machine Learning. It provides the mathematical framework for representing and processing high-dimensional data.",keyConcepts:[{title:"Vectors & Spaces",description:"The arena where data lives, defined by basis and independence."},{title:"Matrix Operations",description:"Transforming space through multiplication, inversion, and determinants."},{title:"Decompositions",description:"Breaking complex transformations into Eigenvalues and SVD."},{title:"Applications",description:"Dimension reduction (PCA) and regression optimization."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

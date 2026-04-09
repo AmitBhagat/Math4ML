@@ -1071,7 +1071,7 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
     <p>Teacher's Final Word: Integrals are the ultimate tool for "Global Understanding." They take the local rules of probability and scale them up to show us the big picture of a dataset or a model's behavior.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Integration measures accumulation. Now, find the 'best' possible values by exploring <strong><a href="#/mathematics/calculus/optimization">Optimization Theory</a></strong>.
+      <strong>Next Step:</strong> Integration measures accumulation. Now, explore the logic of uncertainty in <strong><a href="#/mathematics/probability/random-variables">Probability Theory</a></strong>.
     </div>
   `},d={id:"calculus",title:"Calculus",description:"The mathematical engine for optimization, using derivatives and gradients to minimize model error and power backpropagation.",keyConcepts:[{title:"Differentiation",description:"Calculating instantaneous rates of change and sensitivity."},{title:"Partial Derivatives",description:"Handling variables in multi-dimensional loss surfaces."},{title:"The Gradient",description:"The compass that points towards reaching the minimum error."},{title:"Chain Rule",description:"Connecting layers for deep network backpropagation."},{title:"Jacobian & Hessian",description:"Information grids for sensitivity and curvature."},{title:"Optimization",description:"Finding local and global minima at critical points."}],introHtml:String.raw`
     <div class="max-w-4xl mx-auto space-y-16 animate-in fade-in slide-in-from-bottom-8 duration-1000 pb-20">

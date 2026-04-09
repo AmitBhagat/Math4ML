@@ -1169,7 +1169,7 @@ print(df[['Price', 'Age_at_Sale']])
     <p>Teacher's Final Word: Shovel in garbage, get out garbage. The model is only as smart as the features you give it. Feature engineering is the difference between a model that merely memorizes history and one that truly understands the hidden mechanics of future behavior.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Even with perfect features, if they are on different scales (e.g. 1 km vs 1,000 mm), the machine will get confused. Explore <strong><a href="#/machine-learning/foundation-ml/scaling-normalization">Scaling and Normalization</a></strong>.
+      <strong>Next Step:</strong> You’ve mastered the art of features. Now, learn the mechanical rigor of cleaning and scaling those features in <strong><a href="#/machine-learning/data-preprocessing/intro">Data Preprocessing</a></strong>.
     </div>
   `},c={id:"scaling-normalization",title:"Feature Scaling and Normalization",description:"Feature Scaling is a method used to normalize the range of independent variables or features of data.",color:"#FF9800",html:String.raw`
     <div class="premium-hero">
