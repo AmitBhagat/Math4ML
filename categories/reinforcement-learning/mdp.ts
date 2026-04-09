@@ -17,20 +17,30 @@ export const mdpSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The MDP 5-tuple</div>
-      <p>A **Markov Decision Process (MDP)** is defined by the tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$, where the process satisfies the **Markov Property**: the future state depends only on the current state and action, not on the historical path:</p>
+      <div class="premium-def-title">Formalism: The Bellman Optimality & State Transitions</div>
+      <p>MDPs are the "Blueprint of Agency." They provide the rigorous math for making decisions in a world that is partially random and partially controlled.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a robot navigator in a pitch-black maze. At every step, you are in a "State" $s$ (your coordinates). You take an "Action" $a$ (move North). Geometrically, an <strong>MDP</strong> is a <strong>State-Action Graph</strong>—a complex network where nodes are world-states and edges are potential futures. But the edges are "Blurry." Because of environmental noise, moving North might accidentally land you in the East cell. Each transition is a gamble. Your goal is to find a <strong>Policy</strong> $\pi$—a set of instructions that navigates this blurry graph to maximize the total "Gold" (Cumulative Reward) you collect before the journey ends.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An MDP is defined by the 5-tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$. The core of the problem is the <strong>Bellman Equation</strong>, which defines the "Value" $V(s)$ of a state as the sum of immediate reward and discounted future potential:</p>
       <div class="math-block">
-        $$P(S_{t+1} | S_t, A_t, S_{t-1}, A_{t-1}, \dots) = P(S_{t+1} | S_t, A_t)$$
+        $$V^\pi(s) = \mathbb{E}_\pi [ R_{t+1} + \gamma V^\pi(S_{t+1}) | S_t = s ]$$
       </div>
-      <p>The components of the learning environment are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>State Space ($\mathcal{S}$)</strong>: The set of all possible situations the agent can be in.</li>
-        <li><strong>Action Space ($\mathcal{A}$)</strong>: The set of all possible moves the agent can take.</li>
-        <li><strong>Transition Probability ($\mathcal{P}$)</strong>: The probability $P(s' | s, a)$ of landing in state $s'$ after taking action $a$ in state $s$.</li>
-        <li><strong>Reward Function ($\mathcal{R}$)</strong>: The immediate feedback $R(s, a)$ provided by the environment.</li>
-        <li><strong>Discount Factor ($\gamma$)</strong>: A value in $[0, 1)$ that determines the present value of future rewards.</li>
+      <p>To reach "Nirvana," the agent solves the <strong>Bellman Optimality Equation</strong>. It finds the maximum possible value by choosing the best possible action at every intersection:</p>
+      <div class="math-block">
+        $$V^*(s) = \max_{a} \sum_{s'} P(s'|s, a) [R(s, a, s') + \gamma V^*(s')]$$
+      </div>
+      <p>The <strong>Discount Factor ($\gamma$)</strong> is the "Impatience" constant. It mathematically ensures that the agent doesn't get distracted by distant, infinite rewards and focuses on actually winning the game in a reasonable timeframe.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Reinforcement Learning, the MDP is the <strong>Reality Map</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Markov Property</strong>: "The future is independent of the past, given the present." The agent doesn't need to remember how it got to state $s$; it only needs to know $s$ to make the next move.</li>
+        <li><strong>Policy ($\pi$)</strong>: This is the agent's "Brain." It is a mapping from states to actions. Solving an MDP means finding the $\pi$ that points toward the highest total reward.</li>
       </ul>
-      <p class="mt-2">The agent's objective is to find a **Policy** $\pi(s)$ that maximizes the expected cumulative discounted Reward (the Return).</p>
+      <p class="mt-4 italic text-sm">Gotcha: Dimensionality. If your state space is too large (like the pixels in a video game), you can't build a simple graph. You have to use "Deep RL" to approximate the Bellman equations, which is where the real headache begins.</p>
     </div>
     
     <div class="callout tip">

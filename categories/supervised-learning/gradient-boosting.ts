@@ -17,16 +17,30 @@ export const gradientBoostingSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gradient Boosting</div>
-      <p>Gradient Boosting is an additive ensemble method that constructs a model $F_M(x)$ as a sum of $M$ weak learners $h_m(x)$. The final prediction is:</p>
+      <div class="premium-def-title">Formalism: Gradient Descent in Function Space</div>
+      <p>Gradient Boosting is "Iterative Correction." It is the process of building a complex model by stacking simple models that focus exclusively on what we got wrong.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to reach a target in a high-dimensional dark room. In Random Forest, you ask 100 people to guess where the target is and take the average. In <strong>Gradient Boosting</strong>, you take one step, look at how far you are from the target (the <strong>Residual</strong>), and then take another small step *specifically to close that gap*. Geometrically, each tree is a vector in <strong>Function Space</strong>. We are performing Gradient Descent, but instead of updating weights, we are adding entire functions (trees) to our model's "command chain." Each new tree is a piecewise correction that nudges the overall prediction closer to the truth.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We build our model $F(\mathbf{x})$ as a sum of weak learners $h_m(\mathbf{x})$. At each step $m$, we calculate the <strong>Pseudo-residuals</strong>—the direction we need to move to minimize our loss $L$:</p>
       <div class="math-block">
-        $$F_M(x) = \sum_{m=1}^M \nu \cdot \gamma_m h_m(x)$$
+        $$r_{im} = -\left[ \frac{\partial L(y_i, F(\mathbf{x}_i))}{\partial F(\mathbf{x}_i)} \right]_{F=F_{m-1}}$$
       </div>
-      <p>At each step $m$, the algorithm fits a new learner to the **pseudo-residuals**, which are the negative gradients of the loss function $\mathcal{L}(y, F(x))$:</p>
+      <p>We then train a new Decision Tree $h_m(\mathbf{x})$ to predict these residuals (not the actual labels!). The overall model is updated using a <strong>Learning Rate</strong> $\eta$ (Shrinkage) to prevent the correction from being too aggressive:</p>
       <div class="math-block">
-        $$r_{im} = -\left[ \frac{\partial \mathcal{L}(y_i, F(x_i))}{\partial F(x_i)} \right]_{F(x)=F_{m-1}(x)}$$
+        $$F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta \cdot h_m(\mathbf{x})$$
       </div>
-      <p class="mt-2">Where $\nu$ is the learning rate and $\gamma_m$ is the step length optimized for each tree.</p>
+      <p>By repeating this process $M$ times, we arrive at a final model that is the sum of many small, targeted strikes on error.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Gradient Boosting is the <strong>Surgical Perfectionist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Hard Pattern Extraction</strong>: Because it focuses on errors, Boosting is unparalleled at finding rare or difficult correlations that simpler models might miss.</li>
+        <li><strong>Sequential Penalty</strong>: Unlike Random Forests, Boosting cannot be parallelized easily because tree #100 *must* know what tree #99 did. It's slower to train but usually more accurate.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Boosting is a "Greedy" algorithm and can easily <strong>Overfit</strong> if you give it too many trees or if the trees are too deep. You must carefully balance the number of iterations ($M$) against the learning rate ($\eta$).</p>
     </div>
     
     <div class="callout tip">

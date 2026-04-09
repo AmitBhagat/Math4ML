@@ -22,7 +22,7 @@ export const ensembleIntroSection: TopicSection = {
       <div class="math-block">
         $$H(\mathbf{x}) = \sum_{i=1}^m \alpha_i h_i(\mathbf{x}) \quad \text{or} \quad H(\mathbf{x}) = \text{argmax}_{c \in \mathcal{C}} \sum_{i=1}^m w_i \mathcal{I}(h_i(\mathbf{x}) = c)$$
       </div>
-      <p>The core theoretical justification lies in the **Ambiguity Decomposition**, which relates the ensemble error to the average error of individual models and their diversity (covariance):</p>
+      <p>The core theoretical justification lies in the <strong>Ambiguity Decomposition</strong>, which relates the ensemble error to the average error of individual models and their diversity (covariance):</p>
       <div class="math-block">
         $$\text{Error}_{\text{ens}} = \overline{\text{Error}}_{\text{ind}} - \text{Ambiguity}$$
       </div>

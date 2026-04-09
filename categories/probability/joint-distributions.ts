@@ -25,18 +25,29 @@ export const jointDistributionsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Multi-Dimensional PDF</div>
-      <p>For two random variables $X$ and $Y$, the **Joint Distribution** specifies the probability that $X$ and $Y$ fall within any specified range or set of values simultaneously. It is defined by the Joint Cumulative Distribution Function:</p>
+      <div class="premium-def-title">Formalism: The Probabilistic Landscape & Marginalization</div>
+      <p>Joint Distributions are how we handle "Coupled Complexity." They model how multiple variables move in tandem within the same universe.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a 3D landscape where the $x$ and $y$ axes represent two different features (e.g., Temperature and Humidity). The height of the terrain at any point $(x, y)$ represents the <strong>Joint Density</strong> $f(x, y)$. Instead of just calculating "length" (1D probability), we are now calculating <strong>Volume</strong>. The total volume under this 3D surface across the entire infinite plane must equal exactly <strong>1.0</strong>. If the landscape has a high "mountain" at $(30^\circ, 80\%)$, it means those two conditions are highly likely to happen together.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the <strong>Joint PDF</strong> (Probability Density Function) such that the probability of the pair $(X, Y)$ falling into a region $A$ is the double integral over that region:</p>
       <div class="math-block">
-        $$F_{X,Y}(x, y) = P(X \le x, Y \le y)$$
+        $$P((X, Y) \in A) = \iint_A f_{X,Y}(x, y) dx dy$$
       </div>
-      <p>The joint behavior is expressed through two primary functional forms depending on the variable types:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Joint PMF</strong>: For discrete variables, $p(x, y) = P(X=x, Y=y)$, satisfying $\sum_x \sum_y p(x, y) = 1$.</li>
-        <li><strong>Joint PDF</strong>: For continuous variables, $f(x, y)$ is the surface such that the volume under it over a region $A$ is $P((X, Y) \in A) = \iint_A f(x, y) dx dy$.</li>
-        <li><strong>Marginalization</strong>: The distribution of a single variable $X$ is obtained by "summing out" the other variable: $f_X(x) = \int_{-\infty}^\infty f(x, y) dy$.</li>
+      <p>To recover the behavior of just one variable (say $X$) while ignoring the other, we perform <strong>Marginalization</strong>. Geometrically, this is like "pancake-ing" the 3D mountain onto the $x$-axis by summing (integrating) up all the $y$-values for each $x$:</p>
+      <div class="math-block">
+        $$f_X(x) = \int_{-\infty}^{\infty} f_{X,Y}(x, y) dy$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Joint Distributions define the <strong>Generative Process</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Likelihoods</strong>: In supervised learning, the "Likelihood" function $P(\mathcal{D} | \theta)$ is actually a joint distribution over all $N$ data points: $L(\theta) = \prod f(x_i, y_i | \theta)$.</li>
+        <li><strong>Variable Coupling</strong>: If two variables are independent, their joint mountain is just the product of two 2D curves. If they are dependent, the mountain twists and leans, indicating that one variable "reveals" information about the other.</li>
       </ul>
-      <p class="mt-2">Correlation and independence are fundamental properties of the joint distribution: $X \perp Y$ iff $f(x, y) = f_X(x)f_Y(y)$.</p>
+      <p class="mt-4 italic text-sm">Gotcha: High-dimensional Joint Distributions are the enemy of computation. Each new variable adds another dimension to the integral, making it exponentially harder to calculate (the "Curse of Dimensionality"). This is why we use "Mean Field Assumptions" to pretend variables are independent even when we know they aren't.</p>
     </div>
     
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
@@ -113,8 +124,8 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
     <h2 id="applications">Applications in ML</h2>
     <p>A Joint Distribution is the "God's Eye View" of your data. It doesn't just look at variables in isolation; it captures the invisible threads that tie them together into a coherent reality.</p>
     <ul>
-      <li><strong>Realistic Image Synthesis (GANs & Diffusion)</strong>: When an AI generates a picture of a face, it isn't just picking a random color for each pixel. It is sampling from a massive **Joint Distribution** of millions of pixels. The probability of pixel (100, 100) being "Skin Tone" is extremely high **and** it is jointly linked to the probability that the neighboring pixel (101, 100) is also "Skin Tone." If the pixels weren't jointly distributed, the AI would just generate a screen of colorful static. Understanding the joint links is what creates structure out of chaos.</li>
-      <li><strong>Multi-Modal AI (CLIP / GPT-4V)</strong>: The most advanced AI models today work by finding a **Joint Embedding Space** between images and text. They don't just "see" a dog and "read" the word dog separately. They learn the joint probability that a specific pattern of pixels (an image) and a specific pattern of characters (text) represent the same concept. This joint understanding allows you to search for "A cat on a skateboard" and have the AI find the exact frames in a video that match that multi-variable query.</li>
+      <li><strong>Realistic Image Synthesis (GANs & Diffusion)</strong>: When an AI generates a picture of a face, it isn't just picking a random color for each pixel. It is sampling from a massive <strong>Joint Distribution</strong> of millions of pixels. The probability of pixel (100, 100) being "Skin Tone" is extremely high <strong>and</strong> it is jointly linked to the probability that the neighboring pixel (101, 100) is also "Skin Tone." If the pixels weren't jointly distributed, the AI would just generate a screen of colorful static. Understanding the joint links is what creates structure out of chaos.</li>
+      <li><strong>Multi-Modal AI (CLIP / GPT-4V)</strong>: The most advanced AI models today work by finding a <strong>Joint Embedding Space</strong> between images and text. They don't just "see" a dog and "read" the word dog separately. They learn the joint probability that a specific pattern of pixels (an image) and a specific pattern of characters (text) represent the same concept. This joint understanding allows you to search for "A cat on a skateboard" and have the AI find the exact frames in a video that match that multi-variable query.</li>
     </ul>
     <p>Teacher's Final Word: In the real world, nothing happens in a vacuum. High temperatures are linked to high ice cream sales; high training time is linked to low loss. Joint Distributions are the mathematical map of these relationships. If you only look at one variable at a time, you're missing the whole story.</p>
 

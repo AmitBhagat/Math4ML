@@ -17,12 +17,28 @@ export const mlpSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Feedforward Neural Network</div>
-      <p>A Multilayer Perceptron is a directed graph consisting of multiple layers of nodes. For an input vector $\mathbf{x}$, the activation $\mathbf{a}^{(l)}$ of layer $l$ is determined by the weights $\mathbf{W}^{(l)}$ and biases $\mathbf{b}^{(l)}$ of that layer:</p>
+      <div class="premium-def-title">Formalism: Compositional Warping & Hierarchical Logic</div>
+      <p>MLPs are "Manifold Benders." They take a space where data is messy and tangled, and recursively unfold it until the truth is obvious.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have two classes of data tangled together like spaghetti—perhaps one is a circle nested inside a ring. A single line can never separate them. A <strong>Multilayer Perceptron (MLP)</strong> is a stack of mathematical "Warps." Geometrically, every hidden layer performs a rigid rotation and stretch (Linear) followed by a "Bend" or "Fold" (Non-Linearity). Layer by layer, the spaghetti is straightened out. By the time the signal reaches the final layer, the space has been warped so thoroughly that a simple straight line is enough to separate the classes perfectly. It is the art of <strong>Recursive Simplification</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An MLP is defined as a sequence of nested transformations. For an $L$-layer network, the output is calculated through a forward-pass recursion:</p>
       <div class="math-block">
-        $$\mathbf{a}^{(l)} = \sigma\left( \mathbf{W}^{(l)} \mathbf{a}^{(l-1)} + \mathbf{b}^{(l)} \right)$$
+        $$\mathbf{h}_0 = \mathbf{x} \in \mathbb{R}^d$$
+        $$\mathbf{h}_l = \sigma(\mathbf{W}_l \mathbf{h}_{l-1} + \mathbf{b}_l) \quad \text{for } l=1, \dots, L-1$$
+        $$\hat{\mathbf{y}} = \phi(\mathbf{W}_L \mathbf{h}_{L-1} + \mathbf{b}_L)$$
       </div>
-      <p>Where $\mathbf{a}^{(0)} = \mathbf{x}$ and $\sigma$ is a non-linear activation function. According to the **Universal Approximation Theorem**, a network with a single hidden layer and sufficient width can approximate any continuous function $f: \mathbb{R}^d \to \mathbb{R}^m$ to arbitrary precision.</p>
+      <p>Where $\mathbf{W}_l$ is the weight matrix, $\mathbf{b}_l$ is the bias vector, $\sigma$ is a hidden activation (ReLU/Tanh), and $\phi$ is the output activation (Softmax/Sigmoid). The <strong>Universal Approximation Theorem</strong> proves that such a structure, with even a single hidden layer and enough neurons, can approximate *any* continuous function $f: \mathbb{R}^d \to \mathbb{R}^m$. In plain English: the MLP is a "Mathematical Clay" that can take the shape of any logic, no matter how complex.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, MLPs are the <strong>Baseline Sages</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Dense Connectivity</strong>: Every neuron in layer $l$ talks to every neuron in $l+1$. This means the MLP is powerful but "Naive"—it has no built-in knowledge of spatial (CNN) or temporal (RNN) order. It treats all features as equal until proven otherwise.</li>
+        <li><strong>Hidden Representations</strong>: The hidden layers are "Internal Dialects." They represent the data in a way that is optimized for the final decision, often revealing hidden correlations that a human could never spot in the raw features.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Overfitting. Because an MLP is a universal function approximator, it's very good at "memorizing" individual data points instead of learning general rules. Without regularization (like Dropout), your MLP will become a master of your training set but a total failure in the real world.</p>
     </div>
     
     <div class="callout tip">

@@ -17,19 +17,30 @@ export const lstmGruSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gated Memory (LSTM)</div>
-      <p>An LSTM cell maintains a cell state $C_t$ (long-term memory) and a hidden state $h_t$ (short-term memory). The flow is regulated by three sigmoidal gates:</p>
-      <div class="math-block">
-        $$\text{Forget Gate: } f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)$$
-        $$\text{Input Gate: } i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i)$$
-        $$\text{Output Gate: } o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o)$$
-      </div>
-      <p>The internal cell state is updated by forgetting old news and adding new, filtered news:</p>
-      <div class="math-block">
-        $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(W_c \cdot [h_{t-1}, x_t] + b_c)$$
-        $$h_t = o_t \odot \tanh(C_t)$$
-      </div>
-      <p class="mt-2">The **GRU** simplifies this by merging $C_t$ and $h_t$ into a single state, reducing the number of gates to two (Reset and Update).</p>
+      <div class="premium-def-title">Formalism: Gated Recurrence & The Constant Error Carousel</div>
+      <p>LSTMs are "Memory Stewards." They maintain a protected highway for information to travel through time without being corrupted by the "Noise" of intermediate layers.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Standard RNNs suffer from "Short-Term Memory"—the gradients vanish so quickly that by the time you reach the end of a sentence, the model has forgotten the beginning. <strong>LSTMs</strong> (Long Short-Term Memory) solve this by introducing a <strong>Cell State</strong> ($C_t$)—a linear "Information Highway" that runs through the entire sequence. Geometrically, this highway is protected by <strong>Gates</strong> (Valves) that use sigmoid functions to decide exactly how much information to Add (Input), Remove (Forget), or Share (Output). It is a mechanism for controlled, additive updates that allow the gradient to "skip" over a thousand steps and reach the past intact.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An LSTM cell at time $t$ uses a vector of "Gates" to control the flow of the hidden state $h_t$ and cell state $C_t$. Each gate is a learnable neural network layer outputting values in $(0, 1)$:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Forget Gate ($f_t$)</strong>: $\sigma(\mathbf{W}_f \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_f)$. Decides which parts of the old memory $C_{t-1}$ are "Old News" to be deleted.</li>
+        <li><strong>Input Gate ($i_t$)</strong>: $\sigma(\mathbf{W}_i \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_i)$. Decides which parts of the new "candidate" memory $\tilde{C}_t$ are "Breaking News" worth saving.</li>
+        <li><strong>Cell Update</strong>: The long-term highway is updated by combining the gated past and the gated present:
+          $$C_t = f_t \odot C_{t-1} + i_t \odot \tanh(\mathbf{W}_C \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_C)$$
+        </li>
+        <li><strong>Output Gate ($o_t$)</strong>: $\sigma(\mathbf{W}_o \cdot [\mathbf{h}_{t-1}, \mathbf{x}_t] + \mathbf{b}_o)$. Filters the cell state to produce the final "Visible" hidden state: $\mathbf{h}_t = o_t \odot \tanh(C_t)$.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, LSTMs are the <strong>Sequential Archivists</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Gradient Bypass</strong>: Because the cell state update is <strong>Additive</strong> ($+$) rather than multiplicative ($\times$), the gradient can flow backward through the highway with minimal decay, solving the vanishing gradient problem.</li>
+        <li><strong>GRU (Gated Recurrent Unit)</strong>: A streamlined version of the LSTM that merges the forget and input gates into a single "Update Gate." It is faster to train and often performs just as well on smaller datasets.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Sequential Bottleneck. LSTMs must process data one step at a time. This makes them much slower than Transformers, which can look at the whole sequence simultaneously using parallel "Attention" hardware.</p>
     </div>
     
     <div class="callout tip">

@@ -17,15 +17,31 @@ export const cnnSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Convolution Operation</div>
-      <p>A CNN layer computes the dot product between a local region of the input $I$ and a learnable kernel (filter) $K$. For a 2D input, the convolution at $(i, j)$ is:</p>
+      <div class="premium-def-title">Formalism: Locality, Weight Sharing & Spatial Convolutions</div>
+      <p>CNNs are "Spatial Taxonomists." They assume that the world is composed of local, repeating patterns that are invariant to their specific location.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are looking at a giant mosaic through a small, square magnifying glass. You don't see the whole picture at once; you scan it, looking for specific shapes—an edge here, a curve there. A <strong>Convolutional Neural Network (CNN)</strong> is a stack of these digital magnifying glasses (Filters). Geometrically, it treats an image as a 3D volume (Height, Width, Depth). Unlike a standard network that "looks everywhere at once," a CNN assumes <strong>Locality</strong> (nearby pixels are related) and <strong>Translation Invariance</strong> (a cat in the corner is still a cat). It ignores the "Where" to master the "What."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The core operation is the <strong>Convolution (Cross-Correlation)</strong>. For an input image $I$ and a learnable kernel (filter) $K$, the output feature map $S$ at position $(i, j)$ is computed as the sum of element-wise products:</p>
       <div class="math-block">
-        $$(I * K)(i, j) = \sum_{m} \sum_{n} I(i+m, j+n) K(m, n)$$
+        $$S(i, j) = (I * K)(i, j) = \sum_{m} \sum_{n} I(i+m, j+n) K(m, n)$$
       </div>
-      <p>This is followed by a non-linear activation and a **Pooling** step, which provides **Translation Invariance** by mapping a local region to its maximum or average value:</p>
-      <div class="math-block">
-        $$y_{p,q} = \max_{i,j \in \mathcal{R}_{p,q}} \{ a_{i,j} \}$$
-      </div>
+      <p>Key architectural properties include:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Weight Sharing</strong>: The same filter $K$ is reused across the entire image. This reduces the number of parameters from billions to thousands, making it possible to train on high-res photos.</li>
+        <li><strong>Stride & Padding</strong>: Stride defines how many pixels the filter "jumps" during each step. Padding adds a border to the image to ensure the filters can reach the very edges.</li>
+        <li><strong>Pooling</strong>: We downsample the map, usually with <strong>Max Pooling</strong>, which keeps only the strongest signal in a region: $y = \max \{x_1, x_2, x_3, x_4\}$.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, CNNs are the <strong>Visual Archetypists</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Feature Hierarchy</strong>: Early layers detect simple edges; middle layers combine them into shapes (noses, eyes); deep layers combine those shapes into objects (faces, cars).</li>
+        <li><strong>Computational Efficiency</strong>: By using local filters rather than fully-connected weights, CNNs avoid the "Curse of Dimensionality" that would otherwise incinerate your GPU when processing video.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Receptive Field. A neuron in the first layer only "sees" a 3x3 patch. To see a whole mountain, you need multiple layers so that the "vision" of the deeper neurons grows to cover the entire image.</p>
     </div>
     
     <div class="callout tip">

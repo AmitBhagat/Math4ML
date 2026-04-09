@@ -17,14 +17,30 @@ export const activationsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Non-Linear Mappings</div>
-      <p>An activation function $\sigma(z)$ is applied element-wise to the weighted sum $z$ to introduce non-linearity. Without this, a multi-layer network collapses into a single linear transformation. Key formal signatures include:</p>
-      <div class="math-block">
-        $$\text{ReLU: } \max(0, z)$$
-        $$\text{Sigmoid: } \frac{1}{1 + e^{-z}}$$
-        $$\text{Softmax: } \frac{e^{z_j}}{\sum_{k=1}^K e^{z_k}}$$
-      </div>
-      <p class="mt-2">The choice of activation affects the gradient flow during backpropagation. For example, **ReLU** helps mitigate the vanishing gradient problem by keeping the derivative as 1 for all $z > 0$.</p>
+      <div class="premium-def-title">Formalism: Non-Linear Warping & Gradient Preservation</div>
+      <p>Activation Functions are "Reality Benders." They break the rigidity of linear math, allowing the model to wrap its logic around complex, non-linear manifolds.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your Neural Network is a high-dimensional sheet of paper. Linear operations (matrix multiplications) can only fold or stretch that paper in straight lines. <strong>Activation Functions</strong> are what allow you to "Curl," "Twist," and "Warp" the paper. Geometrically, they introduce <strong>Non-Linearity</strong>, which is the only reason a network can learn complex boundaries like spirals or concentric circles. Without these "Bends," a 1,000-layer network would mathematically collapse into a single, boring Linear Regression. They transform a rigid calculator into a flexible, universal function approximator.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A neuron computes a weighted sum $a = \mathbf{w}^T \mathbf{x} + b$ (the pre-activation). The activation function $\sigma(a)$ is the "Gatekeeper" that transforms this signal. Each type has a specific mathematical specialty:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Sigmoid</strong>: $\sigma(a) = \frac{1}{1 + e^{-a}}$. Maps inputs to the range $(0, 1)$, acting as a "Probability Squeezer." </li>
+        <li><strong>ReLU (Rectified Linear Unit)</strong>: $f(a) = \max(0, a)$. The modern workhorse. It kills negative signals perfectly, but allows positive signals to flow without "Saturating" (shrinking the gradient).</li>
+        <li><strong>Softmax</strong>: Used at the very end to turn a vector of raw scores into a valid probability distribution where everything adds up to 1:
+          $$\text{Softmax}(a_i) = \frac{e^{a_i}}{\sum_{j=1}^K e^{a_j}}$$
+        </li>
+      </ul>
+      <p>The "Engine" of learning is the derivative $\sigma'(a)$. If this derivative is near zero (common in Sigmoid for large inputs), the network hits a <strong>Vanishing Gradient</strong> wall and stops learning entirely.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Activations are the <strong>Decision Gates</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Sparsity</strong>: ReLU creates "Sparse" networks where many neurons are exactly 0. This makes the model computationally efficient and helps it focus only on relevant features.</li>
+        <li><strong>Symmetry</strong>: Tanh is often preferred over Sigmoid in hidden layers because it is zero-centered, ensuring that the gradients don't all shift in the same direction during training.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Watch out for "Dead ReLU" Syndrome. If a neuron's weights get pushed so far that its input is always negative, it will always output 0, its gradient will always be 0, and it will effectively "Die"—never learning again.</p>
     </div>
     
     <div class="callout tip">

@@ -17,23 +17,38 @@ export const pcaSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Principal Component Analysis</div>
-      <p>PCA identifies the orthogonal axes (principal components) that maximize the variance of the projected data. For a centered data matrix $\mathbf{X} \in \mathbb{R}^{n \times d}$, the first principal component $\mathbf{w}_1$ is defined as:</p>
+      <div class="premium-def-title">Formalism: Variance Maximization & Eigen-Decomposition</div>
+      <p>PCA is "Mathematical Rotation." It doesn't delete data; it reorients your entire coordinate system to prioritize the strongest signals.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as an elongated, tilted ellipsoidal cloud (like a rugby ball) in 3D. While the ball exists in three dimensions, most of its "character" or "Spread" is along its length. <strong>Principal Component Analysis (PCA)</strong> is the search for that primary axis—and the subsequent axes that are perpendicular (orthogonal) to it. Geometrically, PCA is a <strong>Rigid Rotation</strong> of the space. We rotate our camera until we find the angle where the data looks "widest," capturing the maximum possible variance on our 2D sensor.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Let our centered data be $\mathbf{X} \in \mathbb{R}^{n \times d}$. We want to find a unit vector $\mathbf{w}$ such that the variance of the data projected onto $\mathbf{w}$ is maximized:</p>
       <div class="math-block">
-        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \text{Var}(\mathbf{Xw}) = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^T \mathbf{X}^T \mathbf{X} \mathbf{w}$$
+        $$\max_{\mathbf{w}} \text{Var}(\mathbf{X}\mathbf{w}) = \max_{\mathbf{w}} \mathbf{w}^T \left( \frac{1}{n}\mathbf{X}^T\mathbf{X} \right) \mathbf{w} \quad \text{s.t. } \mathbf{w}^T\mathbf{w} = 1$$
       </div>
-      <p>The solution is found via the **SVD** of $\mathbf{X}$ or the **Eigen-Decomposition** of the covariance matrix $\boldsymbol{\Sigma}$. The $k$-th principal component is the eigenvector corresponding to the $k$-th largest eigenvalue $\lambda_k$:</p>
+      <p>Solving this using Lagrange Multipliers leads to the <strong>Eigenvalue Equation</strong> of the Covariance Matrix $\mathbf{C}$:</p>
       <div class="math-block">
-        $$\boldsymbol{\Sigma} \mathbf{v}_k = \lambda_k \mathbf{v}_k$$
+        $$\mathbf{C}\mathbf{w} = \lambda \mathbf{w}$$
       </div>
+      <p>The Principal Components are the eigenvectors of $\mathbf{C}$. The amount of information (variance) captured by each component is exactly equal to its corresponding eigenvalue $\lambda$. We keep the $k$ components with the largest eigenvalues and discard the rest as "Noise."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, PCA is the <strong>Information Distiller</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Limitation</strong>: PCA only sees straight lines. If your data lives on a curved manifold (like a spiral), PCA will try to "squash" it flat, often losing the underlying structure. In those cases, you need non-linear methods like t-SNE or UMAP.</li>
+        <li><strong> orthogonality</strong>: Every principal component is 100% uncorrelated with the others. This makes PCA an excellent tool for "decorrelating" features before feeding them into a model like a Naive Bayes or Linear Regression.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Scaling is mandatory. If one feature (like "Annual Income") has a much larger numeric range than another (like "Age"), PCA will think Income is the only thing that matters, simply because its variance is numerically larger.</p>
     </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         Think of PCA as <strong>"Finding the Axis of Change"</strong> or the <strong>"Best Photograph Analogy."</strong> 
-        Imagine a **Rugby Ball** floating in space. It has 3 dimensions, but its most important feature is its "Length." PC1 is that long axis. If you only had one dimension to describe that ball, you’d pick the long axis because it captures 80% of the shape. 
-        Or think of it as taking a 2D picture of a 100D alien. <strong>PCA</strong> is the algorithm that calculates the <strong>Exact Orbital Position</strong> for your camera so that the 2D photo captures the most detail (the widest spread) of the alien's complex, many-dimensional body. It is about finding the **Perspective** that kills the redundant noise and keeps the pure signal.
+        Imagine a <strong>Rugby Ball</strong> floating in space. It has 3 dimensions, but its most important feature is its "Length." PC1 is that long axis. If you only had one dimension to describe that ball, you’d pick the long axis because it captures 80% of the shape. 
+        Or think of it as taking a 2D picture of a 100D alien. <strong>PCA</strong> is the algorithm that calculates the <strong>Exact Orbital Position</strong> for your camera so that the 2D photo captures the most detail (the widest spread) of the alien's complex, many-dimensional body. It is about finding the <strong>Perspective</strong> that kills the redundant noise and keeps the pure signal.
       </div>
     </div>
     

@@ -26,18 +26,34 @@ export const anovaSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The One-Way ANOVA</div>
-      <p>ANOVA tests the null hypothesis that all group means are equal ($H_0: \mu_1 = \mu_2 = \dots = \mu_k$). It uses the <strong>F-statistic</strong>, which is the ratio of Variance Between Groups to Variance Within Groups:</p>
+      <div class="premium-def-title">Formalism: The Partitioning of Variance & The F-Statistic</div>
+      <p>ANOVA is the "Signal-to-Noise" ratio for group comparisons. It asks if the differences between groups are larger than the chaos within them.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine $k$ different clusters of data points in a 1D space. Each cluster has its own mean $\bar{x}_i$. ANOVA is a measure of the <strong>Structure</strong> of this data. If the clusters are overlapping messes, you can't distinguish them. If the clusters are "tight" (low within-group variance) and the centers are "far" (high between-group variance), then the groups are distinct. Geometrically, we are partitioning the total "volume" of squared distances into two buckets: the distance <strong>Between</strong> the cluster centers and the distance <strong>Within</strong> each cluster center. </p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the <strong>Sum of Squares Total (SST)</strong>, the squared distance of every point from the "Grand Mean" $\bar{x}_{..}$. We decompose this total into two independent components:</p>
       <div class="math-block">
-        $$F = \frac{\text{MS}_{between}}{\text{MS}_{within}}$$
+        $$SS_{total} = SS_{between} + SS_{within}$$
       </div>
-      <p>Where:</p>
-      <ul class="mt-2 space-y-1">
-        <li>$\text{MS}_{between}$: Mean Square Between groups (Variation due to the "Treatment" or "Category").</li>
-        <li>$\text{MS}_{within}$: Mean Square Within groups (Variation due to "Error" or "Noise").</li>
-        <li>$\text{MS} = \frac{\text{Sum of Squares}}{\text{Degrees of Freedom}}$.</li>
+      <p>We then calculate the <strong>Mean Squares (MS)</strong> by dividing by the Degrees of Freedom ($k$ groups, $N$ total samples):</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li>$MS_{between} = \frac{\sum n_i (\bar{x}_i - \bar{x}_{..})^2}{k - 1}$ (The Signal)</li>
+        <li>$MS_{within} = \frac{\sum \sum (x_{ij} - \bar{x}_i)^2}{N - k}$ (The Noise)</li>
       </ul>
-      <p class="mt-4">If $F$ is significantly greater than 1, we reject $H_0$, meaning *at least one* group is significantly different from the others. To find *which* one, we use <strong>Post-Hoc Tests</strong> (like Tukey's HSD).</p>
+      <p>The <strong>F-Statistic</strong> is the ratio of these two quantities. Under the Null Hypothesis ($H_0$), where all groups are the same, this ratio should be close to 1.0:</p>
+      <div class="math-block">
+        $$F = \frac{MS_{between}}{MS_{within}}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, ANOVA is the foundation of <strong>Model Validation</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Hyperparameter Comparison</strong>: If you're comparing 3 different learning rates over 10 seeds each, ANOVA tells you if the choice of rate actually matters or if the variations are just seed-dependent noise.</li>
+        <li><strong>The F-Test</strong>: The higher the $F$ value, the more evidence we have that the independent variable (e.g., the model type) is actually influencing the outcome.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: ANOVA tells you THAT a difference exists, but not WHERE. It’s an <strong>Omnibus Test</strong>. If you reject the null, you must follow up with a "Post-Hoc" test (like Tukey) to figure out which specific groups are the odd ones out.</p>
     </div>
     
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Optimizer Comparison (Deep Learning)</h2>

@@ -17,18 +17,27 @@ export const positiveDefiniteSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Quadratic Stability</div>
-      <p>A symmetric matrix $A \in \mathbb{R}^{n \times n}$ is **Positive Definite** if the quadratic form resulting from any non-zero vector $\mathbf{x}$ is strictly positive:</p>
+      <div class="premium-def-title">Formalism: The Quadratic Energy & Convexity</div>
+      <p>Positive Definite matrices are the "Bedrock" of optimization. They ensure that your mathematical surface has a clear bottom and no hidden traps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a function $f(\mathbf{x})$ that represents the "energy" or "loss" of a system. If the surface of this function looks like a perfect bowl (a paraboloid), then no matter where you start, Gravity (Gradient Descent) will pull you to a single, unique minimum. A <strong>Positive Definite (PD)</strong> matrix is the mathematical "Blueprint" of that bowl.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We test for this "bowl-like" behavior using a <strong>Quadratic Form</strong>. For a symmetric matrix $A$, we measure the "energy" $Q$ in any direction $\mathbf{x}$:</p>
       <div class="math-block">
-        $$\mathbf{x}^\top A \mathbf{x} > 0, \quad \forall \mathbf{x} \in \mathbb{R}^n \setminus \{\mathbf{0}\}$$
+        $$Q(\mathbf{x}) = \mathbf{x}^\top A \mathbf{x} = \sum_{i,j=1}^n A_{ij} x_i x_j$$
       </div>
-      <p>This definition implies several strictly equivalent properties that are easier to check in practice:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Eigenvalue Test</strong>: Each eigenvalue $\lambda_i$ of $A$ satisfies $\lambda_i > 0$.</li>
-        <li><strong>Determinant Test</strong>: Every leading principal minor (top-left sub-matrices) has a positive determinant.</li>
-        <li><strong>Factorization</strong>: $A$ can be decomposed as $L L^\top$ (Cholesky Factorization), where $L$ is lower triangular.</li>
+      <p>For a 2x2 matrix $\begin{bmatrix} a & b \\ b & c \end{bmatrix}$, this expands to $ax_1^2 + 2bx_1x_2 + cx_2^2$. If this energy is <strong>strictly positive</strong> for every possible non-zero direction, then the matrix is PD. This means the transformation doesn't just stretch space—it stretches it "outward" in every direction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A symmetric matrix $A$ is Positive Definite ($A \succ 0$) if and only if:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quadratic Condition</strong>: $\mathbf{x}^\top A \mathbf{x} > 0$ for all $\mathbf{x} \neq \mathbf{0}$.</li>
+        <li><strong>Eigenvalue Test</strong>: Every eigenvalue $\lambda_i > 0$.</li>
+        <li><strong>Cholesky Test</strong>: $A = LL^\top$ for some unique lower triangular matrix $L$.</li>
       </ul>
-      <p class="mt-2">If $\mathbf{x}^\top A \mathbf{x} \ge 0$, the matrix is **Positive Semi-Definite**, a condition crucial for valid Kernels and Covariance matrices.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Many "correlation" matrices in ML are only Positive SEMI-Definite ($\lambda \ge 0$), meaning the bowl has a flat bottom (a valley). This can cause your optimizer to wander aimlessly. Always check for that strict positive "tilt."</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>

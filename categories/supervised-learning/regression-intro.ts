@@ -17,12 +17,29 @@ export const regressionIntroSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Regression Analysis</div>
-      <p>Regression is the process of estimating the relationship between a dependent variable $y \in \mathbb{R}$ and a feature vector $\mathbf{x} \in \mathbb{R}^d$. Formally, we seek to find a function $f$ that approximates the conditional expectation of $y$ given $\mathbf{x}$:</p>
+      <div class="premium-def-title">Formalism: The Residual Minimization Framework</div>
+      <p>Regression is "Trend Mining." It is the mathematical process of filtering out the noise to find the stable signal beneath.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a cloud of data points $(\mathbf{x}, y)$ floating in a high-dimensional space. Regression is the search for a <strong>Manifold</strong> (a line, a plane, or a complex surface) that stays as close to all points as possible. Geometrically, if you drop a vertical "leash" from every point to the surface, the optimal surface is the one that minimizes the total "pull" of all those leashes. It is the center of gravity for your observations.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the quality of our prediction $\hat{y} = f(\mathbf{x}, \mathbf{w})$ using the <strong>Residuals</strong> (the errors). The most common objective is to minimize the <strong>Sum of Squared Residuals (SSR)</strong>:</p>
       <div class="math-block">
-        $$f(\mathbf{x}) = \mathbb{E}[y \mid \mathbf{x}]$$
+        $$L(\mathbf{w}) = \sum_{i=1}^n (y_i - f(\mathbf{x}_i, \mathbf{w}))^2$$
       </div>
-      <p>The observed response is typically modeled as $y = f(\mathbf{x}) + \varepsilon$, where $\varepsilon$ is an irreducible error term (noise) such that $\mathbb{E}[\varepsilon \mid \mathbf{x}] = 0$.</p>
+      <p>By squaring the errors, we ensure the loss is <strong>Convex</strong> (yielding a unique bottom) and we disproportionately penalize massive outliers. The "Learning" happens when we find the weight vector $\mathbf{w}$ that makes the gradient of this loss exactly zero:</p>
+      <div class="math-block">
+        $$\text{Find } \mathbf{w} \text{ such that: } \nabla_\mathbf{w} L = 0$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we model the relationship as:</p>
+      <div class="math-block">
+        $$y = f(\mathbf{x}) + \epsilon$$
+      </div>
+      <p>where $f(\mathbf{x})$ is the <strong>Structure</strong> (what we can learn) and $\epsilon$ is the <strong>Noise</strong> (irreducible error). Our mission is to build an $f$ that captures all the signal, without getting "fooled" by the noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Regression assumes that the future will look like the past. If the underlying data-generating process changes (a "Regime Shift"), your model becomes paperweight instantly. Regression is a mirror, not a crystal ball.</p>
     </div>
     
     <div class="callout tip">

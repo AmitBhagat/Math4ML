@@ -17,16 +17,31 @@ export const umapSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: UMAP (Topological Reconstruction)</div>
-      <p>UMAP is founded on the assumption that data is uniformly distributed on a locally connected Riemannian manifold. It constructs a fuzzy simplicial complex representation of the data. For two points $x_i$ and $x_j$, the membership strength is:</p>
-      <div class="math-block">
-        $$p_{ij} = \exp\left(-\frac{d(x_i, x_j) - \rho_i}{\sigma_i}\right)$$
-      </div>
-      <p>Where $\rho_i$ is the distance to the nearest neighbor. The low-dimensional embedding is optimized by minimizing the **Fuzzy Set Cross-Entropy**:</p>
-      <div class="math-block">
-        $$\text{CE}(P, Q) = \sum_{e} \left[ p_e \log\left(\frac{p_e}{q_e}\right) + (1-p_e) \log\left(\frac{1-p_e}{1-q_e}\right) \right]$$
-      </div>
-      <p class="mt-2">Where $p_e$ and $q_e$ represent the high- and low-dimensional edge weights in the topological graph.</p>
+      <div class="premium-def-title">Formalism: Fuzzy Simplicial Sets & Cross-Entropy</div>
+      <p>UMAP is "Topological Reconstruction." It uses the math of manifolds to translate a high-dimensional universe into a 2D map without losing the soul of its shape.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points are scattered across a complex, multi-dimensional topography—like a crumpled mountain range in 1,000D. <strong>UMAP</strong> (Uniform Manifold Approximation and Projection) assumes that your data lives on a hidden, smooth surface (a manifold). Geometrically, it builds a "Mathematical Skeleton" of this surface called a <strong>Fuzzy Simplicial Set</strong>—a web of connections where every point is linked to its neighbors by "stretchy" edges. UMAP then seeks a low-dimensional layout that preserves the "Connectivity Map" of this skeleton as accurately as possible.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The algorithm iterates through two primary phases:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Phase 1: High-D Topology</strong>: For each point, we find its nearest neighbors and calculate a local connectivity weight $p_{ij}$. We use a "Local Connectivity" parameter ($\rho$) to ensure every point is connected to at least one neighbor, even in sparse regions.</li>
+        <li><strong>Phase 2: Low-D Optimization</strong>: We place the points in 2D and define their similarities $q_{ij}$. We then minimize the <strong>Fuzzy Set Cross-Entropy</strong> between the High-D and Low-D graphs:
+          <div class="math-block">
+            $$\mathcal{L} = \sum_{e} \left( p_{ij} \log \frac{p_{ij}}{q_{ij}} + (1 - p_{ij}) \log \frac{1 - p_{ij}}{1 - q_{ij}} \right)$$
+          </div>
+          The first term (the "Attraction") pulls together points that were close in high-D. The second term (the "Repulsion") pushes away points that were far apart.
+        </li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, UMAP is the <strong>Modern Standard</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Global vs. Local</strong>: Unlike t-SNE, which creates beautiful clusters but forgets where they are relative to each other, UMAP preserves both the "Neighborhoods" and the "Global Geography" of your data.</li>
+        <li><strong>Performance</strong>: UMAP is built on the math of the <strong>Nearest Neighbor Descent</strong> algorithm, making it drastically faster than t-SNE and capable of handling millions of points on a standard laptop.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: UMAP is non-linear and non-deterministic. While it is more stable than t-SNE, the exact orientation and placement of clusters can still shift between runs. It is a "Stochastic Approximation"—not a rigid solution like PCA.</p>
     </div>
     
     <div class="callout tip">

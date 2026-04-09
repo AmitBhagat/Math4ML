@@ -18,19 +18,29 @@ export const f1ScoreSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Harmonic Mean Reconciliation</div>
-      <p>The **F1 Score** is a single-number measure of classification performance that reconciles the trade-off between Precision ($P$) and Recall ($R$). It is defined as the harmonic mean of the two:</p>
+      <p>The F1-Score is the "Balanced Diplomat." It is the metric that refuses to ignore a failure in either quality or quantity.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to build a bridge across a massive valley. You have two main cables: <strong>Precision</strong> (how correctly you place each bolt) and <strong>Recall</strong> (how much of the gap you actually span). If one cable is perfectly engineered but the other is missing, the bridge collapses. Geometrically, the <strong>F1-Score</strong> is the <strong>Harmonic Mean</strong> of these two cables. It is the "Anchor of Equilibrium." Unlike a regular average, which can be inflated by one strong value, the F1-Score is pulled down by the "Weakest Link." It is the metric of pure, balanced competence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The F1-Score is derived from Precision ($P$) and Recall ($R$). We use the harmonic mean because we are dealing with rates and ratios. The reciprocal of the F1-Score is the average of the reciprocals of $P$ and $R$:</p>
       <div class="math-block">
-        $$F_1 = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
+        $$\frac{1}{F_1} = \frac{1}{2} \left( \frac{1}{P} + \frac{1}{R} \right)$$
       </div>
-      <p>The mathematical properties that make F1 superior to a simple average include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Sensitivity to Extremes</strong>: The harmonic mean is closer to the minimum of the two values. If either $P$ or $R$ drops to zero, the $F_1$ score drops to zero, correctly signaling a total failure of the model.</li>
-        <li><strong>Robustness to Skew</strong>: In imbalanced datasets where one class dominates, F1 measures performance on the "Case of Interest" (the positive class) without being inflated by the "Easy" negative predictions.</li>
-        <li><strong>Generalized Form ($F_\beta$)</strong>: The score can be weighted to emphasize one metric over the other using a $\beta$ parameter:
-          $$F_\beta = (1 + \beta^2) \cdot \frac{P \cdot R}{(\beta^2 \cdot P) + R}$$
-        </li>
+      <p>Rearranging this gives us the familiar formula:</p>
+      <div class="math-block">
+        $$F_1 = 2 \cdot \frac{P \cdot R}{P + R}$$
+      </div>
+      <p>Why not use a simple average (Arithmetic Mean)? Because the Arithmetic Mean is too forgiving. If a model has $1.0$ Precision but $0.0$ Recall, the Arithmetic Mean is $0.5$ (passing grade). But a model that finds *zero* actual cases is useless. The Harmonic Mean correctly identifies this as a failure, yielding an F1-Score of $0$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, F1 is the <strong>Sanity Test</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Balance Requirement</strong>: To get a high F1-Score, you *must* have both high Precision and high Recall. You cannot "fake" a good score by excelling in only one area.</li>
+        <li><strong>Skew Robustness</strong>: For highly imbalanced datasets (e.g., detecting rare fraud), F1 ignores the "Easy" True Negatives and focuses entirely on how well the model handles the positive class.</li>
       </ul>
-      <p class="mt-2">Use $F_1$ when you need a balanced representative of both model purity and model completeness.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Precision-Recall Trade-off. You rarely get both for free. Increasing your threshold usually boosts Precision but kills Recall. F1 helps you find the "Nirvana" point where the two are most harmoniously balanced.</p>
     </div>
     
     <div class="callout tip">

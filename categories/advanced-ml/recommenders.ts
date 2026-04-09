@@ -18,7 +18,7 @@ export const recommendersSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Latent Factor Decomposition</div>
-      <p>A recommender system seeks to fill the missing entries of a sparse user-item interaction matrix $\mathbf{R}$. The most common approach is **Matrix Factorization**, which decomposes $\mathbf{R}$ into user preferences $\mathbf{P}$ and item characteristics $\mathbf{Q}$ in a $k$-dimensional latent space:</p>
+      <p>A recommender system seeks to fill the missing entries of a sparse user-item interaction matrix $\mathbf{R}$. The most common approach is <strong>Matrix Factorization</strong>, which decomposes $\mathbf{R}$ into user preferences $\mathbf{P}$ and item characteristics $\mathbf{Q}$ in a $k$-dimensional latent space:</p>
       <div class="math-block">
         $$\hat{r}_{u,i} = \mathbf{p}_u \cdot \mathbf{q}_i^T = \sum_{f=1}^k p_{u,f} q_{i,f}$$
       </div>

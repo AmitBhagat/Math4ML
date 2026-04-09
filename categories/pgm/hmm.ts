@@ -17,19 +17,33 @@ export const hmmSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Latent Sequence Model</div>
-      <p>A **Hidden Markov Model (HMM)** is defined by a 5-tuple $\lambda = (S, V, A, B, \pi)$ representing a system where the state sequence $\{q_1, q_2, \dots, q_T\}$ is unobservable (latent) and must be inferred from a sequence of observations $\{O_1, O_2, \dots, O_T\}$:</p>
-      <div class="math-block">
-        $$P(\mathbf{O}, \mathbf{q} \mid \lambda) = \pi_{q_1} b_{q_1}(O_1) \prod_{t=2}^T a_{q_{t-1}q_t} b_{q_t}(O_t)$$
-      </div>
-      <p>The model’s behavior is strictly governed by three fundamental parameter sets:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Transition Matrix ($A$)</strong>: $a_{ij} = P(q_{t+1} = S_j \mid q_t = S_i)$. Encodes the dynamics of the hidden reality over time.</li>
-        <li><strong>Emission Matrix ($B$)</strong>: $b_j(k) = P(O_t = v_k \mid q_t = S_j)$. Encodes the probability of producing a specific observation from a specific hidden state.</li>
-        <li><strong>Initial Distribution ($\pi$)</strong>: $\pi_i = P(q_1 = S_i)$. The starting probability vector for the hidden states.</li>
-        <li><strong>Markov Property</strong>: The next state $q_{t+1}$ depends only on the current state $q_t$, not on the entire history.</li>
+      <div class="premium-def-title">Formalism: The Latent Sequence Trellis</div>
+      <p>HMMs are "Sequential Decoders." They allow us to see through the noise of observations to find the hidden logic governing a system.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are locked in a room and you hear a sequence of footsteps. You don't know who is walking (the Hidden States), but you can hear the distinct sound of their shoes (the Observations). <strong>Hidden Markov Models (HMMs)</strong> are the math of decoding that mystery. Geometrically, an HMM is a <strong>Trellis Diagram</strong>—a layered graph where each layer is a time step and each node is a possible reality. The "Truth" is a single path winding through this trellis. By calculating the "Weight" of each edge and node, we can find the <strong>Viterbi Path</strong>—the most probable trajectory that explains the sounds you heard.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>An HMM is defined by a 5-tuple $(S, V, A, B, \pi)$. The key components that define the "Story" are:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Transition Matrix ($A$)</strong>: $A_{ij} = P(s_t = j \mid s_{t-1} = i)$. The probability of shifting from one hidden state to another (e.g., from "Rain" to "Sun").</li>
+        <li><strong>Emission Matrix ($B$)</strong>: $B_{jk} = P(o_t = k \mid s_t = j)$. The probability of "Seeing" a specific clue given a hidden state (e.g., an "Umbrella" given "Rain").</li>
+        <li><strong>Initial State ($\pi$)</strong>: Where the story begins.</li>
       </ul>
-      <p class="mt-2">HMMs are operationalized via the **Forward-Backward** algorithm (Likelihood), the **Viterbi** algorithm (Decoding), and the **Baum-Welch** algorithm (Learning).</p>
+      <p>We solve the HMM by answering three fundamental questions:</p>
+      <ol class="mt-2 mb-4 list-decimal pl-5 space-y-1">
+        <li><strong>Evaluation</strong>: How likely is this specific sequence of clues? (Solved via the <strong>Forward Algorithm</strong>).</li>
+        <li><strong>Decoding</strong>: What is the most likely "Hidden Path"? (Solved via the <strong>Viterbi Algorithm</strong>).</li>
+        <li><strong>Learning</strong>: How do we learn the matrices $A$ and $B$ from raw data? (Solved via <strong>Baum-Welch/EM</strong>).</li>
+      </ol>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Sequential Modeling, HMMs are the <strong>State-Space Decipherers</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Markov Property</strong>: The next hidden state depends only on the current one. It is a "Memoryless" system where the future is independent of the distant past once you know the present.</li>
+        <li><strong>Stationarity</strong>: We assume the rules of the game (the matrices $A$ and $B$) don't change over time. Rain is just as likely to cause an umbrella on day 1 as on day 100.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Underflow. Because we are multiplying hundreds of small probabilities together, the resulting numbers become so tiny that computers can't store them. In practice, we always work in <strong>Log-Space</strong> (adding logs instead of multiplying decimals) to prevent the math from disappearing into zero.</p>
     </div>
     
     <h2 id="viterbi">The Viterbi Search: Finding the Sequence</h2>

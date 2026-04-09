@@ -37,7 +37,7 @@ export const typesOfMLSection: TopicSection = {
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like **Semi-Supervised Learning** utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
+      <p class="text-xs opacity-80 mt-2">Hybrid paradigms like <strong>Semi-Supervised Learning</strong> utilize a mix of these signals to improve efficiency when labels are scarce but raw data is abundant. The choice of paradigm determines the mathematical complexity and the reliability of the resulting intelligence.</p>
     </div>
     
     <h2 id="supervised">Supervised Learning: The Teacher</h2>

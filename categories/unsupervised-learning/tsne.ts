@@ -17,16 +17,33 @@ export const tsneSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: t-SNE</div>
-      <p>t-SNE converts high-dimensional Euclidean distances into conditional probabilities representing similarities. For point $x_j$ given $x_i$, the similarity is:</p>
+      <div class="premium-def-title">Formalism: Stochastic Neighbor Embedding & KL Divergence</div>
+      <p>t-SNE is "Topological Stewardship." It is the process of flattening high-dimensional manifolds while honoring the local "Friendships" between data points.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a tangled, complex knot (like a "Swiss Roll") in a 1,000-dimensional space. A linear projection (PCA) would simply "crush" this knot, merging unrelated points. <strong>t-SNE</strong> (t-Distributed Stochastic Neighbor Embedding) is a non-linear tool that focuses exclusively on <strong>Local Structure</strong>. Geometrically, it tries to "unroll" the manifold onto a 2D sheet so that points that were immediate neighbors in high-D remain neighbors in 2D. It is like taking a crumpled piece of paper and carefully smoothing it out on a table without tearing the fibers.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>t-SNE matches two probability distributions—one in the high-dimensional space and one in the 2D mapping:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>High-D Similarities ($P$)</strong>: For each pair $(i, j)$, we calculate the joint probability $p_{ij}$ that they are neighbors, modeled as a Gaussian distribution centered at $x_i$.</li>
+        <li><strong>Low-D Similarities ($Q$)</strong>: In the 2D space, we calculate the similarity $q_{ij}$ using a <strong>Student t-distribution</strong> (with 1 degree of freedom).
+          $$q_{ij} = \frac{(1 + \|\mathbf{y}_i - \mathbf{y}_j\|^2)^{-1}}{\sum_{k \ne l} (1 + \|\mathbf{y}_k - \mathbf{y}_l\|^2)^{-1}}$$
+          The heavy tails of the t-distribution solve the "Crowding Problem," allowing clusters to spread out so they don't all crush into the center of the map.
+        </li>
+      </ul>
+      <p>We optimize the 2D locations $\mathbf{y}$ by minimizing the <strong>Kullback-Leibler (KL) Divergence</strong> between the two distributions:</p>
       <div class="math-block">
-        $$p_{j|i} = \frac{\exp(-\|x_i - x_j\|^2 / 2\sigma_i^2)}{\sum_{k \ne i} \exp(-\|x_i - x_k\|^2 / 2\sigma_i^2)}$$
+        $$\mathcal{L} = \sum_{i \ne j} p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
       </div>
-      <p>In the low-dimensional space, t-SNE uses a Student's t-distribution to model similarities $q_{ij}$. The embedding is found by minimizing the **KL Divergence** via gradient descent:</p>
-      <div class="math-block">
-        $$\mathcal{C} = KL(P \| Q) = \sum_i \sum_j p_{ij} \log \frac{p_{ij}}{q_{ij}}$$
-      </div>
-      <p class="mt-2">The 't-distribution' handles the 'crowding problem' by having heavier tails than a Gaussian.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, t-SNE is the <strong>Visualization Specialist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Local Focus</strong>: The algorithm is hyper-sensitive to "cliques." It captures clusters that are mathematically curved or nested, making them visible to the human eye for the first time.</li>
+        <li><strong>Stochastic Nature</strong>: Because it uses random initialization and non-convex optimization, the final map can look different every time you run it. It captures the "Neighborhoods," but the exact distance between two far-off clusters is meaningless.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: t-SNE is computationally expensive ($O(n^2)$) and effectively "destroys" the meaning of global distances. Once you project to 2D with t-SNE, you can see the clusters, but you can no longer measure how far apart the "extremes" of your data really are.</p>
     </div>
     
     <div class="callout tip">

@@ -17,17 +17,29 @@ export const selfSupervisedSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Pretext Task</div>
-      <p>In self-supervised learning, labels $y$ are automatically generated from the data $\mathbf{x}$ using a function $\mathcal{G}(\mathbf{x})$. The objective is to learn a representation $f_\theta(\mathbf{x})$ by solving a surrogate task:</p>
-      <div class="math-block">
-        $$\min_\theta \mathbb{E}_{\mathbf{x} \sim p_{\text{data}}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathcal{G}(\mathbf{x})) ]$$
-      </div>
-      <p>Where $\tilde{\mathbf{x}}$ is a corrupted or partial version of $\mathbf{x}$. Common paradigms include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Auto-encoding</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with noise; $\mathcal{G}(\mathbf{x}) = \mathbf{x}$.</li>
-        <li><strong>Masking</strong>: $\tilde{\mathbf{x}}$ is $\mathbf{x}$ with missing parts (e.g., in BERT); $\mathcal{G}(\mathbf{x})$ is the missing segment.</li>
-        <li><strong>Instance Discrimination</strong>: Learning to distinguish $\mathbf{x}$ from other samples (Contrastive Learning).</li>
+      <div class="premium-def-title">Formalism: The Pretext Task & Surrogate Optimization</div>
+      <p>Self-Supervised Learning is the "DIY" of Machine Learning. It provides a way to extract value from raw existence without a single human-provided label.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to learn how to juggle by watching yourself in a mirror. You don't have a coach telling you what's right; you only know if the ball falls to the floor. Geometrically, <strong>Self-Supervised Learning (SSL)</strong> is the process of generating <strong>Internal Supervision</strong> from the data itself. We take a piece of data (like an image), hide or distort a part of it—the "Pretext Task"—and challenge the model to guess the missing piece. This creates a <strong>Gradient Flow</strong> from the "Truth" of the original data back to the model’s "Guess." The goal is to build an internal map of the world where the hidden parts are geometrically and semantically consistent with the visible ones.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>SSL transforms an unsupervised dataset $\mathcal{D} = \{ \mathbf{x}_i \}$ into a supervised one by creating "Pseudo-labels."</p>
+      <ol class="mt-2 mb-4 list-decimal pl-5 space-y-1">
+        <li><strong>Corruption</strong>: For an input $\mathbf{x}$, we apply a transformation $t$ to create a corrupted version $\tilde{\mathbf{x}} = t(\mathbf{x})$. This might mean rotating the image, masking words, or scrambling pixels.</li>
+        <li><strong>Surrogate Objective</strong>: We train the model $f_\theta$ to minimize a "Pretext Loss" that measures its ability to reverse the corruption:
+          $$\min_\theta \mathbb{E}_{\mathbf{x} \sim \mathcal{D}} [ \mathcal{L}(f_\theta(\tilde{\mathbf{x}}), \mathbf{y}_{\text{pseudo}}) ]$$
+        </li>
+      </ol>
+      <p>In <strong>Masked Autoencoding (MAE)</strong>, the pseudo-label $\mathbf{y}_{\text{pseudo}}$ is the original pixel values of the hidden parts. By forcing the model to "Fill in the Blanks," we force it to learn about "Shapes," "Textures," and "Logic"—all for free.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Modern ML, SSL is the <strong>Knowledge Foundation</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Pre-training Power</strong>: The features learned during a pretext task (like "Guess the next word") are almost always useful for more difficult "Downstream" tasks (like "Analyze the sentiment of this book").</li>
+        <li><strong>The Scale Factor</strong>: Because SSL doesn't need humans, we can train on the entire internet. The model's "IQ" scales directly with the amount of raw data we throw at it.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Shortcut Learning. If your pretext task is too easy, the model will find a "Cheat Code." For example, if you hide the middle of an image, the model might just copy the pixels from the edges instead of actually learning what the object looks like. You must design tasks that are difficult enough to force true understanding.</p>
     </div>
     
     <div class="callout tip">

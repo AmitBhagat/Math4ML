@@ -25,16 +25,32 @@ export const dotProductSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Inner Product</div>
-      <p>For two vectors $\mathbf{u}, \mathbf{v} \in \mathbb{R}^n$, the **Dot Product** is a scalar value defined algebraically as the sum of the products of their components:</p>
+      <div class="premium-def-title">Formalism: The Inner Product & The Law of Cosines</div>
+      <p>The Dot Product is the bridge between raw numbers (coordinates) and physical reality (angles). We derive it by looking at the geometry of a triangle.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Consider two vectors $\mathbf{u}$ and $\mathbf{v}$ starting at the origin, with an angle $\theta$ between them. They form two sides of a triangle. The third side is the vector $\mathbf{w} = \mathbf{u} - \mathbf{v}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>From the Law of Cosines, we know the relationship between the lengths of the sides:</p>
       <div class="math-block">
-        $$\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^n u_i v_i = \mathbf{u}^\top \mathbf{v}$$
+        $$\|\mathbf{u} - \mathbf{v}\|^2 = \|\mathbf{u}\|^2 + \|\mathbf{v}\|^2 - 2\|\mathbf{u}\|\|\mathbf{v}\|\cos(\theta)$$
       </div>
-      <p>Geometrically, the dot product represents the product of the magnitudes and the cosine of the angle $\theta$ between them:</p>
+      <p>Using the property that $\|\mathbf{x}\|^2 = \mathbf{x} \cdot \mathbf{x}$, we expand the left side:</p>
       <div class="math-block">
-        $$\mathbf{u} \cdot \mathbf{v} = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
+        $$(\mathbf{u} - \mathbf{v}) \cdot (\mathbf{u} - \mathbf{v}) = \mathbf{u} \cdot \mathbf{u} - 2(\mathbf{u} \cdot \mathbf{v}) + \mathbf{v} \cdot \mathbf{v}$$
       </div>
-      <p class="mt-2">This duality allows us to use coordinate-wise multiplication to solve geometric problems of alignment and projection in high-dimensional space.</p>
+      <p>Equating both expressions and cancelling identical terms ($\|\mathbf{u}\|^2$ and $\|\mathbf{v}\|^2$), we find the definition of the Dot Product:</p>
+      <div class="math-block">
+        $$-2(\mathbf{u} \cdot \mathbf{v}) = -2\|\mathbf{u}\|\|\mathbf{v}\|\cos(\theta)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>The duality of the Dot Product allows us to calculate angles using only coordinates:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{v} = \sum_{i=1}^n u_i v_i = \|\mathbf{u}\| \|\mathbf{v}\| \cos(\theta)$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: If the dot product is 0, $\cos(\theta) = 0$, meaning the vectors are orthogonal (90°). If it's negative, they are pointing in "opposite" directions (> 90°).</p>
     </div>
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>

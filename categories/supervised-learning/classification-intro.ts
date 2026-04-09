@@ -17,15 +17,29 @@ export const classificationIntroSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Classification</div>
-      <p>Classification is the task of approximating a mapping function $f: \mathbf{x} \to y$ where $y \in \{1, 2, \dots, K\}$ is a discrete set of classes. Formally, for $K$ classes, the objective is to model the conditional probability distribution:</p>
+      <div class="premium-def-title">Formalism: Decision Manifolds & Probabilistic Commitment</div>
+      <p>Classification is "Territory Drafting." We partition the feature space into distinct regions, assigning every point to a specific "bucket."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a space filled with observations of different classes (e.g., Red points and Blue points). <strong>Classification</strong> is the mathematical search for the <strong>Decision Boundary</strong>—a manifold (line, curve, or plane) that separates these "territories." Geometrically, we are slicing the universe into regions. If a new point lands in the "Red Region," it is classified as Red. The goal is to maximize the separation between territories while minimizing "intruders" (points on the wrong side of the fence).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Ideally, we want a function $h(\mathbf{x})$ that minimizes the <strong>Misclassification Rate</strong> (Zero-One Loss):</p>
       <div class="math-block">
-        $$P(y = c \mid \mathbf{x}; \theta) = \frac{ \text{exp}(f_c(\mathbf{x}; \theta)) }{ \sum_{j=1}^K \text{exp}(f_j(\mathbf{x}; \theta)) }$$
+        $$L(\mathbf{w}) = \frac{1}{n} \sum_{i=1}^n \mathbb{I}(h(\mathbf{x}_i, \mathbf{w}) \neq y_i)$$
       </div>
-      <p>The model parameters $\theta$ are typically optimized by minimizing the **Cross-Entropy Loss**, which measures the divergence between the true and predicted distributions:</p>
+      <p>However, Zero-One loss is non-differentiable and impossible to optimize directly with gradient descent. Instead, we model the <strong>Class Probabilities</strong> $P(y \mid \mathbf{x})$. For two classes, the decision boundary is the set of points where the model is perfectly undecided:</p>
       <div class="math-block">
-        $$\mathcal{L}(\theta) = -\sum_{i=1}^n \sum_{c=1}^K y_{ic} \log(\hat{y}_{ic})$$
+        $$\text{Boundary } S = \{ \mathbf{x} \in \mathbb{R}^d \mid P(y=C_1 \mid \mathbf{x}) = P(y=C_2 \mid \mathbf{x}) \}$$
       </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we optimize by maximizing the <strong>Likelihood</strong> of the observed classes:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft vs. Hard Labels</strong>: The model outputs a probability (Soft), but we commit to the Class with the highest probability (Hard).</li>
+        <li><strong>Commitment Formula</strong>: $\hat{y} = \text{arg}\max_k P(y=k \mid \mathbf{x})$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Classification assumes your buckets are <strong>Mutually Exclusive</strong>. If an object can belong to multiple categories at once (e.g., a movie being both 'Action' and 'Comedy'), you don't need classification—you need <strong>Multi-label Learning</strong>, which is a series of independent binary choices.</p>
     </div>
     
     <div class="callout tip">

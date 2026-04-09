@@ -17,17 +17,30 @@ export const pcaSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Variance Maximization Problem</div>
-      <p>Given a centered data matrix $X \in \mathbb{R}^{n \times d}$, PCA seeks an orthogonal projection onto a $k$-dimensional subspace that captures the maximum variance. The first principal component $\mathbf{w}_1$ is the unit vector that satisfies:</p>
+      <div class="premium-def-title">Formalism: The Lagrangian & Variance Maximization</div>
+      <p>PCA is the search for the "Most Informative Projection." It finds the axis where your data points are the most spread out, preserving the "Signal" while deleting the "Noise."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Given a centered data matrix $X$ (where the average of every feature is 0), we want to find a unit direction $\mathbf{w}$ such that when we project our data onto it, the variance of the resulting points is <strong>Maximum</strong>. Geometrically, we are looking for the longest axis of the data "cloud."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The variance of the projected data $X\mathbf{w}$ is given by the quadratic form $\mathbf{w}^\top \Sigma \mathbf{w}$, where $\Sigma = \frac{1}{n} X^\top X$ is the Covariance Matrix. We want to maximize this variance subject to the constraint that $\mathbf{w}$ is a unit vector ($\mathbf{w}^\top \mathbf{w} = 1$). We set up the <strong>Lagrangian</strong>:</p>
       <div class="math-block">
-        $$\mathbf{w}_1 = \arg\max_{\|\mathbf{w}\|=1} \|X\mathbf{w}\|^2 = \arg\max_{\|\mathbf{w}\|=1} \mathbf{w}^\top \Sigma \mathbf{w}$$
+        $$\mathcal{L}(\mathbf{w}, \lambda) = \mathbf{w}^\top \Sigma \mathbf{w} - \lambda (\mathbf{w}^\top \mathbf{w} - 1)$$
       </div>
-      <p>Where $\Sigma = \frac{1}{n} X^\top X$ is the covariance matrix. The solution to this optimization problem leads to several critical properties:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Spectral Theorem</strong>: The principal components are the eigenvectors of $\Sigma$.</li>
-        <li><strong>Variance Capture</strong>: The eigenvalue $\lambda_i$ represents the variance captured by the $i$-th component.</li>
-        <li><strong>Decoupling</strong>: The transformed features (scores) are linearly uncorrelated.</li>
+      <p>Taking the derivative with respect to $\mathbf{w}$ and setting it to zero:</p>
+      <div class="math-block">
+        $$\frac{\partial \mathcal{L}}{\partial \mathbf{w}} = 2\Sigma \mathbf{w} - 2\lambda \mathbf{w} = 0 \implies \Sigma \mathbf{w} = \lambda \mathbf{w}$$
+      </div>
+      <p>This reveals a profound truth: The directions of maximum variance are exactly the <strong>Eigenvectors</strong> of the covariance matrix, and the amount of variance captured is the <strong>Eigenvalue</strong> $\lambda$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>To reduce noise, we keep the top $k$ components:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Principal Components</strong>: The eigenvectors of $\Sigma$ sorted by $\lambda$.</li>
+        <li><strong>Explained Variance</strong>: $\frac{\lambda_i}{\sum \lambda_j}$ tells you the percentage of "truth" captured by that axis.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: PCA assumes the data is centered. If you forget to subtract the mean, your first "Principal Component" will just point from the origin to the center of your data cloud—a useless direction that tells you nothing about the internal structure.</p>
     </div>
     
     <div class="callout tip">

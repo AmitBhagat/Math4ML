@@ -17,14 +17,28 @@ export const vectorSpacesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Linear Axioms</div>
-      <p>A vector space $V$ over a field $\mathbb{F}$ (usually $\mathbb{R}$) is a set equipped with vector addition and scalar multiplication satisfying the following conditions for all $\mathbf{u}, \mathbf{v} \in V$ and $a, b \in \mathbb{F}$:</p>
+      <div class="premium-def-title">Formalism: The Linear Axioms & Closure</div>
+      <p>A Vector Space $V$ is a set that is "computationally stable." If you stay within its rules, you can't be pushed out of the universe.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Think of a vector space as a coordinate system that extends infinitely. A <strong>Subspace</strong> $W$ is a "flat" subset (like a line through the origin in 3D) that maintains the same physical laws as the parent space. For a subset to be a valid subspace, it must be "anchored" at the origin and behave consistently under stress (scaling and addition).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation of a Subspace</h3>
+      <p>To prove a set $W \subseteq V$ is a subspace, we check for <strong>Linear Closure</strong>. For any two vectors $\mathbf{u}, \mathbf{v} \in W$ and any scalar $c \in \mathbb{R}$, we must show:</p>
       <div class="math-block">
-        $$\text{1. Closure: } \mathbf{u} + \mathbf{v} \in V, \quad a\mathbf{u} \in V$$
-        $$\text{2. Identity: } \exists \mathbf{0} \in V \text{ s.t. } \mathbf{v} + \mathbf{0} = \mathbf{v}$$
-        $$\text{3. Distributivity: } a(\mathbf{u} + \mathbf{v}) = a\mathbf{u} + a\mathbf{v}$$
+        $$\text{1. Additive Closure: } \mathbf{u} + \mathbf{v} \in W$$
+        $$\text{2. Scalar Closure: } c\mathbf{u} \in W$$
       </div>
-      <p>Crucially, for $V$ to be a **Subspace** of $\mathbb{R}^n$, it must contain the origin $\mathbf{0}$, and any linear combination $\sum \alpha_i \mathbf{v}_i$ must reside within $V$.</p>
+      <p>If these hold, then every linear combination $\sum a_i \mathbf{v}_i$ is also in $W$. This derivation ensures that our transformations (like moving weights in a neural net) never result in an "undefined" state.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A collection of vectors $V$ is a Vector Space if it satisfies the 8 fundamental axioms, but for ML, the big three are:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Existence of Zero</strong>: $\exists \mathbf{0} \in V$ such that $\mathbf{v} + \mathbf{0} = \mathbf{v}$. No zero, no subspace.</li>
+        <li><strong>Additive Inverse</strong>: $\forall \mathbf{v} \in V, \exists -\mathbf{v} \in V$ such that $\mathbf{v} + (-\mathbf{v}) = \mathbf{0}$.</li>
+        <li><strong>Commutativity</strong>: $\mathbf{u} + \mathbf{v} = \mathbf{v} + \mathbf{u}$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: A set that skips the origin (like the line $y=x+1$) is NOT a subspace. Why? Because scaling any vector by zero gives $[0,0]$, which isn't on the line. You've just broken the laws of the universe.</p>
     </div>
     
     <div class="callout tip">

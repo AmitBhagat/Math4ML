@@ -25,16 +25,28 @@ export const chainRuleSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Calculus of Connectivity</div>
-      <p>The **Chain Rule** provides a mechanism to differentiate composite functions. If $y = f(u)$ and $u = g(x)$, then the change in $y$ relative to $x$ is the product of intermediate rates:</p>
+      <div class="premium-def-title">Formalism: The Calculus of Nested Sensitivity</div>
+      <p>The Chain Rule is the mathematical "Relay" of AI. It propagates sensitivity from the output of a system back to its initial inputs.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a composite function $z = f(g(x))$. This is a two-step transformation: $x \xrightarrow{g} u \xrightarrow{f} z$. To understand how a nudge in $x$ affects the final result $z$, we must track the signal as it passes through the intermediate point $u$. Each step has its own local "slope"—the Chain Rule is the mechanism that combines them.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the rule by analyzing the ratio of infinitesimal changes. If we nudge $x$ by $\Delta x$, it causes a change $\Delta u$ in the intermediate variable, which in turn causes $\Delta z$ in the final result. By multiplying the ratios, we find the total sensitivity:</p>
       <div class="math-block">
-        $$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$
+        $$\frac{\Delta z}{\Delta x} = \frac{\Delta z}{\Delta u} \cdot \frac{\Delta u}{\Delta x}$$
       </div>
-      <p>For multivariable systems (the foundation of Backpropagation), if $z = f(x_1, \dots, x_n)$ where each $x_i$ is a function of $t$, the total derivative is:</p>
+      <p>As we take the limit where $\Delta x \to 0$ (and consequently $\Delta u \to 0$), these ratios become the exact derivatives:</p>
       <div class="math-block">
-        $$\frac{dz}{dt} = \sum_{i=1}^n \frac{\partial f}{\partial x_i} \frac{dx_i}{dt}$$
+        $$\frac{dz}{dx} = \frac{dz}{du} \cdot \frac{du}{dx} = f'(g(x)) \cdot g'(x)$$
       </div>
-      <p class="mt-2">In deep learning, this generalizes to the product of Jacobian matrices: $\nabla_{\mathbf{w}} L = \frac{\partial L}{\partial \mathbf{a}_L} \frac{\partial \mathbf{a}_L}{\partial \mathbf{a}_{L-1}} \dots \frac{\partial \mathbf{a}_1}{\partial \mathbf{w}}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula (Backprop Edition)</h3>
+      <p>In Deep Learning, we deal with vectors. If $\mathbf{y} = \mathbf{f}(\mathbf{u})$ and $\mathbf{u} = \mathbf{g}(\mathbf{x})$, the chain rule becomes a <strong>Jacobian Multiplication</strong>:</p>
+      <div class="math-block">
+        $$\frac{\partial y}{\partial x} = \frac{\partial y}{\partial u} \frac{\partial u}{\partial x}$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: Many beginners treat the chain rule like simple fraction cancellation. While it looks like fractions, it’s actually a product of linear approximations. Don't be fooled—in multivariable space, the order of multiplication (Jacobians) matters!</p>
     </div>
     
     <div class="callout tip">
@@ -118,8 +130,8 @@ x = 3.0
 # g'(x) = 2x
 dg_dx = 2 * x
 
-# f'(u) = np.cos(u) where u = x**2
-df_du = np.cos(x**2)
+# f'(u) = np.cos(u) where u = x<strong>2
+df_du = np.cos(x</strong>2)
 
 # Chain Rule: df/dx = df/du * dg/dx
 df_dx = df_du * dg_dx

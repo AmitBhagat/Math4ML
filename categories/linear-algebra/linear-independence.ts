@@ -17,13 +17,26 @@ export const linearIndependenceSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Trivial Solution Requirement</div>
-      <p>A set of vectors $\{\mathbf{v}_1, \mathbf{v}_2, \dots, \mathbf{v}_k\}$ is **Linearly Independent** if the vector equation:</p>
+      <div class="premium-def-title">Formalism: The Trivial Solution & The Null Space</div>
+      <p>Linear Independence is the measure of "Informational Innovation." It asks if a vector brings something new or is just a remix.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a set of vectors. If you can use some of them to reconstruct another (like mixing blue and yellow to get green), then that "green" vector is <strong>Linearly Dependent</strong>. Geometrically, this means the dependent vector lies within the <strong>Span</strong> (the shadow) of the others. Independent vectors are truly "new" directions in space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We test for independence by seeing if there is any way to combine the vectors to hit the origin $\mathbf{0}$ WITHOUT using all zeros. We set up the linear combination equation:</p>
       <div class="math-block">
-        $$\sum_{i=1}^k c_i \mathbf{v}_i = \mathbf{0}$$
+        $$c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \dots + c_k \mathbf{v}_k = \mathbf{0}$$
       </div>
-      <p>is satisfied **only** when $c_1 = c_2 = \dots = c_k = 0$. If there exists a non-trivial solution (where at least one $c_i \neq 0$), the set is **Linearly Dependent**.</p>
-      <p class="mt-2">Geometrically, this means that every independent vector adds a new dimension to the span. Dependent vectors are redundant because they lie within the span of the others.</p>
+      <p>If the <strong>only</strong> way to satisfy this is the <strong>Trivial Solution</strong> ($c_1 = c_2 = \dots = c_k = 0$), the vectors are independent. If there's a "backdoor" solution (non-trivial), then at least one vector can be expressed as a combination of the others: $\mathbf{v}_k = -\frac{1}{c_k} \sum_{i=1}^{k-1} c_i \mathbf{v}_i$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A set is Linearly Independent if and only if:</p>
+      <div class="math-block">
+        $$\text{rank}(\mathbf{V}) = k$$
+      </div>
+      <p>where $\mathbf{V}$ is the matrix containing the vectors as columns. If rank is less than $k$, you have redundant dimensions.</p>
+      <p class="mt-4 italic text-sm">Gotcha: A set containing the Zero Vector is ALWAYS dependent. Why? Because you can set $c_{zero} = 1$ and all other $c_i = 0$, and the sum will still be zero. The origin adds no new direction.</p>
     </div>
     
     <div class="callout tip">

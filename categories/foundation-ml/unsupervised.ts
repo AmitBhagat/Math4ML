@@ -18,7 +18,7 @@ export const unsupervisedLearningSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: Latent Structure and Representation Learning</div>
-      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of **Unsupervised Learning** is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
+      <p>Given an unlabeled dataset $\mathcal{D} = \{\mathbf{x}_1, \dots, \mathbf{x}_N\}$, the objective of <strong>Unsupervised Learning</strong> is to learn a mapping $g: \mathcal{X} \to \mathcal{Z}$ that preserves the essential structure of the input space. The paradigm is operationalized through three mathematical pillars:</p>
       
       <div class="space-y-4">
         <div>
@@ -38,7 +38,7 @@ export const unsupervisedLearningSection: TopicSection = {
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of **Density Estimation** $P(\mathbf{x})$, **Intrinsic Dimensionality**, and **Manifold Fidelity**, rather than explicit label accuracy.</p>
+      <p class="text-xs opacity-80 mt-2">The success of unsupervised learning is evaluated through measures of <strong>Density Estimation</strong> $P(\mathbf{x})$, <strong>Intrinsic Dimensionality</strong>, and <strong>Manifold Fidelity</strong>, rather than explicit label accuracy.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Society Party</h2>

@@ -17,16 +17,25 @@ export const matrixMultiplicationSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Composition Product</div>
-      <p>For two matrices $A \in \mathbb{R}^{m \times p}$ and $B \in \mathbb{R}^{p \times n}$, the product $C = AB \in \mathbb{R}^{m \times n}$ is defined by the entry-wise dot products:</p>
+      <div class="premium-def-title">Formalism: The Matrix Composition & Inner Dimensions</div>
+      <p>Matrix Multiplication is the "Relay Race" of mathematics. It chains transformations together so that the output of one becomes the fuel for the next.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Suppose you have two linear maps: $g: \mathbb{R}^n \to \mathbb{R}^p$ (represented by matrix $B$) and $f: \mathbb{R}^p \to \mathbb{R}^m$ (represented by matrix $A$). The <strong>composition</strong> $(f \circ g)$ is a single jump from $\mathbb{R}^n$ directly to $\mathbb{R}^m$. The matrix representing this combined leap is the product $AB$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To find the entry at $C_{ij}$, we look at the interaction between the $i$-th row of $A$ and the $j$-th column of $B$. This is because the $j$-th column of $B$ tells us where the $j$-th basis vector lands after the first map, and the rows of $A$ tell us how that new position is transformed by the second map. Algebraically, this is a sum of products:</p>
       <div class="math-block">
         $$c_{ij} = \sum_{k=1}^p a_{ik} b_{kj}$$
       </div>
-      <p>This operation is defined **only** when the number of columns in $A$ matches the number of rows in $B$. Geometrically, if $A$ represents mapping $f$ and $B$ represents mapping $g$, then $AB$ represents the composition:</p>
+      <p>Note the <strong>Inner Dimension Match</strong>: The number of columns in $A$ ($p$) must exactly equal the number of rows in $B$ ($p$). If they don't, the "relay baton" is dropped, and the composition is mathematically impossible.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Identity</h3>
+      <p>For any $\mathbf{x} \in \mathbb{R}^n$:</p>
       <div class="math-block">
-        $$(f \circ g)(\mathbf{x}) = A(B\mathbf{x})$$
+        $$(AB)\mathbf{x} = A(B\mathbf{x})$$
       </div>
-      <p class="mt-2">Note: Matrix multiplication is non-commutative ($AB \neq BA$), as the order of transformations determines the final state of the space.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
@@ -108,7 +117,7 @@ print(f"Product: {C}")
       <li><strong>Neural Network Forward Pass</strong>: Every single layer in a deep network is really just a massive matrix multiplication. It takes the input vector from the previous layer and multiplies it by a "Weight Matrix." This operation mixes the features together, intensifying the signal that matters and killing the noise that doesn't. Without this operation, modern AI simply wouldn't exist.</li>
       <li><strong>3D Coordinate Transformations in AR/VR</strong>: When you move your head while wearing a VR headset, the computer must recalculate every pixel in the 3D world. It uses matrix multiplication to rotate, scale, and translate millions of points in space instantly, ensuring the virtual world moves in perfect sync with your real-world motion.</li>
     </ul>
-    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about **Composition**. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
+    <p>Teacher's Final Word: Matrix multiplication isn't just about crunching numbers; it's about <strong>Composition</strong>. It allows us to chain simple rules together to build incredibly complex intelligence, layer by layer. Mastering this is the absolute key to understanding how an AI "thinks" internally.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Multiplication is the forward pass. But how do we work backwards? Explore <strong><a href="#/mathematics/linear-algebra/matrix-inverse">Matrix Inverse</a></strong>.

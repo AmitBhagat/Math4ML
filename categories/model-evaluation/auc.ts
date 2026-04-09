@@ -17,24 +17,30 @@ export const aucSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Ranking Probability (Wilcoxon-Mann-Whitney)</div>
-      <p>The **Area Under the Curve (AUC)** is the integral of the True Positive Rate (TPR) function with respect to the False Positive Rate (FPR). It represents the aggregate measure of performance across all possible classification thresholds:</p>
-      
+      <div class="premium-def-title">Formalism: The Ranking Integral & Separability Power</div>
+      <p>AUC (Area Under the Curve) is the "Grade of the Model." It measures a model's fundamental ability to separate truth from noise, regardless of the classification threshold.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a general in a war room, and you have to decide at what distance to fire at an incoming plane. If you set the threshold too low, you waste ammo on birds (<strong>False Positives</strong>). If you set it too high, the enemy plane hits you (<strong>False Negatives</strong>). Geometrically, the <strong>ROC Curve</strong> (Receiver Operating Characteristic) is the plot of this trade-off. The <strong>AUC</strong> is the total area under that curve. It represents the physical space of "Model Competence"—it is the only metric that tells you how well your model ranks the world, independent of where you decide to draw the line of action.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>AUC is defined as the integral of the True Positive Rate (TPR) with respect to the False Positive Rate (FPR):</p>
       <div class="math-block">
         $$\text{AUC} = \int_{0}^{1} TPR(FPR^{-1}(u)) \, du$$
       </div>
-      
-      <p>Beyond integration, AUC has a critical probabilistic interpretation. Let $f(\mathbf{x}_+)$ be the model's score for a random positive instance and $f(\mathbf{x}_-)$ the score for a random negative instance. Then:</p>
+      <p>Beyond the calculus, AUC has a beautiful probabilistic identity known as the <strong>Wilcoxon-Mann-Whitney Statistic</strong>. Let $f(x^+)$ be the model's confidence score for a random positive instance and $f(x^-)$ be the score for a random negative instance. Then:</p>
       <div class="math-block">
-        $$\text{AUC} = \mathbb{P}(f(\mathbf{x}_+) > f(\mathbf{x}_-))$$
+        $$\text{AUC} = P(f(x^+) > f(x^-))$$
       </div>
+      <p>This means if you pick one random "Sick" person and one random "Healthy" person, AUC is the probability that your model will correctly rank the sick person with a higher risk score than the healthy one. It is the measure of pure <strong>Ranking Accuracy</strong>.</p>
 
-      <ul class="mt-2 space-y-1">
-        <li><strong>Separation Power</strong>: $\text{AUC} = 1.0$ implies a perfectly separated distribution where the lowest-scoring positive still ranks higher than the highest-scoring negative.</li>
-        <li><strong>Random Baseline</strong>: $\text{AUC} = 0.5$ implies the distributions are overlapping and the model has no discriminative power (equivalent to a coin flip).</li>
-        <li><strong>Invariance</strong>: AUC is invariant to the classification threshold and invariant to the prior class distribution (class skew).</li>
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, AUC is the <strong>Integrity Check</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Threshold Invariance</strong>: Accuracy changes if you move the goalposts (the threshold). AUC does not. It evaluates the model across *all* possible goalposts at once.</li>
+        <li><strong>Class Invariance</strong>: If your data is 99.9% one class (e.g., fraud detection), a model can be 99.9% "accurate" by doing nothing. But its AUC will be $0.5$—telling you the model is actually useless.</li>
       </ul>
-      <p class="mt-2">Use AUC as the primary "All-Weather" grade when comparing the intrinsic capability of different models, especially on imbalanced datasets.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Calibration. A model can have a perfect AUC of 1.0 but be "Uncalibrated." It might rank every positive higher than every negative, but if its predicted probabilities are always $0.51$ and $0.49$, the model is technically correct but lacks the confidence for real-world decision making.</p>
     </div>
     
     <div class="callout tip">

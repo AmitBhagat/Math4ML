@@ -18,7 +18,7 @@ export const whatIsMLSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Experience-Task-Performance Triad</div>
-      <p>A computer program is said to **learn** from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a **Hypothesis Space** $\mathcal{H}$:</p>
+      <p>A computer program is said to <strong>learn</strong> from experience $E$ with respect to some class of tasks $T$ and performance measure $P$, if its performance at tasks in $T$, as measured by $P$, improves with experience $E$ (Mitchell, 1997). This is mathematically framed as a search over a <strong>Hypothesis Space</strong> $\mathcal{H}$:</p>
       
       <div class="math-block">
         $$\hat{h} = \arg \min_{h \in \mathcal{H}} \frac{1}{n} \sum_{i=1}^n L(y_i, h(\mathbf{x}_i))$$
@@ -27,9 +27,9 @@ export const whatIsMLSection: TopicSection = {
       <ul class="mt-2 space-y-1">
         <li><strong>Task ($T$)</strong>: The problem being solved (e.g., Image Classification, Price Prediction).</li>
         <li><strong>Experience ($E$)</strong>: The training data $\mathcal{D} = \{(\mathbf{x}_1, y_1), \dots, (\mathbf{x}_n, y_n)\}$ provided to the system.</li>
-        <li><strong>Performance Measure ($P$)</strong>: The **Loss Function** $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
+        <li><strong>Performance Measure ($P$)</strong>: The <strong>Loss Function</strong> $L$ (e.g., MSE or Cross-Entropy) that quantifies how far the model's hypothesis $h$ is from the ground truth.</li>
       </ul>
-      <p class="mt-2">The goal of any learning algorithm is **Empirical Risk Minimization (ERM)**: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
+      <p class="mt-2">The goal of any learning algorithm is <strong>Empirical Risk Minimization (ERM)</strong>: finding the specific rule $h$ that best explains the provided examples while maintaining the ability to generalize to unseen data.</p>
     </div>
     
     <div class="callout tip">

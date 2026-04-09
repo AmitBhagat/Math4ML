@@ -25,17 +25,28 @@ export const taylorSeriesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Polynomial Approximation</div>
-      <p>If a function $f(x)$ is infinitely differentiable at a point $a$, its **Taylor Series** is the power series:</p>
+      <div class="premium-def-title">Formalism: The Polynomial Approximation & Derivative Matching</div>
+      <p>A Taylor Series is the ultimate "Mimicry." It allows us to clone a complex function's behavior in a local neighborhood using only simple polynomials.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a complex, non-linear function $f(x)$. We want to find a polynomial $P(x)$ that "looks" exactly like $f(x)$ near a specific point $a$. For this to happen, the polynomial must match the function's value, its slope (velocity), its curvature (acceleration), and every higher-order sensitivity at that point.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We assume an $n$-th degree polynomial of the form $P(x) = \sum_{k=0}^n c_k (x - a)^k$. To find the coefficients $c_k$, we enforce the condition that the $k$-th derivative of $P$ must match the $k$-th derivative of $f$ at point $a$:</p>
       <div class="math-block">
-        $$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x - a)^n$$
+        $$P^{(k)}(a) = f^{(k)}(a)$$
       </div>
-      <p>In Machine Learning, we rarely use the infinite series, instead relying on low-degree **Taylor Polynomials** for local optimization:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>First-Order (Linear)</strong>: $f(x) \approx f(a) + f'(a)(x-a)$. Used in Gradient Descent.</li>
-        <li><strong>Second-Order (Quadratic)</strong>: $f(x) \approx f(a) + f'(a)(x-a) + \frac{1}{2}f''(a)(x-a)^2$. Used in Newton's Method.</li>
-        <li><strong>Remainder</strong>: The Taylor theorem ensures that the error $R_n(x)$ becomes negligible as $x$ approaches $a$.</li>
-      </ul>
+      <p>When we differentiate $(x-a)^k$ exactly $k$ times, the power rule brings down the exponents $k, k-1, \dots, 1$, resulting in $k!$. All other terms go to zero at $x=a$. Solving for the coefficients:</p>
+      <div class="math-block">
+        $$c_k \cdot k! = f^{(k)}(a) \implies c_k = \frac{f^{(k)}(a)}{k!}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <div class="math-block">
+        $$f(x) \approx \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x - a)^k$$
+      </div>
+      <p>In Deep Learning, we usually stop at the first order (Gradient Descent) or second order (Newton's Method). This "Local Map" provides the mathematical bedrock for almost all numerical optimization.</p>
+      <p class="mt-4 italic text-sm">Gotcha: This approximation is only valid locally. The further you move from the center $a$, the more the polynomial "drifts" away from the truth. In ML, this is why we limit our update steps—if we step too far, our Taylor-based map becomes a lie.</p>
     </div>
     
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
@@ -108,7 +119,7 @@ def taylor_exp_approx(x, a, n_terms=3):
     approx = 0
     for k in range(n_terms):
         # f^(k)(a) for e^x is always 1 if a=0
-        term = (1 / np.math.factorial(k)) * (x - a)**k
+        term = (1 / np.math.factorial(k)) * (x - a)<strong>k
         approx += term
     return approx
 
@@ -124,7 +135,7 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       <li><strong>Fast Kernel Approximations (RFF)</strong>: Training on millions of data points with complex math is too slow. We use Taylor Series to approximate these complex functions with simple polynomials. This allows "Support Vector Machines" (SVMs) to scale to massive datasets without crashing your computer.</li>
       <li><strong>Trust-Region Optimization</strong>: In safety-critical AI, we don't just follow the gradient blindly. We create a Taylor expansion and define a "Trust Region"—a safe zone where our approximation is guaranteed to be accurate. The model only moves within this zone to avoid disastrous, unpredictable jumps in logic.</li>
     </ul>
-    <p>Teacher's Final Word: Even if we don't know the "Whole Universe" of the loss function, the Taylor expansion gives us a reliable **Local Map** to decide our next step. It's how we navigate the unknown with scientific precision.</p>
+    <p>Teacher's Final Word: Even if we don't know the "Whole Universe" of the loss function, the Taylor expansion gives us a reliable </strong>Local Map** to decide our next step. It's how we navigate the unknown with scientific precision.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Approximations help us find the "Low points" on a curve. But how do we identify them exactly? Explore <strong><a href="#/mathematics/calculus/critical-points">Critical Points</a></strong>.

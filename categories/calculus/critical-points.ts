@@ -25,18 +25,31 @@ export const criticalPointsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Stationary Conditions</div>
-      <p>For a differentiable function $f: \mathbb{R}^n \to \mathbb{R}$, a point $\mathbf{x}^*$ in the domain is a **Critical Point** (or stationary point) if the gradient is zero:</p>
+      <div class="premium-def-title">Formalism: The First-Order Optimality & Curvature Classification</div>
+      <p>Critical Points are the "Stationary States" of your loss function. They are the only points where your model stops changing and settles into a solution.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a smooth surface $z = f(\mathbf{x})$. At most points, there is a clear "uphill" direction defined by the gradient. However, at a <strong>Critical Point</strong>, the surface is locally flat—the tangent plane is perfectly horizontal. In ML, we hunt for these flat spots, hoping they represent a deep valley (minimum) rather than a peak (maximum).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A point $\mathbf{x}^*$ is a critical point if the <strong>First-Order Condition</strong> is met: the sensitivity in every direction must be zero.</p>
       <div class="math-block">
         $$\nabla f(\mathbf{x}^*) = \mathbf{0}$$
       </div>
-      <p>To determine the nature of a critical point, we utilize the **Second Derivative Test** based on the eigenvalues ($\lambda_i$) of the Hessian matrix $\mathbf{H}$ at $\mathbf{x}^*$:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Local Minimum</strong>: $\mathbf{H}$ is positive definite ($\lambda_i > 0$ for all $i$). Geometrically, all directions lead uphill.</li>
-        <li><strong>Local Maximum</strong>: $\mathbf{H}$ is negative definite ($\lambda_i < 0$ for all $i$). Geometrically, all directions lead downhill.</li>
-        <li><strong>Saddle Point</strong>: $\mathbf{H}$ is indefinite (both positive and negative eigenvalues exist). The point is a minimum in one direction and a maximum in another.</li>
+      <p>To classify the behavior at this flat spot, we look at the <strong>Second-Order Condition</strong> via the Hessian matrix $\mathbf{H}$. Near $\mathbf{x}^*$, the function is approximated by the quadratic form:</p>
+      <div class="math-block">
+        $$f(\mathbf{x}^* + \Delta \mathbf{x}) \approx f(\mathbf{x}^*) + \frac{1}{2} \Delta \mathbf{x}^\top \mathbf{H} \Delta \mathbf{x}$$
+      </div>
+      <p>The "energy" of this quadratic term determines if the surface curves up or down.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria (Second Derivative Test)</h3>
+      <p>We classify the critical point based on the eigenvalues ($\lambda_i$) of the Hessian $\mathbf{H}$ at $\mathbf{x}^*$:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Local Minimum</strong>: $\lambda_i > 0$ for all $i$ ($\mathbf{H}$ is Positive Definite). Every step away from the point goes uphill.</li>
+        <li><strong>Local Maximum</strong>: $\lambda_i < 0$ for all $i$ ($\mathbf{H}$ is Negative Definite). Every step leads downhill.</li>
+        <li><strong>Saddle Point</strong>: Mixed eigenvalues. The point is a "Minimum" in some directions and a "Maximum" in others.</li>
       </ul>
-      <p class="mt-2">Note: If $\det(\mathbf{H}) = 0$, the test is inconclusive, representing a "flat" region of higher-order complexity.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Most high-dimensional critical points in AI are <strong>Saddle Points</strong>. The Gradient is zero, so your optimizer stops, but the Loss is still massive. This is why we use "Momentum" and "Noise"—to kick the model out of these flat traps.</p>
     </div>
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>

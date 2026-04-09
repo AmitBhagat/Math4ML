@@ -17,18 +17,33 @@ export const gradientDescentSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The First-Order Update Rule</div>
-      <p>Given a differentiable objective function $J(\theta)$, **Gradient Descent** iteratively updates the parameter vector $\theta$ by descending along the negative gradient of the function. For a learning rate $\eta > 0$ at step $t$:</p>
+      <div class="premium-def-title">Formalism: First-Order Taylor Approximation & The Descent Vector</div>
+      <p>Gradient Descent is "Greedy Minimization." It tells you the exact direction to walk to reduce your error as fast as possible in the next step.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are standing on a multivariable loss surface $J(\theta)$. At your current location, the <strong>Gradient</strong> $\nabla J(\theta)$ is a vector that points in the direction of the steepest <strong>Ascent</strong> (the fastest way up the mountain). Geometrically, if you want to reach the bottom of the valley, you must move in the exact opposite direction. The gradient is always orthogonal (perpendicular) to the <strong>Level Sets</strong> (contour lines) of the function, ensuring you are always taking the most direct path downward at any given moment.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the update rule using a <strong>First-Order Taylor Expansion</strong>. If we take a tiny step $\Delta \theta$, the change in our loss is approximately:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta_t \nabla_\theta J(\theta_t)$$
+        $$J(\theta + \Delta \theta) \approx J(\theta) + \nabla J(\theta)^T \Delta \theta$$
       </div>
-      <p>This update mechanism is based on the following mathematical principles:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>The Gradient ($\nabla J$)</strong>: A vector pointing in the direction of steepest *ascent*. Subtracting it ensures we move toward the steepest *descent*.</li>
-        <li><strong>The Step Size ($\eta$)</strong>: Controlled by the Learning Rate. High $\eta$ can lead to divergence (overshooting); low $\eta$ results in slow convergence or entrapment in local minima.</li>
-        <li><strong>Convergence</strong>: For convex functions, GD is guaranteed to reach the global minimum given a sufficiently small $\eta$. For non-convex surfaces (DL), it finds a local minimum or stationary point.</li>
+      <p>To make the loss decrease, we need the term $\nabla J(\theta)^T \Delta \theta$ to be as negative as possible. The <strong>Cauchy-Schwarz Inequality</strong> proves that for a fixed step-size magnitude, this term is minimized when $\Delta \theta$ points in the exact opposite direction of the gradient:</p>
+      <div class="math-block">
+        $$\Delta \theta = -\eta \nabla J(\theta)$$
+      </div>
+      <p>This leads to the fundamental <strong>Gradient Descent Update Rule</strong>:</p>
+      <div class="math-block">
+        $$\theta_{t+1} = \theta_t - \eta \nabla J(\theta_t)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Gradient Descent is our <strong>Main Engine</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Vanilla Gradient Descent</strong>: Uses the entire dataset to calculate one gradient. It is perfectly stable but painfully slow and memory-intensive for modern data.</li>
+        <li><strong>The Learning Rate ($\eta$)</strong>: This is the most sensitive knob in AI. If $\eta$ is too high, you overstep the valley and "explode" up the other side. If it's too low, the model takes years to learn anything.</li>
       </ul>
-      <p class="mt-2">In **Batch Gradient Descent**, the gradient $\nabla J$ is computed by averaging the errors over the *entire dataset*, resulting in a stable but computationally expensive trajectory.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Gradient Descent can get stuck in <strong>local minima</strong> or <strong>saddle points</strong>. In high-dimensional spaces, a point might look like a minimum in 9 dimensions but a maximum in the 10th. We use techniques like <strong>Momentum</strong> to "punch through" these deceptive flat areas.</p>
     </div>
     
     <h2 id="batch">Batch Gradient Descent</h2>

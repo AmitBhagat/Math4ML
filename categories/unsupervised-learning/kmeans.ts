@@ -17,16 +17,32 @@ export const kmeansSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: K-Means Clustering</div>
-      <p>Given a set of observations $(\mathbf{x}_1, \mathbf{x}_2, \dots, \mathbf{x}_n)$, k-means clustering aims to partition the $n$ observations into $k \le n$ sets $\mathbf{S} = \{S_1, S_2, \dots, S_k\}$ so as to minimize the **Within-Cluster Sum of Squares (WCSS)**:</p>
+      <div class="premium-def-title">Formalism: Voronoi Partitioning & WCSS Minimization</div>
+      <p>K-Means is "Geometric Segregation." It seek to divide the world into $K$ disjoint territories based on proximity to a central anchor.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a scattered crowd of people in a vast plaza. You want to designate $K$ "Meeting Points" (Centroids) such that every person's walking distance to their nearest point is minimized. <strong>K-Means</strong> is the iterative dance of moving these points until they are perfectly centered within their respective "Tribes." Geometrically, this process carves the entire space into $K$ disjoint regions called <strong>Voronoi Cells</strong>. Every point inside a cell is mathematically closer to that cell's centroid than to any other. It is a "Hard" partitioning—there are no overlapping territories.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the quality of the clustering by the <strong>Within-Cluster Sum of Squares (WCSS)</strong>, which measures the total "Tightness" or "Chaos" of the groups:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{S}} \sum_{i=1}^k \sum_{\mathbf{x} \in S_i} \|\mathbf{x} - \mu_i\|^2$$
+        $$J = \sum_{j=1}^K \sum_{\mathbf{x} \in S_j} \| \mathbf{x} - \mu_j \|^2$$
       </div>
-      <p>Where $\mu_i$ is the mean of points in $S_i$. The algorithm iteratively performs two steps:</p>
-      <ol class="mt-2 space-y-1">
-        <li><strong>Assignment</strong>: Assign each observation to the cluster with the nearest mean: $S_i^{(t)} = \{x_p : \|x_p - \mu_i^{(t)}\|^2 \le \|x_p - \mu_j^{(t)}\|^2 \forall j \}$.</li>
-        <li><strong>Update</strong>: Calculate the new means (centroids) of the observations in the new clusters: $\mu_i^{(t+1)} = \frac{1}{|S_i^{(t)}|} \sum_{x_j \in S_i^{(t)}} x_j$.</li>
-      </ol>
+      <p>We minimize $J$ using <strong>Lloyd's Algorithm</strong>, an iterative refinement process:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Assignment Step</strong>: Fix the centroids $\mu_j$ and assign every point $\mathbf{x}_i$ to the closest one. This minimizes $J$ with respect to the cluster assignments.</li>
+        <li><strong>Update Step</strong>: Fix the assignments and move each centroid $\mu_j$ to the <strong>Mean Position</strong> of all points in its cluster:
+          $$\mu_j = \frac{1}{|S_j|} \sum_{\mathbf{x} \in S_j} \mathbf{x}$$
+        </li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, K-Means is the <strong>Speed King</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Spherical Assumption</strong>: K-Means assumes all clusters are roughly the same size and are shaped like perfect spheres. If your data is shaped like a line or a ring, K-Means will fail because its "Euclidean" brain can't understand non-spherical connectivity.</li>
+        <li><strong>Local Optima</strong>: Because the objective $J$ is non-convex, the algorithm is sensitive to the starting positions. A bad initial "guess" can lead to a terrible final clustering. This is why we almost always use <strong>K-Means++</strong> for smarter initialization.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: K-Means is blind to noise. It forces every single point—even the outliers—to belong to a cluster. One point accidentally placed on the moon will pull its centroid halfway to the stars.</p>
     </div>
     
     <div class="callout tip">

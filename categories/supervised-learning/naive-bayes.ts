@@ -27,15 +27,33 @@ export const naiveBayesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Naive Bayes Classifier</div>
-      <p>Given a class variable $y$ and dependent feature vector $\mathbf{x} = (x_1, \dots, x_d)$, Bayes' Theorem states:</p>
+      <div class="premium-def-title">Formalism: The Decoupled Likelihood & MAP Estimate</div>
+      <p>Naive Bayes is "Probabilistic Atomicity." It assumes that each feature provides a clean, independent signal, making the math lightning-fast.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine each class in your data (e.g., Spam vs. Ham) as a distinct "Cloud of Probability." Classification is the search for the cloud that most likely produced your input point $\mathbf{x}$. Geometrically, Naive Bayes assumes these clouds are <strong>Axis-Aligned</strong>. It treats each feature's contribution as a separate 1D projection. Instead of calculating a complex, swirling multidimensional volume, we simply measure the "overlap" on each axis independently and multiply the results. It is the definitive "Divide and Conquer" approach to probability.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with <strong>Bayes' Theorem</strong>, which reverses the probability to find the Class $y$ given the Clues $\mathbf{x}$:</p>
       <div class="math-block">
-        $$P(y \mid x_1, \dots, x_d) = \frac{P(y) P(x_1, \dots, x_d \mid y)}{P(x_1, \dots, x_d)}$$
+        $$P(y \mid \mathbf{x}) = \frac{P(y) P(\mathbf{x} \mid y)}{P(\mathbf{x})}$$
       </div>
-      <p>Using the **Conditional Independence Assumption**, we simplify the likelihood to $P(\mathbf{x}|y) = \prod_{i=1}^d P(x_i|y)$, yielding the classification rule:</p>
+      <p>The "Naive" part is the <strong>Independence Assumption</strong>: we assume features $x_i$ and $x_j$ have zero correlation given the class. This allows us to explode the complex joint likelihood into a simple product of 1D probabilities:</p>
       <div class="math-block">
-        $$\hat{y} = \arg\max_{c \in \mathcal{Y}} P(y=c) \prod_{i=1}^d P(x_i \mid y=c)$$
+        $$P(\mathbf{x} \mid y) = P(x_1 \mid y) \cdot P(x_2 \mid y) \cdots P(x_d \mid y)$$
       </div>
+      <p>The final classification is the <strong>Maximum A Posteriori (MAP)</strong> estimate. Because computers hate multiplying tiny decimals (it leads to numerical "underflow"), we transform the product into a <strong>sum of logarithms</strong>:</p>
+      <div class="math-block">
+        $$\hat{y} = \text{arg}\max_k \left( \log P(y=k) + \sum_{j=1}^d \log P(x_j \mid y=k) \right)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Naive Bayes is the <strong>Street-Smart Baseline</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Independence Lie</strong>: The assumption is almost always false (e.g., the words "New" and "York" are highly correlated), but the model still works because it only needs the *correct class* to have the highest probability, not for the probability numbers to be perfectly accurate.</li>
+        <li><strong>Zero-Frequency Problem</strong>: If a feature never appeared with a class in training, the probability becomes 0, which kills the entire calculation. We solve this with <strong>Laplace Smoothing</strong> ($+1$ to all counts).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Naive Bayes is a "High Bias, Low Variance" model. It won't overfit easily, but it might be too "simple" to capture complex, non-linear dependencies between features.</p>
     </div>
 
     <h2 id="laplace">Laplace Smoothing: The Zero-Frequency Fix</h2>

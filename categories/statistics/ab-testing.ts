@@ -24,17 +24,32 @@ export const abTestingSection: TopicSection = {
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine you deploy a new recommendation engine and sales go up by 10%. Did your model work, or was it just a holiday weekend? Without a <strong>Control Group</strong>, you have no way to know. A/B testing is the tactical decision to leave part of your population on the old system so you have a "baseline" for comparison. It is the only way to move from "Correlation" to "Causality." In AI, we use A/B tests to justify months of R&D—proving that the 0.5% gain in AUC actually translates into real dollars or user engagement.</p>
 
-    <h2 id="formal-definition">The Calculus of Experimentation</h2>
+    <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Power & Sample Size</div>
-      <p>The success of an A/B test is governed by the relationship between four critical variables:</p>
+      <div class="premium-def-title">Formalism: The Difference of Estimators & The Z-Test</div>
+      <p>A/B testing is "Evidence-Based Decision Making." It quantifies the probability that a perceived "Win" is actually just a statistical fluke.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine two "Sampling Distributions" (bell curves) representing our estimate of the conversion rate for Group A (Control) and Group B (Treatment). Due to the <strong>Central Limit Theorem</strong>, these estimates will be normally distributed around their true values. An A/B test is a measure of the <strong>Overlap</strong> between these two mountains. If the curves are merged, any difference we see is likely noise. If the curves are pulled apart, the "Gap" is significant. Geometrically, we are asking: *Is the distance between the two peaks large enough compared to the width (variance) of the mountains?*</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the <strong>Null Hypothesis ($H_0$)</strong>: that there is zero difference between the groups ($\mu_B - \mu_A = 0$). We calculate the observed difference $\Delta = \bar{X}_B - \bar{X}_A$. To determine if this $\Delta$ is meaningful, we must scale it by the <strong>Pooled Standard Error</strong>:</p>
+      <div class="math-block">
+        $$SE_{\Delta} = \sqrt{\frac{\sigma_A^2}{n_A} + \frac{\sigma_B^2}{n_B}}$$
+      </div>
+      <p>This gives us our <strong>Z-Score</strong> (the number of standard deviations our result is from the "no-change" baseline):</p>
+      <div class="math-block">
+        $$Z = \frac{(\bar{X}_B - \bar{X}_A) - 0}{SE_{\Delta}}$$
+      </div>
+      <p>The <strong>$p$-value</strong> is the area under the tails of the standard normal distribution beyond this $Z$ score. If $p < 0.05$, the "Gap" is too large to be a coincidence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, A/B testing is the last line of defense: </p>
       <ul class="mt-2 space-y-2">
-        <li><strong>Significance Level ($\alpha$)</strong>: The probability of a False Positive (usually 5%).</li>
-        <li><strong>Statistical Power ($1-\beta$)</strong>: The probability of detecting a real effect if it exists (usually 80%).</li>
-        <li><strong>Minimum Detectable Effect (MDE)</strong>: The smallest "Lift" you actually care about (e.g., a 1% increase in conversion).</li>
-        <li><strong>Sample Size ($n$)</strong>: How many users you need to see.</li>
+        <li><strong>Causality</strong>: While MSE and AUC show correlation, only a Randomized Controlled Trial (A/B Test) proves that your model *caused* the increase in revenue.</li>
+        <li><strong>Sample Size Power</strong>: The "Sensitivity" of your test depends on $n$. If you have too few users, you might miss a real 1% lift simply because your "mountains" were too fuzzy and overlapping.</li>
       </ul>
-      <p class="mt-4"><strong>The Headache:</strong> If you want to detect a very small MDE, you need a massive sample size. The required $n$ is roughly proportional to $1/MDE^2$.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Stopping a test as soon as the $p$-value hits 0.05 is the "Cardinal Sin" of statistics. This is called <strong>p-hacking</strong>. You must wait until your pre-calculated sample size is reached, or your "significant" result will likely vanish if you run it again. </p>
     </div>
     
     <h2 id="workflow">The Experimenter's Workflow</h2>

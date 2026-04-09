@@ -17,12 +17,31 @@ export const contrastiveSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The InfoNCE Objective</div>
-      <p>Contrastive learning aims to learn an encoder $f_\theta$ that maps inputs to a latent space where similar samples are close. Given a positive pair $(\mathbf{z}_i, \mathbf{z}_j)$, the **InfoNCE** (Information Noise-Contrastive Estimation) loss is defined as:</p>
+      <div class="premium-def-title">Formalism: The InfoNCE Objective & Semantic Magnetism</div>
+      <p>Contrastive Learning is "Learning by Comparison." It teaches the model what something *is* by identifying everything that it *isn't*.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a sculptor trying to organize a million unlabeled photos in a massive 3D room. You want photos of "Cats" to be clustered tightly in the far corner, and "Dogs" to be pushed as far away as possible. Geometrically, <strong>Contrastive Learning</strong> is the act of warping the <strong>Embedding Space</strong> using forces of magnetism. "Positive pairs" (two different views of the same object) are pulled together by <strong>Attraction</strong>, while "Negative pairs" (different objects) are shoved apart by <strong>Global Repulsion</strong>. The goal is to reach an equilibrium where geometric distance accurately reflects semantic similarity.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We train an encoder $f_\theta$ to map inputs to a normalized hypersphere. Given a batch of $N$ samples, we generate two augmented "Views" of each sample, creating a total of $2N$ inputs. For a specific positive pair $(z_i, z_j)$, we minimize the <strong>InfoNCE</strong> (Information Noise-Contrastive Estimation) loss:</p>
       <div class="math-block">
-        $$\mathcal{L}_{i,j} = -\log \frac{\exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(\mathbf{z}_i, \mathbf{z}_k) / \tau)}$$
+        $$\mathcal{L}_{i,j} = -\ln \frac{\exp(\text{sim}(z_i, z_j) / \tau)}{\sum_{k=1}^{2N} \mathbb{1}_{[k \neq i]} \exp(\text{sim}(z_i, z_k) / \tau)}$$
       </div>
-      <p>Where $\text{sim}(\mathbf{u}, \mathbf{v})$ is the cosine similarity and $\tau$ is a temperature hyperparameter. The model must correctly identify the "positive" sample $j$ among a set of $2N-1$ "negative" distractors.</p>
+      <p>Where:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>$\text{sim}(z_i, z_j)$</strong>: Typically the cosine similarity ($z_i \cdot z_j / \|z_i\| \|z_j\|$). It measures the angular alignment of the vectors.</li>
+        <li><strong>Temperature ($\tau$)</strong>: The "Sharpness" parameter. A small $\tau$ forces the model to ignore easy negatives and focus purely on the hardest, most confusing distractors.</li>
+      </ul>
+      <p>The math forces the numerator (the "Friend") to be as large as possible while keeping the denominator (the "Crowd") as small as possible.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Modern ML, Contrastive Learning is the <strong>Representation Engine</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Instance Discrimination</strong>: The model treats every single image as its own unique "Class." It learns to find the core essence of that image that survives cropping, color-jittering, and noise.</li>
+        <li><strong>Alignment vs. Uniformity</strong>: Effective contrastive learning must satisfy two conditions: similar instances must be <strong>Aligned</strong> (close together), and all embeddings must be <strong>Uniformly</strong> distributed across the hypersphere (so they don't collapse into a single useless point).</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Large Batches. Contrastive learning is hungry for "Negatives." If your batch size is too small, the model has nobody to "Push" against, and it fails to learn the boundaries of reality. This is why techniques like SimCLR or MoCo require massive GPU memory or clever "Memory Banks."</p>
     </div>
     
     <div class="callout tip">

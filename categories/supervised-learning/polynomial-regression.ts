@@ -17,15 +17,33 @@ export const polynomialRegressionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Polynomial Regression</div>
-      <p>Polynomial regression is a special case of multiple linear regression where the features are $d$-th degree polynomials of the original input $x$. The hypothesis function is:</p>
+      <div class="premium-def-title">Formalism: Basis Expansion & The Vandermonde Transformation</div>
+      <p>Polynomial Regression is "Fake Linearity." We trick a linear model into following a curve by exploding the feature space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a curve on a 2D plot. A straight line (Linear Regression) can never touch more than two points on that curve perfectly. <strong>Polynomial Regression</strong> is the process of bending the ruler. Geometrically, we are performing a <strong>Basis Expansion</strong>. We take our 1D input $x$ and "lift" it into a higher-dimensional space inhabited by $[x, x^2, \dots, x^n]$. In this expanded space, the curvy data points actually align into a <strong>Flat Hyperplane</strong>. By finding the best "flat slice" in high dimensions and projecting it back to 2D, we get a curve that perfectly hugs the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The model is a weighted sum of powers of the input feature:</p>
       <div class="math-block">
-        $$\hat{y} = w_0 + w_1 x + w_2 x^2 + \dots + w_d x^d$$
+        $$\hat{y} = w_0 + w_1 x + w_2 x^2 + \dots + w_n x^n$$
       </div>
-      <p>This is formally a linear model because the weights $w_j$ are linear. The feature space is transformed via a **Basis Expansion** mapping $\phi(x) = [1, x, x^2, \dots, x^d]^T$, and the objective remains the minimization of the squared error:</p>
+      <p>We represent this more elegantly using the <strong>Vandermonde Matrix</strong> ($\Phi$), where each row is the power-series expansion of a data point:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}) = \sum_{i=1}^n (y_i - \mathbf{w}^T \phi(x_i))^2$$
+        $$\Phi_{ij} = x_i^{j-1}$$
       </div>
+      <p>Because the weights $\mathbf{w}$ still appear linearly in the equation, we can still use the <strong>Ordinary Least Squares</strong> solution to find the absolute best "bend":</p>
+      <div class="math-block">
+        $$\mathbf{w} = (\Phi^T \Phi)^{-1} \Phi^T \mathbf{y}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, with great power comes great <strong>Overfitting</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Degree Selection</strong>: Small degrees (1-2) are robust but "Stupid" (Bias). High degrees (10+) are "Hallucinogenic" (Variance)—they will twist and turn to hit every speck of noise, losing the overall trend.</li>
+        <li><strong>Multicollinearity</strong>: As you increase powers ($x, x^2, x^3 \dots$), the features become highly correlated. This makes the $\Phi^T \Phi$ matrix nearly impossible to invert, leading to numerical instability.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Polynomial regression is technically still <strong>Linear Regression</strong>. It is linear in the <em>parameters</em> ($w$), even though it is non-linear in the <em>features</em> ($x$). This is the first step toward the "Kernel Trick" used in SVMs.</p>
     </div>
     
     <div class="callout tip">

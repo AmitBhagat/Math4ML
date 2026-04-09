@@ -17,19 +17,30 @@ export const momentumSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Velocity Accumulator</div>
-      <p>The **Momentum** method accelerates Gradient Descent by introducing a velocity vector $v$ that builds inertia based on the history of previous gradients. The update at step $t$ is defined as:</p>
+      <div class="premium-def-title">Formalism: The Velocity Accumulator & Geometric Series</div>
+      <p>Momentum is "Temporal Smoothing." It prevents the optimizer from getting caught in jittery oscillations by focusing on the long-term trend.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a <strong>Ravine</strong>—a loss surface that is very steep on the sides but has a long, flat floor. Standard Gradient Descent will bounce back and forth between the walls (high oscillation) while moving painfully slowly along the floor (low progress). <strong>Momentum</strong> introduces the concept of physical inertia. Geometrically, it acts as a <strong>Low-Pass Filter</strong>. It accumulates the consistent, downward signal along the floor of the ravine while the "chatter" against the walls cancels out over time. It transforms a jittery path into a smooth, high-speed glide toward the minimum.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We introduce a <strong>Velocity vector</strong> $v$ that tracks the history of gradients. At each step $t$, the velocity is updated by decaying the previous velocity by $\gamma$ and adding the new "impulse" of the current gradient:</p>
       <div class="math-block">
-        $$v_{t+1} = \gamma v_t + \eta \nabla_\theta J(\theta_t)$$
-        $$\theta_{t+1} = \theta_t - v_{t+1}$$
+        $$v_t = \gamma v_{t-1} + \eta \nabla J(\theta_t)$$
       </div>
-      <p>This physical analogy provides the optimizer with two critical capabilities:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Friction ($\gamma$)</strong>: The momentum coefficient (typically 0.9) determines what percentage of the previous velocity is kept. it prevents the "Bolder" from rolling infinitely.</li>
-        <li><strong>Oscillation Dampening</strong>: In directions where the gradient changes sign (jitter), the velocity terms cancel out. In consistent directions, the velocity builds up.</li>
-        <li><strong>Ravine Navigation</strong>: Many loss functions have narrow "valleys" (high curvature in one dimension). Momentum allows the optimizer to focus on the long-term downward trend rather than bouncing between the valley walls.</li>
+      <p>The parameters are then pushed by this velocity rather than just the instant gradient: $\theta_{t+1} = \theta_t - v_t$. If we expand this, we see that the update is actually a <strong>Weighted Moving Average</strong> (a geometric series) of all previous gradients:</p>
+      <div class="math-block">
+        $$v_t = \eta \sum_{k=0}^t \gamma^k \nabla J(\theta_{t-k})$$
+      </div>
+      <p>In a direction where the gradient is constant, the velocity builds up to a terminal speed of $\frac{\eta}{1-\gamma}$. If $\gamma = 0.9$, your steps become 10x more powerful in the right direction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Momentum is the <strong>Oscillation Eraser</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Smoothing out Mini-batches</strong>: SGD updates can be erratic because they only look at one batch. Momentum averages these erratic pulses into a stable "current."</li>
+        <li><strong>Punching through Saddle Points</strong>: If the gradient vanishes in a flat region (a saddle point), the accumulated velocity carries the model through the plateau, preventing it from getting stuck in "mediocre" land.</li>
       </ul>
-      <p class="mt-2">Momentum ensures that the optimizer doesn't get "distracted" by the noise of an individual batch, leading to much faster convergence on complex surfaces.</p>
+      <p class="mt-4 italic text-sm">Gotcha: If your momentum $\gamma$ is too high, the optimizer will behave like a bowling ball on ice. It will build so much speed that it overshoots the minimum and orbits it in a massive loop, unable to stop.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Heavy Boulder</h2>

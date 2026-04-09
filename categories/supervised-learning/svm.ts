@@ -17,13 +17,29 @@ export const svmSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Support Vector Machine</div>
-      <p>Given training vectors $\mathbf{x}_i \in \mathbb{R}^d$ and labels $y_i \in \{1, -1\}$, SVM finds the optimal hyperplane $(\mathbf{w}^*, b^*)$ that maximizes the margin. The optimization problem (Soft Margin) is defined as:</p>
+      <div class="premium-def-title">Formalism: The Maximal Margin & Dual Optimization</div>
+      <p>SVM is "Geometric Security." It doesn't just look for a line; it looks for the thickest possible "No-Man's Land" between classes.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have two clusters of data. Many lines could separate them. <strong>Support Vector Machines (SVM)</strong> seek the one unique line (or plane) that maximizes the <strong>Margin</strong>—the distance to the nearest points of either class. These critical edge points are called <strong>Support Vectors</strong>. Geometrically, we are building a "Security Buffer." If you move a point deep inside its own territory, the boundary doesn't move. It is only anchored by the most difficult, conflicting points on the border.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A hyperplane is defined as $\mathbf{w}^T \mathbf{x} + b = 0$. The goal is to maximize the margin $\frac{2}{\|\mathbf{w}\|}$, which is mathematically equivalent to minimizing the squared norm of the weights:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{w}, b, \xi} \frac{1}{2} \|\mathbf{w}\|^2 + C \sum_{i=1}^n \xi_i$$
+        $$\text{arg}\min_{\mathbf{w}, b} \frac{1}{2} \|\mathbf{w}\|^2 \quad \text{subject to } y_i(\mathbf{w}^T \mathbf{x}_i + b) \ge 1$$
       </div>
-      <p>Subject to the constraints: $y_i(\mathbf{w}^T \phi(\mathbf{x}_i) + b) \ge 1 - \xi_i$ and $\xi_i \ge 0$.</p>
-      <p class="mt-2">Where $\phi(\cdot)$ is a kernel mapping, $C$ is the regularization parameter, and $\xi$ are slack variables representing classification errors.</p>
+      <p>For non-linear separation, we use the <strong>Kernel Trick</strong>. We map the points into a higher-dimensional space where they *are* linearly separable. In the dual form, this only requires replacing the dot product $\mathbf{x}_i \cdot \mathbf{x}_j$ with a Kernel function $K(\mathbf{x}_i, \mathbf{x}_j)$:</p>
+      <div class="math-block">
+        $$f(\mathbf{x}) = \sum \alpha_i y_i K(\mathbf{x}_i, \mathbf{x}) + b$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, SVM is the <strong>Robust Architect</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft Margin (C)</strong>: In the real world, data is messy. Parameter $C$ determines the trade-off between having a wide highway and correctly classifying every single point. High $C$ = strictly correct; Low $C$ = wider margin but allows some "slack."</li>
+        <li><strong>RBF Kernel Magic</strong>: The Radial Basis Function (RBF) kernel effectively projects your data into an infinite-dimensional space, allowing the SVM to find incredibly complex, "swirly" boundaries that look like magic in 2D.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: SVM is computationally expensive on large datasets (it scales quadratically with the number of samples). If you have 1,000,000 rows, an SVM will eat your RAM for breakfast—you’re better off with a linear model or a tree ensemble.</p>
     </div>
     
     <div class="callout tip">

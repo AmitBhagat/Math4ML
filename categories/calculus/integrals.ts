@@ -25,18 +25,29 @@ export const integralsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Limit of Accumulation</div>
-      <p>For a continuous function $f(x)$, the **Definite Integral** over the interval $[a, b]$ is defined as the signed area between the $x$-axis and the graph, calculated as the limit of Riemann sums:</p>
+      <div class="premium-def-title">Formalism: The Limit of Infinite Accumulation</div>
+      <p>Integration is the "Global Odometer" of math. It takes local rates of change and reconstructs the total history of a system.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the area under a curve $f(x)$ between $a$ and $b$. To calculate it, we slice the region into $n$ vertical rectangles of equal width $\Delta x$. The total area is approximately the sum of these rectangles. As we make the slices thinner and thinner ($n \to \infty$), the jagged staircase of rectangles perfectly fits the curve.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the <strong>Riemann Sum</strong> $S_n$ as the accumulation of these slices, where $x_i^*$ is a sample point in each sub-interval:</p>
       <div class="math-block">
-        $$\int_a^b f(x) dx = \lim_{\Delta x \to 0} \sum_{i} f(x_i^*) \Delta x_i$$
+        $$S_n = \sum_{i=1}^n f(x_i^*) \Delta x$$
       </div>
-      <p>The relationship between integration and differentiation is codified by the **Fundamental Theorem of Calculus**:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Antidifferentiation</strong>: If $F(x) = \int f(x) dx$, then $F'(x) = f(x)$.</li>
-        <li><strong>Definite Integral Calculation</strong>: $\int_a^b f(x) dx = F(b) - F(a)$.</li>
-        <li><strong>ML Utility</strong>: In probability theory, the area under a density function $p(x)$ determines the cumulative mass: $P(X \le k) = \int_{-\infty}^k p(x) dx$.</li>
+      <p>The <strong>Definite Integral</strong> is the limit of this sum as the width $\Delta x \to 0$. The <strong>Fundamental Theorem of Calculus</strong> links this accumulation back to differentiation: if $F'(x) = f(x)$, then the total accumulation is just the difference in the "Potential" at the boundaries:</p>
+      <div class="math-block">
+        $$\int_a^b f(x) dx = F(b) - F(a)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, integrals are the foundation of <strong>Expectation</strong> and <strong>Probability Mass</strong>:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Continuous Probability</strong>: The probability of a variable falling in a range is the integral of its Density Function.</li>
+        <li><strong>Normalization</strong>: We use integrals to ensure that the "Total Reality" (area under the curve) of our predictions always sums to exactly 1.0.</li>
       </ul>
-      <p class="mt-2">Integrals enable the transition from discrete sets to continuous distributions, a requirement for high-fidelity modeling in Statistics and Bayesian Inference.</p>
+      <p class="mt-4 italic text-sm">Gotcha: In high-dimensional AI, we almost never solve integrals analytically—there are too many variables. Instead, we use "Monte Carlo Integration," which is essentially like throwing millions of random darts at the curve and counting how many land inside the area.</p>
     </div>
     
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>

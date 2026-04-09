@@ -17,12 +17,30 @@ export const hierarchicalSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Hierarchical Clustering</div>
-      <p>Hierarchical clustering builds a nested hierarchy of clusters. In **Agglomerative** (bottom-up) clustering, we start with $n$ clusters and sequentially merge the closest pair $(A, B)$ by minimizing a linkage criterion $d(A, B)$. For **Ward's Method**, the merge cost is the increase in the total **Within-Cluster Sum of Squares**:</p>
-      <div class="math-block">
-        $$d_{Ward}(A, B) = \frac{|A||B|}{|A|+|B|} \|\mu_A - \mu_B\|^2$$
-      </div>
-      <p>The resulting tree structure is visualized as a **Dendrogram**, where the horizontal position represents the merge and the vertical axis represents the distance $d(A, B)$ at which the merge occurred.</p>
+      <div class="premium-def-title">Formalism: Agglomerative Linkage & Nested Partitions</div>
+      <p>Hierarchical Clustering is "Relational Ancestry." It is the process of building a tree of similarity where every point eventually finds its way to a common root.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as individual organisms in a high-dimensional room. At the start, everyone is a "Group of One." <strong>Hierarchical Clustering</strong> is the process where the most similar points find each other and "clump" together. These small clumps then search for the next most similar clumps, and so on, until the entire population is merged into a single "Master Cluster." Geometrically, this creates a <strong>Nested hierarchy</strong> of subspaces. Unlike K-Means, which gives you one flat layer of groups, this method gives you the entire "Evolutionary Tree" of how those groups formed.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We typically use the <strong>Agglomerative (Bottom-Up)</strong> approach. We start with $n$ clusters and iteratively merge the pair $(A, B)$ that is "Closest" according to a <strong>Linkage Criterion</strong>. The definition of "Close" changes the entire shape of the tree:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Single Linkage (Min)</strong>: $d(A,B) = \min_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y})$. Finds the "Bridge" between groups.</li>
+        <li><strong>Complete Linkage (Max)</strong>: $d(A,B) = \max_{\mathbf{x} \in A, \mathbf{y} \in B} d(\mathbf{x}, \mathbf{y})$. Ensures compact, "safe" clusters.</li>
+        <li><strong>Ward's Method</strong>: Minimizes the increase in within-cluster variance. This is the "Gold Standard" for creating even, spherical clusters:
+          $$d_{Ward}(A, B) = \frac{|A||B|}{|A|+|B|} \|\mu_A - \mu_B\|^2_{2}$$
+        </li>
+      </ul>
+      <p>The result is a <strong>Dendrogram</strong>— a tree where the vertical axis represents the distance $d(A, B)$ at which each merge occurred.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Hierarchical Clustering is the <strong>Taxonomist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>No K Required</strong>: You don't need to guess how many clusters exist before you start. You decide where to "Cut" the tree after you see the whole family history.</li>
+        <li><strong>Computational Wall</strong>: Because we have to calculate the distance between *every* pair of points/clusters, the algorithm scales at $O(n^3)$ or $O(n^2 \log n)$. If you have a million points, your computer will likely catch fire before the tree is finished.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Once two clusters are merged, they can never be un-merged. One bad decision at the beginning of the algorithm (due to noise) will propagate all the way up the tree, potentially ruining the final hierarchy.</p>
     </div>
     
     <div class="callout tip">

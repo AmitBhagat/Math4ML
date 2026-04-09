@@ -37,16 +37,32 @@ export const randomForestSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Random Forest</div>
-      <p>A Random Forest is an ensemble of $B$ decision trees $\{T_1, \dots, T_B\}$. For a given input $x$, the prediction is the aggregate of all individual tree predictions:</p>
-      <div class="math-block">
-        $$\hat{y}_{RF} = \frac{1}{B} \sum_{b=1}^B T_b(x, \Theta_b)$$
-      </div>
-      <p>Where $\Theta_b$ represents the random parameters for the $b$-th tree, generated through:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Bootstrap Aggregating (Bagging)</strong>: Training each tree on a sample drawn with replacement.</li>
-        <li><strong>Feature Selection</strong>: Choosing the best split from a random subset of $m \approx \sqrt{d}$ features.</li>
+      <div class="premium-def-title">Formalism: Bootstrap Aggregation & Feature Decorrelation</div>
+      <p>Random Forest is "Statistical Robustness." It is the process of averaging out individual errors to reveal a stable, underlying pattern.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a single Decision Tree as a jagged, unstable boundary. Because trees are "Greedy," they often over-focus on local noise in the data. A <strong>Random Forest</strong> is an ensemble of $B$ different trees. Geometrically, each tree creates its own axis-aligned partition of the space. By "Averaging" these partitions together, we smooth out the jagged cliffs of individual trees into a more stable, continuous decision surface. It is the mathematical equivalent of asking 100 people to draw a map and then using the consensus of their lines.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The Forest is built using two layers of randomness to ensure diversity:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Bagging (Bootstrapping)</strong>: We generate $B$ datasets $\{D_1, \dots, D_B\}$ by sampling $n$ items from the original data <em>with replacement</em>.</li>
+        <li><strong>Feature Randomness</strong>: At each node of every tree, we only allow the algorithm to choose from a random subset of $m$ features (typically $m = \sqrt{d}$).</li>
       </ul>
+      <p>The final prediction for a given input $\mathbf{x}$ is the <strong>Aggregate</strong> of all $B$ base learners $\{f_b(\mathbf{x})\}$:</p>
+      <div class="math-block">
+        $$\hat{y}_{Forest} = \text{mode}\{f_1(\mathbf{x}), f_2(\mathbf{x}), \dots, f_B(\mathbf{x})\} \quad \text{(Classification)}$$
+        $$\hat{y}_{Forest} = \frac{1}{B} \sum_{b=1}^B f_b(\mathbf{x}) \quad \text{(Regression)}$$
+      </div>
+      <p>As $B$ increases, the variance of the ensemble decreases while the bias remains stable. This is the <strong>Power of Averaging</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Random Forest is the <strong>Easy Button</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Out-of-Bag (OOB) Error</strong>: Because each tree only sees about 63% of the data, we can use the remaining 37% to validate the model <em>during training</em> without needing a separate test set.</li>
+        <li><strong>Feature Importance</strong>: We can calculate which variables are actually driving the decisions by measuring how much the forest's accuracy drops when we "scramble" a specific feature.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: While Random Forests are incredibly hard to overfit, they are "Black Boxes." You know the answer is right, but explaining exactly *why* 500 trees voted that way is much harder than explaining a single decision tree.</p>
     </div>
     
     <div class="callout tip">

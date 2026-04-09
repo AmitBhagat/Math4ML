@@ -17,16 +17,31 @@ export const matrixInverseSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix Reciprocal</div>
-      <p>A square matrix $A \in \mathbb{R}^{n \times n}$ is **Invertible** if there exists a matrix $A^{-1}$ such that:</p>
+      <div class="premium-def-title">Formalism: The Matrix Reciprocal & Identity</div>
+      <p>The Matrix Inverse is the mathematical process of "Unwinding" a transformation. It finds the path back to the origin of the signal.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>If matrix $A$ maps Vector $\mathbf{x}$ to $\mathbf{y}$ by rotating and stretching the space, the <strong>Inverse</strong> $A^{-1}$ must be a transformation that rotates and stretches everything back to its exact starting position. This is only possible if $A$ hasn't "squashed" any information—i.e., it must preserve all dimensions of the space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>By definition, applying a transformation and then its inverse must be the same as doing nothing (the Identity transformation $I$):</p>
       <div class="math-block">
-        $$A A^{-1} = A^{-1} A = I$$
+        $$A A^{-1} = I \quad \text{and} \quad A^{-1} A = I$$
       </div>
-      <p>Where $I$ is the identity matrix. A matrix is invertible if and only if it is **Non-singular**, meaning its determinant is non-zero ($\det(A) \neq 0$). For a $2 \times 2$ matrix, the inverse is calculated as:</p>
+      <p>For a 2x2 matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, we find $A^{-1}$ by using the Adjugate matrix and dividing by the scale factor (the determinant):</p>
       <div class="math-block">
         $$A^{-1} = \frac{1}{ad - bc} \begin{bmatrix} d & -b \\ -c & a \end{bmatrix}$$
       </div>
-      <p class="mt-2">The inverse represents the reverse transformation. In higher dimensions, it is often computed via Gaussian Elimination or the Adjugate Matrix.</p>
+      <p>If $ad-bc = 0$, you are trying to divide by zero, which is the mathematical way of saying: "You can't undo this—the information is gone."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A matrix $A$ is invertible if and only if:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Non-Zero Determinant</strong>: $\det(A) \neq 0$.</li>
+        <li><strong>Full Rank</strong>: All rows and columns are linearly independent.</li>
+        <li><strong>Trivial Null Space</strong>: The only solution to $A\mathbf{x} = \mathbf{0}$ is $\mathbf{x} = \mathbf{0}$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Inverting large matrices is "computationally expensive" ($O(n^3)$). In AI, we almost never calculate $A^{-1}$ directly. We use Solvers like $LU$ or $QR$ decomposition to find the result without doing the heavy lifting by hand.</p>
     </div>
     
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>

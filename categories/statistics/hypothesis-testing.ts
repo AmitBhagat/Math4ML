@@ -26,17 +26,30 @@ export const hypothesisTestingSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Test of Significance</div>
-      <p>A <strong>Hypothesis Test</strong> is a formal procedure for determining whether to reject a null hypothesis $H_0$ based on sample evidence. It evaluates two mutually exclusive statements about a population:</p>
+      <div class="premium-def-title">Formalism: The Rejection Region & The Decision Rule</div>
+      <p>Hypothesis Testing is "The Rigorous Disbelief." It is a framework for deciding if your data has enough weight to overthrow the status quo.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the <strong>Null Distribution</strong>—the bell curve (PDF) that describes how the world behaves if your "Breakthrough" is actually just random noise. Geometrically, we divide this curve into two parts: the <strong>Region of Acceptance</strong> (the fat middle) and the <strong>Region of Rejection</strong> (the thin tails). We set a boundary $\alpha$ (the significance level). If your observed data lands in the tails, you have "crossed the line." You’ve found a result so extreme that the "random noise" explanation becomes mathematically implausible. </p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start by stating the <strong>Null Hypothesis ($H_0$)</strong> and the <strong>Alternative ($H_1$)</strong>. We then calculate the <strong>Test Statistic</strong> $T$, which scales the difference we saw by the expected noise:</p>
       <div class="math-block">
-        $$H_0: \theta = \theta_0, \quad H_a: \theta \neq \theta_0$$
+        $$T = \frac{\text{Effect Size}}{\text{Standard Error}}$$
       </div>
-      <p>The decision is governed by the following analytical components:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Test Statistic ($T_{obs}$)</strong>: A numerical value calculated from sample data (e.g., $Z$, $t$, or $\chi^2$) that measures the deviation from $H_0$.</li>
-        <li><strong>p-value</strong>: $P(T \ge T_{obs} \mid H_0)$. The probability of observing results as extreme as yours if the Null Hypothesis were true.</li>
-        <li><strong>Significance Level ($\alpha$)</strong>: The error budget (typically 0.05). If $p < \alpha$, the result is <strong>Statistically Significant</strong>, and $H_0$ is rejected.</li>
+      <p>The <strong>P-Value</strong> is then derived as the area under the Null Distribution curve that is "more extreme" than our observed $T$:</p>
+      <div class="math-block">
+        $$p = P(|t| > |T| \mid H_0)$$
+      </div>
+      <p>The <strong>Decision Rule</strong> is binary: If $p < \alpha$, we reject the Null. If $p \ge \alpha$, we "Fail to Reject"—which is a fancy way of saying we don't have enough evidence yet.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, this determines the <strong>Deployment Gate</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Significance vs. Size</strong>: A model might be "Statistically Significant" because you have 10 million users, even if the "Effect Size" (the accuracy lift) is only 0.0001%. You need to balance the math with common sense.</li>
+        <li><strong>Consistency</strong>: A hypothesis test tells you how likely your result is to replicate. If $p=0.49$, your "win" will likely disappear next week.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: A high p-value DOES NOT prove the Null Hypothesis is true. It only means you didn't prove it's false. "Absence of evidence is not evidence of absence."</p>
     </div>
 
     <h2 id="errors">Decision Errors: The Cost of Being Wrong</h2>

@@ -17,18 +17,33 @@ export const orthogonalityProjectionsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Closest Vector Property</div>
-      <p>Two vectors $\mathbf{u}, \mathbf{v}$ are **Orthogonal** if their inner product is zero ($\mathbf{u} \cdot \mathbf{v} = 0$). The **Orthogonal Projection** of a vector $\mathbf{x}$ onto a subspace $W$ is the unique vector $\hat{\mathbf{x}} \in W$ such that $(\mathbf{x} - \hat{\mathbf{x}})$ is orthogonal to every vector in $W$.</p>
-      <p>Algebraically, the projection of $\mathbf{x}$ onto a non-zero vector $\mathbf{v}$ is:</p>
-      <div class="math-block">
-        $$\text{proj}_{\mathbf{v}} \mathbf{x} = \frac{\mathbf{x} \cdot \mathbf{v}}{\|\mathbf{v}\|^2} \mathbf{v}$$
-      </div>
-      <p>Properties of the projection include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Optimality</strong>: $\hat{\mathbf{x}}$ is the vector in $W$ that minimizes the distance $\|\mathbf{x} - \mathbf{v}\|$ for all $\mathbf{v} \in W$.</li>
-        <li><strong>Linearity</strong>: $\text{proj}_W (c_1\mathbf{x}_1 + c_2\mathbf{x}_2) = c_1\text{proj}_W \mathbf{x}_1 + c_2\text{proj}_W \mathbf{x}_2$.</li>
-        <li><strong>Residual</strong>: The vector $\mathbf{e} = \mathbf{x} - \hat{\mathbf{x}}$ represents the component of $\mathbf{x}$ orthogonal to $W$.</li>
+      <div class="premium-def-title">Formalism: The Shadow & Orthogonality</div>
+      <p>Projections are the mathematical way to find the "Best Approximation." We find the shadow of a vector onto a lower-dimensional subspace.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine we want to project a vector $\mathbf{y}$ onto a vector $\mathbf{u}$. The goal is to find a vector $\hat{\mathbf{y}}$ that is a "shadow" of $\mathbf{y}$ on the line spanned by $\mathbf{u}$. Two critical facts hold:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Direction</strong>: Since $\hat{\mathbf{y}}$ lies on the line spanned by $\mathbf{u}$, it must be a scalar multiple: $\hat{\mathbf{y}} = c\mathbf{u}$.</li>
+        <li><strong>Orthogonality</strong>: The error vector $\mathbf{e} = \mathbf{y} - \hat{\mathbf{y}}$ must be perpendicular to $\mathbf{u}$.</li>
       </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Since the error vector $\mathbf{e}$ is orthogonal to $\mathbf{u}$, their dot product is zero:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot (\mathbf{y} - \hat{\mathbf{y}}) = 0$$
+        $$\mathbf{u} \cdot (\mathbf{y} - c\mathbf{u}) = 0$$
+      </div>
+      <p>Distributing the dot product and solving for $c$:</p>
+      <div class="math-block">
+        $$\mathbf{u} \cdot \mathbf{y} - c(\mathbf{u} \cdot \mathbf{u}) = 0 \implies c = \frac{\mathbf{u} \cdot \mathbf{y}}{\mathbf{u} \cdot \mathbf{u}}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>Plugging $c$ back into our definition $\hat{\mathbf{y}} = c\mathbf{u}$ gives the orthogonal projection of $\mathbf{y}$ onto $\mathbf{u}$:</p>
+      <div class="math-block">
+        $$\hat{\mathbf{y}} = \left( \frac{\mathbf{y} \cdot \mathbf{u}}{\mathbf{u} \cdot \mathbf{u}} \right) \mathbf{u}$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: This formula only works for 1D projections. For projecting onto a subspace spanned by matrix $X$, we use the <strong>Normal Equations</strong>: $\hat{\mathbf{y}} = X(X^T X)^{-1} X^T \mathbf{y}$.</p>
     </div>
     
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>

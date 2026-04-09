@@ -25,20 +25,31 @@ export const jacobianSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix of Sensitivities</div>
-      <p>For a vector-valued function $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$, the **Jacobian Matrix** $\mathbf{J}$ (or $\mathbf{Df}$) is the matrix of all first-order partial derivatives. It represents the best linear approximation of the function at a point $\mathbf{x}$:</p>
+      <div class="premium-def-title">Formalism: The Matrix of Total Differentials</div>
+      <p>The Jacobian is the "Global Sensitivity Map." It tracks every possible interaction between a vector of inputs and a vector of outputs.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a transformation $\mathbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ that warps one space into another. At any point $\mathbf{x}$, the function might stretch, rotate, or squash space. The <strong>Jacobian Matrix</strong> is the "Local Linear Approximation" of this warping. It tells us that for a tiny step $d\mathbf{x}$ in the input space, the resulting step $d\mathbf{y}$ in the output space is a simple matrix-vector product.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the Jacobian by considering the <strong>Total Differential</strong> of each output component $f_i$. For each output, the change $df_i$ is a weighted sum of the changes in all inputs $dx_j$:</p>
       <div class="math-block">
-        $$\mathbf{J} = \frac{\partial \mathbf{f}}{\partial \mathbf{x}} = \begin{bmatrix} 
+        $$df_i = \sum_{j=1}^n \frac{\partial f_i}{\partial x_j} dx_j = \nabla f_i \cdot d\mathbf{x}$$
+      </div>
+      <p>By stacking these gradients as rows, we form a matrix $J$ such that the entire system of changes can be written as a single linear map:</p>
+      <div class="math-block">
+        $$d\mathbf{f} = \mathbf{J} d\mathbf{x}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <div class="math-block">
+        $$\mathbf{J} = \begin{bmatrix} 
         \frac{\partial f_1}{\partial x_1} & \dots & \frac{\partial f_1}{\partial x_n} \\
         \vdots & \ddots & \vdots \\
         \frac{\partial f_m}{\partial x_1} & \dots & \frac{\partial f_m}{\partial x_n} \end{bmatrix}$$
       </div>
-      <p>The Jacobian plays three critical roles in advanced mathematical modeling:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Multivariate Chain Rule</strong>: To differentiate $\mathbf{f}(\mathbf{g}(\mathbf{x}))$, we multiply their Jacobians: $\mathbf{J}_{\mathbf{f} \circ \mathbf{g}} = \mathbf{J}_{\mathbf{f}} \cdot \mathbf{J}_{\mathbf{g}}$.</li>
-        <li><strong>Local Linearization</strong>: Near $\mathbf{x}$, the change in output is predicted by $\Delta \mathbf{f} \approx \mathbf{J} \Delta \mathbf{x}$.</li>
-        <li><strong>Volume Scaling</strong>: If $n=m$, $|\det(\mathbf{J})|$ measures how the transformation expands or shrinks space locally.</li>
-      </ul>
+      <p>In Deep Learning, the Jacobian is the engine of the <strong>Chain Rule</strong>. When we compose layers, we simply multiply their Jacobians to track how error flows from one layer to the next.</p>
+      <p class="mt-4 italic text-sm">Gotcha: If the Jacobian is square ($n=m$), the absolute value of its determinant $|\det(J)|$ is the <strong>Volume Scaling Factor</strong>. It tells you how much the transformation expands or shrinks the volume of a local region—a critical concept in Generative AI (VAEs and Normalizing Flows).</p>
     </div>
     
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
@@ -122,7 +133,7 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
       <li><strong>Backpropagation in Vector Layers</strong>: In layers like Softmax or Batch Norm, it's not just one input affecting one output. The Jacobian is the matrix that tracks the multi-node connectivity, allowing the error to flow perfectly through these complex layers.</li>
       <li><strong>Generative Models (Latent Space Warping)</strong>: In models like Variational Autoencoders (VAEs), the Jacobian measures how the AI's "Latent Space" is being stretched to create an image. This ensures that the generated images are diverse and don't all collapse into the same pattern.</li>
     </ul>
-    <p>Teacher's Final Word: While a simple derivative tracks one-to-one changes, the Jacobian tracks **all possible interactions**. It’s the master map that tells the model exactly how every single parameter contributes to the final complex behavior of the network.</p>
+    <p>Teacher's Final Word: While a simple derivative tracks one-to-one changes, the Jacobian tracks <strong>all possible interactions</strong>. It’s the master map that tells the model exactly how every single parameter contributes to the final complex behavior of the network.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Jacobians tell us about "first-order" velocity. What about the "Acceleration" or the curvature of the loss? Explore <strong><a href="#/mathematics/calculus/hessian">The Hessian Matrix</a></strong>.

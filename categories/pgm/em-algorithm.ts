@@ -17,18 +17,33 @@ export const emAlgorithmSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Iterative Maximum Likelihood with Latent Variables</div>
-      <p>The **EM Algorithm** is a strategy for maximum likelihood estimation in models with latent variables $\mathbf{Z}$. It iteratively improves a lower bound on the log-likelihood $\ell(\theta) = \log P(\mathbf{X} \mid \theta)$ through two coordinate-ascent steps:</p>
+      <div class="premium-def-title">Formalism: ELBO Optimization & Coordinate Ascent</div>
+      <p>The EM Algorithm is the "Sherlock Holmes" of statistics. It provides a rigorous way to find the truth when the most important clues are missing.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are trying to find the highest peak in a mountain range, but it's middle of the night and you can only see 5 feet in front of you. <strong>Expectation-Maximization (EM)</strong> is a two-step climb. Geometrically, it is a <strong>Coordinate Ascent</strong> on a Likelihood surface. Because our data has "Hidden" (Latent) variables, the true peak is hard to see. EM works by building a "Proxy Hill" (a lower bound) at your current location, climbing to its peak, and then building a new hill. It ensures that every step you take is mathematically guaranteed to lead you higher than where you started.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We want to find parameters $\theta$ that maximize the marginal log-likelihood $\mathcal{L}(\theta) = \sum_i \ln P(\mathbf{x}_i \mid \theta)$. But since we have unobserved latent variables $\mathbf{Z}$, the direct maximization is a nightmare. Using <strong>Jensen's Inequality</strong>, we define the <strong>Evidence Lower Bound (ELBO)</strong>:</p>
       <div class="math-block">
-        $$Q(\theta \mid \theta^{(t)}) = \mathbb{E}_{\mathbf{Z} \mid \mathbf{X}, \theta^{(t)}} [ \log P(\mathbf{X}, \mathbf{Z} \mid \theta) ]$$
+        $$\text{ELBO}(Q, \theta) = \mathbb{E}_{Q(\mathbf{Z})} [ \ln P(\mathbf{X}, \mathbf{Z} \mid \theta) ] + \mathbb{H}(Q)$$
       </div>
-      <p>The optimization process follows this rigorous cycle:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>E-Step (Expectation)</strong>: Calculate the posterior probability $P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)})$ of the hidden variables given the observed data and current parameters.</li>
-        <li><strong>M-Step (Maximization)</strong>: Find $\theta^{(t+1)} = \arg \max_\theta Q(\theta \mid \theta^{(t)})$. Update parameters to maximize the expected log-likelihood.</li>
-        <li><strong>Jensen's Inequality</strong>: EM guarantees that the likelihood $P(\mathbf{X} \mid \theta)$ is non-decreasing at each step by optimizing the Evidence Lower Bound (ELBO).</li>
+      <p>The EM algorithm alternates between optimizing $Q$ and optimizing $\theta$:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>E-Step (Expectation)</strong>: We set $Q(\mathbf{Z})$ to be the posterior distribution of the missing data: $Q(\mathbf{Z}) = P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)})$. This "Fills in the blanks" with our best possible guess.</li>
+        <li><strong>M-Step (Maximization)</strong>: We find the $\theta$ that maximizes the expected log-likelihood:
+          $$\theta^{(t+1)} = \arg \max_\theta \sum_{\mathbf{Z}} P(\mathbf{Z} \mid \mathbf{X}, \theta^{(t)}) \ln P(\mathbf{X}, \mathbf{Z} \mid \theta)$$
+        </li>
       </ul>
-      <p class="mt-2">EM is the core solver for **Gaussian Mixture Models (GMM)** and the calibration phase of **Hidden Markov Models**.</p>
+      <p>Because the M-step maximizes the ELBO, and the E-step makes the ELBO equal to the true likelihood, the algorithm is guaranteed to never decrease the likelihood of your data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Graphical Models, EM is the <strong>Incomplete Data Solver</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Latent Variables</strong>: These are the "Shadows" (like the species label in GMM or the hidden state in HMM) that we cannot see but must estimate to understand the system.</li>
+        <li><strong>Local Convergence</strong>: While EM is guaranteed to go "Up," it is a greedy algorithm. It might get stuck on a small "Hill" and miss the "Mount Everest" of global maximum likelihood.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Initialization Matters. If you start your EM algorithm at a terrible location, it will converge to a terrible answer. Always run EM multiple times with different random start points to make sure you've found the true summit.</p>
     </div>
     
     <h2 id="steps">The 2 Big Steps: E and M</h2>

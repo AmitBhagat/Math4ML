@@ -17,16 +17,30 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The characteristic Equation</div>
-      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, a non-zero vector $\mathbf{v}$ is an **Eigenvector** and $\lambda$ is its corresponding **Eigenvalue** if:</p>
+      <div class="premium-def-title">Formalism: The Invariance Property & Characteristic Polynomial</div>
+      <p>Eigenvectors are the "Magic Axes" of a transformation. While every other vector rotates into chaos, these directions stay perfectly still.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>A linear transformation $A$ usually rotates and scales its input. An <strong>Eigenvector</strong> $\mathbf{v}$ is a special direction where the transformation acts as simple scalar multiplication. The vector stays on its span; it only grows or shrinks by factor $\lambda$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the "Eigen-Identity": $A\mathbf{v} = \lambda\mathbf{v}$. To solve for $\mathbf{v}$ and $\lambda$, we rearrange the equation into a homogeneous system:</p>
       <div class="math-block">
-        $$A \mathbf{v} = \lambda \mathbf{v}$$
+        $$A\mathbf{v} - \lambda\mathbf{v} = \mathbf{0}$$
+        $$(A - \lambda I)\mathbf{v} = \mathbf{0}$$
       </div>
-      <p>This relationship implies that $(A - \lambda I)\mathbf{v} = \mathbf{0}$. For a non-trivial solution to exist, the matrix $(A - \lambda I)$ must be non-invertible, leading to the **Characteristic Equation**:</p>
+      <p>For a non-zero (non-trivial) eigenvector $\mathbf{v}$ to exist, the matrix $(A - \lambda I)$ <strong>must be non-invertible</strong>. If it were invertible, we could just multiply by the inverse and get $\mathbf{v} = \mathbf{0}$, which is useless. A matrix is non-invertible only if its determinant is zero, leading us to the <strong>Characteristic Equation</strong>:</p>
       <div class="math-block">
         $$\det(A - \lambda I) = 0$$
       </div>
-      <p class="mt-2">The roots of this $n$-th degree polynomial are the eigenvalues. In ML, these reveal the principal axes of data variation and the stability of iterative systems.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>The Eigenvalues are the roots of the characteristic polynomial. For each $\lambda$, we find the corresponding eigenvectors by finding the <strong>Null Space</strong> of $(A - \lambda I)$.</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Trace Property</strong>: $\sum \lambda_i = \text{tr}(A)$ (Sum of diagonal elements).</li>
+        <li><strong>Determinant Property</strong>: $\prod \lambda_i = \det(A)$.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Some matrices have "Complex" eigenvalues, meaning they represent a pure rotation with no invariant real directions. In ML, we usually look for Symmetric matrices where the eigenvalues are guaranteed to be real.</p>
     </div>
     
     <div class="callout tip">

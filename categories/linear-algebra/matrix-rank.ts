@@ -17,17 +17,26 @@ export const matrixRankSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Dimension of the Span</div>
-      <p>The **Rank** of a matrix $A$, denoted $\text{rank}(A)$, is defined as the dimension of the vector space spanned by its columns (or rows). Formally:</p>
+      <div class="premium-def-title">Formalism: The Fundamental Theorem of Linear Algebra</div>
+      <p>Rank is the measure of "Informational Signal." It tells you how many dimensions of your input survived the transformation.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>When a matrix $A$ acts on a space, it maps every vector to its <strong>Column Space</strong> (the image). If the matrix is "Rank Deficient," it collapses some directions into nothingness. The set of all vectors that are squashed to zero is called the <strong>Kernel</strong> (or Null Space). The number of dimensions we lose is the <strong>Nullity</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We find the rank by performing Gaussian Elimination to reach Row Echelon Form. The number of <strong>Pivot Positions</strong> (non-zero rows) is the Rank. This derivation reveals a deep "Conservation of Dimension" law: every dimension of the input space $\mathbb{R}^n$ must either be preserved in the output or lost in the kernel. Mathematically, this is expressed as:</p>
       <div class="math-block">
-        $$\text{rank}(A) = \dim(\text{col}(A)) = \dim(\text{row}(A))$$
+        $$\text{Rank}(A) + \text{Nullity}(A) = n$$
       </div>
-      <p>Crucially, $\text{rank}(A) \le \min(m, n)$. A matrix is called **Full Rank** if its rank equals the smaller of its two dimensions. Key implications include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Invertibility</strong>: A square $n \times n$ matrix is invertible iff $\text{rank}(A) = n$.</li>
-        <li><strong>Redundancy</strong>: If $\text{rank}(A) < n$, then there exist linearly dependent columns (i.e., redundant features).</li>
-        <li><strong>Rank-Nullity Theorem</strong>: $\text{rank}(A) + \dim(\text{null}(A)) = n$.</li>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Rule</h3>
+      <p>Rank defines the fundamental limits of a matrix:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Full Rank</strong>: $\text{rank}(A) = \min(m, n)$. No redundant features.</li>
+        <li><strong>Rank Deficient</strong>: $\text{rank}(A) < \min(m, n)$. You have redundancy (copycats) in your data.</li>
+        <li><strong>Maximum Rank</strong>: A matrix can never have a rank higher than its smallest dimension.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: In real-world data, rank is rarely exactly zero due to noise. We use "Effective Rank" or SVD to find the "pivots" that are large enough to be signal and small enough to be noise.</p>
     </div>
     
     <div class="callout tip">
@@ -110,7 +119,7 @@ print(f"Matrix Rank: {rank}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the **True Information Density** of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
+    <p>Rank is the "Reality Check" of Linear Algebra. It tells you the <strong>True Information Density</strong> of your data—the actual number of independent dimensions you are working with once you strip away all the fluff and redundant copycats.</p>
     <ul>
       <li><strong>Low-Rank Recommendation Systems</strong>: Services like Netflix treat user ratings as a giant matrix. By forcing the model to find a "Low-Rank" approximation of this matrix, we discover the core "Latent Factors" (like Preference for Sci-Fi or Hate for Musicals) that explain millions of ratings. This turns a sparse, messy grid into a lean, predictive engine.</li>
       <li><strong>Identifying Degrees of Freedom</strong>: In physics-based ML or robotics, the rank of a "Jacobian Matrix" tells you the actual number of ways a robot arm can move. If the rank drops (due to a mechanical limit), the robot loses a "Degree of Freedom." By monitoring rank, we ensure the system always knows the limits of its own physical agency.</li>

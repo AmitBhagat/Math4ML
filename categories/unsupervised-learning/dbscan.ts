@@ -17,14 +17,32 @@ export const dbscanSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: DBSCAN Clustering</div>
-      <p>Given parameters $\epsilon$ (radius) and $MinPts$ (density threshold), DBSCAN classifies points into three categories based on their $\epsilon$-neighborhood $N_{\epsilon}(p) = \{q \in D \mid d(p, q) \le \epsilon\}$:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Core Point</strong>: $|N_{\epsilon}(p)| \ge MinPts$.</li>
-        <li><strong>Border Point</strong>: $|N_{\epsilon}(p)| < MinPts$, but $p$ is reachable from a core point.</li>
-        <li><strong>Noise Point</strong>: Neither of the above.</li>
+      <div class="premium-def-title">Formalism: Density-Connectivity & The Epsilon Reach</div>
+      <p>DBSCAN is "Topological Clustering." It ignores global shapes and focuses exclusively on local density chains to define territory.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data as "High-Density Islands" in a sea of sparse noise. Traditional clustering (like K-Means) assumes these islands are perfectly circular blobs. <strong>DBSCAN</strong> recognizes that an island can be any shape—a winding river, a crescent moon, or two interlocking rings. Geometrically, a cluster is defined as a contiguous region where the "Point Density" exceeds a specific threshold. As long as you can "hop" from point to point within a fixed distance $\epsilon$ without leaving the crowd, you belong to the same cluster.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the neighborhood of a point $\mathbf{x}$ as the set of points within radius $\epsilon$:</p>
+      <div class="math-block">
+        $$N_\epsilon(\mathbf{x}) = \{ \mathbf{y} \in D \mid \|\mathbf{x} - \mathbf{y}\| \le \epsilon \}$$
+      </div>
+      <p>Using this neighborhood and a minimum point threshold ($MinPts$), we categorize every point into a hierarchy:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Core Point</strong>: A point where $|N_\epsilon(\mathbf{x})| \ge MinPts$. These are the "hearts" of the clusters.</li>
+        <li><strong>Density-Reachable</strong>: Point $\mathbf{y}$ is reachable from $\mathbf{x}$ if there is a chain of core points connecting them.</li>
+        <li><strong>Density-Connected</strong>: Points $\mathbf{p}$ and $\mathbf{q}$ are connected if they both share a common reachable core point.</li>
       </ul>
-      <p>Two points $p$ and $q$ are **Density-Connected** if there exists a point $o$ such that both $p$ and $q$ are density-reachable from $o$. A cluster is a maximal set of density-connected points.</p>
+      <p>A cluster is formally defined as the <strong>Maximal Set of Density-Connected Points</strong>. Any point that is not reachable from a core point is designated as <strong>Noise</strong> (or Outlier).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, DBSCAN is the <strong>Outlier-Aware Specialist</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Shape Independence</strong>: It is one of the few algorithms that can find "Non-Convex" clusters (e.g., a circle inside a ring) because it only cares about local connectivity.</li>
+        <li><strong>Parameter Sensitivity</strong>: Choosing $\epsilon$ and $MinPts$ is tricky. If $\epsilon$ is too small, your clusters will shatter into noise. If it's too large, your entire dataset will merge into one giant "Super-Cluster."</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: DBSCAN struggles with clusters of varying densities. If one group is very "tight" and another is "loose," a single $\epsilon$ cannot capture both correctly. In those cases, you might need HDBSCAN.</p>
     </div>
     
     <div class="callout tip">

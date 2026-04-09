@@ -17,18 +17,30 @@ export const recallSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Sensitivity / True Positive Rate (TPR)</div>
-      <p>In binary classification, **Recall** is defined as the probability that a sample is predicted as positive given that it truly belongs to the positive class. It is a measure of the model's "Completeness":</p>
+      <div class="premium-def-title">Formalism: Sensitivity / True Positive Rate (TPR) & Truth Inclusion</div>
+      <p>Recall is the metric of "Thoroughness." It doesn't care about your false alarms; it only cares about exactly how much of the truth you successfully retrieved.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a fisherman in a massive pond full of 1,000 fish. You want to catch every single one. <strong>Recall</strong> is the ratio of fish you actually caught in your net to the total number of fish that exist in the pond. Geometrically, it is a <strong>Venn Diagram</strong> of Inclusion: it measures the intersection of your predictions with the truth, but it scales that intersection by the size of the *Actual Positive* circle (the Truth). It ignores your "False Alarms" (False Positives) and focuses entirely on your "Misses" (False Negatives). It is the metric of quantity—it tells you how much of the reality you successfully accounted for.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Recall is formally known as <strong>Sensitivity</strong> or the <strong>True Positive Rate (TPR)</strong>. It is defined as the conditional probability that a sample is predicted as positive given that it truly belongs to the positive class:</p>
       <div class="math-block">
-        $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1) = \frac{TP}{TP + FN}$$
+        $$\text{Recall} = \mathbb{P}(\hat{y}=1 \mid y=1)$$
       </div>
-      <p>The components of the recall estimate are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TP (True Positives)</strong>: Actual positive samples correctly identified as such.</li>
-        <li><strong>FN (False Negatives)</strong>: Actual positive samples incorrectly labeled as negative (Type II Error).</li>
-        <li><strong>Inclusion Property</strong>: Recall is independent of the number of **False Positives**. It strictly focuses on the "Inclusion" of all positive samples, even at the cost of capturing irrelevant noise (mislabeling negatives).</li>
+      <p>Using the tallies from the confusion matrix, we calculate it as:</p>
+      <div class="math-block">
+        $$\text{Recall} = \frac{TP}{TP + FN}$$
+      </div>
+      <p>A model with high recall is often described as <strong>Obsessive</strong> or <strong>Aggressive</strong>. It shouts "Yes!" at almost everything just to be absolutely sure it doesn't miss a single positive instance. By lowering your classification threshold (being "more inclusive"), you essentially expand your "Predicted Positive" circle, which reduces False Negatives and boosts Recall—but at the cost of your Precision.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, Recall is the <strong>Safety Check</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quantity over Quality</strong>: High recall guarantees that you've captured most of the "Truth," even if your predictions are messy and full of noise.</li>
+        <li><strong>Cost of Failure</strong>: Recall is the primary metric when the cost of a "Miss" (a False Negative) is catastrophic. If you're a doctor screening for a terminal disease, you want recall to be $100\%$. You'd rather have ten false alarms than let one person go home undiagnosed.</li>
       </ul>
-      <p class="mt-2">Recall is the primary metric in safety-critical domains like medical diagnostics and fraud detection, where **Missing a Signal** (a false negative) carries extreme risk.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Recall Triviality. You can achieve a perfect $100\%$ recall by simply predicting "Positive" for every single sample in the universe. In this case, your model is perfectly "Thorough" but functionally useless because it has no selectivity.</p>
     </div>
     
     <div class="callout tip">

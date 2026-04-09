@@ -17,16 +17,30 @@ export const autoencodersSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Autoencoder Architecture</div>
-      <p>An autoencoder is a neural network trained to approximate the identity function, $g_{\phi}(f_{\theta}(\mathbf{x})) \approx \mathbf{x}$. It consists of two joint mappings:</p>
+      <div class="premium-def-title">Formalism: The Information Hourglass & Latent Embedding</div>
+      <p>Autoencoders are "Self-Supervised Compressors." They use the input as the target, forcing the machine to learn a high-fidelity summary of reality.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a sprawling, complex manifold (a surface) in high-dimensional space. An <strong>Autoencoder</strong> is a two-part machine designed to "Unfold" that manifold into a flat, simple sheet—the <strong>Latent Space</strong>—and then fold it back into its original shape. Geometrically, this is <strong>Non-Linear Dimensionality Reduction</strong>. By forcing the data through a narrow bottleneck, we strip away the noise and redundant pixels, leaving only the "skeleton" or the core geometric structure of the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The system is defined by two joint mappings, typically realized by Neural Networks:</p>
+      <ul class="mt-2 mb-4 space-y-1">
+        <li><strong>Encoder ($f_\theta$)</strong>: Maps the input $\mathbf{x} \in \mathbb{R}^d$ to a lower-dimensional code $\mathbf{z} \in \mathbb{R}^k$ (where $k \ll d$).</li>
+        <li><strong>Decoder ($g_\phi$)</strong>: Maps the compressed code $\mathbf{z}$ back to a reconstruction $\hat{\mathbf{x}} \in \mathbb{R}^d$.</li>
+      </ul>
+      <p>The goal is to minimize the <strong>Reconstruction Error</strong>, ensuring that the "essence" of the data is preserved despite the extreme compression:</p>
       <div class="math-block">
-        $$\text{Encoder: } \mathbf{z} = f_{\theta}(\mathbf{x}) \in \mathbb{R}^k \mid k < d$$
-        $$\text{Decoder: } \mathbf{\hat{x}} = g_{\phi}(\mathbf{z}) \in \mathbb{R}^d$$
+        $$\mathcal{L}(\theta, \phi) = \frac{1}{n} \sum_{i=1}^n \| \mathbf{x}_i - g_\phi(f_\theta(\mathbf{x}_i)) \|^2$$
       </div>
-      <p>The objective is to minimize a loss function $\mathcal{L}$ that penalizes the reconstruction distance. For continuous data, we typically minimize the **Mean Squared Error (MSE)**:</p>
-      <div class="math-block">
-        $$\mathcal{L}(\theta, \phi) = \arg\min_{\theta, \phi} \frac{1}{n} \sum_{i=1}^n \|\mathbf{x}_i - g_{\phi}(f_{\theta}(\mathbf{x}_i))\|^2$$
-      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Autoencoders are the <strong>Feature Extractors</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>The Bottleneck Constraint</strong>: Without the bottleneck ($k < d$), the network would simply "memorize" the identity function. The restriction forces meaningful representation learning.</li>
+        <li><strong>Anomaly Detection</strong>: If an autoencoder is trained on "Normal" data and sees an "Anomaly," it will fail to reconstruct it (high loss). The reconstruction error itself is a powerful signal for finding outliers.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Standard Autoencoders can be too good at memorizing—learning a "lookup table" instead of a general pattern. To fix this, we often use <strong>Denoising Autoencoders</strong> (adding noise to the input) or <strong>VAEs</strong> (enforcing a probabilistic latent space).</p>
     </div>
     
     <div class="callout tip">

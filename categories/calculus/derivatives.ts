@@ -25,18 +25,25 @@ export const derivativesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Instantaneous Rate</div>
-      <p>For a continuous function $f(x)$, the derivative $f'(x)$ (also denoted $\frac{df}{dx}$) represents the limit of the average rate of change as the interval $\Delta x$ shrinks to zero:</p>
+      <div class="premium-def-title">Formalism: The Instantaneous Limit of Change</div>
+      <p>The Derivative is the limit of "Average Change" as the measurement interval collapses into a single, instantaneous point.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a curve $f(x)$ and a <strong>Secant Line</strong> connecting two points: $(x, f(x))$ and a slightly shifted point $(x+h, f(x+h))$. The slope of this secant line is the average rate of change over the interval $h$. As we slide the second point closer to the first ($h \to 0$), the secant line gracefully transforms into the <strong>Tangent Line</strong>.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The slope of the secant line is the classic "Rise over Run":</p>
       <div class="math-block">
-        $$f'(x) = \lim_{\Delta x \to 0} \frac{f(x + \Delta x) - f(x)}{\Delta x}$$
+        $$m_{\text{secant}} = \frac{\Delta y}{\Delta x} = \frac{f(x+h) - f(x)}{h}$$
       </div>
-      <p>A function is **Differentiable** at $x$ if this limit exists. The derivative provides an linear approximation of the function at a specific point, governed by several fundamental rules:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Power Rule</strong>: $\frac{d}{dx}x^n = nx^{n-1}$.</li>
-        <li><strong>Linearity</strong>: $\frac{d}{dx}[af(x) + bg(x)] = af'(x) + bg'(x)$.</li>
-        <li><strong>Product Rule</strong>: $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$.</li>
-      </ul>
-      <p class="mt-2">In ML, we interpret $f'(x)$ as the sensitivity of the loss $f$ to a specific parameter $x$.</p>
+      <p>To find the <strong>Instantaneous</strong> slope (the Derivative), we apply a limit. We analyze what happens to this ratio as $h$ becomes infinitesimally small. If the limit exists, it is the exact slope at point $x$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <div class="math-block">
+        $$f'(x) = \lim_{h \to 0} \frac{f(x + h) - f(x)}{h}$$
+      </div>
+      <p>In Machine Learning, this $f'(x)$ is the <strong>Sensitivity</strong>. It tells us exactly how the Loss function will react to a microscopic nudge in weight $x$.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>

@@ -25,17 +25,33 @@ export const hessianSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix of Curvature</div>
-      <p>For a twice-differentiable scalar function $f: \mathbb{R}^n \to \mathbb{R}$, the **Hessian Matrix** $\mathbf{H}$ (or $\nabla^2 f$) is a square matrix containing all second-order partial derivatives. It quantifies how the gradient of the function changes as you move:</p>
+      <div class="premium-def-title">Formalism: The Matrix of Second-Order Sensitivities</div>
+      <p>The Hessian is the "Acceleration" of your loss function. It measures how the slope itself is changing as you move through parameter space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the Gradient $\nabla f$ as your velocity vector. If you move, does that velocity stay the same, or does it rotate and stretch? The <strong>Hessian Matrix</strong> is the "Curvature Grid" that describes the local shape of the surface. It tells you if you're in a stable bowl (positive curvature), at a peak (negative curvature), or on a treacherous saddle point.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Mathematically, the Hessian is the <strong>Jacobian of the Gradient</strong>. We track how each component of the gradient $\frac{\partial f}{\partial x_i}$ changes with respect to every input $x_j$:</p>
       <div class="math-block">
-        $$\mathbf{H}_{ij} = \frac{\partial^2 f}{\partial x_i \partial x_j}$$
+        $$\mathbf{H} = \nabla(\nabla f) = \begin{bmatrix} 
+        \frac{\partial^2 f}{\partial x_1^2} & \dots & \frac{\partial^2 f}{\partial x_1 \partial x_n} \\
+        \vdots & \ddots & \vdots \\
+        \frac{\partial^2 f}{\partial x_n \partial x_1} & \dots & \frac{\partial^2 f}{\partial x_n^2} \end{bmatrix}$$
       </div>
-      <p>The Hessian is the fundamental tool for "Second-Order" optimization and stability analysis:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Characterizing Extrema</strong>: If $\nabla f(\mathbf{x}) = \mathbf{0}$ and $\mathbf{H}(\mathbf{x})$ is positive definite, $\mathbf{x}$ is a local minimum. If $\mathbf{H}(\mathbf{x})$ is negative definite, it is a local maximum.</li>
-        <li><strong>Taylor Approximation</strong>: The Hessian defines the parabolic (quadratic) shape of the function locally.</li>
-        <li><strong>Conditioning</strong>: The ratio of max/min eigenvalues of $\mathbf{H}$ tells us if the "bowl" is perfectly circular or a narrow, stretched canyon (making gradient descent slow).</li>
+      <p>This matrix appears in the second-order <strong>Taylor Expansion</strong>. For a small step $\Delta \mathbf{x}$, the change in function value is modeled as a quadratic surface:</p>
+      <div class="math-block">
+        $$f(\mathbf{x} + \Delta \mathbf{x}) \approx f(\mathbf{x}) + \nabla f^\top \Delta \mathbf{x} + \frac{1}{2} \Delta \mathbf{x}^\top \mathbf{H} \Delta \mathbf{x}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>The Hessian's eigenvalues (the <strong>Principal Curvatures</strong>) determine local stability:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Positive Definite ($\mathbf{H} \succ 0$)</strong>: Local Minimum (The "Bowl").</li>
+        <li><strong>Negative Definite ($\mathbf{H} \prec 0$)</strong>: Local Maximum (The "Mountain").</li>
+        <li><strong>Indefinite</strong>: Saddle Point (The "Trap").</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: In high-dimensional ML (like LLMs), we almost never calculate the full Hessian—it would require petabytes of memory. Instead, we use "Hessian-Free" optimizers or diagonal approximations to get the curvature benefits without the system-crashing cost.</p>
     </div>
     
     <div class="callout tip">
@@ -123,13 +139,13 @@ def compute_hessian(x_vec, h=1e-4):
                 # Second derivative
                 x_plus = np.copy(x_vec); x_plus[i] += h
                 x_minus = np.copy(x_vec); x_minus[i] -= h
-                H[i, i] = (f(x_plus) - 2*f_val + f(x_minus)) / (h**2)
+                H[i, i] = (f(x_plus) - 2*f_val + f(x_minus)) / (h<strong>2)
             else:
                 # Cross derivative
                 xp_yp = np.copy(x_vec); xp_yp[i] += h; xp_yp[j] += h
                 xp = np.copy(x_vec); xp[i] += h
                 yp = np.copy(x_vec); yp[j] += h
-                H[i, j] = (f(xp_yp) - f(xp) - f(yp) + f_val) / (h**2)
+                H[i, j] = (f(xp_yp) - f(xp) - f(yp) + f_val) / (h</strong>2)
     return H
 
 # Point (1,2)

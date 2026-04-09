@@ -22,7 +22,7 @@ export const semiSupervisedLearningSection: TopicSection = {
       <div class="math-block">
         $$J(f) = \sum_{i=1}^l L(y_i, f(\mathbf{x}_i)) + \lambda \cdot \Omega(f, \mathcal{U})$$
       </div>
-      <p>The **Unsupervised Regularizer** $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
+      <p>The <strong>Unsupervised Regularizer</strong> $\Omega$ uses the unlabeled data to enforce structural constraints:</p>
       <ul class="mt-2 space-y-1">
         <li><strong>Smoothness Assumption</strong>: If $\mathbf{x}_i$ and $\mathbf{x}_j$ are close in high-density regions, their outputs $f(\mathbf{x}_i)$ and $f(\mathbf{x}_j)$ should be similar.</li>
         <li><strong>Low-Density Separation</strong>: The decision boundary should pass through areas where the marginal density $P(\mathbf{x})$ is low, effectively avoiding the "splitting" of natural clusters.</li>

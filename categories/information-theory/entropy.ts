@@ -25,19 +25,29 @@ export const entropySection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Shannon Information Content</div>
-      <p>The **Shannon Entropy** $H(X)$ of a discrete random variable $X$ with set of possible outcomes $\mathcal{X}$ and probability mass function $P(x)$ is the expected value of the self-information:</p>
+      <div class="premium-def-title">Formalism: The Expectation of Surprisal & The Boundary of Information</div>
+      <p>Entropy is the mathematical "Chaos Meter." it quantifies the average amount of "Newness" or "Shock" in a stream of data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your probability distribution as a landscape. If there is a massive spike at one outcome (e.g., $P(A) = 0.99$), the landscape is highly predictable—when the event happens, you aren't surprised. Entropy in this state is near zero. However, if the landscape is perfectly flat (Uniform Distribution), your uncertainty is maximized. You have no idea where the next point will land, so every outcome provides the maximum possible "News." Geometrically, Entropy measures the "Spread" or "Smoothness" of your probability mass.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start by defining the <strong>Information Content</strong> (or "Surprisal") of an individual event $x$. An event that is guaranteed ($p=1$) has 0 surprise, while an event that is impossible ($p \approx 0$) has infinite surprise. We use the negative log to model this relationship:</p>
       <div class="math-block">
-        $$H(X) = -\sum_{x \in \mathcal{X}} P(x) \log_b P(x)$$
+        $$I(x) = -\log_2 P(x)$$
       </div>
-      <p>This measurement is defined by the following mathematical axioms:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Self-Information</strong>: The "Surprise" of an individual outcome is $-\log P(x)$. Rare events have high surprise.</li>
-        <li><strong>Units</strong>: If $b=2$, the unit is **Bits** (standard in CS). If $b=e$, the unit is **Nats** (standard in physics/continuous math).</li>
-        <li><strong>Maximization</strong>: $H(X)$ is maximized when all outcomes are equally likely ($P(x) = 1/|\mathcal{X}|$), indicating total uncertainty.</li>
-        <li><strong>Minimization</strong>: $H(X) = 0$ if and only if one outcome has probability 1. The result is perfectly predictable ("No news").</li>
+      <p><strong>Entropy</strong> $H(X)$ is simply the <strong>Expected Value</strong> of this surprise across all possible outcomes. We calculate the sum of each outcome's surprise, weighted by how often it actually happens:</p>
+      <div class="math-block">
+        $$H(X) = \mathbb{E}[I(X)] = -\sum_{x \in \mathcal{X}} P(x) \log_2 P(x)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Entropy is our target for <strong>Reduction</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Decision Trees</strong>: A split is "Good" if it reduces the entropy of the child nodes. We want the nodes to be as "Pure" (low entropy) as possible.</li>
+        <li><strong>Regularization</strong>: Sometimes we actually <strong>maximize</strong> entropy to keep a model from getting too overconfident too quickly (Maximum Entropy Principle).</li>
       </ul>
-      <p class="mt-2">In ML, we use entropy to measure the pure "chaos" of a sample. By reducing entropy through splits (Decision Trees), the model extracts information from the noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Entropy is units-dependent. If you use $\log_2$, you're measuring in <strong>Bits</strong>. If you use the natural log $\ln$ (common in deep learning math), you're measuring in <strong>Nats</strong>. Don't mix them up or your gradients will be scaled incorrectly.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>

@@ -17,21 +17,30 @@ export const sgdSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Stochastic Finite-Sum Optimization</div>
-      <p>Stochastic Gradient Descent (SGD) is a version of gradient descent where the gradient of the objective function $J(\theta) = \frac{1}{n} \sum_{i=1}^n f_i(\theta)$ is approximated using a single randomly selected sample $i_t$ at each iteration:</p>
-      
+      <div class="premium-def-title">Formalism: Unbiased Estimators & Stochastic Finite-Sums</div>
+      <p>SGD is "Fast Estimation." It replaces the perfect, slow truth with a fast, noisy guess that averages out to the truth over time.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a massive mountain range representing your loss function across 1 million data points. <strong>Batch Gradient Descent</strong> waits until it has surveyed every single pebble on every slope before taking one perfect step. <strong>Stochastic Gradient Descent (SGD)</strong> looks at just one pebble (or a small batch) and moves immediately. Geometrically, this transforms the smooth "water-flow" descent into a jittery, zig-zagging <strong>Random Walk</strong>. However, this noise is a feature—the "kinetic energy" from the jittering helps the model vibrate out of shallow local minima (traps) that would have permanently stuck a perfect algorithm.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Our objective is the average loss over $n$ samples: $J(\theta) = \frac{1}{n} \sum_{i=1}^n Q_i(\theta)$. The true gradient is the average of all individual gradients. In SGD, we sample a random index $i$ and use the gradient of that single point as an approximation:</p>
       <div class="math-block">
-        $$\theta_{t+1} = \theta_t - \eta \nabla_\theta f_{i_t}(\theta_t)$$
+        $$\theta_{t+1} = \theta_t - \eta \nabla Q_i(\theta_t)$$
       </div>
-      
-      <p>The mathematical properties that distinguish SGD from Batch GD include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Unbiased Estimation</strong>: The stochastic gradient is an unbiased estimator of the true gradient, meaning $\mathbb{E}[\nabla f_{i_t}(\theta_t)] = \nabla J(\theta_t)$. On average, the algorithm moves in the correct direction.</li>
-        <li><strong>Stochastic Noise</strong>: The variance in the gradient estimate introduces "jitter" into the optimization path. This noise acts as a natural regularizer, allowing the model to "jump" out of shallow local minima and find flatter, more generalizable minima.</li>
-        <li><strong>Convergence</strong>: Convergence to a stationary point is guaranteed under the **Robbins-Monro conditions** (e.g., using a decaying learning rate).</li>
+      <p>The core mathematical justification is that the stochastic gradient is an <strong>Unbiased Estimator</strong> of the true gradient. In expectation, the "mean" direction is correct:</p>
+      <div class="math-block">
+        $$\mathbb{E}[\nabla Q_i(\theta)] = \frac{1}{n} \sum_{i=1}^n \nabla Q_i(\theta) = \nabla J(\theta)$$
+      </div>
+      <p>Even though any individual step might be "wrong," the net movement over many steps converges to the same destination as Batch GD, but millions of times faster.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we almost always use <strong>Mini-batch SGD</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Batch Size ($B$)</strong>: We average the gradient over a small group (e.g., 32 or 64 samples). This reduces the variance of the estimate while still being fast enough to fit in GPU memory.</li>
+        <li><strong>Online Stability</strong>: SGD is the only way to train on data streams that never stop (e.g., social media feeds), as it doesn't requires seeing the "end" of the data to start learning.</li>
       </ul>
-      
-      <p class="mt-2">In practice, we use **Mini-batch SGD**, which averages the gradient over $B$ samples ($1 < B < n$) to achieve a hardware-efficient balance between noise and stability.</p>
+      <p class="mt-4 italic text-sm">Gotcha: SGD requires a <strong>Decaying Learning Rate</strong>. If you don't slow down as you approach the minimum, the "jitter" will eventually prevent you from ever landing in the center, and you will just orbit the minimum forever.</p>
     </div>
     
     <div class="callout tip">

@@ -17,18 +17,32 @@ export const vectorNormsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The $p$-norm Metric</div>
-      <p>A **Norm** $\|\cdot\|$ is a function that maps a vector to a non-negative scalar, satisfying the triangle inequality and absolute homogeneity. In $\mathbb{R}^n$, we define the family of $L^p$ norms as:</p>
+      <div class="premium-def-title">Formalism: The $L^p$ Space & Metrics</div>
+      <p>A Norm is a function that maps a vector to a "scale"—a single number that represents its magnitude. It is the core of regularization in AI.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>The "shape" of a norm is defined by its <strong>Unit Ball</strong>—the set of all vectors where $\|\mathbf{x}\| = 1$. For $L^2$, this is a circle; for $L^1$, it's a diamond. These shapes determine how our models "prefer" some weights over others.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To be a valid norm, a function $f(\mathbf{x})$ must satisfy three strict axioms. If it fails one, it's just a set of numbers, not a magnitude:</p>
+      <div class="math-block">
+        $$\text{1. Positivity: } f(\mathbf{x}) \ge 0; \quad f(\mathbf{x}) = 0 \iff \mathbf{x} = \mathbf{0}$$
+        $$\text{2. Uniform Scaling: } f(c\mathbf{x}) = |c|f(\mathbf{x})$$
+        $$\text{3. Triangle Ineq: } f(\mathbf{x} + \mathbf{y}) \le f(\mathbf{x}) + f(\mathbf{y})$$
+      </div>
+      <p>The general $L^p$ norm is derived as the $p$-th root of the sum of the $p$-th powers of the absolute components:</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
       <div class="math-block">
         $$\|\mathbf{x}\|_p = \left( \sum_{i=1}^n |x_i|^p \right)^{1/p}$$
       </div>
-      <p>The three most critical variations in Machine Learning are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>$L^1$ Norm</strong>: $\sum |x_i|$. Promotes sparsity (Lasso).</li>
-        <li><strong>$L^2$ Norm</strong>: $\sqrt{\sum x_i^2}$. Promotes small, distributed weights (Ridge).</li>
-        <li><strong>$L^\infty$ Norm</strong>: $\max_i |x_i|$. Measures the maximum deviation.</li>
+      <p>Common cases in ML:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L1 (Manhattan)</strong>: $p=1$. Sum of absolute values. Forces "useless" features to 0.</li>
+        <li><strong>L2 (Euclidean)</strong>: $p=2$. Root sum of squares. Keeps weights distributed.</li>
+        <li><strong>L-infinity (Max)</strong>: $p \to \infty$. $\max(|x_i|)$. Sensitive only to the biggest outlier.</li>
       </ul>
-      <p class="mt-2">Norms provide the mathematical basis for regularization, ensuring that model complexity remains bounded during the learning process.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Many "distance" functions in ML aren't true norms because they fail the triangle inequality. Always check the math before you assume your optimizer will behave.</p>
     </div>
     
     <div class="callout tip">
@@ -110,7 +124,7 @@ print(f"L2: {l2}, L1: {l1}")
       <li><strong>Lasso and Ridge Regularization</strong>: When training a model, we add the L1 or L2 norm of the weights to our loss function. This "Penalty" prevents the model from relying too heavily on any single feature, keeping it from "Overfitting" to random noise. L1 (Lasso) is particularly ruthless; it acts like a "Pruning Tool" that shrinks useless weights of irrelevant features to exactly zero, effectively deleting them from the model.</li>
       <li><strong>Anomaly Detection in Server Logs</strong>: To find a hacker in millions of server requests, we represent each request as a vector (Time, Data Size, Frequency). We then calculate the <strong>Distance (Norm)</strong> of every new request from the "Normal" average vector. If the norm is massive, it means the request is a geometric outlier—a "weird" point in space that requires immediate attention.</li>
     </ul>
-    <p>Teacher's Final Word: A Norm is a **"Magnitude Meter."** It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
+    <p>Teacher's Final Word: A Norm is a <strong>"Magnitude Meter."</strong> It takes a multi-dimensional mess and boils it down to a single, comparable number. In AI, this is our most power tool for keeping models lean, stable, and accurate.</p>
 
     <div class="linking-rule">
       <strong>Next Step:</strong> Vectors are building blocks. Let's arrange them into grids. Explore <strong><a href="#/mathematics/linear-algebra/matrices">Matrices</a></strong>.

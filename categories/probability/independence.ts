@@ -25,18 +25,33 @@ export const independenceSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Factorization of Probability</div>
-      <p>Two events $A$ and $B$ are **Independent** if the occurrence of one does not alter the probability of the other. Formally, this is defined by the product rule of their joint probability:</p>
+      <div class="premium-def-title">Formalism: The Product Rule & Information Invariance</div>
+      <p>Independence is "Pure Isolation." It means that knowing everything about one variable tells you absolutely nothing about the other.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>In a sample space $\Omega$, consider two events $A$ and $B$. If they are independent, then the fraction of $A$ that lives inside $B$ is exactly the same as the fraction of $A$ in the entire universe. Geometrically, this means event $B$ doesn't "select" for $A$ any more or less than the world already does. The intersection $A \cap B$ is just a "blind" overlap proportional to their respective sizes.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define independence algebraically through the <strong>Invariance of Conditional Probability</strong>. If $A$ is independent of $B$, then:</p>
+      <div class="math-block">
+        $$P(A | B) = P(A)$$
+      </div>
+      <p>Substituting this into the standard definition of conditional probability ($P(A|B) = \frac{P(A \cap B)}{P(B)}$):</p>
+      <div class="math-block">
+        $$P(A) = \frac{P(A \cap B)}{P(B)}$$
+      </div>
+      <p>Multiplying by $P(B)$, we arrive at the <strong>Product Rule of Independence</strong>:</p>
       <div class="math-block">
         $$P(A \cap B) = P(A) \cdot P(B)$$
       </div>
-      <p>For random variables $X$ and $Y$, independence implies the factorization of their density or mass functions:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Equality of Conditionals</strong>: If $A$ and $B$ are independent, $P(A | B) = P(A)$ and $P(B | A) = P(B)$.</li>
-        <li><strong>Mutual Independence</strong>: A set of events $\{A_i\}$ is independent if $P(\bigcap_{i \in S} A_i) = \prod_{i \in S} P(A_i)$ for every subset $S$.</li>
-        <li><strong>Conditional Independence</strong>: $X \perp Y \mid Z$ if $P(X, Y | Z) = P(X | Z)P(Y | Z)$. This is the "Naive" assumption in probabilistic modeling.</li>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, independence is the ultimate computational cheat code: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Factorization</strong>: If features are independent, the high-dimensional joint distribution $P(x_1, \dots, x_n)$ factorizes into $P(x_1) \dots P(x_n)$. This turns an exponential problem into a linear one.</li>
+        <li><strong>I.I.D. Assumption</strong>: Almost all training algorithms assume data is <strong>I</strong>ndependent and <strong>I</strong>dentically <strong>D</strong>istributed. If your samples are dependent (like sequential frames in a video), standard training will fail as the model "over-learns" the correlations.</li>
       </ul>
-      <p class="mt-2">Independence is the most powerful "Symmetry" in statistics, reducing the complexity of a model from exponential to linear.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Independence is NOT "Mutually Exclusive." Mutually exclusive events are the opposite of independent—if $A$ happens, $P(B)$ immediately drops to zero. That is a massive amount of information shift, meaning they are perfectly dependent.</p>
     </div>
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
@@ -115,7 +130,7 @@ print(f"P(A) * P(B): {check:.4f}")
     <h2 id="applications">Applications in ML</h2>
     <p>Independence is the ultimate "Simplifier." It allows us to break down a massive, overwhelming problem into tiny, manageable pieces that a computer can actually solve in a fraction of a second.</p>
     <ul>
-      <li><strong>The "Naive" assumption in Naive Bayes</strong>: If you are building a Spam Filter with 10,000 possible words, calculating the "Joint Probability" of every word combination is mathematically impossible (it would require more data than exists in the universe). Instead, we assume that every word appears **Independently**. This "Naive" lie turns a crushing 10,000D problem into 10,000 simple 1D problems, allowing your email app to sort your inbox instantly.</li>
+      <li><strong>The "Naive" assumption in Naive Bayes</strong>: If you are building a Spam Filter with 10,000 possible words, calculating the "Joint Probability" of every word combination is mathematically impossible (it would require more data than exists in the universe). Instead, we assume that every word appears <strong>Independently</strong>. This "Naive" lie turns a crushing 10,000D problem into 10,000 simple 1D problems, allowing your email app to sort your inbox instantly.</li>
       <li><strong>Feature Disentanglement in Generative Models</strong>: When we train a model to "Imagine" a human face, we want the "Independence" of features. We want the "Hair Color" variable to be independent of the "Eye Shape" variable. If they are dependent (entangled), the model can't change one without accidentally warping the other. Total independence in the model's brain is what gives us the power to "edit" reality with precision.</li>
     </ul>
     <p>Teacher's Final Word: Independence is the art of "Not Repeating Yourself." In ML, we crave independence because it means every feature is giving us a fresh piece of the truth, rather than just echoing what we already know. It’s what keeps our models lean and our computations fast.</p>

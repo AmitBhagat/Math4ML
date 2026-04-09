@@ -18,14 +18,14 @@ export const biasVarianceTradeoffSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Bias-Variance Decomposition</div>
-      <p>The **Bias-Variance Tradeoff** is a mathematical derivation of the Expected Mean Squared Error (MSE) of an estimator $\hat{f}$ at a point $x$. The error decomposes into three distinct components:</p>
+      <p>The <strong>Bias-Variance Tradeoff</strong> is a mathematical derivation of the Expected Mean Squared Error (MSE) of an estimator $\hat{f}$ at a point $x$. The error decomposes into three distinct components:</p>
       <div class="math-block">
         $$\mathbb{E}_D \left[ (y - \hat{f}(x; D))^2 \right] = \text{Bias}[\hat{f}(x)]^2 + \text{Var}[\hat{f}(x)] + \sigma^2$$
       </div>
       <p>The constituents of the generalization error are defined as follows:</p>
       <ul class="mt-2 space-y-1">
-        <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to **Underfitting**.</li>
-        <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to **Overfitting**.</li>
+        <li><strong>Bias</strong>: $\mathbb{E}[\hat{f}(x)] - f(x)$. Represents the systematic error introduced by simplifying assumptions. High bias corresponds to <strong>Underfitting</strong>.</li>
+        <li><strong>Variance</strong>: $\mathbb{E}[(\hat{f}(x) - \mathbb{E}[\hat{f}(x)])^2]$. Measures how much the model's prediction would change if trained on a different dataset. High variance corresponds to <strong>Overfitting</strong>.</li>
         <li><strong>Irreducible Error ($\sigma^2$)</strong>: The lower bound on error caused by inherent noise in the true underlying process $y = f(x) + \epsilon$.</li>
       </ul>
       <p class="mt-2">The engineering challenge is to minimize the sum of squared bias and variance by carefully selecting model capacity (regularization, architecture size, etc.).</p>

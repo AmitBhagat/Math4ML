@@ -25,17 +25,29 @@ export const partialDerivativesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Variable-wise Sensitivity</div>
-      <p>For a multivariable function $f(x_1, x_2, \dots, x_n)$, the partial derivative $\frac{\partial f}{\partial x_i}$ is defined as the traditional derivative taken with respect to $x_i$ while treating all other variables $x_j$ (where $j \neq i$) as constant parameters:</p>
+      <div class="premium-def-title">Formalism: The Directional Slice & Ceteris Paribus</div>
+      <p>A Partial Derivative is "Specialized Sensitivity." It isolates the influence of a single variable by freezing the rest of the universe.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a 3D surface $z = f(x, y)$. To find the partial derivative with respect to $x$, we slice the surface with a vertical plane parallel to the x-axis (fixing $y = y_0$). The intersection of this plane and the surface is a 2D curve. The <strong>Partial Derivative</strong> is simply the slope of the tangent line to that curve at the point $(x_0, y_0)$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive $\frac{\partial f}{\partial x}$ by applying the 1D derivative definition to this "sliced" curve. We treat $y$ as a constant $k$ and nudge only $x$ by an infinitesimal $h$:</p>
       <div class="math-block">
-        $$\frac{\partial f}{\partial x_i}(\mathbf{x}) = \lim_{h \to 0} \frac{f(x_1, \dots, x_i + h, \dots, x_n) - f(x_1, \dots, x_n)}{h}$$
+        $$\frac{\partial f}{\partial x}(x, y) = \lim_{h \to 0} \frac{f(x + h, y) - f(x, y)}{h}$$
       </div>
-      <p>This operation measures the instantaneous rate of change of $f$ in the direction of the $i$-th coordinate axis. Key details include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Independence</strong>: $\frac{\partial f}{\partial x_i}$ ignores interactions between $x_i$ and other variables during the computation.</li>
-        <li><strong>Notation</strong>: Often written as $f_{x_i}$ or $\partial_{x_i} f$.</li>
-        <li><strong>Geometry</strong>: It represents the slope of the tangent line to the curve formed by intersecting the surface with a plane parallel to the $x_i$-axis.</li>
+      <p>Similarly, for $\frac{\partial f}{\partial y}$, we fix $x$ as a constant and nudge only $y$:</p>
+      <div class="math-block">
+        $$\frac{\partial f}{\partial y}(x, y) = \lim_{h \to 0} \frac{f(x, y + h) - f(x, y)}{h}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>A function is differentiable if all its partial derivatives exist and are continuous. In ML, these derivatives are the building blocks of the <strong>Gradient</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Sensitivity</strong>: $\frac{\partial f}{\partial x_i}$ tells us exactly how the Loss depends on $x_i$, ignoring feature interactions.</li>
+        <li><strong>Independence</strong>: We use the same rules as 1D calculus (Power Rule, Chain Rule), just treating other vars as static "junk" numbers.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Partial derivatives don't tell the whole story. You can have a function where all partial derivatives exist at a point, but the function isn't even continuous there! To truly understand the "Total Change," you need the <strong>Gradient</strong>.</p>
     </div>
     
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>

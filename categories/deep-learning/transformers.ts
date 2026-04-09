@@ -17,16 +17,32 @@ export const transformersSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Scaled Dot-Product Attention</div>
-      <p>The Transformer maps a sequence of input representations $(\mathbf{x}_1, \dots, \mathbf{x}_n)$ to a sequence of continuous representations $\mathbf{z}$. The core operation is **Self-Attention**, which computes a weighted sum of values $\mathbf{V}$ based on the similarity between queries $\mathbf{Q}$ and keys $\mathbf{K}$:</p>
+      <div class="premium-def-title">Formalism: Scaled Dot-Product Attention & Relational Dynamics</div>
+      <p>Transformers are "Relationship Machines." They discard the rigidity of time and treat data as a single, massive web of global dependencies.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a crowded gala where every guest is an input token (word). In an RNN, guest 1 talks to guest 2, who then talks to guest 3. By the end, the message is a mess. In a <strong>Transformer</strong>, every guest has a metaphorical "Spotlight." Simultaneously, every guest shines their light on every other guest in the room. Geometrically, this is an <strong>All-to-All Interaction</strong>. The Transformer treats a sequence not as a timeline, but as a <strong>Relational Graph</strong>, where distance doesn't matter. A word at the beginning of a book can "Pay Attention" to a word at the very end as easily as the word right next to it.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The core engine is <strong>Scaled Dot-Product Attention</strong>. For each input token, we transform it into three distinct roles:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Query ($Q$)</strong>: "What information am I looking for?"</li>
+        <li><strong>Key ($K$)</strong>: "What information do I have to offer?"</li>
+        <li><strong>Value ($V$)</strong>: "The actual content I carry."</li>
+      </ul>
+      <p>The relationship between any two tokens is the dot product of their Query and Key. We scale this by the square root of the dimension $\sqrt{d_k}$ to stop the math from "Exploding" and apply a softmax to turn these scores into a weighted distribution:</p>
       <div class="math-block">
-        $$\text{Attention}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Softmax}\left(\frac{\mathbf{Q}\mathbf{K}^T}{\sqrt{d_k}}\right)\mathbf{V}$$
+        $$\text{Attention}(Q, K, V) = \text{softmax}\left(\frac{QK^T}{\sqrt{d_k}}\right)V$$
       </div>
-      <p>To capture information from different representation subspaces, the model uses **Multi-Head Attention**:</p>
-      <div class="math-block">
-        $$\text{MultiHead}(\mathbf{Q}, \mathbf{K}, \mathbf{V}) = \text{Concat}(\text{head}_1, \dots, \text{head}_h)\mathbf{W}^O$$
-      </div>
-      <p class="mt-2">Where each head is an independent attention mechanism. Because there is no recurrence, **Positional Encodings** are added to the input embeddings to inject sequence order.</p>
+      <p>To capture complex nuance (like seeing both the grammar and the sentiment of a sentence), we use <strong>Multi-Head Attention</strong>, which runs several of these "Spotlights" in parallel and concatenates the results.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Transformers are the <strong>Parallel Visionaries</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Parallelization</strong>: Because there is no "Looping" (Recurrence), we can calculate the entire sequence's attention in one massive matrix operation. This is why we can train them on the entire internet.</li>
+        <li><strong>Permutation Invariance</strong>: On their own, Transformers don't know the order of words. We have to inject "Position Encodings" (coordinates in time) so the model knows that "Dog bites Man" is different from "Man bites Dog."</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Quadratic Complexity. Because every word looks at every other word, the cost grows as $O(N^2)$. If you double the length of your text, your computer has to do four times the work. This is the "Context Window" wall that limits how much an AI can read at once.</p>
     </div>
     
     <div class="callout tip">

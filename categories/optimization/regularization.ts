@@ -17,20 +17,37 @@ export const regularizationSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Structural Risk Minimization (Complexity Penalty)</div>
-      <p>Regularization involves minimizing a modified objective function $\tilde{J}$ that incorporates a penalty term $\Omega(\theta)$ based on model complexity:</p>
-      
-      <div class="math-block">
-        $$\tilde{J}(\theta) = J(\theta) + \lambda \Omega(\theta)$$
-      </div>
-      
-      <p>Two primary paradigms dominate the field:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>L2 Regularization (Ridge)</strong>: $\Omega(\theta) = \frac{1}{2} \|\theta\|_2^2$. This adds a quadratic penalty that discourages high-magnitude weights, equivalent to assuming a Gaussian prior $P(\theta) \sim \mathcal{N}(0, \sigma^2)$. It results in **Weight Decay**.</li>
-        <li><strong>L1 Regularization (Lasso)</strong>: $\Omega(\theta) = \|\theta\|_1$. This adds an absolute magnitude penalty, equivalent to a Laplace prior. Because the L1 norm has a singular derivative at zero, it promotes **Sparsity**, effectively zeroing out irrelevant features.</li>
+      <div class="premium-def-title">Formalism: The MAP Dual-Perspective & Norm Geometry</div>
+      <p>Regularization is "Complexity Management." It is the mathematical process of forcing your model to justify every bit of complexity it uses.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the <strong>Loss Contours</strong> of your model (e.g., the rings of an MSE objective). The "Pure" solution wants to reach the absolute center of these rings. Now, imagine a <strong>Constraint Region</strong> centered at zero. </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L2 Geometry (The Sphere)</strong>: The constraint is a smooth ball. The loss rings will touch the ball at a point where the weights are small and distributed. </li>
+        <li><strong>L1 Geometry (The Diamond)</strong>: The constraint has "Sharp Corners" on the axes. Because of these corners, the loss rings are mathematically biased to "hit" the axis. Geometrically, this forces some weights to become exactly zero, creating <strong>Sparsity</strong>.</li>
       </ul>
-      
-      <p class="mt-2">The hyperparameter $\lambda$ (Lambda) determines the strength of the constraint. High $\lambda$ leads to **Underfitting** (too much bias); low $\lambda$ leads to **Overfitting** (too much variance).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Regularization is best understood through the <strong>MAP Perspective</strong>. We start by assuming a <strong>Prior Distribution</strong> for our weights $w$. If we assume weights are small and normally distributed (Gaussian prior):</p>
+      <div class="math-block">
+        $$P(w) \sim \mathcal{N}(0, \sigma^2) \implies \ln P(w) \propto -\frac{1}{2\sigma^2} \|w\|_2^2$$
+      </div>
+      <p>This gives us <strong>L2 Regularization (Weight Decay)</strong>. However, if we assume a Laplace prior (which is peaked sharply at zero):</p>
+      <div class="math-block">
+        $$P(w) \propto e^{-\frac{|w|}{b}} \implies \ln P(w) \propto -\lambda \|w\|_1$$
+      </div>
+      <p>This gives us <strong>L1 Regularization (Lasso)</strong>. The total regularized loss is simply the original loss plus this log-prior penalty:</p>
+      <div class="math-block">
+        $$J_{reg}(\theta) = J(\theta) + \lambda \Omega(\theta)$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Choosing your norm is a <strong>Strategic Decision</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>L2 for Stability</strong>: Use L2 when you have many correlated features and you want to keep them all, but keep them quiet. It prevents individual weights from "Exploding."</li>
+        <li><strong>L1 for Sparsity</strong>: Use L1 when you have 1,000 features but you suspect only 10 actually matter. It performs <strong>Feature Selection</strong> by literally deleting the noise.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Regularization is a "Bias-Variance" trade. By adding a penalty, you are intentionally adding <strong>Bias</strong> (making the model too simple) in exchange for a massive reduction in <strong>Variance</strong> (making the model more stable). If $\lambda$ is too high, your model will be "Stubborn" and fail to learn anything.</p>
     </div>
     
     <div class="callout tip">

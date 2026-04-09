@@ -26,9 +26,9 @@ export const supervisedLearningSection: TopicSection = {
       <ul class="mt-2 space-y-1">
         <li><strong>Regression</strong>: $\mathcal{Y}$ is a continuous space ($\mathbb{R}$). The objective is to estimate a numerical value based on continuous or categorical features.</li>
         <li><strong>Classification</strong>: $\mathcal{Y}$ is a discrete set of classes $\{C_1, \dots, C_k\}$. The objective is to determine the decision boundaries that separate these categories in high-dimensional space.</li>
-        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use **MSE**; for classification, we use **Cross-Entropy**.</li>
+        <li><strong>Loss Function ($L$)</strong>: Measures the "disagreement" between truth and prediction. For regression, we typically use <strong>MSE</strong>; for classification, we use <strong>Cross-Entropy</strong>.</li>
       </ul>
-      <p class="mt-2">The ultimate success of supervised learning is measured by **Generalization**: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
+      <p class="mt-2">The ultimate success of supervised learning is measured by <strong>Generalization</strong>: the accuracy of $f$ on data points not contained in the original training set $\mathcal{D}$.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Flashcard Challenge</h2>

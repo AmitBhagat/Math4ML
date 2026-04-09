@@ -17,12 +17,30 @@ export const lassoRegressionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Lasso Regression (L1)</div>
-      <p>The Least Absolute Shrinkage and Selection Operator (Lasso) adds an $L_1$ regularization term to the least squares objective. Unlike $L_2$, the $L_1$ penalty is non-differentiable at zero, which encourages coefficients to become exactly zero (sparsity):</p>
+      <div class="premium-def-title">Formalism: L1 Sparsity & The Corner Contact Phenomenon</div>
+      <p>Lasso is "Structural Selection." It is the process of building a model that is as simple as possible by explicitly deleting useless features.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the elliptical contours of your loss function in a 2D space. In Ridge Regression, we use a circular constraint. In <strong>Lasso Regression</strong>, we use a <strong>Diamond-shaped constraint</strong> (the $L_1$ ball) defined by $|w_1| + |w_2| \le c$. Geometrically, this diamond has sharp vertices located exactly on the axes ($w_1=0$ or $w_2=0$). When the loss ellipse expands, it is highly likely to hit one of these "corners" before it hits a flat edge. That moment of contact on the axis forces a weight to become <strong>exactly zero</strong>. Lasso doesn't just muffle noise; it performs absolute, mathematical feature selection.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The objective function adds a penalty based on the sum of absolute values of the weights:</p>
       <div class="math-block">
-        $$\text{arg}\min_{\mathbf{w}} \left\{ \frac{1}{2n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda \|\mathbf{w}\|_1 \right\}$$
+        $$J(\mathbf{w}) = \frac{1}{2n} \|\mathbf{y} - \mathbf{X}\mathbf{w}\|_2^2 + \lambda \sum_{j=1}^d |w_j|$$
       </div>
-      <p>Where $\|\mathbf{w}\|_1 = \sum_{j=1}^d |w_j|$ is the $L_1$ norm. This optimization problem has no closed-form solution and is typically solved using **Coordinate Descent**.</p>
+      <p>Because the absolute value function has a "kink" at zero, there is <strong>no closed-form solution</strong> (no simple matrix inverse). Instead, we use <strong>Coordinate Descent</strong>, optimizing one weight at a time. The solution for a single weight $w_j$ is the <strong>Soft-Thresholding Operator</strong>:</p>
+      <div class="math-block">
+        $$w_j = S_{\lambda}(\rho_j) = \text{sign}(\rho_j) \max(0, |\rho_j| - \lambda)$$
+      </div>
+      <p>Here, $\rho_j$ represents the "signal" of the $j$-th feature. If the signal is smaller than the threshold $\lambda$, the operator returns exactly zero. The feature is fired.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Lasso is your <strong>Complexity Crusher</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Automatic Sparsity</strong>: If you have 1,000 features and only 10 actually correlate with the target, Lasso will find those 10 and set the other 990 to zero.</li>
+        <li><strong>Interpretability</strong>: By deleting the "junk," Lasso leaves you with a model that a human can actually read and explain.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: If you have two highly correlated features, Lasso will pick one at random and kill the other. This "unstable selection" is why we sometimes use <strong>Elastic Net</strong> (a mix of L1 and L2) to get the best of both worlds.</p>
     </div>
     
     <div class="callout tip">

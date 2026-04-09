@@ -17,19 +17,27 @@ export const bayesianNetworksSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Directed Probabilistic Factorization</div>
-      <p>A **Bayesian Network** $\mathcal{B}$ represents a joint probability distribution over a set of random variables $\mathcal{X} = \{X_1, \dots, X_n\}$ through a graph structure and a set of local parameters:</p>
+      <div class="premium-def-title">Formalism: Directed Acyclic Factorization & Causal Graphs</div>
+      <p>Bayesian Networks are "Reasoning Maps." They take a chaotic set of variables and organize them into a hierarchy of influence and effect.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the world is a giant web of dominoes. If you shove one, three others might fall. <strong>Bayesian Networks</strong> are the map of these causal ripples. Geometrically, a Bayesian Network is a <strong>Directed Acyclic Graph (DAG)</strong>. Each node is a Random Variable (like "Rain" or "Traffic"), and each directed arrow is a "Vocal Influence." The key is that the arrows never form a loop—causality only flows forward in time and logic. It is a way to factorize a massive, messy reality into a series of local, understandable dependencies.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A Bayesian Network over a set of variables $\mathbf{X} = \{X_1, \dots, X_n\}$ is defined by a graph and a set of Conditional Probability Distributions (CPDs). The fundamental "Cheat Code" is the <strong>Factorization Rule</strong>:</p>
       <div class="math-block">
-        $$\mathcal{B} = \langle G, P \rangle$$
+        $$P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{parents}(X_i))$$
       </div>
-      <p>where $G$ is a Directed Acyclic Graph (DAG) and $P$ is a set of Conditional Probability Distributions (CPDs). The structure satisfies the following properties:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Factorization</strong>: $P(X_1, \dots, X_n) = \prod_{i=1}^n P(X_i \mid \text{Pa}_G(X_i))$. The joint distribution is the product of the probability of each node given its parents.</li>
-        <li><strong>Local Markov Property</strong>: Every variable $X_i$ is conditionally independent of its non-descendants given its parents $\text{Pa}_G(X_i)$.</li>
-        <li><strong>D-Separation</strong>: A graphical criterion used to identify global independence relations ($X \perp Y \mid Z$) without explicitly computing the probability tables.</li>
-        <li><strong>CPDs</strong>: For discrete variables, these are Conditional Probability Tables (CPTs); for continuous variables, these are functional mappings (e.g., Linear Gaussians).</li>
+      <p>Instead of storing an exponential table of every possible combination of $n$ variables, we only store the local probabilities of each node given its direct "Parents." This reduces the complexity from $O(2^n)$ to $O(n \times 2^k)$, where $k$ is the max number of parents. This is the only reason we can model systems with thousands of variables.</p>
+      <p>To determine if two variables are independent, we use <strong>d-separation</strong> (directed separation). If all paths between $X$ and $Y$ are "blocked" by evidence at $Z$, then $X$ and $Y$ are conditionally independent given $Z$. This is the mathematical language of "Focusing on the relevant facts."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Graphical Models, Bayesian Networks are the <strong>Causal Anchors</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Local Markov Property</strong>: A node is "Shielded" from its past. If you know its parents, you don't need to know its grandparents or its cousins to predict its behavior.</li>
+        <li><strong>V-Structure (Explaining Away)</strong>: A unique phenomenon where two independent causes (e.g., Burglar and Earthquake) become correlated once you observe their shared effect (e.g., Alarm). Seeing the earthquake "explains away" the need for a burglar.</li>
       </ul>
-      <p class="mt-2">Bayesian Networks allow for efficient **Inference** (updating beliefs based on evidence) and **Learning** (discovering the graph structure and parameters from data).</p>
+      <p class="mt-4 italic text-sm">Gotcha: Structure Learning. Finding the "Best" set of arrows to fit your data is an NP-Hard problem. Usually, we rely on domain experts to draw the map, or we use greedy algorithms that might miss the true "Source of Truth."</p>
     </div>
     
     <div class="callout tip">

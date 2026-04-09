@@ -18,7 +18,7 @@ export const crossValidationSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The K-Fold Partition</div>
-      <p>Given a dataset $\mathcal{D}$, **K-Fold Cross-Validation** partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
+      <p>Given a dataset $\mathcal{D}$, <strong>K-Fold Cross-Validation</strong> partitions the data into $k$ disjoint subsets $\{\mathcal{D}_1, \dots, \mathcal{D}_k\}$ of approximately equal size. The performance estimator is defined as the average error across $k$ separate trials:</p>
       <div class="math-block">
         $$\text{CV}(\hat{f}) = \frac{1}{k} \sum_{i=1}^k \mathcal{L}(\mathcal{D}_i, \hat{f}_{(-i)})$$
       </div>

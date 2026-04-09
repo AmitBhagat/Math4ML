@@ -17,16 +17,30 @@ export const decisionTreesSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Decision Tree</div>
-      <p>A decision tree represents a function $f: \mathcal{X} \to \mathcal{Y}$ that partitions the input space into $M$ disjoint regions $R_1, R_2, \dots, R_M$. The prediction is defined as:</p>
+      <div class="premium-def-title">Formalism: Recursive Partitioning & Information Gain</div>
+      <p>Decision Trees are "Logical Hierarchies." They turn a complex decision space into a series of simple, actionable steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points in a high-dimensional room. A <strong>Decision Tree</strong> is a series of "Slices" through that room that are always <strong>parallel to the axes</strong>. Geometrically, the tree partitions the entire feature space into a set of disjoint hyper-rectangles (boxes). Inside each box, the model predicts a single value or class. The goal of the algorithm is to position these slices so that the resulting boxes are as "Pure" as possible—meaning they contain mostly one type of data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each step, we look for a split $(j, t)$ consisting of a feature $j$ and a threshold $t$. We evaluate splits using an <strong>Impurity Measure</strong> $I(S)$. The two most common are:</p>
       <div class="math-block">
-        $$\hat{f}(x) = \sum_{m=1}^M c_m I(x \in R_m)$$
+        $$\text{Gini: } G(S) = 1 - \sum_{k=1}^K p_k^2 \quad \text{Entropy: } H(S) = -\sum_{k=1}^K p_k \log_2(p_k)$$
       </div>
-      <p>For classification, $c_m$ is the majority class in $R_m$. The regions are found by recursively minimizing the **Impurity Selection Criterion** (e.g., Gini):</p>
+      <p>The "Best Split" is the one that maximizes the <strong>Information Gain</strong>—the reduction in impurity after the slice is made:</p>
       <div class="math-block">
-        $$G = \sum_{k=1}^K p_{mk}(1 - p_{mk})$$
+        $$IG(S, j, t) = I(S) - \left( \frac{|S_{left}|}{|S|} I(S_{left}) + \frac{|S_{right}|}{|S|} I(S_{right}) \right)$$
       </div>
-      <p class="mt-2">Where $p_{mk}$ is the proportion of class $k$ observations in node $m$.</p>
+      <p>The algorithm recursively applies this rule, creating a deep hierarchy of logic until the regions are stable or a "Max Depth" limit is reached.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Decision Trees are the <strong>Interrogators</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Greedy Optimization</strong>: The tree makes the best possible split *now* without looking ahead to see if a different split would be better later. This makes it fast but sometimes suboptimal.</li>
+        <li><strong>High Variance (Overfitting)</strong>: Without limits, a tree will keep splitting until every point is in its own box. This "memorization" of noise is why we usually "Prune" trees or limit their height.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Because the slices are always axis-parallel, Decision Trees struggle with diagonal boundaries. To separate two groups divided by a 45-degree line, a tree has to create a "staircase" of many small horizontal and vertical steps.</p>
     </div>
     
     <div class="callout tip">

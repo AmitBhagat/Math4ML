@@ -26,18 +26,30 @@ export const chiSquareSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The \(\chi^2\) Statistic</div>
-      <p>The <strong>Chi-Square Test of Independence</strong> evaluates whether there is a statistically significant association between two categorical variables. The statistic is computed by comparing observed frequencies ($O_i$) with expected frequencies ($E_i$):</p>
+      <div class="premium-def-title">Formalism: The Residual of Independence & The \(\chi^2\) Sum</div>
+      <p>The Chi-Square Test is the "Independence Auditor." it measures how far a set of categorical observations drifts from the baseline of pure chance.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a "Ghost Table" representing the perfect state of independence—where knowing $X$ gives you exactly zero information about $Y$. In this table, every cell is just a proportional slice of the totals. Now, look at your "Real Table" (the Observed data). Geometrically, Chi-Square is the <strong>Total Squared Strain</strong> required to warp the Ghost Table until it matches the Real Table. If the tables are nearly identical, the "strain" is low; if the counts are wildly concentrated in specific corners, the strain is high, indicating a strong hidden bond between the variables.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We first calculate the <strong>Expected Frequency</strong> ($E_{ij}$) for each cell under the null hypothesis of independence. This is the probability of the row times the probability of the column, scaled by the total sample size $N$:</p>
       <div class="math-block">
-        $$\chi^2 = \sum \frac{(O_i - E_i)^2}{E_i}$$
+        $$E_{ij} = \frac{(\text{Row Total}_i \times \text{Column Total}_j)}{N}$$
       </div>
-      <p>Where:</p>
-      <ul class="mt-2 space-y-1">
-        <li>$O_i$: The actual count in a specific cell of your table.</li>
-        <li>$E_i$: The count expected if the variables were independent (calculated as $\frac{\text{Row Total} \times \text{Col Total}}{\text{Grand Total}}$).</li>
-        <li>$df$: $(rows - 1) \times (cols - 1)$.</li>
+      <p>The <strong>Chi-Square Statistic</strong> is the sum of the standardized squared residuals across all cells of the table:</p>
+      <div class="math-block">
+        $$\chi^2 = \sum_{i} \sum_{j} \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$$
+      </div>
+      <p>We divide by $E_{ij}$ to scale the "Error" relative to the magnitude of the expectation. A deviation of 10 is massive if you expected 2, but irrelevant if you expected 10,000.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Chi-Square is the "First Filter": </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Feature Selection</strong>: We use $\chi^2$ to rank categorical features. If a feature has a low Chi-Square score against the target label, it means it is effectively independent of the outcome—meaning it is "Noise" and should be deleted to save memory and prevent overfitting.</li>
+        <li><strong>Independence Check</strong>: Unlike correlation (which only sees straight lines), $\chi^2$ can detect complex, non-linear relationships between categories (e.g., "Color" and "Price Segment").</li>
       </ul>
-      <p class="mt-4">A high $\chi^2$ value indicates that the observed data deviates significantly from the "Independence" assumption, leading us to reject $H_0$.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Chi-Square is a "Large Sample" test. If any cells in your table have an expected count of less than 5, the math starts to break down and the test becomes unreliable. If your data is sparse, you need to use <strong>Fisher's Exact Test</strong> instead.</p>
     </div>
     
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Feature Relevance (E-commerce)</h2>

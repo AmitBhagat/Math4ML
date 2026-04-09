@@ -22,22 +22,34 @@ export const tTestSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you’re testing two different UI designs. Design A gets 5% clicks, and Design B gets 7%. Is Design B "better"? Not necessarily. If you only tested 10 people, that 2% difference is almost certainly noise. If you tested 10,000 people, it’s almost certainly a real signal. The <strong>T-Test</strong> is the tactical way we weigh the **Size of the Difference** against the **Amount of Noise** (variance). It converts the messy reality of data into a single <strong>T-score</strong>. A high T-score means the signal is loud and the noise is quiet—giving you the green light to trust your results. This is the "headache" of statistics: proving that your success wasn't just a fluke of luck.</p>
+    <p>Imagine you’re testing two different UI designs. Design A gets 5% clicks, and Design B gets 7%. Is Design B "better"? Not necessarily. If you only tested 10 people, that 2% difference is almost certainly noise. If you tested 10,000 people, it’s almost certainly a real signal. The <strong>T-Test</strong> is the tactical way we weigh the <strong>Size of the Difference</strong> against the <strong>Amount of Noise</strong> (variance). It converts the messy reality of data into a single <strong>T-score</strong>. A high T-score means the signal is loud and the noise is quiet—giving you the green light to trust your results. This is the "headache" of statistics: proving that your success wasn't just a fluke of luck.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Student's T-Statistic</div>
-      <p>The <strong>Independent Two-Sample T-Test</strong> evaluates whether the means of two independent populations are significantly different. The test statistic $t$ is calculated as:</p>
+      <div class="premium-def-title">Formalism: The Scaled Difference & The T-Distribution</div>
+      <p>The T-Test is the "Noise Filter." it measures if the gap between two averages is a result of a real difference or just the luck of the draw.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine two "Clouds" of data points. Each cloud has a center (the mean) and a width (the variance). If the clouds are overlapping, they are effectively the same world. If they are pushed apart, they are different worlds. Geometrically, the T-statistic is the <strong>Standardized Distance</strong> between these centers. However, there’s a catch: the smaller your sample size, the "fuzzier" your estimate of the center is. We use the <strong>T-distribution</strong> (which has fatter tails than a Normal curve) to account for this uncertainty. The T-test asks: *Is the signal (distance between peaks) strong enough to override the noise (the width of the clouds)?*</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the <strong>Null Hypothesis ($H_0$)</strong>: that the true population means are equal ($\mu_1 = \mu_2$). We calculate the observed difference $\Delta = \bar{X}_1 - \bar{X}_2$. To turn this raw difference into a "Score," we scale it by the <strong>Estimated Standard Error</strong> of the difference:</p>
       <div class="math-block">
-        $$t = \frac{\bar{X}_1 - \bar{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}}$$
+        $$SE_{\Delta} = \sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}$$
       </div>
-      <p>Where:</p>
-      <ul class="mt-2 space-y-1">
-        <li>$\bar{X}_1, \bar{X}_2$: Sample means of the two groups.</li>
-        <li>$s_1^2, s_2^2$: Sample variances.</li>
-        <li>$n_1, n_2$: Sample sizes.</li>
+      <p>The <strong>T-Statistic</strong> is the number of "standard errors" that our observed difference is away from the zero-difference baseline:</p>
+      <div class="math-block">
+        $$t = \frac{(\bar{X}_1 - \bar{X}_2) - 0}{SE_{\Delta}}$$
+      </div>
+      <p>We then look up this $t$ value in the Student's T-distribution table (using our degrees of freedom) to find the <strong>p-value</strong>. </p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, the T-test is the <strong>Benchmarking Standard</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Model Comparison</strong>: If Model A has 92% accuracy and Model B has 93% accuracy, you run a Paired T-test across 10 cross-validation folds. If $p < 0.05$, you've proven that the 1% gain is a real architectural advantage, not just a lucky random seed.</li>
+        <li><strong>Sample size matters ($n$)</strong>: As your $n$ gets larger, the standard error decreases. This means that even small differences can become "Significant" if you have enough data. </li>
       </ul>
-      <p class="mt-4">The <strong>Degrees of Freedom ($df$)</strong> determine the shape of the T-distribution. As $n$ increases, the T-distribution converges to the Standard Normal ($Z$) distribution. We use the resulting $p$-value to decide whether to reject the Null Hypothesis ($H_0: \mu_1 = \mu_2$).</p>
+      <p class="mt-4 italic text-sm">Gotcha: A T-test assumes your data follows a Normal Distribution. If your data is highly skewed (like "Days since last purchase"), the T-test math will lie to you. In those cases, use a non-parametric test like the <strong>Mann-Whitney U Test</strong>.</p>
     </div>
     
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A/B Testing (UI Design)</h2>

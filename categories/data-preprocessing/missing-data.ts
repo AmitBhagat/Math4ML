@@ -17,16 +17,28 @@ export const missingDataSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Mechanisms of Missingness</div>
-      <p>Missing data handling is governed by the relationship between the missingness indicator $M$ and the data distribution. We categorize missingness into three formal mechanisms (Rubin, 1976):</p>
-      
-      <ul class="mt-2 space-y-1">
-        <li><strong>MCAR (Missing Completely at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M)$. The absence of a value is independent of any data (e.g., a random hardware failure). Simple deletion is safe but reduces power.</li>
-        <li><strong>MAR (Missing at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M \mid X_{obs})$. The missingness is systematic but can be fully explained by variables we have observed (e.g., younger people being less likely to respond to a survey).</li>
-        <li><strong>MNAR (Missing Not at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis})$ depends on the missing values $X_{mis}$ themselves. This is a source of **Selection Bias** (e.g., people with extreme illness not appearing in a study).</li>
-      </ul>
+      <div class="premium-def-title">Formalism: The Rubin Framework & Manifold Repair</div>
+      <p>Missing data is the "Silent Killer" of models. It's the art of reconstructing a broken mirror without leaving any cracks or distorting the reflection.</p>
 
-      <p class="text-xs opacity-80 mt-2"><strong>Correction via Imputation</strong>: Imputation is the estimation of $X_{mis}$ using the conditional distribution $P(X_{mis} \mid X_{obs})$. While simple mean imputation preserves the first moment ($\mu$), it shrinks the variance and distorts the underlying probability density. Iterative methods like **MICE** (Chained Equations) are preferred for preserving multivariate relationships.</p>
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are looking at a high-resolution photograph of a forest. Now, imagine someone has taken a hole-puncher and randomly punched thousands of holes in the picture. Geometrically, <strong>Missing Data</strong> is the existence of "Null Voids" in your high-dimensional manifold. If you simply ignore the holes, you are looking at a fragmented, broken reality. If you fill them with the "Average" color of the forest (Mean Imputation), you are "Smoothing" the image, potentially erasing the sharp edges (the signal) that actually matter. The goal is to perform <strong>Manifold Repair</strong>: to fill the voids in a way that is geometrically consistent with the surrounding patterns.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define our data $X$ as composed of observed values $X_{obs}$ and missing values $X_{mis}$. The process of data missingness is a random variable $M$. According to the <strong>Rubin Framework</strong>, we must classify $M$ before we can fix it:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>MCAR (Missing Completely at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M)$. The "Hole-Puncher" is blind. The missingness has no relationship to the data itself. You can delete these rows safely, though it saps your statistical power.</li>
+        <li><strong>MAR (Missing at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis}) = \mathbb{P}(M \mid X_{obs})$. The holes depend only on what we *can* see (e.g., a sensor that fails only when the temperature is high). We can fix this using the observed context.</li>
+        <li><strong>MNAR (Missing Not at Random)</strong>: $\mathbb{P}(M \mid X_{obs}, X_{mis})$ depends on the $X_{mis}$ itself. This is selection bias (e.g., patients dropping out of a study because they are too sick). This is the "Mathematical Trap"—you can't fix it without making deep assumptions about the hidden data.</li>
+      </ul>
+      <p>To fill the gaps, we use <strong>Multiple Imputation</strong>: we don't just guess once. We create $m$ différentes "Realities" by sampling from the conditional distribution $P(X_{mis} \mid X_{obs})$ and average the results to account for our own uncertainty.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Data Preprocessing, handling missingness is the <strong>Integrity Check</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Deletion vs. Imputation</strong>: If 50% of a column is missing, stop trying to be a hero and delete the column. You can't perform surgery on a ghost.</li>
+        <li><strong>Bias Preservation</strong>: Always remember that mean imputation artificially shrinks your variance. If you want a model that understands risk, mean imputation is your enemy because it makes the world look safer and more "Average" than it actually is.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Indicating the Patch. When you impute data, you should often add a binary <code>Is_Missing</code> column. This allows the model to learn that the value was a guess. Sometimes the fact that a value is missing is the most important signal of all.</p>
     </div>
     
     <div class="callout tip">

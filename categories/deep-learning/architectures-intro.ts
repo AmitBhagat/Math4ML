@@ -17,18 +17,30 @@ export const architecturesIntroSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Architectural Inductive Bias</div>
-      <p>A deep neural network architecture is a directed graph of layers $f_1, f_2, \dots, f_L$ that compose to form a non-linear mapping $\Phi: \mathcal{X} \to \mathcal{Y}$. The architecture encodes an **Inductive Bias**, making assumptions about the data structure:</p>
+      <div class="premium-def-title">Formalism: Compositional Gradients & Functional Hierarchy</div>
+      <p>Architectures are "Structural Hypotheses." They define the pathways through which information is distilled from raw pixels to abstract concepts.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data as a raw, uncut block of marble in 1,000D space. A Deep Learning <strong>Architecture</strong> is a sequence of "Math Chisels" (layers), each designed to chip away a specific type of redundancy. Geometrically, the architecture is a <strong>Composed Transformation</strong>. As data flows through the layers, the space is warped, folded, and squeezed. The goal is to transform a chaotic input space (where classes are tangled like spaghetti) into a "Latent Space" where the classes are distinct and easily separated by a single straight line.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>A deep architecture is mathematically defined as a sequence of function compositions. If $f_l$ represents the operation of the $l$-th layer, the entire network is:</p>
       <div class="math-block">
-        $$\mathbf{y} = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
+        $$F(\mathbf{x}) = f_L(f_{L-1}(\dots f_1(\mathbf{x}) \dots))$$
       </div>
-      <p>Common structural paradigms include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Feedforward (MLP)</strong>: Dense connectivity; assumes no specific topological relationship.</li>
-        <li><strong>Convolutional (CNN)</strong>: Sparse connectivity and weight sharing; assumes **translation invariance** and local spatial correlation.</li>
-        <li><strong>Recurrent (RNN)</strong>: Cyclic connectivity; assumes **temporal dependency** and sequential order.</li>
-        <li><strong>Attention (Transformer)</strong>: Dynamic weighting; assumes **relational importance** regardless of distance.</li>
+      <p>Each layer $f_l(\mathbf{h})$ typically consists of a linear transformation followed by a non-linearity:</p>
+      <div class="math-block">
+        $$f_l(\mathbf{h}) = \sigma(\mathbf{W}_l \mathbf{h} + \mathbf{b}_l)$$
+      </div>
+      <p>The power of "Deep" architectures comes from the <strong>Universal Approximation Theorem</strong>, which states that such a composition can represent *any* continuous function. However, the exact structure of $\mathbf{W}$ (whether it is dense, sparse, or recurrent) defines the model's <strong>Inductive Bias</strong>—the assumptions we make about the data's geometry (e.g., spatial symmetry in images or temporal order in text).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, Architectures are the <strong>Network Blueprints</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Depth vs. Width</strong>: Adding layers (depth) allows the network to learn "Features of Features," which is exponentially more efficient than simply adding more neurons to a single layer (width).</li>
+        <li><strong>Symmetry & Invariance</strong>: Specialized architectures like CNNs use <strong>Weight Sharing</strong> to ensure that if the model detects an "Eye" in the top-left corner, it can also detect it in the bottom-right without needing to learn it twice.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Architecture is a double-edged sword. If you pick the wrong structure (e.g., using a non-recurrent network for speech), the model will struggle to see the obvious patterns, no matter how much data you throw at it.</p>
     </div>
     
     <div class="callout tip">

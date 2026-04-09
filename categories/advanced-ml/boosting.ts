@@ -22,7 +22,7 @@ export const boostingSection: TopicSection = {
       <div class="math-block">
         $$F_m(\mathbf{x}) = F_{m-1}(\mathbf{x}) + \eta \cdot h_m(\mathbf{x})$$
       </div>
-      <p>In **Gradient Boosting**, each $h_m$ is trained to approximate the negative gradient of the loss function $\mathcal{L}$ with respect to the previous prediction:</p>
+      <p>In <strong>Gradient Boosting</strong>, each $h_m$ is trained to approximate the negative gradient of the loss function $\mathcal{L}$ with respect to the previous prediction:</p>
       <div class="math-block">
         $$h_m = \arg\min_{h \in \mathcal{H}} \sum_{i=1}^n \left( -\left[ \frac{\partial \mathcal{L}(y_i, F_{m-1}(\mathbf{x}_i))}{\partial F_{m-1}(\mathbf{x}_i)} \right] - h(\mathbf{x}_i) \right)^2$$
       </div>

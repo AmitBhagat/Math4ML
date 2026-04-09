@@ -17,23 +17,33 @@ export const bayesTheoremSection: TopicSection = {
     
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Bayesian Inference & Posterior Update</div>
-      <p>Bayes' Theorem provides a rigorous method for updating the probability of a hypothesis $\theta$ relative to observed data $\mathcal{D}$. It is the foundation of structural and parameter uncertainty in machine learning.</p>
-      
-      <p>The posterior probability is given by the relationship:</p>
+      <div class="premium-def-title">Formalism: The Symmetry of Joint Probability & The Posterior Update</div>
+      <p>Bayes' Theorem isn't just a formula; it's a "Consistency Constraint." it ensures that your conditional beliefs remain mathematically valid regardless of which variable you observe first.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a sample space $\Omega$ (the "Universe") where two events $A$ and $B$ occur. These events overlap in a region $A \cap B$. To find the conditional probability $P(A|B)$, we effectively "shrink" our universe. Instead of looking at the whole box $\Omega$, we look only through the "keyhole" of event $B$. The probability of $A$ occurring in this new, smaller universe is just the ratio of the overlap to the total area of $B$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive Bayes' Rule by exploiting the fact that the "Overlap" $P(A \cap B)$ can be calculated in two identical ways. By the definition of conditional probability:</p>
       <div class="math-block">
-        $$P(\theta \mid \mathcal{D}) = \frac{P(\mathcal{D} \mid \theta) P(\theta)}{P(\mathcal{D})}$$
+        $$P(A \cap B) = P(A|B)P(B)$$
+        $$P(B \cap A) = P(B|A)P(A)$$
+      </div>
+      <p>Since $P(A \cap B) = P(B \cap A)$, we set the right-hand sides equal to each other:</p>
+      <div class="math-block">
+        $$P(A|B)P(B) = P(B|A)P(A)$$
+      </div>
+      <p>Solving for $P(A|B)$ gives the final update rule:</p>
+      <div class="math-block">
+        $$P(A|B) = \frac{P(B|A) P(A)}{P(B)}$$
       </div>
 
-      <p>Where the components are characterized as follows:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Posterior ($P(\theta \mid \mathcal{D})$)</strong>: The probability that the hypothesis $\theta$ is true *after* considering data $\mathcal{D}$.</li>
-        <li><strong>Likelihood ($P(\mathcal{D} \mid \theta)$)</strong>: The probability that the data $\mathcal{D}$ would have been observed given that $\theta$ is true.</li>
-        <li><strong>Prior ($P(\theta)$)</strong>: The probability of $\theta$ before receiving any data, representing initial beliefs or domain knowledge.</li>
-        <li><strong>Evidence ($P(\mathcal{D})$)</strong>: The marginal probability of the data, acting as a normalization constant: $P(\mathcal{D}) = \sum_{\theta'} P(\mathcal{D} \mid \theta') P(\theta')$.</li>
-      </ul>
-      
-      <p class="mt-2">Bayes' Theorem is the mathematical prerequisite for **Naive Bayes Classifiers**, **Bayesian Optimization**, and **Gaussian Processes**.</p>
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria (ML Practitioner's View)</h3>
+      <p>In Machine Learning, we replace generic events with <strong>Hypothesis</strong> ($\theta$) and <strong>Data</strong> ($\mathcal{D}$):</p>
+      <div class="math-block">
+        $$\text{Posterior} = \frac{\text{Likelihood} \times \text{Prior}}{\text{Evidence}}$$
+      </div>
+      <p class="mt-4 italic text-sm">Gotcha: Beginners usually ignore the <strong>Evidence</strong> ($P(\mathcal{D})$) because it's just a constant. But in complex models, calculating it requires a massive integral over all possible hypotheses—this is the "Bayesian Bottleneck" that makes full Bayesian inference computationally expensive (and why we use things like MCMC or Variational Inference).</p>
     </div>
 
     <div class="callout tip">
@@ -118,8 +128,8 @@ print(f"Prob(Spam | 'Free'): {bayes_inference(prior_spam, l_spam, l_ham):.4f}")
     <h2 id="applications">Applications in ML</h2>
     <p>Bayes' Theorem is the "Self-Correction Engine" of AI. It provides the mathematical proof that our beliefs should always be in a state of flux, updating every time a new piece of data hits the table.</p>
     <ul>
-      <li><strong>Bayesian Neural Networks (BNNs)</strong>: Standard neural networks give you a single "Guess" (e.g., 90% sure this is a dog). BNNs use Bayes' Theorem to give you a **Distribution of Guesses**. Instead of one set of weights, they have a "Prior" belief about what the weights should be and update that "Posterior" as they see training data. This allows the AI to say: "I think this is a dog, but I've never seen a picture this blurry before, so I'm actually very uncertain." It prevents the model from being "Arrogantly Wrong."</li>
-      <li><strong>Self-Driving Car Localization (Kalman Filters)</strong>: A Tesla navigating a highway uses Bayes' Theorem every millisecond. It has a "Prior" (where it thought it was 10ms ago based on physics) and it receives "Evidence" (GPS and LIDAR data). The GPS might be slightly off due to a tunnel, and the LIDAR might be confused by rain. Bayes' Theorem allows the car to optimally **Blend** those two noisy inputs to calculate the most likely "Posterior" position. It is the math that keeps the car in its lane.</li>
+      <li><strong>Bayesian Neural Networks (BNNs)</strong>: Standard neural networks give you a single "Guess" (e.g., 90% sure this is a dog). BNNs use Bayes' Theorem to give you a <strong>Distribution of Guesses</strong>. Instead of one set of weights, they have a "Prior" belief about what the weights should be and update that "Posterior" as they see training data. This allows the AI to say: "I think this is a dog, but I've never seen a picture this blurry before, so I'm actually very uncertain." It prevents the model from being "Arrogantly Wrong."</li>
+      <li><strong>Self-Driving Car Localization (Kalman Filters)</strong>: A Tesla navigating a highway uses Bayes' Theorem every millisecond. It has a "Prior" (where it thought it was 10ms ago based on physics) and it receives "Evidence" (GPS and LIDAR data). The GPS might be slightly off due to a tunnel, and the LIDAR might be confused by rain. Bayes' Theorem allows the car to optimally <strong>Blend</strong> those two noisy inputs to calculate the most likely "Posterior" position. It is the math that keeps the car in its lane.</li>
     </ul>
     <p>Teacher's Final Word: Bayes' Theorem is the logic of humbleness. It forces the machine to admit what it knew before and adjust it based on what it sees now. In a world of noise, it is the only way to arrive at the signal.</p>
 

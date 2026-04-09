@@ -17,16 +17,31 @@ export const transferLearningSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Cross-Domain Knowledge Transfer</div>
-      <p>Transfer learning leverages knowledge from a source domain $\mathcal{D}_S$ and task $\mathcal{T}_S$ to improve performance on a target domain $\mathcal{D}_T$ and task $\mathcal{T}_T$. Formally, we aim to learn a target function $f_T(\mathbf{x})$ such that:</p>
-      <div class="math-block">
-        $$\mathcal{T}_T = \{ \mathcal{Y}_T, P(Y_T | X_T) \}$$
-      </div>
-      <p>This is achieved by either **Pre-training** the weights $\theta_S$ on $\mathcal{D}_S$ and then **Fine-tuning** them on $\mathcal{D}_T$, or by using the source model as a fixed **Feature Extractor** $\phi(\cdot)$:</p>
-      <div class="math-block">
-        $$\hat{y}_T = f_T(\phi(\mathbf{x}_T; \theta_S); \theta_T)$$
-      </div>
-      <p class="mt-2">This effectively transfers the "Inductive Bias" of the source task to the target task, significantly reducing the sample complexity required for convergence.</p>
+      <div class="premium-def-title">Formalism: Cross-Domain Weight Initialization & Inductive Bias</div>
+      <p>Transfer Learning is the "Head Start" of Artificial Intelligence. It allows a model to stand on the shoulders of giants rather than reinventing the wheel.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a master carpenter who has spent 30 years building houses. One day, you are asked to build a wooden ship. You don't start as a novice; you already know how to measure wood, how to use a saw, and how to create strong joints. Geometrically, <strong>Transfer Learning</strong> is the process of taking a model's <strong>Coordinate Space</strong>—learned for a massive "Task A" (like ImageNet)—and warping it to fit a specific "Task B" (like medical imaging). Instead of starting your optimization journey at a point of random chaos (Gaussian noise), you start in a pre-trained <strong>Basin of Attraction</strong> that already understands the fundamental geometric priors of reality.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Transfer learning involves a source domain $\mathcal{D}_S$ (data+task) and a target domain $\mathcal{D}_T$. The objective is to learn a mapping $f_{\theta_T}$ for the target task using the knowledge $\theta_S$ from the source.</p>
+      <ol class="mt-2 mb-4 list-decimal pl-5 space-y-1">
+        <li><strong>Initialization</strong>: Traditionally, we initialize weights $\theta$ randomly. In Transfer Learning, we set our starting weights $\theta_0$ to the pre-trained values:
+          $$\theta_0 = \theta_S$$
+        </li>
+        <li><strong>Fine-tuning</strong>: We perform gradient descent on the small target dataset $\mathcal{D}_T$ using a much smaller learning rate $\eta_{\text{small}}$ to "Nudge" the pre-trained wisdom toward the new goal:
+          $$\theta_{t+1} = \theta_t - \eta_{\text{small}} \nabla \mathcal{L}(\mathcal{D}_T; \theta_t)$$
+        </li>
+      </ol>
+      <p>This effectively transfers the <strong>Inductive Bias</strong> of the source task—the "Assumption" that edges and textures matter—into the target task, which drastically reduces the amount of data needed for convergence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Modern ML, Transfer Learning is the <strong>Great Equalizer</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Feature Extraction vs. Fine-tuning</strong>: You can either freeze the early layers and use them as a "Universal Brain" (Feature Extraction) or allow all weights to update slightly (Fine-tuning). Fine-tuning is usually more powerful but risks overwriting the pre-trained knowledge.</li>
+        <li><strong>Domain Gap</strong>: The effectiveness of transfer learning depends on the similarity between $\mathcal{D}_S$ and $\mathcal{D}_T$. If you try to transfer knowledge of "Video Games" to "Legal Documents," the pre-trained weights might actually confuse the model—a phenomenon known as <strong>Negative Transfer</strong>.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Catastrophic Forgetting. If you fine-tune too aggressively on a small target task, the model might "Forget" everything it knew about the world in its hurry to memorize your 100 data points. You must use a very small learning rate to preserve the "Foundation" while building the "Attic."</p>
     </div>
     
     <div class="callout tip">
@@ -34,7 +49,7 @@ export const transferLearningSection: TopicSection = {
       <div class="callout-body">
         Think of Transfer Learning as <strong>"Academic Credit"</strong> or <strong>"The Kung Fu Master."</strong> 
         If you have a PhD in Physics, you don't need to retake High School Math to learn Chemistry—you <strong>Transfer</strong> your understanding of logic and numbers. 
-        Imagine a **Kung Fu Master** who has spent 30 years mastering body mechanics, reflexes, and balance. One day, he decides to learn <strong>Tennis</strong>. He doesn't start like a toddler; he already has the footwork and discipline. He only needs to learn the racket grip and the rules of the court. 
+        Imagine a <strong>Kung Fu Master</strong> who has spent 30 years mastering body mechanics, reflexes, and balance. One day, he decides to learn <strong>Tennis</strong>. He doesn't start like a toddler; he already has the footwork and discipline. He only needs to learn the racket grip and the rules of the court. 
         In ML, the 30 years of Kung Fu is the <strong>Pre-training</strong> (on a massive dataset like ImageNet), and the tennis lessons are the <strong>Fine-tuning</strong> (on your specific, small dataset).
       </div>
     </div>

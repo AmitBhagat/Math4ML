@@ -17,17 +17,30 @@ export const determinantsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Leibniz Definition</div>
-      <p>For a square matrix $A \in \mathbb{R}^{n \times n}$, the determinant $\det(A)$ is a scalar value defined by the permutation sum:</p>
+      <div class="premium-def-title">Formalism: The Signed Volume Scaling Factor</div>
+      <p>The Determinant isn't just a number; it's the "Stretch Factor" of a matrix. It measures how much the volume of space changes after the transformation.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a unit "cube" defined by the standard basis vectors. After applying matrix $A$, this cube is warped into a <strong>Parallelepiped</strong> where the edges are the columns of $A$. The <strong>Determinant</strong> $\det(A)$ is the volume of this new shape. If the vectors are dependent, the shape is squashed flat, and the volume is zero.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>For a 2x2 matrix $A = \begin{bmatrix} a & b \\ c & d \end{bmatrix}$, we derive the area of the parallelogram formed by $[a, c]$ and $[b, d]$. By calculating the area of the surrounding rectangle and subtracting the outer triangles, we arrive at the cross-multiplication rule:</p>
+      <div class="math-block">
+        $$\text{Area} = ad - bc$$
+      </div>
+      <p>In $n$-dimensions, we use the <strong>Leibniz Formula</strong>, which sums all possible ways to pick one element from each row and column, adjusted by the sign of the permutation ($\sigma$):</p>
       <div class="math-block">
         $$\det(A) = \sum_{\sigma \in S_n} \text{sgn}(\sigma) \prod_{i=1}^n A_{i, \sigma(i)}$$
       </div>
-      <p>Where $S_n$ is the set of all permutations of $\{1, \dots, n\}$. Geometrically, $\det(A)$ represents the signed **Volume Scaling Factor** of the linear transformation. Essential takeaways include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Invertibility</strong>: $A$ is invertible $\iff \det(A) \neq 0$.</li>
-        <li><strong>Composition</strong>: $\det(AB) = \det(A)\det(B)$.</li>
-        <li><strong>Linear Dependence</strong>: $\det(A) = 0$ implies the rows/columns are linearly dependent.</li>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>The Determinant satisfies three critical properties that define its behavior:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Multiplicativity</strong>: $\det(AB) = \det(A)\det(B)$. Scale factors multiply.</li>
+        <li><strong>Inversion</strong>: $\det(A^{-1}) = 1/\det(A)$. "Unwinding" a 2x stretch requires a 0.5x squeeze.</li>
+        <li><strong>Singularity</strong>: If $\det(A) = 0$, the matrix is non-invertible. You have squashed space so hard you've deleted a dimension.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: A negative determinant means the transformation "flipped" space inside out (like a reflection). The absolute value is the volume change, but the sign tells you about the orientation.</p>
     </div>
     
     <div class="callout tip">

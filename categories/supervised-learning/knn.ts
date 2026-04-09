@@ -17,12 +17,30 @@ export const knnSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: k-Nearest Neighbors</div>
-      <p>Given a query point $x$, a training set $\mathcal{D} = \{(x_i, y_i)\}_{i=1}^n$, and a distance metric $d(x, x')$, the KNN classification rule is defined as:</p>
+      <div class="premium-def-title">Formalism: The Voronoi Partition & Instance-Based Voting</div>
+      <p>k-NN is "Peer Pressure Optimization." It assumes that the identity of a point is entirely determined by its immediate social circle.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your feature space is a map where every training point is an "Anchor" with a known identity. When a new, unknown point $\mathbf{x}$ is placed on the map, $k$-NN looks at the $k$ closest anchors. Geometrically, this divides the entire space into <strong>Voronoi Regions</strong>—zones of influence where a specific class or combination of classes dominates. It is a <strong>Non-parametric</strong> model, meaning it doesn't assume the data follows a line or a curve; it just follows the local density of the crowd.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>First, we define a distance metric $D$ to measure "similarity." The most common is the <strong>Euclidean Distance</strong> ($L_2$ norm):</p>
       <div class="math-block">
-        $$\hat{f}(x) = \text{arg}\max_{c \in \mathcal{Y}} \sum_{i \in \mathcal{N}_k(x)} I(y_i = c)$$
+        $$D(\mathbf{x}, \mathbf{x}_i) = \sqrt{\sum_{j=1}^d (x_j - x_{i,j})^2}$$
       </div>
-      <p class="mt-2">Where $\mathcal{N}_k(x)$ is the set of $k$ indices $i$ such that $d(x, x_i)$ are the $k$ smallest distances, and $I(\cdot)$ is the indicator function.</p>
+      <p>The algorithm then identifies the $k$ indices $\{i_1, \dots, i_k\}$ that minimize this distance. The final prediction is a simple <strong>Majority Vote</strong> (the mode) among these neighbors:</p>
+      <div class="math-block">
+        $$\hat{y} = \text{mode}(\{y_{i_1}, y_{i_2}, \dots, y_{i_k}\})$$
+      </div>
+      <p>Because there is no "Training" phase (the data itself <em>is</em> the model), $k$-NN is known as a <strong>Lazy Learner</strong>. All the mathematical "work" is deferred until the moment you ask for a prediction.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, $k$-NN is the <strong>Baseline of Simplicity</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Choosing $K$</strong>: Small $K$ (e.g., 1) is incredibly sensitive to noise (Outliers). Large $K$ smooths out the boundaries but can miss fine details (Bias). We always use an <strong>Odd Number</strong> to prevent "Deadlocked" votes.</li>
+        <li><strong>Scaling is Mandatory</strong>: Because $k$-NN relies on distance, if one feature (like "Salary" in the 100,000s) has a larger scale than another (like "Age" in the 10s), the distance calculation will be hijacked by the larger numbers. You <em>must</em> normalize your data before using $k$-NN.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: In high dimensions (e.g., 1,000s of features), $k$-NN breaks down due to the <strong>Curse of Dimensionality</strong>. In such a massive space, every point is "far away" from every other point, and the concept of a "nearest neighbor" becomes mathematically meaningless.</p>
     </div>
     
     <div class="callout tip">

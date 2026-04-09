@@ -23,7 +23,7 @@ export const evaluationMetricsSection: TopicSection = {
       <div class="space-y-4">
         <div>
           <h4 class="text-sm font-bold text-green-premium">1. Classification Metrics (Discrete)</h4>
-          <p class="text-xs mb-1">Based on the **Confusion Matrix** (TP, TN, FP, FN):</p>
+          <p class="text-xs mb-1">Based on the <strong>Confusion Matrix</strong> (TP, TN, FP, FN):</p>
           <div class="math-block">
             $$\text{Precision} = \frac{TP}{TP + FP} \quad \text{Recall} = \frac{TP}{TP + FN}$$
             $$\text{F1-Score} = 2 \cdot \frac{\text{Precision} \cdot \text{Recall}}{\text{Precision} + \text{Recall}}$$
@@ -39,7 +39,7 @@ export const evaluationMetricsSection: TopicSection = {
         </div>
       </div>
 
-      <p class="mt-2">Metrics like **Cross-Entropy** are used for training (optimization), while metrics like **Accuracy** or **AUC-ROC** are used for final validation and model comparison.</p>
+      <p class="mt-2">Metrics like <strong>Cross-Entropy</strong> are used for training (optimization), while metrics like <strong>Accuracy</strong> or <strong>AUC-ROC</strong> are used for final validation and model comparison.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Fishing Trip</h2>

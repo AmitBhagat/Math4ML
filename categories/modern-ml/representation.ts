@@ -17,16 +17,31 @@ export const representationSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Latent Mapping</div>
-      <p>Representation learning aims to find a function $f_\theta: \mathcal{X} \to \mathbb{R}^d$ that maps high-dimensional input $\mathbf{x}$ to a lower-dimensional latent vector $\mathbf{z}$ while preserving task-relevant information. A principal objective is **Disentanglement**, where factors of variation are separated:</p>
+      <div class="premium-def-title">Formalism: The Information Bottleneck & Manifold Projections</div>
+      <p>Representation Learning is the "Internal Translation" of AI. It turns the messy, high-dimensional reality of the world into a clean, geometric point in space.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are looking at a massive, tangled knot of colorful wires. From the wrong angle, it looks like a chaotic mess. But if you walk around it and find the "Right Angle," you see that it's actually a perfectly organized spiral. Geometrically, <strong>Representation Learning</strong> is the process of finding that angle. It assumes the <strong>Manifold Hypothesis</strong>: high-dimensional data (like images) actually lies on a thin, lower-dimensional "Surface" (the Manifold) within the noise. The goal is to learn a non-linear mapping $f_\theta$ that "Unrolls" this manifold into a flat, coordinate space where similar concepts are sitting right next to each other.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We aim to find a mapping $\mathbf{z} = f_\theta(\mathbf{x})$ that transforms raw input $\mathbf{x}$ into a latent vector $\mathbf{z}$ that is both <strong>Compact</strong> and <strong>Informative</strong>. This is governed by the <strong>Information Bottleneck Principal</strong>:</p>
       <div class="math-block">
-        $$\mathbf{z} = f_\theta(\mathbf{x}), \quad \text{where } \mathbf{x} \approx g_\phi(\mathbf{z})$$
+        $$\min_\theta I(X; Z) - \beta I(Z; Y)$$
       </div>
-      <p>A robust representation satisfies **The Manifold Hypothesis**, assuming that data lies on a low-dimensional topological manifold $\mathcal{M}$. The learning objective often involves minimizing reproduction error or maximizing mutual information:</p>
-      <div class="math-block">
-        $$\max_{\theta} I(\mathbf{x}; f_\theta(\mathbf{x}))$$
-      </div>
-      <p class="mt-2">Where $I$ is the Mutual Information. By learning these "shortcuts," the model avoids the curse of dimensionality.</p>
+      <p>This equation is a tug-of-war:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>$I(X; Z)$ (Compression)</strong>: We want to minimize the mutual information between the raw input and the representation. We want the "Bottleneck" to be as tight as possible, stripping away the useless pixels (the "Melt").</li>
+        <li><strong>$I(Z; Y)$ (Sufficiency)</strong>: We want to *maximize* the information in the representation about our final goal $Y$. We want to retain the "Refinement" (the signal).</li>
+      </ul>
+      <p>The result is a representation that knows exactly what "Chair-ness" looks like, but has completely forgotten the irrelevant color of the wall behind the chair.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Modern ML, Representation Learning is the <strong>Essence Extractor</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Disentanglement</strong>: A "Good" representation separates the factors of variation. If you change one number in the vector, only one concept (like "Rotation" or "Color") should change.</li>
+        <li><strong>Downstream Efficiency</strong>: Once a good representation is learned, complex tasks like classification become "Linear"—you can separate the classes with a simple straight line in the latent space.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Dimensional Collapse. If your bottleneck is *too* tight or your loss is poorly designed, the model might map every input to the exact same point. This "Collapse" is the death of representation learning—the model has found a way to satisfy the math while learning absolutely nothing about the world.</p>
     </div>
     
     <div class="callout tip">

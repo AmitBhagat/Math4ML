@@ -17,19 +17,30 @@ export const lrSchedulingSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Temporal Step Function</div>
-      <p>A **Learning Rate Schedule** is a function $f: t \to \eta_t$ that adjusts the optimizer's step size as a function of training progress $t$. This refinement is essential for navigating the multi-scale curvature of high-dimensional loss surfaces:</p>
+      <div class="premium-def-title">Formalism: Robbins-Monro Convergence & Temporal Step Decay</div>
+      <p>Scheduling is "Dynamic Precision." It is the science of knowing when to stop sprinting and start tiptoeing.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a skier approaching a narrow gate at the bottom of a massive valley. At the top, speed (High $\eta$) is your friend—it gets you through the flat plateaus and boring terrain quickly. But as you enter the final approach, that same speed becomes your enemy. If your momentum is too high, the "Curvature" of the valley will bounce you back and forth across the finish line, never letting you stop. Geometrically, Scheduling is the process of shrinking the <strong>Radius of the Update</strong> so that it fits inside the increasingly narrow basin of the minimum. It is the transition from "Exploration" to "Exploitation."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To guarantee that Stochastic Gradient Descent reaches the global minimum, the learning rates must satisfy the <strong>Robbins-Monro conditions</strong>:</p>
       <div class="math-block">
-        $$\eta_t = f(t, \eta_{initial})$$
+        $$\text{1. } \sum_{t=1}^\infty \eta_t = \infty \quad \text{2. } \sum_{t=1}^\infty \eta_t^2 < \infty$$
       </div>
-      <p>Common scheduling paradigms used in state-of-the-art architectures include:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Step/Exponential Decay</strong>: $\eta_{t+1} = \eta_t \cdot \gamma$. This creates a "Staircase" effect, allowing the model to stabilize and refine at discrete intervals.</li>
-        <li><strong>Cosine Annealing</strong>: $\eta_t = \eta_{min} + \frac{1}{2}(\eta_{max} - \eta_{min})(1 + \cos(\frac{T_{cur}}{T_{max}}\pi))$. This provides a smooth, continuous transition that is highly effective for Deep Learning.</li>
-        <li><strong>Warmup Phase</strong>: A linear increase in $\eta$ during the first $K$ steps to prevent gradient explosion caused by random weight initialization.</li>
-        <li><strong>Cyclic Scheduling</strong>: Oscillating between a range of values to "restart" the search and prevent entrapment in sub-optimal basins.</li>
+      <p>Condition (1) ensures the model can actually cover enough distance to reach the goal from any starting point. Condition (2) ensures that the "Step Energy" eventually dissipates so the model doesn't vibrate forever due to random sampling noise. We implement this through decay functions:</p>
+      <div class="math-block">
+        $$\eta_t = \eta_0 \cdot \gamma^{\lfloor t/s \rfloor} \quad (\text{Step Decay})$$
+        $$\eta_t = \frac{\eta_0}{1 + kt} \quad (\text{Inverse Time Decay})$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, your schedule dictates your <strong>Stability</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Warmup</strong>: We often start with an *increasing* learning rate for the first few hundred steps. Why? Because random weights produce massive gradients that can "shatter" the model early on. Warmup lets the model find its footing before the real descent begins.</li>
+        <li><strong>Cosine Annealing</strong>: This is the gold standard for modern Deep Learning. It smoothly reduces the learning rate to near-zero, allowing the model to perform "surgery" on the weights at the end of training for maximum accuracy.</li>
       </ul>
-      <p class="mt-2">Proper scheduling is often the difference between a model that merely "learns" and one that achieves state-of-the-art generalization.</p>
+      <p class="mt-4 italic text-sm">Gotcha: If you decay your learning rate too fast, you might get trapped in a mediocre local minimum (or a flat plateau) simply because you "Ran out of gas" to keep moving. If you decay too slow, you’ll never see a stable loss curve.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Controlled Descent</h2>

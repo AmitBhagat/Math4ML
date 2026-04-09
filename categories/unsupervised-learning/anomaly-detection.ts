@@ -17,12 +17,30 @@ export const anomalyDetectionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Outlier Detection</div>
-      <p>Anomaly detection is the task of identifying data points $\{\mathbf{x}_i\}$ that do not conform to an expected pattern or "normal" distribution $P(\mathbf{x})$. Formally, for a threshold $\tau$, a point is an anomaly if its density score is sufficiently low:</p>
+      <div class="premium-def-title">Formalism: Probabilistic Density & The Low-Variance Void</div>
+      <p>Anomaly Detection is "Mathematical Ostracism." It is the process of identifying points that are so statistically unlikely they must be treated as errors or threats.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data points as a dense, glowing "Continent" in a dark, high-dimensional space. Most points live in the crowded interior, surrounded by thousands of neighbors. <strong>Anomaly Detection</strong> is the search for the "Loners"—the dim points flickering far out in the void. Geometrically, we are looking for observations that fall into regions where the <strong>Probability Density</strong> is near zero. These points don't just deviate from the mean; they exist outside the manifolds that Define the "Normal" world.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>One of the most robust ways to model this is through <strong>Gaussian Density Estimation</strong>. We assume each feature $x_j$ follows a normal distribution $\mathcal{N}(\mu_j, \sigma_j^2)$. The joint probability of a data point $\mathbf{x}$ is calculated as the product of these individual feature densities:</p>
       <div class="math-block">
-        $$f(\mathbf{x}) < \tau$$
+        $$p(\mathbf{x}) = \prod_{j=1}^d \frac{1}{\sqrt{2\pi}\sigma_j} \exp\left(-\frac{(x_j - \mu_j)^2}{2\sigma_j^2}\right)$$
       </div>
-      <p>Where $f(\mathbf{x})$ can be a likelihood $P(\mathbf{x} \mid \theta)$, a distance-based metric $1/d(\mathbf{x}, \text{nn}(\mathbf{x}))$, or a reconstruction error $\| \mathbf{x} - g(h(\mathbf{x})) \|^2$.</p>
+      <p>We then define an anomaly as any point whose total probability density falls below a critical sensitivity threshold $\epsilon$:</p>
+      <div class="math-block">
+        $$\text{Prediction} = \begin{cases} 1 (\text{Anomaly}) & \text{if } p(\mathbf{x}) < \epsilon \\ 0 (\text{Normal}) & \text{if } p(\mathbf{x}) \ge \epsilon \end{cases}$$
+      </div>
+      <p>For complex data, we use <strong>Isolation Forests</strong>, which measure "Path Length" $h(\mathbf{x})$ in a tree—anomalies are isolated faster (shorter paths) because they require fewer logical "cuts" to be separated from the rest of the data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Anomaly Detection is the <strong>Immune System</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Choosing $\epsilon$</strong>: This is the dial for your "Paranoia." Set it too low, and you'll miss the subtle hackers. Set it too high, and you'll flag your best customers as fraudsters because they bought a nice gift.</li>
+        <li><strong>Feature Independence</strong>: Basic density estimation assumes features aren't correlated. If they are (e.g., "Amount" and "Category"), you must use a <strong>Multivariate Gaussian</strong> to account for the covariance between them.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Anomaly detection is notoriously difficult to evaluate because you usually don't have "labels" for the bad guys. You are often flying blind, relying purely on the math of "Strangeness."</p>
     </div>
     
     <div class="callout tip">

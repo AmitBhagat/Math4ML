@@ -17,15 +17,35 @@ export const advancedBoostingSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Regularized Gradient Boosting</div>
-      <p>Modern boosting frameworks (like XGBoost) optimize a regularized objective function that balances predictive power with model simplicity. At iteration $t$, the objective is:</p>
+      <div class="premium-def-title">Formalism: 2nd-Order Taylor Expansion & Hessian Optimization</div>
+      <p>Advanced Boosting is "Curvature-Aware Optimization." It doesn't just know where to move; it knows how fast the landscape is changing.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are navigating a foggy mountain. Basic Gradient Boosting only knows the local slope (the Gradient). <strong>Advanced Boosting</strong> (specifically XGBoost) uses the <strong>Curvature</strong> of the terrain (the Hessian). Geometrically, at every step, we build a <strong>local quadratic model</strong> of the loss surface. This is like having a GPS that doesn't just tell you "go down," but tells you the exact shape of the valley ahead. This allows the model to take much larger, more confident steps on flat ground and more precise, careful steps when the terrain is steep and complex.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>To find the next tree $f_t$, we optimize the loss summed over all samples plus a <strong>Complexity regularization</strong> term $\Omega$:</p>
       <div class="math-block">
-        $$\mathcal{L}^{(t)} = \sum_{i=1}^n l(y_i, \hat{y}_i^{(t-1)} + f_t(\mathbf{x}_i)) + \Omega(f_t)$$
+        $$\text{Obj}^{(t)} = \sum_{i=1}^n L(y_i, \hat{y}_i^{(t-1)} + f_t(\mathbf{x}_i)) + \Omega(f_t)$$
       </div>
-      <p>Where $\Omega(f_t) = \gamma T + \frac{1}{2} \lambda \|\mathbf{w}\|^2$ is the **Complexity Penalty** ($T$ is the number of leaves). By using a second-order Taylor expansion, the algorithm finds the optimal leaf weight $w_j^*$ using the gradients $g_i$ and hessians $h_i$ of the loss:</p>
+      <p>Using a <strong>Second-Order Taylor Expansion</strong> at $F_{t-1}$, we express the objective in terms of gradients $g_i$ and Hessians $h_i$:</p>
       <div class="math-block">
-        $$w_j^* = -\frac{\sum_{i \in R_j} g_i}{\sum_{i \in R_j} h_i + \lambda}$$
+        $$\text{Obj}^{(t)} \approx \sum_{i=1}^n [g_i f_t(\mathbf{x}_i) + \frac{1}{2} h_i f_t^2(\mathbf{x}_i)] + \gamma T + \frac{1}{2} \lambda \sum_{j=1}^T w_j^2$$
       </div>
+      <p>Solving for the optimal weight $w_j^*$ of a leaf $j$, we arrive at the core scoring formula of XGBoost:</p>
+      <div class="math-block">
+        $$w_j^* = -\frac{\sum_{i \in I_j} g_i}{\sum_{i \in I_j} h_i + \lambda}$$
+      </div>
+      <p>This formula is the "brain" of the engine—it tells the tree exactly how much credit to give each feature while penalizing complexity ($\lambda$).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, the "Big Three" libraries optimize different parts of the search:</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>XGBoost</strong>: Focuses on the <strong>Split Search</strong>. It uses a "Sparsity-aware" algorithm to find the best split points even when your data is filled with missing values.</li>
+        <li><strong>LightGBM</strong>: Focuses on <strong>Data Reduction</strong>. It uses <strong>GOSS</strong> (Gradient-based One-Side Sampling) to ignore samples with small gradients, focusing only on the "hard" examples.</li>
+        <li><strong>CatBoost</strong>: Focuses on <strong>Categories</strong>. It uses <strong>Ordered Boosting</strong> to prevent target leakage, which is a common disaster when dealing with categorical text data.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: These models are "Parameters-Heavy." If you don't tune your <code>max_depth</code>, <code>learning_rate</code>, and <code>subsample</code>, you will end up with a model that is perfectly accurate on your laptop but completely useless in the real world.</p>
     </div>
     
     <div class="callout tip">

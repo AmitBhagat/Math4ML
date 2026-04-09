@@ -17,16 +17,34 @@ export const perceptronSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Artificial Neuron</div>
-      <p>A Perceptron is a binary classifier that maps an input vector $\mathbf{x} \in \mathbb{R}^d$ to an output $f(\mathbf{x}) \in \{0, 1\}$. The output is calculated as:</p>
+      <div class="premium-def-title">Formalism: The Linear Hyperplane & Convergence Logic</div>
+      <p>The Perceptron is the "Elementary Judge." It is the atomic unit of a neural network, performing the simplest possible form of classification.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you have a bowl of red and blue marbles on a table and you want to separate them with a single straight ruler. The <strong>Perceptron</strong> is that ruler. Geometrically, it is a <strong>Linear Hyperplane</strong>—a flat surface that cuts a high-dimensional space into two half-spaces. One side of the ruler is "Yes" (1) and the other is "No" (0). It is the mathematical absolute of binary logic. However, its fatal flaw is that it can only solve problems that are <strong>Linearly Separable</strong>. If the data is mixed like a marble cake, a single ruler can never separate it.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The Perceptron takes an input vector $\mathbf{x} \in \mathbb{R}^d$ and performs a weighted sum plus a "Level of Grumpiness" (Bias):</p>
       <div class="math-block">
-        $$f(\mathbf{x}) = \begin{cases} 1 & \text{if } \sum_{i=1}^d w_i x_i + b > 0 \\ 0 & \text{otherwise} \end{cases}$$
+        $$z = \mathbf{w}^T \mathbf{x} + b$$
       </div>
-      <p>The model learns by iteratively updating its weights $\mathbf{w}$ whenever the predicted $\hat{y}$ differs from the ground truth $y$:</p>
+      <p>It then passes this sum through a <strong>Heaviside Step Function</strong> to force a binary decision:</p>
+      <div class="math-block">
+        $$\hat{y} = \begin{cases} 1 & \text{if } z \geq 0 \\ 0 & \text{if } z < 0 \end{cases}$$
+      </div>
+      <p>The "Learning" happens through a simple recursive rule. If the prediction $\hat{y}$ is wrong ($y \neq \hat{y}$), we "Nudge" the weights in the direction of the error:</p>
       <div class="math-block">
         $$\mathbf{w}_{t+1} = \mathbf{w}_t + \eta(y - \hat{y})\mathbf{x}$$
       </div>
-      <p class="mt-2">Where $\eta$ is the learning rate. Note that this algorithm only converges if the data is <strong>linearly separable</strong>.</p>
+      <p>The <strong>Perceptron Convergence Theorem</strong> guarantees that if a solution exists (the data is separable), this algorithm *will* find it in a finite number of steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, the Perceptron is the <strong>Binary Building Block</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Linear Bound</strong>: It can only model "OR", "AND", and "NOT" logic. It cannot model "XOR" because an OR gate where both inputs can't be true is not a straight-line problem.</li>
+        <li><strong>Hard Threshold</strong>: Unlike modern neurons that use smooth curves (Sigmoid/ReLU), the Perceptron is a "Hard Switch." This makes it impossible to use with Backpropagation because its derivative is zero almost everywhere.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Infinite Loops. If your data cannot be separated by a straight line, the Perceptron will cycle through its weights forever, never finding peace. This "Crisis of 1969" almost killed AI research for a decade.</p>
     </div>
     
     <div class="callout tip">

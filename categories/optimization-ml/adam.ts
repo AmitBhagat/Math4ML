@@ -17,23 +17,34 @@ export const adamSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Adaptive Moment Estimation</div>
-      <p>The **Adam** optimizer maintains exponentially moving averages of the gradient ($m_t$) and the squared gradient ($v_t$) to provide per-parameter adaptive updates. At each step $t$:</p>
+      <div class="premium-def-title">Formalism: Adaptive Moment Estimation & Bias Correction</div>
+      <p>Adam is "Smart Descent." Instead of a fixed step size, it calculates a custom, velocity-aware update for every single weight in your model.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a boulder rolling down a multidimensional cliff. Some dimensions are steep and chaotic (high variance), while others are long, flat plateaus (low variance). <strong>Adam</strong> is like a boulder equipped with a smart suspension system. It tracks its own <strong>Momentum</strong> ($m$) to smooth out the jitters in the steep parts, and it tracks the <strong>Volatility</strong> ($v$) of each dimension to ensure it doesn't overshoot narrow turns. Geometrically, Adam "squashes" the gradient space—it takes large steps in flat directions and cautious, tiny steps in volatile ones, making the descent much more efficient.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each step $t$, we calculate the gradient $g_t$. We then update two moving averages with decay rates $\beta_1$ (momentum) and $\beta_2$ (scaling):</p>
       <div class="math-block">
-        $$m_t = \beta_1 m_{t-1} + (1 - \beta_1) g_t$$
-        $$v_t = \beta_2 v_{t-1} + (1 - \beta_2) g_t^2$$
+        $$m_t = \beta_1 m_{t-1} + (1-\beta_1) g_t \quad (\text{The Mean})$$
+        $$v_t = \beta_2 v_{t-1} + (1-\beta_2) g_t^2 \quad (\text{The Variance})$$
       </div>
-      <p>where $g_t$ is the current gradient. To account for initialization at zero, these moments are bias-corrected:</p>
+      <p>Because these values are initialized at zero, they are "biased" toward zero in the early steps. We fix this with <strong>Bias Correction</strong>:</p>
       <div class="math-block">
-        $$\hat{m}_t = \frac{m_t}{1 - \beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1 - \beta_2^t}$$
+        $$\hat{m}_t = \frac{m_t}{1-\beta_1^t}, \quad \hat{v}_t = \frac{v_t}{1-\beta_2^t}$$
       </div>
-      <p>The final parameter update utilizes these corrected estimates:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Update Rule</strong>: $\theta_{t+1} = \theta_t - \eta \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$. The step size is effectively normalized by the local volatility.</li>
-        <li><strong>Robustness</strong>: $\beta_1$ (typically 0.9) acts as Momentum, while $\beta_2$ (typically 0.999) acts as an adaptive scaling factor (RMSProp).</li>
-        <li><strong>Bias Correction</strong>: Crucial during the initial steps when $m_t$ and $v_t$ are heavily biased towards the origin.</li>
+      <p>The final update rule combines these corrected moments:</p>
+      <div class="math-block">
+        $$\theta_t = \theta_{t-1} - \eta \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Adam is the <strong>Industry Standard</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Per-Parameter Adaptivity</strong>: Unlike SGD, where one learning rate rules them all, Adam gives every neuron its own "Speed Limit." This is essential for training huge Transformers where feature scales vary wildly.</li>
+        <li><strong>Hyperparameter Robustness</strong>: The "Gotcha" with Adam is that while it works for almost everything with default settings, it sometimes fails to converge to the *absolute* best minimum compared to a perfectly tuned SGD.</li>
       </ul>
-      <p class="mt-2">Adam is the de facto standard for Deep Learning, as it offers the fastest convergence and is most resilient to hyperparameter choices.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Adam's $\beta_2$ term is usually set to 0.999. If your gradients are extremely sparse or noisy, this can cause the "Second Moment" to become stale or explode. If your training gets unstable, checking your $\epsilon$ and $\beta_2$ is the first step.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Olympic Athlete</h2>
@@ -89,10 +100,10 @@ for step in range(1, 101):
     t += 1
     # a) Update moving averages
     m = beta1 * m + (1 - beta1) * grad
-    v = beta2 * v + (1 - beta2) * (grad**2)
+    v = beta2 * v + (1 - beta2) * (grad<strong>2)
     
     # b) Bias correction (Crucial for first few steps)
-    m_hat = m / (1 - beta1**t)
+    m_hat = m / (1 - beta1</strong>t)
     v_hat = v / (1 - beta2**t)
     
     # c) Final Update: Direction / sqrt(Volatility)

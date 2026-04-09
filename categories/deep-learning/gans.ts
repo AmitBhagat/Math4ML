@@ -17,12 +17,31 @@ export const gansSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Adversarial Minimax Game</div>
-      <p>A GAN consists of a Generator $G$ and a Discriminator $D$. $G$ maps a latent noise vector $\mathbf{z}$ to the data space, while $D$ estimates the probability that a sample came from the real data distribution rather than $G$. The training is a zero-sum game with the value function:</p>
+      <div class="premium-def-title">Formalism: The Minimax Game & Manifold Forgery</div>
+      <p>GANs are "Adversarial Learners." They use the friction between two opposing forces to discover the underlying distribution of complex data.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a room with an art counterfeiter (the <strong>Generator</strong>) and a detective (the <strong>Discriminator</strong>). The counterfeiter has never seen a real masterpiece; they only hear the detective's feedback ("This is fake because the brushstrokes are too thick"). Geometrically, this is a <strong>Minimax Game</strong> played on the probability manifold of the data. The Generator tries to map a simple noise distribution (like a 100D Gaussian) into the highly complex, high-dimensional manifold of "Real Images." Simultaneously, the Discriminator tries to find the optimal decision boundary—the hyperplane—that separates the true data distribution from the generated one. It is "Learning via Friction."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define the training as a zero-sum game between the Discriminator $D$ and the Generator $G$ using the following <strong>Value Function</strong> (Binary Cross-Entropy):</p>
       <div class="math-block">
-        $$\min_G \max_D \mathcal{V}(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{data}}[\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}}[\log(1 - D(G(\mathbf{z})))]$$
+        $$\min_G \max_D V(D, G) = \mathbb{E}_{\mathbf{x} \sim p_{data}(\mathbf{x})} [\log D(\mathbf{x})] + \mathbb{E}_{\mathbf{z} \sim p_{\mathbf{z}}(\mathbf{z})} [\log(1 - D(G(\mathbf{z})))]$$
       </div>
-      <p>At equilibrium, $G$ produces a distribution $p_g = p_{data}$, and $D(\mathbf{x}) = 1/2$ everywhere, meaning the discriminator can no longer distinguish real from fake.</p>
+      <p>The logic is a two-step "Duel":</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>Step 1: The Detective</strong>: $D$ tries to maximize $V$. It learns to output 1 for real data $\mathbf{x}$ and 0 for forgeries $G(\mathbf{z})$.</li>
+        <li><strong>Step 2: The Forger</strong>: $G$ tries to minimize the second term. It "wins" if it can force the Discriminator to output $D(G(\mathbf{z})) = 1$.</li>
+      </ul>
+      <p>At the <strong>Nash Equilibrium</strong>, the Generator has captured the data distribution so perfectly that $p_g = p_{data}$. At this point, the Discriminator is forced to guess, with $D(\mathbf{x}) = 0.5$ for every input.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, GANs are the <strong>Creative Engines</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Implicit Density</strong>: Unlike other models, GANs never actually "see" the raw data distribution. They only see the *gradient* of the Discriminator. They learn to sample from a distribution rather than modeling it explicitly.</li>
+        <li><strong>Training Instability</strong>: GANs are notoriously hard to train. If the Discriminator becomes too "smart" too early, it will always output 0 for fakes, leaving the Generator with zero gradient and no way to learn. This leads to the infamous "Vanishing Gradient" on the Generator's side.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Mode Collapse. This happens when the Generator finds a single "Safe" image that always fools the Discriminator and stops trying to be diverse. You end up with a model that can only generate one specific face over and over again.</p>
     </div>
     
     <div class="callout tip">

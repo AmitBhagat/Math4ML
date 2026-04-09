@@ -25,18 +25,33 @@ export const probabilityDistributionsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Probability Laws</div>
-      <p>A **Probability Distribution** is a mathematical descriptor that provides the likelihood of every possible value of a random variable $X$. It is defined either by its discrete or continuous nature:</p>
+      <div class="premium-def-title">Formalism: The Law of Total Probability Mass & Density</div>
+      <p>A Probability Distribution is the "Identity Card" of a random variable. It maps the abstract chaos of "what might happen" into a precise mathematical shape.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a plot where the horizontal axis represents all possible outcomes $x$ of an experiment. We want to assign a "height" or "weight" to each outcome to show how likely it is. Geometrically, a distribution is a shape that encloses a total area (or volume) of exactly <strong>1.0</strong>. This area represents the "Universe of Certainty"—one of the outcomes *must* happen. If the shape is a tall spike, the outcome is predictable; if it's a flat plateau, the outcome is pure noise.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We define a distribution through its <strong>Cumulative Distribution Function (CDF)</strong>, which tracks the accumulation of probability $P(X \le x)$:</p>
       <div class="math-block">
-        $$F(x) = P(X \le x), \quad x \in \mathbb{R}$$
+        $$F_X(x) = P(X \le x)$$
       </div>
-      <p>The behavior is characterized by two fundamental functional forms:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Mass Function (PMF)</strong>: For discrete $X$, $p(x) = P(X = x)$, satisfying $\sum p(x_i) = 1$.</li>
-        <li><strong>Density Function (PDF)</strong>: For continuous $X$, $f(x) = \frac{d}{dx}F(x)$, satisfying $\int_{-\infty}^\infty f(x) dx = 1$.</li>
-        <li><strong>Normalization</strong>: Both forms ensure the total "volume" of probability is exactly 1, representing certainty that <em>some</em> outcome must occur.</li>
+      <p>For a <strong>Continuous Distribution</strong>, we derive the "Rate of Change" of this accumulation, which we call the <strong>Probability Density Function (PDF)</strong>. This is the derivative of the CDF:</p>
+      <div class="math-block">
+        $$f_X(x) = \frac{d}{dx} F_X(x)$$
+      </div>
+      <p>Because the probability of the entire sample space $\Omega$ must be 1.0, any valid PDF must satisfy the <strong>Normalization Constraint</strong>:</p>
+      <div class="math-block">
+        $$\int_{-\infty}^{\infty} f_X(x) dx = 1$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, we optimize parameters $\theta$ to find the "Best Fit" distribution: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Density Estimation</strong>: We assume a distribution family (like Normal or Bernoulli) and use data to calculate the mean and variance.</li>
+        <li><strong>Log-Likelihood</strong>: Instead of maximizing the probability directly (which can be infinitesimally small), we maximize the <strong>Log</strong> of the density, as it turns multiplications into sums and keeps the math stable.</li>
       </ul>
-      <p class="mt-2">Machine Learning often involves **Density Estimation**, where we approximate the parameters of a distribution $p(x|\theta)$ that best explains the observed data.</p>
+      <p class="mt-4 italic text-sm">Gotcha: In a continuous distribution, the probability of any <strong>exact</strong> point is exactly zero ($P(X=5.000...)$). We only care about the probability of falling within a range (an integral). The vertical height $f(x)$ is a density, not a probability—it can actually be greater than 1.0.</p>
     </div>
     
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>

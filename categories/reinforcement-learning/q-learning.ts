@@ -17,21 +17,30 @@ export const qLearningSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Bellman Update</div>
-      <p>The **Q-Value** $Q(s, a)$ represents the expected cumulative reward for taking action $a$ in state $s$ and following the optimal policy thereafter. It is governed by the **Bellman Optimality Equation**:</p>
+      <div class="premium-def-title">Formalism: Temporal Difference & the Q-Value Surface</div>
+      <p>Q-Learning is the "Scoreboard of Experience." It is the algorithm that turns a series of random interactions into a map of superhuman skill.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are in a massive, dark library searching for a specific book. You have no map, but every time you pick a book, a price tag on the back tells you its value. Geometrically, <strong>Q-Learning</strong> is the process of building a <strong>Value Surface</strong> (the Q-Table) over the coordinate space of (State, Action). At the start, this surface is perfectly flat—you know nothing. As you explore, you iteratively "Carve" this surface, raising the regions that lead to rewards and lowering the pits of failure. The goal is to smooth out the noise until you have a "Ridge of Success" that guides the agent from any starting point straight to the goal.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Q-Learning is a "Model-Free" algorithm, meaning it learns without knowing the transition probabilities $P(s'|s, a)$. It relies on the <strong>Q-Value function</strong>, which represents the quality of a specific action in a specific state:</p>
       <div class="math-block">
-        $$Q^*(s, a) = \mathbb{E}[R_{t+1} + \gamma \max_{a'} Q^*(s', a') \mid s, a]$$
+        $$Q(s, a) = \mathbb{E} [ R_{t+1} + \gamma \max_{a'} Q(S_{t+1}, a') \mid S_t=s, A_t=a ]$$
       </div>
-      <p>In most real-world scenarios, the agent does not know the environment's transitions. It updates its $Q$ estimates iteratively using **Temporal Difference (TD)** learning:</p>
+      <p>Because the agent doesn't know the future, it uses a <strong>Temporal Difference (TD)</strong> update to refine its guesses. It compares what it *thought* would happen (the Guess) to what *actually* happened (the Target):</p>
       <div class="math-block">
-        $$Q(s, a) \leftarrow Q(s, a) + \alpha \underbrace{[R + \gamma \max_{a'} Q(s', a') - Q(s, a)]}_{\text{TD Error}}$$
+        $$Q(s, a) \leftarrow Q(s, a) + \alpha [ \underbrace{R_{t+1} + \gamma \max_{a'} Q(s', a')}_{\text{Learned Target}} - \underbrace{Q(s, a)}_{\text{Current Guess}} ]$$
       </div>
-      <p class="text-xs opacity-80 mt-2">Where:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TD Error</strong>: The difference between the "Updated Target" and the current estimate.</li>
-        <li><strong>Learning Rate ($\alpha$)</strong>: How quickly the agent forgets old knowledge in favor of new experiences.</li>
-        <li><strong>Exploration ($\epsilon$-greedy)</strong>: The agent occasionally takes random actions to discover better "Golden Paths" it hasn't seen yet.</li>
+      <p>The term in brackets is the <strong>TD-Error</strong>. By repeatedly nudging our guess toward the target using the <strong>Learning Rate ($\alpha$)</strong>, the Q-table is guaranteed to converge to the optimal values.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Reinforcement Learning, Q-Learning is the <strong>Off-Policy Solver</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Exploration-Exploitation</strong>: We use $\epsilon$-greedy strategies. The agent occasionally takes random actions to find better "Gold" it hasn't seen yet, but mostly follows its best guess.</li>
+        <li><strong>Independence</strong>: Q-Learning learns the optimal policy even if the agent is acting randomly (Off-Policy), provided every state-action pair is visited enough times.</li>
       </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Overestimation Bias. Q-Learning has a tendency to overestimate values because of the <code>max</code> operator. If there's noise in your rewards, the agent might get "excited" about a fluke and waste thousands of steps chasing a mirage.</p>
     </div>
     
     <div class="callout tip">

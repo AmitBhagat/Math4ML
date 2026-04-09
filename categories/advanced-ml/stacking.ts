@@ -22,7 +22,7 @@ export const stackingSection: TopicSection = {
       <div class="math-block">
         $$\hat{y} = H\left( h_1(\mathbf{x}), h_2(\mathbf{x}), \dots, h_M(\mathbf{x}) \right)$$
       </div>
-      <p>To prevent overfitting, the meta-features $\mathbf{z}_i$ for training $H$ must be generated using **Out-of-Fold (OOF)** predictions:</p>
+      <p>To prevent overfitting, the meta-features $\mathbf{z}_i$ for training $H$ must be generated using <strong>Out-of-Fold (OOF)</strong> predictions:</p>
       <div class="math-block">
         $$z_{i,m} = h_m^{(-i)}(\mathbf{x}_i)$$
       </div>

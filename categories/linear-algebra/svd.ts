@@ -17,18 +17,26 @@ export const singularValueDecompositionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Universal Factorization</div>
-      <p>Any matrix $A \in \mathbb{R}^{m \times n}$ can be decomposed into three specialized matrices:</p>
+      <div class="premium-def-title">Formalism: The Universal Decomposition & Symmetry</div>
+      <p>SVD is the most powerful "unraveling" tool in your kit. It breaks <strong>any</strong> linear transformation into its core geometric steps.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Every transformation $A$ can be seen as a three-stage relay: First, a rotation in the input space ($V^T$), then a scaling along some key axes ($\Sigma$), and finally a rotation in the output space ($U$). Unlike Eigendecomposition, which requires a square matrix that doesn't "stretch" space too weirdly, SVD works for every matrix in existence.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation via $A^\top A$</h3>
+      <p>To find the singular values, we capitalize on the fact that $A^\top A$ is always a symmetric, positive semi-definite matrix. Its eigenvalues $\lambda_i$ are always non-negative. We derive the components of $A = U\Sigma V^\top$ as follows:</p>
+      <div class="math-block">
+        $$A^\top A = (U\Sigma V^\top)^\top (U\Sigma V^\top) = V \Sigma^\top U^\top U \Sigma V^\top = V (\Sigma^\top \Sigma) V^\top$$
+      </div>
+      <p>This reveals that the <strong>Right Singular Vectors</strong> ($V$) are the eigenvectors of $A^\top A$, and the <strong>Singular Values</strong> ($\sigma_i$) are the square roots of the eigenvalues: $\sigma_i = \sqrt{\lambda_i}$. Similarly, the left singular vectors ($U$) are the eigenvectors of $AA^\top$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Formula</h3>
+      <p>For any $A \in \mathbb{R}^{m \times n}$, we have:</p>
       <div class="math-block">
         $$A = U \Sigma V^\top$$
       </div>
-      <p>where the components provide a structural breakdown of the transformation:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>$U \in \mathbb{R}^{m \times m}$</strong>: An orthogonal matrix whose columns (left-singular vectors) represent the geometry of the output space.</li>
-        <li><strong>$\Sigma \in \mathbb{R}^{m \times n}$</strong>: A diagonal matrix of singular values $\sigma_i$, representing the "strength" of the transformation along each axis.</li>
-        <li><strong>$V \in \mathbb{R}^{n \times n}$</strong>: An orthogonal matrix whose columns (right-singular vectors) represent the geometry of the input space.</li>
-      </ul>
-      <p class="mt-2">SVD is the foundation of data compression; by retaining only the largest $\sigma_i$ values, we obtain the optimal low-rank approximation of the original data.</p>
+      <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
@@ -92,7 +100,7 @@ print(f"Singular values of A: {s}")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: **Rotate, Stretch, Rotate.**</p>
+    <p>SVD is the ultimate "Noise Filter" for Machine Learning. It allows you to take any messy, complex matrix and unravel it into three elegant steps: <strong>Rotate, Stretch, Rotate.</strong></p>
     <ul>
       <li><strong>Concept Search (Latent Semantic Analysis)</strong>: Google and Bing don't just look for keywords; they look for "Concepts." SVD takes a giant matrix of billions of words and documents and finds the "Hidden Dimensions" (Topics). This allows the system to realize that a paper about "Quantum Computing" and a blog post about "Qubits" are semantically identical, even if they share zero identical words, because they align on the same singular value axis.</li>
       <li><strong>Top-k Image Denoising</strong>: In scientific imaging or astrophotography, pictures are often buried under a haze of sensor "noise." Since the "Real Image" is a high-rank pattern and noise is random jitter, we use SVD to keep only the top-k singular values. This mathematically "kills" the noise while keeping the sharp edges of the galaxy or the cell, essentially distilling the signal from the static.</li>

@@ -17,15 +17,32 @@ export const gmmSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Gaussian Mixture Model</div>
-      <p>A Gaussian Mixture Model represents the probability distribution of observations as a weighted sum of $K$ multivariate Gaussian densities:</p>
+      <div class="premium-def-title">Formalism: Mixture Densities & Latent Responsibilities</div>
+      <p>GMM is "Probabilistic Pluralism." It assumes that each cluster is a distinct "Probability Cloud" and that reality is a weighted sum of these clouds.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>While K-Means treats clusters as hard, rigid Voronoi cells, <strong>Gaussian Mixture Models (GMM)</strong> see them as "Soft Clouds" of probability. Geometrically, each cluster is a multidimensional bell curve (Gaussian) that has a center ($\mu$), a specific orientation, and a "stretch" or "spread" defined by its <strong>Covariance Matrix</strong> ($\Sigma$). Because these clouds are probabilistic, they can overlap. A point sitting in the middle of two clouds belongs to both, with different degrees of "Responsibility." It is the difference between drawing a hard border and mapping a diffuse fog.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>The probability of observing a point $\mathbf{x}$ is defined as a weighted sum (mixture) of $K$ separate Gaussian distributions:</p>
       <div class="math-block">
-        $$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x} \mid \mu_k, \boldsymbol{\Sigma}_k)$$
+        $$p(\mathbf{x}) = \sum_{k=1}^K \pi_k \mathcal{N}(\mathbf{x} \mid \mu_k, \Sigma_k)$$
       </div>
-      <p>Where $\pi_k$ are the mixing coefficients satisfying $\sum_{k=1}^K \pi_k = 1$. The model is typically solved using the **Expectation-Maximization (EM)** algorithm, which iteratively calculates the **Responsibility** (posterior probability) $\gamma_{ik}$:</p>
-      <div class="math-block">
-        $$\gamma_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i \mid \mu_k, \boldsymbol{\Sigma}_k)}{\sum_{j=1}^K \pi_j \mathcal{N}(\mathbf{x}_i \mid \mu_j, \boldsymbol{\Sigma}_j)}$$
-      </div>
+      <p>We solve for the parameters using the <strong>Expectation-Maximization (EM)</strong> algorithm:</p>
+      <ul class="mt-2 mb-4 space-y-2">
+        <li><strong>E-Step (Expectation)</strong>: We calculate the <strong>Responsibility</strong> $\gamma_{nk}$—the probability that cluster $k$ was responsible for generating point $n$:
+          $$\gamma_{nk} = \frac{\pi_k \mathcal{N}(\mathbf{x}_n \mid \mu_k, \Sigma_k)}{\sum_j \pi_j \mathcal{N}(\mathbf{x}_n \mid \mu_j, \Sigma_j)}$$
+        </li>
+        <li><strong>M-Step (Maximization)</strong>: We update the means, covariances, and mixing weights by calculating the "weighted" average of the data, where the weights are those very responsibilities.</li>
+      </ul>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, GMM is the <strong>Flexible Modeler</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Soft Assignment</strong>: Unlike K-Means, you get a "membership vector" for every point. This is crucial for applications like speech or medical imaging where things are rarely 100% one type or another.</li>
+        <li><strong>Cluster Shape</strong>: By adjusting the covariance type (Spherical, Diagonal, or Full), GMM can find clusters that are stretched into long, thin ellipses at any angle—something K-Means is physically incapable of doing.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: GMM is very sensitive to initialization. If you start with your Gaussians in total chaos, the EM algorithm might get stuck in a "local optimum" where one cloud eats the entire dataset and another cloud collapses into a single point.</p>
     </div>
 
     <h2 id="soft">Soft Clustering: Membership Probability</h2>

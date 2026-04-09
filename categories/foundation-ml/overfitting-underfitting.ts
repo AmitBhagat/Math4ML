@@ -18,7 +18,7 @@ export const overfittingUnderfittingSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Generalization Gap</div>
-      <p>The performance of a model $h$ is defined by the difference between its **Empirical Risk** $\hat{R}(h)$ (training error) and its **Structural Risk** $R(h)$ (true error on unseen data):</p>
+      <p>The performance of a model $h$ is defined by the difference between its <strong>Empirical Risk</strong> $\hat{R}(h)$ (training error) and its <strong>Structural Risk</strong> $R(h)$ (true error on unseen data):</p>
       <div class="math-block">
         $$\text{Gap} = R(h) - \hat{R}(h)$$
       </div>
@@ -26,7 +26,7 @@ export const overfittingUnderfittingSection: TopicSection = {
       <ul class="mt-2 space-y-1">
         <li><strong>Underfitting (High Bias)</strong>: The hypothesis space $\mathcal{H}$ is too restrictive. Both training and test errors are high. The model fails to solve the "optimization" part of the problem.</li>
         <li><strong>Overfitting (High Variance)</strong>: The model has excessive capacity, allowing it to minimize $\hat{R}(h)$ by interpolating noise. This leads to a massive generalization gap where $R(h) \gg \hat{R}(h)$.</li>
-        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via **Regularization** ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
+        <li><strong>Occam's Razor</strong>: In ML, we prefer the simplest hypothesis that explains the data. We enforce this via <strong>Regularization</strong> ($\Omega(h)$), minimizing the total objective: $J(h) = \hat{R}(h) + \lambda \Omega(h)$.</li>
       </ul>
       <p class="mt-2">Successful learning occurs when the model finds the global minimum of the total risk, balancing model complexity against data resolution.</p>
     </div>

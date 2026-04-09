@@ -25,19 +25,33 @@ export const confidenceIntervalsSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Interval Estimation</div>
-      <p>A **Confidence Interval (CI)** for a population parameter $\theta$ is an interval $[L, U]$ computed from sample data, associated with a confidence level $1 - \alpha$ (commonly 0.95 or 0.99):</p>
+      <div class="premium-def-title">Formalism: The Probabilistic Bound & Standard Error Scaling</div>
+      <p>A Confidence Interval is "Honest Estimation." It tells you exactly how much room for error your data actually has.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine the <strong>Sampling Distribution</strong> of the mean (the bell curve of all possible averages you could have calculated). A single sample mean $\bar{X}$ is just one point on this curve. A <strong>Confidence Interval</strong> is a "Cage" centered around your sample mean. Geometrically, it’s the width required to cover exactly $(1 - \alpha)$ of the total area under that bell curve. If you want more certainty (99%), you have to build a wider cage. If you have more data ($n$), the bell curve becomes skinnier, and your cage becomes more precise.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We derive the interval starting from the <strong>Z-Statistic</strong> of the sample mean. We know that for a large enough sample size $n$:</p>
       <div class="math-block">
-        $$P(L \le \theta \le U) = 1 - \alpha$$
+        $$Z = \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \sim \mathcal{N}(0, 1)$$
       </div>
-      <p>For estimating the population mean $\mu$ under the assumption of normality, the interval is constructed as:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Standard Formula</strong>: $CI = \bar{x} \pm z^* \left( \frac{\sigma}{\sqrt{n}} \right)$, where $\bar{x}$ is the sample mean.</li>
-        <li><strong>Margin of Error</strong>: The term $z^* \frac{\sigma}{\sqrt{n}}$ represents the maximum expected distance between the point estimate and the true parameter.</li>
-        <li><strong>Critical Value ($z^*$)</strong>: Determined by the level of confidence; for a 95% CI, $z^* \approx 1.96$ (from the standard normal distribution).</li>
-        <li><strong>Sample Size Impact</strong>: The width of the interval is inversely proportional to $\sqrt{n}$. Tripling the confidence level requires a much larger sample to maintain the same precision.</li>
+      <p>For a confidence level of $1-\alpha$, we find the critical value $z^*$ such that the area between $-z^*$ and $z^*$ is $1-\alpha$. This leads to the probability inequality:</p>
+      <div class="math-block">
+        $$P\left( -z^* \le \frac{\bar{X} - \mu}{\sigma / \sqrt{n}} \le z^* \right) = 1 - \alpha$$
+      </div>
+      <p>Rearranging this inequality to isolate the true population mean $\mu$, we arrive at the <strong>Confidence Interval formula</strong>:</p>
+      <div class="math-block">
+        $$CI = \bar{X} \pm z^* \cdot \frac{\sigma}{\sqrt{n}}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Confidence Intervals are our <strong>Stability Metrics</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Precision over Accuracy</strong>: A model that is "90% accurate" with a $\pm 10\%$ CI is effectively useless—it might be an 80% model or a 100% model. We need high precision (tight intervals) to trust our deployments.</li>
+        <li><strong>The $\sqrt{n}$ Law</strong>: To cut your error bar in half, you need <strong>four times</strong> more data. This is the fundamental "diminishing returns" of data collection.</li>
       </ul>
-      <p class="mt-2">In ML, we use CIs (often via **Bootstrapping**) to determine if the performance gap between two models is statistically significant or the result of sampling noise.</p>
+      <p class="mt-4 italic text-sm">Gotcha: A 95% Confidence Interval DOES NOT mean there is a 95% chance that the true mean is in *your* specific interval. It means that if you repeated the experiment, 95% of the *different* intervals you created would contain the true mean. It is a property of the process, not the specific outcome.</p>
     </div>
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
@@ -115,7 +129,7 @@ print(f"Bootstrap 95% CI: [{ci_low:.2f}, {ci_high:.2f}]")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>A Confidence Interval is a "Safety Net." Instead of giving a single fragile number, it gives a range that tells you how much you should **Trust** your model's predictions.</p>
+    <p>A Confidence Interval is a "Safety Net." Instead of giving a single fragile number, it gives a range that tells you how much you should <strong>Trust</strong> your model's predictions.</p>
     <ul>
       <li><strong>A/B Testing (Lift Analysis)</strong>: When we change a website's layout, we don't just calculate the mean increase in sales. We calculate a 95% Confidence Interval for that "Lift." If the interval doesn't cross Zero, we can say with mathematical certainty that the change actually helped and wasn't just a fluke.</li>
       <li><strong>Model Benchmarking (Bootstrap CI)</strong>: In academic papers, we don't just say "My Model is 92% accurate." We use Bootstrapping to create 1,000 virtual test sets and find the range where the model's accuracy actually lives. This tells other scientists how robust your model is to variations in the data.</li>

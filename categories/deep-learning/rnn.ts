@@ -17,16 +17,30 @@ export const rnnSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Sequential State Updates</div>
-      <p>An RNN is a dynamic system that computes a hidden state $\mathbf{h}_t$ by combining the current input $\mathbf{x}_t$ with the previous state $\mathbf{h}_{t-1}$. The update rule is typically defined as:</p>
+      <div class="premium-def-title">Formalism: Temporal Recursion & Unrolled Manifods</div>
+      <p>RNNs are "Sequential Processors." They treat data as a causal stream where the meaning of the present is defined by the context of the past.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine your data is not a photo, but a movie. A standard network only sees one frame at a time and forgets it immediately. A <strong>Recurrent Neural Network (RNN)</strong> is a cell that loops back on itself. Geometrically, it is a <strong>Cycle</strong> in the computational graph. When we "Unroll" this cycle over a sequence of length $T$, it becomes a very deep feedforward network with $T$ layers, all sharing the exact same weight matrices. It maintains a <strong>Hidden State</strong> ($\mathbf{h}_t$)—a dynamic vector that acts as a "Internal Summary" or "Latent Memory" of everything the network has seen up to that second.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>At each time step $t$, the RNN cell updates its internal state by combining the current input $\mathbf{x}_t$ with the previous state $\mathbf{h}_{t-1}$:</p>
       <div class="math-block">
         $$\mathbf{h}_t = \sigma( \mathbf{W}_{hh} \mathbf{h}_{t-1} + \mathbf{W}_{xh} \mathbf{x}_t + \mathbf{b}_h )$$
       </div>
-      <p>The final output $\mathbf{y}_t$ is then projected from this hidden state:</p>
+      <p>The output is then projected from this shared memory:</p>
       <div class="math-block">
         $$\mathbf{y}_t = \text{Softmax}(\mathbf{W}_{hy} \mathbf{h}_t + \mathbf{b}_y)$$
       </div>
-      <p class="mt-2">Due to the recursive nature, training involves **Backpropagation Through Time (BPTT)**, which can suffer from vanishing gradients over long sequences.</p>
+      <p>Training this monster requires <strong>Backpropagation Through Time (BPTT)</strong>. Because we apply the same matrix $\mathbf{W}_{hh}$ over and over, the gradient $\nabla \mathcal{L}$ involves a product of $T$ Jacobians. This leads to the <strong>Vanishing Gradient Problem</strong>: if the weights are small, the gradient shrinks to zero, and the model forgets the beginning of the sequence. If they are large, the gradient explodes, crashing the training.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Deep Learning, RNNs are the <strong>Chronological Decipherers</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Variable Length</strong>: Unlike CNNs or MLPs, RNNs can process sequences of any length (sentences of 5 words or 500 words) because they use the same "Logic Loop" for every step.</li>
+        <li><strong>Temporal Inductive Bias</strong>: It assumes that the "Next" event is directly influenced by the "Previous" event, making it the perfect tool for language, audio, and time-series data.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Sequential Dependencies. Because $\mathbf{h}_t$ depends on $\mathbf{h}_{t-1}$, you cannot compute step 10 until step 9 is finished. This makes RNNs slow to train on modern parallel hardware (GPUs) compared to Transformers.</p>
     </div>
     
     <div class="callout tip">

@@ -17,13 +17,26 @@ export const basisDimensionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Spanning Sets and Cardinality</div>
-      <p>A set of vectors $\mathcal{B} = \{\mathbf{b}_1, \mathbf{b}_2, \dots, \mathbf{b}_n\}$ is a **Basis** for a vector space $V$ if it satisfies two conditions:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>Independence</strong>: No vector in $\mathcal{B}$ can be expressed as a linear combination of the others.</li>
-        <li><strong>Span</strong>: Every vector $\mathbf{v} \in V$ can be uniquely expressed as: $\mathbf{v} = \sum_{i=1}^n c_i \mathbf{b}_i$.</li>
+      <div class="premium-def-title">Formalism: Spanning Sets & Linear Coordinates</div>
+      <p>A Basis is the most efficient "Dictionary" for a space. It allows you to describe any vector without using a single redundant word.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Think of $V$ as a room. A <strong>Basis</strong> $\mathcal{B} = \{\mathbf{b}_1, \dots, \mathbf{b}_n\}$ is a set of "directional arrows" that, when combined, can reach every corner of the room. To be a basis, the arrows must be <strong>Linearly Independent</strong> (no redundant directions) and they must <strong>Span</strong> the space (no dead zones).</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation of Uniqueness</h3>
+      <p>If $\mathcal{B}$ is a basis, then every vector $\mathbf{v}$ has a <strong>unique</strong> set of coordinates. We prove this by contradiction. Suppose $\mathbf{v}$ had two different representations:</p>
+      <div class="math-block">
+        $$\mathbf{v} = \sum a_i \mathbf{b}_i \quad \text{and} \quad \mathbf{v} = \sum d_i \mathbf{b}_i$$
+      </div>
+      <p>Subtracting them gives: $\mathbf{0} = \sum (a_i - d_i) \mathbf{b}_i$. Since basis vectors are independent, the only way to get $\mathbf{0}$ is if every coefficient $(a_i - d_i) = 0$, meaning $a_i = d_i$. This uniqueness is what allows us to map high-dimensional data like images into a stable, numeric coordinate system.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Parameter</h3>
+      <p>The <strong>Dimension</strong> $\dim(V)$ is the number of vectors in its basis. It is the "Degree of Freedom" of the space.</p>
+      <ul class="mt-2 space-y-2">
+        <li>If you have $n+1$ vectors in an $n$-dimensional space, they <strong>must</strong> be dependent.</li>
+        <li>If you have $n-1$ vectors, they <strong>cannot</strong> span the space.</li>
       </ul>
-      <p>The **Dimension** $\dim(V)$ is defined as the cardinality $n$ of the basis. Any two bases for the same vector space must have the same number of elements.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Dimension is a property of the SPACE, not the vectors. $[1,0,0]$ and $[0,1,0]$ are 3D vectors, but they only span a 2D subspace. Context is everything.</p>
     </div>
     
     <div class="callout tip">

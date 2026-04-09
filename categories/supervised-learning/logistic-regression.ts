@@ -17,22 +17,37 @@ export const logisticRegressionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Logistic Regression</div>
-      <p>Logistic regression models the probability of a binary response variable using the **Logistic (Sigmoid) Function**. For a feature vector $\mathbf{x}$, the predicted probability $\hat{y}$ is:</p>
+      <div class="premium-def-title">Formalism: The Sigmoid Warp & Log-Likelihood</div>
+      <p>Logistic Regression is "Probabilistic Linearization." It turns a hard classification problem into a smooth, learnable probability curve.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a standard linear plane trying to predict a "Yes" or "No" outcome. A plane extends to infinity in both directions, which is useless for expressing confidence. <strong>Logistic Regression</strong> solves this by <strong>warping</strong> that infinite plane into an S-shaped manifold (the <strong>Sigmoid curve</strong>). Geometrically, it calculates the distance of a point from the <strong>Decision Boundary</strong> (the line where the model is 50% sure) and "squashes" that distance into a window between 0 and 1. The further you are from the fence, the more certain the model becomes.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with a linear score $z = \mathbf{w}^T \mathbf{x} + b$ (the <strong>Log-Odds</strong>). We then pass this through the <strong>Sigmoid Function</strong> to get a probability $p$:</p>
       <div class="math-block">
-        $$\hat{y} = \sigma(\mathbf{w}^T \mathbf{x} + b) = \frac{1}{1 + e^{-(\mathbf{w}^T \mathbf{x} + b)}}$$
+        $$P(y=1 \mid \mathbf{x}) = \sigma(z) = \frac{1}{1 + e^{-z}}$$
       </div>
-      <p>The model parameters are optimized by minimizing the **Binary Cross-Entropy (Log Loss)** objective:</p>
+      <p>To train the model, we maximize the likelihood of the observed data. In practice, we minimize the <strong>Binary Cross-Entropy (BCE)</strong>, also known as the Negative Log-Likelihood:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}, b) = -\frac{1}{n} \sum_{i=1}^n \left[ y_i \log(\hat{y}_i) + (1 - y_i) \log(1 - \hat{y}_i) \right]$$
+        $$J(\mathbf{w}) = -\frac{1}{n} \sum_{i=1}^n [y_i \log(\hat{y}_i) + (1-y_i) \log(1-\hat{y}_i)]$$
       </div>
+      <p>Unlike Linear Regression, this objective has no closed-form matrix solution. We must use Gradient Descent to "walk" down the convex surface of the log-loss until we find the optimal weights.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Logistic Regression is the <strong>Single Neuron</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Uncertainty is a Feature</strong>: It doesn't just say "Class A"; it says "92% chance of Class A." This allows researchers to set custom thresholds based on risk.</li>
+        <li><strong>Linear Separability</strong>: It assumes that the two classes can be separated by a straight line or a plane. If your data is "swirled" together (like a Yin-Yang), simple Logistic Regression will fail unless you use kernels or poly-features.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Logistic Regression is very sensitive to <strong>Outliers</strong> that are far from the decision boundary but on the correct side; they can pull the boundary away from the cluster and ruin the model's calibration.</p>
     </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
         Think of Logistic Regression as a <strong>"Commitment Curve"</strong> or a <strong>"Soft Switch."</strong> 
-        A linear model is like a long, straight pipe, but a Sigmoid is like an **S-Curve** that decides the fate of the data. 
+        A linear model is like a long, straight pipe, but a Sigmoid is like an <strong>S-Curve</strong> that decides the fate of the data. 
         As your input gets stronger, the model "Leans" harder toward 1.0; as it gets weaker, it "Commits" to 0.0. 
         The magic happens in the middle: the model stays honest about the uncertainty. 
         It's the foundation of all Neural Networks—a single "Neuron" in a massive AI like GPT is often just a sophisticated version of this same logistic switch.

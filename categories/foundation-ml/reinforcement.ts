@@ -18,7 +18,7 @@ export const reinforcementLearningSection: TopicSection = {
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Markov Decision Process (MDP)</div>
-      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an **MDP** tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
+      <p>Reinforcement Learning is formally defined by the interaction between an agent and a stochastic environment, modeled as an <strong>MDP</strong> tuple $(\mathcal{S}, \mathcal{A}, \mathcal{P}, \mathcal{R}, \gamma)$:</p>
       
       <div class="space-y-4">
         <div>
@@ -28,14 +28,14 @@ export const reinforcementLearningSection: TopicSection = {
 
         <div>
           <h4 class="text-sm font-bold text-green-premium">2. The Optimization Goal</h4>
-          <p class="text-xs mb-1">The objective is to find an optimal **Policy** $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
+          <p class="text-xs mb-1">The objective is to find an optimal <strong>Policy</strong> $\pi(a \mid s)$ that maximizes the expected cumulative discounted reward (The Return):</p>
           <div class="math-block">
             $$G_t = \sum_{k=0}^\infty \gamma^k R_{t+k+1}$$
           </div>
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the **Bellman Equation**, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
+      <p class="text-xs opacity-80 mt-2">The fundamental recursive relationship is the <strong>Bellman Equation</strong>, which relates the value of the current state to the expected value of future states. $\gamma$ (the discount factor) represents the agent's "horizon"—how much it values immediate rewards versus long-term stability.</p>
     </div>
     
     <h2 id="exploitation">Exploration vs. Exploitation</h2>

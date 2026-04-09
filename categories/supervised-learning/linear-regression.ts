@@ -17,15 +17,33 @@ export const linearRegressionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Linear Regression</div>
-      <p>Linear regression models the relationship between a dependent variable $y \in \mathbb{R}$ and a feature vector $\mathbf{x} \in \mathbb{R}^d$. The relationship is assumed to be linear:</p>
+      <div class="premium-def-title">Formalism: The Normal Equation & Orthogonal Projection</div>
+      <p>Linear Regression is the "Mathematical Baseline." It assumes the world is a series of simple, additive influences.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine a vector $\mathbf{y}$ containing your target values. Now imagine a multidimensional <strong>Feature Space</strong> spanned by your input variables $\mathbf{x}_1, \dots, \mathbf{x}_d$. Unless your data is perfectly consistent, $\mathbf{y}$ will not lie on this plane. <strong>Linear Regression</strong> is the process of finding the point in the feature plane that is <strong>closest</strong> to $\mathbf{y}$. Geometrically, this point is the <strong>Orthogonal Projection</strong> of $\mathbf{y}$ onto the column space of your data matrix $\mathbf{X}$. The "Error" is the perpendicular line connecting the two.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>We start with the <strong>Loss Function</strong> (Sum of Squared Errors):</p>
       <div class="math-block">
-        $$\hat{y} = \mathbf{w}^T \mathbf{x} + b$$
+        $$J(\mathbf{w}) = \|\mathbf{y} - \mathbf{X}\mathbf{w}\|^2 = (\mathbf{y} - \mathbf{X}\mathbf{w})^T(\mathbf{y} - \mathbf{X}\mathbf{w})$$
       </div>
-      <p>The optimal parameters $(\mathbf{w}^*, b^*)$ are found by minimizing the **Residual Sum of Squares (RSS)**:</p>
+      <p>Expanding this, we get a quadratic form. To find the minimum, we take the derivative with respect to the weight vector $\mathbf{w}$ and set it to zero:</p>
       <div class="math-block">
-        $$\mathcal{L}(\mathbf{w}, b) = \sum_{i=1}^n (y_i - (\mathbf{w}^T \mathbf{x}_i + b))^2$$
+        $$\frac{\partial J}{\partial \mathbf{w}} = -2\mathbf{X}^T\mathbf{y} + 2\mathbf{X}^T\mathbf{X}\mathbf{w} = 0$$
       </div>
+      <p>Solving for $\mathbf{w}$, we arrive at the legendary <strong>Normal Equation</strong>:</p>
+      <div class="math-block">
+        $$\mathbf{w} = (\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T\mathbf{y}$$
+      </div>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Machine Learning, Linear Regression is our <strong>Gold Standard for Interpretability</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Coefficients as Influence</strong>: Each weight $w_i$ tells you exactly how much $y$ changes if you nudge $x_i$ by 1 unit. There is no mystery; the math is a glass box.</li>
+        <li><strong>Assumptions</strong>: For this to work best, we assume <strong>Homoscedasticity</strong> (noise is constant across features) and <strong>Independence</strong>. If features are highly correlated (<strong>Multicollinearity</strong>), the matrix $(\mathbf{X}^T\mathbf{X})$ becomes impossible to invert, and the model collapses.</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: Many practitioners jump straight to Gradient Descent. In reality, if your dataset is small enough to fit in memory, the <strong>Normal Equation</strong> is often faster and yields the exact mathematical truth with zero tuning.</p>
     </div>
     
     <div class="callout tip">

@@ -17,18 +17,30 @@ export const precisionSection: TopicSection = {
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: Positive Predictive Value (PPV)</div>
-      <p>In binary classification, **Precision** is defined as the probability that a sample belongs to the positive class given that the model predicted it as positive. It is a measure of the "Purity" of positive predictions:</p>
+      <div class="premium-def-title">Formalism: Positive Predictive Value (PPV) & Prediction Purity</div>
+      <p>Precision is the metric of "Credibility." It asks a simple, brutal question: Of all the times you yelled 'Positive!', how many times were you actually right?</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
+      <p>Imagine you are a prospector panning for gold in a rushing river. You scoop up a pan full of dirt, silt, and pebbles. <strong>Precision</strong> is the ratio of actual gold nuggets you found to the total amount of "stuff" in your pan. Geometrically, it is a <strong>Venn Diagram</strong> of Overlap: it measures the intersection of your predictions with the ground truth, but it scales that intersection by the size of your *Predicted Positive* circle. It ignores everything you correctly ignored (True Negatives) and only judges the quality of your *Actions*. It is the metric of purity—it tells you how much of your "Signal" is actually "Truth."</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
+      <p>Precision is formally known as the <strong>Positive Predictive Value (PPV)</strong>. It is defined as the conditional probability that a sample is positive given that the model predicted it as positive:</p>
       <div class="math-block">
-        $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1) = \frac{TP}{TP + FP}$$
+        $$\text{Precision} = \mathbb{P}(y=1 \mid \hat{y}=1)$$
       </div>
-      <p>The components of the precision estimate are:</p>
-      <ul class="mt-2 space-y-1">
-        <li><strong>TP (True Positives)</strong>: Samples correctly identified as positive.</li>
-        <li><strong>FP (False Positives)</strong>: Samples wrongly identified as positive (Type I Error).</li>
-        <li><strong>Trade-off</strong>: Precision is often inversely related to **Recall**. Increasing the classification threshold (being "stricter") increases precision by reducing false alarms, but at the risk of missing genuine signals.</li>
+      <p>Using the tallies from the confusion matrix, we calculate it as:</p>
+      <div class="math-block">
+        $$\text{Precision} = \frac{TP}{TP + FP}$$
+      </div>
+      <p>A model with high precision is often described as <strong>Conservative</strong> or <strong>Callous</strong>. It only says "Yes" when it is extremely sure. By raising your classification threshold (being "stricter"), you essentially shrink your "Predicted Positive" circle, which reduces False Positives and boosts Precision—but it usually costs you in terms of Recall.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
+      <p>In Model Evaluation, Precision is the <strong>Commitment Test</strong>: </p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Quality over Quantity</strong>: High precision guarantees that your "Positive" labels are trustworthy, even if you miss many positive instances.</li>
+        <li><strong>Cost of Error</strong>: Precision is the king of metrics when the cost of a "False Alarm" is high. If you're a judge deciding a sentence, you want precision to be $100\%$. You'd rather let a guilty person go than put an innocent one in jail.</li>
       </ul>
-      <p class="mt-2">Precision is the priority metric when the **Cost of a False Positive** is high—such as in judicial systems, where convicting an innocent person is a devastating failure.</p>
+      <p class="mt-4 italic text-sm">Gotcha: Precision Blindness. You can have $100\%$ precision by predicting "Positive" for only the single most obvious sample in the entire dataset and ignoring the other 9,999. In this case, your model is perfectly "Right" but functionally useless because it has no coverage.</p>
     </div>
     
     <div class="callout tip">

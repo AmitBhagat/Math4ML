@@ -38,7 +38,7 @@ export const trainTestSplitSection: TopicSection = {
         </div>
       </div>
 
-      <p class="text-xs opacity-80 mt-2">To prevent **Data Leakage**, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
+      <p class="text-xs opacity-80 mt-2">To prevent <strong>Data Leakage</strong>, any preprocessing (scaling, imputation) must be calculated on $D_{train}$ only and applied to $D_{test}$. If $|D_{test} \cap D_{train}| > 0$, the resulting performance metrics are invalid due to circular reasoning.</p>
     </div>
     
     <h2 id="example" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Secret Sommelier</h2>
