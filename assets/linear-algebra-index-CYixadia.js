@@ -13,9 +13,6 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Why do we care about vectors? Because they allow us to treat <strong>Qualities</strong> as <strong>Quantities</strong>. In the real world, things are messy—a house has an age, a size, and a location. In math, we treat each of these as a unique <strong>Direction</strong> in space. A single vector is just a point in that multidimensional space, representing one specific "version" of reality. This allows us to calculate the "distance" between house prices or find the "direction" that leads to the highest profit. It is the language that turns our fuzzy observations into a concrete coordinate system that a computer can actually navigate.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The $n$-tuplet & Geometric Magnitude</div>
@@ -43,6 +40,8 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
+
+    <visualizer topic="Vectors" />
     
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     
@@ -171,6 +170,8 @@ print(f"Sum: {add}, Scaled: {scaled}")
     </div>
 
     <h2 id="subspaces">2. Subspaces</h2>
+    
+    <visualizer topic="vector-spaces" />
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
     <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>
@@ -256,103 +257,72 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Space is huge. How do we ensure our vectors aren't redundant? Explore <strong><a href="#/mathematics/linear-algebra/linear-independence">Linear Independence</a></strong>.
     </div>
-  `},i={id:"linear-independence",title:"Linear Independence",description:"Linear Independence ensures your vectors aren't redundant. If a vector can be written as a combination of others, it adds no new information.",color:"#FF9800",html:String.raw`
+  `},i={id:"linear-independence",title:"Linear Independence",description:"A set of vectors is independent if no vector can be built from the others. It's the key to avoid redundancy.",color:"#673AB7",html:String.raw`
     <div class="premium-hero">
-      <div class="premium-hero-badge">🏹 Linear Algebra · Linear Independence</div>
+      <div class="premium-hero-badge">🔢 Linear Algebra · Independence</div>
       <h1>Linear Independence: Zero Redundancy</h1>
-      <p>Linear Independence is a way to measure the <strong>uniqueness</strong> of information. In Machine Learning, if two features are linearly dependent, you have redundant info that could slow down your model or cause errors.</p>
+      <p>In Machine Learning, we want our features to be unique. <strong>Linear Independence</strong> is the formal way of saying: "Every vector in this set brings something new to the table."</p>
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Linear Independence is the ultimate measure of <strong>Efficiency</strong>. If a vector can be built by combining other vectors you already have, then it is "Dependent"—it adds exactly zero new information to your system. In Machine Learning, we strive for independence because redundant features (like "Temp in Celsius" and "Temp in Fahrenheit") just add noise and computational weight without helping the model learn anything new. Ensuring independence is the first step toward a lean, fast, and stable model.</p>
+    <p>Why do we care about independence? Because every piece of data in Machine Learning has a "Price"—in memory, in computation, and in complexity. <strong>Linear Independence</strong> is the rule that tells us whether a new feature is actually adding a new "Direction" to our knowledge, or if it is just a noisy echo of something we already know. If your features are independent, your model is clean and efficient. If they are dependent, your weights can become unstable, and your model might "hallucinate" relationships that aren't there. It is the filter that separates unique insights from redundant clutter.</p>
+
+    <visualizer topic="Basis" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Trivial Solution & The Null Space</div>
-      <p>Linear Independence is the measure of "Informational Innovation." It asks if a vector brings something new or is just a remix.</p>
+      <div class="premium-def-title">Formalism: The Non-Trivial Zero Combination</div>
+      <p>Linear independence is defined by whether we can force a set of vectors to cancel each other out to exactly zero without cheating ($c_i = 0$).</p>
 
       <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
-      <p>Imagine a set of vectors. If you can use some of them to reconstruct another (like mixing blue and yellow to get green), then that "green" vector is <strong>Linearly Dependent</strong>. Geometrically, this means the dependent vector lies within the <strong>Span</strong> (the shadow) of the others. Independent vectors are truly "new" directions in space.</p>
+      <p>If you have two vectors $\mathbf{v}$ and $\mathbf{w}$ in 2D space, they are dependent if they lie on the same line. If you have three vectors in 2D, they <strong>must</strong> be dependent because you've run out of "freedom" in that space. Independence means every new vector "breaks out" into a new dimension.</p>
 
-      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
-      <p>We test for independence by seeing if there is any way to combine the vectors to hit the origin $\mathbf{0}$ WITHOUT using all zeros. We set up the linear combination equation:</p>
+      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Test</h3>
+      <p>A set $\{\mathbf{v}_1, \dots, \mathbf{v}_n\}$ is <strong>Linearly Independent</strong> if the only solution to the equation below is the <strong>Trivial Solution</strong> (every $c_i = 0$):</p>
       <div class="math-block">
-        $$c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \dots + c_k \mathbf{v}_k = \mathbf{0}$$
+        $$c_1 \mathbf{v}_1 + c_2 \mathbf{v}_2 + \dots + c_n \mathbf{v}_n = \mathbf{0}$$
       </div>
-      <p>If the <strong>only</strong> way to satisfy this is the <strong>Trivial Solution</strong> ($c_1 = c_2 = \dots = c_k = 0$), the vectors are independent. If there's a "backdoor" solution (non-trivial), then at least one vector can be expressed as a combination of the others: $\mathbf{v}_k = -\frac{1}{c_k} \sum_{i=1}^{k-1} c_i \mathbf{v}_i$.</p>
+      <p>If there is <strong>any</strong> other way to reach zero using non-zero weights, then at least one vector is just a "combination" of the others—rendering it redundant.</p>
 
-      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Criteria</h3>
-      <p>A set is Linearly Independent if and only if:</p>
-      <div class="math-block">
-        $$\text{rank}(\mathbf{V}) = k$$
-      </div>
-      <p>where $\mathbf{V}$ is the matrix containing the vectors as columns. If rank is less than $k$, you have redundant dimensions.</p>
-      <p class="mt-4 italic text-sm">Gotcha: A set containing the Zero Vector is ALWAYS dependent. Why? Because you can set $c_{zero} = 1$ and all other $c_i = 0$, and the sum will still be zero. The origin adds no new direction.</p>
+      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Rule</h3>
+      <p>Linear Independence is binary: either a set is independent, or it's not. There is no "mostly" independent in formal algebra.</p>
+      <ul class="mt-2 space-y-2">
+        <li><strong>Independent</strong>: No vector is in the span of the others.</li>
+        <li><strong>Dependent</strong>: At least one vector can be deleted without losing any "reach."</li>
+      </ul>
+      <p class="mt-4 italic text-sm">Gotcha: If the zero vector $\mathbf{0}$ is in your set, the set is <strong>always</strong> dependent. Why? Because you can give $\mathbf{0}$ a weight of 1,000,000 and the sum stays zero!</p>
     </div>
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
-        Think of vectors as <strong>Speakers in a Room</strong>. 
-        If Speaker A says something new, they are <strong>Independent</strong>. 
-        But if Speaker B just repeats a mix of what Speaker A and Speaker C already said, then Speaker B is <strong>Linearly Dependent</strong>. 
-        They are a "copycat" who adds no new insight (news) to the conversation. 
-        In AI, we want a team of "Independent Experts" where every feature brings a unique perspective to the table, rather than having a thousand voices all saying the same thing.
+        Think of Linear Independence like a <strong>"Team of Experts."</strong> 
+        If you have a Python coder and a Math expert, they are independent—each brings a unique skill. 
+        But if you add a second Python coder, they are "Dependent" because their skills overlap. 
+        In ML, we want a "Team" of independent features so we get the most info for the least number of variables. 
+        Redundant features just make the "Salary" (Computation) of the model higher without doing more work.
       </div>
     </div>
 
-    <h2 id="example-redundancy" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Redundant Feature Check</h2>
+    <h2 id="example-2d" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Visualizing Redundancy</h2>
     
-      <h4>Problem: Identifying Noise</h4>
-      <p>Are \(\mathbf{v}_1 = [1, 2]\) and \(\mathbf{v}_2 = [2, 4]\) independent?</p>
+      <h4>Problem: Dependency of [1, 2] and [2, 4]</h4>
       
       <div class="algorithm-steps">
         <div class="algorithm-step">
           <span class="step-badge">1</span>
-          <div><strong>Identify:</strong> Look for a scaling factor.</div>
+          <div><strong>Analyze:</strong> Notice that \([2, 4] = 2 \times [1, 2]\).</div>
         </div>
         <div class="algorithm-step">
           <span class="step-badge">2</span>
-          <div><strong>Calculate:</strong> \(\mathbf{v}_2 = 2 \times \mathbf{v}_1\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">3</span>
-          <div><strong>Check:</strong> \(\mathbf{v}_2\) is just a double of \(\mathbf{v}_1\).</div>
+          <div><strong>Combine:</strong> \(2\mathbf{v}_1 - 1\mathbf{v}_2 = [2-2, 4-4] = [0, 0]\).</div>
         </div>
       </div>
 
-      <div class="callout error">
-        <div class="callout-icon">✕</div>
+      <div class="callout warning">
+        <div class="callout-icon">⚠</div>
         <div class="callout-body">
-          <strong>Result:</strong> Dependent. They are just the same line. In ML, this could be like having "Temperature in Celsius" and "Temperature in Kelvin" as two separate features—they are mathematically redundant.
-        </div>
-      </div>
-    
-
-    <h2 id="example-zero" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Zero Solution Test</h2>
-    
-      <h4>Problem: Checking ℝ² Independence</h4>
-      <p>Are \(\mathbf{v}_1 = [1, 0]\) and \(\mathbf{v}_2 = [0, 1]\) independent?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Equation:</strong> \(c_1[1, 0] + c_2[0, 1] = [0, 0]\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Solve:</strong> \(c_1 = 0, c_2 = 0\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">3</span>
-          <div><strong>Check:</strong> There is <strong>no other way</strong> to get zero except by using zero.</div>
-        </div>
-      </div>
-
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> YES. Independent. They point in completely different directions.
+          <strong>Result:</strong> These vectors are <strong>Dependent</strong>. They lie on the same line and span only a 1D subspace of the 2D plane.
         </div>
       </div>
     
@@ -361,26 +331,30 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <python-code>
 import numpy as np
 
-# A set of vectors in a matrix
-A = np.array([[1, 2], [2, 4]])
+# Column vectors
+v1 = np.array([1, 2, 0])
+v2 = np.array([0, 1, 1])
+v3 = np.array([1, 3, 1]) # v3 = v1 + v2 (dependent!)
 
-# If the Rank < Number of columns, they are dependent.
-rank = np.linalg.matrix_rank(A)
-is_independent = rank == A.shape[1]
+# Check stack rank
+matrix = np.column_stack([v1, v2, v3])
+rank = np.linalg.matrix_rank(matrix)
 
-print(f"Is Independent? {is_independent}")
+print(f"Number of vectors: {matrix.shape[1]}")
+print(f"Rank (Independent dimensions): {rank}")
+print("Dependent!" if rank < 3 else "Independent!")
     </python-code>
 
     <h2 id="applications">Applications in ML</h2>
-    <p>Linear Independence is the ultimate measure of "Efficiency." It asks your data: "Are you actually telling me something new, or are you just a remix of what I already know?"</p>
+    <p>Linear Independence is the ultimate filter for data efficiency. It tells you whether you're collecting "New Information" or just expensive "Echoes" of what you already have.</p>
     <ul>
-      <li><strong>Automated Feature Selection</strong>: In predictive modeling, we use linear independence to strip away the "copycats." If your dataset includes "Total Sales" and "Tax Paid" where tax is a fixed 10%, these features are linearly dependent. One adds exactly zero new information. By identifying and removing these dependent features, we reduce the computational load and prevent the model from getting "distracted" by redundant data.</li>
-      <li><strong>Detecting Multicollinearity in Regression</strong>: If you try to train a Linear Regression model on dependent features, the math literally explodes—the matrix becomes "Singular" and cannot be inverted. This is <strong>Multicollinearity</strong>. By ensuring our features are independent, we guarantee that the model has a stable, unique solution rather than a chaotic range of infinite possibilities.</li>
+      <li><strong>The Multicollinearity Trap</strong>: In Linear Regression, if two features (like "Size in sq ft" and "Size in sq meters") are linearly dependent, the math inside the model will literally break. The matrix becomes "Singular," and the computer can't figure out which feature is responsible for the result. We use independence tests to "Clean" our data so the model stays stable.</li>
+      <li><strong>Feature Selection</strong>: Modern models use algorithms to find the most "Independent" subset of thousands of variables. By keeping only the unique directions and throwing away the "Copycats," we can train models 10x faster with the same accuracy. Independence is the bridge between a "Fat and Slow" model and a "Lean and Fast" one.</li>
     </ul>
-    <p>Teacher's Final Word: In AI, we want a lean team of "Independent Experts." Every feature should bring a unique perspective to the table, rather than having a thousand voices all saying the same thing in different languages. Independence isn't just a property; it's a requirement for stability.</p>
+    <p>Teacher's Final Word: You want every feature in your model to be a unique voice. Linear Independence is the gatekeeper that makes sure you aren't paying for redundancy, ensuring that your logic is as lean and sharp as the universe allows.</p>
 
     <div class="linking-rule">
-      <strong>Next Step:</strong> Independence is great. But how many independent vectors do we need to build an entire world? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.
+      <strong>Next Step:</strong> Independence tells us we have unique voices. But how many voices do we actually need? Explore <strong><a href="#/mathematics/linear-algebra/basis-dimension">Basis and Dimension</a></strong>.
     </div>
   `},a={id:"basis-dimension",title:"Basis and Dimension",description:"A Basis is the minimal set of vectors needed to build a space. Dimension is just the count of vectors in that set.",color:"#9C27B0",html:String.raw`
     <div class="premium-hero">
@@ -522,9 +496,6 @@ print(f"Dimension of the created space: {dim}")
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>At its core, the <strong>Dot Product</strong> answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em> It is the fundamental measure of <strong>Similarity</strong>. If two vectors are perfectly aligned, the dot product is maximized. If they have nothing in common (orthogonal), it is zero. This simple operation allows us to transform high-dimensional data into a single "compatibility score." In modern AI, when you hear about "Attention" or "Similarity Search," you are essentially hearing about billions of dot products happening simultaneously as the model looks for the most relevant information.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Inner Product & The Law of Cosines</div>
@@ -554,6 +525,8 @@ print(f"Dimension of the created space: {dim}")
       </div>
       <p class="mt-4 italic text-sm">Gotcha: If the dot product is 0, $\cos(\theta) = 0$, meaning the vectors are orthogonal (90°). If it's negative, they are pointing in "opposite" directions (> 90°).</p>
     </div>
+
+    <visualizer topic="DotProduct" />
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
     
@@ -890,29 +863,11 @@ print(f"Transpose:\n{A_t}")
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
-
-    <h2 id="formal-definition">Formal Definition</h2>
-    <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix Composition & Inner Dimensions</div>
-      <p>Matrix Multiplication is the "Relay Race" of mathematics. It chains transformations together so that the output of one becomes the fuel for the next.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
-      <p>Suppose you have two linear maps: $g: \mathbb{R}^n \to \mathbb{R}^p$ (represented by matrix $B$) and $f: \mathbb{R}^p \to \mathbb{R}^m$ (represented by matrix $A$). The <strong>composition</strong> $(f \circ g)$ is a single jump from $\mathbb{R}^n$ directly to $\mathbb{R}^m$. The matrix representing this combined leap is the product $AB$.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
-      <p>To find the entry at $C_{ij}$, we look at the interaction between the $i$-th row of $A$ and the $j$-th column of $B$. This is because the $j$-th column of $B$ tells us where the $j$-th basis vector lands after the first map, and the rows of $A$ tell us how that new position is transformed by the second map. Algebraically, this is a sum of products:</p>
-      <div class="math-block">
-        $$c_{ij} = \sum_{k=1}^p a_{ik} b_{kj}$$
-      </div>
-      <p>Note the <strong>Inner Dimension Match</strong>: The number of columns in $A$ ($p$) must exactly equal the number of rows in $B$ ($p$). If they don't, the "relay baton" is dropped, and the composition is mathematically impossible.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Identity</h3>
-      <p>For any $\mathbf{x} \in \mathbb{R}^n$:</p>
-      <div class="math-block">
-        $$(AB)\mathbf{x} = A(B\mathbf{x})$$
-      </div>
+    
       <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
+    
+    <visualizer topic="matrix-multiplication" />
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     
@@ -1038,6 +993,8 @@ print(f"Product: {C}")
     </div>
     
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
+    
+    <visualizer topic="matrix-inverse" />
     
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       
@@ -1414,6 +1371,8 @@ print(f"Matrix Rank: {rank}")
       <p class="mt-4 italic text-sm">Gotcha: This formula only works for 1D projections. For projecting onto a subspace spanned by matrix $X$, we use the <strong>Normal Equations</strong>: $\hat{\mathbf{y}} = X(X^T X)^{-1} X^T \mathbf{y}$.</p>
     </div>
     
+    <visualizer topic="projections" />
+
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     
       <h4>Problem: Shadow of [3, 4] on X-axis</h4>
@@ -1662,6 +1621,8 @@ print(f"Eigenvectors:\n{vecs}")
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
     
+    <visualizer topic="positive-definite" />
+    
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>
       
@@ -1738,9 +1699,6 @@ print(f"Is Matrix Positive Definite? {is_pd}")
       <p>SVD is the <strong>Swiss Army Knife</strong> of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> matrix—even the "messy" rectangular ones. It is the core algorithm behind image compression and recommendation systems.</p>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Every linear transformation—no matter how messy or complex—can be broken down into three simple, elegant steps: <strong>Rotate, Stretch, Rotate</strong>. This is the power of <strong>Singular Value Decomposition (SVD)</strong>. Unlike Eigen-decomposition, SVD works for every matrix in existence, whether it is square, rectangular, or full of noise. It allows us to mathematically "unravel" any matrix to find the core directions that contain the most information. In Machine Learning, SVD is the engine that finds the hidden structure in our data, telling us which features are actually "Loud" and which are just background static.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Universal Decomposition & Symmetry</div>
@@ -1764,6 +1722,8 @@ print(f"Is Matrix Positive Definite? {is_pd}")
       <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
       <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
+
+    <visualizer topic="SVD" />
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     

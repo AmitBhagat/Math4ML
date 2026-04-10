@@ -1,4 +1,4 @@
-const e={id:"derivatives",title:"Derivatives",description:"The Derivative is the study of how functions change when their inputs change by infinitesimal amounts. It's the primary engine for machine learning optimization.",color:"#1B5E20",html:String.raw`
+const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the study of how functions change when their inputs change by infinitesimal amounts. It's the primary engine for machine learning optimization.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Derivatives</div>
       <h1>Derivatives: The Rate of Change</h1>
@@ -12,9 +12,6 @@ const e={id:"derivatives",title:"Derivatives",description:"The Derivative is the
         <li><strong>Slopes</strong>: Basic Algebra of "Rise over Run."</li>
       </ul>
     </div>
-
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculus is the "Language of Sensitivity." It answers the core question of Machine Learning: <em>"If I nudge this specific variable by a hair, how much does the final result move?"</em> If you are standing on a landscape of data, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. By calculating these slopes for every single weight in a neural network, we gain a clear map of how to move. It is the fundamental difference between blind guessing and having a scientific plan to reduce error.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -38,6 +35,8 @@ const e={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       <p>In Machine Learning, this $f'(x)$ is the <strong>Sensitivity</strong>. It tells us exactly how the Loss function will react to a microscopic nudge in weight $x$.</p>
       <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
+
+    <visualizer topic="Differentiation" />
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     
@@ -111,7 +110,7 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     <div class="linking-rule">
       <strong>Next Step:</strong> Single variables are rare in ML. How do we find slopes on multidimensional planes? Explore <strong><a href="#/mathematics/calculus/partial-derivatives">Partial Derivatives</a></strong>.
     </div>
-  `},t={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
+  `},e={id:"partial-derivatives",title:"Partial Derivatives",description:"A Partial Derivative measures the rate of change of a multi-input function with respect to one variable while other inputs are held constant.",color:"#1B5E20",html:String.raw`
     <div class="premium-hero">
       <div class="premium-hero-badge">📐 Calculus · Multivariable</div>
       <h1>Partial Derivatives: The Specialized Slope</h1>
@@ -127,8 +126,6 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you are standing on a massive 3D mountain range (the <strong>Loss Surface</strong>). To improve your model, you need to know: <em>"If I step strictly North (nudging Weight A), does it go up? If I step strictly East (nudging Weight B), does it go down?"</em> A <strong>Partial Derivative</strong> is exactly that—it isolates the influence of a single variable while freezing every other part of the universe. In Machine Learning, where models have millions of weights, these allow us to diagnose exactly which specific parameter is causing the most trouble without getting overwhelmed by the sheer complexity of the whole system.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Directional Slice & Ceteris Paribus</div>
@@ -155,6 +152,8 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Partial derivatives don't tell the whole story. You can have a function where all partial derivatives exist at a point, but the function isn't even continuous there! To truly understand the "Total Change," you need the <strong>Gradient</strong>.</p>
     </div>
+    
+    <visualizer topic="PartialDerivatives" />
     
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     
@@ -253,8 +252,6 @@ print(f"Exact derivative (2x): {2*x_val}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East—but the real world (and real data) is rarely that simple. The <strong>Gradient</strong> (\(\nabla f\)) combines all these individual slopes into a single, powerful arrow that points exactly in the direction of the <strong>steepest ascent</strong>. It is the mathematical "North Star" for optimization. In Machine Learning, our goal is to decrease error as fast as possible, so we simply take our current position and move in the <strong>exact opposite direction</strong> of the gradient.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Vector of Steepest Ascent</div>
@@ -277,6 +274,8 @@ print(f"Exact derivative (2x): {2*x_val}")
       <p>The magnitude $\|\nabla f\|$ tells you the <strong>steepness</strong> of that ascent. In ML, we use <strong>Gradient Descent</strong> by moving in the direction of $-\nabla f$ to find the "Bottom of the Bowl."</p>
       <p class="mt-4 italic text-sm">Gotcha: Beginners often think the gradient points "along the surface." It doesn't. Gradient vectors live in the <strong>input space</strong> (the floor), pointing you where to step on the map to go up on the mountain.</p>
     </div>
+    
+    <visualizer topic="Gradient" />
     
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
     
@@ -527,7 +526,6 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A simple derivative is for one input and one output. A Gradient is for many inputs and one output. But in Deep Learning, every layer takes a vector and transforms it into a <strong>new vector</strong>. To track this complex interaction, we need the <strong>Jacobian Matrix</strong>—a complete grid where every row is the gradient of a different output neuron. It tells us exactly how every single input in a layer influences every single output in the next. Without this map, we wouldn't be able to "link" the chain of sensitivities together to train deep neural networks.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -557,6 +555,8 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
       <p>In Deep Learning, the Jacobian is the engine of the <strong>Chain Rule</strong>. When we compose layers, we simply multiply their Jacobians to track how error flows from one layer to the next.</p>
       <p class="mt-4 italic text-sm">Gotcha: If the Jacobian is square ($n=m$), the absolute value of its determinant $|\det(J)|$ is the <strong>Volume Scaling Factor</strong>. It tells you how much the transformation expands or shrinks the volume of a local region—a critical concept in Generative AI (VAEs and Normalizing Flows).</p>
     </div>
+    
+    <visualizer topic="jacobian" />
     
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
@@ -660,7 +660,7 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Gradient tells you which way to walk to reduce the loss—but it doesn't tell you how <strong>fast</strong> the ground is changing under your feet. The <strong>Hessian Matrix</strong> is the "Grid of Curvatures" that measures the second-order sensitivity of your function. It tells you if you are walking into a sharp, narrow crevice or a broad, flat valley. In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
+    <p>In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -692,6 +692,8 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional ML (like LLMs), we almost never calculate the full Hessian—it would require petabytes of memory. Instead, we use "Hessian-Free" optimizers or diagonal approximations to get the curvature benefits without the system-crashing cost.</p>
     </div>
+    
+    <visualizer topic="curvature" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -818,7 +820,9 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola. These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
+    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola.</p>
+    
+    <p>These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -845,6 +849,8 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
       <p>In Deep Learning, we usually stop at the first order (Gradient Descent) or second order (Newton's Method). This "Local Map" provides the mathematical bedrock for almost all numerical optimization.</p>
       <p class="mt-4 italic text-sm">Gotcha: This approximation is only valid locally. The further you move from the center $a$, the more the polynomial "drifts" away from the truth. In ML, this is why we limit our update steps—if we step too far, our Taylor-based map becomes a lie.</p>
     </div>
+    
+    <visualizer topic="taylor" />
     
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
@@ -953,7 +959,9 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>. We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
+    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>.</p>
+    
+    <p>We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -983,6 +991,8 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Most high-dimensional critical points in AI are <strong>Saddle Points</strong>. The Gradient is zero, so your optimizer stops, but the Loss is still massive. This is why we use "Momentum" and "Noise"—to kick the model out of these flat traps.</p>
     </div>
+    
+    <visualizer topic="optimizer" />
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     
@@ -1114,6 +1124,8 @@ print(f"Value at Min: {res.fun}")
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional AI, we almost never solve integrals analytically—there are too many variables. Instead, we use "Monte Carlo Integration," which is essentially like throwing millions of random darts at the curve and counting how many land inside the area.</p>
     </div>
     
+    <visualizer topic="AreaUnderCurve" />
+    
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
     
       <h4>Problem: Finding Range Probabilities</h4>
@@ -1219,4 +1231,4 @@ print(f"Probability P(1 <= X <= 2): {probability:.4f}")
       </div>
 
     </div>
-  `,sections:[e,t,i,a,s,n,o,r,l]};export{c as CALCULUS_DATA};
+  `,sections:[t,e,i,a,s,n,o,r,l]};export{c as CALCULUS_DATA};

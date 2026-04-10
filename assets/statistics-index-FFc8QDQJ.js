@@ -419,6 +419,8 @@ plt.show()
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the annoying, skeptical assumption that "Nothing happened, it's just random noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (our data) is so overwhelming that it is highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your specific results if the "Nothing happened" assumption were true. If that probability is tiny (usually less than 5%), we decide that the "Noise" explanation is just too implausible. In Machine Learning, this is the tactical way we prove that our model's improvement is a <strong>Real Signal</strong>, protecting us from wasting time chasing ghosts and accidental patterns in the data that aren't actually there.</p>
+    
+    <visualizer topic="HypothesisTesting" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -963,6 +965,8 @@ print(f"Measured Lift: {lift*100:.1f}%")
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A single number is extremely fragile—it can be easily swayed by a single outlier or a tiny quirk in your dataset. <strong>Confidence Intervals</strong> provide the <strong>Precision</strong> that a single average lacks. instead of shouting a single value, you are providing a mathematical "Safety Net" that admits to uncertainty. A 95% Confidence Interval means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em> In Machine Learning, this is the difference between a lucky guess and a reliable product. It tells you if your model's accuracy is a rock-solid foundation you can build on, or a moving target that you happened to hit once by sheer chance. It is the tactical way we communicate <strong>Trust</strong> in our findings.</p>
+    
+    <visualizer topic="ConfidenceIntervals" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
