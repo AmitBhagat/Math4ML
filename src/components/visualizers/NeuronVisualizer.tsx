@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Mafs, Coordinates, Line, Point, Text, MovablePoint } from "mafs";
 import { PremiumSlider } from "./core/PremiumSlider";
-import "react-katex/dist/katex.min.css";
+import "katex/dist/katex.min.css";
 import { InlineMath, BlockMath } from "react-katex";
 
 // Local LaTeX rendering helper consistent with other labs
