@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linear Algebra — Interactive Tools</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0d0f14;
+  --surface: #13161e;
+  --surface2: #1a1e28;
+  --surface3: #20253200;
+  --border: rgba(255,255,255,0.07);
+  --border-accent: rgba(110,180,255,0.25);
+  --text: #e8ecf4;
+  --text-muted: #7a8399;
+  --text-dim: #4a5268;
+  --accent: #5b9cf6;
+  --accent2: #7edba0;
+  --accent3: #f8a96a;
+  --accent4: #c97df8;
+  --accent-glow: rgba(91,156,246,0.15);
+  --red: #f06b6b;
+  --purple: #a78bfa;
+  --teal: #34d4b8;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --mono: 'DM Mono', monospace;
+  --serif: 'DM Serif Display', serif;
+  --sans: 'Outfit', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-weight: 400;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Background grid */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(91,156,246,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(91,156,246,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 0 24px 60px; }
+
+/* ── HEADER ── */
+header {
+  padding: 48px 0 36px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 36px;
+}
+.header-left { display: flex; align-items: center; gap: 20px; }
+.logo-mark {
+  width: 48px; height: 48px;
+  background: linear-gradient(135deg, var(--accent), var(--purple));
+  border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--serif);
+  font-size: 22px;
+  color: #fff;
+  flex-shrink: 0;
+  box-shadow: 0 0 24px rgba(91,156,246,0.3);
+}
+.header-text h1 {
+  font-family: var(--serif);
+  font-size: 26px;
+  font-weight: 400;
+  color: var(--text);
+  letter-spacing: -0.3px;
+}
+.header-text p {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 3px;
+  font-weight: 300;
+}
+.header-badge {
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--mono);
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(91,156,246,0.1);
+  color: var(--accent);
+  border: 1px solid rgba(91,156,246,0.2);
+  letter-spacing: 0.04em;
+}
+
+/* ── TAB NAV ── */
+.tab-nav {
+  display: flex;
+  gap: 4px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 5px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+.tab-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 10px 16px;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  text-align: center;
+}
+.tab-btn:hover { color: var(--text); background: rgba(255,255,255,0.04); }
+.tab-btn.active {
+  color: var(--bg);
+  background: var(--accent);
+  box-shadow: 0 2px 12px rgba(91,156,246,0.35);
+}
+
+/* ── PANELS ── */
+.tab-panel { display: none; animation: fadeIn .25s ease; }
+.tab-panel.active { display: block; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ── LAYOUT HELPERS ── */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+@media(max-width: 720px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+/* ── CARDS ── */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+}
+.card-title {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--mono);
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 16px;
+}
+
+/* ── CANVAS CARD ── */
+.canvas-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+canvas { display: block; border-radius: 6px; }
+
+/* ── CONTROLS ── */
+.ctrl-group { margin-bottom: 14px; }
+.ctrl-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.ctrl-label {
+  font-size: 13px;
+  color: var(--text-muted);
+  min-width: 40px;
+  font-family: var(--mono);
+}
+.ctrl-row input[type="range"] {
+  -webkit-appearance: none;
+  flex: 1;
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+}
+.ctrl-row input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px; height: 16px;
+  border-radius: 50%;
+  background: var(--accent);
+  border: 2px solid var(--bg);
+  box-shadow: 0 0 8px rgba(91,156,246,0.5);
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+.ctrl-row input[type="range"]::-webkit-slider-thumb:hover { transform: scale(1.15); }
+.val-badge {
+  font-family: var(--mono);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--accent);
+  min-width: 36px;
+  text-align: right;
+}
+
+/* ── STAT ROWS ── */
+.stat-grid { display: flex; flex-direction: column; gap: 0; }
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 13px;
+}
+.stat-row:last-child { border-bottom: none; }
+.stat-key { color: var(--text-muted); font-family: var(--mono); font-size: 12px; }
+.stat-val { font-weight: 500; color: var(--text); font-family: var(--mono); }
+.stat-val.accent { color: var(--accent); }
+.stat-val.green { color: var(--accent2); }
+.stat-val.orange { color: var(--accent3); }
+.stat-val.red { color: var(--red); }
+
+/* ── MATRIX INPUTS ── */
+.mat-grid {
+  display: inline-grid;
+  gap: 6px;
+  position: relative;
+  padding: 12px 20px;
+}
+.mat-grid::before, .mat-grid::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 3px;
+  background: var(--border-accent);
+  border-radius: 2px;
+}
+.mat-grid::before { left: 6px; }
+.mat-grid::after { right: 6px; }
+.mat-input {
+  width: 68px;
+  padding: 8px;
+  font-size: 14px;
+  font-family: var(--mono);
+  font-weight: 500;
+  text-align: center;
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.mat-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(91,156,246,0.15);
+}
+.mat-label {
+  font-size: 11px;
+  font-family: var(--mono);
+  color: var(--text-dim);
+  margin-bottom: 6px;
+  letter-spacing: 0.06em;
+}
+
+/* ── BUTTONS ── */
+.btn-row { display: flex; gap: 8px; flex-wrap: wrap; margin: 14px 0; }
+.btn {
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--mono);
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.02em;
+}
+.btn:hover { background: rgba(91,156,246,0.1); color: var(--accent); border-color: rgba(91,156,246,0.3); }
+.btn:active { transform: scale(0.97); }
+.btn-primary {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: var(--accent);
+  font-weight: 600;
+}
+.btn-primary:hover { background: #4a8be8; color: var(--bg); border-color: #4a8be8; box-shadow: 0 0 16px rgba(91,156,246,0.35); }
+
+/* ── RESULT DISPLAY ── */
+.result-box {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 14px 16px;
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--text);
+  white-space: pre;
+  min-height: 60px;
+  line-height: 1.8;
+}
+.result-label {
+  font-size: 11px;
+  color: var(--text-dim);
+  font-family: var(--mono);
+  margin-bottom: 6px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.eq-line {
+  font-family: var(--mono);
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 10px;
+  min-height: 22px;
+}
+
+/* ── INFO BOX ── */
+.info-box {
+  background: rgba(91,156,246,0.05);
+  border-left: 2px solid var(--accent);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  padding: 12px 14px;
+  font-size: 13px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-top: 14px;
+}
+.info-box b { color: var(--text); font-weight: 500; }
+
+/* ── SECTION DIVIDER ── */
+.divider { height: 1px; background: var(--border); margin: 20px 0; }
+
+/* ── SYSTEM INPUTS ── */
+.sys-equation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+.sys-equation .mat-input { width: 60px; }
+.sys-sym { font-weight: 500; color: var(--text-dim); }
+
+/* ── PRESET TAGS ── */
+.preset-row { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.preset-tag {
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 500;
+  font-family: var(--mono);
+  background: var(--surface2);
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.15s;
+  letter-spacing: 0.03em;
+}
+.preset-tag:hover { background: rgba(91,156,246,0.1); color: var(--accent); border-color: rgba(91,156,246,0.3); }
+
+/* ── VECTOR LEGEND ── */
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 10px; }
+.legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; font-family: var(--mono); color: var(--text-muted); }
+.legend-dot { width: 10px; height: 10px; border-radius: 50%; }
+
+/* ── SECTION HEADING ── */
+.section-heading {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  font-family: var(--mono);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+
+/* ── FOOTER ── */
+footer {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+footer p { font-size: 12px; color: var(--text-dim); font-family: var(--mono); }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div class="header-left">
+    <div class="logo-mark">Λ</div>
+    <div class="header-text">
+      <h1>Linear Algebra</h1>
+      <p>Interactive mathematical tools — visualize, compute, explore</p>
+    </div>
+  </div>
+  <span class="header-badge">5 modules</span>
+</header>
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('vectors', this)">→ Vectors</button>
+  <button class="tab-btn" onclick="switchTab('transform', this)">⊞ Transform</button>
+  <button class="tab-btn" onclick="switchTab('matcalc', this)">× Matrix Calc</button>
+  <button class="tab-btn" onclick="switchTab('eigen', this)">λ Eigenvalues</button>
+  <button class="tab-btn" onclick="switchTab('systems', this)">∥ Lin. Systems</button>
+</nav>
+
+<!-- ═══════════════════ VECTORS ═══════════════════ -->
+<div id="panel-vectors" class="tab-panel active">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">Vector A</div>
+        <div class="ctrl-row"><span class="ctrl-label">A<sub>x</sub></span><input type="range" id="ax" min="-5" max="5" value="3" step="0.5" oninput="updateVectors()"><span class="val-badge" id="ax-v">3</span></div>
+        <div class="ctrl-row"><span class="ctrl-label">A<sub>y</sub></span><input type="range" id="ay" min="-5" max="5" value="2" step="0.5" oninput="updateVectors()"><span class="val-badge" id="ay-v">2</span></div>
+        <div class="divider"></div>
+        <div class="card-title">Vector B</div>
+        <div class="ctrl-row"><span class="ctrl-label">B<sub>x</sub></span><input type="range" id="bx" min="-5" max="5" value="-1" step="0.5" oninput="updateVectors()"><span class="val-badge" id="bx-v">-1</span></div>
+        <div class="ctrl-row"><span class="ctrl-label">B<sub>y</sub></span><input type="range" id="by" min="-5" max="5" value="4" step="0.5" oninput="updateVectors()"><span class="val-badge" id="by-v">4</span></div>
+      </div>
+      <div class="card" style="margin-top:16px">
+        <div class="card-title">Computed Properties</div>
+        <div class="stat-grid">
+          <div class="stat-row"><span class="stat-key">|A| (magnitude)</span><span class="stat-val accent" id="magA">—</span></div>
+          <div class="stat-row"><span class="stat-key">|B| (magnitude)</span><span class="stat-val accent" id="magB">—</span></div>
+          <div class="stat-row"><span class="stat-key">A · B (dot product)</span><span class="stat-val" id="dotAB">—</span></div>
+          <div class="stat-row"><span class="stat-key">θ (angle between)</span><span class="stat-val green" id="angleAB">—</span></div>
+          <div class="stat-row"><span class="stat-key">A + B (resultant)</span><span class="stat-val" id="sumAB">—</span></div>
+          <div class="stat-row"><span class="stat-key">A × B (2D cross)</span><span class="stat-val orange" id="crossAB">—</span></div>
+        </div>
+        <div class="info-box">The <b>dot product</b> A·B = |A||B|cosθ. When it equals zero, vectors are perpendicular. The 2D cross product gives the signed area of the parallelogram spanned by A and B.</div>
+      </div>
+    </div>
+    <div>
+      <div class="canvas-card">
+        <canvas id="vecCanvas" width="380" height="380"></canvas>
+      </div>
+      <div class="legend" style="margin-top:12px;padding-left:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>Vector A</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7edba0"></div>Vector B</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f8a96a"></div>A + B</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ TRANSFORM ═══════════════════ -->
+<div id="panel-transform" class="tab-panel">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">Transformation Matrix T</div>
+        <div class="mat-label">entries</div>
+        <div class="mat-grid" style="grid-template-columns: 1fr 1fr;">
+          <input class="mat-input" id="t00" value="2" oninput="updateTransform()">
+          <input class="mat-input" id="t01" value="0" oninput="updateTransform()">
+          <input class="mat-input" id="t10" value="0" oninput="updateTransform()">
+          <input class="mat-input" id="t11" value="1" oninput="updateTransform()">
+        </div>
+        <div class="divider"></div>
+        <div class="card-title">Presets</div>
+        <div class="preset-row">
+          <span class="preset-tag" onclick="setPreset('scale2')">Scale ×2</span>
+          <span class="preset-tag" onclick="setPreset('rot90')">Rotate 90°</span>
+          <span class="preset-tag" onclick="setPreset('rot45')">Rotate 45°</span>
+          <span class="preset-tag" onclick="setPreset('shear')">Shear</span>
+          <span class="preset-tag" onclick="setPreset('reflect')">Reflect Y</span>
+          <span class="preset-tag" onclick="setPreset('reflectX')">Reflect X</span>
+          <span class="preset-tag" onclick="setPreset('identity')">Identity</span>
+        </div>
+        <div class="divider"></div>
+        <div class="card-title">Properties</div>
+        <div class="stat-grid">
+          <div class="stat-row"><span class="stat-key">det(T)</span><span class="stat-val accent" id="t-det">—</span></div>
+          <div class="stat-row"><span class="stat-key">trace(T)</span><span class="stat-val" id="t-trace">—</span></div>
+          <div class="stat-row"><span class="stat-key">Invertible?</span><span class="stat-val" id="t-inv">—</span></div>
+          <div class="stat-row"><span class="stat-key">Area scale factor</span><span class="stat-val orange" id="t-area">—</span></div>
+        </div>
+      </div>
+      <div class="info-box" style="margin-top:14px">The shaded region shows the unit square after transformation. <b>det > 0</b>: orientation preserved. <b>det = 0</b>: collapsed to a line. <b>det < 0</b>: orientation flipped.</div>
+    </div>
+    <div>
+      <div class="canvas-card">
+        <canvas id="transformCanvas" width="380" height="380"></canvas>
+      </div>
+      <div class="legend" style="margin-top:12px;padding-left:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(91,156,246,0.4);border:1px solid #5b9cf6"></div>Original</div>
+        <div class="legend-item"><div class="legend-dot" style="background:rgba(126,219,160,0.4);border:1px solid #7edba0"></div>Transformed</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>e₁ basis</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f8a96a"></div>e₂ basis</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ MATRIX CALC ═══════════════════ -->
+<div id="panel-matcalc" class="tab-panel">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">Matrix A</div>
+        <div class="mat-grid" style="grid-template-columns:1fr 1fr">
+          <input class="mat-input" id="a00" value="1">
+          <input class="mat-input" id="a01" value="2">
+          <input class="mat-input" id="a10" value="3">
+          <input class="mat-input" id="a11" value="4">
+        </div>
+        <div class="divider"></div>
+        <div class="card-title">Matrix B</div>
+        <div class="mat-grid" style="grid-template-columns:1fr 1fr">
+          <input class="mat-input" id="b00" value="5">
+          <input class="mat-input" id="b01" value="6">
+          <input class="mat-input" id="b10" value="7">
+          <input class="mat-input" id="b11" value="8">
+        </div>
+      </div>
+    </div>
+    <div>
+      <div class="card">
+        <div class="card-title">Operations</div>
+        <div class="btn-row">
+          <button class="btn" onclick="calcMat('add')">A + B</button>
+          <button class="btn" onclick="calcMat('sub')">A − B</button>
+          <button class="btn btn-primary" onclick="calcMat('mul')">A × B</button>
+          <button class="btn" onclick="calcMat('detA')">det(A)</button>
+          <button class="btn" onclick="calcMat('detB')">det(B)</button>
+          <button class="btn" onclick="calcMat('invA')">A⁻¹</button>
+          <button class="btn" onclick="calcMat('invB')">B⁻¹</button>
+          <button class="btn" onclick="calcMat('trans')">Aᵀ</button>
+          <button class="btn" onclick="calcMat('transB')">Bᵀ</button>
+          <button class="btn" onclick="calcMat('rank')">rank(A)</button>
+        </div>
+        <div class="divider"></div>
+        <div class="result-label">Result</div>
+        <div class="eq-line" id="mat-eq">Select an operation above</div>
+        <div class="result-box" id="mat-result">—</div>
+        <div class="info-box" style="margin-top:12px">Matrix multiplication is <b>not commutative</b>: A×B ≠ B×A in general. The inverse A⁻¹ exists only when det(A) ≠ 0.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ EIGENVALUES ═══════════════════ -->
+<div id="panel-eigen" class="tab-panel">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">2×2 Matrix A</div>
+        <div class="mat-grid" style="grid-template-columns:1fr 1fr">
+          <input class="mat-input" id="e00" value="3" oninput="calcEigen()">
+          <input class="mat-input" id="e01" value="1" oninput="calcEigen()">
+          <input class="mat-input" id="e10" value="2" oninput="calcEigen()">
+          <input class="mat-input" id="e11" value="2" oninput="calcEigen()">
+        </div>
+        <div class="divider"></div>
+        <div class="card-title">Step-by-Step Solution</div>
+        <div class="result-box" id="eigen-steps" style="font-size:12px;line-height:1.9;min-height:160px">Adjust matrix values above</div>
+      </div>
+      <div class="info-box" style="margin-top:14px">Eigenvalues λ satisfy <b>det(A − λI) = 0</b>. The characteristic polynomial for 2×2 is <b>λ² − tr(A)λ + det(A) = 0</b>. Eigenvectors give the invariant directions under A.</div>
+    </div>
+    <div>
+      <div class="canvas-card">
+        <canvas id="eigenCanvas" width="380" height="380"></canvas>
+      </div>
+      <p style="font-size:12px;color:var(--text-dim);margin-top:10px;font-family:var(--mono);padding-left:4px">Arrows show eigenvectors. The matrix stretches / shrinks them by their eigenvalue λ.</p>
+      <div class="legend" style="margin-top:8px;padding-left:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>v₁ (λ₁)</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7edba0"></div>v₂ (λ₂)</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════ LINEAR SYSTEMS ═══════════════════ -->
+<div id="panel-systems" class="tab-panel">
+  <div class="two-col">
+    <div>
+      <div class="card">
+        <div class="card-title">System Ax = b</div>
+        <p style="font-size:12px;color:var(--text-dim);font-family:var(--mono);margin-bottom:14px">Enter coefficients and constants</p>
+        <div class="sys-equation">
+          <input class="mat-input" id="s00" value="2">
+          <span class="sys-sym">x +</span>
+          <input class="mat-input" id="s01" value="1">
+          <span class="sys-sym">y =</span>
+          <input class="mat-input" id="sb0" value="5">
+        </div>
+        <div class="sys-equation">
+          <input class="mat-input" id="s10" value="4">
+          <span class="sys-sym">x +</span>
+          <input class="mat-input" id="s11" value="3">
+          <span class="sys-sym">y =</span>
+          <input class="mat-input" id="sb1" value="11">
+        </div>
+        <button class="btn btn-primary" style="margin-top:14px" onclick="solveSystem()">Solve via Gaussian Elimination</button>
+        <div class="divider"></div>
+        <div class="result-label">Step-by-Step Solution</div>
+        <div class="result-box" id="sys-steps" style="min-height:120px;font-size:12px;line-height:1.9">Press Solve to compute</div>
+      </div>
+    </div>
+    <div>
+      <div class="canvas-card">
+        <canvas id="sysCanvas" width="380" height="380"></canvas>
+      </div>
+      <div class="legend" style="margin-top:12px;padding-left:4px">
+        <div class="legend-item"><div class="legend-dot" style="background:#5b9cf6"></div>Equation 1</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#7edba0"></div>Equation 2</div>
+        <div class="legend-item"><div class="legend-dot" style="background:#f8a96a"></div>Solution point</div>
+      </div>
+      <div class="info-box" style="margin-top:12px">The graph shows each equation as a line. The <b>intersection point</b> is the unique solution. Parallel lines → no solution. Overlapping lines → infinite solutions.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Linear Algebra Interactive Tools — 2×2 and 2D</p>
+  <p style="color:var(--text-dim)">Built with Canvas API &amp; Vanilla JS</p>
+</footer>
+
+</div><!-- /container -->
+
+<script>
+const TAU = Math.PI * 2;
+
+/* ── TAB SWITCHING ── */
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('panel-' + name).classList.add('active');
+  if (name === 'vectors') updateVectors();
+  if (name === 'transform') updateTransform();
+  if (name === 'eigen') calcEigen();
+  if (name === 'systems') solveSystem();
+}
+
+/* ─────────────── DRAW HELPERS ─────────────── */
+function drawGrid(ctx, W, H, cx, cy, sc) {
+  ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+  for (let i = -8; i <= 8; i++) {
+    ctx.beginPath(); ctx.moveTo(cx + i*sc, 0); ctx.lineTo(cx + i*sc, H); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(0, cy + i*sc); ctx.lineTo(W, cy + i*sc); ctx.stroke();
+  }
+  ctx.strokeStyle = 'rgba(255,255,255,0.15)'; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(0, cy); ctx.lineTo(W, cy); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx, 0); ctx.lineTo(cx, H); ctx.stroke();
+  ctx.fillStyle = 'rgba(255,255,255,0.2)';
+  ctx.font = '10px DM Mono, monospace';
+  ctx.fillText('x', W - 14, cy - 6);
+  ctx.fillText('y', cx + 6, 14);
+}
+
+function drawArrow(ctx, x0, y0, x1, y1, color, label, lw = 2.5) {
+  const angle = Math.atan2(y1 - y0, x1 - x0);
+  const al = 11, aw = 0.38;
+  ctx.strokeStyle = color; ctx.fillStyle = color; ctx.lineWidth = lw;
+  ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo(x1, y1);
+  ctx.lineTo(x1 - al*Math.cos(angle - aw), y1 - al*Math.sin(angle - aw));
+  ctx.lineTo(x1 - al*Math.cos(angle + aw), y1 - al*Math.sin(angle + aw));
+  ctx.closePath(); ctx.fill();
+  if (label) {
+    ctx.font = '600 13px DM Mono, monospace';
+    ctx.fillStyle = color;
+    const lx = x1 + 9 * Math.cos(angle) + (angle > 0 ? 0 : -4);
+    const ly = y1 + 9 * Math.sin(angle) - 6;
+    ctx.fillText(label, lx, ly);
+  }
+}
+
+/* ─────────────── VECTORS ─────────────── */
+function updateVectors() {
+  const ax = +document.getElementById('ax').value, ay = +document.getElementById('ay').value;
+  const bx = +document.getElementById('bx').value, by = +document.getElementById('by').value;
+  document.getElementById('ax-v').textContent = ax;
+  document.getElementById('ay-v').textContent = ay;
+  document.getElementById('bx-v').textContent = bx;
+  document.getElementById('by-v').textContent = by;
+  const magA = Math.sqrt(ax*ax + ay*ay), magB = Math.sqrt(bx*bx + by*by);
+  const dot = ax*bx + ay*by;
+  const angle = (magA && magB) ? Math.acos(Math.max(-1, Math.min(1, dot/(magA*magB)))) * 180/Math.PI : 0;
+  const cross = ax*by - ay*bx;
+  document.getElementById('magA').textContent = magA.toFixed(3);
+  document.getElementById('magB').textContent = magB.toFixed(3);
+  document.getElementById('dotAB').textContent = dot.toFixed(3);
+  document.getElementById('angleAB').textContent = angle.toFixed(2) + '°';
+  document.getElementById('sumAB').textContent = `(${(ax+bx).toFixed(2)}, ${(ay+by).toFixed(2)})`;
+  document.getElementById('crossAB').textContent = cross.toFixed(3);
+  drawVectors(ax, ay, bx, by);
+}
+
+function drawVectors(ax, ay, bx, by) {
+  const c = document.getElementById('vecCanvas'), ctx = c.getContext('2d');
+  const W = c.width, H = c.height, cx = W/2, cy = H/2, sc = 34;
+  ctx.clearRect(0, 0, W, H);
+  drawGrid(ctx, W, H, cx, cy, sc);
+  const sx = ax+bx, sy = ay+by;
+  ctx.setLineDash([5, 5]);
+  ctx.strokeStyle = 'rgba(248,169,106,0.3)'; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(cx+ax*sc, cy-ay*sc); ctx.lineTo(cx+sx*sc, cy-sy*sc); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(cx+bx*sc, cy-by*sc); ctx.lineTo(cx+sx*sc, cy-sy*sc); ctx.stroke();
+  ctx.setLineDash([]);
+  if (sx!==0 || sy!==0) drawArrow(ctx, cx, cy, cx+sx*sc, cy-sy*sc, '#f8a96a', 'A+B', 2);
+  drawArrow(ctx, cx, cy, cx+ax*sc, cy-ay*sc, '#5b9cf6', 'A');
+  drawArrow(ctx, cx, cy, cx+bx*sc, cy-by*sc, '#7edba0', 'B');
+  const magA = Math.sqrt(ax*ax+ay*ay), magB = Math.sqrt(bx*bx+by*by), dot = ax*bx+ay*by;
+  if (magA > 0.1 && magB > 0.1) {
+    const angle = Math.acos(Math.max(-1, Math.min(1, dot/(magA*magB))));
+    const startA = Math.atan2(-ay, ax), startB = Math.atan2(-by, bx);
+    ctx.strokeStyle = 'rgba(255,255,255,0.2)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, cy, 28, Math.min(startA,startB), Math.max(startA,startB)); ctx.stroke();
+    const midAngle = (startA+startB)/2;
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.font = '10px DM Mono, monospace';
+    ctx.fillText('θ', cx+36*Math.cos(midAngle)-4, cy+36*Math.sin(midAngle)+4);
+  }
+}
+
+/* ─────────────── TRANSFORM ─────────────── */
+function getT() {
+  return [[+document.getElementById('t00').value, +document.getElementById('t01').value],
+          [+document.getElementById('t10').value, +document.getElementById('t11').value]];
+}
+function setPreset(p) {
+  const P = {scale2:[2,0,0,2],rot90:[0,-1,1,0],rot45:[.707,-.707,.707,.707],shear:[1,1,0,1],reflect:[-1,0,0,1],reflectX:[1,0,0,-1],identity:[1,0,0,1]};
+  const v = P[p];
+  ['t00','t01','t10','t11'].forEach((id,i) => document.getElementById(id).value = Math.round(v[i]*1000)/1000);
+  updateTransform();
+}
+function updateTransform() {
+  const T = getT();
+  const det = T[0][0]*T[1][1] - T[0][1]*T[1][0];
+  const trace = T[0][0] + T[1][1];
+  document.getElementById('t-det').textContent = det.toFixed(4);
+  document.getElementById('t-trace').textContent = trace.toFixed(4);
+  const inv = document.getElementById('t-inv');
+  if (Math.abs(det) > 1e-9) { inv.textContent = '✓ Yes'; inv.className = 'stat-val green'; }
+  else { inv.textContent = '✗ Singular'; inv.className = 'stat-val red'; }
+  document.getElementById('t-area').textContent = Math.abs(det).toFixed(4) + 'x';
+  drawTransform(T);
+}
+function drawTransform(T) {
+  const c = document.getElementById('transformCanvas'), ctx = c.getContext('2d');
+  const W = c.width, H = c.height, cx = W/2, cy = H/2, sc = 44;
+  ctx.clearRect(0, 0, W, H);
+  drawGrid(ctx, W, H, cx, cy, sc);
+  const txPt = (x,y) => [cx+(T[0][0]*x+T[0][1]*y)*sc, cy-(T[1][0]*x+T[1][1]*y)*sc];
+  const origPts = [[0,0],[1,0],[1,1],[0,1]];
+  ctx.strokeStyle = 'rgba(91,156,246,0.25)'; ctx.fillStyle = 'rgba(91,156,246,0.08)'; ctx.lineWidth = 1; ctx.setLineDash([4,4]);
+  ctx.beginPath();
+  origPts.forEach(([x,y],i) => { const px=cx+x*sc, py=cy-y*sc; i===0?ctx.moveTo(px,py):ctx.lineTo(px,py); });
+  ctx.closePath(); ctx.fill(); ctx.stroke(); ctx.setLineDash([]);
+  const tPts = origPts.map(([x,y]) => txPt(x,y));
+  ctx.fillStyle = 'rgba(126,219,160,0.15)'; ctx.strokeStyle = '#7edba0'; ctx.lineWidth = 2;
+  ctx.beginPath(); tPts.forEach(([x,y],i) => i===0?ctx.moveTo(x,y):ctx.lineTo(x,y)); ctx.closePath(); ctx.fill(); ctx.stroke();
+  const [e1x,e1y] = txPt(1,0), [e2x,e2y] = txPt(0,1);
+  drawArrow(ctx, cx, cy, e1x, e1y, '#5b9cf6', 'e₁');
+  drawArrow(ctx, cx, cy, e2x, e2y, '#f8a96a', 'e₂');
+}
+
+/* ─────────────── MATRIX CALCULATOR ─────────────── */
+function getA() {return[[+document.getElementById('a00').value,+document.getElementById('a01').value],[+document.getElementById('a10').value,+document.getElementById('a11').value]];}
+function getB() {return[[+document.getElementById('b00').value,+document.getElementById('b01').value],[+document.getElementById('b10').value,+document.getElementById('b11').value]];}
+function mStr(m) {
+  if (!Array.isArray(m[0])) return m.toFixed(6);
+  const fmt = n => (n>=0?' ':'')+n.toFixed(4);
+  return `[ ${fmt(m[0][0])}  ${fmt(m[0][1])} ]\n[ ${fmt(m[1][0])}  ${fmt(m[1][1])} ]`;
+}
+function det2(m) {return m[0][0]*m[1][1]-m[0][1]*m[1][0];}
+function calcMat(op) {
+  const A=getA(), B=getB();
+  const eq=document.getElementById('mat-eq'), res=document.getElementById('mat-result');
+  if(op==='add'){eq.textContent='A + B =';res.textContent=mStr([[A[0][0]+B[0][0],A[0][1]+B[0][1]],[A[1][0]+B[1][0],A[1][1]+B[1][1]]]);}
+  else if(op==='sub'){eq.textContent='A − B =';res.textContent=mStr([[A[0][0]-B[0][0],A[0][1]-B[0][1]],[A[1][0]-B[1][0],A[1][1]-B[1][1]]]);}
+  else if(op==='mul'){eq.textContent='A × B =';res.textContent=mStr([[A[0][0]*B[0][0]+A[0][1]*B[1][0],A[0][0]*B[0][1]+A[0][1]*B[1][1]],[A[1][0]*B[0][0]+A[1][1]*B[1][0],A[1][0]*B[0][1]+A[1][1]*B[1][1]]]);}
+  else if(op==='detA'){eq.textContent='det(A) =';res.textContent=det2(A).toFixed(6);}
+  else if(op==='detB'){eq.textContent='det(B) =';res.textContent=det2(B).toFixed(6);}
+  else if(op==='invA'){
+    const d=det2(A); eq.textContent='A⁻¹ =';
+    if(Math.abs(d)<1e-10){res.textContent='Matrix is singular — inverse does not exist.\ndet(A) = 0';return;}
+    res.textContent=mStr([[A[1][1]/d,-A[0][1]/d],[-A[1][0]/d,A[0][0]/d]]);
+  }
+  else if(op==='invB'){
+    const d=det2(B); eq.textContent='B⁻¹ =';
+    if(Math.abs(d)<1e-10){res.textContent='Matrix is singular — inverse does not exist.\ndet(B) = 0';return;}
+    res.textContent=mStr([[B[1][1]/d,-B[0][1]/d],[-B[1][0]/d,B[0][0]/d]]);
+  }
+  else if(op==='trans'){eq.textContent='Aᵀ =';res.textContent=mStr([[A[0][0],A[1][0]],[A[0][1],A[1][1]]]);}
+  else if(op==='transB'){eq.textContent='Bᵀ =';res.textContent=mStr([[B[0][0],B[1][0]],[B[0][1],B[1][1]]]);}
+  else if(op==='rank'){
+    eq.textContent='rank(A) =';
+    const d=det2(A);
+    const r=Math.abs(d)>1e-10?2:(A[0][0]!==0||A[0][1]!==0||A[1][0]!==0||A[1][1]!==0?1:0);
+    res.textContent=r.toString();
+  }
+}
+
+/* ─────────────── EIGENVALUES ─────────────── */
+function eigvec(a,b,c,d,lam) {
+  if (Math.abs(b)>1e-9) { const n=Math.sqrt(b*b+(lam-a)*(lam-a)); return [b/n,(lam-a)/n]; }
+  if (Math.abs(d-lam)>1e-9) { const n=Math.sqrt(c*c+(lam-d)*(lam-d)); return [(lam-d)/n,c/n]; }
+  return [1,0];
+}
+function calcEigen() {
+  const a=+document.getElementById('e00').value, b=+document.getElementById('e01').value;
+  const cc=+document.getElementById('e10').value, d=+document.getElementById('e11').value;
+  const tr=a+d, det=a*d-b*cc, disc=tr*tr-4*det;
+  let out = `Characteristic polynomial:\n  λ² − (${tr})λ + (${det}) = 0\n\ntr(A) = ${tr.toFixed(4)},  det(A) = ${det.toFixed(4)}\nDiscriminant = ${disc.toFixed(4)}\n`;
+  let v1=null, v2=null;
+  if (disc < -1e-10) {
+    const re=(tr/2).toFixed(4), im=(Math.sqrt(-disc)/2).toFixed(4);
+    out += `\nComplex eigenvalues (no real eigenvectors):\n  λ₁ = ${re} + ${im}i\n  λ₂ = ${re} − ${im}i`;
+  } else {
+    const l1=(tr+Math.sqrt(Math.max(0,disc)))/2, l2=(tr-Math.sqrt(Math.max(0,disc)))/2;
+    v1=eigvec(a,b,cc,d,l1); v2=eigvec(a,b,cc,d,l2);
+    out += `\nEigenvalues:\n  λ₁ = ${l1.toFixed(4)}\n  λ₂ = ${l2.toFixed(4)}\n\nEigenvectors:\n  v₁ ≈ (${v1[0].toFixed(4)}, ${v1[1].toFixed(4)})\n  v₂ ≈ (${v2[0].toFixed(4)}, ${v2[1].toFixed(4)})\n\nVerification:  A·v₁ = λ₁·v₁\n  LHS = (${(a*v1[0]+b*v1[1]).toFixed(3)}, ${(cc*v1[0]+d*v1[1]).toFixed(3)})\n  RHS = (${(l1*v1[0]).toFixed(3)}, ${(l1*v1[1]).toFixed(3)})`;
+  }
+  document.getElementById('eigen-steps').textContent = out;
+  drawEigen(v1, v2);
+}
+function drawEigen(v1, v2) {
+  const c=document.getElementById('eigenCanvas'), ctx=c.getContext('2d');
+  const W=c.width, H=c.height, cx=W/2, cy=H/2, sc=38;
+  ctx.clearRect(0,0,W,H);
+  drawGrid(ctx,W,H,cx,cy,sc);
+  const drawEV=(vx,vy,col,label) => {
+    const S=3.8, ex=cx+vx*S*sc, ey=cy-vy*S*sc;
+    drawArrow(ctx,cx,cy,ex,ey,col,label,2.5);
+    ctx.strokeStyle=col+'55'; ctx.lineWidth=1; ctx.setLineDash([3,5]);
+    ctx.beginPath(); ctx.moveTo(cx-vx*S*sc,cy+vy*S*sc); ctx.lineTo(ex,ey); ctx.stroke();
+    ctx.setLineDash([]);
+  };
+  if (v1) drawEV(v1[0],v1[1],'#5b9cf6','v₁');
+  if (v2) drawEV(v2[0],v2[1],'#7edba0','v₂');
+}
+
+/* ─────────────── LINEAR SYSTEMS ─────────────── */
+function solveSystem() {
+  const a=+document.getElementById('s00').value, b=+document.getElementById('s01').value;
+  const cc=+document.getElementById('s10').value, d=+document.getElementById('s11').value;
+  const e=+document.getElementById('sb0').value, f=+document.getElementById('sb1').value;
+  const det=a*d-b*cc;
+  let out=`System of equations:\n  ${a}x + ${b}y = ${e}   ...(1)\n  ${cc}x + ${d}y = ${f}   ...(2)\n\nForming augmented matrix [A|b]:\n  [ ${a}  ${b} | ${e} ]\n  [ ${cc}  ${d} | ${f} ]\n\ndet(A) = ${a}·${d} − ${b}·${cc} = ${det.toFixed(4)}\n`;
+  let res=null;
+  if (Math.abs(det)<1e-10) {
+    const inconsistent = Math.abs(a*f-e*cc)>1e-9;
+    out += inconsistent ? '\nLines are parallel.\n→ No solution (inconsistent system).' : '\nLines are identical.\n→ Infinitely many solutions.';
+  } else {
+    const x=(e*d-b*f)/det, y=(a*f-e*cc)/det;
+    out += `\nCramer's Rule:\n  x = (${e}·${d} − ${b}·${f}) / ${det.toFixed(2)}\n    = ${x.toFixed(6)}\n\n  y = (${a}·${f} − ${e}·${cc}) / ${det.toFixed(2)}\n    = ${y.toFixed(6)}\n\n─────────────────────────\nSolution:  x = ${x.toFixed(4)},  y = ${y.toFixed(4)}`;
+    res={x,y};
+  }
+  document.getElementById('sys-steps').textContent=out;
+  drawSystem(a,b,e,cc,d,f,res);
+}
+function drawSystem(a,b,e,cc,d,f,res) {
+  const c=document.getElementById('sysCanvas'), ctx=c.getContext('2d');
+  const W=c.width, H=c.height, cx=W/2, cy=H/2, sc=28;
+  ctx.clearRect(0,0,W,H);
+  drawGrid(ctx,W,H,cx,cy,sc);
+  const drawLine=(a0,b0,e0,col) => {
+    ctx.strokeStyle=col; ctx.lineWidth=2.5;
+    if (Math.abs(b0)>1e-9) {
+      const x1=-9,y1=(e0-a0*x1)/b0,x2=9,y2=(e0-a0*x2)/b0;
+      ctx.beginPath(); ctx.moveTo(cx+x1*sc,cy-y1*sc); ctx.lineTo(cx+x2*sc,cy-y2*sc); ctx.stroke();
+    } else if (Math.abs(a0)>1e-9) {
+      const x=e0/a0;
+      ctx.beginPath(); ctx.moveTo(cx+x*sc,0); ctx.lineTo(cx+x*sc,H); ctx.stroke();
+    }
+  };
+  drawLine(a,b,e,'#5b9cf6');
+  drawLine(cc,d,f,'#7edba0');
+  if (res) {
+    const px=cx+res.x*sc, py=cy-res.y*sc;
+    ctx.fillStyle='rgba(248,169,106,0.2)';
+    ctx.beginPath(); ctx.arc(px,py,14,0,TAU); ctx.fill();
+    ctx.fillStyle='#f8a96a';
+    ctx.beginPath(); ctx.arc(px,py,5,0,TAU); ctx.fill();
+    ctx.strokeStyle='rgba(248,169,106,0.6)'; ctx.lineWidth=1.5;
+    ctx.beginPath(); ctx.arc(px,py,14,0,TAU); ctx.stroke();
+    ctx.font='600 11px DM Mono, monospace'; ctx.fillStyle='#f8a96a';
+    ctx.fillText(`(${res.x.toFixed(2)}, ${res.y.toFixed(2)})`, px+18, py-8);
+  }
+}
+
+/* ── INIT ── */
+updateVectors();
+setTimeout(() => { updateTransform(); calcEigen(); solveSystem(); calcMat('mul'); }, 80);
+</script>
+</body>
+</html>

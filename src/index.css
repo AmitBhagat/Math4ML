@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
+@import "mafs/core.css";
+@import "mafs/font.css";
 @import "tailwindcss";
+
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
@@ -66,6 +69,13 @@
     --mesh-3: color-mix(in srgb, var(--gold) 15%, transparent);
     --mesh-4: color-mix(in srgb, var(--green) 12%, transparent);
     --mesh-centre: color-mix(in srgb, var(--bg2) 65%, transparent);
+
+    /* Mapped variables for React components */
+    --accent-premium: var(--accent);
+    --gold-premium: var(--gold);
+    --green-premium: var(--green);
+    --purple-premium: var(--purple);
+    --text-premium: var(--text);
   }
 
   .dark {
@@ -94,6 +104,13 @@
     --mesh-3: color-mix(in srgb, var(--gold) 6%, transparent);
     --mesh-4: color-mix(in srgb, var(--green) 6%, transparent);
     --mesh-centre: rgba(30, 27, 75, 0.2);
+
+    /* Mapped variables for React components */
+    --accent-premium: var(--accent);
+    --gold-premium: var(--gold);
+    --green-premium: var(--green);
+    --purple-premium: var(--purple);
+    --text-premium: var(--text);
   }
 
   html {
@@ -406,4 +423,94 @@
 }
 .katex-display {
   @apply mt-4 mb-6 overflow-x-auto overflow-y-hidden;
+}
+
+/* ─── MAFS PREMIUM OVERRIDES ─── */
+.mafs-view {
+  background: transparent !important;
+  font-family: inherit !important;
+}
+
+.mafs-view text {
+  font-family: var(--font-mono) !important;
+  font-size: 11px !important;
+}
+
+.mafs-axis line {
+  stroke: var(--muted) !important;
+  stroke-opacity: 0.3 !important;
+}
+
+.mafs-grid line {
+  stroke: var(--muted) !important;
+  stroke-opacity: var(--grid-opacity, 0.15) !important;
+}
+
+.mafs-axis-tick line {
+  stroke: var(--muted) !important;
+}
+
+.mafs-axis-tick text {
+  fill: var(--muted) !important;
+  font-weight: 500 !important;
+}
+
+.mafs-origin {
+  fill: var(--muted) !important;
+  opacity: 0.5;
+}
+
+.dark .mafs-grid line {
+  stroke: rgba(255, 255, 255, 0.08) !important;
+}
+
+.dark .mafs-axis line {
+  stroke: rgba(255, 255, 255, 0.15) !important;
+}
+
+.dark .mafs-axis-tick text {
+  fill: #94a3b8 !important;
+  opacity: 0.8;
+}
+
+/* Custom Vector Styling */
+.mafs-vector {
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+}
+
+/* ─── LAB DASHBOARD LAYOUT ─── */
+.lab-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem; /* Reduced from gap-8 for tighter UI */
+}
+
+.lab-visualizer {
+  width: 100%;
+  overflow: hidden;
+  transition: all 0.5s ease;
+  border-radius: var(--radius);
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.1),
+    0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+.dark .lab-visualizer {
+  box-shadow: 
+    0 20px 50px -10px rgba(0, 0, 0, 0.5),
+    0 0 30px -5px color-mix(in srgb, var(--accent) 15%, transparent);
+}
+
+.lab-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .lab-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

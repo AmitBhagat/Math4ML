@@ -22,6 +22,8 @@ export const dotProductSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>At its core, the <strong>Dot Product</strong> answers one critical question: <em>"How much are these two vectors pointing in the same direction?"</em> It is the fundamental measure of <strong>Similarity</strong>. If two vectors are perfectly aligned, the dot product is maximized. If they have nothing in common (orthogonal), it is zero. This simple operation allows us to transform high-dimensional data into a single "compatibility score." In modern AI, when you hear about "Attention" or "Similarity Search," you are essentially hearing about billions of dot products happening simultaneously as the model looks for the most relevant information.</p>
+    
+    <visualizer topic="DotProduct" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

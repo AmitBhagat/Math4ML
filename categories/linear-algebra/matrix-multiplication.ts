@@ -14,6 +14,8 @@ export const matrixMultiplicationSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
+    
+    <visualizer topic="MatrixOperations" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

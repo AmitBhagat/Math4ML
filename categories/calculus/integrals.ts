@@ -22,6 +22,8 @@ export const integralsSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>If derivatives are the "Speedometer" (measuring instant change), then <strong>Integrals</strong> are the "Odometer" (measuring total distance traveled). In Machine Learning, we often know the local rules or probabilities, and we need to find the <strong>Total Result</strong>. Whether it's calculating the total probability of an event or finding the expected value across a continuous range, integrals allow us to sum up an infinite number of tiny, infinitesimal slices to reconstruct a whole reality. It is the mathematical bridge between local slope and global accumulation.</p>
+    
+    <visualizer topic="AreaUnderCurve" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

@@ -14,6 +14,8 @@ export const linearRegressionSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine you have a chaotic cloud of data points—maybe house prices vs. square footage—and you want to find the "Universal Rule" that connects them. <strong>Linear Regression</strong> is the search for that one perfect, straight path that passes as close to every point as possible. It is the mathematical bridge between "Observations" and "Predictions." In Machine Learning, we use this simple line to turn messy history into a clear, logical forecast about the future. It is the "Hello World" of AI because it proves that even with millions of data points, a simple, interpretable rule can often be more powerful than a complex black box.</p>
+    
+    <visualizer topic="LinearRegression" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

@@ -22,6 +22,8 @@ export const vectorsSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Why do we care about vectors? Because they allow us to treat <strong>Qualities</strong> as <strong>Quantities</strong>. In the real world, things are messy—a house has an age, a size, and a location. In math, we treat each of these as a unique <strong>Direction</strong> in space. A single vector is just a point in that multidimensional space, representing one specific "version" of reality. This allows us to calculate the "distance" between house prices or find the "direction" that leads to the highest profit. It is the language that turns our fuzzy observations into a concrete coordinate system that a computer can actually navigate.</p>
+    
+    <visualizer topic="Vectors" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

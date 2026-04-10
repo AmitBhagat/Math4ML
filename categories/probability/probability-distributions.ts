@@ -22,6 +22,8 @@ export const probabilityDistributionsSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A Random Variable is just a placeholder, like a "Potential Weather" or "Future Stock Price." But a <strong>Probability Distribution</strong> is the actual personality or "DNA" of that variable. It doesn't just list what could happen; it tells you exactly how the universe is "loaded." Distributions allow us to quantify <strong>Uncertainty</strong> so we can stop guessing. Instead of a single point-prediction like "This house will sell for $500k," a distribution gives us a full spectrum of likelihood. In ML, every model we train is essentially trying to find the "Shape" that best fits the scattered dots of our training data.</p>
+    
+    <visualizer topic="Distributions" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

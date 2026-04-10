@@ -22,6 +22,8 @@ export const conditionalProbabilitySection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Normally, your perspective covers the entire universe of possibilities. But once I tell you "Condition B is true," your world shrinks instantly. You are no longer interested in the parts of the universe that don't satisfy B. <strong>Conditional Probability</strong> is the "Shrinking Universe" intuition—it forces us to focus only on the survivors of that condition. In Machine Learning, this is the "Secret Sauce." When we ask a model, "Is this a cat?", we are really asking for the probability of 'Cat' <strong>given</strong> the features we see. We are filtering out every other possible object and looking only at the slice of reality that matches the image pixels.</p>
+    
+    <visualizer topic="ConditionalProbability" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

@@ -22,6 +22,8 @@ export const gradientSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East—but the real world (and real data) is rarely that simple. The <strong>Gradient</strong> (\(\nabla f\)) combines all these individual slopes into a single, powerful arrow that points exactly in the direction of the <strong>steepest ascent</strong>. It is the mathematical "North Star" for optimization. In Machine Learning, our goal is to decrease error as fast as possible, so we simply take our current position and move in the <strong>exact opposite direction</strong> of the gradient.</p>
+    
+    <visualizer topic="Gradient" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

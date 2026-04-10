@@ -228,6 +228,18 @@ export const CATEGORY_META: CategoryMeta[] = [
       { title: "Knowledge Transfer", description: "Repurposing pre-trained global intelligence for specific tasks." },
       { title: "Latent Manifolds", description: "Mapping raw data into low-dimensional semantic vector spaces." }
     ]
+  },
+  {
+    id: "math-tools",
+    title: "Math Tools",
+    description: "High-fidelity interactive utilities for real-time mathematical exploration — from vector arithmetic to eigenvalue solvers.",
+    keyConcepts: [
+      { title: "Vector Explorer", description: "Visualize vector addition, dot products, and cross products." },
+      { title: "Transform Lab", description: "Experiment with 2D linear transformations and basis changes." },
+      { title: "Matrix Calc", description: "Perform 2x2 matrix operations: Inverse, Rank, Determinants." },
+      { title: "Eigen Solver", description: "Step-by-step characteristic polynomial and eigenvector analysis." },
+      { title: "System Solver", description: "Solve and visualize systems of linear equations via Cramer's Rule." }
+    ]
   }
 ];
 
@@ -243,7 +255,7 @@ export const CLUSTERS: ClusterMeta[] = [
     id: "mathematics",
     title: "Mathematics",
     description: "The rigorous theoretical frameworks that govern linear transformations, optimization, and probabilistic reasoning.",
-    categories: ["linear-algebra", "calculus", "probability", "statistics", "optimization", "information-theory", "discrete-math"]
+    categories: ["linear-algebra", "calculus", "probability", "statistics", "optimization", "information-theory", "discrete-math", "math-tools"]
   },
   {
     id: "machine-learning",
@@ -282,6 +294,7 @@ export const ICON_MAP: Record<string, any> = {
   "optimization-ml": Zap,
   "advanced-ml": Layers,
   "modern-ml": Activity,
+  "math-tools": Zap,
 };
 
 // ---------------------------------------------------------------------------
@@ -311,6 +324,7 @@ const importMap: Record<string, () => Promise<any>> = {
   'optimization-ml': () => import('../../categories/optimization-ml-index'),
   'advanced-ml': () => import('../../categories/advanced-ml-index'),
   'modern-ml': () => import('../../categories/modern-ml-index'),
+  'math-tools': () => import('../../categories/math-tools-index'),
 };
 
 // Export name map (the const name inside each file)
@@ -335,6 +349,7 @@ const exportNameMap: Record<string, string> = {
   'optimization-ml': 'OPTIMIZATION_ML_DATA',
   'advanced-ml': 'ADVANCED_ML_DATA',
   'modern-ml': 'MODERN_ML_DATA',
+  'math-tools': 'MATH_TOOLS_DATA',
 };
 
 // Fix the REINFORCEMENT_LEARNING export name if I made a typo above

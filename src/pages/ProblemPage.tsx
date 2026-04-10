@@ -14,63 +14,77 @@ import { cleanMathContent } from '@/src/lib/mathUtils';
 import { getCategoryTheme } from "@/src/lib/themeUtils";
 import { Hammer, Clock, Star } from "lucide-react";
 
-import { InteractiveVisualizer } from "@/src/components/visualizers/InteractiveVisualizer";
-import { MatrixOperationsInteractive } from "@/src/components/visualizers/MatrixOperationsInteractive";
+import { InteractiveVisualizer } from "@/src/components/visualizers/core/InteractiveVisualizer";
+import { VisualizerModal } from "@/src/components/visualizers/core/VisualizerModal";
 
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
+  const [activeTopic, setActiveTopic] = useState<string | null>(null);
+
   if (!html) return null;
   // Match both <python-code> and <visualizer topic="..." />
-    const segments = html.split(/(<python-code[\s\S]*?>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
+  const segments = html.split(/(<python-code[\s\S]*?>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
   
   return (
     <>
       {segments.map((segment, idx) => {
         if (segment.startsWith('<python-code')) {
-          // Extract attributes and content from <python-code ...>content</python-code>
           const match = segment.match(/<python-code([^>]*)>([\s\S]*?)<\/python-code>/);
           if (match) {
             const attrString = match[1];
             const code = match[2].trim();
-            
-            // Basic static-output extractor
             const staticOutputMatch = attrString.match(/static-output="([^"]*)"/);
             const staticOutput = staticOutputMatch ? staticOutputMatch[1].replace(/\\n/g, '\n') : undefined;
-
             const runnableMatch = attrString.match(/runnable="([^"]*)"/);
             const runnable = runnableMatch ? runnableMatch[1] === "true" : true;
 
-            return (
-              <div key={idx}>
-                <CodeSnippet code={code} staticOutput={staticOutput} runnable={runnable} />
-              </div>
-            );
+            return <div key={idx}><CodeSnippet code={code} staticOutput={staticOutput} runnable={runnable} /></div>;
           }
         }
-
 
         if (segment.startsWith('<visualizer')) {
           const match = segment.match(/topic="([^"]*)"/);
           const topic = match ? match[1] : '';
 
-          // Special Case: Matrix Operations (Exactly same UI bypass)
-          if (topic === "MatrixOperations") {
-            return (
-              <div key={idx} className="my-14 w-full">
-                 <MatrixOperationsInteractive />
-              </div>
-            );
-          }
-
           return (
-            <div key={idx} className="my-14 max-w-6xl">
-               <InteractiveVisualizer topicId={topic} />
+            <div key={idx} className="my-14 max-w-4xl">
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => setActiveTopic(topic)}
+                className="w-full relative group overflow-hidden rounded-[28px] p-[1px] bg-gradient-to-br from-accent-premium/40 via-white/10 to-transparent transition-all duration-500 shadow-2xl hover:shadow-accent-premium/20"
+              >
+                <div className="relative bg-surface-container/80 backdrop-blur-xl rounded-[27px] px-8 py-10 flex flex-col items-center text-center gap-6">
+                  <div className="w-20 h-20 rounded-2xl bg-accent-premium/10 flex items-center justify-center group-hover:bg-accent-premium group-hover:text-white transition-all duration-500 shadow-inner">
+                    <Hammer className="w-10 h-10" />
+                  </div>
+                  
+                  <div>
+                    <h4 className="text-xl font-bold tracking-tight text-text-premium mb-2">Interactive Laboratory: {topic}</h4>
+                    <p className="text-sm text-muted-premium max-w-md mx-auto">
+                      Step into the simulation to manipulate parameters and visualize the underlying geometry in real-time.
+                    </p>
+                  </div>
+
+                  <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-accent-premium text-white text-[12px] font-black uppercase tracking-[0.2em] shadow-lg shadow-accent-premium/30 group-hover:scale-105 transition-transform">
+                    Launch Experiment
+                  </div>
+                </div>
+              </motion.button>
             </div>
           );
         }
         
         return <HtmlWithMath key={idx} html={segment} />;
       })}
+
+      <VisualizerModal 
+        isOpen={activeTopic !== null} 
+        onClose={() => setActiveTopic(null)} 
+        title={activeTopic || "Interactive Lab"}
+      >
+        {activeTopic && <InteractiveVisualizer topicId={activeTopic} />}
+      </VisualizerModal>
     </>
   );
 };

@@ -15,6 +15,8 @@ export const bayesTheoremSection: TopicSection = {
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculating the "Forward" probability (Probability of Effect given Cause) is usually easy, like guessing if it will rain given a dark cloud. But in AI, we want to go <strong>backward</strong>: "Given this input data (Effect), what's the most likely model (Cause)?" Bayes' Theorem is the Bridge that lets us flip these conditional probabilities. It combines what you knew <strong>before</strong> (Prior) with what you see <strong>now</strong> (Evidence) to give you a <strong>Posterior</strong> belief. It is the mathematical engine of "Self-Correction"—it tells us exactly how much to update our worldview when new facts hit the table. Without it, machines couldn't learn from experience; they would just be static calculators.</p>
     
+    <visualizer topic="BayesTheorem" />
+    
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Symmetry of Joint Probability & The Posterior Update</div>

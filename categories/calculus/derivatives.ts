@@ -22,6 +22,8 @@ export const derivativesSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Calculus is the "Language of Sensitivity." It answers the core question of Machine Learning: <em>"If I nudge this specific variable by a hair, how much does the final result move?"</em> If you are standing on a landscape of data, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. By calculating these slopes for every single weight in a neural network, we gain a clear map of how to move. It is the fundamental difference between blind guessing and having a scientific plan to reduce error.</p>
+    
+    <visualizer topic="Differentiation" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

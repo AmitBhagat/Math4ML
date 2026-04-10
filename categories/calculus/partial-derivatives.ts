@@ -22,6 +22,8 @@ export const partialDerivativesSection: TopicSection = {
 
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Imagine you are standing on a massive 3D mountain range (the <strong>Loss Surface</strong>). To improve your model, you need to know: <em>"If I step strictly North (nudging Weight A), does it go up? If I step strictly East (nudging Weight B), does it go down?"</em> A <strong>Partial Derivative</strong> is exactly that—it isolates the influence of a single variable while freezing every other part of the universe. In Machine Learning, where models have millions of weights, these allow us to diagnose exactly which specific parameter is causing the most trouble without getting overwhelmed by the sheer complexity of the whole system.</p>
+    
+    <visualizer topic="PartialDerivatives" />
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">

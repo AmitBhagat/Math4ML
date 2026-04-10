@@ -86,7 +86,7 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
       );
     }
     return (
-      <div className="max-w-6xl mx-auto px-4 md:px-6 py-12 md:py-24">
+      <div className="max-w-[1400px] mx-auto px-4 md:px-10 lg:px-12 py-12 md:py-24">
         <div className="animate-pulse space-y-10">
           <div className="h-6 w-48 bg-surface-container rounded" />
           <div className="h-16 w-3/4 bg-surface-container rounded" />
@@ -97,7 +97,7 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
   }
   return (
     <div 
-      className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12"
+      className="max-w-[1400px] mx-auto px-4 md:px-10 lg:px-12 py-8 md:py-12"
       style={{
         '--category-primary': getCategoryTheme(categoryId || '').primary,
         '--category-secondary': getCategoryTheme(categoryId || '').secondary,
