@@ -21,7 +21,6 @@ export const jacobianSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A simple derivative is for one input and one output. A Gradient is for many inputs and one output. But in Deep Learning, every layer takes a vector and transforms it into a <strong>new vector</strong>. To track this complex interaction, we need the <strong>Jacobian Matrix</strong>—a complete grid where every row is the gradient of a different output neuron. It tells us exactly how every single input in a layer influences every single output in the next. Without this map, we wouldn't be able to "link" the chain of sensitivities together to train deep neural networks.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -51,6 +50,8 @@ export const jacobianSection: TopicSection = {
       <p>In Deep Learning, the Jacobian is the engine of the <strong>Chain Rule</strong>. When we compose layers, we simply multiply their Jacobians to track how error flows from one layer to the next.</p>
       <p class="mt-4 italic text-sm">Gotcha: If the Jacobian is square ($n=m$), the absolute value of its determinant $|\det(J)|$ is the <strong>Volume Scaling Factor</strong>. It tells you how much the transformation expands or shrinks the volume of a local region—a critical concept in Generative AI (VAEs and Normalizing Flows).</p>
     </div>
+    
+    <visualizer topic="jacobian" />
     
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     

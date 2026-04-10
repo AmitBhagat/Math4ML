@@ -12,9 +12,6 @@ export const singularValueDecompositionSection: TopicSection = {
       <p>SVD is the <strong>Swiss Army Knife</strong> of Linear Algebra. Unlike Eigen-decomposition, it works for <strong>any</strong> matrix—even the "messy" rectangular ones. It is the core algorithm behind image compression and recommendation systems.</p>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Every linear transformation—no matter how messy or complex—can be broken down into three simple, elegant steps: <strong>Rotate, Stretch, Rotate</strong>. This is the power of <strong>Singular Value Decomposition (SVD)</strong>. Unlike Eigen-decomposition, SVD works for every matrix in existence, whether it is square, rectangular, or full of noise. It allows us to mathematically "unravel" any matrix to find the core directions that contain the most information. In Machine Learning, SVD is the engine that finds the hidden structure in our data, telling us which features are actually "Loud" and which are just background static.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Universal Decomposition & Symmetry</div>
@@ -38,6 +35,8 @@ export const singularValueDecompositionSection: TopicSection = {
       <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
       <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
+
+    <visualizer topic="SVD" />
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     

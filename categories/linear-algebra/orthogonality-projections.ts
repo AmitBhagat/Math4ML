@@ -46,6 +46,8 @@ export const orthogonalityProjectionsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: This formula only works for 1D projections. For projecting onto a subspace spanned by matrix $X$, we use the <strong>Normal Equations</strong>: $\hat{\mathbf{y}} = X(X^T X)^{-1} X^T \mathbf{y}$.</p>
     </div>
     
+    <visualizer topic="projections" />
+
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     
       <h4>Problem: Shadow of [3, 4] on X-axis</h4>

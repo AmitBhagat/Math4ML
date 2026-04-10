@@ -20,9 +20,6 @@ export const jointDistributionsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>A single distribution for "House Price" or "Number of Bedrooms" is helpful, but in the real world, these things don't live in isolation. They are linked. High bedrooms usually lead to a high price—they interact. <strong>Joint Distributions</strong> allow us to track this multi-dimensional relationship. If we know the joint distribution of our data, we have the "God's Eye View" of the entire dataset. We can see not just the individual traits, but the underlying <strong>Coupling</strong> between variables. In AI, this is the difference between looking at individual pixel colors and seeing an actual object formed by those pixels moving together.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Probabilistic Landscape & Marginalization</div>
@@ -49,6 +46,8 @@ export const jointDistributionsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: High-dimensional Joint Distributions are the enemy of computation. Each new variable adds another dimension to the integral, making it exponentially harder to calculate (the "Curse of Dimensionality"). This is why we use "Mean Field Assumptions" to pretend variables are independent even when we know they aren't.</p>
     </div>
+
+    <visualizer topic="Joint-Distributions" />
     
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     

@@ -21,7 +21,7 @@ export const hessianSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Gradient tells you which way to walk to reduce the loss—but it doesn't tell you how <strong>fast</strong> the ground is changing under your feet. The <strong>Hessian Matrix</strong> is the "Grid of Curvatures" that measures the second-order sensitivity of your function. It tells you if you are walking into a sharp, narrow crevice or a broad, flat valley. In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
+    <p>In Machine Learning, we use the Hessian to determine the stability of our current position: if the Hessian is <strong>Positive Definite</strong>, we’ve found a stable "bowl" (a minimum). If it's mixed, we're likely in a <strong>Saddle Point</strong>, and we need to be careful not to get trapped.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -53,6 +53,8 @@ export const hessianSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional ML (like LLMs), we almost never calculate the full Hessian—it would require petabytes of memory. Instead, we use "Hessian-Free" optimizers or diagonal approximations to get the curvature benefits without the system-crashing cost.</p>
     </div>
+    
+    <visualizer topic="curvature" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

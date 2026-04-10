@@ -151,13 +151,6 @@ export const MathToolsDashboard: React.FC<DashboardProps> = ({ initialTab = 'vec
         {activeTab === 'taylor' && <TaylorLab />}
       </div>
 
-      <footer className="lab-footer">
-        <div className="footer-line"></div>
-        <div className="footer-content">
-          <p>Mathematical Laboratory — Immersive Glass Architecture</p>
-          <p className="footer-meta">Category: {CATEGORIES.find(c => c.id === activeCategory)?.label}</p>
-        </div>
-      </footer>
     </div>
   );
 };

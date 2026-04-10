@@ -2,6 +2,7 @@
 @import "mafs/core.css";
 @import "mafs/font.css";
 @import "tailwindcss";
+@import "./styles/visualizer-lab.css";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -60,6 +61,10 @@
     --s-container: rgba(255, 255, 255, 0.5);
     --s-container-low: rgba(255, 255, 255, 0.3);
     --s-container-high: rgba(255, 255, 255, 0.7);
+
+    /* Premium Math Colors (Light Optimized) */
+    --blue: #3b82f6;      /* Bright Info Blue */
+    --red: #ef4444;       /* Result/Danger Red */
     
     --sidebar-w: 280px;
 
@@ -76,6 +81,8 @@
     --green-premium: var(--green);
     --purple-premium: var(--purple);
     --text-premium: var(--text);
+    --blue-premium: var(--blue);
+    --red-premium: var(--red);
   }
 
   .dark {
@@ -98,6 +105,10 @@
     --s-container-low: rgba(2, 6, 23, 0.4);
     --s-container-high: rgba(31, 41, 55, 0.8);
 
+    /* Premium Math Colors (Dark/Night Glow) */
+    --blue: #60a5fa;      /* Glowing Cyan-Blue */
+    --red: #f87171;       /* Soft Glow Red */
+
     /* Dark Mesh Configuration */
     --mesh-1: color-mix(in srgb, var(--accent) 9%, transparent);
     --mesh-2: color-mix(in srgb, var(--purple) 9%, transparent);
@@ -111,6 +122,8 @@
     --green-premium: var(--green);
     --purple-premium: var(--purple);
     --text-premium: var(--text);
+    --blue-premium: var(--blue);
+    --red-premium: var(--red);
   }
 
   html {
@@ -437,40 +450,42 @@
 }
 
 .mafs-axis line {
-  stroke: var(--muted) !important;
-  stroke-opacity: 0.3 !important;
+  stroke: var(--text-premium) !important;
+  stroke-opacity: 0.2 !important;
 }
 
 .mafs-grid line {
-  stroke: var(--muted) !important;
-  stroke-opacity: var(--grid-opacity, 0.15) !important;
+  stroke: var(--text-premium) !important;
+  stroke-opacity: var(--grid-opacity, 0.08) !important;
 }
 
 .mafs-axis-tick line {
-  stroke: var(--muted) !important;
+  stroke: var(--text-premium) !important;
+  stroke-opacity: 0.3 !important;
 }
 
 .mafs-axis-tick text {
-  fill: var(--muted) !important;
+  fill: var(--text-premium) !important;
   font-weight: 500 !important;
+  opacity: 0.6;
 }
 
 .mafs-origin {
-  fill: var(--muted) !important;
-  opacity: 0.5;
+  fill: var(--text-premium) !important;
+  opacity: 0.3;
 }
 
 .dark .mafs-grid line {
-  stroke: rgba(255, 255, 255, 0.08) !important;
+  stroke: rgba(255, 255, 255, 0.06) !important;
 }
 
 .dark .mafs-axis line {
-  stroke: rgba(255, 255, 255, 0.15) !important;
+  stroke: rgba(255, 255, 255, 0.1) !important;
 }
 
 .dark .mafs-axis-tick text {
-  fill: #94a3b8 !important;
-  opacity: 0.8;
+  fill: var(--text-premium) !important;
+  opacity: 0.5;
 }
 
 /* Custom Vector Styling */
@@ -483,7 +498,11 @@
 .lab-layout {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem; /* Reduced from gap-8 for tighter UI */
+  gap: 1.5rem;
+  padding-bottom: 3.5rem; /* Ensure content doesn't hit the card bottom */
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
 }
 
 .lab-visualizer {
@@ -507,6 +526,7 @@
   grid-template-columns: 1fr;
   gap: 1.5rem;
   align-items: start;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {

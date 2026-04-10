@@ -42,6 +42,8 @@ export const positiveDefiniteSection: TopicSection = {
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
     
+    <visualizer topic="positive-definite" />
+    
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>
       

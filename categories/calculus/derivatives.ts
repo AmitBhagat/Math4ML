@@ -20,11 +20,6 @@ export const derivativesSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculus is the "Language of Sensitivity." It answers the core question of Machine Learning: <em>"If I nudge this specific variable by a hair, how much does the final result move?"</em> If you are standing on a landscape of data, the derivative at your feet is the <strong>slope</strong>. Positive means uphill, negative means downhill. By calculating these slopes for every single weight in a neural network, we gain a clear map of how to move. It is the fundamental difference between blind guessing and having a scientific plan to reduce error.</p>
-    
-    <visualizer topic="Differentiation" />
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Instantaneous Limit of Change</div>
@@ -47,6 +42,8 @@ export const derivativesSection: TopicSection = {
       <p>In Machine Learning, this $f'(x)$ is the <strong>Sensitivity</strong>. It tells us exactly how the Loss function will react to a microscopic nudge in weight $x$.</p>
       <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
+
+    <visualizer topic="Differentiation" />
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     

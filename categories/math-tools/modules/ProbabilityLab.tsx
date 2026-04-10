@@ -1,10 +1,34 @@
-﻿import React, { useState, useEffect, useRef } from "react";
-import { CanvasBase, drawGrid, C } from "../../../src/components/visualizers/core/CanvasBase";
+import React, { useState, useEffect, useRef } from "react";
+import { InlineMath, BlockMath } from 'react-katex';
+import 'katex/dist/katex.min.css';
+import { Mafs, Coordinates, Plot, MovablePoint, Line, Point, Vector, Text, Theme, vec, Polygon, Circle } from "mafs";
 import { useTheme } from "../../../src/hooks/useTheme";
+import { PremiumSlider } from "../../../src/components/visualizers/core/PremiumSlider";
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ─────────────────────────────────────────────────────────────────────────────
+   HELPERS & SHARED COMPONENTS
+   ───────────────────────────────────────────────────────────────────────────── */
+const LatexSolver = ({ steps }: { steps: string[] }) => (
+  <div className="space-y-4 py-3">
+    {steps.map((step, i) => (
+      <div key={i} className="animate-in fade-in slide-in-from-left-4 duration-500" style={{ animationDelay: `${i * 100}ms` }}>
+        <div className="flex items-center gap-2 mb-0.5">
+           <span className="w-4 h-4 rounded-full bg-accent-premium/10 text-accent-premium text-[9px] font-bold flex items-center justify-center border border-accent-premium/20">
+             {i+1}
+           </span>
+           <span className="text-[9px] font-black uppercase tracking-widest text-muted-premium opacity-60">Step {i+1}</span>
+        </div>
+        <div className="pl-6 overflow-x-auto text-text-premium derivation-latex font-mono pb-4" style={{ fontSize: '11px' }}>
+          <BlockMath math={step} />
+        </div>
+      </div>
+    ))}
+  </div>
+);
+
+/* ─────────────────────────────────────────────────────────────────────────────
    MODULE 1: BAYES GRID
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ───────────────────────────────────────────────────────────────────────────── */
 export const BayesGrid = () => {
   const [prevalence, setPrevalence] = useState(0.1);
   const [accuracy, setAccuracy] = useState(0.9);
@@ -15,25 +39,20 @@ export const BayesGrid = () => {
   const truePos = Math.round(sick * accuracy);
   const falsePos = Math.round(healthy * (1 - accuracy));
 
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const p_ab = (truePos / (truePos + falsePos));
-  const derivation = `1. Prior P(Sick):
-   P(S) = ${prevalence.toFixed(2)}
+  const p_ab = (truePos / (truePos + falsePos)) || 0;
+  
+  const pSick = prevalence;
+  const pHalthy = 1 - prevalence;
+  const pPosSick = accuracy;
+  const pPosHealthy = 1 - accuracy;
+  const pPos = (pPosSick * pSick) + (pPosHealthy * pHalthy);
 
-2. Likelihoods:
-   P(Pos | Sick) = ${accuracy.toFixed(2)}
-   P(Pos | Healthy) = ${(1 - accuracy).toFixed(2)}
-
-3. Evidence P(Pos Test):
-   P(Pos) = P(Pos|S)P(S) + P(Pos|H)P(H)
-   P(Pos) = (${accuracy.toFixed(2)} * ${prevalence.toFixed(2)}) + (${(1-accuracy).toFixed(2)} * ${(1-prevalence).toFixed(2)})
-   P(Pos) = ${(truePos/100).toFixed(3)} + ${(falsePos/100).toFixed(3)} = ${((truePos + falsePos)/100).toFixed(3)}
-
-4. Posterior P(Sick | Pos):
-   P(S|Pos) = (P(Pos|S)P(S)) / P(Pos)
-   P(S|Pos) = ${(truePos/100).toFixed(3)} / ${((truePos + falsePos)/100).toFixed(3)}
-   P(S|Pos) = ${p_ab.toFixed(4)}`;
+  const steps = [
+    `P(S) = ${pSick.toFixed(2)}, \\, P(H) = ${pHalthy.toFixed(2)} \\quad \\text{(Base Rate)}`,
+    `P(\\text{Pos}|S) = ${pPosSick.toFixed(2)}, \\, P(\\text{Pos}|H) = ${pPosHealthy.toFixed(2)}`,
+    `P(\\text{Pos}) = (${pPosSick.toFixed(2)} \\cdot ${pSick.toFixed(2)}) + (${pPosHealthy.toFixed(2)} \\cdot ${pHalthy.toFixed(2)}) = ${pPos.toFixed(3)}`,
+    `P(S|\\text{Pos}) = \\frac{P(\\text{Pos}|S)P(S)}{P(\\text{Pos})} = \\frac{${(pPosSick * pSick).toFixed(3)}}{${pPos.toFixed(3)}} = ${p_ab.toFixed(3)}`
+  ];
 
   return (
     <div className="two-col">
@@ -42,474 +61,615 @@ export const BayesGrid = () => {
           <div className="card-title">Bayesian Population Grid</div>
           <div className="ctrl-row">
             <span className="ctrl-label">Base Rate</span>
-            <input type="range" min="0.01" max="0.5" step="0.01" value={prevalence} onChange={e => setPrevalence(+e.target.value)} />
-            <span className="val-badge">{(prevalence * 100).toFixed(0)}%</span>
+            <PremiumSlider min={0.01} max={0.5} step={0.01} value={prevalence} onChange={setPrevalence} origin={0.01} />
+            <span className="val-badge text-blue-premium">{((prevalence * 100)).toFixed(1)}%</span>
           </div>
           <div className="ctrl-row">
             <span className="ctrl-label">Accuracy</span>
-            <input type="range" min="0.5" max="0.99" step="0.01" value={accuracy} onChange={e => setAccuracy(+e.target.value)} />
-            <span className="val-badge">{(accuracy * 100).toFixed(0)}%</span>
+            <PremiumSlider min={0.5} max={0.99} step={0.01} value={accuracy} onChange={setAccuracy} origin={0.5} />
+            <span className="val-badge text-green-premium">{((accuracy * 100)).toFixed(1)}%</span>
           </div>
         </div>
-        <div className="card">
-          <div className="result-label">Step-by-Step Bayes</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">The Bayes Inference Engine</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div className="card p-4 flex flex-wrap gap-2 justify-center content-start" style={{ background: 'var(--surface2)' }}>
-        {Array.from({ length: 100 }).map((_, i) => {
-          let state = 'healthy';
-          if (i < sick) state = i < truePos ? 'true-pos' : 'sick-missed';
-          else if (i < sick + falsePos) state = 'false-pos';
-          const color = state === 'true-pos' ? colors.teal : state === 'false-pos' ? colors.orange : state === 'sick-missed' ? colors.teal + '33' : colors.muted + '1A';
-          return <div key={i} className="w-4 h-4 rounded-sm transition-colors duration-500" style={{ background: color }}></div>;
-        })}
+      
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [0, 10], y: [0, 10] }}>
+          
+          {Array.from({ length: 100 }).map((_, i) => {
+            const x = i % 10;
+            const y = 9 - Math.floor(i / 10);
+            let state = 'healthy';
+            if (i < sick) state = i < truePos ? 'true-pos' : 'sick-missed';
+            else if (i < sick + falsePos) state = 'false-pos';
+            
+            const color = state === 'true-pos' ? 'var(--green-premium)' : 
+                          state === 'false-pos' ? 'var(--accent-premium)' : 
+                          state === 'sick-missed' ? 'var(--green-premium)' : 'var(--border)';
+            const opacity = state === 'sick-missed' ? 0.15 : state === 'healthy' ? 0.1 : 0.8;
+            
+            return (
+              <React.Fragment key={i}>
+                <Point x={x + 0.5} y={y + 0.5} color={color} opacity={opacity} />
+                {state === 'true-pos' && <Circle center={[x+0.5, y+0.5]} radius={0.3} color={color} opacity={0.2} />}
+              </React.Fragment>
+            );
+          })}
+        </Mafs>
       </div>
     </div>
   );
 };
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   MODULE 2: GALTON BOARD (Optimized)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 2: GALTON BOARD (CLT)
+   ───────────────────────────────────────────────────────────────────────────── */
 export const GaltonBoard = () => {
   const [bias, setBias] = useState(0.5);
-  const ballsRef = useRef<{x: number, y: number, vx: number}[]>([]);
-  const binsRef = useRef<number[]>(new Array(11).fill(0));
-  const lastTimeRef = useRef(0);
-
-  const spawnBall = () => { ballsRef.current.push({ x: 0, y: -200, vx: 0 }); };
-
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number, elapsed: number) => {
-    const cx = W / 2, cy = H / 2;
-    ctx.clearRect(0, 0, W, H);
-    const dt = (elapsed - lastTimeRef.current);
-    if (dt > 16) {
-      ballsRef.current.forEach(b => {
-        b.y += 4;
-        if (b.y % 40 === 0) b.vx = Math.random() < bias ? 2 : -2;
-        if (b.y % 40 < 20) b.x += b.vx;
-      });
-      ballsRef.current = ballsRef.current.filter(b => {
-        if (b.y > 150) {
-          const binIdx = Math.min(10, Math.max(0, Math.floor((b.x + 100) / 20)));
-          binsRef.current[binIdx]++; return false;
+  const [bins, setBins] = useState<number[]>(new Array(13).fill(0));
+  const [balls, setBalls] = useState<{ x: number; y: number; stage: number }[]>([]);
+  
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setBalls(prev => prev.map(b => {
+        const nextY = b.y - 0.2;
+        const currentStage = Math.floor((3.2 - b.y) * 2.5);
+        if (currentStage > b.stage && currentStage <= 12) {
+          const shift = Math.random() < bias ? 0.3 : -0.3;
+          return { x: b.x + shift, y: nextY, stage: currentStage };
+        }
+        return { ...b, y: nextY };
+      }).filter(b => {
+        if (b.y < -1.5) {
+          const binIdx = Math.min(12, Math.max(0, Math.floor((b.x + 3.1) / 0.48)));
+          setBins(prev => {
+            const next = [...prev];
+            next[binIdx]++;
+            return next;
+          });
+          return false;
         }
         return true;
-      });
-      lastTimeRef.current = elapsed;
-    }
-    ctx.fillStyle = colors.muted + '33';
-    for(let r=0; r<8; r++) for(let c=0; c<=r; c++) { ctx.beginPath(); ctx.arc(cx + (c - r/2)*30, cy - 150 + r*40, 3, 0, Math.PI*2); ctx.fill(); }
-    const maxBin = Math.max(...binsRef.current, 1);
-    binsRef.current.forEach((count, i) => {
-      const h = (count / maxBin) * 80;
-      ctx.fillStyle = colors.blue + '4D';
-      ctx.fillRect(cx - 100 + i * 20 + 2, cy + 180, 16, -h);
-    });
-    ctx.fillStyle = colors.orange;
-    ballsRef.current.forEach(b => { ctx.beginPath(); ctx.arc(cx + b.x, cy + b.y, 4, 0, Math.PI * 2); ctx.fill(); });
+      }));
+    }, 40);
+    return () => clearInterval(timer);
+  }, [bias]);
+
+  const n = 12;
+  const mu = n * bias;
+  const sigma = Math.sqrt(n * bias * (1 - bias));
+  const normal = (x: number) => {
+    const scale = Math.max(...bins, 10) * 0.45;
+    return (1 / (sigma * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - mu) / sigma) ** 2) * scale;
   };
 
-  const derivation = `1. Bernoulli Trials (n=10):
-   Each pin is a coin flip. 
-   P(Right) = p = ${bias.toFixed(2)}
-
-2. Normal Approximation (CLT):
-   Î¼ = n * p = 10 * ${bias.toFixed(2)} = ${(10*bias).toFixed(1)}
-   ÏƒÂ² = n * p(1-p) = ${ (10 * bias * (1-bias)).toFixed(2) }
-
-3. Convergence:
-   As N â†’ âˆž, the bin heights approach:
-   N(Î¼, ÏƒÂ²) via the Central Limit Theorem.`;
+  const steps = [
+    `X \\sim \\text{Binomial}(n=12, p=${bias.toFixed(2)})`,
+    `E[X] = np = 12 \\cdot ${bias.toFixed(2)} = ${mu.toFixed(2)}`,
+    `\\text{Var}[X] = np(1-p) = 12 \\cdot ${bias.toFixed(2)} \\cdot ${(1-bias).toFixed(2)} = ${sigma ** 2 > 0 ? (sigma ** 2).toFixed(2) : '0'}`,
+    `\\text{Result: CLT Approximates } \\mathcal{N}(${mu.toFixed(1)}, ${sigma.toFixed(2)})`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
-          <div className="card-title">Central Limit Theorem</div>
+          <div className="card-title">Galton Peg Board</div>
           <div className="ctrl-row">
             <span className="ctrl-label">Peg Bias</span>
-            <input type="range" min="0.2" max="0.8" step="0.05" value={bias} onChange={e => setBias(+e.target.value)} />
-            <span className="val-badge">{(bias * 100).toFixed(0)}% R</span>
+            <PremiumSlider min={0.2} max={0.8} step={0.05} value={bias} onChange={setBias} origin={0.5} />
+            <span className="val-badge text-orange">{((bias * 100)).toFixed(0)}% R</span>
           </div>
-          <button className="btn btn-primary w-full mt-4" onClick={spawnBall}>Drop Ball</button>
-          <button className="btn w-full mt-2" onClick={() => binsRef.current.fill(0)}>Clear Bins</button>
+          <div className="btn-row">
+            <button className="btn btn-primary" onClick={() => setBalls(prev => [...prev, { x: 0, y: 3.2, stage: 0 }])}>Drop Ball</button>
+            <button className="btn" onClick={() => setBins(new Array(13).fill(0))}>Reset</button>
+          </div>
         </div>
-        <div className="card">
-          <div className="result-label">The limit of Sums</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">The Limit of Sums</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div><div className="canvas-card" style={{ height: '400px' }}><CanvasBase onDraw={draw} autoStart={true} showControls={false} theme={theme as any} /></div></div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-2, 4] }}>
+          
+          {Array.from({ length: 13 }).map((_, r) => 
+            Array.from({ length: r + 1 }).map((_, c) => (
+              <Point key={`${r}-${c}`} x={(c - r/2)*0.4} y={3 - r*0.4} color="var(--border)" size={2} opacity={0.3} />
+            ))
+          )}
+          {bins.map((v, i) => (
+            <Polygon key={i} points={[[-3.1+i*0.48,-1.5],[-2.7+i*0.48,-1.5],[-2.7+i*0.48,-1.5+v*0.1],[-3.1+i*0.48,-1.5+v*0.1]]} color="var(--blue-premium)" fillOpacity={0.4} />
+          ))}
+          <Plot.OfX y={(x) => normal((x + 3.1) / 0.48) - 1.5} color="var(--accent-premium)" weight={3} />
+          {balls.map((b, i) => <Point key={i} x={b.x} y={b.y} color="var(--accent-premium)" size={4} />)}
+        </Mafs>
+      </div>
     </div>
   );
 };
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   MODULE 3: MAXIMUM LIKELIHOOD ESTIMATION (MLE)
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 3: MAXIMUM LIKELIHOOD (MLE)
+   ───────────────────────────────────────────────────────────────────────────── */
 export const MLELab = () => {
   const [mu, setMu] = useState(0);
   const [sigma, setSigma] = useState(1);
-  const { theme } = useTheme();
-  const colors = C(theme as any);
+  const data = [-1.5, -0.5, 0.2, 0.8, 1.5];
 
-  const data = [-1.5, -0.8, 0.2, 0.5, 1.2]; // Fixed observed data
+  const logL = data.reduce((acc, x) => acc + Math.log((1/(sigma*Math.sqrt(2*Math.PI))) * Math.exp(-0.5*((x-mu)/sigma)**2)), 0);
 
-  const gaussian = (x: number, m: number, s: number) => 
-    (1 / (s * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - m) / s)**2);
-
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number) => {
-    const cx = W / 2, cy = H / 2, sc = 40;
-    ctx.clearRect(0, 0, W, H);
-    drawGrid(ctx, W, H, sc, cx, cy, theme as any);
-
-    // Draw Data Points
-    ctx.fillStyle = colors.orange;
-    data.forEach(d => {
-      ctx.beginPath(); ctx.arc(cx + d*sc, cy + 100, 5, 0, Math.PI*2); ctx.fill();
-    });
-
-    // Draw PDF
-    ctx.strokeStyle = colors.blue; ctx.lineWidth = 3;
-    ctx.beginPath();
-    for (let x = -5; x <= 5; x += 0.1) {
-      const [px, py] = [cx + x*sc, cy + 100 - gaussian(x, mu, sigma)*sc*2];
-      if (x === -5) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-    }
-    ctx.stroke();
-  };
-
-  const getLogLikelihood = () => {
-    let sum = 0;
-    data.forEach(x => {
-        const val = gaussian(x, mu, sigma);
-        sum += Math.log(val || 1e-10);
-    });
-    return sum;
-  };
-
-  const derivation = `1. Gaussian Likelihood L(Î¸):
-   L = Î  p(xáµ¢ | Î¼, Ïƒ)
-
-2. Log-Likelihood â„“(Î¸):
-   â„“ = Î£ ln[p(xáµ¢ | Î¼, Ïƒ)]
-   Current â„“ â‰ˆ ${getLogLikelihood().toFixed(2)}
-
-3. Optimization Goal:
-   Adjust Î¼, Ïƒ until â„“ is MAXIMIZED.
-   Data Mean: ${ (data.reduce((a,b)=>a+b,0)/data.length).toFixed(2) }`;
+  const steps = [
+    `L(\\mu, \\sigma) = \\prod_{i=1}^n \\frac{1}{\\sigma\\sqrt{2\\pi}} e^{-\\frac{(x_i-\\mu)^2}{2\\sigma^2}}`,
+    `\\text{Substitute } n=5: \\, L(\\mu, \\sigma) = \\prod_{i=1}^5 f(x_i | \\mu, \\sigma)`,
+    `\\ln L = \\sum_{i=1}^5 \\ln(f(x_i | ${mu.toFixed(1)}, ${sigma.toFixed(1)})) = ${logL.toFixed(3)}`,
+    logL > -8 ? `\\text{Model matches the 5 data points closely.}` : `\\text{Insight: Adjust parameters to increase likelihood.}`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
-          <div className="card-title">MLE Calibration</div>
-          <div className="ctrl-row"><span className="ctrl-label">Mean Î¼</span><input type="range" min="-3" max="3" step="0.1" value={mu} onChange={e => setMu(+e.target.value)} /><span className="val-badge">{mu.toFixed(1)}</span></div>
-          <div className="ctrl-row"><span className="ctrl-label">Std Ïƒ</span><input type="range" min="0.5" max="2" step="0.1" value={sigma} onChange={e => setSigma(+e.target.value)} /><span className="val-badge">{sigma.toFixed(1)}</span></div>
+          <div className="card-title">Likelihood Fitting</div>
+          <div className="ctrl-row"><span className="ctrl-label">Mean</span><PremiumSlider min={-3} max={3} value={mu} onChange={setMu} /><span className="val-badge text-blue">{mu.toFixed(1)}</span></div>
+          <div className="ctrl-row"><span className="ctrl-label">Sigma</span><PremiumSlider min={0.5} max={2} value={sigma} onChange={setSigma} /><span className="val-badge text-green-premium">{sigma.toFixed(1)}</span></div>
         </div>
-        <div className="card">
-          <div className="result-label">Log-Likelihood Derivation</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Optimization Goal</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div><div className="canvas-card" style={{ height: '400px' }}><CanvasBase onDraw={draw} showControls={false} theme={theme as any} /></div></div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-0.2, 1] }}>
+          <Coordinates.Cartesian />
+          {data.map((x, i) => <Point key={i} x={x} y={0} color="var(--accent-premium)" size={6} />)}
+          <Plot.OfX y={(x) => (1/(sigma*Math.sqrt(2*Math.PI))) * Math.exp(-0.5*((x-mu)/sigma)**2)} color="var(--blue-premium)" weight={3} />
+          
+          {/* Grabbable Handles for Mu and Sigma */}
+          <MovablePoint point={[mu, 1/(sigma*Math.sqrt(2*Math.PI))]} onMove={([x, y]) => {
+            setMu(x);
+             // Inverse map y to sigma: y = 1/(sigma*sqrt(2pi)) -> sigma = 1/(y*sqrt(2pi))
+            const newSigma = 1 / (y * Math.sqrt(2 * Math.PI));
+            setSigma(Math.max(0.5, Math.min(2, newSigma)));
+          }} color="var(--blue-premium)" />
+        </Mafs>
+      </div>
     </div>
   );
 };
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+/* ─────────────────────────────────────────────────────────────────────────────
    MODULE 4: KL-DIVERGENCE
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+   ───────────────────────────────────────────────────────────────────────────── */
 export const KLDivLab = () => {
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const [muP, setMuP] = useState(-1);
-  const [muQ, setMuQ] = useState(1);
+  const [muQ, setMuQ] = useState(1.5);
+  const muP = 0; // Target is fixed at 0 for clarity
+  const sigma = 0.8;
 
-  const gaussian = (x: number, m: number) => 
-    (1 / (0.8 * Math.sqrt(2 * Math.PI))) * Math.exp(-0.5 * ((x - m) / 0.8)**2);
+  const getKL = () => (Math.pow(muP - muQ, 2)) / (2 * Math.pow(sigma, 2));
 
-  const calculateKL = () => {
-    let kl = 0;
-    for (let x = -5; x <= 5; x += 0.1) {
-      const p = gaussian(x, muP), q = gaussian(x, muQ);
-      kl += p * Math.log((p + 1e-10) / (q + 1e-10)) * 0.1;
-    }
-    return kl;
-  };
-
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number) => {
-    const cx = W / 2, cy = H / 2, sc = 40;
-    ctx.clearRect(0, 0, W, H);
-    drawGrid(ctx, W, H, sc, cx, cy, theme as any);
-
-    const drawPDF = (m: number, color: string, label: string) => {
-        ctx.strokeStyle = color; ctx.lineWidth = 3;
-        ctx.beginPath();
-        for (let x = -5; x <= 5; x += 0.1) {
-            const [px, py] = [cx + x*sc, cy + 100 - gaussian(x, m)*sc*2];
-            if (x === -5) ctx.moveTo(px, py); else ctx.lineTo(px, py);
-        }
-        ctx.stroke();
-    };
-
-    drawPDF(muP, colors.blue, 'P'); // Target
-    drawPDF(muQ, colors.orange, 'Q'); // Model
-  };
-
-  const kl = calculateKL();
-  const derivation = `1. Kullback-Leibler Score:
-   D_KL(P || Q) = Î£ P(x) ln(P(x) / Q(x))
-
-2. Insight:
-   Measures Information Leak when Q 
-   is used to approximate P.
-
-Current D_KL â‰ˆ ${kl.toFixed(3)} bits
-If D_KL = 0, P and Q are identical.`;
+  const steps = [
+    `D_{KL}(P || Q) = \\int P(x) \\ln \\frac{P(x)}{Q(x)} dx`,
+    `\\text{Special case (Gaussians): } D_{KL} = \\frac{(\\mu_p - \\mu_q)^2}{2\\sigma^2}`,
+    `D_{KL} = \\frac{(0 - ${muQ.toFixed(2)})^2}{2 \\cdot ${sigma}^2} = ${getKL().toFixed(3)} \\text{ bits}`,
+    `\\text{Insight: Informational difference between } P \\text{ and } Q.`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
           <div className="card-title">Distribution Drift</div>
-          <div className="ctrl-row"><span className="ctrl-label">Target Î¼_p</span><input type="range" min="-3" max="3" step="0.1" value={muP} onChange={e => setMuP(+e.target.value)} /><span className="val-badge">{muP.toFixed(1)}</span></div>
-          <div className="ctrl-row"><span className="ctrl-label">Model Î¼_q</span><input type="range" min="-3" max="3" step="0.1" value={muQ} onChange={e => setMuQ(+e.target.value)} /><span className="val-badge">{muQ.toFixed(1)}</span></div>
+          <div className="ctrl-row">
+            <span className="ctrl-label">Model μ_q</span>
+            <PremiumSlider min={-3} max={3} step={0.1} value={muQ} onChange={setMuQ} origin={1.5} />
+            <span className="val-badge text-orange">{muQ.toFixed(2)}</span>
+          </div>
         </div>
-        <div className="card">
-          <div className="result-label">Distance Analysis</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Information Leakage</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div><div className="canvas-card" style={{ height: '400px' }}><CanvasBase onDraw={draw} showControls={false} /></div></div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-0.1, 0.6] }}>
+          <Coordinates.Cartesian />
+          <Plot.OfX y={(x) => (1/(sigma*Math.sqrt(2*Math.PI))) * Math.exp(-0.5*((x-muP)/sigma)**2)} color="var(--blue-premium)" weight={3} />
+          <Plot.OfX y={(x) => (1/(sigma*Math.sqrt(2*Math.PI))) * Math.exp(-0.5*((x-muQ)/sigma)**2)} color="var(--accent-premium)" weight={3} />
+          <MovablePoint point={[muQ, 0.45]} onMove={([x]) => setMuQ(x)} color="var(--accent-premium)" />
+          <Text x={muP} y={0.55} color="var(--blue-premium)" align="center" size={12}>P (Target)</Text>
+          <Text x={muQ} y={0.55} color="var(--accent-premium)" align="center" size={12}>Q (Model)</Text>
+        </Mafs>
+      </div>
     </div>
   );
 };
 
-/* â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
-   MODULE 5: COVARIANCE MATRIX
-   â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-export const CovarianceLab = () => {
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const [rho, setRho] = useState(0.5);
-  const dataRef = useRef<{x: number, y: number}[]>([]);
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 5: EXPECTATION & LLN
+   ───────────────────────────────────────────────────────────────────────────── */
+export const ExpectationBeam = () => {
+  const [wL, setWL] = useState(2);
+  const [wR, setWR] = useState(6);
+  const mean = (-2 * wL + 2 * wR) / (wL + wR);
 
-  useEffect(() => {
-    const d = [];
-    for(let i=0; i<100; i++) {
-        const x = (Math.random() - 0.5) * 4;
-        const e = (Math.random() - 0.5) * 4 * (1 - Math.abs(rho));
-        d.push({ x, y: x * rho + e });
-    }
-    dataRef.current = d;
-  }, [rho]);
-
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number) => {
-    const cx = W / 2, cy = H / 2, sc = 40;
-    ctx.clearRect(0, 0, W, H);
-    drawGrid(ctx, W, H, sc, cx, cy, theme as any);
-
-    ctx.fillStyle = colors.blue + '99';
-    dataRef.current.forEach(p => {
-        ctx.beginPath(); ctx.arc(cx + p.x*sc, cy - p.y*sc, 3, 0, Math.PI*2); ctx.fill();
-    });
-  };
-
-  const cov = rho * 1.33; // Approx for uniform distribution variance
-  const derivation = `1. Covariance Matrix Î£:
-   Î£ = [ Ïƒ_xÂ²   Ïƒ_xy ]
-       [ Ïƒ_xy   Ïƒ_yÂ² ]
-
-2. Pearson Correlation Ï:
-   Ï = ${rho.toFixed(2)}
-
-3. Joint Relationship:
-   Ïƒ_xy (Covariance) â‰ˆ ${cov.toFixed(3)}
-   ${Math.abs(rho) > 0.7 ? "Strong Linear Dependency" : "Independent/Weak"}`;
+  const steps = [
+    `E[X] = \\sum x_i P(x_i)`,
+    `P(L) = \\frac{${wL}}{${wL+wR}}, \\, P(R) = \\frac{${wR}}{${wL+wR}}`,
+    `E[X] = (-2)\\frac{${wL}}{${wL+wR}} + (2)\\frac{${wR}}{${wL+wR}} = ${mean.toFixed(2)}`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
-          <div className="card-title">Feature Dependencies</div>
-          <div className="ctrl-row">
-            <span className="ctrl-label">Correlation Ï</span>
-            <input type="range" min="-0.95" max="0.95" step="0.05" value={rho} onChange={e => setRho(+e.target.value)} />
-            <span className="val-badge">{rho.toFixed(2)}</span>
-          </div>
+          <div className="card-title">Balance of Probability</div>
+          <div className="ctrl-row"><span className="ctrl-label">Weight L</span><PremiumSlider min={1} max={10} value={wL} onChange={setWL} /><span className="val-badge text-blue">{wL}</span></div>
+          <div className="ctrl-row"><span className="ctrl-label">Weight R</span><PremiumSlider min={1} max={10} value={wR} onChange={setWR} /><span className="val-badge text-orange">{wR}</span></div>
         </div>
-        <div className="card">
-          <div className="result-label">Joint Stats</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Expected Value Mechanics</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div><div className="canvas-card" style={{ height: '400px' }}><CanvasBase onDraw={draw} showControls={false} /></div></div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-2, 2] }}>
+          <Line.Segment point1={[-3, -0.5]} point2={[3, -0.5]} color="var(--border)" weight={5} />
+          {Array.from({length: wL}).map((_, i) => <Point key={i} x={-2} y={-0.4 + i*0.2} color="var(--blue-premium)" />)}
+          {Array.from({length: wR}).map((_, i) => <Point key={i} x={2} y={-0.4 + i*0.2} color="var(--accent-premium)" />)}
+          <Polygon points={[[mean, -0.5], [mean-0.3, -1], [mean+0.3, -1]]} color="var(--accent-premium)" />
+          <Text x={mean} y={-1.3} color="var(--accent-premium)" align="center" weight={800}>E[X]</Text>
+        </Mafs>
+      </div>
     </div>
   );
 };
 
-export const EntropyLab = () => {
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const entropyRef = useRef(0);
-  const particlesRef = useRef<{x: number, y: number, color: string}[]>([]);
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 6: COVARIANCE PLOT
+   ───────────────────────────────────────────────────────────────────────────── */
+export const CovarianceLab = () => {
+  const [rho, setRho] = useState(0.7);
+  const data = useRef(Array.from({length: 80}).map(() => ({x: (Math.random()-0.5)*6, r: Math.random()-0.5})));
 
-  useEffect(() => {
-    const p = [];
-    for(let i=0; i<50; i++) p.push({ x: Math.random() < 0.5 ? 40 : 160, y: Math.random()*150 + 25, color: i < 25 ? colors.blue : colors.orange });
-    particlesRef.current = p;
-  }, []);
+  const steps = [
+    `\\text{Joint Covariance Matrix } \\Sigma:`,
+    `\\Sigma = \\begin{bmatrix} 1.00 & ${rho.toFixed(2)} \\\\ ${rho.toFixed(2)} & 1.00 \\end{bmatrix}`,
+    `\\rho = \\text{Correlation} = ${rho.toFixed(2)}`,
+    `\\text{Degree of Linear Dependency: } ${Math.abs(rho) > 0.6 ? "High" : "Low"}`
+  ];
+
+  return (
+    <div className="two-col">
+      <div className="space-y-4">
+        <div className="card">
+          <div className="card-title">Joint Distributions</div>
+          <div className="ctrl-row">
+            <span className="ctrl-label">Correlation</span>
+            <PremiumSlider min={-0.9} max={0.9} step={0.1} value={rho} onChange={setRho} origin={0} />
+            <span className="val-badge text-blue">{rho.toFixed(2)}</span>
+          </div>
+        </div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Feature Covariance</div>
+          <LatexSolver steps={steps} />
+        </div>
+      </div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-4, 4] }}>
+          <Coordinates.Cartesian />
+          {data.current.map((p, i) => (
+            <Point key={i} x={p.x} y={p.x * rho + p.r * (1 - Math.abs(rho)) * 3} color="var(--blue-premium)" opacity={0.6} size={3} />
+          ))}
+        </Mafs>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 7: ENTROPY (INFORMATION THEORY)
+   ───────────────────────────────────────────────────────────────────────────── */
+export const EntropyLab = () => {
+  const [entropy, setEntropy] = useState(0);
+  const [particles, setParticles] = useState(() => 
+    Array.from({ length: 60 }).map((_, i) => ({
+      x: i < 30 ? -2 + Math.random() : 1 + Math.random(),
+      y: (Math.random() - 0.5) * 3,
+      color: i < 30 ? 'var(--blue-premium)' : 'var(--accent-premium)'
+    }))
+  );
 
   const scramble = () => {
-    particlesRef.current.forEach(p => {
-      p.x = Math.max(10, Math.min(190, p.x + (Math.random() - 0.5) * 20));
-      p.y = Math.max(10, Math.min(190, p.y + (Math.random() - 0.5) * 20));
-    });
-    entropyRef.current = Math.min(1.0, entropyRef.current + 0.1);
+    setParticles(prev => prev.map(p => ({
+      ...p,
+      x: p.x + (Math.random() - 0.5) * 1.5,
+      y: p.y + (Math.random() - 0.5) * 1.5
+    })));
+    setEntropy(prev => Math.min(1, prev + 0.1));
   };
 
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number) => {
-     const cx = W / 2 - 100, cy = H / 2 - 100;
-     ctx.clearRect(0, 0, W, H);
-     ctx.strokeStyle = colors.muted + '33'; ctx.strokeRect(cx, cy, 200, 200);
-     particlesRef.current.forEach(p => { ctx.fillStyle = p.color; ctx.beginPath(); ctx.arc(cx + p.x, cy + p.y, 4, 0, Math.PI*2); ctx.fill(); });
-     ctx.fillStyle = colors.blue; ctx.fillRect(cx, cy + 220, 200 * entropyRef.current, 5);
-  };
-
-  const h = entropyRef.current;
-  const derivation = `1. Shannnon Entropy H(X):
-   H(X) = -Î£ p(x) logâ‚‚(p(x))
-
-2. Statistical Order:
-   Current Randomness (S): ${ (h * 100).toFixed(0) }%
-   
-3. Information Content:
-   Uncertainty in outcome is increasing 
-   as particles scramble from two bins 
-   into a single joint distribution.`;
+  const steps = [
+    `H(X) = -\\sum_{i=1}^n P(x_i) \\log_2 P(x_i)`,
+    `\\text{Substitute } n=60: \\, H(X) = -\\sum_{i=1}^{60} P(x_i) \\log_2 P(x_i)`,
+    `\\text{Entropy Metric: } ${(entropy * 3.32).toFixed(3)} \\text{ bits}`,
+    `\\text{Disorder: } ${(entropy * 100).toFixed(0)}%`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
-          <div className="card-title">Information Theory</div>
-          <button className="btn btn-primary w-full" onClick={scramble}>Scramble System</button>
-          <button className="btn w-full mt-2" onClick={() => { entropyRef.current = 0; }}>Reset Order</button>
+          <div className="card-title">Shannon Entropy</div>
+          <p className="text-[11px] opacity-70 mb-4">Observe how scrambling particles increases the system entropy.</p>
+          <div className="btn-row">
+            <button className="btn btn-primary" onClick={scramble}>Scramble</button>
+            <button className="btn" onClick={() => {
+              setEntropy(0);
+              setParticles(Array.from({ length: 60 }).map((_, i) => ({
+                x: i < 30 ? -2 + Math.random() : 1 + Math.random(),
+                y: (Math.random() - 0.5) * 3,
+                color: i < 30 ? 'var(--blue-premium)' : 'var(--accent-premium)'
+              })));
+            }}>Restore Order</button>
+          </div>
         </div>
-        <div className="card">
-          <div className="result-label">Entropy Calculation</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Statistical Complexity</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div><div className="canvas-card" style={{ height: '400px' }}><CanvasBase onDraw={draw} showControls={false} theme={theme as any} /></div></div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-3, 3] }}>
+          
+          <Polygon points={[[-3.5, -2.5], [3.5, -2.5], [3.5, 2.5], [-3.5, 2.5]]} color="var(--border)" fillOpacity={0.05} />
+          {particles.map((p, i) => (
+            <Point key={i} x={p.x} y={p.y} color={p.color} size={4} opacity={0.6} />
+          ))}
+          <Line.Segment point1={[0, -2.5]} point2={[0, 2.5]} color="var(--border)" opacity={0.2} strokeStyle="dashed" />
+        </Mafs>
+      </div>
     </div>
   );
 };
 
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 8: SAMPLING & LLN
+   ───────────────────────────────────────────────────────────────────────────── */
 export const MarbleJar = () => {
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const [counts, setCounts] = useState({ red: 4, blue: 6 });
+  const [counts, setCounts] = useState({ red: 5, blue: 5 });
   const [history, setHistory] = useState<string[]>([]);
-  const drawingRef = useRef(false);
-
-  const drawMarble = () => {
-    if (drawingRef.current) return;
-    drawingRef.current = true;
-    setTimeout(() => {
-      const res = Math.random() < (counts.red / (counts.red + counts.blue)) ? 'red' : 'blue';
-      setHistory(prev => [res, ...prev].slice(0, 50));
-      drawingRef.current = false;
-    }, 400);
+  
+  const draw = () => {
+    const total = counts.red + counts.blue;
+    const res = Math.random() < (counts.red / total) ? 'red' : 'blue';
+    setHistory(prev => [res, ...prev].slice(0, 40));
   };
 
-  const redP = counts.red / (counts.red + counts.blue);
-  const sampleP = history.length > 0 ? history.filter(c => c === 'red').length / history.length : 0;
-  const derivation = `1. Population Probability:
-   P(Red) = ${counts.red} / ${counts.red + counts.blue} = ${redP.toFixed(2)}
+  const p_theoretical = counts.red / (counts.red + counts.blue);
+  const p_observed = history.length ? history.filter(x => x === 'red').length / history.length : 0;
 
-2. Sampling (n=${history.length}):
-   Observed Freq = ${sampleP.toFixed(3)}
-
-3. Law of Large Numbers (LLN):
-   As n â†’ âˆž, |Observed - P(Red)| â†’ 0.
-   Current Gap: ${ Math.abs(redP - sampleP).toFixed(3) }`;
+  const steps = [
+    `P(\\text{Red}) = \\frac{N_{red}}{N_{total}} = \\frac{${counts.red}}{${counts.red} + ${counts.blue}}`,
+    `\\text{Theoretical: } P(\\text{Red}) = ${p_theoretical.toFixed(2)}`,
+    `\\text{Observed: } \\hat{P}_n = ${p_observed.toFixed(3)} \\text{ (n=${history.length})}`,
+    `\\text{LLN Convergence: } \\hat{P}_n \\to ${p_theoretical.toFixed(2)}`
+  ];
 
   return (
     <div className="two-col">
       <div className="space-y-4">
         <div className="card">
-          <div className="card-title">Frequentest Sampling</div>
-          <div className="ctrl-row"><span className="ctrl-label">Red</span><input type="range" min="1" max="10" value={counts.red} onChange={e => setCounts({...counts, red: +e.target.value})} /><span className="val-badge">{counts.red}</span></div>
-          <div className="ctrl-row"><span className="ctrl-label">Blue</span><input type="range" min="1" max="10" value={counts.blue} onChange={e => setCounts({...counts, blue: +e.target.value})} /><span className="val-badge">{counts.blue}</span></div>
-          <button className="btn btn-primary w-full mt-4" onClick={drawMarble}>Draw Marble</button>
+          <div className="card-title">Frequentest Jar</div>
+          <div className="ctrl-row">
+            <span className="ctrl-label text-accent-premium">Red Marbles</span>
+            <PremiumSlider min={1} max={10} step={1} value={counts.red} onChange={v => setCounts(prev => ({...prev, red: v}))} />
+            <span className="val-badge">{counts.red}</span>
+          </div>
+          <div className="ctrl-row">
+            <span className="ctrl-label text-blue-premium">Blue Marbles</span>
+            <PremiumSlider min={1} max={10} step={1} value={counts.blue} onChange={v => setCounts(prev => ({...prev, blue: v}))} />
+            <span className="val-badge">{counts.blue}</span>
+          </div>
+          <div className="btn-row">
+            <button className="btn btn-primary" onClick={draw}>Draw Marble</button>
+            <button className="btn" onClick={() => setHistory([])}>Clear</button>
+          </div>
         </div>
-        <div className="card">
-          <div className="result-label">Symmetry of Sampling</div>
-          <div className="result-box">{derivation}</div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Law of Large Numbers</div>
+          <LatexSolver steps={steps} />
         </div>
       </div>
-      <div className="card flex flex-col items-center justify-center p-8 gap-6" style={{ background: 'var(--surface2)' }}>
-        <div className="flex gap-2 min-h-8">
-           {history.slice(0, 8).map((c, i) => <div key={i} className={`w-6 h-6 rounded-full ${c === 'red' ? 'bg-red-500' : 'bg-blue-500'}`}></div>)}
-        </div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-4, 4], y: [-2, 2] }}>
+          
+          {/* History Display */}
+          {history.map((res, i) => {
+             const row = Math.floor(i / 10);
+             const col = i % 10;
+             return (
+               <Point key={i} x={-2.25 + col * 0.5} y={1 - row * 0.5} color={res === 'red' ? 'var(--accent-premium)' : 'var(--blue-premium)'} size={10} />
+             );
+          })}
+          <Text x={0} y={-1.5} color="var(--text-premium)" opacity={0.4} align="center">SAMPLE HISTORY (n={history.length})</Text>
+        </Mafs>
       </div>
     </div>
   );
 };
 
-export const ExpectationBeam = () => {
-  const { theme } = useTheme();
-  const colors = C(theme as any);
-  const [w1, setW1] = useState(1);
-  const [w2, setW2] = useState(2);
-  const mean = (-2*w1 + 2*w2) / (w1 + w2);
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 9: INDEPENDENCE
+   ───────────────────────────────────────────────────────────────────────────── */
+export const IndependenceLab = () => {
+  const [pA, setPA] = useState(0.4);
+  const [pB, setPB] = useState(0.5);
+  const [corr, setCorr] = useState(0); 
 
-  const draw = (ctx: CanvasRenderingContext2D, W: number, H: number) => {
-    const cx = W / 2, cy = H / 2, sc = 40;
-    ctx.clearRect(0, 0, W, H);
-    ctx.strokeStyle = colors.muted; ctx.lineWidth = 4; ctx.beginPath(); ctx.moveTo(cx - 100, cy + 50); ctx.lineTo(cx + 100, cy + 50); ctx.stroke();
-    ctx.fillStyle = colors.orange; ctx.beginPath(); ctx.moveTo(cx + mean*sc, cy + 50); ctx.lineTo(cx + mean*sc - 10, cy+70); ctx.lineTo(cx + mean*sc + 10, cy+70); ctx.fill();
-    ctx.fillStyle = colors.blue; 
-    for(let i=0; i<w1; i++) ctx.fillRect(cx - 2*sc - 10, cy + 48 - (i+1)*12, 20, 10);
-    for(let i=0; i<w2; i++) ctx.fillRect(cx + 2*sc - 10, cy + 48 - (i+1)*12, 20, 10);
-  };
+  const pA_pB = pA * pB;
+  const maxPossible = Math.min(pA, pB);
+  const minPossible = Math.max(0, pA + pB - 1);
+  
+  const pAnB = corr >= 0 
+    ? pA_pB + corr * (maxPossible - pA_pB)
+    : pA_pB + corr * (pA_pB - minPossible);
 
-  const derivation = `1. Outcomes xáµ¢:
-   xâ‚ = -2 (Left), xâ‚‚ = 2 (Right)
-
-2. Probabilities P(xáµ¢):
-   P(xâ‚) = ${w1} / ${w1 + w2} = ${(w1/(w1+w2)).toFixed(2)}
-   P(xâ‚‚) = ${w2} / ${w1 + w2} = ${(w2/(w1+w2)).toFixed(2)}
-
-3. Expected Value (Mean):
-   E[X] = Î£ xáµ¢ P(xáµ¢)
-   E[X] = (-2 * ${(w1/(w1+w2)).toFixed(2)}) + (2 * ${(w2/(w1+w2)).toFixed(2)})
-   E[X] = ${mean.toFixed(3)}`;
+  const steps = [
+    `P(A) = ${pA.toFixed(2)}, \\, P(B) = ${pB.toFixed(2)}`,
+    `\\text{If Independent: } P(A \\cap B) = P(A)P(B) = ${(pA * pB).toFixed(3)}`,
+    `\\text{Actual Overlap: } P(A \\cap B) = ${pAnB.toFixed(3)}`,
+    Math.abs(pAnB - (pA * pB)) < 0.01 
+      ? `\\text{Result: Independent! (knowing B doesn't scale A)}` 
+      : `\\text{Result: Dependent (knowing B changes A likelihood)}`
+  ];
 
   return (
     <div className="two-col">
-       <div className="space-y-4">
-          <div className="card">
-            <div className="card-title">Expected Values</div>
-            <div className="ctrl-row"><span className="ctrl-label">Weight L</span><input type="range" min="1" max="8" value={w1} onChange={e => setW1(+e.target.value)} /><span className="val-badge">{w1}</span></div>
-            <div className="ctrl-row"><span className="ctrl-label">Weight R</span><input type="range" min="1" max="8" value={w2} onChange={e => setW2(+e.target.value)} /><span className="val-badge">{w2}</span></div>
+      <div className="space-y-4">
+        <div className="card">
+          <div className="card-title">Joint Probability Independence</div>
+          <div className="ctrl-row">
+            <span className="ctrl-label text-blue-premium">P(A)</span>
+            <PremiumSlider min={0.1} max={0.9} step={0.05} value={pA} onChange={setPA} />
+            <span className="val-badge text-blue-premium">{pA.toFixed(2)}</span>
           </div>
-          <div className="card">
-            <div className="result-label">Mean Calculation</div>
-            <div className="result-box">{derivation}</div>
+          <div className="ctrl-row">
+            <span className="ctrl-label text-accent-premium">P(B)</span>
+            <PremiumSlider min={0.1} max={0.9} step={0.05} value={pB} onChange={setPB} />
+            <span className="val-badge text-accent-premium">{pB.toFixed(2)}</span>
           </div>
-       </div>
-       <div><div className="canvas-card"><CanvasBase onDraw={draw} showControls={false} theme={theme as any} /></div></div>
+          <div className="ctrl-row">
+            <span className="ctrl-label">Dependency</span>
+            <PremiumSlider min={-1} max={1} step={0.1} value={corr} onChange={setCorr} origin={0} />
+            <span className="val-badge">{corr > 0 ? "Positive" : corr < 0 ? "Negative" : "None"}</span>
+          </div>
+        </div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Information Dependence</div>
+          <LatexSolver steps={steps} />
+        </div>
+      </div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [0, 1.2], y: [0, 1.2] }}>
+          <Polygon points={[[0,0], [1,0], [1,1], [0,1]]} color="var(--border)" fillOpacity={0.05} />
+          <Polygon points={[[0, 0], [pA, 0], [pA, 1], [0, 1]]} color="var(--blue-premium)" fillOpacity={0.15} />
+          {(() => {
+            const h1 = pAnB / pA;
+            const h2 = (pB - pAnB) / (1 - pA);
+            return (
+              <>
+                <Polygon points={[[0, 0], [pA, 0], [pA, h1], [0, h1]]} color="var(--accent-premium)" fillOpacity={0.4} />
+                <Polygon points={[[pA, 0], [1, 0], [1, h2], [pA, h2]]} color="var(--accent-premium)" fillOpacity={0.25} />
+                <Text x={pA/2} y={h1/2} color="white" align="center" size={10}>P(A∩B)</Text>
+              </>
+            );
+          })()}
+        </Mafs>
+      </div>
     </div>
   );
 };
 
-export const ProbabilityLab = () => <BayesGrid />;
+/* ─────────────────────────────────────────────────────────────────────────────
+   MODULE 10: VARIANCE
+   ───────────────────────────────────────────────────────────────────────────── */
+export const VarianceLab = () => {
+  const [spread, setSpread] = useState(1.5);
+  const basePoints = [-2, -1, 0, 1, 2];
+  const points = basePoints.map(p => p * spread);
+  const mean = points.reduce((a, b) => a + b, 0) / points.length;
+  
+  const variance = points.reduce((acc, p) => acc + (p - mean) ** 2, 0) / points.length;
+  const std = Math.sqrt(variance);
 
+  const steps = [
+    `\\mu = \\frac{1}{n} \\sum_{i=1}^n x_i \\text{ and } \\sigma^2 = \\frac{1}{n} \\sum_{i=1}^n (x_i - \\mu)^2`,
+    `\\text{Substitute } n=5: \\, \\mu = \\frac{1}{5} \\sum x_i = ${mean.toFixed(2)}`,
+    `\\sigma^2 = \\frac{1}{5} \\sum (x_i - ${mean.toFixed(1)})^2 = ${variance.toFixed(3)}`,
+    `\\text{Result: } \\sigma = \\sqrt{${variance.toFixed(2)}} = ${std.toFixed(3)}`
+  ];
+
+  return (
+    <div className="two-col">
+      <div className="space-y-4">
+        <div className="card">
+          <div className="card-title">Variance & Spread</div>
+          <div className="ctrl-row">
+            <span className="ctrl-label">Spread Factor</span>
+            <PremiumSlider min={0.2} max={2.5} step={0.1} value={spread} onChange={setSpread} origin={1} />
+            <span className="val-badge text-accent-premium">{spread.toFixed(1)}x</span>
+          </div>
+        </div>
+        <div className="card overflow-y-auto max-h-[350px]">
+          <div className="result-label">Standard Deviation Calculus</div>
+          <LatexSolver steps={steps} />
+        </div>
+      </div>
+      <div className="canvas-card">
+        <Mafs viewBox={{ x: [-6, 6], y: [-3, 6] }}>
+          <Coordinates.Cartesian subdivisions={2} />
+          {points.map((p, i) => {
+            const diff = Math.abs(p - mean);
+            return (
+              <React.Fragment key={i}>
+                <Polygon 
+                  points={[[p, 0], [mean, 0], [mean, diff], [p, diff]]} 
+                  color="var(--accent-premium)" 
+                  fillOpacity={0.1}
+                  strokeStyle="dashed"
+                />
+                <Point x={p} y={0} color="var(--blue-premium)" size={6} />
+                <Line.Segment point1={[p, 0]} point2={[p, diff]} color="var(--accent-premium)" opacity={0.3} />
+              </React.Fragment>
+            );
+          })}
+          <Line.ThroughPoints point1={[mean, -10]} point2={[mean, 10]} color="var(--gold-premium)" weight={3} />
+          <Text x={mean} y={-1.5} color="var(--gold-premium)" align="center" weight={800}>μ</Text>
+        </Mafs>
+      </div>
+    </div>
+  );
+};
+
+/* ─────────────────────────────────────────────────────────────────────────────
+   MAIN PROBABILITY LABORATORY
+   ───────────────────────────────────────────────────────────────────────────── */
+export const ProbabilityLab = () => {
+  const [activeTab, setActiveTab] = useState('bayes');
+  
+  const labs: Record<string, React.ReactNode> = {
+    'bayes': <BayesGrid />,
+    'clt': <GaltonBoard />,
+    'mle': <MLELab />,
+    'kldiv': <KLDivLab />,
+    'entropy': <EntropyLab />,
+    'sampling': <MarbleJar />,
+    'expectation': <ExpectationBeam />,
+    'covariance': <CovarianceLab />,
+    'independence': <IndependenceLab />,
+    'variance': <VarianceLab />
+  };
+
+  return (
+    <div className="lab-layout">
+      <div className="tool-nav-modular no-scrollbar">
+        {Object.keys(labs).map(tab => (
+          <button 
+            key={tab} 
+            className={`tool-tab ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab === 'clt' ? 'Galton Board' : tab === 'kldiv' ? 'KL-Div' : tab}
+          </button>
+        ))}
+      </div>
+      <div className="mt-8 animate-in fade-in duration-700">
+        {labs[activeTab]}
+      </div>
+    </div>
+  );
+};

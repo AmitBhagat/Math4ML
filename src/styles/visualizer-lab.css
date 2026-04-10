@@ -13,7 +13,7 @@
   --accent2: #48bb78;     /* Mint Green */
   --accent3: #f6ad55;     /* Amber */
   --accent4: #b794f4;     /* Lavender */
-  --grid-line: rgba(91, 156, 246, 0.06);
+  --grid-line: rgba(59, 130, 246, 0.06);
   --glass-hover: rgba(0, 0, 0, 0.03);
   
   --radius: 20px;
@@ -26,7 +26,7 @@
   min-height: 100%;
   position: relative;
   overflow-x: hidden;
-  padding: 40px;
+  padding: 40px 40px 0 40px;
   transition: background 0.5s ease, color 0.5s ease;
 }
 
@@ -65,12 +65,11 @@
   z-index: 1; 
   max-width: 1100px; 
   margin: 0 auto; 
-  padding-bottom: 60px; /* Prevent overlap with external footer */
 }
 
 /* ── HEADER ── */
 /* ── MODERN HEADER & CATEGORIES ── */
-.math-lab-dashboard .lab-header-modern {
+.lab-header-modern {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -78,11 +77,11 @@
   border-bottom: 2px solid var(--border);
   margin-bottom: 24px;
 }
-.math-lab-dashboard .category-chips {
+.category-chips {
   display: flex;
   gap: 12px;
 }
-.math-lab-dashboard .cat-chip {
+.cat-chip {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -97,34 +96,35 @@
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.math-lab-dashboard .cat-chip:hover {
+.cat-chip:hover {
   background: var(--glass-hover);
   border-color: var(--border-accent);
   color: var(--text);
+  transform: translateY(-2px);
 }
-.math-lab-dashboard .cat-chip.active {
+.cat-chip.active {
   background: rgba(91, 156, 246, 0.1);
   border-color: var(--accent);
   color: var(--accent);
-  box-shadow: 0 0 15px rgba(91, 156, 246, 0.15);
+  box-shadow: 0 5px 15px rgba(91, 156, 246, 0.15);
 }
-.math-lab-dashboard .cat-icon {
+.cat-icon {
   font-family: var(--serif);
   font-size: 16px;
   opacity: 0.8;
 }
 
 /* ── TOOL NAVIGATION (Level 2) ── */
-.math-lab-dashboard .tool-nav-modular {
+.tool-nav-modular {
   display: flex;
   gap: 8px;
   margin-bottom: 32px;
   overflow-x: auto;
   padding-bottom: 8px;
 }
-.math-lab-dashboard .tool-tab {
+.tool-tab {
   padding: 8px 18px;
-  background: var(--glass-hover);
+  background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
   font-family: var(--mono);
@@ -134,19 +134,22 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.3s ease;
   white-space: nowrap;
 }
-.math-lab-dashboard .tool-tab:hover {
-  background: var(--border-accent);
+.tool-tab:hover {
+  background: var(--surface2);
+  border-color: var(--accent);
   color: var(--text);
+  transform: scale(1.05);
 }
-.math-lab-dashboard .tool-tab.active {
+.tool-tab.active {
   background: var(--surface2);
   border-color: var(--accent2);
   color: var(--accent2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
-.math-lab-dashboard .nav-spacer {
+.nav-spacer {
   height: 20px;
 }
 
@@ -171,44 +174,113 @@
 }
 
 /* ── CARDS & COLUMNS ── */
-.math-lab-dashboard .two-col { 
-  display: grid; 
-  grid-template-columns: 380px 1fr; 
+.two-col { 
+  display: grid !important; 
+  grid-template-columns: 1fr 400px; 
   gap: 32px; 
+  max-width: 1200px;
+  margin: 0 auto;
+  width: 100%;
+  align-items: start;
 }
-.math-lab-dashboard .card {
+
+@media (max-width: 1100px) {
+  .two-col { 
+    grid-template-columns: 1fr !important;
+    max-width: 700px;
+  }
+}
+.two-col > *:first-child { order: 2; }
+.two-col > *:last-child { order: 1; }
+.card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 24px;
 }
-.math-lab-dashboard .card-title {
+.card-title {
   font-family: var(--mono); font-size: 10px; font-weight: 700;
   color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.15em;
   margin-bottom: 20px;
 }
-.math-lab-dashboard .canvas-card {
+.canvas-card {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   overflow: hidden;
+  min-width: 0; /* Critical for grid stability */
 }
 
 /* ── INPUTS & STATS ── */
 .math-lab-dashboard .ctrl-row {
-  display: flex; align-items: center; gap: 16px; margin-bottom: 12px;
+  display: flex; 
+  align-items: center; 
+  gap: 16px; 
+  margin-bottom: 20px; /* Increased for better separation */
 }
-.math-lab-dashboard .ctrl-label { font-family: var(--mono); font-size: 13px; color: var(--text-muted); min-width: 32px; }
+.math-lab-dashboard .ctrl-label { 
+  font-family: var(--mono); 
+  font-size: 13px; 
+  color: var(--text-muted); 
+  min-width: 80px; /* Increased to accommodate longer labels like "Learning Rate" */
+  flex-shrink: 0;
+}
 .math-lab-dashboard .val-badge { 
   font-family: var(--mono); 
   font-size: 13px; 
   font-weight: 600; 
-  min-width: 60px; 
+  width: 4rem; /* Reduced for mobile space */
   text-align: right; 
   font-variant-numeric: tabular-nums;
+  flex-shrink: 0;
+  display: inline-block;
+}
+
+@media (max-width: 450px) {
+  .math-lab-dashboard .ctrl-row { flex-wrap: wrap; gap: 8px; }
+  .math-lab-dashboard .ctrl-label { min-width: 100%; }
 }
 .math-lab-dashboard .val-badge.text-blue { color: var(--accent); }
 .math-lab-dashboard .val-badge.text-teal { color: var(--accent2); }
+
+/* ── SLIDERS ── */
+input[type="range"].premium-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 10px;
+  background: var(--surface2); /* Fallback */
+  outline: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 1px solid var(--border);
+}
+
+input[type="range"].premium-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px; /* Increased for touch */
+  height: 20px; /* Increased for touch */
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+input[type="range"].premium-slider:hover::-webkit-slider-thumb {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(255, 131, 92, 0.3);
+}
+
+input[type="range"].premium-slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  background: var(--accent);
+  border-radius: 50%;
+  border: 2px solid #fff;
+}
 
 .math-lab-dashboard .stat-grid { display: flex; flex-direction: column; }
 .math-lab-dashboard .stat-row {
@@ -219,9 +291,10 @@
 .math-lab-dashboard .stat-val { 
   font-weight: 600; 
   color: var(--text); 
-  min-width: 80px; 
+  width: 6rem; /* Fixed width */
   text-align: right;
   font-variant-numeric: tabular-nums;
+  font-family: var(--mono);
 }
 .math-lab-dashboard .stat-val.accent { color: var(--accent); }
 .math-lab-dashboard .stat-val.green { color: var(--accent2); }
@@ -241,16 +314,11 @@
 .math-lab-dashboard .legend-item { display: flex; align-items: center; gap: 8px; font-family: var(--mono); font-size: 12px; color: var(--text-muted); }
 .math-lab-dashboard .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
 
-.math-lab-dashboard .lab-footer {
-  margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border);
-  display: flex; justify-content: space-between;
-  font-family: var(--mono); font-size: 11px; color: var(--text-dim);
-}
 
 /* ── RESPONSIVE OVERRIDES ── */
 @media (max-width: 950px) {
   .math-lab-container { padding: 20px; }
-  .math-lab-dashboard .two-col { grid-template-columns: 1fr; gap: 32px; }
+  .two-col { grid-template-columns: 1fr !important; gap: 32px; }
   .math-lab-dashboard .lab-header-modern { flex-direction: column; align-items: flex-start; gap: 24px; }
   .math-lab-dashboard .category-chips { width: 100%; overflow-x: auto; padding-bottom: 12px; }
   .math-lab-dashboard .cat-chip { flex-shrink: 0; }
@@ -297,81 +365,115 @@
 }
 
 /* ── BUTTONS ── */
-.math-lab-dashboard .btn-row { 
+.btn-row { 
   display: flex; 
-  gap: 10px; 
+  gap: 12px; 
   flex-wrap: wrap; 
-  margin: 20px 0; 
+  margin: 16px 0; 
 }
-.math-lab-dashboard .btn {
-  padding: 10px 16px;
+.btn {
+  padding: 12px 20px;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: var(--mono);
-  background: var(--surface2);
+  background: var(--surface);
   color: var(--text-muted);
   border: 1px solid var(--border);
-  border-radius: 8px;
+  border-radius: 14px;
   cursor: pointer;
-  transition: all 0.2s;
-  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+  outline: none;
 }
-.math-lab-dashboard .btn:hover { 
-  background: rgba(91,156,246,0.1); 
-  color: var(--accent); 
-  border-color: rgba(91,156,246,0.3); 
-}
-.math-lab-dashboard .btn-primary {
-  background: var(--accent);
-  color: #070a11;
+.btn:hover { 
+  background: var(--bg);
   border-color: var(--accent);
+  color: var(--text);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 131, 92, 0.15);
+}
+.btn:active {
+  transform: scale(0.96);
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent3) 100%);
+  color: #fff !important;
+  border: none;
+  box-shadow: 0 4px 14px rgba(255, 131, 92, 0.4);
+}
+.btn-primary:hover {
+  box-shadow: 0 6px 20px rgba(255, 131, 92, 0.5);
+  filter: brightness(1.05);
 }
 
 /* ── RESULT BOX ── */
-.math-lab-dashboard .result-box {
-  padding: 20px;
+.result-box {
+  padding: 24px;
   font-family: var(--mono);
   font-size: 13px;
   color: var(--text);
   background: var(--surface2);
-  white-space: pre;
+  white-space: pre-wrap;
   line-height: 1.8;
+  border-radius: 12px;
+  border: 1px solid var(--border);
 }
-.math-lab-dashboard .result-label {
+.result-label {
   font-size: 10px;
   color: var(--text-dim);
   font-family: var(--mono);
   margin-bottom: 12px;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
 }
-.math-lab-dashboard .eq-line {
-  font-family: var(--mono);
-  font-size: 14px;
-  color: var(--accent);
-  margin-bottom: 8px;
+
+/* ── TABS ── */
+.tab-nav {
+  display: flex; gap: 8px;
+  background: var(--surface2);
+  padding: 6px; border-radius: 16px;
+  margin-bottom: 32px;
+  border: 1px solid var(--border);
+}
+.tab-btn {
+  flex: 1; padding: 10px; border-radius: 12px;
+  font-family: var(--sans); font-size: 13px; font-weight: 600;
+  color: var(--text-muted); background: transparent; border: none;
+  cursor: pointer; transition: all 0.3s ease;
+}
+.tab-btn:hover { color: var(--text); background: var(--surface); }
+.tab-btn.active {
+  background: var(--surface); color: var(--accent);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
 }
 
 /* ── PRESETS & TAGS ── */
-.math-lab-dashboard .preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
-.math-lab-dashboard .preset-tag {
+.preset-row { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+.preset-tag {
   padding: 6px 14px;
   font-size: 11px;
-  font-weight: 600;
+  font-weight: 700;
   font-family: var(--mono);
-  background: rgba(255,255,255,0.03);
+  background: var(--surface);
   color: var(--text-muted);
   border: 1px solid var(--border);
   border-radius: 20px;
   cursor: pointer;
   transition: all 0.2s;
+  text-transform: uppercase;
 }
-.math-lab-dashboard .preset-tag:hover { color: var(--text); background: var(--glass-hover); }
-.math-lab-dashboard .preset-tag.active {
-  background: rgba(91,156,246,0.15);
+.preset-tag:hover { 
+  border-color: var(--accent); 
+  color: var(--text); 
+  transform: translateY(-1px);
+}
+.preset-tag.active {
+  background: var(--accent);
   border-color: var(--accent);
-  color: var(--accent);
-  box-shadow: 0 0 10px rgba(91,156,246,0.1);
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(255, 131, 92, 0.3);
 }
 
 /* ── SYSTEM EQUATIONS ── */
@@ -395,6 +497,8 @@
   position: relative;
   width: 100%;
   aspect-ratio: 16 / 9; /* Default landscape */
+  touch-action: pan-y; /* Prevent scroll-blocking but allow panning */
+  min-height: 300px;
 }
 @media (max-width: 950px) {
   .math-lab-dashboard .canvas-card { aspect-ratio: 1 / 1; } /* Higher detail on mobile */

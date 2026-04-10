@@ -21,7 +21,9 @@ export const criticalPointsSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>. We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
+    <p>When you are navigating a landscape of data, a <strong>Critical Point</strong> is any location where the ground beneath your feet is perfectly flat (\(\nabla f = \mathbf{0}\)). In Machine Learning, our entire training process is a high-stakes search for one specific type of critical point: the <strong>Global Minimum</strong>.</p>
+    
+    <p>We want to find the exact combination of weights where the error cannot be lowered any further. However, the path is dangerous—we might get stuck at a local peak, or worse, find ourselves trapped in a flat, endless "Saddle Point" where the model stops learning entirely.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -51,6 +53,8 @@ export const criticalPointsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Most high-dimensional critical points in AI are <strong>Saddle Points</strong>. The Gradient is zero, so your optimizer stops, but the Loss is still massive. This is why we use "Momentum" and "Noise"—to kick the model out of these flat traps.</p>
     </div>
+    
+    <visualizer topic="optimizer" />
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     

@@ -20,11 +20,6 @@ export const vectorsSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Why do we care about vectors? Because they allow us to treat <strong>Qualities</strong> as <strong>Quantities</strong>. In the real world, things are messy—a house has an age, a size, and a location. In math, we treat each of these as a unique <strong>Direction</strong> in space. A single vector is just a point in that multidimensional space, representing one specific "version" of reality. This allows us to calculate the "distance" between house prices or find the "direction" that leads to the highest profit. It is the language that turns our fuzzy observations into a concrete coordinate system that a computer can actually navigate.</p>
-    
-    <visualizer topic="Vectors" />
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The $n$-tuplet & Geometric Magnitude</div>
@@ -52,6 +47,8 @@ export const vectorsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
+
+    <visualizer topic="Vectors" />
     
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     

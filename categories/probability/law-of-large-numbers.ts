@@ -54,6 +54,8 @@ export const lawOfLargeNumbersSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: LLN only works if your samples are "i.i.d." (Independent and Identically Distributed). If your data has hidden correlations (like time-series data or a rigged coin), the errors won't cancel out, the variance won't collapse, and your "Average" will lie to you.</p>
     </div>
     
+    <visualizer topic="LLN" />
+    
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
     
       <h4>Problem: Tracking Profit over Time</h4>

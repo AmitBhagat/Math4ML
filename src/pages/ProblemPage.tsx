@@ -19,7 +19,6 @@ import { VisualizerModal } from "@/src/components/visualizers/core/VisualizerMod
 
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
-  const [activeTopic, setActiveTopic] = useState<string | null>(null);
 
   if (!html) return null;
   // Match both <python-code> and <visualizer topic="..." />
@@ -47,30 +46,21 @@ const ParsedContent = ({ html }: { html: string }) => {
           const topic = match ? match[1] : '';
 
           return (
-            <div key={idx} className="my-14 max-w-4xl">
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => setActiveTopic(topic)}
-                className="w-full relative group overflow-hidden rounded-[28px] p-[1px] bg-gradient-to-br from-accent-premium/40 via-white/10 to-transparent transition-all duration-500 shadow-2xl hover:shadow-accent-premium/20"
-              >
-                <div className="relative bg-surface-container/80 backdrop-blur-xl rounded-[27px] px-8 py-10 flex flex-col items-center text-center gap-6">
-                  <div className="w-20 h-20 rounded-2xl bg-accent-premium/10 flex items-center justify-center group-hover:bg-accent-premium group-hover:text-white transition-all duration-500 shadow-inner">
-                    <Hammer className="w-10 h-10" />
+            <div key={idx} className="my-16 max-w-full lg:-mx-12 xl:-mx-20">
+               <div className="bg-surface-container/30 backdrop-blur-sm rounded-[32px] border border-border-premium/50 p-6 md:p-10 shadow-premium-glow">
+                  <div className="flex items-center gap-4 mb-8">
+                     <div className="w-10 h-10 rounded-xl bg-accent-premium/10 flex items-center justify-center text-accent-premium">
+                        <Hammer className="w-5 h-5 shadow-sm" />
+                     </div>
+                     <div>
+                        <h4 className="text-sm font-black uppercase tracking-[0.2em] text-text-premium">Live Interaction: {topic}</h4>
+                        <p className="text-[11px] text-muted-premium font-medium">Manipulate the visual parameters to explore coordinate dependencies.</p>
+                     </div>
                   </div>
-                  
-                  <div>
-                    <h4 className="text-xl font-bold tracking-tight text-text-premium mb-2">Interactive Laboratory: {topic}</h4>
-                    <p className="text-sm text-muted-premium max-w-md mx-auto">
-                      Step into the simulation to manipulate parameters and visualize the underlying geometry in real-time.
-                    </p>
+                  <div className="w-full min-h-[400px] rounded-2xl border border-border-premium shadow-inner bg-black/5 dark:bg-black/20">
+                    <InteractiveVisualizer topicId={topic} />
                   </div>
-
-                  <div className="inline-flex items-center gap-3 px-6 py-2.5 rounded-full bg-accent-premium text-white text-[12px] font-black uppercase tracking-[0.2em] shadow-lg shadow-accent-premium/30 group-hover:scale-105 transition-transform">
-                    Launch Experiment
-                  </div>
-                </div>
-              </motion.button>
+               </div>
             </div>
           );
         }
@@ -78,13 +68,6 @@ const ParsedContent = ({ html }: { html: string }) => {
         return <HtmlWithMath key={idx} html={segment} />;
       })}
 
-      <VisualizerModal 
-        isOpen={activeTopic !== null} 
-        onClose={() => setActiveTopic(null)} 
-        title={activeTopic || "Interactive Lab"}
-      >
-        {activeTopic && <InteractiveVisualizer topicId={activeTopic} />}
-      </VisualizerModal>
     </>
   );
 };

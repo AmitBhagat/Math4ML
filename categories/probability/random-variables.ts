@@ -50,6 +50,8 @@ export const randomVariablesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A "Random Variable" is neither random nor a variable—it is a deterministic function. The randomness comes entirely from the underlying sample space $\Omega$, not the mapping itself.</p>
     </div>
     
+    <visualizer topic="Random-Variables" />
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
     
       <h4>Problem: Mapping Binary Outcomes</h4>

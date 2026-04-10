@@ -15,30 +15,10 @@ export const matrixMultiplicationSection: TopicSection = {
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
     
-    <visualizer topic="MatrixOperations" />
-
-    <h2 id="formal-definition">Formal Definition</h2>
-    <div class="premium-def-box">
-      <div class="premium-def-title">Formalism: The Matrix Composition & Inner Dimensions</div>
-      <p>Matrix Multiplication is the "Relay Race" of mathematics. It chains transformations together so that the output of one becomes the fuel for the next.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">1. The Geometric Setup</h3>
-      <p>Suppose you have two linear maps: $g: \mathbb{R}^n \to \mathbb{R}^p$ (represented by matrix $B$) and $f: \mathbb{R}^p \to \mathbb{R}^m$ (represented by matrix $A$). The <strong>composition</strong> $(f \circ g)$ is a single jump from $\mathbb{R}^n$ directly to $\mathbb{R}^m$. The matrix representing this combined leap is the product $AB$.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">2. The Algebraic Derivation</h3>
-      <p>To find the entry at $C_{ij}$, we look at the interaction between the $i$-th row of $A$ and the $j$-th column of $B$. This is because the $j$-th column of $B$ tells us where the $j$-th basis vector lands after the first map, and the rows of $A$ tell us how that new position is transformed by the second map. Algebraically, this is a sum of products:</p>
-      <div class="math-block">
-        $$c_{ij} = \sum_{k=1}^p a_{ik} b_{kj}$$
-      </div>
-      <p>Note the <strong>Inner Dimension Match</strong>: The number of columns in $A$ ($p$) must exactly equal the number of rows in $B$ ($p$). If they don't, the "relay baton" is dropped, and the composition is mathematically impossible.</p>
-
-      <h3 class="text-lg font-bold mt-4 mb-2">3. The Final Identity</h3>
-      <p>For any $\mathbf{x} \in \mathbb{R}^n$:</p>
-      <div class="math-block">
-        $$(AB)\mathbf{x} = A(B\mathbf{x})$$
-      </div>
       <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
+    
+    <visualizer topic="matrix-multiplication" />
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     

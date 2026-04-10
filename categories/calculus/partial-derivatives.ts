@@ -21,10 +21,6 @@ export const partialDerivativesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you are standing on a massive 3D mountain range (the <strong>Loss Surface</strong>). To improve your model, you need to know: <em>"If I step strictly North (nudging Weight A), does it go up? If I step strictly East (nudging Weight B), does it go down?"</em> A <strong>Partial Derivative</strong> is exactly that—it isolates the influence of a single variable while freezing every other part of the universe. In Machine Learning, where models have millions of weights, these allow us to diagnose exactly which specific parameter is causing the most trouble without getting overwhelmed by the sheer complexity of the whole system.</p>
-    
-    <visualizer topic="PartialDerivatives" />
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Directional Slice & Ceteris Paribus</div>
@@ -51,6 +47,8 @@ export const partialDerivativesSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Partial derivatives don't tell the whole story. You can have a function where all partial derivatives exist at a point, but the function isn't even continuous there! To truly understand the "Total Change," you need the <strong>Gradient</strong>.</p>
     </div>
+    
+    <visualizer topic="PartialDerivatives" />
     
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     

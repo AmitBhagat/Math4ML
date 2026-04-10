@@ -5,20 +5,20 @@ export type VisualizerTheme = 'light' | 'dark';
 
 const PALETTES = {
   light: {
-    blue: "#ff835c", blue2: "#ff9e7d", teal: "#48bb78", purple: "#b794f4",
-    pink: "#f472b6", yellow: "#f6ad55", red: "#f87171", green: "#4ade80",
-    orange: "#fb923c",
-    grid: "rgba(91, 156, 246, 0.2)", gridBright: "rgba(91, 156, 246, 0.45)",
-    axis: "rgba(74, 85, 104, 0.8)", white: "#24292f", muted: "#4a5568",
-    bg: "#fdfaf9"
+    blue: "#3b82f6", blue2: "#60a5fa", teal: "#10b981", purple: "#8b5cf6",
+    pink: "#ec4899", yellow: "#f59e0b", red: "#ef4444", green: "#22c55e",
+    orange: "#f97316",
+    grid: "rgba(59, 130, 246, 0.06)", gridBright: "rgba(59, 130, 246, 0.12)",
+    axis: "rgba(15, 23, 42, 0.15)", white: "#ffffff", muted: "#64748b",
+    bg: "#ffffff"
   },
   dark: {
     blue: "#5b9cf6", blue2: "#93c5fd", teal: "#7edba0", purple: "#c084fc",
     pink: "#f472b6", yellow: "#f6ad55", red: "#f87171", green: "#4ade80",
     orange: "#fb923c",
-    grid: "rgba(255, 255, 255, 0.06)", gridBright: "rgba(255, 255, 255, 0.2)",
-    axis: "rgba(255, 255, 255, 0.6)", white: "#f8fafc", muted: "#94a3b8",
-    bg: "#070a11"
+    grid: "rgba(91, 156, 246, 0.08)", gridBright: "rgba(91, 156, 246, 0.2)",
+    axis: "rgba(255, 255, 255, 0.15)", white: "#f8fafc", muted: "#94a3b8",
+    bg: "#0c111d"
   }
 };
 

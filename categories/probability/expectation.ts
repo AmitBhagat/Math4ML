@@ -20,9 +20,6 @@ export const expectationSection: TopicSection = {
       </ul>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>A Probability Distribution tells you what *could* happen, but the Expectation tells you what *will* happen if you play the long game. It is the "Balance Point" of your distribution. If a distribution is a see-saw, the Expected Value is exactly where you would place the fulcrum to keep it level. In Machine Learning, we don't care about a single "lucky" training batch; we care about the <strong>Aggregate Truth</strong>. We build models that minimize <strong>Expected Loss</strong> because we want the model to be correct across the entire lifetime of its deployment, not just once.</p>
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The First Moment & The Center of Mass</div>
@@ -50,6 +47,8 @@ export const expectationSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: The Expected Value is not necessarily the "Most Likely" value. If you roll a die, the expectation is 3.5—a number that is physically impossible to roll. Don't confuse the "Center of Mass" with an individual outcome.</p>
     </div>
+
+    <visualizer topic="Expectation" />
     
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     

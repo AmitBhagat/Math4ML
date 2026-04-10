@@ -46,6 +46,8 @@ export const matrixInverseSection: TopicSection = {
     
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
     
+    <visualizer topic="matrix-inverse" />
+    
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       
       <div class="algorithm-steps">

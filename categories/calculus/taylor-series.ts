@@ -21,7 +21,9 @@ export const taylorSeriesSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola. These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
+    <p>Calculating a 100-layer neural network's exact output at every possible point is a mathematical nightmare. But if we are currently at a specific set of weights, we only need to know what the loss surface looks like <strong>nearby</strong>. A <strong>Taylor Series</strong> is a tool that allows us to approximate any complex, curvy function with a simple polynomial like a line or a parabola.</p>
+    
+    <p>These approximations are the foundation of almost all numerical solvers. Even if we don't know the "Whole World" of the loss function, the Taylor expansion gives us a reliable "Local Map" to decide our next step.</p>
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -48,6 +50,8 @@ export const taylorSeriesSection: TopicSection = {
       <p>In Deep Learning, we usually stop at the first order (Gradient Descent) or second order (Newton's Method). This "Local Map" provides the mathematical bedrock for almost all numerical optimization.</p>
       <p class="mt-4 italic text-sm">Gotcha: This approximation is only valid locally. The further you move from the center $a$, the more the polynomial "drifts" away from the truth. In ML, this is why we limit our update steps—if we step too far, our Taylor-based map becomes a lie.</p>
     </div>
+    
+    <visualizer topic="taylor" />
     
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     

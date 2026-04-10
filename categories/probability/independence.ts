@@ -54,6 +54,8 @@ export const independenceSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Independence is NOT "Mutually Exclusive." Mutually exclusive events are the opposite of independent—if $A$ happens, $P(B)$ immediately drops to zero. That is a massive amount of information shift, meaning they are perfectly dependent.</p>
     </div>
     
+    <visualizer topic="Independence" />
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
     
       <h4>Problem: Successive Binary Trials</h4>

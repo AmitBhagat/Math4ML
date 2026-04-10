@@ -21,10 +21,6 @@ export const gradientSection: TopicSection = {
     </div>
 
     <h2 id="theory">Intuition & Motivation</h2>
-    <p>A partial derivative tells you how the mountain slopes if you move strictly North or strictly East—but the real world (and real data) is rarely that simple. The <strong>Gradient</strong> (\(\nabla f\)) combines all these individual slopes into a single, powerful arrow that points exactly in the direction of the <strong>steepest ascent</strong>. It is the mathematical "North Star" for optimization. In Machine Learning, our goal is to decrease error as fast as possible, so we simply take our current position and move in the <strong>exact opposite direction</strong> of the gradient.</p>
-    
-    <visualizer topic="Gradient" />
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Vector of Steepest Ascent</div>
@@ -47,6 +43,8 @@ export const gradientSection: TopicSection = {
       <p>The magnitude $\|\nabla f\|$ tells you the <strong>steepness</strong> of that ascent. In ML, we use <strong>Gradient Descent</strong> by moving in the direction of $-\nabla f$ to find the "Bottom of the Bowl."</p>
       <p class="mt-4 italic text-sm">Gotcha: Beginners often think the gradient points "along the surface." It doesn't. Gradient vectors live in the <strong>input space</strong> (the floor), pointing you where to step on the map to go up on the mountain.</p>
     </div>
+    
+    <visualizer topic="Gradient" />
     
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
     

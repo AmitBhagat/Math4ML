@@ -54,6 +54,8 @@ export const varianceSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Variance is measured in "Squared Units" (like $meters^2$), which is hard to visualize. We take the square root ($\sigma = \sqrt{\text{Var}}$) to get the <strong>Standard Deviation</strong>, putting the "spread" back into the same units as the original data.</p>
     </div>
     
+    <visualizer topic="Variance" />
+    
     <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
     
       <h4>Problem: Comparing Two Stocks</h4>

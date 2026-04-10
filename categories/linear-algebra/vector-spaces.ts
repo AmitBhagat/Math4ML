@@ -52,6 +52,8 @@ export const vectorSpacesSection: TopicSection = {
     </div>
 
     <h2 id="subspaces">2. Subspaces</h2>
+    
+    <visualizer topic="vector-spaces" />
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
     <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>

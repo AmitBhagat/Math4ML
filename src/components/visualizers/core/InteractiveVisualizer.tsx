@@ -18,16 +18,12 @@ export const InteractiveVisualizer: React.FC<InteractiveVisualizerProps> = ({ to
   const vTheme = theme as VisualizerTheme;
 
   return (
-    <div className="w-full h-full animate-in fade-in duration-700">
-      <div className="math-lab-container w-full h-full min-h-[600px]">
+    <div className="w-full animate-in fade-in duration-700">
+      <div className="math-lab-container w-full">
         <TopicVisualizer topicId={topicId} theme={vTheme} />
       </div>
       
-      <div className="mt-8 px-4 opacity-70">
-        <div className="text-[11px] text-slate-400 font-medium italic leading-relaxed text-center font-mono">
-          Interactive Analytical Engine — Coordinate-accurate vertex processing active.
-        </div>
-      </div>
+
     </div>
   );
 };

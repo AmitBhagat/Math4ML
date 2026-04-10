@@ -12,11 +12,6 @@ export const linearRegressionSection: TopicSection = {
       <p>Imagine you have a cloud of data points and you want to draw a <strong>single straight line</strong> that passes as close to all of them as possible. That is <strong>Linear Regression</strong>. It's the "Hello World" of Machine Learning.</p>
     </div>
 
-    <h2 id="theory">Intuition & Motivation</h2>
-    <p>Imagine you have a chaotic cloud of data points—maybe house prices vs. square footage—and you want to find the "Universal Rule" that connects them. <strong>Linear Regression</strong> is the search for that one perfect, straight path that passes as close to every point as possible. It is the mathematical bridge between "Observations" and "Predictions." In Machine Learning, we use this simple line to turn messy history into a clear, logical forecast about the future. It is the "Hello World" of AI because it proves that even with millions of data points, a simple, interpretable rule can often be more powerful than a complex black box.</p>
-    
-    <visualizer topic="LinearRegression" />
-
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
       <div class="premium-def-title">Formalism: The Normal Equation & Orthogonal Projection</div>
@@ -47,6 +42,8 @@ export const linearRegressionSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Many practitioners jump straight to Gradient Descent. In reality, if your dataset is small enough to fit in memory, the <strong>Normal Equation</strong> is often faster and yields the exact mathematical truth with zero tuning.</p>
     </div>
+
+    <visualizer topic="LinearRegression" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
