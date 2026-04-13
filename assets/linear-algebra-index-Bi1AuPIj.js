@@ -40,9 +40,8 @@ const e={id:"vectors",title:"Vectors",description:"A vector is a collection of n
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
-
-    <visualizer topic="Vectors" />
     
+    <visualizer topic="vectors" />
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     
       <h4>Problem: Real Estate Vectorization</h4>
@@ -159,6 +158,8 @@ print(f"Sum: {add}, Scaled: {scaled}")
       <p class="mt-4 italic text-sm">Gotcha: A set that skips the origin (like the line $y=x+1$) is NOT a subspace. Why? Because scaling any vector by zero gives $[0,0]$, which isn't on the line. You've just broken the laws of the universe.</p>
     </div>
     
+    <visualizer topic="vector-spaces" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -171,7 +172,7 @@ print(f"Sum: {add}, Scaled: {scaled}")
 
     <h2 id="subspaces">2. Subspaces</h2>
     
-    <visualizer topic="vector-spaces" />
+
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
     <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>
@@ -267,7 +268,7 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Why do we care about independence? Because every piece of data in Machine Learning has a "Price"—in memory, in computation, and in complexity. <strong>Linear Independence</strong> is the rule that tells us whether a new feature is actually adding a new "Direction" to our knowledge, or if it is just a noisy echo of something we already know. If your features are independent, your model is clean and efficient. If they are dependent, your weights can become unstable, and your model might "hallucinate" relationships that aren't there. It is the filter that separates unique insights from redundant clutter.</p>
 
-    <visualizer topic="Basis" />
+
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -292,6 +293,8 @@ print(f"Is v2 in subspace? {is_in_subspace(v2)}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: If the zero vector $\mathbf{0}$ is in your set, the set is <strong>always</strong> dependent. Why? Because you can give $\mathbf{0}$ a weight of 1,000,000 and the sum stays zero!</p>
     </div>
+    
+    <visualizer topic="rank" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -390,6 +393,8 @@ print("Dependent!" if rank < 3 else "Independent!")
       <p class="mt-4 italic text-sm">Gotcha: Dimension is a property of the SPACE, not the vectors. $[1,0,0]$ and $[0,1,0]$ are 3D vectors, but they only span a 2D subspace. Context is everything.</p>
     </div>
     
+    <visualizer topic="basis" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -400,7 +405,7 @@ print("Dependent!" if rank < 3 else "Independent!")
       </div>
     </div>
 
-    <visualizer topic="BasisChange" />
+
 
     <h2 id="dimension">2. Dimension vs. Rank</h2>
     <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>
@@ -525,8 +530,10 @@ print(f"Dimension of the created space: {dim}")
       </div>
       <p class="mt-4 italic text-sm">Gotcha: If the dot product is 0, $\cos(\theta) = 0$, meaning the vectors are orthogonal (90°). If it's negative, they are pointing in "opposite" directions (> 90°).</p>
     </div>
+    
+    <visualizer topic="dot-product" />
 
-    <visualizer topic="DotProduct" />
+
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
     
@@ -640,6 +647,8 @@ print(f"Dot Product: {dot}")
       <p class="mt-4 italic text-sm">Gotcha: Many "distance" functions in ML aren't true norms because they fail the triangle inequality. Always check the math before you assume your optimizer will behave.</p>
     </div>
     
+    <visualizer topic="norms" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -650,7 +659,7 @@ print(f"Dot Product: {dot}")
       </div>
     </div>
 
-    <visualizer topic="VectorNorms" />
+
 
     <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
     
@@ -758,6 +767,8 @@ print(f"L2: {l2}, L1: {l1}")
       <p class="mt-4 italic text-sm">Gotcha: Never multiply $A\mathbf{x}$ if the number of columns in $A$ doesn't match the dimensions of $\mathbf{x}$. It's like trying to fit a 3-pin plug into a 2-pin socket—the signal simply has nowhere to go.</p>
     </div>
     
+    <visualizer topic="transformation" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -768,7 +779,7 @@ print(f"L2: {l2}, L1: {l1}")
       </div>
     </div>
 
-    <visualizer topic="Matrices" />
+
 
     <h2 id="operations">Mathematical Operations</h2>
     <p>A matrix \(A \in \mathbb{R}^{m \times n}\) has \(m\) rows and \(n\) columns.</p>
@@ -861,13 +872,34 @@ print(f"Transpose:\n{A_t}")
       <p>Combining two matrices (\(AB\)) is not just multiplication—it's <strong>Composition</strong>. It's the mathematical way of saying, "Do Transformation B, then do Transformation A." This is exactly what happens in every layer of a Neural Network.</p>
     </div>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix Product</div>
+      <p>Let $\mathbf{A}$ be an $m \times n$ matrix and $\mathbf{B}$ be an $n \times p$ matrix. The product $\mathbf{C} = \mathbf{A}\mathbf{B}$ is an $m \times p$ matrix where each entry $\mathbf{C}_{ij}$ is calculated as the dot product of the $i$-th row of $\mathbf{A}$ and the $j$-th column of $\mathbf{B}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Inner Product View</h3>
+      <p>To compute the entry at row $i$ and column $j$ of the resulting matrix:</p>
+      <div class="math-block">
+        $$\mathbf{C}_{ij} = \sum_{k=1}^n \mathbf{A}_{ik} \mathbf{B}_{kj} = \mathbf{A}_{i,:} \cdot \mathbf{B}_{:,j}$$
+      </div>
+      <p>This means you grab the $i$-th row of the first matrix, the $j$-th column of the second, and "dot" them together.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. Dimension Compatibility (The Handshake Rule)</h3>
+      <p>Multiplication is only defined if the "inner dimensions" match. If A is $(m \times \color{red}{n})$ and B is $(\color{red}{n} \times p)$, the $n$'s must be identical. Think of it as a handshake: the number of things A "outputs" in its row MUST match the number of things B "expects" in its column.</p>
+
+      <p class="mt-4 italic text-sm">Gotcha: Matrix multiplication is <strong>Linear Transformation Composition</strong>. Calculating $C = AB$ is mathematically identical to applying $B$ first, then $A$. If B's output space doesn't match A's input space, the signal is lost.</p>
+    </div>
+
+    <visualizer topic="matrix-multiplication" />
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
     
-      <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
+    <div class="callout secondary">
+      <p class="italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
     
-    <visualizer topic="matrix-multiplication" />
+
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     
@@ -992,9 +1024,11 @@ print(f"Product: {C}")
       <p class="mt-4 italic text-sm">Gotcha: Inverting large matrices is "computationally expensive" ($O(n^3)$). In AI, we almost never calculate $A^{-1}$ directly. We use Solvers like $LU$ or $QR$ decomposition to find the result without doing the heavy lifting by hand.</p>
     </div>
     
+    <visualizer topic="matrix-inverse" />
+    
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
     
-    <visualizer topic="matrix-inverse" />
+
     
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       
@@ -1116,6 +1150,8 @@ else:
       <p class="mt-4 italic text-sm">Gotcha: A negative determinant means the transformation "flipped" space inside out (like a reflection). The absolute value is the volume change, but the sign tells you about the orientation.</p>
     </div>
     
+    <visualizer topic="determinants" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -1126,7 +1162,7 @@ else:
       </div>
     </div>
 
-    <visualizer topic="Determinants" />
+
 
     <h2 id="rules">2. Properties & Meaning</h2>
     <ul>
@@ -1240,6 +1276,8 @@ print(f"Determinant: {det:.2f}")
       <p class="mt-4 italic text-sm">Gotcha: In real-world data, rank is rarely exactly zero due to noise. We use "Effective Rank" or SVD to find the "pivots" that are large enough to be signal and small enough to be noise.</p>
     </div>
     
+    <visualizer topic="rank" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -1250,7 +1288,7 @@ print(f"Determinant: {det:.2f}")
       </div>
     </div>
 
-    <visualizer topic="Rank" />
+
 
     <h2 id="rules">2. Properties of Rank</h2>
     <ul>
@@ -1372,6 +1410,8 @@ print(f"Matrix Rank: {rank}")
     </div>
     
     <visualizer topic="projections" />
+    
+
 
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     
@@ -1487,6 +1527,8 @@ print(f"Shadow of y on u: {proj_y_u}")
       <p class="mt-4 italic text-sm">Gotcha: Some matrices have "Complex" eigenvalues, meaning they represent a pure rotation with no invariant real directions. In ML, we usually look for Symmetric matrices where the eigenvalues are guaranteed to be real.</p>
     </div>
     
+    <visualizer topic="eigen" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -1497,7 +1539,7 @@ print(f"Shadow of y on u: {proj_y_u}")
       </div>
     </div>
 
-    <visualizer topic="Eigenvalues" />
+
 
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>
@@ -1619,9 +1661,11 @@ print(f"Eigenvectors:\n{vecs}")
       <p class="mt-4 italic text-sm">Gotcha: Many "correlation" matrices in ML are only Positive SEMI-Definite ($\lambda \ge 0$), meaning the bowl has a flat bottom (a valley). This can cause your optimizer to wander aimlessly. Always check for that strict positive "tilt."</p>
     </div>
     
+    <visualizer topic="positive-definite" />
+    
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
     
-    <visualizer topic="positive-definite" />
+
     
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>
@@ -1722,8 +1766,10 @@ print(f"Is Matrix Positive Definite? {is_pd}")
       <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
       <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
+    
+    <visualizer topic="svd" />
 
-    <visualizer topic="SVD" />
+
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     
@@ -1834,6 +1880,8 @@ print(f"Singular values of A: {s}")
       <p class="mt-4 italic text-sm">Gotcha: PCA assumes the data is centered. If you forget to subtract the mean, your first "Principal Component" will just point from the origin to the center of your data cloud—a useless direction that tells you nothing about the internal structure.</p>
     </div>
     
+    <visualizer topic="pca" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -1844,7 +1892,7 @@ print(f"Singular values of A: {s}")
       </div>
     </div>
 
-    <visualizer topic="PCA" />
+
 
     <h2 id="steps">2. The 5 Steps of PCA</h2>
     <div class="algorithm-steps">

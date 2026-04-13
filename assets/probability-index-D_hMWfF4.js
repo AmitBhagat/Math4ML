@@ -43,7 +43,9 @@ const e={id:"random-variables",title:"Random Variables",description:"A Random Va
       <p class="mt-4 italic text-sm">Gotcha: A "Random Variable" is neither random nor a variable—it is a deterministic function. The randomness comes entirely from the underlying sample space $\Omega$, not the mapping itself.</p>
     </div>
     
-    <visualizer topic="Random-Variables" />
+    <visualizer topic="random-variables" />
+    
+
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Discrete (Coin Flips)</h2>
     
@@ -172,7 +174,9 @@ print(f"Outcome of Y: {wait_time:.2f} minutes")
       <p class="mt-4 italic text-sm">Gotcha: In a continuous distribution, the probability of any <strong>exact</strong> point is exactly zero ($P(X=5.000...)$). We only care about the probability of falling within a range (an integral). The vertical height $f(x)$ is a density, not a probability—it can actually be greater than 1.0.</p>
     </div>
     
-    <visualizer topic="Distributions" />
+    <visualizer topic="probability-distributions" />
+    
+
     
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
     
@@ -288,8 +292,10 @@ print(f"Mean of Normal Data: {data.mean():.4f}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: High-dimensional Joint Distributions are the enemy of computation. Each new variable adds another dimension to the integral, making it exponentially harder to calculate (the "Curse of Dimensionality"). This is why we use "Mean Field Assumptions" to pretend variables are independent even when we know they aren't.</p>
     </div>
+    
+    <visualizer topic="joint-distributions" />
 
-    <visualizer topic="Joint-Distributions" />
+
     
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     
@@ -415,7 +421,9 @@ print(f"Overall Default Rate: {marginal_default[1]*100}%")
       <p class="mt-4 italic text-sm">Gotcha: Correlation is not Conditioning. Just because $P(A|B)$ is high doesn't mean $B$ caused $A$. It just means that in the sub-universe where $B$ exists, $A$ happens to show up often. To prove "Cause," you need deeper tools like Do-Calculus or Randomized Control Trials.</p>
     </div>
     
-    <visualizer topic="ConditionalProbability" />
+    <visualizer topic="conditional-probability" />
+    
+
     
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
     
@@ -547,7 +555,9 @@ print(f"P(Purchase | Click) Simulated: {cond_prob:.2f}")
       <p class="mt-4 italic text-sm">Gotcha: Independence is NOT "Mutually Exclusive." Mutually exclusive events are the opposite of independent—if $A$ happens, $P(B)$ immediately drops to zero. That is a massive amount of information shift, meaning they are perfectly dependent.</p>
     </div>
     
-    <visualizer topic="Independence" />
+    <visualizer topic="independence" />
+    
+
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Independent Coin Tosses</h2>
     
@@ -675,8 +685,10 @@ print(f"P(A) * P(B): {check:.4f}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: The Expected Value is not necessarily the "Most Likely" value. If you roll a die, the expectation is 3.5—a number that is physically impossible to roll. Don't confuse the "Center of Mass" with an individual outcome.</p>
     </div>
+    
+    <visualizer topic="expectation" />
 
-    <visualizer topic="Expectation" />
+
     
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     
@@ -808,7 +820,9 @@ print(f"Simulated Average: {simulated_trials.mean():.2f}")
       <p class="mt-4 italic text-sm">Gotcha: Variance is measured in "Squared Units" (like $meters^2$), which is hard to visualize. We take the square root ($\sigma = \sqrt{\text{Var}}$) to get the <strong>Standard Deviation</strong>, putting the "spread" back into the same units as the original data.</p>
     </div>
     
-    <visualizer topic="Variance" />
+    <visualizer topic="variance" />
+    
+
     
     <h2 id="example-risk" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Risk in Investment</h2>
     
@@ -945,7 +959,9 @@ print(f"Variance: {var}, Std Dev: {std:.2f}")
       <p class="mt-4 italic text-sm">Gotcha: LLN only works if your samples are "i.i.d." (Independent and Identically Distributed). If your data has hidden correlations (like time-series data or a rigged coin), the errors won't cancel out, the variance won't collapse, and your "Average" will lie to you.</p>
     </div>
     
-    <visualizer topic="LLN" />
+    <visualizer topic="lln" />
+    
+
     
     <h2 id="example-casino" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Casino's House Edge</h2>
     
@@ -1067,7 +1083,9 @@ print(f"Final Average: {running_avg[-1]:.4f}")
       <p class="mt-4 italic text-sm">Gotcha: Many practitioners forget the "Finite Variance" requirement. If your data comes from a "Fat-Tailed" distribution (like Cauchy or some power-law finance data), the CLT fails. The sums will never settle into a bell curve—they'll just keep exploding into wild, unpredictable spikes.</p>
     </div>
     
-    <visualizer topic="Central-Limit-Theorem" />
+    <visualizer topic="galton" />
+    
+
     
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
     
@@ -1186,8 +1204,10 @@ plt.show()
       </div>
       <p class="mt-4 italic text-sm">Gotcha: Beginners usually ignore the <strong>Evidence</strong> ($P(\mathcal{D})$) because it's just a constant. But in complex models, calculating it requires a massive integral over all possible hypotheses—this is the "Bayesian Bottleneck" that makes full Bayesian inference computationally expensive (and why we use things like MCMC or Variational Inference).</p>
     </div>
+    
+    <visualizer topic="bayes-theorem" />
 
-    <visualizer topic="BayesTheorem" />
+
 
     <div class="callout tip">
       <div class="callout-icon">💡</div>

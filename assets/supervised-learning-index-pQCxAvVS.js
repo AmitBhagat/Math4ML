@@ -205,7 +205,7 @@ print(f"Model Equation: y = {model.coef_[0]:.1f}x + {model.intercept_:.1f}")
       <p class="mt-4 italic text-sm">Gotcha: Many practitioners jump straight to Gradient Descent. In reality, if your dataset is small enough to fit in memory, the <strong>Normal Equation</strong> is often faster and yields the exact mathematical truth with zero tuning.</p>
     </div>
 
-    <visualizer topic="LinearRegression" />
+
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

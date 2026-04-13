@@ -47,6 +47,10 @@ const e={id:"mle",title:"Maximum Likelihood Estimation (MLE)",description:"MLE i
       <p class="mt-4 italic text-sm">Gotcha: MLE is dangerously over-confident on small datasets. If you flip a coin once and get Heads, MLE will tell you the coin is 100% rigged for Heads with absolute certainty. This is why we use MAP (regularization) to keep MLE from drinking the kool-aid of small-sample noise.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
     
       <h4>Problem: Finding the "True" Chance of Heads</h4>
@@ -178,6 +182,10 @@ print(f"Sample Mean: {data.mean():.4f}")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: If your "Prior Belief" is wrong, the MAP estimate will be biased away from the truth. If you treat a biased coin as a 50/50 coin (strong prior), it will take a massive number of flips for the MAP estimate to finally admit the coin is unfair.</p>
     </div>
+    
+    <visualizer topic="mle" />
+    
+
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prior Belief about Coin Bias</h2>
     
@@ -319,6 +327,10 @@ print(f"MAP Estimate: {res.x[0]:.4f}")
       <p class="mt-4 italic text-sm">Gotcha: You can never reach zero error. The "Irreducible Error" $\sigma^2$ is your mathematical floor. If your model's error is lower than the noise floor of the data, you aren't a genius—you're just overfitting to the noise.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
     
       <h4>Problem: Trying to Fit a Parabola with a Line</h4>
@@ -420,7 +432,7 @@ plt.show()
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Everything in statistics starts with the <strong>Null Hypothesis (\(H_0\))</strong>—the annoying, skeptical assumption that "Nothing happened, it's just random noise." We only accept the <strong>Alternative Hypothesis (\(H_1\))</strong> if the evidence (our data) is so overwhelming that it is highly unlikely to have occurred by chance. The <strong>P-Value</strong> is the probability of seeing your specific results if the "Nothing happened" assumption were true. If that probability is tiny (usually less than 5%), we decide that the "Noise" explanation is just too implausible. In Machine Learning, this is the tactical way we prove that our model's improvement is a <strong>Real Signal</strong>, protecting us from wasting time chasing ghosts and accidental patterns in the data that aren't actually there.</p>
     
-    <visualizer topic="HypothesisTesting" />
+
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -449,6 +461,8 @@ plt.show()
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: A high p-value DOES NOT prove the Null Hypothesis is true. It only means you didn't prove it's false. "Absence of evidence is not evidence of absence."</p>
     </div>
+    
+    <visualizer topic="mle" />
 
     <h2 id="errors">Decision Errors: The Cost of Being Wrong</h2>
     <div class="premium-def-box">
@@ -559,6 +573,10 @@ else:
       <p class="mt-4 italic text-sm">Gotcha: A T-test assumes your data follows a Normal Distribution. If your data is highly skewed (like "Days since last purchase"), the T-test math will lie to you. In those cases, use a non-parametric test like the <strong>Mann-Whitney U Test</strong>.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A/B Testing (UI Design)</h2>
     
       <h4>Problem: Does a New UI Increase Clicks?</h4>
@@ -663,6 +681,10 @@ else:
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Chi-Square is a "Large Sample" test. If any cells in your table have an expected count of less than 5, the math starts to break down and the test becomes unreliable. If your data is sparse, you need to use <strong>Fisher's Exact Test</strong> instead.</p>
     </div>
+    
+    <visualizer topic="mle" />
+    
+
     
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Feature Relevance (E-commerce)</h2>
     
@@ -775,6 +797,10 @@ else:
       <p class="mt-4 italic text-sm">Gotcha: ANOVA tells you THAT a difference exists, but not WHERE. It’s an <strong>Omnibus Test</strong>. If you reject the null, you must follow up with a "Post-Hoc" test (like Tukey) to figure out which specific groups are the odd ones out.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Optimizer Comparison (Deep Learning)</h2>
     
       <h4>Problem: Which Optimizer is Best? (Adam vs. SGD vs. RMSprop)</h4>
@@ -879,6 +905,10 @@ else:
       <p class="mt-4 italic text-sm">Gotcha: Stopping a test as soon as the $p$-value hits 0.05 is the "Cardinal Sin" of statistics. This is called <strong>p-hacking</strong>. You must wait until your pre-calculated sample size is reached, or your "significant" result will likely vanish if you run it again. </p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="workflow">The Experimenter's Workflow</h2>
     <div class="algorithm-steps">
       <div class="algorithm-step">
@@ -966,7 +996,7 @@ print(f"Measured Lift: {lift*100:.1f}%")
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A single number is extremely fragile—it can be easily swayed by a single outlier or a tiny quirk in your dataset. <strong>Confidence Intervals</strong> provide the <strong>Precision</strong> that a single average lacks. instead of shouting a single value, you are providing a mathematical "Safety Net" that admits to uncertainty. A 95% Confidence Interval means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em> In Machine Learning, this is the difference between a lucky guess and a reliable product. It tells you if your model's accuracy is a rock-solid foundation you can build on, or a moving target that you happened to hit once by sheer chance. It is the tactical way we communicate <strong>Trust</strong> in our findings.</p>
     
-    <visualizer topic="ConfidenceIntervals" />
+
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -998,6 +1028,8 @@ print(f"Measured Lift: {lift*100:.1f}%")
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: A 95% Confidence Interval DOES NOT mean there is a 95% chance that the true mean is in *your* specific interval. It means that if you repeated the experiment, 95% of the *different* intervals you created would contain the true mean. It is a property of the process, not the specific outcome.</p>
     </div>
+    
+    <visualizer topic="mle" />
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
     

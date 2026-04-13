@@ -48,7 +48,7 @@ const t={id:"gradient-descent",title:"Gradient Descent",description:"Gradient De
       </div>
     </div>
 
-    <visualizer topic="GradientDescent" />
+
 
     <h2 id="example-parabola" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The 1D Parabola</h2>
     

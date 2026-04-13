@@ -35,8 +35,10 @@ const t={id:"derivatives",title:"Derivatives",description:"The Derivative is the
       <p>In Machine Learning, this $f'(x)$ is the <strong>Sensitivity</strong>. It tells us exactly how the Loss function will react to a microscopic nudge in weight $x$.</p>
       <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
+    
+    <visualizer topic="derivatives" />
 
-    <visualizer topic="Differentiation" />
+
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     
@@ -153,7 +155,9 @@ print(f"Exact slope (2x) at x=3: {2*x_val}")
       <p class="mt-4 italic text-sm">Gotcha: Partial derivatives don't tell the whole story. You can have a function where all partial derivatives exist at a point, but the function isn't even continuous there! To truly understand the "Total Change," you need the <strong>Gradient</strong>.</p>
     </div>
     
-    <visualizer topic="PartialDerivatives" />
+    <visualizer topic="partial-derivatives" />
+    
+
     
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     
@@ -275,7 +279,9 @@ print(f"Exact derivative (2x): {2*x_val}")
       <p class="mt-4 italic text-sm">Gotcha: Beginners often think the gradient points "along the surface." It doesn't. Gradient vectors live in the <strong>input space</strong> (the floor), pointing you where to step on the map to go up on the mountain.</p>
     </div>
     
-    <visualizer topic="Gradient" />
+    <visualizer topic="stochastic" />
+    
+
     
     <h2 id="example-mountain" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Navigating a Loss Mountain</h2>
     
@@ -409,6 +415,8 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
       <p class="mt-4 italic text-sm">Gotcha: Many beginners treat the chain rule like simple fraction cancellation. While it looks like fractions, it’s actually a product of linear approximations. Don't be fooled—in multivariable space, the order of multiplication (Jacobians) matters!</p>
     </div>
     
+    <visualizer topic="backprop" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -419,7 +427,7 @@ print(f"Gradient at (3,4): {compute_gradient(point)}")
       </div>
     </div>
 
-    <visualizer topic="ChainRule" />
+
 
     <h2 id="example-composite" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Composite Functions</h2>
     
@@ -558,6 +566,8 @@ print(f"Derivative of sin(x^2) at x=3: {df_dx:.4f}")
     
     <visualizer topic="jacobian" />
     
+
+    
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>
@@ -693,7 +703,9 @@ print(f"Jacobian matrix at (1,2):\n{compute_jacobian(point)}")
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional ML (like LLMs), we almost never calculate the full Hessian—it would require petabytes of memory. Instead, we use "Hessian-Free" optimizers or diagonal approximations to get the curvature benefits without the system-crashing cost.</p>
     </div>
     
-    <visualizer topic="curvature" />
+    <visualizer topic="hessian" />
+    
+
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>
@@ -852,6 +864,8 @@ print(f"Numerical Hessian at (1,2):\n{compute_hessian(np.array([1.0, 2.0]))}")
     
     <visualizer topic="taylor" />
     
+
+    
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>
@@ -992,7 +1006,9 @@ print(f"4-term approximation: {taylor_exp_approx(val, 0, 4)}")
       <p class="mt-4 italic text-sm">Gotcha: Most high-dimensional critical points in AI are <strong>Saddle Points</strong>. The Gradient is zero, so your optimizer stops, but the Loss is still massive. This is why we use "Momentum" and "Noise"—to kick the model out of these flat traps.</p>
     </div>
     
-    <visualizer topic="optimizer" />
+    <visualizer topic="stochastic" />
+    
+
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     
@@ -1124,7 +1140,9 @@ print(f"Value at Min: {res.fun}")
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional AI, we almost never solve integrals analytically—there are too many variables. Instead, we use "Monte Carlo Integration," which is essentially like throwing millions of random darts at the curve and counting how many land inside the area.</p>
     </div>
     
-    <visualizer topic="AreaUnderCurve" />
+    <visualizer topic="integrals" />
+    
+
     
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
     
