@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation, useParams } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { CLUSTERS, CATEGORY_META, getCategoryData } from "../data/topics";
 import { TopicSection } from "../data/types";
 import { getCategoryTheme } from "../lib/themeUtils";
-import { ChevronDown, ChevronRight, LayoutPanelLeft, Loader2, Menu, X, Clock } from "lucide-react";
+import { ChevronDown, ChevronRight, LayoutPanelLeft, Loader2, X, Clock } from "lucide-react";
 import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useTheme } from "../hooks/useTheme";
@@ -19,7 +19,6 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
   const pathParts = location.pathname.split('/').filter(Boolean);
   
   // Explicitly derive params from path since useParams can be unreliable in parent layouts
-  const currentClusterId = pathParts.length >= 1 ? pathParts[0] : undefined;
   const currentCategoryId = pathParts.length >= 2 ? pathParts[1] : (pathParts.length === 1 ? pathParts[0] : undefined);
   const currentProblemId = pathParts.length >= 3 ? pathParts[2] : undefined;
 
@@ -111,7 +110,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                 const category = CATEGORY_META.find((c) => c.id === catId);
                 if (!category) return null;
                 
-                const theme = getCategoryTheme(catId);
+                const themeMapping = getCategoryTheme(catId);
                 const isActive = currentCategoryId === catId;
                 const isExpanded = expandedId === catId;
                 const isHovered = hoveredId === catId;
@@ -136,7 +135,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                           isActive ? "font-semibold" : "text-muted-premium hover:text-text-premium"
                         )}
                         style={{ 
-                          color: activeOrHover ? theme.primary : undefined,
+                          color: activeOrHover ? themeMapping.primary : undefined,
                         }}
                       >
                         <span 
@@ -145,8 +144,8 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                             activeOrHover ? "scale-125 opacity-100" : "bg-muted-premium/30 opacity-40"
                           )} 
                           style={{ 
-                            backgroundColor: activeOrHover ? theme.primary : undefined,
-                            boxShadow: activeOrHover ? `0 0 10px ${theme.primary}80` : undefined
+                            backgroundColor: activeOrHover ? themeMapping.primary : undefined,
+                            boxShadow: activeOrHover ? `0 0 10px ${themeMapping.primary}80` : undefined
                           }}
                         />
                         <span className="truncate">{category.title}</span>
@@ -179,7 +178,7 @@ export const Sidebar = ({ onClose, className }: { onClose?: () => void; classNam
                         ) : sections.length > 0 ? (
                           sections.map((section) => {
                             const isTopicActive = currentProblemId === section.id;
-                            const sectionColor = section.color || theme.primary;
+                            const sectionColor = section.color || themeMapping.primary;
                             
                             return (
                               <Link

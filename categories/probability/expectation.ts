@@ -47,8 +47,10 @@ export const expectationSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: The Expected Value is not necessarily the "Most Likely" value. If you roll a die, the expectation is 3.5—a number that is physically impossible to roll. Don't confuse the "Center of Mass" with an individual outcome.</p>
     </div>
+    
+    <visualizer topic="expectation" />
 
-    <visualizer topic="Expectation" />
+
     
     <h2 id="example-payoff" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Long-term Average Payoff</h2>
     

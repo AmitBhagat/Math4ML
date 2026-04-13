@@ -1,9 +1,36 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { VisualizerTheme } from './CanvasBase';
-import { VectorLab, TransformLab, NormsLab, DotProductLab, ProjectionLab } from '../../../../categories/math-tools/modules/BasicLA';
-import { EigenLab, SystemsLab, BasisLab, SVDLab, DeterminantsLab, MatrixMultiplicationLab, RankLab, PCALab, VectorSpacesLab, InverseLab } from '../../../../categories/math-tools/modules/AdvancedLA';
-import { BayesGrid, GaltonBoard, ExpectationBeam, MarbleJar, EntropyLab, MLELab, KLDivLab, CovarianceLab, IndependenceLab, VarianceLab } from '../../../../categories/math-tools/modules/ProbabilityLab';
-import { BackpropLab, AUCIntegralLab, ParameterSensitivity, StochasticOptimizer, JacobianLab, HessianLab, TaylorLab } from '../../../../categories/math-tools/modules/CalculusLab';
+
+// --- Linear Algebra ---
+const MatrixMultiplication = lazy(() => import('../labs/linear-algebra/MatrixMultiplication'));
+const VectorArithmetic = lazy(() => import('../labs/linear-algebra/VectorArithmetic'));
+const MatrixTransformation = lazy(() => import('../labs/linear-algebra/MatrixTransformation'));
+const EigenValues = lazy(() => import('../labs/linear-algebra/EigenValues'));
+const Determinants = lazy(() => import('../labs/linear-algebra/Determinants'));
+const SVD = lazy(() => import('../labs/linear-algebra/SVD'));
+const PCA = lazy(() => import('../labs/linear-algebra/PCA'));
+const DotProduct = lazy(() => import('../labs/linear-algebra/DotProduct'));
+const SystemsOfEquations = lazy(() => import('../labs/linear-algebra/SystemsOfEquations'));
+const MatrixInverse = lazy(() => import('../labs/linear-algebra/MatrixInverse'));
+const MatrixRank = lazy(() => import('../labs/linear-algebra/MatrixRank'));
+const BasisDimension = lazy(() => import('../labs/linear-algebra/BasisDimension'));
+const OrthogonalProjections = lazy(() => import('../labs/linear-algebra/OrthogonalProjections'));
+const VectorNorms = lazy(() => import('../labs/linear-algebra/VectorNorms'));
+
+// --- Calculus ---
+const Derivatives = lazy(() => import('../labs/calculus/Derivatives'));
+const Integrals = lazy(() => import('../labs/calculus/Integrals'));
+
+// --- Probability & Statistics ---
+const BayesTheorem = lazy(() => import('../labs/probability/BayesTheorem'));
+const GaussianMLE = lazy(() => import('../labs/probability/GaussianMLE'));
+
+// Fallback Loading UI
+const LabLoader = () => (
+    <div className="w-full h-[400px] flex items-center justify-center bg-white/5 rounded-3xl animate-pulse">
+        <span className="text-[10px] font-black uppercase tracking-widest text-accent-premium/40">Loading Laboratory...</span>
+    </div>
+);
 
 export interface VisualizerProps {
   topicId: string;
@@ -12,98 +39,61 @@ export interface VisualizerProps {
   params?: any;
 }
 
-/**
- * Returns the raw visualizer component for a given topic ID.
- * This registry maps topic identifiers to the specific laboratory modules
- * used for inline embedding in the curriculum.
- */
 export const getVisualizerComponent = (topicId: string): React.FC<any> | null => {
   const tid = topicId.toLowerCase();
 
-  const registry: Record<string, React.FC<any>> = {
-    "vectors": VectorLab,
-    "vector-arithmetic": VectorLab,
-    "transformation": TransformLab,
-    "transform": TransformLab,
-    "linear-transformation": TransformLab,
-    "matrices": TransformLab,
-    "matrix-calc": MatrixMultiplicationLab,
-    "matrixcalc": MatrixMultiplicationLab,
-    "matrix-multiplication": MatrixMultiplicationLab,
-    "dot-product": DotProductLab,
-    "dotproduct": DotProductLab,
-    "projections": ProjectionLab,
-    "projection": ProjectionLab,
-    "determinants": DeterminantsLab,
-    "determinant": DeterminantsLab,
-    "norms": NormsLab,
-    "vector-norms": NormsLab,
-    "eigen": EigenLab,
-    "eigenvalues": EigenLab,
-    "eigenvalues-eigenvectors": EigenLab,
-    "positive-definite": EigenLab,
-    "systems": SystemsLab,
-    "system-solver": SystemsLab,
-    "systems-of-equations": SystemsLab,
-    "basis": BasisLab,
-    "basis-dimension": BasisLab,
-    "rank": RankLab,
-    "matrix-rank": RankLab,
-    "svd": SVDLab,
-    "singular-value-decomposition": SVDLab,
-    "pca": PCALab,
-    "principal-component-analysis": PCALab,
-    "vector-spaces": VectorSpacesLab,
-    "vectorspaces": VectorSpacesLab,
-    "matrix-inverse": InverseLab,
-    "matrixinverse": InverseLab,
-    "inverse": InverseLab,
-    "bayes": BayesGrid,
-    "bayes-theorem": BayesGrid,
-    "bayestheorem": BayesGrid,
-    "conditional-probability": BayesGrid,
-    "conditionalprobability": BayesGrid,
-    "galton": GaltonBoard,
-    "central-limit-theorem": GaltonBoard,
-    "expectation": ExpectationBeam,
-    "sampling": MarbleJar,
-    "lln": MarbleJar,
-    "law-of-large-numbers": MarbleJar,
-    "random-variables": MarbleJar,
-    "distributions": MLELab,
-    "variance": VarianceLab,
-    "independence": IndependenceLab,
-    "vectornorms": NormsLab,
-    "basischange": BasisLab,
-    "entropy": EntropyLab,
-    "mle": MLELab,
-    "probability-distributions": MLELab,
-    "kldiv": KLDivLab,
-    "covariance": CovarianceLab,
-    "joint-distributions": CovarianceLab,
-    "differentiation": ParameterSensitivity,
-    "derivatives": ParameterSensitivity,
-    "partial-derivatives": JacobianLab,
-    "partialderivatives": JacobianLab,
-    "gradient": StochasticOptimizer,
-    "auc": AUCIntegralLab,
-    "area-under-curve": AUCIntegralLab,
-    "integrals": AUCIntegralLab,
-    "chain-rule": BackpropLab,
-    "chainrule": BackpropLab,
-    "backprop": BackpropLab,
-    "stochastic": StochasticOptimizer,
-    "gradient-descent": StochasticOptimizer,
-    "optimizer": StochasticOptimizer,
-    "optimization": StochasticOptimizer,
-    "jacobian": JacobianLab,
-    "partial-derivatives-grid": JacobianLab,
-    "curvature": HessianLab,
-    "hessian": HessianLab,
-    "taylor": TaylorLab,
-    "critical-points": StochasticOptimizer,
-    "stationary-points": StochasticOptimizer,
+  const registry: Record<string, React.LazyExoticComponent<any> | React.FC<any>> = {
+    // Linear Algebra
+    "vectors": VectorArithmetic,
+    "vector-arithmetic": VectorArithmetic,
+    "vector-ops": VectorArithmetic,
+    "transformation": MatrixTransformation,
+    "linear-transformation": MatrixTransformation,
+    "linear-transformations": MatrixTransformation,
+    "matrix-calc": MatrixMultiplication,
+    "matrix-multiplication": MatrixMultiplication,
+    "eigen": EigenValues,
+    "eigenvalues": EigenValues,
+    "eigenvalues-eigenvectors": EigenValues,
+    "positive-definite-matrices": EigenValues,
+    "determinants": Determinants,
+    "determinant": Determinants,
+    "svd": SVD,
+    "pca": PCA,
+    "dot-product": DotProduct,
+    "dotproduct": DotProduct,
+    "linear-systems": SystemsOfEquations,
+    "systems-of-equations": SystemsOfEquations,
+    "matrix-inverse": MatrixInverse,
+    "inverse-matrices": MatrixInverse,
+    "matrix-rank": MatrixRank,
+    "rank": MatrixRank,
+    "basis-dimension": BasisDimension,
+    "vector-spaces": BasisDimension,
+    "orthogonality-projections": OrthogonalProjections,
+    "projections": OrthogonalProjections,
+    "vector-norms": VectorNorms,
+    "norms": VectorNorms,
+
+    // Calculus
+    "differentiation": Derivatives,
+    "derivatives": Derivatives,
+    "integrals": Integrals,
+    "auc": Integrals,
+
+    // Probability & Statistics
+    "bayes": BayesTheorem,
+    "bayes-theorem": BayesTheorem,
+    "mle": GaussianMLE,
+    "probability-distributions": GaussianMLE,
   };
 
-  return registry[tid] || null;
+  const Component = registry[tid];
+  if (!Component) return null;
+
+  return (props: any) => (
+    <Suspense fallback={<LabLoader />}>
+      <Component {...props} />
+    </Suspense>
+  );
 };

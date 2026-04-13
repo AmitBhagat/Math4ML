@@ -42,8 +42,10 @@ export const derivativesSection: TopicSection = {
       <p>In Machine Learning, this $f'(x)$ is the <strong>Sensitivity</strong>. It tells us exactly how the Loss function will react to a microscopic nudge in weight $x$.</p>
       <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
+    
+    <visualizer topic="derivatives" />
 
-    <visualizer topic="Differentiation" />
+
     
     <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
     

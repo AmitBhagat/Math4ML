@@ -43,6 +43,8 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Some matrices have "Complex" eigenvalues, meaning they represent a pure rotation with no invariant real directions. In ML, we usually look for Symmetric matrices where the eigenvalues are guaranteed to be real.</p>
     </div>
     
+    <visualizer topic="eigen" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -53,7 +55,7 @@ export const eigenvaluesEigenvectorsSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="Eigenvalues" />
+
 
     <h2 id="derivation">Formal Definition</h2>
     <p>A vector \(\mathbf{v}\) is an eigenvector if:</p>

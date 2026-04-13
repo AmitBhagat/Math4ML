@@ -43,6 +43,8 @@ export const pcaSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: PCA assumes the data is centered. If you forget to subtract the mean, your first "Principal Component" will just point from the origin to the center of your data cloud—a useless direction that tells you nothing about the internal structure.</p>
     </div>
     
+    <visualizer topic="pca" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -53,7 +55,7 @@ export const pcaSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="PCA" />
+
 
     <h2 id="steps">2. The 5 Steps of PCA</h2>
     <div class="algorithm-steps">

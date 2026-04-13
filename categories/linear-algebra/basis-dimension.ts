@@ -39,6 +39,8 @@ export const basisDimensionSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Dimension is a property of the SPACE, not the vectors. $[1,0,0]$ and $[0,1,0]$ are 3D vectors, but they only span a 2D subspace. Context is everything.</p>
     </div>
     
+    <visualizer topic="basis" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -49,7 +51,7 @@ export const basisDimensionSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="BasisChange" />
+
 
     <h2 id="dimension">2. Dimension vs. Rank</h2>
     <p>The <strong>Dimension</strong> of a space is the number of vectors in any basis for that space. For example, \(\mathbb{R}^3\) has a dimension of 3 because it takes at least 3 vectors to reach every height, width, and depth.</p>

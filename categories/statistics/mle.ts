@@ -54,6 +54,10 @@ export const mleSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: MLE is dangerously over-confident on small datasets. If you flip a coin once and get Heads, MLE will tell you the coin is 100% rigged for Heads with absolute certainty. This is why we use MAP (regularization) to keep MLE from drinking the kool-aid of small-sample noise.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Estimating Coin Bias</h2>
     
       <h4>Problem: Finding the "True" Chance of Heads</h4>

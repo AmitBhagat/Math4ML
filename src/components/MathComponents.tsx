@@ -1,8 +1,22 @@
-import React, { useState, useCallback, useRef, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { TopicVisualizer } from "./MathematicalVisualizations";
-import { runPython } from "@/src/hooks/usePyodide";
+import { runPython } from "../hooks/usePyodide";
 import { Copy, Check, Play, RotateCcw } from "lucide-react";
-import { useTheme } from "@/src/hooks/useTheme";
+import { useTheme } from "../hooks/useTheme";
+
+export const VisualizerContainer = ({ title }: { title: string }) => {
+  return (
+    <div className="relative w-full h-full bg-surface-container flex items-center justify-center overflow-hidden">
+      <div
+        className="absolute inset-0 z-0 pointer-events-none opacity-10"
+        style={{ backgroundImage: `radial-gradient(circle at center, var(--accent-teal) 0%, transparent 100%)` }}
+      />
+      <div className="relative z-10 w-full h-full">
+        <TopicVisualizer topicId={title} />
+      </div>
+    </div>
+  );
+};
 
 // ── MONOKAI SYNTAX HIGHLIGHTER (Lightweight Regex) ──
 const highlightPython = (code: string, isDark: boolean = true) => {
@@ -42,20 +56,6 @@ const highlightPython = (code: string, isDark: boolean = true) => {
   // Add remaining text
   html += escape(code.slice(lastIndex));
   return html;
-};
-
-export const VisualizerContainer = ({ title }: { title: string }) => {
-  return (
-    <div className="relative w-full h-full bg-surface-container flex items-center justify-center overflow-hidden">
-      <div
-        className="absolute inset-0 z-0 pointer-events-none opacity-10"
-        style={{ backgroundImage: `radial-gradient(circle at center, var(--accent-teal) 0%, transparent 100%)` }}
-      />
-      <div className="relative z-10 w-full h-full">
-        <TopicVisualizer topicId={title} />
-      </div>
-    </div>
-  );
 };
 
 type RunState = "idle" | "loading-pyodide" | "running" | "done" | "error";
@@ -139,7 +139,6 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
 
   // What to display in the output panel
   const shownOutput = liveOutput ?? staticOutput ?? null;
-  const isLive = liveOutput !== null;
   const isRunning = runState === "loading-pyodide" || runState === "running";
 
   const statusText: Partial<Record<RunState, string>> = {
@@ -316,9 +315,6 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
           </div>
         </div>
       )}
-
-      {/* ── Hint when there is no output at all yet ── */}
-
         </div>
       </div>
   );

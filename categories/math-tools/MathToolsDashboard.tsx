@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { VectorLab, TransformLab, MatrixCalcLab, NormsLab } from "./modules/BasicLA";
 import { EigenLab, SystemsLab, BasisLab, SVDLab } from "./modules/AdvancedLA";
-import { BayesGrid, GaltonBoard, ExpectationBeam, MarbleJar, EntropyLab, MLELab, KLDivLab, CovarianceLab } from "./modules/ProbabilityLab";
-import { BackpropLab, AUCIntegralLab, ParameterSensitivity, StochasticOptimizer, JacobianLab, CurvatureLab, TaylorLab } from "./modules/CalculusLab";
+import { 
+  RandomVariableLab, DistributionsLab, JointDistributionsLab, ConditionalProbLab, 
+  IndependenceLab, ExpectationLab, VarianceLab, LLNLab, CLTLab, BayesLab 
+} from "./modules/ProbabilityLab";
+import { 
+  MLELab, MAPLab, BiasVarianceLab, HypothesisTestingLab, 
+  TTestLab, ChiSquareLab, ANOVALab, ABTestingLab, ConfidenceIntervalLab 
+} from "./modules/StatisticsLab";
+import { DerivativeLab, PartialDerivativeLab, GradientLab, ChainRuleLab, JacobianLab, HessianLab, TaylorLab, CriticalPointsLab, IntegralLab } from "./modules/CalculusLab";
 
 interface DashboardProps {
   initialTab?: string;
@@ -19,13 +26,19 @@ const CATEGORIES = [
     id: "probability", 
     label: "Probability", 
     icon: "⚄",
-    tabs: ["bayes", "galton", "mle", "kldiv", "entropy", "covariance", "expectation", "sampling"] 
+    tabs: ["rv", "distributions", "joint", "conditional", "independence", "expectation", "variance", "lln", "clt", "bayes"] 
   },
   { 
     id: "calculus", 
     label: "Calculus", 
     icon: "∫",
-    tabs: ["backprop", "jacobian", "sensitivity", "curvature", "auc", "stochastic", "taylor"] 
+    tabs: ["derivatives", "partial", "gradient", "chain", "jacobian", "hessian", "taylor", "critical", "integrals"] 
+  },
+  { 
+    id: "statistics", 
+    label: "Statistics", 
+    icon: "θ",
+    tabs: ["mle", "map", "biasvariance", "hyp", "t-test", "chi-square", "anova", "ab-test", "ci"] 
   }
 ];
 
@@ -38,21 +51,34 @@ const ALL_TABS = [
   { id: 'systems', label: '∥ System of Equations' },
   { id: 'basis', label: '⊡ Basis & Span' },
   { id: 'svd', label: '◌ Matrix SVD' },
-  { id: 'bayes', label: "≗ Bayes' Theorem" },
-  { id: 'galton', label: '∢ Central Limit' },
-  { id: 'expectation', label: '⚖ Expected Values' },
-  { id: 'sampling', label: '⚄ Sampling' },
-  { id: 'entropy', label: '⋈ Entropy Lab' },
-  { id: 'mle', label: '⚚ Maximum Likelihood' },
-  { id: 'kldiv', label: '⩕ KL-Divergence' },
-  { id: 'covariance', label: '⊞ Covariance Matrix' },
-  { id: 'backprop', label: '▽ Backpropagation' },
-  { id: 'auc', label: '∫ Model AUC' },
-  { id: 'sensitivity', label: '∂ Weight Sensitivity' },
-  { id: 'stochastic', label: '⦿ Stochastic Gradient' },
-  { id: 'jacobian', label: '⊗ Jacobian Fields' },
-  { id: 'curvature', label: '⊕ Hessian Curvature' },
-  { id: 'taylor', label: '≋ Taylor Series' }
+  { id: 'rv', label: "⚀ Random Variables" },
+  { id: 'distributions', label: "∿ Distributions" },
+  { id: 'joint', label: "⊞ Joint Distributions" },
+  { id: 'conditional', label: "⩕ Conditional Prob" },
+  { id: 'independence', label: "⩖ Independence" },
+  { id: 'expectation', label: "⚖ Expectation" },
+  { id: 'variance', label: "↔ Variance Lab" },
+  { id: 'lln', label: "⚄ Large Numbers" },
+  { id: 'clt', label: "∢ Central Limit" },
+  { id: 'bayes', label: "≗ Bayes Theorem" },
+  { id: 'derivatives', label: '∂ Derivatives' },
+  { id: 'partial', label: '∂ Partial Derivatives' },
+  { id: 'gradient', label: '∇ Gradient Fields' },
+  { id: 'chain', label: '🔗 Chain Rule' },
+  { id: 'jacobian', label: '⊗ Jacobian Matrix' },
+  { id: 'hessian', label: '⊕ Hessian Matrix' },
+  { id: 'taylor', label: '≋ Taylor Series' },
+  { id: 'critical', label: '📍 Critical Points' },
+  { id: 'integrals', label: '∫ Integral Calculus' },
+  { id: 'mle', label: "⚚ Max Likelihood" },
+  { id: 'map', label: "≗ MAP Estimation" },
+  { id: 'biasvariance', label: "≋ Bias-Variance" },
+  { id: 'hyp', label: "⚖ Hypothesis Test" },
+  { id: 't-test', label: "∿ T-Distribution" },
+  { id: 'chi-square', label: "χ² Chi-Square" },
+  { id: 'anova', label: "⊞ ANOVA Lab" },
+  { id: 'ab-test', label: "⇄ A/B Testing" },
+  { id: 'ci', label: "↔ Confidence Intervals" }
 ];
 
 export const MathToolsDashboard: React.FC<DashboardProps> = ({ initialTab = 'vectors' }) => {
@@ -134,21 +160,34 @@ export const MathToolsDashboard: React.FC<DashboardProps> = ({ initialTab = 'vec
         {activeTab === 'systems' && <SystemsLab />}
         {activeTab === 'basis' && <BasisLab />}
         {activeTab === 'svd' && <SVDLab />}
-        {activeTab === 'bayes' && <BayesGrid />}
-        {activeTab === 'galton' && <GaltonBoard />}
-        {activeTab === 'expectation' && <ExpectationBeam />}
-        {activeTab === 'sampling' && <MarbleJar />}
-        {activeTab === 'entropy' && <EntropyLab />}
-        {activeTab === 'mle' && <MLELab />}
-        {activeTab === 'kldiv' && <KLDivLab />}
-        {activeTab === 'covariance' && <CovarianceLab />}
-        {activeTab === 'backprop' && <BackpropLab />}
-        {activeTab === 'auc' && <AUCIntegralLab />}
-        {activeTab === 'sensitivity' && <ParameterSensitivity />}
-        {activeTab === 'stochastic' && <StochasticOptimizer />}
+        {activeTab === 'rv' && <RandomVariableLab />}
+        {activeTab === 'distributions' && <DistributionsLab />}
+        {activeTab === 'joint' && <JointDistributionsLab />}
+        {activeTab === 'conditional' && <ConditionalProbLab />}
+        {activeTab === 'independence' && <IndependenceLab />}
+        {activeTab === 'expectation' && <ExpectationLab />}
+        {activeTab === 'variance' && <VarianceLab />}
+        {activeTab === 'lln' && <LLNLab />}
+        {activeTab === 'clt' && <CLTLab />}
+        {activeTab === 'bayes' && <BayesLab />}
+        {activeTab === 'derivatives' && <DerivativeLab />}
+        {activeTab === 'partial' && <PartialDerivativeLab />}
+        {activeTab === 'gradient' && <GradientLab />}
+        {activeTab === 'chain' && <ChainRuleLab />}
         {activeTab === 'jacobian' && <JacobianLab />}
-        {activeTab === 'curvature' && <CurvatureLab />}
+        {activeTab === 'hessian' && <HessianLab />}
         {activeTab === 'taylor' && <TaylorLab />}
+        {activeTab === 'critical' && <CriticalPointsLab />}
+        {activeTab === 'integrals' && <IntegralLab />}
+        {activeTab === 'mle' && <MLELab />}
+        {activeTab === 'map' && <MAPLab />}
+        {activeTab === 'biasvariance' && <BiasVarianceLab />}
+        {activeTab === 'hyp' && <HypothesisTestingLab />}
+        {activeTab === 't-test' && <TTestLab />}
+        {activeTab === 'chi-square' && <ChiSquareLab />}
+        {activeTab === 'anova' && <ANOVALab />}
+        {activeTab === 'ab-test' && <ABTestingLab />}
+        {activeTab === 'ci' && <ConfidenceIntervalLab />}
       </div>
 
     </div>

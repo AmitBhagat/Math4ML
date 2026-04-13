@@ -39,6 +39,8 @@ export const matricesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Never multiply $A\mathbf{x}$ if the number of columns in $A$ doesn't match the dimensions of $\mathbf{x}$. It's like trying to fit a 3-pin plug into a 2-pin socket—the signal simply has nowhere to go.</p>
     </div>
     
+    <visualizer topic="transformation" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -49,7 +51,7 @@ export const matricesSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="Matrices" />
+
 
     <h2 id="operations">Mathematical Operations</h2>
     <p>A matrix \(A \in \mathbb{R}^{m \times n}\) has \(m\) rows and \(n\) columns.</p>

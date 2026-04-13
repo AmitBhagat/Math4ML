@@ -5,7 +5,7 @@ export interface ContentBlock {
   html?: string;
   code?: string;
   output?: string;
-  visualizer?: 'matrix';
+  visualizer?: string;
 }
 
 export interface TopicSection {

@@ -7,22 +7,21 @@ import { ChevronRight, ArrowLeft } from "lucide-react";
 import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 import { CategoryData, TopicSection, ContentBlock } from "@/src/data/types";
 import { CodeSnippet } from "@/src/components/MathComponents";
-import { TopicVisualizer } from "@/src/components/MathematicalVisualizations";
 import 'katex/dist/katex.min.css';
 import { InlineMath, BlockMath } from 'react-katex';
 import { cleanMathContent } from '@/src/lib/mathUtils';
 import { getCategoryTheme } from "@/src/lib/themeUtils";
 import { Hammer, Clock, Star } from "lucide-react";
+import { TopicVisualizer } from "@/src/components/MathematicalVisualizations";
 
-import { InteractiveVisualizer } from "@/src/components/visualizers/core/InteractiveVisualizer";
-import { VisualizerModal } from "@/src/components/visualizers/core/VisualizerModal";
+
 
 // ── Custom Parser for Unified HTML ──
 const ParsedContent = ({ html }: { html: string }) => {
 
   if (!html) return null;
-  // Match both <python-code> and <visualizer topic="..." />
-  const segments = html.split(/(<python-code[\s\S]*?>[\s\S]*?<\/python-code>|<visualizer\s+topic="[^"]*"\s*\/>)/g);
+  // Match <python-code> OR <visualizer>
+  const segments = html.split(/(<python-code[\s\S]*?>[\s\S]*?<\/python-code>|<visualizer[\s\S]*?\/>)/g);
   
   return (
     <>
@@ -42,28 +41,11 @@ const ParsedContent = ({ html }: { html: string }) => {
         }
 
         if (segment.startsWith('<visualizer')) {
-          const match = segment.match(/topic="([^"]*)"/);
-          const topic = match ? match[1] : '';
-
-          return (
-            <div key={idx} className="my-16 max-w-full lg:-mx-12 xl:-mx-20">
-               <div className="bg-surface-container/30 backdrop-blur-sm rounded-[32px] border border-border-premium/50 p-6 md:p-10 shadow-premium-glow">
-                  <div className="flex items-center gap-4 mb-8">
-                     <div className="w-10 h-10 rounded-xl bg-accent-premium/10 flex items-center justify-center text-accent-premium">
-                        <Hammer className="w-5 h-5 shadow-sm" />
-                     </div>
-                     <div>
-                        <h4 className="text-sm font-black uppercase tracking-[0.2em] text-text-premium">Live Interaction: {topic}</h4>
-                        <p className="text-[11px] text-muted-premium font-medium">Manipulate the visual parameters to explore coordinate dependencies.</p>
-                     </div>
-                  </div>
-                  <div className="w-full min-h-[400px] rounded-2xl border border-border-premium shadow-inner bg-black/5 dark:bg-black/20">
-                    <InteractiveVisualizer topicId={topic} />
-                  </div>
-               </div>
-            </div>
-          );
+            const topicMatch = segment.match(/topic="([^"]*)"/);
+            const topic = topicMatch ? topicMatch[1] : '';
+            return <div key={idx} className="my-8"><TopicVisualizer topicId={topic} /></div>;
         }
+
         
         return <HtmlWithMath key={idx} html={segment} />;
       })}

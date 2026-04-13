@@ -45,6 +45,8 @@ export const vectorNormsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Many "distance" functions in ML aren't true norms because they fail the triangle inequality. Always check the math before you assume your optimizer will behave.</p>
     </div>
     
+    <visualizer topic="norms" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -55,7 +57,7 @@ export const vectorNormsSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="VectorNorms" />
+
 
     <h2 id="example-distance" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Manhattan vs. Euclidean</h2>
     

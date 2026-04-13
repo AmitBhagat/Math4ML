@@ -15,7 +15,7 @@ export const linearIndependenceSection: TopicSection = {
     <h2 id="theory">Intuition & Motivation</h2>
     <p>Why do we care about independence? Because every piece of data in Machine Learning has a "Price"—in memory, in computation, and in complexity. <strong>Linear Independence</strong> is the rule that tells us whether a new feature is actually adding a new "Direction" to our knowledge, or if it is just a noisy echo of something we already know. If your features are independent, your model is clean and efficient. If they are dependent, your weights can become unstable, and your model might "hallucinate" relationships that aren't there. It is the filter that separates unique insights from redundant clutter.</p>
 
-    <visualizer topic="Basis" />
+
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -40,6 +40,8 @@ export const linearIndependenceSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: If the zero vector $\mathbf{0}$ is in your set, the set is <strong>always</strong> dependent. Why? Because you can give $\mathbf{0}$ a weight of 1,000,000 and the sum stays zero!</p>
     </div>
+    
+    <visualizer topic="rank" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

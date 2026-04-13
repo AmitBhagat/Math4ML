@@ -44,9 +44,11 @@ export const matrixInverseSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Inverting large matrices is "computationally expensive" ($O(n^3)$). In AI, we almost never calculate $A^{-1}$ directly. We use Solvers like $LU$ or $QR$ decomposition to find the result without doing the heavy lifting by hand.</p>
     </div>
     
+    <visualizer topic="matrix-inverse" />
+    
     <h2 id="example-undo" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The "Undo" Walkthrough</h2>
     
-    <visualizer topic="matrix-inverse" />
+
     
       <h4>Problem: Finding the Inverse of A = [[4, 7], [2, 6]]</h4>
       

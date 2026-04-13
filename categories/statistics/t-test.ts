@@ -52,6 +52,10 @@ export const tTestSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A T-test assumes your data follows a Normal Distribution. If your data is highly skewed (like "Days since last purchase"), the T-test math will lie to you. In those cases, use a non-parametric test like the <strong>Mann-Whitney U Test</strong>.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A/B Testing (UI Design)</h2>
     
       <h4>Problem: Does a New UI Increase Clicks?</h4>

@@ -50,7 +50,9 @@ export const integralsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional AI, we almost never solve integrals analytically—there are too many variables. Instead, we use "Monte Carlo Integration," which is essentially like throwing millions of random darts at the curve and counting how many land inside the area.</p>
     </div>
     
-    <visualizer topic="AreaUnderCurve" />
+    <visualizer topic="integrals" />
+    
+
     
     <h2 id="example" class="mb-8">Illustrative <span class="text-green-premium font-bold">Case Study:</span> </h2>
     

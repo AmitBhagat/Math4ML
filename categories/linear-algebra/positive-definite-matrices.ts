@@ -40,9 +40,11 @@ export const positiveDefiniteSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Many "correlation" matrices in ML are only Positive SEMI-Definite ($\lambda \ge 0$), meaning the bowl has a flat bottom (a valley). This can cause your optimizer to wander aimlessly. Always check for that strict positive "tilt."</p>
     </div>
     
+    <visualizer topic="positive-definite" />
+    
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Global Minimum Stability Check</h2>
     
-    <visualizer topic="positive-definite" />
+
     
       <h4>Problem: Is this Surface Stable?</h4>
       <p>For \(A = \begin{bmatrix} 2 & 0 \\ 0 & 3 \end{bmatrix}\), check if it's PD.</p>

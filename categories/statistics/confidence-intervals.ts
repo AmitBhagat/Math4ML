@@ -23,7 +23,7 @@ export const confidenceIntervalsSection: TopicSection = {
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A single number is extremely fragile—it can be easily swayed by a single outlier or a tiny quirk in your dataset. <strong>Confidence Intervals</strong> provide the <strong>Precision</strong> that a single average lacks. instead of shouting a single value, you are providing a mathematical "Safety Net" that admits to uncertainty. A 95% Confidence Interval means: <em>"If I repeat this entire experiment 100 times, 95 of my calculated intervals will successfully contain the True Answer."</em> In Machine Learning, this is the difference between a lucky guess and a reliable product. It tells you if your model's accuracy is a rock-solid foundation you can build on, or a moving target that you happened to hit once by sheer chance. It is the tactical way we communicate <strong>Trust</strong> in our findings.</p>
     
-    <visualizer topic="ConfidenceIntervals" />
+
 
     <h2 id="formal-definition">Formal Definition</h2>
     <div class="premium-def-box">
@@ -55,6 +55,8 @@ export const confidenceIntervalsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: A 95% Confidence Interval DOES NOT mean there is a 95% chance that the true mean is in *your* specific interval. It means that if you repeated the experiment, 95% of the *different* intervals you created would contain the true mean. It is a property of the process, not the specific outcome.</p>
     </div>
+    
+    <visualizer topic="mle" />
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
     

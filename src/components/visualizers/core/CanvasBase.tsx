@@ -1,4 +1,5 @@
 import React, { useRef, useEffect, useCallback } from "react";
+import { Play, RotateCcw } from "lucide-react";
 
 // ─── HIGH-FIDELITY THEME PALETTES ──────────────────────────────────────────
 export type VisualizerTheme = 'light' | 'dark';
@@ -88,8 +89,7 @@ export function drawArrow(
   x1: number, y1: number, 
   x2: number, y2: number, 
   color: string, 
-  width = 2, 
-  headSize = 10
+  width = 2,  HeadSize = 10
 ) {
   const angle = Math.atan2(y2 - y1, x2 - x1);
   ctx.beginPath();
@@ -101,8 +101,8 @@ export function drawArrow(
   ctx.beginPath();
   ctx.fillStyle = color;
   ctx.moveTo(x2, y2);
-  ctx.lineTo(x2 - headSize * Math.cos(angle - 0.4), y2 - headSize * Math.sin(angle - 0.4));
-  ctx.lineTo(x2 - headSize * Math.cos(angle + 0.4), y2 - headSize * Math.sin(angle + 0.4));
+  ctx.lineTo(x2 - HeadSize * Math.cos(angle - 0.4), y2 - HeadSize * Math.sin(angle - 0.4));
+  ctx.lineTo(x2 - HeadSize * Math.cos(angle + 0.4), y2 - HeadSize * Math.sin(angle + 0.4));
   ctx.closePath();
   ctx.fill();
 }
@@ -130,8 +130,6 @@ export function drawTicks(ctx: CanvasRenderingContext2D, ox: number, oy: number,
 export function lerp(a: number, b: number, t: number) { return a + (b - a) * t; }
 export function easeInOut(t: number) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
-import { Play, RotateCcw } from "lucide-react";
-
 interface CanvasBaseProps {
   onDraw: (ctx: CanvasRenderingContext2D, width: number, height: number, elapsed: number, theme: VisualizerTheme) => void;
   className?: string;
@@ -149,7 +147,8 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({
   theme = 'light', 
   autoStart = true, 
   onUpdateInfo,
-  showControls = true 
+  showControls = true,
+  onCanvasClick
 }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
@@ -270,7 +269,3 @@ export const CanvasBase: React.FC<CanvasBaseProps> = ({
     </div>
   );
 };
-
-
-
-

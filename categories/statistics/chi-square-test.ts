@@ -52,6 +52,10 @@ export const chiSquareSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Chi-Square is a "Large Sample" test. If any cells in your table have an expected count of less than 5, the math starts to break down and the test becomes unreliable. If your data is sparse, you need to use <strong>Fisher's Exact Test</strong> instead.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Feature Relevance (E-commerce)</h2>
     
       <h4>Problem: Is 'Gender' Related to 'Buying a Phone'?</h4>

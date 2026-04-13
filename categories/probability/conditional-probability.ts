@@ -47,7 +47,9 @@ export const conditionalProbabilitySection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Correlation is not Conditioning. Just because $P(A|B)$ is high doesn't mean $B$ caused $A$. It just means that in the sub-universe where $B$ exists, $A$ happens to show up often. To prove "Cause," you need deeper tools like Do-Calculus or Randomized Control Trials.</p>
     </div>
     
-    <visualizer topic="ConditionalProbability" />
+    <visualizer topic="conditional-probability" />
+    
+
     
     <h2 id="example-die" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Die Roll Given > 3</h2>
     

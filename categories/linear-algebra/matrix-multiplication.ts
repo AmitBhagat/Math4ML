@@ -12,13 +12,34 @@ export const matrixMultiplicationSection: TopicSection = {
       <p>Combining two matrices (\(AB\)) is not just multiplication—it's <strong>Composition</strong>. It's the mathematical way of saying, "Do Transformation B, then do Transformation A." This is exactly what happens in every layer of a Neural Network.</p>
     </div>
 
+    <h2 id="formal-definition">Formal Definition</h2>
+    <div class="premium-def-box">
+      <div class="premium-def-title">Formalism: The Matrix Product</div>
+      <p>Let $\mathbf{A}$ be an $m \times n$ matrix and $\mathbf{B}$ be an $n \times p$ matrix. The product $\mathbf{C} = \mathbf{A}\mathbf{B}$ is an $m \times p$ matrix where each entry $\mathbf{C}_{ij}$ is calculated as the dot product of the $i$-th row of $\mathbf{A}$ and the $j$-th column of $\mathbf{B}$.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">1. The Inner Product View</h3>
+      <p>To compute the entry at row $i$ and column $j$ of the resulting matrix:</p>
+      <div class="math-block">
+        $$\mathbf{C}_{ij} = \sum_{k=1}^n \mathbf{A}_{ik} \mathbf{B}_{kj} = \mathbf{A}_{i,:} \cdot \mathbf{B}_{:,j}$$
+      </div>
+      <p>This means you grab the $i$-th row of the first matrix, the $j$-th column of the second, and "dot" them together.</p>
+
+      <h3 class="text-lg font-bold mt-4 mb-2">2. Dimension Compatibility (The Handshake Rule)</h3>
+      <p>Multiplication is only defined if the "inner dimensions" match. If A is $(m \times \color{red}{n})$ and B is $(\color{red}{n} \times p)$, the $n$'s must be identical. Think of it as a handshake: the number of things A "outputs" in its row MUST match the number of things B "expects" in its column.</p>
+
+      <p class="mt-4 italic text-sm">Gotcha: Matrix multiplication is <strong>Linear Transformation Composition</strong>. Calculating $C = AB$ is mathematically identical to applying $B$ first, then $A$. If B's output space doesn't match A's input space, the signal is lost.</p>
+    </div>
+
+    <visualizer topic="matrix-multiplication" />
+
     <h2 id="theory">Intuition & Motivation</h2>
     <p>A matrix-vector product (\(Ax\)) takes a vector and "moves" it to a new location. <strong>Matrix Multiplication</strong> (\(AB\)) takes <strong>all</strong> the vectors that B could possibly move and moves them <strong>again</strong> using A. It is the mathematical way of saying, "Take these results and process them some more." This allows us to collapse multiple complex, sequential steps into a single, unified matrix. In Artificial Intelligence, this is how we go from "Raw Data" to "High-Level Decisions" through layers of stacked influence.</p>
     
-      <p class="mt-4 italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
+    <div class="callout secondary">
+      <p class="italic text-sm">Gotcha: Order matters. $AB \neq BA$. In a relay race, the order of the runners changes the final time. In math, rotating then stretching is NOT the same as stretching then rotating. Always keep your transformation sequence in check.</p>
     </div>
     
-    <visualizer topic="matrix-multiplication" />
+
     
     <h2 id="example-composition" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Chaining Transformations</h2>
     

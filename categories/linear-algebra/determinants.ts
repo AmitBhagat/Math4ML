@@ -43,6 +43,8 @@ export const determinantsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A negative determinant means the transformation "flipped" space inside out (like a reflection). The absolute value is the volume change, but the sign tells you about the orientation.</p>
     </div>
     
+    <visualizer topic="determinants" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -53,7 +55,7 @@ export const determinantsSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="Determinants" />
+
 
     <h2 id="rules">2. Properties & Meaning</h2>
     <ul>

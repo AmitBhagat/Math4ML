@@ -54,7 +54,9 @@ export const criticalPointsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Most high-dimensional critical points in AI are <strong>Saddle Points</strong>. The Gradient is zero, so your optimizer stops, but the Loss is still massive. This is why we use "Momentum" and "Noise"—to kick the model out of these flat traps.</p>
     </div>
     
-    <visualizer topic="optimizer" />
+    <visualizer topic="stochastic" />
+    
+
     
     <h2 id="example-minimum" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Local Minima</h2>
     

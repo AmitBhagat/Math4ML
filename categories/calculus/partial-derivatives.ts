@@ -48,7 +48,9 @@ export const partialDerivativesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Partial derivatives don't tell the whole story. You can have a function where all partial derivatives exist at a point, but the function isn't even continuous there! To truly understand the "Total Change," you need the <strong>Gradient</strong>.</p>
     </div>
     
-    <visualizer topic="PartialDerivatives" />
+    <visualizer topic="partial-derivatives" />
+    
+
     
     <h2 id="example-bowl" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Surface Slope of a Bowl</h2>
     

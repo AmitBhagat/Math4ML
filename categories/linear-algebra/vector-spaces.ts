@@ -41,6 +41,8 @@ export const vectorSpacesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A set that skips the origin (like the line $y=x+1$) is NOT a subspace. Why? Because scaling any vector by zero gives $[0,0]$, which isn't on the line. You've just broken the laws of the universe.</p>
     </div>
     
+    <visualizer topic="vector-spaces" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -53,7 +55,7 @@ export const vectorSpacesSection: TopicSection = {
 
     <h2 id="subspaces">2. Subspaces</h2>
     
-    <visualizer topic="vector-spaces" />
+
     <p>A <strong>Subspace</strong> is a "flat slice" of the original vector space that still goes through the origin.</p>
 
     <h2 id="example-subspace" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> A 2D Plane in 3D Space</h2>

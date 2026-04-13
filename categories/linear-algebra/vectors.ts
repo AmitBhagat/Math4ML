@@ -47,9 +47,8 @@ export const vectorsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
-
-    <visualizer topic="Vectors" />
     
+    <visualizer topic="vectors" />
     <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
     
       <h4>Problem: Real Estate Vectorization</h4>

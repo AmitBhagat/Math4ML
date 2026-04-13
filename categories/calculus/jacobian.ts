@@ -53,6 +53,8 @@ export const jacobianSection: TopicSection = {
     
     <visualizer topic="jacobian" />
     
+
+    
     <h2 id="example-jacobian" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Layer-to-Layer Sensitivity</h2>
     
       <h4>Problem: Finding the Jacobian of \(\mathbf{f}(x, y) = [x^2y, 5x + \sin(y)]^T\)</h4>

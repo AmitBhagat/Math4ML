@@ -49,8 +49,10 @@ export const dotProductSection: TopicSection = {
       </div>
       <p class="mt-4 italic text-sm">Gotcha: If the dot product is 0, $\cos(\theta) = 0$, meaning the vectors are orthogonal (90°). If it's negative, they are pointing in "opposite" directions (> 90°).</p>
     </div>
+    
+    <visualizer topic="dot-product" />
 
-    <visualizer topic="DotProduct" />
+
     
     <h2 id="example-nlp" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Word Similarity in NLP</h2>
     

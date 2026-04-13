@@ -47,6 +47,8 @@ export const orthogonalityProjectionsSection: TopicSection = {
     </div>
     
     <visualizer topic="projections" />
+    
+
 
     <h2 id="example-projection" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> 1D Projection (Searching for Shadows)</h2>
     

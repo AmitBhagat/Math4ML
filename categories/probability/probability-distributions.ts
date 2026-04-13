@@ -54,7 +54,9 @@ export const probabilityDistributionsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: In a continuous distribution, the probability of any <strong>exact</strong> point is exactly zero ($P(X=5.000...)$). We only care about the probability of falling within a range (an integral). The vertical height $f(x)$ is a density, not a probability—it can actually be greater than 1.0.</p>
     </div>
     
-    <visualizer topic="Distributions" />
+    <visualizer topic="probability-distributions" />
+    
+
     
     <h2 id="example-bernoulli" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Bernoulli (Success vs. Failure)</h2>
     

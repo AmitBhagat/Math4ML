@@ -50,7 +50,9 @@ export const centralLimitTheoremSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Many practitioners forget the "Finite Variance" requirement. If your data comes from a "Fat-Tailed" distribution (like Cauchy or some power-law finance data), the CLT fails. The sums will never settle into a bell curve—they'll just keep exploding into wild, unpredictable spikes.</p>
     </div>
     
-    <visualizer topic="Central-Limit-Theorem" />
+    <visualizer topic="galton" />
+    
+
     
     <h2 id="example-uniform" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sum of Uniform Distributions</h2>
     

@@ -54,7 +54,9 @@ export const hessianSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: In high-dimensional ML (like LLMs), we almost never calculate the full Hessian—it would require petabytes of memory. Instead, we use "Hessian-Free" optimizers or diagonal approximations to get the curvature benefits without the system-crashing cost.</p>
     </div>
     
-    <visualizer topic="curvature" />
+    <visualizer topic="hessian" />
+    
+
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

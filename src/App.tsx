@@ -1,6 +1,7 @@
 import { HashRouter, Routes, Route, useParams, useLocation } from "react-router-dom";
 import { MainLayout } from "./components/MainLayout";
 import React, { Suspense } from "react";
+// We use 'motion' but import from 'framer-motion' for compatibility with demo code
 import { AnimatePresence } from "framer-motion";
 import LoadingSkeleton from "./components/LoadingSkeleton";
 import ScrollToTop from "./components/ScrollToTop";
@@ -10,7 +11,6 @@ const HomePage = React.lazy(() => import("./pages/HomePage").then(m => ({ defaul
 const ClusterPage = React.lazy(() => import("./pages/ClusterPage").then(m => ({ default: m.ClusterPage })));
 const AsyncCategoryPage = React.lazy(() => import("./pages/AsyncCategoryPage").then(m => ({ default: m.AsyncCategoryPage })));
 const ProblemPage = React.lazy(() => import("./pages/ProblemPage").then(m => ({ default: m.ProblemPage })));
-const VisualizationsPage = React.lazy(() => import("./pages/VisualizationsPage").then(m => ({ default: m.VisualizationsPage })));
 
 function CategoryRoute() {
   const { clusterId, categoryId } = useParams();
@@ -27,6 +27,7 @@ function ProblemRoute() {
   const routeKey = clusterId ? `${clusterId}-${categoryId}-${problemId}` : `${categoryId}-${problemId}`;
   return <ProblemPage key={routeKey} />;
 }
+
 export default function App() {
   return (
     <ThemeProvider>
@@ -46,8 +47,6 @@ function AppContent() {
       <Routes location={location} key={location.pathname}>
         <Route element={<MainLayout />}>
           <Route path="/" element={<Suspense fallback={<LoadingSkeleton /> }><HomePage /></Suspense>} />
-          
-          <Route path="/visualizations" element={<Suspense fallback={<LoadingSkeleton /> }><VisualizationsPage /></Suspense>} />
           
           {/* Cluster Pages (Mathematics / Machine Learning) */}
           <Route path="/:clusterId" element={<Suspense fallback={<LoadingSkeleton /> }><ClusterPage /></Suspense>} />

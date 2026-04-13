@@ -52,6 +52,10 @@ export const abTestingSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Stopping a test as soon as the $p$-value hits 0.05 is the "Cardinal Sin" of statistics. This is called <strong>p-hacking</strong>. You must wait until your pre-calculated sample size is reached, or your "significant" result will likely vanish if you run it again. </p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="workflow">The Experimenter's Workflow</h2>
     <div class="algorithm-steps">
       <div class="algorithm-step">

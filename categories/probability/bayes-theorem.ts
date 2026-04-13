@@ -43,8 +43,10 @@ export const bayesTheoremSection: TopicSection = {
       </div>
       <p class="mt-4 italic text-sm">Gotcha: Beginners usually ignore the <strong>Evidence</strong> ($P(\mathcal{D})$) because it's just a constant. But in complex models, calculating it requires a massive integral over all possible hypotheses—this is the "Bayesian Bottleneck" that makes full Bayesian inference computationally expensive (and why we use things like MCMC or Variational Inference).</p>
     </div>
+    
+    <visualizer topic="bayes-theorem" />
 
-    <visualizer topic="BayesTheorem" />
+
 
     <div class="callout tip">
       <div class="callout-icon">💡</div>

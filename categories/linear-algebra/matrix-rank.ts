@@ -39,6 +39,8 @@ export const matrixRankSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: In real-world data, rank is rarely exactly zero due to noise. We use "Effective Rank" or SVD to find the "pivots" that are large enough to be signal and small enough to be noise.</p>
     </div>
     
+    <visualizer topic="rank" />
+    
     <div class="callout tip">
       <div class="callout-icon">💡</div>
       <div class="callout-body">
@@ -49,7 +51,7 @@ export const matrixRankSection: TopicSection = {
       </div>
     </div>
 
-    <visualizer topic="Rank" />
+
 
     <h2 id="rules">2. Properties of Rank</h2>
     <ul>

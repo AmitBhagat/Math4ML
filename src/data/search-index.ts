@@ -599,13 +599,6 @@ export const SEARCH_INDEX: SearchableTopic[] = [
     keywords: ["dimensionality", "reduction", "projection", "curse of dimensionality", "shadow"]
   },
   {
-    id: "pca",
-    title: "PCA",
-    category: "Unsupervised Learning",
-    path: "/machine-learning/unsupervised-learning/pca",
-    keywords: ["pca", "variance", "eigenvalue", "eigenvector", "components", "projection", "svd"]
-  },
-  {
     id: "tsne",
     title: "t-SNE",
     category: "Unsupervised Learning",

@@ -55,6 +55,10 @@ export const biasVarianceSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: You can never reach zero error. The "Irreducible Error" $\sigma^2$ is your mathematical floor. If your model's error is lower than the noise floor of the data, you aren't a genius—you're just overfitting to the noise.</p>
     </div>
     
+    <visualizer topic="mle" />
+    
+
+    
     <h2 id="example-under" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Underfitting (High Bias)</h2>
     
       <h4>Problem: Trying to Fit a Parabola with a Line</h4>

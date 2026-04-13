@@ -35,8 +35,10 @@ export const singularValueDecompositionSection: TopicSection = {
       <p>Where $U^\top U = I$ and $V^\top V = I$. $\Sigma$ contains the singular values in descending order, effectively sorting your data's signal from its noise.</p>
       <p class="mt-4 italic text-sm">Gotcha: SVD is "stable" even for singular matrices. While the inverse might explode, SVD just sets the singular value to zero, letting you see exactly *where* the information was lost.</p>
     </div>
+    
+    <visualizer topic="svd" />
 
-    <visualizer topic="SVD" />
+
     
     <h2 id="example-reconstruction" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Rotation-Scaling-Rotation Breakdown</h2>
     

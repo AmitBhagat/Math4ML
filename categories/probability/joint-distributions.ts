@@ -46,8 +46,10 @@ export const jointDistributionsSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: High-dimensional Joint Distributions are the enemy of computation. Each new variable adds another dimension to the integral, making it exponentially harder to calculate (the "Curse of Dimensionality"). This is why we use "Mean Field Assumptions" to pretend variables are independent even when we know they aren't.</p>
     </div>
+    
+    <visualizer topic="joint-distributions" />
 
-    <visualizer topic="Joint-Distributions" />
+
     
     <h2 id="example-scatter" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Scatter of Binary Features</h2>
     

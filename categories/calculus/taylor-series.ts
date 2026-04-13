@@ -53,6 +53,8 @@ export const taylorSeriesSection: TopicSection = {
     
     <visualizer topic="taylor" />
     
+
+    
     <h2 id="example-linear" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Linear Approximation of \(e^x\)</h2>
     
       <h4>Problem: Tracking Error of Current Model (A Proxy for exp)</h4>

@@ -1,7 +1,7 @@
 import { Outlet, useLocation, useParams } from "react-router-dom";
 import { Sidebar } from "./Sidebar";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { ThemeToggle } from "./ThemeToggle";
 import { Search } from "./Search";
 import { clsx, type ClassValue } from "clsx";
