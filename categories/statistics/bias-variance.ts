@@ -55,7 +55,7 @@ export const biasVarianceSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: You can never reach zero error. The "Irreducible Error" $\sigma^2$ is your mathematical floor. If your model's error is lower than the noise floor of the data, you aren't a genius—you're just overfitting to the noise.</p>
     </div>
     
-    <visualizer topic="mle" />
+    <visualizer topic="bias-variance" />
     
 
     

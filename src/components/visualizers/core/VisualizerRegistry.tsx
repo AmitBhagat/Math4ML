@@ -20,10 +20,36 @@ const VectorNorms = lazy(() => import('../labs/linear-algebra/VectorNorms'));
 // --- Calculus ---
 const Derivatives = lazy(() => import('../labs/calculus/Derivatives'));
 const Integrals = lazy(() => import('../labs/calculus/Integrals'));
+const PartialDerivatives3D = lazy(() => import('../labs/calculus/PartialDerivatives3D'));
+const Gradient3D = lazy(() => import('../labs/calculus/Gradient3D'));
+const CriticalPoints3D = lazy(() => import('../labs/calculus/CriticalPoints3D'));
+const MultipleIntegrals3D = lazy(() => import('../labs/calculus/MultipleIntegrals3D'));
+const TaylorSeries = lazy(() => import('../labs/calculus/TaylorSeries'));
+const ChainRule = lazy(() => import('../labs/calculus/ChainRule'));
+const Jacobian2D = lazy(() => import('../labs/calculus/Jacobian2D'));
+const Hessian3D = lazy(() => import('../labs/calculus/Hessian3D'));
 
 // --- Probability & Statistics ---
 const BayesTheorem = lazy(() => import('../labs/probability/BayesTheorem'));
-const GaussianMLE = lazy(() => import('../labs/probability/GaussianMLE'));
+const ConditionalProbability = lazy(() => import('../labs/probability/ConditionalProbability'));
+const RandomVariables = lazy(() => import('../labs/probability/RandomVariables'));
+const ProbabilityDistributions = lazy(() => import('../labs/probability/ProbabilityDistributions'));
+const Expectation = lazy(() => import('../labs/probability/Expectation'));
+const Variance = lazy(() => import('../labs/probability/Variance'));
+const JointDistributions = lazy(() => import('../labs/probability/JointDistributions'));
+const Independence = lazy(() => import('../labs/probability/Independence'));
+const LawOfLargeNumbers = lazy(() => import('../labs/probability/LawOfLargeNumbers'));
+const CentralLimitTheorem = lazy(() => import('../labs/probability/CentralLimitTheorem'));
+
+const MLE = lazy(() => import('../labs/statistics/MLE'));
+const MAP = lazy(() => import('../labs/statistics/MAP'));
+const BiasVariance = lazy(() => import('../labs/statistics/BiasVariance'));
+const HypothesisTesting = lazy(() => import('../labs/statistics/HypothesisTesting'));
+const TTest = lazy(() => import('../labs/statistics/TTest'));
+const ABTesting = lazy(() => import('../labs/statistics/ABTesting'));
+const ChiSquareTest = lazy(() => import('../labs/statistics/ChiSquareTest'));
+const ANOVA = lazy(() => import('../labs/statistics/ANOVA'));
+const ConfidenceIntervals = lazy(() => import('../labs/statistics/ConfidenceIntervals'));
 
 // Fallback Loading UI
 const LabLoader = () => (
@@ -78,14 +104,43 @@ export const getVisualizerComponent = (topicId: string): React.FC<any> | null =>
     // Calculus
     "differentiation": Derivatives,
     "derivatives": Derivatives,
+    "partial-derivatives": PartialDerivatives3D,
+    "gradient": Gradient3D,
+    "critical-points": CriticalPoints3D,
     "integrals": Integrals,
+    "multiple-integrals": MultipleIntegrals3D,
+    "taylor-series": TaylorSeries,
+    "chain-rule": ChainRule,
+    "jacobian": Jacobian2D,
+    "hessian": Hessian3D,
     "auc": Integrals,
 
     // Probability & Statistics
     "bayes": BayesTheorem,
     "bayes-theorem": BayesTheorem,
-    "mle": GaussianMLE,
-    "probability-distributions": GaussianMLE,
+    "conditional-probability": ConditionalProbability,
+    "random-variables": RandomVariables,
+    "probability-distributions": ProbabilityDistributions,
+    "expectation": Expectation,
+    "expectations": Expectation,
+    "variance": Variance,
+    "joint-distributions": JointDistributions,
+    "independence": Independence,
+    "law-of-large-numbers": LawOfLargeNumbers,
+    "lln": LawOfLargeNumbers,
+    "clt": CentralLimitTheorem,
+    "central-limit-theorem": CentralLimitTheorem,
+    "galton": CentralLimitTheorem,
+
+    "mle": MLE,
+    "map": MAP,
+    "bias-variance": BiasVariance,
+    "hypothesis-testing": HypothesisTesting,
+    "t-test": TTest,
+    "ab-testing": ABTesting,
+    "chi-square": ChiSquareTest,
+    "anova": ANOVA,
+    "confidence-intervals": ConfidenceIntervals,
   };
 
   const Component = registry[tid];

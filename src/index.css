@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@400;500&family=Outfit:wght@300;400;500;600&display=swap');
-@import "mafs/core.css";
-@import "mafs/font.css";
+@import "./jsxgraph.css";
 @import "tailwindcss";
 @import "./styles/visualizer-lab.css";
 
@@ -205,35 +204,6 @@
   }
 
   /* ─── SECTION HEADERS ─── */
-  .premium-h2 {
-    font-family: 'Crimson Pro', serif;
-    @apply text-[24px] md:text-[32px] lg:text-[28px] font-semibold text-text-premium mt-10 mb-3 pb-3 border-b-2 border-border-premium relative;
-  }
-  .premium-h2::after {
-    content: '';
-    position: absolute;
-    bottom: -2px; left: 0;
-    width: 48px; height: 2px;
-    background-color: var(--category-primary, var(--accent));
-  }
-  .premium-h3 {
-    @apply text-xl font-semibold text-accent-premium mt-8 mb-3;
-  }
-  .premium-h4 {
-    @apply text-lg font-semibold text-gold-premium mt-6 mb-2;
-  }
-
-  /* ─── CALLOUTS ─── */
-  .premium-callout {
-    @apply rounded-xl p-4 mb-6 flex gap-3;
-  }
-  .premium-callout.info { @apply bg-accent-premium/10 border border-accent-premium/25; }
-  .premium-callout.warn { @apply bg-gold-premium/10 border border-gold-premium/25; }
-  .premium-callout.success { @apply bg-green-premium/10 border border-green-premium/25; }
-  
-  .premium-callout-icon { @apply text-base mt-0.5 shrink-0; }
-  .premium-callout-body { @apply text-base font-normal text-text-premium; }
-  .premium-callout-body strong { @apply font-semibold text-accent-premium; }
 
   /* ─── DEFINITIONS & CASE STUDIES ─── */
   .premium-def-box {
@@ -247,11 +217,6 @@
     @apply font-mono text-[13px] md:text-[14px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-80;
   }
 
-  .premium-case-study {
-    @apply relative overflow-hidden backdrop-blur-2xl border border-white/20 rounded-[32px] p-8 mb-10 transition-all duration-500 hover:scale-[1.01];
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-  }
-  .premium-case-study h4 { @apply text-green-premium mt-0 mb-3 font-bold; }
 
   /* ─── MATH & TABLES ─── */
   .premium-math-block {
@@ -268,12 +233,6 @@
   .premium-table tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 2%, transparent); }
 
   /* ─── TOC ─── */
-  .premium-toc {
-    @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
-  }
-  .premium-toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
-  .premium-toc a { @apply block text-muted-premium no-underline text-[15.5px] py-1 transition-colors hover:text-accent-premium; }
-  .premium-toc a.sub { @apply pl-4 text-[15px]; }
 
   /* ─── CODE ─── */
   code:not(pre code) {
@@ -438,61 +397,6 @@
   @apply mt-4 mb-6 overflow-x-auto overflow-y-hidden;
 }
 
-/* ─── MAFS PREMIUM OVERRIDES ─── */
-.mafs-view {
-  background: transparent !important;
-  font-family: inherit !important;
-}
-
-.mafs-view text {
-  font-family: var(--font-mono) !important;
-  font-size: 11px !important;
-}
-
-.mafs-axis line {
-  stroke: var(--text-premium) !important;
-  stroke-opacity: 0.2 !important;
-}
-
-.mafs-grid line {
-  stroke: var(--text-premium) !important;
-  stroke-opacity: var(--grid-opacity, 0.08) !important;
-}
-
-.mafs-axis-tick line {
-  stroke: var(--text-premium) !important;
-  stroke-opacity: 0.3 !important;
-}
-
-.mafs-axis-tick text {
-  fill: var(--text-premium) !important;
-  font-weight: 500 !important;
-  opacity: 0.6;
-}
-
-.mafs-origin {
-  fill: var(--text-premium) !important;
-  opacity: 0.3;
-}
-
-.dark .mafs-grid line {
-  stroke: rgba(255, 255, 255, 0.06) !important;
-}
-
-.dark .mafs-axis line {
-  stroke: rgba(255, 255, 255, 0.1) !important;
-}
-
-.dark .mafs-axis-tick text {
-  fill: var(--text-premium) !important;
-  opacity: 0.5;
-}
-
-/* Custom Vector Styling */
-.mafs-vector {
-  stroke-linecap: round !important;
-  stroke-linejoin: round !important;
-}
 
 /* ─── LAB DASHBOARD LAYOUT ─── */
 .lab-layout {

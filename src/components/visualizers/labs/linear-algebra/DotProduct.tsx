@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import JXG from 'jsxgraph';
+import { renderTex } from '@/src/lib/mathUtils';
 
 const DotProduct = () => {
     const boardRef = useRef<HTMLDivElement>(null);
@@ -7,7 +8,7 @@ const DotProduct = () => {
     useEffect(() => {
         if (!boardRef.current) return;
 
-        JXG.Options.text.useMathJax = true;
+        JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
             boundingbox: [-7, 7, 7, -7],
             axis: true,
@@ -15,8 +16,8 @@ const DotProduct = () => {
             showCopyright: false
         });
 
-        const a = board.create('point', [4, 1], { name: '\\mathbf{a}', color: '#D8C3A5', size: 4 });
-        const b = board.create('point', [1, 4], { name: '\\mathbf{b}', color: '#E98074', size: 4 });
+        const a = board.create('point', [4, 1], { name: renderTex('\\mathbf{a}'), color: '#D8C3A5', size: 4 });
+        const b = board.create('point', [1, 4], { name: renderTex('\\mathbf{b}'), color: '#E98074', size: 4 });
 
         board.create('arrow', [[0, 0], a], { strokeColor: '#D8C3A5', strokeWidth: 3 });
         board.create('arrow', [[0, 0], b], { strokeColor: '#E98074', strokeWidth: 3 });
@@ -29,7 +30,7 @@ const DotProduct = () => {
         const proj = board.create('point', [
             () => b.X() * scalar(),
             () => b.Y() * scalar()
-        ], { name: 'proj_{\\mathbf{b}}\\mathbf{a}', color: '#8E9775', size: 3 });
+        ], { name: renderTex('\\text{proj}_{\\mathbf{b}}\\mathbf{a}'), color: '#8E9775', size: 3 });
 
         board.create('segment', [a, proj], { strokeColor: '#8E9775', dash: 2, strokeWidth: 1 });
         board.create('arrow', [[0, 0], proj], { strokeColor: '#8E9775', strokeWidth: 4 });
@@ -37,13 +38,13 @@ const DotProduct = () => {
         // MathJax: Dot Product Formula
         board.create('text', [-6.5, 6, () => {
             const d = dot().toFixed(2);
-            return `\\[\\mathbf{a} \\cdot \\mathbf{b} = a_x b_x + a_y b_y = ${d}\\]`;
-        }], { fontSize: 18 });
+            return renderTex(`\\mathbf{a} \\cdot \\mathbf{b} = ${d}`, true);
+        }], { fontSize: 18, parse: false });
 
         board.create('text', [-6.5, 4.5, () => {
             const angle = Math.acos(dot() / (Math.sqrt(a.X()**2 + a.Y()**2) * Math.sqrt(magBSq()) || 1)) * (180 / Math.PI);
-            return `\\[\\theta = ${angle.toFixed(1)}^\\circ\\]`;
-        }], { fontSize: 16, color: '#D8C3A5' });
+            return renderTex(`\\theta = ${angle.toFixed(1)}^\\circ`, true);
+        }], { fontSize: 16, color: '#D8C3A5', parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

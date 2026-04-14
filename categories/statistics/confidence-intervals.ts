@@ -56,7 +56,7 @@ export const confidenceIntervalsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A 95% Confidence Interval DOES NOT mean there is a 95% chance that the true mean is in *your* specific interval. It means that if you repeated the experiment, 95% of the *different* intervals you created would contain the true mean. It is a property of the process, not the specific outcome.</p>
     </div>
     
-    <visualizer topic="mle" />
+    <visualizer topic="confidence-intervals" />
     
     <h2 id="example-error" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Error Bars on Predictions</h2>
     

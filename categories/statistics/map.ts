@@ -51,7 +51,7 @@ export const mapSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: If your "Prior Belief" is wrong, the MAP estimate will be biased away from the truth. If you treat a biased coin as a 50/50 coin (strong prior), it will take a massive number of flips for the MAP estimate to finally admit the coin is unfair.</p>
     </div>
     
-    <visualizer topic="mle" />
+    <visualizer topic="map" />
     
 
     

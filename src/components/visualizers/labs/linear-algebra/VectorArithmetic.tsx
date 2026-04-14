@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import JXG from 'jsxgraph';
+import { renderTex } from '@/src/lib/mathUtils';
 
 const VectorArithmetic = () => {
     const boardRef = useRef<HTMLDivElement>(null);
@@ -9,7 +10,7 @@ const VectorArithmetic = () => {
     useEffect(() => {
         if (!boardRef.current) return;
 
-        JXG.Options.text.useMathJax = true;
+        JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
             boundingbox: [-8, 8, 8, -8],
             axis: true,
@@ -22,12 +23,12 @@ const VectorArithmetic = () => {
         const k = board.create('slider', [[-7, -6], [-3, -6], [-3, 1.5, 3]], { name: 'k', color: '#E98074' });
 
         // Vector A
-        const a = board.create('point', [3, 2], { name: '\\mathbf{a}', color: '#D8C3A5', size: 4 });
+        const a = board.create('point', [3, 2], { name: renderTex('\\mathbf{a}'), color: '#D8C3A5', size: 4 });
         const arrowA = board.create('arrow', [[0, 0], a], { strokeColor: '#D8C3A5', strokeWidth: 3 });
 
         // Vector B
         const b = board.create('point', [1, 4], { 
-            name: '\\mathbf{b}', 
+            name: renderTex('\\mathbf{b}'), 
             color: '#8E9775', 
             size: 4,
             visible: () => mode !== 'scalar'
@@ -51,7 +52,7 @@ const VectorArithmetic = () => {
         };
 
         const res = board.create('point', [resX, resY], { 
-            name: '\\mathbf{v}', 
+            name: renderTex('\\mathbf{v}'), 
             color: '#E98074', 
             size: 5,
             face: 'square'
@@ -76,8 +77,8 @@ const VectorArithmetic = () => {
         board.create('text', [-7.5, 7, () => {
             const sym = mode === 'add' ? '+' : mode === 'sub' ? '-' : '\\cdot';
             const resLabel = mode === 'scalar' ? `k\\mathbf{a}` : `\\mathbf{a} ${sym} \\mathbf{b}`;
-            return `\\[${resLabel} = \\begin{bmatrix} ${resX().toFixed(1)} \\\\ ${resY().toFixed(1)} \\end{bmatrix}\\]`;
-        }], { fontSize: 18 });
+            return renderTex(`${resLabel} = \\begin{bmatrix} ${resX().toFixed(1)} \\\\ ${resY().toFixed(1)} \\end{bmatrix}`, true);
+        }], { fontSize: 18, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

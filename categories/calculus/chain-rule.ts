@@ -49,7 +49,7 @@ export const chainRuleSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Many beginners treat the chain rule like simple fraction cancellation. While it looks like fractions, it’s actually a product of linear approximations. Don't be fooled—in multivariable space, the order of multiplication (Jacobians) matters!</p>
     </div>
     
-    <visualizer topic="backprop" />
+    <visualizer topic="chain-rule" />
     
     <div class="callout tip">
       <div class="callout-icon">💡</div>

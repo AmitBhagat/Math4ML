@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import JXG from 'jsxgraph';
+import { renderTex } from '@/src/lib/mathUtils';
 
 const MatrixRank = () => {
     const boardRef = useRef<HTMLDivElement>(null);
@@ -7,7 +8,7 @@ const MatrixRank = () => {
     useEffect(() => {
         if (!boardRef.current) return;
 
-        JXG.Options.text.useMathJax = true;
+        JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
             boundingbox: [-8, 8, 8, -8],
             axis: true,
@@ -16,8 +17,8 @@ const MatrixRank = () => {
         });
 
         // Column vectors of matrix A = [c1, c2]
-        const c1 = board.create('point', [4, 1], { name: 'c1', color: '#E98074', size: 4 });
-        const c2 = board.create('point', [1, 3], { name: 'c2', color: '#D8C3A5', size: 4 });
+        const c1 = board.create('point', [4, 1], { name: renderTex('\\mathbf{c}_1'), color: '#E98074', size: 4 });
+        const c2 = board.create('point', [1, 3], { name: renderTex('\\mathbf{c}_2'), color: '#D8C3A5', size: 4 });
 
         board.create('arrow', [[0, 0], c1], { strokeColor: '#E98074', strokeWidth: 3 });
         board.create('arrow', [[0, 0], c2], { strokeColor: '#D8C3A5', strokeWidth: 3 });
@@ -38,15 +39,17 @@ const MatrixRank = () => {
 
         board.create('text', [-7.5, 7, () => {
             const rank = getRank();
-            return `\\[\\text{Rank}(A) = ${rank}\\]`;
-        }], { fontSize: 24, fontStyle: 'bold' });
+            return renderTex(`\\text{Rank}(A) = ${rank}`, true);
+        }], { fontSize: 24, parse: false });
 
-        board.create('text', [-7.5, 5, () => {
+        board.create('text', [-7.5, 5.2, () => {
             const rank = getRank();
-            if (rank === 2) return '\\text{Full Rank: Spans } \\mathbb{R}^2';
-            if (rank === 1) return '\\text{Rank Deficient: Space collapses to a line}';
-            return '\\text{Zero Matrix: Space collapses to a point}';
-        }], { fontSize: 16, color: '#E98074' });
+            let label = "";
+            if (rank === 2) label = "\\text{Full Rank: Spans } \\mathbb{R}^2";
+            else if (rank === 1) label = "\\text{Rank Deficient: Space collapses to a line}";
+            else label = "\\text{Zero Matrix: Space collapses to a point}";
+            return renderTex(label, false);
+        }], { fontSize: 16, color: '#E98074', parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

@@ -51,7 +51,7 @@ export const taylorSeriesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: This approximation is only valid locally. The further you move from the center $a$, the more the polynomial "drifts" away from the truth. In ML, this is why we limit our update steps—if we step too far, our Taylor-based map becomes a lie.</p>
     </div>
     
-    <visualizer topic="taylor" />
+    <visualizer topic="taylor-series" />
     
 
     

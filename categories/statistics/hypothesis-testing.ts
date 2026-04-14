@@ -54,7 +54,7 @@ export const hypothesisTestingSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A high p-value DOES NOT prove the Null Hypothesis is true. It only means you didn't prove it's false. "Absence of evidence is not evidence of absence."</p>
     </div>
     
-    <visualizer topic="mle" />
+    <visualizer topic="hypothesis-testing" />
 
     <h2 id="errors">Decision Errors: The Cost of Being Wrong</h2>
     <div class="premium-def-box">

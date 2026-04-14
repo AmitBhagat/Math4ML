@@ -56,7 +56,7 @@ export const anovaSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: ANOVA tells you THAT a difference exists, but not WHERE. It’s an <strong>Omnibus Test</strong>. If you reject the null, you must follow up with a "Post-Hoc" test (like Tukey) to figure out which specific groups are the odd ones out.</p>
     </div>
     
-    <visualizer topic="mle" />
+    <visualizer topic="anova" />
     
 
     

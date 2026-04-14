@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import JXG from 'jsxgraph';
+import { renderTex } from '@/src/lib/mathUtils';
 
 const Integrals = () => {
     const boardRef = useRef<HTMLDivElement>(null);
@@ -7,7 +8,7 @@ const Integrals = () => {
     useEffect(() => {
         if (!boardRef.current) return;
 
-        JXG.Options.text.useMathJax = true;
+        JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
             boundingbox: [-1, 6, 12, -1],
             axis: true,
@@ -21,8 +22,8 @@ const Integrals = () => {
         const graph = board.create('functiongraph', [f], { strokeColor: '#8E9775', strokeWidth: 3 });
 
         // Lower and Upper bounds (Sliders)
-        const a = board.create('slider', [[1, -1.5], [4, -1.5], [0, 1, 10]], { name: 'a', color: '#E98074' });
-        const b = board.create('slider', [[6, -1.5], [9, -1.5], [0, 5, 10]], { name: 'b', color: '#E98074' });
+        const a = board.create('slider', [[1, -1.5], [4, -1.5], [0, 1, 10]], { name: renderTex('a'), color: '#E98074' });
+        const b = board.create('slider', [[6, -1.5], [9, -1.5], [0, 5, 10]], { name: renderTex('b'), color: '#E98074' });
 
         // Riemann Sum Integral
         const os = board.create('riemannsum', [f, () => 20, "middle", () => a.Value(), () => b.Value()], {
@@ -36,10 +37,10 @@ const Integrals = () => {
         board.create('text', [1, 5, () => {
             const start = a.Value().toFixed(1);
             const end = b.Value().toFixed(1);
-            // Riemann sum value is roughly the integral value here
-            const val = JXG.Math.Numerics.integral([a.Value(), b.Value()], f).toFixed(3);
-            return `\\[\\int_{${start}}^{${end}} f(x) \\, dx = ${val}\\]`;
-        }], { fontSize: 20 });
+            // Use the value directly from the Riemann Sum element for consistency
+            const val = os.Value().toFixed(3);
+            return renderTex(`\\int_{${start}}^{${end}} f(x) \\, dx \\approx ${val}`, true);
+        }], { fontSize: 20, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

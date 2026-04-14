@@ -44,7 +44,7 @@ export const gradientSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Beginners often think the gradient points "along the surface." It doesn't. Gradient vectors live in the <strong>input space</strong> (the floor), pointing you where to step on the map to go up on the mountain.</p>
     </div>
     
-    <visualizer topic="stochastic" />
+    <visualizer topic="gradient" />
     
 
     

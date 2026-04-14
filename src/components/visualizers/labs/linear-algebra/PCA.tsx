@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import JXG from 'jsxgraph';
+import { renderTex } from '@/src/lib/mathUtils';
 
 const PCA = () => {
     const boardRef = useRef<HTMLDivElement>(null);
@@ -7,7 +8,7 @@ const PCA = () => {
     useEffect(() => {
         if (!boardRef.current) return;
 
-        JXG.Options.text.useMathJax = true;
+        JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
             boundingbox: [-8, 8, 8, -8],
             axis: true,
@@ -28,7 +29,7 @@ const PCA = () => {
         // Centroid Computation
         const meanX = () => points.reduce((acc, p) => acc + p.X(), 0) / points.length;
         const meanY = () => points.reduce((acc, p) => acc + p.Y(), 0) / points.length;
-        const centroid = board.create('point', [meanX, meanY], { color: '#D8C3A5', size: 6, face: 'plus', name: '\\mu' });
+        const centroid = board.create('point', [meanX, meanY], { color: '#D8C3A5', size: 6, face: 'plus', name: renderTex('\\mu') });
 
         // Covariance Matrix & Eigen-analysis
         const getPCAData = () => {
@@ -64,21 +65,21 @@ const PCA = () => {
             () => { const d = getPCAData(); return d.mx + d.v1[0] * Math.sqrt(d.l1) * 2; },
             () => { const d = getPCAData(); return d.my + d.v1[1] * Math.sqrt(d.l1) * 2; }
         ], { visible: false });
-        board.create('arrow', [centroid, pc1Tip], { strokeColor: '#D8C3A5', strokeWidth: 4, name: 'PC1' });
+        board.create('arrow', [centroid, pc1Tip], { strokeColor: '#D8C3A5', strokeWidth: 4, name: renderTex('\\mathbf{v}_1', false) });
 
         // PC2 Vector
         const pc2Tip = board.create('point', [
             () => { const d = getPCAData(); return d.mx + d.v2[0] * Math.sqrt(d.l2) * 2; },
             () => { const d = getPCAData(); return d.my + d.v2[1] * Math.sqrt(d.l2) * 2; }
         ], { visible: false });
-        board.create('arrow', [centroid, pc2Tip], { strokeColor: '#8E9775', strokeWidth: 3, name: 'PC2' });
+        board.create('arrow', [centroid, pc2Tip], { strokeColor: '#8E9775', strokeWidth: 3, name: renderTex('\\mathbf{v}_2', false) });
 
         // MathJax: Variance Explained
         board.create('text', [-7.5, 7, () => {
             const { l1, l2 } = getPCAData();
             const ratio = (l1 / (l1 + l2) * 100).toFixed(1);
-            return `\\[\\text{PC1 Variance Expl: } ${ratio}\\% \\]`;
-        }], { fontSize: 16 });
+            return renderTex(`\\text{Explained Variance: } ${ratio}\\%`, true);
+        }], { fontSize: 16, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);
