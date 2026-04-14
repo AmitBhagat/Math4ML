@@ -1,7 +1,0 @@
-import{r as x,j as h}from"./index-BncGo-yC.js";import{j as r}from"./index-BA5YGfZJ.js";import{r as a}from"./ProblemPage-DijFdUXx.js";import"./themeUtils-iHBdRlxb.js";import"./star-BrYkrIXy.js";import"./proxy-Dl3RgZCC.js";const V=()=>{const o=x.useRef(null);return x.useEffect(()=>{if(!o.current)return;r.Options.text.useMathJax=!1;const e=r.JSXGraph.initBoard(o.current,{boundingbox:[-4,7,13,-2],axis:!0,showNavigation:!1,showCopyright:!1}),s=t=>Math.sin(t)+3;e.create("functiongraph",[s],{strokeColor:"#8E9775",strokeWidth:3});const i=e.create("slider",[[1,-1.5],[4,-1.5],[0,1,10]],{name:a("a"),color:"#E98074"}),n=e.create("slider",[[6,-1.5],[9,-1.5],[0,5,10]],{name:a("b"),color:"#E98074"}),u=e.create("riemannsum",[s,()=>20,"middle",()=>i.Value(),()=>n.Value()],{fillColor:"#E98074",fillOpacity:.2,strokeColor:"#E98074",strokeOpacity:.3});return e.create("text",[1,5,()=>{const t=i.Value(),l=n.Value(),f=u.Value().toFixed(3),c=d=>-Math.cos(d)+3*d,p=c(t).toFixed(2),m=c(l).toFixed(2);return a(`
-                \\begin{aligned}
-                \\int_{a}^{b} (\\sin x + 3) \\, dx &= \\Big[ -\\cos x + 3x \\Big]_{${t.toFixed(1)}}^{${l.toFixed(1)}} \\\\
-                &= (${m}) - (${p}) \\\\
-                &= ${f}
-                \\end{aligned}
-            `,!0)}],{fontSize:13,parse:!1}),()=>{r.JSXGraph.freeBoard(e)}},[]),h.jsx("div",{ref:o,className:"jxgbox rounded-3xl shadow-2xl border border-white/10",style:{width:"100%",aspectRatio:"1/1",maxWidth:"750px"}})};export{V as default};
