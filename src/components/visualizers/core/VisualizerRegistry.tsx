@@ -51,6 +51,11 @@ const ChiSquareTest = lazy(() => import('../labs/statistics/ChiSquareTest'));
 const ANOVA = lazy(() => import('../labs/statistics/ANOVA'));
 const ConfidenceIntervals = lazy(() => import('../labs/statistics/ConfidenceIntervals'));
 
+// --- Information Theory ---
+const BinaryEntropy = lazy(() => import('../labs/information-theory/BinaryEntropy'));
+const KLDivergence = lazy(() => import('../labs/information-theory/KLDivergence'));
+const MutualInformation = lazy(() => import('../labs/information-theory/MutualInformation'));
+
 // Fallback Loading UI
 const LabLoader = () => (
     <div className="w-full h-[400px] flex items-center justify-center bg-white/5 rounded-3xl animate-pulse">
@@ -141,6 +146,12 @@ export const getVisualizerComponent = (topicId: string): React.FC<any> | null =>
     "chi-square": ChiSquareTest,
     "anova": ANOVA,
     "confidence-intervals": ConfidenceIntervals,
+
+    // Information Theory
+    "shannon-entropy": BinaryEntropy,
+    "kl-divergence": KLDivergence,
+    "cross-entropy": KLDivergence,
+    "mutual-information": MutualInformation,
   };
 
   const Component = registry[tid];

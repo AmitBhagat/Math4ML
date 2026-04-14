@@ -53,6 +53,8 @@ export const klDivergenceSection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: KL-Divergence is hypersensitive to "Zero Frequency" events. If $Q(x) = 0$ for any $x$ where $P(x) > 0$, the divergence becomes <strong>infinite</strong>. This is why we add "Smoothing" or use Small-$\epsilon$ priors to prevent our training from exploding.</p>
     </div>
+
+    <visualizer topic="kl-divergence" />
     
     <h2 id="example-gap" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Normal vs. Uniform</h2>
     

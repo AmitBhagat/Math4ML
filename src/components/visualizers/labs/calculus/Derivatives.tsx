@@ -10,7 +10,7 @@ const Derivatives = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-4, 6, 6, -1],
+            boundingbox: [-6, 8, 10, -2],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -35,12 +35,18 @@ const Derivatives = () => {
         ], { visible: false });
         board.create('arrow', [p, vTip], { strokeColor: '#E98074', strokeWidth: 4 });
 
-        // MathJax: Gradient Calculation
-        board.create('text', [-3.5, 5, () => {
+        // MathJax: Gradient Step-by-Step
+        board.create('text', [-5.5, 7.5, () => {
             const x = p.X();
             const grad = df(x);
-            return renderTex(`\\frac{dL}{dw} = ${grad.toFixed(2)}`, true);
-        }], { fontSize: 18, parse: false });
+            return renderTex(`
+                \\begin{aligned}
+                f(w) &= \\frac{w^2}{4} + 1 \\\\
+                \\frac{df}{dw} &= \\frac{2w}{4} = \\frac{w}{2} \\\\
+                \\frac{df}{dw}\\Big|_{w=${x.toFixed(2)}} &= \\frac{${x.toFixed(2)}}{2} = ${grad.toFixed(2)}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false, anchorX: 'left', anchorY: 'top' });
 
         board.create('text', [-3.5, 3.5, () => {
             const grad = df(p.X());

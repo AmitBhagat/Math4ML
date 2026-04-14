@@ -10,7 +10,7 @@ const DotProduct = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-7, 7, 7, -7],
+            boundingbox: [-9, 9, 9, -9],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -35,16 +35,29 @@ const DotProduct = () => {
         board.create('segment', [a, proj], { strokeColor: '#8E9775', dash: 2, strokeWidth: 1 });
         board.create('arrow', [[0, 0], proj], { strokeColor: '#8E9775', strokeWidth: 4 });
 
-        // MathJax: Dot Product Formula
+        // MathJax: Step-by-Step Dot Product Formula
         board.create('text', [-6.5, 6, () => {
-            const d = dot().toFixed(2);
-            return renderTex(`\\mathbf{a} \\cdot \\mathbf{b} = ${d}`, true);
-        }], { fontSize: 18, parse: false });
+            const ax = a.X().toFixed(2);
+            const ay = a.Y().toFixed(2);
+            const bx = b.X().toFixed(2);
+            const by = b.Y().toFixed(2);
+            const dotVal = dot();
+            
+            return renderTex(`
+                \\begin{aligned}
+                \\mathbf{a} \\cdot \\mathbf{b} &= a_x b_x + a_y b_y \\\\
+                &= (${ax})( ${bx}) + (${ay})( ${by}) \\\\
+                &= ${dotVal.toFixed(2)}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false, color: '#D8C3A5' });
 
-        board.create('text', [-6.5, 4.5, () => {
-            const angle = Math.acos(dot() / (Math.sqrt(a.X()**2 + a.Y()**2) * Math.sqrt(magBSq()) || 1)) * (180 / Math.PI);
+        board.create('text', [-6.5, 3.5, () => {
+            const magA = Math.sqrt(a.X()**2 + a.Y()**2);
+            const magB = Math.sqrt(magBSq());
+            const angle = Math.acos(dot() / (magA * magB || 1)) * (180 / Math.PI);
             return renderTex(`\\theta = ${angle.toFixed(1)}^\\circ`, true);
-        }], { fontSize: 16, color: '#D8C3A5', parse: false });
+        }], { fontSize: 13, color: '#E98074', parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

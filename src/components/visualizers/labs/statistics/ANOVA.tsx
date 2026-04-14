@@ -68,7 +68,7 @@ const ANOVA = () => {
         <div 
             ref={boardRef} 
             className="jxgbox rounded-3xl shadow-2xl border border-white/10" 
-            style={{ width: '100%', aspectRatio: '1.2/1' }} 
+            style={{ width: '100%', aspectRatio: '1.6/1', maxWidth: '900px' }} 
         />
     );
 };

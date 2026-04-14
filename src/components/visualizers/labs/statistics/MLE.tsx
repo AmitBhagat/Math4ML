@@ -10,7 +10,7 @@ const MLE = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-1, 10, 11, -2],
+            boundingbox: [-4, 11, 11, -2],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -79,11 +79,24 @@ const MLE = () => {
             return sum / points.length;
         }, 0], { name: 'MLE', color: '#8E9775', size: 2, fixed: true });
 
-        board.create('text', [6, 6, () => {
+        // Step-by-Step MLE Expansion
+        board.create('text', [-3.5, 10.5, () => {
             const currentMu = muSlider.Value().toFixed(2);
-            const idealMu = (points.reduce((acc, p) => acc + p.X(), 0) / points.length).toFixed(2);
-             return renderTex(`\\hat{\\mu}_{MLE} = ${idealMu} \\quad \\text{Current } \\mu = ${currentMu}`, true);
-        }], { fontSize: 16, parse: false });
+            const sumX = points.reduce((acc, p) => acc + p.X(), 0);
+            const n = points.length;
+            const idealMu = (sumX / n).toFixed(2);
+            
+            const pointsStr = points.map(p => p.X().toFixed(1)).join(' + ');
+
+            return renderTex(`
+                \\begin{aligned}
+                \\hat{\\mu}_{MLE} &= \\frac{1}{n} \\sum_{i=1}^{n} x_i \\\\
+                &= \\frac{1}{${n}} (${pointsStr}) \\\\
+                &= \\frac{${sumX.toFixed(2)}}{${n}} = ${idealMu} \\\\
+                &\\text{Current Bias: } \\mu - \\hat{\\mu} = ${(muSlider.Value() - parseFloat(idealMu)).toFixed(2)}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false, anchorX: 'left', anchorY: 'top' });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);
@@ -94,7 +107,7 @@ const MLE = () => {
         <div 
             ref={boardRef} 
             className="jxgbox rounded-3xl shadow-2xl border border-white/10" 
-            style={{ width: '100%', aspectRatio: '1.2/1', maxWidth: '800px' }} 
+            style={{ width: '100%', aspectRatio: '1.6/1', maxWidth: '900px' }} 
         />
     );
 };

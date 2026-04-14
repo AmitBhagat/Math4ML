@@ -10,7 +10,7 @@ const Integrals = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-1, 6, 12, -1],
+            boundingbox: [-4, 7, 13, -2],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -33,14 +33,25 @@ const Integrals = () => {
             strokeOpacity: 0.3
         });
 
-        // MathJax: Integral Notation
+        // MathJax: Step-by-Step Integral (Fundamental Theorem of Calculus)
         board.create('text', [1, 5, () => {
-            const start = a.Value().toFixed(1);
-            const end = b.Value().toFixed(1);
-            // Use the value directly from the Riemann Sum element for consistency
+            const start = a.Value();
+            const end = b.Value();
             const val = os.Value().toFixed(3);
-            return renderTex(`\\int_{${start}}^{${end}} f(x) \\, dx \\approx ${val}`, true);
-        }], { fontSize: 20, parse: false });
+            
+            // Antiderivative of sin(x) + 3 is -cos(x) + 3x
+            const F = (x: number) => -Math.cos(x) + 3 * x;
+            const fa = F(start).toFixed(2);
+            const fb = F(end).toFixed(2);
+
+            return renderTex(`
+                \\begin{aligned}
+                \\int_{a}^{b} (\\sin x + 3) \\, dx &= \\Big[ -\\cos x + 3x \\Big]_{${start.toFixed(1)}}^{${end.toFixed(1)}} \\\\
+                &= (${fb}) - (${fa}) \\\\
+                &= ${val}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

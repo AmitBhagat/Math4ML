@@ -56,17 +56,22 @@ const Expectation = () => {
         });
 
         // Instructional Text
-        board.create('text', [1, 3.2, () => {
-             return `<div class="p-4 bg-bg-secondary border border-border-premium rounded-xl shadow-xl">
-                <div class="text-[10px] font-black uppercase tracking-widest text-accent-premium mb-1">Expectation</div>
-                <div class="text-sm font-bold text-white">
-                    $E[X] = \\sum x_i P(x_i)$
-                </div>
-                <div class="mt-1 text-[9px] text-muted-premium italic">
-                    The Fulcrum balances the distribution. Move points or change weights!
-                </div>
-            </div>`;
-        }], { parse: false });
+        // Step-by-Step Expectation Calculation
+        board.create('text', [0.2, 3.2, () => {
+             const sW = sumW() || 1;
+             const normW1 = w1.Value() / sW;
+             const normW2 = w2.Value() / sW;
+             const normW3 = w3.Value() / sW;
+             const ev = getE().toFixed(2);
+             
+             return renderTex(`
+                \\begin{aligned}
+                E[X] &= \\sum x_i P(x_i) \\\\
+                &= (${p1.X().toFixed(1)} \\cdot ${normW1.toFixed(2)}) + (${p2.X().toFixed(1)} \\cdot ${normW2.toFixed(2)}) + (${p3.X().toFixed(1)} \\cdot ${normW3.toFixed(2)}) \\\\
+                &= ${ev}
+                \\end{aligned}
+             `, true);
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);
@@ -77,7 +82,7 @@ const Expectation = () => {
         <div 
             ref={boardRef} 
             className="jxgbox rounded-3xl shadow-2xl border border-white/10" 
-            style={{ width: '100%', aspectRatio: '1.2/1', maxWidth: '800px' }} 
+            style={{ width: '100%', aspectRatio: '1.6/1', maxWidth: '900px' }} 
         />
     );
 };

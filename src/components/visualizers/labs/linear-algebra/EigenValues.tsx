@@ -10,7 +10,7 @@ const EigenValues = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-8, 8, 8, -8],
+            boundingbox: [-10, 10, 12, -10],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -35,13 +35,19 @@ const EigenValues = () => {
         board.create('arrow', [[0, 0], p2], { strokeColor: '#E98074', strokeWidth: 3 });
 
         // MathJax: Characteristic Equation
-        board.create('text', [-7.5, 7, () => {
+        board.create('text', [-7.5, 7.2, () => {
             const tr = a.Value() + d.Value();
             const det = a.Value() * d.Value() - b.Value() * c.Value();
             const trStr = tr >= 0 ? `- ${tr.toFixed(1)}` : `+ ${Math.abs(tr).toFixed(1)}`;
             const detStr = det >= 0 ? `+ ${det.toFixed(1)}` : `- ${Math.abs(det).toFixed(1)}`;
-            return renderTex(`\\det(A - \\lambda I) = \\lambda^2 ${trStr}\\lambda ${detStr} = 0`, true);
-        }], { fontSize: 16, parse: false });
+            return renderTex(`
+                \\begin{aligned}
+                P(\\lambda) &= \\lambda^2 - \\text{tr}(A)\\lambda + \\det(A) \\\\
+                &= \\lambda^2 - (${a.Value().toFixed(1)} + ${d.Value().toFixed(1)})\\lambda + (${a.Value().toFixed(1)}\\cdot${d.Value().toFixed(1)} - ${b.Value().toFixed(1)}\\cdot${c.Value().toFixed(1)}) \\\\
+                &= \\lambda^2 ${trStr}\\lambda ${detStr} = 0
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false });
 
         // MathJax: Current Eigenvalues (Approximate)
         board.create('text', [-7.5, 5, () => {

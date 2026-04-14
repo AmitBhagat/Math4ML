@@ -73,12 +73,39 @@ const VectorArithmetic = () => {
             visible: () => mode === 'add'
         });
 
-        // MathJax Formulas
-        board.create('text', [-7.5, 7, () => {
-            const sym = mode === 'add' ? '+' : mode === 'sub' ? '-' : '\\cdot';
-            const resLabel = mode === 'scalar' ? `k\\mathbf{a}` : `\\mathbf{a} ${sym} \\mathbf{b}`;
-            return renderTex(`${resLabel} = \\begin{bmatrix} ${resX().toFixed(1)} \\\\ ${resY().toFixed(1)} \\end{bmatrix}`, true);
-        }], { fontSize: 18, parse: false });
+        // Step-by-Step Arithmetic Calculation
+        board.create('text', [-7.5, 7.2, () => {
+            const ax = a.X().toFixed(1);
+            const ay = a.Y().toFixed(1);
+            const bx = b.X().toFixed(1);
+            const by = b.Y().toFixed(1);
+            const rx = resX().toFixed(1);
+            const ry = resY().toFixed(1);
+            const valK = k.Value().toFixed(1);
+
+            if (mode === 'add') {
+                return renderTex(`
+                    \\begin{aligned}
+                    \\mathbf{a} + \\mathbf{b} &= \\begin{bmatrix} ${ax} \\\\ ${ay} \\end{bmatrix} + \\begin{bmatrix} ${bx} \\\\ ${by} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${ax} + ${bx} \\\\ ${ay} + ${by} \\end{bmatrix} = \\begin{bmatrix} ${rx} \\\\ ${ry} \\end{bmatrix}
+                    \\end{aligned}
+                `, true);
+            } else if (mode === 'sub') {
+                return renderTex(`
+                    \\begin{aligned}
+                    \\mathbf{a} - \\mathbf{b} &= \\begin{bmatrix} ${ax} \\\\ ${ay} \\end{bmatrix} - \\begin{bmatrix} ${bx} \\\\ ${by} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${ax} - (${bx}) \\\\ ${ay} - (${by}) \\end{bmatrix} = \\begin{bmatrix} ${rx} \\\\ ${ry} \\end{bmatrix}
+                    \\end{aligned}
+                `, true);
+            } else {
+                return renderTex(`
+                    \\begin{aligned}
+                    k\\mathbf{a} &= ${valK} \\begin{bmatrix} ${ax} \\\\ ${ay} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${valK} \\cdot ${ax} \\\\ ${valK} \\cdot ${ay} \\end{bmatrix} = \\begin{bmatrix} ${rx} \\\\ ${ry} \\end{bmatrix}
+                    \\end{aligned}
+                `, true);
+            }
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

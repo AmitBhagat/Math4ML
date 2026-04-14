@@ -389,12 +389,21 @@
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
 
+/* ─── JSXGRAPH & KATEX UI FIXES ─── */
+.jxgbox text, 
+.jxgbox foreignObject, 
+.jxgbox div {
+  overflow: visible !important;
+}
+
 .katex {
   font-size: 1.15em !important;
   color: var(--text) !important;
 }
+
 .katex-display {
-  @apply mt-4 mb-6 overflow-x-auto overflow-y-hidden;
+  @apply mt-4 mb-6;
+  overflow: visible !important; /* Prevent scrollbars in boards */
 }
 
 

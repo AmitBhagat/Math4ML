@@ -58,9 +58,19 @@ const BiasVariance = () => {
         updateStats();
 
         // 4. Theoretical Text
-        board.create('text', [-1.8, 1.8, renderTex('\\text{Error} = \\text{Bias}^2 + \\text{Variance} + \\text{Noise}', false)], { 
-            fontSize: 12, color: '#D8C3A5' 
-        });
+        // 4. Theoretical Text: Step-by-Step Error Decomposition
+        board.create('text', [-1.8, 1.8, () => {
+             const b = biasSlider.Value();
+             const v = varSlider.Value();
+             const error = b*b + v;
+             return renderTex(`
+                \\begin{aligned}
+                \\text{Total Error} &\\approx \\text{Bias}^2 + \\text{Variance} \\\\
+                &\\approx (${b.toFixed(2)})^2 + ${v.toFixed(2)} \\\\
+                &\\approx ${error.toFixed(2)}
+                \\end{aligned}
+             `, true);
+        }], { fontSize: 13, color: '#D8C3A5' });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);
@@ -82,7 +92,7 @@ const BiasVariance = () => {
             <div 
                 ref={boardRef} 
                 className="jxgbox rounded-3xl shadow-2xl border border-white/10" 
-                style={{ width: '100%', aspectRatio: '1/1', maxWidth: '600px' }} 
+                style={{ width: '100%', aspectRatio: '1.6/1', maxWidth: '850px' }} 
             />
         </div>
     );

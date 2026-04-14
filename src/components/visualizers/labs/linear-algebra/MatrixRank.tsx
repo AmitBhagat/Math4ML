@@ -10,7 +10,7 @@ const MatrixRank = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-8, 8, 8, -8],
+            boundingbox: [-10, 8, 8, -8],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -37,10 +37,17 @@ const MatrixRank = () => {
         // Span Visualization
         board.create('line', [[0,0], c1], { strokeColor: '#E98074', strokeWidth: 1, dash: 2, visible: () => getRank() === 1 });
 
-        board.create('text', [-7.5, 7, () => {
+        board.create('text', [-9.5, 7.5, () => {
             const rank = getRank();
-            return renderTex(`\\text{Rank}(A) = ${rank}`, true);
-        }], { fontSize: 24, parse: false });
+            const det = c1.X() * c2.Y() - c1.Y() * c2.X();
+            return renderTex(`
+                \\begin{aligned}
+                \\det(A) &= c_{1x}c_{2y} - c_{1y}c_{2x} \\\\
+                &= (${c1.X().toFixed(1)})(${c2.Y().toFixed(1)}) - (${c1.Y().toFixed(1)})(${c2.X().toFixed(1)}) \\\\
+                &= ${det.toFixed(2)} \\implies \\text{Rank} = ${rank}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false, anchorX: 'left', anchorY: 'top' });
 
         board.create('text', [-7.5, 5.2, () => {
             const rank = getRank();

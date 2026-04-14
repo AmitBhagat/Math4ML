@@ -95,7 +95,7 @@ const CentralLimitTheorem = () => {
             <div 
                 ref={boardRef} 
                 className="jxgbox rounded-3xl shadow-2xl border border-white/10" 
-                style={{ width: '100%', aspectRatio: '1.5/1', maxWidth: '850px' }} 
+                style={{ width: '100%', aspectRatio: '1.6/1', maxWidth: '900px' }} 
             />
         </div>
     );

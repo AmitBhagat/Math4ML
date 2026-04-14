@@ -49,6 +49,8 @@ export const entropySection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Entropy is units-dependent. If you use $\log_2$, you're measuring in <strong>Bits</strong>. If you use the natural log $\ln$ (common in deep learning math), you're measuring in <strong>Nats</strong>. Don't mix them up or your gradients will be scaled incorrectly.</p>
     </div>
+
+    <visualizer topic="shannon-entropy" />
     
     <h2 id="example-coin" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Fair vs. Biased Coin</h2>
     

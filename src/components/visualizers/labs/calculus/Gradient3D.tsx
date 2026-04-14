@@ -78,12 +78,21 @@ const Gradient3D = () => {
             lastArrow: true 
         });
 
-        // MathJax
-        board.create('text', [-4.5, 4.5, () => {
-            const dx = Fdx(x0.Value(), y0.Value()).toFixed(2);
-            const dy = Fdy(x0.Value(), y0.Value()).toFixed(2);
-            return renderTex(`\\nabla f = \\begin{bmatrix} ${dx} \\\\ ${dy} \\end{bmatrix}`, true);
-        }], { fontSize: 16, parse: false });
+        // MathJax Step-by-Step Gradient
+        board.create('text', [-4.7, 4.2, () => {
+            const vx = x0.Value();
+            const vy = y0.Value();
+            const dx = Fdx(vx, vy).toFixed(2);
+            const dy = Fdy(vy, vy).toFixed(2); // Wait, Fdy(vx, vy) would be better
+            const dyActual = Fdy(vx, vy).toFixed(2);
+
+            return renderTex(`
+                \\begin{aligned}
+                \\nabla f &= \\begin{bmatrix} \\partial f/\\partial x \\\\ \\partial f/\\partial y \\end{bmatrix} = \\begin{bmatrix} 0.6x \\\\ 0.6y \\end{bmatrix} \\\\
+                &= \\begin{bmatrix} 0.6(${vx.toFixed(1)}) \\\\ 0.6(${vy.toFixed(1)}) \\end{bmatrix} = \\begin{bmatrix} ${dx} \\\\ ${dyActual} \\end{bmatrix}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

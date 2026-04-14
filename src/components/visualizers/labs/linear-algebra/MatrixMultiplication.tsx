@@ -55,18 +55,18 @@ export const MatrixMultiplication = () => {
             <div className="text-[10px] font-black uppercase tracking-[0.2em] mb-4 text-accent-premium/60">
               Derivation: Dot Product Steps
             </div>
-            <div className="space-y-3 font-mono text-[11px] md:text-[13px] text-white/80">
-              <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                <span className="text-accent-premium opacity-50 mr-2">C₁₁:</span> ({a[0][0]}·{b[0][0]}) + ({a[0][1]}·{b[1][0]}) = {c[0][0]}
+            <div className="space-y-4 text-white/90">
+              <div className="p-3 bg-white/5 rounded-lg border border-white/5 font-serif italic">
+                $C_{11} = ({a[0][0]} \cdot {b[0][0]}) + ({a[0][1]} \cdot {b[1][0]}) = {c[0][0]}$
               </div>
-              <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                <span className="text-accent-premium opacity-50 mr-2">C₁₂:</span> ({a[0][0]}·{b[0][1]}) + ({a[0][1]}·{b[1][1]}) = {c[0][1]}
+              <div className="p-3 bg-white/5 rounded-lg border border-white/5 font-serif italic">
+                $C_{12} = ({a[0][0]} \cdot {b[0][1]}) + ({a[0][1]} \cdot {b[1][1]}) = {c[0][1]}$
               </div>
-              <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                <span className="text-accent-premium opacity-50 mr-2">C₂₁:</span> ({a[1][0]}·{b[0][0]}) + ({a[1][1]}·{b[1][0]}) = {c[1][0]}
+              <div className="p-3 bg-white/5 rounded-lg border border-white/5 font-serif italic">
+                $C_{21} = ({a[1][0]} \cdot {b[0][0]}) + ({a[1][1]} \cdot {b[1][0]}) = {c[1][0]}$
               </div>
-              <div className="p-3 bg-white/5 rounded-lg border border-white/5">
-                <span className="text-accent-premium opacity-50 mr-2">C₂₂:</span> ({a[1][0]}·{b[0][1]}) + ({a[1][1]}·{b[1][1]}) = {c[22] || c[1][1]}
+              <div className="p-3 bg-white/5 rounded-lg border border-white/5 font-serif italic">
+                $C_{22} = ({a[1][0]} \cdot {b[0][1]}) + ({a[1][1]} \cdot {b[1][1]}) = {c[1][1]}$
               </div>
             </div>
           </div>

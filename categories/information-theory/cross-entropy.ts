@@ -50,6 +50,8 @@ export const crossEntropySection: TopicSection = {
       </ul>
       <p class="mt-4 italic text-sm">Gotcha: Cross-Entropy is asymmetrical ($H(P, Q) \neq H(Q, P)$). In ML, $P$ is ALWAYS the ground truth. If you swap them, you are trying to force reality to look like your model, which is a recipe for catastrophic failure.</p>
     </div>
+
+    <visualizer topic="cross-entropy" />
     
     <h2 id="example-target" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Prediction vs. Target</h2>
     

@@ -55,23 +55,39 @@ const VectorNorms = () => {
             fillOpacity: 0.1
         });
 
-        board.create('text', [-3.5, 3.5, () => {
+        board.create('text', [-3.8, 3.8, () => {
             const x = Math.abs(p.X());
             const y = Math.abs(p.Y());
-            let val = 0;
-            let label = "";
+            const valV1 = x + y;
+            const valV2 = Math.sqrt(x * x + y * y);
+            const valVinf = Math.max(x, y);
+
             if (normType === 'l1') {
-                val = x + y;
-                label = `\\|\\mathbf{v}\\|_1 = |x| + |y|`;
+                return renderTex(`
+                    \\begin{aligned}
+                    \\|\\mathbf{v}\\|_1 &= |x| + |y| \\\\
+                    &= |${p.X().toFixed(2)}| + |${p.Y().toFixed(2)}| \\\\
+                    &= ${valV1.toFixed(2)}
+                    \\end{aligned}
+                `, true);
             } else if (normType === 'l2') {
-                val = Math.sqrt(x * x + y * y);
-                label = `\\|\\mathbf{v}\\|_2 = \\sqrt{x^2 + y^2}`;
+                return renderTex(`
+                    \\begin{aligned}
+                    \\|\\mathbf{v}\\|_2 &= \\sqrt{x^2 + y^2} \\\\
+                    &= \\sqrt{(${p.X().toFixed(2)})^2 + (${p.Y().toFixed(2)})^2} \\\\
+                    &= ${valV2.toFixed(2)}
+                    \\end{aligned}
+                `, true);
             } else {
-                val = Math.max(x, y);
-                label = `\\|\\mathbf{v}\\|_{\\infty} = \\max(|x|, |y|)`;
+                return renderTex(`
+                    \\begin{aligned}
+                    \\|\\mathbf{v}\\|_{\\infty} &= \\max(|x|, |y|) \\\\
+                    &= \\max(|${p.X().toFixed(2)}|, |${p.Y().toFixed(2)}|) \\\\
+                    &= ${valVinf.toFixed(2)}
+                    \\end{aligned}
+                `, true);
             }
-            return renderTex(`${label} = ${val.toFixed(2)}`, true);
-        }], { fontSize: 18, parse: false });
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

@@ -11,7 +11,7 @@ const MatrixInverse = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-8, 8, 8, -8],
+            boundingbox: [-10, 8, 10, -10],
             axis: true,
             showNavigation: false,
             showCopyright: false
@@ -34,12 +34,26 @@ const MatrixInverse = () => {
         board.create('arrow', [[0, 0], p], { strokeColor: '#D8C3A5', dash: 2, opacity: 0.5 });
         board.create('arrow', [[0, 0], p2], { strokeColor: '#E98074', strokeWidth: 3 });
 
-        // Determinant check
-        board.create('text', [-7.5, 7, () => {
-            const det = a.Value() * d.Value() - b.Value() * c.Value();
-            const label = Math.abs(det) < 0.01 ? '\\det(A) = 0 \\implies \\text{A is Singular}' : `\\det(A) = ${det.toFixed(2)}`;
-            return renderTex(label, true);
-        }], { fontSize: 18, parse: false });
+        // Step-by-Step Inverse Calculation
+        board.create('text', [-9.5, 7.5, () => {
+            const valA = a.Value();
+            const valB = b.Value();
+            const valC = c.Value();
+            const valD = d.Value();
+            const det = valA * valD - valB * valC;
+            
+            if (Math.abs(det) < 0.01) {
+                return renderTex(`\\det(A) = 0 \\implies \\text{Non-invertible}`, true);
+            }
+
+            return renderTex(`
+                \\begin{aligned}
+                \\det(A) &= (${valA.toFixed(1)})(${valD.toFixed(1)}) - (${valB.toFixed(1)})(${valC.toFixed(1)}) = ${det.toFixed(2)} \\\\
+                A^{-1} &= \\frac{1}{${det.toFixed(2)}} \\begin{bmatrix} ${valD.toFixed(1)} & ${(-valB).toFixed(1)} \\\\ ${(-valC).toFixed(1)} & ${valA.toFixed(1)} \\end{bmatrix} \\\\
+                &= \\begin{bmatrix} ${(valD/det).toFixed(2)} & ${(-valB/det).toFixed(2)} \\\\ ${(-valC/det).toFixed(2)} & ${(valA/det).toFixed(2)} \\end{bmatrix}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false, anchorX: 'left', anchorY: 'top' });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

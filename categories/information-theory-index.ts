@@ -2,6 +2,7 @@ import { CategoryData } from '../src/data/types';
 import { entropySection } from './information-theory/entropy';
 import { crossEntropySection } from './information-theory/cross-entropy';
 import { klDivergenceSection } from './information-theory/kl-divergence';
+import { mutualInformationSection } from './information-theory/mutual-information';
 
 // =============================================================================
 // INFORMATION THEORY (High-Fidelity 3-Topic Edition)
@@ -64,6 +65,7 @@ export const INFORMATION_THEORY_DATA: CategoryData = {
   `,
   sections: [
     entropySection,
+    mutualInformationSection,
     crossEntropySection,
     klDivergenceSection
   ]

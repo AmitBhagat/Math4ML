@@ -10,7 +10,7 @@ const BayesTheorem = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-1, 12, 11, -2],
+            boundingbox: [-6, 12, 16, -2],
             axis: false,
             showNavigation: false,
             showCopyright: false
@@ -54,26 +54,23 @@ const BayesTheorem = () => {
             });
         }
 
-        // 3. Posterior Calculation Text
-        board.create('text', [0, 11, () => {
+        // 3. Posterior Calculation: Step-by-Step Expansion
+        board.create('text', [0.2, 11, () => {
             const prior = pA.Value();
             const likelihood = pBA.Value();
-            const pBAc = 0.1; // False alarm rate
-            const marginalB = (prior * likelihood) + ((1 - prior) * pBAc);
+            const pBAc = 0.1; // False alarm rate (fixed in this lab)
+            const pAc = 1 - prior;
+            const marginalB = (prior * likelihood) + (pAc * pBAc);
             const posterior = (prior * likelihood) / Math.max(0.001, marginalB);
             
-            return `<div class="p-5 bg-bg-secondary border-2 border-border-premium rounded-2xl shadow-xl">
-                <div class="flex items-center gap-4">
-                    <div>
-                        <div class="text-[10px] font-black uppercase text-accent-premium mb-1 tracking-tighter">Updated Belief</div>
-                        <div class="text-3xl font-black text-white">${renderTex(`P(A|B) = ${posterior.toFixed(3)}`, false)}</div>
-                    </div>
-                </div>
-                <div class="mt-2 text-[10px] text-muted-premium italic">
-                    Prior prob $P(A)$ was ${prior.toFixed(2)}. Evidence $B$ updated it to ${posterior.toFixed(2)}.
-                </div>
-            </div>`;
-        }], { parse: false });
+            return renderTex(`
+                \\begin{aligned}
+                P(A|B) &= \\frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)} \\\\
+                &= \\frac{(${likelihood.toFixed(2)})(${prior.toFixed(2)})}{(${likelihood.toFixed(2)} \\cdot ${prior.toFixed(2)}) + (${pBAc.toFixed(2)} \\cdot ${pAc.toFixed(2)})} \\\\
+                &= \\frac{${(prior * likelihood).toFixed(3)}}{${marginalB.toFixed(3)}} = ${posterior.toFixed(3)}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);

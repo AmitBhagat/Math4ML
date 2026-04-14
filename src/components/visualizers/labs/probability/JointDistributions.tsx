@@ -10,7 +10,7 @@ const JointDistributions = () => {
 
         JXG.Options.text.useMathJax = false;
         const board = JXG.JSXGraph.initBoard(boardRef.current, {
-            boundingbox: [-2, 6, 11, -2],
+            boundingbox: [-2.5, 6, 10.5, -2],
             axis: false,
             showNavigation: false,
             showCopyright: false

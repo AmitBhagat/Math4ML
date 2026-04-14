@@ -75,11 +75,28 @@ const TaylorSeries = () => {
             strokeWidth: 4 
         });
 
-        // Math Info
-        board.create('text', [-4.5, 4.5, () => {
+        // Math Info: Step-by-Step Term Expansion
+        board.create('text', [-4.7, 4.5, () => {
             const n = Math.round(nSlider.Value());
-            return renderTex(`P_{${n}}(x) \\approx \\sum_{k=0}^{${n}} \\frac{f^{(k)}(a)}{k!}(x-a)^k`, true);
-        }], { fontSize: 18, parse: false });
+            const x0 = a.X();
+            
+            let expansion = `P_{${n}}(x) = `;
+            for (let k = 0; k <= Math.min(n, 2); k++) {
+                const fk = derivatives[k](x0).toFixed(2);
+                const term = k === 0 ? `${fk}` : 
+                             k === 1 ? ` + ${fk}(x - ${x0.toFixed(1)})` : 
+                             ` + \\frac{${fk}}{${factorials[k]}}(x - ${x0.toFixed(1)})^2`;
+                expansion += term;
+            }
+            if (n > 2) expansion += " + \\dots";
+
+            return renderTex(`
+                \\begin{aligned}
+                &${expansion} \\\\
+                &\\text{centered at } a = ${x0.toFixed(2)}
+                \\end{aligned}
+            `, true);
+        }], { fontSize: 13, parse: false });
 
         return () => {
             JXG.JSXGraph.freeBoard(board);
