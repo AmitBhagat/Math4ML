@@ -1,0 +1,17 @@
+import{r as b,j as c}from"./index-DXIEzczR.js";import{j as h}from"./index-BA5YGfZJ.js";import{r as o}from"./ProblemPage-pFCW54qS.js";import"./themeUtils-iHBdRlxb.js";import"./star-BBGDq61z.js";import"./proxy-DbiQfKqV.js";const F=()=>{const l=b.useRef(null),k=b.useRef(null),[t,w]=b.useState("add");return b.useEffect(()=>{if(!l.current)return;h.Options.text.useMathJax=!1;const e=h.JSXGraph.initBoard(l.current,{boundingbox:[-8,8,8,-8],axis:!0,showNavigation:!0,showCopyright:!1});k.current=e;const m=e.create("slider",[[-7,-6],[-3,-6],[-3,1.5,3]],{name:"k",color:"#E98074"}),r=e.create("point",[3,2],{name:o("\\mathbf{a}"),color:"#D8C3A5",size:4});e.create("arrow",[[0,0],r],{strokeColor:"#D8C3A5",strokeWidth:3});const a=e.create("point",[1,4],{name:o("\\mathbf{b}"),color:"#8E9775",size:4,visible:()=>t!=="scalar"});e.create("arrow",[[0,0],a],{strokeColor:"#8E9775",strokeWidth:3,visible:()=>t!=="scalar"});const p=()=>t==="add"?r.X()+a.X():t==="sub"?r.X()-a.X():r.X()*m.Value(),$=()=>t==="add"?r.Y()+a.Y():t==="sub"?r.Y()-a.Y():r.Y()*m.Value(),x=e.create("point",[p,$],{name:o("\\mathbf{v}"),color:"#E98074",size:5,face:"square"});return e.create("arrow",[[0,0],x],{strokeColor:"#E98074",strokeWidth:4}),e.create("segment",[r,x],{strokeColor:"#8E9775",dash:2,strokeWidth:1,visible:()=>t==="add"}),e.create("segment",[a,x],{strokeColor:"#D8C3A5",dash:2,strokeWidth:1,visible:()=>t==="add"}),e.create("text",[-7.5,7.2,()=>{const i=r.X().toFixed(1),n=r.Y().toFixed(1),s=a.X().toFixed(1),d=a.Y().toFixed(1),u=p().toFixed(1),f=$().toFixed(1),g=m.Value().toFixed(1);return t==="add"?o(`
+                    \\begin{aligned}
+                    \\mathbf{a} + \\mathbf{b} &= \\begin{bmatrix} ${i} \\\\ ${n} \\end{bmatrix} + \\begin{bmatrix} ${s} \\\\ ${d} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${i} + ${s} \\\\ ${n} + ${d} \\end{bmatrix} = \\begin{bmatrix} ${u} \\\\ ${f} \\end{bmatrix}
+                    \\end{aligned}
+                `,!0):t==="sub"?o(`
+                    \\begin{aligned}
+                    \\mathbf{a} - \\mathbf{b} &= \\begin{bmatrix} ${i} \\\\ ${n} \\end{bmatrix} - \\begin{bmatrix} ${s} \\\\ ${d} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${i} - (${s}) \\\\ ${n} - (${d}) \\end{bmatrix} = \\begin{bmatrix} ${u} \\\\ ${f} \\end{bmatrix}
+                    \\end{aligned}
+                `,!0):o(`
+                    \\begin{aligned}
+                    k\\mathbf{a} &= ${g} \\begin{bmatrix} ${i} \\\\ ${n} \\end{bmatrix} \\\\
+                    &= \\begin{bmatrix} ${g} \\cdot ${i} \\\\ ${g} \\cdot ${n} \\end{bmatrix} = \\begin{bmatrix} ${u} \\\\ ${f} \\end{bmatrix}
+                    \\end{aligned}
+                `,!0)}],{fontSize:13,parse:!1}),()=>{h.JSXGraph.freeBoard(e)}},[t]),c.jsxs("div",{className:"w-full h-full flex flex-col items-center",children:[c.jsx("div",{className:"flex gap-2 mb-6",children:["add","sub","scalar"].map(e=>c.jsx("button",{onClick:()=>w(e),className:`px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest transition-all
+                            ${t===e?"bg-accent-premium text-white shadow-lg scale-105":"bg-accent-premium/5 text-accent-premium hover:bg-accent-premium/10 border border-accent-premium/20"}`,children:e==="add"?"Addition":e==="sub"?"Subtraction":"Scalar Mul"},e))}),c.jsx("div",{ref:l,className:"jxgbox rounded-3xl shadow-2xl border border-white/10",style:{width:"100%",aspectRatio:"1/1",maxWidth:"700px"}})]})};export{F as default};
