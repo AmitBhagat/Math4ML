@@ -43,92 +43,94 @@
 
 @layer base {
   :root {
-    /* ─── AESTHETIC SOFT MESH THEME (Design System Overhaul) ─── */
+    /* ─── AESTHETIC SOFT MESH THEME ─── */
     --bg: #fdfaf9;
     --bg2: #fef1ed;
     --bg3: #ffffff;
     --border: rgba(0, 0, 0, 0.04);
-
-    /* Candy Accent Palette from Reference */
-    --accent: #ff835c;    /* Vibrant Coral Orange */
+    --accent: #ff835c;
     --accent2: #ff9e7d;
-    --gold: #f6ad55;      /* Warm Amber */
-    --green: #48bb78;     /* Mint/Leaf Green */
-    --purple: #b794f4;    /* Soft Lavender */
-
-    --text: #171923;      /* Deep Modern Charcoal */
+    --gold: #f6ad55;
+    --green: #48bb78;
+    --purple: #b794f4;
+    --text: #171923;
     --muted: #4a5568;
-
-    /* Glassmorphism Containers */
     --s-container: rgba(255, 255, 255, 0.5);
     --s-container-low: rgba(255, 255, 255, 0.3);
     --s-container-high: rgba(255, 255, 255, 0.7);
+    --blue: #3b82f6;
+    --red: #ef4444;
 
-    /* Premium Math Colors (Light Optimized) */
-    --blue: #3b82f6;      /* Bright Info Blue */
-    --red: #ef4444;       /* Result/Danger Red */
+    /* Shadcn Mapping */
+    --background: var(--bg);
+    --foreground: var(--text);
+    --card: var(--bg3);
+    --card-foreground: var(--text);
+    --popover: var(--bg3);
+    --popover-foreground: var(--text);
+    --primary: var(--accent);
+    --primary-foreground: #ffffff;
+    --secondary: var(--bg2);
+    --secondary-foreground: var(--text);
+    --muted-foreground: var(--muted);
+    --accent-foreground: var(--accent);
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --input: var(--border);
+    --ring: var(--accent);
+    --radius: 0.75rem;
 
-    --sidebar-w: 280px;
-
-    /* Mesh Configuration */
     --mesh-1: color-mix(in srgb, var(--accent) 18%, transparent);
     --mesh-2: color-mix(in srgb, var(--purple) 18%, transparent);
     --mesh-3: color-mix(in srgb, var(--gold) 15%, transparent);
     --mesh-4: color-mix(in srgb, var(--green) 12%, transparent);
     --mesh-centre: color-mix(in srgb, var(--bg2) 65%, transparent);
-
-    /* Mapped variables for React components */
-    --accent-premium: var(--accent);
-    --gold-premium: var(--gold);
-    --green-premium: var(--green);
-    --purple-premium: var(--purple);
-    --text-premium: var(--text);
-    --blue-premium: var(--blue);
-    --red-premium: var(--red);
   }
 
   .dark {
-    /* ─── MIDNIGHT MESH (Soothing Dark Overhaul) ─── */
     --bg: #0a0e14;
     --bg2: #020617;
     --bg3: #111827;
     --border: rgba(255, 255, 255, 0.05);
-
-    --accent: #fb923c;    /* Soft Peach */
+    --accent: #fb923c;
     --accent2: #fdba74;
     --gold: #f6ad55;
-    --green: #2dd4bf;     /* Muted Teal */
-    --purple: #c084fc;    /* Muted Lavender */
-
-    --text: #cbd5e1;      /* Non-glaring Off-white */
-    --muted: #94a3b8;     /* Slate 400 - Clearer muted text */
-
+    --green: #2dd4bf;
+    --purple: #c084fc;
+    --text: #cbd5e1;
+    --muted: #94a3b8;
     --s-container: rgba(17, 24, 39, 0.6);
     --s-container-low: rgba(2, 6, 23, 0.4);
     --s-container-high: rgba(31, 41, 55, 0.8);
+    --blue: #60a5fa;
+    --red: #f87171;
 
-    /* Premium Math Colors (Dark/Night Glow) */
-    --blue: #60a5fa;      /* Glowing Cyan-Blue */
-    --red: #f87171;       /* Soft Glow Red */
+    /* Shadcn Mapping (Dark) */
+    --background: var(--bg);
+    --foreground: var(--text);
+    --card: var(--bg3);
+    --card-foreground: var(--text);
+    --popover: var(--bg3);
+    --popover-foreground: var(--text);
+    --primary: var(--accent);
+    --primary-foreground: var(--bg);
+    --secondary: var(--bg2);
+    --secondary-foreground: var(--text);
+    --muted-foreground: var(--muted);
+    --accent-foreground: var(--accent);
+    --destructive: #ef4444;
+    --destructive-foreground: #ffffff;
+    --input: var(--border);
+    --ring: var(--accent);
 
-    /* Dark Mesh Configuration */
     --mesh-1: color-mix(in srgb, var(--accent) 9%, transparent);
     --mesh-2: color-mix(in srgb, var(--purple) 9%, transparent);
     --mesh-3: color-mix(in srgb, var(--gold) 6%, transparent);
     --mesh-4: color-mix(in srgb, var(--green) 6%, transparent);
     --mesh-centre: rgba(30, 27, 75, 0.2);
-
-    /* Mapped variables for React components */
-    --accent-premium: var(--accent);
-    --gold-premium: var(--gold);
-    --green-premium: var(--green);
-    --purple-premium: var(--purple);
-    --text-premium: var(--text);
-    --blue-premium: var(--blue);
-    --red-premium: var(--red);
   }
 
-  html {
+  html { 
     overflow-y: scroll;
     scrollbar-gutter: stable both-edges;
     @apply font-sans;
@@ -146,422 +148,166 @@
     background-attachment: fixed;
     color: var(--text);
     font-family: 'Outfit', sans-serif;
-    font-size: 17px;
-    line-height: 1.7;
     -webkit-font-smoothing: antialiased;
     overflow-x: hidden;
     min-height: 100vh;
     @apply bg-background text-foreground;
   }
 
-  @media (min-width: 768px) {
-    body { font-size: 20px; }
-  }
+  /* ─── TYPOGRAPHY SPACING RESTORATION ─── */
+  p { @apply mb-5 font-normal text-foreground leading-relaxed; }
+  ul, ol { @apply mb-6 pl-6 space-y-3; }
+  li { @apply font-normal text-foreground; }
+  h1, h2, h3, h4 { @apply font-headline font-bold text-foreground mb-4 tracking-tight; }
+  h1 { @apply text-4xl md:text-5xl border-b border-border pb-4 mb-8; }
+  h2 { @apply text-3xl md:text-4xl mt-12 mb-6; }
+  h3 { @apply text-2xl md:text-3xl mt-10 mb-5 text-primary; }
+  h4 { @apply text-xl md:text-2xl mt-8 mb-4 border-l-4 border-primary/20 pl-4; }
+  
+  strong { @apply font-bold text-foreground; }
+  hr { @apply my-12 border-border opacity-50; }
 
-  @media (min-width: 1024px) {
-    body { font-size: 18px; }
-  }
-
-  .no-transition, .no-transition * {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  /* ─── TYPOGRAPHY & LIST SPACING ─── */
-  p {
-    @apply mb-5 font-normal text-text-premium leading-relaxed;
-  }
-
-  ul, ol {
-    @apply mb-6 pl-6 space-y-3;
-  }
-
-  li {
-    @apply font-normal text-text-premium;
-  }
-  * {
-    @apply border-border outline-ring/50;
-  }
+  * { @apply border-border outline-ring/50; }
 }
 
 @layer components {
-  /* ─── PREMIUM HERO ─── */
+  /* ─── PREMIUM INTEGRATED NOTEBOOK COMPONENTS ─── */
   .premium-hero {
     --theme-primary: var(--category-primary, var(--accent));
     --theme-secondary: var(--category-secondary, var(--purple));
-
     @apply backdrop-blur-3xl rounded-[40px] p-10 mb-12 relative overflow-hidden;
     background: linear-gradient(135deg, color-mix(in srgb, var(--theme-primary) 12%, transparent) 0%, color-mix(in srgb, var(--theme-secondary) 8%, transparent) 100%);
     border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 
-      inset 0 1px 1px rgba(255, 255, 255, 0.3),
-      0 20px 40px -10px color-mix(in srgb, var(--theme-primary) 20%, transparent);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.3), 0 20px 40px -10px color-mix(in srgb, var(--theme-primary) 20%, transparent);
   }
+  .premium-hero h1 { font-family: 'Crimson Pro', serif; @apply text-4xl md:text-5xl font-bold leading-tight mb-4 tracking-tight; }
+  .premium-hero p { @apply text-[17px] md:text-[20px] leading-relaxed max-w-3xl opacity-80; }
+
+  .premium-def-box, .def-box {
+    @apply backdrop-blur-2xl rounded-3xl p-8 mb-10 border border-white/20 transition-all duration-300;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.2), 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+  }
+  .premium-def-title, .def-title { @apply font-mono text-[13px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-80; }
+
+  .premium-math-block, .math-block {
+    @apply backdrop-blur-3xl rounded-[28px] mt-8 pt-8 pb-8 px-6 mb-8 overflow-x-auto border border-white/10;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
+  }
+  
+  .example-box {
+    @apply relative overflow-hidden backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 mb-12 shadow-xl;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
+  }
+
+  .callout { @apply rounded-[24px] p-6 mb-8 flex gap-5 backdrop-blur-xl border border-white/20; }
+  .callout.info { background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), rgba(255,255,255,0.05)); }
+  .callout.warn { background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 8%, transparent), rgba(255,255,255,0.05)); }
+  .callout.success { background: linear-gradient(135deg, color-mix(in srgb, var(--green) 8%, transparent), rgba(255,255,255,0.05)); }
+
   .premium-hero-badge {
     @apply inline-flex items-center gap-1.5 rounded-full px-4 py-1.5 text-xs font-semibold mb-6 shadow-sm backdrop-blur-md;
     color: var(--theme-primary, var(--accent));
     background-color: rgba(255, 255, 255, 0.15);
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
-  .premium-hero h1 {
-    font-family: 'Crimson Pro', serif;
-    @apply text-4xl md:text-5xl lg:text-4xl font-bold leading-tight mb-4 text-text-premium tracking-tight;
-  }
-  .premium-hero p {
-    @apply text-[17px] md:text-[20px] lg:text-[18px] leading-relaxed font-normal text-text-premium max-w-3xl opacity-80;
-  }
 
-  /* ─── SECTION HEADERS ─── */
-
-  /* ─── DEFINITIONS & CASE STUDIES ─── */
-  .premium-def-box {
-    @apply backdrop-blur-2xl rounded-3xl p-8 mb-10 border border-white/20 transition-all duration-300;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
-    box-shadow: 
-      inset 0 1px 1px rgba(255, 255, 255, 0.2),
-      0 10px 30px -5px rgba(0, 0, 0, 0.05);
-  }
-  .premium-def-title {
-    @apply font-mono text-[13px] md:text-[14px] text-purple-premium uppercase tracking-[0.25em] mb-4 opacity-80;
-  }
-
-  /* ─── MATH & TABLES ─── */
-  .premium-math-block {
-    @apply backdrop-blur-3xl rounded-[28px] mt-8 pt-8 pb-8 px-6 mb-8 overflow-x-auto text-[17px] md:text-[20px] lg:text-[18px] border border-white/10;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.03) 100%);
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
-  }
-
-  .premium-table-wrap { @apply overflow-x-auto mb-8 rounded-lg border border-border-premium; }
-  .premium-table { @apply w-full border-collapse text-base; }
-  .premium-table thead { @apply bg-bg-secondary; }
-  .premium-table th { @apply px-4 py-3 text-left font-semibold text-accent-premium border border-border-premium text-[15px] uppercase tracking-wider; }
-  .premium-table td { @apply px-4 py-3 border border-border-premium text-text-premium font-normal align-top; }
-  .premium-table tr:nth-child(even) td { background: color-mix(in srgb, var(--accent) 2%, transparent); }
-
-  /* ─── TOC ─── */
-
-  /* ─── CODE ─── */
-  code:not(pre code) {
-    @apply font-mono text-[14px] bg-bg-tertiary px-1.5 py-0.5 rounded text-gold-premium border border-border-premium/50;
-  }
-
-  /* ─── DOCUMENTATION SPECIFIC (G-STYLE) ─── */
-  /* These support the new Linear Algebra HTML content */
-  .toc {
-    @apply bg-bg-secondary border border-border-premium rounded-xl p-6 mb-10;
-  }
-  .toc-title { @apply text-xs uppercase tracking-widest text-muted-premium font-semibold mb-3; }
-  .toc a { @apply block text-muted-premium no-underline text-[15.5px] py-1 transition-colors hover:text-accent-premium; }
-  .toc a.sub { @apply pl-4 text-[15px]; }
-
-  .def-box {
-    @apply backdrop-blur-2xl bg-white/10 border border-white/20 rounded-[28px] p-8 mb-10 shadow-sm transition-all;
-    box-shadow: inset 0 1px 1px rgba(255,255,255,0.2);
-  }
-  .dark .def-box {
-    background: rgba(255, 255, 255, 0.03);
-  }
-  .def-title {
-    @apply font-mono text-[12px] md:text-[13px] text-purple-premium uppercase tracking-[0.3em] mb-4 opacity-90;
-  }
-
-  .example-box {
-    @apply relative overflow-hidden backdrop-blur-2xl border border-white/20 rounded-[40px] p-10 mb-12 shadow-xl transition-all duration-500 hover:shadow-2xl;
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.05) 100%);
-  }
-  .example-box h4 { @apply text-category-primary font-headline text-3xl font-bold mt-0 mb-6; }
-
-  .callout { 
-    @apply rounded-[24px] p-6 mb-8 flex gap-5 backdrop-blur-xl border border-white/20 transition-all; 
-    box-shadow: 0 4px 20px -5px rgba(0,0,0,0.05);
-  }
-  .callout.info { background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 8%, transparent), rgba(255,255,255,0.05)); }
-  .callout.warn { background: linear-gradient(135deg, color-mix(in srgb, var(--gold) 8%, transparent), rgba(255,255,255,0.05)); }
-  .callout.success { background: linear-gradient(135deg, color-mix(in srgb, var(--green) 8%, transparent), rgba(255,255,255,0.05)); }
-  .callout.tip { background: linear-gradient(135deg, color-mix(in srgb, var(--purple) 8%, transparent), rgba(255,255,255,0.05)); }
-  .callout-icon { @apply text-lg mt-0.5 shrink-0; }
-  .callout-body { @apply text-base font-normal text-text-premium; }
-  .callout-body strong { @apply font-semibold text-accent-premium; }
-
-  .math-block {
-    @apply bg-bg-tertiary border border-border-premium rounded-lg mt-6 pt-6 pb-6 px-4 md:px-6 mb-6 overflow-x-auto text-[17px] max-w-full;
-    border-left: 3px solid var(--accent);
-  }
-
-  /* Remove backgrounds/borders when math is inside a definition or case study */
-  .premium-def-box .math-block,
-  .def-box .math-block,
-  .premium-def-box .premium-math-block,
-  .def-box .premium-math-block,
-  .premium-case-study .math-block,
-  .example-box .math-block {
-    background: transparent !important;
-    border: none !important;
-    box-shadow: none !important;
-    padding: 0 !important;
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
-    border-left: none !important;
-    overflow: visible;
-  }
-
-  /* Linking Rules */
-  .linking-rule {
-    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-text-premium;
-  }
-  .linking-rule strong { @apply text-accent-premium font-semibold; }
-
-  .note-box {
-    @apply bg-gold-premium/5 border border-gold-premium/20 rounded-xl p-5 my-6 text-base font-normal text-text-premium;
-  }
-  .note-box strong { @apply text-gold-premium font-semibold; }
-
-  .step-box {
-    @apply bg-bg-tertiary border border-border-premium rounded-xl p-5 my-4 flex items-start gap-4;
-  }
-  .step-num {
-    @apply shrink-0 bg-accent-premium text-bg font-bold p-1 rounded-full w-6 h-6 flex items-center justify-center text-[12px];
-  }
-
-  /* ─── ENHANCED ALGORITHM LISTS (Integrated style) ─── */
-  .algorithm-steps {
-    @apply space-y-5 my-6;
-  }
-  .algorithm-step {
-    @apply flex items-start gap-4 text-[17px] leading-relaxed;
-  }
+  /* ─── ENHANCED ALGORITHM LISTS ─── */
+  .algorithm-steps { @apply space-y-5 my-6; }
+  .algorithm-step { @apply flex items-start gap-4 text-[17px] leading-relaxed; }
   .step-badge {
     @apply shrink-0 mt-1 w-6 h-6 rounded-full bg-accent-premium/10 text-accent-premium border border-accent-premium/30 flex items-center justify-center font-bold text-[11px];
   }
 
-  /* Solved Examples Patterns */
-  .solved-card {
-    @apply bg-bg-secondary border border-border-premium rounded-2xl my-8 overflow-hidden;
+  .linking-rule {
+    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-foreground;
   }
-  .solved-header {
-    @apply bg-accent-premium/5 border-b border-border-premium p-5 flex items-center gap-4;
-  }
-  .solved-num {
-    @apply w-8 h-8 rounded-full bg-accent-premium text-bg flex items-center justify-center font-bold text-base;
-  }
-  .solved-title {
-    @apply font-headline text-xl font-semibold text-accent-premium;
-  }
-  .solved-body {
-    @apply p-6;
-  }
-  .problem-box {
-    @apply bg-accent-premium/5 border border-accent-premium/15 rounded-xl p-5 mb-6 text-base leading-relaxed;
-  }
-  .problem-label {
-    @apply font-mono text-[12px] text-accent-premium uppercase tracking-widest mb-2 block;
-  }
-  .step-label {
-    @apply font-mono text-[12px] text-muted-premium uppercase tracking-widest mt-6 mb-2 block;
-  }
-  .conclusion {
-    @apply bg-green-premium/5 border border-green-premium/20 rounded-xl p-5 mt-6 text-base font-normal text-text-premium;
-  }
-  .conclusion strong { @apply text-green-premium font-semibold; }
+  .linking-rule strong { @apply text-accent-premium font-semibold; }
 
-  /* Elevation Utilities */
-  .surface-elevated {
-    @apply bg-surface-container border border-border-premium shadow-lg rounded-2xl p-6;
+  /* ─── COLOR UTILITIES ─── */
+  .text-green-premium { color: var(--green); }
+  .text-purple-premium { color: var(--purple); }
+  .text-gold-premium { color: var(--gold); }
+  .text-blue-premium { color: var(--blue); }
+
+  /* ─── NAV TABS (Complex-3 Overrides) ─── */
+  [data-slot="tabs-list"] {
+    @apply p-1 bg-bg-secondary/80 rounded-2xl border border-white/5 shadow-sm;
   }
-  .surface-elevated-low {
-    @apply bg-surface-container-low border border-border-premium/50 shadow-sm rounded-xl p-4;
+  [data-slot="tabs-trigger"] {
+    @apply transition-all duration-300 font-bold uppercase tracking-widest text-[10px];
   }
-  /* ─── GLASSMORPHISM UTILITIES ─── */
+  [data-slot="tabs-trigger"][data-state="active"] {
+    @apply bg-white text-primary shadow-lg scale-[1.02] rounded-xl;
+  }
+  .dark [data-slot="tabs-trigger"][data-state="active"] {
+    @apply bg-accent/20 text-accent border border-accent/30 shadow-[0_0_15px_-5px_var(--accent)];
+  }
+
   .glass-panel {
     @apply backdrop-blur-xl;
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.3),
-      0 8px 32px 0 rgba(0, 0, 0, 0.1);
   }
 
-  .dark .glass-panel {
-    background: linear-gradient(135deg, rgba(30, 41, 59, 0.5) 0%, rgba(15, 23, 42, 0.3) 100%);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 
-      inset 0 1px 1px 0 rgba(255, 255, 255, 0.1),
-      0 8px 32px 0 rgba(0, 0, 0, 0.4);
+  /* ─── LAB & DASHBOARD LAYOUTS ─── */
+  .lab-layout { @apply flex flex-col gap-6 pb-14 max-w-[1200px] mx-auto w-full; }
+  .lab-visualizer { @apply w-full overflow-hidden rounded-3xl shadow-xl transition-all duration-500 bg-background/50 border border-border/50; }
+
+  /* ─── NEUMORPHIC CURRICULUM CARDS ─── */
+  .curriculum-card {
+    --card-bg: var(--bg);
+    --shadow-light: #ffffff;
+    --shadow-dark: rgba(220, 210, 205, 0.6);
+    background: var(--card-bg);
+    border-radius: 30px;
+    box-shadow: 12px 12px 24px var(--shadow-dark),
+                -12px -12px 24px var(--shadow-light);
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
   }
-}
 
-/* ─── GLOBAL UTILITIES ─── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  .curriculum-card:hover {
+    transform: translateY(-5px) scale(1.01);
+    box-shadow: 18px 18px 36px var(--shadow-dark),
+                -18px -18px 36px var(--shadow-light);
+  }
 
-/* ─── JSXGRAPH & KATEX UI FIXES ─── */
-.jxgbox text, 
-.jxgbox foreignObject, 
-.jxgbox div {
-  overflow: visible !important;
-}
+  .curriculum-card:active {
+    transform: scale(0.98);
+    box-shadow: inset 8px 8px 16px var(--shadow-dark),
+                inset -8px -8px 16px var(--shadow-light);
+  }
 
-.katex {
-  font-size: 1.15em !important;
-  color: var(--text) !important;
-}
-
-.katex-display {
-  @apply mt-4 mb-6;
-  overflow: visible !important; /* Prevent scrollbars in boards */
-}
-
-/* ─── LAB DASHBOARD LAYOUT ─── */
-.lab-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  padding-bottom: 3.5rem; /* Ensure content doesn't hit the card bottom */
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.lab-visualizer {
-  width: 100%;
-  overflow: hidden;
-  transition: all 0.5s ease;
-  border-radius: var(--radius);
-  box-shadow: 
-    0 20px 50px -10px rgba(0, 0, 0, 0.1),
-    0 10px 20px -5px rgba(0, 0, 0, 0.05);
-}
-
-.dark .lab-visualizer {
-  box-shadow: 
-    0 20px 50px -10px rgba(0, 0, 0, 0.5),
-    0 0 30px -5px color-mix(in srgb, var(--accent) 15%, transparent);
-}
-
-.lab-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 1.5rem;
-  align-items: start;
-  width: 100%;
-}
-
-@media (min-width: 1024px) {
-  .lab-grid {
-    grid-template-columns: repeat(2, 1fr);
+  .dark .curriculum-card {
+    --card-bg: #0d1117;
+    --shadow-light: #1c222d;
+    --shadow-dark: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.03);
   }
 }
 
 @theme inline {
-  --font-heading: var(--font-sans);
-  --font-sans: 'Geist Variable', sans-serif;
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
   --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --color-foreground: var(--foreground);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
   --color-background: var(--background);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
-
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
 }

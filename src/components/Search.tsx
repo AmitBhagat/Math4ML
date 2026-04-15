@@ -74,11 +74,11 @@ export const Search = () => {
       {/* Trigger Button */}
       <button 
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-3 px-3 py-2 bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-lg text-slate-500 hover:text-slate-900 dark:hover:text-slate-100 dark:text-slate-400 transition-all group w-48 md:w-64"
+        className="flex items-center gap-2 px-3 py-1.5 bg-secondary/50 border border-border rounded-md text-muted-foreground hover:text-foreground hover:bg-secondary transition-all group w-40 md:w-48"
       >
-        <SearchIcon size={16} className="group-hover:scale-110 transition-transform" />
-        <span className="text-xs font-semibold uppercase tracking-wider flex-1 text-left">Search Topics...</span>
-        <div className="flex items-center gap-1 opacity-50 px-1.5 py-0.5 border border-slate-300 dark:border-slate-700 rounded text-[10px] font-bold">
+        <SearchIcon size={14} />
+        <span className="text-xs font-medium flex-1 text-left truncate">Search...</span>
+        <div className="flex items-center gap-0.5 opacity-50 px-1 py-0.5 border border-border rounded text-[10px] font-medium">
           <Command size={10} />
           <span>K</span>
         </div>
@@ -87,11 +87,11 @@ export const Search = () => {
       {/* Modal Overlay */}
       {isOpen && (
         <div className="fixed inset-0 z-[100] flex items-start justify-center pt-20 px-4">
-          <div className="absolute inset-0 bg-slate-950/60 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
+          <div className="absolute inset-0 bg-background/80 backdrop-blur-sm" onClick={() => setIsOpen(false)} />
           
-          <div className="relative w-full max-w-2xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
-            <div className="flex items-center gap-4 p-4 border-b border-slate-100 dark:border-slate-800">
-              <SearchIcon size={20} className="text-slate-400" />
+          <div className="relative w-full max-w-2xl bg-background border border-border rounded-xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="flex items-center gap-4 p-4 border-b border-border">
+              <SearchIcon size={18} className="text-muted-foreground" />
               <input 
                 ref={inputRef}
                 type="text"
@@ -99,10 +99,10 @@ export const Search = () => {
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="Search by topic, keyword, or category..."
-                className="flex-1 bg-transparent border-none outline-none text-slate-100 placeholder:text-slate-500 text-lg"
+                className="flex-1 bg-transparent border-none outline-none text-foreground placeholder:text-muted-foreground text-base"
               />
-              <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg text-slate-500 transition-colors">
-                <X size={20} />
+              <button onClick={() => setIsOpen(false)} className="p-1 hover:bg-secondary rounded-lg text-muted-foreground transition-colors">
+                <X size={18} />
               </button>
             </div>
 
@@ -114,15 +114,15 @@ export const Search = () => {
                       key={topic.id}
                       onClick={() => handleSelect(topic)}
                       onMouseEnter={() => setSelectedIndex(idx)}
-                      className={`w-full flex items-center justify-between p-3 rounded-xl transition-all text-left ${idx === selectedIndex ? 'bg-accent text-white shadow-lg shadow-accent/20 scale-[1.02]' : 'hover:bg-slate-100 dark:hover:bg-slate-800'}`}
+                      className={`w-full flex items-center justify-between p-3 rounded-lg transition-all text-left ${idx === selectedIndex ? 'bg-accent text-accent-foreground shadow-md' : 'hover:bg-secondary'}`}
                     >
-                      <div className="flex flex-col">
-                        <span className={`text-sm font-bold ${idx === selectedIndex ? 'text-white' : 'text-slate-200'}`}>{topic.title}</span>
-                        <span className={`text-[10px] uppercase tracking-widest font-black opacity-60 ${idx === selectedIndex ? 'text-white' : 'text-accent'}`}>{topic.category}</span>
+                      <div className="flex flex-col gap-0.5">
+                        <span className={`text-sm font-semibold ${idx === selectedIndex ? 'text-accent-foreground' : 'text-foreground'}`}>{topic.title}</span>
+                        <span className={`text-[10px] uppercase tracking-wide font-medium opacity-70 ${idx === selectedIndex ? 'text-accent-foreground' : 'text-muted-foreground'}`}>{topic.category}</span>
                       </div>
-                      <div className="flex gap-1">
-                        {topic.keywords.slice(0, 3).map(kw => (
-                          <span key={kw} className={`text-[9px] px-1.5 py-0.5 rounded border ${idx === selectedIndex ? 'border-white/30 text-white/80' : 'border-slate-200 dark:border-slate-800 text-slate-500'}`}>
+                      <div className="flex gap-1 flex-wrap justify-end max-w-[40%]">
+                        {topic.keywords.slice(0, 2).map(kw => (
+                          <span key={kw} className={`text-[9px] px-1.5 py-0.5 rounded border ${idx === selectedIndex ? 'border-accent-foreground/30 text-accent-foreground/80' : 'border-border text-muted-foreground'}`}>
                             {kw}
                           </span>
                         ))}
@@ -131,13 +131,13 @@ export const Search = () => {
                   ))}
                 </div>
               ) : query ? (
-                <div className="p-8 text-center text-slate-500 italic">No topics found for "{query}"</div>
+                <div className="p-8 text-center text-muted-foreground text-sm">No topics found for "{query}"</div>
               ) : (
-                <div className="p-8 text-center text-slate-500">
-                  <div className="text-sm font-bold uppercase tracking-widest mb-2 opacity-50">Suggestions</div>
+                <div className="p-6 text-center text-muted-foreground">
+                  <div className="text-xs font-medium uppercase tracking-wider mb-3 opacity-60">Suggestions</div>
                   <div className="flex flex-wrap justify-center gap-2">
                     {['SVD', 'Entropy', 'Gradient', 'MLE', 'Probability'].map(term => (
-                      <button key={term} onClick={() => setQuery(term)} className="px-3 py-1 bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-[10px] font-bold hover:border-accent transition-colors">
+                      <button key={term} onClick={() => setQuery(term)} className="px-3 py-1.5 bg-secondary border border-border rounded-md text-xs font-medium hover:bg-accent hover:text-accent-foreground transition-colors">
                         {term}
                       </button>
                     ))}
@@ -146,12 +146,12 @@ export const Search = () => {
               )}
             </div>
 
-            <div className="p-3 bg-slate-50 dark:bg-slate-950/50 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-[10px] font-bold uppercase tracking-widest text-slate-500">
+            <div className="p-3 bg-secondary/50 border-t border-border flex items-center justify-between text-[10px] font-medium uppercase tracking-wider text-muted-foreground">
               <div className="flex items-center gap-4">
-                <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">↵</kbd> Select</span>
-                <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">↑↓</kbd> Navigate</span>
+                <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-background border border-border">↵</kbd> Select</span>
+                <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-background border border-border">↑↓</kbd> Navigate</span>
               </div>
-              <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800">esc</kbd> Close</span>
+              <span className="flex items-center gap-1"><kbd className="px-1.5 py-0.5 rounded bg-background border border-border">esc</kbd> Close</span>
             </div>
           </div>
         </div>

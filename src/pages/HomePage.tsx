@@ -1,7 +1,6 @@
-import React, { ReactNode, CSSProperties } from "react";
+import React, { ReactNode } from "react";
 import { Link } from "react-router-dom";
 import { 
-  ArrowRight, 
   Layers, 
   FunctionSquare, 
   BarChart3, 
@@ -11,7 +10,7 @@ import {
 } from "lucide-react";
 import { motion } from "motion/react";
 import { CLUSTERS } from "@/src/data/topics";
-import { getCategoryTheme } from "@/src/lib/themeUtils";
+import { CurriculumCard } from "../components/CurriculumCard";
 
 const FadeIn = ({ children, delay = 0, y = 20 }: { children: ReactNode, delay?: number, y?: number, key?: any }) => (
   <motion.div
@@ -34,56 +33,6 @@ const SectionHeading = ({ title, subtitle }: { title: string, subtitle?: string 
   </FadeIn>
 );
 
-const PillarCard = ({ title, description, icon: Icon, link, delay, categoryId }: { title: string, description: string, icon: any, link: string, delay: number, categoryId: string }) => {
-  const theme = getCategoryTheme(categoryId);
-  
-  return (
-    <FadeIn delay={delay}>
-      <Link 
-        to={link}
-        className="group flex flex-col h-full bg-bg-secondary rounded-2xl transition-all duration-500 hover:-translate-y-2 border border-border-premium/50 relative overflow-hidden"
-        style={{ 
-          '--accent-color': theme.primary,
-          '--bg-tint': `${theme.primary}08`,
-          '--bg-tint-hover': `${theme.primary}12`,
-        } as CSSProperties}
-      >
-        {/* Top Accent Bar */}
-        <div 
-          className="absolute top-0 left-0 right-0 h-1.5 transition-all duration-500 opacity-60 group-hover:opacity-100"
-          style={{ backgroundColor: theme.primary }}
-        />
-
-        <div className="p-8 flex flex-col h-full relative z-10 transition-colors duration-500 group-hover:bg-[var(--bg-tint-hover)]">
-          <div 
-            className="w-12 h-12 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500 shadow-sm"
-            style={{ backgroundColor: `${theme.primary}15`, color: theme.primary }}
-          >
-            <Icon className="w-6 h-6" />
-          </div>
-
-          <h3 className="text-2xl font-headline font-semibold text-text-premium mb-3 transition-colors group-hover:text-text-premium">
-            {title}
-          </h3>
-          <p className="text-base text-muted-premium leading-relaxed mb-6 font-normal">{description}</p>
-          
-          <div 
-            className="mt-auto flex items-center gap-2 text-sm font-semibold uppercase tracking-widest opacity-0 group-hover:opacity-100 translate-x-[-10px] group-hover:translate-x-0 transition-all duration-500"
-            style={{ color: theme.primary }}
-          >
-            Explore Module <ArrowRight className="w-3 h-3" />
-          </div>
-        </div>
-
-        {/* Hover Shadow Effect */}
-        <div 
-          className="absolute inset-0 opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none"
-          style={{ boxShadow: `0 30px 60px -10px ${theme.primary}` }}
-        />
-      </Link>
-    </FadeIn>
-  );
-};
 
 
 export const HomePage = () => {
@@ -132,39 +81,43 @@ export const HomePage = () => {
             subtitle="Bridging the gap between abstract theory and practical implementation across the four essential branches of intelligence."
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <PillarCard 
-              title="Linear Algebra"
-              description="The language of data. Learn how matrices represent datasets and how PCA reduces complexity."
-              icon={Layers}
-              link="/mathematics/linear-algebra"
-              delay={0.1}
-              categoryId="linear-algebra"
-            />
-            <PillarCard 
-              title="Calculus"
-              description="The engine of learning. Understand how gradients allow algorithms like Backpropagation to minimize error."
-              icon={FunctionSquare}
-              link="/mathematics/calculus"
-              delay={0.2}
-              categoryId="calculus"
-            />
-            <PillarCard 
-              title="Probability & Stats"
-              description="The framework of uncertainty. Master how models make predictions and deal with noise."
-              icon={Dice5}
-              link="/mathematics/probability"
-              delay={0.3}
-              categoryId="probability"
-            />
-            <PillarCard 
-              title="Optimization"
-              description="The path to efficiency. Dive into how algorithms find the best parameters via Gradient Descent."
-              icon={Target}
-              link="/mathematics/calculus/gradient-descent"
-              delay={0.4}
-              categoryId="calculus"
-            />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 px-4">
+            <FadeIn delay={0.1}>
+              <CurriculumCard 
+                title="Linear Algebra"
+                description="The language of data. Learn how matrices represent datasets and how PCA reduces complexity."
+                icon={Layers}
+                href="/mathematics/linear-algebra"
+                categoryId="linear-algebra"
+              />
+            </FadeIn>
+            <FadeIn delay={0.2}>
+              <CurriculumCard 
+                title="Calculus"
+                description="The engine of learning. Understand how gradients allow algorithms like Backpropagation to minimize error."
+                icon={FunctionSquare}
+                href="/mathematics/calculus"
+                categoryId="calculus"
+              />
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <CurriculumCard 
+                title="Probability & Stats"
+                description="The framework of uncertainty. Master how models make predictions and deal with noise."
+                icon={Dice5}
+                href="/mathematics/probability"
+                categoryId="probability"
+              />
+            </FadeIn>
+            <FadeIn delay={0.4}>
+              <CurriculumCard 
+                title="Optimization"
+                description="The path to efficiency. Dive into how algorithms find the best parameters via Gradient Descent."
+                icon={Target}
+                href="/mathematics/calculus/gradient-descent"
+                categoryId="calculus"
+              />
+            </FadeIn>
           </div>
         </div>
       </section>
