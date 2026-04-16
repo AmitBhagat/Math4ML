@@ -202,7 +202,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                     <HamburgerIcon />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent align="start" className="w-64 p-2 glass-panel border-white/10 shadow-xl">
+                <PopoverContent align="start" className="w-[280px] p-2 glass-panel border-black/5 dark:border-white/10 shadow-2xl max-h-[80vh] overflow-y-auto custom-scrollbar">
                   <NavigationMenu className="max-w-none">
                     <NavigationMenuList className="flex-col items-start gap-1">
                       <div className="px-3 py-2 text-[10px] font-bold uppercase tracking-widest text-muted-foreground opacity-50">Curriculum</div>
