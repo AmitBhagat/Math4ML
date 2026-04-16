@@ -132,13 +132,7 @@ export const ClusterPage = () => {
             ))}
           </div>
 
-          {/* Bottom Navigation Tag */}
-          <div className="mt-auto py-12 border-t border-black/5 dark:border-white/5 flex justify-end items-end">
-            <Link to="/" className="text-[12px] font-black uppercase tracking-widest text-on-surface hover:text-accent transition-colors flex items-center gap-3 group">
-              Back to Overview <ArrowRight className="size-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
           </div>
        </div>
-    </div>
   );
 };

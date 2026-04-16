@@ -194,33 +194,90 @@ export const ProblemPage = () => {
       } as React.CSSProperties}
     >
       
-      {/* ─── Minimal Header ─── */}
-      {!problem.html?.trim().startsWith('<div class="premium-hero">') && (
-        <div className="mb-12">
-          <h1 className="text-2xl md:text-3xl font-black uppercase tracking-[0.2em] text-on-surface">
+      {/* ─── Breadcrumbs & Header ─── */}
+      <div className="mb-12 border-b border-black/5 dark:border-white/5 pb-8">
+        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-premium mb-4">
+          <Link to={`/${clusterId}`} className="hover:text-accent transition-colors">
+            {cluster?.title}
+          </Link>
+          <ChevronRight className="size-3" />
+          <Link to={`/${clusterId}/${categoryId}`} className="hover:text-accent transition-colors">
+            {category?.title}
+          </Link>
+        </div>
+        
+        {!problem.html?.trim().startsWith('<div class="premium-hero">') && (
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-headline font-black text-on-surface tracking-tight leading-tight">
             {problem.title}
           </h1>
-        </div>
-      )}
+        )}
+      </div>
 
-      {/* ─── Content Area ─── */}
-      <div className="content-area">
-        {problem.html ? (
-          <ParsedContent html={problem.html} />
+      {/* ─── Main Content Area ─── */}
+      <article className="prose prose-zinc dark:prose-invert max-w-none mb-24">
+        <div className="content-area">
+          {problem.html ? (
+            <ParsedContent html={problem.html} />
+          ) : (
+            <div className="space-y-6 text-on-surface/80 font-normal leading-relaxed text-lg">
+               {problem.details && problem.details.map((detail, idx) => (
+                 <div key={idx} className="flex gap-4 mb-4">
+                   <div className="size-1.5 rounded-full bg-accent mt-2.5 shrink-0" />
+                   <span>{detail}</span>
+                 </div>
+               ))}
+               {problem.formula && (
+                 <div className="my-12 p-8 bg-black/5 dark:bg-white/5 rounded-2xl">
+                   <BlockMath math={cleanMathContent(problem.formula)} />
+                 </div>
+               )}
+            </div>
+          )}
+        </div>
+      </article>
+
+      {/* ─── GFG-Style Next/Prev Navigation ─── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-12 border-t border-black/5 dark:border-white/5">
+        {prevProblem ? (
+          <Link
+            to={`/${clusterId}/${categoryId}/${prevProblem.id}`}
+            className="group p-6 bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-2xl hover:border-accent/40 transition-all text-left"
+          >
+            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-premium mb-2 group-hover:text-accent transition-colors">
+              Previous Topic
+            </div>
+            <div className="text-lg font-black text-on-surface">
+              {prevProblem.title}
+            </div>
+          </Link>
         ) : (
-          <div className="space-y-4 text-text-premium font-light leading-relaxed">
-             {problem.details && problem.details.map((detail, idx) => (
-               <div key={idx} className="flex gap-3 mb-4">
-                 <span className="text-accent-premium mt-1.5 shrink-0">•</span>
-                 <span>{detail}</span>
-               </div>
-             ))}
-             {problem.formula && (
-               <div className="premium-math-block">
-                 <BlockMath math={cleanMathContent(problem.formula)} />
-               </div>
-             )}
-          </div>
+          <div />
+        )}
+
+        {nextProblem ? (
+          <Link
+            to={`/${clusterId}/${categoryId}/${nextProblem.id}`}
+            className="group p-6 bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-2xl hover:border-accent/40 transition-all text-right"
+          >
+            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-muted-premium mb-2 group-hover:text-accent transition-colors">
+              Next Topic
+            </div>
+            <div className="text-lg font-black text-on-surface">
+              {nextProblem.title}
+            </div>
+          </Link>
+        ) : (
+          <Link
+            to={`/${clusterId}`}
+            className="group p-6 bg-accent text-white rounded-2xl transition-all text-right shadow-xl shadow-accent/20"
+          >
+            <div className="text-[10px] font-black uppercase tracking-[0.2em] text-white/60 mb-2">
+              Finish Track
+            </div>
+            <div className="text-lg font-black">
+              Return to {cluster?.title} Overview
+            </div>
+          </Link>
         )}
       </div>
 

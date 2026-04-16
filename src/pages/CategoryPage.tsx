@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
-import { ChevronRight, Hammer, Clock, Star, ArrowLeft } from "lucide-react";
+import { ChevronRight, Hammer, Clock, Star, ArrowLeft, ArrowRight } from "lucide-react";
 import { CategoryData } from "@/src/data/types";
 import { getCategoryData, CLUSTERS } from "@/src/data/topics";
 import { getCategoryTheme } from "@/src/lib/themeUtils";
@@ -97,72 +97,97 @@ export const CategoryPage = ({ category: initialCategory, categoryId: propCatego
   }
   return (
     <div 
-      className="max-w-[1400px] mx-auto px-4 md:px-10 lg:px-12 py-8 md:py-12"
+      className="w-full"
       style={{
         '--category-primary': getCategoryTheme(categoryId || '').primary,
         '--category-secondary': getCategoryTheme(categoryId || '').secondary,
       } as React.CSSProperties}
     >
-
-
-      {/* ─── Minimal Header (Hidden if custom intro is present) ─── */}
-      {!category.introHtml && (
-        <div className="mb-12">
-          <h1 className="text-3xl md:text-4xl font-black uppercase tracking-[0.2em] text-on-surface">
-            {category.title}
-          </h1>
+      {/* ─── Breadcrumbs & Header ─── */}
+      <div className="mb-12 border-b border-black/5 dark:border-white/5 pb-8">
+        <div className="flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-muted-premium mb-4">
+          <Link to={`/${clusterId}`} className="hover:text-accent transition-colors">
+            {cluster?.title}
+          </Link>
+          <ChevronRight className="size-3" />
+          <span className="text-on-surface">{category.title}</span>
         </div>
-      )}
+        
+        <h1 className="text-3xl md:text-5xl lg:text-6xl font-headline font-black text-on-surface tracking-tight leading-tight">
+          {category.title}
+        </h1>
+      </div>
 
-      {category.introHtml ? (
-        /* Custom Narrative Intro */
-        <div 
-          className="premium-intro-content" 
-          dangerouslySetInnerHTML={{ __html: category.introHtml }} 
-        />
-      ) : (
-        /* Default Key Concepts Grid */
-        <div className="mb-24">
-          <div className="flex items-center gap-6 mb-12 border-b border-black/5 dark:border-white/5 pb-6">
-            <h2 className="text-[10px] font-black text-on-surface-variant uppercase tracking-[0.3em]">Key Concepts Breakdown</h2>
-            <div className="h-[2px] flex-grow bg-gradient-to-r from-accent-teal/30 to-transparent"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {category.sections.map((section) => {
-              const sectionColor = section.color || 'var(--category-primary)';
-              return (
-                <Link
-                  key={section.id}
-                  to={cluster ? `/${cluster.id}/${category.id}/${section.id}` : `/${category.id}/${section.id}`}
-                  className="group bg-surface-container p-10 rounded border border-transparent hover:border-border-premium hover:bg-surface-container-high transition-all duration-300 flex flex-col h-full relative overflow-hidden"
-                  style={{
-                    '--hover-glow': `${sectionColor}15`,
-                  } as React.CSSProperties}
-                >
-                  <div 
-                    className="absolute top-0 left-0 w-1.5 h-full transition-transform duration-300 group-hover:scale-y-110" 
-                    style={{ backgroundColor: sectionColor }}
-                  />
-                  <div className="mb-4 flex items-center justify-between">
-                    <h3 
-                      className="font-headline font-black text-xl text-on-surface transition-colors"
-                      style={{ color: 'inherit' }}
-                    >
+      {/* ─── Story Intro ─── */}
+      <div className="prose prose-zinc dark:prose-invert max-w-none mb-20">
+        <p className="text-xl md:text-2xl text-muted-premium leading-relaxed font-medium">
+          {category.description}
+        </p>
+        
+        {category.introHtml && (
+          <div 
+            className="mt-12 pt-12 border-t border-black/5 dark:border-white/5" 
+            dangerouslySetInnerHTML={{ __html: category.introHtml }} 
+          />
+        )}
+      </div>
+
+      {/* ─── Table of Contents (GFG Style) ─── */}
+      <div className="mb-24">
+        <div className="flex items-center gap-6 mb-12">
+          <h2 className="text-[12px] font-black text-on-surface uppercase tracking-[0.3em]">Module Curriculum</h2>
+          <div className="h-px flex-grow bg-black/5 dark:bg-white/5"></div>
+        </div>
+        
+        <div className="grid gap-3">
+          {category.sections.map((section, idx) => {
+            const sectionColor = section.color || 'var(--category-primary)';
+            return (
+              <Link
+                key={section.id}
+                to={cluster ? `/${cluster.id}/${category.id}/${section.id}` : `/${category.id}/${section.id}`}
+                className="group flex items-center justify-between p-6 bg-white dark:bg-zinc-900 border border-black/5 dark:border-white/5 rounded-2xl hover:border-accent transition-all duration-300"
+              >
+                <div className="flex items-center gap-6">
+                  <span className="text-xl font-black italic text-muted-premium/20 group-hover:text-accent/30 transition-colors">
+                    {String(idx + 1).padStart(2, '0')}
+                  </span>
+                  <div>
+                    <h3 className="font-bold text-lg text-on-surface group-hover:text-accent transition-colors">
                       {section.title}
                     </h3>
                   </div>
-                  <div className="flex flex-wrap gap-2 mt-auto">
-                    {section.tags?.slice(0, 3).map((tag) => (
-                      <span key={tag} className="text-[8px] font-black uppercase tracking-[0.15em] bg-bg-secondary/50 text-muted-premium px-2 py-1 rounded">
+                </div>
+                <div className="flex items-center gap-4">
+                  <div className="hidden md:flex flex-wrap gap-2">
+                    {section.tags?.slice(0, 2).map((tag) => (
+                      <span key={tag} className="text-[9px] font-black uppercase tracking-widest bg-black/5 dark:bg-white/5 text-muted-premium px-3 py-1 rounded-full">
                         {tag}
                       </span>
                     ))}
                   </div>
-                </Link>
-              );
-            })}
-          </div>
+                  <ChevronRight className="size-5 text-muted-premium group-hover:text-accent group-hover:translate-x-1 transition-all" />
+                </div>
+              </Link>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* ─── Begin Logic ─── */}
+      {category.sections[0] && (
+        <div className="p-12 bg-accent rounded-[2.5rem] text-center text-white shadow-2xl shadow-accent/20">
+          <h3 className="text-3xl font-headline font-black mb-6">Master this Domain</h3>
+          <p className="text-white/80 mb-10 text-lg max-w-2xl mx-auto">
+            Dive into the first core module and begin your journey through the technical foundations of {category.title}.
+          </p>
+          <Link
+            to={cluster ? `/${cluster.id}/${category.id}/${category.sections[0].id}` : `/${category.id}/${category.sections[0].id}`}
+            className="inline-flex items-center gap-4 bg-white text-black px-12 py-5 rounded-2xl font-black uppercase tracking-widest hover:bg-black hover:text-white transition-all group scale-100 hover:scale-105 active:scale-95"
+          >
+            Begin Journey
+            <ArrowRight className="size-5 group-hover:translate-x-2 transition-transform" />
+          </Link>
         </div>
       )}
     </div>

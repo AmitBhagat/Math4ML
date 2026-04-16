@@ -3,6 +3,7 @@ import { TopicVisualizer } from "./MathematicalVisualizations";
 import { runPython } from "../hooks/usePyodide";
 import { Copy, Check, Play, RotateCcw } from "lucide-react";
 import { useTheme } from "../hooks/useTheme";
+import { cn } from "../lib/utils";
 
 export const VisualizerContainer = ({ title }: { title: string }) => {
   return (
@@ -150,24 +151,30 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
   const editorMetrics = "text-[13px] md:text-[15.5px] font-mono leading-relaxed px-4 md:px-10 py-4 md:py-8";
 
   return (
-    <div className="mt-4 mb-10 md:mt-6 md:mb-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
-      {/* ── Main Code Window (Glassmorphism Container) ── */}
-      <div className={`rounded-[24px] shadow-2xl overflow-hidden transition-all duration-500 glass-panel
-        ${isDark ? "shadow-indigo-500/10" : "shadow-slate-200"}`}>
+    <div className="not-prose mt-4 mb-10 md:mt-6 md:mb-14 relative group animate-in fade-in slide-in-from-bottom-4 duration-700 max-w-4xl">
+      {/* ── Main Code Window (Solid Container) ── */}
+      <div className={cn(
+        "rounded-[24px] shadow-2xl overflow-hidden transition-all duration-500 border",
+        isDark ? "bg-[#0d0f14] border-white/10 shadow-indigo-500/10" : "bg-[#f8f9fa] border-black/10 shadow-slate-200"
+      )}>
 
-      {/* ── Header bar (Semi-transparent glossy overlay) ── */}
-      <div className={`px-4 md:px-6 py-3 md:py-4 flex items-center justify-between border-b transition-colors duration-500
-        ${isDark ? "bg-white/5 border-white/10" : "bg-white/40 border-black/5"}`}>
+      {/* ── Header bar ── */}
+      <div className={cn(
+        "px-4 md:px-6 py-3 md:py-4 flex items-center justify-between border-b transition-colors duration-500",
+        isDark ? "bg-[#161b22] border-white/5" : "bg-white border-black/5"
+      )}>
         <div className="flex items-center gap-6">
           {/* Traffic Lights (macOS Colors) */}
           <div className="flex gap-2 mr-2">
-            <div className="w-3.5 h-3.5 rounded-full bg-[#ff5f56] shadow-sm border border-black/5" />
-            <div className="w-3.5 h-3.5 rounded-full bg-[#ffbd2e] shadow-sm border border-black/5" />
-            <div className="w-3.5 h-3.5 rounded-full bg-[#27c93f] shadow-sm border border-black/5" />
+            <div className="w-3 h-3 rounded-full bg-[#ff5f56]" />
+            <div className="w-3 h-3 rounded-full bg-[#ffbd2e]" />
+            <div className="w-3 h-3 rounded-full bg-[#27c93f]" />
           </div>
           
-          <span className={`text-[12px] font-black uppercase tracking-[0.25em] transition-colors
-            ${isDark ? "text-white/30" : "text-muted-premium/60"}`}>
+          <span className={cn(
+            "text-[12px] font-black uppercase tracking-[0.25em] transition-colors",
+            isDark ? "text-white/30" : "text-muted-premium/60"
+          )}>
             {language}
           </span>
           {statusText[runState] && (
@@ -178,14 +185,14 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
         </div>
 
         <div className="flex items-center gap-3">
-        <div className="flex items-center gap-2">
           {isPython && (
-            <>
-              {/* Copy Button */}
+            <div className="flex items-center gap-2">
               <button
                 onClick={handleCopy}
-                className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
-                  ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
+                className={cn(
+                  "flex items-center gap-1.5 p-2 rounded-md transition-colors",
+                  isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"
+                )}
                 title="Copy to clipboard"
               >
                 {copied ? <Check className="w-3.5 h-3.5 text-green-premium" /> : <Copy className="w-3.5 h-3.5" />}
@@ -196,12 +203,13 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
               
               {runnable && (
                 <>
-                  {/* ↺ Reset */}
                   {(editedCode !== code || liveOutput !== null) && (
                     <button
                       onClick={handleReset}
-                      className={`flex items-center gap-1.5 p-2 rounded-md transition-colors group
-                        ${isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"}`}
+                      className={cn(
+                        "flex items-center gap-1.5 p-2 rounded-md transition-colors",
+                        isDark ? "hover:bg-white/5 text-white/40 hover:text-white" : "hover:bg-black/5 text-muted-premium hover:text-accent-premium"
+                      )}
                       title="Restore original code"
                     >
                       <RotateCcw className="w-3.5 h-3.5" />
@@ -209,15 +217,15 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
                     </button>
                   )}
 
-                  {/* ▶ Run */}
                   <button
                     onClick={handleRun}
                     disabled={isRunning}
-                    className={`inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-lg
-                      ${isRunning
+                    className={cn(
+                      "inline-flex items-center gap-2 px-4 md:px-6 py-2 rounded-lg text-[12px] font-black uppercase tracking-[0.2em] transition-all shadow-lg",
+                      isRunning
                         ? "bg-bg-secondary text-muted-premium cursor-not-allowed"
                         : "bg-accent-premium hover:bg-accent-premium-light hover:scale-105 text-white cursor-pointer"
-                      }`}
+                    )}
                   >
                     {isRunning ? (
                       <>
@@ -236,26 +244,27 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
                   </button>
                 </>
               )}
-            </>
+            </div>
           )}
-
-        </div>
-
         </div>
       </div>
 
-      {/* ── Code Editor Layer (Transparent to allow glass effect) ── */}
-      <div className="relative bg-transparent overflow-hidden group">
-        {/* Layer 1: Highlighted Display */}
+      {/* ── Code Editor Layer ── */}
+      <div className={cn(
+        "relative transition-colors duration-500",
+        isDark ? "bg-[#0d0f14]" : "bg-[#f8f9fa]"
+      )}>
         <pre
           ref={preRef}
           aria-hidden="true"
-          className={`absolute inset-0 m-0 pointer-events-none whitespace-pre overflow-hidden ${editorMetrics}`}
-          style={{ color: isDark ? "#ffffff" : "var(--text)" }}
+          className={cn(
+            "absolute inset-0 m-0 pointer-events-none whitespace-pre overflow-hidden",
+            editorMetrics
+          )}
+          style={{ color: isDark ? "#ffffff" : "#1e1e1e" }}
           dangerouslySetInnerHTML={{ __html: highlightPython(editedCode, isDark) + "\n" }}
         />
 
-        {/* Layer 2: Interactive Textarea */}
         <textarea
           ref={textareaRef}
           value={editedCode}
@@ -266,27 +275,37 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
           onScroll={handleScroll}
           spellCheck={false}
           wrap="off"
-          className={`relative w-full bg-transparent text-transparent ${isDark ? "caret-white" : "caret-black"} 
-                     resize-none outline-none border-none focus:outline-none transition-colors 
-                     overflow-x-auto min-h-[120px] ${editorMetrics}`}
-          style={{ overflowY: "hidden" }}
+          className={cn(
+            "relative w-full bg-transparent text-transparent resize-none outline-none border-none focus:outline-none transition-colors scroll-smooth",
+            isDark ? "caret-white" : "caret-black",
+            editorMetrics
+          )}
+          style={{ overflowY: "hidden", minHeight: "140px" }}
           aria-label="Editable Python code"
         />
       </div>
 
-      {/* ── Single output panel (Glassmorphism continuation) ── */}
+      {/* ── Output panel ── */}
       {showOutput && shownOutput !== null && (
-        <div className={`border-t animate-in fade-in slide-in-from-top-2 duration-300 transition-colors
-          ${isDark ? "border-white/5 bg-slate-900/20" : "border-black/5 bg-white/20"}`}>
-          <div className={`px-8 py-3 border-b border-white/5 flex flex-wrap items-center justify-between transition-colors
-            ${runState === "error" ? "bg-red-500/10" : isDark ? "bg-white/5" : "bg-black/5"}`}>
-            <span className={`text-[12px] font-black uppercase tracking-[0.2em]
-              ${runState === "error" ? "text-red-500" : isDark ? "text-white/40" : "text-muted-premium"}`}>
+        <div className={cn(
+          "border-t animate-in fade-in slide-in-from-top-2 duration-300",
+          isDark ? "border-white/5 bg-black/20" : "border-black/5 bg-white shadow-inner"
+        )}>
+          <div className={cn(
+            "px-8 py-3 border-b flex flex-wrap items-center justify-between",
+            runState === "error" ? "bg-red-500/10 border-red-500/20" : isDark ? "bg-white/5 border-white/5" : "bg-black/5 border-black/5"
+          )}>
+            <span className={cn(
+              "text-[12px] font-black uppercase tracking-[0.2em]",
+              runState === "error" ? "text-red-500" : isDark ? "text-white/40" : "text-muted-premium"
+            )}>
               {runState === "error" ? "⚠ System Error" : "▸ Output"}
             </span>
           </div>
-          <div className={`px-4 md:px-8 py-3 md:py-6 text-[13px] md:text-[15px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto transition-colors
-            ${isDark ? "text-white/90" : "text-text-premium"}`}>
+          <div className={cn(
+            "px-4 md:px-8 py-3 md:py-6 text-[13px] md:text-[15px] font-mono leading-relaxed whitespace-pre-wrap overflow-x-auto",
+            isDark ? "text-white/90" : "text-text-premium"
+          )}>
             {(() => {
               const lines = shownOutput.split("\n");
               const textLines: string[] = [];
@@ -315,7 +334,7 @@ export const CodeSnippet = ({ code, language = "python", staticOutput, runnable 
           </div>
         </div>
       )}
-        </div>
       </div>
+    </div>
   );
 };
