@@ -87,7 +87,7 @@ export const HomePage = () => {
                 title="Linear Algebra"
                 description="The language of data. Learn how matrices represent datasets and how PCA reduces complexity."
                 icon={Layers}
-                href="/mathematics/linear-algebra"
+                href="mathematics/linear-algebra"
                 categoryId="linear-algebra"
               />
             </FadeIn>
@@ -96,7 +96,7 @@ export const HomePage = () => {
                 title="Calculus"
                 description="The engine of learning. Understand how gradients allow algorithms like Backpropagation to minimize error."
                 icon={FunctionSquare}
-                href="/mathematics/calculus"
+                href="mathematics/calculus"
                 categoryId="calculus"
               />
             </FadeIn>
@@ -105,7 +105,7 @@ export const HomePage = () => {
                 title="Probability & Stats"
                 description="The framework of uncertainty. Master how models make predictions and deal with noise."
                 icon={Dice5}
-                href="/mathematics/probability"
+                href="mathematics/probability"
                 categoryId="probability"
               />
             </FadeIn>
@@ -114,7 +114,7 @@ export const HomePage = () => {
                 title="Optimization"
                 description="The path to efficiency. Dive into how algorithms find the best parameters via Gradient Descent."
                 icon={Target}
-                href="/mathematics/calculus/gradient-descent"
+                href="mathematics/calculus/gradient-descent"
                 categoryId="calculus"
               />
             </FadeIn>

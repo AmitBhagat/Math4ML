@@ -56,7 +56,7 @@ export const MODEL_EVALUATION_DATA: CategoryData = {
       <div class="pt-12 text-center border-t border-border-premium/50">
         <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Start digging into the truth of your predictions.</p>
         <a 
-          href="/#/machine-learning/model-evaluation/confusion-matrix" 
+          href="#/machine-learning/model-evaluation/confusion-matrix" 
           class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
         >
           Begin with the Confusion Matrix

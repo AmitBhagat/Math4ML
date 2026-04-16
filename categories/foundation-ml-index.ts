@@ -64,7 +64,7 @@ export const FOUNDATION_ML_DATA: CategoryData = {
       <div class="pt-12 text-center border-t border-border-premium/50">
         <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Ready to begin your journey?</p>
         <a 
-          href="/#/machine-learning/foundation-ml/what-is-ml" 
+          href="#/machine-learning/foundation-ml/what-is-ml" 
           class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
         >
           Start with What is ML?

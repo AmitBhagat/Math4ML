@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import { useEffect, useRef, useState } from "react"
+import { useParams, useLocation, Link } from "react-router-dom"
 import { Button } from "./ui/button"
 import {
   NavigationMenu,
@@ -19,8 +20,10 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs"
 import { cn } from "../lib/utils"
 import { ThemeToggle } from "./ThemeToggle"
 import { Search } from "./Search"
-import { Brain } from "lucide-react"
-import { CATEGORY_META, CLUSTERS, ICON_MAP } from "../data/topics"
+import { Brain, ChevronRight, Menu, Map, ListTree } from "lucide-react"
+import { CATEGORY_META, CLUSTERS, ICON_MAP, getCategoryData } from "../data/topics"
+import { CategoryData } from "../data/types"
+import { getCategoryTheme } from "../lib/themeUtils"
 
 // Simple logo component for the navbar
 const Logo = (props: React.SVGAttributes<SVGElement>) => {
@@ -120,6 +123,29 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
     const [isMenuOpen, setIsMenuOpen] = useState(false)
     const [activeTab, setActiveTab] = useState(CLUSTERS[0].id)
     const containerRef = useRef<HTMLElement>(null)
+    const { clusterId, categoryId, problemId } = useParams()
+    const location = useLocation()
+    const [currentCategory, setCurrentCategory] = useState<CategoryData | null>(null)
+
+    useEffect(() => {
+      if (categoryId) {
+        getCategoryData(categoryId).then(setCurrentCategory)
+      } else {
+        setCurrentCategory(null)
+      }
+    }, [categoryId])
+
+    const activeCluster = CLUSTERS.find(c => c.id === clusterId) || 
+                          CLUSTERS.find(c => c.categories.includes(categoryId || ''))
+    const activeCategoryMeta = CATEGORY_META.find(m => m.id === categoryId)
+    const activeTopic = currentCategory?.sections.find(s => s.id === problemId)
+    const [expandedClusters, setExpandedClusters] = useState<Record<string, boolean>>({})
+
+    const toggleClusterExpansion = (id: string, e: React.MouseEvent) => {
+      e.preventDefault();
+      e.stopPropagation();
+      setExpandedClusters(prev => ({ ...prev, [id]: !prev[id] }));
+    }
 
     useEffect(() => {
       const checkWidth = () => {
@@ -183,7 +209,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                       {CLUSTERS.map((cluster) => (
                         <NavigationMenuItem className="w-full" key={cluster.id}>
                           <a
-                            href={`/#/${cluster.id}`}
+                            href={`#/${cluster.id}`}
                             className={cn(
                               "flex w-full items-center rounded-md px-3 py-2 text-sm font-bold transition-colors hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline text-foreground/90"
                             )}
@@ -191,25 +217,33 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                             {cluster.title}
                           </a>
                           <div className="ml-4 flex flex-col gap-1 border-l border-accent/20 pl-4 my-1">
-                            {cluster.categories.slice(0, 3).map(catId => {
+                            {(expandedClusters[cluster.id] ? cluster.categories : cluster.categories.slice(0, 3)).map(catId => {
                                const meta = CATEGORY_META.find(m => m.id === catId);
                                return (
-                                 <a 
+                                 <Link 
                                    key={catId} 
-                                   href={`/#/${cluster.id}/${catId}`}
-                                   className="text-[12px] text-muted-foreground hover:text-accent transition-colors py-1"
+                                   to={`/${cluster.id}/${catId}`}
+                                   onClick={() => setIsMenuOpen(false)}
+                                   className="text-[12px] text-muted-foreground hover:text-accent transition-colors py-1.5"
                                  >
                                    {meta?.title}
-                                 </a>
+                                 </Link>
                                )
                             })}
-                            <a href={`/#/${cluster.id}`} className="text-[10px] text-accent font-bold mt-1 opacity-80">View all →</a>
+                            {cluster.categories.length > 3 && (
+                              <button 
+                                onClick={(e) => toggleClusterExpansion(cluster.id, e)}
+                                className="text-[10px] text-accent font-black mt-2 opacity-80 uppercase tracking-widest text-left hover:opacity-100 transition-opacity flex items-center gap-1"
+                              >
+                                {expandedClusters[cluster.id] ? "Collapse list ↑" : `Expand all (${cluster.categories.length}) ↓`}
+                              </button>
+                            )}
                           </div>
                         </NavigationMenuItem>
                       ))}
                       <div className="h-px w-full bg-border/50 my-2" />
                       <NavigationMenuItem className="w-full">
-                        <a href="/#/search" className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline">
+                        <a href="#/search" className="flex w-full items-center rounded-md px-3 py-2 text-sm font-medium text-foreground/80 hover:bg-accent hover:text-accent-foreground cursor-pointer no-underline">
                           Search Topics
                         </a>
                       </NavigationMenuItem>
@@ -220,13 +254,79 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
             )}
             {/* Main nav */}
             <div className="flex h-16 items-center gap-6">
-              <a
-                href={logoHref}
+              <Link
+                to={logoHref}
                 className="flex items-center space-x-2 text-primary hover:text-primary/90 transition-colors cursor-pointer"
               >
                 <div className="text-2xl">{logo}</div>
-                <span className="hidden font-bold text-xl sm:inline-block">Math4ML</span>
-              </a>
+                <span className="hidden font-bold text-xl sm:inline-block tracking-tighter">Math4ML</span>
+              </Link>
+              
+              {/* Contextual Breadcrumb & Topic Selector */}
+              {activeCluster && (
+                <div className="flex items-center gap-1.5 md:gap-2 px-2 md:px-4 py-1.5 h-9 rounded-full bg-accent/5 border border-accent/10">
+                  <Link 
+                    to={`/${activeCluster.id}`} 
+                    className="hidden sm:inline-block text-[10px] font-black uppercase tracking-widest text-muted-foreground hover:text-accent transition-colors"
+                  >
+                    {activeCluster.title}
+                  </Link>
+                  <ChevronRight className="hidden sm:inline-block size-3 text-muted-foreground/30" />
+                  
+                  {activeCategoryMeta ? (
+                    <>
+                      <Link 
+                        to={`/${activeCluster.id}/${activeCategoryMeta.id}`} 
+                        className={cn(
+                          "text-[10px] font-black uppercase tracking-widest transition-colors",
+                          problemId ? "text-muted-foreground hover:text-accent" : "text-accent"
+                        )}
+                      >
+                        {activeCategoryMeta.title}
+                      </Link>
+                      
+                      {currentCategory && (
+                        <>
+                          <ChevronRight className="size-3 text-muted-foreground/30" />
+                          <NavigationMenu>
+                            <NavigationMenuList>
+                              <NavigationMenuItem>
+                                <NavigationMenuTrigger className="h-auto p-0 bg-transparent hover:bg-transparent data-[state=open]:bg-transparent font-black text-[10px] uppercase tracking-widest text-accent flex items-center gap-1 group">
+                                  <span className="max-w-[80px] md:max-w-[150px] truncate">
+                                    {activeTopic?.title || "Topics"}
+                                  </span>
+                                </NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                  <div className="w-[280px] md:w-[320px] p-2 glass-panel rounded-xl shadow-2xl border-white/10 max-h-[60vh] overflow-y-auto custom-scrollbar">
+                                    <div className="flex flex-col gap-1">
+                                      {currentCategory.sections.map((section) => (
+                                        <NavigationMenuLink
+                                          asChild
+                                          key={section.id}
+                                          className={cn(
+                                            "flex items-center justify-between px-3 py-2.5 rounded-lg text-xs transition-all hover:bg-accent/10",
+                                            problemId === section.id ? "bg-accent/10 border-l-2 border-accent text-accent font-bold" : "text-foreground/80 hover:text-foreground"
+                                          )}
+                                        >
+                                          <Link to={`/${activeCluster.id}/${currentCategory.id}/${section.id}`} className="flex items-center justify-between w-full">
+                                            <span className="truncate">{section.title}</span>
+                                            {problemId === section.id && <div className="size-1.5 rounded-full bg-accent animate-pulse" />}
+                                          </Link>
+                                        </NavigationMenuLink>
+                                      ))}
+                                    </div>
+                                  </div>
+                                </NavigationMenuContent>
+                              </NavigationMenuItem>
+                            </NavigationMenuList>
+                          </NavigationMenu>
+                        </>
+                      )}
+                    </>
+                  ) : null}
+                </div>
+              )}
+
               {/* Navigation menu */}
               {!isMobile && (
                 <NavigationMenu>
@@ -245,7 +345,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 const Icon = ICON_MAP[catId] || Brain
                                 return (
                                   <NavigationMenuLink
-                                    href={`/#/${cluster.id}/${catId}`}
+                                    href={`#/${cluster.id}/${catId}`}
                                     key={catId}
                                     className="group block select-none space-y-1 rounded-xl p-3 leading-none no-underline outline-none transition-all hover:bg-accent/10 hover:text-accent-foreground focus:bg-accent/10"
                                   >
@@ -277,7 +377,7 @@ export const Navbar = React.forwardRef<HTMLElement, NavbarProps>(
                                 </p>
                               </div>
                               <a
-                                href={`/#/${cluster.id}`}
+                                href={`#/${cluster.id}`}
                                 className="text-[11px] font-bold uppercase tracking-tighter text-accent hover:underline"
                               >
                                 View Cluster Map →

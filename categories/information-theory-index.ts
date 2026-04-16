@@ -54,7 +54,7 @@ export const INFORMATION_THEORY_DATA: CategoryData = {
       <div class="pt-12 text-center border-t border-border-premium/50">
         <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Ready to measure surprise?</p>
         <a 
-          href="/#/mathematics/information-theory/entropy" 
+          href="#/mathematics/information-theory/entropy" 
           class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
         >
           Begin with Entropy

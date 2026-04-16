@@ -67,7 +67,7 @@ export const LINEAR_ALGEBRA_DATA: CategoryData = {
       <div class="pt-12 text-center border-t border-border-premium/50">
         <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Ready to start?</p>
         <a 
-          href="/#/mathematics/linear-algebra/vectors" 
+          href="#/mathematics/linear-algebra/vectors" 
           class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
         >
           Begin with The Vector

@@ -2,6 +2,8 @@ import { Outlet, useLocation } from "react-router-dom";
 import { Navbar } from "./Navbar";
 import { useRef } from "react";
 import { cn } from "../lib/utils";
+import { TechnicalSpine } from "./TechnicalSpine";
+import { useParams } from "react-router-dom";
 
 export const MainLayout = () => {
   const location = useLocation();
@@ -12,6 +14,9 @@ export const MainLayout = () => {
 
       {/* ─── Top Navigation Layer (Horizontal Mega-Menu) ─── */}
       <Navbar />
+
+      {/* ─── Technical Spine (Contextual Topic Rail) ─── */}
+      <TechnicalSpine />
 
       {/* ─── Main View Layer ─── */}
       <div className="flex-1 flex flex-col min-w-0 relative h-full overflow-hidden">

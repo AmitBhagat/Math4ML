@@ -48,7 +48,7 @@ export const REINFORCEMENT_LEARNING_DATA: CategoryData = {
       <div class="pt-12 text-center border-t border-border-premium/50">
         <p class="text-2xl font-headline font-semibold text-text-premium mb-10">Start the exploration loop.</p>
         <a 
-          href="/#/machine-learning/reinforcement-learning/fundamentals" 
+          href="#/machine-learning/reinforcement-learning/fundamentals" 
           class="inline-flex items-center gap-4 bg-accent text-white px-12 py-5 rounded-2xl font-bold text-lg tracking-wide hover:bg-accent/90 transition-all shadow-xl shadow-accent/20 hover:scale-[1.05] active:scale-95 group"
         >
           Begin with MDP Fundamentals
