@@ -1,4 +1,4 @@
-aimport { TopicSection } from '../../src/data/types';
+import { TopicSection } from '../../src/data/types';
 
 export const derivativesSection: TopicSection = {
   id: "derivatives",
