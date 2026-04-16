@@ -48,33 +48,37 @@ export const vectorsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Never add vectors of different dimensions. It's like trying to add "height in cm" to "color of an apple"—the math will break because the spaces don't align.</p>
     </div>
     
-    <visualizer topic="vectors" />
-    <h2 id="example-data" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
-    
-      <h4>Problem: Real Estate Vectorization</h4>
-      <p>A house has 3 bedrooms, 2 bathrooms, and is 1500 sq ft. Represent this as a vector \(\mathbf{h}\) and find the vector for a "double-sized" house.</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Identify:</strong> Let bedrooms be \(v_1\), bathrooms \(v_2\), and sq ft \(v_3\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Represent:</strong> \(\mathbf{h} = [3, 2, 1500]^T\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">3</span>
-          <div><strong>Scale:</strong> To double the house, calculate \(2\mathbf{h} = [6, 4, 3000]^T\).</div>
-        </div>
+    <h2 id="algorithm">The Logic Flow</h2>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>Identify:</strong> Define the physical dimensions (e.g., bedrooms, bathrooms, sq ft) as components \(v_1, v_2, \dots, v_n\).</div>
       </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Represent:</strong> Construct the vector \(\mathbf{v} = [v_1, v_2, \dots, v_n]^T\).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Transform:</strong> Apply scalar operations (e.g., scaling by \(c\)) to adjust all features proportionately.</div>
+      </div>
+    </div>
 
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> We've mathematically represented a physical object. This is "Feature Engineering" in its purest form.
-        </div>
+    <visualizer topic="vectors" />
+
+    <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Data Representation</h2>
+    <p>A house has 3 bedrooms, 2 bathrooms, and is 1500 sq ft. To represent this house and its "double-sized" counterpart, we apply the <strong>Logic Flow</strong> defined above:</p>
+    <ul>
+      <li><strong>Vector:</strong> \(\mathbf{h} = [3, 2, 1500]^T\).</li>
+      <li><strong>Scaling:</strong> \(2\mathbf{h} = [6, 4, 3000]^T\).</li>
+    </ul>
+
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Result:</strong> We've mathematically represented a physical object. This is "Feature Engineering" in its purest form.
       </div>
+    </div>
     
 
     <h2 id="example-navigation" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Vector Navigation</h2>

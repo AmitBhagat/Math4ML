@@ -44,48 +44,38 @@ export const bayesTheoremSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Beginners usually ignore the <strong>Evidence</strong> ($P(\mathcal{D})$) because it's just a constant. But in complex models, calculating it requires a massive integral over all possible hypotheses—this is the "Bayesian Bottleneck" that makes full Bayesian inference computationally expensive (and why we use things like MCMC or Variational Inference).</p>
     </div>
     
-    <visualizer topic="bayes-theorem" />
-
-
-
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of Bayes' Theorem as a <strong>"Scientific Tuning Machine"</strong> or a <strong>"Bullshit Detector."</strong> 
-        You start with a guess (the Prior: "I think this email might be spam"). 
-        You see some evidence (the Data: "It contains the word 'FREE' in all caps"). 
-        Bayes' Theorem tells you exactly how much to "correct" your initial guess to arrive at the <strong>Truth</strong> (the Posterior). 
-        It is the fundamental rule for how a machine "Learns" from experience. 
-        It forces the model to balance its existing knowledge with the cold, hard facts of the new data, preventing it from jumping to conclusions too quickly or ignoring new evidence entirely.
+    <h2 id="algorithm">The Logic Flow</h2>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>Assess the Prior:</strong> Determine your initial degree of belief \(P(H)\) before seeing any new data.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Filter the Evidence:</strong> Observe new data and calculate the Likelihood \(P(D|H)\) and the total Evidence \(P(D)\).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Compute the Posterior:</strong> Apply Bayes' Rule to update your belief: \(P(H|D) = \frac{P(D|H)P(H)}{P(D)}\).</div>
       </div>
     </div>
 
-    <h2 id="example-spam" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter (Prior/Posterior)</h2>
-    
-      <h4>Problem: Identifying Junk Emails</h4>
-      <p>10% of emails are Spam. 80% of Spam contains the word "Free." Only 1% of ham (good emails) contains "Free." If an email has "Free," is it spam?</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Identify:</strong> \(P(S) = 0.1, P(F|S) = 0.8, P(F|H) = 0.01\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Filter:</strong> \(P(\text{Spam} | \text{Free}) = \frac{P(\text{Free}|\text{Spam}) P(\text{Spam})}{P(\text{Free})}\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">3</span>
-          <div><strong>Calculate:</strong> \(\frac{0.8 \times 0.1}{ (0.8 \times 0.1) + (0.01 \times 0.9) } = \frac{0.08}{0.089} \approx 0.89\).</div>
-        </div>
-      </div>
+    <visualizer topic="bayes-theorem" />
 
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> Your belief that the email is spam shot up from <strong>10%</strong> to <strong>89%</strong> just by seeing one word. This is how basic Spam filters function.
-        </div>
+    <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Spam Filter</h2>
+    <p>10% of emails are Spam (\(P(S)=0.1\)). 80% of Spam contains the word "Free" (\(P(F|S)=0.8\)). Only 1% of ham contains "Free" (\(P(F|H)=0.01\)). We apply the <strong>Logic Flow</strong> to update our belief:</p>
+    <ul>
+      <li><strong>Prior:</strong> \(0.1\).</li>
+      <li><strong>Likelihood:</strong> \(0.8\).</li>
+      <li><strong>Posterior:</strong> \(\frac{0.8 \times 0.1}{ (0.8 \times 0.1) + (0.01 \times 0.9) } \approx 0.89\).</li>
+    </ul>
+
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Result:</strong> Your probability of spam increased from <strong>10%</strong> to <strong>89%</strong>. The "Evidence" effectively filtered the noise.
       </div>
+    </div>
     
 
     <h2 id="example-monty" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> The Monty Hall Problem</h2>

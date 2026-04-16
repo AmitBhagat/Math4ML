@@ -43,49 +43,37 @@ export const determinantsSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: A negative determinant means the transformation "flipped" space inside out (like a reflection). The absolute value is the volume change, but the sign tells you about the orientation.</p>
     </div>
     
-    <visualizer topic="determinants" />
-    
-    <div class="callout tip">
-      <div class="callout-icon">💡</div>
-      <div class="callout-body">
-        Think of the Determinant as a <strong>"Scale Factor"</strong> or a <strong>"Dimension Watchdog."</strong> 
-        It measures the "Stretching Power" of a matrix. 
-        If \(\det = 0\), your transformation is destructive—you're losing information because you're squashing multiple points into the same spot. 
-        In Machine Learning, we monitor determinants (like in the Jacobian) to ensure our transformations aren't accidentally "erasing" the very features we are trying to learn.
+    <h2 id="algorithm">The Logic Flow</h2>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>Construct:</strong> Arrange your basis vectors as columns in a square matrix \(A\).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Calculate:</strong> For 2x2, apply \(ad - bc\). For \(n \times n\), use cofactor expansion or the Leibniz formula.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Interpret:</strong> If \(\det(A) = 0\), space is squashed. If \(\neq 0\), the value is the volume change factor.</div>
       </div>
     </div>
 
+    <visualizer topic="determinants" />
 
-
-    <h2 id="rules">2. Properties & Meaning</h2>
+    <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Area Scaling</h2>
+    <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), we can calculate the scaling factor using our <strong>Logic Flow</strong>:</p>
     <ul>
-      <li>\(\det(A) > 0\): Space is stretched/shrunk but keeps its orientation.</li>
-      <li>\(\det(A) < 0\): Space is "flipped" inside out (like a reflection in a mirror).</li>
-      <li>\(\det(A) = 0\): Matrix is non-invertible (Singular).</li>
+      <li><strong>Determinant:</strong> \((3 \times 2) - (0 \times 0) = 6\).</li>
+      <li><strong>Interpretation:</strong> Any shape in this space will have exactly <strong>6 times</strong> the area after the transformation. This is a "Pure Stretch" across two axes.</li>
     </ul>
 
-    <h2 id="example-area" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Area Scaling of a Unit Square</h2>
-    
-      <h4>Problem: Finding the Scale Factor</h4>
-      <p>For \(A = \begin{bmatrix} 3 & 0 \\ 0 & 2 \end{bmatrix}\), find the determinant and interpret it.</p>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Calculate:</strong> \(\det(A) = (3 \times 2) - (0 \times 0) = 6\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Interpret:</strong> A \(1 \times 1\) unit square becomes a \(3 \times 2\) rectangle. Area increases by 6x.</div>
-        </div>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Result:</strong> Space is stretching, not squashing. The transformation is invertible and preserves 2D area.
       </div>
-
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> Any shape you draw in that space will have exactly <strong>6 times</strong> the area after the transformation.
-        </div>
-      </div>
+    </div>
     
 
     <h2 id="example-singularity" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Singularity Check (Det = 0)</h2>

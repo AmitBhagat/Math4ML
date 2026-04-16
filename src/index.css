@@ -222,7 +222,7 @@
   .premium-def-title, .def-title { @apply font-black text-[11px] text-accent uppercase tracking-[0.3em] mb-4 opacity-100; }
 
   .premium-math-block, .math-block {
-    @apply rounded-[2rem] my-12 p-10 overflow-x-auto border border-black/5 dark:border-white/5 bg-black/[0.01] dark:bg-white/[0.01];
+    @apply my-8 text-center overflow-x-auto;
   }
   
   .example-box {
@@ -242,17 +242,32 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
   }
 
-  /* ─── ENHANCED ALGORITHM LISTS ─── */
-  .algorithm-steps { @apply space-y-5 my-6; }
-  .algorithm-step { @apply flex items-start gap-4 text-[17px] leading-relaxed; }
-  .step-badge {
-    @apply shrink-0 mt-1 w-6 h-6 rounded-full bg-accent-premium/10 text-accent-premium border border-accent-premium/30 flex items-center justify-center font-bold text-[11px];
+  /* ─── HIGH-FIDELITY ALGORITHM LOGIC FLOW ─── */
+  .algorithm-steps { 
+    @apply space-y-8 my-10 relative pl-4; 
+  }
+  
+  /* Vertical Logic Line */
+  .algorithm-steps::before {
+    content: '';
+    @apply absolute left-[27px] top-4 bottom-4 w-px bg-accent/20 dark:bg-accent/10;
   }
 
-  .linking-rule {
-    @apply bg-accent-premium/5 border border-accent-premium/20 rounded-xl p-5 mt-10 text-base font-normal text-foreground;
+  .algorithm-step { 
+    @apply relative flex items-start gap-6 text-[17px] leading-relaxed transition-all duration-300; 
   }
-  .linking-rule strong { @apply text-accent-premium font-semibold; }
+  
+  .step-badge {
+    @apply shrink-0 relative z-10 w-7 h-7 rounded-lg bg-accent text-white shadow-lg shadow-accent/20 flex items-center justify-center font-black text-[12px] transition-transform duration-300 group-hover:scale-110;
+  }
+
+  .algorithm-step:hover .step-badge {
+    @apply scale-110 rotate-3;
+  }
+
+  .algorithm-step strong {
+    @apply text-accent uppercase tracking-widest text-xs font-black block mb-1;
+  }
 
   /* ─── COLOR UTILITIES ─── */
   .text-green-premium { color: var(--green); }

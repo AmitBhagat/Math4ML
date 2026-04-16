@@ -1,4 +1,4 @@
-import { TopicSection } from '../../src/data/types';
+aimport { TopicSection } from '../../src/data/types';
 
 export const derivativesSection: TopicSection = {
   id: "derivatives",
@@ -43,31 +43,37 @@ export const derivativesSection: TopicSection = {
       <p class="mt-4 italic text-sm">Gotcha: Not every function is differentiable. Sharp "corners" (like in a ReLU activation) have no unique tangent at the point—the limit is different depending on whether $h$ approaches from the left or right. We call these "non-smooth" points.</p>
     </div>
     
+    <h2 id="algorithm">The Logic Flow</h2>
+    <div class="algorithm-steps">
+      <div class="algorithm-step">
+        <span class="step-badge">1</span>
+        <div><strong>Differentiate:</strong> Apply the appropriate rule (Power, Chain, Product) to find the derivative function \(f'(x)\).</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">2</span>
+        <div><strong>Substitute:</strong> Plug in the specific input value \(a\) where you want to find the instantaneous change.</div>
+      </div>
+      <div class="algorithm-step">
+        <span class="step-badge">3</span>
+        <div><strong>Interpret:</strong> The result \(f'(a)\) is the exact slope of the tangent line at that point.</div>
+      </div>
+    </div>
+
     <visualizer topic="derivatives" />
 
+    <h2 id="case-study" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Tangent Slopes</h2>
+    <p>For \(f(x) = x^2\) at \(x = 3\), we apply our <strong>Logic Flow</strong> to find the precise rate of change:</p>
+    <ul>
+      <li><strong>Derivative:</strong> \(\frac{d}{dx}x^2 = 2x\).</li>
+      <li><strong>Evaluation:</strong> \(2(3) = 6\).</li>
+    </ul>
 
-    
-    <h2 id="example-tangent" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Finding Tangent Slopes</h2>
-    
-      <h4>Problem: Slope of \(f(x) = x^2\) at \(x = 3\)</h4>
-      
-      <div class="algorithm-steps">
-        <div class="algorithm-step">
-          <span class="step-badge">1</span>
-          <div><strong>Apply Power Rule:</strong> \(\frac{d}{dx}x^2 = 2x\).</div>
-        </div>
-        <div class="algorithm-step">
-          <span class="step-badge">2</span>
-          <div><strong>Substitute:</strong> Evaluate at \(x = 3 \to 2(3) = 6\).</div>
-        </div>
+    <div class="callout success">
+      <div class="callout-icon">✓</div>
+      <div class="callout-body">
+        <strong>Result:</strong> The slope is 6. This means that for every microscopic unit you move \(x\), the value of \(y\) will react by moving 6 units in the same direction.
       </div>
-
-      <div class="callout success">
-        <div class="callout-icon">✓</div>
-        <div class="callout-body">
-          <strong>Result:</strong> The slope (rate of change) is 6. For every 0.01 unit you increase \(x\), the output \(y\) will increase by approximately 0.06 units.
-        </div>
-      </div>
+    </div>
     
 
     <h2 id="example-loss" class="mb-8"><span class="text-green-premium font-bold">Case Study:</span> Sensitivity of Loss to Bias</h2>
