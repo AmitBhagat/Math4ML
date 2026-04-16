@@ -9,14 +9,14 @@ export const MainLayout = () => {
   const location = useLocation();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
+  const pathParts = location.pathname.split('/').filter(Boolean);
+  const isClusterRoot = pathParts.length === 1;
+
   return (
     <div className="h-screen flex flex-col bg-background text-foreground font-sans selection:bg-primary/20 overflow-hidden">
 
       {/* ─── Top Navigation Layer (Horizontal Mega-Menu) ─── */}
       <Navbar />
-
-      {/* ─── Technical Spine (Contextual Topic Rail) ─── */}
-      <TechnicalSpine />
 
       {/* ─── Main View Layer ─── */}
       <div className="flex-1 flex flex-col min-w-0 relative h-full overflow-hidden">
@@ -28,20 +28,14 @@ export const MainLayout = () => {
         >
           <div
             className={cn(
-              "max-w-6xl mx-auto pb-32 px-4 md:px-10 lg:px-16",
-              location.pathname === "/" ? "pt-8" : "pt-12 md:pt-20 lg:pt-16"
+              "mx-auto pb-32 px-4 md:px-10 lg:px-16 transition-all duration-500",
+              isClusterRoot ? "max-w-[1800px] pt-8" : "max-w-6xl pt-12 md:pt-20 lg:pt-16",
+              location.pathname === "/" && "pt-8"
             )}
           >
             <Outlet />
           </div>
 
-          <footer className="py-12 border-t border-border bg-bg-secondary/30 mt-auto">
-            <div className="max-w-[1400px] mx-auto px-6 text-center">
-              <p className="text-sm text-muted-foreground font-light tracking-widest uppercase">
-                Math4ML Curriculum © 2026 • Optimized for Deep Insight
-              </p>
-            </div>
-          </footer>
         </main>
       </div>
     </div>
